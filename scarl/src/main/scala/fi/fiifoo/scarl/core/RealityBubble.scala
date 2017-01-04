@@ -1,0 +1,49 @@
+package fi.fiifoo.scarl.core
+
+import fi.fiifoo.scarl.core.action.ActionDecider
+import fi.fiifoo.scarl.core.effect.EffectResolver
+import fi.fiifoo.scarl.core.entity._
+import fi.fiifoo.scarl.core.mutation.TickMutation
+
+class RealityBubble(var s: State, actionDecider: ActionDecider) {
+
+  val actorQueue = new ActorQueue()
+  s = actorQueue.enqueueNewActors(s)
+
+  def be(): Boolean = {
+    val actor = dequeue()
+
+    actor.foreach(actor => {
+      s = TickMutation(actor(s).tick)(s)
+
+      val effects = actor(s) match {
+        case creature: Creature => actionDecider(s, creature)(s, creature)
+        case status: ActiveStatus => status.activate(s)
+        case _ => throw new Exception("Unknown actor type")
+      }
+
+      s = EffectResolver(s, effects)
+      s = actorQueue.enqueueNewActors(s)
+      enqueue(actor)
+    })
+
+    actor.isDefined
+  }
+
+  private def dequeue(): Option[ActorId] = {
+    while (!actorQueue.isEmpty) {
+      val actor = actorQueue.dequeue()
+      if (s.entities.isDefinedAt(actor)) {
+        return Some(actor)
+      }
+    }
+
+    None
+  }
+
+  private def enqueue(actor: ActorId): Unit = {
+    if (s.entities.isDefinedAt(actor)) {
+      actorQueue.enqueue(actor, actor(s).tick)
+    }
+  }
+}

@@ -4,6 +4,9 @@ version := "0.1"
 
 lazy val root = (project in file("."))
   .enablePlugins(PlayScala)
+  .dependsOn(scarl)
+
+lazy val scarl = project
 
 scalaVersion := "2.11.7"
 
