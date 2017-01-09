@@ -20,3 +20,7 @@ libraryDependencies ++= Seq(
 
 
 fork in run := true
+
+
+
+unmanagedResourceDirectories in Assets += (baseDirectory.value / "scarl-ui" / "dist")
