@@ -1,8 +1,8 @@
-package fi.fiifoo.scarl.core.test_assets
+package io.github.fiifoo.scarl.core.test_assets
 
-import fi.fiifoo.scarl.core.effect.{Effect, EffectResult}
-import fi.fiifoo.scarl.core.entity.CreatureId
-import fi.fiifoo.scarl.core.{Location, State}
+import io.github.fiifoo.scarl.core.effect.{Effect, EffectResult}
+import io.github.fiifoo.scarl.core.entity.CreatureId
+import io.github.fiifoo.scarl.core.{Location, State}
 
 case class TestKaboomEffect(target: CreatureId) extends Effect {
   val damage = 9001

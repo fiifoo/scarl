@@ -1,6 +1,6 @@
-package fi.fiifoo.scarl.core
+package io.github.fiifoo.scarl.core
 
-import fi.fiifoo.scarl.core.entity.{ActorId, Entity, EntityId}
+import io.github.fiifoo.scarl.core.entity.{ActorId, Entity, EntityId}
 
 case class State(entities: Map[EntityId, Entity] = Map(),
                  index: StateIndex = StateIndex(),

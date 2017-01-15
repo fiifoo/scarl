@@ -1,6 +1,6 @@
-package fi.fiifoo.scarl.core.effect
+package io.github.fiifoo.scarl.core.effect
 
-import fi.fiifoo.scarl.core.mutation.Mutation
+import io.github.fiifoo.scarl.core.mutation.Mutation
 
 object EffectResult {
 

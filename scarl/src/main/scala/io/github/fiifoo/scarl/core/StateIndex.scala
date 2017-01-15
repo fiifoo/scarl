@@ -1,6 +1,6 @@
-package fi.fiifoo.scarl.core
+package io.github.fiifoo.scarl.core
 
-import fi.fiifoo.scarl.core.entity.{EntityId, ItemId, LocatableId, StatusId}
+import io.github.fiifoo.scarl.core.entity.{EntityId, ItemId, LocatableId, StatusId}
 
 case class StateIndex(entities: EntityIndex = EntityIndex(),
                       items: ItemIndex = ItemIndex(),

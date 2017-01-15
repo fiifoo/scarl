@@ -1,6 +1,6 @@
-package fi.fiifoo.scarl.core.entity
+package io.github.fiifoo.scarl.core.entity
 
-import fi.fiifoo.scarl.core.State
+import io.github.fiifoo.scarl.core.State
 
 case class CreatureId(value: Int) extends EntityId with ActorId with LocatableId {
 

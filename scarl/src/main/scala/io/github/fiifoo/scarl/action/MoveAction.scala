@@ -1,10 +1,10 @@
-package fi.fiifoo.scarl.action
+package io.github.fiifoo.scarl.action
 
-import fi.fiifoo.scarl.core.action.Action
-import fi.fiifoo.scarl.core.effect.Effect
-import fi.fiifoo.scarl.core.entity.Creature
-import fi.fiifoo.scarl.core.{Location, State}
-import fi.fiifoo.scarl.effect.{MoveEffect, TickEffect}
+import io.github.fiifoo.scarl.core.action.Action
+import io.github.fiifoo.scarl.core.effect.Effect
+import io.github.fiifoo.scarl.core.entity.Creature
+import io.github.fiifoo.scarl.core.{Location, State}
+import io.github.fiifoo.scarl.effect.{MoveEffect, TickEffect}
 
 case class MoveAction(location: Location) extends Action {
   val cost = 100

@@ -1,8 +1,8 @@
-package fi.fiifoo.scarl.core.test_assets
+package io.github.fiifoo.scarl.core.test_assets
 
-import fi.fiifoo.scarl.core.entity.{Creature, CreatureId}
-import fi.fiifoo.scarl.core.mutation.NewEntityMutation
-import fi.fiifoo.scarl.core.{Location, State}
+import io.github.fiifoo.scarl.core.entity.{Creature, CreatureId}
+import io.github.fiifoo.scarl.core.mutation.NewEntityMutation
+import io.github.fiifoo.scarl.core.{Location, State}
 
 object TestCreatureFactory {
 

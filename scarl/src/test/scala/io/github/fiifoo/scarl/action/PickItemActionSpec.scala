@@ -1,9 +1,9 @@
-package fi.fiifoo.scarl.action
+package io.github.fiifoo.scarl.action
 
-import fi.fiifoo.scarl.action.test_assets.TestPickItemActionDecider
-import fi.fiifoo.scarl.core.entity.{ContainerId, CreatureId, ItemId}
-import fi.fiifoo.scarl.core.test_assets.{TestCreatureFactory, TestItemFactory}
-import fi.fiifoo.scarl.core.{Location, RealityBubble, State}
+import io.github.fiifoo.scarl.action.test_assets.TestPickItemActionDecider
+import io.github.fiifoo.scarl.core.entity.{ContainerId, CreatureId, ItemId}
+import io.github.fiifoo.scarl.core.test_assets.{TestCreatureFactory, TestItemFactory}
+import io.github.fiifoo.scarl.core.{Location, RealityBubble, State}
 import org.scalatest._
 
 class PickItemActionSpec extends FlatSpec with Matchers {

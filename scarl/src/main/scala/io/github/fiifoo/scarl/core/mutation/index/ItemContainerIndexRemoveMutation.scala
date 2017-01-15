@@ -1,6 +1,6 @@
-package fi.fiifoo.scarl.core.mutation.index
+package io.github.fiifoo.scarl.core.mutation.index
 
-import fi.fiifoo.scarl.core.entity.{EntityId, ItemId}
+import io.github.fiifoo.scarl.core.entity.{EntityId, ItemId}
 
 case class ItemContainerIndexRemoveMutation(item: ItemId, container: EntityId) {
 

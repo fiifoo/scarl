@@ -1,9 +1,9 @@
-package fi.fiifoo.scarl.effect
+package io.github.fiifoo.scarl.effect
 
-import fi.fiifoo.scarl.core.effect.{Effect, EffectResult}
-import fi.fiifoo.scarl.core.entity.{Container, ContainerId, ItemId}
-import fi.fiifoo.scarl.core.mutation.{ItemContainerMutation, NewEntityMutation}
-import fi.fiifoo.scarl.core.{Location, State}
+import io.github.fiifoo.scarl.core.effect.{Effect, EffectResult}
+import io.github.fiifoo.scarl.core.entity.{Container, ContainerId, ItemId}
+import io.github.fiifoo.scarl.core.mutation.{ItemContainerMutation, NewEntityMutation}
+import io.github.fiifoo.scarl.core.{Location, State}
 
 case class DropItemEffect(target: ItemId, location: Location) extends Effect {
 

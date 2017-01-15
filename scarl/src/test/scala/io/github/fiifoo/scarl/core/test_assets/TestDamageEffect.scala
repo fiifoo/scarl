@@ -1,9 +1,9 @@
-package fi.fiifoo.scarl.core.test_assets
+package io.github.fiifoo.scarl.core.test_assets
 
-import fi.fiifoo.scarl.core.State
-import fi.fiifoo.scarl.core.effect.{Effect, EffectResult}
-import fi.fiifoo.scarl.core.entity.CreatureId
-import fi.fiifoo.scarl.core.mutation.CreatureDamageMutation
+import io.github.fiifoo.scarl.core.State
+import io.github.fiifoo.scarl.core.effect.{Effect, EffectResult}
+import io.github.fiifoo.scarl.core.entity.CreatureId
+import io.github.fiifoo.scarl.core.mutation.CreatureDamageMutation
 
 case class TestDamageEffect(target: CreatureId, amount: Int) extends Effect {
 

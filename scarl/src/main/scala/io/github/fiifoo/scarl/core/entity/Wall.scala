@@ -1,6 +1,6 @@
-package fi.fiifoo.scarl.core.entity
+package io.github.fiifoo.scarl.core.entity
 
-import fi.fiifoo.scarl.core.Location
+import io.github.fiifoo.scarl.core.Location
 
 case class Wall(id: WallId, location: Location) extends Entity with Locatable {
 

@@ -1,7 +1,7 @@
-package fi.fiifoo.scarl.core.mutation
+package io.github.fiifoo.scarl.core.mutation
 
-import fi.fiifoo.scarl.core.State
-import fi.fiifoo.scarl.core.entity.ActorId
+import io.github.fiifoo.scarl.core.State
+import io.github.fiifoo.scarl.core.entity.ActorId
 
 case class ActorTickMutation(actor: ActorId, tick: Int) extends Mutation {
 

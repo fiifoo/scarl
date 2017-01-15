@@ -1,5 +1,5 @@
-package fi.fiifoo.scarl.status
+package io.github.fiifoo.scarl.status
 
-import fi.fiifoo.scarl.core.entity.{CreatureId, PassiveStatus, PassiveStatusId}
+import io.github.fiifoo.scarl.core.entity.{CreatureId, PassiveStatus, PassiveStatusId}
 
 case class DeathStatus(id: PassiveStatusId, target: CreatureId) extends PassiveStatus

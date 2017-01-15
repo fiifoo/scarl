@@ -1,8 +1,8 @@
-package fi.fiifoo.scarl.core
+package io.github.fiifoo.scarl.core
 
-import fi.fiifoo.scarl.core.entity.{ActiveStatusId, CreatureId}
-import fi.fiifoo.scarl.core.mutation.{RemovableEntityMutation, RemoveEntitiesMutation}
-import fi.fiifoo.scarl.core.test_assets.{TestActiveStatus, TestActiveStatusActionDecider, TestCreatureFactory, TestMoveActionDecider}
+import io.github.fiifoo.scarl.core.entity.{ActiveStatusId, CreatureId}
+import io.github.fiifoo.scarl.core.mutation.{RemovableEntityMutation, RemoveEntitiesMutation}
+import io.github.fiifoo.scarl.core.test_assets.{TestActiveStatus, TestActiveStatusActionDecider, TestCreatureFactory, TestMoveActionDecider}
 import org.scalatest._
 
 class RealityBubbleSpec extends FlatSpec with Matchers {

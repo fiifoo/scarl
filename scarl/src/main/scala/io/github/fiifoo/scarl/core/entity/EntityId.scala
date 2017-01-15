@@ -1,6 +1,6 @@
-package fi.fiifoo.scarl.core.entity
+package io.github.fiifoo.scarl.core.entity
 
-import fi.fiifoo.scarl.core.State
+import io.github.fiifoo.scarl.core.State
 
 trait EntityId {
   val value: Int

@@ -1,9 +1,9 @@
-package fi.fiifoo.scarl.core
+package io.github.fiifoo.scarl.core
 
-import fi.fiifoo.scarl.core.Selectors._
-import fi.fiifoo.scarl.core.entity.{ActiveStatusId, CreatureId, ItemId}
-import fi.fiifoo.scarl.core.mutation.NewEntityMutation
-import fi.fiifoo.scarl.core.test_assets.{TestActiveStatus, TestCreatureFactory, TestItemFactory}
+import io.github.fiifoo.scarl.core.Selectors._
+import io.github.fiifoo.scarl.core.entity.{ActiveStatusId, CreatureId, ItemId}
+import io.github.fiifoo.scarl.core.mutation.NewEntityMutation
+import io.github.fiifoo.scarl.core.test_assets.{TestActiveStatus, TestCreatureFactory, TestItemFactory}
 import org.scalatest._
 
 class SelectorsSpec extends FlatSpec with Matchers {

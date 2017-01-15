@@ -1,7 +1,7 @@
-package fi.fiifoo.scarl.core.mutation.index
+package io.github.fiifoo.scarl.core.mutation.index
 
-import fi.fiifoo.scarl.core.Location
-import fi.fiifoo.scarl.core.entity.LocatableId
+import io.github.fiifoo.scarl.core.Location
+import io.github.fiifoo.scarl.core.entity.LocatableId
 
 case class LocatableLocationIndexRemoveMutation(locatable: LocatableId, location: Location) {
 

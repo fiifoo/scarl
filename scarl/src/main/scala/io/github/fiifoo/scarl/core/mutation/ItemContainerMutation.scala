@@ -1,8 +1,8 @@
-package fi.fiifoo.scarl.core.mutation
+package io.github.fiifoo.scarl.core.mutation
 
-import fi.fiifoo.scarl.core.entity.{EntityId, Item, ItemId}
-import fi.fiifoo.scarl.core.mutation.index.{ItemContainerIndexAddMutation, ItemContainerIndexRemoveMutation}
-import fi.fiifoo.scarl.core.{State, StateIndex}
+import io.github.fiifoo.scarl.core.entity.{EntityId, Item, ItemId}
+import io.github.fiifoo.scarl.core.mutation.index.{ItemContainerIndexAddMutation, ItemContainerIndexRemoveMutation}
+import io.github.fiifoo.scarl.core.{State, StateIndex}
 
 case class ItemContainerMutation(item: ItemId, container: EntityId) extends Mutation {
 

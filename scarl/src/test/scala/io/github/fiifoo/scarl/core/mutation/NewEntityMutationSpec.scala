@@ -1,8 +1,8 @@
-package fi.fiifoo.scarl.core.mutation
+package io.github.fiifoo.scarl.core.mutation
 
-import fi.fiifoo.scarl.core.entity.{ActiveStatusId, CreatureId, Item, ItemId}
-import fi.fiifoo.scarl.core.test_assets.{TestActiveStatus, TestCreatureFactory}
-import fi.fiifoo.scarl.core.{Location, State}
+import io.github.fiifoo.scarl.core.entity.{ActiveStatusId, CreatureId, Item, ItemId}
+import io.github.fiifoo.scarl.core.test_assets.{TestActiveStatus, TestCreatureFactory}
+import io.github.fiifoo.scarl.core.{Location, State}
 import org.scalatest._
 
 class NewEntityMutationSpec extends FlatSpec with Matchers {

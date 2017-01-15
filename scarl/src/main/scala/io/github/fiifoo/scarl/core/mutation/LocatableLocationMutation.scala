@@ -1,8 +1,8 @@
-package fi.fiifoo.scarl.core.mutation
+package io.github.fiifoo.scarl.core.mutation
 
-import fi.fiifoo.scarl.core.entity.{Locatable, LocatableId}
-import fi.fiifoo.scarl.core.mutation.index.{LocatableLocationIndexAddMutation, LocatableLocationIndexRemoveMutation}
-import fi.fiifoo.scarl.core.{Location, State, StateIndex}
+import io.github.fiifoo.scarl.core.entity.{Locatable, LocatableId}
+import io.github.fiifoo.scarl.core.mutation.index.{LocatableLocationIndexAddMutation, LocatableLocationIndexRemoveMutation}
+import io.github.fiifoo.scarl.core.{Location, State, StateIndex}
 
 case class LocatableLocationMutation(locatable: LocatableId, location: Location) extends Mutation {
 

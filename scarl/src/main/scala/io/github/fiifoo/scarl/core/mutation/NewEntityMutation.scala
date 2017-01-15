@@ -1,8 +1,8 @@
-package fi.fiifoo.scarl.core.mutation
+package io.github.fiifoo.scarl.core.mutation
 
-import fi.fiifoo.scarl.core._
-import fi.fiifoo.scarl.core.entity._
-import fi.fiifoo.scarl.core.mutation.index.{ItemContainerIndexAddMutation, LocatableLocationIndexAddMutation, StatusTargetIndexAddMutation}
+import io.github.fiifoo.scarl.core._
+import io.github.fiifoo.scarl.core.entity._
+import io.github.fiifoo.scarl.core.mutation.index.{ItemContainerIndexAddMutation, LocatableLocationIndexAddMutation, StatusTargetIndexAddMutation}
 
 case class NewEntityMutation(entity: Entity) extends Mutation {
 

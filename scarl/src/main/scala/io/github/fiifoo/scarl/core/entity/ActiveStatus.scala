@@ -1,7 +1,7 @@
-package fi.fiifoo.scarl.core.entity
+package io.github.fiifoo.scarl.core.entity
 
-import fi.fiifoo.scarl.core.State
-import fi.fiifoo.scarl.core.effect.Effect
+import io.github.fiifoo.scarl.core.State
+import io.github.fiifoo.scarl.core.effect.Effect
 
 trait ActiveStatus extends Entity with Status with Actor {
   val id: ActiveStatusId

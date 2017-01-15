@@ -1,4 +1,4 @@
-package fi.fiifoo.scarl.core.entity
+package io.github.fiifoo.scarl.core.entity
 
 import org.scalatest._
 

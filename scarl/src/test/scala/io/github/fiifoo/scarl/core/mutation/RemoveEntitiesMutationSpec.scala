@@ -1,8 +1,8 @@
-package fi.fiifoo.scarl.core.mutation
+package io.github.fiifoo.scarl.core.mutation
 
-import fi.fiifoo.scarl.core.entity._
-import fi.fiifoo.scarl.core.test_assets.{TestActiveStatus, TestCreatureFactory}
-import fi.fiifoo.scarl.core.{Location, State, TmpState}
+import io.github.fiifoo.scarl.core.entity._
+import io.github.fiifoo.scarl.core.test_assets.{TestActiveStatus, TestCreatureFactory}
+import io.github.fiifoo.scarl.core.{Location, State, TmpState}
 import org.scalatest._
 
 class RemoveEntitiesMutationSpec extends FlatSpec with Matchers {

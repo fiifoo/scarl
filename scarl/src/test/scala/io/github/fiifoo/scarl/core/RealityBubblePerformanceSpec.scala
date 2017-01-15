@@ -1,8 +1,8 @@
-package fi.fiifoo.scarl.core
+package io.github.fiifoo.scarl.core
 
-import fi.fiifoo.scarl.core.entity.CreatureId
-import fi.fiifoo.scarl.core.mutation.LocatableLocationMutation
-import fi.fiifoo.scarl.core.test_assets.{TestCreatureFactory, TestMoveActionDecider}
+import io.github.fiifoo.scarl.core.entity.CreatureId
+import io.github.fiifoo.scarl.core.mutation.LocatableLocationMutation
+import io.github.fiifoo.scarl.core.test_assets.{TestCreatureFactory, TestMoveActionDecider}
 import org.scalatest._
 
 class RealityBubblePerformanceSpec extends FlatSpec with Matchers {

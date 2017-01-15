@@ -1,9 +1,9 @@
-package fi.fiifoo.scarl.core
+package io.github.fiifoo.scarl.core
 
-import fi.fiifoo.scarl.core.action.ActionDecider
-import fi.fiifoo.scarl.core.effect.EffectResolver
-import fi.fiifoo.scarl.core.entity._
-import fi.fiifoo.scarl.core.mutation.TickMutation
+import io.github.fiifoo.scarl.core.action.ActionDecider
+import io.github.fiifoo.scarl.core.effect.EffectResolver
+import io.github.fiifoo.scarl.core.entity._
+import io.github.fiifoo.scarl.core.mutation.TickMutation
 
 class RealityBubble(var s: State, actionDecider: ActionDecider) {
 

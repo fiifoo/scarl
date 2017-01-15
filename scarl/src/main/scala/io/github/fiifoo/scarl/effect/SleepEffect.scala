@@ -1,10 +1,10 @@
-package fi.fiifoo.scarl.effect
+package io.github.fiifoo.scarl.effect
 
-import fi.fiifoo.scarl.core.State
-import fi.fiifoo.scarl.core.effect.{Effect, EffectResult}
-import fi.fiifoo.scarl.core.entity.{ActiveStatusId, CreatureId}
-import fi.fiifoo.scarl.core.mutation.NewEntityMutation
-import fi.fiifoo.scarl.status.SleepStatus
+import io.github.fiifoo.scarl.core.State
+import io.github.fiifoo.scarl.core.effect.{Effect, EffectResult}
+import io.github.fiifoo.scarl.core.entity.{ActiveStatusId, CreatureId}
+import io.github.fiifoo.scarl.core.mutation.NewEntityMutation
+import io.github.fiifoo.scarl.status.SleepStatus
 
 case class SleepEffect(target: CreatureId) extends Effect {
 

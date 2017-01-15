@@ -1,8 +1,8 @@
-package fi.fiifoo.scarl.core.mutation
+package io.github.fiifoo.scarl.core.mutation
 
-import fi.fiifoo.scarl.core.State
-import fi.fiifoo.scarl.core.entity.CreatureId
-import fi.fiifoo.scarl.core.test_assets.TestCreatureFactory
+import io.github.fiifoo.scarl.core.State
+import io.github.fiifoo.scarl.core.entity.CreatureId
+import io.github.fiifoo.scarl.core.test_assets.TestCreatureFactory
 import org.scalatest._
 
 class CreatureDamageMutationSpec extends FlatSpec with Matchers {

@@ -1,9 +1,9 @@
-package fi.fiifoo.scarl.action.test_assets
+package io.github.fiifoo.scarl.action.test_assets
 
-import fi.fiifoo.scarl.action.MoveAction
-import fi.fiifoo.scarl.core.action.{Action, ActionDecider}
-import fi.fiifoo.scarl.core.entity.Creature
-import fi.fiifoo.scarl.core.{Location, State}
+import io.github.fiifoo.scarl.action.MoveAction
+import io.github.fiifoo.scarl.core.action.{Action, ActionDecider}
+import io.github.fiifoo.scarl.core.entity.Creature
+import io.github.fiifoo.scarl.core.{Location, State}
 
 object TestMoveActionDecider extends ActionDecider {
 

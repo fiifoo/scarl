@@ -1,7 +1,7 @@
-package fi.fiifoo.scarl.core.effect
+package io.github.fiifoo.scarl.core.effect
 
-import fi.fiifoo.scarl.core.State
-import fi.fiifoo.scarl.core.mutation.RemoveEntitiesMutation
+import io.github.fiifoo.scarl.core.State
+import io.github.fiifoo.scarl.core.mutation.RemoveEntitiesMutation
 
 import scala.collection.mutable
 

@@ -1,8 +1,8 @@
-package fi.fiifoo.scarl.core.effect
+package io.github.fiifoo.scarl.core.effect
 
-import fi.fiifoo.scarl.core.State
-import fi.fiifoo.scarl.core.entity._
-import fi.fiifoo.scarl.core.test_assets._
+import io.github.fiifoo.scarl.core.State
+import io.github.fiifoo.scarl.core.entity._
+import io.github.fiifoo.scarl.core.test_assets._
 import org.scalatest._
 
 class EffectResolverSpec extends FlatSpec with Matchers {

@@ -1,6 +1,6 @@
-package fi.fiifoo.scarl.core
+package io.github.fiifoo.scarl.core
 
-import fi.fiifoo.scarl.core.entity._
+import io.github.fiifoo.scarl.core.entity._
 
 object Selectors {
 

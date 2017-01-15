@@ -1,9 +1,9 @@
-package fi.fiifoo.scarl.effect
+package io.github.fiifoo.scarl.effect
 
-import fi.fiifoo.scarl.core.State
-import fi.fiifoo.scarl.core.effect.{Effect, EffectResult}
-import fi.fiifoo.scarl.core.entity.ActorId
-import fi.fiifoo.scarl.core.mutation.ActorTickMutation
+import io.github.fiifoo.scarl.core.State
+import io.github.fiifoo.scarl.core.effect.{Effect, EffectResult}
+import io.github.fiifoo.scarl.core.entity.ActorId
+import io.github.fiifoo.scarl.core.mutation.ActorTickMutation
 
 case class TickEffect(target: ActorId, amount: Int) extends Effect {
 

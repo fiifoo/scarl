@@ -1,10 +1,10 @@
-package fi.fiifoo.scarl.status
+package io.github.fiifoo.scarl.status
 
-import fi.fiifoo.scarl.core.Selectors.getLocationEntities
-import fi.fiifoo.scarl.core.State
-import fi.fiifoo.scarl.core.effect.Effect
-import fi.fiifoo.scarl.core.entity._
-import fi.fiifoo.scarl.effect.{DamageEffect, RemoveStatusEffect, TickEffect}
+import io.github.fiifoo.scarl.core.Selectors.getLocationEntities
+import io.github.fiifoo.scarl.core.State
+import io.github.fiifoo.scarl.core.effect.Effect
+import io.github.fiifoo.scarl.core.entity._
+import io.github.fiifoo.scarl.effect.{DamageEffect, RemoveStatusEffect, TickEffect}
 
 case class BurnStatus(id: ActiveStatusId,
                       tick: Int,

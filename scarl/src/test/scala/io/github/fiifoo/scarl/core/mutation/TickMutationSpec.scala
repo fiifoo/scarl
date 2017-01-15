@@ -1,6 +1,6 @@
-package fi.fiifoo.scarl.core.mutation
+package io.github.fiifoo.scarl.core.mutation
 
-import fi.fiifoo.scarl.core.State
+import io.github.fiifoo.scarl.core.State
 import org.scalatest._
 
 class TickMutationSpec extends FlatSpec with Matchers {

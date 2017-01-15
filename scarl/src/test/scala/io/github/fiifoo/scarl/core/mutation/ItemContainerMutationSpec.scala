@@ -1,8 +1,8 @@
-package fi.fiifoo.scarl.core.mutation
+package io.github.fiifoo.scarl.core.mutation
 
-import fi.fiifoo.scarl.core.State
-import fi.fiifoo.scarl.core.entity.{CreatureId, ItemId}
-import fi.fiifoo.scarl.core.test_assets.{TestCreatureFactory, TestItemFactory}
+import io.github.fiifoo.scarl.core.State
+import io.github.fiifoo.scarl.core.entity.{CreatureId, ItemId}
+import io.github.fiifoo.scarl.core.test_assets.{TestCreatureFactory, TestItemFactory}
 import org.scalatest._
 
 class ItemContainerMutationSpec extends FlatSpec with Matchers {

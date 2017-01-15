@@ -1,7 +1,7 @@
-package fi.fiifoo.scarl.core.mutation
+package io.github.fiifoo.scarl.core.mutation
 
-import fi.fiifoo.scarl.core.entity.CreatureId
-import fi.fiifoo.scarl.core.{State, TmpState}
+import io.github.fiifoo.scarl.core.entity.CreatureId
+import io.github.fiifoo.scarl.core.{State, TmpState}
 import org.scalatest._
 
 class ResetAddedActorsMutationSpec extends FlatSpec with Matchers {

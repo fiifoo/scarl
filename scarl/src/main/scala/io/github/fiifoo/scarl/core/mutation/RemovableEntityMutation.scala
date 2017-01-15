@@ -1,7 +1,7 @@
-package fi.fiifoo.scarl.core.mutation
+package io.github.fiifoo.scarl.core.mutation
 
-import fi.fiifoo.scarl.core.State
-import fi.fiifoo.scarl.core.entity.EntityId
+import io.github.fiifoo.scarl.core.State
+import io.github.fiifoo.scarl.core.entity.EntityId
 
 case class RemovableEntityMutation(id: EntityId) extends Mutation {
 

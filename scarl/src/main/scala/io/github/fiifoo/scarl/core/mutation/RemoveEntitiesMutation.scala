@@ -1,8 +1,8 @@
-package fi.fiifoo.scarl.core.mutation
+package io.github.fiifoo.scarl.core.mutation
 
-import fi.fiifoo.scarl.core._
-import fi.fiifoo.scarl.core.entity.{Entity, Item, Locatable, Status}
-import fi.fiifoo.scarl.core.mutation.index.{ItemContainerIndexRemoveMutation, LocatableLocationIndexRemoveMutation, StatusTargetIndexRemoveMutation}
+import io.github.fiifoo.scarl.core._
+import io.github.fiifoo.scarl.core.entity.{Entity, Item, Locatable, Status}
+import io.github.fiifoo.scarl.core.mutation.index.{ItemContainerIndexRemoveMutation, LocatableLocationIndexRemoveMutation, StatusTargetIndexRemoveMutation}
 
 case class RemoveEntitiesMutation() extends Mutation {
 
