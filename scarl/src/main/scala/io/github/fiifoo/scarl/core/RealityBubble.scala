@@ -1,6 +1,6 @@
 package io.github.fiifoo.scarl.core
 
-import io.github.fiifoo.scarl.core.action.ActionDecider
+import io.github.fiifoo.scarl.core.action.{Action, ActionDecider}
 import io.github.fiifoo.scarl.core.effect.EffectResolver
 import io.github.fiifoo.scarl.core.entity._
 import io.github.fiifoo.scarl.core.mutation.TickMutation
@@ -10,14 +10,14 @@ class RealityBubble(var s: State, actionDecider: ActionDecider) {
   val actorQueue = new ActorQueue()
   s = actorQueue.enqueueNewActors(s)
 
-  def be(): Boolean = {
+  def be(action: Option[Action] = None): Boolean = {
     val actor = dequeue()
 
     actor.foreach(actor => {
       s = TickMutation(actor(s).tick)(s)
 
       val effects = actor(s) match {
-        case creature: Creature => actionDecider(s, creature)(s, creature)
+        case creature: Creature => action.getOrElse(actionDecider(s, creature))(s, creature)
         case status: ActiveStatus => status.activate(s)
         case _ => throw new Exception("Unknown actor type")
       }
