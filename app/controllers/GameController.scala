@@ -4,7 +4,7 @@ import javax.inject.Inject
 
 import akka.actor._
 import akka.stream.Materializer
-import models.{Game, Player}
+import models.{Actions, Game, Player}
 import play.Environment
 import play.api.libs.json.JsValue
 import play.api.libs.streams._
@@ -34,8 +34,6 @@ class GameController @Inject()(implicit system: ActorSystem, materializer: Mater
 
   class WebSocketActor(out: ActorRef) extends Actor {
 
-    import io.github.fiifoo.scarl.action.PassAction
-
     val player = new Player(sendEntities)
     val actionReceiver = game.receivePlayer(player)
 
@@ -44,7 +42,7 @@ class GameController @Inject()(implicit system: ActorSystem, materializer: Mater
     }
 
     def receive = {
-      case _: JsValue => actionReceiver(PassAction())
+      case json: JsValue => actionReceiver(Actions.fromClient(json))
     }
   }
 
