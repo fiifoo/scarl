@@ -5,34 +5,32 @@ import io.github.fiifoo.scarl.core.effect.EffectResolver
 import io.github.fiifoo.scarl.core.entity._
 import io.github.fiifoo.scarl.core.mutation.TickMutation
 
-class RealityBubble(var s: State, actionDecider: ActionDecider) {
+class RealityBubble(var s: State, ai: ActionDecider) {
 
-  val actorQueue = new ActorQueue()
-  s = actorQueue.enqueueNewActors(s)
+  val actors = new ActorQueue()
+  s = actors.enqueueNewActors(s)
 
-  def be(action: Option[Action] = None): Boolean = {
-    val actor = dequeue()
+  def nextActor: Option[ActorId] = if (actors.nonEmpty) Some(actors.head) else None
 
-    actor.foreach(actor => {
+  def be(action: Option[Action] = None): Unit = {
+    dequeue().foreach(actor => {
       s = TickMutation(actor(s).tick)(s)
 
       val effects = actor(s) match {
-        case creature: Creature => action.getOrElse(actionDecider(s, creature))(s, creature)
+        case creature: Creature => action.getOrElse(ai(s, creature))(s, creature)
         case status: ActiveStatus => status.activate(s)
         case _ => throw new Exception("Unknown actor type")
       }
 
       s = EffectResolver(s, effects)
-      s = actorQueue.enqueueNewActors(s)
+      s = actors.enqueueNewActors(s)
       enqueue(actor)
     })
-
-    actor.isDefined
   }
 
   private def dequeue(): Option[ActorId] = {
-    while (!actorQueue.isEmpty) {
-      val actor = actorQueue.dequeue()
+    if (actors.nonEmpty) {
+      val actor = actors.dequeue()
       if (s.entities.isDefinedAt(actor)) {
         return Some(actor)
       }
@@ -43,7 +41,7 @@ class RealityBubble(var s: State, actionDecider: ActionDecider) {
 
   private def enqueue(actor: ActorId): Unit = {
     if (s.entities.isDefinedAt(actor)) {
-      actorQueue.enqueue(actor, actor(s).tick)
+      actors.enqueue(actor, actor(s).tick)
     }
   }
 }

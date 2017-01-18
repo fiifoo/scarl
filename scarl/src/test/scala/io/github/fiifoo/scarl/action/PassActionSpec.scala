@@ -15,9 +15,9 @@ class PassActionSpec extends FlatSpec with Matchers {
     )
 
     bubble.be()
-    bubble.actorQueue.head should ===(CreatureId(2))
+    bubble.actors.head should ===(CreatureId(2))
 
     bubble.be()
-    bubble.actorQueue.head should ===(CreatureId(1))
+    bubble.actors.head should ===(CreatureId(1))
   }
 }

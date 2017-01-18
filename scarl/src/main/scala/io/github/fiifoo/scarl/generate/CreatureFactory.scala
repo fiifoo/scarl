@@ -20,7 +20,8 @@ class CreatureFactory(locationConstraint: (Int, Int) = (80, 25)) {
     (0 until count).foldLeft(s)((s, i) => {
       val id = CreatureId(s.nextEntityId)
       val location = generateLocation(s.seed + id.value)
-      val creature = prototype.copy(id, location)
+      val tick = s.tick
+      val creature = prototype.copy(id, location, tick)
 
       NewEntityMutation(creature)(s)
     })

@@ -28,6 +28,8 @@ class ActorQueue() {
 
   def isEmpty: Boolean = queue.isEmpty
 
+  def nonEmpty: Boolean = queue.nonEmpty
+
   def head: ActorId = queue.head._1
 
   private def orderBy(x: (ActorId, Int)): (Int, Int) = (-x._2, -x._1.value)

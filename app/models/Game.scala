@@ -17,9 +17,15 @@ class Game() {
     }
   }
 
-  val playerId = CreatureId(1)
+  class ActionReceiver(player: Player) {
+    def apply(action: Action): Unit = {
+      runPlayer(player, action)
+    }
+  }
 
-  val bubble = new RealityBubble(
+  private val playerId = CreatureId(1)
+
+  private val bubble = new RealityBubble(
     new CreatureFactory().generate(State(), 1000),
     SillyMoveActionDecider
   )
@@ -47,16 +53,9 @@ class Game() {
     }
   }
 
-  private def isPlayerTurn = !bubble.actorQueue.isEmpty && bubble.actorQueue.head == playerId
+  private def isPlayerTurn = bubble.nextActor.contains(playerId)
 
-  private def isNpcTurn = !bubble.actorQueue.isEmpty && bubble.actorQueue.head != playerId
+  private def isNpcTurn = bubble.actors.nonEmpty && !bubble.nextActor.contains(playerId)
 
   private def entities = bubble.s.entities
-
-  class ActionReceiver(player: Player) {
-    def apply(action: Action): Unit = {
-      runPlayer(player, action)
-    }
-  }
-
 }
