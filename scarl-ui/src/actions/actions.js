@@ -25,13 +25,31 @@ export const openConnection = () => dispatch => {
 
 export const closeConnection = () => dispatch => {
     connection.close()
+    connection = null
     dispatch(_closeConnection())
 }
 
 export const ping = () => dispatch => {
-    connection.send({ping: 1})
+    connection.send({
+        type: 'Pass',
+        data: {},
+    })
     dispatch(_ping())
     log('Sent')
+}
+
+export const move = location => dispatch => {
+    if (! connection) {
+        return
+    }
+
+    connection.send({
+        type: 'Move',
+        data: {location},
+    })
+
+    dispatch(_move(location))
+    log('Moved')
 }
 
 const _openConnection = () => ({
@@ -52,6 +70,11 @@ const _connectionClosed = () => ({
 
 const _ping = () => ({
     type: types.PING,
+})
+
+const _move = location => ({
+    type: types.MOVE,
+    location,
 })
 
 const _receiveMessage = data => ({

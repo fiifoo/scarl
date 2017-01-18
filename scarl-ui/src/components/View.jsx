@@ -31,21 +31,27 @@ class ViewCell extends Component {
     }
 
     render() {
-        return <td>{this.props.display}</td>
+        const {display, move, x, y} = this.props
+
+        return (
+            <td onClick={() => move({x, y})}>
+                {display}
+            </td>
+        )
     }
 }
 
-const View = ({creatures}) => {
+const View = ({creatures, move}) => {
     const map = buildMap(creatures)
 
     const renderCell = (y, x) => {
         const display = map[y] && map[y][x] ? 'x' : null
 
-        return <ViewCell key={x} display={display} />
+        return <ViewCell key={x} display={display} move={move} x={x} y={y} />
     }
 
     return (
-        <table className="table table-bordered table-condensed view">
+        <table className="view">
             <tbody>
                 {rows.map((_, y) =>
                     <tr key={y}>

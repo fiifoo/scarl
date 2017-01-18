@@ -3,7 +3,7 @@ import ConnectionContainer from '../containers/ConnectionContainer'
 import ViewContainer from '../containers/ViewContainer'
 
 const App = () => (
-    <div className="container">
+    <div className="container-fluid">
         <h1>Test</h1>
         <ConnectionContainer />
         <hr />

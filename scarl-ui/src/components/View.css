@@ -1,3 +1,13 @@
-.table.view {
-    font-size: 9px;
+table.view {
+    border: 1px solid #ccc;
+    border-collapse: collapse;
+    font-size: 10px;
+}
+
+table.view td {
+    border: 1px solid #ccc;
+    width: 20px;
+    height: 20px;
+    vertical-align: middle;
+    text-align: center;
 }
