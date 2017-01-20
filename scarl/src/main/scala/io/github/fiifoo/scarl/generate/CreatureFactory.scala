@@ -17,9 +17,11 @@ class CreatureFactory(locationConstraint: (Int, Int) = (80, 25)) {
 
   def generate(s: State, count: Int, prototype: Creature = create(CreatureId(0))): State = {
 
+    val random =  new Random(s.seed)
+
     (0 until count).foldLeft(s)((s, i) => {
       val id = CreatureId(s.nextEntityId)
-      val location = generateLocation(s.seed + id.value)
+      val location = generateLocation(random)
       val tick = s.tick
       val creature = prototype.copy(id, location, tick)
 
@@ -27,8 +29,7 @@ class CreatureFactory(locationConstraint: (Int, Int) = (80, 25)) {
     })
   }
 
-  private def generateLocation(seed: Int): Location = {
-    val random = new Random(seed)
+  private def generateLocation(random: Random): Location = {
     val x = random.nextInt(locationConstraint._1)
     val y = random.nextInt(locationConstraint._2)
 
