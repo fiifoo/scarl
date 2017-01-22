@@ -25,29 +25,49 @@ const buildMap = creatures => {
     return map
 }
 
+const buildFovMap = fov => {
+    const map = []
+
+    fov.forEach(location => {
+        const x = location.x
+        const y = location.y
+
+        if (! map[y]) {
+            map[y] = []
+        }
+        if (! map[y][x]) {
+            map[y][x] = true
+        }
+    })
+
+    return map
+}
+
 class ViewCell extends Component {
     shouldComponentUpdate(nextProps) {
-        return this.props.display !== nextProps.display
+        return this.props.display !== nextProps.display || this.props.seen !== nextProps.seen
     }
 
     render() {
-        const {display, move, x, y} = this.props
+        const {display, move, seen, x, y} = this.props
 
         return (
-            <td onClick={() => move({x, y})}>
+            <td onClick={() => move({x, y})} className={seen ? 'seen' : null}>
                 {display}
             </td>
         )
     }
 }
 
-const View = ({creatures, move}) => {
+const View = ({creatures, fov, move}) => {
     const map = buildMap(creatures)
+    const fovMap = buildFovMap(fov)
 
     const renderCell = (y, x) => {
         const display = map[y] && map[y][x] ? 'x' : null
+        const seen = fovMap[y] && fovMap[y][x]
 
-        return <ViewCell key={x} display={display} move={move} x={x} y={y} />
+        return <ViewCell key={x} display={display} move={move} seen={seen} x={x} y={y} />
     }
 
     return (

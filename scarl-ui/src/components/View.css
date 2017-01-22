@@ -11,3 +11,7 @@ table.view td {
     vertical-align: middle;
     text-align: center;
 }
+
+table.view td.seen {
+    background-color: yellow
+}

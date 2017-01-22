@@ -5,6 +5,7 @@ import View from '../components/View.jsx'
 const ViewContainer = connect(
     state => ({
         creatures: state.entities.creatures,
+        fov: state.fov,
         items: state.entities.items,
     }),
     {move}

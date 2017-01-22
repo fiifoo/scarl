@@ -7,7 +7,7 @@ const getTuple = entity => [entity.id, entity]
 const factory = type => (state = Map(), action) => {
     switch (action.type) {
         case types.RECEIVE_MESSAGE: {
-            const entities = action.data[type]
+            const entities = action.data.entities[type]
 
             return Map(entities.map(getTuple))
         }

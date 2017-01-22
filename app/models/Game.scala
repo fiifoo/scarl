@@ -1,21 +1,13 @@
 package models
 
-import io.github.fiifoo.scarl.action.MoveAction
-import io.github.fiifoo.scarl.core.action.{Action, ActionDecider}
-import io.github.fiifoo.scarl.core.entity.{Creature, CreatureId}
-import io.github.fiifoo.scarl.core.{Location, RealityBubble, State}
+import io.github.fiifoo.scarl.ai.ActionDecider
+import io.github.fiifoo.scarl.core.action.Action
+import io.github.fiifoo.scarl.core.entity.CreatureId
+import io.github.fiifoo.scarl.core.{RealityBubble, State}
 import io.github.fiifoo.scarl.generate.CreatureFactory
+import io.github.fiifoo.scarl.geometry.Fov
 
 class Game() {
-
-  object SillyMoveActionDecider extends ActionDecider {
-    def apply(s: State, actor: Creature): Action = {
-      val from = actor.location
-      val to = Location(from.x + 1, from.y)
-
-      MoveAction(to)
-    }
-  }
 
   class ActionReceiver(player: Player) {
     def apply(action: Action): Unit = {
@@ -26,13 +18,13 @@ class Game() {
   private val playerId = CreatureId(1)
 
   private val bubble = new RealityBubble(
-    new CreatureFactory().generate(State(), 1000),
-    SillyMoveActionDecider
+    new CreatureFactory().generate(State(), 100),
+    ActionDecider
   )
 
   def receivePlayer(player: Player): ActionReceiver = {
     runNpc()
-    player.receive(entities)
+    player.receive(entities, fov)
 
     new ActionReceiver(player)
   }
@@ -40,10 +32,10 @@ class Game() {
   private def runPlayer(player: Player, action: Action): Unit = {
     if (isPlayerTurn) {
       bubble.be(Some(action))
-      player.receive(entities)
+      player.receive(entities, fov)
 
       runNpc()
-      player.receive(entities)
+      player.receive(entities, fov)
     }
   }
 
@@ -58,4 +50,10 @@ class Game() {
   private def isNpcTurn = bubble.actors.nonEmpty && !bubble.nextActor.contains(playerId)
 
   private def entities = bubble.s.entities
+
+  private def fov = {
+    val s = bubble.s
+    val location = playerId(s).location
+    Fov(s)(location, 10)
+  }
 }

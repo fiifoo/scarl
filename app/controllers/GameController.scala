@@ -34,11 +34,11 @@ class GameController @Inject()(implicit system: ActorSystem, materializer: Mater
 
   class WebSocketActor(out: ActorRef) extends Actor {
 
-    val player = new Player(sendEntities)
+    val player = new Player(send)
     val actionReceiver = game.receivePlayer(player)
 
-    def sendEntities = (entities: JsValue) => {
-      out ! entities
+    def send = (data: JsValue) => {
+      out ! data
     }
 
     def receive = {
