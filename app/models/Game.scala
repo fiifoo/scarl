@@ -30,12 +30,14 @@ class Game() {
   }
 
   private def runPlayer(player: Player, action: Action): Unit = {
-    if (isPlayerTurn) {
+    if (isPlayerTurn && isPlayerAlive) {
       bubble.be(Some(action))
       player.receive(entities, fov)
 
-      runNpc()
-      player.receive(entities, fov)
+      if (isPlayerAlive) {
+        runNpc()
+        player.receive(entities, fov)
+      }
     }
   }
 
@@ -45,6 +47,8 @@ class Game() {
     }
   }
 
+  private def isPlayerAlive = bubble.s.entities.isDefinedAt(playerId)
+
   private def isPlayerTurn = bubble.nextActor.contains(playerId)
 
   private def isNpcTurn = bubble.actors.nonEmpty && !bubble.nextActor.contains(playerId)
@@ -52,8 +56,12 @@ class Game() {
   private def entities = bubble.s.entities
 
   private def fov = {
-    val s = bubble.s
-    val location = playerId(s).location
-    Fov(s)(location, 10)
+    if (!isPlayerAlive) {
+      List()
+    } else {
+      val s = bubble.s
+      val location = playerId(s).location
+      Fov(s)(location, 10)
+    }
   }
 }
