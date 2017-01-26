@@ -20,7 +20,7 @@ object ActionDecider extends ActionDeciderTrait {
 
   private def attack(actor: Creature, enemy: Creature): Action = {
     val line = Line(actor.location, enemy.location)
-    if (line.size == 2) {
+    if (line.size <= 2) {
       AttackAction(enemy)
     } else {
       MoveAction(line(1))
