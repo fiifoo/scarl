@@ -1,6 +1,6 @@
 package io.github.fiifoo.scarl.action
 
-import io.github.fiifoo.scarl.action.test_assets.TestMoveActionDecider
+import io.github.fiifoo.scarl.action.test_assets.TestMoveTactic
 import io.github.fiifoo.scarl.core.entity.CreatureId
 import io.github.fiifoo.scarl.core.test_assets.TestCreatureFactory
 import io.github.fiifoo.scarl.core.{Location, RealityBubble, State}
@@ -11,7 +11,7 @@ class MoveActionSpec extends FlatSpec with Matchers {
   "MoveAction" should "move creatures" in {
     val bubble = new RealityBubble(
       TestCreatureFactory.generate(State()),
-      TestMoveActionDecider
+      TestMoveTactic
     )
 
     def s = bubble.s

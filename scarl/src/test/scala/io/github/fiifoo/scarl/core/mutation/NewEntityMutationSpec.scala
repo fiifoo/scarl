@@ -10,7 +10,7 @@ class NewEntityMutationSpec extends FlatSpec with Matchers {
   "NewEntityMutation" should "mutate new entity" in {
     val existingCreature = TestCreatureFactory.create(CreatureId(1))
     val newCreature = TestCreatureFactory.create(CreatureId(2))
-    val initial = State(Map(existingCreature.id -> existingCreature), nextEntityId = 2)
+    val initial = State(entities = Map(existingCreature.id -> existingCreature), nextEntityId = 2)
 
     val mutated = NewEntityMutation(newCreature)(initial)
     mutated.entities.size should ===(2)

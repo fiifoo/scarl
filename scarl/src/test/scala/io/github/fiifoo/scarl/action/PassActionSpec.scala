@@ -1,6 +1,6 @@
 package io.github.fiifoo.scarl.action
 
-import io.github.fiifoo.scarl.action.test_assets.TestPassActionDecider
+import io.github.fiifoo.scarl.action.test_assets.TestPassTactic
 import io.github.fiifoo.scarl.core.entity.CreatureId
 import io.github.fiifoo.scarl.core.test_assets.TestCreatureFactory
 import io.github.fiifoo.scarl.core.{RealityBubble, State}
@@ -11,7 +11,7 @@ class PassActionSpec extends FlatSpec with Matchers {
   "PassAction" should "pass creature turn" in {
     val bubble = new RealityBubble(
       TestCreatureFactory.generate(State(), 2),
-      TestPassActionDecider
+      TestPassTactic
     )
 
     bubble.be()

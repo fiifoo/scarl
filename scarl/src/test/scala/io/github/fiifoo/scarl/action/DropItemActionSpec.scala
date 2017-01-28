@@ -1,6 +1,6 @@
 package io.github.fiifoo.scarl.action
 
-import io.github.fiifoo.scarl.action.test_assets.TestDropItemActionDecider
+import io.github.fiifoo.scarl.action.test_assets.TestDropItemTactic
 import io.github.fiifoo.scarl.core.entity.{ContainerId, CreatureId, ItemId}
 import io.github.fiifoo.scarl.core.test_assets.{TestCreatureFactory, TestItemFactory}
 import io.github.fiifoo.scarl.core.{Location, RealityBubble, State}
@@ -15,7 +15,7 @@ class DropItemActionSpec extends FlatSpec with Matchers {
 
     val bubble = new RealityBubble(
       TestItemFactory.generate(TestCreatureFactory.generate(State(), 1, creaturePrototype), 2, CreatureId(1)),
-      TestDropItemActionDecider
+      TestDropItemTactic
     )
 
     def s = bubble.s

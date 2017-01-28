@@ -2,15 +2,16 @@ package io.github.fiifoo.scarl.core
 
 import io.github.fiifoo.scarl.core.entity.CreatureId
 import io.github.fiifoo.scarl.core.mutation.LocatableLocationMutation
-import io.github.fiifoo.scarl.core.test_assets.{TestCreatureFactory, TestMoveActionDecider}
+import io.github.fiifoo.scarl.core.test_assets.{TestCreatureFactory, TestMoveTactic}
 import org.scalatest._
 
 class RealityBubblePerformanceSpec extends FlatSpec with Matchers {
   val count = 10000
   val bubble = new RealityBubble(
     TestCreatureFactory.generate(State(), count),
-    TestMoveActionDecider
+    TestMoveTactic
   )
+
   def s = bubble.s
 
   "RealityBubble" should "initialize for performance test" in {

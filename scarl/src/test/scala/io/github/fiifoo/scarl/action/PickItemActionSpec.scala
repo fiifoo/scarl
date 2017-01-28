@@ -1,6 +1,6 @@
 package io.github.fiifoo.scarl.action
 
-import io.github.fiifoo.scarl.action.test_assets.TestPickItemActionDecider
+import io.github.fiifoo.scarl.action.test_assets.TestPickItemTactic
 import io.github.fiifoo.scarl.core.entity.{ContainerId, CreatureId, ItemId}
 import io.github.fiifoo.scarl.core.test_assets.{TestCreatureFactory, TestItemFactory}
 import io.github.fiifoo.scarl.core.{Location, RealityBubble, State}
@@ -11,7 +11,7 @@ class PickItemActionSpec extends FlatSpec with Matchers {
   "PickItemAction" should "pick items" in {
     val bubble = new RealityBubble(
       TestItemFactory.generate(TestCreatureFactory.generate(State(), 1), 2, Location(0, 0)),
-      TestPickItemActionDecider
+      TestPickItemTactic
     )
 
     def s = bubble.s

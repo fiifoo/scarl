@@ -2,7 +2,7 @@ package io.github.fiifoo.scarl.core
 
 import io.github.fiifoo.scarl.core.entity.{ActiveStatusId, CreatureId}
 import io.github.fiifoo.scarl.core.mutation.{RemovableEntityMutation, RemoveEntitiesMutation}
-import io.github.fiifoo.scarl.core.test_assets.{TestActiveStatus, TestActiveStatusActionDecider, TestCreatureFactory, TestMoveActionDecider}
+import io.github.fiifoo.scarl.core.test_assets.{TestActiveStatus, TestActiveStatusTactic, TestCreatureFactory, TestMoveTactic}
 import org.scalatest._
 
 class RealityBubbleSpec extends FlatSpec with Matchers {
@@ -10,7 +10,7 @@ class RealityBubbleSpec extends FlatSpec with Matchers {
   "RealityBubble" should "move a creature" in {
     val bubble = new RealityBubble(
       TestCreatureFactory.generate(State()),
-      TestMoveActionDecider
+      TestMoveTactic
     )
 
     def s = bubble.s
@@ -23,7 +23,7 @@ class RealityBubbleSpec extends FlatSpec with Matchers {
   it should "add new actor to actor queue" in {
     val bubble = new RealityBubble(
       TestCreatureFactory.generate(State()),
-      TestActiveStatusActionDecider
+      TestActiveStatusTactic
     )
 
     def s = bubble.s
@@ -40,7 +40,7 @@ class RealityBubbleSpec extends FlatSpec with Matchers {
   it should "activate new actor correctly" in {
     val bubble = new RealityBubble(
       TestCreatureFactory.generate(State()),
-      TestActiveStatusActionDecider
+      TestActiveStatusTactic
     )
 
     def s = bubble.s
@@ -54,7 +54,7 @@ class RealityBubbleSpec extends FlatSpec with Matchers {
   it should "have correct order for actor queue" in {
     val bubble = new RealityBubble(
       TestCreatureFactory.generate(State()),
-      TestActiveStatusActionDecider
+      TestActiveStatusTactic
     )
 
     def s = bubble.s
@@ -110,7 +110,7 @@ class RealityBubbleSpec extends FlatSpec with Matchers {
   it should "ignore removed actors" in {
     val bubble = new RealityBubble(
       TestCreatureFactory.generate(State(), 3),
-      TestMoveActionDecider
+      TestMoveTactic
     )
 
     def s = bubble.s

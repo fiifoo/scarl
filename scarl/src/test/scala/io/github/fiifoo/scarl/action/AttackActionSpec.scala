@@ -1,6 +1,6 @@
 package io.github.fiifoo.scarl.action
 
-import io.github.fiifoo.scarl.action.test_assets.TestAttackActionDecider
+import io.github.fiifoo.scarl.action.test_assets.TestAttackTactic
 import io.github.fiifoo.scarl.core.entity.CreatureId
 import io.github.fiifoo.scarl.core.test_assets.TestCreatureFactory
 import io.github.fiifoo.scarl.core.{RealityBubble, State}
@@ -11,7 +11,7 @@ class AttackActionSpec extends FlatSpec with Matchers {
   "AttackAction" should "damage creatures" in {
     val bubble = new RealityBubble(
       TestCreatureFactory.generate(State(), 2),
-      TestAttackActionDecider
+      TestAttackTactic
     )
 
     def s = bubble.s
@@ -29,7 +29,7 @@ class AttackActionSpec extends FlatSpec with Matchers {
   it should "kill creature" in {
     val bubble = new RealityBubble(
       TestCreatureFactory.generate(State(), 2, TestCreatureFactory.create(health = 2)),
-      TestAttackActionDecider
+      TestAttackTactic
     )
 
     def s = bubble.s

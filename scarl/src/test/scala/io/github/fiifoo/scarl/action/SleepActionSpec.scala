@@ -1,6 +1,6 @@
 package io.github.fiifoo.scarl.action
 
-import io.github.fiifoo.scarl.action.test_assets.TestSleepActionDecider
+import io.github.fiifoo.scarl.action.test_assets.TestSleepTactic
 import io.github.fiifoo.scarl.core.entity.{ActiveStatusId, CreatureId}
 import io.github.fiifoo.scarl.core.test_assets.TestCreatureFactory
 import io.github.fiifoo.scarl.core.{RealityBubble, State}
@@ -12,7 +12,7 @@ class SleepActionSpec extends FlatSpec with Matchers {
   "SleepAction" should "generate sleep status" in {
     val bubble = new RealityBubble(
       TestCreatureFactory.generate(State()),
-      TestSleepActionDecider
+      TestSleepTactic
     )
 
     def s = bubble.s
@@ -24,7 +24,7 @@ class SleepActionSpec extends FlatSpec with Matchers {
   it should "heal creature" in {
     val bubble = new RealityBubble(
       TestCreatureFactory.generate(State(), 1, TestCreatureFactory.create(damage = 2)),
-      TestSleepActionDecider
+      TestSleepTactic
     )
 
     def s = bubble.s
@@ -37,7 +37,7 @@ class SleepActionSpec extends FlatSpec with Matchers {
   it should "remove sleep status when fully healed" in {
     val bubble = new RealityBubble(
       TestCreatureFactory.generate(State(), 1, TestCreatureFactory.create(damage = 2)),
-      TestSleepActionDecider
+      TestSleepTactic
     )
 
     def s = bubble.s

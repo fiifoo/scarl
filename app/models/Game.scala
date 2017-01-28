@@ -1,6 +1,6 @@
 package models
 
-import io.github.fiifoo.scarl.ai.ActionDecider
+import io.github.fiifoo.scarl.ai.tactic.RoamTactic
 import io.github.fiifoo.scarl.core.action.Action
 import io.github.fiifoo.scarl.core.entity.CreatureId
 import io.github.fiifoo.scarl.core.{RealityBubble, State}
@@ -19,7 +19,7 @@ class Game() {
 
   private val bubble = new RealityBubble(
     new CreatureFactory().generate(State(), 100),
-    ActionDecider
+    RoamTactic
   )
 
   def receivePlayer(player: Player): ActionReceiver = {

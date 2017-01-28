@@ -1,7 +1,8 @@
 package io.github.fiifoo.scarl.core.mutation
 
 import io.github.fiifoo.scarl.core._
-import io.github.fiifoo.scarl.core.entity.{Entity, Item, Locatable, Status}
+import io.github.fiifoo.scarl.core.action.Tactic
+import io.github.fiifoo.scarl.core.entity._
 import io.github.fiifoo.scarl.core.mutation.index.{ItemContainerIndexRemoveMutation, LocatableLocationIndexRemoveMutation, StatusTargetIndexRemoveMutation}
 
 case class RemoveEntitiesMutation() extends Mutation {
@@ -16,8 +17,17 @@ case class RemoveEntitiesMutation() extends Mutation {
     s.copy(
       entities = s.entities -- s.tmp.removableEntities,
       index = index,
+      tactics = mutateTactics(s.tactics, entities),
       tmp = s.tmp.copy(removableEntities = List())
     )
+  }
+
+  private def mutateTactics(tactics: Map[CreatureId, Tactic], entities: List[Entity]): Map[CreatureId, Tactic] = {
+    val creatures = entities collect { case c: Creature => c }
+
+    creatures.foldLeft(tactics)((tactics, creature) => {
+      tactics - creature.id
+    })
   }
 
   private def mutateIndex(index: StateIndex, entity: Entity): StateIndex = {
