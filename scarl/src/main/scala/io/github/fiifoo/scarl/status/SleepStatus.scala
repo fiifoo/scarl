@@ -18,9 +18,9 @@ case class SleepStatus(id: ActiveStatusId,
     val damage = target(s).damage
 
     List(
-      TickEffect(id, interval),
-      if (damage > 0) HealEffect(target, heal) else null,
-      if (damage - heal <= 0) RemoveStatusEffect(id) else null
-    ) filter (_ != null)
+      Some(TickEffect(id, interval)),
+      if (damage > 0) Some(HealEffect(target, heal)) else None,
+      if (damage - heal <= 0) Some(RemoveStatusEffect(id)) else None
+    ).flatten
   }
 }
