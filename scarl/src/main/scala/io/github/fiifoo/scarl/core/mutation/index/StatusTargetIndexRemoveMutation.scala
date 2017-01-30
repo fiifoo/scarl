@@ -3,14 +3,15 @@ package io.github.fiifoo.scarl.core.mutation.index
 import io.github.fiifoo.scarl.core.entity.{EntityId, StatusId}
 
 case class StatusTargetIndexRemoveMutation(status: StatusId, target: EntityId) {
+  type Index = Map[EntityId, List[StatusId]]
 
-  def apply(s: Map[EntityId, List[StatusId]]): Map[EntityId, List[StatusId]] = {
-    val statuses = s(target) filter (_ != status)
+  def apply(index: Index): Index = {
+    val statuses = index(target) filter (_ != status)
 
     if (statuses.isEmpty) {
-      s - target
+      index - target
     } else {
-      s + (target -> statuses)
+      index + (target -> statuses)
     }
   }
 }

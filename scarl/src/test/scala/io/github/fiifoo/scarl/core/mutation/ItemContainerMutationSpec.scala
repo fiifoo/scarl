@@ -37,7 +37,7 @@ class ItemContainerMutationSpec extends FlatSpec with Matchers {
       container2 -> List(item3, item2)
     )
 
-    mutated.index.items.container should ===(should)
+    mutated.index.containerItems should ===(should)
   }
 
 }

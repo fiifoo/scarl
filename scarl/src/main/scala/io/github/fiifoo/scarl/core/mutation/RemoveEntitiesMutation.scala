@@ -3,65 +3,46 @@ package io.github.fiifoo.scarl.core.mutation
 import io.github.fiifoo.scarl.core._
 import io.github.fiifoo.scarl.core.action.Tactic
 import io.github.fiifoo.scarl.core.entity._
-import io.github.fiifoo.scarl.core.mutation.index.{ItemContainerIndexRemoveMutation, LocatableLocationIndexRemoveMutation, StatusTargetIndexRemoveMutation}
+import io.github.fiifoo.scarl.core.mutation.index._
 
 case class RemoveEntitiesMutation() extends Mutation {
+  type Tactics = Map[CreatureId, Tactic]
 
   def apply(s: State): State = {
+    val removable = s.tmp.removableEntities
 
-    val entities = s.tmp.removableEntities map (id => s.entities(id))
-    val index = entities.foldLeft(s.index)((index, entity) => {
-      mutateIndex(index, entity)
+    val index = removable.foldLeft(s.index)((index, entity) => {
+      mutateIndex(index, entity(s))
     })
 
     s.copy(
-      entities = s.entities -- s.tmp.removableEntities,
+      entities = s.entities -- removable,
       index = index,
-      tactics = mutateTactics(s.tactics, entities),
+      tactics = mutateTactics(s.tactics, removable),
       tmp = s.tmp.copy(removableEntities = List())
     )
   }
 
-  private def mutateTactics(tactics: Map[CreatureId, Tactic], entities: List[Entity]): Map[CreatureId, Tactic] = {
-    val creatures = entities collect { case c: Creature => c }
+  private def mutateTactics(tactics: Tactics, removable: List[EntityId]): Tactics = {
+    val creatures = removable collect { case c: CreatureId => c }
 
-    creatures.foldLeft(tactics)((tactics, creature) => {
-      tactics - creature.id
-    })
+    tactics -- creatures
   }
 
-  private def mutateIndex(index: StateIndex, entity: Entity): StateIndex = {
+  private def mutateIndex(index: State.Index, entity: Entity): State.Index = {
     index.copy(
-      entities = mutateEntityIndex(index.entities, entity),
-      statuses = entity match {
-        case status: Status => mutateStatusIndex(index.statuses, status)
-        case _ => index.statuses
+      containerItems = entity match {
+        case item: Item => ItemContainerIndexRemoveMutation(item.id, item.container)(index.containerItems)
+        case _ => index.containerItems
       },
-      items = entity match {
-        case item: Item => mutateItemIndex(index.items, item)
-        case _ => index.items
+      locationEntities = entity match {
+        case locatable: Locatable => LocatableLocationIndexRemoveMutation(locatable.id, locatable.location)(index.locationEntities)
+        case _ => index.locationEntities
+      },
+      targetStatuses = entity match {
+        case status: Status => StatusTargetIndexRemoveMutation(status.id, status.target)(index.targetStatuses)
+        case _ => index.targetStatuses
       }
-    )
-  }
-
-  private def mutateEntityIndex(index: EntityIndex, entity: Entity): EntityIndex = {
-    index.copy(
-      location = entity match {
-        case locatable: Locatable => LocatableLocationIndexRemoveMutation(locatable.id, locatable.location)(index.location)
-        case _ => index.location
-      }
-    )
-  }
-
-  private def mutateStatusIndex(index: StatusIndex, status: Status): StatusIndex = {
-    index.copy(
-      target = StatusTargetIndexRemoveMutation(status.id, status.target)(index.target)
-    )
-  }
-
-  private def mutateItemIndex(index: ItemIndex, item: Item): ItemIndex = {
-    index.copy(
-      container = ItemContainerIndexRemoveMutation(item.id, item.container)(index.container)
     )
   }
 }

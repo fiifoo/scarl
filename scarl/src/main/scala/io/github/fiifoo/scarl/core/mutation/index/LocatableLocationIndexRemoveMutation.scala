@@ -4,14 +4,15 @@ import io.github.fiifoo.scarl.core.Location
 import io.github.fiifoo.scarl.core.entity.LocatableId
 
 case class LocatableLocationIndexRemoveMutation(locatable: LocatableId, location: Location) {
+  type Index = Map[Location, List[LocatableId]]
 
-  def apply(s: Map[Location, List[LocatableId]]): Map[Location, List[LocatableId]] = {
-    val entities = s(location) filter (_ != locatable)
+  def apply(index: Index): Index = {
+    val entities = index(location) filter (_ != locatable)
 
     if (entities.isEmpty) {
-      s - location
+      index - location
     } else {
-      s + (location -> entities)
+      index + (location -> entities)
     }
   }
 }

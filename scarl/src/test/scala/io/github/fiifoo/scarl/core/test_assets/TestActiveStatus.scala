@@ -13,7 +13,7 @@ case class TestActiveStatus(id: ActiveStatusId,
 
   def setTick(tick: Int): Actor = copy(tick = tick)
 
-  def activate(s: State): List[Effect] = {
+  def apply(s: State): List[Effect] = {
     List(
       TestTickEffect(id, interval),
       TestDamageEffect(target, damage)

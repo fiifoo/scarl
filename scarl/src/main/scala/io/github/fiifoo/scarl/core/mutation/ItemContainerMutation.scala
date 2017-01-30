@@ -1,8 +1,8 @@
 package io.github.fiifoo.scarl.core.mutation
 
+import io.github.fiifoo.scarl.core.State
 import io.github.fiifoo.scarl.core.entity.{EntityId, Item, ItemId}
 import io.github.fiifoo.scarl.core.mutation.index.{ItemContainerIndexAddMutation, ItemContainerIndexRemoveMutation}
-import io.github.fiifoo.scarl.core.{State, StateIndex}
 
 case class ItemContainerMutation(item: ItemId, container: EntityId) extends Mutation {
 
@@ -16,14 +16,10 @@ case class ItemContainerMutation(item: ItemId, container: EntityId) extends Muta
     )
   }
 
-  private def mutateIndex(index: StateIndex, previous: Item, next: Item): StateIndex = {
+  private def mutateIndex(index: State.Index, previous: Item, next: Item): State.Index = {
     val remove = ItemContainerIndexRemoveMutation(item, previous.container)
     val add = ItemContainerIndexAddMutation(item, next.container)
 
-    index.copy(
-      items = index.items.copy(
-        container = add(remove(index.items.container))
-      )
-    )
+    index.copy(containerItems = add(remove(index.containerItems)))
   }
 }

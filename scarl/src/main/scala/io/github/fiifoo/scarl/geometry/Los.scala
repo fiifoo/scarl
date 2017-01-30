@@ -10,6 +10,6 @@ object Los {
   }
 
   private def blocked(s: State)(location: Location): Boolean = {
-    s.index.entities.location.isDefinedAt(location)
+    s.index.locationEntities.isDefinedAt(location)
   }
 }

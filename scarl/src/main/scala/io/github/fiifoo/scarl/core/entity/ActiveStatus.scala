@@ -6,5 +6,5 @@ import io.github.fiifoo.scarl.core.effect.Effect
 trait ActiveStatus extends Entity with Status with Actor {
   val id: ActiveStatusId
 
-  def activate(s: State): List[Effect]
+  def apply(s: State): List[Effect]
 }

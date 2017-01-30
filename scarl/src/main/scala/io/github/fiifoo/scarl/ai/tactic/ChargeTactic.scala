@@ -18,7 +18,7 @@ case class ChargeTactic(actor: CreatureId, target: SafeCreatureId, destination: 
 
         val charge = copy(destination = line.last)
         val action = if (line.size <= 2) {
-          AttackAction(target)
+          AttackAction(target.id)
         } else {
           MoveAction(line(1))
         }

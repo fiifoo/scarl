@@ -19,9 +19,9 @@ class RealityBubble(var s: State, ai: (CreatureId) => Tactic) {
     dequeue().foreach(actor => {
       s = TickMutation(actor(s).tick)(s)
 
-      val effects = actor(s) match {
-        case creature: Creature => handleCreature(creature, action)
-        case status: ActiveStatus => status.activate(s)
+      val effects = actor match {
+        case creature: CreatureId => handleCreature(creature, action)
+        case status: ActiveStatusId => status(s)(s)
         case _ => throw new Exception("Unknown actor type")
       }
 
@@ -32,9 +32,9 @@ class RealityBubble(var s: State, ai: (CreatureId) => Tactic) {
     })
   }
 
-  private def handleCreature(actor: Creature, action: Option[Action]): List[Effect] = {
+  private def handleCreature(actor: CreatureId, action: Option[Action]): List[Effect] = {
     action map (action => action(s, actor)) getOrElse {
-      val (tactic, action) = s.tactics.get(actor.id) map (tactic => tactic(s)) getOrElse ai(actor.id)(s)
+      val (tactic, action) = s.tactics.get(actor) map (_ (s)) getOrElse ai(actor)(s)
       s = TacticMutation(tactic)(s)
 
       action(s, actor)

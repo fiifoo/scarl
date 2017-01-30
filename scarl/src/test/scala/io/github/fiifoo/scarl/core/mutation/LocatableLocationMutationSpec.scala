@@ -36,7 +36,7 @@ class LocatableLocationMutationSpec extends FlatSpec with Matchers {
       location2 -> List(creature3, creature2)
     )
 
-    mutated.index.entities.location should ===(should)
+    mutated.index.locationEntities should ===(should)
   }
 
 }

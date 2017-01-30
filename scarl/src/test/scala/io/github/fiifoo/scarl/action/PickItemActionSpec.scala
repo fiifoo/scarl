@@ -10,7 +10,7 @@ class PickItemActionSpec extends FlatSpec with Matchers {
 
   "PickItemAction" should "pick items" in {
     val bubble = new RealityBubble(
-      TestItemFactory.generate(TestCreatureFactory.generate(State(), 1), 2, Location(0, 0)),
+      TestItemFactory.generate(TestCreatureFactory.generate(State()), 2, Location(0, 0)),
       TestPickItemTactic
     )
 

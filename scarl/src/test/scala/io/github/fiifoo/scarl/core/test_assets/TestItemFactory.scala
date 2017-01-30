@@ -12,7 +12,7 @@ object TestItemFactory {
 
   def generate(s: State, count: Int, container: EntityId): State = {
 
-    (0 until count).foldLeft(s)((s, i) => {
+    (0 until count).foldLeft(s)((s, _) => {
       val item = create(ItemId(s.nextEntityId), container)
 
       NewEntityMutation(item)(s)
@@ -21,7 +21,7 @@ object TestItemFactory {
 
   def generate(s: State, count: Int, location: Location): State = {
 
-    (0 until count).foldLeft(s)((s, i) => {
+    (0 until count).foldLeft(s)((s, _) => {
       val container = Container(ContainerId(s.nextEntityId), location)
       val _s = NewEntityMutation(container)(s)
 

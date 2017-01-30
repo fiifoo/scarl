@@ -16,12 +16,11 @@ case class BurnStatus(id: ActiveStatusId,
 
   def setTick(tick: Int): Actor = copy(tick = tick)
 
-  def activate(s: State): List[Effect] = {
+  def apply(s: State): List[Effect] = {
     val location = target(s).location
-    val entities = getLocationEntities(location)(s)
-    val targets = entities collect { case creature: Creature => creature.id }
-
-    val effects = targets map (target => DamageEffect(target, damage))
+    val effects = getLocationEntities(s)(location) collect {
+      case target: CreatureId => DamageEffect(target, damage)
+    }
 
     if (expires.forall(_ > tick)) {
       TickEffect(id, interval) :: effects

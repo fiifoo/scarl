@@ -10,7 +10,7 @@ import io.github.fiifoo.scarl.status.DeathStatus
 case class DeathEffect(target: CreatureId) extends Effect {
 
   def apply(s: State): EffectResult = {
-    if (getTargetStatuses(target)(s) exists (_.isInstanceOf[DeathStatus])) {
+    if (getTargetStatuses(s)(target) exists (_ (s).isInstanceOf[DeathStatus])) {
       return EffectResult()
     }
 

@@ -14,7 +14,7 @@ class BurnStatusSpec extends FlatSpec with Matchers {
     val status = BurnStatus(ActiveStatusId(2), 0, creature.id)
     val s = NewEntityMutation(status)(NewEntityMutation(creature)(State()))
 
-    status.activate(s) should ===(List(
+    status(s) should ===(List(
       TickEffect(status.id, status.interval),
       DamageEffect(creature.id, status.damage)
     ))
@@ -26,7 +26,7 @@ class BurnStatusSpec extends FlatSpec with Matchers {
     val status = BurnStatus(ActiveStatusId(3), 0, container.id)
     val s = NewEntityMutation(status)(NewEntityMutation(container)(NewEntityMutation(creature)(State())))
 
-    status.activate(s) should ===(List(
+    status(s) should ===(List(
       TickEffect(status.id, status.interval),
       DamageEffect(creature.id, status.damage)
     ))
@@ -38,7 +38,7 @@ class BurnStatusSpec extends FlatSpec with Matchers {
     val status = BurnStatus(ActiveStatusId(3), 0, container.id)
     val s = NewEntityMutation(status)(NewEntityMutation(container)(NewEntityMutation(creature)(State())))
 
-    status.activate(s) should ===(List(TickEffect(status.id, status.interval)))
+    status(s) should ===(List(TickEffect(status.id, status.interval)))
   }
 
   it should "not burn non-creatures in burning location" in {
@@ -47,7 +47,7 @@ class BurnStatusSpec extends FlatSpec with Matchers {
     val status = BurnStatus(ActiveStatusId(3), 0, container.id)
     val s = NewEntityMutation(status)(NewEntityMutation(container)(NewEntityMutation(wall)(State())))
 
-    status.activate(s) should ===(List(TickEffect(status.id, status.interval)))
+    status(s) should ===(List(TickEffect(status.id, status.interval)))
   }
 
   it should "remove itself if tick reaches given expire time" in {
@@ -56,11 +56,11 @@ class BurnStatusSpec extends FlatSpec with Matchers {
     val status2 = BurnStatus(ActiveStatusId(3), 100, creature.id, Some(100))
     val s = NewEntityMutation(status2)(NewEntityMutation(status1)(NewEntityMutation(creature)(State())))
 
-    status1.activate(s) should ===(List(
+    status1(s) should ===(List(
       TickEffect(status1.id, status1.interval),
       DamageEffect(creature.id, status1.damage)
     ))
-    status2.activate(s) should ===(List(
+    status2(s) should ===(List(
       RemoveStatusEffect(status2.id),
       DamageEffect(creature.id, status1.damage)
     ))

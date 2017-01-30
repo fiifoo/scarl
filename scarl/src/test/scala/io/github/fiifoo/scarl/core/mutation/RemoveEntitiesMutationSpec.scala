@@ -2,14 +2,14 @@ package io.github.fiifoo.scarl.core.mutation
 
 import io.github.fiifoo.scarl.core.entity._
 import io.github.fiifoo.scarl.core.test_assets.{TestActiveStatus, TestCreatureFactory}
-import io.github.fiifoo.scarl.core.{Location, State, TmpState}
+import io.github.fiifoo.scarl.core.{Location, State}
 import org.scalatest._
 
 class RemoveEntitiesMutationSpec extends FlatSpec with Matchers {
 
   "RemoveEntitiesMutation" should "remove entities" in {
     val initial = TestCreatureFactory.generate(
-      State(tmp = TmpState(removableEntities = List(CreatureId(1), CreatureId(3)))),
+      State(tmp = State.Temporary(removableEntities = List(CreatureId(1), CreatureId(3)))),
       3
     )
     val creature1 = CreatureId(1)
@@ -26,41 +26,39 @@ class RemoveEntitiesMutationSpec extends FlatSpec with Matchers {
 
   it should "mutate entity location index" in {
     val initial = TestCreatureFactory.generate(
-      State(tmp = TmpState(removableEntities = List(CreatureId(1), CreatureId(3)))),
+      State(tmp = State.Temporary(removableEntities = List(CreatureId(1), CreatureId(3)))),
       3
     )
 
     val mutated = RemoveEntitiesMutation()(initial)
-    mutated.index.entities.location should ===(Map(Location(0, 0) -> List(CreatureId(2))))
+    mutated.index.locationEntities should ===(Map(Location(0, 0) -> List(CreatureId(2))))
   }
 
   it should "mutate status target index" in {
     val initial = TestCreatureFactory.generate(
-      State(tmp = TmpState(removableEntities = List(ActiveStatusId(3)))),
-      1
+      State(tmp = State.Temporary(removableEntities = List(ActiveStatusId(3))))
     )
     val status1 = TestActiveStatus(ActiveStatusId(2), initial.tick, CreatureId(1))
     val status2 = TestActiveStatus(ActiveStatusId(3), initial.tick, CreatureId(1))
 
     val mutated = RemoveEntitiesMutation()(NewEntityMutation(status2)(NewEntityMutation(status1)(initial)))
-    mutated.index.statuses.target should ===(Map(CreatureId(1) -> List(ActiveStatusId(2))))
+    mutated.index.targetStatuses should ===(Map(CreatureId(1) -> List(ActiveStatusId(2))))
   }
 
   it should "mutate item container index" in {
     val initial = TestCreatureFactory.generate(
-      State(tmp = TmpState(removableEntities = List(ItemId(3)))),
-      1
+      State(tmp = State.Temporary(removableEntities = List(ItemId(3))))
     )
     val item1 = Item(ItemId(2), CreatureId(1))
     val item2 = Item(ItemId(3), CreatureId(1))
 
     val mutated = RemoveEntitiesMutation()(NewEntityMutation(item2)(NewEntityMutation(item1)(initial)))
-    mutated.index.items.container should ===(Map(CreatureId(1) -> List(ItemId(2))))
+    mutated.index.containerItems should ===(Map(CreatureId(1) -> List(ItemId(2))))
   }
 
   it should "throw exception if entity does not exist" in {
     intercept[Exception] {
-      RemoveEntitiesMutation()(State(tmp = TmpState(removableEntities = List(CreatureId(1)))))
+      RemoveEntitiesMutation()(State(tmp = State.Temporary(removableEntities = List(CreatureId(1)))))
     }
   }
 }

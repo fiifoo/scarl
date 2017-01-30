@@ -6,18 +6,22 @@ import io.github.fiifoo.scarl.core.{Location, State}
 
 import scala.util.Random
 
-class CreatureFactory(locationConstraint: (Int, Int) = (80, 25)) {
+object CreatureFactory {
+  def apply(locationConstraint: (Int, Int) = (80, 25)): CreatureFactory = new CreatureFactory(locationConstraint)
+}
 
-  def create(id: CreatureId,
+class CreatureFactory(locationConstraint: (Int, Int)) {
+
+  def create(id: CreatureId = CreatureId(0),
              location: Location = Location(0, 0),
              tick: Int = 1,
              health: Int = 1,
              damage: Int = 0
             ): Creature = Creature(id, location, tick, health, damage)
 
-  def generate(s: State, count: Int, prototype: Creature = create(CreatureId(0))): State = {
+  def generate(s: State, count: Int, prototype: Creature = create()): State = {
 
-    val random =  new Random(s.seed)
+    val random = new Random(s.seed)
 
     (0 until count).foldLeft(s)((s, i) => {
       val id = CreatureId(s.nextEntityId)

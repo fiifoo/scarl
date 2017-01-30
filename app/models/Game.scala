@@ -18,7 +18,7 @@ class Game() {
   private val playerId = CreatureId(1)
 
   private val bubble = new RealityBubble(
-    new CreatureFactory().generate(State(), 100),
+    CreatureFactory().generate(State(), 100),
     RoamTactic
   )
 

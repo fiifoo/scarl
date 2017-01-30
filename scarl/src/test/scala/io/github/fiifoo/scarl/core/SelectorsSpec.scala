@@ -19,9 +19,9 @@ class SelectorsSpec extends FlatSpec with Matchers {
         TestCreatureFactory.create(location = location)
       )
 
-    getLocationEntities(location)(s) should ===(List(
-      CreatureId(3)(s),
-      CreatureId(2)(s)
+    getLocationEntities(s)(location) should ===(List(
+      CreatureId(3),
+      CreatureId(2)
     ))
   }
 
@@ -33,9 +33,9 @@ class SelectorsSpec extends FlatSpec with Matchers {
             TestCreatureFactory.generate(State(), 2)
           )))
 
-    getTargetStatuses(CreatureId(1))(s) should ===(List(
-      ActiveStatusId(4)(s),
-      ActiveStatusId(3)(s)
+    getTargetStatuses(s)(CreatureId(1)) should ===(List(
+      ActiveStatusId(4),
+      ActiveStatusId(3)
     ))
   }
 
@@ -55,9 +55,9 @@ class SelectorsSpec extends FlatSpec with Matchers {
         CreatureId(2)
       )
 
-    getContainerItems(CreatureId(1))(s) should ===(List(
-      ItemId(4)(s),
-      ItemId(3)(s)
+    getContainerItems(s)(CreatureId(1)) should ===(List(
+      ItemId(4),
+      ItemId(3)
     ))
   }
 }

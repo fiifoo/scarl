@@ -10,8 +10,8 @@ case class RemovableEntityMutation(id: EntityId) extends Mutation {
       return s
     }
 
-    val items = s.index.items.container.getOrElse(id, List())
-    val statuses = s.index.statuses.target.getOrElse(id, List())
+    val items = s.index.containerItems.getOrElse(id, List())
+    val statuses = s.index.targetStatuses.getOrElse(id, List())
 
     s.copy(tmp = s.tmp.copy(
       removableEntities = id :: s.tmp.removableEntities ++ items ++ statuses

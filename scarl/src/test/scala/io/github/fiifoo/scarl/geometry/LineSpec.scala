@@ -13,7 +13,7 @@ class LineSpec extends FlatSpec with Matchers {
 
     val random = new Random()
 
-    for (i <- 0 to 1000) {
+    for (_ <- 0 to 1000) {
       val a = generateLocation(random)
       val b = generateLocation(random)
       val line = Line(a, b)

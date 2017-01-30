@@ -8,10 +8,10 @@ import io.github.fiifoo.scarl.core.entity.{CreatureId, Item}
 case class TestDropItemTactic(actor: CreatureId) extends Tactic {
 
   def apply(s: State): (Tactic, Action) = {
-    val items = s.entities filter (_._2.isInstanceOf[Item]) map (_._2.asInstanceOf[Item])
-    val inventory = items filter (_.container == actor)
-    val item = inventory.head
+    val inventory = s.entities.values collect {
+      case i: Item if i.container == actor => i
+    }
 
-    (this, DropItemAction(item))
+    (this, DropItemAction(inventory.head.id))
   }
 }

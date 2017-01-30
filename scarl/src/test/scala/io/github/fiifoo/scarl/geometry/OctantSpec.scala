@@ -42,7 +42,7 @@ class OctantSpec extends FlatSpec with Matchers {
 
     val random = new Random()
 
-    for (i <- 0 to 100) {
+    for (_ <- 0 to 100) {
       val a = generateLocation(random)
       val b = generateLocation(random)
       val octant = Octant(a, b)

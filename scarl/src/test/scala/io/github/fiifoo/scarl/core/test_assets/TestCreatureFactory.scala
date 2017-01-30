@@ -15,7 +15,7 @@ object TestCreatureFactory {
 
   def generate(s: State, count: Int = 1, prototype: Creature = create()): State = {
 
-    (0 until count).foldLeft(s)((s, i) => {
+    (0 until count).foldLeft(s)((s, _) => {
       val creature = prototype.copy(CreatureId(s.nextEntityId))
 
       NewEntityMutation(creature)(s)
