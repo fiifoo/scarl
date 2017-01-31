@@ -42,7 +42,7 @@ class GameController @Inject()(implicit system: ActorSystem, materializer: Mater
     }
 
     def receive = {
-      case json: JsValue => actionReceiver(Actions.fromClient(json))
+      case json: JsValue => actionReceiver(Actions.fromJson(json))
     }
   }
 

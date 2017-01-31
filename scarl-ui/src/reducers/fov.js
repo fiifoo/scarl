@@ -1,10 +1,34 @@
-import { List } from 'immutable'
 import * as types from '../actions/actionTypes'
 
-export default (state = List(), action) => {
+const build = (data, fov = []) => {
+    data.forEach(item => {
+        const x = item.location.x
+        const y = item.location.y
+
+        if (fov[x] === undefined) {
+            fov[x] = []
+        }
+        fov[x][y] = item.entities
+    })
+
+    return fov
+}
+
+const initial = {
+    cumulative: [],
+    delta: [],
+    shouldHide: [],
+}
+
+export default (state = initial, action) => {
     switch (action.type) {
         case types.RECEIVE_MESSAGE: {
-            return List(action.data.fov)
+            const data = action.data.fov
+            return {
+                cumulative: build(data.delta, state.cumulative),
+                delta: build(data.delta),
+                shouldHide: data.shouldHide,
+            }
         }
         default: {
             return state

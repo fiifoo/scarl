@@ -23,7 +23,7 @@ class CreatureFactory(locationConstraint: (Int, Int)) {
 
     val random = new Random(s.seed)
 
-    (0 until count).foldLeft(s)((s, i) => {
+    (0 until count).foldLeft(s)((s, _) => {
       val id = CreatureId(s.nextEntityId)
       val location = generateLocation(random)
       val tick = s.tick

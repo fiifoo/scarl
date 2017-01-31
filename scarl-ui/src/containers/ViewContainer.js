@@ -1,14 +1,12 @@
 import { connect } from 'react-redux'
-import { move } from '../actions/actions'
+import { focusKeyboard } from '../actions/keyboardActions'
 import View from '../components/View.jsx'
 
 const ViewContainer = connect(
     state => ({
-        creatures: state.entities.creatures,
         fov: state.fov,
-        items: state.entities.items,
     }),
-    {move}
+    {focusKeyboard}
 )(View)
 
 export default ViewContainer

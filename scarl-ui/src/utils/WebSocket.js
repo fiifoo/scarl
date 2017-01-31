@@ -9,9 +9,7 @@ export default (url, {onOpen, onMessage, onClose}) => {
         onOpen()
     }
     websocket.onmessage = event => {
-        //console.log('Connection message')
         const json = JSON.parse(event.data)
-        //console.log(json)
         onMessage(json)
     }
     websocket.onclose = () => {

@@ -1,86 +1,99 @@
 import React, { Component } from 'react'
+import { COLS, ROWS } from '../const/view'
+
 import './View.css'
 
-const rows = Array(25)
-rows.fill(null)
-const cols = Array(80)
-cols.fill(null)
+const build = element => {
+    const fragment = document.createDocumentFragment()
 
-const buildMap = creatures => {
-    const map = []
-
-    creatures.forEach(creature => {
-        const x = creature.location.x
-        const y = creature.location.y
-
-        if (! map[y]) {
-            map[y] = []
+    for (let y = 0; y < ROWS; y++) {
+        const row = document.createElement('tr')
+        fragment.appendChild(row)
+        for (let x = 0; x < COLS; x++) {
+            const cell = document.createElement('td')
+            row.appendChild(cell)
         }
-        if (! map[y][x]) {
-            map[y][x] = []
-        }
-        map[y][x].push(creature)
-    })
+    }
 
-    return map
+    element.appendChild(fragment)
 }
 
-const buildFovMap = fov => {
-    const map = []
-
-    fov.forEach(location => {
+const update = (element, fov) => {
+    fov.delta.forEach((rows, x) => {
+        rows.forEach((entities, y) => {
+            if (element.rows[y] !== undefined && element.rows[y].cells[x] !== undefined) {
+                const cell = element.rows[y].cells[x]
+                renderVisible(cell, entities)
+            }
+        })
+    })
+    fov.shouldHide.forEach(location => {
         const x = location.x
         const y = location.y
-
-        if (! map[y]) {
-            map[y] = []
-        }
-        if (! map[y][x]) {
-            map[y][x] = true
+        if (element.rows[y] !== undefined && element.rows[y].cells[x] !== undefined) {
+            const cell = element.rows[y].cells[x]
+            const entities = fov.cumulative[x][y]
+            renderHidden(cell, entities)
         }
     })
-
-    return map
 }
 
-class ViewCell extends Component {
-    shouldComponentUpdate(nextProps) {
-        return this.props.display !== nextProps.display || this.props.seen !== nextProps.seen
+const renderVisible = (cell, entities) => {
+    if (entities.creature) {
+        renderCreature(cell, entities.creature)
+    } else if (entities.wall) {
+        renderWall(cell)
+    } else {
+        renderTerrain(cell)
+    }
+}
+
+const renderHidden = (cell, entities) => {
+    if (entities.wall) {
+        renderWall(cell)
+    } else {
+        renderTerrain(cell)
+    }
+}
+
+const renderCreature = (cell, creature) => {
+    if (creature.id === 1) {
+        cell.innerHTML = '<div style="color: yellow;">@</div>'
+    } else {
+        cell.innerHTML = '<div style="color: green;">o</div>'
+    }
+}
+
+const renderWall = (cell) => {
+    cell.innerHTML = '<div style="color: darkgrey;">#</div>'
+}
+
+const renderTerrain = (cell) => {
+    cell.innerHTML = '.'
+}
+
+class View extends Component {
+
+    shouldComponentUpdate() {
+        return false
+    }
+
+    componentDidMount() {
+        build(this.element)
+        update(this.element, this.props.fov)
+    }
+
+    componentWillReceiveProps(nextProps) {
+        update(this.element, nextProps.fov)
     }
 
     render() {
-        const {display, move, seen, x, y} = this.props
-
         return (
-            <td onClick={() => move({x, y})} className={seen ? 'seen' : null}>
-                {display}
-            </td>
+            <table className="view" onClick={this.props.focusKeyboard}>
+                <tbody ref={tbody => this.element = tbody} />
+            </table>
         )
     }
-}
-
-const View = ({creatures, fov, move}) => {
-    const map = buildMap(creatures)
-    const fovMap = buildFovMap(fov)
-
-    const renderCell = (y, x) => {
-        const display = map[y] && map[y][x] ? 'x' : null
-        const seen = fovMap[y] && fovMap[y][x]
-
-        return <ViewCell key={x} display={display} move={move} seen={seen} x={x} y={y} />
-    }
-
-    return (
-        <table className="view">
-            <tbody>
-                {rows.map((_, y) =>
-                    <tr key={y}>
-                        {cols.map((_, x) => renderCell(y, x))}
-                    </tr>
-                )}
-            </tbody>
-        </table>
-    )
 }
 
 export default View

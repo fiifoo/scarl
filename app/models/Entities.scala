@@ -6,14 +6,6 @@ import play.api.libs.json.{JsNumber, JsValue, Json, Writes}
 
 object Entities {
 
-  case class ClientEntities(containers: Iterable[Container],
-                            creatures: Iterable[Creature],
-                            items: Iterable[Item],
-                            statuses: Iterable[Status],
-                            terrains: Iterable[Terrain],
-                            walls: Iterable[Wall]
-                           )
-
   implicit val entityIdWrites = new Writes[EntityId] {
     def writes(id: EntityId) = JsNumber(id.value)
   }
@@ -32,16 +24,33 @@ object Entities {
   implicit val terrainWrites = Json.writes[Terrain]
   implicit val wallWrites = Json.writes[Wall]
 
-  implicit val clientEntitiesWrites = Json.writes[ClientEntities]
-
-  def toClient(entities: Map[EntityId, Entity]): JsValue = {
-    Json.toJson(ClientEntities(
-      entities.values.collect { case e: Container => e },
-      entities.values.collect { case e: Creature => e },
-      entities.values.collect { case e: Item => e },
-      entities.values.collect { case e: Status => e },
-      entities.values.collect { case e: Terrain => e },
-      entities.values.collect { case e: Wall => e }
-    ))
+  def toJson(creature: Creature): JsValue = {
+    Json.toJson(creature)
   }
+
+  object Fov {
+
+    case class LocationEntities(creature: Option[Creature],
+                                terrain: Option[Terrain],
+                                wall: Option[Wall]
+                               )
+
+    case class LocationData(location: Location,
+                            entities: LocationEntities
+                           )
+
+    implicit val locationEntitiesWrites = Json.writes[LocationEntities]
+    implicit val locationDataWrites = Json.writes[LocationData]
+
+    var prev: Map[Location, LocationEntities] = Map()
+
+    def toJson(fov: Map[Location, LocationEntities]): JsValue = {
+      Json.toJson(fov map (x => LocationData(x._1, x._2)))
+    }
+
+    def toJson(fov: Iterable[Location]): JsValue = {
+      Json.toJson(fov)
+    }
+  }
+
 }

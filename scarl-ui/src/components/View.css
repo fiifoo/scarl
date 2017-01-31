@@ -1,17 +1,15 @@
 table.view {
-    border: 1px solid #ccc;
-    border-collapse: collapse;
-    font-size: 10px;
+    background-color: #000;
+    color: lightgray;
+    font-size: 14px;
+    font-family: "Lucida Console", Monospace;
 }
 
 table.view td {
-    border: 1px solid #ccc;
-    width: 20px;
-    height: 20px;
+    padding: 0px;
+    width: 17px;
+    height: 17px;
+    line-height: 17px;
     vertical-align: middle;
     text-align: center;
-}
-
-table.view td.seen {
-    background-color: yellow
 }

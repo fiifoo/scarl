@@ -1,5 +1,6 @@
 package io.github.fiifoo.scarl.geometry
 
+import io.github.fiifoo.scarl.core.entity.WallId
 import io.github.fiifoo.scarl.core.{Location, State}
 
 object Los {
@@ -10,6 +11,8 @@ object Los {
   }
 
   private def blocked(s: State)(location: Location): Boolean = {
-    s.index.locationEntities.isDefinedAt(location)
+    s.index.locationEntities.get(location).exists(_ collectFirst {
+      case _: WallId => true
+    } getOrElse false)
   }
 }

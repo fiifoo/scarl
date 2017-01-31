@@ -3,9 +3,9 @@ package models
 import io.github.fiifoo.scarl.ai.tactic.RoamTactic
 import io.github.fiifoo.scarl.core.action.Action
 import io.github.fiifoo.scarl.core.entity.CreatureId
+import io.github.fiifoo.scarl.core.mutation.SeedMutation
 import io.github.fiifoo.scarl.core.{RealityBubble, State}
-import io.github.fiifoo.scarl.generate.CreatureFactory
-import io.github.fiifoo.scarl.geometry.Fov
+import io.github.fiifoo.scarl.generate.{CreatureFactory, WallFactory}
 
 class Game() {
 
@@ -18,13 +18,13 @@ class Game() {
   private val playerId = CreatureId(1)
 
   private val bubble = new RealityBubble(
-    CreatureFactory().generate(State(), 100),
+    generate(),
     RoamTactic
   )
 
   def receivePlayer(player: Player): ActionReceiver = {
     runNpc()
-    player.receive(entities, fov)
+    player.receive(s)
 
     new ActionReceiver(player)
   }
@@ -32,12 +32,11 @@ class Game() {
   private def runPlayer(player: Player, action: Action): Unit = {
     if (isPlayerTurn && isPlayerAlive) {
       bubble.be(Some(action))
-      player.receive(entities, fov)
 
       if (isPlayerAlive) {
         runNpc()
-        player.receive(entities, fov)
       }
+      player.receive(s)
     }
   }
 
@@ -47,21 +46,19 @@ class Game() {
     }
   }
 
+  private def s = bubble.s
+
   private def isPlayerAlive = bubble.s.entities.isDefinedAt(playerId)
 
   private def isPlayerTurn = bubble.nextActor.contains(playerId)
 
   private def isNpcTurn = bubble.actors.nonEmpty && !bubble.nextActor.contains(playerId)
 
-  private def entities = bubble.s.entities
+  private def generate(): State = {
+    val creatures = CreatureFactory().generate(State(), 100)
+    val seeded = SeedMutation(creatures.seed + 1)(creatures)
+    val walls = WallFactory().generate(seeded, 500)
 
-  private def fov = {
-    if (!isPlayerAlive) {
-      List()
-    } else {
-      val s = bubble.s
-      val location = playerId(s).location
-      Fov(s)(location, 10)
-    }
+    walls
   }
 }
