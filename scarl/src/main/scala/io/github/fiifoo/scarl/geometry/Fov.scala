@@ -4,19 +4,20 @@ import io.github.fiifoo.scarl.core.{Location, State}
 
 object Fov {
 
-  def apply(s: State)(start: Location, range: Int): List[Location] = {
+  def apply(s: State)(start: Location, range: Int): Set[Location] = {
     val los = Los(s) _
-    var fov: List[Location] = List()
+    val r = 0 to range * 2
+    val fov: Set[Location] = Set()
 
-    for (x <- 0 to range * 2) {
-      for (y <- 0 to range * 2) {
+    r.foldLeft(fov)((fov, x) => {
+      r.foldLeft(fov)((fov, y) => {
         val location = Location(start.x - range + x, start.y - range + y)
         if (los(Line(start, location))) {
-          fov = location :: fov
+          fov + location
+        } else {
+          fov
         }
-      }
-    }
-
-    fov
+      })
+    })
   }
 }
