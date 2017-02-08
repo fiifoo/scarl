@@ -53,7 +53,6 @@ class TacticsSpec extends FlatSpec with Matchers {
     CreatureId(2)(s).damage should ===(1)
 
     bubble.be() // other creature
-    bubble.be() // other creature, stupid attack cost
   }
 
   it should "switch tactic to pursue when enemy leaves field of vision" in {

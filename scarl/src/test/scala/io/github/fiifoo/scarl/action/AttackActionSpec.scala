@@ -20,7 +20,7 @@ class AttackActionSpec extends FlatSpec with Matchers {
     CreatureId(2)(s).damage should ===(1)
 
     bubble.be()
-    CreatureId(1)(s).damage should ===(1)
+    CreatureId(1)(s).damage should ===(0) // missed...
 
     bubble.be()
     CreatureId(2)(s).damage should ===(2)
