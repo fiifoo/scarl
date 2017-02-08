@@ -7,13 +7,17 @@ import io.github.fiifoo.scarl.core.mutation.{SeedMutation, TacticMutation, TickM
 
 import scala.util.Random
 
-class RealityBubble(var s: State, ai: (CreatureId) => Tactic) {
+class RealityBubble(var s: State,
+                    ai: (CreatureId) => Tactic,
+                    logger: Logger = new Logger()
+                   ) {
 
   val random = new Random(s.seed)
+  val resolveEffect = new EffectResolver(logger.effect)
   val actors = new ActorQueue()
   s = actors.enqueueNewActors(s)
 
-  def nextActor: Option[ActorId] = if (actors.nonEmpty) Some(actors.head) else None
+  def nextActor: Option[ActorId] = actors.headOption
 
   def be(action: Option[Action] = None): Unit = {
     dequeue().foreach(actor => {
@@ -25,7 +29,7 @@ class RealityBubble(var s: State, ai: (CreatureId) => Tactic) {
         case _ => throw new Exception("Unknown actor type")
       }
 
-      s = EffectResolver(s, effects)
+      s = resolveEffect(s, effects)
       s = SeedMutation(random.nextInt())(s)
       s = actors.enqueueNewActors(s)
       enqueue(actor)

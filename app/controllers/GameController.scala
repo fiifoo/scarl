@@ -4,15 +4,14 @@ import javax.inject.Inject
 
 import akka.actor._
 import akka.stream.Materializer
-import models.{Actions, Game, Player}
+import io.github.fiifoo.scarl.game.{OutConnection, Game, OutMessage, Player}
+import models.{Actions, OutMessages}
 import play.Environment
 import play.api.libs.json.JsValue
 import play.api.libs.streams._
 import play.api.mvc._
 
 class GameController @Inject()(implicit system: ActorSystem, materializer: Materializer, environment: Environment) extends Controller {
-
-  val game = new Game()
 
   def index = Action {
     val assets = if (environment.isDev) {
@@ -24,7 +23,7 @@ class GameController @Inject()(implicit system: ActorSystem, materializer: Mater
     Ok(views.html.index(assets))
   }
 
-  def socket = WebSocket.accept[JsValue, JsValue] { request =>
+  def socket = WebSocket.accept[JsValue, JsValue] { _ =>
     ActorFlow.actorRef(out => WebSocketActor.props(out))
   }
 
@@ -33,16 +32,16 @@ class GameController @Inject()(implicit system: ActorSystem, materializer: Mater
   }
 
   class WebSocketActor(out: ActorRef) extends Actor {
-
-    val player = new Player(send)
-    val actionReceiver = game.receivePlayer(player)
-
-    def send = (data: JsValue) => {
-      out ! data
-    }
+    val player = new Player()
+    val connection = new OutConnection(player, send)
+    val game = new Game(connection, player)
 
     def receive = {
-      case json: JsValue => actionReceiver(Actions.fromJson(json))
+      case json: JsValue => game.receive(Actions.fromJson(json))
+    }
+
+    def send = (data: OutMessage) => {
+      out ! OutMessages.toJson(data)
     }
   }
 

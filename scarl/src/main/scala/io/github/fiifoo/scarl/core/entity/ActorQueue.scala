@@ -32,5 +32,7 @@ class ActorQueue() {
 
   def head: ActorId = queue.head._1
 
+  def headOption: Option[ActorId] = queue.headOption map (x => x._1)
+
   private def orderBy(x: (ActorId, Int)): (Int, Int) = (-x._2, -x._1.value)
 }

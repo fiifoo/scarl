@@ -7,6 +7,8 @@ import org.scalatest._
 
 class EffectResolverSpec extends FlatSpec with Matchers {
 
+  val resolve = new EffectResolver()
+
   "EffectResolver" should "resolve damage to creature" in {
     val initial = 10
     val add = 5
@@ -15,7 +17,7 @@ class EffectResolverSpec extends FlatSpec with Matchers {
     val creature = CreatureId(1)
 
     val effect = TestDamageEffect(creature, add)
-    s = EffectResolver(s, List(effect))
+    s = resolve(s, List(effect))
 
     creature(s).damage should ===(initial + add)
   }
@@ -30,7 +32,7 @@ class EffectResolverSpec extends FlatSpec with Matchers {
 
     val e1 = TestDamageEffect(c1, add)
     val e2 = TestDamageEffect(c2, add)
-    s = EffectResolver(s, List(e1, e2))
+    s = resolve(s, List(e1, e2))
 
     c1(s).damage should ===(initial + add)
     c2(s).damage should ===(initial + add)
@@ -45,7 +47,7 @@ class EffectResolverSpec extends FlatSpec with Matchers {
 
     val e1 = TestDamageEffect(creature, add)
     val e2 = TestDamageEffect(creature, add)
-    s = EffectResolver(s, List(e1, e2))
+    s = resolve(s, List(e1, e2))
 
     creature(s).damage should ===(initial + add + add)
   }
@@ -55,7 +57,7 @@ class EffectResolverSpec extends FlatSpec with Matchers {
     val creature = CreatureId(1)
 
     val effect = TestKaboomEffect(creature)
-    s = EffectResolver(s, List(effect))
+    s = resolve(s, List(effect))
 
     creature(s).damage should ===(effect.damage)
     creature(s).location should ===(effect.location)
@@ -68,7 +70,7 @@ class EffectResolverSpec extends FlatSpec with Matchers {
     val effect = TestActorStatusEffect(creature)
 
     s.entities.size should ===(1)
-    s = EffectResolver(s, List(effect))
+    s = resolve(s, List(effect))
     s.entities.size should ===(2)
     s.entities(ActiveStatusId(2)) should ===(TestActiveStatus(ActiveStatusId(2), 1, creature))
   }
@@ -80,7 +82,7 @@ class EffectResolverSpec extends FlatSpec with Matchers {
     val effect = TestEntityRemoveEffect(creature)
 
     creature(s)
-    s = EffectResolver(s, List(effect))
+    s = resolve(s, List(effect))
     intercept[Exception] {
       creature(s)
     }
@@ -95,7 +97,7 @@ class EffectResolverSpec extends FlatSpec with Matchers {
     val e2 = TestDamageEffect(creature, 5)
 
     creature(s)
-    s = EffectResolver(s, List(e1, e2))
+    s = resolve(s, List(e1, e2))
     intercept[Exception] {
       creature(s)
     }
