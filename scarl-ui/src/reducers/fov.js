@@ -22,10 +22,13 @@ const initial = {
 
 export default (state = initial, action) => {
     switch (action.type) {
+        case types.CONNECTION_CLOSED: {
+            return initial
+        }
         case types.RECEIVE_MESSAGE: {
             const data = action.data.fov
             return {
-                cumulative: build(data.delta, state.cumulative),
+                cumulative: build(data.delta, state.cumulative), // mutates state!
                 delta: build(data.delta),
                 shouldHide: data.shouldHide,
             }

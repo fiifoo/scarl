@@ -18,6 +18,13 @@ const build = element => {
     element.appendChild(fragment)
 }
 
+const reset = element => {
+    while (element.lastChild) {
+        element.removeChild(element.lastChild)
+    }
+    build(element)
+}
+
 const update = (element, fov) => {
     fov.delta.forEach((rows, x) => {
         rows.forEach((entities, y) => {
@@ -84,7 +91,11 @@ class View extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        update(this.element, nextProps.fov)
+        if (nextProps.connection === false) {
+            reset(this.element)
+        } else {
+            update(this.element, nextProps.fov)
+        }
     }
 
     render() {

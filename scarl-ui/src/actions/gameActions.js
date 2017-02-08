@@ -10,7 +10,7 @@ export const attack = target => dispatch => {
 
     dispatch({
         type: types.GAME_ATTACK,
-        location,
+        target,
     })
 }
 

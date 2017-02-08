@@ -1,6 +1,8 @@
 import React from 'react'
 import ConnectionContainer from '../containers/ConnectionContainer'
 import KeyboardContainer from '../containers/KeyboardContainer'
+import MessageBarContainer from '../containers/MessageBarContainer'
+import MessageLogContainer from '../containers/MessageLogContainer'
 import ViewContainer from '../containers/ViewContainer'
 
 import './App.css'
@@ -21,7 +23,9 @@ const App = () => (
         </nav>
 
         <div className="container-fluid">
+            <MessageBarContainer />
             <ViewContainer />
+            <MessageLogContainer />
         </div>
     </div>
 )

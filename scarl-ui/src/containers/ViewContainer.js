@@ -4,6 +4,7 @@ import View from '../components/View.jsx'
 
 const ViewContainer = connect(
     state => ({
+        connection: state.connection,
         fov: state.fov,
     }),
     {focusKeyboard}
