@@ -16,6 +16,7 @@ object OutMessages {
   }
 
   implicit val locationWrites = Json.writes[Location]
+  implicit val creatureStatsWrites = Json.writes[Creature.Stats]
   implicit val creatureWrites = Json.writes[Creature]
   implicit val terrainWrites = Json.writes[Terrain]
   implicit val wallWrites = Json.writes[Wall]

@@ -10,10 +10,11 @@ case class DamageEffect(target: CreatureId, amount: Int) extends Effect {
   def apply(s: State): EffectResult = {
     val creature = target(s)
     val damage = creature.damage + amount
+    val health = creature.stats.health
 
     val mutation = CreatureDamageMutation(target, damage)
 
-    if (creature.damage < creature.health && damage >= creature.health) {
+    if (creature.damage < health && damage >= health) {
       EffectResult(mutation, DeathEffect(target))
     } else {
       EffectResult(mutation)
