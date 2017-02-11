@@ -3,14 +3,14 @@ package io.github.fiifoo.scarl.ai.tactic
 import io.github.fiifoo.scarl.action.{AttackAction, MoveAction}
 import io.github.fiifoo.scarl.core.action.{Action, Tactic}
 import io.github.fiifoo.scarl.core.entity.{CreatureId, SafeCreatureId}
-import io.github.fiifoo.scarl.core.{Location, State}
+import io.github.fiifoo.scarl.core.{Location, Rng, State}
 import io.github.fiifoo.scarl.geometry.{Line, Los}
 
 case class ChargeTactic(actor: CreatureId, target: SafeCreatureId, destination: Location) extends Tactic {
 
   private def _range = 5 // should come from creature
 
-  def apply(s: State): (Tactic, Action) = {
+  def apply(s: State, rng: Rng): (Tactic, Action, Rng) = {
     target(s) map (target => {
       val line = Line(actor(s).location, target.location)
 
@@ -23,15 +23,15 @@ case class ChargeTactic(actor: CreatureId, target: SafeCreatureId, destination: 
           MoveAction(line(1))
         }
 
-        (charge, action)
+        (charge, action, rng)
 
       } else {
 
         val pursue = PursueTactic(actor, SafeCreatureId(target.id), destination)
-        pursue(s)
+        pursue(s, rng)
 
       }
 
-    }) getOrElse RoamTactic(actor)(s)
+    }) getOrElse RoamTactic(actor)(s, rng)
   }
 }

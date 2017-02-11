@@ -1,7 +1,7 @@
 package io.github.fiifoo.scarl.generate
 
 import io.github.fiifoo.scarl.core.entity.{Wall, WallId}
-import io.github.fiifoo.scarl.core.mutation.NewEntityMutation
+import io.github.fiifoo.scarl.core.mutation.{NewEntityMutation, RngMutation}
 import io.github.fiifoo.scarl.core.{Location, State}
 
 import scala.util.Random
@@ -17,10 +17,10 @@ class WallFactory(locationConstraint: (Int, Int)) {
             ): Wall = Wall(id, location)
 
   def generate(s: State, count: Int, prototype: Wall = create()): State = {
+    val (random, rng) = s.rng()
+    val _s = RngMutation(rng)(s)
 
-    val random = new Random(s.seed)
-
-    (0 until count).foldLeft(s)((s, _) => {
+    (0 until count).foldLeft(_s)((s, _) => {
       val id = WallId(s.nextEntityId)
       val location = generateLocation(random)
       val wall = prototype.copy(id, location)

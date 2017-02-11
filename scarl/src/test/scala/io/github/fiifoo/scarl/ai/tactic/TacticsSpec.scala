@@ -4,13 +4,13 @@ import io.github.fiifoo.scarl.action.test_assets.TestPassTactic
 import io.github.fiifoo.scarl.core.entity.{CreatureId, SafeCreatureId}
 import io.github.fiifoo.scarl.core.mutation.LocatableLocationMutation
 import io.github.fiifoo.scarl.core.test_assets.TestCreatureFactory
-import io.github.fiifoo.scarl.core.{Location, RealityBubble, State}
+import io.github.fiifoo.scarl.core.{Location, RealityBubble, Rng, State}
 import org.scalatest._
 
 class TacticsSpec extends FlatSpec with Matchers {
 
   val bubble = new RealityBubble(
-    TestCreatureFactory.generate(State(), 2, TestCreatureFactory.create(health = 100)),
+    TestCreatureFactory.generate(State(rng = Rng(2)), 2, TestCreatureFactory.create(health = 100)),
     ai = (actor: CreatureId) => actor match {
       case CreatureId(1) => RoamTactic(CreatureId(1))
       case CreatureId(2) => TestPassTactic(CreatureId(2))
@@ -24,7 +24,7 @@ class TacticsSpec extends FlatSpec with Matchers {
 
     CreatureId(1)(s).location should ===(Location(0, 0))
     bubble.be()
-    CreatureId(1)(s).location should ===(Location(-1, 0))
+    CreatureId(1)(s).location should ===(Location(-1, 1))
     s.tactics(CreatureId(1)) should ===(RoamTactic(CreatureId(1)))
 
     bubble.be() // other creature

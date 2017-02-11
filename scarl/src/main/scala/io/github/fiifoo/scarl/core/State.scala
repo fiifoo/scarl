@@ -19,7 +19,7 @@ object State {
 case class State(entities: Map[EntityId, Entity] = Map(),
                  index: State.Index = State.Index(),
                  nextEntityId: Int = 1,
-                 seed: Int = 1,
+                 rng: Rng = Rng(1),
                  tactics: Map[CreatureId, Tactic] = Map(),
                  tick: Int = 1,
                  tmp: State.Temporary = State.Temporary()

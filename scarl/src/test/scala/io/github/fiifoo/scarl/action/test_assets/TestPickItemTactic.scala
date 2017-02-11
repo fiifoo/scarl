@@ -3,11 +3,11 @@ package io.github.fiifoo.scarl.action.test_assets
 import io.github.fiifoo.scarl.action.PickItemAction
 import io.github.fiifoo.scarl.core.action.{Action, Tactic}
 import io.github.fiifoo.scarl.core.entity._
-import io.github.fiifoo.scarl.core.{Location, State}
+import io.github.fiifoo.scarl.core.{Location, Rng, State}
 
 case class TestPickItemTactic(actor: CreatureId) extends Tactic {
 
-  def apply(s: State): (Tactic, Action) = {
+  def apply(s: State, rng: Rng): (Tactic, Action, Rng) = {
 
     def getItemLocation(item: Item): Option[Location] = {
       item.container(s) match {
@@ -22,6 +22,6 @@ case class TestPickItemTactic(actor: CreatureId) extends Tactic {
       case i: Item if getItemLocation(i) contains location => i
     }
 
-    (this, PickItemAction(here.head.id))
+    (this, PickItemAction(here.head.id), rng)
   }
 }

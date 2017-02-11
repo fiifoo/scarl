@@ -1,7 +1,7 @@
 package io.github.fiifoo.scarl.generate
 
 import io.github.fiifoo.scarl.core.entity.{Creature, CreatureId}
-import io.github.fiifoo.scarl.core.mutation.NewEntityMutation
+import io.github.fiifoo.scarl.core.mutation.{NewEntityMutation, RngMutation}
 import io.github.fiifoo.scarl.core.{Location, State}
 
 import scala.util.Random
@@ -20,10 +20,10 @@ class CreatureFactory(locationConstraint: (Int, Int)) {
             ): Creature = Creature(id, location, tick, health, damage)
 
   def generate(s: State, count: Int, prototype: Creature = create()): State = {
+    val (random, rng) = s.rng()
+    val _s = RngMutation(rng)(s)
 
-    val random = new Random(s.seed)
-
-    (0 until count).foldLeft(s)((s, _) => {
+    (0 until count).foldLeft(_s)((s, _) => {
       val id = CreatureId(s.nextEntityId)
       val location = generateLocation(random)
       val tick = s.tick

@@ -3,16 +3,12 @@ package io.github.fiifoo.scarl.core
 import io.github.fiifoo.scarl.core.action.{Action, Tactic}
 import io.github.fiifoo.scarl.core.effect.{Effect, EffectResolver}
 import io.github.fiifoo.scarl.core.entity._
-import io.github.fiifoo.scarl.core.mutation.{SeedMutation, TacticMutation, TickMutation}
-
-import scala.util.Random
+import io.github.fiifoo.scarl.core.mutation.{RngMutation, TacticMutation, TickMutation}
 
 class RealityBubble(var s: State,
                     ai: (CreatureId) => Tactic,
                     logger: Logger = new Logger()
                    ) {
-
-  val random = new Random(s.seed)
   val resolveEffect = new EffectResolver(logger.effect)
   val actors = new ActorQueue()
   s = actors.enqueueNewActors(s)
@@ -30,7 +26,6 @@ class RealityBubble(var s: State,
       }
 
       s = resolveEffect(s, effects)
-      s = SeedMutation(random.nextInt())(s)
       s = actors.enqueueNewActors(s)
       enqueue(actor)
     })
@@ -38,8 +33,8 @@ class RealityBubble(var s: State,
 
   private def handleCreature(actor: CreatureId, action: Option[Action]): List[Effect] = {
     action map (action => action(s, actor)) getOrElse {
-      val (tactic, action) = s.tactics.get(actor) map (_ (s)) getOrElse ai(actor)(s)
-      s = TacticMutation(tactic)(s)
+      val (tactic, action, rng) = s.tactics.get(actor) map (_ (s, s.rng)) getOrElse ai(actor)(s, s.rng)
+      s = TacticMutation(tactic)(RngMutation(rng)(s))
 
       action(s, actor)
     }
