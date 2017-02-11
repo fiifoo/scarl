@@ -50,7 +50,7 @@ class TacticsSpec extends FlatSpec with Matchers {
     CreatureId(2)(s).damage should ===(0)
     bubble.be()
     CreatureId(1)(s).location should ===(Location(1, 0))
-    CreatureId(2)(s).damage should ===(1)
+    CreatureId(2)(s).damage should ===(13)
 
     bubble.be() // other creature
   }
