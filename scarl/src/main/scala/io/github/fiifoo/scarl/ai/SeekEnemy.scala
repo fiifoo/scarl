@@ -23,11 +23,16 @@ object SeekEnemy {
   }
 
   private def getCandidates(s: State, creature: Creature): List[Creature] = {
-    val candidates: Iterable[Creature] = s.entities.values collect {
-      case candidate: Creature if candidate != creature && inRange(creature, candidate, _range) => candidate
-    }
+    val factions = creature.faction(s).enemies
+    val filterCandidate = (candidate: Creature) => candidate != creature && inRange(creature, candidate, _range)
 
-    candidates.toList sortWith ((a, b) => distance(creature, a) < distance(creature, b))
+    val candidates = factions.foldLeft(List[Creature]())((candidates, faction) => {
+      val filtered = s.index.factionMembers getOrElse(faction, List()) map (_ (s)) filter filterCandidate
+
+      filtered ::: candidates
+    })
+
+    candidates sortWith ((a, b) => distance(creature, a) < distance(creature, b))
   }
 
   private def inRange(creature: Creature, candidate: Creature, range: Int): Boolean = {

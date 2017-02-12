@@ -35,6 +35,10 @@ case class RemoveEntitiesMutation() extends Mutation {
         case item: Item => ItemContainerIndexRemoveMutation(item.id, item.container)(index.containerItems)
         case _ => index.containerItems
       },
+      factionMembers = entity match {
+        case member: Creature => FactionMemberIndexRemoveMutation(member.id, member.faction)(index.factionMembers)
+        case _ => index.factionMembers
+      },
       locationEntities = entity match {
         case locatable: Locatable => LocatableLocationIndexRemoveMutation(locatable.id, locatable.location)(index.locationEntities)
         case _ => index.locationEntities

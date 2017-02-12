@@ -15,6 +15,7 @@ object Creature {
 }
 
 case class Creature(id: CreatureId,
+                    faction: FactionId,
                     location: Location,
                     tick: Int,
                     damage: Int,

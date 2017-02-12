@@ -25,12 +25,12 @@ const reset = element => {
     build(element)
 }
 
-const update = (element, fov) => {
+const update = (element, fov, player) => {
     fov.delta.forEach((rows, x) => {
         rows.forEach((entities, y) => {
             if (element.rows[y] !== undefined && element.rows[y].cells[x] !== undefined) {
                 const cell = element.rows[y].cells[x]
-                renderVisible(cell, entities)
+                renderVisible(cell, entities, player)
             }
         })
     })
@@ -45,9 +45,9 @@ const update = (element, fov) => {
     })
 }
 
-const renderVisible = (cell, entities) => {
+const renderVisible = (cell, entities, player) => {
     if (entities.creature) {
-        renderCreature(cell, entities.creature)
+        renderCreature(cell, entities.creature, player)
     } else if (entities.wall) {
         renderWall(cell)
     } else {
@@ -63,8 +63,8 @@ const renderHidden = (cell, entities) => {
     }
 }
 
-const renderCreature = (cell, creature) => {
-    if (creature.id === 1) {
+const renderCreature = (cell, creature, player) => {
+    if (creature.id === player.id) {
         cell.innerHTML = '<div style="color: yellow;">@</div>'
     } else {
         cell.innerHTML = '<div style="color: green;">o</div>'
@@ -87,14 +87,14 @@ class View extends Component {
 
     componentDidMount() {
         build(this.element)
-        update(this.element, this.props.fov)
+        update(this.element, this.props.fov, this.props.player)
     }
 
     componentWillReceiveProps(nextProps) {
         if (nextProps.connection === false) {
             reset(this.element)
         } else {
-            update(this.element, nextProps.fov)
+            update(this.element, nextProps.fov, nextProps.player)
         }
     }
 

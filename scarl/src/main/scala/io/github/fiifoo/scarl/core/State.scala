@@ -6,6 +6,7 @@ import io.github.fiifoo.scarl.core.entity._
 object State {
 
   case class Index(containerItems: Map[EntityId, List[ItemId]] = Map(),
+                   factionMembers: Map[FactionId, List[CreatureId]] = Map(),
                    locationEntities: Map[Location, List[LocatableId]] = Map(),
                    targetStatuses: Map[EntityId, List[StatusId]] = Map()
                   )
@@ -17,6 +18,7 @@ object State {
 }
 
 case class State(entities: Map[EntityId, Entity] = Map(),
+                 factions: Map[FactionId, Faction] = Map(),
                  index: State.Index = State.Index(),
                  nextEntityId: Int = 1,
                  rng: Rng = Rng(1),

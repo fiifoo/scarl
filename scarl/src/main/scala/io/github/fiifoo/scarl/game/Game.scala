@@ -2,17 +2,16 @@ package io.github.fiifoo.scarl.game
 
 import io.github.fiifoo.scarl.ai.tactic.RoamTactic
 import io.github.fiifoo.scarl.core.action.Action
-import io.github.fiifoo.scarl.core.{Logger, RealityBubble}
+import io.github.fiifoo.scarl.core.{Logger, RealityBubble, State}
 import io.github.fiifoo.scarl.game.message.MessageBuilder
-import io.github.fiifoo.scarl.generate.Generate
 import io.github.fiifoo.scarl.geometry.Fov
 
-class Game(out: OutConnection, player: Player) {
+class Game(out: OutConnection, player: Player, initial: State) {
 
   private val messages = new MessageBuilder(player)
 
   private val bubble = new RealityBubble(
-    s = Generate(),
+    s = initial,
     ai = RoamTactic,
     logger = new Logger(effect = messages.receive)
   )

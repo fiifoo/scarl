@@ -26,6 +26,10 @@ case class NewEntityMutation(entity: Entity) extends Mutation {
         case item: Item => ItemContainerIndexAddMutation(item.id, item.container)(index.containerItems)
         case _ => index.containerItems
       },
+      factionMembers = entity match {
+        case member: Creature => FactionMemberIndexAddMutation(member.id, member.faction)(index.factionMembers)
+        case _ => index.factionMembers
+      },
       locationEntities = entity match {
         case locatable: Locatable => LocatableLocationIndexAddMutation(locatable.id, locatable.location)(index.locationEntities)
         case _ => index.locationEntities

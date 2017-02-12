@@ -3,7 +3,7 @@ package models
 import io.github.fiifoo.scarl.core.Location
 import io.github.fiifoo.scarl.core.entity._
 import io.github.fiifoo.scarl.game.{LocationEntities, OutMessage}
-import play.api.libs.json.{JsNumber, JsValue, Json, Writes}
+import play.api.libs.json._
 
 object OutMessages {
 
@@ -13,6 +13,9 @@ object OutMessages {
 
   implicit val entityIdWrites = new Writes[EntityId] {
     def writes(id: EntityId) = JsNumber(id.value)
+  }
+  implicit val factionIdWrites = new Writes[FactionId] {
+    def writes(id: FactionId) = JsString(id.value)
   }
 
   implicit val locationWrites = Json.writes[Location]
