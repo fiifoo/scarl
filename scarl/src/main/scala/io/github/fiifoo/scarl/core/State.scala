@@ -9,6 +9,7 @@ object State {
   case class Index(containerItems: Map[EntityId, List[ItemId]] = Map(),
                    factionMembers: Map[FactionId, List[CreatureId]] = Map(),
                    locationEntities: Map[Location, List[LocatableId]] = Map(),
+                   locationTriggers: Map[Location, List[TriggerStatusId]] = Map(),
                    targetStatuses: Map[EntityId, List[StatusId]] = Map()
                   )
 

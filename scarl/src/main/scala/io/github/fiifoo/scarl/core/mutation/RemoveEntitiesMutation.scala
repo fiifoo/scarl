@@ -12,7 +12,7 @@ case class RemoveEntitiesMutation() extends Mutation {
     val removable = s.tmp.removableEntities
 
     val index = removable.foldLeft(s.index)((index, entity) => {
-      mutateIndex(index, entity(s))
+      mutateIndex(s, index, entity(s))
     })
 
     s.copy(
@@ -29,7 +29,7 @@ case class RemoveEntitiesMutation() extends Mutation {
     tactics -- creatures
   }
 
-  private def mutateIndex(index: State.Index, entity: Entity): State.Index = {
+  private def mutateIndex(s: State, index: State.Index, entity: Entity): State.Index = {
     index.copy(
       containerItems = entity match {
         case item: Item => ItemContainerIndexRemoveMutation(item.id, item.container)(index.containerItems)
@@ -42,6 +42,10 @@ case class RemoveEntitiesMutation() extends Mutation {
       locationEntities = entity match {
         case locatable: Locatable => LocatableLocationIndexRemoveMutation(locatable.id, locatable.location)(index.locationEntities)
         case _ => index.locationEntities
+      },
+      locationTriggers = entity match {
+        case trigger: TriggerStatus => TriggerLocationIndexRemoveMutation(trigger.id, trigger.target(s).location)(index.locationTriggers)
+        case _ => index.locationTriggers
       },
       targetStatuses = entity match {
         case status: Status => StatusTargetIndexRemoveMutation(status.id, status.target)(index.targetStatuses)

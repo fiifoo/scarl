@@ -1,6 +1,6 @@
 package io.github.fiifoo.scarl.core.mutation
 
-import io.github.fiifoo.scarl.core.entity.{Locatable, LocatableId}
+import io.github.fiifoo.scarl.core.entity.{ContainerId, Locatable, LocatableId}
 import io.github.fiifoo.scarl.core.mutation.index.{LocatableLocationIndexAddMutation, LocatableLocationIndexRemoveMutation}
 import io.github.fiifoo.scarl.core.{Location, State}
 
@@ -19,6 +19,11 @@ case class LocatableLocationMutation(locatable: LocatableId, location: Location)
   private def mutateIndex(index: State.Index, previous: Locatable, next: Locatable): State.Index = {
     val remove = LocatableLocationIndexRemoveMutation(locatable, previous.location)
     val add = LocatableLocationIndexAddMutation(locatable, next.location)
+
+    locatable match {
+      case _: ContainerId => throw new Exception("Mutating location trigger index not implemented. Moving container not allowed without it.")
+      case _ =>
+    }
 
     index.copy(locationEntities = add(remove(index.locationEntities)))
   }

@@ -7,6 +7,10 @@ import io.github.fiifoo.scarl.core.mutation.index._
 case class NewEntityMutation(entity: Entity) extends Mutation {
 
   def apply(s: State): State = {
+    if (entity.id.value != s.nextEntityId) {
+      throw new Exception(s"${entity.id} does not match state next entity id")
+    }
+
     val addedActors = entity match {
       case actor: Actor => actor.id :: s.tmp.addedActors
       case _ => s.tmp.addedActors
@@ -14,13 +18,13 @@ case class NewEntityMutation(entity: Entity) extends Mutation {
 
     s.copy(
       entities = s.entities + (entity.id -> entity),
-      index = mutateIndex(s.index, entity),
+      index = mutateIndex(s, s.index, entity),
       nextEntityId = entity.id.value + 1,
       tmp = s.tmp.copy(addedActors = addedActors)
     )
   }
 
-  private def mutateIndex(index: State.Index, entity: Entity): State.Index = {
+  private def mutateIndex(s: State, index: State.Index, entity: Entity): State.Index = {
     index.copy(
       containerItems = entity match {
         case item: Item => ItemContainerIndexAddMutation(item.id, item.container)(index.containerItems)
@@ -33,6 +37,10 @@ case class NewEntityMutation(entity: Entity) extends Mutation {
       locationEntities = entity match {
         case locatable: Locatable => LocatableLocationIndexAddMutation(locatable.id, locatable.location)(index.locationEntities)
         case _ => index.locationEntities
+      },
+      locationTriggers = entity match {
+        case trigger: TriggerStatus => TriggerLocationIndexAddMutation(trigger.id, trigger.target(s).location)(index.locationTriggers)
+        case _ => index.locationTriggers
       },
       targetStatuses = entity match {
         case status: Status => StatusTargetIndexAddMutation(status.id, status.target)(index.targetStatuses)
