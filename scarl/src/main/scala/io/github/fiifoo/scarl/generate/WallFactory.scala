@@ -1,6 +1,6 @@
 package io.github.fiifoo.scarl.generate
 
-import io.github.fiifoo.scarl.core.entity.{Wall, WallId}
+import io.github.fiifoo.scarl.core.entity.{KindId, Wall, WallId}
 import io.github.fiifoo.scarl.core.mutation.{NewEntityMutation, RngMutation}
 import io.github.fiifoo.scarl.core.{Location, State}
 
@@ -13,8 +13,9 @@ object WallFactory {
 class WallFactory(locationConstraint: (Int, Int)) {
 
   def create(id: WallId = WallId(0),
+             kind: KindId = KindId("wall"),
              location: Location = Location(0, 0)
-            ): Wall = Wall(id, location)
+            ): Wall = Wall(id, kind, location)
 
   def generate(s: State, count: Int, prototype: Wall = create()): State = {
     val (random, rng) = s.rng()
@@ -23,7 +24,7 @@ class WallFactory(locationConstraint: (Int, Int)) {
     (0 until count).foldLeft(_s)((s, _) => {
       val id = WallId(s.nextEntityId)
       val location = generateLocation(random)
-      val wall = prototype.copy(id, location)
+      val wall = prototype.copy(id, location = location)
 
       NewEntityMutation(wall)(s)
     })

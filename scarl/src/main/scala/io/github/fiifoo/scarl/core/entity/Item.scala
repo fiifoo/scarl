@@ -1,3 +1,8 @@
 package io.github.fiifoo.scarl.core.entity
 
-case class Item(id: ItemId, container: EntityId) extends Entity
+import io.github.fiifoo.scarl.core.kind.ItemKindId
+
+case class Item(id: ItemId,
+                kind: ItemKindId,
+                container: EntityId
+               ) extends Entity

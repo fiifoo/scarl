@@ -1,6 +1,7 @@
 package io.github.fiifoo.scarl.status
 
 import io.github.fiifoo.scarl.core.entity._
+import io.github.fiifoo.scarl.core.kind.WallKindId
 import io.github.fiifoo.scarl.core.mutation.NewEntityMutation
 import io.github.fiifoo.scarl.core.test_assets.TestCreatureFactory
 import io.github.fiifoo.scarl.core.{Location, State}
@@ -42,7 +43,7 @@ class BurnStatusSpec extends FlatSpec with Matchers {
   }
 
   it should "not burn non-creatures in burning location" in {
-    val wall = Wall(WallId(1), Location(0, 0))
+    val wall = Wall(WallId(1), WallKindId("wall"), Location(0, 0))
     val container = Container(ContainerId(2), Location(0, 0))
     val status = BurnStatus(ActiveStatusId(3), 0, container.id)
     val s = NewEntityMutation(status)(NewEntityMutation(container)(NewEntityMutation(wall)(State())))

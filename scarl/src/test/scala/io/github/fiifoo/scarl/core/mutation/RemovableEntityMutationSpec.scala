@@ -1,7 +1,8 @@
 package io.github.fiifoo.scarl.core.mutation
 
 import io.github.fiifoo.scarl.core.State
-import io.github.fiifoo.scarl.core.entity.{ActiveStatusId, CreatureId, Item, ItemId}
+import io.github.fiifoo.scarl.core.entity._
+import io.github.fiifoo.scarl.core.kind.ItemKindId
 import io.github.fiifoo.scarl.core.test_assets.{TestActiveStatus, TestCreatureFactory}
 import org.scalatest._
 
@@ -33,8 +34,8 @@ class RemovableEntityMutationSpec extends FlatSpec with Matchers {
   it should "schedule removal for entity items" in {
     val initial = TestCreatureFactory.generate(State())
     val creature1 = CreatureId(1)
-    val item1 = Item(ItemId(2), creature1)
-    val item2 = Item(ItemId(3), creature1)
+    val item1 = Item(ItemId(2), ItemKindId("item"), creature1)
+    val item2 = Item(ItemId(3), ItemKindId("item"), creature1)
 
     val mutated = RemovableEntityMutation(creature1)(NewEntityMutation(item2)(NewEntityMutation(item1)(initial)))
     mutated.tmp.removableEntities should ===(List(creature1, item2.id, item1.id))

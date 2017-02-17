@@ -1,7 +1,7 @@
 package io.github.fiifoo.scarl.generate
 
 import io.github.fiifoo.scarl.core.entity.Creature.Stats
-import io.github.fiifoo.scarl.core.entity.{Creature, CreatureId, FactionId}
+import io.github.fiifoo.scarl.core.entity.{Creature, CreatureId, FactionId, KindId}
 import io.github.fiifoo.scarl.core.mutation.{NewEntityMutation, RngMutation}
 import io.github.fiifoo.scarl.core.{Location, State}
 
@@ -14,12 +14,13 @@ object CreatureFactory {
 class CreatureFactory(locationConstraint: (Int, Int)) {
 
   def create(faction: FactionId,
+             kind: KindId = KindId("creature"),
              id: CreatureId = CreatureId(0),
              location: Location = Location(0, 0),
              tick: Int = 1,
              damage: Int = 0,
              stats: Stats = Stats(health = 10, attack = 10, defence = 10, damage = 10, armor = 5)
-            ): Creature = Creature(id, faction, location, tick, damage, stats)
+            ): Creature = Creature(id, kind, faction, location, tick, damage, stats)
 
   def generate(s: State, count: Int, faction: FactionId): State = {
     val (random, rng) = s.rng()

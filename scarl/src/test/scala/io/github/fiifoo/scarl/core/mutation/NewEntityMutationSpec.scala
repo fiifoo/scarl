@@ -1,6 +1,7 @@
 package io.github.fiifoo.scarl.core.mutation
 
-import io.github.fiifoo.scarl.core.entity.{ActiveStatusId, CreatureId, Item, ItemId}
+import io.github.fiifoo.scarl.core.entity._
+import io.github.fiifoo.scarl.core.kind.ItemKindId
 import io.github.fiifoo.scarl.core.test_assets.{TestActiveStatus, TestCreatureFactory}
 import io.github.fiifoo.scarl.core.{Location, State}
 import org.scalatest._
@@ -45,8 +46,8 @@ class NewEntityMutationSpec extends FlatSpec with Matchers {
 
   it should "mutate item container index" in {
     val initial = TestCreatureFactory.generate(State())
-    val item1 = Item(ItemId(2), CreatureId(1))
-    val item2 = Item(ItemId(3), CreatureId(1))
+    val item1 = Item(ItemId(2), ItemKindId("item"), CreatureId(1))
+    val item2 = Item(ItemId(3), ItemKindId("item"), CreatureId(1))
 
     val mutated = NewEntityMutation(item1)(initial)
     mutated.index.containerItems should ===(Map(CreatureId(1) -> List(ItemId(2))))

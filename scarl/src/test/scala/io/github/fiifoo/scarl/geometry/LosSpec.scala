@@ -1,6 +1,7 @@
 package io.github.fiifoo.scarl.geometry
 
 import io.github.fiifoo.scarl.core.entity.{Wall, WallId}
+import io.github.fiifoo.scarl.core.kind.WallKindId
 import io.github.fiifoo.scarl.core.mutation.NewEntityMutation
 import io.github.fiifoo.scarl.core.{Location, State}
 import org.scalatest._
@@ -8,7 +9,7 @@ import org.scalatest._
 class LosSpec extends FlatSpec with Matchers {
 
   "Los" should "should check line of sight from one location to another" in {
-    val wall = Wall(WallId(1), Location(0, 1))
+    val wall = Wall(WallId(1), WallKindId("wall"), Location(0, 1))
     val state = NewEntityMutation(wall)(State())
 
     val los = Los(state) _

@@ -1,6 +1,7 @@
 package io.github.fiifoo.scarl.core.mutation
 
 import io.github.fiifoo.scarl.core.entity._
+import io.github.fiifoo.scarl.core.kind.ItemKindId
 import io.github.fiifoo.scarl.core.test_assets.{TestActiveStatus, TestCreatureFactory}
 import io.github.fiifoo.scarl.core.{Location, State}
 import org.scalatest._
@@ -49,8 +50,8 @@ class RemoveEntitiesMutationSpec extends FlatSpec with Matchers {
     val initial = TestCreatureFactory.generate(
       State(tmp = State.Temporary(removableEntities = List(ItemId(3))))
     )
-    val item1 = Item(ItemId(2), CreatureId(1))
-    val item2 = Item(ItemId(3), CreatureId(1))
+    val item1 = Item(ItemId(2), ItemKindId("item"), CreatureId(1))
+    val item2 = Item(ItemId(3), ItemKindId("item"), CreatureId(1))
 
     val mutated = RemoveEntitiesMutation()(NewEntityMutation(item2)(NewEntityMutation(item1)(initial)))
     mutated.index.containerItems should ===(Map(CreatureId(1) -> List(ItemId(2))))

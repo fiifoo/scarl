@@ -2,6 +2,7 @@ package io.github.fiifoo.scarl.core
 
 import io.github.fiifoo.scarl.core.action.Tactic
 import io.github.fiifoo.scarl.core.entity._
+import io.github.fiifoo.scarl.core.kind.Kinds
 
 object State {
 
@@ -20,6 +21,7 @@ object State {
 case class State(entities: Map[EntityId, Entity] = Map(),
                  factions: Map[FactionId, Faction] = Map(),
                  index: State.Index = State.Index(),
+                 kinds: Kinds = Kinds(),
                  nextEntityId: Int = 1,
                  rng: Rng = Rng(1),
                  tactics: Map[CreatureId, Tactic] = Map(),

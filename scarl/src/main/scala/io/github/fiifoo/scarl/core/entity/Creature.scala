@@ -2,6 +2,7 @@ package io.github.fiifoo.scarl.core.entity
 
 import io.github.fiifoo.scarl.core.Location
 import io.github.fiifoo.scarl.core.entity.Creature.Stats
+import io.github.fiifoo.scarl.core.kind.CreatureKindId
 
 object Creature {
 
@@ -15,6 +16,7 @@ object Creature {
 }
 
 case class Creature(id: CreatureId,
+                    kind: CreatureKindId,
                     faction: FactionId,
                     location: Location,
                     tick: Int,
