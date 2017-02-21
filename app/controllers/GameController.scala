@@ -5,8 +5,7 @@ import javax.inject.Inject
 import akka.actor._
 import akka.stream.Materializer
 import io.github.fiifoo.scarl.game.{Game, OutConnection, OutMessage, Player}
-import io.github.fiifoo.scarl.generate.Generate
-import models.{Actions, OutMessages}
+import models.{Actions, Data, GenerateBubble, OutMessages}
 import play.Environment
 import play.api.libs.json.JsValue
 import play.api.libs.streams._
@@ -33,7 +32,10 @@ class GameController @Inject()(implicit system: ActorSystem, materializer: Mater
   }
 
   class WebSocketActor(out: ActorRef) extends Actor {
-    val (s, creature) = Generate()
+    val factions = Data.factions
+    val kinds = Data.kinds
+
+    val (s, creature) = GenerateBubble(factions, kinds)
 
     val player = new Player(creature)
     val connection = new OutConnection(player, send)
