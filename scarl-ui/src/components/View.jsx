@@ -25,12 +25,12 @@ const reset = element => {
     build(element)
 }
 
-const update = (element, fov, player) => {
+const update = (element, fov, kinds) => {
     fov.delta.forEach((rows, x) => {
         rows.forEach((entities, y) => {
             if (element.rows[y] !== undefined && element.rows[y].cells[x] !== undefined) {
                 const cell = element.rows[y].cells[x]
-                renderVisible(cell, entities, player)
+                renderCell(cell, entities, kinds)
             }
         })
     })
@@ -40,42 +40,33 @@ const update = (element, fov, player) => {
         if (element.rows[y] !== undefined && element.rows[y].cells[x] !== undefined) {
             const cell = element.rows[y].cells[x]
             const entities = fov.cumulative[x][y]
-            renderHidden(cell, entities)
+            renderCell(cell, entities, kinds, false)
         }
     })
 }
 
-const renderVisible = (cell, entities, player) => {
-    if (entities.creature) {
-        renderCreature(cell, entities.creature, player)
+const renderCell = (cell, entities, kinds, visible = true) => {
+    if (visible && entities.creature) {
+        renderEntity(cell, entities.creature, kinds.creatures)
+    } else if (entities.items.length > 0) {
+        renderEntity(cell, entities.items[entities.items.length - 1], kinds.items)
     } else if (entities.wall) {
-        renderWall(cell)
+        renderEntity(cell, entities.wall, kinds.walls)
+    } else if (entities.terrain) {
+        renderEntity(cell, entities.terrain, kinds.terrains)
     } else {
-        renderTerrain(cell)
+        renderEmpty(cell)
     }
 }
 
-const renderHidden = (cell, entities) => {
-    if (entities.wall) {
-        renderWall(cell)
-    } else {
-        renderTerrain(cell)
-    }
+const renderEntity = (cell, entity, kinds) => {
+    const kind = kinds.get(entity.kind)
+    const display = kind.display
+    const color = kind.color
+    cell.innerHTML = '<div style="color: ' + color + '">' + display + '</div>'
 }
 
-const renderCreature = (cell, creature, player) => {
-    if (creature.id === player.id) {
-        cell.innerHTML = '<div style="color: yellow;">@</div>'
-    } else {
-        cell.innerHTML = '<div style="color: green;">o</div>'
-    }
-}
-
-const renderWall = (cell) => {
-    cell.innerHTML = '<div style="color: darkgrey;">#</div>'
-}
-
-const renderTerrain = (cell) => {
+const renderEmpty = (cell) => {
     cell.innerHTML = '.'
 }
 
@@ -87,14 +78,14 @@ class View extends Component {
 
     componentDidMount() {
         build(this.element)
-        update(this.element, this.props.fov, this.props.player)
+        update(this.element, this.props.fov, this.props.kinds)
     }
 
     componentWillReceiveProps(nextProps) {
         if (nextProps.connection === false) {
             reset(this.element)
         } else {
-            update(this.element, nextProps.fov, nextProps.player)
+            update(this.element, nextProps.fov, nextProps.kinds)
         }
     }
 

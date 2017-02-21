@@ -6,7 +6,7 @@ const ViewContainer = connect(
     state => ({
         connection: state.connection,
         fov: state.fov,
-        player: state.player,
+        kinds: state.kinds,
     }),
     {focusKeyboard}
 )(View)
