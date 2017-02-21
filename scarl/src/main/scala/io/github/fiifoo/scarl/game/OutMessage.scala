@@ -2,6 +2,7 @@ package io.github.fiifoo.scarl.game
 
 import io.github.fiifoo.scarl.core.Location
 import io.github.fiifoo.scarl.core.entity.Creature
+import io.github.fiifoo.scarl.core.kind.Kinds
 
 object OutMessage {
 
@@ -11,4 +12,8 @@ object OutMessage {
 
 }
 
-case class OutMessage(fov: OutMessage.Fov, messages: List[String], player: Option[Creature])
+case class OutMessage(fov: OutMessage.Fov,
+                      messages: List[String],
+                      player: Option[Creature],
+                      kinds: Option[Kinds] = None
+                     )

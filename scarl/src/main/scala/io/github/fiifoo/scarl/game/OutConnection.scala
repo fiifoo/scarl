@@ -1,17 +1,19 @@
 package io.github.fiifoo.scarl.game
 
 import io.github.fiifoo.scarl.core.entity.Creature
+import io.github.fiifoo.scarl.core.kind.Kinds
 import io.github.fiifoo.scarl.core.{Location, State}
 
 class OutConnection(val player: Player,
                     send: OutMessage => Unit
                    ) {
 
-  def apply(s: State, messages: List[String]): Unit = {
+  def apply(s: State, messages: List[String], kinds: Option[Kinds]): Unit = {
     val message = OutMessage(
       calculateMessageFov(s),
       messages,
-      s.entities.get(player.creature) map (_.asInstanceOf[Creature])
+      s.entities.get(player.creature) map (_.asInstanceOf[Creature]),
+      kinds
     )
 
     send(message)

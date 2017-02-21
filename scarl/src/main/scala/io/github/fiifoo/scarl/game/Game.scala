@@ -2,6 +2,7 @@ package io.github.fiifoo.scarl.game
 
 import io.github.fiifoo.scarl.ai.tactic.RoamTactic
 import io.github.fiifoo.scarl.core.action.Action
+import io.github.fiifoo.scarl.core.kind.Kinds
 import io.github.fiifoo.scarl.core.{Logger, RealityBubble, State}
 import io.github.fiifoo.scarl.game.message.MessageBuilder
 import io.github.fiifoo.scarl.geometry.Fov
@@ -27,7 +28,7 @@ class Game(out: OutConnection, player: Player, initial: State) {
     updateFov()
     runNpc()
     updateFov()
-    send()
+    send(Some(s.kinds))
   }
 
   private def run(action: Action): Unit = {
@@ -54,8 +55,8 @@ class Game(out: OutConnection, player: Player, initial: State) {
     }
   }
 
-  private def send(): Unit = {
-    out(s, messages.extract())
+  private def send(kinds: Option[Kinds] = None): Unit = {
+    out(s, messages.extract(), kinds)
   }
 
   private def s = bubble.s
