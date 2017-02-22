@@ -1,17 +1,11 @@
 import React from 'react'
 import ConnectionContainer from '../containers/ConnectionContainer'
-import KeyboardContainer from '../containers/KeyboardContainer'
-import MessageBarContainer from '../containers/MessageBarContainer'
-import MessageLogContainer from '../containers/MessageLogContainer'
-import PlayerInfoContainer from '../containers/PlayerInfoContainer'
-import ViewContainer from '../containers/ViewContainer'
+import GameContainer from '../containers/GameContainer'
 
 import './App.css'
 
 const App = () => (
     <div>
-        <KeyboardContainer />
-
         <nav className="navbar navbar-inverse">
             <div className="container-fluid">
                 <div className="navbar-header">
@@ -24,10 +18,7 @@ const App = () => (
         </nav>
 
         <div className="container-fluid">
-            <MessageBarContainer />
-            <ViewContainer />
-            <PlayerInfoContainer />
-            <MessageLogContainer />
+            <GameContainer />
         </div>
     </div>
 )
