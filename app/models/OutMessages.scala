@@ -3,7 +3,7 @@ package models
 import io.github.fiifoo.scarl.core.Location
 import io.github.fiifoo.scarl.core.entity._
 import io.github.fiifoo.scarl.core.kind._
-import io.github.fiifoo.scarl.game.{LocationEntities, OutMessage}
+import io.github.fiifoo.scarl.game.{LocationEntities, OutMessage, Statistics}
 import play.api.libs.json._
 
 object OutMessages {
@@ -52,6 +52,11 @@ object OutMessages {
       "walls" -> Json.toJson(k.walls.values)
     ))
   }
+
+  implicit val deathStatisticsWrites = new Writes[Map[CreatureKindId, Int]] {
+    def writes(x: Map[CreatureKindId, Int]) = JsObject(x map { y => (y._1.value, JsNumber(y._2)) })
+  }
+  implicit val statisticsWrites = Json.writes[Statistics]
 
   implicit val messageWrites = Json.writes[OutMessage]
 

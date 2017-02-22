@@ -8,12 +8,13 @@ class OutConnection(val player: Player,
                     send: OutMessage => Unit
                    ) {
 
-  def apply(s: State, messages: List[String], kinds: Option[Kinds]): Unit = {
+  def apply(s: State, messages: List[String], kinds: Option[Kinds] = None, statistics: Option[Statistics] = None): Unit = {
     val message = OutMessage(
       calculateMessageFov(s),
       messages,
       s.entities.get(player.creature) map (_.asInstanceOf[Creature]),
-      kinds
+      kinds,
+      statistics
     )
 
     send(message)

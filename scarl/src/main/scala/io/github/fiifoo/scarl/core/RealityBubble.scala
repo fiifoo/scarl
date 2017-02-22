@@ -7,9 +7,9 @@ import io.github.fiifoo.scarl.core.mutation.{RngMutation, TacticMutation, TickMu
 
 class RealityBubble(var s: State,
                     ai: (CreatureId) => Tactic,
-                    logger: Logger = new Logger()
+                    listener: Listener = new Listener()
                    ) {
-  val resolveEffect = new EffectResolver(logger.effect)
+  val resolveEffect = new EffectResolver(listener.effect)
   val actors = new ActorQueue()
   s = actors.enqueueNewActors(s)
 

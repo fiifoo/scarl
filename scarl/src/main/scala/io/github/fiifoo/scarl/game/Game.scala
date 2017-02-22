@@ -2,25 +2,40 @@ package io.github.fiifoo.scarl.game
 
 import io.github.fiifoo.scarl.ai.tactic.RoamTactic
 import io.github.fiifoo.scarl.core.action.Action
-import io.github.fiifoo.scarl.core.kind.Kinds
-import io.github.fiifoo.scarl.core.{Logger, RealityBubble, State}
+import io.github.fiifoo.scarl.core.effect.{CombinedEffectListener, Effect, EffectListener}
+import io.github.fiifoo.scarl.core.{Listener, RealityBubble, State}
+import io.github.fiifoo.scarl.effect.DeathEffect
 import io.github.fiifoo.scarl.game.message.MessageBuilder
 import io.github.fiifoo.scarl.geometry.Fov
 
 class Game(out: OutConnection, player: Player, initial: State) {
 
+  private var gameOver = false
   private val messages = new MessageBuilder(player)
+  private val statistics = new StatisticsBuilder()
+
+  object GameOverListener extends EffectListener {
+    def apply(s: State, effect: Effect): Unit = {
+      effect match {
+        case effect: DeathEffect if effect.target == player.creature => gameOver = true
+        case _ =>
+      }
+    }
+  }
 
   private val bubble = new RealityBubble(
     s = initial,
     ai = RoamTactic,
-    logger = new Logger(effect = messages.receive)
+    listener = new Listener(effect = new CombinedEffectListener(List(
+      messages,
+      statistics,
+      GameOverListener
+    )))
   )
 
   def receive(action: Action): Unit = {
     if (!gameOver) {
       run(action)
-      send()
     }
   }
 
@@ -28,21 +43,25 @@ class Game(out: OutConnection, player: Player, initial: State) {
     updateFov()
     runNpc()
     updateFov()
-    send(Some(s.kinds))
+
+    sendInitial()
   }
 
   private def run(action: Action): Unit = {
     bubble.be(Some(action))
     updateFov()
+    runNpc()
+    updateFov()
 
-    if (!gameOver) {
-      runNpc()
-      updateFov()
+    if (gameOver) {
+      sendFinal()
+    } else {
+      send()
     }
   }
 
   private def runNpc(): Unit = {
-    while (npcTurn) {
+    while (!gameOver && npcTurn) {
       bubble.be()
     }
   }
@@ -55,13 +74,19 @@ class Game(out: OutConnection, player: Player, initial: State) {
     }
   }
 
-  private def send(kinds: Option[Kinds] = None): Unit = {
-    out(s, messages.extract(), kinds)
+  private def sendInitial(): Unit = {
+    out(s, messages.extract(), kinds = Some(s.kinds))
+  }
+
+  private def send(): Unit = {
+    out(s, messages.extract())
+  }
+
+  private def sendFinal(): Unit = {
+    out(s, messages.extract(), statistics = Some(statistics.get()))
   }
 
   private def s = bubble.s
-
-  private def gameOver = !bubble.s.entities.isDefinedAt(player.creature)
 
   private def npcTurn = bubble.actors.nonEmpty && !bubble.nextActor.contains(player.creature)
 

@@ -5,7 +5,7 @@ import io.github.fiifoo.scarl.core.mutation.RemoveEntitiesMutation
 
 import scala.collection.mutable
 
-class EffectResolver(log: (State, Effect) => Unit = (_, _) => ()) {
+class EffectResolver(listener: EffectListener = NullEffectListener) {
 
   def apply(s: State, effects: List[Effect]): State = {
 
@@ -18,7 +18,7 @@ class EffectResolver(log: (State, Effect) => Unit = (_, _) => ()) {
 
       result.mutations.foreach(mutation => _s = mutation(_s))
       result.effects.foreach(effect => queue.enqueue(effect))
-      log(_s, effect)
+      listener(_s, effect)
     }
 
     if (_s.tmp.removableEntities.nonEmpty) {

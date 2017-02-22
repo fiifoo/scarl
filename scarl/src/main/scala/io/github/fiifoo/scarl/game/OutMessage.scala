@@ -15,5 +15,6 @@ object OutMessage {
 case class OutMessage(fov: OutMessage.Fov,
                       messages: List[String],
                       player: Option[Creature],
-                      kinds: Option[Kinds] = None
+                      kinds: Option[Kinds] = None,
+                      statistics: Option[Statistics] = None
                      )
