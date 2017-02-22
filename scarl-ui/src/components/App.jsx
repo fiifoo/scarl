@@ -3,6 +3,7 @@ import ConnectionContainer from '../containers/ConnectionContainer'
 import KeyboardContainer from '../containers/KeyboardContainer'
 import MessageBarContainer from '../containers/MessageBarContainer'
 import MessageLogContainer from '../containers/MessageLogContainer'
+import PlayerInfoContainer from '../containers/PlayerInfoContainer'
 import ViewContainer from '../containers/ViewContainer'
 
 import './App.css'
@@ -25,6 +26,7 @@ const App = () => (
         <div className="container-fluid">
             <MessageBarContainer />
             <ViewContainer />
+            <PlayerInfoContainer />
             <MessageLogContainer />
         </div>
     </div>
