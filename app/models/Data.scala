@@ -1,5 +1,6 @@
 package models
 
+import io.github.fiifoo.scarl.core.Rng.WeightedChoices
 import io.github.fiifoo.scarl.core.entity._
 import io.github.fiifoo.scarl.core.kind._
 import io.github.fiifoo.scarl.widget.{DelayedTransformingWidget, HealLocationWidget, SummonCreatureWidget, TriggeredTransformingWidget}
@@ -33,34 +34,87 @@ object Data {
   }
 
   private def creatures = {
-    val hero = CreatureKind(CreatureKindId("hero"), "Hero", '@', "yellow", FactionId("justice"), Creature.Stats(
-      health = 20,
-      attack = 20,
-      defence = 20,
-      damage = 10,
-      armor = 5
-    ))
+    val hero = CreatureKind(
+      id = CreatureKindId("hero"),
+      name = "Hero",
+      display = '@',
+      color = "yellow",
+      faction = FactionId("justice"),
+      stats = Creature.Stats(
+        health = 30,
+        attack = 20,
+        defence = 20,
+        damage = 10,
+        armor = 5
+      )
+    )
 
-    val avatarOfJustice = CreatureKind(CreatureKindId("avatar-of-justice"), "Avatar of Justice", 'A', "white", FactionId("justice"), Creature.Stats(
-      health = 1000,
-      attack = 20,
-      defence = 20,
-      damage = 10,
-      armor = 5
-    ))
+    val avatarOfJustice = CreatureKind(
+      id = CreatureKindId("avatar-of-justice"),
+      name = "Avatar of Justice",
+      display = 'A',
+      color = "white",
+      faction = FactionId("justice"),
+      stats = Creature.Stats(
+        health = 1000,
+        attack = 20,
+        defence = 20,
+        damage = 10,
+        armor = 5
+      )
+    )
 
-    val houndOfChaos = CreatureKind(CreatureKindId("hound-of-chaos"), "Hound of Chaos", 'c', "purple", FactionId("chaos"), Creature.Stats(
-      health = 10,
-      attack = 10,
-      defence = 10,
-      damage = 10,
-      armor = 5
-    ))
+    val houndOfChaos = CreatureKind(
+      id = CreatureKindId("hound-of-chaos"),
+      name = "Hound of Chaos",
+      display = 'c',
+      color = "purple",
+      faction = FactionId("chaos"),
+      stats = Creature.Stats(
+        health = 10,
+        attack = 10,
+        defence = 10,
+        damage = 10,
+        armor = 5
+      )
+    )
+
+    val heraldOfChaos = CreatureKind(
+      id = CreatureKindId("herald-of-chaos"),
+      name = "Herald of Chaos",
+      display = 'C',
+      color = "blue",
+      faction = FactionId("chaos"),
+      stats = Creature.Stats(
+        health = 10,
+        attack = 20,
+        defence = 20,
+        damage = 10,
+        armor = 5
+      )
+    )
+
+    val avatarOfChaos = CreatureKind(
+      id = CreatureKindId("avatar-of-chaos"),
+      name = "Avatar of Chaos",
+      display = 'A',
+      color = "red",
+      faction = FactionId("chaos"),
+      stats = Creature.Stats(
+        health = 50,
+        attack = 30,
+        defence = 30,
+        damage = 10,
+        armor = 5
+      )
+    )
 
     Map(
       hero.id -> hero,
       avatarOfJustice.id -> avatarOfJustice,
-      houndOfChaos.id -> houndOfChaos
+      houndOfChaos.id -> houndOfChaos,
+      heraldOfChaos.id -> heraldOfChaos,
+      avatarOfChaos.id -> avatarOfChaos
     )
   }
 
@@ -98,7 +152,11 @@ object Data {
     val portal = SummonCreatureWidget(
       id = WidgetKindId("chaos-portal-widget"),
       item = ItemKindId("chaos-portal"),
-      summon = CreatureKindId("hound-of-chaos"),
+      summon = WeightedChoices(List(
+        (CreatureKindId("hound-of-chaos"), 100),
+        (CreatureKindId("herald-of-chaos"), 10),
+        (CreatureKindId("avatar-of-chaos"), 2)
+      )),
       interval = 1000
     )
 
