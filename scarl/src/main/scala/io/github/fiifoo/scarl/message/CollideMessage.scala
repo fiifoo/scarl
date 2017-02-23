@@ -1,8 +1,8 @@
-package io.github.fiifoo.scarl.game.message
+package io.github.fiifoo.scarl.message
 
 import io.github.fiifoo.scarl.core.State
 import io.github.fiifoo.scarl.core.entity.{CreatureId, WallId}
-import io.github.fiifoo.scarl.effect.{CollideEffect, DeathEffect}
+import io.github.fiifoo.scarl.effect.CollideEffect
 import io.github.fiifoo.scarl.game.Player
 
 object CollideMessage {

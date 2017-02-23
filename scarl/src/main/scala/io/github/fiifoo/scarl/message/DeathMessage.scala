@@ -1,19 +1,19 @@
-package io.github.fiifoo.scarl.game.message
+package io.github.fiifoo.scarl.message
 
 import io.github.fiifoo.scarl.core.State
 import io.github.fiifoo.scarl.core.entity.CreatureId
-import io.github.fiifoo.scarl.effect.HealEffect
+import io.github.fiifoo.scarl.effect.DeathEffect
 import io.github.fiifoo.scarl.game.Player
 
-object HealMessage {
+object DeathMessage {
 
-  def apply(s: State, effect: HealEffect, player: Player): Option[String] = {
+  def apply(s: State, effect: DeathEffect, player: Player): Option[String] = {
     val target = effect.target
 
     if (target == player.creature) {
-      Some("You feel better.")
+      Some("You die...")
     } else if (player.fov contains target(s).location) {
-      Some(s"${kind(s, target)} looks better.")
+      Some(s"${kind(s, target)} is killed.")
     } else {
       None
     }

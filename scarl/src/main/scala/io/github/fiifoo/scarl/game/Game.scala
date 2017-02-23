@@ -5,8 +5,8 @@ import io.github.fiifoo.scarl.core.action.Action
 import io.github.fiifoo.scarl.core.effect.{CombinedEffectListener, Effect, EffectListener}
 import io.github.fiifoo.scarl.core.{Listener, RealityBubble, State}
 import io.github.fiifoo.scarl.effect.DeathEffect
-import io.github.fiifoo.scarl.game.message.MessageBuilder
 import io.github.fiifoo.scarl.geometry.Fov
+import io.github.fiifoo.scarl.message.MessageBuilder
 
 class Game(out: OutConnection, player: Player, initial: State) {
 
