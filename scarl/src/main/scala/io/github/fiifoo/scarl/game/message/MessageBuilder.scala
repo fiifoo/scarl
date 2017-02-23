@@ -11,6 +11,7 @@ class MessageBuilder(player: Player) extends EffectListener {
 
   def apply(s: State, effect: Effect): Unit = {
     val message: Option[String] = effect match {
+      case effect: CollideEffect => CollideMessage(s, effect, player)
       case effect: DeathEffect => DeathMessage(s, effect, player)
       case effect: HealEffect => HealMessage(s, effect, player)
       case effect: HitEffect => HitMessage(s, effect, player)
