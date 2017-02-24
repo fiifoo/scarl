@@ -1,6 +1,6 @@
-package io.github.fiifoo.scarl.core.entity
+package io.github.fiifoo.scarl.core
 
-import io.github.fiifoo.scarl.core.State
+import io.github.fiifoo.scarl.core.entity.ActorId
 import io.github.fiifoo.scarl.core.mutation.ResetAddedActorsMutation
 
 import scala.collection.mutable

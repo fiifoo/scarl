@@ -1,5 +1,6 @@
-package io.github.fiifoo.scarl.core.entity
+package io.github.fiifoo.scarl.core
 
+import io.github.fiifoo.scarl.core.entity.CreatureId
 import org.scalatest._
 
 class ActorQueueSpec extends FlatSpec with Matchers {
