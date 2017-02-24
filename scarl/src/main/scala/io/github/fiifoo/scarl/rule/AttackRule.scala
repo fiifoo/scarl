@@ -20,23 +20,23 @@ object AttackRule {
     val defenderStats = defender(s).stats
 
     AttackRule(
-      s,
+      s.rng,
       Attacker(attackerStats.attack, attackerStats.damage),
       Defender(defenderStats.defence, defenderStats.armor)
     )
   }
 
-  def apply(s: State, attacker: Attacker, defender: Defender): (Result, Rng) = {
-    val (random, rng) = s.rng()
+  def apply(rng: Rng, attacker: Attacker, defender: Defender): (Result, Rng) = {
+    val (random, nextRng) = rng()
     val hit = rollHit(random, attacker, defender)
 
     if (hit) {
       val bypass = rollBypass(random, attacker, defender)
       val damage = rollDamage(random, attacker, defender, bypass)
 
-      (Result(hit, bypass, damage), rng)
+      (Result(hit, bypass, damage), nextRng)
     } else {
-      (Result(hit, None, None), rng)
+      (Result(hit, None, None), nextRng)
     }
   }
 
