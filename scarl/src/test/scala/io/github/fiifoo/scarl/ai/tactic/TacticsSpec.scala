@@ -4,7 +4,7 @@ import io.github.fiifoo.scarl.action.test_assets.TestPassTactic
 import io.github.fiifoo.scarl.core.entity.{CreatureId, Faction, FactionId, SafeCreatureId}
 import io.github.fiifoo.scarl.core.mutation.{LocatableLocationMutation, NewFactionMutation}
 import io.github.fiifoo.scarl.core.test_assets.TestCreatureFactory
-import io.github.fiifoo.scarl.core.{Location, RealityBubble, Rng, State}
+import io.github.fiifoo.scarl.core.{Location, RealityBubble, State}
 import org.scalatest._
 
 class TacticsSpec extends FlatSpec with Matchers {
@@ -12,7 +12,7 @@ class TacticsSpec extends FlatSpec with Matchers {
   val faction = Faction(FactionId("people"), Set(FactionId("people")))
 
   val initial = NewFactionMutation(faction)(TestCreatureFactory.generate(
-    s = State(rng = Rng(2)),
+    s = State(),
     count = 2,
     prototype = TestCreatureFactory.create(health = 100, faction = faction.id)
   ))
@@ -58,7 +58,7 @@ class TacticsSpec extends FlatSpec with Matchers {
     CreatureId(2)(s).damage should ===(0)
     bubble.be()
     CreatureId(1)(s).location should ===(Location(1, 0))
-    CreatureId(2)(s).damage should ===(13)
+    CreatureId(2)(s).damage should be > 0
 
     bubble.be() // other creature
   }

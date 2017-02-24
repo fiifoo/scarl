@@ -33,7 +33,7 @@ class BurnStatusSpec extends FlatSpec with Matchers {
     ))
   }
 
-  it should "burn creatures in other locations" in {
+  it should "not burn creatures in other locations" in {
     val creature = TestCreatureFactory.create(CreatureId(1), location = Location(0, 1))
     val container = Container(ContainerId(2), Location(0, 0))
     val status = BurnStatus(ActiveStatusId(3), 0, container.id)

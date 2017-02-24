@@ -16,34 +16,40 @@ class AttackActionSpec extends FlatSpec with Matchers {
 
     def s = bubble.s
 
-    bubble.be()
-    CreatureId(2)(s).damage should ===(9)
+    var damage1 = 0
+    var damage2 = 0
 
     bubble.be()
-    CreatureId(1)(s).damage should ===(13)
+    CreatureId(1)(s).damage should ===(damage1)
+    CreatureId(2)(s).damage should be > damage2
+    damage2 = CreatureId(2)(s).damage
 
     bubble.be()
-    CreatureId(2)(s).damage should ===(21)
+    CreatureId(1)(s).damage should be > damage1
+    CreatureId(2)(s).damage should ===(damage2)
+    damage1 = CreatureId(1)(s).damage
+
+    bubble.be()
+    CreatureId(1)(s).damage should ===(damage1)
+    CreatureId(2)(s).damage should be > damage2
   }
 
   it should "kill creature" in {
+    val c1 = TestCreatureFactory.create(health = 1)
+    val c2 = TestCreatureFactory.create(health = 1000)
     val bubble = new RealityBubble(
-      TestCreatureFactory.generate(State(), 2, TestCreatureFactory.create(health = 15)),
+      TestCreatureFactory.generate(TestCreatureFactory.generate(State(), 1, c1), 1, c2),
       TestAttackTactic
     )
 
     def s = bubble.s
 
-    bubble.be() // 9 damage to CreatureId(2)
-    bubble.be() // 12 damage to CreatureId(1)
+    bubble.be() // damage to CreatureId(2)
     s.entities.size should ===(2)
-    s.nextEntityId should ===(3)
-    s.entities.get(CreatureId(2)).isEmpty should ===(false)
-
-    bubble.be() // 9 more damage to CreatureId(2)
+    bubble.be() // damage to CreatureId(1) killing it
     s.entities.size should ===(1)
-    s.nextEntityId should ===(4) // death status was generated and immediately removed
-    s.entities.get(CreatureId(2)).isEmpty should ===(true)
+    s.entities.get(CreatureId(1)).isEmpty should ===(true)
+    s.entities.get(CreatureId(2)).isEmpty should ===(false)
   }
 
 }
