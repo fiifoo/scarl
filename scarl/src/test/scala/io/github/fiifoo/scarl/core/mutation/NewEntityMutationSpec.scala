@@ -2,7 +2,7 @@ package io.github.fiifoo.scarl.core.mutation
 
 import io.github.fiifoo.scarl.core.entity._
 import io.github.fiifoo.scarl.core.kind.ItemKindId
-import io.github.fiifoo.scarl.core.test_assets.{TestActiveStatus, TestCreatureFactory}
+import io.github.fiifoo.scarl.core.test_assets.{TestActiveStatus, TestCreatureFactory, TestItemFactory, TestTriggerStatus}
 import io.github.fiifoo.scarl.core.{Location, State}
 import org.scalatest._
 
@@ -17,6 +17,23 @@ class NewEntityMutationSpec extends FlatSpec with Matchers {
     mutated.entities.size should ===(2)
     existingCreature.id(mutated) should ===(existingCreature)
     newCreature.id(mutated) should ===(newCreature)
+  }
+
+  it should "mutate added actors" in {
+    val location = Location(1, 1)
+    val creature1 = TestCreatureFactory.create(CreatureId(1), location = location)
+    val creature2 = TestCreatureFactory.create(CreatureId(2), location = location)
+    val item = TestItemFactory.create(ItemId(3), container = CreatureId(1))
+    val initial = State()
+
+    val mutated = NewEntityMutation(creature1)(initial)
+    mutated.tmp.addedActors should ===(List(CreatureId(1)))
+
+    val mutatedAgain = NewEntityMutation(creature2)(mutated)
+    mutatedAgain.tmp.addedActors should ===(List(CreatureId(2), CreatureId(1)))
+
+    val mutatedMore = NewEntityMutation(item)(mutatedAgain)
+    mutatedMore.tmp.addedActors should ===(List(CreatureId(2), CreatureId(1)))
   }
 
   it should "mutate entity location index" in {
@@ -54,5 +71,42 @@ class NewEntityMutationSpec extends FlatSpec with Matchers {
 
     val mutatedAgain = NewEntityMutation(item2)(mutated)
     mutatedAgain.index.containerItems should ===(Map(CreatureId(1) -> List(ItemId(3), ItemId(2))))
+  }
+
+  it should "mutate faction member index" in {
+    val creature1 = TestCreatureFactory.create(CreatureId(1), faction = FactionId("1"))
+    val creature2 = TestCreatureFactory.create(CreatureId(2), faction = FactionId("2"))
+    val creature3 = TestCreatureFactory.create(CreatureId(3), faction = FactionId("1"))
+    val initial = State()
+
+    val mutated = NewEntityMutation(creature1)(initial)
+    mutated.index.factionMembers should ===(Map(FactionId("1") -> List(CreatureId(1))))
+
+    val mutatedAgain = NewEntityMutation(creature2)(mutated)
+    mutatedAgain.index.factionMembers should ===(Map(
+      FactionId("1") -> List(CreatureId(1)),
+      FactionId("2") -> List(CreatureId(2))
+    ))
+
+    val mutatedMore = NewEntityMutation(creature3)(mutatedAgain)
+    mutatedMore.index.factionMembers should ===(Map(
+      FactionId("1") -> List(CreatureId(3), CreatureId(1)),
+      FactionId("2") -> List(CreatureId(2))
+    ))
+  }
+
+  it should "mutate trigger location index" in {
+    val location = Location(1, 1)
+    val container1 = Container(ContainerId(1), location)
+    val container2 = Container(ContainerId(2), location)
+    val initial = NewEntityMutation(container2)(NewEntityMutation(container1)(State()))
+    val status1 = TestTriggerStatus(TriggerStatusId(3), ContainerId(1))
+    val status2 = TestTriggerStatus(TriggerStatusId(4), ContainerId(2))
+
+    val mutated = NewEntityMutation(status1)(initial)
+    mutated.index.locationTriggers should ===(Map(location -> List(TriggerStatusId(3))))
+
+    val mutatedAgain = NewEntityMutation(status2)(mutated)
+    mutatedAgain.index.locationTriggers should ===(Map(location -> List(TriggerStatusId(4), TriggerStatusId(3))))
   }
 }
