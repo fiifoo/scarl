@@ -8,7 +8,7 @@ import org.scalatest._
 
 class LosSpec extends FlatSpec with Matchers {
 
-  "Los" should "should check line of sight from one location to another" in {
+  "Los" should "check line of sight from one location to another" in {
     val wall = Wall(WallId(1), WallKindId("wall"), Location(0, 1))
     val state = NewEntityMutation(wall)(State())
 

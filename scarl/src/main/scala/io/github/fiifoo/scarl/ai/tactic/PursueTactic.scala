@@ -4,7 +4,7 @@ import io.github.fiifoo.scarl.action.MoveAction
 import io.github.fiifoo.scarl.core.action.{Action, Tactic}
 import io.github.fiifoo.scarl.core.entity.{CreatureId, SafeCreatureId}
 import io.github.fiifoo.scarl.core.{Location, Rng, State}
-import io.github.fiifoo.scarl.geometry.{Line, Los}
+import io.github.fiifoo.scarl.geometry.{Line, Los, Path}
 
 case class PursueTactic(actor: CreatureId, target: SafeCreatureId, destination: Location) extends Tactic {
 
@@ -17,13 +17,13 @@ case class PursueTactic(actor: CreatureId, target: SafeCreatureId, destination: 
 
       if (line.size <= _range + 1 && Los(s)(line)) {
 
-        val charge = ChargeTactic(actor, SafeCreatureId(target.id), line.last)
+        val charge = ChargeTactic(actor, SafeCreatureId(target.id), target.location)
         Some(charge(s, rng))
 
       } else if (location != destination) {
 
-        val move = MoveAction(Line(location, destination)(1))
-        Some((this, move, rng))
+        val moveOption = Path(s)(location, destination) map (path => MoveAction(path.head))
+        moveOption map ((this, _, rng))
 
       } else {
         None
