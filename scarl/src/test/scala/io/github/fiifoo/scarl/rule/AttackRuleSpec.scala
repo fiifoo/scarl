@@ -21,12 +21,13 @@ class AttackRuleSpec extends FlatSpec with Matchers {
   }
 
   it should "deal damage with different averages" in {
-    getAverageDamage(Attacker(10, 100), Defender(10, 100)) should ===(14)
+    getAverageDamage(Attacker(10, 100), Defender(10, 0)) should ===(100)
+    getAverageDamage(Attacker(10, 100), Defender(10, 100)) should ===(15)
     getAverageDamage(Attacker(20, 100), Defender(10, 100)) should ===(34)
 
 
-    getAverageDamage(Attacker(10, 100), Defender(10, 50)) should ===(51)
-    getAverageDamage(Attacker(19, 100), Defender(10, 50)) should ===(62)
+    getAverageDamage(Attacker(10, 100), Defender(10, 50)) should ===(52)
+    getAverageDamage(Attacker(19, 100), Defender(10, 50)) should ===(63)
   }
 
   private def getHitPercentage(attack: Int, defence: Int): Int = {
@@ -74,7 +75,7 @@ class AttackRuleSpec extends FlatSpec with Matchers {
   }
 
   private def getAverageDamage(attacker: Attacker, defender: Defender): Int = {
-    val attacks = 10000
+    val attacks = 100000
 
     val (hits, damage, _) = (1 to attacks).foldLeft[(Int, Int, Rng)]((0, 0, Rng(1)))((carry, _) => {
       val (hits, damage, rng) = carry

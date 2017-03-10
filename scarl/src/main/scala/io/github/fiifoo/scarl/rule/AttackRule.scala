@@ -69,7 +69,7 @@ object AttackRule {
 
   private def rollDamage(random: Random, attacker: Attacker, defender: Defender, bypass: Option[Int]): Option[Int] = {
     val variance = Math.round(attacker.damage * DamageVariance).toInt
-    val damage = attacker.damage + random.nextInt(variance * 2) - variance
+    val damage = attacker.damage + random.nextInt(variance * 2 + 1) - variance
     val armor = defender.armor * (100 - (bypass getOrElse 0)) / 100
 
     if (damage > armor) {
