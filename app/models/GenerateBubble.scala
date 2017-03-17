@@ -1,22 +1,45 @@
 package models
 
-import io.github.fiifoo.scarl.core.State
+import io.github.fiifoo.scarl.area.template.{ApplyTemplate, CalculateTemplate, Template, TemplateId}
 import io.github.fiifoo.scarl.core.entity._
-import io.github.fiifoo.scarl.core.kind.{CreatureKindId, Kinds, WidgetKindId}
-import io.github.fiifoo.scarl.generate.Generator
+import io.github.fiifoo.scarl.core.kind.{CreatureKind, CreatureKindId, Kinds}
+import io.github.fiifoo.scarl.core.mutation.{NewEntityMutation, NewFactionMutation}
+import io.github.fiifoo.scarl.core.{Rng, State}
+
+import scala.util.Random
 
 object GenerateBubble {
 
-  val generate = new Generator()
+  def apply(factions: Map[FactionId, Faction],
+            kinds: Kinds,
+            templates: Map[TemplateId, Template]
+           ): (State, CreatureId) = {
 
-  def apply(factions: Map[FactionId, Faction], kinds: Kinds): (State, CreatureId) = {
-    val s0 = State(kinds = kinds)
-    val s1 = generate.factions(s0, factions)
-    val s2 = generate.walls(s1, 500, kinds.walls.values.head)
-    val s3 = generate.creatures(s2, 1, kinds.creatures(CreatureKindId("avatar-of-justice")))
-    val s4 = generate.widgets(s3, 10, kinds.widgets(WidgetKindId("chaos-portal-widget")))
-    val s5 = generate.widgets(s4, 10, kinds.widgets(WidgetKindId("activate-healing-altar-widget")))
+    val initial = factions.values.foldLeft(State(kinds = kinds))((s, faction) => {
+      NewFactionMutation(faction)(s)
+    })
 
-    generate.player(s5, kinds.creatures(CreatureKindId("hero")))
+    val (random, _) = initial.rng()
+    val template = templates(TemplateId("main"))
+    val templateResult = CalculateTemplate(template, templates, random)
+    val state = ApplyTemplate(initial, templateResult)
+
+    player(state, kinds.creatures(CreatureKindId("hero")), templateResult, random)
+  }
+
+  private def player(s: State,
+                     kind: CreatureKind,
+                     templateResult: Template.Result,
+                     random: Random
+                    ): (State, CreatureId) = {
+    val id = CreatureId(s.nextEntityId)
+    // temp until areas have conduits
+    val location = Rng.nextChoice(random, templateResult.shape.contained)
+    val creature = kind(s, location)
+
+    (
+      NewEntityMutation(creature)(s),
+      id
+    )
   }
 }

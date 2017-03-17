@@ -1,5 +1,7 @@
 package models
 
+import io.github.fiifoo.scarl.area.shape.Rectangle
+import io.github.fiifoo.scarl.area.template.{RandomizedTemplate, Template, TemplateId}
 import io.github.fiifoo.scarl.core.Rng.WeightedChoices
 import io.github.fiifoo.scarl.core.entity._
 import io.github.fiifoo.scarl.core.kind._
@@ -30,6 +32,60 @@ object Data {
       terrains,
       walls,
       widgets
+    )
+  }
+
+  def templates: Map[TemplateId, Template] = {
+    val main = RandomizedTemplate(
+      id = TemplateId("main"),
+      shape = Rectangle(80, 25, 0),
+      templates = List(
+        (TemplateId("big-room"), 1, 1),
+        (TemplateId("room"), 5, 5)
+      ),
+      border = Some(WallKindId("stone-wall")),
+      fill = Some(WallKindId("stone-wall")),
+      content = Template.RandomizedContent(
+        creatures = List((CreatureKindId("hound-of-chaos"), 4, 7))
+      )
+    )
+    val bigRoom = RandomizedTemplate(
+      id = TemplateId("big-room"),
+      shape = Rectangle(30, 20, 0),
+      templates = List(
+        (TemplateId("room"), 1, 1)
+      ),
+      entrances = List((Some(ItemKindId("opened-door")), 4, 4)),
+      border = Some(WallKindId("stone-wall")),
+      terrain = Some(TerrainKindId("rubble")),
+      content = Template.RandomizedContent(
+        creatures = List((CreatureKindId("avatar-of-justice"), 5, 5)),
+        items = List((ItemKindId("grey-altar"), 5, 5)),
+        widgets = List(
+          (WidgetKindId("chaos-portal-widget"), 4, 4),
+          (WidgetKindId("activate-healing-altar-widget"), 3, 3)
+        )
+      )
+    )
+    val room = RandomizedTemplate(
+      id = TemplateId("room"),
+      shape = Rectangle(12, 10, 0.4),
+      entrances = List((Some(ItemKindId("opened-door")), 1, 2)),
+      border = Some(WallKindId("stone-wall")),
+      content = Template.RandomizedContent(
+        creatures = List((CreatureKindId("hound-of-chaos"), 0, 2)),
+        items = List((ItemKindId("grey-altar"), 0, 1)),
+        widgets = List(
+          (WidgetKindId("chaos-portal-widget"), 0, 1),
+          (WidgetKindId("activate-healing-altar-widget"), 0, 1)
+        )
+      )
+    )
+
+    Map(
+      main.id -> main,
+      bigRoom.id -> bigRoom,
+      room.id -> room
     )
   }
 
@@ -119,12 +175,14 @@ object Data {
   }
 
   private def items = {
+    val openedDoor = ItemKind(ItemKindId("opened-door"), "Opened door", '/', "brown")
     val portal = ItemKind(ItemKindId("chaos-portal"), "Chaos portal", 'O', "red")
     val greyAltar = ItemKind(ItemKindId("grey-altar"), "Grey altar", 'T', "grey")
     val whiteAltar = ItemKind(ItemKindId("white-altar"), "White altar", 'T', "white")
     val shiningAltar = ItemKind(ItemKindId("shining-altar"), "Shining altar", 'T', "yellow")
 
     Map(
+      openedDoor.id -> openedDoor,
       portal.id -> portal,
       greyAltar.id -> greyAltar,
       whiteAltar.id -> whiteAltar,
@@ -134,9 +192,11 @@ object Data {
 
   private def terrains = {
     val stone = TerrainKind(TerrainKindId("stone-floor"), "Stone floor", '.', "lightgray")
+    val rubble = TerrainKind(TerrainKindId("rubble"), "Rubble", '.', "brown")
 
     Map(
-      stone.id -> stone
+      stone.id -> stone,
+      rubble.id -> rubble
     )
   }
 

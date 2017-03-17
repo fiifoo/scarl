@@ -34,8 +34,9 @@ class GameController @Inject()(implicit system: ActorSystem, materializer: Mater
   class WebSocketActor(out: ActorRef) extends Actor {
     val factions = Data.factions
     val kinds = Data.kinds
+    val templates = Data.templates
 
-    val (s, creature) = GenerateBubble(factions, kinds)
+    val (s, creature) = GenerateBubble(factions, kinds, templates)
 
     val player = new Player(creature)
     val connection = new OutConnection(player, send)
