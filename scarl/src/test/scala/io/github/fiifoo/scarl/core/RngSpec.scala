@@ -21,8 +21,31 @@ class RngSpec extends FlatSpec with Matchers {
     a should !==(b)
   }
 
+  it should "give range with min/max length" in {
+    val min = 10
+    val max = 20
+
+    val (minLength, maxLength, _) = (1 to 1000).foldLeft[(Int, Int, Rng)]((999, 0, Rng(1)))((carry, _) => {
+      val (minLength, maxLength, rng) = carry
+      val (range, nextRng) = rng.nextRange(min, max)
+
+      (Math.min(range.length, minLength), Math.max(range.length, maxLength), nextRng)
+    })
+
+    minLength should ===(min)
+    maxLength should ===(max)
+  }
+
+  it should "give choices from set" in {
+    val d = getSetChoiceDistribution(Set('A', 'B', 'C'))
+
+    Math.round(d('A').toDouble / d('B').toDouble) should ===(1)
+    Math.round(d('A').toDouble / d('C').toDouble) should ===(1)
+    Math.round(d('B').toDouble / d('C').toDouble) should ===(1)
+  }
+
   it should "give weighted choice" in {
-    val d1 = getChoiceDistribution(WeightedChoices(List(
+    val d1 = getWeightedChoiceDistribution(WeightedChoices(List(
       ('A', 1),
       ('B', 1),
       ('C', 1)
@@ -32,7 +55,7 @@ class RngSpec extends FlatSpec with Matchers {
     Math.round(d1('A').toDouble / d1('C').toDouble) should ===(1)
     Math.round(d1('B').toDouble / d1('C').toDouble) should ===(1)
 
-    val d2 = getChoiceDistribution(WeightedChoices(List(
+    val d2 = getWeightedChoiceDistribution(WeightedChoices(List(
       ('A', 10),
       ('B', 2),
       ('C', 1)
@@ -43,12 +66,24 @@ class RngSpec extends FlatSpec with Matchers {
     Math.round(d2('B').toDouble / d2('C').toDouble) should ===(2)
   }
 
-  private def getChoiceDistribution(choices: WeightedChoices[Char]): Map[Char, Int] = {
+  private def getSetChoiceDistribution(choices: Set[Char]): Map[Char, Int] = {
+    def next(rng: Rng): (Char, Rng) = rng.nextChoice(choices)
+
+    getChoiceDistribution(next)
+  }
+
+  private def getWeightedChoiceDistribution(choices: WeightedChoices[Char]): Map[Char, Int] = {
+    def next(rng: Rng): (Char, Rng) = rng.nextChoice(choices)
+
+    getChoiceDistribution(next)
+  }
+
+  private def getChoiceDistribution(next: Rng => (Char, Rng)): Map[Char, Int] = {
     val initial = Map('A' -> 0, 'B' -> 0, 'C' -> 0)
 
     val (result, _) = (1 to 100000).foldLeft[(Map[Char, Int], Rng)]((initial, Rng(1)))((carry, _) => {
       val (current, rng) = carry
-      val (choice, nextRng) = rng.nextChoice(choices)
+      val (choice, nextRng) = next(rng)
 
       (current + (choice -> (current(choice) + 1)), nextRng)
     })
