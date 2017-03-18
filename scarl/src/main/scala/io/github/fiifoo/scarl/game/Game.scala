@@ -2,93 +2,92 @@ package io.github.fiifoo.scarl.game
 
 import io.github.fiifoo.scarl.ai.tactic.RoamTactic
 import io.github.fiifoo.scarl.core.action.Action
-import io.github.fiifoo.scarl.core.effect.{CombinedEffectListener, Effect, EffectListener}
+import io.github.fiifoo.scarl.core.effect.CombinedEffectListener
 import io.github.fiifoo.scarl.core.{Listener, RealityBubble, State}
-import io.github.fiifoo.scarl.effect.DeathEffect
 import io.github.fiifoo.scarl.geometry.Fov
 import io.github.fiifoo.scarl.message.MessageBuilder
 
-class Game(out: OutConnection, player: Player, initial: State) {
+import scala.annotation.tailrec
 
-  private var gameOver = false
+class Game(out: OutConnection,
+           player: Player,
+           initial: State
+          ) {
+
   private val messages = new MessageBuilder(player)
   private val statistics = new StatisticsBuilder()
-
-  object GameOverListener extends EffectListener {
-    def apply(s: State, effect: Effect): Unit = {
-      effect match {
-        case effect: DeathEffect if effect.target == player.creature => gameOver = true
-        case _ =>
-      }
-    }
-  }
-
-  private val bubble = new RealityBubble(
-    s = initial,
-    ai = RoamTactic,
-    listener = new Listener(effect = new CombinedEffectListener(List(
-      messages,
-      statistics,
-      GameOverListener
-    )))
-  )
+  private var (bubble, state) = createBubble(initial)
 
   def receive(action: Action): Unit = {
-    if (!gameOver) {
-      run(action)
-    }
+    run(Some(action))
   }
 
   private def initialize(): Unit = {
-    updateFov()
-    runNpc()
-    updateFov()
-
-    sendInitial()
+    sendInitial(state)
+    run(None)
   }
 
-  private def run(action: Action): Unit = {
-    bubble.be(Some(action))
-    updateFov()
-    runNpc()
-    updateFov()
+  private def run(action: Option[Action]): Unit = {
+    val s = process(bubble, state, action)
 
-    if (gameOver) {
-      sendFinal()
+    if (gameOver(s)) {
+      sendFinal(s)
     } else {
-      send()
+      send(s)
     }
+
+    state = s
   }
 
-  private def runNpc(): Unit = {
-    while (!gameOver && npcTurn) {
-      bubble.be()
+  @tailrec
+  private def process(b: RealityBubble, s: State, action: Option[Action]): State = {
+    if (gameOver(s)) {
+      return s
     }
-  }
 
-  private def updateFov(): Unit = {
-    if (gameOver) {
-      player.fov = Set()
+    if (b.nextActor.contains(player.creature)) {
+      if (action.isDefined) {
+        process(b, b(s, action), None)
+      } else {
+        s
+      }
     } else {
-      player.fov = Fov(s)(player.creature(s).location, 10)
+      process(b, b(s, None), action)
     }
   }
 
-  private def sendInitial(): Unit = {
+  private def sendInitial(s: State): Unit = {
+    updateFov(s)
     out(s, messages.extract(), kinds = Some(s.kinds))
   }
 
-  private def send(): Unit = {
+  private def send(s: State): Unit = {
+    updateFov(s)
     out(s, messages.extract())
   }
 
-  private def sendFinal(): Unit = {
+  private def sendFinal(s: State): Unit = {
     out(s, messages.extract(), statistics = Some(statistics.get()))
   }
 
-  private def s = bubble.s
+  private def updateFov(s: State): Unit = {
+    player.fov = Fov(s)(player.creature(s).location, 10)
+  }
 
-  private def npcTurn = bubble.actors.nonEmpty && !bubble.nextActor.contains(player.creature)
+  private def gameOver(s: State): Boolean = {
+    !s.entities.isDefinedAt(player.creature)
+  }
+
+  private def createBubble(s: State): (RealityBubble, State) = {
+    RealityBubble(
+      initial = s,
+      ai = RoamTactic,
+      listener = new Listener(effect = new CombinedEffectListener(List(
+        messages,
+        statistics
+      )))
+    )
+  }
 
   initialize()
 }

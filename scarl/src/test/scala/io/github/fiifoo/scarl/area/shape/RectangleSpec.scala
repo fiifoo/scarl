@@ -43,7 +43,7 @@ class RectangleSpec extends FlatSpec with Matchers {
       innerHeight = 3,
       border = Set(Location(0, 2), Location(0, 0), Location(2, 0), Location(2, 2), Location(0, 1), Location(1, 2), Location(2, 1), Location(1, 0)),
       contained = Set(Location(1, 1)),
-      entranceCandidates = Set(Location(0,1), Location(1,2), Location(2,1), Location(1,0))
+      entranceCandidates = Set(Location(0, 1), Location(1, 2), Location(2, 1), Location(1, 0))
     )
 
     v3(new Random(1)) should ===(r3)
@@ -56,7 +56,7 @@ class RectangleSpec extends FlatSpec with Matchers {
       innerHeight = 3,
       border = Set(Location(0, 2), Location(0, 0), Location(3, 1), Location(2, 0), Location(3, 0), Location(3, 2), Location(2, 2), Location(0, 1), Location(1, 2), Location(1, 0)),
       contained = Set(Location(1, 1), Location(2, 1)),
-      entranceCandidates = Set(Location(3,1), Location(2,0), Location(2,2), Location(0,1), Location(1,2), Location(1,0))
+      entranceCandidates = Set(Location(3, 1), Location(2, 0), Location(2, 2), Location(0, 1), Location(1, 2), Location(1, 0))
     )
 
     v4(new Random(1)) should ===(r4)
@@ -81,9 +81,9 @@ class RectangleSpec extends FlatSpec with Matchers {
       outerHeight = 3,
       innerWidth = 3,
       innerHeight = 3,
-      border = Set(Location(0,2), Location(0,0), Location(2,0), Location(2,2), Location(0,1), Location(1,2), Location(2,1), Location(1,0)),
+      border = Set(Location(0, 2), Location(0, 0), Location(2, 0), Location(2, 2), Location(0, 1), Location(1, 2), Location(2, 1), Location(1, 0)),
       contained = Set(Location(1, 1)),
-      entranceCandidates = Set(Location(0,1), Location(1,2), Location(2,1), Location(1,0))
+      entranceCandidates = Set(Location(0, 1), Location(1, 2), Location(2, 1), Location(1, 0))
     )
 
     v1(new Random(424)) should ===(r2)
