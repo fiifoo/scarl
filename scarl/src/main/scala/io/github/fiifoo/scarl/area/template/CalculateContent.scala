@@ -26,33 +26,35 @@ object CalculateContent {
       }
     })
 
+    val noWalls = locations -- target.walls.keys
+
     val creatures = CalculateUtils.randomUniqueElementLocations(
-      locations,
+      noWalls,
       source.creatures,
       target.creatures,
       random
     )
     val items = CalculateUtils.randomElementLocations(
-      locations,
+      noWalls,
       source.items,
       entranceItems,
       random
     )
     val terrains = CalculateUtils.randomUniqueElementLocations(
-      locations -- target.terrains.keys,
+      noWalls -- target.terrains.keys,
       source.terrains,
       target.terrains,
       random
     )
     val widgets = CalculateUtils.randomUniqueElementLocations(
-      locations,
+      noWalls,
       source.widgets,
       target.widgets,
       random
     )
 
     val defaultTerrains = terrain map (terrain => {
-      (locations filterNot terrains.isDefinedAt map (location => {
+      (noWalls filterNot terrains.isDefinedAt map (location => {
         (location, terrain)
       })).toMap
     }) getOrElse Map()

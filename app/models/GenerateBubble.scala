@@ -4,7 +4,7 @@ import io.github.fiifoo.scarl.area.template.{ApplyTemplate, CalculateTemplate, T
 import io.github.fiifoo.scarl.core.entity._
 import io.github.fiifoo.scarl.core.kind.{CreatureKind, CreatureKindId, Kinds}
 import io.github.fiifoo.scarl.core.mutation.{NewEntityMutation, NewFactionMutation}
-import io.github.fiifoo.scarl.core.{Rng, State}
+import io.github.fiifoo.scarl.core.{Location, Rng, Selectors, State}
 
 import scala.util.Random
 
@@ -33,13 +33,20 @@ object GenerateBubble {
                      random: Random
                     ): (State, CreatureId) = {
     val id = CreatureId(s.nextEntityId)
-    // temp until areas have conduits
-    val location = Rng.nextChoice(random, templateResult.shape.contained)
+    val location = Rng.nextChoice(random, playerLocations(s, templateResult))
     val creature = kind(s, location)
 
     (
       NewEntityMutation(creature)(s),
       id
     )
+  }
+
+  /* temp until areas have conduits */
+  private def playerLocations(s: State, templateResult: Template.Result): Set[Location] = {
+    templateResult.shape.contained filterNot (location => Selectors.getLocationEntities(s)(location) exists {
+      case _: WallId => true
+      case _ => false
+    })
   }
 }
