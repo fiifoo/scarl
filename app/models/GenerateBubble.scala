@@ -14,8 +14,8 @@ object GenerateBubble {
             kinds: Kinds,
             templates: Map[TemplateId, Template]
            ): (State, CreatureId) = {
-
-    val initial = factions.values.foldLeft(State(kinds = kinds))((s, faction) => {
+    val seed = Random.nextInt()
+    val initial = factions.values.foldLeft(State(kinds = kinds, rng = Rng(seed)))((s, faction) => {
       NewFactionMutation(faction)(s)
     })
 

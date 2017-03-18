@@ -36,6 +36,6 @@ class CalculateTemplateSpec extends FlatSpec with Matchers {
 
     val t = Map(t1.id -> t1, t2.id -> t2, t3.id -> t3, t4.id -> t4)
 
-    CalculateTemplate(t1, t, new Random(1))
+    CalculateTemplate(t1, t, new Random(1), Some(1))
   }
 }

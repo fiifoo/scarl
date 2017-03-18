@@ -9,7 +9,7 @@ object CalculateTemplate {
   def apply(template: Template,
             templates: Map[TemplateId, Template],
             random: Random,
-            attemptLimit: Option[Int] = Some(100)
+            attemptLimit: Option[Int] = None
            ): Result = {
 
     var i = 0
