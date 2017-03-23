@@ -14,13 +14,16 @@ object State {
                   )
 
   case class Temporary(addedActors: List[ActorId] = List(),
+                       conduitEntry: Option[(ConduitId, Creature)] = None,
                        removableEntities: List[EntityId] = List()
                       )
 
 }
 
 case class State(entities: Map[EntityId, Entity] = Map(),
+                 conduits: Map[ConduitId, Location] = Map(),
                  factions: Map[FactionId, Faction] = Map(),
+                 gateways: Set[Location] = Set(),
                  index: State.Index = State.Index(),
                  kinds: Kinds = Kinds(),
                  nextEntityId: Int = 1,

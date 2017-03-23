@@ -20,6 +20,9 @@ object CalculateUtils {
                                 existing: Map[Location, List[T]],
                                 random: Random
                                ): Map[Location, List[T]] = {
+    if (source.isEmpty) {
+      return Map()
+    }
     if (locations.isEmpty) {
       throw new CalculateFailedException
     }
@@ -71,6 +74,30 @@ object CalculateUtils {
       val location = Rng.nextChoice(random, choices)
 
       (results + (location -> element), choices - location)
+    })
+
+    results
+  }
+
+  def randomUniqueLocations(locations: Set[Location],
+                            count: (Int, Int),
+                            existing: Set[Location],
+                            random: Random
+                           ): Set[Location] = {
+
+    val (min, max) = count
+    val range = Rng.nextRange(random, min, max)
+    val fold = range.foldLeft[(Set[Location], Set[Location])](Set(), locations -- existing) _
+
+    val (results, _) = fold((carry, _) => {
+      val (results, choices) = carry
+      if (choices.isEmpty) {
+        throw new CalculateFailedException
+      }
+
+      val location = Rng.nextChoice(random, choices)
+
+      (results + location, choices - location)
     })
 
     results

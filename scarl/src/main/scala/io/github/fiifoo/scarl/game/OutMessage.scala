@@ -1,5 +1,6 @@
 package io.github.fiifoo.scarl.game
 
+import io.github.fiifoo.scarl.area.AreaId
 import io.github.fiifoo.scarl.core.Location
 import io.github.fiifoo.scarl.core.entity.Creature
 import io.github.fiifoo.scarl.core.kind.Kinds
@@ -12,7 +13,8 @@ object OutMessage {
 
 }
 
-case class OutMessage(fov: OutMessage.Fov,
+case class OutMessage(area: AreaId,
+                      fov: OutMessage.Fov,
                       messages: List[String],
                       player: Option[Creature],
                       kinds: Option[Kinds] = None,

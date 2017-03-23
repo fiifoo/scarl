@@ -85,6 +85,9 @@ class View extends Component {
         if (nextProps.connection === false) {
             reset(this.element)
         } else {
+            if (nextProps.area !== this.props.area) {
+                reset(this.element)
+            }
             update(this.element, nextProps.fov, nextProps.kinds)
         }
     }

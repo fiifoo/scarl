@@ -26,6 +26,8 @@ class ActorQueue() {
 
   def dequeue(): ActorId = queue.dequeue()._1
 
+  def dequeueAll: List[ActorId] = (queue map (_._1)).toList
+
   def isEmpty: Boolean = queue.isEmpty
 
   def nonEmpty: Boolean = queue.nonEmpty

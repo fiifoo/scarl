@@ -6,7 +6,7 @@ import io.github.fiifoo.scarl.core.entity.{CreatureId, LocatableId, WallId}
 import io.github.fiifoo.scarl.core.mutation.LocatableLocationMutation
 import io.github.fiifoo.scarl.core.{Location, State}
 
-case class MoveEffect(target: LocatableId, location: Location) extends Effect {
+case class MoveEffect(target: CreatureId, location: Location) extends Effect {
 
   def apply(s: State): EffectResult = {
     val obstacle = getObstacle(s)
@@ -31,9 +31,6 @@ case class MoveEffect(target: LocatableId, location: Location) extends Effect {
   }
 
   private def getTriggerEffects(s: State): List[Effect] = {
-    (target match {
-      case creature: CreatureId => getLocationTriggers(s)(location) map (_ (s)(s, creature))
-      case _ => List()
-    }).flatten
+    getLocationTriggers(s)(location) flatMap (_ (s)(s, target))
   }
 }

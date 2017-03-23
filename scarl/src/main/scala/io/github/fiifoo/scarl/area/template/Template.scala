@@ -22,7 +22,9 @@ object Template {
                     terrain: Option[TerrainKindId] = None
                    )
 
-  case class FixedContent(creatures: Map[Location, CreatureKindId] = Map(),
+  case class FixedContent(conduitLocations: Set[Location] = Set(),
+                          creatures: Map[Location, CreatureKindId] = Map(),
+                          gatewayLocations: Set[Location] = Set(),
                           items: Map[Location, List[ItemKindId]] = Map(),
                           terrains: Map[Location, TerrainKindId] = Map(),
                           walls: Map[Location, WallKindId] = Map(),
@@ -30,7 +32,8 @@ object Template {
                          )
 
   /** List(what, min, max) */
-  case class RandomizedContent(creatures: List[(CreatureKindId, Int, Int)] = List(),
+  case class RandomizedContent(conduitLocations: (Int, Int) = (0, 0),
+                               creatures: List[(CreatureKindId, Int, Int)] = List(),
                                items: List[(ItemKindId, Int, Int)] = List(),
                                terrains: List[(TerrainKindId, Int, Int)] = List(),
                                widgets: List[(WidgetKindId, Int, Int)] = List()

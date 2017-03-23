@@ -53,6 +53,14 @@ class RealityBubble(actors: ActorQueue,
     s
   }
 
+  def empty(s: State): State = {
+    val storeActors = actors.dequeueAll filter s.entities.isDefinedAt
+
+    s.copy(tmp = s.tmp.copy(
+      addedActors = s.tmp.addedActors ::: storeActors
+    ))
+  }
+
   private def handleCreature(s: State,
                              actor: CreatureId,
                              action: Option[Action]

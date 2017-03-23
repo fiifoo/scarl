@@ -1,5 +1,6 @@
 package models
 
+import io.github.fiifoo.scarl.area.AreaId
 import io.github.fiifoo.scarl.core.Location
 import io.github.fiifoo.scarl.core.entity._
 import io.github.fiifoo.scarl.core.kind._
@@ -24,6 +25,9 @@ object OutMessages {
   }
   implicit val kindIdWrites = new Writes[KindId] {
     def writes(id: KindId) = JsString(id.value)
+  }
+  implicit val areaIdWrites = new Writes[AreaId] {
+    def writes(id: AreaId) = JsString(id.value)
   }
 
   implicit val locationWrites = Json.writes[Location]

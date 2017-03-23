@@ -1,13 +1,36 @@
 package models
 
 import io.github.fiifoo.scarl.area.shape.Rectangle
-import io.github.fiifoo.scarl.area.template.{RandomizedTemplate, Template, TemplateId}
+import io.github.fiifoo.scarl.area.template.Template.FixedContent
+import io.github.fiifoo.scarl.area.template.{FixedTemplate, RandomizedTemplate, Template, TemplateId}
+import io.github.fiifoo.scarl.area.{Area, AreaId}
+import io.github.fiifoo.scarl.core.Location
 import io.github.fiifoo.scarl.core.Rng.WeightedChoices
 import io.github.fiifoo.scarl.core.entity._
 import io.github.fiifoo.scarl.core.kind._
 import io.github.fiifoo.scarl.widget.{DelayedTransformingWidget, HealLocationWidget, SummonCreatureWidget, TriggeredTransformingWidget}
 
 object Data {
+
+  def areas: Map[AreaId, Area] = {
+    val first = Area(
+      id = AreaId("first"),
+      template = TemplateId("main"),
+      conduits = List(
+        (AreaId("second"), ItemKindId("stairs-down"), ItemKindId("stairs-up")),
+        (AreaId("second"), ItemKindId("stairs-down"), ItemKindId("stairs-up"))
+      )
+    )
+    val second = Area(
+      id = AreaId("second"),
+      template = TemplateId("main")
+    )
+
+    Map(
+      first.id -> first,
+      second.id -> second
+    )
+  }
 
   def factions: Map[FactionId, Faction] = {
     val justice = Faction(
@@ -41,7 +64,8 @@ object Data {
       shape = Rectangle(80, 25, 0),
       templates = List(
         (TemplateId("big-room"), 1, 1),
-        (TemplateId("room"), 5, 5)
+        (TemplateId("room"), 3, 4),
+        (TemplateId("gateway-room"), 1, 1)
       ),
       border = Some(WallKindId("stone-wall")),
       fill = Some(WallKindId("stone-wall")),
@@ -73,6 +97,7 @@ object Data {
       entrances = List((Some(ItemKindId("opened-door")), 1, 2)),
       border = Some(WallKindId("stone-wall")),
       content = Template.RandomizedContent(
+        conduitLocations = (1, 1),
         creatures = List((CreatureKindId("hound-of-chaos"), 0, 2)),
         items = List((ItemKindId("grey-altar"), 0, 1)),
         widgets = List(
@@ -81,11 +106,46 @@ object Data {
         )
       )
     )
+    val gatewayRoom = FixedTemplate(
+      id = TemplateId("gateway-room"),
+      shape = Rectangle(5, 5, 0),
+      entrances = Map(Location(2, 0) -> Some(ItemKindId("opened-door"))),
+      fixedContent = FixedContent(
+        gatewayLocations = Set(Location(2, 2)),
+        items = Map(
+          Location(1, 1) -> List(ItemKindId("grey-altar")),
+          Location(3, 1) -> List(ItemKindId("grey-altar")),
+          Location(3, 2) -> List(ItemKindId("grey-altar")),
+          Location(3, 3) -> List(ItemKindId("grey-altar")),
+          Location(2, 3) -> List(ItemKindId("grey-altar")),
+          Location(1, 3) -> List(ItemKindId("grey-altar")),
+          Location(1, 2) -> List(ItemKindId("grey-altar"))
+        ),
+        walls = Map(
+          Location(0, 0) -> WallKindId("stone-wall"),
+          Location(1, 0) -> WallKindId("stone-wall"),
+          Location(3, 0) -> WallKindId("stone-wall"),
+          Location(4, 0) -> WallKindId("stone-wall"),
+          Location(0, 4) -> WallKindId("stone-wall"),
+          Location(1, 4) -> WallKindId("stone-wall"),
+          Location(2, 4) -> WallKindId("stone-wall"),
+          Location(3, 4) -> WallKindId("stone-wall"),
+          Location(4, 4) -> WallKindId("stone-wall"),
+          Location(0, 1) -> WallKindId("stone-wall"),
+          Location(0, 2) -> WallKindId("stone-wall"),
+          Location(0, 3) -> WallKindId("stone-wall"),
+          Location(4, 1) -> WallKindId("stone-wall"),
+          Location(4, 2) -> WallKindId("stone-wall"),
+          Location(4, 3) -> WallKindId("stone-wall")
+        )
+      )
+    )
 
     Map(
       main.id -> main,
       bigRoom.id -> bigRoom,
-      room.id -> room
+      room.id -> room,
+      gatewayRoom.id -> gatewayRoom
     )
   }
 
@@ -180,13 +240,17 @@ object Data {
     val greyAltar = ItemKind(ItemKindId("grey-altar"), "Grey altar", 'T', "grey")
     val whiteAltar = ItemKind(ItemKindId("white-altar"), "White altar", 'T', "white")
     val shiningAltar = ItemKind(ItemKindId("shining-altar"), "Shining altar", 'T', "yellow")
+    val stairsDown = ItemKind(ItemKindId("stairs-down"), "Stairs down", '>', "light-gray")
+    val stairsUp = ItemKind(ItemKindId("stairs-up"), "Stairs up", '<', "light-gray")
 
     Map(
       openedDoor.id -> openedDoor,
       portal.id -> portal,
       greyAltar.id -> greyAltar,
       whiteAltar.id -> whiteAltar,
-      shiningAltar.id -> shiningAltar
+      shiningAltar.id -> shiningAltar,
+      stairsDown.id -> stairsDown,
+      stairsUp.id -> stairsUp
     )
   }
 
