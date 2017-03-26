@@ -21,7 +21,7 @@ object CalculateUtils {
                                 random: Random
                                ): Map[Location, List[T]] = {
     if (source.isEmpty) {
-      return Map()
+      return existing
     }
     if (locations.isEmpty) {
       throw new CalculateFailedException
