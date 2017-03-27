@@ -31,6 +31,6 @@ case class MoveEffect(target: CreatureId, location: Location) extends Effect {
   }
 
   private def getTriggerEffects(s: State): List[Effect] = {
-    getLocationTriggers(s)(location) flatMap (_ (s)(s, target))
+    getLocationTriggers(s)(location).toList flatMap (_ (s)(s, target))
   }
 }

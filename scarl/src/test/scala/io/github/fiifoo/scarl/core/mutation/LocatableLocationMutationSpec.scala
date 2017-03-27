@@ -31,9 +31,9 @@ class LocatableLocationMutationSpec extends FlatSpec with Matchers {
 
     val mutated = mutation3(mutation2(mutation1(initial)))
     val should = Map(
-      Location(0, 0) -> List(creature4),
-      location1 -> List(creature1),
-      location2 -> List(creature3, creature2)
+      Location(0, 0) -> Set(creature4),
+      location1 -> Set(creature1),
+      location2 -> Set(creature2, creature3)
     )
 
     mutated.index.locationEntities should ===(should)

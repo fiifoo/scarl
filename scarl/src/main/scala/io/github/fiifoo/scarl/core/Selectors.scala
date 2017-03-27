@@ -4,19 +4,19 @@ import io.github.fiifoo.scarl.core.entity._
 
 object Selectors {
 
-  def getContainerItems(s: State)(container: EntityId): List[ItemId] = {
-    s.index.containerItems.getOrElse(container, List())
+  def getContainerItems(s: State)(container: EntityId): Set[ItemId] = {
+    s.index.containerItems.getOrElse(container, Set())
   }
 
-  def getLocationEntities(s: State)(location: Location): List[LocatableId] = {
-    s.index.locationEntities.getOrElse(location, List())
+  def getLocationEntities(s: State)(location: Location): Set[LocatableId] = {
+    s.index.locationEntities.getOrElse(location, Set())
   }
 
-  def getLocationTriggers(s: State)(location: Location): List[TriggerStatusId] = {
-    s.index.locationTriggers.getOrElse(location, List())
+  def getLocationTriggers(s: State)(location: Location): Set[TriggerStatusId] = {
+    s.index.locationTriggers.getOrElse(location, Set())
   }
 
-  def getTargetStatuses(s: State)(target: EntityId): List[StatusId] = {
-    s.index.targetStatuses.getOrElse(target, List())
+  def getTargetStatuses(s: State)(target: EntityId): Set[StatusId] = {
+    s.index.targetStatuses.getOrElse(target, Set())
   }
 }

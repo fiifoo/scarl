@@ -4,13 +4,13 @@ import io.github.fiifoo.scarl.core.Location
 import io.github.fiifoo.scarl.core.entity.TriggerStatusId
 
 case class TriggerLocationIndexAddMutation(trigger: TriggerStatusId, location: Location) {
-  type Index = Map[Location, List[TriggerStatusId]]
+  type Index = Map[Location, Set[TriggerStatusId]]
 
   def apply(index: Index): Index = {
     val triggers = if (index.isDefinedAt(location)) {
-      trigger :: index(location)
+      index(location) + trigger
     } else {
-      List(trigger)
+      Set(trigger)
     }
 
     index + (location -> triggers)

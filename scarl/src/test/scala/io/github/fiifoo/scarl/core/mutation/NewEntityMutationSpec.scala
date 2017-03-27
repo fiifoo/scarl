@@ -43,10 +43,10 @@ class NewEntityMutationSpec extends FlatSpec with Matchers {
     val initial = State()
 
     val mutated = NewEntityMutation(creature1)(initial)
-    mutated.index.locationEntities should ===(Map(location -> List(CreatureId(1))))
+    mutated.index.locationEntities should ===(Map(location -> Set(CreatureId(1))))
 
     val mutatedAgain = NewEntityMutation(creature2)(mutated)
-    mutatedAgain.index.locationEntities should ===(Map(location -> List(CreatureId(2), CreatureId(1))))
+    mutatedAgain.index.locationEntities should ===(Map(location -> Set(CreatureId(2), CreatureId(1))))
   }
 
   it should "mutate status target index" in {
@@ -55,10 +55,10 @@ class NewEntityMutationSpec extends FlatSpec with Matchers {
     val status2 = TestActiveStatus(ActiveStatusId(3), initial.tick, CreatureId(1))
 
     val mutated = NewEntityMutation(status1)(initial)
-    mutated.index.targetStatuses should ===(Map(CreatureId(1) -> List(ActiveStatusId(2))))
+    mutated.index.targetStatuses should ===(Map(CreatureId(1) -> Set(ActiveStatusId(2))))
 
     val mutatedAgain = NewEntityMutation(status2)(mutated)
-    mutatedAgain.index.targetStatuses should ===(Map(CreatureId(1) -> List(ActiveStatusId(3), ActiveStatusId(2))))
+    mutatedAgain.index.targetStatuses should ===(Map(CreatureId(1) -> Set(ActiveStatusId(3), ActiveStatusId(2))))
   }
 
   it should "mutate item container index" in {
@@ -67,10 +67,10 @@ class NewEntityMutationSpec extends FlatSpec with Matchers {
     val item2 = Item(ItemId(3), ItemKindId("item"), CreatureId(1))
 
     val mutated = NewEntityMutation(item1)(initial)
-    mutated.index.containerItems should ===(Map(CreatureId(1) -> List(ItemId(2))))
+    mutated.index.containerItems should ===(Map(CreatureId(1) -> Set(ItemId(2))))
 
     val mutatedAgain = NewEntityMutation(item2)(mutated)
-    mutatedAgain.index.containerItems should ===(Map(CreatureId(1) -> List(ItemId(3), ItemId(2))))
+    mutatedAgain.index.containerItems should ===(Map(CreatureId(1) -> Set(ItemId(3), ItemId(2))))
   }
 
   it should "mutate faction member index" in {
@@ -80,18 +80,18 @@ class NewEntityMutationSpec extends FlatSpec with Matchers {
     val initial = State()
 
     val mutated = NewEntityMutation(creature1)(initial)
-    mutated.index.factionMembers should ===(Map(FactionId("1") -> List(CreatureId(1))))
+    mutated.index.factionMembers should ===(Map(FactionId("1") -> Set(CreatureId(1))))
 
     val mutatedAgain = NewEntityMutation(creature2)(mutated)
     mutatedAgain.index.factionMembers should ===(Map(
-      FactionId("1") -> List(CreatureId(1)),
-      FactionId("2") -> List(CreatureId(2))
+      FactionId("1") -> Set(CreatureId(1)),
+      FactionId("2") -> Set(CreatureId(2))
     ))
 
     val mutatedMore = NewEntityMutation(creature3)(mutatedAgain)
     mutatedMore.index.factionMembers should ===(Map(
-      FactionId("1") -> List(CreatureId(3), CreatureId(1)),
-      FactionId("2") -> List(CreatureId(2))
+      FactionId("1") -> Set(CreatureId(3), CreatureId(1)),
+      FactionId("2") -> Set(CreatureId(2))
     ))
   }
 
@@ -104,9 +104,9 @@ class NewEntityMutationSpec extends FlatSpec with Matchers {
     val status2 = TestTriggerStatus(TriggerStatusId(4), ContainerId(2))
 
     val mutated = NewEntityMutation(status1)(initial)
-    mutated.index.locationTriggers should ===(Map(location -> List(TriggerStatusId(3))))
+    mutated.index.locationTriggers should ===(Map(location -> Set(TriggerStatusId(3))))
 
     val mutatedAgain = NewEntityMutation(status2)(mutated)
-    mutatedAgain.index.locationTriggers should ===(Map(location -> List(TriggerStatusId(4), TriggerStatusId(3))))
+    mutatedAgain.index.locationTriggers should ===(Map(location -> Set(TriggerStatusId(4), TriggerStatusId(3))))
   }
 }

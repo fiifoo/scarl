@@ -49,7 +49,7 @@ class RemoveEntitiesMutationSpec extends FlatSpec with Matchers {
     )
 
     val mutated = RemoveEntitiesMutation()(initial)
-    mutated.index.locationEntities should ===(Map(Location(0, 0) -> List(CreatureId(2))))
+    mutated.index.locationEntities should ===(Map(Location(0, 0) -> Set(CreatureId(2))))
   }
 
   it should "mutate status target index" in {
@@ -60,7 +60,7 @@ class RemoveEntitiesMutationSpec extends FlatSpec with Matchers {
     val status2 = TestActiveStatus(ActiveStatusId(3), initial.tick, CreatureId(1))
 
     val mutated = RemoveEntitiesMutation()(NewEntityMutation(status2)(NewEntityMutation(status1)(initial)))
-    mutated.index.targetStatuses should ===(Map(CreatureId(1) -> List(ActiveStatusId(2))))
+    mutated.index.targetStatuses should ===(Map(CreatureId(1) -> Set(ActiveStatusId(2))))
   }
 
   it should "mutate item container index" in {
@@ -71,7 +71,7 @@ class RemoveEntitiesMutationSpec extends FlatSpec with Matchers {
     val item2 = Item(ItemId(3), ItemKindId("item"), CreatureId(1))
 
     val mutated = RemoveEntitiesMutation()(NewEntityMutation(item2)(NewEntityMutation(item1)(initial)))
-    mutated.index.containerItems should ===(Map(CreatureId(1) -> List(ItemId(2))))
+    mutated.index.containerItems should ===(Map(CreatureId(1) -> Set(ItemId(2))))
   }
 
   it should "mutate faction member index" in {
@@ -83,7 +83,7 @@ class RemoveEntitiesMutationSpec extends FlatSpec with Matchers {
     )
 
     val mutated = RemoveEntitiesMutation()(initial)
-    mutated.index.factionMembers should ===(Map(faction -> List(CreatureId(2))))
+    mutated.index.factionMembers should ===(Map(faction -> Set(CreatureId(2))))
   }
 
   it should "mutate trigger location index" in {
@@ -97,7 +97,7 @@ class RemoveEntitiesMutationSpec extends FlatSpec with Matchers {
     )))))
 
     val mutated = RemoveEntitiesMutation()(initial)
-    mutated.index.locationTriggers should ===(Map(location -> List(s2.id)))
+    mutated.index.locationTriggers should ===(Map(location -> Set(s2.id)))
   }
 
   it should "throw exception if entity does not exist" in {

@@ -38,7 +38,7 @@ class RemovableEntityMutationSpec extends FlatSpec with Matchers {
     val item2 = Item(ItemId(3), ItemKindId("item"), creature1)
 
     val mutated = RemovableEntityMutation(creature1)(NewEntityMutation(item2)(NewEntityMutation(item1)(initial)))
-    mutated.tmp.removableEntities should ===(List(creature1, item2.id, item1.id))
+    mutated.tmp.removableEntities should ===(List(creature1, item1.id, item2.id))
   }
 
   it should "allow duplicate removal but ignore it" in {

@@ -26,13 +26,13 @@ object SeekEnemy {
     val factions = creature.faction(s).enemies
     val filterCandidate = (candidate: Creature) => candidate != creature && inRange(creature, candidate, _range)
 
-    val candidates = factions.foldLeft(List[Creature]())((candidates, faction) => {
-      val filtered = s.index.factionMembers getOrElse(faction, List()) map (_ (s)) filter filterCandidate
+    val candidates = factions.foldLeft(Set[Creature]())((candidates, faction) => {
+      val filtered = s.index.factionMembers getOrElse(faction, Set()) map (_ (s)) filter filterCandidate
 
-      filtered ::: candidates
+      filtered ++ candidates
     })
 
-    candidates sortWith ((a, b) => distance(creature, a) < distance(creature, b))
+    candidates.toList sortWith ((a, b) => distance(creature, a) < distance(creature, b))
   }
 
   private def inRange(creature: Creature, candidate: Creature, range: Int): Boolean = {

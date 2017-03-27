@@ -23,5 +23,5 @@ object LocationEntities {
 case class LocationEntities(creature: Option[Creature],
                             terrain: Option[Terrain],
                             wall: Option[Wall],
-                            items: List[Item]
+                            items: Set[Item]
                            )

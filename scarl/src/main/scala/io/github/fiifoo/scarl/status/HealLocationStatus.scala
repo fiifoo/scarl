@@ -21,7 +21,7 @@ case class HealLocationStatus(id: ActiveStatusId,
 
   def apply(s: State): List[Effect] = {
     val location = target(s).location
-    val effects = getLocationEntities(s)(location) collect {
+    val effects = getLocationEntities(s)(location).toList collect {
       case target: CreatureId => HealEffect(target, amount)
     }
 

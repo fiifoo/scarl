@@ -33,8 +33,8 @@ class ItemContainerMutationSpec extends FlatSpec with Matchers {
 
     val mutated = mutation5(mutation4(mutation3(mutation2(mutation1(initial)))))
     val should = Map(
-      container1 -> List(item4, item1),
-      container2 -> List(item3, item2)
+      container1 -> Set(item4, item1),
+      container2 -> Set(item3, item2)
     )
 
     mutated.index.containerItems should ===(should)
