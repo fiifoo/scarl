@@ -7,6 +7,7 @@ import akka.stream.Materializer
 import io.github.fiifoo.scarl.game.OutMessage
 import models.GameManager
 import models.json.{ReadAction, WriteOutMessage}
+import models.save.{FileSaveStorage, NullSaveStorage}
 import play.Environment
 import play.api.libs.json.JsValue
 import play.api.libs.streams._
@@ -14,13 +15,19 @@ import play.api.mvc._
 
 class GameController @Inject()(implicit system: ActorSystem, materializer: Materializer, environment: Environment) extends Controller {
 
-  def index = Action {
-    val assets = if (environment.isDev) {
-      "http://localhost:80"
-    } else {
-      routes.Assets.versioned("").toString
-    }
+  val assets = if (environment.isDev) {
+    "http://localhost:80"
+  } else {
+    routes.Assets.versioned("").toString
+  }
 
+  val saveStorage = if (environment.isDev) {
+    new FileSaveStorage("user")
+  } else {
+    NullSaveStorage
+  }
+
+  def index = Action {
     Ok(views.html.index(assets))
   }
 
@@ -34,7 +41,8 @@ class GameController @Inject()(implicit system: ActorSystem, materializer: Mater
 
   class WebSocketActor(out: ActorRef) extends Actor {
 
-    val game = GameManager.loadOrCreate(send)
+    val manager = new GameManager(saveStorage)
+    val game = manager.loadOrCreate(send)
 
     def send = (data: OutMessage) => {
       out ! WriteOutMessage(data)
@@ -46,9 +54,9 @@ class GameController @Inject()(implicit system: ActorSystem, materializer: Mater
 
     override def postStop() = {
       if (game.over) {
-        GameManager.end(game)
+        manager.end(game)
       } else {
-        GameManager.save(game)
+        manager.save(game)
       }
     }
   }

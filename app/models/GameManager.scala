@@ -9,11 +9,12 @@ import io.github.fiifoo.scarl.game.{Game, OutConnection, OutMessage, Player}
 import io.github.fiifoo.scarl.world.{WorldManager, WorldState}
 import models.json.FormatId._
 import models.json.FormatWorldState._
+import models.save.SaveStorage
 import play.api.libs.json._
 
 import scala.util.Random
 
-object GameManager {
+class GameManager(saveStorage: SaveStorage) {
 
   case class SaveData(areaId: AreaId,
                       playerCreature: CreatureId,
@@ -23,8 +24,6 @@ object GameManager {
 
   val formatSaveData = Json.format[SaveData]
 
-  private var savedGame: Option[JsValue] = None // testing
-
   private val worldManager = new WorldManager(
     Data.areas,
     Data.factions,
@@ -33,7 +32,7 @@ object GameManager {
   )
 
   def loadOrCreate(send: OutMessage => Unit): Game = {
-    val (world, area, creature) = savedGame map loadWorld getOrElse generateWorld
+    val (world, area, creature) = saveStorage.load() map loadWorld getOrElse generateWorld
 
     val player = new Player(creature)
     val connection = new OutConnection(player, send)
@@ -47,11 +46,11 @@ object GameManager {
     val data = SaveData(area, playerCreature, world, world.hashCode)
     val json = formatSaveData.writes(data)
 
-    savedGame = Some(json)
+    saveStorage.save(json)
   }
 
   def end(game: Game): Unit = {
-    savedGame = None
+    saveStorage.clear()
   }
 
   private def loadWorld(json: JsValue): (WorldState, AreaId, CreatureId) = {
