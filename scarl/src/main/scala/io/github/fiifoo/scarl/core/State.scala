@@ -1,5 +1,6 @@
 package io.github.fiifoo.scarl.core
 
+import io.github.fiifoo.scarl.core.State.Stored
 import io.github.fiifoo.scarl.core.action.Tactic
 import io.github.fiifoo.scarl.core.entity._
 import io.github.fiifoo.scarl.core.kind.Kinds
@@ -12,6 +13,8 @@ object State {
                    locationTriggers: Map[Location, Set[TriggerStatusId]] = Map(),
                    targetStatuses: Map[EntityId, Set[StatusId]] = Map()
                   )
+
+  case class Stored(actors: List[ActorId] = List())
 
   case class Temporary(addedActors: List[ActorId] = List(),
                        conduitEntry: Option[(ConduitId, Creature)] = None,
@@ -28,6 +31,7 @@ case class State(entities: Map[EntityId, Entity] = Map(),
                  kinds: Kinds = Kinds(),
                  nextEntityId: Int = 1,
                  rng: Rng = Rng(1),
+                 stored: Stored = Stored(),
                  tactics: Map[CreatureId, Tactic] = Map(),
                  tick: Int = 1,
                  tmp: State.Temporary = State.Temporary()

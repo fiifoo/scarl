@@ -1,7 +1,7 @@
 package io.github.fiifoo.scarl.core
 
 import io.github.fiifoo.scarl.core.entity.ActorId
-import io.github.fiifoo.scarl.core.mutation.ResetAddedActorsMutation
+import io.github.fiifoo.scarl.core.mutation.{ResetAddedActorsMutation, ResetStoredActorsMutation}
 
 import scala.collection.mutable
 
@@ -9,12 +9,19 @@ class ActorQueue() {
 
   private val queue = mutable.PriorityQueue[(ActorId, Int)]()(Ordering.by(orderBy))
 
-  def enqueueNewActors(s: State): State = {
-    if (s.tmp.addedActors.nonEmpty) {
-      s.tmp.addedActors foreach (actor => enqueue(actor, actor(s).tick))
-      ResetAddedActorsMutation()(s)
+  def enqueueNewActors(s0: State): State = {
+    val s1 = if (s0.tmp.addedActors.nonEmpty) {
+      s0.tmp.addedActors foreach (actor => enqueue(actor, actor(s0).tick))
+      ResetAddedActorsMutation()(s0)
     } else {
-      s
+      s0
+    }
+
+    if (s1.stored.actors.nonEmpty) {
+      s1.stored.actors foreach (actor => enqueue(actor, actor(s1).tick))
+      ResetStoredActorsMutation()(s1)
+    } else {
+      s1
     }
   }
 

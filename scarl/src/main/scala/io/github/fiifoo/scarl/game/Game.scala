@@ -65,7 +65,7 @@ class Game(out: OutConnection,
     var currentState = ResetConduitEntryMutation()(s)
 
     if (creature.id == player.creature) {
-      currentState = b.empty(currentState)
+      currentState = b.save(currentState)
       val (nextWorld, playerCreature) = worldManager.switchArea(w, a, currentState, conduit, creature)
       val nextArea = getNextArea(w.conduits(conduit), a)
       val (nextBubble, nextState) = createBubble(nextWorld.states(nextArea))

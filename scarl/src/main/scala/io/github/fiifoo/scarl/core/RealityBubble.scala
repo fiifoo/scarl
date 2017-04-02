@@ -3,7 +3,7 @@ package io.github.fiifoo.scarl.core
 import io.github.fiifoo.scarl.core.action.{Action, Tactic}
 import io.github.fiifoo.scarl.core.effect.{Effect, EffectResolver}
 import io.github.fiifoo.scarl.core.entity._
-import io.github.fiifoo.scarl.core.mutation.{RngMutation, TacticMutation, TickMutation}
+import io.github.fiifoo.scarl.core.mutation.{RngMutation, StoredActorsMutation, TacticMutation, TickMutation}
 
 object RealityBubble {
 
@@ -53,12 +53,10 @@ class RealityBubble(actors: ActorQueue,
     s
   }
 
-  def empty(s: State): State = {
+  def save(s: State): State = {
     val storeActors = actors.dequeueAll filter s.entities.isDefinedAt
 
-    s.copy(tmp = s.tmp.copy(
-      addedActors = s.tmp.addedActors ::: storeActors
-    ))
+    StoredActorsMutation(storeActors)(s)
   }
 
   private def handleCreature(s: State,
