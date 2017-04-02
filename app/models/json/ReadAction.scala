@@ -1,12 +1,16 @@
-package models
+package models.json
 
 import io.github.fiifoo.scarl.action.{AttackAction, MoveAction, PassAction}
-import io.github.fiifoo.scarl.core.Location
 import io.github.fiifoo.scarl.core.action.Action
-import io.github.fiifoo.scarl.core.entity.CreatureId
+import models.json.FormatBase._
+import models.json.FormatId._
 import play.api.libs.json._
 
-object Actions {
+object ReadAction {
+
+  def apply(json: JsValue): Action = {
+    readAction.reads(json).get
+  }
 
   object ActionType extends Enumeration {
     type ActionType = Value
@@ -15,15 +19,12 @@ object Actions {
 
   import ActionType._
 
-  implicit val actionTypeReads = Reads.enumNameReads(ActionType)
+  implicit val readActionType = Reads.enumNameReads(ActionType)
 
-  implicit val creatureIdReads = Json.reads[CreatureId]
-  implicit val locationReads = Json.reads[Location]
+  implicit val readAttackAction = Json.reads[AttackAction]
+  implicit val readMoveAction = Json.reads[MoveAction]
 
-  implicit val attackActionReads = Json.reads[AttackAction]
-  implicit val moveActionReads = Json.reads[MoveAction]
-
-  implicit val actionReads = new Reads[Action] {
+  implicit val readAction = new Reads[Action] {
     def reads(json: JsValue): JsResult[Action] = {
       val container = json.as[JsObject].value
       val actionType = container("type").as[ActionType]
@@ -36,6 +37,4 @@ object Actions {
       })
     }
   }
-
-  def fromJson(json: JsValue): Action = json.as[Action]
 }

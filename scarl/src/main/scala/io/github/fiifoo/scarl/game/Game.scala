@@ -31,6 +31,19 @@ class Game(out: OutConnection,
     run(Some(action))
   }
 
+  def save(): (WorldState, AreaId, CreatureId) = {
+    state = bubble.save(state)
+    world = world.copy(
+      states = world.states + (area -> state)
+    )
+
+    (world, area, player.creature)
+  }
+
+  def over: Boolean = {
+    gameOver(state)
+  }
+
   private def initialize(): Unit = {
     sendInitial(state)
     run(None)

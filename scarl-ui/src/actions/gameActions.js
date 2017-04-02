@@ -5,7 +5,7 @@ import { sendMessage } from './connectionActions'
 export const attack = target => dispatch => {
     sendMessage({
         type: 'Attack',
-        data: {target: {value: target}},
+        data: {target},
     })(dispatch)
 
     dispatch({

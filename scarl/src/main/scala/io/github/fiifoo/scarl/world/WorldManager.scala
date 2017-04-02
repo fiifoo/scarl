@@ -7,10 +7,10 @@ import io.github.fiifoo.scarl.core.entity._
 import io.github.fiifoo.scarl.core.kind.{CreatureKindId, Kinds}
 import io.github.fiifoo.scarl.core.mutation.{NewEntityMutation, NewFactionMutation}
 
-class WorldManager(areas: Map[AreaId, Area],
-                   factions: Map[FactionId, Faction],
-                   kinds: Kinds,
-                   templates: Map[TemplateId, Template]
+class WorldManager(val areas: Map[AreaId, Area],
+                   val factions: Map[FactionId, Faction],
+                   val kinds: Kinds,
+                   val templates: Map[TemplateId, Template]
                   ) {
 
   def create(firstArea: AreaId, player: CreatureKindId, rng: Rng = Rng(1)): (WorldState, CreatureId) = {

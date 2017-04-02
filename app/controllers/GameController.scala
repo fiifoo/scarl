@@ -4,8 +4,9 @@ import javax.inject.Inject
 
 import akka.actor._
 import akka.stream.Materializer
-import io.github.fiifoo.scarl.game.{Game, OutConnection, OutMessage, Player}
-import models.{Actions, GenerateWorld, OutMessages}
+import io.github.fiifoo.scarl.game.OutMessage
+import models.GameManager
+import models.json.{ReadAction, WriteOutMessage}
 import play.Environment
 import play.api.libs.json.JsValue
 import play.api.libs.streams._
@@ -32,18 +33,23 @@ class GameController @Inject()(implicit system: ActorSystem, materializer: Mater
   }
 
   class WebSocketActor(out: ActorRef) extends Actor {
-    val (worldManager, world, area, creature) = GenerateWorld()
 
-    val player = new Player(creature)
-    val connection = new OutConnection(player, send)
-    val game = new Game(connection, player, worldManager, world, area)
-
-    def receive = {
-      case json: JsValue => game.receive(Actions.fromJson(json))
-    }
+    val game = GameManager.loadOrCreate(send)
 
     def send = (data: OutMessage) => {
-      out ! OutMessages.toJson(data)
+      out ! WriteOutMessage(data)
+    }
+
+    def receive = {
+      case json: JsValue => game.receive(ReadAction(json))
+    }
+
+    override def postStop() = {
+      if (game.over) {
+        GameManager.end(game)
+      } else {
+        GameManager.save(game)
+      }
     }
   }
 
