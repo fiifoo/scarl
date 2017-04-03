@@ -1,18 +1,17 @@
 package io.github.fiifoo.scarl.message
 
-import io.github.fiifoo.scarl.core.State
 import io.github.fiifoo.scarl.core.entity.CreatureId
+import io.github.fiifoo.scarl.core.{Location, State}
 import io.github.fiifoo.scarl.effect.DeathEffect
-import io.github.fiifoo.scarl.game.Player
 
-object DeathMessage {
+class DeathMessage(player: () => CreatureId, fov: () => Set[Location]) {
 
-  def apply(s: State, effect: DeathEffect, player: Player): Option[String] = {
+  def apply(s: State, effect: DeathEffect): Option[String] = {
     val target = effect.target
 
-    if (target == player.creature) {
+    if (target == player()) {
       Some("You die...")
-    } else if (player.fov contains target(s).location) {
+    } else if (fov() contains target(s).location) {
       Some(s"${kind(s, target)} is killed.")
     } else {
       None

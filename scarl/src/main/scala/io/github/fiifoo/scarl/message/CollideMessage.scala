@@ -1,18 +1,17 @@
 package io.github.fiifoo.scarl.message
 
-import io.github.fiifoo.scarl.core.State
 import io.github.fiifoo.scarl.core.entity.{CreatureId, WallId}
+import io.github.fiifoo.scarl.core.{Location, State}
 import io.github.fiifoo.scarl.effect.CollideEffect
-import io.github.fiifoo.scarl.game.Player
 
-object CollideMessage {
+class CollideMessage(player: () => CreatureId, fov: () => Set[Location]) {
 
-  def apply(s: State, effect: CollideEffect, player: Player): Option[String] = {
+  def apply(s: State, effect: CollideEffect): Option[String] = {
     val target = effect.target
 
-    if (target == player.creature) {
+    if (target == player()) {
       effect.obstacle match {
-        case w: WallId => Some("Ouch. You run straight into wall.")
+        case _: WallId => Some("Ouch. You run straight into wall.")
         case c: CreatureId => Some(s"${kind(s, c)} blocks your way.")
         case _ => None
       }

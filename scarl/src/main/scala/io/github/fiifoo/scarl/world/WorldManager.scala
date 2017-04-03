@@ -25,7 +25,7 @@ class WorldManager(val areas: Map[AreaId, Area],
                  currentState: State,
                  conduit: ConduitId,
                  player: Creature
-                ): (WorldState, CreatureId) = {
+                ): (WorldState, AreaId, CreatureId) = {
 
     val currentWorld = world.copy(states = world.states + (currentArea -> currentState))
     val nextArea = getConduitExit(world.conduits(conduit), currentArea)
@@ -112,7 +112,7 @@ class WorldManager(val areas: Map[AreaId, Area],
                                  area: AreaId,
                                  conduit: ConduitId,
                                  traveler: Creature
-                                ): (WorldState, CreatureId) = {
+                                ): (WorldState, AreaId, CreatureId) = {
     val state = world.states(area)
     val location = state.conduits(conduit)
     val travelerId = CreatureId(state.nextEntityId)
@@ -122,10 +122,11 @@ class WorldManager(val areas: Map[AreaId, Area],
       location = location,
       tick = state.tick
     ))(state)
+
     val nextWorld = world.copy(
       states = world.states + (area -> nextState)
     )
 
-    (nextWorld, travelerId)
+    (nextWorld, area, travelerId)
   }
 }
