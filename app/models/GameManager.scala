@@ -1,10 +1,9 @@
 package models
 
 import io.github.fiifoo.scarl.area.AreaId
+import io.github.fiifoo.scarl.core.Rng
 import io.github.fiifoo.scarl.core.entity.CreatureId
 import io.github.fiifoo.scarl.core.kind.CreatureKindId
-import io.github.fiifoo.scarl.core.mutation.index.NewEntityIndexMutation
-import io.github.fiifoo.scarl.core.{Rng, State}
 import io.github.fiifoo.scarl.game.{Game, OutConnection, OutMessage, Player}
 import io.github.fiifoo.scarl.world.{WorldManager, WorldState}
 import models.json.FormatId._
@@ -54,26 +53,14 @@ class GameManager(saveStorage: SaveStorage) {
   }
 
   private def loadWorld(json: JsValue): (WorldState, AreaId, CreatureId) = {
-    val raw = formatSaveData.reads(json).get
+    val data = formatSaveData.reads(json).get
+    val world = GameUtils.finalizeLoadedWorld(data.world, worldManager)
 
-    val data = raw.copy(world = raw.world.copy(
-      areas = worldManager.areas,
-      states = raw.world.states.map(x => {
-        val (area, state) = x
-        val fixed = state.copy(
-          index = calculateStateIndex(state),
-          kinds = worldManager.kinds
-        )
-
-        (area, fixed)
-      })
-    ))
-
-    if (data.worldHashCode != data.world.hashCode) {
+    if (data.worldHashCode != world.hashCode) {
       throw new Exception("Corrupt save data.")
     }
 
-    (data.world, data.areaId, data.playerCreature)
+    (world, data.areaId, data.playerCreature)
   }
 
   private def generateWorld(): (WorldState, AreaId, CreatureId) = {
@@ -82,11 +69,5 @@ class GameManager(saveStorage: SaveStorage) {
     val (world, player) = worldManager.create(area, CreatureKindId("hero"), rng)
 
     (world, area, player)
-  }
-
-  private def calculateStateIndex(s: State): State.Index = {
-    s.entities.values.foldLeft(s.index)((index, entity) => {
-      NewEntityIndexMutation(entity)(s, index)
-    })
   }
 }
