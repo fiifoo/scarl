@@ -2,7 +2,7 @@ package models.json
 
 import io.github.fiifoo.scarl.core.Location
 import io.github.fiifoo.scarl.core.kind._
-import io.github.fiifoo.scarl.game.{LocationEntities, OutMessage, Statistics}
+import io.github.fiifoo.scarl.game.{LocationEntities, OutMessage, PlayerFov, Statistics}
 import models.json.FormatBase._
 import models.json.FormatEntity._
 import models.json.FormatId._
@@ -23,7 +23,12 @@ object WriteOutMessage {
   implicit val writeLocationMap = new Writes[Map[Location, LocationEntities]] {
     def writes(m: Map[Location, LocationEntities]) = Json.toJson(m map (x => LocationData(x._1, x._2)))
   }
-  implicit val writesFov = Json.writes[OutMessage.Fov]
+  implicit val writesPlayerFov = new Writes[PlayerFov] {
+    def writes(fov: PlayerFov): JsValue = JsObject(Map(
+      "delta" -> Json.toJson(fov.delta),
+      "shouldHide" -> Json.toJson(fov.shouldHide)
+    ))
+  }
 
   implicit val writeCreature = Json.writes[CreatureKind]
   implicit val writeItemKind = Json.writes[ItemKind]

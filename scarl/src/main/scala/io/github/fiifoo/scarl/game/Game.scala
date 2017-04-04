@@ -5,6 +5,7 @@ import io.github.fiifoo.scarl.core._
 import io.github.fiifoo.scarl.core.action.Action
 import io.github.fiifoo.scarl.core.effect.CombinedEffectListener
 import io.github.fiifoo.scarl.core.entity.Creature
+import io.github.fiifoo.scarl.core.kind.Kinds
 import io.github.fiifoo.scarl.core.mutation.ResetConduitEntryMutation
 import io.github.fiifoo.scarl.geometry.Fov
 import io.github.fiifoo.scarl.message.MessageBuilder
@@ -13,14 +14,14 @@ import io.github.fiifoo.scarl.world.WorldManager
 import scala.annotation.tailrec
 
 class Game(initial: GameState,
-           out: OutConnection,
-           worldManager: WorldManager
+           worldManager: WorldManager,
+           out: OutMessage => Unit
           ) {
 
   private var gameState = initial
-  private var fov: Set[Location] = Set()
+  private var fov = PlayerFov()
 
-  private val messageBuilder = new MessageBuilder(() => gameState.player, () => fov)
+  private val messageBuilder = new MessageBuilder(() => gameState.player, () => fov.locations)
   private val statisticsBuilder = new StatisticsBuilder()
 
   private var (bubble, state) = createBubble(gameState.world.states(gameState.area))
@@ -43,7 +44,6 @@ class Game(initial: GameState,
   }
 
   private def initialize(): Unit = {
-    updateFov()
     sendInitial()
     run(None)
   }
@@ -56,7 +56,6 @@ class Game(initial: GameState,
     if (gameOver(state)) {
       sendFinal()
     } else {
-      updateFov()
       send()
     }
   }
@@ -85,6 +84,9 @@ class Game(initial: GameState,
     gameState = gameState.copy(nextArea, nextPlayer, nextWorld)
     bubble = nextBubble
     state = nextState
+    fov = PlayerFov()
+
+    sendArea()
   }
 
   @tailrec
@@ -105,19 +107,38 @@ class Game(initial: GameState,
   }
 
   private def sendInitial(): Unit = {
-    out(gameState, state, fov, messageBuilder.extract(), kinds = Some(state.kinds))
+    updateFov()
+    out(outMessage(kinds = Some(state.kinds)))
   }
 
   private def send(): Unit = {
-    out(gameState, state, fov, messageBuilder.extract())
+    updateFov()
+    out(outMessage())
+  }
+
+  private def sendArea(): Unit = {
+    updateFov()
+    out(outMessage())
   }
 
   private def sendFinal(): Unit = {
-    out(gameState, state, fov, messageBuilder.extract(), statistics = Some(statisticsBuilder.get()))
+    out(outMessage(statistics = Some(statisticsBuilder.get())))
   }
 
   private def updateFov(): Unit = {
-    fov = Fov(state)(gameState.player(state).location, 10)
+    val locations = Fov(state)(gameState.player(state).location, 10)
+
+    fov = fov.next(state, locations)
+  }
+
+  private def outMessage(kinds: Option[Kinds] = None,
+                         statistics: Option[Statistics] = None
+                        ): OutMessage = {
+    val area = gameState.area
+    val messages = messageBuilder.extract()
+    val player = state.entities.get(gameState.player) map (_.asInstanceOf[Creature])
+
+    OutMessage(area, fov, messages, player, kinds, statistics)
   }
 
   private def gameOver(s: State): Boolean = {

@@ -26,11 +26,10 @@ class GameManager(saveStorage: SaveStorage) {
     Data.templates
   )
 
-  def loadOrCreate(send: OutMessage => Unit): Game = {
+  def loadOrCreate(out: OutMessage => Unit): Game = {
     val state = saveStorage.load() map loadGame getOrElse generateGame
-    val connection = new OutConnection(send)
 
-    new Game(state, connection, worldManager)
+    new Game(state, worldManager, out)
   }
 
   def save(game: Game): Unit = {
