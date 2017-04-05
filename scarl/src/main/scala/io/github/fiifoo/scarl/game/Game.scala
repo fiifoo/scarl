@@ -7,6 +7,7 @@ import io.github.fiifoo.scarl.core.effect.CombinedEffectListener
 import io.github.fiifoo.scarl.core.entity.Creature
 import io.github.fiifoo.scarl.core.kind.Kinds
 import io.github.fiifoo.scarl.core.mutation.ResetConduitEntryMutation
+import io.github.fiifoo.scarl.game.map.{MapBuilder, MapLocation}
 import io.github.fiifoo.scarl.geometry.Fov
 import io.github.fiifoo.scarl.message.MessageBuilder
 import io.github.fiifoo.scarl.world.WorldManager
@@ -23,6 +24,7 @@ class Game(initial: GameState,
 
   private val messageBuilder = new MessageBuilder(() => gameState.player, () => fov.locations)
   private val statisticsBuilder = new StatisticsBuilder()
+  private val mapBuilder = new MapBuilder(areaMap)
 
   private var (bubble, state) = createBubble(gameState.world.states(gameState.area))
 
@@ -31,12 +33,15 @@ class Game(initial: GameState,
   }
 
   def save(): GameState = {
+    val maps = gameState.maps
     val world = gameState.world
     val area = gameState.area
 
-    gameState.copy(world = world.copy(
-      states = world.states + (area -> bubble.save(state))
-    ))
+    gameState.copy(
+      maps = maps + (area -> mapBuilder.extract()),
+      world = world.copy(
+        states = world.states + (area -> bubble.save(state))
+      ))
   }
 
   def over: Boolean = {
@@ -51,7 +56,7 @@ class Game(initial: GameState,
   private def run(action: Option[Action]): Unit = {
     state = process(state, action)
 
-    getConduitEntry(state).foreach(handleConduitEntry)
+    conduitEntry(state).foreach(handleConduitEntry)
 
     if (gameOver(state)) {
       sendFinal()
@@ -80,8 +85,9 @@ class Game(initial: GameState,
       player
     )
     val (nextBubble, nextState) = createBubble(nextWorld.states(nextArea))
+    val nextMaps = gameState.maps + (gameState.area -> mapBuilder.extract(gameState.maps.get(nextArea)))
 
-    gameState = gameState.copy(nextArea, nextPlayer, nextWorld)
+    gameState = gameState.copy(area = nextArea, maps = nextMaps, player = nextPlayer, world = nextWorld)
     bubble = nextBubble
     state = nextState
     fov = PlayerFov()
@@ -91,7 +97,7 @@ class Game(initial: GameState,
 
   @tailrec
   private def process(s: State, action: Option[Action]): State = {
-    if (gameOver(s) || getConduitEntry(s).isDefined) {
+    if (gameOver(s) || conduitEntry(s).isDefined) {
       return s
     }
 
@@ -108,7 +114,7 @@ class Game(initial: GameState,
 
   private def sendInitial(): Unit = {
     updateFov()
-    out(outMessage(kinds = Some(state.kinds)))
+    out(outMessage(map = areaMap, kinds = Some(state.kinds)))
   }
 
   private def send(): Unit = {
@@ -118,7 +124,7 @@ class Game(initial: GameState,
 
   private def sendArea(): Unit = {
     updateFov()
-    out(outMessage())
+    out(outMessage(map = areaMap))
   }
 
   private def sendFinal(): Unit = {
@@ -129,23 +135,29 @@ class Game(initial: GameState,
     val locations = Fov(state)(gameState.player(state).location, 10)
 
     fov = fov.next(state, locations)
+    mapBuilder(fov)
   }
 
   private def outMessage(kinds: Option[Kinds] = None,
+                         map: Option[Map[Location, MapLocation]] = None,
                          statistics: Option[Statistics] = None
                         ): OutMessage = {
     val area = gameState.area
     val messages = messageBuilder.extract()
     val player = state.entities.get(gameState.player) map (_.asInstanceOf[Creature])
 
-    OutMessage(area, fov, messages, player, kinds, statistics)
+    OutMessage(area, fov, messages, player, kinds, map, statistics)
+  }
+
+  private def areaMap: Option[Map[Location, MapLocation]] = {
+    gameState.maps.get(gameState.area)
   }
 
   private def gameOver(s: State): Boolean = {
     !s.entities.isDefinedAt(gameState.player)
   }
 
-  private def getConduitEntry(s: State): Option[(ConduitId, Creature)] = {
+  private def conduitEntry(s: State): Option[(ConduitId, Creature)] = {
     s.tmp.conduitEntry
   }
 

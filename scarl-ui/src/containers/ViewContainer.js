@@ -8,6 +8,7 @@ const ViewContainer = connect(
         connection: state.connection,
         fov: state.fov,
         kinds: state.kinds,
+        map: state.map,
     }),
     {focusKeyboard}
 )(View)

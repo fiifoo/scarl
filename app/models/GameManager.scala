@@ -51,6 +51,7 @@ class GameManager(saveStorage: SaveStorage) {
 
     val state = GameState(
       data.state.area,
+      data.state.maps,
       data.state.player,
       world
     )
@@ -67,6 +68,6 @@ class GameManager(saveStorage: SaveStorage) {
     val area = AreaId("first")
     val (world, player) = worldManager.create(area, CreatureKindId("hero"), rng)
 
-    GameState(area, player, world)
+    GameState(area, maps = Map(), player, world)
   }
 }

@@ -4,6 +4,7 @@ import connection from './connection'
 import fov from './fov'
 import gameOver from './gameOver'
 import kinds from './kinds'
+import map from './map'
 import messages from './messages'
 import player from './player'
 import statistics from './statistics'
@@ -15,6 +16,7 @@ export default combineReducers({
     fov,
     gameOver,
     kinds,
+    map,
     messages,
     player,
     statistics,

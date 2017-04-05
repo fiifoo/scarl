@@ -5,6 +5,7 @@ import io.github.fiifoo.scarl.core.kind._
 import io.github.fiifoo.scarl.game.{LocationEntities, OutMessage, PlayerFov, Statistics}
 import models.json.FormatBase._
 import models.json.FormatEntity._
+import models.json.FormatGameState.formatAreaMap
 import models.json.FormatId._
 import play.api.libs.json._
 

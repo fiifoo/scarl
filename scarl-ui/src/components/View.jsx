@@ -3,7 +3,7 @@ import { COLS, ROWS } from '../const/view'
 
 import './View.css'
 
-const build = element => {
+const build = (element, map, kinds) => {
     const fragment = document.createDocumentFragment()
 
     for (let y = 0; y < ROWS; y++) {
@@ -11,6 +11,9 @@ const build = element => {
         fragment.appendChild(row)
         for (let x = 0; x < COLS; x++) {
             const cell = document.createElement('td')
+            if (map[x] !== undefined && map[x][y] !== undefined) {
+                renderMapCell(cell, map[x][y], kinds)
+            }
             row.appendChild(cell)
         }
     }
@@ -18,11 +21,11 @@ const build = element => {
     element.appendChild(fragment)
 }
 
-const reset = element => {
+const reset = (element, map, kinds) => {
     while (element.lastChild) {
         element.removeChild(element.lastChild)
     }
-    build(element)
+    build(element, map, kinds)
 }
 
 const update = (element, fov, kinds) => {
@@ -59,8 +62,24 @@ const renderCell = (cell, entities, kinds, visible = true) => {
     }
 }
 
+const renderMapCell = (cell, data, kinds) => {
+    if (data.items.length > 0) {
+        renderKind(cell, data.items[data.items.length - 1], kinds.items)
+    } else if (data.wall) {
+        renderKind(cell, data.wall, kinds.walls)
+    } else if (data.terrain) {
+        renderKind(cell, data.terrain, kinds.terrains)
+    } else {
+        renderEmpty(cell)
+    }
+}
+
 const renderEntity = (cell, entity, kinds) => {
-    const kind = kinds.get(entity.kind)
+    renderKind(cell, entity.kind, kinds)
+}
+
+const renderKind = (cell, kindId, kinds) => {
+    const kind = kinds.get(kindId)
     const display = kind.display
     const color = kind.color
     cell.innerHTML = '<div style="color: ' + color + '">' + display + '</div>'
@@ -77,16 +96,16 @@ class View extends Component {
     }
 
     componentDidMount() {
-        build(this.element)
+        build(this.element, this.props.map, this.props.kinds)
         update(this.element, this.props.fov, this.props.kinds)
     }
 
     componentWillReceiveProps(nextProps) {
         if (nextProps.connection === false) {
-            reset(this.element)
+            reset(this.element, nextProps.map, nextProps.kinds)
         } else {
             if (nextProps.area !== this.props.area) {
-                reset(this.element)
+                reset(this.element, nextProps.map, nextProps.kinds)
             }
             update(this.element, nextProps.fov, nextProps.kinds)
         }
