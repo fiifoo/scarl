@@ -8,14 +8,13 @@ import io.github.fiifoo.scarl.geometry.{Line, Los, Path}
 
 case class PursueTactic(actor: CreatureId, target: SafeCreatureId, destination: Location) extends Tactic {
 
-  private def _range = 5 // should come from creature
-
   def apply(s: State, rng: Rng): (Tactic, Action, Rng) = {
     target(s) flatMap (target => {
       val location = actor(s).location
       val line = Line(location, target.location)
+      val range = actor(s).stats.sight.range
 
-      if (line.size <= _range + 1 && Los(s)(line)) {
+      if (line.size <= range + 1 && Los(s)(line)) {
 
         val charge = ChargeTactic(actor, SafeCreatureId(target.id), target.location)
         Some(charge(s, rng))

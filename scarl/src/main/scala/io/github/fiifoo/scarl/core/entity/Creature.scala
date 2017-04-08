@@ -10,8 +10,11 @@ object Creature {
                    attack: Int,
                    defence: Int,
                    damage: Int,
-                   armor: Int
+                   armor: Int,
+                   sight: Sight
                   )
+
+  case class Sight(range: Int)
 
 }
 

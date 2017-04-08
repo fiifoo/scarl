@@ -132,7 +132,8 @@ class Game(initial: GameState,
   }
 
   private def updateFov(): Unit = {
-    val locations = Fov(state)(gameState.player(state).location, 10)
+    val creature = gameState.player(state)
+    val locations = Fov(state)(creature.location, creature.stats.sight.range)
 
     fov = fov.next(state, locations)
     mapBuilder(fov)

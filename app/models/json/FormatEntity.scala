@@ -9,6 +9,7 @@ import play.api.libs.json._
 
 object FormatEntity {
   implicit val formatCreatureKindChoice = formatWeightedChoices(formatCreatureKindId)
+  implicit val formatCreatureSight = Json.format[Creature.Sight]
   implicit val formatCreatureStats = Json.format[Creature.Stats]
 
   implicit val formatContainer = Json.format[Container]

@@ -6,8 +6,6 @@ import io.github.fiifoo.scarl.geometry.{Line, Los}
 
 object SeekEnemy {
 
-  private def _range = 5 // should come from creature
-
   def apply(s: State, creature: Creature): Option[Creature] = {
 
     val los = Los(s) _
@@ -24,7 +22,9 @@ object SeekEnemy {
 
   private def getCandidates(s: State, creature: Creature): List[Creature] = {
     val factions = creature.faction(s).enemies
-    val filterCandidate = (candidate: Creature) => candidate != creature && inRange(creature, candidate, _range)
+    val range = creature.stats.sight.range
+    val filterCandidate = (candidate: Creature) =>
+      candidate != creature && inRange(creature, candidate, range)
 
     val candidates = factions.foldLeft(Set[Creature]())((candidates, faction) => {
       val filtered = s.index.factionMembers getOrElse(faction, Set()) map (_ (s)) filter filterCandidate

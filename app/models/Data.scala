@@ -6,6 +6,7 @@ import io.github.fiifoo.scarl.area.template.{FixedTemplate, RandomizedTemplate, 
 import io.github.fiifoo.scarl.area.{Area, AreaId}
 import io.github.fiifoo.scarl.core.Location
 import io.github.fiifoo.scarl.core.Rng.WeightedChoices
+import io.github.fiifoo.scarl.core.entity.Creature.Sight
 import io.github.fiifoo.scarl.core.entity._
 import io.github.fiifoo.scarl.core.kind._
 import io.github.fiifoo.scarl.widget.{DelayedTransformingWidget, HealLocationWidget, SummonCreatureWidget, TriggeredTransformingWidget}
@@ -161,7 +162,8 @@ object Data {
         attack = 20,
         defence = 20,
         damage = 10,
-        armor = 5
+        armor = 5,
+        sight = Sight(10)
       )
     )
 
@@ -176,7 +178,8 @@ object Data {
         attack = 20,
         defence = 20,
         damage = 10,
-        armor = 5
+        armor = 5,
+        sight = Sight(5)
       )
     )
 
@@ -191,7 +194,8 @@ object Data {
         attack = 10,
         defence = 10,
         damage = 10,
-        armor = 5
+        armor = 5,
+        sight = Sight(5)
       )
     )
 
@@ -206,7 +210,8 @@ object Data {
         attack = 20,
         defence = 20,
         damage = 10,
-        armor = 5
+        armor = 5,
+        sight = Sight(5)
       )
     )
 
@@ -221,7 +226,8 @@ object Data {
         attack = 30,
         defence = 30,
         damage = 10,
-        armor = 5
+        armor = 5,
+        sight = Sight(5)
       )
     )
 
