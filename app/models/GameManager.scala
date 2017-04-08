@@ -51,9 +51,10 @@ class GameManager(saveStorage: SaveStorage) {
 
     val state = GameState(
       data.state.area,
-      data.state.maps,
       data.state.player,
-      world
+      world,
+      data.state.maps,
+      data.state.statistics
     )
 
     if (data.checkHashCode != state.hashCode) {
@@ -68,6 +69,6 @@ class GameManager(saveStorage: SaveStorage) {
     val area = AreaId("first")
     val (world, player) = worldManager.create(area, CreatureKindId("hero"), rng)
 
-    GameState(area, maps = Map(), player, world)
+    GameState(area, player, world)
   }
 }

@@ -2,10 +2,10 @@ package models.json
 
 import io.github.fiifoo.scarl.core.Location
 import io.github.fiifoo.scarl.core.kind._
-import io.github.fiifoo.scarl.game.{LocationEntities, OutMessage, PlayerFov, Statistics}
+import io.github.fiifoo.scarl.game.{LocationEntities, OutMessage, PlayerFov}
 import models.json.FormatBase._
 import models.json.FormatEntity._
-import models.json.FormatGameState.formatAreaMap
+import models.json.FormatGameState.{formatAreaMap, formatStatistics}
 import models.json.FormatId._
 import play.api.libs.json._
 
@@ -43,11 +43,6 @@ object WriteOutMessage {
       "walls" -> Json.toJson(k.walls.values)
     ))
   }
-
-  implicit val writeDeathStatistics = new Writes[Map[CreatureKindId, Int]] {
-    def writes(m: Map[CreatureKindId, Int]) = JsObject(m map { x => (x._1.value, JsNumber(x._2)) })
-  }
-  implicit val writeStatistics = Json.writes[Statistics]
 
   implicit val writeOutMessage = Json.writes[OutMessage]
 }

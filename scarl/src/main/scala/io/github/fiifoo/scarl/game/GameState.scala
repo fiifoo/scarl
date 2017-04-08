@@ -7,7 +7,8 @@ import io.github.fiifoo.scarl.game.map.MapLocation
 import io.github.fiifoo.scarl.world.WorldState
 
 case class GameState(area: AreaId,
-                     maps: Map[AreaId, Map[Location, MapLocation]],
                      player: CreatureId,
-                     world: WorldState
+                     world: WorldState,
+                     maps: Map[AreaId, Map[Location, MapLocation]] = Map(),
+                     statistics: Statistics = Statistics()
                     )

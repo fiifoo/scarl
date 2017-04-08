@@ -6,9 +6,9 @@ import io.github.fiifoo.scarl.core.entity.CreatureId
 import io.github.fiifoo.scarl.core.kind.CreatureKindId
 import io.github.fiifoo.scarl.effect.DeathEffect
 
-class StatisticsBuilder extends EffectListener {
+class StatisticsBuilder(initial: Statistics = Statistics()) extends EffectListener {
 
-  var deaths: Map[CreatureKindId, Int] = Map()
+  private var deaths: Map[CreatureKindId, Int] = initial.deaths
 
   def apply(s: State, effect: Effect): Unit = {
     effect match {

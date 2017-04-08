@@ -23,7 +23,7 @@ class Game(initial: GameState,
   private var fov = PlayerFov()
 
   private val messageBuilder = new MessageBuilder(() => gameState.player, () => fov.locations)
-  private val statisticsBuilder = new StatisticsBuilder()
+  private val statisticsBuilder = new StatisticsBuilder(gameState.statistics)
   private val mapBuilder = new MapBuilder(areaMap)
 
   private var (bubble, state) = createBubble(gameState.world.states(gameState.area))
@@ -39,6 +39,7 @@ class Game(initial: GameState,
 
     gameState.copy(
       maps = maps + (area -> mapBuilder.extract()),
+      statistics = statisticsBuilder.get(),
       world = world.copy(
         states = world.states + (area -> bubble.save(state))
       ))
