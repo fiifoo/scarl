@@ -2,13 +2,13 @@ import * as types from '../actions/actionTypes'
 
 const build = (data, fov = []) => {
     data.forEach(item => {
-        const x = item.location.x
-        const y = item.location.y
+        const x = item.key.x
+        const y = item.key.y
 
         if (fov[x] === undefined) {
             fov[x] = []
         }
-        fov[x][y] = item.entities
+        fov[x][y] = item.value
     })
 
     return fov

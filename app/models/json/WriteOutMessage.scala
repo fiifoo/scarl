@@ -1,12 +1,12 @@
 package models.json
 
-import io.github.fiifoo.scarl.core.Location
 import io.github.fiifoo.scarl.core.kind._
 import io.github.fiifoo.scarl.game.{LocationEntities, OutMessage, PlayerFov}
 import models.json.FormatBase._
 import models.json.FormatEntity._
 import models.json.FormatGameState.{formatAreaMap, formatStatistics}
 import models.json.FormatId._
+import models.json.FormatUtils._
 import play.api.libs.json._
 
 object WriteOutMessage {
@@ -15,16 +15,9 @@ object WriteOutMessage {
     writeOutMessage.writes(message)
   }
 
-  case class LocationData(location: Location,
-                          entities: LocationEntities
-                         )
-
-  implicit val writeLocationEntities = Json.writes[LocationEntities]
-  implicit val writeLocationData = Json.writes[LocationData]
-  implicit val writeLocationMap = new Writes[Map[Location, LocationEntities]] {
-    def writes(m: Map[Location, LocationEntities]) = Json.toJson(m map (x => LocationData(x._1, x._2)))
-  }
-  implicit val writesPlayerFov = new Writes[PlayerFov] {
+  implicit val formatLocationEntities = Json.format[LocationEntities]
+  implicit val formatLocationEntitiesMap = formatMap(formatLocation, formatLocationEntities)
+  implicit val writePlayerFov = new Writes[PlayerFov] {
     def writes(fov: PlayerFov): JsValue = JsObject(Map(
       "delta" -> Json.toJson(fov.delta),
       "shouldHide" -> Json.toJson(fov.shouldHide)
