@@ -4,7 +4,9 @@ import io.github.fiifoo.scarl.core.entity.CreatureId
 import io.github.fiifoo.scarl.core.{Location, State}
 import io.github.fiifoo.scarl.effect.DeathEffect
 
-class DeathMessage(player: () => CreatureId, fov: () => Set[Location]) {
+class DeathMessage(player: () => CreatureId,
+                   fov: () => Set[Location]
+                  ) extends MessageBuilder[DeathEffect] {
 
   def apply(s: State, effect: DeathEffect): Option[String] = {
     val target = effect.target

@@ -4,7 +4,9 @@ import io.github.fiifoo.scarl.core.entity.CreatureId
 import io.github.fiifoo.scarl.core.{Location, State}
 import io.github.fiifoo.scarl.effect.HealEffect
 
-class HealMessage(player: () => CreatureId, fov: () => Set[Location]) {
+class HealMessage(player: () => CreatureId,
+                  fov: () => Set[Location]
+                 ) extends MessageBuilder[HealEffect] {
 
   def apply(s: State, effect: HealEffect): Option[String] = {
     val target = effect.target

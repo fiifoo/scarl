@@ -4,7 +4,9 @@ import io.github.fiifoo.scarl.core.entity.CreatureId
 import io.github.fiifoo.scarl.core.{Location, State}
 import io.github.fiifoo.scarl.effect.HitEffect
 
-class HitMessage(player: () => CreatureId, fov: () => Set[Location]) {
+class HitMessage(player: () => CreatureId,
+                 fov: () => Set[Location]
+                ) extends MessageBuilder[HitEffect] {
 
   def apply(s: State, effect: HitEffect): Option[String] = {
     val bypass = effect.result.bypass

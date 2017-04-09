@@ -9,7 +9,7 @@ import io.github.fiifoo.scarl.core.kind.Kinds
 import io.github.fiifoo.scarl.core.mutation.ResetConduitEntryMutation
 import io.github.fiifoo.scarl.game.map.{MapBuilder, MapLocation}
 import io.github.fiifoo.scarl.geometry.Fov
-import io.github.fiifoo.scarl.message.MessageBuilder
+import io.github.fiifoo.scarl.message.MessageFactory
 import io.github.fiifoo.scarl.world.WorldManager
 
 import scala.annotation.tailrec
@@ -22,7 +22,7 @@ class Game(initial: GameState,
   private var gameState = initial
   private var fov = PlayerFov()
 
-  private val messageBuilder = new MessageBuilder(() => gameState.player, () => fov.locations)
+  private val messageFactory = new MessageFactory(() => gameState.player, () => fov.locations)
   private val statisticsBuilder = new StatisticsBuilder(gameState.statistics)
   private val mapBuilder = new MapBuilder(areaMap)
 
@@ -145,7 +145,7 @@ class Game(initial: GameState,
                          statistics: Option[Statistics] = None
                         ): OutMessage = {
     val area = gameState.area
-    val messages = messageBuilder.extract()
+    val messages = messageFactory.extract()
     val player = state.entities.get(gameState.player) map (_.asInstanceOf[Creature])
 
     OutMessage(area, fov, messages, player, kinds, map, statistics)
@@ -168,7 +168,7 @@ class Game(initial: GameState,
       initial = s,
       ai = RoamTactic,
       listener = new Listener(effect = new CombinedEffectListener(List(
-        messageBuilder,
+        messageFactory,
         statisticsBuilder
       )))
     )

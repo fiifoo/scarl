@@ -4,7 +4,9 @@ import io.github.fiifoo.scarl.core.entity.{CreatureId, WallId}
 import io.github.fiifoo.scarl.core.{Location, State}
 import io.github.fiifoo.scarl.effect.CollideEffect
 
-class CollideMessage(player: () => CreatureId, fov: () => Set[Location]) {
+class CollideMessage(player: () => CreatureId,
+                     fov: () => Set[Location]
+                    ) extends MessageBuilder[CollideEffect] {
 
   def apply(s: State, effect: CollideEffect): Option[String] = {
     val target = effect.target
