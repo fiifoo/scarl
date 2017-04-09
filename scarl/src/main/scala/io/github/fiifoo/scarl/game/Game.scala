@@ -1,5 +1,6 @@
 package io.github.fiifoo.scarl.game
 
+import io.github.fiifoo.scarl.action.validate.ValidateAction
 import io.github.fiifoo.scarl.ai.tactic.RoamTactic
 import io.github.fiifoo.scarl.core._
 import io.github.fiifoo.scarl.core.action.Action
@@ -29,7 +30,9 @@ class Game(initial: GameState,
   private var (bubble, state) = createBubble(gameState.world.states(gameState.area))
 
   def receive(action: Action): Unit = {
-    run(Some(action))
+    if (shouldRun(action)) {
+      run(Some(action))
+    }
   }
 
   def save(): GameState = {
@@ -153,6 +156,10 @@ class Game(initial: GameState,
 
   private def areaMap: Option[Map[Location, MapLocation]] = {
     gameState.maps.get(gameState.area)
+  }
+
+  private def shouldRun(action: Action): Boolean = {
+    !gameOver(state) && ValidateAction(state, gameState.player, action)
   }
 
   private def gameOver(s: State): Boolean = {
