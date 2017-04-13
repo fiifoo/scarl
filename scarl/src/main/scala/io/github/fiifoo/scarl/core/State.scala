@@ -2,6 +2,7 @@ package io.github.fiifoo.scarl.core
 
 import io.github.fiifoo.scarl.core.State.Stored
 import io.github.fiifoo.scarl.core.action.Tactic
+import io.github.fiifoo.scarl.core.character.{Progression, ProgressionId}
 import io.github.fiifoo.scarl.core.entity._
 import io.github.fiifoo.scarl.core.kind.Kinds
 
@@ -30,6 +31,7 @@ case class State(entities: Map[EntityId, Entity] = Map(),
                  index: State.Index = State.Index(),
                  kinds: Kinds = Kinds(),
                  nextEntityId: Int = 1,
+                 progressions: Map[ProgressionId, Progression] = Map(),
                  rng: Rng = Rng(1),
                  stored: Stored = Stored(),
                  tactics: Map[CreatureId, Tactic] = Map(),

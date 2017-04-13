@@ -6,6 +6,7 @@ import io.github.fiifoo.scarl.area.template.{FixedTemplate, RandomizedTemplate, 
 import io.github.fiifoo.scarl.area.{Area, AreaId}
 import io.github.fiifoo.scarl.core.Location
 import io.github.fiifoo.scarl.core.Rng.WeightedChoices
+import io.github.fiifoo.scarl.core.character.{Progression, ProgressionId}
 import io.github.fiifoo.scarl.core.entity.Creature.Sight
 import io.github.fiifoo.scarl.core.entity._
 import io.github.fiifoo.scarl.core.kind._
@@ -56,6 +57,30 @@ object Data {
       terrains,
       walls,
       widgets
+    )
+  }
+
+  def progressions: Map[ProgressionId, Progression] = {
+    val add = Creature.Stats(
+      health = 2,
+      attack = 1,
+      defence = 1,
+      damage = 1,
+      armor = 0,
+      sight = Sight(0)
+    )
+
+    val steps = (1 to 10)
+      .map(i => Progression.Step(Progression.Requirements(10 * i), add))
+      .toVector
+
+    val some = Progression(
+      id = ProgressionId("some"),
+      steps = steps
+    )
+
+    Map(
+      some.id -> some
     )
   }
 
@@ -157,6 +182,7 @@ object Data {
       display = '@',
       color = "yellow",
       faction = FactionId("justice"),
+      progression = Some(ProgressionId("some")),
       stats = Creature.Stats(
         health = 30,
         attack = 20,
@@ -173,6 +199,7 @@ object Data {
       display = 'A',
       color = "white",
       faction = FactionId("justice"),
+      progression = Some(ProgressionId("some")),
       stats = Creature.Stats(
         health = 1000,
         attack = 20,
@@ -189,6 +216,7 @@ object Data {
       display = 'c',
       color = "purple",
       faction = FactionId("chaos"),
+      progression = None,
       stats = Creature.Stats(
         health = 10,
         attack = 10,
@@ -205,6 +233,7 @@ object Data {
       display = 'C',
       color = "blue",
       faction = FactionId("chaos"),
+      progression = None,
       stats = Creature.Stats(
         health = 10,
         attack = 20,
@@ -221,6 +250,7 @@ object Data {
       display = 'A',
       color = "red",
       faction = FactionId("chaos"),
+      progression = None,
       stats = Creature.Stats(
         health = 50,
         attack = 30,

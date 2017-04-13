@@ -13,7 +13,8 @@ object GameUtils {
         val (area, state) = x
         val finalized = state.copy(
           index = calculateStateIndex(state),
-          kinds = manager.kinds
+          kinds = manager.kinds,
+          progressions = manager.progressions
         )
 
         (area, finalized)

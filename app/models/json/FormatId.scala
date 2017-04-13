@@ -3,6 +3,7 @@ package models.json
 import io.github.fiifoo.scarl.area.AreaId
 import io.github.fiifoo.scarl.area.template.TemplateId
 import io.github.fiifoo.scarl.core.ConduitId
+import io.github.fiifoo.scarl.core.character.ProgressionId
 import io.github.fiifoo.scarl.core.entity._
 import io.github.fiifoo.scarl.core.kind._
 import models.json.FormatUtils._
@@ -12,6 +13,7 @@ object FormatId {
   implicit val formatAreaId = formatStringId[AreaId](_.value, AreaId.apply)
   implicit val formatConduitId = formatIntId[ConduitId](_.value, ConduitId.apply)
   implicit val formatFactionId = formatStringId[FactionId](_.value, FactionId.apply)
+  implicit val formatProgressionId = formatStringId[ProgressionId](_.value, ProgressionId.apply)
   implicit val formatTemplateId = formatStringId[TemplateId](_.value, TemplateId.apply)
 
   implicit val formatCreatureKindId = formatStringId[CreatureKindId](_.value, CreatureKindId.apply)

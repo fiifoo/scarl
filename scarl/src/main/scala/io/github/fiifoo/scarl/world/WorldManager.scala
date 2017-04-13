@@ -3,6 +3,7 @@ package io.github.fiifoo.scarl.world
 import io.github.fiifoo.scarl.area.template.{ApplyTemplate, CalculateTemplate, Template, TemplateId}
 import io.github.fiifoo.scarl.area.{Area, AreaId, Conduit}
 import io.github.fiifoo.scarl.core._
+import io.github.fiifoo.scarl.core.character.{Progression, ProgressionId}
 import io.github.fiifoo.scarl.core.entity._
 import io.github.fiifoo.scarl.core.kind.{CreatureKindId, Kinds}
 import io.github.fiifoo.scarl.core.mutation.{NewEntityMutation, NewFactionMutation}
@@ -10,6 +11,7 @@ import io.github.fiifoo.scarl.core.mutation.{NewEntityMutation, NewFactionMutati
 class WorldManager(val areas: Map[AreaId, Area],
                    val factions: Map[FactionId, Faction],
                    val kinds: Kinds,
+                   val progressions: Map[ProgressionId, Progression],
                    val templates: Map[TemplateId, Template]
                   ) {
 
@@ -43,7 +45,11 @@ class WorldManager(val areas: Map[AreaId, Area],
                            rng: Rng
                           ): WorldState = {
 
-    val s0 = State(kinds = kinds, rng = rng)
+    val s0 = State(
+      kinds = kinds,
+      progressions = progressions,
+      rng = rng
+    )
     val s1 = factions.values.foldLeft(s0)((s, faction) => {
       NewFactionMutation(faction)(s)
     })

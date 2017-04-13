@@ -23,6 +23,7 @@ class GameManager(saveStorage: SaveStorage) {
     Data.areas,
     Data.factions,
     Data.kinds,
+    Data.progressions,
     Data.templates
   )
 

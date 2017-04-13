@@ -1,5 +1,6 @@
 package models.json
 
+import io.github.fiifoo.scarl.core.character.{Progression, ProgressionId}
 import io.github.fiifoo.scarl.core.entity._
 import io.github.fiifoo.scarl.core.kind.Kinds
 import io.github.fiifoo.scarl.core.{Rng, State}
@@ -15,6 +16,7 @@ object FormatState {
   implicit val formatStateIndex = formatEmpty(State.Index())
   // reset from game data
   implicit val formatStateKinds = formatEmpty(Kinds())
+  implicit val formatStateProgressions = formatEmpty[Map[ProgressionId, Progression]](Map())
   // should be empty
   implicit val formatStateTemporary = formatEmpty(State.Temporary())
 

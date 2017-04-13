@@ -12,6 +12,7 @@ class FormatWorldStateSpec extends PlaySpec {
     Data.areas,
     Data.factions,
     Data.kinds,
+    Data.progressions,
     Data.templates
   )
 

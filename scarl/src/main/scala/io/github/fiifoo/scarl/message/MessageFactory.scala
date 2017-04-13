@@ -11,6 +11,7 @@ class MessageFactory(player: () => CreatureId, fov: () => Set[Location]) extends
 
   implicit val collide = new CollideMessage(player, fov)
   implicit val death = new DeathMessage(player, fov)
+  implicit val gainLevel = new GainLevelMessage(player, fov)
   implicit val heal = new HealMessage(player, fov)
   implicit val hit = new HitMessage(player, fov)
   implicit val miss = new MissMessage(player, fov)
@@ -20,6 +21,7 @@ class MessageFactory(player: () => CreatureId, fov: () => Set[Location]) extends
     val message: Option[String] = effect match {
       case e: CollideEffect => build(s, e)
       case e: DeathEffect => build(s, e)
+      case e: GainLevelEffect => build(s, e)
       case e: HealEffect => build(s, e)
       case e: HitEffect => build(s, e)
       case e: MissEffect => build(s, e)
