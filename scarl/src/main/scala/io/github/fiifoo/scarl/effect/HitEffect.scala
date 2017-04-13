@@ -5,11 +5,16 @@ import io.github.fiifoo.scarl.core.effect.{Effect, EffectResult}
 import io.github.fiifoo.scarl.core.entity.CreatureId
 import io.github.fiifoo.scarl.rule.AttackRule.Result
 
-case class HitEffect(attacker: CreatureId, target: CreatureId, result: Result) extends Effect {
+case class HitEffect(attacker: CreatureId,
+                     target: CreatureId,
+                     result: Result,
+                     parent: Option[Effect] = None
+                    ) extends Effect {
+
   def apply(s: State): EffectResult = {
     result.damage map { damage =>
       EffectResult(
-        DamageEffect(target, damage)
+        DamageEffect(target, damage, Some(this))
       )
     } getOrElse EffectResult()
   }

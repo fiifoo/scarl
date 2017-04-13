@@ -24,10 +24,11 @@ class DamageEffectSpec extends FlatSpec with Matchers {
     val damage = 5
 
     val s = TestCreatureFactory.generate(State(), 1, TestCreatureFactory.create(health = health))
+    val effect = DamageEffect(CreatureId(1), damage)
 
-    DamageEffect(CreatureId(1), damage)(s) should ===(EffectResult(
+    effect(s) should ===(EffectResult(
       CreatureDamageMutation(CreatureId(1), damage),
-      DeathEffect(CreatureId(1))
+      DeathEffect(CreatureId(1), Some(effect))
     ))
   }
 

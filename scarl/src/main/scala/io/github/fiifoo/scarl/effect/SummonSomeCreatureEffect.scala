@@ -9,7 +9,8 @@ import io.github.fiifoo.scarl.core.{Location, State}
 
 case class SummonSomeCreatureEffect(choices: WeightedChoices[CreatureKindId],
                                     location: Location,
-                                    source: LocatableId
+                                    source: LocatableId,
+                                    parent: Option[Effect] = None
                                    ) extends Effect {
 
   def apply(s: State): EffectResult = {

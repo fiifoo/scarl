@@ -5,7 +5,10 @@ import io.github.fiifoo.scarl.core.effect.{Effect, EffectResult}
 import io.github.fiifoo.scarl.core.entity.CreatureId
 import io.github.fiifoo.scarl.core.mutation.CreatureDamageMutation
 
-case class DamageEffect(target: CreatureId, amount: Int) extends Effect {
+case class DamageEffect(target: CreatureId,
+                        amount: Int,
+                        parent: Option[Effect] = None
+                       ) extends Effect {
 
   def apply(s: State): EffectResult = {
     val creature = target(s)
@@ -15,7 +18,7 @@ case class DamageEffect(target: CreatureId, amount: Int) extends Effect {
     val mutation = CreatureDamageMutation(target, damage)
 
     if (creature.damage < health && damage >= health) {
-      EffectResult(mutation, DeathEffect(target))
+      EffectResult(mutation, DeathEffect(target, Some(this)))
     } else {
       EffectResult(mutation)
     }

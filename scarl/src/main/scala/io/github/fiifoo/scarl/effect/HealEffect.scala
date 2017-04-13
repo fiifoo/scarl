@@ -5,7 +5,10 @@ import io.github.fiifoo.scarl.core.effect.{Effect, EffectResult}
 import io.github.fiifoo.scarl.core.entity.CreatureId
 import io.github.fiifoo.scarl.core.mutation.CreatureDamageMutation
 
-case class HealEffect(target: CreatureId, amount: Int) extends Effect {
+case class HealEffect(target: CreatureId,
+                      amount: Int,
+                      parent: Option[Effect] = None
+                     ) extends Effect {
 
   def apply(s: State): EffectResult = {
     val creature = target(s)

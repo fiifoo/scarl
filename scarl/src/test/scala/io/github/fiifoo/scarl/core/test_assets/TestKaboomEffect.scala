@@ -4,7 +4,9 @@ import io.github.fiifoo.scarl.core.effect.{Effect, EffectResult}
 import io.github.fiifoo.scarl.core.entity.CreatureId
 import io.github.fiifoo.scarl.core.{Location, State}
 
-case class TestKaboomEffect(target: CreatureId) extends Effect {
+case class TestKaboomEffect(target: CreatureId,
+                            parent: Option[Effect] = None
+                           ) extends Effect {
   val damage = 9001
   val location = Location(9999, 9999)
 

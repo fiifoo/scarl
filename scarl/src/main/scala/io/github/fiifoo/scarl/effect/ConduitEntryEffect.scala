@@ -5,7 +5,11 @@ import io.github.fiifoo.scarl.core.entity.CreatureId
 import io.github.fiifoo.scarl.core.mutation.{ConduitEntryMutation, RemovableEntityMutation}
 import io.github.fiifoo.scarl.core.{ConduitId, State}
 
-case class ConduitEntryEffect(creature: CreatureId, conduit: ConduitId) extends Effect {
+case class ConduitEntryEffect(creature: CreatureId,
+                              conduit: ConduitId,
+                              parent: Option[Effect] = None
+                             ) extends Effect {
+
   def apply(s: State): EffectResult = {
     EffectResult(List(
       ConduitEntryMutation(creature, conduit),

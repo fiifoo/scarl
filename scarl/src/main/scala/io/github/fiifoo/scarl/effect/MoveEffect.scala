@@ -6,14 +6,17 @@ import io.github.fiifoo.scarl.core.entity.{CreatureId, LocatableId, WallId}
 import io.github.fiifoo.scarl.core.mutation.LocatableLocationMutation
 import io.github.fiifoo.scarl.core.{Location, State}
 
-case class MoveEffect(target: CreatureId, location: Location) extends Effect {
+case class MoveEffect(target: CreatureId,
+                      location: Location,
+                      parent: Option[Effect] = None
+                     ) extends Effect {
 
   def apply(s: State): EffectResult = {
     val obstacle = getObstacle(s)
 
     if (obstacle.isDefined) {
       EffectResult(
-        CollideEffect(target, location, obstacle.get)
+        CollideEffect(target, location, obstacle.get, Some(this))
       )
     } else {
       EffectResult(

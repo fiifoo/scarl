@@ -6,15 +6,18 @@ import io.github.fiifoo.scarl.core.entity.CreatureId
 import io.github.fiifoo.scarl.core.mutation.RngMutation
 import io.github.fiifoo.scarl.rule.AttackRule
 
-case class StrikeEffect(attacker: CreatureId, target: CreatureId) extends Effect {
+case class StrikeEffect(attacker: CreatureId,
+                        target: CreatureId,
+                        parent: Option[Effect] = None
+                       ) extends Effect {
 
   def apply(s: State): EffectResult = {
     val (result, rng) = AttackRule(s, attacker, target)
 
     val effect = if (result.hit) {
-      HitEffect(attacker, target, result)
+      HitEffect(attacker, target, result, Some(this))
     } else {
-      MissEffect(attacker, target)
+      MissEffect(attacker, target, Some(this))
     }
 
     EffectResult(

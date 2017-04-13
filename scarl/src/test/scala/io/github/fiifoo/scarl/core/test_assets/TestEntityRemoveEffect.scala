@@ -5,7 +5,9 @@ import io.github.fiifoo.scarl.core.effect.{Effect, EffectResult}
 import io.github.fiifoo.scarl.core.entity.EntityId
 import io.github.fiifoo.scarl.core.mutation.RemovableEntityMutation
 
-case class TestEntityRemoveEffect(target: EntityId) extends Effect {
+case class TestEntityRemoveEffect(target: EntityId,
+                                  parent: Option[Effect] = None
+                                 ) extends Effect {
 
   def apply(s: State): EffectResult = {
     EffectResult(RemovableEntityMutation(target))

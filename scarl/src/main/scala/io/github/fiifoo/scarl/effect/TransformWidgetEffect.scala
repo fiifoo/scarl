@@ -8,7 +8,8 @@ import io.github.fiifoo.scarl.core.mutation.{NewEntityMutation, RemovableEntityM
 
 case class TransformWidgetEffect(widget: ContainerId,
                                  to: WidgetKindId,
-                                 description: Option[String] = None
+                                 description: Option[String] = None,
+                                 parent: Option[Effect] = None
                                 ) extends Effect {
 
   def apply(s: State): EffectResult = {

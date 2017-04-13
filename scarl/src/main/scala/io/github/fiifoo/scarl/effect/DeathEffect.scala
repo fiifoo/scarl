@@ -7,7 +7,9 @@ import io.github.fiifoo.scarl.core.entity.{CreatureId, PassiveStatusId}
 import io.github.fiifoo.scarl.core.mutation.{NewEntityMutation, RemovableEntityMutation}
 import io.github.fiifoo.scarl.status.DeathStatus
 
-case class DeathEffect(target: CreatureId) extends Effect {
+case class DeathEffect(target: CreatureId,
+                       parent: Option[Effect] = None
+                      ) extends Effect {
 
   def apply(s: State): EffectResult = {
     if (getTargetStatuses(s)(target) exists (_ (s).isInstanceOf[DeathStatus])) {
