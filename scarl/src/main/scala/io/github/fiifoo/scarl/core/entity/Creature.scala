@@ -24,6 +24,7 @@ case class Creature(id: CreatureId,
                     location: Location,
                     tick: Int,
                     damage: Int,
+                    experience: Int,
                     stats: Stats
                    ) extends Entity with Actor with Locatable {
 

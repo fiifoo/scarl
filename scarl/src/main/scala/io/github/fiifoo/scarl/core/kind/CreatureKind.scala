@@ -19,6 +19,7 @@ case class CreatureKind(id: CreatureKindId,
       location = location,
       tick = s.tick,
       damage = 0,
+      experience = 0,
       stats = stats
     )
   }

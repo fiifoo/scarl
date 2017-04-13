@@ -16,8 +16,9 @@ object TestCreatureFactory {
              tick: Int = 1,
              location: Location = Location(0, 0),
              health: Int = 0,
-             damage: Int = 0
-            ): Creature = Creature(id, kind, faction, location, tick, damage, defaultStats.copy(health))
+             damage: Int = 0,
+             experience: Int = 0
+            ): Creature = Creature(id, kind, faction, location, tick, damage, experience, defaultStats.copy(health))
 
   def generate(s: State, count: Int = 1, prototype: Creature = create()): State = {
 
