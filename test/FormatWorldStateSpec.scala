@@ -10,6 +10,7 @@ class FormatWorldStateSpec extends PlaySpec {
 
   val worldManager = new WorldManager(
     Data.areas,
+    Data.communications,
     Data.factions,
     Data.kinds,
     Data.progressions,

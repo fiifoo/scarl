@@ -1,7 +1,7 @@
 package io.github.fiifoo.scarl.ai.tactic
 
 import io.github.fiifoo.scarl.action.MoveAction
-import io.github.fiifoo.scarl.ai.SeekEnemy
+import io.github.fiifoo.scarl.ai.{Greeting, SeekEnemy}
 import io.github.fiifoo.scarl.core.action.{Action, Tactic}
 import io.github.fiifoo.scarl.core.entity.{Creature, CreatureId, SafeCreatureId}
 import io.github.fiifoo.scarl.core.{Location, State}
@@ -22,9 +22,12 @@ case class RoamTactic(actor: CreatureId) extends Tactic {
   }
 
   private def roam(s: State, random: Random): Result = {
-    val from = actor(s).location
-    val to = randomLocation(from, random)
-    val action = MoveAction(to)
+    val action = Greeting(s, actor) getOrElse {
+      val from = actor(s).location
+      val to = randomLocation(from, random)
+
+      MoveAction(to)
+    }
 
     (this, action)
   }

@@ -7,6 +7,7 @@ import io.github.fiifoo.scarl.area.{Area, AreaId}
 import io.github.fiifoo.scarl.core.Location
 import io.github.fiifoo.scarl.core.Rng.WeightedChoices
 import io.github.fiifoo.scarl.core.character.{Progression, ProgressionId}
+import io.github.fiifoo.scarl.core.communication.{Communication, CommunicationId, Message}
 import io.github.fiifoo.scarl.core.entity.Creature.Sight
 import io.github.fiifoo.scarl.core.entity._
 import io.github.fiifoo.scarl.core.kind._
@@ -31,6 +32,32 @@ object Data {
     Map(
       first.id -> first,
       second.id -> second
+    )
+  }
+
+  def communications: Map[CommunicationId, Communication] = {
+    val greetJustice1 = Message(
+      id = CommunicationId("greet-justice-1"),
+      value = "I greet you. We will fight by your side."
+    )
+    val greetJustice2 = Message(
+      id = CommunicationId("greet-justice-2"),
+      value = "Justice prevails."
+    )
+    val responseJustice1 = Message(
+      id = CommunicationId("response-justice-1"),
+      value = "Let us strike at our foes."
+    )
+    val responseJustice2 = Message(
+      id = CommunicationId("response-justice-2"),
+      value = "Chaos will be undone."
+    )
+
+    Map(
+      greetJustice1.id -> greetJustice1,
+      greetJustice2.id -> greetJustice2,
+      responseJustice1.id -> responseJustice1,
+      responseJustice2.id -> responseJustice2
     )
   }
 
@@ -207,6 +234,18 @@ object Data {
         damage = 10,
         armor = 5,
         sight = Sight(5)
+      ),
+      greetings = Map(
+        FactionId("justice") -> List(
+          CommunicationId("greet-justice-1"),
+          CommunicationId("greet-justice-2")
+        )
+      ),
+      responses = Map(
+        FactionId("justice") -> List(
+          CommunicationId("response-justice-1"),
+          CommunicationId("response-justice-2")
+        )
       )
     )
 

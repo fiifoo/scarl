@@ -21,6 +21,7 @@ class GameManager(saveStorage: SaveStorage) {
 
   private val worldManager = new WorldManager(
     Data.areas,
+    Data.communications,
     Data.factions,
     Data.kinds,
     Data.progressions,

@@ -14,6 +14,18 @@ export const attack = target => dispatch => {
     })
 }
 
+export const communicate = target => dispatch => {
+    sendMessage({
+        type: 'Communicate',
+        data: {target},
+    })(dispatch)
+
+    dispatch({
+        type: types.GAME_COMMUNICATE,
+        target,
+    })
+}
+
 export const move = location => dispatch => {
     sendMessage({
         type: 'Move',

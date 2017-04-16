@@ -1,5 +1,7 @@
 package models.json
 
+import io.github.fiifoo.scarl.core.communication.CommunicationId
+import io.github.fiifoo.scarl.core.entity.FactionId
 import io.github.fiifoo.scarl.core.kind._
 import io.github.fiifoo.scarl.game.{LocationEntities, OutMessage, PlayerFov}
 import models.json.FormatBase._
@@ -22,6 +24,10 @@ object WriteOutMessage {
       "delta" -> Json.toJson(fov.delta),
       "shouldHide" -> Json.toJson(fov.shouldHide)
     ))
+  }
+
+  implicit val writeEmptyCommunications = new Writes[Map[FactionId, List[CommunicationId]]] {
+    def writes(m: Map[FactionId, List[CommunicationId]]): JsValue = JsNull
   }
 
   implicit val writeCreature = Json.writes[CreatureKind]

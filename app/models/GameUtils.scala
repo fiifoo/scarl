@@ -12,6 +12,7 @@ object GameUtils {
       states = world.states.map(x => {
         val (area, state) = x
         val finalized = state.copy(
+          communications = state.communications.copy(manager.communications),
           index = calculateStateIndex(state),
           kinds = manager.kinds,
           progressions = manager.progressions

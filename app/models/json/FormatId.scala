@@ -4,6 +4,7 @@ import io.github.fiifoo.scarl.area.AreaId
 import io.github.fiifoo.scarl.area.template.TemplateId
 import io.github.fiifoo.scarl.core.ConduitId
 import io.github.fiifoo.scarl.core.character.ProgressionId
+import io.github.fiifoo.scarl.core.communication.CommunicationId
 import io.github.fiifoo.scarl.core.entity._
 import io.github.fiifoo.scarl.core.kind._
 import models.json.FormatUtils._
@@ -11,6 +12,7 @@ import play.api.libs.json._
 
 object FormatId {
   implicit val formatAreaId = formatStringId[AreaId](_.value, AreaId.apply)
+  implicit val formatCommunicationId = formatStringId[CommunicationId](_.value, CommunicationId.apply)
   implicit val formatConduitId = formatIntId[ConduitId](_.value, ConduitId.apply)
   implicit val formatFactionId = formatStringId[FactionId](_.value, FactionId.apply)
   implicit val formatProgressionId = formatStringId[ProgressionId](_.value, ProgressionId.apply)

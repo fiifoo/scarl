@@ -1,7 +1,9 @@
 import * as types from './actionTypes'
 import * as game from './gameActions'
 
+const COMMUNICATE = 84
 const PASS = 101
+
 const DIRECTIONS = [97, 98, 99, 100, 102, 103, 104, 105]
 const DIRECTION_OFFSET = 96
 
@@ -31,6 +33,10 @@ export const keypress = event => (dispatch, getState) => {
         directionAction(code - DIRECTION_OFFSET, player, fov, dispatch)
     } else {
         switch (code) {
+            case COMMUNICATE: {
+                communicateAction(player, fov, dispatch)
+                break
+            }
             case PASS: {
                 game.pass()(dispatch)
                 break
@@ -46,11 +52,27 @@ export const keypress = event => (dispatch, getState) => {
 
 const directionAction = (direction, player, fov, dispatch) => {
     const to = getDirectionLocation(direction, player.location)
-    const enemy = getLocationEnemy(to, fov.cumulative)
-    if (enemy) {
-        game.attack(enemy.id)(dispatch)
+    const target = getLocationCreature(to, fov.cumulative)
+    if (target) {
+        game.attack(target.id)(dispatch)
     } else {
         game.move(to)(dispatch)
+    }
+}
+
+const communicateAction = (player, fov, dispatch) => {
+    for (let direction = 1; direction <= 9; direction++) {
+        if (direction === 5) {
+            continue
+        }
+
+        const to = getDirectionLocation(direction, player.location)
+        const target = getLocationCreature(to, fov.cumulative)
+
+        if (target) {
+            game.communicate(target.id)(dispatch)
+            break
+        }
     }
 }
 
@@ -59,4 +81,4 @@ const getDirectionLocation = (d, {x, y}) => ({
     y: isNorth(d) ? y - 1 : (isSouth(d) ? y + 1 : y),
 })
 
-const getLocationEnemy = (l, f) => f[l.x] && f[l.x][l.y] ? f[l.x][l.y].creature : undefined
+const getLocationCreature = (l, f) => f[l.x] && f[l.x][l.y] ? f[l.x][l.y].creature : undefined

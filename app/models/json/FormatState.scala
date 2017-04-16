@@ -1,6 +1,8 @@
 package models.json
 
+import io.github.fiifoo.scarl.core.State.Communications
 import io.github.fiifoo.scarl.core.character.{Progression, ProgressionId}
+import io.github.fiifoo.scarl.core.communication.{Communication, CommunicationId}
 import io.github.fiifoo.scarl.core.entity._
 import io.github.fiifoo.scarl.core.kind.Kinds
 import io.github.fiifoo.scarl.core.{Rng, State}
@@ -15,14 +17,17 @@ object FormatState {
   // recalculated
   implicit val formatStateIndex = formatEmpty(State.Index())
   // reset from game data
+  implicit val formatStateCommunicationsData = formatEmpty[Map[CommunicationId, Communication]](Map())
   implicit val formatStateKinds = formatEmpty(Kinds())
   implicit val formatStateProgressions = formatEmpty[Map[ProgressionId, Progression]](Map())
   // should be empty
   implicit val formatStateTemporary = formatEmpty(State.Temporary())
 
   implicit val formatActorIdList = formatList(formatActorId)
+  implicit val formatCreatureCommunications = formatMap(formatCreatureId, implicitly[Format[Set[CommunicationId]]])
   implicit val formatFaction = Json.format[Faction]
 
+  implicit val formatStateCommunications = Json.format[Communications]
   implicit val formatStateConduits = formatMap(formatConduitId, formatLocation)
   implicit val formatStateFactions = formatMap(formatFactionId, formatFaction)
   implicit val formatStateRng = Json.format[Rng]
