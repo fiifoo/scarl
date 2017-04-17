@@ -2,32 +2,55 @@ package io.github.fiifoo.scarl.ai.tactic
 
 import io.github.fiifoo.scarl.action.MoveAction
 import io.github.fiifoo.scarl.core.action.{Action, Tactic}
-import io.github.fiifoo.scarl.core.entity.{CreatureId, SafeCreatureId}
-import io.github.fiifoo.scarl.core.{Location, Rng, State}
+import io.github.fiifoo.scarl.core.entity.{Creature, CreatureId, SafeCreatureId}
+import io.github.fiifoo.scarl.core.{Location, State}
 import io.github.fiifoo.scarl.geometry.{Line, Los, Path}
 
-case class PursueTactic(actor: CreatureId, target: SafeCreatureId, destination: Location) extends Tactic {
+import scala.util.Random
 
-  def apply(s: State, rng: Rng): (Tactic, Action, Rng) = {
+case class PursueTactic(actor: CreatureId,
+                        target: SafeCreatureId,
+                        destination: Location
+                       ) extends Tactic {
+  type Result = (Tactic, Action)
+
+  def apply(s: State, random: Random): Result = {
     target(s) flatMap (target => {
-      val location = actor(s).location
-      val line = Line(location, target.location)
-      val range = actor(s).stats.sight.range
+      pursueOrCharge(s, random, target)
+    }) getOrElse {
+      roam(s, random)
+    }
+  }
 
-      if (line.size <= range + 1 && Los(s)(line)) {
+  private def pursueOrCharge(s: State, random: Random, target: Creature): Option[Result] = {
+    val location = actor(s).location
+    val line = Line(location, target.location)
+    val range = actor(s).stats.sight.range
 
-        val charge = ChargeTactic(actor, SafeCreatureId(target.id), target.location)
-        Some(charge(s, rng))
+    if (line.size <= range + 1 && Los(s)(line)) {
+      charge(s, random, target)
+    } else if (location != destination) {
+      pursue(s, target)
+    } else {
+      None
+    }
+  }
 
-      } else if (location != destination) {
+  private def pursue(s: State, target: Creature): Option[Result] = {
+    Path(s)(actor(s).location, destination) map (path => {
+      val action = MoveAction(path.head)
 
-        val moveOption = Path(s)(location, destination) map (path => MoveAction(path.head))
-        moveOption map ((this, _, rng))
+      (this, action)
+    })
+  }
 
-      } else {
-        None
-      }
+  private def charge(s: State, random: Random, target: Creature): Option[Result] = {
+    val tactic = ChargeTactic(actor, SafeCreatureId(target.id), target.location)
 
-    }) getOrElse RoamTactic(actor)(s, rng)
+    Some(tactic(s, random))
+  }
+
+  private def roam(s: State, random: Random): Result = {
+    RoamTactic(actor)(s, random)
   }
 }

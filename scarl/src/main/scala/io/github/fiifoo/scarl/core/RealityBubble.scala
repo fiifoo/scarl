@@ -65,10 +65,12 @@ class RealityBubble(actors: ActorQueue,
                             ): (List[Effect], State) = {
 
     action map (_ (s, actor) -> s) getOrElse {
-      val (tactic, action, rng) = s.tactics.get(actor) map (_ (s, s.rng)) getOrElse ai(actor)(s, s.rng)
-      val mutated = TacticMutation(tactic)(RngMutation(rng)(s))
+      val (random, nextRng) = s.rng()
+      val (tactic, action) = s.tactics.get(actor) map (_ (s, random)) getOrElse ai(actor)(s, random)
 
-      (action(mutated, actor), mutated)
+      val nextState = TacticMutation(tactic)(RngMutation(nextRng)(s))
+
+      (action(nextState, actor), nextState)
     }
   }
 
