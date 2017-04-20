@@ -8,9 +8,3 @@ export const PING = 'PING'
 
 export const FOCUS_KEYBOARD = 'FOCUS_KEYBOARD'
 export const BLUR_KEYBOARD = 'BLUR_KEYBOARD'
-export const KEYPRESS = 'KEYPRESS'
-
-export const GAME_ATTACK = 'GAME_ATTACK'
-export const GAME_COMMUNICATE = 'GAME_COMMUNICATE'
-export const GAME_MOVE = 'GAME_MOVE'
-export const GAME_PASS = 'GAME_PASS'

@@ -1,5 +1,3 @@
-import * as types from './actionTypes'
-
 import { sendMessage } from './connectionActions'
 
 export const attack = target => dispatch => {
@@ -7,11 +5,6 @@ export const attack = target => dispatch => {
         type: 'Attack',
         data: {target},
     })(dispatch)
-
-    dispatch({
-        type: types.GAME_ATTACK,
-        target,
-    })
 }
 
 export const communicate = target => dispatch => {
@@ -19,11 +12,6 @@ export const communicate = target => dispatch => {
         type: 'Communicate',
         data: {target},
     })(dispatch)
-
-    dispatch({
-        type: types.GAME_COMMUNICATE,
-        target,
-    })
 }
 
 export const move = location => dispatch => {
@@ -31,11 +19,6 @@ export const move = location => dispatch => {
         type: 'Move',
         data: {location},
     })(dispatch)
-
-    dispatch({
-        type: types.GAME_MOVE,
-        location,
-    })
 }
 
 export const pass = () => dispatch => {
@@ -43,8 +26,4 @@ export const pass = () => dispatch => {
         type: 'Pass',
         data: {},
     })(dispatch)
-
-    dispatch({
-        type: types.GAME_PASS,
-    })
 }
