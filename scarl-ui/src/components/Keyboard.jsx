@@ -22,7 +22,7 @@ class Keyboard extends Component {
 
         const keypress = event => {
             event.preventDefault()
-            if (this.props.connection && ! this.props.gameOver) {
+            if (this.props.game.started && ! this.props.game.over) {
                 this.props.keypress(event)
             }
         }

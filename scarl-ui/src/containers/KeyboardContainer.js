@@ -4,8 +4,7 @@ import Keyboard from '../components/Keyboard.jsx'
 
 const KeyboardContainer = connect(
     state => ({
-        connection: state.connection,
-        gameOver: state.gameOver,
+        game: state.game,
         keyboardFocused: state.ui.keyboardFocused,
     }),
     {

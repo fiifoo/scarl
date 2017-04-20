@@ -2,7 +2,6 @@ import * as types from './actionTypes'
 import WebSocket from '../utils/WebSocket'
 
 import { log } from '../utils/debug'
-import { pass } from './gameActions'
 
 let connection = null
 
@@ -50,13 +49,5 @@ export const sendMessage = data => dispatch => {
     dispatch({
         type: types.SEND_MESSAGE,
         data,
-    })
-}
-
-export const ping = () => dispatch => {
-    pass()(dispatch)
-
-    dispatch({
-        type: types.PING,
     })
 }

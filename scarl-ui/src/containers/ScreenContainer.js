@@ -1,16 +1,16 @@
 import { connect } from 'react-redux'
 import { focusKeyboard } from '../actions/keyboardActions'
-import View from '../components/View.jsx'
+import Screen from '../components/Screen.jsx'
 
-const ViewContainer = connect(
+const ScreenContainer = connect(
     state => ({
         area: state.area,
-        connection: state.connection,
         fov: state.fov,
+        game: state.game,
         kinds: state.kinds,
         map: state.map,
     }),
     {focusKeyboard}
-)(View)
+)(Screen)
 
-export default ViewContainer
+export default ScreenContainer

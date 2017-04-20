@@ -2,7 +2,7 @@ import { combineReducers } from 'redux'
 import area from './area'
 import connection from './connection'
 import fov from './fov'
-import gameOver from './gameOver'
+import game from './game'
 import kinds from './kinds'
 import map from './map'
 import messages from './messages'
@@ -14,7 +14,7 @@ export default combineReducers({
     area,
     connection,
     fov,
-    gameOver,
+    game,
     kinds,
     map,
     messages,

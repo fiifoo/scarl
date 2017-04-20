@@ -3,8 +3,7 @@ import Game from '../components/Game.jsx'
 
 const GameContainer = connect(
     state => ({
-        connection: state.connection,
-        gameOver: state.gameOver,
+        game: state.game,
     })
 )(Game)
 

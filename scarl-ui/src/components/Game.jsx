@@ -3,11 +3,11 @@ import KeyboardContainer from '../containers/KeyboardContainer'
 import MessageBarContainer from '../containers/MessageBarContainer'
 import MessageLogContainer from '../containers/MessageLogContainer'
 import PlayerInfoContainer from '../containers/PlayerInfoContainer'
+import ScreenContainer from '../containers/ScreenContainer'
 import StatisticsContainer from '../containers/StatisticsContainer'
-import ViewContainer from '../containers/ViewContainer'
 
-const Game = ({connection, gameOver}) => ! connection ? <div></div> : (
-    gameOver ? (
+const Game = ({game}) => ! game.started ? <div></div> : (
+    game.over ? (
         <div>
             <h3>Your journey is over</h3>
             <StatisticsContainer />
@@ -18,7 +18,7 @@ const Game = ({connection, gameOver}) => ! connection ? <div></div> : (
         <div>
             <KeyboardContainer />
             <MessageBarContainer />
-            <ViewContainer />
+            <ScreenContainer />
             <PlayerInfoContainer />
             <MessageLogContainer />
         </div>

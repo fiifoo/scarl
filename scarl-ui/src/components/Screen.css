@@ -1,11 +1,11 @@
-table.view {
+table.screen {
     background-color: #000;
     color: lightgray;
     font-size: 14px;
     font-family: "Lucida Console", Monospace;
 }
 
-table.view td {
+table.screen td {
     padding: 0px;
     width: 17px;
     height: 17px;

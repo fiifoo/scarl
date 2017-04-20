@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Connection = ({closeConnection, closingConnection, connection, gameOver, openConnection, openingConnection, ping}) => (
+const Connection = ({closeConnection, closingConnection, connection, openConnection, openingConnection}) => (
     <div className="btn-toolbar">
         <button
             type="button"
@@ -14,12 +14,6 @@ const Connection = ({closeConnection, closingConnection, connection, gameOver, o
             onClick={closeConnection}
             disabled={! connection || closingConnection}
             >Disconnect</button>
-        <button
-            type="button"
-            className="btn btn-default navbar-btn"
-            onClick={ping}
-            disabled={! connection || closingConnection || gameOver}
-            >Ping</button>
     </div>
 )
 
