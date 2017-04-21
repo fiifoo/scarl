@@ -23,7 +23,12 @@ class Screen extends Component {
             if (nextProps.area !== this.props.area) {
                 this.screen.reset(nextProps.map)
             }
-            this.screen.update(nextProps.fov)
+
+            if (nextProps.cursor !== this.props.cursor) {
+                this.screen.updateCursor(nextProps.cursor, this.props.cursor)
+            } else {
+                this.screen.update(nextProps.fov)
+            }
         }
     }
 

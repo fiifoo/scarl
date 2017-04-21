@@ -4,9 +4,9 @@ import Connection from '../components/Connection.jsx'
 
 const ConnectionContainer = connect(
     state => ({
-        closingConnection: state.ui.closingConnection,
+        closingConnection: state.ui.main.closingConnection,
         connection: state.connection,
-        openingConnection: state.ui.openingConnection
+        openingConnection: state.ui.main.openingConnection
     }), {
         closeConnection,
         openConnection,

@@ -1,13 +1,13 @@
 import { Record } from 'immutable'
-import * as types from '../actions/actionTypes'
+import * as types from '../../actions/actionTypes'
 
-const Ui = Record({
+const initial = Record({
     closingConnection: false,
     openingConnection: false,
     keyboardFocused: false,
-})
+})()
 
-export default (state = Ui(), action) => {
+export default (state = initial, action) => {
     switch (action.type) {
         case types.OPEN_CONNECTION: {
             return state.set('openingConnection', true)

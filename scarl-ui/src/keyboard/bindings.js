@@ -1,8 +1,9 @@
 import { Map } from 'immutable'
 import * as commands from './commands'
 import * as keycodes from './keycodes'
+import * as gameModes from '../game/modes'
 
-export const directions = Map([
+const directions = Map([
     [keycodes.ARROW_LEFT, commands.DIRECTION_WEST],
     [keycodes.ARROW_UP, commands.DIRECTION_NORTH],
     [keycodes.ARROW_RIGHT, commands.DIRECTION_EAST],
@@ -18,8 +19,16 @@ export const directions = Map([
     [keycodes.NUMPAD_9, commands.DIRECTION_NORTH_EAST],
 ])
 
-export const main = Map([
-    [keycodes.T, commands.COMMUNICATE],
-    [keycodes.ENTER, commands.PASS],
-    [keycodes.NUMPAD_5, commands.PASS],
-]).merge(directions)
+export default {
+    [gameModes.MAIN]: Map([
+        [keycodes.ENTER, commands.PASS],
+        [keycodes.NUMPAD_5, commands.PASS],
+        [keycodes.L, commands.LOOK],
+        [keycodes.T, commands.COMMUNICATE],
+    ]).merge(directions),
+
+    [gameModes.LOOK]: Map([
+        [keycodes.ESC, commands.CANCEL_MODE],
+        [keycodes.L, commands.CANCEL_MODE],
+    ]).merge(directions),
+}

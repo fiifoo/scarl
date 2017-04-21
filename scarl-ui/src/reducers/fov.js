@@ -14,6 +14,16 @@ const build = (data, fov = []) => {
     return fov
 }
 
+const buildCumulative = (data, cumulative) => {
+    build(data.delta, cumulative)
+
+    data.shouldHide.forEach(l => {
+        cumulative[l.x][l.y].creature = undefined
+    })
+
+    return cumulative
+}
+
 const initial = {
     cumulative: [],
     delta: [],
@@ -28,7 +38,7 @@ export default (state = initial, action) => {
         case types.RECEIVE_MESSAGE: {
             const data = action.data.fov
             return {
-                cumulative: build(data.delta, state.cumulative), // mutates state!
+                cumulative: buildCumulative(data, state.cumulative), // mutates state!
                 delta: build(data.delta),
                 shouldHide: data.shouldHide,
             }

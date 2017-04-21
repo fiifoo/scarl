@@ -51,6 +51,31 @@ export default (element, kinds) => {
         })
     }
 
+    const updateCursor = (next, previous) => {
+        if (previous !== null) {
+            hideCursor(previous)
+        }
+        if (next !== null) {
+            showCursor(next)
+        }
+    }
+
+    const showCursor = location => {
+        const cell = getCell(location)
+
+        if (cell !== null) {
+            cell.className = 'cursor'
+        }
+    }
+
+    const hideCursor = location => {
+        const cell = getCell(location)
+
+        if (cell !== null) {
+            cell.className = ''
+        }
+    }
+
     const renderCell = (cell, entities, visible = true) => {
         if (visible && entities.creature) {
             renderEntity(cell, entities.creature, kinds.creatures)
@@ -93,9 +118,18 @@ export default (element, kinds) => {
         cell.innerHTML = '.'
     }
 
+    const getCell = ({x, y}) => {
+        if (element.rows[y] !== undefined && element.rows[y].cells[x] !== undefined) {
+            return element.rows[y].cells[x]
+        } else {
+            return null
+        }
+    }
+
     return {
         build,
         reset,
-        update
+        update,
+        updateCursor,
     }
 }

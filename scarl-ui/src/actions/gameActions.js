@@ -1,29 +1,24 @@
-import { sendMessage } from './connectionActions'
+import * as modes from '../game/modes'
+import * as types from './actionTypes'
 
-export const attack = target => dispatch => {
-    sendMessage({
-        type: 'Attack',
-        data: {target},
-    })(dispatch)
+export const look = () => (dispatch, getState) => {
+    const {player} = getState()
+
+    setCursorLocation(player.location)(dispatch)
+    changeMode(modes.LOOK)(dispatch)
 }
 
-export const communicate = target => dispatch => {
-    sendMessage({
-        type: 'Communicate',
-        data: {target},
-    })(dispatch)
+export const cancelMode = () => dispatch => {
+    setCursorLocation(null)(dispatch)
+    changeMode(modes.MAIN)(dispatch)
 }
 
-export const move = location => dispatch => {
-    sendMessage({
-        type: 'Move',
-        data: {location},
-    })(dispatch)
-}
+export const setCursorLocation = location => dispatch => dispatch({
+    type: types.SET_CURSOR_LOCATION,
+    location,
+})
 
-export const pass = () => dispatch => {
-    sendMessage({
-        type: 'Pass',
-        data: {},
-    })(dispatch)
-}
+const changeMode = mode => dispatch => dispatch({
+    type: types.CHANGE_GAME_MODE,
+    mode,
+})

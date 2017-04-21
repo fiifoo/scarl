@@ -6,10 +6,25 @@ table.screen {
 }
 
 table.screen td {
+    border-bottom: 1px solid transparent;
     padding: 0px;
     width: 17px;
     height: 17px;
     line-height: 17px;
     vertical-align: middle;
     text-align: center;
+}
+
+table.screen td.cursor {
+    border-bottom-color: lightgray;
+    animation: 0.75s blink-cursor step-start infinite;
+}
+
+@keyframes blink-cursor {
+    from, to {
+        border-bottom-color: transparent;
+    }
+    50% {
+        border-bottom-color: lightgray;
+    }
 }
