@@ -1,4 +1,4 @@
-import { getAdjacentLocations, getLocationCreature } from '../../game/utils'
+import { getLocationCreature } from '../../game/utils'
 import * as commands from '../../keyboard/commands'
 import { isDirectionCommand, getDirectionLocation } from '../../keyboard/utils'
 import * as gameActions from '../gameActions'
@@ -15,7 +15,7 @@ export default (command, dispatch, getState) => {
 
     switch (command) {
         case commands.COMMUNICATE: {
-            communicateAction(player, fov, dispatch)
+            playerActions.communicate()(dispatch, getState)
             break
         }
         case commands.LOOK: {
@@ -26,19 +26,6 @@ export default (command, dispatch, getState) => {
             playerActions.pass()(dispatch)
             break
         }
-    }
-}
-
-const communicateAction = (player, fov, dispatch) => {
-    let target = undefined
-    getAdjacentLocations(player.location).forEach(location => {
-        if (target === undefined) {
-            target = getLocationCreature(location, fov.cumulative)
-        }
-    })
-
-    if (target) {
-        playerActions.communicate(target.id)(dispatch)
     }
 }
 

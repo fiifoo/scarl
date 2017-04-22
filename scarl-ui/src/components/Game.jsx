@@ -1,10 +1,13 @@
 import React from 'react'
+import ActionBarContainer from '../containers/ActionBarContainer'
 import KeyboardContainer from '../containers/KeyboardContainer'
 import MessageBarContainer from '../containers/MessageBarContainer'
 import MessageLogContainer from '../containers/MessageLogContainer'
 import PlayerInfoContainer from '../containers/PlayerInfoContainer'
 import ScreenContainer from '../containers/ScreenContainer'
 import StatisticsContainer from '../containers/StatisticsContainer'
+
+const Spacer = () => <div>&nbsp;</div>
 
 const Game = ({game}) => ! game.started ? <div></div> : (
     game.over ? (
@@ -20,6 +23,9 @@ const Game = ({game}) => ! game.started ? <div></div> : (
             <MessageBarContainer />
             <ScreenContainer />
             <PlayerInfoContainer />
+            <Spacer />
+            <ActionBarContainer />
+            <Spacer />
             <MessageLogContainer />
         </div>
     )

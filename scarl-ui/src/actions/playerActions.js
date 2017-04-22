@@ -1,3 +1,4 @@
+import { getAdjacentLocations, getLocationCreature } from '../game/utils'
 import { sendMessage } from './connectionActions'
 
 export const attack = target => dispatch => {
@@ -7,13 +8,18 @@ export const attack = target => dispatch => {
     })(dispatch)
 }
 
-export const communicate = target => dispatch => {
-    sendMessage({
-        type: 'Communicate',
-        data: {target},
-    })(dispatch)
-}
+export const communicate = () => (dispatch, getState) => {
+    const {player, fov} = getState()
+    const target = findCommunicateTarget(player, fov)
 
+    if (target) {
+        sendMessage({
+            type: 'Communicate',
+            data: {target},
+        })(dispatch)
+    }
+
+}
 export const move = location => dispatch => {
     sendMessage({
         type: 'Move',
@@ -26,4 +32,15 @@ export const pass = () => dispatch => {
         type: 'Pass',
         data: {},
     })(dispatch)
+}
+
+const findCommunicateTarget = (player, fov) => {
+    let target = undefined
+    getAdjacentLocations(player.location).forEach(location => {
+        if (target === undefined) {
+            target = getLocationCreature(location, fov.cumulative)
+        }
+    })
+
+    return target !== undefined ? target.id : undefined
 }
