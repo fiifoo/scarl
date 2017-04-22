@@ -24,7 +24,14 @@ const TalkButton = ({communicate}) => (
         >Talk</button>
 )
 
-const ActionBar = ({mode, cancelMode, communicate, focusKeyboard, look}) =>  {
+const MessageLogButton = ({toggleMessageLog}) => (
+    <button
+        className={className}
+        onClick={toggleMessageLog}
+        >Message log</button>
+)
+
+const ActionBar = ({mode, cancelMode, communicate, focusKeyboard, look, toggleMessageLog}) =>  {
 
     const wrap = action => () => {
         action()
@@ -39,6 +46,7 @@ const ActionBar = ({mode, cancelMode, communicate, focusKeyboard, look}) =>  {
         <div className="btn-toolbar">
             <LookButton mode={mode} cancelMode={cancelMode} look={look} />
             <TalkButton communicate={communicate} />
+            <MessageLogButton toggleMessageLog={toggleMessageLog} />
         </div>
     )
 }

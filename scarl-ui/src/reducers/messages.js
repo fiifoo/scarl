@@ -1,6 +1,8 @@
 import { List } from 'immutable'
 import * as types from '../actions/actionTypes'
 
+const MAX = 100
+
 const initial = {
     latest: List(),
     all: List(),
@@ -16,7 +18,7 @@ export default (state = initial, action) => {
 
             return {
                 latest: messages,
-                all: state.all.concat(messages)
+                all: state.all.concat(messages).take(MAX)
             }
         }
         default: {

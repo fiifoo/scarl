@@ -19,14 +19,13 @@ const Game = ({game}) => ! game.started ? <div></div> : (
         </div>
     ) : (
         <div>
+            <MessageLogContainer />
             <KeyboardContainer />
             <MessageBarContainer />
             <ScreenContainer />
             <PlayerInfoContainer />
             <Spacer />
             <ActionBarContainer />
-            <Spacer />
-            <MessageLogContainer />
         </div>
     )
 )
