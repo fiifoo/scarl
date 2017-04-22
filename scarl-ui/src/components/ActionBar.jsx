@@ -31,7 +31,14 @@ const MessageLogButton = ({toggleMessageLog}) => (
         >Message log</button>
 )
 
-const ActionBar = ({mode, cancelMode, communicate, focusKeyboard, look, toggleMessageLog}) =>  {
+const KeyBindingsButton = ({toggleKeyBindings}) => (
+    <button
+        className={className}
+        onClick={toggleKeyBindings}
+        >Key bindings</button>
+)
+
+const ActionBar = ({mode, cancelMode, communicate, focusKeyboard, look, toggleKeyBindings, toggleMessageLog}) =>  {
 
     const wrap = action => () => {
         action()
@@ -47,6 +54,7 @@ const ActionBar = ({mode, cancelMode, communicate, focusKeyboard, look, toggleMe
             <LookButton mode={mode} cancelMode={cancelMode} look={look} />
             <TalkButton communicate={communicate} />
             <MessageLogButton toggleMessageLog={toggleMessageLog} />
+            <KeyBindingsButton toggleKeyBindings={toggleKeyBindings} />
         </div>
     )
 }

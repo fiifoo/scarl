@@ -1,5 +1,6 @@
 import React from 'react'
 import ActionBarContainer from '../containers/ActionBarContainer'
+import KeyBindingsContainer from '../containers/KeyBindingsContainer'
 import KeyboardContainer from '../containers/KeyboardContainer'
 import MessageBarContainer from '../containers/MessageBarContainer'
 import MessageLogContainer from '../containers/MessageLogContainer'
@@ -19,8 +20,11 @@ const Game = ({game}) => ! game.started ? <div></div> : (
         </div>
     ) : (
         <div>
-            <MessageLogContainer />
             <KeyboardContainer />
+
+            <MessageLogContainer />
+            <KeyBindingsContainer />
+
             <MessageBarContainer />
             <ScreenContainer />
             <PlayerInfoContainer />
