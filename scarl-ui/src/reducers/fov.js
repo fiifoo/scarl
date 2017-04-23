@@ -24,22 +24,30 @@ const buildCumulative = (data, cumulative) => {
     return cumulative
 }
 
-const initial = {
+const getInitial = () => ({
+    area: null,
     cumulative: [],
     delta: [],
     shouldHide: [],
-}
+})
 
-export default (state = initial, action) => {
+export default (state = getInitial(), action) => {
     switch (action.type) {
         case types.CONNECTION_CLOSED: {
-            return initial
+            return getInitial()
         }
         case types.RECEIVE_MESSAGE: {
+            const area = action.data.area
             const data = action.data.fov
+
+            if (state.area !== area) {
+                state = getInitial()
+            }
+
             return {
-                cumulative: buildCumulative(data, state.cumulative), // mutates state!
+                area,
                 delta: build(data.delta),
+                cumulative: buildCumulative(data, state.cumulative), // mutates state!
                 shouldHide: data.shouldHide,
             }
         }
