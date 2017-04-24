@@ -1,6 +1,8 @@
 package io.github.fiifoo.scarl.core.mutation
 
 import io.github.fiifoo.scarl.ai.tactic.RoamTactic
+import io.github.fiifoo.scarl.core.State.Communications
+import io.github.fiifoo.scarl.core.communication.CommunicationId
 import io.github.fiifoo.scarl.core.entity._
 import io.github.fiifoo.scarl.core.kind.ItemKindId
 import io.github.fiifoo.scarl.core.test_assets.{TestActiveStatus, TestCreatureFactory, TestTriggerStatus}
@@ -24,6 +26,23 @@ class RemoveEntitiesMutationSpec extends FlatSpec with Matchers {
     mutated.entities.get(creature2).isEmpty should ===(false)
     mutated.entities.get(creature3).isEmpty should ===(true)
     mutated.tmp.removableEntities should ===(List())
+  }
+
+  it should "remove creature received communications" in {
+    val initial = TestCreatureFactory.generate(
+      State(
+        tmp = State.Temporary(removableEntities = List(CreatureId(1), CreatureId(3))),
+        communications = Communications(received = Map(
+          CreatureId(1) -> Set(CommunicationId("some")),
+          CreatureId(2) -> Set(CommunicationId("some")),
+          CreatureId(3) -> Set(CommunicationId("some"), CommunicationId("other"))
+        ))
+      ),
+      3
+    )
+
+    val mutated = RemoveEntitiesMutation()(initial)
+    mutated.communications.received should ===(Map(CreatureId(2) -> Set(CommunicationId("some"))))
   }
 
   it should "remove creature tactics" in {

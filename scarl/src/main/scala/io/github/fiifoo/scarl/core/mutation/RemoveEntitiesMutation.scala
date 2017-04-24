@@ -1,5 +1,6 @@
 package io.github.fiifoo.scarl.core.mutation
 
+import io.github.fiifoo.scarl.core.State.Communications
 import io.github.fiifoo.scarl.core._
 import io.github.fiifoo.scarl.core.action.Tactic
 import io.github.fiifoo.scarl.core.entity._
@@ -16,10 +17,19 @@ case class RemoveEntitiesMutation() extends Mutation {
     })
 
     s.copy(
+      communications = mutateCommunications(s.communications, removable),
       entities = s.entities -- removable,
       index = index,
       tactics = mutateTactics(s.tactics, removable),
       tmp = s.tmp.copy(removableEntities = List())
+    )
+  }
+
+  private def mutateCommunications(communications: Communications, removable: List[EntityId]): Communications = {
+    val creatures = removable collect { case c: CreatureId => c }
+
+    communications.copy(
+      received = communications.received -- creatures
     )
   }
 
