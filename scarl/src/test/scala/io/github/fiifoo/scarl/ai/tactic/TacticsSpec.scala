@@ -21,7 +21,7 @@ class TacticsSpec extends FlatSpec with Matchers {
     initial = initial,
     ai = (actor: CreatureId) => actor match {
       case CreatureId(1) => RoamTactic(CreatureId(1))
-      case CreatureId(2) => TestPassTactic(CreatureId(2))
+      case _ => TestPassTactic(CreatureId(2))
     }
   )
 

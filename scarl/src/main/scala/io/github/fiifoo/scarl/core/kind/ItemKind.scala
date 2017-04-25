@@ -1,12 +1,17 @@
 package io.github.fiifoo.scarl.core.kind
 
 import io.github.fiifoo.scarl.core.entity._
+import io.github.fiifoo.scarl.core.equipment.{Armor, Shield, Weapon}
 import io.github.fiifoo.scarl.core.{Location, State}
 
 case class ItemKind(id: ItemKindId,
                     name: String,
                     display: Char,
-                    color: String
+                    color: String,
+                    pickable: Boolean = false,
+                    armor: Option[Armor] = None,
+                    shield: Option[Shield] = None,
+                    weapon: Option[Weapon] = None
                    ) extends Kind {
 
   def apply(s: State, container: EntityId): Item = {
@@ -23,7 +28,11 @@ case class ItemKind(id: ItemKindId,
     val item = Item(
       id = ItemId(s.nextEntityId + 1),
       kind = id,
-      container = container.id
+      container = container.id,
+      pickable = pickable,
+      armor = armor,
+      shield = shield,
+      weapon = weapon
     )
 
     (container, item)

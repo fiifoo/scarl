@@ -9,7 +9,7 @@ import io.github.fiifoo.scarl.core.{Location, State}
 
 object TestCreatureFactory {
 
-  val defaultStats = Stats(0, 1000, 10, 10, 0, Sight(5))
+  val defaultStats = Stats(attack = 1000, defence = 10, damage = 10, sight = Sight(5))
   val defaultKind = CreatureKind(
     id = CreatureKindId("creature"),
     name = "Creature",

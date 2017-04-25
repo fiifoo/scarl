@@ -5,6 +5,7 @@ import io.github.fiifoo.scarl.core.action.Tactic
 import io.github.fiifoo.scarl.core.character.{Progression, ProgressionId}
 import io.github.fiifoo.scarl.core.communication.{Communication, CommunicationId}
 import io.github.fiifoo.scarl.core.entity._
+import io.github.fiifoo.scarl.core.equipment.Slot
 import io.github.fiifoo.scarl.core.kind.Kinds
 
 object State {
@@ -14,6 +15,7 @@ object State {
                            )
 
   case class Index(containerItems: Map[EntityId, Set[ItemId]] = Map(),
+                   equipmentStats: Map[CreatureId, Creature.Stats] = Map(),
                    factionMembers: Map[FactionId, Set[CreatureId]] = Map(),
                    locationEntities: Map[Location, Set[LocatableId]] = Map(),
                    locationTriggers: Map[Location, Set[TriggerStatusId]] = Map(),
@@ -32,6 +34,7 @@ object State {
 case class State(entities: Map[EntityId, Entity] = Map(),
                  communications: Communications = Communications(),
                  conduits: Map[ConduitId, Location] = Map(),
+                 equipments: Map[CreatureId, Map[Slot, ItemId]] = Map(),
                  factions: Map[FactionId, Faction] = Map(),
                  gateways: Set[Location] = Set(),
                  index: State.Index = State.Index(),

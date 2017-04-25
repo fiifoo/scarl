@@ -4,7 +4,7 @@ import * as types from './actionTypes'
 export const look = () => (dispatch, getState) => {
     const {player} = getState()
 
-    setCursorLocation(player.location)(dispatch)
+    setCursorLocation(player.creature.location)(dispatch)
     changeMode(modes.LOOK)(dispatch)
 }
 

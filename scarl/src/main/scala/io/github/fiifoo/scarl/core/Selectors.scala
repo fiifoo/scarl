@@ -8,6 +8,10 @@ object Selectors {
     s.index.containerItems.getOrElse(container, Set())
   }
 
+  def getEquipmentStats(s: State)(creature: CreatureId): Creature.Stats = {
+    s.index.equipmentStats.getOrElse(creature, Creature.Stats())
+  }
+
   def getLocationEntities(s: State)(location: Location): Set[LocatableId] = {
     s.index.locationEntities.getOrElse(location, Set())
   }

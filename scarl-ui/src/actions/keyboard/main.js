@@ -1,4 +1,4 @@
-import { getLocationCreature } from '../../game/utils'
+import { getLocationCreature, getLocationPickableItems } from '../../game/utils'
 import * as commands from '../../keyboard/commands'
 import { isDirectionCommand, getDirectionLocation } from '../../keyboard/utils'
 import * as gameActions from '../gameActions'
@@ -30,12 +30,21 @@ export default (command, dispatch, getState) => {
 }
 
 const directionAction = (command, player, fov, dispatch) => {
-    const to = getDirectionLocation(command, player.location)
+    const to = getDirectionLocation(command, player.creature.location)
     const target = getLocationCreature(to, fov.cumulative)
 
     if (target) {
         playerActions.attack(target.id)(dispatch)
     } else {
-        playerActions.move(to)(dispatch)
+        // testing
+        const items = getLocationPickableItems(to, fov.cumulative)
+        if (items.length > 0) {
+            const item = items[0]
+            playerActions.move(to)(dispatch)
+            playerActions.pickItem(item.id)(dispatch)
+            playerActions.equipItem(item.id, 'MainHand')(dispatch)
+        } else {
+            playerActions.move(to)(dispatch)
+        }
     }
 }

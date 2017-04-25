@@ -1,7 +1,7 @@
 package models
 
 import io.github.fiifoo.scarl.core.State
-import io.github.fiifoo.scarl.core.mutation.index.NewEntityIndexMutation
+import io.github.fiifoo.scarl.core.mutation.index.{EquipmentStatsIndexMutation, NewEntityIndexMutation}
 import io.github.fiifoo.scarl.world.{WorldManager, WorldState}
 
 object GameUtils {
@@ -24,8 +24,14 @@ object GameUtils {
   }
 
   private def calculateStateIndex(s: State): State.Index = {
-    s.entities.values.foldLeft(s.index)((index, entity) => {
+    val index = s.entities.values.foldLeft(s.index)((index, entity) => {
       NewEntityIndexMutation(entity)(s, index)
     })
+
+    val equipmentStats = s.equipments.keys.foldLeft(index.equipmentStats)((stats, creature) => {
+      EquipmentStatsIndexMutation(creature)(s, stats)
+    })
+
+    index.copy(equipmentStats = equipmentStats)
   }
 }

@@ -4,42 +4,56 @@ import io.github.fiifoo.scarl.core.State.Communications
 import io.github.fiifoo.scarl.core._
 import io.github.fiifoo.scarl.core.action.Tactic
 import io.github.fiifoo.scarl.core.entity._
+import io.github.fiifoo.scarl.core.equipment.Slot
 import io.github.fiifoo.scarl.core.mutation.index._
 
+/**
+  * Clears references to removed entities
+  *
+  * Warning: removing equipped item directly without unequipping it first is not supported
+  */
 case class RemoveEntitiesMutation() extends Mutation {
   type Tactics = Map[CreatureId, Tactic]
+  type Equipments = Map[CreatureId, Map[Slot, ItemId]]
 
   def apply(s: State): State = {
     val removable = s.tmp.removableEntities
 
-    val index = removable.foldLeft(s.index)((index, entity) => {
-      mutateIndex(s, index, entity(s))
-    })
-
     s.copy(
       communications = mutateCommunications(s.communications, removable),
       entities = s.entities -- removable,
-      index = index,
+      equipments = mutateEquipments(s.equipments, removable),
+      index = mutateIndex(s, removable),
       tactics = mutateTactics(s.tactics, removable),
       tmp = s.tmp.copy(removableEntities = List())
     )
   }
 
   private def mutateCommunications(communications: Communications, removable: List[EntityId]): Communications = {
-    val creatures = removable collect { case c: CreatureId => c }
-
     communications.copy(
-      received = communications.received -- creatures
+      received = communications.received -- collectCreatures(removable)
     )
   }
 
-  private def mutateTactics(tactics: Tactics, removable: List[EntityId]): Tactics = {
-    val creatures = removable collect { case c: CreatureId => c }
-
-    tactics -- creatures
+  private def mutateEquipments(equipments: Equipments, removable: List[EntityId]): Equipments = {
+    equipments -- collectCreatures(removable)
   }
 
-  private def mutateIndex(s: State, index: State.Index, entity: Entity): State.Index = {
+  private def mutateTactics(tactics: Tactics, removable: List[EntityId]): Tactics = {
+    tactics -- collectCreatures(removable)
+  }
+
+  private def mutateIndex(s: State, removable: List[EntityId]): State.Index = {
+    val index = removable.foldLeft(s.index)((index, entity) => {
+      mutateSingleIndex(s, index, entity(s))
+    })
+
+    index.copy(
+      equipmentStats = index.equipmentStats -- collectCreatures(removable)
+    )
+  }
+
+  private def mutateSingleIndex(s: State, index: State.Index, entity: Entity): State.Index = {
     index.copy(
       containerItems = entity match {
         case item: Item => ItemContainerIndexRemoveMutation(item.id, item.container)(index.containerItems)
@@ -62,5 +76,9 @@ case class RemoveEntitiesMutation() extends Mutation {
         case _ => index.targetStatuses
       }
     )
+  }
+
+  private def collectCreatures(removable: List[EntityId]): List[CreatureId] = {
+    removable collect { case c: CreatureId => c }
   }
 }

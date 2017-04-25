@@ -17,6 +17,12 @@ export const getLocationCreature = (location, fov) => {
     return entities ? entities.creature : undefined
 }
 
+export const getLocationPickableItems = (location, fov) => {
+    const entities = getLocationEntities(location, fov)
+
+    return entities ? entities.items.filter(item => item.pickable) : undefined
+}
+
 export const getLocationDescriptions = (location, fov, map, kinds) => {
     const content = getLocationKinds(location, fov, map)
 

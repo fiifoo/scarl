@@ -7,12 +7,12 @@ import io.github.fiifoo.scarl.core.kind.CreatureKindId
 
 object Creature {
 
-  case class Stats(health: Int,
-                   attack: Int,
-                   defence: Int,
-                   damage: Int,
-                   armor: Int,
-                   sight: Sight
+  case class Stats(health: Int = 0,
+                   attack: Int = 0,
+                   defence: Int = 0,
+                   damage: Int = 0,
+                   armor: Int = 0,
+                   sight: Sight = Sight()
                   ) {
 
     def add(stats: Stats): Stats = {
@@ -27,7 +27,7 @@ object Creature {
     }
   }
 
-  case class Sight(range: Int) {
+  case class Sight(range: Int = 0) {
     def add(sight: Sight): Sight = {
       copy(range + sight.range)
     }

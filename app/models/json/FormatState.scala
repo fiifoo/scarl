@@ -8,6 +8,7 @@ import io.github.fiifoo.scarl.core.kind.Kinds
 import io.github.fiifoo.scarl.core.{Rng, State}
 import models.json.FormatBase._
 import models.json.FormatEntities._
+import models.json.FormatEquipment.formatSlot
 import models.json.FormatId._
 import models.json.FormatTactic._
 import models.json.FormatUtils._
@@ -29,6 +30,7 @@ object FormatState {
 
   implicit val formatStateCommunications = Json.format[Communications]
   implicit val formatStateConduits = formatMap(formatConduitId, formatLocation)
+  implicit val formatEquipments = formatMap(formatCreatureId, formatMap(formatSlot, formatItemId))
   implicit val formatStateFactions = formatMap(formatFactionId, formatFaction)
   implicit val formatStateRng = Json.format[Rng]
   implicit val formatStateTactics = formatMap(formatCreatureId, formatTactic)

@@ -2,12 +2,14 @@ package io.github.fiifoo.scarl.game
 
 import io.github.fiifoo.scarl.action.validate.ValidateAction
 import io.github.fiifoo.scarl.ai.tactic.RoamTactic
+import io.github.fiifoo.scarl.core.Selectors.{getContainerItems, getEquipmentStats}
 import io.github.fiifoo.scarl.core._
 import io.github.fiifoo.scarl.core.action.Action
 import io.github.fiifoo.scarl.core.effect.CombinedEffectListener
 import io.github.fiifoo.scarl.core.entity.Creature
 import io.github.fiifoo.scarl.core.kind.Kinds
 import io.github.fiifoo.scarl.core.mutation.ResetConduitEntryMutation
+import io.github.fiifoo.scarl.game.OutMessage.PlayerInfo
 import io.github.fiifoo.scarl.game.map.{MapBuilder, MapLocation}
 import io.github.fiifoo.scarl.geometry.Fov
 import io.github.fiifoo.scarl.message.MessageFactory
@@ -149,7 +151,14 @@ class Game(initial: GameState,
                         ): OutMessage = {
     val area = gameState.area
     val messages = messageFactory.extract()
-    val player = state.entities.get(gameState.player) map (_.asInstanceOf[Creature])
+    val player = state.entities.get(gameState.player) collect {
+      case creature: Creature => PlayerInfo(
+        creature = creature,
+        equipments = state.equipments.getOrElse(creature.id, Map()),
+        equipmentStats = getEquipmentStats(state)(creature.id),
+        inventory = getContainerItems(state)(creature.id) map (_ (state))
+      )
+    }
 
     OutMessage(area, fov, messages, player, kinds, map, statistics)
   }

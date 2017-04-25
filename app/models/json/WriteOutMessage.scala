@@ -3,9 +3,11 @@ package models.json
 import io.github.fiifoo.scarl.core.communication.CommunicationId
 import io.github.fiifoo.scarl.core.entity.FactionId
 import io.github.fiifoo.scarl.core.kind._
+import io.github.fiifoo.scarl.game.OutMessage.PlayerInfo
 import io.github.fiifoo.scarl.game.{LocationEntities, OutMessage, PlayerFov}
 import models.json.FormatBase._
 import models.json.FormatEntity._
+import models.json.FormatEquipment._
 import models.json.FormatGameState.{formatAreaMap, formatStatistics}
 import models.json.FormatId._
 import models.json.FormatUtils._
@@ -42,6 +44,9 @@ object WriteOutMessage {
       "walls" -> Json.toJson(k.walls.values)
     ))
   }
+
+  implicit val formatEquipments = formatMap(formatSlot, formatItemId)
+  implicit val writePlayerInfo = Json.writes[PlayerInfo]
 
   implicit val writeOutMessage = Json.writes[OutMessage]
 }

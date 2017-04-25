@@ -18,8 +18,15 @@ export const communicate = () => (dispatch, getState) => {
             data: {target},
         })(dispatch)
     }
-
 }
+
+export const equipItem = (item, slot) => dispatch => {
+    sendMessage({
+        type: 'EquipItem',
+        data: {item, slot},
+    })(dispatch)
+}
+
 export const move = location => dispatch => {
     sendMessage({
         type: 'Move',
@@ -34,9 +41,16 @@ export const pass = () => dispatch => {
     })(dispatch)
 }
 
+export const pickItem = item => dispatch => {
+    sendMessage({
+        type: 'PickItem',
+        data: {item},
+    })(dispatch)
+}
+
 const findCommunicateTarget = (player, fov) => {
     let target = undefined
-    getAdjacentLocations(player.location).forEach(location => {
+    getAdjacentLocations(player.creature.location).forEach(location => {
         if (target === undefined) {
             target = getLocationCreature(location, fov.cumulative)
         }
