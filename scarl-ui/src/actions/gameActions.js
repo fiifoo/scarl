@@ -18,6 +18,10 @@ export const setCursorLocation = location => dispatch => dispatch({
     location,
 })
 
+export const toggleInventory = () => dispatch => dispatch({
+    type: types.TOGGLE_INVENTORY,
+})
+
 const changeMode = mode => dispatch => dispatch({
     type: types.CHANGE_GAME_MODE,
     mode,

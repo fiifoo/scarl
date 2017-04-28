@@ -16,5 +16,7 @@ export const NUMPAD_9 = 105
 export const ENTER = 13
 export const ESC = 27
 
+export const I = 73
 export const L = 76
+export const P = 80
 export const T = 84

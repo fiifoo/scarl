@@ -1,4 +1,4 @@
-import { getAdjacentLocations, getLocationCreature } from '../game/utils'
+import { getAdjacentLocations, getLocationCreature, getLocationPickableItems } from '../game/utils'
 import { sendMessage } from './connectionActions'
 
 export const attack = target => dispatch => {
@@ -41,11 +41,19 @@ export const pass = () => dispatch => {
     })(dispatch)
 }
 
-export const pickItem = item => dispatch => {
-    sendMessage({
-        type: 'PickItem',
-        data: {item},
-    })(dispatch)
+export const pickItem = () => (dispatch, getState) => {
+    const {player, fov} = getState()
+    const location = player.creature.location
+    const items = getLocationPickableItems(location, fov.cumulative)
+
+    if (items.length > 0) {
+        const item = items[0].id
+
+        sendMessage({
+            type: 'PickItem',
+            data: {item},
+        })(dispatch)
+    }
 }
 
 const findCommunicateTarget = (player, fov) => {

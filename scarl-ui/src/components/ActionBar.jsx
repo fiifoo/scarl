@@ -17,11 +17,25 @@ const LookButton = ({mode, cancelMode, look}) => {
     )
 }
 
+const PickItemButton = ({pickItem}) => (
+    <button
+        className={className}
+        onClick={pickItem}
+        >Pick item</button>
+)
+
 const TalkButton = ({communicate}) => (
     <button
         className={className}
         onClick={communicate}
         >Talk</button>
+)
+
+const InventoryButton = ({toggleInventory}) => (
+    <button
+        className={className}
+        onClick={toggleInventory}
+        >Inventory</button>
 )
 
 const MessageLogButton = ({toggleMessageLog}) => (
@@ -38,21 +52,23 @@ const KeyBindingsButton = ({toggleKeyBindings}) => (
         >Key bindings</button>
 )
 
-const ActionBar = ({mode, cancelMode, communicate, focusKeyboard, look, toggleKeyBindings, toggleMessageLog}) =>  {
+const ActionBar = props =>  {
+    const {mode} = props
+    const {cancelMode, focusKeyboard} = props
+    const {communicate, look, pickItem} = props
+    const {toggleInventory, toggleKeyBindings, toggleMessageLog} = props
 
     const wrap = action => () => {
         action()
         focusKeyboard()
     }
 
-    cancelMode = wrap(cancelMode)
-    communicate = wrap(communicate)
-    look = wrap(look)
-
     return (
         <div className="btn-toolbar">
-            <LookButton mode={mode} cancelMode={cancelMode} look={look} />
-            <TalkButton communicate={communicate} />
+            <LookButton mode={mode} cancelMode={wrap(cancelMode)} look={wrap(look)} />
+            <PickItemButton pickItem={wrap(pickItem)} />
+            <TalkButton communicate={wrap(communicate)} />
+            <InventoryButton toggleInventory={toggleInventory} />
             <MessageLogButton toggleMessageLog={toggleMessageLog} />
             <KeyBindingsButton toggleKeyBindings={toggleKeyBindings} />
         </div>

@@ -23,7 +23,9 @@ export default {
     [gameModes.MAIN]: Map([
         [keycodes.ENTER, commands.PASS],
         [keycodes.NUMPAD_5, commands.PASS],
+        [keycodes.I, commands.INVENTORY],
         [keycodes.L, commands.LOOK],
+        [keycodes.P, commands.PICK_ITEM],
         [keycodes.T, commands.COMMUNICATE],
     ]).merge(directions),
 
