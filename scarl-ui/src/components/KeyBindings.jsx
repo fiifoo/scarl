@@ -1,6 +1,6 @@
 import { Map } from 'immutable'
 import React from 'react'
-import { Modal, Tab, Tabs } from 'react-bootstrap'
+import { Tab, Tabs } from 'react-bootstrap'
 import * as modes from '../game/modes'
 import * as keycodes from '../keyboard/keycodes'
 import bindings from '../keyboard/bindings'
@@ -15,7 +15,7 @@ const sorter = (a, b) => keycodeNames.get(a) < keycodeNames.get(b) ? -1 : 1
 const Bindings = ({bindings}) => {
 
     const renderBinding = (command, keycode) => (
-        <tr>
+        <tr key={keycode}>
             <td>{humanize(keycodeNames.get(keycode))}</td>
             <td>{humanize(command)}</td>
         </tr>
@@ -24,13 +24,13 @@ const Bindings = ({bindings}) => {
     return (
         <table className="table table-condensed table-striped" style={{marginTop: '1em'}}>
             <tbody>
-                {bindings.sortBy(sortMapper, sorter).map(renderBinding)}
+                {bindings.sortBy(sortMapper, sorter).map(renderBinding).toArray()}
             </tbody>
         </table>
     )
 }
 
-const KeyBindings = ({visible, focusKeyboard, toggle}) =>  {
+const KeyBindings = () =>  {
 
     const renderMode = mode => (
         <Tab key={mode} eventKey={mode} title={humanize(mode)}>
@@ -39,16 +39,9 @@ const KeyBindings = ({visible, focusKeyboard, toggle}) =>  {
     )
 
     return (
-        <Modal show={visible} onHide={toggle} onExited={focusKeyboard}>
-            <Modal.Header closeButton>
-                <Modal.Title>Key bindings</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-                <Tabs id="key-bindings-tabs" bsStyle="pills">
-                    {Map(modes).map(renderMode)}
-                </Tabs>
-            </Modal.Body>
-        </Modal>
+        <Tabs id="key-bindings-tabs" bsStyle="pills">
+            {Map(modes).map(renderMode).toArray()}
+        </Tabs>
     )
 }
 

@@ -11,6 +11,7 @@ export const openConnection = () => dispatch => {
     })
 
     const onMessage = data => {
+        log('Received')
         dispatch({
             type: types.RECEIVE_MESSAGE,
             data,
