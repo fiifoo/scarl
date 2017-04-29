@@ -9,7 +9,7 @@ const ScreenContainer = connect(
         fov: state.fov,
         game: state.game,
         kinds: state.kinds,
-        map: state.map,
+        map: state.map.locations,
     }),
     {focusKeyboard}
 )(Screen)

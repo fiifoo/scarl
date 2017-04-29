@@ -16,13 +16,24 @@ const build = data => {
     return map
 }
 
-export default (state = [], action) => {
+const initial = {
+    area: null,
+    locations: [],
+}
+
+export default (state = initial, action) => {
     switch (action.type) {
         case types.CONNECTION_CLOSED: {
-            return []
+            return initial
         }
         case types.RECEIVE_MESSAGE: {
-            return action.data.map ? build(action.data.map) : state
+            const area = action.data.area
+            const data = action.data.map
+
+            return state.area !== area || data ? ({
+                area,
+                locations: data ? build(data) : [],
+            }) : state
         }
         default: {
             return state

@@ -10,7 +10,7 @@ const getMessages = state => {
         case modes.LOOK: {
             const location = state.ui.game.cursor
             const fov = state.fov.cumulative
-            const map = state.map
+            const map = state.map.locations
             const kinds = state.kinds
 
             return getLocationDescriptions(location, fov, map, kinds)
