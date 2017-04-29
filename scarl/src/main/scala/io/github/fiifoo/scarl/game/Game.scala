@@ -83,7 +83,7 @@ class Game(initial: GameState,
   }
 
   private def switchArea(conduit: ConduitId, player: Creature): Unit = {
-    val (nextWorld, nextArea, nextPlayer) = worldManager.switchArea(
+    val (nextWorld, nextArea) = worldManager.switchArea(
       gameState.world,
       gameState.area,
       bubble.save(state),
@@ -93,7 +93,7 @@ class Game(initial: GameState,
     val (nextBubble, nextState) = createBubble(nextWorld.states(nextArea))
     val nextMaps = gameState.maps + (gameState.area -> mapBuilder.extract(gameState.maps.get(nextArea)))
 
-    gameState = gameState.copy(area = nextArea, maps = nextMaps, player = nextPlayer, world = nextWorld)
+    gameState = gameState.copy(area = nextArea, maps = nextMaps, world = nextWorld)
     bubble = nextBubble
     state = nextState
     fov = PlayerFov()

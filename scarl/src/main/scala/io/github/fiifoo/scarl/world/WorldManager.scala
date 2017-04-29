@@ -30,27 +30,30 @@ class WorldManager(val areas: Map[AreaId, Area],
                  currentState: State,
                  conduit: ConduitId,
                  player: Creature
-                ): (WorldState, AreaId, CreatureId) = {
+                ): (WorldState, AreaId) = {
 
     val currentWorld = world.copy(states = world.states + (currentArea -> currentState))
     val nextArea = getConduitExit(world.conduits(conduit), currentArea)
     val nextWorld = if (world.states.get(nextArea).isDefined) {
-      currentWorld
+      reloadArea(currentWorld, nextArea, currentState.nextEntityId)
     } else {
-      generateArea(currentWorld, nextArea, currentState.rng)
+      generateArea(currentWorld, nextArea, currentState.rng, currentState.nextEntityId)
     }
+    val finalWorld = addConduitTraveler(nextWorld, nextArea, conduit, player)
 
-    addConduitTraveler(nextWorld, nextArea, conduit, player)
+    (finalWorld, nextArea)
   }
 
   private def generateArea(world: WorldState,
                            area: AreaId,
-                           rng: Rng
+                           rng: Rng,
+                           nextEntityId: Int = 1
                           ): WorldState = {
 
     val s0 = State(
       communications = Communications(communications),
       kinds = kinds,
+      nextEntityId = nextEntityId,
       progressions = progressions,
       rng = rng
     )
@@ -71,6 +74,14 @@ class WorldManager(val areas: Map[AreaId, Area],
       states = world.states + (area -> state),
       conduits = world.conduits ++ (out map (c => (c.id, c))).toMap,
       nextConduitId = nextConduitId
+    )
+  }
+
+  private def reloadArea(world: WorldState, area: AreaId, nextEntityId: Int): WorldState = {
+    val state = world.states(area).copy(nextEntityId = nextEntityId)
+
+    world.copy(
+      states = world.states + (area -> state)
     )
   }
 
@@ -112,31 +123,27 @@ class WorldManager(val areas: Map[AreaId, Area],
       states = world.states + (area -> nextState)
     )
 
-    (
-      nextWorld,
-      creature.id
-    )
+    (nextWorld, creature.id)
   }
 
   private def addConduitTraveler(world: WorldState,
                                  area: AreaId,
                                  conduit: ConduitId,
                                  traveler: Creature
-                                ): (WorldState, AreaId, CreatureId) = {
+                                ): WorldState = {
     val state = world.states(area)
     val location = state.conduits(conduit)
-    val travelerId = CreatureId(state.nextEntityId)
 
-    val nextState = NewEntityMutation(traveler.copy(
-      id = CreatureId(state.nextEntityId),
-      location = location,
-      tick = state.tick
-    ))(state)
+    val nextState = NewEntityMutation(
+      entity = traveler.copy(
+        location = location,
+        tick = state.tick
+      ),
+      existing = true
+    )(state)
 
-    val nextWorld = world.copy(
+    world.copy(
       states = world.states + (area -> nextState)
     )
-
-    (nextWorld, area, travelerId)
   }
 }
