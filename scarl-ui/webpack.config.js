@@ -1,4 +1,3 @@
-var webpack = require('webpack')
 var ExtractTextPlugin = require('extract-text-webpack-plugin')
 
 module.exports = {
@@ -20,11 +19,6 @@ module.exports = {
     },
     plugins: [
         new ExtractTextPlugin('index.css'),
-        new webpack.DefinePlugin({
-            'process.env': {
-                NODE_ENV: JSON.stringify('production')
-            }
-        }),
     ],
     devServer: {
         port: 80
