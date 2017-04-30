@@ -1,5 +1,6 @@
 package io.github.fiifoo.scarl.core.mutation
 
+import io.github.fiifoo.scarl.core.Selectors.{getContainerItems, getTargetStatuses}
 import io.github.fiifoo.scarl.core.State
 import io.github.fiifoo.scarl.core.entity.EntityId
 
@@ -10,11 +11,17 @@ case class RemovableEntityMutation(id: EntityId) extends Mutation {
       return s
     }
 
-    val items = s.index.containerItems.getOrElse(id, List())
-    val statuses = s.index.targetStatuses.getOrElse(id, List())
-
-    s.copy(tmp = s.tmp.copy(
-      removableEntities = id :: s.tmp.removableEntities ++ items ++ statuses
+    var result = s.copy(tmp = s.tmp.copy(
+      removableEntities = s.tmp.removableEntities + id
     ))
+
+    result = getContainerItems(s)(id).foldLeft(result)((s, item) => {
+      RemovableEntityMutation(item)(s)
+    })
+    result = getTargetStatuses(s)(id).foldLeft(result)((s, status) => {
+      RemovableEntityMutation(status)(s)
+    })
+
+    result
   }
 }

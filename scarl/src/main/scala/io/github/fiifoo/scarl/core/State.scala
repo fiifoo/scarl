@@ -27,7 +27,7 @@ object State {
 
   case class Temporary(addedActors: List[ActorId] = List(),
                        conduitEntry: Option[(ConduitId, Traveler)] = None,
-                       removableEntities: List[EntityId] = List()
+                       removableEntities: Set[EntityId] = Set()
                       )
 
 }

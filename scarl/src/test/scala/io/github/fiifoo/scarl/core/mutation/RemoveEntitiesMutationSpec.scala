@@ -14,7 +14,7 @@ class RemoveEntitiesMutationSpec extends FlatSpec with Matchers {
 
   "RemoveEntitiesMutation" should "remove entities" in {
     val initial = TestCreatureFactory.generate(
-      State(tmp = State.Temporary(removableEntities = List(CreatureId(1), CreatureId(3)))),
+      State(tmp = State.Temporary(removableEntities = Set(CreatureId(1), CreatureId(3)))),
       3
     )
     val creature1 = CreatureId(1)
@@ -26,13 +26,13 @@ class RemoveEntitiesMutationSpec extends FlatSpec with Matchers {
     mutated.entities.get(creature1).isEmpty should ===(true)
     mutated.entities.get(creature2).isEmpty should ===(false)
     mutated.entities.get(creature3).isEmpty should ===(true)
-    mutated.tmp.removableEntities should ===(List())
+    mutated.tmp.removableEntities should ===(Set())
   }
 
   it should "remove creature received communications" in {
     val initial = TestCreatureFactory.generate(
       State(
-        tmp = State.Temporary(removableEntities = List(CreatureId(1), CreatureId(3))),
+        tmp = State.Temporary(removableEntities = Set(CreatureId(1), CreatureId(3))),
         communications = Communications(received = Map(
           CreatureId(1) -> Set(CommunicationId("some")),
           CreatureId(2) -> Set(CommunicationId("some")),
@@ -49,7 +49,7 @@ class RemoveEntitiesMutationSpec extends FlatSpec with Matchers {
   it should "remove creature equipments" in {
     val initial = TestCreatureFactory.generate(
       State(
-        tmp = State.Temporary(removableEntities = List(CreatureId(1), CreatureId(3))),
+        tmp = State.Temporary(removableEntities = Set(CreatureId(1), CreatureId(3))),
         equipments = Map(
           CreatureId(1) -> Map(),
           CreatureId(2) -> Map(MainHand -> ItemId(10)),
@@ -69,7 +69,7 @@ class RemoveEntitiesMutationSpec extends FlatSpec with Matchers {
     val tactic3 = RoamTactic(CreatureId(3))
     val initial = TestCreatureFactory.generate(
       State(
-        tmp = State.Temporary(removableEntities = List(CreatureId(1), CreatureId(3))),
+        tmp = State.Temporary(removableEntities = Set(CreatureId(1), CreatureId(3))),
         tactics = Map(CreatureId(1) -> tactic1, CreatureId(2) -> tactic2, CreatureId(3) -> tactic3)
       ),
       3
@@ -81,7 +81,7 @@ class RemoveEntitiesMutationSpec extends FlatSpec with Matchers {
 
   it should "mutate entity location index" in {
     val initial = TestCreatureFactory.generate(
-      State(tmp = State.Temporary(removableEntities = List(CreatureId(1), CreatureId(3)))),
+      State(tmp = State.Temporary(removableEntities = Set(CreatureId(1), CreatureId(3)))),
       3
     )
 
@@ -91,7 +91,7 @@ class RemoveEntitiesMutationSpec extends FlatSpec with Matchers {
 
   it should "mutate status target index" in {
     val initial = TestCreatureFactory.generate(
-      State(tmp = State.Temporary(removableEntities = List(ActiveStatusId(3))))
+      State(tmp = State.Temporary(removableEntities = Set(ActiveStatusId(3))))
     )
     val status1 = TestActiveStatus(ActiveStatusId(2), initial.tick, CreatureId(1))
     val status2 = TestActiveStatus(ActiveStatusId(3), initial.tick, CreatureId(1))
@@ -102,7 +102,7 @@ class RemoveEntitiesMutationSpec extends FlatSpec with Matchers {
 
   it should "mutate item container index" in {
     val initial = TestCreatureFactory.generate(
-      State(tmp = State.Temporary(removableEntities = List(ItemId(3))))
+      State(tmp = State.Temporary(removableEntities = Set(ItemId(3))))
     )
     val item1 = Item(ItemId(2), ItemKindId("item"), CreatureId(1))
     val item2 = Item(ItemId(3), ItemKindId("item"), CreatureId(1))
@@ -114,7 +114,7 @@ class RemoveEntitiesMutationSpec extends FlatSpec with Matchers {
   it should "mutate faction member index" in {
     val faction = FactionId("them")
     val initial = TestCreatureFactory.generate(
-      State(tmp = State.Temporary(removableEntities = List(CreatureId(1), CreatureId(3)))),
+      State(tmp = State.Temporary(removableEntities = Set(CreatureId(1), CreatureId(3)))),
       3,
       TestCreatureFactory.create(faction = faction)
     )
@@ -130,7 +130,7 @@ class RemoveEntitiesMutationSpec extends FlatSpec with Matchers {
     val s1 = TestTriggerStatus(TriggerStatusId(3), c1.id)
     val s2 = TestTriggerStatus(TriggerStatusId(4), c2.id)
     val initial = NewEntityMutation(s2)(NewEntityMutation(s1)(NewEntityMutation(c2)(NewEntityMutation(c1)(State(
-      tmp = State.Temporary(removableEntities = List(s1.id))
+      tmp = State.Temporary(removableEntities = Set(s1.id))
     )))))
 
     val mutated = RemoveEntitiesMutation()(initial)
@@ -139,7 +139,7 @@ class RemoveEntitiesMutationSpec extends FlatSpec with Matchers {
 
   it should "throw exception if entity does not exist" in {
     intercept[Exception] {
-      RemoveEntitiesMutation()(State(tmp = State.Temporary(removableEntities = List(CreatureId(1)))))
+      RemoveEntitiesMutation()(State(tmp = State.Temporary(removableEntities = Set(CreatureId(1)))))
     }
   }
 }

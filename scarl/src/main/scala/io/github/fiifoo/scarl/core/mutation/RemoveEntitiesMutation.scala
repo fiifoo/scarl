@@ -25,25 +25,25 @@ case class RemoveEntitiesMutation() extends Mutation {
       equipments = mutateEquipments(s.equipments, removable),
       index = mutateIndex(s, removable),
       tactics = mutateTactics(s.tactics, removable),
-      tmp = s.tmp.copy(removableEntities = List())
+      tmp = s.tmp.copy(removableEntities = Set())
     )
   }
 
-  private def mutateCommunications(communications: Communications, removable: List[EntityId]): Communications = {
+  private def mutateCommunications(communications: Communications, removable: Set[EntityId]): Communications = {
     communications.copy(
       received = communications.received -- collectCreatures(removable)
     )
   }
 
-  private def mutateEquipments(equipments: Equipments, removable: List[EntityId]): Equipments = {
+  private def mutateEquipments(equipments: Equipments, removable: Set[EntityId]): Equipments = {
     equipments -- collectCreatures(removable)
   }
 
-  private def mutateTactics(tactics: Tactics, removable: List[EntityId]): Tactics = {
+  private def mutateTactics(tactics: Tactics, removable: Set[EntityId]): Tactics = {
     tactics -- collectCreatures(removable)
   }
 
-  private def mutateIndex(s: State, removable: List[EntityId]): State.Index = {
+  private def mutateIndex(s: State, removable: Set[EntityId]): State.Index = {
     val index = removable.foldLeft(s.index)((index, entity) => {
       mutateSingleIndex(s, index, entity(s))
     })
@@ -78,7 +78,7 @@ case class RemoveEntitiesMutation() extends Mutation {
     )
   }
 
-  private def collectCreatures(removable: List[EntityId]): List[CreatureId] = {
+  private def collectCreatures(removable: Set[EntityId]): Set[CreatureId] = {
     removable collect { case c: CreatureId => c }
   }
 }
