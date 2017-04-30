@@ -1,7 +1,7 @@
 package models.json
 
-import io.github.fiifoo.scarl.area.{Area, AreaId, Conduit}
-import io.github.fiifoo.scarl.world.WorldState
+import io.github.fiifoo.scarl.area.{Area, AreaId}
+import io.github.fiifoo.scarl.world.{Conduit, WorldState}
 import models.json.FormatId._
 import models.json.FormatState._
 import models.json.FormatUtils._

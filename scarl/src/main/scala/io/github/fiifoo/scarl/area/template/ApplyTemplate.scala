@@ -1,11 +1,12 @@
 package io.github.fiifoo.scarl.area.template
 
-import io.github.fiifoo.scarl.area.Conduit
 import io.github.fiifoo.scarl.core.entity.{Entity, TriggerStatusId}
 import io.github.fiifoo.scarl.core.kind._
 import io.github.fiifoo.scarl.core.mutation.{NewConduitMutation, NewEntityMutation, NewGatewayMutation}
-import io.github.fiifoo.scarl.core.{ConduitId, Location, Rng, State}
+import io.github.fiifoo.scarl.core.world.ConduitId
+import io.github.fiifoo.scarl.core.{Location, Rng, State}
 import io.github.fiifoo.scarl.status.TriggeredConduitStatus
+import io.github.fiifoo.scarl.world.Conduit
 
 import scala.util.Random
 

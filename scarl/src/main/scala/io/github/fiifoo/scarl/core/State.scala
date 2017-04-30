@@ -7,6 +7,7 @@ import io.github.fiifoo.scarl.core.communication.{Communication, CommunicationId
 import io.github.fiifoo.scarl.core.entity._
 import io.github.fiifoo.scarl.core.equipment.Slot
 import io.github.fiifoo.scarl.core.kind.Kinds
+import io.github.fiifoo.scarl.core.world.ConduitId
 
 object State {
 

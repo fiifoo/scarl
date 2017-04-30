@@ -1,7 +1,7 @@
 package io.github.fiifoo.scarl.world
 
 import io.github.fiifoo.scarl.area.template.{ApplyTemplate, CalculateTemplate, Template, TemplateId}
-import io.github.fiifoo.scarl.area.{Area, AreaId, Conduit}
+import io.github.fiifoo.scarl.area.{Area, AreaId}
 import io.github.fiifoo.scarl.core.State.Communications
 import io.github.fiifoo.scarl.core._
 import io.github.fiifoo.scarl.core.character.{Progression, ProgressionId}
@@ -9,6 +9,7 @@ import io.github.fiifoo.scarl.core.communication.{Communication, CommunicationId
 import io.github.fiifoo.scarl.core.entity._
 import io.github.fiifoo.scarl.core.kind.{CreatureKindId, Kinds}
 import io.github.fiifoo.scarl.core.mutation.{NewEntityMutation, NewFactionMutation}
+import io.github.fiifoo.scarl.core.world.ConduitId
 
 class WorldManager(val areas: Map[AreaId, Area],
                    val communications: Map[CommunicationId, Communication],

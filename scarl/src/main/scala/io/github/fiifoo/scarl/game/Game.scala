@@ -9,6 +9,7 @@ import io.github.fiifoo.scarl.core.effect.CombinedEffectListener
 import io.github.fiifoo.scarl.core.entity.Creature
 import io.github.fiifoo.scarl.core.kind.Kinds
 import io.github.fiifoo.scarl.core.mutation.ResetConduitEntryMutation
+import io.github.fiifoo.scarl.core.world.ConduitId
 import io.github.fiifoo.scarl.game.OutMessage.PlayerInfo
 import io.github.fiifoo.scarl.game.map.{MapBuilder, MapLocation}
 import io.github.fiifoo.scarl.geometry.Fov
