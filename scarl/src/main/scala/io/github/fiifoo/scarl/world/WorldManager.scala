@@ -8,8 +8,8 @@ import io.github.fiifoo.scarl.core.character.{Progression, ProgressionId}
 import io.github.fiifoo.scarl.core.communication.{Communication, CommunicationId}
 import io.github.fiifoo.scarl.core.entity._
 import io.github.fiifoo.scarl.core.kind.{CreatureKindId, Kinds}
-import io.github.fiifoo.scarl.core.mutation.{NewEntityMutation, NewFactionMutation}
-import io.github.fiifoo.scarl.core.world.ConduitId
+import io.github.fiifoo.scarl.core.mutation.{ConduitExitMutation, NewEntityMutation, NewFactionMutation}
+import io.github.fiifoo.scarl.core.world.{ConduitId, Traveler}
 
 class WorldManager(val areas: Map[AreaId, Area],
                    val communications: Map[CommunicationId, Communication],
@@ -30,7 +30,7 @@ class WorldManager(val areas: Map[AreaId, Area],
                  currentArea: AreaId,
                  currentState: State,
                  conduit: ConduitId,
-                 player: Creature
+                 traveler: Traveler
                 ): (WorldState, AreaId) = {
 
     val currentWorld = world.copy(states = world.states + (currentArea -> currentState))
@@ -40,7 +40,7 @@ class WorldManager(val areas: Map[AreaId, Area],
     } else {
       generateArea(currentWorld, nextArea, currentState.rng, currentState.nextEntityId)
     }
-    val finalWorld = addConduitTraveler(nextWorld, nextArea, conduit, player)
+    val finalWorld = applyConduitExit(nextWorld, nextArea, conduit, traveler)
 
     (finalWorld, nextArea)
   }
@@ -127,21 +127,14 @@ class WorldManager(val areas: Map[AreaId, Area],
     (nextWorld, creature.id)
   }
 
-  private def addConduitTraveler(world: WorldState,
-                                 area: AreaId,
-                                 conduit: ConduitId,
-                                 traveler: Creature
-                                ): WorldState = {
+  private def applyConduitExit(world: WorldState,
+                               area: AreaId,
+                               conduit: ConduitId,
+                               traveler: Traveler
+                              ): WorldState = {
     val state = world.states(area)
     val location = state.conduits(conduit)
-
-    val nextState = NewEntityMutation(
-      entity = traveler.copy(
-        location = location,
-        tick = state.tick
-      ),
-      existing = true
-    )(state)
+    val nextState = ConduitExitMutation(traveler, location)(state)
 
     world.copy(
       states = world.states + (area -> nextState)

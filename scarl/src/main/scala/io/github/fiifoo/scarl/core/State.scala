@@ -7,7 +7,7 @@ import io.github.fiifoo.scarl.core.communication.{Communication, CommunicationId
 import io.github.fiifoo.scarl.core.entity._
 import io.github.fiifoo.scarl.core.equipment.Slot
 import io.github.fiifoo.scarl.core.kind.Kinds
-import io.github.fiifoo.scarl.core.world.ConduitId
+import io.github.fiifoo.scarl.core.world.{ConduitId, Traveler}
 
 object State {
 
@@ -26,7 +26,7 @@ object State {
   case class Stored(actors: List[ActorId] = List())
 
   case class Temporary(addedActors: List[ActorId] = List(),
-                       conduitEntry: Option[(ConduitId, Creature)] = None,
+                       conduitEntry: Option[(ConduitId, Traveler)] = None,
                        removableEntities: List[EntityId] = List()
                       )
 

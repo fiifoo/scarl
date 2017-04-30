@@ -9,7 +9,7 @@ import io.github.fiifoo.scarl.core.effect.CombinedEffectListener
 import io.github.fiifoo.scarl.core.entity.Creature
 import io.github.fiifoo.scarl.core.kind.Kinds
 import io.github.fiifoo.scarl.core.mutation.ResetConduitEntryMutation
-import io.github.fiifoo.scarl.core.world.ConduitId
+import io.github.fiifoo.scarl.core.world.{ConduitId, Traveler}
 import io.github.fiifoo.scarl.game.OutMessage.PlayerInfo
 import io.github.fiifoo.scarl.game.map.{MapBuilder, MapLocation}
 import io.github.fiifoo.scarl.geometry.Fov
@@ -72,24 +72,24 @@ class Game(initial: GameState,
     }
   }
 
-  private def handleConduitEntry(entry: (ConduitId, Creature)): Unit = {
-    val (conduit, creature) = entry
+  private def handleConduitEntry(entry: (ConduitId, Traveler)): Unit = {
+    val (conduit, traveler) = entry
     state = ResetConduitEntryMutation()(state)
 
-    if (creature.id == gameState.player) {
-      switchArea(conduit, creature)
+    if (traveler.creature.id == gameState.player) {
+      switchArea(conduit, traveler)
     }
 
     state = process(state, None)
   }
 
-  private def switchArea(conduit: ConduitId, player: Creature): Unit = {
+  private def switchArea(conduit: ConduitId, traveler: Traveler): Unit = {
     val (nextWorld, nextArea) = worldManager.switchArea(
       gameState.world,
       gameState.area,
       bubble.save(state),
       conduit,
-      player
+      traveler
     )
     val (nextBubble, nextState) = createBubble(nextWorld.states(nextArea))
     val nextMaps = gameState.maps + (gameState.area -> mapBuilder.extract(gameState.maps.get(nextArea)))
@@ -176,7 +176,7 @@ class Game(initial: GameState,
     !s.entities.isDefinedAt(gameState.player)
   }
 
-  private def conduitEntry(s: State): Option[(ConduitId, Creature)] = {
+  private def conduitEntry(s: State): Option[(ConduitId, Traveler)] = {
     s.tmp.conduitEntry
   }
 
