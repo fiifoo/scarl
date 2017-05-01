@@ -10,7 +10,7 @@ import io.github.fiifoo.scarl.core.character.{Progression, ProgressionId}
 import io.github.fiifoo.scarl.core.communication.{Communication, CommunicationId, Message}
 import io.github.fiifoo.scarl.core.entity.Creature.{Sight, Stats}
 import io.github.fiifoo.scarl.core.entity._
-import io.github.fiifoo.scarl.core.equipment.Weapon
+import io.github.fiifoo.scarl.core.equipment._
 import io.github.fiifoo.scarl.core.kind._
 import io.github.fiifoo.scarl.widget.{DelayedTransformingWidget, HealLocationWidget, SummonCreatureWidget, TriggeredTransformingWidget}
 
@@ -138,8 +138,14 @@ object Data {
         creatures = List((CreatureKindId("avatar-of-justice"), 5, 5)),
         items = List(
           (ItemKindId("grey-altar"), 5, 5),
-          (ItemKindId("long-sword"), 0, 2),
-          (ItemKindId("claymore"), 0, 2)
+          (ItemKindId("long-sword"), 0, 1),
+          (ItemKindId("claymore"), 0, 1),
+          (ItemKindId("steel-shield"), 0, 1),
+          (ItemKindId("chain-shirt"), 0, 1),
+          (ItemKindId("chain-leggings"), 0, 1),
+          (ItemKindId("leather-helmet"), 0, 1),
+          (ItemKindId("leather-boots"), 0, 1),
+          (ItemKindId("leather-gloves"), 0, 1)
         ),
         widgets = List(
           (WidgetKindId("chaos-portal-widget"), 4, 4),
@@ -158,7 +164,13 @@ object Data {
         items = List(
           (ItemKindId("grey-altar"), 0, 1),
           (ItemKindId("long-sword"), 0, 1),
-          (ItemKindId("claymore"), 0, 1)
+          (ItemKindId("claymore"), 0, 1),
+          (ItemKindId("steel-shield"), 0, 1),
+          (ItemKindId("chain-shirt"), 0, 1),
+          (ItemKindId("chain-leggings"), 0, 1),
+          (ItemKindId("leather-helmet"), 0, 1),
+          (ItemKindId("leather-boots"), 0, 1),
+          (ItemKindId("leather-gloves"), 0, 1)
         ),
         widgets = List(
           (WidgetKindId("chaos-portal-widget"), 0, 1),
@@ -355,6 +367,90 @@ object Data {
       ))
     )
 
+    val steelShield = ItemKind(
+      id = ItemKindId("steel-shield"),
+      name = "Steel shield",
+      display = '[',
+      color = "dark-gray",
+      pickable = true,
+      shield = Some(Shield(
+        stats = Stats(
+          defence = 10,
+          armor = 1
+        )
+      ))
+    )
+
+    val chainShirt = ItemKind(
+      id = ItemKindId("chain-shirt"),
+      name = "Chain shirt",
+      display = ']',
+      color = "light-gray",
+      pickable = true,
+      armor = Some(Armor(
+        stats = Stats(
+          armor = 2
+        ),
+        slot = ChestArmor
+      ))
+    )
+
+    val chainLeggings = ItemKind(
+      id = ItemKindId("chain-leggings"),
+      name = "Chain leggings",
+      display = ']',
+      color = "light-gray",
+      pickable = true,
+      armor = Some(Armor(
+        stats = Stats(
+          armor = 2
+        ),
+        slot = LegArmor
+      ))
+    )
+
+    val leatherHelmet = ItemKind(
+      id = ItemKindId("leather-helmet"),
+      name = "Leather helmet",
+      display = ']',
+      color = "light-brown",
+      pickable = true,
+      armor = Some(Armor(
+        stats = Stats(
+          armor = 1
+        ),
+        slot = HeadArmor
+      ))
+    )
+
+    val leatherBoots = ItemKind(
+      id = ItemKindId("leather-boots"),
+      name = "Leather boots",
+      display = ']',
+      color = "light-brown",
+      pickable = true,
+      armor = Some(Armor(
+        stats = Stats(
+          armor = 1
+        ),
+        slot = FootArmor
+      ))
+    )
+
+    val leatherGloves = ItemKind(
+      id = ItemKindId("leather-gloves"),
+      name = "Leather gloves",
+      display = ']',
+      color = "light-brown",
+      pickable = true,
+      armor = Some(Armor(
+        stats = Stats(
+          armor = 1
+        ),
+        slot = HandArmor
+      ))
+    )
+
     Map(
       openedDoor.id -> openedDoor,
       portal.id -> portal,
@@ -364,7 +460,13 @@ object Data {
       stairsDown.id -> stairsDown,
       stairsUp.id -> stairsUp,
       longSword.id -> longSword,
-      claymore.id -> claymore
+      claymore.id -> claymore,
+      steelShield.id -> steelShield,
+      chainShirt.id -> chainShirt,
+      chainLeggings.id -> chainLeggings,
+      leatherHelmet.id -> leatherHelmet,
+      leatherBoots.id -> leatherBoots,
+      leatherGloves.id -> leatherGloves
     )
   }
 
