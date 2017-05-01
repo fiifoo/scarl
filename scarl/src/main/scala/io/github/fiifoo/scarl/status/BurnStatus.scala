@@ -14,7 +14,7 @@ case class BurnStatus(id: ActiveStatusId,
   val interval = 100
   val damage = 1
 
-  def setTick(tick: Int): Actor = copy(tick = tick)
+  def setTick(tick: Int): BurnStatus = copy(tick = tick)
 
   def apply(s: State): List[Effect] = {
     val location = target(s).location

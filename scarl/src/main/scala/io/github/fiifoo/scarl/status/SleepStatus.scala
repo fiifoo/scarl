@@ -12,7 +12,7 @@ case class SleepStatus(id: ActiveStatusId,
   val interval = 100
   val heal = 1
 
-  def setTick(tick: Int): Actor = copy(tick = tick)
+  def setTick(tick: Int): SleepStatus = copy(tick = tick)
 
   def apply(s: State): List[Effect] = {
     val damage = target(s).damage

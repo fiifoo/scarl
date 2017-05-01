@@ -7,4 +7,6 @@ trait ActiveStatus extends Entity with Status with Actor {
   val id: ActiveStatusId
 
   def apply(s: State): List[Effect]
+
+  def setTick(tick: Int): ActiveStatus
 }

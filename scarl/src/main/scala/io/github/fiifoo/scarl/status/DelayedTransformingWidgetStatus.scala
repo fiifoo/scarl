@@ -13,7 +13,7 @@ case class DelayedTransformingWidgetStatus(id: ActiveStatusId,
                                            transformDescription: Option[String] = None
                                           ) extends ActiveStatus {
 
-  def setTick(tick: Int): Actor = copy(tick = tick)
+  def setTick(tick: Int): DelayedTransformingWidgetStatus = copy(tick = tick)
 
   def apply(s: State): List[Effect] = {
     List(TransformWidgetEffect(target, transformTo, transformDescription))

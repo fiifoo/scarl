@@ -47,7 +47,7 @@ case class Creature(id: CreatureId,
                     stats: Stats
                    ) extends Entity with Actor with Locatable {
 
-  def setLocation(location: Location): Locatable = copy(location = location)
+  def setLocation(location: Location): Creature = copy(location = location)
 
-  def setTick(tick: Int): Actor = copy(tick = tick)
+  def setTick(tick: Int): Creature = copy(tick = tick)
 }

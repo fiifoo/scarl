@@ -13,7 +13,7 @@ case class SummonCreatureStatus(id: ActiveStatusId,
                                 summon: WeightedChoices[CreatureKindId],
                                 interval: Int
                                ) extends ActiveStatus {
-  def setTick(tick: Int): Actor = copy(tick = tick)
+  def setTick(tick: Int): SummonCreatureStatus = copy(tick = tick)
 
   def apply(s: State): List[Effect] = {
     val location = target(s).location

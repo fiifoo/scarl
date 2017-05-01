@@ -11,7 +11,7 @@ case class TestActiveStatus(id: ActiveStatusId,
   val interval = 50
   val damage = 1
 
-  def setTick(tick: Int): Actor = copy(tick = tick)
+  def setTick(tick: Int): TestActiveStatus = copy(tick = tick)
 
   def apply(s: State): List[Effect] = {
     List(

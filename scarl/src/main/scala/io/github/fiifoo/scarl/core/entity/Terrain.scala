@@ -8,5 +8,5 @@ case class Terrain(id: TerrainId,
                    location: Location
                   ) extends Entity with Locatable {
 
-  def setLocation(location: Location): Locatable = copy(location = location)
+  def setLocation(location: Location): Terrain = copy(location = location)
 }
