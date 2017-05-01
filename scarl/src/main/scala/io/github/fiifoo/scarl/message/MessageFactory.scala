@@ -12,10 +12,12 @@ class MessageFactory(player: () => CreatureId, fov: () => Set[Location]) extends
   implicit val collide = new CollideMessage(player, fov)
   implicit val communicate = new CommunicateMessage(player, fov)
   implicit val death = new DeathMessage(player, fov)
+  implicit val equipItem = new EquipItemMessage(player, fov)
   implicit val gainLevel = new GainLevelMessage(player, fov)
   implicit val heal = new HealMessage(player, fov)
   implicit val hit = new HitMessage(player, fov)
   implicit val miss = new MissMessage(player, fov)
+  implicit val pickItem = new PickItemMessage(player, fov)
   implicit val transformWidget = new TransformWidgetMessage(player, fov)
 
   def apply(s: State, effect: Effect): Unit = {
@@ -23,10 +25,12 @@ class MessageFactory(player: () => CreatureId, fov: () => Set[Location]) extends
       case e: CollideEffect => build(s, e)
       case e: CommunicateEffect => build(s, e)
       case e: DeathEffect => build(s, e)
+      case e: EquipItemEffect => build(s, e)
       case e: GainLevelEffect => build(s, e)
       case e: HealEffect => build(s, e)
       case e: HitEffect => build(s, e)
       case e: MissEffect => build(s, e)
+      case e: PickItemEffect => build(s, e)
       case e: TransformWidgetEffect => build(s, e)
       case _ => None
     }
