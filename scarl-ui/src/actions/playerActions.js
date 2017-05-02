@@ -1,5 +1,6 @@
 import { getAdjacentLocations, getLocationCreature, getLocationPickableItems } from '../game/utils'
 import { sendMessage } from './connectionActions'
+import { addMessage } from './infoActions'
 
 export const attack = target => dispatch => {
     sendMessage({
@@ -17,6 +18,8 @@ export const communicate = () => (dispatch, getState) => {
             type: 'Communicate',
             data: {target},
         })(dispatch)
+    } else {
+        addMessage('No one to talk to.')(dispatch)
     }
 }
 
@@ -53,6 +56,8 @@ export const pickItem = () => (dispatch, getState) => {
             type: 'PickItem',
             data: {item},
         })(dispatch)
+    } else {
+        addMessage('Nothing to pick up.')(dispatch)
     }
 }
 

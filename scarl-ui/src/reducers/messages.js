@@ -13,6 +13,12 @@ export default (state = initial, action) => {
         case types.CONNECTION_CLOSED: {
             return initial
         }
+        case types.ADD_MESSAGE: {
+            return {
+                latest: List([action.message]),
+                all: state.all.push(action.message).take(MAX)
+            }
+        }
         case types.RECEIVE_MESSAGE: {
             const messages = List(action.data.messages.reverse())
 
