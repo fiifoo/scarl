@@ -17,6 +17,7 @@ class MessageFactory(player: () => CreatureId, fov: () => Set[Location]) extends
   implicit val heal = new HealMessage(player, fov)
   implicit val hit = new HitMessage(player, fov)
   implicit val miss = new MissMessage(player, fov)
+  implicit val move = new MoveMessage(player, fov)
   implicit val pickItem = new PickItemMessage(player, fov)
   implicit val transformWidget = new TransformWidgetMessage(player, fov)
 
@@ -30,6 +31,7 @@ class MessageFactory(player: () => CreatureId, fov: () => Set[Location]) extends
       case e: HealEffect => build(s, e)
       case e: HitEffect => build(s, e)
       case e: MissEffect => build(s, e)
+      case e: MoveEffect => build(s, e)
       case e: PickItemEffect => build(s, e)
       case e: TransformWidgetEffect => build(s, e)
       case _ => None
