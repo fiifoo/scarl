@@ -11,6 +11,12 @@ export const getAdjacentLocations = l => ([
     {x: l.x, y:  l.y - 1}
 ])
 
+export const getLocationConduit = (location, fov) => {
+    const entities = getLocationEntities(location, fov)
+
+    return entities ? entities.conduit : undefined
+}
+
 export const getLocationCreature = (location, fov) => {
     const entities = getLocationEntities(location, fov)
 

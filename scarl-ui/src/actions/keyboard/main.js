@@ -18,6 +18,10 @@ export default (command, dispatch, getState) => {
             playerActions.communicate()(dispatch, getState)
             break
         }
+        case commands.ENTER_CONDUIT: {
+            playerActions.enterConduit()(dispatch, getState)
+            break
+        }
         case commands.INVENTORY: {
             gameActions.toggleInventory()(dispatch)
             break

@@ -18,6 +18,7 @@ object State {
   case class Index(containerItems: Map[EntityId, Set[ItemId]] = Map(),
                    equipmentStats: Map[CreatureId, Creature.Stats] = Map(),
                    factionMembers: Map[FactionId, Set[CreatureId]] = Map(),
+                   locationConduit: Map[Location, ConduitId] = Map(),
                    locationEntities: Map[Location, Set[LocatableId]] = Map(),
                    locationTriggers: Map[Location, Set[TriggerStatusId]] = Map(),
                    targetStatuses: Map[EntityId, Set[StatusId]] = Map()

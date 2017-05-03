@@ -2,7 +2,7 @@ import { connect } from 'react-redux'
 import ActionBar from '../components/ActionBar.jsx'
 import { cancelMode, look, toggleInventory } from '../actions/gameActions'
 import { toggleKeyBindings, toggleMessageLog } from '../actions/infoActions'
-import { communicate, pickItem } from '../actions/playerActions'
+import { communicate, enterConduit, pickItem } from '../actions/playerActions'
 import { focusKeyboard } from '../actions/keyboard'
 
 const ActionBarContainer = connect(
@@ -11,6 +11,7 @@ const ActionBarContainer = connect(
     }), {
         cancelMode,
         communicate,
+        enterConduit,
         focusKeyboard,
         look,
         pickItem,

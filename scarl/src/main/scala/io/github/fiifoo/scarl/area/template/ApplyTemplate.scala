@@ -1,11 +1,10 @@
 package io.github.fiifoo.scarl.area.template
 
-import io.github.fiifoo.scarl.core.entity.{Entity, TriggerStatusId}
+import io.github.fiifoo.scarl.core.entity.Entity
 import io.github.fiifoo.scarl.core.kind._
 import io.github.fiifoo.scarl.core.mutation.{NewConduitMutation, NewEntityMutation, NewGatewayMutation}
 import io.github.fiifoo.scarl.core.world.ConduitId
 import io.github.fiifoo.scarl.core.{Location, Rng, State}
-import io.github.fiifoo.scarl.status.TriggeredConduitStatus
 import io.github.fiifoo.scarl.world.Conduit
 
 import scala.util.Random
@@ -159,16 +158,10 @@ object ApplyTemplate {
 
     val (container, _item) = item(s)(s, location)
 
-    val status = TriggeredConduitStatus(
-      id = TriggerStatusId(s.nextEntityId + 2),
-      target = container.id,
-      conduit = conduit
-    )
-
     NewConduitMutation(conduit, location)(
-      NewEntityMutation(status)(
-        NewEntityMutation(_item)(
-          NewEntityMutation(container)(s))))
+      NewEntityMutation(_item)(
+        NewEntityMutation(container)(s))
+    )
   }
 
   private def getConduitLocations(template: Template.Result): Set[Location] = {

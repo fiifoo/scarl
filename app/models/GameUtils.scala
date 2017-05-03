@@ -1,7 +1,7 @@
 package models
 
 import io.github.fiifoo.scarl.core.State
-import io.github.fiifoo.scarl.core.mutation.index.{EquipmentStatsIndexMutation, NewEntityIndexMutation}
+import io.github.fiifoo.scarl.core.mutation.index.{ConduitLocationIndexAddMutation, EquipmentStatsIndexMutation, NewEntityIndexMutation}
 import io.github.fiifoo.scarl.world.{WorldManager, WorldState}
 
 object GameUtils {
@@ -24,8 +24,17 @@ object GameUtils {
   }
 
   private def calculateStateIndex(s: State): State.Index = {
-    val index = s.entities.values.foldLeft(s.index)((index, entity) => {
+    var index = s.index
+
+    index = s.entities.values.foldLeft(index)((index, entity) => {
       NewEntityIndexMutation(entity)(s, index)
+    })
+    index = s.conduits.foldLeft(index)((index, x) => {
+      val (conduit, location) = x
+
+      index.copy(
+        locationConduit = ConduitLocationIndexAddMutation(conduit, location)(index.locationConduit)
+      )
     })
 
     val equipmentStats = s.equipments.keys.foldLeft(index.equipmentStats)((stats, creature) => {

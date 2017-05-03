@@ -1,6 +1,7 @@
 package io.github.fiifoo.scarl.game
 
 import io.github.fiifoo.scarl.core.entity._
+import io.github.fiifoo.scarl.core.world.ConduitId
 import io.github.fiifoo.scarl.core.{Location, Selectors, State}
 
 object LocationEntities {
@@ -12,6 +13,7 @@ object LocationEntities {
     val items = (containers flatMap getContainerItems) map (_ (s))
 
     LocationEntities(
+      s.index.locationConduit.get(location),
       entities collectFirst { case c: CreatureId => c(s) },
       entities collectFirst { case t: TerrainId => t(s) },
       entities collectFirst { case w: WallId => w(s) },
@@ -20,7 +22,8 @@ object LocationEntities {
   }
 }
 
-case class LocationEntities(creature: Option[Creature],
+case class LocationEntities(conduit: Option[ConduitId],
+                            creature: Option[Creature],
                             terrain: Option[Terrain],
                             wall: Option[Wall],
                             items: Set[Item]

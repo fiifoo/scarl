@@ -24,6 +24,13 @@ const PickItemButton = ({pickItem}) => (
         >Pick item</button>
 )
 
+const EnterConduitButton = ({enterConduit}) => (
+    <button
+        className={className}
+        onClick={enterConduit}
+        >Use stairs</button>
+)
+
 const TalkButton = ({communicate}) => (
     <button
         className={className}
@@ -55,7 +62,7 @@ const KeyBindingsButton = ({toggleKeyBindings}) => (
 const ActionBar = props =>  {
     const {mode} = props
     const {cancelMode, focusKeyboard} = props
-    const {communicate, look, pickItem} = props
+    const {communicate, enterConduit, look, pickItem} = props
     const {toggleInventory, toggleKeyBindings, toggleMessageLog} = props
 
     const wrap = action => () => {
@@ -67,6 +74,7 @@ const ActionBar = props =>  {
         <div className="btn-toolbar">
             <LookButton mode={mode} cancelMode={wrap(cancelMode)} look={wrap(look)} />
             <PickItemButton pickItem={wrap(pickItem)} />
+            <EnterConduitButton enterConduit={wrap(enterConduit)} />
             <TalkButton communicate={wrap(communicate)} />
             <InventoryButton toggleInventory={toggleInventory} />
             <MessageLogButton toggleMessageLog={toggleMessageLog} />

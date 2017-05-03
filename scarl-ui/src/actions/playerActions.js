@@ -1,4 +1,4 @@
-import { getAdjacentLocations, getLocationCreature, getLocationPickableItems } from '../game/utils'
+import { getAdjacentLocations, getLocationConduit, getLocationCreature, getLocationPickableItems } from '../game/utils'
 import { sendMessage } from './connectionActions'
 import { addMessage } from './infoActions'
 
@@ -20,6 +20,21 @@ export const communicate = () => (dispatch, getState) => {
         })(dispatch)
     } else {
         addMessage('No one to talk to.')(dispatch)
+    }
+}
+
+export const enterConduit = () => (dispatch, getState) => {
+    const {player, fov} = getState()
+    const location = player.creature.location
+    const conduit = getLocationConduit(location, fov.cumulative)
+
+    if (conduit) {
+        sendMessage({
+            type: 'EnterConduit',
+            data: {conduit},
+        })(dispatch)
+    } else {
+        addMessage('No stairs here.')(dispatch)
     }
 }
 

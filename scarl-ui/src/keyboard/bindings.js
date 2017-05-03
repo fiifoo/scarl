@@ -22,6 +22,7 @@ const directions = Map([
 export default {
     [gameModes.MAIN]: Map([
         [keycodes.ENTER, commands.PASS],
+        [keycodes.LESS, commands.ENTER_CONDUIT],
         [keycodes.NUMPAD_5, commands.PASS],
         [keycodes.I, commands.INVENTORY],
         [keycodes.L, commands.LOOK],

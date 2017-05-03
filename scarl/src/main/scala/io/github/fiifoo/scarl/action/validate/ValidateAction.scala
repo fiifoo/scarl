@@ -9,6 +9,7 @@ object ValidateAction {
 
   implicit val attack = AttackValidator
   implicit val communicate = CommunicateValidator
+  implicit val enterConduit = EnterConduitValidator
   implicit val equipItem = EquipItemValidator
   implicit val move = MoveValidator
   implicit val pass = PassValidator
@@ -18,6 +19,7 @@ object ValidateAction {
     action match {
       case action: AttackAction => validate(s, actor, action)
       case action: CommunicateAction => validate(s, actor, action)
+      case action: EnterConduitAction => validate(s, actor, action)
       case action: EquipItemAction => validate(s, actor, action)
       case action: MoveAction => validate(s, actor, action)
       case action: PassAction => validate(s, actor, action)
