@@ -1,13 +1,15 @@
 package models.json
 
-import io.github.fiifoo.scarl.core.entity.Creature
+import io.github.fiifoo.scarl.core.character.Stats
 import io.github.fiifoo.scarl.core.equipment._
 import play.api.libs.json._
 
 object FormatEquipment {
 
-  private implicit val formatCreatureSight = Json.format[Creature.Sight]
-  private implicit val formatCreatureStats = Json.format[Creature.Stats]
+  private implicit val formatMeleeStats = Json.format[Stats.Melee]
+  private implicit val formatRangedStats = Json.format[Stats.Ranged]
+  private implicit val formatSightStats = Json.format[Stats.Sight]
+  private implicit val formatStats = Json.format[Stats]
 
   implicit val formatArmorSlot = new Format[ArmorSlot] {
     def writes(slot: ArmorSlot): JsValue = {
@@ -38,12 +40,14 @@ object FormatEquipment {
       JsSuccess(slot match {
         case "MainHand" => MainHand
         case "OffHand" => OffHand
+        case "RangedSlot" => RangedSlot
         case _ => formatArmorSlot.reads(json).get
       })
     }
   }
 
   implicit val formatArmor = Json.format[Armor]
+  implicit val formatRangedWeapon = Json.format[RangedWeapon]
   implicit val formatShield = Json.format[Shield]
   implicit val formatWeapon = Json.format[Weapon]
 

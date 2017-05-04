@@ -14,6 +14,7 @@ object ValidateAction {
   implicit val move = MoveValidator
   implicit val pass = PassValidator
   implicit val pickItem = PickItemValidator
+  implicit val shoot = new NullValidator[ShootAction]
 
   def apply(s: State, actor: CreatureId, action: Action): Boolean = {
     action match {
@@ -24,6 +25,7 @@ object ValidateAction {
       case action: MoveAction => validate(s, actor, action)
       case action: PassAction => validate(s, actor, action)
       case action: PickItemAction => validate(s, actor, action)
+      case action: ShootAction => validate(s, actor, action)
       case _ => false
     }
   }

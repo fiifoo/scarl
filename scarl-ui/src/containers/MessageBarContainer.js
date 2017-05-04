@@ -7,6 +7,7 @@ const getMessages = state => {
     const mode = state.ui.game.mode
 
     switch (mode) {
+        case modes.AIM:
         case modes.LOOK: {
             const location = state.ui.game.cursor
             const fov = state.fov.cumulative

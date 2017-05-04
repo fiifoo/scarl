@@ -1,8 +1,9 @@
 package io.github.fiifoo.scarl.effect
 
 import io.github.fiifoo.scarl.core.State
+import io.github.fiifoo.scarl.core.character.Stats
+import io.github.fiifoo.scarl.core.character.Stats.Melee
 import io.github.fiifoo.scarl.core.effect.EffectResolver
-import io.github.fiifoo.scarl.core.entity.Creature.Stats
 import io.github.fiifoo.scarl.core.entity.{CreatureId, Item, ItemId}
 import io.github.fiifoo.scarl.core.equipment._
 import io.github.fiifoo.scarl.core.kind.ItemKindId
@@ -95,8 +96,7 @@ class EquipItemEffectSpec extends FlatSpec with Matchers {
     s = resolve(s, List(e1, e2, e3, e3, e4))
     s.index.equipmentStats should ===(Map(
       creature -> Stats(
-        attack = 1,
-        damage = 1,
+        melee = Melee(attack = 1, damage = 1),
         armor = 1
       )
     ))
@@ -112,7 +112,7 @@ class EquipItemEffectSpec extends FlatSpec with Matchers {
       container = creature,
       pickable = true,
       weapon = Some(Weapon(
-        stats = Stats(attack = 1),
+        stats = Stats(melee = Melee(attack = 1)),
         twoHanded = false
       ))
     )
@@ -123,7 +123,7 @@ class EquipItemEffectSpec extends FlatSpec with Matchers {
       container = creature,
       pickable = true,
       weapon = Some(Weapon(
-        stats = Stats(attack = 1),
+        stats = Stats(melee = Melee(attack = 1)),
         twoHanded = false
       ))
     )
@@ -134,7 +134,7 @@ class EquipItemEffectSpec extends FlatSpec with Matchers {
       container = creature,
       pickable = true,
       weapon = Some(Weapon(
-        stats = Stats(attack = 1, damage = 1),
+        stats = Stats(melee = Melee(attack = 1, damage = 1)),
         twoHanded = true
       ))
     )
@@ -159,7 +159,7 @@ class EquipItemEffectSpec extends FlatSpec with Matchers {
         slot = HeadArmor
       )),
       weapon = Some(Weapon(
-        stats = Stats(attack = 1),
+        stats = Stats(melee = Melee(attack = 1)),
         twoHanded = false
       ))
     )

@@ -8,6 +8,7 @@ case class Item(id: ItemId,
                 container: EntityId,
                 pickable: Boolean = false,
                 armor: Option[Armor] = None,
+                rangedWeapon: Option[RangedWeapon] = None,
                 shield: Option[Shield] = None,
                 weapon: Option[Weapon] = None
                ) extends Entity

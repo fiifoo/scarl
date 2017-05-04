@@ -6,6 +6,7 @@ const initial = Record({
     cursor: null,
     inventoryVisible: false,
     mode: modes.MAIN,
+    target: null,
 })()
 
 export default (state = initial, action) => {
@@ -15,6 +16,9 @@ export default (state = initial, action) => {
         }
         case types.SET_CURSOR_LOCATION: {
             return state.set('cursor', action.location)
+        }
+        case types.SET_TARGET: {
+            return state.set('target', action.target)
         }
         case types.TOGGLE_INVENTORY: {
             return state.set('inventoryVisible', ! state.inventoryVisible)

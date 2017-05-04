@@ -5,9 +5,16 @@ import React from 'react'
 const addStats = (a, b) => {
     return {
         health: a.health + b.health,
-        attack: a.attack + b.attack,
+        melee: {
+            attack: a.melee.attack + b.melee.attack,
+            damage: a.melee.damage + b.melee.damage,
+        },
+        ranged: {
+            attack: a.ranged.attack + b.ranged.attack,
+            damage: a.ranged.damage + b.ranged.damage,
+            range: a.ranged.range + b.ranged.range,
+        },
         defence: a.defence + b.defence,
-        damage: a.damage + b.damage,
         armor: a.armor + b.armor,
         sight: {range: a.sight.range + b.sight.range},
     }
@@ -21,9 +28,12 @@ const PlayerInfo = ({player}) => {
             <div>Health <b>{stats.health - player.creature.damage}/{stats.health}</b></div>
             <div>Level {player.creature.level}</div>
             <div>Experience {player.creature.experience}</div>
-            <div>Attack {stats.attack}</div>
+            <div>Attack {stats.melee.attack}</div>
+            <div>Damage {stats.melee.damage}</div>
+            <div>Ranged attack {stats.ranged.attack}</div>
+            <div>Ranged damage {stats.ranged.damage}</div>
+            <div>Range {stats.ranged.range}</div>
             <div>Defence {stats.defence}</div>
-            <div>Damage {stats.damage}</div>
             <div>Armor {stats.armor}</div>
             <div>Sight {stats.sight.range}</div>
         </div>

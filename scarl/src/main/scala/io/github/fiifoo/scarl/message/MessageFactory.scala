@@ -9,6 +9,7 @@ class MessageFactory(player: () => CreatureId, fov: () => Set[Location]) extends
 
   private var messages: List[String] = List()
 
+  implicit val badShot = new BadShotMessage(player, fov)
   implicit val collide = new CollideMessage(player, fov)
   implicit val communicate = new CommunicateMessage(player, fov)
   implicit val death = new DeathMessage(player, fov)
@@ -23,6 +24,7 @@ class MessageFactory(player: () => CreatureId, fov: () => Set[Location]) extends
 
   def apply(s: State, effect: Effect): Unit = {
     val message: Option[String] = effect match {
+      case e: BadShotEffect => build(s, e)
       case e: CollideEffect => build(s, e)
       case e: CommunicateEffect => build(s, e)
       case e: DeathEffect => build(s, e)

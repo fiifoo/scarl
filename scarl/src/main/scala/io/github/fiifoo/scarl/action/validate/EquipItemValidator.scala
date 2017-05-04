@@ -18,7 +18,7 @@ object EquipItemValidator extends ActionValidator[EquipItemAction] {
   }
 
   private def validateSlot(item: Item, slot: Slot): Boolean = {
-    val slots = getSlots(item.armor) ++ getSlots(item.shield) ++ getSlots(item.weapon)
+    val slots = getSlots(item.armor) ++ getSlots(item.shield) ++ getSlots(item.rangedWeapon) ++ getSlots(item.weapon)
 
     slots contains slot
   }

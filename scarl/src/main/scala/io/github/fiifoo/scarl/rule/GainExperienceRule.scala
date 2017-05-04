@@ -3,7 +3,7 @@ package io.github.fiifoo.scarl.rule
 import io.github.fiifoo.scarl.core.State
 import io.github.fiifoo.scarl.core.effect.Effect
 import io.github.fiifoo.scarl.core.entity.CreatureId
-import io.github.fiifoo.scarl.effect.{DeathEffect, StrikeEffect}
+import io.github.fiifoo.scarl.effect.{DeathEffect, HitEffect}
 
 object GainExperienceRule {
   val default = 1
@@ -16,7 +16,7 @@ object GainExperienceRule {
 
   private def attacker(effect: Effect): Option[CreatureId] = {
     effect.parent.collect({
-      case strike: StrikeEffect => Some(strike.attacker)
+      case hit: HitEffect => Some(hit.attacker)
       case other: Effect => attacker(other)
     }).flatten
   }

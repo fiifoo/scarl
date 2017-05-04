@@ -1,7 +1,7 @@
 package io.github.fiifoo.scarl.core.mutation.index
 
 import io.github.fiifoo.scarl.core.State
-import io.github.fiifoo.scarl.core.entity.Creature.Stats
+import io.github.fiifoo.scarl.core.character.Stats
 import io.github.fiifoo.scarl.core.entity.{CreatureId, ItemId}
 import io.github.fiifoo.scarl.core.equipment._
 
@@ -25,6 +25,8 @@ case class EquipmentStatsIndexMutation(creature: CreatureId) {
         val stats = slot match {
           case _: HandSlot =>
             getStats(data.weapon) add getStats(data.shield)
+          case RangedSlot =>
+            getStats(data.rangedWeapon)
           case _: ArmorSlot =>
             getStats(data.armor)
         }

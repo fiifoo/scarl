@@ -20,6 +20,10 @@ export const slots = {
         key: 'OffHand',
         label: 'Off-hand',
     }),
+    RangedSlot: Slot({
+        key: 'RangedSlot',
+        label: 'Ranged weapon',
+    }),
     HeadArmor: Slot({
         key: 'HeadArmor',
         label: 'Head armor',
@@ -52,6 +56,11 @@ export const groups = {
         prop: 'shield',
         label: 'Shields',
         getSlots: () => List([slots.OffHand.key]),
+    }),
+    RangedWeapon: Group({
+        prop: 'rangedWeapon',
+        label: 'Ranged weapons',
+        getSlots:() => List([slots.RangedSlot.key]),
     }),
     Weapon: Group({
         prop: 'weapon',

@@ -43,6 +43,7 @@ case class EquipItemEffect(creature: CreatureId,
     // Order might matter eg. two handed weapon + shield
     List(
       item.weapon collect valid,
+      item.rangedWeapon collect valid,
       item.shield collect valid,
       item.armor collect valid
     ).flatten.headOption

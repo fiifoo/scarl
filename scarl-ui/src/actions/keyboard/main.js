@@ -14,6 +14,10 @@ export default (command, dispatch, getState) => {
     }
 
     switch (command) {
+        case commands.AIM: {
+            gameActions.aim()(dispatch, getState)
+            break
+        }
         case commands.COMMUNICATE: {
             playerActions.communicate()(dispatch, getState)
             break

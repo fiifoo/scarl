@@ -13,9 +13,11 @@ export const NUMPAD_7 = 103
 export const NUMPAD_8 = 104
 export const NUMPAD_9 = 105
 
+export const COMMA = 188
 export const ENTER = 13
 export const ESC = 27
 export const LESS = 60
+export const SPACEBAR = 32
 
 export const I = 73
 export const L = 76

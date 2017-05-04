@@ -16,7 +16,13 @@ export default (state = initial, action) => {
         case types.ADD_MESSAGE: {
             return {
                 latest: List([action.message]),
-                all: state.all.push(action.message).take(MAX)
+                all: state.all.push(action.message).take(MAX),
+            }
+        }
+        case types.CHANGE_GAME_MODE: {
+            return {
+                latest: List(),
+                all: state.all,
             }
         }
         case types.RECEIVE_MESSAGE: {
@@ -24,7 +30,7 @@ export default (state = initial, action) => {
 
             return {
                 latest: messages,
-                all: state.all.concat(messages).take(MAX)
+                all: state.all.concat(messages).take(MAX),
             }
         }
         default: {

@@ -12,7 +12,7 @@ case class StrikeEffect(attacker: CreatureId,
                        ) extends Effect {
 
   def apply(s: State): EffectResult = {
-    val (result, rng) = AttackRule(s, attacker, target)
+    val (result, rng) = AttackRule.melee(s, attacker, target)
 
     val effect = if (result.hit) {
       HitEffect(attacker, target, result, Some(this))

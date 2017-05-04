@@ -10,6 +10,8 @@ case object MainHand extends HandSlot
 
 case object OffHand extends HandSlot
 
+case object RangedSlot extends Slot
+
 case object HeadArmor extends ArmorSlot
 
 case object ChestArmor extends ArmorSlot

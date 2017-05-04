@@ -1,6 +1,6 @@
 package io.github.fiifoo.scarl.rule
 
-import io.github.fiifoo.scarl.core.Selectors.getEquipmentStats
+import io.github.fiifoo.scarl.core.Selectors.getCreatureStats
 import io.github.fiifoo.scarl.core.entity.CreatureId
 import io.github.fiifoo.scarl.core.{Rng, State}
 
@@ -16,13 +16,24 @@ object AttackRule {
 
   val DamageVariance = 0.5
 
-  def apply(s: State, attacker: CreatureId, defender: CreatureId): (Result, Rng) = {
-    val attackerStats = attacker(s).stats add getEquipmentStats(s)(attacker)
-    val defenderStats = defender(s).stats add getEquipmentStats(s)(defender)
+  def melee(s: State, attacker: CreatureId, defender: CreatureId): (Result, Rng) = {
+    val attackerStats = getCreatureStats(s)(attacker)
+    val defenderStats = getCreatureStats(s)(defender)
 
     AttackRule(
       s.rng,
-      Attacker(attackerStats.attack, attackerStats.damage),
+      Attacker(attackerStats.melee.attack, attackerStats.melee.damage),
+      Defender(defenderStats.defence, defenderStats.armor)
+    )
+  }
+
+  def ranged(s: State, attacker: CreatureId, defender: CreatureId): (Result, Rng) = {
+    val attackerStats = getCreatureStats(s)(attacker)
+    val defenderStats = getCreatureStats(s)(defender)
+
+    AttackRule(
+      s.rng,
+      Attacker(attackerStats.ranged.attack, attackerStats.ranged.damage),
       Defender(defenderStats.defence, defenderStats.armor)
     )
   }

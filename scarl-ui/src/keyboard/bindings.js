@@ -21,13 +21,20 @@ const directions = Map([
 
 export default {
     [gameModes.MAIN]: Map([
+        [keycodes.COMMA, commands.PICK_ITEM],
         [keycodes.ENTER, commands.PASS],
         [keycodes.LESS, commands.ENTER_CONDUIT],
         [keycodes.NUMPAD_5, commands.PASS],
+        [keycodes.SPACEBAR, commands.AIM],
         [keycodes.I, commands.INVENTORY],
         [keycodes.L, commands.LOOK],
         [keycodes.P, commands.PICK_ITEM],
         [keycodes.T, commands.COMMUNICATE],
+    ]).merge(directions),
+
+    [gameModes.AIM]: Map([
+        [keycodes.ESC, commands.CANCEL_MODE],
+        [keycodes.SPACEBAR, commands.SHOOT],
     ]).merge(directions),
 
     [gameModes.LOOK]: Map([

@@ -2,7 +2,7 @@ package io.github.fiifoo.scarl.core
 
 import io.github.fiifoo.scarl.core.State.{Communications, Stored}
 import io.github.fiifoo.scarl.core.action.Tactic
-import io.github.fiifoo.scarl.core.character.{Progression, ProgressionId}
+import io.github.fiifoo.scarl.core.character.{Progression, ProgressionId, Stats}
 import io.github.fiifoo.scarl.core.communication.{Communication, CommunicationId}
 import io.github.fiifoo.scarl.core.entity._
 import io.github.fiifoo.scarl.core.equipment.Slot
@@ -16,7 +16,7 @@ object State {
                            )
 
   case class Index(containerItems: Map[EntityId, Set[ItemId]] = Map(),
-                   equipmentStats: Map[CreatureId, Creature.Stats] = Map(),
+                   equipmentStats: Map[CreatureId, Stats] = Map(),
                    factionMembers: Map[FactionId, Set[CreatureId]] = Map(),
                    locationConduit: Map[Location, ConduitId] = Map(),
                    locationEntities: Map[Location, Set[LocatableId]] = Map(),

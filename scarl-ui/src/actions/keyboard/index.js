@@ -1,11 +1,13 @@
 import * as modes from '../../game/modes'
 import bindings from '../../keyboard/bindings'
 import * as types from '../actionTypes'
+import aim from './aim'
 import main from './main'
 import look from './look'
 
 const handlers = {
     [modes.MAIN]: main,
+    [modes.AIM]: aim,
     [modes.LOOK]: look,
 }
 

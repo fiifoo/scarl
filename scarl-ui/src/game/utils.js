@@ -1,4 +1,5 @@
 import { List } from 'immutable'
+import { distance } from './geometry'
 
 export const getAdjacentLocations = l => ([
     {x: l.x - 1, y: l.y - 1},
@@ -43,6 +44,25 @@ export const getLocationDescriptions = (location, fov, map, kinds) => {
     const descriptions = [creature, wall].filter(x => x !== undefined).concat(items)
 
     return List(descriptions.map (d => d + '.'))
+}
+
+export const seekTargets = (player, fov) => {
+    const location = player.creature.location
+    const range = player.creature.stats.ranged.range + player.equipmentStats.ranged.range
+
+    const targets = []
+    for (let x = location.x - range; x <= location.x + range; x++) {
+        for (let y = location.y - range; y <= location.y + range; y++) {
+            const creature = getLocationCreature({x, y}, fov)
+            if (creature && creature.id !== player.creature.id) {
+                targets.push(creature)
+            }
+        }
+    }
+
+    return targets.sort((a, b) => (
+        distance(location, a.location) < distance(location, b.location) ? -1 : 1
+    ))
 }
 
 const getLocationEntities = (l, fov) => fov[l.x] ? fov[l.x][l.y] : undefined

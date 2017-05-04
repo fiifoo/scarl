@@ -36,10 +36,14 @@ const EquipmentItem = ({equipped, group, item, kind, equipItem}) => {
     return (
         <tr className={equipped ? 'warning' : null}>
             <td>{kind.name}</td>
-            <td>{stats.attack}</td>
-            <td>{stats.damage}</td>
+            <td>{stats.melee.attack}</td>
+            <td>{stats.melee.damage}</td>
+            <td>{stats.ranged.attack}</td>
+            <td>{stats.ranged.damage}</td>
+            <td>{stats.ranged.range}</td>
             <td>{stats.defence}</td>
             <td>{stats.armor}</td>
+            <td>{stats.sight.range}</td>
             <td><EquipButton item={item} allowedSlots={allowedSlots} equipItem={equipItem} /></td>
         </tr>
     )
@@ -57,8 +61,12 @@ const EquipmentGroup = ({equipments, group, items, kinds, equipItem}) => (
                             <td></td>
                             <td>Attack</td>
                             <td>Damage</td>
+                            <td>Ranged attack</td>
+                            <td>Ranged damage</td>
+                            <td>Range</td>
                             <td>Defence</td>
                             <td>Armor</td>
+                            <td>Sight</td>
                             <td></td>
                         </tr>
                     </thead>

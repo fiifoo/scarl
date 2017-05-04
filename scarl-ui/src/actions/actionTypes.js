@@ -9,6 +9,7 @@ export const RECEIVE_MESSAGE = 'RECEIVE_MESSAGE'
 // game
 export const CHANGE_GAME_MODE = 'CHANGE_GAME_MODE'
 export const SET_CURSOR_LOCATION = 'SET_CURSOR_LOCATION'
+export const SET_TARGET = 'SET_TARGET'
 export const TOGGLE_INVENTORY = 'TOGGLE_INVENTORY'
 
 // info

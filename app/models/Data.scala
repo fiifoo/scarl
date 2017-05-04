@@ -6,9 +6,9 @@ import io.github.fiifoo.scarl.area.template.{FixedTemplate, RandomizedTemplate, 
 import io.github.fiifoo.scarl.area.{Area, AreaId}
 import io.github.fiifoo.scarl.core.Location
 import io.github.fiifoo.scarl.core.Rng.WeightedChoices
-import io.github.fiifoo.scarl.core.character.{Progression, ProgressionId}
+import io.github.fiifoo.scarl.core.character.Stats.{Melee, Ranged, Sight}
+import io.github.fiifoo.scarl.core.character.{Progression, ProgressionId, Stats}
 import io.github.fiifoo.scarl.core.communication.{Communication, CommunicationId, Message}
-import io.github.fiifoo.scarl.core.entity.Creature.{Sight, Stats}
 import io.github.fiifoo.scarl.core.entity._
 import io.github.fiifoo.scarl.core.equipment._
 import io.github.fiifoo.scarl.core.kind._
@@ -91,9 +91,8 @@ object Data {
   def progressions: Map[ProgressionId, Progression] = {
     val add = Stats(
       health = 2,
-      attack = 1,
-      defence = 1,
-      damage = 1
+      melee = Melee(attack = 1, damage = 1),
+      defence = 1
     )
 
     val steps = (1 to 10)
@@ -138,6 +137,7 @@ object Data {
         creatures = List((CreatureKindId("avatar-of-justice"), 5, 5)),
         items = List(
           (ItemKindId("grey-altar"), 5, 5),
+          (ItemKindId("musket"), 1, 1),
           (ItemKindId("long-sword"), 0, 1),
           (ItemKindId("claymore"), 0, 1),
           (ItemKindId("steel-shield"), 0, 1),
@@ -163,6 +163,7 @@ object Data {
         creatures = List((CreatureKindId("hound-of-chaos"), 0, 2)),
         items = List(
           (ItemKindId("grey-altar"), 0, 1),
+          (ItemKindId("musket"), 1, 1),
           (ItemKindId("long-sword"), 0, 1),
           (ItemKindId("claymore"), 0, 1),
           (ItemKindId("steel-shield"), 0, 1),
@@ -231,9 +232,8 @@ object Data {
       progression = Some(ProgressionId("some")),
       stats = Stats(
         health = 30,
-        attack = 20,
+        melee = Melee(attack = 20, damage = 10),
         defence = 20,
-        damage = 10,
         armor = 5,
         sight = Sight(10)
       )
@@ -248,9 +248,8 @@ object Data {
       progression = Some(ProgressionId("some")),
       stats = Stats(
         health = 1000,
-        attack = 20,
+        melee = Melee(attack = 20, damage = 10),
         defence = 20,
-        damage = 10,
         armor = 5,
         sight = Sight(5)
       ),
@@ -277,9 +276,8 @@ object Data {
       progression = None,
       stats = Stats(
         health = 10,
-        attack = 10,
+        melee = Melee(attack = 10, damage = 10),
         defence = 10,
-        damage = 10,
         armor = 5,
         sight = Sight(5)
       )
@@ -294,9 +292,8 @@ object Data {
       progression = None,
       stats = Stats(
         health = 10,
-        attack = 20,
+        melee = Melee(attack = 20, damage = 10),
         defence = 20,
-        damage = 10,
         armor = 5,
         sight = Sight(5)
       )
@@ -311,9 +308,8 @@ object Data {
       progression = None,
       stats = Stats(
         health = 50,
-        attack = 30,
+        melee = Melee(attack = 30, damage = 15),
         defence = 30,
-        damage = 10,
         armor = 5,
         sight = Sight(5)
       )
@@ -337,6 +333,19 @@ object Data {
     val stairsDown = ItemKind(ItemKindId("stairs-down"), "Stairs down", '>', "light-gray")
     val stairsUp = ItemKind(ItemKindId("stairs-up"), "Stairs up", '<', "light-gray")
 
+    val musket = ItemKind(
+      id = ItemKindId("musket"),
+      name = "Musket",
+      display = '!',
+      color = "brown",
+      pickable = true,
+      rangedWeapon = Some(RangedWeapon(
+        stats = Stats(
+          ranged = Ranged(attack = 20, damage = 10, range = 5)
+        )
+      ))
+    )
+
     val longSword = ItemKind(
       id = ItemKindId("long-sword"),
       name = "Long sword",
@@ -345,9 +354,8 @@ object Data {
       pickable = true,
       weapon = Some(Weapon(
         stats = Stats(
-          attack = 5,
-          defence = 5,
-          damage = 5
+          melee = Melee(attack = 5, damage = 5),
+          defence = 5
         ),
         twoHanded = false
       ))
@@ -360,8 +368,7 @@ object Data {
       pickable = true,
       weapon = Some(Weapon(
         stats = Stats(
-          attack = 10,
-          damage = 10
+          melee = Melee(attack = 10, damage = 10)
         ),
         twoHanded = true
       ))
@@ -459,6 +466,7 @@ object Data {
       shiningAltar.id -> shiningAltar,
       stairsDown.id -> stairsDown,
       stairsUp.id -> stairsUp,
+      musket.id -> musket,
       longSword.id -> longSword,
       claymore.id -> claymore,
       steelShield.id -> steelShield,

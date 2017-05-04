@@ -1,6 +1,7 @@
 import { getAdjacentLocations, getLocationConduit, getLocationCreature, getLocationPickableItems } from '../game/utils'
 import { sendMessage } from './connectionActions'
 import { addMessage } from './infoActions'
+import { cancelMode, setTarget } from './gameActions'
 
 export const attack = target => dispatch => {
     sendMessage({
@@ -74,6 +75,22 @@ export const pickItem = () => (dispatch, getState) => {
     } else {
         addMessage('Nothing to pick up.')(dispatch)
     }
+}
+
+export const shoot = location => (dispatch, getState) => {
+    const {fov} = getState()
+    const target = getLocationCreature(location, fov.cumulative)
+
+    if (target) {
+        setTarget(target.id)(dispatch)
+    }
+
+    cancelMode()(dispatch)
+
+    sendMessage({
+        type: 'Shoot',
+        data: {location},
+    })(dispatch)
 }
 
 const findCommunicateTarget = (player, fov) => {

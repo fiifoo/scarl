@@ -1,5 +1,6 @@
 package io.github.fiifoo.scarl.core
 
+import io.github.fiifoo.scarl.core.character.Stats
 import io.github.fiifoo.scarl.core.entity._
 
 object Selectors {
@@ -8,8 +9,12 @@ object Selectors {
     s.index.containerItems.getOrElse(container, Set())
   }
 
-  def getEquipmentStats(s: State)(creature: CreatureId): Creature.Stats = {
-    s.index.equipmentStats.getOrElse(creature, Creature.Stats())
+  def getCreatureStats(s: State)(creature: CreatureId): Stats = {
+    creature(s).stats add getEquipmentStats(s)(creature)
+  }
+
+  def getEquipmentStats(s: State)(creature: CreatureId): Stats = {
+    s.index.equipmentStats.getOrElse(creature, Stats())
   }
 
   def getLocationEntities(s: State)(location: Location): Set[LocatableId] = {

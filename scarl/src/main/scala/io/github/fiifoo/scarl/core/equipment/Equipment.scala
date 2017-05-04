@@ -1,6 +1,6 @@
 package io.github.fiifoo.scarl.core.equipment
 
-import io.github.fiifoo.scarl.core.entity.Creature.Stats
+import io.github.fiifoo.scarl.core.character.Stats
 
 sealed trait Equipment {
   val stats: Stats
@@ -10,6 +10,11 @@ sealed trait Equipment {
 
 case class Armor(stats: Stats, slot: ArmorSlot) extends Equipment {
   val slots: Set[Slot] = Set(slot)
+  val fillAll: Boolean = true
+}
+
+case class RangedWeapon(stats: Stats) extends Equipment {
+  val slots: Set[Slot] = Set(RangedSlot)
   val fillAll: Boolean = true
 }
 

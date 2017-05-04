@@ -1,6 +1,6 @@
 package io.github.fiifoo.scarl.core.kind
 
-import io.github.fiifoo.scarl.core.character.ProgressionId
+import io.github.fiifoo.scarl.core.character.{ProgressionId, Stats}
 import io.github.fiifoo.scarl.core.communication.CommunicationId
 import io.github.fiifoo.scarl.core.entity._
 import io.github.fiifoo.scarl.core.{Location, State}
@@ -11,7 +11,7 @@ case class CreatureKind(id: CreatureKindId,
                         color: String,
                         faction: FactionId,
                         progression: Option[ProgressionId],
-                        stats: Creature.Stats,
+                        stats: Stats,
                         greetings: Map[FactionId, List[CommunicationId]] = Map(),
                         responses: Map[FactionId, List[CommunicationId]] = Map()
                        ) extends Kind {

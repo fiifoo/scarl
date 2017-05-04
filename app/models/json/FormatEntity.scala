@@ -1,5 +1,6 @@
 package models.json
 
+import io.github.fiifoo.scarl.core.character.Stats
 import io.github.fiifoo.scarl.core.entity._
 import io.github.fiifoo.scarl.status._
 import models.json.FormatBase._
@@ -10,8 +11,10 @@ import play.api.libs.json._
 
 object FormatEntity {
   implicit val formatCreatureKindChoice = formatWeightedChoices(formatCreatureKindId)
-  implicit val formatCreatureSight = Json.format[Creature.Sight]
-  implicit val formatCreatureStats = Json.format[Creature.Stats]
+  implicit val formatMeleeStats = Json.format[Stats.Melee]
+  implicit val formatRangedStats = Json.format[Stats.Ranged]
+  implicit val formatSightStats = Json.format[Stats.Sight]
+  implicit val formatStats = Json.format[Stats]
 
   implicit val formatContainer = Json.format[Container]
   implicit val formatCreature = Json.format[Creature]

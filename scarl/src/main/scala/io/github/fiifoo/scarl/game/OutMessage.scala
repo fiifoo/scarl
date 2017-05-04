@@ -2,6 +2,7 @@ package io.github.fiifoo.scarl.game
 
 import io.github.fiifoo.scarl.area.AreaId
 import io.github.fiifoo.scarl.core.Location
+import io.github.fiifoo.scarl.core.character.Stats
 import io.github.fiifoo.scarl.core.entity.{Creature, Item, ItemId}
 import io.github.fiifoo.scarl.core.equipment.Slot
 import io.github.fiifoo.scarl.core.kind.Kinds
@@ -12,7 +13,7 @@ object OutMessage {
 
   case class PlayerInfo(creature: Creature,
                         equipments: Map[Slot, ItemId],
-                        equipmentStats: Creature.Stats,
+                        equipmentStats: Stats,
                         inventory: Set[Item]
                        )
 
