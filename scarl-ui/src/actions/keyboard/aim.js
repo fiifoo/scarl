@@ -4,10 +4,10 @@ import * as gameActions from '../gameActions'
 import * as playerActions from '../playerActions'
 
 export default (command, dispatch, getState) => {
-    const cursor = getState().ui.game.cursor
+    const reticule = getState().ui.game.reticule
 
     if (isDirectionCommand(command)) {
-        moveCursor(command, cursor, dispatch)
+        moveReticule(command, reticule, dispatch, getState)
 
         return
     }
@@ -18,14 +18,14 @@ export default (command, dispatch, getState) => {
             break
         }
         case commands.SHOOT: {
-            playerActions.shoot(cursor)(dispatch, getState)
+            playerActions.shoot(reticule)(dispatch, getState)
             break
         }
     }
 }
 
-const moveCursor = (command, cursor, dispatch) => {
-    const location = getDirectionLocation(command, cursor)
+const moveReticule = (command, reticule, dispatch, getState) => {
+    const location = getDirectionLocation(command, reticule)
 
-    gameActions.setCursorLocation(location)(dispatch)
+    gameActions.setReticule(location)(dispatch, getState)
 }

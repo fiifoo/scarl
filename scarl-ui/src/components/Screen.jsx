@@ -26,6 +26,13 @@ class Screen extends Component {
 
             if (nextProps.cursor !== this.props.cursor) {
                 this.screen.updateCursor(nextProps.cursor, this.props.cursor)
+            } else if (nextProps.reticule !== this.props.reticule) {
+                this.screen.updateReticule(
+                    nextProps.reticule,
+                    nextProps.trajectory,
+                    this.props.reticule,
+                    this.props.trajectory
+                )
             } else {
                 this.screen.update(nextProps.fov)
             }

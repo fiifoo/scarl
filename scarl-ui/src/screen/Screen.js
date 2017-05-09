@@ -53,26 +53,22 @@ export default (element, kinds) => {
 
     const updateCursor = (next, previous) => {
         if (previous !== null) {
-            hideCursor(previous)
+            removeCursor(previous)
         }
         if (next !== null) {
-            showCursor(next)
+            renderCursor(next)
         }
     }
 
-    const showCursor = location => {
-        const cell = getCell(location)
-
-        if (cell !== null) {
-            cell.className = 'cursor'
+    const updateReticule = (next, nextTrajetory, prev, prevTrajectory) => {
+        prevTrajectory.forEach(removeTrajectory)
+        if (prev !== null) {
+            removeReticule(prev)
         }
-    }
 
-    const hideCursor = location => {
-        const cell = getCell(location)
-
-        if (cell !== null) {
-            cell.className = ''
+        nextTrajetory.forEach(renderTrajectory)
+        if (next !== null) {
+            renderReticule(next)
         }
     }
 
@@ -118,6 +114,31 @@ export default (element, kinds) => {
         cell.innerHTML = '.'
     }
 
+    const createAddClass = className => location => {
+        const cell = getCell(location)
+
+        if (cell !== null) {
+            cell.className = `${cell.className} ${className}`.trim()
+        }
+    }
+
+    const createRemoveClass = className => location => {
+        const cell = getCell(location)
+
+        if (cell !== null) {
+            cell.className = cell.className.replace(className, '').trim()
+        }
+    }
+
+    const renderCursor = createAddClass('cursor')
+    const removeCursor = createRemoveClass('cursor')
+
+    const renderReticule = createAddClass('reticule')
+    const removeReticule = createRemoveClass('reticule')
+
+    const renderTrajectory = createAddClass('trajectory')
+    const removeTrajectory = createRemoveClass('trajectory')
+
     const getCell = ({x, y}) => {
         if (element.rows[y] !== undefined && element.rows[y].cells[x] !== undefined) {
             return element.rows[y].cells[x]
@@ -131,5 +152,6 @@ export default (element, kinds) => {
         reset,
         update,
         updateCursor,
+        updateReticule,
     }
 }

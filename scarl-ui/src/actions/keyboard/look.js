@@ -15,5 +15,5 @@ export default (command, dispatch, getState) => {
 const moveCursor = (command, cursor, dispatch) => {
     const location = getDirectionLocation(command, cursor)
 
-    gameActions.setCursorLocation(location)(dispatch)
+    gameActions.setCursor(location)(dispatch)
 }

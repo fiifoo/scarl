@@ -20,6 +20,15 @@ table.screen td.cursor {
     animation: 0.75s blink-cursor step-start infinite;
 }
 
+table.screen td.reticule {
+    border-bottom-color: lightgray;
+    animation: 0.75s blink-cursor step-start infinite;
+}
+
+table.screen td.trajectory {
+    background-color: #222;
+}
+
 @keyframes blink-cursor {
     from, to {
         border-bottom-color: transparent;

@@ -1,5 +1,28 @@
 import { List } from 'immutable'
-import { distance } from './geometry'
+import { distance, line } from './geometry'
+
+export const calculateTrajectory = (player, location, fov) => {
+    const from = player.creature.location
+    const range = getRangedAttackRange(player)
+    let blocked = false
+
+    return line(from, location).filter((location, index) => {
+        if (index === 0) {
+            return true
+        }
+        if (blocked || index > range) {
+            return false
+        }
+
+        const entities = getLocationEntities(location, fov)
+
+        if (entities && (entities.creature || entities.wall)) {
+            blocked = true
+        }
+
+        return true
+    })
+}
 
 export const getAdjacentLocations = l => ([
     {x: l.x - 1, y: l.y - 1},
@@ -48,7 +71,7 @@ export const getLocationDescriptions = (location, fov, map, kinds) => {
 
 export const seekTargets = (player, fov) => {
     const location = player.creature.location
-    const range = player.creature.stats.ranged.range + player.equipmentStats.ranged.range
+    const range = getRangedAttackRange(player)
 
     const targets = []
     for (let x = location.x - range; x <= location.x + range; x++) {
@@ -81,3 +104,5 @@ const getLocationKinds = (l, fov, map) => {
         return map[l.x] ? map[l.x][l.y] : undefined
     }
 }
+
+const getRangedAttackRange = player => player.creature.stats.ranged.range + player.equipmentStats.ranged.range

@@ -10,6 +10,8 @@ const ScreenContainer = connect(
         game: state.game,
         kinds: state.kinds,
         map: state.map.locations,
+        reticule: state.ui.game.reticule,
+        trajectory: state.ui.game.trajectory,
     }),
     {focusKeyboard}
 )(Screen)
