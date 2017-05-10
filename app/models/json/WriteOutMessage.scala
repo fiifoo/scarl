@@ -1,7 +1,7 @@
 package models.json
 
 import io.github.fiifoo.scarl.core.communication.CommunicationId
-import io.github.fiifoo.scarl.core.entity.FactionId
+import io.github.fiifoo.scarl.core.entity.{Faction, FactionId}
 import io.github.fiifoo.scarl.core.kind._
 import io.github.fiifoo.scarl.game.OutMessage.PlayerInfo
 import io.github.fiifoo.scarl.game.{LocationEntities, OutMessage, PlayerFov}
@@ -32,7 +32,7 @@ object WriteOutMessage {
     def writes(m: Map[FactionId, List[CommunicationId]]): JsValue = JsNull
   }
 
-  implicit val writeCreature = Json.writes[CreatureKind]
+  implicit val writeCreatureKind = Json.writes[CreatureKind]
   implicit val writeItemKind = Json.writes[ItemKind]
   implicit val writeTerrainKind = Json.writes[TerrainKind]
   implicit val writeWallKind = Json.writes[WallKind]
@@ -45,6 +45,7 @@ object WriteOutMessage {
     ))
   }
 
+  implicit val formatFaction = Json.format[Faction]
   implicit val formatEquipments = formatMap(formatSlot, formatItemId)
   implicit val writePlayerInfo = Json.writes[PlayerInfo]
 

@@ -3,7 +3,7 @@ package io.github.fiifoo.scarl.game
 import io.github.fiifoo.scarl.area.AreaId
 import io.github.fiifoo.scarl.core.Location
 import io.github.fiifoo.scarl.core.character.Stats
-import io.github.fiifoo.scarl.core.entity.{Creature, Item, ItemId}
+import io.github.fiifoo.scarl.core.entity._
 import io.github.fiifoo.scarl.core.equipment.Slot
 import io.github.fiifoo.scarl.core.kind.Kinds
 import io.github.fiifoo.scarl.game.OutMessage.PlayerInfo
@@ -20,6 +20,7 @@ object OutMessage {
 }
 
 case class OutMessage(area: AreaId,
+                      factions: Option[Iterable[Faction]] = None,
                       fov: PlayerFov,
                       messages: List[String],
                       player: Option[PlayerInfo],

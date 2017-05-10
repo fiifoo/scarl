@@ -69,15 +69,22 @@ export const getLocationDescriptions = (location, fov, map, kinds) => {
     return List(descriptions.map (d => d + '.'))
 }
 
-export const seekTargets = (player, fov) => {
+export const isEnemyChecker = (player, factions) => {
+    const enemyFactions = factions.get(player.creature.faction).enemies
+
+    return creature => enemyFactions.contains(creature.faction)
+}
+
+export const seekTargets = (player, factions, fov) => {
     const location = player.creature.location
     const range = getRangedAttackRange(player)
+    const isEnemy = isEnemyChecker(player, factions)
 
     const targets = []
     for (let x = location.x - range; x <= location.x + range; x++) {
         for (let y = location.y - range; y <= location.y + range; y++) {
             const creature = getLocationCreature({x, y}, fov)
-            if (creature && creature.id !== player.creature.id) {
+            if (creature && isEnemy(creature)) {
                 targets.push(creature)
             }
         }

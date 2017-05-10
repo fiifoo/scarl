@@ -1,14 +1,14 @@
-import { getLocationCreature } from '../../game/utils'
+import { getLocationCreature, isEnemyChecker } from '../../game/utils'
 import * as commands from '../../keyboard/commands'
 import { isDirectionCommand, getDirectionLocation } from '../../keyboard/utils'
 import * as gameActions from '../gameActions'
 import * as playerActions from '../playerActions'
 
 export default (command, dispatch, getState) => {
-    const {player, fov} = getState()
+    const {factions, fov, player} = getState()
 
     if (isDirectionCommand(command)) {
-        directionAction(command, player, fov, dispatch)
+        directionAction(command, player, factions, fov, dispatch)
 
         return
     }
@@ -45,11 +45,11 @@ export default (command, dispatch, getState) => {
     }
 }
 
-const directionAction = (command, player, fov, dispatch) => {
+const directionAction = (command, player, factions, fov, dispatch) => {
     const to = getDirectionLocation(command, player.creature.location)
     const target = getLocationCreature(to, fov.cumulative)
 
-    if (target) {
+    if (target && isEnemyChecker(player, factions)(target)) {
         playerActions.attack(target.id)(dispatch)
     } else {
         playerActions.move(to)(dispatch)

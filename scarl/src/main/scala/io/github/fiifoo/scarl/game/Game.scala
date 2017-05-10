@@ -6,7 +6,7 @@ import io.github.fiifoo.scarl.core.Selectors.{getContainerItems, getEquipmentSta
 import io.github.fiifoo.scarl.core._
 import io.github.fiifoo.scarl.core.action.Action
 import io.github.fiifoo.scarl.core.effect.CombinedEffectListener
-import io.github.fiifoo.scarl.core.entity.Creature
+import io.github.fiifoo.scarl.core.entity.{Creature, Faction}
 import io.github.fiifoo.scarl.core.kind.Kinds
 import io.github.fiifoo.scarl.core.mutation.ResetConduitEntryMutation
 import io.github.fiifoo.scarl.core.world.{ConduitId, Traveler}
@@ -121,7 +121,11 @@ class Game(initial: GameState,
 
   private def sendInitial(): Unit = {
     updateFov()
-    out(outMessage(map = areaMap, kinds = Some(state.kinds)))
+    out(outMessage(
+      factions = Some(state.factions.values),
+      kinds = Some(state.kinds),
+      map = areaMap
+    ))
   }
 
   private def send(): Unit = {
@@ -146,7 +150,8 @@ class Game(initial: GameState,
     mapBuilder(fov)
   }
 
-  private def outMessage(kinds: Option[Kinds] = None,
+  private def outMessage(factions: Option[Iterable[Faction]] = None,
+                         kinds: Option[Kinds] = None,
                          map: Option[Map[Location, MapLocation]] = None,
                          statistics: Option[Statistics] = None
                         ): OutMessage = {
@@ -161,7 +166,7 @@ class Game(initial: GameState,
       )
     }
 
-    OutMessage(area, fov, messages, player, kinds, map, statistics)
+    OutMessage(area, factions, fov, messages, player, kinds, map, statistics)
   }
 
   private def areaMap: Option[Map[Location, MapLocation]] = {

@@ -57,10 +57,10 @@ export const toggleInventory = () => dispatch => dispatch({
 })
 
 const seekTarget = () => (dispatch, getState) => {
-    const {player, fov, ui} = getState()
+    const {factions, fov, player, ui} = getState()
     const prev = ui.game.target
 
-    const targets = seekTargets(player, fov.cumulative)
+    const targets = seekTargets(player, factions, fov.cumulative)
 
     if (targets.length > 0) {
         const prevTarget = prev ? targets.find(target => target.id === prev) : undefined
