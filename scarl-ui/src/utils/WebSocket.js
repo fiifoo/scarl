@@ -1,8 +1,9 @@
 /* eslint no-console: 0 */
 
 export default (url, {onOpen, onMessage, onClose}) => {
+    const protocol = window.location.protocol === 'https:' ? 'wss' : 'ws'
 
-    const websocket = new WebSocket(`ws://${url}`)
+    const websocket = new WebSocket(`${protocol}://${url}`)
 
     websocket.onopen = () => {
         console.log('Connection open')
