@@ -2,7 +2,11 @@ import { slots } from '../game/equipment'
 import * as modes from '../game/modes'
 import { seekTargets, calculateTrajectory } from '../game/utils'
 import * as types from './actionTypes'
-import { addMessage } from './infoActions'
+
+export const addMessage = message => dispatch => dispatch({
+    type: types.ADD_MESSAGE,
+    message,
+})
 
 export const aim = () => (dispatch, getState) => {
     const {player} = getState()
@@ -20,6 +24,12 @@ export const aim = () => (dispatch, getState) => {
     changeMode(modes.AIM)(dispatch)
 }
 
+export const cancelMode = () => dispatch => changeMode(modes.MAIN)(dispatch)
+
+export const inventory = () => dispatch => changeMode(modes.INVENTORY)(dispatch)
+
+export const keyBindings = () => dispatch => changeMode(modes.KEY_BINDINGS)(dispatch)
+
 export const look = () => (dispatch, getState) => {
     const {player} = getState()
 
@@ -27,9 +37,7 @@ export const look = () => (dispatch, getState) => {
     changeMode(modes.LOOK)(dispatch)
 }
 
-export const cancelMode = () => dispatch => {
-    changeMode(modes.MAIN)(dispatch)
-}
+export const messageLog = () => dispatch => changeMode(modes.MESSAGE_LOG)(dispatch)
 
 export const setCursor = cursor => dispatch => dispatch({
     type: types.SET_CURSOR,
@@ -50,10 +58,6 @@ export const setReticule = reticule => (dispatch, getState) => {
 export const setTarget = target => dispatch => dispatch({
     type: types.SET_TARGET,
     target,
-})
-
-export const toggleInventory = () => dispatch => dispatch({
-    type: types.TOGGLE_INVENTORY,
 })
 
 const seekTarget = () => (dispatch, getState) => {

@@ -41,7 +41,7 @@ class Screen extends Component {
 
     render() {
         return (
-            <table className="screen" onClick={this.props.focusKeyboard}>
+            <table className="screen">
                 <tbody ref={tbody => this.element = tbody} />
             </table>
         )

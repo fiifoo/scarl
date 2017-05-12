@@ -4,7 +4,6 @@ import * as modes from '../../game/modes'
 
 const initial = Record({
     cursor: null,
-    inventoryVisible: false,
     mode: modes.MAIN,
     reticule: null,
     trajectory: [],
@@ -27,9 +26,6 @@ export default (state = initial, action) => {
         }
         case types.SET_TARGET: {
             return state.set('target', action.target)
-        }
-        case types.TOGGLE_INVENTORY: {
-            return state.set('inventoryVisible', ! state.inventoryVisible)
         }
         default: {
             return state

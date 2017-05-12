@@ -17,9 +17,12 @@ export const COMMA = 188
 export const ENTER = 13
 export const ESC = 27
 export const LESS = 60
+export const LESS2 = 226
 export const SPACEBAR = 32
 
 export const I = 73
+export const K = 75
 export const L = 76
+export const M = 77
 export const P = 80
 export const T = 84

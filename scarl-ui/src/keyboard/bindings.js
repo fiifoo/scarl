@@ -24,10 +24,13 @@ export default {
         [keycodes.COMMA, commands.PICK_ITEM],
         [keycodes.ENTER, commands.PASS],
         [keycodes.LESS, commands.ENTER_CONDUIT],
+        [keycodes.LESS2, commands.ENTER_CONDUIT],
         [keycodes.NUMPAD_5, commands.PASS],
         [keycodes.SPACEBAR, commands.AIM],
         [keycodes.I, commands.INVENTORY],
+        [keycodes.K, commands.KEY_BINDINGS],
         [keycodes.L, commands.LOOK],
+        [keycodes.M, commands.MESSAGE_LOG],
         [keycodes.P, commands.PICK_ITEM],
         [keycodes.T, commands.COMMUNICATE],
     ]).merge(directions),
@@ -37,8 +40,23 @@ export default {
         [keycodes.SPACEBAR, commands.SHOOT],
     ]).merge(directions),
 
+    [gameModes.INVENTORY]: Map([
+        [keycodes.ESC, commands.CANCEL_MODE],
+        [keycodes.I, commands.CANCEL_MODE],
+    ]),
+
+    [gameModes.KEY_BINDINGS]: Map([
+        [keycodes.ESC, commands.CANCEL_MODE],
+        [keycodes.K, commands.CANCEL_MODE],
+    ]),
+
     [gameModes.LOOK]: Map([
         [keycodes.ESC, commands.CANCEL_MODE],
         [keycodes.L, commands.CANCEL_MODE],
     ]).merge(directions),
+
+    [gameModes.MESSAGE_LOG]: Map([
+        [keycodes.ESC, commands.CANCEL_MODE],
+        [keycodes.M, commands.CANCEL_MODE],
+    ]),
 }

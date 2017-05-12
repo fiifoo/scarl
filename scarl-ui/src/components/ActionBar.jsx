@@ -13,7 +13,42 @@ const AimButton = ({mode, cancelMode, aim}) => {
         <button
             className={getClassName(active)}
             onClick={onClick}
+            disabled={mode !== modes.MAIN && mode !== modes.AIM}
             >Aim</button>
+    )
+}
+
+const EnterConduitButton = ({mode, enterConduit}) => (
+    <button
+        className={className}
+        onClick={enterConduit}
+        disabled={mode !== modes.MAIN}
+        >Use stairs</button>
+)
+
+const InventoryButton = ({mode, cancelMode, inventory}) => {
+    const active = mode === modes.INVENTORY
+    const onClick = active ? cancelMode : inventory
+
+    return (
+        <button
+            className={getClassName(active)}
+            onClick={onClick}
+            disabled={mode !== modes.MAIN && mode !== modes.INVENTORY}
+            >Inventory</button>
+    )
+}
+
+const KeyBindingsButton = ({mode, cancelMode, keyBindings}) => {
+    const active = mode === modes.KEY_BINDINGS
+    const onClick = active ? cancelMode : keyBindings
+
+    return (
+        <button
+            className={getClassName(active)}
+            onClick={onClick}
+            disabled={mode !== modes.MAIN && mode !== modes.KEY_BINDINGS}
+            >Key bindings</button>
     )
 }
 
@@ -25,73 +60,83 @@ const LookButton = ({mode, cancelMode, look}) => {
         <button
             className={getClassName(active)}
             onClick={onClick}
+            disabled={mode !== modes.MAIN && mode !== modes.LOOK}
             >Look</button>
     )
 }
 
-const PickItemButton = ({pickItem}) => (
+const MessageLogButton = ({mode, cancelMode, messageLog}) => {
+    const active = mode === modes.MESSAGE_LOG
+    const onClick = active ? cancelMode : messageLog
+
+    return (
+        <button
+            className={getClassName(active)}
+            onClick={onClick}
+            disabled={mode !== modes.MAIN && mode !== modes.MESSAGE_LOG}
+            >Message log</button>
+    )
+}
+
+const PickItemButton = ({mode, pickItem}) => (
     <button
         className={className}
         onClick={pickItem}
+        disabled={mode !== modes.MAIN}
         >Pick item</button>
 )
 
-const EnterConduitButton = ({enterConduit}) => (
-    <button
-        className={className}
-        onClick={enterConduit}
-        >Use stairs</button>
-)
-
-const TalkButton = ({communicate}) => (
+const TalkButton = ({mode, communicate}) => (
     <button
         className={className}
         onClick={communicate}
+        disabled={mode !== modes.MAIN}
         >Talk</button>
 )
 
-const InventoryButton = ({toggleInventory}) => (
-    <button
-        className={className}
-        onClick={toggleInventory}
-        >Inventory</button>
-)
-
-const MessageLogButton = ({toggleMessageLog}) => (
-    <button
-        className={className}
-        onClick={toggleMessageLog}
-        >Message log</button>
-)
-
-const KeyBindingsButton = ({toggleKeyBindings}) => (
-    <button
-        className={className}
-        onClick={toggleKeyBindings}
-        >Key bindings</button>
-)
-
 const ActionBar = props =>  {
-    const {mode} = props
-    const {cancelMode, focusKeyboard} = props
-    const {aim, communicate, enterConduit, look, pickItem} = props
-    const {toggleInventory, toggleKeyBindings, toggleMessageLog} = props
-
-    const wrap = action => () => {
-        action()
-        focusKeyboard()
-    }
+    const {mode, cancelMode} = props
+    const {communicate, enterConduit, pickItem} = props
+    const {aim, inventory, keyBindings, look, messageLog} = props
 
     return (
         <div className="btn-toolbar">
-            <AimButton mode={mode} cancelMode={wrap(cancelMode)} aim={wrap(aim)} />
-            <LookButton mode={mode} cancelMode={wrap(cancelMode)} look={wrap(look)} />
-            <PickItemButton pickItem={wrap(pickItem)} />
-            <EnterConduitButton enterConduit={wrap(enterConduit)} />
-            <TalkButton communicate={wrap(communicate)} />
-            <InventoryButton toggleInventory={toggleInventory} />
-            <MessageLogButton toggleMessageLog={toggleMessageLog} />
-            <KeyBindingsButton toggleKeyBindings={toggleKeyBindings} />
+            <AimButton
+                mode={mode}
+                cancelMode={cancelMode}
+                aim={aim}
+                />
+            <LookButton
+                mode={mode}
+                cancelMode={cancelMode}
+                look={look}
+                />
+            <PickItemButton
+                mode={mode}
+                pickItem={pickItem}
+                />
+            <EnterConduitButton
+                mode={mode}
+                enterConduit={enterConduit}
+                />
+            <TalkButton
+                mode={mode}
+                communicate={communicate}
+                />
+            <InventoryButton
+                mode={mode}
+                cancelMode={cancelMode}
+                inventory={inventory}
+                />
+            <MessageLogButton
+                mode={mode}
+                cancelMode={cancelMode}
+                messageLog={messageLog} />
+            <KeyBindingsButton
+                mode={mode}
+                cancelMode={cancelMode}
+                keyBindings={keyBindings}
+                />
         </div>
     )
 }

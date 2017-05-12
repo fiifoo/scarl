@@ -27,11 +27,19 @@ export default (command, dispatch, getState) => {
             break
         }
         case commands.INVENTORY: {
-            gameActions.toggleInventory()(dispatch)
+            gameActions.inventory()(dispatch)
+            break
+        }
+        case commands.KEY_BINDINGS: {
+            gameActions.keyBindings()(dispatch)
             break
         }
         case commands.LOOK: {
             gameActions.look()(dispatch, getState)
+            break
+        }
+        case commands.MESSAGE_LOG: {
+            gameActions.messageLog()(dispatch)
             break
         }
         case commands.PASS: {

@@ -1,7 +1,6 @@
 import { getAdjacentLocations, getLocationConduit, getLocationCreature, getLocationPickableItems } from '../game/utils'
 import { sendMessage } from './connectionActions'
-import { addMessage } from './infoActions'
-import { cancelMode, setTarget } from './gameActions'
+import { addMessage, cancelMode, setTarget } from './gameActions'
 
 export const attack = target => dispatch => {
     sendMessage({

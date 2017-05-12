@@ -1,12 +1,39 @@
+.game-main-view {
+    overflow-y: auto;
+    height: 451px;
+    padding-right: 15px;
+}
+
+/* colors */
 html, body {
     background-color: #000;
     color: lightgray;
 }
 
-.modal {
-    color: #333;
+.btn-default {
+    background-color: #eee;
+}
+.btn-default:hover {
+    background-color: #fff;
 }
 
-.modal-content {
-    background-color: #efefef;
+.table > thead > tr > th,
+.table > tbody > tr > th,
+.table > tfoot > tr > th,
+.table > thead > tr > td,
+.table > tbody > tr > td,
+.table > tfoot > tr > td {
+    border-color: #555;
+}
+
+.table > tbody + tbody {
+    border-color: #555;
+}
+
+.table-striped > tbody > tr:nth-of-type(2n+1) {
+    background-color: #171717;
+}
+
+.table > tbody > tr.active > td {
+    background-color: #024;
 }

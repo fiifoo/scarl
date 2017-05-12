@@ -7,16 +7,11 @@ export const SEND_MESSAGE = 'SEND_MESSAGE'
 export const RECEIVE_MESSAGE = 'RECEIVE_MESSAGE'
 
 // game
+export const ADD_MESSAGE = 'ADD_MESSAGE'
 export const CHANGE_GAME_MODE = 'CHANGE_GAME_MODE'
 export const SET_CURSOR = 'SET_CURSOR'
 export const SET_RETICULE = 'SET_RETICULE'
 export const SET_TARGET = 'SET_TARGET'
-export const TOGGLE_INVENTORY = 'TOGGLE_INVENTORY'
-
-// info
-export const ADD_MESSAGE = 'ADD_MESSAGE'
-export const TOGGLE_KEY_BINDINGS = 'TOGGLE_KEY_BINDINGS'
-export const TOGGLE_MESSAGE_LOG = 'TOGGLE_MESSAGE_LOG'
 
 // keyboard
 export const FOCUS_KEYBOARD = 'FOCUS_KEYBOARD'

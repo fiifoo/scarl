@@ -11,7 +11,7 @@ import StatisticsContainer from '../containers/StatisticsContainer'
 
 const Spacer = () => <div>&nbsp;</div>
 
-const Game = ({game}) => ! game.started ? <div></div> : (
+const Game = ({game, focusKeyboard}) => ! game.started ? <div></div> : (
     game.over ? (
         <div>
             <h3>Your journey is over</h3>
@@ -20,15 +20,20 @@ const Game = ({game}) => ! game.started ? <div></div> : (
             <MessageLogContainer />
         </div>
     ) : (
-        <div>
+        <div onClick={focusKeyboard}>
             <KeyboardContainer />
 
-            <InventoryContainer />
-            <MessageLogContainer />
-            <KeyBindingsContainer />
-
             <MessageBarContainer />
-            <ScreenContainer />
+            <Spacer />
+
+            <div className="game-main-view">
+                <ScreenContainer />
+
+                <InventoryContainer />
+                <KeyBindingsContainer />
+                <MessageLogContainer />
+            </div>
+
             <PlayerInfoContainer />
             <Spacer />
             <ActionBarContainer />

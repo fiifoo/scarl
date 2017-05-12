@@ -1,9 +1,7 @@
 import { connect } from 'react-redux'
 import ActionBar from '../components/ActionBar.jsx'
-import { aim, cancelMode, look, toggleInventory } from '../actions/gameActions'
-import { toggleKeyBindings, toggleMessageLog } from '../actions/infoActions'
+import { aim, cancelMode, inventory, look, keyBindings, messageLog } from '../actions/gameActions'
 import { communicate, enterConduit, pickItem } from '../actions/playerActions'
-import { focusKeyboard } from '../actions/keyboard'
 
 const ActionBarContainer = connect(
     state => ({
@@ -13,12 +11,11 @@ const ActionBarContainer = connect(
         cancelMode,
         communicate,
         enterConduit,
-        focusKeyboard,
+        inventory,
+        keyBindings,
         look,
+        messageLog,
         pickItem,
-        toggleInventory,
-        toggleKeyBindings,
-        toggleMessageLog,
     }
 )(ActionBar)
 

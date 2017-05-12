@@ -1,12 +1,12 @@
 import { Map } from 'immutable'
 import React from 'react'
-import { Button, Col, MenuItem, Panel, Row, SplitButton, Table } from 'react-bootstrap'
+import { Button, Col, MenuItem, Row, SplitButton, Table } from 'react-bootstrap'
 import { slots, groups } from '../game/equipment'
 
 const createFilter = group => item => item[group] !== undefined
 const createSorter = kinds => (a, b) => kinds.get(a.kind).name <= kinds.get(b.kind).name ? -1 : 1
 
-const Empty = () => <i className="text-muted">Empty</i>
+const Empty = () => <i>Empty</i>
 
 const EquipButton = ({item, allowedSlots, equipItem}) =>  {
     const defaultSlot = allowedSlots.get(0)
@@ -14,7 +14,13 @@ const EquipButton = ({item, allowedSlots, equipItem}) =>  {
     const id = `equip-${defaultSlot}-${item.id}`
 
     return allowedSlots.size > 1 ? (
-        <SplitButton title="Equip" onClick={equipDefault} id={id}>
+        <SplitButton
+            id={id}
+            title="Equip"
+            dropup
+            bsSize="xsmall"
+            onClick={equipDefault}
+            >
             {allowedSlots.map(slot => (
                 <MenuItem key={slot} onClick={() => equipItem(item.id, slot)}>
                     {slots[slot].label}
@@ -22,7 +28,10 @@ const EquipButton = ({item, allowedSlots, equipItem}) =>  {
             )).toArray()}
         </SplitButton>
     ) : (
-        <Button onClick={equipDefault}>
+        <Button
+            bsSize="xsmall"
+            onClick={equipDefault}
+            >
             Equip
         </Button>
     )
@@ -34,7 +43,8 @@ const EquipmentItem = ({equipped, group, item, kind, equipItem}) => {
     const allowedSlots = group.getSlots(equipment)
 
     return (
-        <tr className={equipped ? 'warning' : null}>
+        <tr className={equipped ? 'active' : null}>
+            <td><EquipButton item={item} allowedSlots={allowedSlots} equipItem={equipItem} /></td>
             <td>{kind.name}</td>
             <td>{stats.melee.attack}</td>
             <td>{stats.melee.damage}</td>
@@ -44,48 +54,34 @@ const EquipmentItem = ({equipped, group, item, kind, equipItem}) => {
             <td>{stats.defence}</td>
             <td>{stats.armor}</td>
             <td>{stats.sight.range}</td>
-            <td><EquipButton item={item} allowedSlots={allowedSlots} equipItem={equipItem} /></td>
         </tr>
     )
 }
 
 const EquipmentGroup = ({equipments, group, items, kinds, equipItem}) => (
-    <Panel collapsible defaultExpanded header={group.label}>
-        {items.size === 0
-            ? (
-                <Empty />
-            ) : (
-                <Table condensed striped fill>
-                    <thead>
-                        <tr>
-                            <td></td>
-                            <td>Attack</td>
-                            <td>Damage</td>
-                            <td>Ranged attack</td>
-                            <td>Ranged damage</td>
-                            <td>Range</td>
-                            <td>Defence</td>
-                            <td>Armor</td>
-                            <td>Sight</td>
-                            <td></td>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {items.map(item =>
-                            <EquipmentItem
-                                key={item.id}
-                                equipped={equipments.contains(item.id)}
-                                group={group}
-                                item={item}
-                                kind={kinds.get(item.kind)}
-                                equipItem={equipItem}
-                                />
-                        ).toArray()}
-                    </tbody>
-                </Table>
-            )
-        }
-    </Panel>
+    <tbody>
+        <tr>
+            <td colSpan="2"><b>{group.label}</b></td>
+            <td>Attack</td>
+            <td>Damage</td>
+            <td>Ranged attack</td>
+            <td>Ranged damage</td>
+            <td>Range</td>
+            <td>Defence</td>
+            <td>Armor</td>
+            <td>Sight</td>
+        </tr>
+        {items.map(item =>
+            <EquipmentItem
+                key={item.id}
+                equipped={equipments.contains(item.id)}
+                group={group}
+                item={item}
+                kind={kinds.get(item.kind)}
+                equipItem={equipItem}
+                />
+        ).toArray()}
+    </tbody>
 )
 
 const Equipments = ({equipments, inventory, kinds}) => {
@@ -144,7 +140,9 @@ const Inventory = ({equipments, inventory, kinds, equipItem}) =>  {
                     />
             </Col>
             <Col xs={8}>
-                {Map(groups).map(renderEquipmentGroup).toArray()}
+                <Table condensed>
+                    {Map(groups).map(renderEquipmentGroup).toArray()}
+                </Table>
             </Col>
         </Row>
     )
