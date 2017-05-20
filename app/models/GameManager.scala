@@ -4,6 +4,7 @@ import io.github.fiifoo.scarl.area.AreaId
 import io.github.fiifoo.scarl.core.Rng
 import io.github.fiifoo.scarl.core.kind.CreatureKindId
 import io.github.fiifoo.scarl.game._
+import io.github.fiifoo.scarl.game.api.OutMessage
 import io.github.fiifoo.scarl.world.WorldManager
 import models.json.FormatGameState._
 import models.save.SaveStorage

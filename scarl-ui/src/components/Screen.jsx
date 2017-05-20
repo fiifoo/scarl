@@ -12,16 +12,16 @@ class Screen extends Component {
     componentDidMount() {
         this.screen = createScreen(this.element, this.props.kinds)
 
-        this.screen.build(this.props.map)
+        this.screen.build(this.props.area.map)
         this.screen.update(this.props.fov)
     }
 
     componentWillReceiveProps(nextProps) {
-        if (nextProps.game.started === false) {
-            this.screen.reset(nextProps.map)
+        if (nextProps.game.running === false) {
+            this.screen.reset(nextProps.area.map)
         } else {
-            if (nextProps.area !== this.props.area) {
-                this.screen.reset(nextProps.map)
+            if (nextProps.area.id !== this.props.area.id) {
+                this.screen.reset(nextProps.area.map)
             }
 
             if (nextProps.cursor !== this.props.cursor) {

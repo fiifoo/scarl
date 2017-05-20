@@ -5,8 +5,8 @@ export default (state = null, action) => {
         case types.CONNECTION_CLOSED: {
             return null
         }
-        case types.RECEIVE_MESSAGE: {
-            return action.data.player ? action.data.player : null
+        case types.RECEIVE_GAME_UPDATE: {
+            return action.data.player
         }
         default: {
             return state

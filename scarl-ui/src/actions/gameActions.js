@@ -1,7 +1,7 @@
-import { slots } from '../game/equipment'
 import * as modes from '../game/modes'
 import { seekTargets, calculateTrajectory } from '../game/utils'
 import * as types from './actionTypes'
+import { sendInventoryQuery } from './connectionActions'
 
 export const addMessage = message => dispatch => dispatch({
     type: types.ADD_MESSAGE,
@@ -9,10 +9,7 @@ export const addMessage = message => dispatch => dispatch({
 })
 
 export const aim = () => (dispatch, getState) => {
-    const {player} = getState()
-
-    // todo: just check from Map once api is sensible
-    const hasWeapon = player.equipments.find(x => x.key === slots.RangedSlot.key) !== undefined
+    const hasWeapon = getState().player.equipmentStats.ranged.range > 0
 
     if (! hasWeapon) {
         addMessage('Nothing to aim with.')(dispatch)
@@ -26,7 +23,10 @@ export const aim = () => (dispatch, getState) => {
 
 export const cancelMode = () => dispatch => changeMode(modes.MAIN)(dispatch)
 
-export const inventory = () => dispatch => changeMode(modes.INVENTORY)(dispatch)
+export const inventory = () => dispatch => {
+    sendInventoryQuery()
+    changeMode(modes.INVENTORY)(dispatch)
+}
 
 export const keyBindings = () => dispatch => changeMode(modes.KEY_BINDINGS)(dispatch)
 

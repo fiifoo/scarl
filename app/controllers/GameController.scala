@@ -4,9 +4,9 @@ import javax.inject.Inject
 
 import akka.actor._
 import akka.stream.Materializer
-import io.github.fiifoo.scarl.game.OutMessage
+import io.github.fiifoo.scarl.game.api.OutMessage
 import models.GameManager
-import models.json.{ReadAction, WriteOutMessage}
+import models.json.{ReadInMessage, WriteOutMessage}
 import models.save.{FileSaveStorage, NullSaveStorage}
 import play.Environment
 import play.api.libs.json.JsValue
@@ -49,7 +49,7 @@ class GameController @Inject()(implicit system: ActorSystem, materializer: Mater
     }
 
     def receive = {
-      case json: JsValue => game.receive(ReadAction(json))
+      case json: JsValue => game.receive(ReadInMessage(json))
     }
 
     override def postStop() = {

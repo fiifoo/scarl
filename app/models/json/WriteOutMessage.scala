@@ -3,8 +3,9 @@ package models.json
 import io.github.fiifoo.scarl.core.communication.CommunicationId
 import io.github.fiifoo.scarl.core.entity.{Faction, FactionId}
 import io.github.fiifoo.scarl.core.kind._
-import io.github.fiifoo.scarl.game.OutMessage.PlayerInfo
-import io.github.fiifoo.scarl.game.{LocationEntities, OutMessage, PlayerFov}
+import io.github.fiifoo.scarl.game.api.OutMessage.PlayerInfo
+import io.github.fiifoo.scarl.game.api._
+import io.github.fiifoo.scarl.game.{LocationEntities, PlayerFov}
 import models.json.FormatBase._
 import models.json.FormatEntity._
 import models.json.FormatEquipment._
@@ -49,5 +50,26 @@ object WriteOutMessage {
   implicit val formatEquipments = formatMap(formatSlot, formatItemId)
   implicit val writePlayerInfo = Json.writes[PlayerInfo]
 
-  implicit val writeOutMessage = Json.writes[OutMessage]
+  implicit val writeGameStart = Json.writes[GameStart]
+  implicit val writeGameUpdate = Json.writes[GameUpdate]
+  implicit val writeGameOver = Json.writes[GameOver]
+  implicit val writeAreaChange = Json.writes[AreaChange]
+  implicit val writePlayerInventory = Json.writes[PlayerInventory]
+
+  implicit val writeOutMessage = new Writes[OutMessage] {
+    def writes(message: OutMessage): JsValue = {
+      val data = message match {
+        case message: GameStart => writeGameStart.writes(message)
+        case message: GameUpdate => writeGameUpdate.writes(message)
+        case message: GameOver => writeGameOver.writes(message)
+        case message: AreaChange => writeAreaChange.writes(message)
+        case message: PlayerInventory => writePlayerInventory.writes(message)
+      }
+
+      JsObject(Map(
+        "type" -> JsString(message.getClass.getSimpleName),
+        "data" -> data
+      ))
+    }
+  }
 }

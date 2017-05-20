@@ -9,8 +9,8 @@ const InventoryContainer = connect(
         component: Inventory,
         visible: state.ui.game.mode === INVENTORY,
 
-        equipments: state.player.equipments,
-        inventory: state.player.inventory,
+        equipments: state.equipments,
+        inventory: state.inventory,
         kinds: state.kinds,
     }), {
         equipItem,

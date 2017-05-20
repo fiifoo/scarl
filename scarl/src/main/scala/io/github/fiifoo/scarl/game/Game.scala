@@ -6,11 +6,10 @@ import io.github.fiifoo.scarl.core.Selectors.{getContainerItems, getEquipmentSta
 import io.github.fiifoo.scarl.core._
 import io.github.fiifoo.scarl.core.action.Action
 import io.github.fiifoo.scarl.core.effect.CombinedEffectListener
-import io.github.fiifoo.scarl.core.entity.{Creature, Faction}
-import io.github.fiifoo.scarl.core.kind.Kinds
 import io.github.fiifoo.scarl.core.mutation.ResetConduitEntryMutation
 import io.github.fiifoo.scarl.core.world.{ConduitId, Traveler}
-import io.github.fiifoo.scarl.game.OutMessage.PlayerInfo
+import io.github.fiifoo.scarl.game.api.OutMessage.PlayerInfo
+import io.github.fiifoo.scarl.game.api._
 import io.github.fiifoo.scarl.game.map.{MapBuilder, MapLocation}
 import io.github.fiifoo.scarl.geometry.Fov
 import io.github.fiifoo.scarl.message.MessageFactory
@@ -32,9 +31,10 @@ class Game(initial: GameState,
 
   private var (bubble, state) = createBubble(gameState.world.states(gameState.area))
 
-  def receive(action: Action): Unit = {
-    if (shouldRun(action)) {
-      run(Some(action))
+  def receive(message: InMessage): Unit = {
+    message match {
+      case message: GameAction => receiveAction(message.action)
+      case _: InventoryQuery => sendPlayerInventory()
     }
   }
 
@@ -55,8 +55,14 @@ class Game(initial: GameState,
     gameOver(state)
   }
 
+  private def receiveAction(action: Action): Unit = {
+    if (shouldRun(action)) {
+      run(Some(action))
+    }
+  }
+
   private def initialize(): Unit = {
-    sendInitial()
+    sendGameStart()
     run(None)
   }
 
@@ -66,9 +72,9 @@ class Game(initial: GameState,
     conduitEntry(state).foreach(handleConduitEntry)
 
     if (gameOver(state)) {
-      sendFinal()
+      sendGameOver()
     } else {
-      send()
+      sendGameUpdate()
     }
   }
 
@@ -99,7 +105,7 @@ class Game(initial: GameState,
     state = nextState
     fov = PlayerFov()
 
-    sendArea()
+    sendAreaChange()
   }
 
   @tailrec
@@ -119,27 +125,46 @@ class Game(initial: GameState,
     }
   }
 
-  private def sendInitial(): Unit = {
-    updateFov()
-    out(outMessage(
-      factions = Some(state.factions.values),
-      kinds = Some(state.kinds),
+  private def sendGameStart(): Unit = {
+    out(GameStart(
+      area = gameState.area,
+      factions = state.factions.values,
+      kinds = state.kinds,
       map = areaMap
     ))
   }
 
-  private def send(): Unit = {
+  private def sendGameUpdate(): Unit = {
     updateFov()
-    out(outMessage())
+
+    out(GameUpdate(
+      fov = fov,
+      messages = messageFactory.extract(),
+      player = PlayerInfo(
+        creature = gameState.player(state),
+        equipmentStats = getEquipmentStats(state)(gameState.player)
+      )
+    ))
   }
 
-  private def sendArea(): Unit = {
-    updateFov()
-    out(outMessage(map = areaMap))
+  private def sendGameOver(): Unit = {
+    out(GameOver(
+      statistics = statisticsBuilder.get()
+    ))
   }
 
-  private def sendFinal(): Unit = {
-    out(outMessage(statistics = Some(statisticsBuilder.get())))
+  private def sendAreaChange(): Unit = {
+    out(AreaChange(
+      area = gameState.area,
+      map = areaMap
+    ))
+  }
+
+  private def sendPlayerInventory(): Unit = {
+    out(PlayerInventory(
+      inventory = getContainerItems(state)(gameState.player) map (_ (state)),
+      equipments = state.equipments.getOrElse(gameState.player, Map())
+    ))
   }
 
   private def updateFov(): Unit = {
@@ -150,27 +175,8 @@ class Game(initial: GameState,
     mapBuilder(fov)
   }
 
-  private def outMessage(factions: Option[Iterable[Faction]] = None,
-                         kinds: Option[Kinds] = None,
-                         map: Option[Map[Location, MapLocation]] = None,
-                         statistics: Option[Statistics] = None
-                        ): OutMessage = {
-    val area = gameState.area
-    val messages = messageFactory.extract()
-    val player = state.entities.get(gameState.player) collect {
-      case creature: Creature => PlayerInfo(
-        creature = creature,
-        equipments = state.equipments.getOrElse(creature.id, Map()),
-        equipmentStats = getEquipmentStats(state)(creature.id),
-        inventory = getContainerItems(state)(creature.id) map (_ (state))
-      )
-    }
-
-    OutMessage(area, factions, fov, messages, player, kinds, map, statistics)
-  }
-
-  private def areaMap: Option[Map[Location, MapLocation]] = {
-    gameState.maps.get(gameState.area)
+  private def areaMap: Map[Location, MapLocation] = {
+    gameState.maps.getOrElse(gameState.area, Map())
   }
 
   private def shouldRun(action: Action): Boolean = {

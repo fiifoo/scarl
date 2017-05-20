@@ -3,9 +3,9 @@ package io.github.fiifoo.scarl.game.map
 import io.github.fiifoo.scarl.core.Location
 import io.github.fiifoo.scarl.game.PlayerFov
 
-class MapBuilder(initial: Option[Map[Location, MapLocation]]) {
+class MapBuilder(initial: Map[Location, MapLocation]) {
 
-  private var map: Map[Location, MapLocation] = initial getOrElse Map()
+  private var map: Map[Location, MapLocation] = initial
 
   def apply(fov: PlayerFov): Unit = {
     val add = fov.delta mapValues MapLocation.apply

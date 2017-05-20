@@ -11,15 +11,8 @@ import StatisticsContainer from '../containers/StatisticsContainer'
 
 const Spacer = () => <div>&nbsp;</div>
 
-const Game = ({game, focusKeyboard}) => ! game.started ? <div></div> : (
-    game.over ? (
-        <div>
-            <h3>Your journey is over</h3>
-            <StatisticsContainer />
-            <h4>Latest messages:</h4>
-            <MessageLogContainer />
-        </div>
-    ) : (
+const Game = ({game, focusKeyboard}) => (
+    game.running ? (
         <div onClick={focusKeyboard}>
             <KeyboardContainer />
 
@@ -38,6 +31,15 @@ const Game = ({game, focusKeyboard}) => ! game.started ? <div></div> : (
             <Spacer />
             <ActionBarContainer />
         </div>
+    ) : game.over ? (
+        <div>
+            <h3>Your journey is over</h3>
+            <StatisticsContainer />
+            <h4>Latest messages:</h4>
+            <MessageLogContainer />
+        </div>
+    ) : (
+        <div></div>
     )
 )
 

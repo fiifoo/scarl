@@ -17,17 +17,13 @@ export default (state = Kinds(), action) => {
         case types.CONNECTION_CLOSED: {
             return null
         }
-        case types.RECEIVE_MESSAGE: {
-            if (action.data.kinds) {
-                return Kinds({
-                    creatures: buildBranch(action.data.kinds.creatures),
-                    items: buildBranch(action.data.kinds.items),
-                    terrains: buildBranch(action.data.kinds.terrains),
-                    walls: buildBranch(action.data.kinds.walls),
-                })
-            } else {
-                return state
-            }
+        case types.RECEIVE_GAME_START: {
+            return Kinds({
+                creatures: buildBranch(action.data.kinds.creatures),
+                items: buildBranch(action.data.kinds.items),
+                terrains: buildBranch(action.data.kinds.terrains),
+                walls: buildBranch(action.data.kinds.walls),
+            })
         }
         default: {
             return state

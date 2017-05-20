@@ -12,14 +12,10 @@ export default (state = Statistics(), action) => {
         case types.CONNECTION_CLOSED: {
             return Statistics()
         }
-        case types.RECEIVE_MESSAGE: {
-            if (action.data.statistics) {
-                return Statistics({
-                    deaths: Map(action.data.statistics.deaths.map(getTuple)),
-                })
-            } else {
-                return state
-            }
+        case types.RECEIVE_GAME_OVER: {
+            return Statistics({
+                deaths: Map(action.data.statistics.deaths.map(getTuple)),
+            })
         }
         default: {
             return state

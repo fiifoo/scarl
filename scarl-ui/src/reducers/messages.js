@@ -25,7 +25,7 @@ export default (state = initial, action) => {
                 all: state.all,
             }
         }
-        case types.RECEIVE_MESSAGE: {
+        case types.RECEIVE_GAME_UPDATE: {
             const messages = List(action.data.messages.reverse())
 
             return {

@@ -5,7 +5,7 @@ import { getLocationDescriptions } from '../game/utils.js'
 
 const locationDescriptions = (state, location) => {
     const fov = state.fov.cumulative
-    const map = state.map.locations
+    const map = state.area.map
     const kinds = state.kinds
 
     return getLocationDescriptions(location, fov, map, kinds)

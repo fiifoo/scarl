@@ -1,7 +1,7 @@
 import * as types from '../actions/actionTypes'
 
 const initial = {
-    started: false,
+    running: false,
     over: false,
 }
 
@@ -10,19 +10,20 @@ export default (state = initial, action) => {
         case types.CONNECTION_CLOSED: {
             return initial
         }
-        case types.RECEIVE_MESSAGE: {
-            if (! state.started) {
+        case types.RECEIVE_GAME_UPDATE: {
+            if (! state.running) {
                 return {
-                    ...initial,
-                    started: true,
-                }
-            } else if (! action.data.player) {
-                return {
-                    ...state,
-                    over: true,
+                    running: true,
+                    over: false,
                 }
             } else {
                 return state
+            }
+        }
+        case types.RECEIVE_GAME_OVER: {
+            return {
+                running: false,
+                over: true,
             }
         }
         default: {

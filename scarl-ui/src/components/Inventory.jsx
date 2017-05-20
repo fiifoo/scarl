@@ -113,10 +113,6 @@ const Equipments = ({equipments, inventory, kinds}) => {
 }
 
 const Inventory = ({equipments, inventory, kinds, equipItem}) =>  {
-    // todo: should be at reducer but is here for performance because of bad api
-    inventory = Map(inventory.map(x => [x.id, x]))
-    equipments = Map(equipments.map(x => [x.key, x.value]))
-
     const sorter = createSorter(kinds.items)
 
     const renderEquipmentGroup = group => (

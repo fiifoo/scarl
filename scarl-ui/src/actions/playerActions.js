@@ -1,12 +1,9 @@
 import { getAdjacentLocations, getLocationConduit, getLocationCreature, getLocationPickableItems } from '../game/utils'
-import { sendMessage } from './connectionActions'
+import { sendAction, sendInventoryQuery } from './connectionActions'
 import { addMessage, cancelMode, setTarget } from './gameActions'
 
-export const attack = target => dispatch => {
-    sendMessage({
-        type: 'Attack',
-        data: {target},
-    })(dispatch)
+export const attack = target => () => {
+    sendAction('Attack', {target})
 }
 
 export const communicate = () => (dispatch, getState) => {
@@ -14,10 +11,7 @@ export const communicate = () => (dispatch, getState) => {
     const target = findCommunicateTarget(player, fov)
 
     if (target) {
-        sendMessage({
-            type: 'Communicate',
-            data: {target},
-        })(dispatch)
+        sendAction('Communicate', {target})
     } else {
         addMessage('No one to talk to.')(dispatch)
     }
@@ -29,34 +23,23 @@ export const enterConduit = () => (dispatch, getState) => {
     const conduit = getLocationConduit(location, fov.cumulative)
 
     if (conduit) {
-        sendMessage({
-            type: 'EnterConduit',
-            data: {conduit},
-        })(dispatch)
+        sendAction('EnterConduit', {conduit})
     } else {
         addMessage('No stairs here.')(dispatch)
     }
 }
 
-export const equipItem = (item, slot) => dispatch => {
-    sendMessage({
-        type: 'EquipItem',
-        data: {item, slot},
-    })(dispatch)
+export const equipItem = (item, slot) => () => {
+    sendAction('EquipItem', {item, slot})
+    sendInventoryQuery()
 }
 
-export const move = location => dispatch => {
-    sendMessage({
-        type: 'Move',
-        data: {location},
-    })(dispatch)
+export const move = location => () => {
+    sendAction('Move', {location})
 }
 
-export const pass = () => dispatch => {
-    sendMessage({
-        type: 'Pass',
-        data: {},
-    })(dispatch)
+export const pass = () => () => {
+    sendAction('Pass')
 }
 
 export const pickItem = () => (dispatch, getState) => {
@@ -67,10 +50,7 @@ export const pickItem = () => (dispatch, getState) => {
     if (items.length > 0) {
         const item = items[0].id
 
-        sendMessage({
-            type: 'PickItem',
-            data: {item},
-        })(dispatch)
+        sendAction('PickItem', {item})
     } else {
         addMessage('Nothing to pick up.')(dispatch)
     }
@@ -85,11 +65,7 @@ export const shoot = location => (dispatch, getState) => {
     }
 
     cancelMode()(dispatch)
-
-    sendMessage({
-        type: 'Shoot',
-        data: {location},
-    })(dispatch)
+    sendAction('Shoot', {location})
 }
 
 const findCommunicateTarget = (player, fov) => {

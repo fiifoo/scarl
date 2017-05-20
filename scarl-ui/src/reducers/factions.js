@@ -16,12 +16,8 @@ export default (state = Map(), action) => {
         case types.CONNECTION_CLOSED: {
             return Map()
         }
-        case types.RECEIVE_MESSAGE: {
-            if (action.data.factions) {
-                return Map(action.data.factions.map(buildFaction).map(x => [x.id, x]))
-            } else {
-                return state
-            }
+        case types.RECEIVE_GAME_START: {
+            return Map(action.data.factions.map(buildFaction).map(x => [x.id, x]))
         }
         default: {
             return state

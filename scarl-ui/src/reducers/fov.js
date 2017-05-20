@@ -25,7 +25,6 @@ const buildCumulative = (data, cumulative) => {
 }
 
 const getInitial = () => ({
-    area: null,
     cumulative: [],
     delta: [],
     shouldHide: [],
@@ -36,16 +35,13 @@ export default (state = getInitial(), action) => {
         case types.CONNECTION_CLOSED: {
             return getInitial()
         }
-        case types.RECEIVE_MESSAGE: {
-            const area = action.data.area
+        case types.RECEIVE_AREA_CHANGE: {
+            return getInitial()
+        }
+        case types.RECEIVE_GAME_UPDATE: {
             const data = action.data.fov
 
-            if (state.area !== area) {
-                state = getInitial()
-            }
-
             return {
-                area,
                 delta: build(data.delta),
                 cumulative: buildCumulative(data, state.cumulative), // mutates state!
                 shouldHide: data.shouldHide,
