@@ -1,10 +1,11 @@
 package models.json
 
 import io.github.fiifoo.scarl.core.character.Stats
-import io.github.fiifoo.scarl.core.equipment._
+import io.github.fiifoo.scarl.core.item.Equipment._
+import io.github.fiifoo.scarl.core.item._
 import play.api.libs.json._
 
-object FormatEquipment {
+object FormatItem {
 
   private implicit val formatMeleeStats = Json.format[Stats.Melee]
   private implicit val formatRangedStats = Json.format[Stats.Ranged]

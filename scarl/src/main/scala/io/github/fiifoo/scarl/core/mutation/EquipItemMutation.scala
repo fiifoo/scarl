@@ -2,7 +2,7 @@ package io.github.fiifoo.scarl.core.mutation
 
 import io.github.fiifoo.scarl.core.State
 import io.github.fiifoo.scarl.core.entity.{CreatureId, ItemId}
-import io.github.fiifoo.scarl.core.equipment.Slot
+import io.github.fiifoo.scarl.core.item.Equipment.Slot
 import io.github.fiifoo.scarl.core.mutation.index.EquipmentStatsIndexMutation
 
 case class EquipItemMutation(creature: CreatureId,

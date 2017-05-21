@@ -5,7 +5,8 @@ import io.github.fiifoo.scarl.core.character.Stats
 import io.github.fiifoo.scarl.core.character.Stats.Melee
 import io.github.fiifoo.scarl.core.effect.EffectResolver
 import io.github.fiifoo.scarl.core.entity.{CreatureId, Item, ItemId}
-import io.github.fiifoo.scarl.core.equipment._
+import io.github.fiifoo.scarl.core.item.Equipment._
+import io.github.fiifoo.scarl.core.item._
 import io.github.fiifoo.scarl.core.kind.ItemKindId
 import io.github.fiifoo.scarl.core.mutation.NewEntityMutation
 import io.github.fiifoo.scarl.core.test_assets.TestCreatureFactory

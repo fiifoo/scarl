@@ -4,8 +4,8 @@ import io.github.fiifoo.scarl.action._
 import io.github.fiifoo.scarl.core.action.Action
 import io.github.fiifoo.scarl.core.entity.CreatureId
 import models.json.FormatBase._
-import models.json.FormatEquipment.formatSlot
 import models.json.FormatId._
+import models.json.FormatItem.formatSlot
 import play.api.libs.json._
 
 object ReadAction {

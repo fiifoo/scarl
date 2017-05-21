@@ -4,8 +4,8 @@ import io.github.fiifoo.scarl.core.character.Stats
 import io.github.fiifoo.scarl.core.entity._
 import io.github.fiifoo.scarl.status._
 import models.json.FormatBase._
-import models.json.FormatEquipment._
 import models.json.FormatId._
+import models.json.FormatItem._
 import models.json.FormatUtils._
 import play.api.libs.json._
 

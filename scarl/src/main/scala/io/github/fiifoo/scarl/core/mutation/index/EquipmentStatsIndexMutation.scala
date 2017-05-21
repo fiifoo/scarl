@@ -3,7 +3,8 @@ package io.github.fiifoo.scarl.core.mutation.index
 import io.github.fiifoo.scarl.core.State
 import io.github.fiifoo.scarl.core.character.Stats
 import io.github.fiifoo.scarl.core.entity.{CreatureId, ItemId}
-import io.github.fiifoo.scarl.core.equipment._
+import io.github.fiifoo.scarl.core.item.Equipment._
+import io.github.fiifoo.scarl.core.item._
 
 case class EquipmentStatsIndexMutation(creature: CreatureId) {
   type Index = Map[CreatureId, Stats]

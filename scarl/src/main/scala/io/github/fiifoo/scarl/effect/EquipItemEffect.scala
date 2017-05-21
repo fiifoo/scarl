@@ -3,7 +3,8 @@ package io.github.fiifoo.scarl.effect
 import io.github.fiifoo.scarl.core.State
 import io.github.fiifoo.scarl.core.effect.{Effect, EffectResult}
 import io.github.fiifoo.scarl.core.entity.{CreatureId, Item, ItemId}
-import io.github.fiifoo.scarl.core.equipment._
+import io.github.fiifoo.scarl.core.item.Equipment.Slot
+import io.github.fiifoo.scarl.core.item._
 import io.github.fiifoo.scarl.core.mutation.EquipItemMutation
 
 /**

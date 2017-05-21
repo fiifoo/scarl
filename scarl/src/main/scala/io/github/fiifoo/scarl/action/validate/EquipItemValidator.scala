@@ -4,7 +4,8 @@ import io.github.fiifoo.scarl.action.EquipItemAction
 import io.github.fiifoo.scarl.action.validate.ValidatorUtils._
 import io.github.fiifoo.scarl.core.State
 import io.github.fiifoo.scarl.core.entity.{CreatureId, Item}
-import io.github.fiifoo.scarl.core.equipment._
+import io.github.fiifoo.scarl.core.item.Equipment.Slot
+import io.github.fiifoo.scarl.core.item._
 
 object EquipItemValidator extends ActionValidator[EquipItemAction] {
   def apply(s: State, actor: CreatureId, action: EquipItemAction): Boolean = {

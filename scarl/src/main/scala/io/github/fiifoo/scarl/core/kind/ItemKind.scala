@@ -1,7 +1,7 @@
 package io.github.fiifoo.scarl.core.kind
 
 import io.github.fiifoo.scarl.core.entity._
-import io.github.fiifoo.scarl.core.equipment.{Armor, RangedWeapon, Shield, Weapon}
+import io.github.fiifoo.scarl.core.item.{Armor, RangedWeapon, Shield, Weapon}
 import io.github.fiifoo.scarl.core.{Location, State}
 
 case class ItemKind(id: ItemKindId,

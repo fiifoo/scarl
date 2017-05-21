@@ -2,8 +2,8 @@ package models.json
 
 import io.github.fiifoo.scarl.game.api.{GameAction, InMessage, InventoryQuery}
 import models.json.FormatBase._
-import models.json.FormatEquipment.formatSlot
 import models.json.FormatId._
+import models.json.FormatItem.formatSlot
 import models.json.ReadAction.readAction
 import play.api.libs.json._
 

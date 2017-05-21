@@ -4,7 +4,7 @@ import io.github.fiifoo.scarl.core.State.Communications
 import io.github.fiifoo.scarl.core._
 import io.github.fiifoo.scarl.core.action.Tactic
 import io.github.fiifoo.scarl.core.entity._
-import io.github.fiifoo.scarl.core.equipment.Slot
+import io.github.fiifoo.scarl.core.item.Equipment.Slot
 import io.github.fiifoo.scarl.core.mutation.index._
 
 /**

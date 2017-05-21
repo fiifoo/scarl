@@ -10,7 +10,8 @@ import io.github.fiifoo.scarl.core.character.Stats.{Melee, Ranged, Sight}
 import io.github.fiifoo.scarl.core.character.{Progression, ProgressionId, Stats}
 import io.github.fiifoo.scarl.core.communication.{Communication, CommunicationId, Message}
 import io.github.fiifoo.scarl.core.entity._
-import io.github.fiifoo.scarl.core.equipment._
+import io.github.fiifoo.scarl.core.item.Equipment._
+import io.github.fiifoo.scarl.core.item._
 import io.github.fiifoo.scarl.core.kind._
 import io.github.fiifoo.scarl.widget.{DelayedTransformingWidget, HealLocationWidget, SummonCreatureWidget, TriggeredTransformingWidget}
 

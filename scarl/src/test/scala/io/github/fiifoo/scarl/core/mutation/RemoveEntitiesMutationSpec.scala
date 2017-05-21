@@ -4,7 +4,7 @@ import io.github.fiifoo.scarl.ai.tactic.RoamTactic
 import io.github.fiifoo.scarl.core.State.Communications
 import io.github.fiifoo.scarl.core.communication.CommunicationId
 import io.github.fiifoo.scarl.core.entity._
-import io.github.fiifoo.scarl.core.equipment.{MainHand, OffHand}
+import io.github.fiifoo.scarl.core.item.Equipment._
 import io.github.fiifoo.scarl.core.kind.ItemKindId
 import io.github.fiifoo.scarl.core.test_assets.{TestActiveStatus, TestCreatureFactory, TestTriggerStatus}
 import io.github.fiifoo.scarl.core.{Location, State}

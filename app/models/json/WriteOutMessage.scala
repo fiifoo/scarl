@@ -8,9 +8,9 @@ import io.github.fiifoo.scarl.game.api._
 import io.github.fiifoo.scarl.game.{LocationEntities, PlayerFov}
 import models.json.FormatBase._
 import models.json.FormatEntity._
-import models.json.FormatEquipment._
 import models.json.FormatGameState.{formatAreaMap, formatStatistics}
 import models.json.FormatId._
+import models.json.FormatItem._
 import models.json.FormatUtils._
 import play.api.libs.json._
 

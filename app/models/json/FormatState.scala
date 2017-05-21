@@ -8,8 +8,8 @@ import io.github.fiifoo.scarl.core.kind.Kinds
 import io.github.fiifoo.scarl.core.{Rng, State}
 import models.json.FormatBase._
 import models.json.FormatEntities._
-import models.json.FormatEquipment.formatSlot
 import models.json.FormatId._
+import models.json.FormatItem.formatSlot
 import models.json.FormatTactic._
 import models.json.FormatUtils._
 import play.api.libs.json._
