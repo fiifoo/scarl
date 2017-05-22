@@ -1,14 +1,12 @@
-import { getLocationCreature, isEnemyChecker } from '../../game/utils'
+import { getLocationCreature, getLocationDoor, isEnemyChecker } from '../../game/utils'
 import * as commands from '../../keyboard/commands'
 import { isDirectionCommand, getDirectionLocation } from '../../keyboard/utils'
 import * as gameActions from '../gameActions'
 import * as playerActions from '../playerActions'
 
 export default (command, dispatch, getState) => {
-    const {factions, fov, player} = getState()
-
     if (isDirectionCommand(command)) {
-        directionAction(command, player, factions, fov, dispatch)
+        directionAction(command, dispatch, getState)
 
         return
     }
@@ -50,15 +48,24 @@ export default (command, dispatch, getState) => {
             playerActions.pickItem()(dispatch, getState)
             break
         }
+        case commands.USE_DOOR: {
+            playerActions.useDoor()(dispatch, getState)
+            break
+        }
     }
 }
 
-const directionAction = (command, player, factions, fov, dispatch) => {
+const directionAction = (command, dispatch, getState) => {
+    const {factions, fov, player} = getState()
+
     const to = getDirectionLocation(command, player.creature.location)
     const target = getLocationCreature(to, fov.cumulative)
+    const door = getLocationDoor(to, fov.cumulative)
 
     if (target && isEnemyChecker(player, factions)(target)) {
         playerActions.attack(target.id)(dispatch)
+    } else if (door && !door.door.open) {
+        playerActions.useDoor(door.id)(dispatch, getState)
     } else {
         playerActions.move(to)(dispatch)
     }

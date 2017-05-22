@@ -131,7 +131,7 @@ object Data {
       templates = List(
         (TemplateId("room"), 1, 1)
       ),
-      entrances = List((Some(ItemKindId("opened-door")), 4, 4)),
+      entrances = List((Some(ItemKindId("wooden-door-closed")), 4, 4)),
       border = Some(WallKindId("stone-wall")),
       terrain = Some(TerrainKindId("rubble")),
       content = Template.RandomizedContent(
@@ -157,7 +157,7 @@ object Data {
     val room = RandomizedTemplate(
       id = TemplateId("room"),
       shape = Rectangle(12, 10, 0.4),
-      entrances = List((Some(ItemKindId("opened-door")), 1, 2)),
+      entrances = List((Some(ItemKindId("wooden-door-closed")), 1, 2)),
       border = Some(WallKindId("stone-wall")),
       content = Template.RandomizedContent(
         conduitLocations = (1, 1),
@@ -183,7 +183,7 @@ object Data {
     val gatewayRoom = FixedTemplate(
       id = TemplateId("gateway-room"),
       shape = Rectangle(5, 5, 0),
-      entrances = Map(Location(2, 0) -> Some(ItemKindId("opened-door"))),
+      entrances = Map(Location(2, 0) -> Some(ItemKindId("wooden-door-closed"))),
       fixedContent = FixedContent(
         gatewayLocations = Set(Location(2, 2)),
         items = Map(
@@ -326,13 +326,34 @@ object Data {
   }
 
   private def items = {
-    val openedDoor = ItemKind(ItemKindId("opened-door"), "Opened door", '/', "brown")
     val portal = ItemKind(ItemKindId("chaos-portal"), "Chaos portal", 'O', "red")
     val greyAltar = ItemKind(ItemKindId("grey-altar"), "Grey altar", 'T', "grey")
     val whiteAltar = ItemKind(ItemKindId("white-altar"), "White altar", 'T', "white")
     val shiningAltar = ItemKind(ItemKindId("shining-altar"), "Shining altar", 'T', "yellow")
     val stairsDown = ItemKind(ItemKindId("stairs-down"), "Stairs down", '>', "light-gray")
     val stairsUp = ItemKind(ItemKindId("stairs-up"), "Stairs up", '<', "light-gray")
+
+    val woodenDoorOpen = ItemKind(
+      id = ItemKindId("wooden-door-open"),
+      name = "Wooden door",
+      display = '/',
+      color = "brown",
+      door = Some(Door(
+        open = true,
+        transformTo = ItemKindId("wooden-door-closed")
+      ))
+    )
+
+    val woodenDoorClosed = ItemKind(
+      id = ItemKindId("wooden-door-closed"),
+      name = "Wooden door",
+      display = '+',
+      color = "brown",
+      door = Some(Door(
+        open = false,
+        transformTo = ItemKindId("wooden-door-open")
+      ))
+    )
 
     val musket = ItemKind(
       id = ItemKindId("musket"),
@@ -460,13 +481,14 @@ object Data {
     )
 
     Map(
-      openedDoor.id -> openedDoor,
       portal.id -> portal,
       greyAltar.id -> greyAltar,
       whiteAltar.id -> whiteAltar,
       shiningAltar.id -> shiningAltar,
       stairsDown.id -> stairsDown,
       stairsUp.id -> stairsUp,
+      woodenDoorOpen.id -> woodenDoorOpen,
+      woodenDoorClosed.id -> woodenDoorClosed,
       musket.id -> musket,
       longSword.id -> longSword,
       claymore.id -> claymore,

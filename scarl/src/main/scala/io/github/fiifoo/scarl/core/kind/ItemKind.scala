@@ -1,7 +1,7 @@
 package io.github.fiifoo.scarl.core.kind
 
 import io.github.fiifoo.scarl.core.entity._
-import io.github.fiifoo.scarl.core.item.{Armor, RangedWeapon, Shield, Weapon}
+import io.github.fiifoo.scarl.core.item._
 import io.github.fiifoo.scarl.core.{Location, State}
 
 case class ItemKind(id: ItemKindId,
@@ -12,7 +12,8 @@ case class ItemKind(id: ItemKindId,
                     armor: Option[Armor] = None,
                     rangedWeapon: Option[RangedWeapon] = None,
                     shield: Option[Shield] = None,
-                    weapon: Option[Weapon] = None
+                    weapon: Option[Weapon] = None,
+                    door: Option[Door] = None
                    ) extends Kind {
 
   def apply(s: State, container: EntityId): Item = {
@@ -34,7 +35,8 @@ case class ItemKind(id: ItemKindId,
       armor = armor,
       rangedWeapon = rangedWeapon,
       shield = shield,
-      weapon = weapon
+      weapon = weapon,
+      door = door
     )
 
     (container, item)

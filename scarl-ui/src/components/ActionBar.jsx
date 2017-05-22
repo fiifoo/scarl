@@ -94,9 +94,17 @@ const TalkButton = ({mode, communicate}) => (
         >Talk</button>
 )
 
+const UseDoorButton = ({mode, useDoor}) => (
+    <button
+        className={className}
+        onClick={useDoor}
+        disabled={mode !== modes.MAIN}
+        >Use door</button>
+)
+
 const ActionBar = props =>  {
     const {mode, cancelMode} = props
-    const {communicate, enterConduit, pickItem} = props
+    const {communicate, enterConduit, pickItem, useDoor} = props
     const {aim, inventory, keyBindings, look, messageLog} = props
 
     return (
@@ -122,6 +130,10 @@ const ActionBar = props =>  {
             <TalkButton
                 mode={mode}
                 communicate={communicate}
+                />
+            <UseDoorButton
+                mode={mode}
+                useDoor={useDoor}
                 />
             <InventoryButton
                 mode={mode}

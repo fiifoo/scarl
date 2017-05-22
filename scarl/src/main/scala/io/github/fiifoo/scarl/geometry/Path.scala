@@ -1,6 +1,5 @@
 package io.github.fiifoo.scarl.geometry
 
-import io.github.fiifoo.scarl.core.entity.{CreatureId, WallId}
 import io.github.fiifoo.scarl.core.{Location, State}
 
 import scala.annotation.tailrec
@@ -142,10 +141,7 @@ object Path {
   }
 
   private def blocked(s: State)(location: Location): Boolean = {
-    s.index.locationEntities.get(location).exists(_ collectFirst {
-      case _: WallId => true
-      case _: CreatureId => true
-    } getOrElse false)
+    Obstacle.movement(s)(location).isDefined
   }
 
   private def backtrace(location: Location, parent: Node, nodes: Map[Location, Node]): Vector[Location] = {

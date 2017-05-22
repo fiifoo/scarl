@@ -16,7 +16,11 @@ export const calculateTrajectory = (player, location, fov) => {
 
         const entities = getLocationEntities(location, fov)
 
-        if (entities && (entities.creature || entities.wall)) {
+        if (entities && (
+            entities.creature
+            || entities.wall
+            || entities.items.find(item => item.door && !item.door.open)
+        )) {
             blocked = true
         }
 
@@ -45,6 +49,12 @@ export const getLocationCreature = (location, fov) => {
     const entities = getLocationEntities(location, fov)
 
     return entities ? entities.creature : undefined
+}
+
+export const getLocationDoor = (location, fov) => {
+    const entities = getLocationEntities(location, fov)
+
+    return entities ? entities.items.find(item => !!item.door) : undefined
 }
 
 export const getLocationPickableItems = (location, fov) => {

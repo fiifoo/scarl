@@ -10,8 +10,8 @@ class BadShotMessage(player: () => CreatureId,
 
   def apply(s: State, effect: BadShotEffect): Option[String] = {
     if (effect.attacker == player()) {
-      if (effect.wall.isDefined) {
-        Some("Your shot hits wall.")
+      if (effect.obstacle.isDefined) {
+        Some("Your shot hits obstacle.")
       } else {
         Some("You shoot at nothing.")
       }

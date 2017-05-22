@@ -20,6 +20,7 @@ export const LESS = 60
 export const LESS2 = 226
 export const SPACEBAR = 32
 
+export const D = 68
 export const I = 73
 export const K = 75
 export const L = 76

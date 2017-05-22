@@ -21,6 +21,14 @@ object Selectors {
     s.index.locationEntities.getOrElse(location, Set())
   }
 
+  def getLocationItems(s: State)(location: Location): Set[ItemId] = {
+    s.index.locationEntities.get(location) map (entities => {
+      (entities collect {
+        case container: ContainerId => getContainerItems(s)(container)
+      }).flatten
+    }) getOrElse Set()
+  }
+
   def getLocationTriggers(s: State)(location: Location): Set[TriggerStatusId] = {
     s.index.locationTriggers.getOrElse(location, Set())
   }

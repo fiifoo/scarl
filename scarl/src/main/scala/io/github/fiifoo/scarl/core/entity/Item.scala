@@ -10,5 +10,6 @@ case class Item(id: ItemId,
                 armor: Option[Armor] = None,
                 rangedWeapon: Option[RangedWeapon] = None,
                 shield: Option[Shield] = None,
-                weapon: Option[Weapon] = None
+                weapon: Option[Weapon] = None,
+                door: Option[Door] = None
                ) extends Entity

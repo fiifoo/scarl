@@ -27,6 +27,7 @@ object ReadAction {
   implicit val readMoveAction = Json.reads[MoveAction]
   implicit val readPickItemAction = Json.reads[PickItemAction]
   implicit val readShootAction = Json.reads[ShootAction]
+  implicit val readUseDoorAction = Json.reads[UseDoorAction]
 
   implicit val readAction = new Reads[Action] {
     def reads(json: JsValue): JsResult[Action] = {
@@ -43,6 +44,7 @@ object ReadAction {
         case "Pass" => PassAction()
         case "PickItem" => data.as[PickItemAction]
         case "Shoot" => data.as[ShootAction]
+        case "UseDoor" => data.as[UseDoorAction]
       })
     }
   }

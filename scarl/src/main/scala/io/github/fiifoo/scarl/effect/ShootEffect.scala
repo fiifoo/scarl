@@ -1,11 +1,11 @@
 package io.github.fiifoo.scarl.effect
 
-import io.github.fiifoo.scarl.core.Selectors.{getCreatureStats, getLocationEntities}
+import io.github.fiifoo.scarl.core.Selectors.getCreatureStats
 import io.github.fiifoo.scarl.core.effect.{Effect, EffectResult}
-import io.github.fiifoo.scarl.core.entity.{CreatureId, EntityId, WallId}
+import io.github.fiifoo.scarl.core.entity.{CreatureId, EntityId}
 import io.github.fiifoo.scarl.core.mutation.RngMutation
 import io.github.fiifoo.scarl.core.{Location, State}
-import io.github.fiifoo.scarl.geometry.Line
+import io.github.fiifoo.scarl.geometry.{Line, Obstacle}
 import io.github.fiifoo.scarl.rule.AttackRule
 
 case class ShootEffect(attacker: CreatureId,
@@ -15,11 +15,11 @@ case class ShootEffect(attacker: CreatureId,
 
   def apply(s: State): EffectResult = {
     val path = Line(attacker(s).location, location).tail take range(s)
-    val target = (path flatMap locationTarget(s) _).headOption
+    val target = (path flatMap Obstacle.movement(s) _).headOption
 
     target collect {
       case target: CreatureId => attackResult(s, target)
-      case wall: WallId => badShotResult(Some(wall))
+      case obstacle: EntityId => badShotResult(Some(obstacle))
     } getOrElse {
       badShotResult()
     }
@@ -40,18 +40,11 @@ case class ShootEffect(attacker: CreatureId,
     )
   }
 
-  private def badShotResult(wall: Option[WallId] = None): EffectResult = {
-    EffectResult(BadShotEffect(attacker, wall))
+  private def badShotResult(obstacle: Option[EntityId] = None): EffectResult = {
+    EffectResult(BadShotEffect(attacker, obstacle))
   }
 
   private def range(s: State): Int = {
     getCreatureStats(s)(attacker).ranged.range
-  }
-
-  private def locationTarget(s: State)(location: Location): Option[EntityId] = {
-    getLocationEntities(s)(location) collectFirst {
-      case creature: CreatureId => creature
-      case wall: WallId => wall
-    }
   }
 }

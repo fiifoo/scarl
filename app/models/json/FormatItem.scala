@@ -3,6 +3,7 @@ package models.json
 import io.github.fiifoo.scarl.core.character.Stats
 import io.github.fiifoo.scarl.core.item.Equipment._
 import io.github.fiifoo.scarl.core.item._
+import models.json.FormatId._
 import play.api.libs.json._
 
 object FormatItem {
@@ -51,6 +52,8 @@ object FormatItem {
   implicit val formatRangedWeapon = Json.format[RangedWeapon]
   implicit val formatShield = Json.format[Shield]
   implicit val formatWeapon = Json.format[Weapon]
+
+  implicit val formatDoor = Json.format[Door]
 
   private def slotName(slot: Slot): String = {
     slot.getClass.getSimpleName.replace("$", "")
