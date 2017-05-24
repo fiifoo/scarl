@@ -21,13 +21,12 @@ case class UseDoorEffect(user: CreatureId,
       }) orElse {
         target(s).door map (door => {
           val opening = !door.open
-          val (nextContainer, nextItem) = door.transformTo(s)(s, location)
+          val next = door.transformTo(s)(s, container)
 
           EffectResult(
             List(
-              NewEntityMutation(nextContainer),
-              NewEntityMutation(nextItem),
-              RemovableEntityMutation(container)
+              NewEntityMutation(next),
+              RemovableEntityMutation(target)
             ),
             List(
               DoorUsedEffect(user, target, opening, Some(this))
