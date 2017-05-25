@@ -6,7 +6,7 @@ import { MESSAGE_LOG } from '../game/modes'
 const MessageLogContainer = connect(
     state => ({
         component: MessageLog,
-        visible: state.ui.game.mode === MESSAGE_LOG,
+        visible: state.ui.game.mode === MESSAGE_LOG || state.game.over,
 
         messages: state.messages.all,
     })
