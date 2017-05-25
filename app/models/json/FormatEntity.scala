@@ -22,6 +22,7 @@ object FormatEntity {
   implicit val formatTerrain = Json.format[Terrain]
   implicit val formatWall = Json.format[Wall]
 
+  implicit val formatDamagingTrapStatus = Json.format[DamagingTrapStatus]
   implicit val formatDeathStatus = Json.format[DeathStatus]
   implicit val formatDelayedTransformingWidgetStatus = Json.format[DelayedTransformingWidgetStatus]
   implicit val formatHealLocationStatus = Json.format[HealLocationStatus]
@@ -33,6 +34,7 @@ object FormatEntity {
     def writes(status: Status) = JsObject(Map(
       "type" -> JsString(status.getClass.getSimpleName),
       "value" -> (status match {
+        case status: DamagingTrapStatus => Json.toJson(status)
         case status: DeathStatus => Json.toJson(status)
         case status: DelayedTransformingWidgetStatus => Json.toJson(status)
         case status: HealLocationStatus => Json.toJson(status)
@@ -47,6 +49,7 @@ object FormatEntity {
       val value = obj("value")
 
       val status = obj("type").as[String] match {
+        case "DamagingTrapStatus" => value.as[DamagingTrapStatus]
         case "DeathStatus" => value.as[DeathStatus]
         case "DelayedTransformingWidgetStatus" => value.as[DelayedTransformingWidgetStatus]
         case "HealLocationStatus" => value.as[HealLocationStatus]

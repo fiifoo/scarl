@@ -23,6 +23,7 @@ class MessageFactory(player: () => CreatureId, fov: () => Set[Location]) extends
   implicit val move = new MoveMessage(player, fov)
   implicit val pickItem = new PickItemMessage(player, fov)
   implicit val transformWidget = new TransformWidgetMessage(player, fov)
+  implicit val triggerTrap = new TriggerTrapMessage(player, fov)
 
   def apply(s: State, effect: Effect): Unit = {
     val message: Option[String] = effect match {
@@ -40,6 +41,7 @@ class MessageFactory(player: () => CreatureId, fov: () => Set[Location]) extends
       case e: MoveEffect => build(s, e)
       case e: PickItemEffect => build(s, e)
       case e: TransformWidgetEffect => build(s, e)
+      case e: TriggerTrapEffect => build(s, e)
       case _ => None
     }
 

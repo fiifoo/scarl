@@ -7,7 +7,7 @@ import io.github.fiifoo.scarl.core.{Location, Selectors, State}
 object LocationEntities {
   def apply(s: State, location: Location): LocationEntities = {
     val entities = Selectors.getLocationEntities(s)(location)
-    val items = Selectors.getLocationItems(s)(location) map (_ (s))
+    val items = Selectors.getLocationItems(s)(location) map (_ (s)) filterNot (_.hidden)
 
     LocationEntities(
       s.index.locationConduit.get(location),

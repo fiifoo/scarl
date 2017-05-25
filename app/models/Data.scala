@@ -13,7 +13,7 @@ import io.github.fiifoo.scarl.core.entity._
 import io.github.fiifoo.scarl.core.item.Equipment._
 import io.github.fiifoo.scarl.core.item._
 import io.github.fiifoo.scarl.core.kind._
-import io.github.fiifoo.scarl.widget.{DelayedTransformingWidget, HealLocationWidget, SummonCreatureWidget, TriggeredTransformingWidget}
+import io.github.fiifoo.scarl.widget._
 
 object Data {
 
@@ -150,7 +150,8 @@ object Data {
         ),
         widgets = List(
           (WidgetKindId("chaos-portal-widget"), 4, 4),
-          (WidgetKindId("activate-healing-altar-widget"), 3, 3)
+          (WidgetKindId("activate-healing-altar-widget"), 3, 3),
+          (WidgetKindId("arrow-trap-widget"), 3, 3)
         )
       )
     )
@@ -176,7 +177,8 @@ object Data {
         ),
         widgets = List(
           (WidgetKindId("chaos-portal-widget"), 0, 1),
-          (WidgetKindId("activate-healing-altar-widget"), 0, 1)
+          (WidgetKindId("activate-healing-altar-widget"), 0, 1),
+          (WidgetKindId("arrow-trap-widget"), 0, 1)
         )
       )
     )
@@ -333,6 +335,14 @@ object Data {
     val stairsDown = ItemKind(ItemKindId("stairs-down"), "Stairs down", '>', "light-gray")
     val stairsUp = ItemKind(ItemKindId("stairs-up"), "Stairs up", '<', "light-gray")
 
+    val arrowTrap = ItemKind(
+      id = ItemKindId("arrow-trap"),
+      name = "Arrow trap",
+      display = '^',
+      color = "red",
+      hidden = true
+    )
+
     val woodenDoorOpen = ItemKind(
       id = ItemKindId("wooden-door-open"),
       name = "Wooden door",
@@ -487,6 +497,7 @@ object Data {
       shiningAltar.id -> shiningAltar,
       stairsDown.id -> stairsDown,
       stairsUp.id -> stairsUp,
+      arrowTrap.id -> arrowTrap,
       woodenDoorOpen.id -> woodenDoorOpen,
       woodenDoorClosed.id -> woodenDoorClosed,
       musket.id -> musket,
@@ -520,6 +531,13 @@ object Data {
   }
 
   private def widgets = {
+    val arrowTrap = DamagingTrapWidget(
+      id = WidgetKindId("arrow-trap-widget"),
+      item = ItemKindId("arrow-trap"),
+      damage = 10,
+      triggerDescription = "You step on pressure plate. Arrow shoots from the wall and hits you."
+    )
+
     val portal = SummonCreatureWidget(
       id = WidgetKindId("chaos-portal-widget"),
       item = ItemKindId("chaos-portal"),
@@ -556,6 +574,7 @@ object Data {
     )
 
     Map(
+      arrowTrap.id -> arrowTrap,
       portal.id -> portal,
       activateAltar.id -> activateAltar,
       activeAltar.id -> activeAltar,
