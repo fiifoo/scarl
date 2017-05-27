@@ -5,6 +5,7 @@ import io.github.fiifoo.scarl.core.entity.{Faction, FactionId}
 import io.github.fiifoo.scarl.core.kind._
 import io.github.fiifoo.scarl.game.api.OutMessage.PlayerInfo
 import io.github.fiifoo.scarl.game.api._
+import io.github.fiifoo.scarl.game.event.{Event, GenericEvent}
 import io.github.fiifoo.scarl.game.{LocationEntities, PlayerFov}
 import models.json.FormatBase._
 import models.json.FormatEntity._
@@ -44,6 +45,20 @@ object WriteOutMessage {
       "terrains" -> Json.toJson(k.terrains.values),
       "walls" -> Json.toJson(k.walls.values)
     ))
+  }
+
+  implicit val writeGenericEvent = Json.writes[GenericEvent]
+  implicit val writeEvent = new Writes[Event] {
+    def writes(event: Event): JsValue = {
+      val data = event match {
+        case event: GenericEvent => writeGenericEvent.writes(event)
+      }
+
+      JsObject(Map(
+        "type" -> JsString(event.getClass.getSimpleName),
+        "data" -> data
+      ))
+    }
   }
 
   implicit val formatFaction = Json.format[Faction]

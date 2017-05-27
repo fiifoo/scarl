@@ -7,6 +7,7 @@ import io.github.fiifoo.scarl.core.entity._
 import io.github.fiifoo.scarl.core.item.Equipment.Slot
 import io.github.fiifoo.scarl.core.kind.Kinds
 import io.github.fiifoo.scarl.game.api.OutMessage.PlayerInfo
+import io.github.fiifoo.scarl.game.event.Event
 import io.github.fiifoo.scarl.game.map.MapLocation
 import io.github.fiifoo.scarl.game.{PlayerFov, Statistics}
 
@@ -27,7 +28,7 @@ case class GameStart(area: AreaId,
                     ) extends OutMessage
 
 case class GameUpdate(fov: PlayerFov,
-                      messages: List[String],
+                      events: List[Event],
                       player: PlayerInfo
                      ) extends OutMessage
 

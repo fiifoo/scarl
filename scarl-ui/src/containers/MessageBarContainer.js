@@ -11,6 +11,10 @@ const locationDescriptions = (state, location) => {
     return getLocationDescriptions(location, fov, map, kinds)
 }
 
+const eventMessages = state => (
+    state.events.latest.filter(e => e.data.message !== undefined).map(e => e.data.message)
+)
+
 const getMessages = state => {
     const mode = state.ui.game.mode
 
@@ -22,7 +26,7 @@ const getMessages = state => {
             return locationDescriptions(state, state.ui.game.cursor)
         }
         default: {
-            return state.messages.latest
+            return eventMessages(state)
         }
 
     }

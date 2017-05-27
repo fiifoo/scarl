@@ -8,15 +8,22 @@ const initial = {
     all: List(),
 }
 
+const createGenericEvent = message => ({
+    type: 'GenericEvent',
+    data: {message},
+})
+
 export default (state = initial, action) => {
     switch (action.type) {
         case types.CONNECTION_CLOSED: {
             return initial
         }
         case types.ADD_MESSAGE: {
+            const event = createGenericEvent(action.message)
+
             return {
-                latest: List([action.message]),
-                all: state.all.push(action.message).take(MAX),
+                latest: List([event]),
+                all: state.all.push(event).take(MAX),
             }
         }
         case types.CHANGE_GAME_MODE: {
@@ -26,11 +33,11 @@ export default (state = initial, action) => {
             }
         }
         case types.RECEIVE_GAME_UPDATE: {
-            const messages = List(action.data.messages.reverse())
+            const events = List(action.data.events.reverse())
 
             return {
-                latest: messages,
-                all: state.all.concat(messages).take(MAX),
+                latest: events,
+                all: state.all.concat(events).take(MAX),
             }
         }
         default: {
