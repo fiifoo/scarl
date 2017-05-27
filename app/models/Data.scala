@@ -113,10 +113,10 @@ object Data {
   def templates: Map[TemplateId, Template] = {
     val main = RandomizedTemplate(
       id = TemplateId("main"),
-      shape = Rectangle(80, 25, 0),
+      shape = Rectangle(70, 25, 0),
       templates = List(
         (TemplateId("big-room"), 1, 1),
-        (TemplateId("room"), 3, 4),
+        (TemplateId("room"), 2, 4),
         (TemplateId("gateway-room"), 1, 1)
       ),
       border = Some(WallKindId("stone-wall")),
@@ -230,7 +230,7 @@ object Data {
       id = CreatureKindId("hero"),
       name = "Hero",
       display = '@',
-      color = "yellow",
+      color = "Yellow",
       faction = FactionId("justice"),
       progression = Some(ProgressionId("some")),
       stats = Stats(
@@ -246,7 +246,7 @@ object Data {
       id = CreatureKindId("avatar-of-justice"),
       name = "Avatar of Justice",
       display = 'A',
-      color = "white",
+      color = "White",
       faction = FactionId("justice"),
       progression = Some(ProgressionId("some")),
       stats = Stats(
@@ -274,7 +274,7 @@ object Data {
       id = CreatureKindId("hound-of-chaos"),
       name = "Hound of Chaos",
       display = 'c',
-      color = "purple",
+      color = "Purple",
       faction = FactionId("chaos"),
       progression = None,
       stats = Stats(
@@ -290,7 +290,7 @@ object Data {
       id = CreatureKindId("herald-of-chaos"),
       name = "Herald of Chaos",
       display = 'C',
-      color = "blue",
+      color = "Blue",
       faction = FactionId("chaos"),
       progression = None,
       stats = Stats(
@@ -306,7 +306,7 @@ object Data {
       id = CreatureKindId("avatar-of-chaos"),
       name = "Avatar of Chaos",
       display = 'A',
-      color = "red",
+      color = "Red",
       faction = FactionId("chaos"),
       progression = None,
       stats = Stats(
@@ -328,18 +328,53 @@ object Data {
   }
 
   private def items = {
-    val portal = ItemKind(ItemKindId("chaos-portal"), "Chaos portal", 'O', "red")
-    val greyAltar = ItemKind(ItemKindId("grey-altar"), "Grey altar", 'T', "grey")
-    val whiteAltar = ItemKind(ItemKindId("white-altar"), "White altar", 'T', "white")
-    val shiningAltar = ItemKind(ItemKindId("shining-altar"), "Shining altar", 'T', "yellow")
-    val stairsDown = ItemKind(ItemKindId("stairs-down"), "Stairs down", '>', "light-gray")
-    val stairsUp = ItemKind(ItemKindId("stairs-up"), "Stairs up", '<', "light-gray")
+    val portal = ItemKind(
+      id = ItemKindId("chaos-portal"),
+      name = "Chaos portal",
+      display = 'O',
+      color = "Red"
+    )
+
+    val greyAltar = ItemKind(
+      id = ItemKindId("grey-altar"),
+      name = "Grey altar",
+      display = 'T',
+      color = "Grey"
+    )
+
+    val whiteAltar = ItemKind(
+      id = ItemKindId("white-altar"),
+      name = "White altar",
+      display = 'T',
+      color = "White"
+    )
+
+    val shiningAltar = ItemKind(
+      id = ItemKindId("shining-altar"),
+      name = "Shining altar",
+      display = 'T',
+      color = "Yellow"
+    )
+
+    val stairsDown = ItemKind(
+      id = ItemKindId("stairs-down"),
+      name = "Stairs down",
+      display = '>',
+      color = "LightGrey"
+    )
+
+    val stairsUp = ItemKind(
+      id = ItemKindId("stairs-up"),
+      name = "Stairs up",
+      display = '<',
+      color = "LightGrey"
+    )
 
     val arrowTrap = ItemKind(
       id = ItemKindId("arrow-trap"),
       name = "Arrow trap",
       display = '^',
-      color = "red",
+      color = "Red",
       hidden = true
     )
 
@@ -347,7 +382,7 @@ object Data {
       id = ItemKindId("wooden-door-open"),
       name = "Wooden door",
       display = '/',
-      color = "brown",
+      color = "Brown",
       door = Some(Door(
         open = true,
         transformTo = ItemKindId("wooden-door-closed")
@@ -358,7 +393,7 @@ object Data {
       id = ItemKindId("wooden-door-closed"),
       name = "Wooden door",
       display = '+',
-      color = "brown",
+      color = "Brown",
       door = Some(Door(
         open = false,
         transformTo = ItemKindId("wooden-door-open")
@@ -369,7 +404,7 @@ object Data {
       id = ItemKindId("musket"),
       name = "Musket",
       display = '!',
-      color = "brown",
+      color = "Brown",
       pickable = true,
       rangedWeapon = Some(RangedWeapon(
         stats = Stats(
@@ -382,7 +417,7 @@ object Data {
       id = ItemKindId("long-sword"),
       name = "Long sword",
       display = '(',
-      color = "light-gray",
+      color = "LightGrey",
       pickable = true,
       weapon = Some(Weapon(
         stats = Stats(
@@ -396,7 +431,7 @@ object Data {
       id = ItemKindId("claymore"),
       name = "Claymore",
       display = '(',
-      color = "white",
+      color = "White",
       pickable = true,
       weapon = Some(Weapon(
         stats = Stats(
@@ -410,7 +445,7 @@ object Data {
       id = ItemKindId("steel-shield"),
       name = "Steel shield",
       display = '[',
-      color = "dark-gray",
+      color = "DarkGrey",
       pickable = true,
       shield = Some(Shield(
         stats = Stats(
@@ -424,7 +459,7 @@ object Data {
       id = ItemKindId("chain-shirt"),
       name = "Chain shirt",
       display = ']',
-      color = "light-gray",
+      color = "LightGrey",
       pickable = true,
       armor = Some(Armor(
         stats = Stats(
@@ -438,7 +473,7 @@ object Data {
       id = ItemKindId("chain-leggings"),
       name = "Chain leggings",
       display = ']',
-      color = "light-gray",
+      color = "LightGrey",
       pickable = true,
       armor = Some(Armor(
         stats = Stats(
@@ -452,7 +487,7 @@ object Data {
       id = ItemKindId("leather-helmet"),
       name = "Leather helmet",
       display = ']',
-      color = "light-brown",
+      color = "Brown",
       pickable = true,
       armor = Some(Armor(
         stats = Stats(
@@ -466,7 +501,7 @@ object Data {
       id = ItemKindId("leather-boots"),
       name = "Leather boots",
       display = ']',
-      color = "light-brown",
+      color = "Brown",
       pickable = true,
       armor = Some(Armor(
         stats = Stats(
@@ -480,7 +515,7 @@ object Data {
       id = ItemKindId("leather-gloves"),
       name = "Leather gloves",
       display = ']',
-      color = "light-brown",
+      color = "Brown",
       pickable = true,
       armor = Some(Armor(
         stats = Stats(
@@ -513,8 +548,18 @@ object Data {
   }
 
   private def terrains = {
-    val stone = TerrainKind(TerrainKindId("stone-floor"), "Stone floor", '.', "lightgray")
-    val rubble = TerrainKind(TerrainKindId("rubble"), "Rubble", '.', "brown")
+    val stone = TerrainKind(
+      id = TerrainKindId("stone-floor"),
+      name = "Stone floor",
+      display = '.',
+      color = "LightGrey"
+    )
+    val rubble = TerrainKind(
+      id = TerrainKindId("rubble"),
+      name = "Rubble",
+      display = '.',
+      color = "Brown"
+    )
 
     Map(
       stone.id -> stone,
@@ -523,7 +568,12 @@ object Data {
   }
 
   private def walls = {
-    val stone = WallKind(WallKindId("stone-wall"), "Stone wall", '#', "darkgray")
+    val stone = WallKind(
+      id = WallKindId("stone-wall"),
+      name = "Stone wall",
+      display = '#',
+      color = "DarkGrey"
+    )
 
     Map(
       stone.id -> stone

@@ -1,7 +1,11 @@
 .game-main-view {
     overflow-y: auto;
-    height: 451px;
+    height: 426px;
     padding-right: 15px;
+}
+
+.screen > canvas {
+    position: absolute;
 }
 
 /* colors */

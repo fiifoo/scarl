@@ -1,7 +1,5 @@
 import React, { Component } from 'react'
-import createScreen from '../screen/Screen.js'
-
-import './Screen.css'
+import createScreen from '../screen'
 
 class Screen extends Component {
 
@@ -25,14 +23,9 @@ class Screen extends Component {
             }
 
             if (nextProps.cursor !== this.props.cursor) {
-                this.screen.updateCursor(nextProps.cursor, this.props.cursor)
+                this.screen.updateCursor(nextProps.cursor)
             } else if (nextProps.reticule !== this.props.reticule) {
-                this.screen.updateReticule(
-                    nextProps.reticule,
-                    nextProps.trajectory,
-                    this.props.reticule,
-                    this.props.trajectory
-                )
+                this.screen.updateReticule(nextProps.reticule, nextProps.trajectory)
             } else {
                 this.screen.update(nextProps.fov)
             }
@@ -41,9 +34,7 @@ class Screen extends Component {
 
     render() {
         return (
-            <table className="screen">
-                <tbody ref={tbody => this.element = tbody} />
-            </table>
+            <div className="screen" ref={element => this.element = element} />
         )
     }
 }
