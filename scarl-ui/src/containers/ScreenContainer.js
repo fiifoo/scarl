@@ -13,6 +13,7 @@ const ScreenContainer = connect(
 
         area: state.area,
         cursor: state.ui.game.cursor,
+        events: state.events.latest,
         fov: state.fov,
         game: state.game,
         kinds: state.kinds,

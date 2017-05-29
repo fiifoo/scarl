@@ -22,10 +22,11 @@ class EventBuilder(player: () => CreatureId, fov: () => Set[Location]) extends E
       case e: EquipItemEffect => build(s, e) map GenericEvent
       case e: GainLevelEffect => build(s, e) map GenericEvent
       case e: HealEffect => build(s, e) map GenericEvent
-      case e: HitEffect => build(s, e) map GenericEvent
+      case e: HitEffect => build(s, e)
       case e: MissEffect => build(s, e) map GenericEvent
       case e: MoveEffect => build(s, e) map GenericEvent
       case e: PickItemEffect => build(s, e) map GenericEvent
+      case e: ShotEffect => build(s, e)
       case e: TransformWidgetEffect => build(s, e) map GenericEvent
       case e: TriggerTrapEffect => build(s, e) map GenericEvent
       case _ => None
@@ -157,10 +158,10 @@ class EventBuilder(player: () => CreatureId, fov: () => Set[Location]) extends E
     }
   }
 
-  private def build(s: State, effect: HitEffect): Option[String] = {
+  private def build(s: State, effect: HitEffect): Option[Event] = {
     val bypass = effect.result.bypass
 
-    if (effect.attacker == player()) {
+    val message = if (effect.attacker == player()) {
       Some(if (bypass.isDefined) {
         s"You hit ${kind(s, effect.target)} bypassing some of it's armor."
       } else {
@@ -181,6 +182,8 @@ class EventBuilder(player: () => CreatureId, fov: () => Set[Location]) extends E
     } else {
       None
     }
+
+    message map (HitEvent(effect.target, effect.target(s).location, _))
   }
 
   private def build(s: State, effect: MissEffect): Option[String] = {
@@ -220,6 +223,15 @@ class EventBuilder(player: () => CreatureId, fov: () => Set[Location]) extends E
       Some(s"You pick up ${kind(s, item)}.")
     } else if (fov() contains creature(s).location) {
       Some(s"${kind(s, creature)} picks up ${kind(s, item)}.")
+    } else {
+      None
+    }
+  }
+
+  private def build(s: State, effect: ShotEffect): Option[Event] = {
+    val f = fov()
+    if ((f contains effect.from) || (f contains effect.to)) {
+      Some(ShotEvent(effect.from, effect.to))
     } else {
       None
     }

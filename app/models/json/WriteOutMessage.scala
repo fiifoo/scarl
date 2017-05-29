@@ -5,7 +5,7 @@ import io.github.fiifoo.scarl.core.entity.{Faction, FactionId}
 import io.github.fiifoo.scarl.core.kind._
 import io.github.fiifoo.scarl.game.api.OutMessage.PlayerInfo
 import io.github.fiifoo.scarl.game.api._
-import io.github.fiifoo.scarl.game.event.{Event, GenericEvent}
+import io.github.fiifoo.scarl.game.event.{Event, GenericEvent, HitEvent, ShotEvent}
 import io.github.fiifoo.scarl.game.{LocationEntities, PlayerFov}
 import models.json.FormatBase._
 import models.json.FormatEntity._
@@ -47,11 +47,17 @@ object WriteOutMessage {
     ))
   }
 
-  implicit val writeGenericEvent = Json.writes[GenericEvent]
+  // writes have conflict with EntityIds for some reason
+  implicit val formatGenericEvent = Json.format[GenericEvent]
+  implicit val formatHitEvent = Json.format[HitEvent]
+  implicit val formatShotEvent = Json.format[ShotEvent]
+
   implicit val writeEvent = new Writes[Event] {
     def writes(event: Event): JsValue = {
       val data = event match {
-        case event: GenericEvent => writeGenericEvent.writes(event)
+        case event: GenericEvent => formatGenericEvent.writes(event)
+        case event: HitEvent => formatHitEvent.writes(event)
+        case event: ShotEvent => formatShotEvent.writes(event)
       }
 
       JsObject(Map(

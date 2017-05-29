@@ -11,7 +11,7 @@ class Screen extends Component {
         this.screen = createScreen(this.element, this.props.kinds)
 
         this.screen.build(this.props.area.map)
-        this.screen.update(this.props.fov)
+        this.screen.update(this.props.fov, this.props.events)
     }
 
     componentWillReceiveProps(nextProps) {
@@ -27,7 +27,7 @@ class Screen extends Component {
             } else if (nextProps.reticule !== this.props.reticule) {
                 this.screen.updateReticule(nextProps.reticule, nextProps.trajectory)
             } else {
-                this.screen.update(nextProps.fov)
+                this.screen.update(nextProps.fov, nextProps.events)
             }
         }
     }
