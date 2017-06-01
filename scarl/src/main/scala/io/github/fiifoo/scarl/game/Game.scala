@@ -1,6 +1,6 @@
 package io.github.fiifoo.scarl.game
 
-import io.github.fiifoo.scarl.action.validate.ValidateAction
+import io.github.fiifoo.scarl.action.validate.ActionValidator
 import io.github.fiifoo.scarl.ai.tactic.RoamTactic
 import io.github.fiifoo.scarl.core.Selectors.{getContainerItems, getEquipmentStats}
 import io.github.fiifoo.scarl.core._
@@ -180,7 +180,7 @@ class Game(initial: GameState,
   }
 
   private def shouldRun(action: Action): Boolean = {
-    !gameOver(state) && ValidateAction(state, gameState.player, action)
+    !gameOver(state) && ActionValidator(state, gameState.player, action)
   }
 
   private def gameOver(s: State): Boolean = {
