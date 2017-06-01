@@ -66,16 +66,21 @@ object Data {
   def factions: Map[FactionId, Faction] = {
     val justice = Faction(
       id = FactionId("justice"),
-      enemies = Set(FactionId("chaos"))
+      enemies = Set(FactionId("chaos"), FactionId("marines"))
     )
     val chaos = Faction(
       id = FactionId("chaos"),
-      enemies = Set(FactionId("justice"))
+      enemies = Set(FactionId("justice"), FactionId("marines"))
+    )
+    val marines = Faction(
+      id = FactionId("marines"),
+      enemies = Set(FactionId("justice"), FactionId("chaos"))
     )
 
     Map(
       justice.id -> justice,
-      chaos.id -> chaos
+      chaos.id -> chaos,
+      marines.id -> marines
     )
   }
 
@@ -125,6 +130,7 @@ object Data {
         creatures = List((CreatureKindId("hound-of-chaos"), 4, 7))
       )
     )
+
     val bigRoom = RandomizedTemplate(
       id = TemplateId("big-room"),
       shape = Rectangle(30, 20, 0),
@@ -162,7 +168,10 @@ object Data {
       border = Some(WallKindId("stone-wall")),
       content = Template.RandomizedContent(
         conduitLocations = (1, 1),
-        creatures = List((CreatureKindId("hound-of-chaos"), 0, 2)),
+        creatures = List(
+          (CreatureKindId("hound-of-chaos"), 0, 2),
+          (CreatureKindId("colonial-marine"), 0, 5)
+        ),
         items = List(
           (ItemKindId("grey-altar"), 0, 1),
           (ItemKindId("musket"), 1, 1),
@@ -318,12 +327,30 @@ object Data {
       )
     )
 
+    val colonialMarine = CreatureKind(
+      id = CreatureKindId("colonial-marine"),
+      name = "Colonial Marine",
+      display = 'm',
+      color = "Green",
+      faction = FactionId("marines"),
+      progression = None,
+      stats = Stats(
+        health = 10,
+        melee = Melee(attack = 10, damage = 10),
+        ranged = Ranged(attack = 10, damage = 10, range = 5),
+        defence = 10,
+        armor = 5,
+        sight = Sight(5)
+      )
+    )
+
     Map(
       hero.id -> hero,
       avatarOfJustice.id -> avatarOfJustice,
       houndOfChaos.id -> houndOfChaos,
       heraldOfChaos.id -> heraldOfChaos,
-      avatarOfChaos.id -> avatarOfChaos
+      avatarOfChaos.id -> avatarOfChaos,
+      colonialMarine.id -> colonialMarine
     )
   }
 

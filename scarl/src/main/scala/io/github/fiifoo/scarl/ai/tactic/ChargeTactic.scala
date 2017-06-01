@@ -1,10 +1,11 @@
 package io.github.fiifoo.scarl.ai.tactic
 
-import io.github.fiifoo.scarl.action.{AttackAction, MoveAction, PassAction}
+import io.github.fiifoo.scarl.action.{AttackAction, MoveAction, PassAction, ShootAction}
+import io.github.fiifoo.scarl.core.Selectors.getCreatureStats
 import io.github.fiifoo.scarl.core.action.{Action, Tactic}
 import io.github.fiifoo.scarl.core.entity.{Creature, CreatureId, SafeCreatureId}
 import io.github.fiifoo.scarl.core.{Location, State}
-import io.github.fiifoo.scarl.geometry.{Line, Los, Path}
+import io.github.fiifoo.scarl.geometry._
 
 import scala.util.Random
 
@@ -27,16 +28,18 @@ case class ChargeTactic(actor: CreatureId,
     val range = actor(s).stats.sight.range
 
     if (line.size <= range + 1 && Los(s)(line)) {
-      charge(s, target, line.size <= 2)
+      charge(s, target, line.size <= 2, line)
     } else {
       pursue(s, random)
     }
   }
 
-  private def charge(s: State, target: Creature, adjacent: Boolean): Result = {
+  private def charge(s: State, target: Creature, adjacent: Boolean, line: Vector[Location]): Result = {
     val tactic = copy(destination = target.location)
     val action = if (adjacent) {
       AttackAction(target.id)
+    } else if (couldShoot(s, line)) {
+      ShootAction(target.location)
     } else {
       Path(s)(actor(s).location, target.location) map (path => {
         MoveAction(path.head)
@@ -54,5 +57,12 @@ case class ChargeTactic(actor: CreatureId,
 
   private def roam(s: State, random: Random): Result = {
     RoamTactic(actor)(s, random)
+  }
+
+  private def couldShoot(s: State, line: Vector[Location]): Boolean = {
+    val range = getCreatureStats(s)(actor).ranged.range
+    val distance = line.length - 1
+
+    range >= distance && !line.tail.init.exists(Obstacle.shot(s)(_).isDefined)
   }
 }

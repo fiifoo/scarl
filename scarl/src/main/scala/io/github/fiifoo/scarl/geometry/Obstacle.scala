@@ -15,6 +15,8 @@ object Obstacle {
     }
   }
 
+  def shot(s: State)(location: Location): Option[EntityId] = movement(s)(location)
+
   def sight(s: State)(location: Location): Option[EntityId] = {
     (getLocationEntities(s)(location) collectFirst {
       case wall: WallId => wall

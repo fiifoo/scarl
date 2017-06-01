@@ -14,7 +14,7 @@ case class ShootEffect(attacker: CreatureId,
   def apply(s: State): EffectResult = {
 
     def getTarget(location: Location): Option[EntityId] = {
-      Obstacle.movement(s)(location) collect {
+      Obstacle.shot(s)(location) collect {
         case target: EntityId if target != attacker => target
       }
     }
