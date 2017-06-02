@@ -1,6 +1,7 @@
 package models.json
 
-import io.github.fiifoo.scarl.core.creature.{Character, Stats}
+import io.github.fiifoo.scarl.core.creature.Missile.{Guidance, Guided, Smart}
+import io.github.fiifoo.scarl.core.creature.{Character, Missile, Stats}
 import io.github.fiifoo.scarl.core.entity._
 import io.github.fiifoo.scarl.status._
 import models.json.FormatBase._
@@ -11,11 +12,27 @@ import play.api.libs.json._
 
 object FormatEntity {
   implicit val formatCreatureKindChoice = formatWeightedChoices(formatCreatureKindId)
+  implicit val formatGuidance = new Format[Guidance] {
+    def writes(guidance: Guidance): JsValue = {
+      JsString(guidanceName(guidance))
+    }
+
+    def reads(json: JsValue): JsResult[Guidance] = {
+      json.as[String] match {
+        case "Guided" => JsSuccess(Guided)
+        case "Smart" => JsSuccess(Smart)
+      }
+    }
+  }
+
+  implicit val formatExplosiveStats = Json.format[Stats.Explosive]
   implicit val formatMeleeStats = Json.format[Stats.Melee]
   implicit val formatRangedStats = Json.format[Stats.Ranged]
   implicit val formatSightStats = Json.format[Stats.Sight]
   implicit val formatStats = Json.format[Stats]
+
   implicit val formatCharacter = Json.format[Character]
+  implicit val formatMissile = Json.format[Missile]
 
   implicit val formatContainer = Json.format[Container]
   implicit val formatCreature = Json.format[Creature]
@@ -61,5 +78,9 @@ object FormatEntity {
 
       JsSuccess(status)
     }
+  }
+
+  private def guidanceName(guidance: Guidance): String = {
+    guidance.getClass.getSimpleName.replace("$", "")
   }
 }

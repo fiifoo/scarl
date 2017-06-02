@@ -37,6 +37,7 @@ object TestCreatureFactory {
       tick,
       damage,
       defaultStats.copy(health = health),
+      owner = None,
       character
     )
   }

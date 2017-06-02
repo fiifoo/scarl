@@ -1,8 +1,9 @@
 package io.github.fiifoo.scarl.rule
 
-import io.github.fiifoo.scarl.core.Rng
 import io.github.fiifoo.scarl.rule.AttackRule.{Attacker, Defender}
 import org.scalatest._
+
+import scala.util.Random
 
 class AttackRuleSpec extends FlatSpec with Matchers {
 
@@ -23,10 +24,9 @@ class AttackRuleSpec extends FlatSpec with Matchers {
   it should "deal damage with different averages" in {
     getAverageDamage(Attacker(10, 100), Defender(10, 0)) should ===(100)
     getAverageDamage(Attacker(10, 100), Defender(10, 100)) should ===(15)
-    getAverageDamage(Attacker(20, 100), Defender(10, 100)) should ===(34)
+    getAverageDamage(Attacker(20, 100), Defender(10, 100)) should ===(35)
 
-
-    getAverageDamage(Attacker(10, 100), Defender(10, 50)) should ===(52)
+    getAverageDamage(Attacker(10, 100), Defender(10, 50)) should ===(51)
     getAverageDamage(Attacker(19, 100), Defender(10, 50)) should ===(63)
   }
 
@@ -34,16 +34,16 @@ class AttackRuleSpec extends FlatSpec with Matchers {
     val attacker = Attacker(attack, 1)
     val defender = Defender(defence, 1)
 
-    val attacks = 10000
+    val attacks = 100000
+    val calculate = AttackRule(new Random(1)) _
 
-    val (hits, _) = (1 to attacks).foldLeft[(Int, Rng)]((0, Rng(1)))((carry, _) => {
-      val (hits, rng) = carry
-      val (result, nextRng) = AttackRule(rng, attacker, defender)
+    val hits = (1 to attacks).foldLeft(0)((hits, _) => {
+      val result = calculate(attacker, defender)
 
       if (result.hit) {
-        (hits + 1, nextRng)
+        hits + 1
       } else {
-        (hits, nextRng)
+        hits
       }
     })
 
@@ -55,19 +55,20 @@ class AttackRuleSpec extends FlatSpec with Matchers {
     val defender = Defender(defence, 1)
 
     val attacks = 100000
+    val calculate = AttackRule(new Random(1)) _
 
-    val (hits, bypasses, _) = (1 to attacks).foldLeft[(Int, Int, Rng)]((0, 0, Rng(1)))((carry, _) => {
-      val (hits, bypasses, rng) = carry
-      val (result, nextRng) = AttackRule(rng, attacker, defender)
+    val (hits, bypasses) = (1 to attacks).foldLeft((0, 0))((carry, _) => {
+      val (hits, bypasses) = carry
+      val result = calculate(attacker, defender)
 
       if (result.hit) {
         if (result.bypass.isDefined) {
-          (hits + 1, bypasses + 1, nextRng)
+          (hits + 1, bypasses + 1)
         } else {
-          (hits + 1, bypasses, nextRng)
+          (hits + 1, bypasses)
         }
       } else {
-        (hits, bypasses, nextRng)
+        (hits, bypasses)
       }
     })
 
@@ -76,15 +77,16 @@ class AttackRuleSpec extends FlatSpec with Matchers {
 
   private def getAverageDamage(attacker: Attacker, defender: Defender): Int = {
     val attacks = 100000
+    val calculate = AttackRule(new Random(1)) _
 
-    val (hits, damage, _) = (1 to attacks).foldLeft[(Int, Int, Rng)]((0, 0, Rng(1)))((carry, _) => {
-      val (hits, damage, rng) = carry
-      val (result, nextRng) = AttackRule(rng, attacker, defender)
+    val (hits, damage) = (1 to attacks).foldLeft((0, 0))((carry, _) => {
+      val (hits, damage) = carry
+      val result = calculate(attacker, defender)
 
       if (result.hit) {
-        (hits + 1, damage + result.damage.getOrElse(0), nextRng)
+        (hits + 1, damage + result.damage.getOrElse(0))
       } else {
-        (hits, damage, nextRng)
+        (hits, damage)
       }
     })
 

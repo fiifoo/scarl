@@ -1,4 +1,4 @@
-import { EVENT_DURATION, HIGHLIGHT_COLOR, SHOT_COLOR, TILE_MIDDLE, TILE_SIZE } from '../const'
+import { EVENT_DURATION, EXPLOSION_COLOR, HIGHLIGHT_COLOR, SHOT_COLOR, TILE_MIDDLE, TILE_SIZE } from '../const'
 import { clearContext, createCanvas } from '../utils'
 
 const filterEvents = e => e.type !== 'GenericEvent'
@@ -17,8 +17,16 @@ export default () => {
 
     const renderEvent = event => {
         switch (event.type) {
+            case 'ExplosionEvent': {
+                renderExplosion(event.data)
+                break
+            }
             case 'HitEvent': {
                 renderHit(event.data)
+                break
+            }
+            case 'MoveMissileEvent': {
+                renderMoveMissile(event.data)
                 break
             }
             case 'ShotEvent': {
@@ -28,12 +36,34 @@ export default () => {
         }
     }
 
+    const renderExplosion = ({location}) => {
+        const x = location.x * TILE_SIZE
+        const y = location.y * TILE_SIZE
+
+        context.fillStyle = EXPLOSION_COLOR
+        context.fillRect(x, y, TILE_SIZE, TILE_SIZE)
+    }
+
     const renderHit = ({location}) => {
         const x = location.x * TILE_SIZE
         const y = location.y * TILE_SIZE
 
         context.fillStyle = HIGHLIGHT_COLOR
         context.fillRect(x, y, TILE_SIZE, TILE_SIZE)
+    }
+
+    const renderMoveMissile = ({from, to}) => {
+        const from_x = from.x * TILE_SIZE + TILE_MIDDLE + 0.5
+        const from_y = from.y * TILE_SIZE + TILE_MIDDLE + 0.5
+        const to_x = to.x * TILE_SIZE + TILE_MIDDLE + 0.5
+        const to_y = to.y * TILE_SIZE + TILE_MIDDLE + 0.5
+
+        context.strokeStyle = SHOT_COLOR
+
+        context.beginPath()
+        context.moveTo(from_x, from_y)
+        context.lineTo(to_x, to_y)
+        context.stroke()
     }
 
     const renderShot = ({from, to}) => {

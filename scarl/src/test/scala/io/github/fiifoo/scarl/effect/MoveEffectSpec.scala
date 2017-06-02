@@ -11,10 +11,11 @@ class MoveEffectSpec extends FlatSpec with Matchers {
 
   "MoveEffect" should "return location mutation" in {
     val s = TestCreatureFactory.generate(State(), 1, TestCreatureFactory.create())
+    val creature = CreatureId(1)
     val location = Location(1, 0)
 
-    MoveEffect(CreatureId(1), location)(s) should ===(EffectResult(
-      LocatableLocationMutation(CreatureId(1), location)))
+    MoveEffect(creature, creature(s).location, location)(s) should ===(EffectResult(
+      LocatableLocationMutation(creature, location)))
   }
 
   it should "return trigger effects from triggers in target location" in {
@@ -33,7 +34,7 @@ class MoveEffectSpec extends FlatSpec with Matchers {
     val creature = CreatureId(7)
     val damageEffect = TestDamageEffect(creature, s1.damage)
 
-    MoveEffect(creature, location)(s) should ===(EffectResult(
+    MoveEffect(creature, creature(s).location, location)(s) should ===(EffectResult(
       LocatableLocationMutation(creature, location),
       List(damageEffect, damageEffect)
     ))

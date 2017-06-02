@@ -20,11 +20,12 @@ class EventBuilder(player: () => CreatureId, fov: () => Set[Location]) extends E
       case e: DoorBlockedEffect => build(s, e) map GenericEvent
       case e: DoorUsedEffect => build(s, e) map GenericEvent
       case e: EquipItemEffect => build(s, e) map GenericEvent
+      case e: ExplosionEffect => build(s, e)
       case e: GainLevelEffect => build(s, e) map GenericEvent
       case e: HealEffect => build(s, e) map GenericEvent
       case e: HitEffect => build(s, e)
       case e: MissEffect => build(s, e) map GenericEvent
-      case e: MoveEffect => build(s, e) map GenericEvent
+      case e: MoveEffect => build(s, e)
       case e: PickItemEffect => build(s, e) map GenericEvent
       case e: ShotEffect => build(s, e)
       case e: TransformWidgetEffect => build(s, e) map GenericEvent
@@ -134,6 +135,14 @@ class EventBuilder(player: () => CreatureId, fov: () => Set[Location]) extends E
     }
   }
 
+  private def build(s: State, effect: ExplosionEffect): Option[Event] = {
+    if (fov() contains effect.location) {
+      Some(ExplosionEvent(effect.location))
+    } else {
+      None
+    }
+  }
+
   private def build(s: State, effect: GainLevelEffect): Option[String] = {
     val target = effect.target
 
@@ -196,17 +205,25 @@ class EventBuilder(player: () => CreatureId, fov: () => Set[Location]) extends E
     }
   }
 
-  private def build(s: State, effect: MoveEffect): Option[String] = {
+  private def build(s: State, effect: MoveEffect): Option[Event] = {
     val target = effect.target
 
     if (target == player()) {
-      val entities = getLocationEntities(s)(effect.location)
+      val entities = getLocationEntities(s)(effect.to)
       val containers = entities collect { case c: ContainerId => c }
       val items = containers flatMap getContainerItems(s)
       val messages = items map (item => s"${kind(s, item)}.")
 
       if (messages.nonEmpty) {
-        Some(messages.mkString(" "))
+        Some(GenericEvent(messages.mkString(" ")))
+      } else {
+        None
+      }
+    } else if (target(s).missile.isDefined) {
+      val f = fov()
+
+      if ((f contains effect.from) || (f contains effect.to)) {
+        Some(MoveMissileEvent(effect.from, effect.to))
       } else {
         None
       }

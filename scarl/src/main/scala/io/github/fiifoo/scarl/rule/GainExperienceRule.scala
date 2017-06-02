@@ -10,7 +10,7 @@ object GainExperienceRule {
 
   def apply(s: State, effect: DeathEffect): Option[(CreatureId, Int)] = {
     attacker(effect) map (attacker => {
-      (attacker, default)
+      (owner(s, attacker), default)
     })
   }
 
@@ -19,5 +19,9 @@ object GainExperienceRule {
       case hit: HitEffect => Some(hit.attacker)
       case other: Effect => attacker(other)
     }).flatten
+  }
+
+  private def owner(s: State, creature: CreatureId): CreatureId = {
+    creature(s).owner map (owner(s, _)) getOrElse creature
   }
 }

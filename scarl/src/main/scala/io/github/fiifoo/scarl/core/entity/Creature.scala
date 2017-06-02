@@ -1,7 +1,7 @@
 package io.github.fiifoo.scarl.core.entity
 
 import io.github.fiifoo.scarl.core.Location
-import io.github.fiifoo.scarl.core.creature.{Character, FactionId, Stats}
+import io.github.fiifoo.scarl.core.creature.{Character, FactionId, Missile, Stats}
 import io.github.fiifoo.scarl.core.kind.CreatureKindId
 
 case class Creature(id: CreatureId,
@@ -11,7 +11,10 @@ case class Creature(id: CreatureId,
                     tick: Int,
                     damage: Int,
                     stats: Stats,
-                    character: Option[Character]
+                    owner: Option[CreatureId] = None,
+                    character: Option[Character] = None,
+                    missile: Option[Missile] = None,
+                    flying: Boolean = false
                    ) extends Entity with Actor with Locatable {
 
   def setLocation(location: Location): Creature = copy(location = location)

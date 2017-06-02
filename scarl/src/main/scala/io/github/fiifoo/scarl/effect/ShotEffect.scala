@@ -23,7 +23,8 @@ case class ShotEffect(attacker: CreatureId,
   }
 
   private def attackResult(s: State, target: CreatureId): EffectResult = {
-    val (result, rng) = AttackRule.ranged(s, attacker, target)
+    val (random, rng) = s.rng()
+    val result = AttackRule.ranged(s, random)(attacker, target)
 
     val effect = if (result.hit) {
       HitEffect(attacker, target, result, Some(this))

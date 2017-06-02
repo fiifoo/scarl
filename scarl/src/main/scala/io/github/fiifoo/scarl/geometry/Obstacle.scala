@@ -6,6 +6,8 @@ import io.github.fiifoo.scarl.core.{Location, State}
 
 object Obstacle {
 
+  def explosion(s: State)(location: Location): Option[EntityId] = sight(s)(location)
+
   def movement(s: State)(location: Location): Option[EntityId] = {
     (getLocationEntities(s)(location) collectFirst {
       case creature: CreatureId => creature

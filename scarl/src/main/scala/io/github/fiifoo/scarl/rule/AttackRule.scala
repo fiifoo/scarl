@@ -1,8 +1,8 @@
 package io.github.fiifoo.scarl.rule
 
 import io.github.fiifoo.scarl.core.Selectors.getCreatureStats
+import io.github.fiifoo.scarl.core.State
 import io.github.fiifoo.scarl.core.entity.CreatureId
-import io.github.fiifoo.scarl.core.{Rng, State}
 
 import scala.util.Random
 
@@ -16,39 +16,46 @@ object AttackRule {
 
   val DamageVariance = 0.5
 
-  def melee(s: State, attacker: CreatureId, defender: CreatureId): (Result, Rng) = {
+  def melee(s: State, random: Random)(attacker: CreatureId, defender: CreatureId): Result = {
     val attackerStats = getCreatureStats(s)(attacker)
     val defenderStats = getCreatureStats(s)(defender)
 
-    AttackRule(
-      s.rng,
+    AttackRule(random)(
       Attacker(attackerStats.melee.attack, attackerStats.melee.damage),
       Defender(defenderStats.defence, defenderStats.armor)
     )
   }
 
-  def ranged(s: State, attacker: CreatureId, defender: CreatureId): (Result, Rng) = {
+  def ranged(s: State, random: Random)(attacker: CreatureId, defender: CreatureId): Result = {
     val attackerStats = getCreatureStats(s)(attacker)
     val defenderStats = getCreatureStats(s)(defender)
 
-    AttackRule(
-      s.rng,
+    AttackRule(random)(
       Attacker(attackerStats.ranged.attack, attackerStats.ranged.damage),
       Defender(defenderStats.defence, defenderStats.armor)
     )
   }
 
-  def apply(rng: Rng, attacker: Attacker, defender: Defender): (Result, Rng) = {
-    val (random, nextRng) = rng()
+  def explosive(s: State, random: Random)(attacker: CreatureId, defender: CreatureId): Result = {
+    val attackerStats = getCreatureStats(s)(attacker)
+    val defenderStats = getCreatureStats(s)(defender)
+
+    AttackRule(random)(
+      Attacker(attackerStats.explosive.attack, attackerStats.explosive.damage),
+      Defender(defenderStats.defence, defenderStats.armor)
+    )
+  }
+
+  def apply(random: Random)(attacker: Attacker, defender: Defender): Result = {
     val hit = rollHit(random, attacker, defender)
 
     if (hit) {
       val bypass = rollBypass(random, attacker, defender)
       val damage = rollDamage(random, attacker, defender, bypass)
 
-      (Result(hit, bypass, damage), nextRng)
+      Result(hit, bypass, damage)
     } else {
-      (Result(hit, None, None), nextRng)
+      Result(hit, None, None)
     }
   }
 

@@ -7,7 +7,8 @@ import io.github.fiifoo.scarl.area.{Area, AreaId}
 import io.github.fiifoo.scarl.core.Location
 import io.github.fiifoo.scarl.core.Rng.WeightedChoices
 import io.github.fiifoo.scarl.core.communication.{Communication, CommunicationId, Message}
-import io.github.fiifoo.scarl.core.creature.Stats.{Melee, Ranged, Sight}
+import io.github.fiifoo.scarl.core.creature.Missile.Guided
+import io.github.fiifoo.scarl.core.creature.Stats.{Explosive, Melee, Ranged, Sight}
 import io.github.fiifoo.scarl.core.creature._
 import io.github.fiifoo.scarl.core.item.Equipment._
 import io.github.fiifoo.scarl.core.item._
@@ -63,6 +64,10 @@ object Data {
   }
 
   def factions: Map[FactionId, Faction] = {
+    val none = Faction(
+      id = FactionId("none"),
+      enemies = Set()
+    )
     val justice = Faction(
       id = FactionId("justice"),
       enemies = Set(FactionId("chaos"), FactionId("marines"))
@@ -77,6 +82,7 @@ object Data {
     )
 
     Map(
+      none.id -> none,
       justice.id -> justice,
       chaos.id -> chaos,
       marines.id -> marines
@@ -197,6 +203,7 @@ object Data {
       fixedContent = FixedContent(
         gatewayLocations = Set(Location(2, 2)),
         items = Map(
+          Location(2, 1) -> List(ItemKindId("guided-missile-launcher")),
           Location(1, 1) -> List(ItemKindId("grey-altar")),
           Location(3, 1) -> List(ItemKindId("grey-altar")),
           Location(3, 2) -> List(ItemKindId("grey-altar")),
@@ -343,13 +350,33 @@ object Data {
       )
     )
 
+    val guidedMissile = CreatureKind(
+      id = CreatureKindId("guided-missile"),
+      name = "Missile",
+      display = 'x',
+      color = "White",
+      faction = FactionId("none"),
+      stats = Stats(
+        speed = 3,
+        health = 10,
+        defence = 100,
+        armor = 10,
+        explosive = Explosive(attack = 50, damage = 20, radius = 2)
+      ),
+      missile = Some(Missile(
+        guidance = Some(Guided))
+      ),
+      flying = true
+    )
+
     Map(
       hero.id -> hero,
       avatarOfJustice.id -> avatarOfJustice,
       houndOfChaos.id -> houndOfChaos,
       heraldOfChaos.id -> heraldOfChaos,
       avatarOfChaos.id -> avatarOfChaos,
-      colonialMarine.id -> colonialMarine
+      colonialMarine.id -> colonialMarine,
+      guidedMissile.id -> guidedMissile
     )
   }
 
@@ -551,6 +578,20 @@ object Data {
       ))
     )
 
+    val guidedMissileLauncher = ItemKind(
+      id = ItemKindId("guided-missile-launcher"),
+      name = "Guided missile launcher",
+      display = '!',
+      color = "White",
+      pickable = true,
+      rangedWeapon = Some(RangedWeapon(
+        stats = Stats(
+          ranged = Ranged(range = 10)
+        ),
+        missile = Some(CreatureKindId("guided-missile"))
+      ))
+    )
+
     Map(
       portal.id -> portal,
       greyAltar.id -> greyAltar,
@@ -569,7 +610,8 @@ object Data {
       chainLeggings.id -> chainLeggings,
       leatherHelmet.id -> leatherHelmet,
       leatherBoots.id -> leatherBoots,
-      leatherGloves.id -> leatherGloves
+      leatherGloves.id -> leatherGloves,
+      guidedMissileLauncher.id -> guidedMissileLauncher
     )
   }
 

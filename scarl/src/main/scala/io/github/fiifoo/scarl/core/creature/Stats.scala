@@ -16,6 +16,12 @@ object Stats {
     }
   }
 
+  case class Explosive(attack: Int = 0, damage: Int = 0, radius: Int = 0) {
+    def add(x: Explosive): Explosive = {
+      copy(attack + x.attack, damage + x.damage, radius + x.radius)
+    }
+  }
+
   case class Sight(range: Int = 0) {
     def add(x: Sight): Sight = {
       copy(range + x.range)
@@ -24,21 +30,25 @@ object Stats {
 
 }
 
-case class Stats(health: Int = 0,
+case class Stats(speed: Double = 1,
+                 health: Int = 0,
                  defence: Int = 0,
                  armor: Int = 0,
                  melee: Melee = Melee(),
                  ranged: Ranged = Ranged(),
+                 explosive: Explosive = Explosive(),
                  sight: Sight = Sight()
                 ) {
 
   def add(x: Stats): Stats = {
     copy(
+      speed * x.speed,
       health + x.health,
       defence + x.defence,
       armor + x.armor,
       melee.add(x.melee),
       ranged.add(x.ranged),
+      explosive.add(x.explosive),
       sight.add(x.sight)
     )
   }

@@ -8,24 +8,29 @@ import io.github.fiifoo.scarl.core.{Location, State}
 import io.github.fiifoo.scarl.geometry.Obstacle
 
 case class MoveEffect(target: CreatureId,
-                      location: Location,
+                      from: Location,
+                      to: Location,
                       parent: Option[Effect] = None
                      ) extends Effect {
 
   def apply(s: State): EffectResult = {
-    Obstacle.movement(s)(location) map (obstacle => {
+    Obstacle.movement(s)(to) map (obstacle => {
       EffectResult(
-        CollideEffect(target, location, obstacle, Some(this))
+        CollideEffect(target, to, obstacle, Some(this))
       )
     }) getOrElse {
       EffectResult(
-        LocatableLocationMutation(target, location),
+        LocatableLocationMutation(target, to),
         getTriggerEffects(s)
       )
     }
   }
 
   private def getTriggerEffects(s: State): List[Effect] = {
-    getLocationTriggers(s)(location).toList flatMap (_ (s)(s, target))
+    if (target(s).flying) {
+      List()
+    } else {
+      getLocationTriggers(s)(to).toList flatMap (_ (s)(s, target))
+    }
   }
 }

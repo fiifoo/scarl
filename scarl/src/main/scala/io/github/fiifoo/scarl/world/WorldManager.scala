@@ -4,8 +4,8 @@ import io.github.fiifoo.scarl.area.template.{ApplyTemplate, CalculateTemplate, T
 import io.github.fiifoo.scarl.area.{Area, AreaId}
 import io.github.fiifoo.scarl.core.State.Communications
 import io.github.fiifoo.scarl.core._
-import io.github.fiifoo.scarl.core.creature.{Faction, FactionId, Progression, ProgressionId}
 import io.github.fiifoo.scarl.core.communication.{Communication, CommunicationId}
+import io.github.fiifoo.scarl.core.creature.{Faction, FactionId, Progression, ProgressionId}
 import io.github.fiifoo.scarl.core.entity._
 import io.github.fiifoo.scarl.core.kind.{CreatureKindId, Kinds}
 import io.github.fiifoo.scarl.core.mutation.{ConduitExitMutation, NewEntityMutation, NewFactionMutation}
