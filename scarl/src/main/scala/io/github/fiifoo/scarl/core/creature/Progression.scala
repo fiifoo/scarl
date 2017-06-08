@@ -1,6 +1,6 @@
-package io.github.fiifoo.scarl.core.character
+package io.github.fiifoo.scarl.core.creature
 
-import io.github.fiifoo.scarl.core.character.Progression.Step
+import io.github.fiifoo.scarl.core.creature.Progression.Step
 
 object Progression {
 

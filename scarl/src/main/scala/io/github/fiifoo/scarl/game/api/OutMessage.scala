@@ -2,7 +2,7 @@ package io.github.fiifoo.scarl.game.api
 
 import io.github.fiifoo.scarl.area.AreaId
 import io.github.fiifoo.scarl.core.Location
-import io.github.fiifoo.scarl.core.character.Stats
+import io.github.fiifoo.scarl.core.creature.{Faction, Stats}
 import io.github.fiifoo.scarl.core.entity._
 import io.github.fiifoo.scarl.core.item.Equipment.Slot
 import io.github.fiifoo.scarl.core.kind.Kinds

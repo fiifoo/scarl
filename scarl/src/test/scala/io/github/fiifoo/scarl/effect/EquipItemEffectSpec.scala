@@ -1,8 +1,8 @@
 package io.github.fiifoo.scarl.effect
 
 import io.github.fiifoo.scarl.core.State
-import io.github.fiifoo.scarl.core.character.Stats
-import io.github.fiifoo.scarl.core.character.Stats.Melee
+import io.github.fiifoo.scarl.core.creature.Stats
+import io.github.fiifoo.scarl.core.creature.Stats.Melee
 import io.github.fiifoo.scarl.core.effect.EffectResolver
 import io.github.fiifoo.scarl.core.entity.{CreatureId, Item, ItemId}
 import io.github.fiifoo.scarl.core.item.Equipment._

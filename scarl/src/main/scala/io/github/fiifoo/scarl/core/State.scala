@@ -2,8 +2,8 @@ package io.github.fiifoo.scarl.core
 
 import io.github.fiifoo.scarl.core.State.{Communications, Stored}
 import io.github.fiifoo.scarl.core.action.Tactic
-import io.github.fiifoo.scarl.core.character.{Progression, ProgressionId, Stats}
 import io.github.fiifoo.scarl.core.communication.{Communication, CommunicationId}
+import io.github.fiifoo.scarl.core.creature._
 import io.github.fiifoo.scarl.core.entity._
 import io.github.fiifoo.scarl.core.item.Equipment.Slot
 import io.github.fiifoo.scarl.core.kind.Kinds

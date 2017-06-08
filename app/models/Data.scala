@@ -6,10 +6,9 @@ import io.github.fiifoo.scarl.area.template.{FixedTemplate, RandomizedTemplate, 
 import io.github.fiifoo.scarl.area.{Area, AreaId}
 import io.github.fiifoo.scarl.core.Location
 import io.github.fiifoo.scarl.core.Rng.WeightedChoices
-import io.github.fiifoo.scarl.core.character.Stats.{Melee, Ranged, Sight}
-import io.github.fiifoo.scarl.core.character.{Progression, ProgressionId, Stats}
 import io.github.fiifoo.scarl.core.communication.{Communication, CommunicationId, Message}
-import io.github.fiifoo.scarl.core.entity._
+import io.github.fiifoo.scarl.core.creature.Stats.{Melee, Ranged, Sight}
+import io.github.fiifoo.scarl.core.creature._
 import io.github.fiifoo.scarl.core.item.Equipment._
 import io.github.fiifoo.scarl.core.item._
 import io.github.fiifoo.scarl.core.kind._
@@ -241,14 +240,16 @@ object Data {
       display = '@',
       color = "Yellow",
       faction = FactionId("justice"),
-      progression = Some(ProgressionId("some")),
       stats = Stats(
         health = 30,
         melee = Melee(attack = 20, damage = 10),
         defence = 20,
         armor = 5,
         sight = Sight(10)
-      )
+      ),
+      character = Some(Character(
+        progression = ProgressionId("some")
+      ))
     )
 
     val avatarOfJustice = CreatureKind(
@@ -257,7 +258,6 @@ object Data {
       display = 'A',
       color = "White",
       faction = FactionId("justice"),
-      progression = Some(ProgressionId("some")),
       stats = Stats(
         health = 1000,
         melee = Melee(attack = 20, damage = 10),
@@ -265,6 +265,9 @@ object Data {
         armor = 5,
         sight = Sight(5)
       ),
+      character = Some(Character(
+        progression = ProgressionId("some")
+      )),
       greetings = Map(
         FactionId("justice") -> List(
           CommunicationId("greet-justice-1"),
@@ -285,7 +288,6 @@ object Data {
       display = 'c',
       color = "Purple",
       faction = FactionId("chaos"),
-      progression = None,
       stats = Stats(
         health = 10,
         melee = Melee(attack = 10, damage = 10),
@@ -301,7 +303,6 @@ object Data {
       display = 'C',
       color = "Blue",
       faction = FactionId("chaos"),
-      progression = None,
       stats = Stats(
         health = 10,
         melee = Melee(attack = 20, damage = 10),
@@ -317,7 +318,6 @@ object Data {
       display = 'A',
       color = "Red",
       faction = FactionId("chaos"),
-      progression = None,
       stats = Stats(
         health = 50,
         melee = Melee(attack = 30, damage = 15),
@@ -333,7 +333,6 @@ object Data {
       display = 'm',
       color = "Green",
       faction = FactionId("marines"),
-      progression = None,
       stats = Stats(
         health = 10,
         melee = Melee(attack = 10, damage = 10),

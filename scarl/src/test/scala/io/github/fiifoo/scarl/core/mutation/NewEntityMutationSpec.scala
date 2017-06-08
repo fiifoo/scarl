@@ -1,5 +1,6 @@
 package io.github.fiifoo.scarl.core.mutation
 
+import io.github.fiifoo.scarl.core.creature.FactionId
 import io.github.fiifoo.scarl.core.entity._
 import io.github.fiifoo.scarl.core.kind.ItemKindId
 import io.github.fiifoo.scarl.core.test_assets.{TestActiveStatus, TestCreatureFactory, TestItemFactory, TestTriggerStatus}

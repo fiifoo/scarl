@@ -1,8 +1,8 @@
 package io.github.fiifoo.scarl.core.test_assets
 
-import io.github.fiifoo.scarl.core.character.Stats.{Melee, Sight}
-import io.github.fiifoo.scarl.core.character.{ProgressionId, Stats}
-import io.github.fiifoo.scarl.core.entity.{Creature, CreatureId, FactionId}
+import io.github.fiifoo.scarl.core.creature.Stats.{Melee, Sight}
+import io.github.fiifoo.scarl.core.creature.{Character, FactionId, Stats}
+import io.github.fiifoo.scarl.core.entity.{Creature, CreatureId}
 import io.github.fiifoo.scarl.core.kind.{CreatureKind, CreatureKindId}
 import io.github.fiifoo.scarl.core.mutation.NewEntityMutation
 import io.github.fiifoo.scarl.core.{Location, State}
@@ -16,32 +16,29 @@ object TestCreatureFactory {
     display = 'c',
     color = "white",
     faction = FactionId("people"),
-    progression = None,
-    stats = defaultStats
+    stats = defaultStats,
+    character = None
   )
 
   def create(id: CreatureId = CreatureId(0),
              kind: CreatureKindId = defaultKind.id,
              faction: FactionId = FactionId("people"),
-             progression: Option[ProgressionId] = None,
              tick: Int = 1,
              location: Location = Location(0, 0),
              health: Int = 0,
              damage: Int = 0,
-             experience: Int = 0,
-             level: Int = 1
+             character: Option[Character] = None
             ): Creature = {
     Creature(
       id,
       kind,
       faction,
-      progression,
       location,
       tick,
       damage,
-      experience,
-      level,
-      defaultStats.copy(health = health))
+      defaultStats.copy(health = health),
+      character
+    )
   }
 
   def generate(s: State, count: Int = 1, prototype: Creature = create()): State = {

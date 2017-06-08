@@ -1,10 +1,11 @@
 package io.github.fiifoo.scarl.effect
 
 import io.github.fiifoo.scarl.core.State
-import io.github.fiifoo.scarl.core.character.Progression.Step
+import io.github.fiifoo.scarl.core.creature.Character
+import io.github.fiifoo.scarl.core.creature.Progression.Step
 import io.github.fiifoo.scarl.core.effect.{Effect, EffectResult}
-import io.github.fiifoo.scarl.core.entity.{Creature, CreatureId}
-import io.github.fiifoo.scarl.core.mutation.CreatureExperienceMutation
+import io.github.fiifoo.scarl.core.entity.CreatureId
+import io.github.fiifoo.scarl.core.mutation.CreatureCharacterMutation
 
 case class GainExperienceEffect(target: CreatureId,
                                 amount: Int,
@@ -12,23 +13,24 @@ case class GainExperienceEffect(target: CreatureId,
                                ) extends Effect {
 
   def apply(s: State): EffectResult = {
-    val creature = target(s)
-    val steps = progressionSteps(s, creature)
+    target(s).character map (character => {
+      val steps = progressionSteps(s, character)
 
-    EffectResult(
-      CreatureExperienceMutation(creature.id, creature.experience + amount),
-      steps map (GainLevelEffect(creature.id, _))
-    )
+      EffectResult(
+        CreatureCharacterMutation(target, character.copy(experience = character.experience + amount)),
+        steps map (GainLevelEffect(target, _))
+      )
+    }) getOrElse EffectResult()
   }
 
-  private def progressionSteps(s: State, creature: Creature): List[Step] = {
-    val progression = creature.progression flatMap s.progressions.get
+  private def progressionSteps(s: State, character: Character): List[Step] = {
+    val progression = s.progressions(character.progression)
 
     val filter = (step: Step) => {
-      step.requirements.experience > creature.experience &&
-        step.requirements.experience <= creature.experience + amount
+      step.requirements.experience > character.experience &&
+        step.requirements.experience <= character.experience + amount
     }
 
-    progression map (_.steps.filter(filter).toList) getOrElse List()
+    progression.steps.filter(filter).toList
   }
 }

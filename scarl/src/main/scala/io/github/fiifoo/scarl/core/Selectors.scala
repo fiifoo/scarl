@@ -1,6 +1,6 @@
 package io.github.fiifoo.scarl.core
 
-import io.github.fiifoo.scarl.core.character.Stats
+import io.github.fiifoo.scarl.core.creature.Stats
 import io.github.fiifoo.scarl.core.entity._
 
 object Selectors {

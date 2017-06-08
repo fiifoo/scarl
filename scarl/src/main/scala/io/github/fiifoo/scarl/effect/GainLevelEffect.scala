@@ -1,10 +1,10 @@
 package io.github.fiifoo.scarl.effect
 
 import io.github.fiifoo.scarl.core.State
-import io.github.fiifoo.scarl.core.character.Progression.Step
+import io.github.fiifoo.scarl.core.creature.Progression.Step
 import io.github.fiifoo.scarl.core.effect.{Effect, EffectResult}
 import io.github.fiifoo.scarl.core.entity.CreatureId
-import io.github.fiifoo.scarl.core.mutation.{CreatureLevelMutation, CreatureStatsMutation}
+import io.github.fiifoo.scarl.core.mutation.{CreatureCharacterMutation, CreatureStatsMutation}
 
 case class GainLevelEffect(target: CreatureId,
                            step: Step,
@@ -12,11 +12,11 @@ case class GainLevelEffect(target: CreatureId,
                           ) extends Effect {
 
   def apply(s: State): EffectResult = {
-    val creature = target(s)
-
-    EffectResult(List(
-      CreatureLevelMutation(creature.id, creature.level + 1),
-      CreatureStatsMutation(creature.id, creature.stats.add(step.stats))
-    ))
+    target(s).character map (character => {
+      EffectResult(List(
+        CreatureCharacterMutation(target, character.copy(level = character.level + 1)),
+        CreatureStatsMutation(target, target(s).stats.add(step.stats))
+      ))
+    }) getOrElse EffectResult()
   }
 }

@@ -1,9 +1,8 @@
 package models.json
 
 import io.github.fiifoo.scarl.core.State.Communications
-import io.github.fiifoo.scarl.core.character.{Progression, ProgressionId}
 import io.github.fiifoo.scarl.core.communication.{Communication, CommunicationId}
-import io.github.fiifoo.scarl.core.entity._
+import io.github.fiifoo.scarl.core.creature.{Faction, Progression, ProgressionId}
 import io.github.fiifoo.scarl.core.kind.Kinds
 import io.github.fiifoo.scarl.core.{Rng, State}
 import models.json.FormatBase._

@@ -1,7 +1,7 @@
 package io.github.fiifoo.scarl.core.mutation
 
 import io.github.fiifoo.scarl.core.State
-import io.github.fiifoo.scarl.core.character.Stats
+import io.github.fiifoo.scarl.core.creature.Stats
 import io.github.fiifoo.scarl.core.entity.CreatureId
 
 case class CreatureStatsMutation(creature: CreatureId, stats: Stats) extends Mutation {

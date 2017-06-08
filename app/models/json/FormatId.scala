@@ -2,8 +2,8 @@ package models.json
 
 import io.github.fiifoo.scarl.area.AreaId
 import io.github.fiifoo.scarl.area.template.TemplateId
-import io.github.fiifoo.scarl.core.character.ProgressionId
 import io.github.fiifoo.scarl.core.communication.CommunicationId
+import io.github.fiifoo.scarl.core.creature.{FactionId, ProgressionId}
 import io.github.fiifoo.scarl.core.entity._
 import io.github.fiifoo.scarl.core.kind._
 import io.github.fiifoo.scarl.core.world.ConduitId

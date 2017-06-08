@@ -1,7 +1,8 @@
 package io.github.fiifoo.scarl.ai.tactic
 
 import io.github.fiifoo.scarl.action.test_assets.TestPassTactic
-import io.github.fiifoo.scarl.core.entity.{CreatureId, Faction, FactionId, SafeCreatureId}
+import io.github.fiifoo.scarl.core.creature.{Faction, FactionId}
+import io.github.fiifoo.scarl.core.entity.{CreatureId, SafeCreatureId}
 import io.github.fiifoo.scarl.core.mutation.{LocatableLocationMutation, NewFactionMutation}
 import io.github.fiifoo.scarl.core.test_assets.TestCreatureFactory
 import io.github.fiifoo.scarl.core.{Location, RealityBubble, State}

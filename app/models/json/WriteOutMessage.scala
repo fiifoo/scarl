@@ -1,7 +1,7 @@
 package models.json
 
 import io.github.fiifoo.scarl.core.communication.CommunicationId
-import io.github.fiifoo.scarl.core.entity.{Faction, FactionId}
+import io.github.fiifoo.scarl.core.creature.{Faction, FactionId}
 import io.github.fiifoo.scarl.core.kind._
 import io.github.fiifoo.scarl.game.api.OutMessage.PlayerInfo
 import io.github.fiifoo.scarl.game.api._

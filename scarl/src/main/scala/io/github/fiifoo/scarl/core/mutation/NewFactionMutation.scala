@@ -1,7 +1,7 @@
 package io.github.fiifoo.scarl.core.mutation
 
 import io.github.fiifoo.scarl.core._
-import io.github.fiifoo.scarl.core.entity._
+import io.github.fiifoo.scarl.core.creature.Faction
 
 case class NewFactionMutation(faction: Faction) extends Mutation {
 

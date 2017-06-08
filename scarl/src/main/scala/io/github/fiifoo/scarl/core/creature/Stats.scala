@@ -1,6 +1,6 @@
-package io.github.fiifoo.scarl.core.character
+package io.github.fiifoo.scarl.core.creature
 
-import io.github.fiifoo.scarl.core.character.Stats._
+import io.github.fiifoo.scarl.core.creature.Stats._
 
 object Stats {
 

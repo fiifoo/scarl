@@ -3,6 +3,7 @@ package io.github.fiifoo.scarl.core.mutation
 import io.github.fiifoo.scarl.ai.tactic.RoamTactic
 import io.github.fiifoo.scarl.core.State.Communications
 import io.github.fiifoo.scarl.core.communication.CommunicationId
+import io.github.fiifoo.scarl.core.creature.FactionId
 import io.github.fiifoo.scarl.core.entity._
 import io.github.fiifoo.scarl.core.item.Equipment._
 import io.github.fiifoo.scarl.core.kind.ItemKindId

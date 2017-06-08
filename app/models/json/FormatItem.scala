@@ -1,6 +1,6 @@
 package models.json
 
-import io.github.fiifoo.scarl.core.character.Stats
+import io.github.fiifoo.scarl.core.creature.Stats
 import io.github.fiifoo.scarl.core.item.Equipment._
 import io.github.fiifoo.scarl.core.item._
 import models.json.FormatId._

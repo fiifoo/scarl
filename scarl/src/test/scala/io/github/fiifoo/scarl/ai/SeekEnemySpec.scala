@@ -1,6 +1,7 @@
 package io.github.fiifoo.scarl.ai
 
-import io.github.fiifoo.scarl.core.entity.{CreatureId, Faction, FactionId}
+import io.github.fiifoo.scarl.core.creature.{Faction, FactionId}
+import io.github.fiifoo.scarl.core.entity.CreatureId
 import io.github.fiifoo.scarl.core.mutation.{NewEntityMutation, NewFactionMutation}
 import io.github.fiifoo.scarl.core.test_assets.TestCreatureFactory
 import io.github.fiifoo.scarl.core.{Location, State}

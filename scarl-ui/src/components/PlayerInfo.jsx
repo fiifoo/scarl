@@ -26,8 +26,8 @@ const PlayerInfo = ({player}) => {
     return (
         <div className="player-info">
             <div>Health <b>{stats.health - player.creature.damage}/{stats.health}</b></div>
-            <div>Level {player.creature.level}</div>
-            <div>Experience {player.creature.experience}</div>
+            <div>Level {player.creature.character.level}</div>
+            <div>Experience {player.creature.character.experience}</div>
             <div>Attack {stats.melee.attack}</div>
             <div>Damage {stats.melee.damage}</div>
             <div>Ranged attack {stats.ranged.attack}</div>

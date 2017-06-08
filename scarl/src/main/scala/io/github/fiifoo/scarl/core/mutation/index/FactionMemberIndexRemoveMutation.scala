@@ -1,6 +1,7 @@
 package io.github.fiifoo.scarl.core.mutation.index
 
-import io.github.fiifoo.scarl.core.entity.{CreatureId, FactionId}
+import io.github.fiifoo.scarl.core.creature.FactionId
+import io.github.fiifoo.scarl.core.entity.CreatureId
 
 case class FactionMemberIndexRemoveMutation(member: CreatureId, faction: FactionId) {
   type Index = Map[FactionId, Set[CreatureId]]
