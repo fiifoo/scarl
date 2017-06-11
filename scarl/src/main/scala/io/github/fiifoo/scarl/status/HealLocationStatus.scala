@@ -5,7 +5,7 @@ import io.github.fiifoo.scarl.core.State
 import io.github.fiifoo.scarl.core.effect.Effect
 import io.github.fiifoo.scarl.core.entity._
 import io.github.fiifoo.scarl.core.kind.WidgetKindId
-import io.github.fiifoo.scarl.effect.{HealEffect, RemoveStatusEffect, TickEffect, TransformWidgetEffect}
+import io.github.fiifoo.scarl.effect._
 
 case class HealLocationStatus(id: ActiveStatusId,
                               tick: Int,
@@ -28,7 +28,11 @@ case class HealLocationStatus(id: ActiveStatusId,
     if (expireAt.forall(_ > tick)) {
       TickEffect(id, interval) :: effects
     } else if (transformTo.isDefined) {
-      effects ::: List(TransformWidgetEffect(target, transformTo.get, transformDescription))
+      effects ::: List(TransformEffect(
+        from = target,
+        to = transformTo.get,
+        description = transformDescription
+      ))
     } else {
       RemoveStatusEffect(id) :: effects
     }

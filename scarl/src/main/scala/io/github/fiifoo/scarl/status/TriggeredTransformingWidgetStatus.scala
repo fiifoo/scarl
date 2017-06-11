@@ -4,7 +4,7 @@ import io.github.fiifoo.scarl.core.State
 import io.github.fiifoo.scarl.core.effect.Effect
 import io.github.fiifoo.scarl.core.entity._
 import io.github.fiifoo.scarl.core.kind.WidgetKindId
-import io.github.fiifoo.scarl.effect.TransformWidgetEffect
+import io.github.fiifoo.scarl.effect.TransformEffect
 
 case class TriggeredTransformingWidgetStatus(id: TriggerStatusId,
                                              target: ContainerId,
@@ -13,6 +13,10 @@ case class TriggeredTransformingWidgetStatus(id: TriggerStatusId,
                                             ) extends TriggerStatus {
 
   def apply(s: State, triggerer: CreatureId): List[Effect] = {
-    List(TransformWidgetEffect(target, transformTo, transformDescription))
+    List(TransformEffect(
+      from = target,
+      to = transformTo,
+      description = transformDescription
+    ))
   }
 }
