@@ -7,6 +7,7 @@ import io.github.fiifoo.scarl.core.creature._
 import io.github.fiifoo.scarl.core.entity._
 import io.github.fiifoo.scarl.core.item.Equipment.Slot
 import io.github.fiifoo.scarl.core.kind.Kinds
+import io.github.fiifoo.scarl.core.power.Powers
 import io.github.fiifoo.scarl.core.world.{ConduitId, Traveler}
 
 object State {
@@ -42,6 +43,7 @@ case class State(entities: Map[EntityId, Entity] = Map(),
                  index: State.Index = State.Index(),
                  kinds: Kinds = Kinds(),
                  nextEntityId: Int = 1,
+                 powers: Powers = Powers(),
                  progressions: Map[ProgressionId, Progression] = Map(),
                  rng: Rng = Rng(1),
                  stored: Stored = Stored(),

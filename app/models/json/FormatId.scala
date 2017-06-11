@@ -6,6 +6,7 @@ import io.github.fiifoo.scarl.core.communication.CommunicationId
 import io.github.fiifoo.scarl.core.creature.{FactionId, ProgressionId}
 import io.github.fiifoo.scarl.core.entity._
 import io.github.fiifoo.scarl.core.kind._
+import io.github.fiifoo.scarl.core.power.{CreaturePowerId, ItemPowerId}
 import io.github.fiifoo.scarl.core.world.ConduitId
 import models.json.FormatUtils._
 import play.api.libs.json._
@@ -23,6 +24,9 @@ object FormatId {
   implicit val formatTerrainKindId = formatStringId[TerrainKindId](_.value, TerrainKindId.apply)
   implicit val formatWallKindId = formatStringId[WallKindId](_.value, WallKindId.apply)
   implicit val formatWidgetKindId = formatStringId[WidgetKindId](_.value, WidgetKindId.apply)
+
+  implicit val formatCreaturePowerId = formatStringId[CreaturePowerId](_.value, CreaturePowerId.apply)
+  implicit val formatItemPowerId = formatStringId[ItemPowerId](_.value, ItemPowerId.apply)
 
   implicit val formatActiveStatusId = formatIntId[ActiveStatusId](_.value, ActiveStatusId.apply)
   implicit val formatContainerId = formatIntId[ContainerId](_.value, ContainerId.apply)

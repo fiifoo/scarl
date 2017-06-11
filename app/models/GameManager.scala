@@ -25,6 +25,7 @@ class GameManager(saveStorage: SaveStorage) {
     Data.communications,
     Data.factions,
     Data.kinds,
+    Data.powers,
     Data.progressions,
     Data.templates
   )

@@ -13,6 +13,7 @@ import io.github.fiifoo.scarl.core.creature._
 import io.github.fiifoo.scarl.core.item.Equipment._
 import io.github.fiifoo.scarl.core.item._
 import io.github.fiifoo.scarl.core.kind._
+import io.github.fiifoo.scarl.core.power.Powers
 import io.github.fiifoo.scarl.widget._
 
 object Data {
@@ -97,6 +98,10 @@ object Data {
       walls,
       widgets
     )
+  }
+
+  def powers: Powers = {
+    Powers()
   }
 
   def progressions: Map[ProgressionId, Progression] = {

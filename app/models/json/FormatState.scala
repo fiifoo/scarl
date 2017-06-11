@@ -4,6 +4,7 @@ import io.github.fiifoo.scarl.core.State.Communications
 import io.github.fiifoo.scarl.core.communication.{Communication, CommunicationId}
 import io.github.fiifoo.scarl.core.creature.{Faction, Progression, ProgressionId}
 import io.github.fiifoo.scarl.core.kind.Kinds
+import io.github.fiifoo.scarl.core.power.Powers
 import io.github.fiifoo.scarl.core.{Rng, State}
 import models.json.FormatBase._
 import models.json.FormatEntities._
@@ -19,6 +20,7 @@ object FormatState {
   // reset from game data
   implicit val formatStateCommunicationsData = formatEmpty[Map[CommunicationId, Communication]](Map())
   implicit val formatStateKinds = formatEmpty(Kinds())
+  implicit val formatStatePowers = formatEmpty(Powers())
   implicit val formatStateProgressions = formatEmpty[Map[ProgressionId, Progression]](Map())
   // should be empty
   implicit val formatStateTemporary = formatEmpty(State.Temporary())

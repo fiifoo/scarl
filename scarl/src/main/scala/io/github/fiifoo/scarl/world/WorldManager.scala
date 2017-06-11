@@ -9,12 +9,14 @@ import io.github.fiifoo.scarl.core.creature.{Faction, FactionId, Progression, Pr
 import io.github.fiifoo.scarl.core.entity._
 import io.github.fiifoo.scarl.core.kind.{CreatureKindId, Kinds}
 import io.github.fiifoo.scarl.core.mutation.{ConduitExitMutation, NewEntityMutation, NewFactionMutation}
+import io.github.fiifoo.scarl.core.power.Powers
 import io.github.fiifoo.scarl.core.world.{ConduitId, Traveler}
 
 class WorldManager(val areas: Map[AreaId, Area],
                    val communications: Map[CommunicationId, Communication],
                    val factions: Map[FactionId, Faction],
                    val kinds: Kinds,
+                   val powers: Powers,
                    val progressions: Map[ProgressionId, Progression],
                    val templates: Map[TemplateId, Template]
                   ) {
@@ -55,6 +57,7 @@ class WorldManager(val areas: Map[AreaId, Area],
       communications = Communications(communications),
       kinds = kinds,
       nextEntityId = nextEntityId,
+      powers = powers,
       progressions = progressions,
       rng = rng
     )

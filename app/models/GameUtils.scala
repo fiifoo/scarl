@@ -15,6 +15,7 @@ object GameUtils {
           communications = state.communications.copy(manager.communications),
           index = calculateStateIndex(state),
           kinds = manager.kinds,
+          powers = manager.powers,
           progressions = manager.progressions
         )
 
