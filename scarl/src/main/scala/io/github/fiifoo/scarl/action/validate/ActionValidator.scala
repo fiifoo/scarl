@@ -2,9 +2,10 @@ package io.github.fiifoo.scarl.action.validate
 
 import io.github.fiifoo.scarl.action._
 import io.github.fiifoo.scarl.action.validate.ValidatorUtils._
+import io.github.fiifoo.scarl.core.Selectors.getItemLocation
 import io.github.fiifoo.scarl.core.State
 import io.github.fiifoo.scarl.core.action.Action
-import io.github.fiifoo.scarl.core.entity.{ContainerId, CreatureId}
+import io.github.fiifoo.scarl.core.entity.CreatureId
 
 object ActionValidator {
 
@@ -48,14 +49,7 @@ object ActionValidator {
       return false
     }
 
-    val item = action.item(s)
-
-    val validContainer = item.container match {
-      case container: ContainerId => container(s).location == actor(s).location
-      case _ => false
-    }
-
-    validContainer && item.pickable
+    action.item(s).pickable && (getItemLocation(s)(action.item) contains actor(s).location)
   }
 
   private def validate(s: State, actor: CreatureId, action: ShootAction): Boolean = true
@@ -65,11 +59,6 @@ object ActionValidator {
       return false
     }
 
-    val location = action.target(s).container match {
-      case container: ContainerId => Some(container(s).location)
-      case _ => None
-    }
-
-    location.exists(adjacentLocation(s, actor, _))
+    getItemLocation(s)(action.target) exists (adjacentLocation(s, actor, _))
   }
 }
