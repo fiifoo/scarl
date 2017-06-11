@@ -1,0 +1,12 @@
+.inventory-group td {
+    white-space: nowrap;
+}
+
+.inventory-group td.full-width {
+    width: 100%;
+}
+
+.inventory-group td > .btn,
+.inventory-group td > .btn-group {
+    min-width: 75px;
+}

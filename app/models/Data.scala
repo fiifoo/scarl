@@ -13,7 +13,8 @@ import io.github.fiifoo.scarl.core.creature._
 import io.github.fiifoo.scarl.core.item.Equipment._
 import io.github.fiifoo.scarl.core.item._
 import io.github.fiifoo.scarl.core.kind._
-import io.github.fiifoo.scarl.core.power.Powers
+import io.github.fiifoo.scarl.core.power.{CreaturePowerId, ItemPowerId, Powers}
+import io.github.fiifoo.scarl.power.{TransformCreaturePower, TransformItemPower}
 import io.github.fiifoo.scarl.widget._
 
 object Data {
@@ -101,7 +102,25 @@ object Data {
   }
 
   def powers: Powers = {
-    Powers()
+    val transformDroneCreature = TransformCreaturePower(
+      id = CreaturePowerId("transform-drone"),
+      to = ItemKindId("drone"),
+      description = Some("Drone shuts down.")
+    )
+    val transformDroneItem = TransformItemPower(
+      id = ItemPowerId("transform-drone"),
+      to = CreatureKindId("drone"),
+      description = Some("Drone starts humming.")
+    )
+
+    Powers(
+      creatures = Map(
+        transformDroneCreature.id -> transformDroneCreature
+      ),
+      items = Map(
+        transformDroneItem.id -> transformDroneItem
+      )
+    )
   }
 
   def progressions: Map[ProgressionId, Progression] = {
@@ -213,7 +232,7 @@ object Data {
           Location(3, 1) -> List(ItemKindId("grey-altar")),
           Location(3, 2) -> List(ItemKindId("grey-altar")),
           Location(3, 3) -> List(ItemKindId("grey-altar")),
-          Location(2, 3) -> List(ItemKindId("grey-altar")),
+          Location(2, 3) -> List(ItemKindId("drone")),
           Location(1, 3) -> List(ItemKindId("grey-altar")),
           Location(1, 2) -> List(ItemKindId("grey-altar"))
         ),
@@ -374,6 +393,23 @@ object Data {
       flying = true
     )
 
+    val drone = CreatureKind(
+      id = CreatureKindId("drone"),
+      name = "Drone",
+      display = 'd',
+      color = "Yellow",
+      faction = FactionId("none"),
+      stats = Stats(
+        health = 50,
+        melee = Melee(attack = 10, damage = 10),
+        ranged = Ranged(attack = 20, damage = 10, range = 5),
+        defence = 30,
+        armor = 10,
+        sight = Sight(5)
+      ),
+      usable = Some(CreaturePowerId("transform-drone"))
+    )
+
     Map(
       hero.id -> hero,
       avatarOfJustice.id -> avatarOfJustice,
@@ -381,7 +417,8 @@ object Data {
       heraldOfChaos.id -> heraldOfChaos,
       avatarOfChaos.id -> avatarOfChaos,
       colonialMarine.id -> colonialMarine,
-      guidedMissile.id -> guidedMissile
+      guidedMissile.id -> guidedMissile,
+      drone.id -> drone
     )
   }
 
@@ -597,6 +634,15 @@ object Data {
       ))
     )
 
+    val drone = ItemKind(
+      id = ItemKindId("drone"),
+      name = "Drone",
+      display = 'd',
+      color = "LightGrey",
+      pickable = true,
+      usable = Some(ItemPowerId("transform-drone"))
+    )
+
     Map(
       portal.id -> portal,
       greyAltar.id -> greyAltar,
@@ -616,7 +662,8 @@ object Data {
       leatherHelmet.id -> leatherHelmet,
       leatherBoots.id -> leatherBoots,
       leatherGloves.id -> leatherGloves,
-      guidedMissileLauncher.id -> guidedMissileLauncher
+      guidedMissileLauncher.id -> guidedMissileLauncher,
+      drone.id -> drone
     )
   }
 

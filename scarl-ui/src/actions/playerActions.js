@@ -17,6 +17,11 @@ export const communicate = () => (dispatch, getState) => {
     }
 }
 
+export const dropItem = item => () => {
+    sendAction('DropItem', {item})
+    sendInventoryQuery()
+}
+
 export const enterConduit = () => (dispatch, getState) => {
     const {player, fov} = getState()
     const location = player.creature.location
@@ -68,6 +73,31 @@ export const shoot = location => (dispatch, getState) => {
     sendAction('Shoot', {location})
 }
 
+export const unequipItem = item => () => {
+    sendAction('UnequipItem', {item})
+    sendInventoryQuery()
+}
+
+export const use = () => (dispatch, getState) => {
+    const {player, fov} = getState()
+    const creature = findUsableCreature(player, fov)
+
+    if (creature) {
+        useCreature(creature)()
+    } else {
+        const item = findUsableItem(player, fov)
+        if (item) {
+            useItem(item)()
+        } else {
+            addMessage('Nothing to use here.')(dispatch)
+        }
+    }
+}
+
+export const useCreature = target => () => {
+    sendAction('UseCreature', {target})
+}
+
 export const useDoor = (door = undefined) => (dispatch, getState) => {
     const {player, fov} = getState()
     const target = door ? door : findDoor(player, fov)
@@ -77,6 +107,15 @@ export const useDoor = (door = undefined) => (dispatch, getState) => {
     } else {
         addMessage('No doors here.')(dispatch)
     }
+}
+
+export const useItem = target => () => {
+    sendAction('UseItem', {target})
+}
+
+export const useInventoryItem = target => () => {
+    useItem(target)()
+    sendInventoryQuery()
 }
 
 const createAdjacentTargetFinder = getTarget => (player, fov) => {
@@ -90,6 +129,20 @@ const createAdjacentTargetFinder = getTarget => (player, fov) => {
     return target !== undefined ? target.id : undefined
 }
 
+const createHereOrAdjacentTargetFinder = getTarget => {
+    const findAdjacent = createAdjacentTargetFinder(getTarget)
+
+    return (player, fov) => {
+        const here = getTarget(player.creature.location, fov.cumulative)
+
+        return here ? here.id : findAdjacent(player, fov)
+    }
+}
+
 const findCommunicateTarget = createAdjacentTargetFinder(utils.getLocationCreature)
 
 const findDoor = createAdjacentTargetFinder(utils.getLocationDoor)
+
+const findUsableCreature = createAdjacentTargetFinder(utils.getLocationUsableCreature)
+
+const findUsableItem = createHereOrAdjacentTargetFinder(utils.getLocationUsableItem)

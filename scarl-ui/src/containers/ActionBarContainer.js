@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 import ActionBar from '../components/ActionBar.jsx'
 import { aim, cancelMode, inventory, look, keyBindings, messageLog } from '../actions/gameActions'
-import { communicate, enterConduit, pickItem, useDoor } from '../actions/playerActions'
+import { communicate, enterConduit, pickItem, use, useDoor } from '../actions/playerActions'
 
 const ActionBarContainer = connect(
     state => ({
@@ -16,6 +16,7 @@ const ActionBarContainer = connect(
         look,
         messageLog,
         pickItem,
+        use,
         useDoor: () => useDoor(), // receives bad argument from redux-thunk(?)
     }
 )(ActionBar)

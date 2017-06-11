@@ -2,19 +2,22 @@ package io.github.fiifoo.scarl.core.kind
 
 import io.github.fiifoo.scarl.core.entity._
 import io.github.fiifoo.scarl.core.item._
+import io.github.fiifoo.scarl.core.power.ItemPowerId
 import io.github.fiifoo.scarl.core.{Location, State}
 
 case class ItemKind(id: ItemKindId,
                     name: String,
                     display: Char,
                     color: String,
+
+                    armor: Option[Armor] = None,
+                    door: Option[Door] = None,
                     hidden: Boolean = false,
                     pickable: Boolean = false,
-                    armor: Option[Armor] = None,
                     rangedWeapon: Option[RangedWeapon] = None,
                     shield: Option[Shield] = None,
-                    weapon: Option[Weapon] = None,
-                    door: Option[Door] = None
+                    usable: Option[ItemPowerId] = None,
+                    weapon: Option[Weapon] = None
                    ) extends Kind {
 
   def apply(s: State, container: EntityId): Item = {
@@ -33,13 +36,15 @@ case class ItemKind(id: ItemKindId,
       id = ItemId(nextId),
       kind = id,
       container = container,
+
+      armor = armor,
+      door = door,
       hidden = hidden,
       pickable = pickable,
-      armor = armor,
       rangedWeapon = rangedWeapon,
       shield = shield,
-      weapon = weapon,
-      door = door
+      usable = usable,
+      weapon = weapon
     )
   }
 }

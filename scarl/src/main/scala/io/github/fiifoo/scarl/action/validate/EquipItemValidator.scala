@@ -9,7 +9,7 @@ import io.github.fiifoo.scarl.core.item._
 
 object EquipItemValidator {
   def apply(s: State, actor: CreatureId, action: EquipItemAction): Boolean = {
-    if (!entityExists(s, action.item)) {
+    if (!entityExists(s)(action.item)) {
       return false
     }
 

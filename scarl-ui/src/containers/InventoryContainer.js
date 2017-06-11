@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { equipItem } from '../actions/playerActions'
+import { dropItem, equipItem, unequipItem, useInventoryItem } from '../actions/playerActions'
 import Inventory from '../components/Inventory.jsx'
 import LazyToggleable from '../components/LazyToggleable.jsx'
 import { INVENTORY } from '../game/modes'
@@ -13,7 +13,10 @@ const InventoryContainer = connect(
         inventory: state.inventory,
         kinds: state.kinds,
     }), {
+        dropItem,
         equipItem,
+        unequipItem,
+        useItem: useInventoryItem,
     }
 )(LazyToggleable)
 

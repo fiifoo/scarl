@@ -48,6 +48,10 @@ export default (command, dispatch, getState) => {
             playerActions.pickItem()(dispatch, getState)
             break
         }
+        case commands.USE: {
+            playerActions.use()(dispatch, getState)
+            break
+        }
         case commands.USE_DOOR: {
             playerActions.useDoor()(dispatch, getState)
             break

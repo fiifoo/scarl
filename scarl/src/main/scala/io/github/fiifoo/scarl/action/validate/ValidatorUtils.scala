@@ -4,7 +4,7 @@ import io.github.fiifoo.scarl.core.entity.{CreatureId, EntityId}
 import io.github.fiifoo.scarl.core.{Location, State}
 
 object ValidatorUtils {
-  def adjacentLocation(s: State, actor: CreatureId, location: Location): Boolean = {
+  def isAdjacentLocation(s: State, actor: CreatureId)(location: Location): Boolean = {
     val actorLocation = actor(s).location
 
     actorLocation != location &&
@@ -12,7 +12,7 @@ object ValidatorUtils {
       Math.abs(actorLocation.y - location.y) <= 1
   }
 
-  def entityExists(s: State, entity: EntityId): Boolean = {
+  def entityExists(s: State)(entity: EntityId): Boolean = {
     s.entities.isDefinedAt(entity)
   }
 }

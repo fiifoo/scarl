@@ -34,6 +34,7 @@ export default {
         [keycodes.M, commands.MESSAGE_LOG],
         [keycodes.P, commands.PICK_ITEM],
         [keycodes.T, commands.COMMUNICATE],
+        [keycodes.U, commands.USE],
     ]).merge(directions),
 
     [gameModes.AIM]: Map([

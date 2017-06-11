@@ -60,7 +60,7 @@ export const getLocationDoor = (location, fov) => {
 export const getLocationPickableItems = (location, fov) => {
     const entities = getLocationEntities(location, fov)
 
-    return entities ? entities.items.filter(item => item.pickable) : undefined
+    return entities ? entities.items.filter(item => item.pickable) : []
 }
 
 export const getLocationDescriptions = (location, fov, map, kinds) => {
@@ -77,6 +77,22 @@ export const getLocationDescriptions = (location, fov, map, kinds) => {
     const descriptions = [creature, wall].filter(x => x !== undefined).concat(items)
 
     return List(descriptions.map (d => d + '.'))
+}
+
+export const getLocationUsableCreature = (location, fov) => {
+    const creature = getLocationCreature(location, fov)
+
+    if (creature && creature.usable) {
+        return creature
+    } else {
+        return undefined
+    }
+}
+
+export const getLocationUsableItem = (location, fov) => {
+    const entities = getLocationEntities(location, fov)
+
+    return entities ? entities.items.find(item => item.usable) : undefined
 }
 
 export const isEnemyChecker = (player, factions) => {
