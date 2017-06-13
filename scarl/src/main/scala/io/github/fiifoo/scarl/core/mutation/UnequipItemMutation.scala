@@ -14,7 +14,7 @@ case class UnequipItemMutation(creature: CreatureId, item: ItemId) extends Mutat
     val s1 = s.copy(equipments = s.equipments + (creature -> next))
 
     s1.copy(index = s1.index.copy(
-      equipmentStats = EquipmentStatsIndexMutation(creature)(s, s.index.equipmentStats)
+      equipmentStats = EquipmentStatsIndexMutation(creature)(s1, s1.index.equipmentStats)
     ))
   }
 }
