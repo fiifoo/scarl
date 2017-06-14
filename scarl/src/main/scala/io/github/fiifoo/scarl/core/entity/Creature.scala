@@ -11,7 +11,7 @@ case class Creature(id: CreatureId,
                     tick: Int,
                     damage: Int,
                     stats: Stats,
-                    owner: Option[CreatureId] = None,
+                    owner: Option[SafeCreatureId] = None,
                     character: Option[Character] = None,
                     missile: Option[Missile] = None,
                     flying: Boolean = false

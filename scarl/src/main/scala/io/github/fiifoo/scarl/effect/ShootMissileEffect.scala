@@ -21,7 +21,7 @@ case class ShootMissileEffect(attacker: CreatureId,
     val destination = (Line(from, location) take range + 1).last
     val creature = kind(s)(s, from).copy(
       faction = attacker(s).faction,
-      owner = Some(attacker)
+      owner = Some(SafeCreatureId(attacker))
     )
 
     creature.missile map (missile => {
