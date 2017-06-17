@@ -19,6 +19,8 @@ class FileSaveStorage(root: String) extends SaveStorage {
   }
 
   def save(json: JsValue): Unit = {
+    checkDirectory()
+
     Files.write(
       file,
       json.toString.getBytes(UTF_8),
@@ -29,5 +31,13 @@ class FileSaveStorage(root: String) extends SaveStorage {
 
   def clear(): Unit = {
     Files.deleteIfExists(file)
+  }
+
+  private def checkDirectory(): Unit = {
+    val path = Paths.get(root)
+
+    if (Files.notExists(path)) {
+      Files.createDirectory(path)
+    }
   }
 }
