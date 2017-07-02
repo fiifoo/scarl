@@ -2,7 +2,7 @@ package io.github.fiifoo.scarl.core.mutation
 
 import io.github.fiifoo.scarl.core.State
 import io.github.fiifoo.scarl.core.entity.{CreatureId, ItemId}
-import io.github.fiifoo.scarl.core.mutation.index.EquipmentStatsIndexMutation
+import io.github.fiifoo.scarl.core.mutation.cache.EquipmentStatsCacheMutation
 
 case class UnequipItemMutation(creature: CreatureId, item: ItemId) extends Mutation {
 
@@ -13,8 +13,8 @@ case class UnequipItemMutation(creature: CreatureId, item: ItemId) extends Mutat
 
     val s1 = s.copy(equipments = s.equipments + (creature -> next))
 
-    s1.copy(index = s1.index.copy(
-      equipmentStats = EquipmentStatsIndexMutation(creature)(s1, s1.index.equipmentStats)
+    s1.copy(cache = s1.cache.copy(
+      equipmentStats = EquipmentStatsCacheMutation(creature)(s1, s1.cache.equipmentStats)
     ))
   }
 }

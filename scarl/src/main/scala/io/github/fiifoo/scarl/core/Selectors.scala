@@ -23,7 +23,7 @@ object Selectors {
   }
 
   def getEquipmentStats(s: State)(creature: CreatureId): Stats = {
-    s.index.equipmentStats.getOrElse(creature, Stats())
+    s.cache.equipmentStats.getOrElse(creature, Stats())
   }
 
   def getItemLocation(s: State)(item: ItemId, deep: Boolean = false): Option[Location] = {

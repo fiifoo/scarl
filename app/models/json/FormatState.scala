@@ -16,6 +16,7 @@ import play.api.libs.json._
 
 object FormatState {
   // recalculated
+  implicit val formatStateCache = formatEmpty(State.Cache())
   implicit val formatStateIndex = formatEmpty(State.Index())
   // reset from game data
   implicit val formatStateCommunicationsData = formatEmpty[Map[CommunicationId, Communication]](Map())

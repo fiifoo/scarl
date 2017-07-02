@@ -95,7 +95,7 @@ class EquipItemEffectSpec extends FlatSpec with Matchers {
     val e4 = EquipItemEffect(creature, items("armorOrSword").id, HeadArmor)
 
     s = resolve(s, List(e1, e2, e3, e3, e4))
-    s.index.equipmentStats should ===(Map(
+    s.cache.equipmentStats should ===(Map(
       creature -> Stats(
         melee = Melee(attack = 1, damage = 1),
         armor = 1

@@ -1,4 +1,4 @@
-package io.github.fiifoo.scarl.core.mutation.index
+package io.github.fiifoo.scarl.core.mutation.cache
 
 import io.github.fiifoo.scarl.core.State
 import io.github.fiifoo.scarl.core.creature.Stats
@@ -6,10 +6,10 @@ import io.github.fiifoo.scarl.core.entity.{CreatureId, ItemId}
 import io.github.fiifoo.scarl.core.item.Equipment._
 import io.github.fiifoo.scarl.core.item._
 
-case class EquipmentStatsIndexMutation(creature: CreatureId) {
-  type Index = Map[CreatureId, Stats]
+case class EquipmentStatsCacheMutation(creature: CreatureId) {
+  type Cache = Map[CreatureId, Stats]
 
-  def apply(s: State, index: Index): Index = {
+  def apply(s: State, cache: Cache): Cache = {
     val equipments = s.equipments.getOrElse(creature, Map())
 
     val fold = equipments.foldLeft((Stats(), Set[ItemId]())) _
@@ -36,7 +36,7 @@ case class EquipmentStatsIndexMutation(creature: CreatureId) {
       }
     })
 
-    index + (creature -> stats)
+    cache + (creature -> stats)
   }
 
   private def getStats(equipment: Option[Equipment]): Stats = {

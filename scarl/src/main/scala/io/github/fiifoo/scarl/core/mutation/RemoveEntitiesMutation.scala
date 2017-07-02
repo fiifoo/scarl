@@ -20,6 +20,7 @@ case class RemoveEntitiesMutation() extends Mutation {
     val removable = s.tmp.removableEntities
 
     s.copy(
+      cache = mutateCache(s, removable),
       communications = mutateCommunications(s.communications, removable),
       entities = s.entities -- removable,
       equipments = mutateEquipments(s.equipments, removable),
@@ -43,14 +44,18 @@ case class RemoveEntitiesMutation() extends Mutation {
     tactics -- collectCreatures(removable)
   }
 
+  private def mutateCache(s: State, removable: Set[EntityId]): State.Cache = {
+    val cache = s.cache
+
+    cache.copy(
+      equipmentStats = cache.equipmentStats -- collectCreatures(removable)
+    )
+  }
+
   private def mutateIndex(s: State, removable: Set[EntityId]): State.Index = {
-    val index = removable.foldLeft(s.index)((index, entity) => {
+    removable.foldLeft(s.index)((index, entity) => {
       mutateSingleIndex(s, index, entity(s))
     })
-
-    index.copy(
-      equipmentStats = index.equipmentStats -- collectCreatures(removable)
-    )
   }
 
   private def mutateSingleIndex(s: State, index: State.Index, entity: Entity): State.Index = {
