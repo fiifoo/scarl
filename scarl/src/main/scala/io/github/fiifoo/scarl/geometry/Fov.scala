@@ -12,7 +12,7 @@ object Fov {
 
       def blocked(l: Location): Boolean = obstacle(denormalize(l)).isDefined
 
-      val results = ScanRecursive(range, blocked)(1, 0, 1)
+      val results = ScanRecursive(range, blocked)()
 
       results map denormalize
     })
@@ -24,80 +24,94 @@ object Fov {
     (0 to 7).toSet map Octant.apply
   }
 
-  private case class ScanRecursive(range: Int, blocked: Location => Boolean) {
-    type Slope = Double
-    type Scan = (Slope, Slope)
+  case class ScanRecursive(range: Int, blocked: Location => Boolean) {
 
-    def apply(step: Int, min: Slope, max: Slope): Set[Location] = {
+    case class Border(slope: Double, peeking: Boolean = false)
+
+    type Scan = (Border, Border)
+
+    def apply(step: Int = 1,
+              min: Border = Border(0),
+              max: Border = Border(1)
+             ): Set[Location] = {
+
       val locations = getLocations(step, min, max)
 
-      if (step < this.range) {
+      val subResults = if (step < this.range) {
         val scans = getScans(min, max, locations)
 
-        locations.toSet ++ (scans flatMap (scan => {
+        scans flatMap (scan => {
           this (step + 1, scan._1, scan._2)
-        }))
+        })
       } else {
-        locations.toSet
+        Set()
       }
+
+      locations.toSet ++ subResults
     }
 
-    private def getLocations(step: Int, min: Slope, max: Slope): Seq[Location] = {
+    private def getLocations(step: Int, min: Border, max: Border): Seq[Location] = {
       val x = step
-      val y1 = (step * min).floor.toInt
-      val y2 = (step * max).ceil.toInt
+      val y1 = (step * min.slope) + (if (min.peeking) 0.5 else 0)
+      val y2 = (step * max.slope) - (if (max.peeking) 0.5 else 0)
 
-      (y1 to y2) map (Location(x, _))
+      (y1.round.toInt to y2.round.toInt) map (Location(x, _))
     }
 
-    private def getScans(min: Slope,
-                         max: Slope,
+    private def getScans(min: Border,
+                         max: Border,
                          locations: Seq[Location]
                         ): List[Scan] = {
 
-      val foldLocations = locations.foldLeft[(List[Scan], Option[Slope])]((List(), None)) _
+      val initialScans = List[Scan]()
+      val initialMin = locations.headOption.collect {
+        case l: Location if !this.blocked(l) => min
+      }
 
-      val (scans, nextMinOption) = foldLocations((carry, location) => {
-        val (scans, nextMinOption) = carry
+      val (scans, minOption) = locations.foldLeft((initialScans, initialMin))((carry, location) => {
+        val (scans, minOption) = carry
 
         if (this.blocked(location)) {
-          nextMinOption map (nextMin => {
-            val nextMax = getMaxSlope(location, max)
 
-            ((nextMin, nextMax) :: scans, None)
+          val nextScans = minOption map (nextMin => {
+            (nextMin, getMaxBorder(location)) :: scans // blocking location after free location -> new scan
           }) getOrElse {
-            (scans, None)
+            scans // another blocking location
           }
-        } else {
-          if (nextMinOption.isEmpty) {
-            val nextMin = getMinSlope(location, min)
 
-            (scans, Some(nextMin))
+          (nextScans, None)
+
+        } else {
+
+          val nextMinOption = if (minOption.isEmpty) {
+            Some(getMinBorder(location)) // free location after blocking location -> prepare new scan
           } else {
-            (scans, nextMinOption)
+            minOption // another free location
           }
+
+          (scans, nextMinOption)
         }
       })
 
-      nextMinOption map (nextMin => {
+      minOption map (nextMin => {
         (nextMin, max) :: scans
       }) getOrElse {
         scans
       }
     }
 
-    private def getMinSlope(l: Location, current: Slope): Slope = {
+    private def getMinBorder(l: Location): Border = {
       val dx = l.x - 0.5
-      val dy = l.y - 0.5
+      val dy = l.y - 1
 
-      Math.max(current, dy / dx)
+      Border(dy / dx, peeking = true)
     }
 
-    private def getMaxSlope(l: Location, current: Slope): Slope = {
+    private def getMaxBorder(l: Location): Border = {
       val dx = l.x + 0.5
-      val dy = l.y - 0.5
+      val dy = l.y
 
-      Math.min(current, dy / dx)
+      Border(dy / dx, peeking = true)
     }
   }
 
