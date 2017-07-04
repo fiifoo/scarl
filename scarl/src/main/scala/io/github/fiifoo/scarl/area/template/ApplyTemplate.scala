@@ -5,6 +5,7 @@ import io.github.fiifoo.scarl.core.kind._
 import io.github.fiifoo.scarl.core.mutation.{NewConduitMutation, NewEntityMutation, NewGatewayMutation}
 import io.github.fiifoo.scarl.core.world.ConduitId
 import io.github.fiifoo.scarl.core.{Location, Rng, State}
+import io.github.fiifoo.scarl.geometry.WaypointNetwork
 import io.github.fiifoo.scarl.world.Conduit
 
 import scala.util.Random
@@ -18,11 +19,16 @@ object ApplyTemplate {
             random: Random
            ): State = {
 
-    val processed = process(initial, template)
-    val conduits = addConduits(processed, template, in, out, random)
-    val gateways = addGateways(conduits, template)
+    var state = initial.copy(area = State.Area(
+      height = template.shape.outerHeight,
+      width = template.shape.outerWidth
+    ))
+    state = process(state, template)
+    state = addConduits(state, template, in, out, random)
+    state = addGateways(state, template)
+    state = buildCache(state)
 
-    gateways
+    state
   }
 
   private def process(initial: State,
@@ -196,5 +202,11 @@ object ApplyTemplate {
 
       extractLocations(template, extract, offset.add(location), result)
     })
+  }
+
+  private def buildCache(s: State): State = {
+    s.copy(cache = s.cache.copy(
+      waypointNetwork = WaypointNetwork(s)
+    ))
   }
 }

@@ -8,10 +8,18 @@ import io.github.fiifoo.scarl.core.item.Equipment.Slot
 import io.github.fiifoo.scarl.core.kind.Kinds
 import io.github.fiifoo.scarl.core.power.Powers
 import io.github.fiifoo.scarl.core.world.{ConduitId, Traveler}
+import io.github.fiifoo.scarl.geometry.WaypointNetwork
 
 object State {
 
-  case class Cache(equipmentStats: Map[CreatureId, Stats] = Map())
+  case class Area(width: Int = 10,
+                  height: Int = 10,
+                  sectorSize: Int = 10
+                 )
+
+  case class Cache(equipmentStats: Map[CreatureId, Stats] = Map(),
+                   waypointNetwork: WaypointNetwork = WaypointNetwork()
+                  )
 
   case class Communications(data: Map[CommunicationId, Communication] = Map(),
                             received: Map[CreatureId, Set[CommunicationId]] = Map()
@@ -34,7 +42,8 @@ object State {
 
 }
 
-case class State(cache: State.Cache = State.Cache(),
+case class State(area: State.Area = State.Area(),
+                 cache: State.Cache = State.Cache(),
                  communications: State.Communications = State.Communications(),
                  conduits: Map[ConduitId, Location] = Map(),
                  entities: Map[EntityId, Entity] = Map(),

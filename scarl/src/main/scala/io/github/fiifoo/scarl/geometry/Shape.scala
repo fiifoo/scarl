@@ -5,15 +5,24 @@ import io.github.fiifoo.scarl.core.Location
 object Shape {
 
   def circle(location: Location, radius: Int): Set[Location] = {
-    val range = 0 to radius * 2
+    val dimension = (0 to radius * 2).toSet
 
-    range.foldLeft(Set[Location]())((result, y) => {
-      val row = range map (x => {
-        location.add(Location(x - radius, y - radius))
+    dimension flatMap (x => {
+      dimension map (y => {
+        Location(x - radius, y - radius) add location
       })
-
-      result ++ row.toSet
     })
   }
 
+  def rectangle(location: Location, width: Int, height: Int): Set[Location] = {
+    (0 until width).toSet flatMap ((x: Int) => {
+      (0 until height).toSet map ((y: Int) => {
+        Location(x, y) add location
+      })
+    })
+  }
+
+  def square(location: Location, size: Int): Set[Location] = {
+    rectangle(location, size, size)
+  }
 }

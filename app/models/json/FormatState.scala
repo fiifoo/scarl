@@ -1,6 +1,5 @@
 package models.json
 
-import io.github.fiifoo.scarl.core.State.Communications
 import io.github.fiifoo.scarl.core.communication.{Communication, CommunicationId}
 import io.github.fiifoo.scarl.core.creature.{Faction, Progression, ProgressionId}
 import io.github.fiifoo.scarl.core.kind.Kinds
@@ -30,7 +29,8 @@ object FormatState {
   implicit val formatCreatureCommunications = formatMap(formatCreatureId, implicitly[Format[Set[CommunicationId]]])
   implicit val formatFaction = Json.format[Faction]
 
-  implicit val formatStateCommunications = Json.format[Communications]
+  implicit val formatStateArea = Json.format[State.Area]
+  implicit val formatStateCommunications = Json.format[State.Communications]
   implicit val formatStateConduits = formatMap(formatConduitId, formatLocation)
   implicit val formatEquipments = formatMap(formatCreatureId, formatMap(formatSlot, formatItemId))
   implicit val formatStateFactions = formatMap(formatFactionId, formatFaction)

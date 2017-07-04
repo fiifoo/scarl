@@ -3,6 +3,7 @@ package models
 import io.github.fiifoo.scarl.core.State
 import io.github.fiifoo.scarl.core.mutation.cache.EquipmentStatsCacheMutation
 import io.github.fiifoo.scarl.core.mutation.index.{ConduitLocationIndexAddMutation, NewEntityIndexMutation}
+import io.github.fiifoo.scarl.geometry.WaypointNetwork
 import io.github.fiifoo.scarl.world.{WorldManager, WorldState}
 
 object GameUtils {
@@ -11,17 +12,20 @@ object GameUtils {
     world.copy(
       areas = manager.areas,
       states = world.states.map(x => {
-        val (area, state) = x
-        val finalized = state.copy(
-          cache = calculateStateCache(state),
+        var (area, state) = x
+
+        state = state.copy(
           communications = state.communications.copy(manager.communications),
           index = calculateStateIndex(state),
           kinds = manager.kinds,
           powers = manager.powers,
           progressions = manager.progressions
         )
+        state = state.copy(
+          cache = calculateStateCache(state)
+        )
 
-        (area, finalized)
+        (area, state)
       })
     )
   }
@@ -33,7 +37,10 @@ object GameUtils {
       EquipmentStatsCacheMutation(creature)(s, stats)
     })
 
-    cache.copy(equipmentStats = equipmentStats)
+    cache.copy(
+      equipmentStats = equipmentStats,
+      waypointNetwork = WaypointNetwork(s)
+    )
   }
 
   private def calculateStateIndex(s: State): State.Index = {
