@@ -1,5 +1,6 @@
 import React from 'react'
 import ActionBarContainer from '../containers/ActionBarContainer'
+import DebugBarContainer from '../containers/DebugBarContainer'
 import InventoryContainer from '../containers/InventoryContainer'
 import KeyBindingsContainer from '../containers/KeyBindingsContainer'
 import KeyboardContainer from '../containers/KeyboardContainer'
@@ -30,6 +31,8 @@ const Game = ({game, focusKeyboard}) => (
             <PlayerInfoContainer />
             <Spacer />
             <ActionBarContainer />
+            <Spacer />
+            <DebugBarContainer />
         </div>
     ) : game.over ? (
         <div>

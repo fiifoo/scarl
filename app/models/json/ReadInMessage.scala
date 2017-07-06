@@ -1,6 +1,6 @@
 package models.json
 
-import io.github.fiifoo.scarl.game.api.{GameAction, InMessage, InventoryQuery}
+import io.github.fiifoo.scarl.game.api._
 import models.json.FormatBase._
 import models.json.FormatId._
 import models.json.FormatItem.formatSlot
@@ -22,8 +22,10 @@ object ReadInMessage {
       val data = container("data")
 
       JsSuccess(messageType match {
+        case "DebugFovQuery" => DebugFovQuery
+        case "DebugWaypointQuery" => DebugWaypointQuery
         case "GameAction" => data.as[GameAction]
-        case "InventoryQuery" => InventoryQuery()
+        case "InventoryQuery" => InventoryQuery
       })
     }
   }

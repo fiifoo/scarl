@@ -1,5 +1,6 @@
 package models.json
 
+import io.github.fiifoo.scarl.core.Location
 import io.github.fiifoo.scarl.core.communication.CommunicationId
 import io.github.fiifoo.scarl.core.creature.{Faction, FactionId}
 import io.github.fiifoo.scarl.core.kind._
@@ -7,6 +8,7 @@ import io.github.fiifoo.scarl.game.api.OutMessage.PlayerInfo
 import io.github.fiifoo.scarl.game.api._
 import io.github.fiifoo.scarl.game.event._
 import io.github.fiifoo.scarl.game.{LocationEntities, PlayerFov}
+import io.github.fiifoo.scarl.geometry.WaypointNetwork
 import models.json.FormatBase._
 import models.json.FormatEntity._
 import models.json.FormatGameState.{formatAreaMap, formatStatistics}
@@ -81,9 +83,19 @@ object WriteOutMessage {
   implicit val writeAreaChange = Json.writes[AreaChange]
   implicit val writePlayerInventory = Json.writes[PlayerInventory]
 
+  implicit val formatLocations = implicitly[Format[Set[Location]]]
+  implicit val formatLocationMap = formatMap(formatLocation, formatLocation)
+  implicit val formatLocationsMap = formatMap(formatLocation, formatLocations)
+  implicit val writeWaypointNetwork = Json.writes[WaypointNetwork]
+
+  implicit val writeDebugFov = Json.writes[DebugFov]
+  implicit val writeDebugWaypoint = Json.writes[DebugWaypoint]
+
   implicit val writeOutMessage = new Writes[OutMessage] {
     def writes(message: OutMessage): JsValue = {
       val data = message match {
+        case message: DebugFov => writeDebugFov.writes(message)
+        case message: DebugWaypoint => writeDebugWaypoint.writes(message)
         case message: GameStart => writeGameStart.writes(message)
         case message: GameUpdate => writeGameUpdate.writes(message)
         case message: GameOver => writeGameOver.writes(message)

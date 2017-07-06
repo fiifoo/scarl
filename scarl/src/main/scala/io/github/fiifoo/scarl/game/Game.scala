@@ -33,8 +33,10 @@ class Game(initial: GameState,
 
   def receive(message: InMessage): Unit = {
     message match {
+      case DebugFovQuery => out(DebugFov(fov.locations))
+      case DebugWaypointQuery => out(DebugWaypoint(state.cache.waypointNetwork))
       case message: GameAction => receiveAction(message.action)
-      case _: InventoryQuery => sendPlayerInventory()
+      case InventoryQuery => sendPlayerInventory()
     }
   }
 

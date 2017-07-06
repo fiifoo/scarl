@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux'
 import area from './area'
 import connection from './connection'
+import debug from './debug'
 import equipments from './equipments'
 import events from './events'
 import factions from './factions'
@@ -15,6 +16,7 @@ import ui from './ui'
 export default combineReducers({
     area,
     connection,
+    debug,
     equipments,
     events,
     factions,

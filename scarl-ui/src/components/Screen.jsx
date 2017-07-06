@@ -22,7 +22,9 @@ class Screen extends Component {
                 this.screen.reset(nextProps.area.map)
             }
 
-            if (nextProps.cursor !== this.props.cursor) {
+            if (nextProps.debugMode !== this.props.debugMode || nextProps.debug !== this.props.debug) {
+                this.screen.updateDebug(nextProps.debugMode, nextProps.debug)
+            } else if (nextProps.cursor !== this.props.cursor) {
                 this.screen.updateCursor(nextProps.cursor)
             } else if (nextProps.reticule !== this.props.reticule) {
                 this.screen.updateReticule(nextProps.reticule, nextProps.trajectory)
