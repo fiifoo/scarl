@@ -7,7 +7,6 @@ import io.github.fiifoo.scarl.core.Selectors.{getContainerItems, getEquipmentSta
 import io.github.fiifoo.scarl.core.action.Action
 import io.github.fiifoo.scarl.core.mutation.{RemoveEntitiesMutation, ResetConduitEntryMutation}
 import io.github.fiifoo.scarl.core.world.{ConduitId, Traveler}
-import io.github.fiifoo.scarl.effect.DeathEffect
 import io.github.fiifoo.scarl.game.api.OutMessage.PlayerInfo
 import io.github.fiifoo.scarl.game.api._
 import io.github.fiifoo.scarl.game.event.EventBuilder
@@ -111,13 +110,11 @@ class Game(bubble: RealityBubble, worldManager: WorldManager) {
         state.fov.locations,
         effects
       ) ::: state.events
+
       val statistics = StatisticsBuilder(instance, state.statistics, effects)
-      val ended = (effects collectFirst {
-        case effect: DeathEffect if effect.target == state.gameState.player => true
-      }) getOrElse false
 
       state.copy(
-        ended = ended,
+        ended = state.gameState.player(instance).dead,
         events = events,
         instance = instance,
         statistics = statistics

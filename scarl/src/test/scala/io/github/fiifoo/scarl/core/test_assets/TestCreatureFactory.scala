@@ -27,6 +27,7 @@ object TestCreatureFactory {
              location: Location = Location(0, 0),
              health: Int = 0,
              damage: Int = 0,
+             dead: Boolean = false,
              character: Option[Character] = None
             ): Creature = {
     Creature(
@@ -36,7 +37,8 @@ object TestCreatureFactory {
       location,
       tick,
       damage,
-      defaultStats.copy(health = health),
+      stats = defaultStats.copy(health = health),
+      dead,
       owner = None,
       character
     )

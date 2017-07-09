@@ -12,6 +12,7 @@ case class Creature(id: CreatureId,
                     tick: Int,
                     damage: Int,
                     stats: Stats,
+                    dead: Boolean = false,
                     owner: Option[SafeCreatureId] = None,
 
                     character: Option[Character] = None,
