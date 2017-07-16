@@ -2,12 +2,13 @@ package io.github.fiifoo.scarl.core.effect
 
 import io.github.fiifoo.scarl.core.State
 import io.github.fiifoo.scarl.core.entity._
+import io.github.fiifoo.scarl.core.mutation.RemoveEntitiesMutation
 import io.github.fiifoo.scarl.core.test_assets._
 import org.scalatest._
 
 class EffectResolverSpec extends FlatSpec with Matchers {
 
-  val resolve = new EffectResolver()
+  def resolve(s: State, effects: List[Effect]): State = EffectResolver(s, effects)._1
 
   "EffectResolver" should "resolve damage to creature" in {
     val initial = 10
@@ -83,6 +84,8 @@ class EffectResolverSpec extends FlatSpec with Matchers {
 
     creature(s)
     s = resolve(s, List(effect))
+    s.tmp.removableEntities.size should ===(1)
+    s = RemoveEntitiesMutation()(s)
     intercept[Exception] {
       creature(s)
     }
@@ -98,6 +101,7 @@ class EffectResolverSpec extends FlatSpec with Matchers {
 
     creature(s)
     s = resolve(s, List(e1, e2))
+    s = RemoveEntitiesMutation()(s)
     intercept[Exception] {
       creature(s)
     }

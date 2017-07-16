@@ -14,16 +14,16 @@ case class NewEntityMutation(entity: Entity, existing: Boolean = false) extends 
       throw new Exception(s"EntityId ${entity.id} is already used.")
     }
 
-    val addedActors = entity match {
-      case actor: Actor => actor.id :: s.tmp.addedActors
-      case _ => s.tmp.addedActors
+    val actorQueue = entity match {
+      case actor: Actor => s.cache.actorQueue.enqueue(actor)
+      case _ => s.cache.actorQueue
     }
 
     s.copy(
+      cache = s.cache.copy(actorQueue = actorQueue),
       entities = s.entities + (entity.id -> entity),
       index = NewEntityIndexMutation(entity)(s, s.index),
       nextEntityId = if (existing) s.nextEntityId else entity.id.value + 1,
-      tmp = s.tmp.copy(addedActors = addedActors)
     )
   }
 }

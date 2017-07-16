@@ -21,7 +21,6 @@ class ConduitEntryMutationSpec extends FlatSpec with Matchers {
     state = ResetConduitEntryMutation()(state)
     state = ConduitExitMutation(traveler, Location(0, 0))(state)
 
-    state = ResetAddedActorsMutation()(state)
     state should ===(initial)
   }
 
@@ -42,6 +41,6 @@ class ConduitEntryMutationSpec extends FlatSpec with Matchers {
     s = NewEntityMutation(TestStatus(PassiveStatusId(s.nextEntityId), creature))(s)
     s = NewEntityMutation(TestStatus(PassiveStatusId(s.nextEntityId), item.id))(s)
 
-    ResetAddedActorsMutation()(s)
+    s
   }
 }

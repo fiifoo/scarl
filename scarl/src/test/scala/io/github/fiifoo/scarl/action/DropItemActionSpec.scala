@@ -13,20 +13,18 @@ class DropItemActionSpec extends FlatSpec with Matchers {
 
     val creaturePrototype = TestCreatureFactory.create(location = location)
 
-    var (bubble, s) = RealityBubble(
-      TestItemFactory.generate(TestCreatureFactory.generate(State(), 1, creaturePrototype), 2, CreatureId(1)),
-      TestDropItemTactic
-    )
+    val bubble = RealityBubble(TestDropItemTactic)
+    var s = TestItemFactory.generate(TestCreatureFactory.generate(State(), 1, creaturePrototype), 2, CreatureId(1))
 
     ItemId(2)(s).container should ===(CreatureId(1))
     CreatureId(1)(s).location should ===(location)
-    s = bubble(s)
+    s = bubble(s).get.state
     ItemId(2)(s).container should ===(ContainerId(4))
     ContainerId(4)(s).location should ===(location)
 
     ItemId(3)(s).container should ===(CreatureId(1))
     CreatureId(1)(s).location should ===(location)
-    s = bubble(s)
+    s = bubble(s).get.state
     ItemId(3)(s).container should ===(ContainerId(5))
     ContainerId(5)(s).location should ===(location)
 

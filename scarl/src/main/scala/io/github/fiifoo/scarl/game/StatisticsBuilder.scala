@@ -1,26 +1,24 @@
 package io.github.fiifoo.scarl.game
 
 import io.github.fiifoo.scarl.core.State
-import io.github.fiifoo.scarl.core.effect.{Effect, EffectListener}
-import io.github.fiifoo.scarl.core.entity.CreatureId
-import io.github.fiifoo.scarl.core.kind.CreatureKindId
+import io.github.fiifoo.scarl.core.effect.Effect
 import io.github.fiifoo.scarl.effect.DeathEffect
 
-class StatisticsBuilder(initial: Statistics = Statistics()) extends EffectListener {
+object StatisticsBuilder {
 
-  private var deaths: Map[CreatureKindId, Int] = initial.deaths
-
-  def apply(s: State, effect: Effect): Unit = {
-    effect match {
-      case effect: DeathEffect => death(s, effect.target)
-      case _ =>
+  def apply(s: State, current: Statistics, effects: List[Effect]): Statistics = {
+    val deaths = effects collect {
+      case effect: DeathEffect => effect
     }
+
+    deaths.foldLeft(current)(death(s))
   }
 
-  def get(): Statistics = Statistics(deaths)
+  private def death(s: State)(current: Statistics, effect: DeathEffect): Statistics = {
+    val kind = effect.target(s).kind
 
-  private def death(s: State, creature: CreatureId): Unit = {
-    val kind = creature(s).kind
-    deaths = deaths + (kind -> (deaths.getOrElse(kind, 0) + 1))
+    current.copy(
+      deaths = current.deaths + (kind -> (current.deaths.getOrElse(kind, 0) + 1))
+    )
   }
 }

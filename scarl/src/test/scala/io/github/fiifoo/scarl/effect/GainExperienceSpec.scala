@@ -2,14 +2,14 @@ package io.github.fiifoo.scarl.effect
 
 import io.github.fiifoo.scarl.core.State
 import io.github.fiifoo.scarl.core.creature.{Character, Progression, ProgressionId, Stats}
-import io.github.fiifoo.scarl.core.effect.EffectResolver
+import io.github.fiifoo.scarl.core.effect.{Effect, EffectResolver}
 import io.github.fiifoo.scarl.core.entity.CreatureId
 import io.github.fiifoo.scarl.core.test_assets.TestCreatureFactory
 import org.scalatest._
 
 class GainExperienceSpec extends FlatSpec with Matchers {
 
-  val resolve = new EffectResolver()
+  def resolve(s: State, effects: List[Effect]): State = EffectResolver(s, effects)._1
 
   val initialStats = TestCreatureFactory.defaultStats
   val addStats = Stats(health = 10)

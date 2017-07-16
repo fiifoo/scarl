@@ -17,7 +17,8 @@ object State {
                   sectorSize: Int = 10
                  )
 
-  case class Cache(equipmentStats: Map[CreatureId, Stats] = Map(),
+  case class Cache(actorQueue: ActorQueue = ActorQueue(),
+                   equipmentStats: Map[CreatureId, Stats] = Map(),
                    waypointNetwork: WaypointNetwork = WaypointNetwork()
                   )
 
@@ -33,10 +34,7 @@ object State {
                    targetStatuses: Map[EntityId, Set[StatusId]] = Map()
                   )
 
-  case class Stored(actors: List[ActorId] = List())
-
-  case class Temporary(addedActors: List[ActorId] = List(),
-                       conduitEntry: Option[(ConduitId, Traveler)] = None,
+  case class Temporary(conduitEntry: Option[(ConduitId, Traveler)] = None,
                        removableEntities: Set[EntityId] = Set()
                       )
 
@@ -56,7 +54,6 @@ case class State(area: State.Area = State.Area(),
                  powers: Powers = Powers(),
                  progressions: Map[ProgressionId, Progression] = Map(),
                  rng: Rng = Rng(1),
-                 stored: State.Stored = State.Stored(),
                  tactics: Map[CreatureId, Tactic] = Map(),
                  tick: Int = 1,
                  tmp: State.Temporary = State.Temporary()

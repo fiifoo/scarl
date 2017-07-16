@@ -4,7 +4,6 @@ import io.github.fiifoo.scarl.area.AreaId
 import io.github.fiifoo.scarl.core.Rng
 import io.github.fiifoo.scarl.core.kind.CreatureKindId
 import io.github.fiifoo.scarl.game._
-import io.github.fiifoo.scarl.game.api.OutMessage
 import io.github.fiifoo.scarl.world.WorldManager
 import models.json.FormatGameState._
 import models.save.SaveStorage
@@ -30,22 +29,22 @@ class GameManager(saveStorage: SaveStorage) {
     Data.templates
   )
 
-  def loadOrCreate(out: OutMessage => Unit): Game = {
+  def loadOrCreate(): (Game, RunState) = {
     val state = saveStorage.load() map loadGame getOrElse generateGame
 
-    new Game(state, worldManager, out)
+    Game(state, worldManager)
   }
 
-  def save(game: Game): Unit = {
-    val state = game.save()
+  def save(game: Game, state: RunState): Unit = {
+    val gameState = game.save(state)
 
-    val data = SaveData(state, state.hashCode)
+    val data = SaveData(gameState, gameState.hashCode)
     val json = formatSaveData.writes(data)
 
     saveStorage.save(json)
   }
 
-  def end(game: Game): Unit = {
+  def end(): Unit = {
     saveStorage.clear()
   }
 
@@ -53,19 +52,19 @@ class GameManager(saveStorage: SaveStorage) {
     val data = formatSaveData.reads(json).get
     val world = GameUtils.finalizeLoadedWorld(data.state.world, worldManager)
 
-    val state = GameState(
-      data.state.area,
-      data.state.player,
-      world,
-      data.state.maps,
-      data.state.statistics
+    val gameState = GameState(
+      area = data.state.area,
+      player = data.state.player,
+      world = world,
+      maps = data.state.maps,
+      statistics = data.state.statistics
     )
 
-    if (data.checkHashCode != state.hashCode) {
+    if (data.checkHashCode != gameState.hashCode) {
       throw new Exception("Corrupt save data.")
     }
 
-    state
+    gameState
   }
 
   private def generateGame(): GameState = {

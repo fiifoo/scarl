@@ -9,15 +9,13 @@ import org.scalatest._
 class MoveActionSpec extends FlatSpec with Matchers {
 
   "MoveAction" should "move creatures" in {
-    var (bubble, s) = RealityBubble(
-      TestCreatureFactory.generate(State()),
-      TestMoveTactic
-    )
+    val bubble = RealityBubble(TestMoveTactic)
+    var s = TestCreatureFactory.generate(State())
 
-    s = bubble(s)
+    s = bubble(s).get.state
     CreatureId(1)(s).location should ===(Location(1, 1))
 
-    s = bubble(s)
+    s = bubble(s).get.state
     CreatureId(1)(s).location should ===(Location(2, 2))
   }
 }

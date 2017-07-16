@@ -2,207 +2,249 @@ package io.github.fiifoo.scarl.game
 
 import io.github.fiifoo.scarl.action.validate.ActionValidator
 import io.github.fiifoo.scarl.ai.tactic.RoamTactic
+import io.github.fiifoo.scarl.core.RealityBubble
 import io.github.fiifoo.scarl.core.Selectors.{getContainerItems, getEquipmentStats}
-import io.github.fiifoo.scarl.core._
 import io.github.fiifoo.scarl.core.action.Action
-import io.github.fiifoo.scarl.core.effect.CombinedEffectListener
-import io.github.fiifoo.scarl.core.mutation.ResetConduitEntryMutation
+import io.github.fiifoo.scarl.core.mutation.{RemoveEntitiesMutation, ResetConduitEntryMutation}
 import io.github.fiifoo.scarl.core.world.{ConduitId, Traveler}
+import io.github.fiifoo.scarl.effect.DeathEffect
 import io.github.fiifoo.scarl.game.api.OutMessage.PlayerInfo
 import io.github.fiifoo.scarl.game.api._
 import io.github.fiifoo.scarl.game.event.EventBuilder
-import io.github.fiifoo.scarl.game.map.{MapBuilder, MapLocation}
+import io.github.fiifoo.scarl.game.map.MapBuilder
 import io.github.fiifoo.scarl.geometry.Fov
 import io.github.fiifoo.scarl.world.WorldManager
 
 import scala.annotation.tailrec
 
-class Game(initial: GameState,
-           worldManager: WorldManager,
-           out: OutMessage => Unit
-          ) {
+object Game {
 
-  private var gameState = initial
-  private var fov = PlayerFov()
+  def apply(gameState: GameState, worldManager: WorldManager): (Game, RunState) = {
 
-  private val eventBuilder = new EventBuilder(() => gameState.player, () => fov.locations)
-  private val statisticsBuilder = new StatisticsBuilder(gameState.statistics)
-  private val mapBuilder = new MapBuilder(areaMap)
+    val instance = gameState.world.states(gameState.area)
+    val bubble = RealityBubble(RoamTactic)
+    val game = new Game(bubble, worldManager)
 
-  private var (bubble, state) = createBubble(gameState.world.states(gameState.area))
+    var state = RunState(
+      areaMap = gameState.maps.getOrElse(gameState.area, Map()),
+      gameState = gameState,
+      instance = instance,
+      statistics = gameState.statistics
+    )
 
-  def receive(message: InMessage): Unit = {
+    state = game.sendGameStart(state)
+    state = game.run(state)
+
+    (game, state)
+  }
+
+}
+
+class Game(bubble: RealityBubble, worldManager: WorldManager) {
+
+  def receive(state: RunState, message: InMessage): RunState = {
     message match {
-      case DebugFovQuery => out(DebugFov(fov.locations))
-      case DebugWaypointQuery => out(DebugWaypoint(state.cache.waypointNetwork))
-      case message: GameAction => receiveAction(message.action)
-      case InventoryQuery => sendPlayerInventory()
+      case DebugFovQuery => sendMessage(state, DebugFov(state.fov.locations))
+      case DebugWaypointQuery => sendMessage(state, DebugWaypoint(state.instance.cache.waypointNetwork))
+      case message: GameAction => receiveAction(state, message.action)
+      case InventoryQuery => sendPlayerInventory(state)
     }
   }
 
-  def save(): GameState = {
-    val maps = gameState.maps
-    val world = gameState.world
-    val area = gameState.area
+  def save(state: RunState): GameState = {
+    val maps = state.gameState.maps
+    val world = state.gameState.world
+    val area = state.gameState.area
+    val instance = RemoveEntitiesMutation()(state.instance)
 
-    gameState.copy(
-      maps = maps + (area -> mapBuilder.extract()),
-      statistics = statisticsBuilder.get(),
+    state.gameState.copy(
+      maps = maps + (area -> state.areaMap),
+      statistics = state.statistics,
       world = world.copy(
-        states = world.states + (area -> bubble.save(state))
+        states = world.states + (area -> instance)
       ))
   }
 
-  def over: Boolean = {
-    gameOver(state)
-  }
-
-  private def receiveAction(action: Action): Unit = {
-    if (shouldRun(action)) {
-      run(Some(action))
-    }
-  }
-
-  private def initialize(): Unit = {
-    sendGameStart()
-    run(None)
-  }
-
-  private def run(action: Option[Action]): Unit = {
-    state = process(state, action)
-
-    conduitEntry(state).foreach(handleConduitEntry)
-
-    if (gameOver(state)) {
-      sendGameOver()
-    } else {
-      sendGameUpdate()
-    }
-  }
-
-  private def handleConduitEntry(entry: (ConduitId, Traveler)): Unit = {
-    val (conduit, traveler) = entry
-    state = ResetConduitEntryMutation()(state)
-
-    if (traveler.creature.id == gameState.player) {
-      switchArea(conduit, traveler)
+  private def receiveAction(state: RunState, action: Action): RunState = {
+    if (!ActionValidator(state.instance, state.gameState.player, action)) {
+      return state
     }
 
-    state = process(state, None)
-  }
-
-  private def switchArea(conduit: ConduitId, traveler: Traveler): Unit = {
-    val (nextWorld, nextArea) = worldManager.switchArea(
-      gameState.world,
-      gameState.area,
-      bubble.save(state),
-      conduit,
-      traveler
-    )
-    val (nextBubble, nextState) = createBubble(nextWorld.states(nextArea))
-    val nextMaps = gameState.maps + (gameState.area -> mapBuilder.extract(gameState.maps.get(nextArea)))
-
-    gameState = gameState.copy(area = nextArea, maps = nextMaps, world = nextWorld)
-    bubble = nextBubble
-    state = nextState
-    fov = PlayerFov()
-
-    sendAreaChange()
+    run(state.copy(stopped = false), Some(action))
   }
 
   @tailrec
-  private def process(s: State, action: Option[Action]): State = {
-    if (gameOver(s) || conduitEntry(s).isDefined) {
-      return s
+  private def run(state: RunState, action: Option[Action] = None): RunState = {
+    if (state.ended) {
+      return sendGameOver(state)
+    } else if (state.stopped) {
+      return sendGameUpdate(state)
     }
 
-    if (bubble.nextActor.contains(gameState.player)) {
-      if (action.isDefined) {
-        process(bubble(s, action), None)
+    var (nextState, nextAction) = if (playerTurn(state)) {
+      val nextState = if (action.isDefined) {
+        tick(state, action)
       } else {
-        s
+        state.copy(stopped = true)
       }
+
+      (nextState, None)
     } else {
-      process(bubble(s, None), action)
+      val nextState = tick(state)
+
+      (nextState, action)
+    }
+
+    nextState = getConduitEntry(nextState) map handleConduitEntry(nextState) getOrElse nextState
+
+    run(nextState, nextAction)
+  }
+
+  private def tick(state: RunState, action: Option[Action] = None): RunState = {
+    bubble(state.instance, action) map (result => {
+      val instance = result.state
+      val effects = result.effects
+
+      val events = state.events ::: EventBuilder(
+        instance,
+        state.gameState.player,
+        state.fov.locations,
+        effects
+      )
+      val statistics = StatisticsBuilder(instance, state.statistics, effects)
+      val ended = (effects collectFirst {
+        case effect: DeathEffect if effect.target == state.gameState.player => true
+      }) getOrElse false
+
+      state.copy(
+        ended = ended,
+        events = events,
+        instance = instance,
+        statistics = statistics
+      )
+    }) getOrElse state
+  }
+
+  private def playerTurn(state: RunState): Boolean = {
+    state.instance.cache.actorQueue.headOption.contains(state.gameState.player)
+  }
+
+  private def getConduitEntry(state: RunState): Option[(ConduitId, Traveler)] = {
+    state.instance.tmp.conduitEntry
+  }
+
+  private def handleConduitEntry(state: RunState)(entry: (ConduitId, Traveler)): RunState = {
+    val (conduit, traveler) = entry
+
+    val nextState = state.copy(
+      instance = ResetConduitEntryMutation()(state.instance)
+    )
+
+    if (traveler.creature.id == state.gameState.player) {
+      switchArea(nextState, conduit, traveler)
+    } else {
+      nextState
     }
   }
 
-  private def sendGameStart(): Unit = {
-    out(GameStart(
-      area = gameState.area,
-      factions = state.factions.values,
-      kinds = state.kinds,
-      map = areaMap
-    ))
+  private def switchArea(state: RunState, conduit: ConduitId, traveler: Traveler): RunState = {
+    val instance = RemoveEntitiesMutation()(state.instance)
+
+    val (nextWorld, nextArea) = worldManager.switchArea(
+      state.gameState.world,
+      state.gameState.area,
+      instance,
+      conduit,
+      traveler
+    )
+    val nextMaps = state.gameState.maps + (state.gameState.area -> state.areaMap)
+    val nextGameState = state.gameState.copy(
+      area = nextArea,
+      maps = nextMaps,
+      world = nextWorld
+    )
+    val nextInstance = nextWorld.states(nextArea)
+
+    val nextState = state.copy(
+      areaMap = state.gameState.maps.getOrElse(nextArea, Map()),
+      fov = PlayerFov(),
+      gameState = nextGameState,
+      instance = nextInstance
+    )
+
+    sendAreaChange(nextState)
   }
 
-  private def sendGameUpdate(): Unit = {
-    updateFov()
+  private def sendGameStart(state: RunState): RunState = {
+    val message = GameStart(
+      area = state.gameState.area,
+      factions = state.instance.factions.values,
+      kinds = state.instance.kinds,
+      map = state.areaMap
+    )
 
-    out(GameUpdate(
-      fov = fov,
-      events = eventBuilder.extract(),
+    sendMessage(state, message)
+  }
+
+  private def sendGameUpdate(state: RunState): RunState = {
+    val events = state.events
+    val nextState = updateFov(state)
+      .copy(events = Nil)
+
+    val message = GameUpdate(
+      fov = nextState.fov,
+      events = events,
       player = PlayerInfo(
-        creature = gameState.player(state),
-        equipmentStats = getEquipmentStats(state)(gameState.player)
+        creature = state.gameState.player(state.instance),
+        equipmentStats = getEquipmentStats(state.instance)(state.gameState.player)
       )
-    ))
+    )
+
+    sendMessage(nextState, message)
   }
 
-  private def sendGameOver(): Unit = {
-    out(GameOver(
-      statistics = statisticsBuilder.get()
-    ))
+  private def sendGameOver(state: RunState): RunState = {
+    val message = GameOver(
+      statistics = state.statistics
+    )
+
+    sendMessage(state, message)
   }
 
-  private def sendAreaChange(): Unit = {
-    out(AreaChange(
-      area = gameState.area,
-      map = areaMap
-    ))
+  private def sendAreaChange(state: RunState): RunState = {
+    val message = AreaChange(
+      area = state.gameState.area,
+      map = state.areaMap
+    )
+
+    sendMessage(state, message)
   }
 
-  private def sendPlayerInventory(): Unit = {
-    out(PlayerInventory(
-      inventory = getContainerItems(state)(gameState.player) map (_ (state)),
-      equipments = state.equipments.getOrElse(gameState.player, Map())
-    ))
+  private def sendPlayerInventory(state: RunState): RunState = {
+    val message = PlayerInventory(
+      inventory = getContainerItems(state.instance)(state.gameState.player) map (_ (state.instance)),
+      equipments = state.instance.equipments.getOrElse(state.gameState.player, Map())
+    )
+
+    sendMessage(state, message)
   }
 
-  private def updateFov(): Unit = {
-    val creature = gameState.player(state)
-    val locations = Fov(state)(creature.location, creature.stats.sight.range)
-
-    fov = fov.next(state, locations)
-    mapBuilder(fov)
-  }
-
-  private def areaMap: Map[Location, MapLocation] = {
-    gameState.maps.getOrElse(gameState.area, Map())
-  }
-
-  private def shouldRun(action: Action): Boolean = {
-    !gameOver(state) && ActionValidator(state, gameState.player, action)
-  }
-
-  private def gameOver(s: State): Boolean = {
-    !s.entities.isDefinedAt(gameState.player)
-  }
-
-  private def conduitEntry(s: State): Option[(ConduitId, Traveler)] = {
-    s.tmp.conduitEntry
-  }
-
-  private def createBubble(s: State): (RealityBubble, State) = {
-    RealityBubble(
-      initial = s,
-      ai = RoamTactic,
-      listener = new Listener(effect = new CombinedEffectListener(List(
-        eventBuilder,
-        statisticsBuilder
-      )))
+  private def sendMessage(state: RunState, message: OutMessage): RunState = {
+    state.copy(
+      outMessages = (message :: state.outMessages).reverse
     )
   }
 
-  initialize()
+  private def updateFov(state: RunState): RunState = {
+    val creature = state.gameState.player(state.instance)
+    val locations = Fov(state.instance)(creature.location, creature.stats.sight.range)
+
+    val areaMap = state.areaMap ++ MapBuilder(state.fov)
+    val fov = state.fov.next(state.instance, locations)
+
+    state.copy(
+      fov = fov,
+      areaMap = areaMap
+    )
+  }
 }

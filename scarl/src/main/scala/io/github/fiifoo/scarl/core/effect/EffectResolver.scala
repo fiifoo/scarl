@@ -1,30 +1,26 @@
 package io.github.fiifoo.scarl.core.effect
 
 import io.github.fiifoo.scarl.core.State
-import io.github.fiifoo.scarl.core.mutation.RemoveEntitiesMutation
 
 import scala.collection.mutable
 
-class EffectResolver(listener: EffectListener = NullEffectListener) {
+object EffectResolver {
 
-  def apply(s: State, effects: List[Effect]): State = {
+  def apply(state: State, effects: List[Effect]): (State, List[Effect]) = {
 
     val queue = mutable.Queue[Effect]() ++= effects
-    var _s = s
+    var resolved: List[Effect] = List()
+    var s = state
 
     while (queue.nonEmpty) {
       val effect = queue.dequeue()
-      val result = effect(_s)
+      val result = effect(s)
 
-      result.mutations.foreach(mutation => _s = mutation(_s))
+      result.mutations.foreach(mutation => s = mutation(s))
       result.effects.foreach(effect => queue.enqueue(effect))
-      listener(_s, effect)
+      resolved = effect :: resolved
     }
 
-    if (_s.tmp.removableEntities.nonEmpty) {
-      _s = RemoveEntitiesMutation()(_s)
-    }
-
-    _s
+    (s, resolved)
   }
 }

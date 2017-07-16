@@ -42,21 +42,29 @@ class GameController @Inject()(cc: ControllerComponents)(implicit system: ActorS
   class WebSocketActor(out: ActorRef) extends Actor {
 
     val manager = new GameManager(saveStorage)
-    val game = manager.loadOrCreate(send)
+    var (game, state) = manager.loadOrCreate()
+    sendMessages()
 
-    def send = (data: OutMessage) => {
+    def sendMessages() = {
+      state.outMessages.foreach(send)
+      state = state.copy(outMessages = Nil)
+    }
+
+    def send(data: OutMessage) = {
       out ! WriteOutMessage(data)
     }
 
     def receive = {
-      case json: JsValue => game.receive(ReadInMessage(json))
+      case json: JsValue =>
+        state = game.receive(state, ReadInMessage(json))
+        sendMessages()
     }
 
     override def postStop() = {
-      if (game.over) {
-        manager.end(game)
+      if (state.ended) {
+        manager.end()
       } else {
-        manager.save(game)
+        manager.save(game, state)
       }
     }
   }

@@ -1,93 +1,102 @@
 package io.github.fiifoo.scarl.core
 
+import io.github.fiifoo.scarl.core.RealityBubble.Result
 import io.github.fiifoo.scarl.core.action.{Action, Tactic}
 import io.github.fiifoo.scarl.core.effect.{Effect, EffectResolver}
 import io.github.fiifoo.scarl.core.entity._
-import io.github.fiifoo.scarl.core.mutation.{RngMutation, StoredActorsMutation, TacticMutation, TickMutation}
+import io.github.fiifoo.scarl.core.mutation._
 
 object RealityBubble {
 
-  def apply(initial: State,
-            ai: (CreatureId) => Tactic,
-            listener: Listener = new Listener()
-           ): (RealityBubble, State) = {
-
-    val actors = new ActorQueue()
-    val mutated = actors.enqueueNewActors(initial)
-
-    (new RealityBubble(actors, ai, listener), mutated)
+  def apply(ai: (CreatureId) => Tactic): RealityBubble = {
+    new RealityBubble(ai)
   }
+
+  case class Result(state: State,
+                    actor: ActorId,
+                    action: Option[Action],
+                    effects: List[Effect])
 
 }
 
-class RealityBubble(actors: ActorQueue,
-                    ai: (CreatureId) => Tactic,
-                    listener: Listener = new Listener()
-                   ) {
+class RealityBubble(ai: (CreatureId) => Tactic) {
 
-  private val resolveEffects = new EffectResolver(listener.effect)
+  def apply(state: State, fixedAction: Option[Action] = None): Option[Result] = {
+    val s = removeEntities(state)
 
-  def nextActor: Option[ActorId] = actors.headOption
+    dequeue(s).map(x => {
+      val (actor, s) = x
 
-  def apply(state: State, action: Option[Action] = None): State = {
-    var s = state
-
-    dequeue(s).foreach(actor => {
-      s = TickMutation(actor(s).tick)(s)
-
-      val effects = actor match {
+      actor match {
         case creature: CreatureId =>
-          val (effects, mutated) = handleCreature(s, creature, action)
-          s = mutated
+          val (ns, action, effects) = handleCreature(s, creature, fixedAction)
 
-          effects
-        case status: ActiveStatusId => status(s)(s)
+          resolve(ns, actor, Some(action), effects)
+        case status: ActiveStatusId =>
+          val effects = status(s)(s)
+
+          resolve(s, actor, None, effects)
         case _ => throw new Exception("Unknown actor type")
       }
-
-      s = resolveEffects(s, effects)
-      s = actors.enqueueNewActors(s)
-      enqueue(s, actor)
     })
-
-    s
   }
 
-  def save(s: State): State = {
-    val storeActors = actors.dequeueAll filter s.entities.isDefinedAt
+  private def resolve(state: State,
+                      actor: ActorId,
+                      action: Option[Action],
+                      effects: List[Effect]
+                     ): Result = {
+    var s = TickMutation(actor(state).tick)(state)
 
-    StoredActorsMutation(storeActors)(s)
+    val (ns, resolved) = EffectResolver(s, effects)
+    s = enqueue(ns, actor)
+
+    Result(s, actor, action, resolved)
   }
 
   private def handleCreature(s: State,
                              actor: CreatureId,
-                             action: Option[Action]
-                            ): (List[Effect], State) = {
+                             fixedAction: Option[Action]
+                            ): (State, Action, List[Effect]) = {
+    fixedAction map (action => {
+      val effects = action(s, actor)
 
-    action map (_ (s, actor) -> s) getOrElse {
+      (s, action, effects)
+    }) getOrElse {
       val (random, nextRng) = s.rng()
       val (tactic, action) = s.tactics.get(actor) map (_ (s, random)) getOrElse ai(actor)(s, random)
 
-      val nextState = TacticMutation(tactic)(RngMutation(nextRng)(s))
+      val ns = TacticMutation(tactic)(RngMutation(nextRng)(s))
+      val effects = action(ns, actor)
 
-      (action(nextState, actor), nextState)
+      (ns, action, effects)
     }
   }
 
-  private def dequeue(s: State): Option[ActorId] = {
-    if (actors.nonEmpty) {
-      val actor = actors.dequeue()
-      if (s.entities.isDefinedAt(actor)) {
-        return Some(actor)
-      }
+  private def removeEntities(s: State): State = {
+    if (s.tmp.removableEntities.nonEmpty) {
+      RemoveEntitiesMutation()(s)
+    } else {
+      s
     }
-
-    None
   }
 
-  private def enqueue(s: State, actor: ActorId): Unit = {
-    if (s.entities.isDefinedAt(actor)) {
-      actors.enqueue(actor, actor(s).tick)
-    }
+  private def dequeue(s: State): Option[(ActorId, State)] = {
+    s.cache.actorQueue.dequeue map (x => {
+      val (actor, nextQueue) = x
+      val ns = s.copy(cache = s.cache.copy(
+        actorQueue = nextQueue
+      ))
+
+      (actor, ns)
+    })
+  }
+
+  private def enqueue(s: State, actor: ActorId): State = {
+    val nextQueue = s.cache.actorQueue.enqueue(actor(s))
+
+    s.copy(cache = s.cache.copy(
+      actorQueue = nextQueue
+    ))
   }
 }

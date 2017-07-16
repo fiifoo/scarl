@@ -9,15 +9,13 @@ import org.scalatest._
 class PassActionSpec extends FlatSpec with Matchers {
 
   "PassAction" should "pass creature turn" in {
-    var (bubble, s) = RealityBubble(
-      TestCreatureFactory.generate(State(), 2),
-      TestPassTactic
-    )
+    val bubble = RealityBubble(TestPassTactic)
+    var s = TestCreatureFactory.generate(State(), 2)
 
-    s = bubble(s)
-    bubble.nextActor.get should ===(CreatureId(2))
+    s = bubble(s).get.state
+    s.cache.actorQueue.headOption.get should ===(CreatureId(2))
 
-    s = bubble(s)
-    bubble.nextActor.get should ===(CreatureId(1))
+    s = bubble(s).get.state
+    s.cache.actorQueue.headOption.get should ===(CreatureId(1))
   }
 }

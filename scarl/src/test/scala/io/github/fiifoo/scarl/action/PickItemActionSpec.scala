@@ -9,17 +9,15 @@ import org.scalatest._
 class PickItemActionSpec extends FlatSpec with Matchers {
 
   "PickItemAction" should "pick items" in {
-    var (bubble, s) = RealityBubble(
-      TestItemFactory.generate(TestCreatureFactory.generate(State()), 2, Location(0, 0)),
-      TestPickItemTactic
-    )
+    val bubble = RealityBubble(TestPickItemTactic)
+    var s = TestItemFactory.generate(TestCreatureFactory.generate(State()), 2, Location(0, 0))
 
     ItemId(3)(s).container should ===(ContainerId(2))
-    s = bubble(s)
+    s = bubble(s).get.state
     ItemId(3)(s).container should ===(CreatureId(1))
 
     ItemId(5)(s).container should ===(ContainerId(4))
-    s = bubble(s)
+    s = bubble(s).get.state
     ItemId(5)(s).container should ===(CreatureId(1))
 
     CreatureId(1)(s).tick > 1 should ===(true)

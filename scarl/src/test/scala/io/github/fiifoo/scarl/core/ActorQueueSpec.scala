@@ -1,17 +1,43 @@
 package io.github.fiifoo.scarl.core
 
-import io.github.fiifoo.scarl.core.entity.CreatureId
+import io.github.fiifoo.scarl.core.entity.{Actor, ActorId, CreatureId}
+import io.github.fiifoo.scarl.core.test_assets.TestCreatureFactory
 import org.scalatest._
 
 class ActorQueueSpec extends FlatSpec with Matchers {
 
-  "ActorQueue" should "implement queue for actor ids using queue number" in {
-    val queue = new ActorQueue()
-      .enqueue(CreatureId(1), 5)
-      .enqueue(CreatureId(2), 10)
-      .enqueue(CreatureId(3), 2)
-      .enqueue(CreatureId(4), 1)
-      .enqueue(CreatureId(5), 500)
+  class QueueHelper() {
+    var queue = ActorQueue()
+
+    def enqueue(id: Int, tick: Int): QueueHelper = {
+      queue = queue.enqueue(getActor(id, tick))
+
+      this
+    }
+
+    def dequeue(): ActorId = {
+      val (actor, next) = queue.dequeue.get
+      queue = next
+
+      actor
+    }
+
+    def head: ActorId = {
+      queue.headOption.get
+    }
+  }
+
+  def getActor(id: Int, tick: Int): Actor = {
+    TestCreatureFactory.create(id = CreatureId(id), tick = tick)
+  }
+
+  "ActorQueue" should "implement queue for actors" in {
+    val queue = new QueueHelper()
+      .enqueue(1, 5)
+      .enqueue(2, 10)
+      .enqueue(3, 2)
+      .enqueue(4, 1)
+      .enqueue(5, 500)
 
     queue.dequeue() should ===(CreatureId(4))
     queue.dequeue() should ===(CreatureId(3))
@@ -21,10 +47,10 @@ class ActorQueueSpec extends FlatSpec with Matchers {
   }
 
   it should "tell current head correctly" in {
-    val queue = new ActorQueue()
-      .enqueue(CreatureId(1), 5)
-      .enqueue(CreatureId(2), 10)
-      .enqueue(CreatureId(3), 2)
+    val queue = new QueueHelper()
+      .enqueue(1, 5)
+      .enqueue(2, 10)
+      .enqueue(3, 2)
 
     queue.head should ===(CreatureId(3))
     queue.dequeue() should ===(CreatureId(3))
@@ -35,10 +61,10 @@ class ActorQueueSpec extends FlatSpec with Matchers {
   }
 
   it should "dequeue smallest actor ids first for same queue numbers" in {
-    val queue = new ActorQueue()
-      .enqueue(CreatureId(2), 1)
-      .enqueue(CreatureId(1), 1)
-      .enqueue(CreatureId(3), 1)
+    val queue = new QueueHelper()
+      .enqueue(2, 1)
+      .enqueue(1, 1)
+      .enqueue(3, 1)
 
     queue.dequeue() should ===(CreatureId(1))
     queue.dequeue() should ===(CreatureId(2))
@@ -46,10 +72,10 @@ class ActorQueueSpec extends FlatSpec with Matchers {
   }
 
   it should "tell if queue is empty or not" in {
-    val queue = new ActorQueue().enqueue(CreatureId(1), 1)
+    val queue = new QueueHelper().enqueue(1, 1)
 
-    queue.isEmpty should ===(false)
+    queue.queue.isEmpty should ===(false)
     queue.dequeue()
-    queue.isEmpty should ===(true)
+    queue.queue.isEmpty should ===(true)
   }
 }

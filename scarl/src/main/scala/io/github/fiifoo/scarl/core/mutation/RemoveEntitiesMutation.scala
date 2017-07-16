@@ -45,10 +45,21 @@ case class RemoveEntitiesMutation() extends Mutation {
   }
 
   private def mutateCache(s: State, removable: Set[EntityId]): State.Cache = {
-    val cache = s.cache
+    val cache = removable.foldLeft(s.cache)((cache, entity) => {
+      mutateSingleCache(s, cache, entity(s))
+    })
 
     cache.copy(
       equipmentStats = cache.equipmentStats -- collectCreatures(removable)
+    )
+  }
+
+  private def mutateSingleCache(s: State, cache: State.Cache, entity: Entity): State.Cache = {
+    cache.copy(
+      actorQueue = entity match {
+        case actor: Actor => cache.actorQueue.remove(actor)
+        case _ => cache.actorQueue
+      },
     )
   }
 

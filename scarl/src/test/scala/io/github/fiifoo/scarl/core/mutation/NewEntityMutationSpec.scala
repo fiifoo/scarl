@@ -4,8 +4,10 @@ import io.github.fiifoo.scarl.core.creature.FactionId
 import io.github.fiifoo.scarl.core.entity._
 import io.github.fiifoo.scarl.core.kind.ItemKindId
 import io.github.fiifoo.scarl.core.test_assets.{TestActiveStatus, TestCreatureFactory, TestItemFactory, TestTriggerStatus}
-import io.github.fiifoo.scarl.core.{Location, State}
+import io.github.fiifoo.scarl.core.{ActorQueue, Location, State}
 import org.scalatest._
+
+import scala.collection.SortedSet
 
 class NewEntityMutationSpec extends FlatSpec with Matchers {
 
@@ -20,7 +22,7 @@ class NewEntityMutationSpec extends FlatSpec with Matchers {
     newCreature.id(mutated) should ===(newCreature)
   }
 
-  it should "mutate added actors" in {
+  it should "mutate actor queue" in {
     val location = Location(1, 1)
     val creature1 = TestCreatureFactory.create(CreatureId(1), location = location)
     val creature2 = TestCreatureFactory.create(CreatureId(2), location = location)
@@ -28,13 +30,13 @@ class NewEntityMutationSpec extends FlatSpec with Matchers {
     val initial = State()
 
     val mutated = NewEntityMutation(creature1)(initial)
-    mutated.tmp.addedActors should ===(List(CreatureId(1)))
+    mutated.cache.actorQueue should ===(ActorQueue(mutated))
 
     val mutatedAgain = NewEntityMutation(creature2)(mutated)
-    mutatedAgain.tmp.addedActors should ===(List(CreatureId(2), CreatureId(1)))
+    mutatedAgain.cache.actorQueue should ===(ActorQueue(mutatedAgain))
 
     val mutatedMore = NewEntityMutation(item)(mutatedAgain)
-    mutatedMore.tmp.addedActors should ===(List(CreatureId(2), CreatureId(1)))
+    mutatedMore.cache.actorQueue should ===(ActorQueue(mutatedMore))
   }
 
   it should "mutate entity location index" in {

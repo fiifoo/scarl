@@ -1,8 +1,8 @@
 package models
 
-import io.github.fiifoo.scarl.core.State
 import io.github.fiifoo.scarl.core.mutation.cache.EquipmentStatsCacheMutation
 import io.github.fiifoo.scarl.core.mutation.index.{ConduitLocationIndexAddMutation, NewEntityIndexMutation}
+import io.github.fiifoo.scarl.core.{ActorQueue, State}
 import io.github.fiifoo.scarl.geometry.WaypointNetwork
 import io.github.fiifoo.scarl.world.{WorldManager, WorldState}
 
@@ -38,6 +38,7 @@ object GameUtils {
     })
 
     cache.copy(
+      actorQueue = ActorQueue(s),
       equipmentStats = equipmentStats,
       waypointNetwork = WaypointNetwork(s)
     )

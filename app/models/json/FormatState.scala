@@ -36,7 +36,6 @@ object FormatState {
   implicit val formatStateFactions = formatMap(formatFactionId, formatFaction)
   implicit val formatStateRng = Json.format[Rng]
   implicit val formatStateTactics = formatMap(formatCreatureId, formatTactic)
-  implicit val formatStateStored = Json.format[State.Stored]
 
   implicit val formatState = Json.format[State]
 }

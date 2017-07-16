@@ -3,7 +3,7 @@ package io.github.fiifoo.scarl.effect
 import io.github.fiifoo.scarl.core.State
 import io.github.fiifoo.scarl.core.creature.Stats
 import io.github.fiifoo.scarl.core.creature.Stats.Melee
-import io.github.fiifoo.scarl.core.effect.EffectResolver
+import io.github.fiifoo.scarl.core.effect.{Effect, EffectResolver}
 import io.github.fiifoo.scarl.core.entity.{CreatureId, Item, ItemId}
 import io.github.fiifoo.scarl.core.item.Equipment._
 import io.github.fiifoo.scarl.core.item._
@@ -14,7 +14,7 @@ import org.scalatest._
 
 class EquipItemEffectSpec extends FlatSpec with Matchers {
 
-  val resolve = new EffectResolver()
+  def resolve(s: State, effects: List[Effect]): State = EffectResolver(s, effects)._1
 
   "EquipItemEffect" should "equip item" in {
     var (s, creature, items) = testStuff

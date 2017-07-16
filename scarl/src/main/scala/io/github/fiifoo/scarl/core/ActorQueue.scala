@@ -1,47 +1,48 @@
 package io.github.fiifoo.scarl.core
 
-import io.github.fiifoo.scarl.core.entity.ActorId
-import io.github.fiifoo.scarl.core.mutation.{ResetAddedActorsMutation, ResetStoredActorsMutation}
+import io.github.fiifoo.scarl.core.ActorQueue._
+import io.github.fiifoo.scarl.core.entity.{Actor, ActorId}
 
-import scala.collection.mutable
+import scala.collection.SortedSet
 
-class ActorQueue() {
+object ActorQueue {
+  type Item = (ActorId, Int)
 
-  private val queue = mutable.PriorityQueue[(ActorId, Int)]()(Ordering.by(orderBy))
+  implicit val ordering = Ordering.by(orderBy)
 
-  def enqueueNewActors(s0: State): State = {
-    val s1 = if (s0.tmp.addedActors.nonEmpty) {
-      s0.tmp.addedActors foreach (actor => enqueue(actor, actor(s0).tick))
-      ResetAddedActorsMutation()(s0)
-    } else {
-      s0
-    }
+  private def orderBy(x: (ActorId, Int)): (Int, Int) = (x._2, x._1.value)
 
-    if (s1.stored.actors.nonEmpty) {
-      s1.stored.actors foreach (actor => enqueue(actor, actor(s1).tick))
-      ResetStoredActorsMutation()(s1)
-    } else {
-      s1
-    }
+  def apply(s: State): ActorQueue = {
+    val queue = (s.entities.values collect {
+      case actor: Actor => (actor.id, actor.tick)
+    }).to[SortedSet]
+
+    ActorQueue(queue)
+  }
+}
+
+case class ActorQueue(queue: SortedSet[Item] = SortedSet[Item]()) {
+
+  def enqueue(actor: Actor): ActorQueue = {
+    this.copy(queue + (actor.id -> actor.tick))
   }
 
-  def enqueue(actorId: ActorId, number: Int): ActorQueue = {
-    queue.enqueue((actorId, number))
+  def dequeue: Option[(ActorId, ActorQueue)] = {
+    queue.headOption map (item => {
+      val actor = item._1
+      val next = queue - item
 
-    this
+      (actor, this.copy(next))
+    })
   }
 
-  def dequeue(): ActorId = queue.dequeue()._1
-
-  def dequeueAll: List[ActorId] = (queue map (_._1)).toList
+  def remove(actor: Actor): ActorQueue = {
+    this.copy(queue - (actor.id -> actor.tick))
+  }
 
   def isEmpty: Boolean = queue.isEmpty
 
   def nonEmpty: Boolean = queue.nonEmpty
 
-  def head: ActorId = queue.head._1
-
-  def headOption: Option[ActorId] = queue.headOption map (x => x._1)
-
-  private def orderBy(x: (ActorId, Int)): (Int, Int) = (-x._2, -x._1.value)
+  def headOption: Option[ActorId] = queue.headOption map (_._1)
 }

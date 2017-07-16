@@ -38,7 +38,6 @@ class FormatWorldStateSpec extends PlaySpec {
 
     world.copy(
       states = world.states + (area -> state.copy(
-        stored = State.Stored(actors = state.tmp.addedActors),
         tmp = State.Temporary()
       ))
     )
