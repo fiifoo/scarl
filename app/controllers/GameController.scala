@@ -13,7 +13,7 @@ import play.api.libs.json.JsValue
 import play.api.libs.streams._
 import play.api.mvc._
 
-class GameController @Inject()(implicit system: ActorSystem, materializer: Materializer, environment: Environment) extends Controller {
+class GameController @Inject()(cc: ControllerComponents)(implicit system: ActorSystem, mat: Materializer, environment: Environment) extends AbstractController(cc) {
 
   val assets = if (environment.isDev) {
     "http://localhost:80"

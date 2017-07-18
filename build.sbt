@@ -8,16 +8,10 @@ lazy val root = (project in file("."))
 
 lazy val scarl = project
 
-scalaVersion := "2.11.7"
+scalaVersion := "2.12.2"
 
-libraryDependencies ++= Seq(
-  "org.scalatestplus.play" %% "scalatestplus-play" % "1.5.1" % Test
-)
-
-
-
-fork in run := true
-
+libraryDependencies += guice
+libraryDependencies += "org.scalatestplus.play" %% "scalatestplus-play" % "3.1.0" % Test
 
 
 unmanagedResourceDirectories in Assets += (baseDirectory.value / "scarl-ui" / "dist")
