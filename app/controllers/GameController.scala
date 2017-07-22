@@ -46,7 +46,7 @@ class GameController @Inject()(cc: ControllerComponents)(implicit system: ActorS
     sendMessages()
 
     def sendMessages() = {
-      state.outMessages.foreach(send)
+      state.outMessages.reverse.foreach(send)
       state = state.copy(outMessages = Nil)
     }
 

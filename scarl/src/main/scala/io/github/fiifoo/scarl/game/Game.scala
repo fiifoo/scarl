@@ -105,12 +105,12 @@ class Game(bubble: RealityBubble, worldManager: WorldManager) {
       val instance = result.state
       val effects = result.effects
 
-      val events = state.events ::: EventBuilder(
+      val events = EventBuilder(
         instance,
         state.gameState.player,
         state.fov.locations,
         effects
-      )
+      ) ::: state.events
       val statistics = StatisticsBuilder(instance, state.statistics, effects)
       val ended = (effects collectFirst {
         case effect: DeathEffect if effect.target == state.gameState.player => true
@@ -231,7 +231,7 @@ class Game(bubble: RealityBubble, worldManager: WorldManager) {
 
   private def sendMessage(state: RunState, message: OutMessage): RunState = {
     state.copy(
-      outMessages = (message :: state.outMessages).reverse
+      outMessages = message :: state.outMessages
     )
   }
 
