@@ -23,7 +23,7 @@ export default (state = initial, action) => {
 
             return {
                 latest: List([event]),
-                all: state.all.push(event).take(MAX),
+                all: state.all.push(event).takeLast(MAX),
             }
         }
         case types.CHANGE_GAME_MODE: {
@@ -37,7 +37,7 @@ export default (state = initial, action) => {
 
             return {
                 latest: events,
-                all: state.all.concat(events).take(MAX),
+                all: state.all.concat(events).takeLast(MAX),
             }
         }
         case types.RECEIVE_GAME_OVER: {
