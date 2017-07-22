@@ -42,6 +42,12 @@ export default {
         [keycodes.SPACEBAR, commands.SHOOT],
     ]).merge(directions),
 
+    [gameModes.GAME_OVER]: Map([
+        [keycodes.ENTER, commands.SHOW_GAME_OVER_SCREEN],
+    ]),
+
+    [gameModes.GAME_OVER_SCREEN]: Map(),
+
     [gameModes.INVENTORY]: Map([
         [keycodes.ESC, commands.CANCEL_MODE],
         [keycodes.I, commands.CANCEL_MODE],

@@ -40,6 +40,14 @@ export default (state = initial, action) => {
                 all: state.all.concat(events).take(MAX),
             }
         }
+        case types.RECEIVE_GAME_OVER: {
+            const event = createGenericEvent('<Press Enter to continue>')
+
+            return {
+                latest: state.latest.push(event),
+                all: state.all,
+            }
+        }
         default: {
             return state
         }

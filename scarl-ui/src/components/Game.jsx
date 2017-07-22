@@ -25,6 +25,7 @@ const Game = ({game, focusKeyboard}) => (
 
                 <InventoryContainer />
                 <KeyBindingsContainer />
+                <StatisticsContainer />
                 <MessageLogContainer />
             </div>
 
@@ -33,13 +34,6 @@ const Game = ({game, focusKeyboard}) => (
             <ActionBarContainer />
             <Spacer />
             <DebugBarContainer />
-        </div>
-    ) : game.over ? (
-        <div>
-            <h3>Your journey is over</h3>
-            <StatisticsContainer />
-            <h4>Latest messages:</h4>
-            <MessageLogContainer />
         </div>
     ) : (
         <div></div>

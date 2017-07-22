@@ -4,7 +4,7 @@ import Screen from '../components/Screen.jsx'
 import Toggleable from '../components/Toggleable.jsx'
 import * as modes from '../game/modes'
 
-const validModes = Set([modes.MAIN, modes.AIM, modes.LOOK])
+const validModes = Set([modes.MAIN, modes.AIM, modes.GAME_OVER, modes.LOOK])
 
 const ScreenContainer = connect(
     state => ({

@@ -22,7 +22,7 @@ export default (state = initial, action) => {
         }
         case types.RECEIVE_GAME_OVER: {
             return {
-                running: false,
+                running: true,
                 over: true,
             }
         }

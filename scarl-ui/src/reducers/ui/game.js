@@ -12,11 +12,14 @@ const initial = Record({
 
 export default (state = initial, action) => {
     switch (action.type) {
+        case types.CONNECTION_CLOSED: {
+            return initial
+        }
+        case types.RECEIVE_GAME_OVER: {
+            return changeMode(state, modes.GAME_OVER)
+        }
         case types.CHANGE_GAME_MODE: {
-            if (action.mode === modes.MAIN) {
-                state = state.set('cursor', null).set('reticule', null).set('trajectory', [])
-            }
-            return state.set('mode', action.mode)
+            return changeMode(state, action.mode)
         }
         case types.SET_CURSOR: {
             return state.set('cursor', action.cursor)
@@ -31,4 +34,10 @@ export default (state = initial, action) => {
             return state
         }
     }
+}
+
+const changeMode = (state, mode) => {
+    state = state.set('cursor', null).set('reticule', null).set('trajectory', [])
+
+    return state.set('mode', mode)
 }

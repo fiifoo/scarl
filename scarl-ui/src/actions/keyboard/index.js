@@ -4,6 +4,7 @@ import * as commands from '../../keyboard/commands'
 import * as types from '../actionTypes'
 import * as gameActions from '../gameActions'
 import aim from './aim'
+import gameOver from './gameOver'
 import main from './main'
 import look from './look'
 
@@ -16,6 +17,7 @@ const onlyCancelMode = (command, dispatch) => {
 const handlers = {
     [modes.MAIN]: main,
     [modes.AIM]: aim,
+    [modes.GAME_OVER]: gameOver,
     [modes.INVENTORY]: onlyCancelMode,
     [modes.KEY_BINDINGS]: onlyCancelMode,
     [modes.LOOK]: look,

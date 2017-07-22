@@ -40,7 +40,11 @@ const KeyBindings = () =>  {
 
     return (
         <Tabs id="key-bindings-tabs" bsStyle="pills">
-            {Map(modes).map(renderMode).toArray()}
+            {Map(modes)
+                .filterNot(mode => bindings[mode].isEmpty())
+                .map(renderMode)
+                .toArray()
+            }
         </Tabs>
     )
 }

@@ -66,7 +66,7 @@ class Game(bubble: RealityBubble, worldManager: WorldManager) {
   }
 
   private def receiveAction(state: RunState, action: Action): RunState = {
-    if (!ActionValidator(state.instance, state.gameState.player, action)) {
+    if (state.ended || !ActionValidator(state.instance, state.gameState.player, action)) {
       return state
     }
 
@@ -76,7 +76,7 @@ class Game(bubble: RealityBubble, worldManager: WorldManager) {
   @tailrec
   private def run(state: RunState, action: Option[Action] = None): RunState = {
     if (state.ended) {
-      return sendGameOver(state)
+      return sendGameOver(sendGameUpdate(state))
     } else if (state.stopped) {
       return sendGameUpdate(state)
     }

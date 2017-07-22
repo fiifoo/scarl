@@ -1,5 +1,7 @@
 export const MAIN = 'MAIN'
 export const AIM = 'AIM'
+export const GAME_OVER = 'GAME_OVER'
+export const GAME_OVER_SCREEN = 'GAME_OVER_SCREEN'
 export const INVENTORY = 'INVENTORY'
 export const KEY_BINDINGS = 'KEY_BINDINGS'
 export const LOOK = 'LOOK'

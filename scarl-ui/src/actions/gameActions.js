@@ -17,11 +17,15 @@ export const aim = () => (dispatch, getState) => {
         return
     }
 
-    seekTarget()(dispatch, getState)
     changeMode(modes.AIM)(dispatch)
+    seekTarget()(dispatch, getState)
 }
 
 export const cancelMode = () => dispatch => changeMode(modes.MAIN)(dispatch)
+
+export const gameOverScreen = () => dispatch => {
+    changeMode(modes.GAME_OVER_SCREEN)(dispatch)
+}
 
 export const inventory = () => dispatch => {
     sendInventoryQuery()
@@ -33,8 +37,8 @@ export const keyBindings = () => dispatch => changeMode(modes.KEY_BINDINGS)(disp
 export const look = () => (dispatch, getState) => {
     const {player} = getState()
 
-    setCursor(player.creature.location)(dispatch)
     changeMode(modes.LOOK)(dispatch)
+    setCursor(player.creature.location)(dispatch)
 }
 
 export const messageLog = () => dispatch => changeMode(modes.MESSAGE_LOG)(dispatch)
