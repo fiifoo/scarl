@@ -34,6 +34,10 @@ object State {
                    targetStatuses: Map[EntityId, Set[StatusId]] = Map()
                   )
 
+  case class Simulation(running: Boolean = false,
+                        entities: Set[EntityId] = Set()
+                       )
+
   case class Temporary(conduitEntry: Option[(ConduitId, Traveler)] = None,
                        removableEntities: Set[EntityId] = Set()
                       )
@@ -54,6 +58,7 @@ case class State(area: State.Area = State.Area(),
                  powers: Powers = Powers(),
                  progressions: Map[ProgressionId, Progression] = Map(),
                  rng: Rng = Rng(1),
+                 simulation: State.Simulation = State.Simulation(),
                  tactics: Map[CreatureId, Tactic] = Map(),
                  tick: Int = 1,
                  tmp: State.Temporary = State.Temporary()

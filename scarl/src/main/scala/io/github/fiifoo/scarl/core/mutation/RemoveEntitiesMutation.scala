@@ -19,12 +19,19 @@ case class RemoveEntitiesMutation() extends Mutation {
   def apply(s: State): State = {
     val removable = s.tmp.removableEntities
 
+    val simulation = if (s.simulation.running) {
+      s.simulation.copy(entities = s.simulation.entities -- removable)
+    } else {
+      s.simulation
+    }
+
     s.copy(
       cache = mutateCache(s, removable),
       communications = mutateCommunications(s.communications, removable),
       entities = s.entities -- removable,
       equipments = mutateEquipments(s.equipments, removable),
       index = mutateIndex(s, removable),
+      simulation = simulation,
       tactics = mutateTactics(s.tactics, removable),
       tmp = s.tmp.copy(removableEntities = Set())
     )

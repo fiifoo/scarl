@@ -23,6 +23,7 @@ object FormatState {
   implicit val formatStatePowers = formatEmpty(Powers())
   implicit val formatStateProgressions = formatEmpty[Map[ProgressionId, Progression]](Map())
   // should be empty
+  implicit val formatStateSimulation = formatEmpty(State.Simulation())
   implicit val formatStateTemporary = formatEmpty(State.Temporary())
 
   implicit val formatActorIdList = formatList(formatActorId)

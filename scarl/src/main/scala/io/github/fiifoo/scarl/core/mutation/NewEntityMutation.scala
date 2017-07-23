@@ -19,11 +19,18 @@ case class NewEntityMutation(entity: Entity, existing: Boolean = false) extends 
       case _ => s.cache.actorQueue
     }
 
+    val simulation = if (s.simulation.running) {
+      s.simulation.copy(entities = s.simulation.entities + entity.id)
+    } else {
+      s.simulation
+    }
+
     s.copy(
       cache = s.cache.copy(actorQueue = actorQueue),
       entities = s.entities + (entity.id -> entity),
       index = NewEntityIndexMutation(entity)(s, s.index),
       nextEntityId = if (existing) s.nextEntityId else entity.id.value + 1,
+      simulation = simulation,
     )
   }
 }
