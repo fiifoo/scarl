@@ -16,7 +16,7 @@ case class ShootMissileEffect(attacker: CreatureId,
                              ) extends Effect {
 
   def apply(s: State): EffectResult = {
-    val range = getCreatureStats(s)(attacker).ranged.range
+    val range = getCreatureStats(s)(attacker).missileLauncher.range
     val from = attacker(s).location
     val destination = (Line(from, location) take range + 1).last
     val creature = kind(s)(s, from).copy(

@@ -2,7 +2,6 @@ package io.github.fiifoo.scarl.core.item
 
 import io.github.fiifoo.scarl.core.creature.Stats
 import io.github.fiifoo.scarl.core.item.Equipment._
-import io.github.fiifoo.scarl.core.kind.CreatureKindId
 
 object Equipment {
 
@@ -41,7 +40,7 @@ case class Armor(stats: Stats, slot: ArmorSlot) extends Equipment {
   val fillAll: Boolean = true
 }
 
-case class RangedWeapon(stats: Stats, missile: Option[CreatureKindId] = None) extends Equipment {
+case class RangedWeapon(stats: Stats) extends Equipment {
   val slots: Set[Slot] = Set(RangedSlot)
   val fillAll: Boolean = true
 }

@@ -20,6 +20,7 @@ object ActionValidator {
       case action: PassAction => validate(s, actor, action)
       case action: PickItemAction => validate(s, actor, action)
       case action: ShootAction => validate(s, actor, action)
+      case action: ShootMissileAction => validate(s, actor, action)
       case action: UnequipItemAction => validate(s, actor, action)
       case action: UseCreatureAction => validate(s, actor, action)
       case action: UseDoorAction => validate(s, actor, action)
@@ -61,6 +62,8 @@ object ActionValidator {
   }
 
   private def validate(s: State, actor: CreatureId, action: ShootAction): Boolean = true
+
+  private def validate(s: State, actor: CreatureId, action: ShootMissileAction): Boolean = true
 
   private def validate(s: State, actor: CreatureId, action: UnequipItemAction): Boolean = {
     val item = action.item(s)

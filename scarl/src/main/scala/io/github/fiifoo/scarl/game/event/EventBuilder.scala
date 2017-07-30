@@ -40,6 +40,7 @@ class EventBuilder(s: State, player: CreatureId, fov: Set[Location]) {
       case e: MissEffect => build(e) map GenericEvent
       case e: MoveEffect => build(e)
       case e: PickItemEffect => build(e) map GenericEvent
+      case e: ShootMissileEffect => build(e) map GenericEvent
       case e: ShotEffect => build(e)
       case e: TransformedEffect => build(e) map GenericEvent
       case e: TransformFailedEffect => build(e) map GenericEvent
@@ -258,6 +259,18 @@ class EventBuilder(s: State, player: CreatureId, fov: Set[Location]) {
       Some(s"You pick up ${kind(item)}.")
     } else if (fov contains creature(s).location) {
       Some(s"${kind(creature)} picks up ${kind(item)}.")
+    } else {
+      None
+    }
+  }
+
+  private def build(effect: ShootMissileEffect): Option[String] = {
+    val attacker = effect.attacker
+
+    if (attacker == player) {
+      Some("You fire missile.")
+    } else if (fov contains attacker(s).location) {
+      Some(s"${kind(attacker)} fires missile.")
     } else {
       None
     }

@@ -27,6 +27,7 @@ object FormatEntity {
 
   implicit val formatExplosiveStats = Json.format[Stats.Explosive]
   implicit val formatMeleeStats = Json.format[Stats.Melee]
+  implicit val formatMissileLauncherStats = Json.format[Stats.MissileLauncher]
   implicit val formatRangedStats = Json.format[Stats.Ranged]
   implicit val formatSightStats = Json.format[Stats.Sight]
   implicit val formatStats = Json.format[Stats]

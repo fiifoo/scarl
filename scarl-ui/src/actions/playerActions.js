@@ -1,6 +1,7 @@
 import * as utils from '../game/utils'
 import { sendAction, sendInventoryQuery } from './connectionActions'
 import { addMessage, cancelMode, setTarget } from './gameActions'
+import { getMissileLauncherEquipped } from '../game/utils'
 
 export const attack = target => () => {
     sendAction('Attack', {target})
@@ -62,15 +63,17 @@ export const pickItem = () => (dispatch, getState) => {
 }
 
 export const shoot = location => (dispatch, getState) => {
-    const {fov} = getState()
+    const {fov, player} = getState()
     const target = utils.getLocationCreature(location, fov.cumulative)
 
     if (target) {
         setTarget(target.id)(dispatch)
     }
 
+    const action = getMissileLauncherEquipped(player) ? 'ShootMissile' : 'Shoot'
+
     cancelMode()(dispatch)
-    sendAction('Shoot', {location})
+    sendAction(action, {location})
 }
 
 export const unequipItem = item => () => {

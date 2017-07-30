@@ -28,6 +28,7 @@ object ReadAction {
   implicit val readMoveAction = Json.reads[MoveAction]
   implicit val readPickItemAction = Json.reads[PickItemAction]
   implicit val readShootAction = Json.reads[ShootAction]
+  implicit val readShootMissileAction = Json.reads[ShootMissileAction]
   implicit val readUnequipItemAction = Json.reads[UnequipItemAction]
   implicit val readUseCreatureAction = Json.reads[UseCreatureAction]
   implicit val readUseDoorAction = Json.reads[UseDoorAction]
@@ -49,6 +50,7 @@ object ReadAction {
         case "Pass" => PassAction()
         case "PickItem" => data.as[PickItemAction]
         case "Shoot" => data.as[ShootAction]
+        case "ShootMissile" => data.as[ShootMissileAction]
         case "UnequipItem" => data.as[UnequipItemAction]
         case "UseCreature" => data.as[UseCreatureAction]
         case "UseDoor" => data.as[UseDoorAction]

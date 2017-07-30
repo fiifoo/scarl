@@ -10,6 +10,7 @@ object FormatItem {
 
   private implicit val formatExplosiveStats = Json.format[Stats.Explosive]
   private implicit val formatMeleeStats = Json.format[Stats.Melee]
+  private implicit val formatMissileLauncherStats = Json.format[Stats.MissileLauncher]
   private implicit val formatRangedStats = Json.format[Stats.Ranged]
   private implicit val formatSightStats = Json.format[Stats.Sight]
   private implicit val formatStats = Json.format[Stats]

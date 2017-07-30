@@ -95,6 +95,24 @@ export const getLocationUsableItem = (location, fov) => {
     return entities ? entities.items.find(item => item.usable) : undefined
 }
 
+export const getMissileLauncherEquipped = player => {
+    const creature = player.creature.stats
+    const equipment = player.equipmentStats
+
+    return !! (creature.missileLauncher.ammo || equipment.missileLauncher.ammo)
+}
+
+export const getRangedAttackRange = player => {
+    const creature = player.creature.stats
+    const equipment = player.equipmentStats
+
+    return getMissileLauncherEquipped(player) ? (
+        creature.missileLauncher.range + equipment.missileLauncher.range
+    ) : (
+        creature.ranged.range + equipment.ranged.range
+    )
+}
+
 export const isEnemyChecker = (player, factions) => {
     const enemyFactions = factions.get(player.creature.faction).enemies
 
@@ -137,5 +155,3 @@ const getLocationKinds = (l, fov, map) => {
         return map[l.x] ? map[l.x][l.y] : undefined
     }
 }
-
-const getRangedAttackRange = player => player.creature.stats.ranged.range + player.equipmentStats.ranged.range

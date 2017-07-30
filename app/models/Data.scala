@@ -8,7 +8,7 @@ import io.github.fiifoo.scarl.core.Location
 import io.github.fiifoo.scarl.core.Rng.WeightedChoices
 import io.github.fiifoo.scarl.core.communication.{Communication, CommunicationId, Message}
 import io.github.fiifoo.scarl.core.creature.Missile.Guided
-import io.github.fiifoo.scarl.core.creature.Stats.{Explosive, Melee, Ranged, Sight}
+import io.github.fiifoo.scarl.core.creature.Stats._
 import io.github.fiifoo.scarl.core.creature._
 import io.github.fiifoo.scarl.core.item.Equipment._
 import io.github.fiifoo.scarl.core.item._
@@ -628,9 +628,11 @@ object Data {
       pickable = true,
       rangedWeapon = Some(RangedWeapon(
         stats = Stats(
-          ranged = Ranged(range = 10)
+          missileLauncher = MissileLauncher(
+            ammo = Some(CreatureKindId("guided-missile")),
+            range = 10
+          )
         ),
-        missile = Some(CreatureKindId("guided-missile"))
       ))
     )
 

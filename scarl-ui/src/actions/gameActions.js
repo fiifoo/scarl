@@ -1,5 +1,5 @@
 import * as modes from '../game/modes'
-import { seekTargets, calculateTrajectory } from '../game/utils'
+import { calculateTrajectory, getRangedAttackRange, seekTargets } from '../game/utils'
 import * as types from './actionTypes'
 import { sendInventoryQuery } from './connectionActions'
 
@@ -9,7 +9,7 @@ export const addMessage = message => dispatch => dispatch({
 })
 
 export const aim = () => (dispatch, getState) => {
-    const hasWeapon = getState().player.equipmentStats.ranged.range > 0
+    const hasWeapon = getRangedAttackRange(getState().player) > 0
 
     if (! hasWeapon) {
         addMessage('Nothing to aim with.')(dispatch)
