@@ -16,13 +16,13 @@ class WaypointNetworkSpec extends FlatSpec with Matchers {
 
     WaypointNetwork(s) should ===(WaypointNetwork(
       waypoints = Set(Location(0, 0)),
-      adjacent = Map(),
-      locations = Map(
+      adjacentWaypoints = Map(),
+      locationWaypoint = Map(
         Location(0, 0) -> Location(0, 0),
         Location(0, 1) -> Location(0, 0),
         Location(1, 0) -> Location(0, 0)
       ),
-      areas = Map(Location(0, 0) -> Set(
+      waypointLocations = Map(Location(0, 0) -> Set(
         Location(0, 0),
         Location(0, 1),
         Location(1, 0)
@@ -58,7 +58,7 @@ class WaypointNetworkSpec extends FlatSpec with Matchers {
       Location(4, 1)
     ))
 
-    result.adjacent should ===(Map(
+    result.adjacentWaypoints should ===(Map(
       Location(2, 0) -> Set(Location(4, 1)),
       Location(4, 1) -> Set(Location(2, 0))
     ))

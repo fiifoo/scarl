@@ -43,7 +43,7 @@ object WaypointNetwork {
         queue = Queue(waypoint),
         locations = locations
       )
-      val nextLocations = locations -- nextNetwork.locations.keys
+      val nextLocations = locations -- nextNetwork.locationWaypoint.keys
 
       if (nextLocations.nonEmpty) {
         calculateWaypoint(nextNetwork, sector, nextLocations)
@@ -79,7 +79,7 @@ object WaypointNetwork {
                                       location: Location
                                      ): (WaypointNetwork, Queue[Location]) = {
 
-    (network.locations.get(location) map (existing => {
+    (network.locationWaypoint.get(location) map (existing => {
       if (existing != waypoint) {
         (addAdjacent(network, waypoint, existing), queue)
       } else {
@@ -106,11 +106,11 @@ object WaypointNetwork {
                           a: Waypoint,
                           b: Waypoint
                          ): WaypointNetwork = {
-    val as = network.adjacent.getOrElse(a, Set()) + b
-    val bs = network.adjacent.getOrElse(b, Set()) + a
+    val as = network.adjacentWaypoints.getOrElse(a, Set()) + b
+    val bs = network.adjacentWaypoints.getOrElse(b, Set()) + a
 
     network.copy(
-      adjacent = network.adjacent + (a -> as) + (b -> bs)
+      adjacentWaypoints = network.adjacentWaypoints + (a -> as) + (b -> bs)
     )
   }
 
@@ -118,17 +118,17 @@ object WaypointNetwork {
                           waypoint: Waypoint,
                           location: Location
                          ): WaypointNetwork = {
-    val area = network.areas.getOrElse(waypoint, Set()) + location
+    val area = network.waypointLocations.getOrElse(waypoint, Set()) + location
 
     network.copy(
-      locations = network.locations + (location -> waypoint),
-      areas = network.areas + (waypoint -> area)
+      locationWaypoint = network.locationWaypoint + (location -> waypoint),
+      waypointLocations = network.waypointLocations + (waypoint -> area)
     )
   }
 }
 
 case class WaypointNetwork(waypoints: Set[Waypoint] = Set(),
-                           adjacent: Map[Waypoint, Set[Waypoint]] = Map(),
-                           locations: Map[Location, Waypoint] = Map(),
-                           areas: Map[Waypoint, Set[Location]] = Map()
+                           adjacentWaypoints: Map[Waypoint, Set[Waypoint]] = Map(),
+                           locationWaypoint: Map[Location, Waypoint] = Map(),
+                           waypointLocations: Map[Waypoint, Set[Location]] = Map()
                           )
