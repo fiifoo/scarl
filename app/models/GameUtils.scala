@@ -1,5 +1,6 @@
 package models
 
+import io.github.fiifoo.scarl.core.State.Assets
 import io.github.fiifoo.scarl.core.mutation.cache.EquipmentStatsCacheMutation
 import io.github.fiifoo.scarl.core.mutation.index.{ConduitLocationIndexAddMutation, NewEntityIndexMutation}
 import io.github.fiifoo.scarl.core.{ActorQueue, State}
@@ -15,6 +16,9 @@ object GameUtils {
         var (area, state) = x
 
         state = state.copy(
+          assets = Assets(
+            combatPower = manager.combatPower
+          ),
           communications = state.communications.copy(manager.communications),
           index = calculateStateIndex(state),
           kinds = manager.kinds,

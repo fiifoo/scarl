@@ -1,6 +1,7 @@
 package io.github.fiifoo.scarl.core
 
 import io.github.fiifoo.scarl.core.action.Tactic
+import io.github.fiifoo.scarl.core.assets.CombatPower
 import io.github.fiifoo.scarl.core.communication.{Communication, CommunicationId}
 import io.github.fiifoo.scarl.core.creature._
 import io.github.fiifoo.scarl.core.entity._
@@ -16,6 +17,8 @@ object State {
                   height: Int = 10,
                   sectorSize: Int = 10
                  )
+
+  case class Assets(combatPower: CombatPower = CombatPower()) // todo: move all assets like stuff here
 
   case class Cache(actorQueue: ActorQueue = ActorQueue(),
                    equipmentStats: Map[CreatureId, Stats] = Map(),
@@ -45,6 +48,7 @@ object State {
 }
 
 case class State(area: State.Area = State.Area(),
+                 assets: State.Assets = State.Assets(),
                  cache: State.Cache = State.Cache(),
                  communications: State.Communications = State.Communications(),
                  conduits: Map[ConduitId, Location] = Map(),

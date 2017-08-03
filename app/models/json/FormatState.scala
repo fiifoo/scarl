@@ -18,6 +18,7 @@ object FormatState {
   implicit val formatStateCache = formatEmpty(State.Cache())
   implicit val formatStateIndex = formatEmpty(State.Index())
   // reset from game data
+  implicit val formatStateAssets = formatEmpty(State.Assets())
   implicit val formatStateCommunicationsData = formatEmpty[Map[CommunicationId, Communication]](Map())
   implicit val formatStateKinds = formatEmpty(Kinds())
   implicit val formatStatePowers = formatEmpty(Powers())

@@ -2,8 +2,9 @@ package io.github.fiifoo.scarl.world
 
 import io.github.fiifoo.scarl.area.template.{ApplyTemplate, CalculateTemplate, Template, TemplateId}
 import io.github.fiifoo.scarl.area.{Area, AreaId}
-import io.github.fiifoo.scarl.core.State.Communications
+import io.github.fiifoo.scarl.core.State.{Assets, Communications}
 import io.github.fiifoo.scarl.core._
+import io.github.fiifoo.scarl.core.assets.CombatPower
 import io.github.fiifoo.scarl.core.communication.{Communication, CommunicationId}
 import io.github.fiifoo.scarl.core.creature.{Faction, FactionId, Progression, ProgressionId}
 import io.github.fiifoo.scarl.core.entity._
@@ -13,6 +14,7 @@ import io.github.fiifoo.scarl.core.power.Powers
 import io.github.fiifoo.scarl.core.world.{ConduitId, Traveler}
 
 class WorldManager(val areas: Map[AreaId, Area],
+                   val combatPower: CombatPower,
                    val communications: Map[CommunicationId, Communication],
                    val factions: Map[FactionId, Faction],
                    val kinds: Kinds,
@@ -54,6 +56,9 @@ class WorldManager(val areas: Map[AreaId, Area],
                           ): WorldState = {
 
     val s0 = State(
+      assets = Assets(
+        combatPower = combatPower
+      ),
       communications = Communications(communications),
       kinds = kinds,
       nextEntityId = nextEntityId,
