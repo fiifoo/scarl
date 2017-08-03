@@ -1,7 +1,7 @@
 package io.github.fiifoo.scarl.core
 
 import io.github.fiifoo.scarl.core.entity.{ActiveStatusId, CreatureId}
-import io.github.fiifoo.scarl.core.mutation.RemovableEntityMutation
+import io.github.fiifoo.scarl.core.mutation.{RemovableEntityMutation, RemoveEntitiesMutation}
 import io.github.fiifoo.scarl.core.test_assets.{TestActiveStatus, TestActiveStatusTactic, TestCreatureFactory, TestMoveTactic}
 import org.scalatest._
 
@@ -102,6 +102,7 @@ class RealityBubbleSpec extends FlatSpec with Matchers {
     CreatureId(3)(s).location should ===(Location(1, 0))
 
     s = RemovableEntityMutation(CreatureId(2))(s)
+    s = RemoveEntitiesMutation()(s)
 
     s = bubble(s).get.state
     s = bubble(s).get.state

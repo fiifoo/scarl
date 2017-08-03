@@ -2,23 +2,14 @@ package io.github.fiifoo.scarl.game.api
 
 import io.github.fiifoo.scarl.area.AreaId
 import io.github.fiifoo.scarl.core.Location
-import io.github.fiifoo.scarl.core.creature.{Faction, Stats}
+import io.github.fiifoo.scarl.core.creature.Faction
 import io.github.fiifoo.scarl.core.entity._
 import io.github.fiifoo.scarl.core.item.Equipment.Slot
 import io.github.fiifoo.scarl.core.kind.Kinds
-import io.github.fiifoo.scarl.game.api.OutMessage.PlayerInfo
 import io.github.fiifoo.scarl.game.event.Event
 import io.github.fiifoo.scarl.game.map.MapLocation
-import io.github.fiifoo.scarl.game.{PlayerFov, Statistics}
+import io.github.fiifoo.scarl.game.{PlayerFov, PlayerInfo, Statistics}
 import io.github.fiifoo.scarl.geometry.WaypointNetwork
-
-object OutMessage {
-
-  case class PlayerInfo(creature: Creature,
-                        equipmentStats: Stats
-                       )
-
-}
 
 sealed trait OutMessage
 

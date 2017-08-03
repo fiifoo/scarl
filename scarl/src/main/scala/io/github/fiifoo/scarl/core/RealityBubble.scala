@@ -22,9 +22,7 @@ object RealityBubble {
 class RealityBubble(ai: (CreatureId) => Tactic) {
 
   def apply(state: State, fixedAction: Option[Action] = None): Option[Result] = {
-    val s = removeEntities(state)
-
-    dequeue(s).map(x => {
+    dequeue(state).map(x => {
       val (actor, s) = x
 
       actor match {

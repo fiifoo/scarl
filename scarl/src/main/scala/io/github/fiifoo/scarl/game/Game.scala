@@ -3,11 +3,10 @@ package io.github.fiifoo.scarl.game
 import io.github.fiifoo.scarl.action.validate.ActionValidator
 import io.github.fiifoo.scarl.ai.tactic.RoamTactic
 import io.github.fiifoo.scarl.core.RealityBubble
-import io.github.fiifoo.scarl.core.Selectors.{getContainerItems, getEquipmentStats}
+import io.github.fiifoo.scarl.core.Selectors.getContainerItems
 import io.github.fiifoo.scarl.core.action.Action
 import io.github.fiifoo.scarl.core.mutation.{RemoveEntitiesMutation, ResetConduitEntryMutation}
 import io.github.fiifoo.scarl.core.world.{ConduitId, Traveler}
-import io.github.fiifoo.scarl.game.api.OutMessage.PlayerInfo
 import io.github.fiifoo.scarl.game.api._
 import io.github.fiifoo.scarl.game.event.EventBuilder
 import io.github.fiifoo.scarl.game.map.MapBuilder
@@ -28,6 +27,7 @@ object Game {
       areaMap = gameState.maps.getOrElse(gameState.area, Map()),
       gameState = gameState,
       instance = instance,
+      playerInfo = PlayerInfo(instance, gameState.player),
       statistics = gameState.statistics
     )
 
@@ -54,13 +54,12 @@ class Game(bubble: RealityBubble, worldManager: WorldManager) {
     val maps = state.gameState.maps
     val world = state.gameState.world
     val area = state.gameState.area
-    val instance = RemoveEntitiesMutation()(state.instance)
 
     state.gameState.copy(
       maps = maps + (area -> state.areaMap),
       statistics = state.statistics,
       world = world.copy(
-        states = world.states + (area -> instance)
+        states = world.states + (area -> state.instance)
       ))
   }
 
@@ -116,7 +115,8 @@ class Game(bubble: RealityBubble, worldManager: WorldManager) {
       state.copy(
         ended = state.gameState.player(instance).dead,
         events = events,
-        instance = instance,
+        instance = RemoveEntitiesMutation()(instance),
+        playerInfo = PlayerInfo(instance, state.gameState.player),
         statistics = statistics
       )
     }) getOrElse state
@@ -145,12 +145,10 @@ class Game(bubble: RealityBubble, worldManager: WorldManager) {
   }
 
   private def switchArea(state: RunState, conduit: ConduitId, traveler: Traveler): RunState = {
-    val instance = RemoveEntitiesMutation()(state.instance)
-
     val (nextWorld, nextArea) = worldManager.switchArea(
       state.gameState.world,
       state.gameState.area,
-      instance,
+      state.instance,
       conduit,
       traveler
     )
@@ -166,7 +164,8 @@ class Game(bubble: RealityBubble, worldManager: WorldManager) {
       areaMap = state.gameState.maps.getOrElse(nextArea, Map()),
       fov = PlayerFov(),
       gameState = nextGameState,
-      instance = nextInstance
+      instance = nextInstance,
+      playerInfo = PlayerInfo(nextInstance, nextGameState.player),
     )
 
     sendAreaChange(nextState)
@@ -191,10 +190,7 @@ class Game(bubble: RealityBubble, worldManager: WorldManager) {
     val message = GameUpdate(
       fov = nextState.fov,
       events = events,
-      player = PlayerInfo(
-        creature = state.gameState.player(state.instance),
-        equipmentStats = getEquipmentStats(state.instance)(state.gameState.player)
-      )
+      player = state.playerInfo
     )
 
     sendMessage(nextState, message)
@@ -233,7 +229,7 @@ class Game(bubble: RealityBubble, worldManager: WorldManager) {
   }
 
   private def updateFov(state: RunState): RunState = {
-    val creature = state.gameState.player(state.instance)
+    val creature = state.playerInfo.creature
     val locations = Fov(state.instance)(creature.location, creature.stats.sight.range)
 
     val areaMap = state.areaMap ++ MapBuilder(state.fov)

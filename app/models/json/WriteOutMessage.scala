@@ -4,10 +4,9 @@ import io.github.fiifoo.scarl.core.Location
 import io.github.fiifoo.scarl.core.communication.CommunicationId
 import io.github.fiifoo.scarl.core.creature.{Faction, FactionId}
 import io.github.fiifoo.scarl.core.kind._
-import io.github.fiifoo.scarl.game.api.OutMessage.PlayerInfo
 import io.github.fiifoo.scarl.game.api._
 import io.github.fiifoo.scarl.game.event._
-import io.github.fiifoo.scarl.game.{LocationEntities, PlayerFov}
+import io.github.fiifoo.scarl.game.{LocationEntities, PlayerFov, PlayerInfo}
 import io.github.fiifoo.scarl.geometry.WaypointNetwork
 import models.json.FormatBase._
 import models.json.FormatEntity._
