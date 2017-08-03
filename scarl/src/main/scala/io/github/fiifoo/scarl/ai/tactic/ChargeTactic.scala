@@ -1,11 +1,12 @@
 package io.github.fiifoo.scarl.ai.tactic
 
-import io.github.fiifoo.scarl.action.{AttackAction, MoveAction, PassAction, ShootAction}
+import io.github.fiifoo.scarl.action._
 import io.github.fiifoo.scarl.core.Selectors.getCreatureStats
 import io.github.fiifoo.scarl.core.action.{Action, Tactic}
 import io.github.fiifoo.scarl.core.entity.{Creature, CreatureId, SafeCreatureId}
 import io.github.fiifoo.scarl.core.{Location, State}
 import io.github.fiifoo.scarl.geometry._
+import io.github.fiifoo.scarl.simulation.{Outcome, ShootMissileOutcomeSimulation}
 
 import scala.util.Random
 
@@ -38,7 +39,9 @@ case class ChargeTactic(actor: CreatureId,
     val tactic = copy(destination = target.location)
     val action = if (adjacent) {
       AttackAction(target.id)
-    } else if (couldShoot(s, line)) {
+    } else if (shouldShootMissile(s, line)) {
+      ShootMissileAction(target.location)
+    } else if (shouldShoot(s, line)) {
       ShootAction(target.location)
     } else {
       Path(s)(actor(s).location, target.location) map (path => {
@@ -59,8 +62,21 @@ case class ChargeTactic(actor: CreatureId,
     RoamTactic(actor)(s, random)
   }
 
-  private def couldShoot(s: State, line: Vector[Location]): Boolean = {
-    val range = getCreatureStats(s)(actor).ranged.range
+  private def shouldShootMissile(s: State, line: Vector[Location]): Boolean = {
+    val stats = getCreatureStats(s)(actor)
+
+    if (s.simulation.running || stats.missileLauncher.ammo.isEmpty || !couldShoot(s, line, stats.missileLauncher.range)) {
+      false
+    } else {
+      ShootMissileOutcomeSimulation(s, actor, line.last) == Outcome.Good
+    }
+  }
+
+  private def shouldShoot(s: State, line: Vector[Location]): Boolean = {
+    couldShoot(s, line, getCreatureStats(s)(actor).ranged.range)
+  }
+
+  private def couldShoot(s: State, line: Vector[Location], range: Int): Boolean = {
     val distance = line.length - 1
 
     range >= distance && !line.tail.init.exists(Obstacle.shot(s)(_).isDefined)

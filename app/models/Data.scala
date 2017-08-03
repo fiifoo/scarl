@@ -402,10 +402,11 @@ object Data {
       stats = Stats(
         health = 50,
         melee = Melee(attack = 10, damage = 10),
+        missileLauncher = MissileLauncher(ammo = Some(CreatureKindId("guided-missile")), range = 10),
         ranged = Ranged(attack = 20, damage = 10, range = 5),
         defence = 30,
         armor = 10,
-        sight = Sight(5)
+        sight = Sight(10)
       ),
       usable = Some(CreaturePowerId("transform-drone"))
     )

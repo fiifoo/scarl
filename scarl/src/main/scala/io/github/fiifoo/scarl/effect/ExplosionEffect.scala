@@ -15,17 +15,19 @@ case class ExplosionEffect(attacker: CreatureId,
                           ) extends Effect {
 
   def apply(s: State): EffectResult = {
-    val targets = (Selectors.getLocationEntities(s)(location) collect {
-      case c: CreatureId => c
-    }) - attacker
-
     val (random, rng) = s.rng()
     val rule = AttackRule.explosive(s, random) _
 
     EffectResult(
       RngMutation(rng),
-      (targets map attack(rule)).toList
+      (targets(s) map attack(rule)).toList
     )
+  }
+
+  def targets(s: State): Set[CreatureId] = {
+    (Selectors.getLocationEntities(s)(location) collect {
+      case c: CreatureId => c
+    }) - attacker
   }
 
   private def attack(rule: (CreatureId, CreatureId) => Result)(target: CreatureId): Effect = {

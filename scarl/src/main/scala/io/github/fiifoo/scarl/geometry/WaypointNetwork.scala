@@ -1,7 +1,7 @@
 package io.github.fiifoo.scarl.geometry
 
 import io.github.fiifoo.scarl.core.Selectors.getLocationEntities
-import io.github.fiifoo.scarl.core.entity.WallId
+import io.github.fiifoo.scarl.core.entity.{CreatureId, WallId}
 import io.github.fiifoo.scarl.core.{Location, State}
 import io.github.fiifoo.scarl.geometry.WaypointNetwork.Waypoint
 
@@ -21,6 +21,15 @@ object WaypointNetwork {
     val calculate = calculateSector(blocked) _
 
     sectors.foldLeft(WaypointNetwork())(calculate)
+  }
+
+  def nearbyCreatures(s: State, locations: Set[Location]): Set[CreatureId] = {
+    val network = s.cache.waypointNetwork
+    val waypoints = locations flatMap network.locationWaypoint.get
+
+    waypoints flatMap network.waypointLocations flatMap getLocationEntities(s) collect {
+      case c: CreatureId => c
+    }
   }
 
   private def calculateSector(blocked: Location => Boolean)
