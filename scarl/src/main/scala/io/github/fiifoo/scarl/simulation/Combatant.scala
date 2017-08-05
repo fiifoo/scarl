@@ -1,17 +1,18 @@
 package io.github.fiifoo.scarl.simulation
 
+import io.github.fiifoo.scarl.core.action.Behavior
 import io.github.fiifoo.scarl.core.creature.{FactionId, Stats}
 import io.github.fiifoo.scarl.core.kind.{CreatureKind, CreatureKindId}
 
 object Combatant {
 
   def apply(kind: CreatureKind): Combatant = {
-    Combatant(CreatureKindId(kind.id.value), kind.stats)
+    Combatant(CreatureKindId(kind.id.value), kind.stats, kind.behavior)
   }
 
 }
 
-case class Combatant(id: CreatureKindId, stats: Stats) {
+case class Combatant(id: CreatureKindId, stats: Stats, behavior: Behavior) {
 
   def apply(faction: FactionId): CreatureKind = {
     CreatureKind(
@@ -20,7 +21,8 @@ case class Combatant(id: CreatureKindId, stats: Stats) {
       display = 'c',
       color = "white",
       faction = faction,
-      stats = stats,
+      behavior = behavior,
+      stats = stats
     )
   }
 

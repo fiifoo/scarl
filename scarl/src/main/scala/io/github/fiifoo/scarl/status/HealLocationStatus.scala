@@ -2,7 +2,7 @@ package io.github.fiifoo.scarl.status
 
 import io.github.fiifoo.scarl.core.Selectors.getLocationEntities
 import io.github.fiifoo.scarl.core.State
-import io.github.fiifoo.scarl.core.effect.Effect
+import io.github.fiifoo.scarl.core.effect.{Effect, TickEffect}
 import io.github.fiifoo.scarl.core.entity._
 import io.github.fiifoo.scarl.core.kind.WidgetKindId
 import io.github.fiifoo.scarl.effect._

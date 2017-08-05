@@ -10,31 +10,29 @@ import org.scalatest._
 
 class SleepActionSpec extends FlatSpec with Matchers {
 
-  val bubble = RealityBubble(TestSleepTactic)
-
   "SleepAction" should "generate sleep status" in {
-    var s = TestCreatureFactory.generate(State())
+    var s = TestCreatureFactory.generate(State(), 1, TestCreatureFactory.create(behavior = TestSleepTactic))
 
-    s = bubble(s).get.state
+    s = RealityBubble(s).get.state
     s.entities(ActiveStatusId(2)) should ===(SleepStatus(ActiveStatusId(2), 1, CreatureId(1)))
   }
 
   it should "heal creature" in {
-    var s = TestCreatureFactory.generate(State(), 1, TestCreatureFactory.create(damage = 2))
+    var s = TestCreatureFactory.generate(State(), 1, TestCreatureFactory.create(damage = 2, behavior = TestSleepTactic))
 
-    s = bubble(s).get.state
-    s = bubble(s).get.state
+    s = RealityBubble(s).get.state
+    s = RealityBubble(s).get.state
     CreatureId(1)(s).damage should ===(1)
   }
 
   it should "remove sleep status when fully healed" in {
-    var s = TestCreatureFactory.generate(State(), 1, TestCreatureFactory.create(damage = 2))
+    var s = TestCreatureFactory.generate(State(), 1, TestCreatureFactory.create(damage = 2, behavior = TestSleepTactic))
 
-    s = bubble(s).get.state // sleep action
-    s = bubble(s).get.state // heal
-    s = bubble(s).get.state // pass action
+    s = RealityBubble(s).get.state // sleep action
+    s = RealityBubble(s).get.state // heal
+    s = RealityBubble(s).get.state // pass action
     s.entities.isDefinedAt(ActiveStatusId(2)) should ===(true)
-    s = bubble(s).get.state // heal
+    s = RealityBubble(s).get.state // heal
     s = RemoveEntitiesMutation()(s)
     s.entities.isDefinedAt(ActiveStatusId(2)) should ===(false)
   }

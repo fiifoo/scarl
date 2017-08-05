@@ -13,6 +13,7 @@ import models.json.FormatEntity._
 import models.json.FormatGameState.{formatAreaMap, formatStatistics}
 import models.json.FormatId._
 import models.json.FormatItem._
+import models.json.FormatTactic.formatBehavior
 import models.json.FormatUtils._
 import play.api.libs.json._
 

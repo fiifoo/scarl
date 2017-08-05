@@ -1,7 +1,6 @@
-package io.github.fiifoo.scarl.effect
+package io.github.fiifoo.scarl.core.effect
 
 import io.github.fiifoo.scarl.core.State
-import io.github.fiifoo.scarl.core.effect.{Effect, EffectResult}
 import io.github.fiifoo.scarl.core.entity.ActorId
 import io.github.fiifoo.scarl.core.mutation.ActorTickMutation
 

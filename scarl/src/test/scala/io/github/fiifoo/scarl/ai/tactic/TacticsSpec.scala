@@ -1,6 +1,6 @@
 package io.github.fiifoo.scarl.ai.tactic
 
-import io.github.fiifoo.scarl.action.test_assets.TestPassTactic
+import io.github.fiifoo.scarl.core.action.PassTactic
 import io.github.fiifoo.scarl.core.creature.{Faction, FactionId}
 import io.github.fiifoo.scarl.core.entity.{CreatureId, SafeCreatureId}
 import io.github.fiifoo.scarl.core.mutation.{LocatableLocationMutation, NewFactionMutation}
@@ -12,16 +12,16 @@ class TacticsSpec extends FlatSpec with Matchers {
 
   val faction = Faction(FactionId("people"), Set(FactionId("people")))
 
-  val initial = NewFactionMutation(faction)(TestCreatureFactory.generate(
-    s = State(),
-    count = 2,
-    prototype = TestCreatureFactory.create(health = 100, faction = faction.id)
-  ))
-
-  val bubble = RealityBubble((actor: CreatureId) => actor match {
-    case CreatureId(1) => RoamTactic(CreatureId(1))
-    case _ => TestPassTactic(CreatureId(2))
-  })
+  val initial = NewFactionMutation(faction)(
+    TestCreatureFactory.generate(
+      TestCreatureFactory.generate(
+        State(),
+        1,
+        TestCreatureFactory.create(health = 100, faction = faction.id, behavior = RoamTactic)
+      ),
+      1,
+      TestCreatureFactory.create(health = 100, faction = faction.id, behavior = PassTactic))
+  )
 
   var s: State = initial
 
@@ -29,22 +29,22 @@ class TacticsSpec extends FlatSpec with Matchers {
     s = LocatableLocationMutation(CreatureId(2), Location(1000, 0))(s) // off you go
 
     CreatureId(1)(s).location should ===(Location(0, 0))
-    s = bubble(s).get.state
+    s = RealityBubble(s).get.state
     CreatureId(1)(s).location should ===(Location(-1, 1))
-    s.tactics(CreatureId(1)) should ===(RoamTactic(CreatureId(1)))
+    s.tactics(CreatureId(1)) should ===(RoamTactic)
 
-    s = bubble(s).get.state // other creature
+    s = RealityBubble(s).get.state // other creature
   }
 
   it should "switch tactic to charge when enemy is close by" in {
     s = LocatableLocationMutation(CreatureId(1), Location(0, 0))(s) // reset
     s = LocatableLocationMutation(CreatureId(2), Location(2, 0))(s) // welcome back
 
-    s = bubble(s).get.state
+    s = RealityBubble(s).get.state
     CreatureId(1)(s).location should ===(Location(1, 0))
-    s.tactics(CreatureId(1)) should ===(ChargeTactic(CreatureId(1), SafeCreatureId(CreatureId(2)), Location(2, 0)))
+    s.tactics(CreatureId(1)) should ===(ChargeTactic(SafeCreatureId(CreatureId(2)), Location(2, 0)))
 
-    s = bubble(s).get.state // other creature
+    s = RealityBubble(s).get.state // other creature
   }
 
   "ChargeTactic" should "move creature towards other" in {
@@ -54,19 +54,19 @@ class TacticsSpec extends FlatSpec with Matchers {
 
   it should "attack other creature when adjacent" in {
     CreatureId(2)(s).damage should ===(0)
-    s = bubble(s).get.state
+    s = RealityBubble(s).get.state
     CreatureId(1)(s).location should ===(Location(1, 0))
     CreatureId(2)(s).damage should be > 0
 
-    s = bubble(s).get.state // other creature
+    s = RealityBubble(s).get.state // other creature
   }
 
   it should "switch tactic to pursue when enemy leaves field of vision" in {
     s = LocatableLocationMutation(CreatureId(2), Location(1000, 0))(s) // begone
-    s = bubble(s).get.state
-    s.tactics(CreatureId(1)) should ===(PursueTactic(CreatureId(1), SafeCreatureId(CreatureId(2)), Location(2, 0)))
+    s = RealityBubble(s).get.state
+    s.tactics(CreatureId(1)) should ===(PursueTactic(SafeCreatureId(CreatureId(2)), Location(2, 0)))
 
-    s = bubble(s).get.state // other creature
+    s = RealityBubble(s).get.state // other creature
   }
 
   "PursueTactic" should "move creature to last known enemy position" in {
@@ -75,9 +75,9 @@ class TacticsSpec extends FlatSpec with Matchers {
   }
 
   it should "switch tactic back to roaming if enemy is not found" in {
-    s = bubble(s).get.state
-    s.tactics(CreatureId(1)) should ===(RoamTactic(CreatureId(1)))
+    s = RealityBubble(s).get.state
+    s.tactics(CreatureId(1)) should ===(RoamTactic)
 
-    s = bubble(s).get.state // other creature
+    s = RealityBubble(s).get.state // other creature
   }
 }

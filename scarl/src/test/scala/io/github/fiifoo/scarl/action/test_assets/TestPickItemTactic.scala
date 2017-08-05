@@ -1,15 +1,16 @@
 package io.github.fiifoo.scarl.action.test_assets
 
 import io.github.fiifoo.scarl.action.PickItemAction
-import io.github.fiifoo.scarl.core.action.{Action, Tactic}
+import io.github.fiifoo.scarl.core.action.Behavior
+import io.github.fiifoo.scarl.core.action.Tactic.Result
 import io.github.fiifoo.scarl.core.entity._
 import io.github.fiifoo.scarl.core.{Location, State}
 
 import scala.util.Random
 
-case class TestPickItemTactic(actor: CreatureId) extends Tactic {
+case object TestPickItemTactic extends Behavior {
 
-  def apply(s: State, random: Random): (Tactic, Action) = {
+  def behavior(s: State, actor: CreatureId, random: Random): Result = {
 
     def getItemLocation(item: Item): Option[Location] = {
       item.container(s) match {

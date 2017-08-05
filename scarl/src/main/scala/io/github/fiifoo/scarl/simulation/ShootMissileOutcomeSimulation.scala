@@ -1,7 +1,6 @@
 package io.github.fiifoo.scarl.simulation
 
 import io.github.fiifoo.scarl.action.ShootMissileAction
-import io.github.fiifoo.scarl.ai.tactic.RoamTactic
 import io.github.fiifoo.scarl.core.creature.FactionId
 import io.github.fiifoo.scarl.core.entity.{ActorId, CreatureId}
 import io.github.fiifoo.scarl.core.{ActorQueue, Location, State}
@@ -24,7 +23,6 @@ object ShootMissileOutcomeSimulation {
   private def createSimulation(enemies: Set[FactionId]): Simulation[Outcome] = {
     new Simulation[Outcome](
       listener = new ExplosionOutcomeListener(enemies),
-      ai = RoamTactic,
       turnLimit = turnLimit
     )
   }

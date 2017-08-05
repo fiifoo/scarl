@@ -7,8 +7,7 @@ import org.scalatest._
 
 class RealityBubblePerformanceSpec extends FlatSpec with Matchers {
   val count = 10000
-  val bubble = RealityBubble(TestMoveTactic)
-  var s = TestCreatureFactory.generate(State(), count)
+  var s = TestCreatureFactory.generate(State(), count, TestCreatureFactory.create(behavior = TestMoveTactic))
 
   "RealityBubble" should "initialize for performance test" in {
     for (i <- 1 to count) {
@@ -18,7 +17,7 @@ class RealityBubblePerformanceSpec extends FlatSpec with Matchers {
   }
 
   it should "move a lot of creatures" in {
-    for (i <- 1 to count + 1) s = bubble(s).get.state
+    for (_ <- 1 to count + 1) s = RealityBubble(s).get.state
 
     CreatureId(1)(s).location.x should ===(2)
     CreatureId(count)(s).location.x should ===(1)

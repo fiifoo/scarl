@@ -1,9 +1,9 @@
 package io.github.fiifoo.scarl.status
 
 import io.github.fiifoo.scarl.core.State
-import io.github.fiifoo.scarl.core.effect.Effect
+import io.github.fiifoo.scarl.core.effect.{Effect, TickEffect}
 import io.github.fiifoo.scarl.core.entity._
-import io.github.fiifoo.scarl.effect.{HealEffect, RemoveStatusEffect, TickEffect}
+import io.github.fiifoo.scarl.effect.{HealEffect, RemoveStatusEffect}
 
 case class SleepStatus(id: ActiveStatusId,
                        tick: Int,

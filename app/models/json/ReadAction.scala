@@ -1,7 +1,7 @@
 package models.json
 
 import io.github.fiifoo.scarl.action._
-import io.github.fiifoo.scarl.core.action.Action
+import io.github.fiifoo.scarl.core.action.{Action, PassAction}
 import io.github.fiifoo.scarl.core.entity.CreatureId
 import models.json.FormatBase._
 import models.json.FormatId._
@@ -47,7 +47,7 @@ object ReadAction {
         case "EnterConduit" => data.as[EnterConduitAction]
         case "EquipItem" => data.as[EquipItemAction]
         case "Move" => data.as[MoveAction]
-        case "Pass" => PassAction()
+        case "Pass" => PassAction
         case "PickItem" => data.as[PickItemAction]
         case "Shoot" => data.as[ShootAction]
         case "ShootMissile" => data.as[ShootMissileAction]

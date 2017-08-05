@@ -1,6 +1,5 @@
 package io.github.fiifoo.scarl.simulation
 
-import io.github.fiifoo.scarl.ai.tactic.RoamTactic
 import io.github.fiifoo.scarl.area.shape.Rectangle
 import io.github.fiifoo.scarl.area.template.{ApplyTemplate, CalculateTemplate, FixedTemplate, TemplateId}
 import io.github.fiifoo.scarl.core.assets.CombatPower
@@ -23,7 +22,6 @@ object CombatPowerSimulation {
 
   private val simulation = new Simulation[Null](
     listener = NullListener,
-    ai = RoamTactic,
     turnLimit = turns
   )
 

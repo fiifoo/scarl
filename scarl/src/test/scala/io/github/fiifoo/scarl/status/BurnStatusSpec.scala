@@ -1,11 +1,12 @@
 package io.github.fiifoo.scarl.status
 
+import io.github.fiifoo.scarl.core.effect.TickEffect
 import io.github.fiifoo.scarl.core.entity._
 import io.github.fiifoo.scarl.core.kind.WallKindId
 import io.github.fiifoo.scarl.core.mutation.NewEntityMutation
 import io.github.fiifoo.scarl.core.test_assets.TestCreatureFactory
 import io.github.fiifoo.scarl.core.{Location, State}
-import io.github.fiifoo.scarl.effect.{DamageEffect, RemoveStatusEffect, TickEffect}
+import io.github.fiifoo.scarl.effect.{DamageEffect, RemoveStatusEffect}
 import org.scalatest._
 
 class BurnStatusSpec extends FlatSpec with Matchers {

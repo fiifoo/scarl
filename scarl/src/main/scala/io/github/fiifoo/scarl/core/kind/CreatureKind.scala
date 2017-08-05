@@ -1,5 +1,6 @@
 package io.github.fiifoo.scarl.core.kind
 
+import io.github.fiifoo.scarl.core.action.Behavior
 import io.github.fiifoo.scarl.core.communication.CommunicationId
 import io.github.fiifoo.scarl.core.creature.{Character, FactionId, Missile, Stats}
 import io.github.fiifoo.scarl.core.entity._
@@ -11,6 +12,7 @@ case class CreatureKind(id: CreatureKindId,
                         display: Char,
                         color: String,
                         faction: FactionId,
+                        behavior: Behavior,
                         stats: Stats,
 
                         character: Option[Character] = None,
@@ -27,6 +29,7 @@ case class CreatureKind(id: CreatureKindId,
       id = CreatureId(s.nextEntityId),
       kind = id,
       faction = faction,
+      behavior = behavior,
       location = location,
       tick = s.tick,
       damage = 0,

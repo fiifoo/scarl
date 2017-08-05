@@ -1,6 +1,7 @@
 package io.github.fiifoo.scarl.core.entity
 
 import io.github.fiifoo.scarl.core.Location
+import io.github.fiifoo.scarl.core.action.Behavior
 import io.github.fiifoo.scarl.core.creature._
 import io.github.fiifoo.scarl.core.kind.CreatureKindId
 import io.github.fiifoo.scarl.core.power.CreaturePowerId
@@ -8,6 +9,7 @@ import io.github.fiifoo.scarl.core.power.CreaturePowerId
 case class Creature(id: CreatureId,
                     kind: CreatureKindId,
                     faction: FactionId,
+                    behavior: Behavior,
                     location: Location,
                     tick: Int,
                     damage: Int,

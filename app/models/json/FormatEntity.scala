@@ -7,6 +7,7 @@ import io.github.fiifoo.scarl.status._
 import models.json.FormatBase._
 import models.json.FormatId._
 import models.json.FormatItem._
+import models.json.FormatTactic._
 import models.json.FormatUtils._
 import play.api.libs.json._
 

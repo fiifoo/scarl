@@ -1,21 +1,22 @@
 package io.github.fiifoo.scarl.action.test_assets
 
-import io.github.fiifoo.scarl.action.{PassAction, SleepAction}
+import io.github.fiifoo.scarl.action.SleepAction
 import io.github.fiifoo.scarl.core.Selectors.getTargetStatuses
 import io.github.fiifoo.scarl.core.State
-import io.github.fiifoo.scarl.core.action.{Action, Tactic}
+import io.github.fiifoo.scarl.core.action.Tactic.Result
+import io.github.fiifoo.scarl.core.action.{Behavior, PassAction}
 import io.github.fiifoo.scarl.core.entity.CreatureId
 import io.github.fiifoo.scarl.status.SleepStatus
 
 import scala.util.Random
 
-case class TestSleepTactic(actor: CreatureId) extends Tactic {
+case object TestSleepTactic extends Behavior {
 
-  def apply(s: State, random: Random): (Tactic, Action) = {
+  def behavior(s: State, actor: CreatureId, random: Random): Result = {
     val action = if (getTargetStatuses(s)(actor) exists (_ (s).isInstanceOf[SleepStatus])) {
-      PassAction()
+      PassAction
     } else {
-      SleepAction()
+      SleepAction
     }
 
     (this, action)

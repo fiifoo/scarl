@@ -2,26 +2,26 @@ package io.github.fiifoo.scarl.ai.tactic
 
 import io.github.fiifoo.scarl.action.MoveAction
 import io.github.fiifoo.scarl.ai.{Greeting, SeekEnemy}
-import io.github.fiifoo.scarl.core.action.{Action, Tactic}
+import io.github.fiifoo.scarl.core.action.Behavior
+import io.github.fiifoo.scarl.core.action.Tactic.Result
 import io.github.fiifoo.scarl.core.entity.{Creature, CreatureId, SafeCreatureId}
 import io.github.fiifoo.scarl.core.{Location, State}
 
 import scala.util.Random
 
-case class RoamTactic(actor: CreatureId) extends Tactic {
-  type Result = (Tactic, Action)
+case object RoamTactic extends Behavior {
 
-  def apply(s: State, random: Random): Result = {
+  def behavior(s: State, actor: CreatureId, random: Random): Result = {
     val enemy = SeekEnemy(s, actor(s))
 
-    enemy map (enemy => {
-      charge(s, random, enemy)
+    enemy flatMap (enemy => {
+      charge(s, actor, enemy, random)
     }) getOrElse {
-      roam(s, random)
+      roam(s, actor, random)
     }
   }
 
-  private def roam(s: State, random: Random): Result = {
+  private def roam(s: State, actor: CreatureId, random: Random): Result = {
     val action = Greeting(s, actor) getOrElse {
       val from = actor(s).location
       val to = randomLocation(from, random)
@@ -32,10 +32,10 @@ case class RoamTactic(actor: CreatureId) extends Tactic {
     (this, action)
   }
 
-  private def charge(s: State, random: Random, enemy: Creature): Result = {
-    val tactic = ChargeTactic(actor, SafeCreatureId(enemy.id), enemy.location)
+  private def charge(s: State, actor: CreatureId, enemy: Creature, random: Random): Option[Result] = {
+    val tactic = ChargeTactic(SafeCreatureId(enemy.id), enemy.location)
 
-    tactic(s, random)
+    tactic(s, actor, random)
   }
 
   private def randomLocation(from: Location, random: Random): Location = {

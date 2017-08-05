@@ -1,25 +1,16 @@
 package io.github.fiifoo.scarl.core
 
-import io.github.fiifoo.scarl.core.RealityBubble.Result
-import io.github.fiifoo.scarl.core.action.{Action, Tactic}
+import io.github.fiifoo.scarl.core.action.Action
 import io.github.fiifoo.scarl.core.effect.{Effect, EffectResolver}
 import io.github.fiifoo.scarl.core.entity._
 import io.github.fiifoo.scarl.core.mutation._
 
 object RealityBubble {
 
-  def apply(ai: (CreatureId) => Tactic): RealityBubble = {
-    new RealityBubble(ai)
-  }
-
   case class Result(state: State,
                     actor: ActorId,
                     action: Option[Action],
                     effects: List[Effect])
-
-}
-
-class RealityBubble(ai: (CreatureId) => Tactic) {
 
   def apply(state: State, fixedAction: Option[Action] = None): Option[Result] = {
     dequeue(state).map(x => {
@@ -62,20 +53,13 @@ class RealityBubble(ai: (CreatureId) => Tactic) {
       (s, action, effects)
     }) getOrElse {
       val (random, nextRng) = s.rng()
-      val (tactic, action) = s.tactics.get(actor) map (_ (s, random)) getOrElse ai(actor)(s, random)
+      val (tactic, action) = s.tactics.get(actor) flatMap (_ (s, actor, random)) getOrElse
+        actor(s).behavior.behavior(s, actor, random)
 
-      val ns = TacticMutation(tactic)(RngMutation(nextRng)(s))
+      val ns = TacticMutation(actor, tactic)(RngMutation(nextRng)(s))
       val effects = action(ns, actor)
 
       (ns, action, effects)
-    }
-  }
-
-  private def removeEntities(s: State): State = {
-    if (s.tmp.removableEntities.nonEmpty) {
-      RemoveEntitiesMutation()(s)
-    } else {
-      s
     }
   }
 

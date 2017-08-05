@@ -1,11 +1,13 @@
 package models
 
+import io.github.fiifoo.scarl.ai.tactic.RoamTactic
 import io.github.fiifoo.scarl.area.shape.Rectangle
 import io.github.fiifoo.scarl.area.template.Template.FixedContent
 import io.github.fiifoo.scarl.area.template.{FixedTemplate, RandomizedTemplate, Template, TemplateId}
 import io.github.fiifoo.scarl.area.{Area, AreaId}
 import io.github.fiifoo.scarl.core.Location
 import io.github.fiifoo.scarl.core.Rng.WeightedChoices
+import io.github.fiifoo.scarl.core.action.PassTactic
 import io.github.fiifoo.scarl.core.communication.{Communication, CommunicationId, Message}
 import io.github.fiifoo.scarl.core.creature.Missile.Guided
 import io.github.fiifoo.scarl.core.creature.Stats._
@@ -271,6 +273,7 @@ object Data {
       display = '@',
       color = "Yellow",
       faction = FactionId("justice"),
+      behavior = RoamTactic,
       stats = Stats(
         health = 30,
         melee = Melee(attack = 20, damage = 10),
@@ -289,6 +292,7 @@ object Data {
       display = 'A',
       color = "White",
       faction = FactionId("justice"),
+      behavior = RoamTactic,
       stats = Stats(
         health = 1000,
         melee = Melee(attack = 20, damage = 10),
@@ -319,6 +323,7 @@ object Data {
       display = 'c',
       color = "Purple",
       faction = FactionId("chaos"),
+      behavior = RoamTactic,
       stats = Stats(
         health = 10,
         melee = Melee(attack = 10, damage = 10),
@@ -334,6 +339,7 @@ object Data {
       display = 'C',
       color = "Blue",
       faction = FactionId("chaos"),
+      behavior = RoamTactic,
       stats = Stats(
         health = 10,
         melee = Melee(attack = 20, damage = 10),
@@ -349,6 +355,7 @@ object Data {
       display = 'A',
       color = "Red",
       faction = FactionId("chaos"),
+      behavior = RoamTactic,
       stats = Stats(
         health = 50,
         melee = Melee(attack = 30, damage = 15),
@@ -364,6 +371,7 @@ object Data {
       display = 'm',
       color = "Green",
       faction = FactionId("marines"),
+      behavior = RoamTactic,
       stats = Stats(
         health = 10,
         melee = Melee(attack = 10, damage = 10),
@@ -380,6 +388,7 @@ object Data {
       display = 'x',
       color = "White",
       faction = FactionId("none"),
+      behavior = PassTactic,
       stats = Stats(
         speed = 3,
         health = 10,
@@ -399,6 +408,7 @@ object Data {
       display = 'd',
       color = "Yellow",
       faction = FactionId("none"),
+      behavior = RoamTactic,
       stats = Stats(
         health = 50,
         melee = Melee(attack = 10, damage = 10),

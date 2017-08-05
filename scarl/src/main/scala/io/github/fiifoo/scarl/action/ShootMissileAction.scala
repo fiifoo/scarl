@@ -1,11 +1,11 @@
 package io.github.fiifoo.scarl.action
 
 import io.github.fiifoo.scarl.core.action.Action
-import io.github.fiifoo.scarl.core.effect.Effect
+import io.github.fiifoo.scarl.core.effect.{Effect, TickEffect}
 import io.github.fiifoo.scarl.core.entity.CreatureId
 import io.github.fiifoo.scarl.core.kind.CreatureKindId
 import io.github.fiifoo.scarl.core.{Location, Selectors, State}
-import io.github.fiifoo.scarl.effect.{ShootMissileEffect, TickEffect}
+import io.github.fiifoo.scarl.effect.ShootMissileEffect
 
 case class ShootMissileAction(location: Location) extends Action {
   val cost = 100

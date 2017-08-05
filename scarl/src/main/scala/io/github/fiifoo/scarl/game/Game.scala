@@ -1,7 +1,6 @@
 package io.github.fiifoo.scarl.game
 
 import io.github.fiifoo.scarl.action.validate.ActionValidator
-import io.github.fiifoo.scarl.ai.tactic.RoamTactic
 import io.github.fiifoo.scarl.core.RealityBubble
 import io.github.fiifoo.scarl.core.Selectors.getContainerItems
 import io.github.fiifoo.scarl.core.action.Action
@@ -20,8 +19,7 @@ object Game {
   def apply(gameState: GameState, worldManager: WorldManager): (Game, RunState) = {
 
     val instance = gameState.world.states(gameState.area)
-    val bubble = RealityBubble(RoamTactic)
-    val game = new Game(bubble, worldManager)
+    val game = new Game(worldManager)
 
     var state = RunState(
       areaMap = gameState.maps.getOrElse(gameState.area, Map()),
@@ -39,7 +37,7 @@ object Game {
 
 }
 
-class Game(bubble: RealityBubble, worldManager: WorldManager) {
+class Game(worldManager: WorldManager) {
 
   def receive(state: RunState, message: InMessage): RunState = {
     message match {
@@ -99,7 +97,7 @@ class Game(bubble: RealityBubble, worldManager: WorldManager) {
   }
 
   private def tick(state: RunState, action: Option[Action] = None): RunState = {
-    bubble(state.instance, action) map (result => {
+    RealityBubble(state.instance, action) map (result => {
       val instance = result.state
       val effects = result.effects
 

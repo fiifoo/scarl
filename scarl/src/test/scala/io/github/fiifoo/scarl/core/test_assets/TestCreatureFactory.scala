@@ -1,5 +1,6 @@
 package io.github.fiifoo.scarl.core.test_assets
 
+import io.github.fiifoo.scarl.core.action.{Behavior, PassTactic}
 import io.github.fiifoo.scarl.core.creature.Stats.{Melee, Sight}
 import io.github.fiifoo.scarl.core.creature.{Character, FactionId, Stats}
 import io.github.fiifoo.scarl.core.entity.{Creature, CreatureId}
@@ -16,6 +17,7 @@ object TestCreatureFactory {
     display = 'c',
     color = "white",
     faction = FactionId("people"),
+    behavior = PassTactic,
     stats = defaultStats,
     character = None
   )
@@ -23,6 +25,7 @@ object TestCreatureFactory {
   def create(id: CreatureId = CreatureId(0),
              kind: CreatureKindId = defaultKind.id,
              faction: FactionId = FactionId("people"),
+             behavior: Behavior = PassTactic,
              tick: Int = 1,
              location: Location = Location(0, 0),
              health: Int = 0,
@@ -34,6 +37,7 @@ object TestCreatureFactory {
       id,
       kind,
       faction,
+      behavior,
       location,
       tick,
       damage,

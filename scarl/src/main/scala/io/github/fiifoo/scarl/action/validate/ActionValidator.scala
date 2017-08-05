@@ -3,7 +3,7 @@ package io.github.fiifoo.scarl.action.validate
 import io.github.fiifoo.scarl.action._
 import io.github.fiifoo.scarl.action.validate.ValidatorUtils._
 import io.github.fiifoo.scarl.core.Selectors.getItemLocation
-import io.github.fiifoo.scarl.core.action.Action
+import io.github.fiifoo.scarl.core.action.{Action, PassAction}
 import io.github.fiifoo.scarl.core.entity.CreatureId
 import io.github.fiifoo.scarl.core.{Location, State}
 
@@ -17,10 +17,10 @@ object ActionValidator {
       case action: EnterConduitAction => validate(s, actor, action)
       case action: EquipItemAction => EquipItemValidator(s, actor, action)
       case action: MoveAction => validate(s, actor, action)
-      case action: PassAction => validate(s, actor, action)
+      case PassAction => true
       case action: PickItemAction => validate(s, actor, action)
-      case action: ShootAction => validate(s, actor, action)
-      case action: ShootMissileAction => validate(s, actor, action)
+      case action: ShootAction => true
+      case action: ShootMissileAction => true
       case action: UnequipItemAction => validate(s, actor, action)
       case action: UseCreatureAction => validate(s, actor, action)
       case action: UseDoorAction => validate(s, actor, action)
@@ -53,17 +53,11 @@ object ActionValidator {
     isAdjacentLocation(s, actor)(action.location)
   }
 
-  private def validate(s: State, actor: CreatureId, action: PassAction): Boolean = true
-
   private def validate(s: State, actor: CreatureId, action: PickItemAction): Boolean = {
     entityExists(s)(action.item) &&
       action.item(s).pickable &&
       (getItemLocation(s)(action.item) contains actor(s).location)
   }
-
-  private def validate(s: State, actor: CreatureId, action: ShootAction): Boolean = true
-
-  private def validate(s: State, actor: CreatureId, action: ShootMissileAction): Boolean = true
 
   private def validate(s: State, actor: CreatureId, action: UnequipItemAction): Boolean = {
     val item = action.item(s)

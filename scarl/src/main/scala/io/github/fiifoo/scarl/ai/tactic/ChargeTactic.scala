@@ -2,7 +2,8 @@ package io.github.fiifoo.scarl.ai.tactic
 
 import io.github.fiifoo.scarl.action._
 import io.github.fiifoo.scarl.core.Selectors.getCreatureStats
-import io.github.fiifoo.scarl.core.action.{Action, Tactic}
+import io.github.fiifoo.scarl.core.action.Tactic.Result
+import io.github.fiifoo.scarl.core.action.{PassAction, Tactic}
 import io.github.fiifoo.scarl.core.entity.{Creature, CreatureId, SafeCreatureId}
 import io.github.fiifoo.scarl.core.{Location, State}
 import io.github.fiifoo.scarl.geometry._
@@ -10,59 +11,50 @@ import io.github.fiifoo.scarl.simulation.{Outcome, ShootMissileOutcomeSimulation
 
 import scala.util.Random
 
-case class ChargeTactic(actor: CreatureId,
-                        target: SafeCreatureId,
-                        destination: Location
-                       ) extends Tactic {
-  type Result = (Tactic, Action)
+case class ChargeTactic(target: SafeCreatureId, destination: Location) extends Tactic {
 
-  def apply(s: State, random: Random): Result = {
-    target(s) map (target => {
-      chargeOrPursue(s, random, target)
-    }) getOrElse {
-      roam(s, random)
-    }
+  def apply(s: State, actor: CreatureId, random: Random): Option[Result] = {
+    target(s) flatMap (target => {
+      val line = Line(actor(s).location, target.location)
+      val range = actor(s).stats.sight.range
+
+      if (line.size <= range + 1 && Los(s)(line)) {
+        charge(s, actor, target, line.size <= 2, line)
+      } else {
+        pursue(s, actor, random)
+      }
+    })
   }
 
-  private def chargeOrPursue(s: State, random: Random, target: Creature): Result = {
-    val line = Line(actor(s).location, target.location)
-    val range = actor(s).stats.sight.range
-
-    if (line.size <= range + 1 && Los(s)(line)) {
-      charge(s, target, line.size <= 2, line)
-    } else {
-      pursue(s, random)
-    }
-  }
-
-  private def charge(s: State, target: Creature, adjacent: Boolean, line: Vector[Location]): Result = {
+  private def charge(s: State,
+                     actor: CreatureId,
+                     target: Creature,
+                     adjacent: Boolean,
+                     line: Vector[Location]
+                    ): Option[Result] = {
     val tactic = copy(destination = target.location)
     val action = if (adjacent) {
       AttackAction(target.id)
-    } else if (shouldShootMissile(s, line)) {
+    } else if (shouldShootMissile(s, actor, line)) {
       ShootMissileAction(target.location)
-    } else if (shouldShoot(s, line)) {
+    } else if (shouldShoot(s, actor, line)) {
       ShootAction(target.location)
     } else {
       Path(s)(actor(s).location, target.location) map (path => {
         MoveAction(path.head)
       }) getOrElse {
-        PassAction()
+        PassAction
       }
     }
 
-    (tactic, action)
+    Some((tactic, action))
   }
 
-  private def pursue(s: State, random: Random): Result = {
-    PursueTactic(actor, target, destination)(s, random)
+  private def pursue(s: State, actor: CreatureId, random: Random): Option[Result] = {
+    PursueTactic(target, destination)(s, actor, random)
   }
 
-  private def roam(s: State, random: Random): Result = {
-    RoamTactic(actor)(s, random)
-  }
-
-  private def shouldShootMissile(s: State, line: Vector[Location]): Boolean = {
+  private def shouldShootMissile(s: State, actor: CreatureId, line: Vector[Location]): Boolean = {
     val stats = getCreatureStats(s)(actor)
 
     if (s.simulation.running || stats.missileLauncher.ammo.isEmpty || !couldShoot(s, line, stats.missileLauncher.range)) {
@@ -72,7 +64,7 @@ case class ChargeTactic(actor: CreatureId,
     }
   }
 
-  private def shouldShoot(s: State, line: Vector[Location]): Boolean = {
+  private def shouldShoot(s: State, actor: CreatureId, line: Vector[Location]): Boolean = {
     couldShoot(s, line, getCreatureStats(s)(actor).ranged.range)
   }
 

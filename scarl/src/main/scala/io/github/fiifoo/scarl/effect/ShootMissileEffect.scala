@@ -5,7 +5,7 @@ import io.github.fiifoo.scarl.core.Selectors.{getCreatureStats, getLocationEntit
 import io.github.fiifoo.scarl.core.effect.{Effect, EffectResult}
 import io.github.fiifoo.scarl.core.entity.{CreatureId, SafeCreatureId}
 import io.github.fiifoo.scarl.core.kind.CreatureKindId
-import io.github.fiifoo.scarl.core.mutation.{NewEntityMutation, TacticMutation}
+import io.github.fiifoo.scarl.core.mutation.NewEntityMutation
 import io.github.fiifoo.scarl.core.{Location, State}
 import io.github.fiifoo.scarl.geometry.Line
 
@@ -30,14 +30,12 @@ case class ShootMissileEffect(attacker: CreatureId,
       }
 
       val tactic = MissileTactic(
-        actor = creature.id,
         destination = destination,
         target = target map SafeCreatureId.apply
       )
 
       EffectResult(List(
-        NewEntityMutation(creature),
-        TacticMutation(tactic)
+        NewEntityMutation(creature.copy(behavior = tactic))
       ))
     }) getOrElse EffectResult()
   }

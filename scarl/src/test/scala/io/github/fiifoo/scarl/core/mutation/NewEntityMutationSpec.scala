@@ -7,8 +7,6 @@ import io.github.fiifoo.scarl.core.test_assets.{TestActiveStatus, TestCreatureFa
 import io.github.fiifoo.scarl.core.{ActorQueue, Location, State}
 import org.scalatest._
 
-import scala.collection.SortedSet
-
 class NewEntityMutationSpec extends FlatSpec with Matchers {
 
   "NewEntityMutation" should "mutate new entity" in {

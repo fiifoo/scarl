@@ -65,19 +65,16 @@ class RemoveEntitiesMutationSpec extends FlatSpec with Matchers {
   }
 
   it should "remove creature tactics" in {
-    val tactic1 = RoamTactic(CreatureId(1))
-    val tactic2 = RoamTactic(CreatureId(2))
-    val tactic3 = RoamTactic(CreatureId(3))
     val initial = TestCreatureFactory.generate(
       State(
         tmp = State.Temporary(removableEntities = Set(CreatureId(1), CreatureId(3))),
-        tactics = Map(CreatureId(1) -> tactic1, CreatureId(2) -> tactic2, CreatureId(3) -> tactic3)
+        tactics = Map(CreatureId(1) -> RoamTactic, CreatureId(2) -> RoamTactic, CreatureId(3) -> RoamTactic)
       ),
       3
     )
 
     val mutated = RemoveEntitiesMutation()(initial)
-    mutated.tactics should ===(Map(CreatureId(2) -> tactic2))
+    mutated.tactics should ===(Map(CreatureId(2) -> RoamTactic))
   }
 
   it should "mutate entity location index" in {

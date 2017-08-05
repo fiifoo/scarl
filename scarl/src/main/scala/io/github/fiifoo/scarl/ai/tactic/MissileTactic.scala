@@ -1,7 +1,8 @@
 package io.github.fiifoo.scarl.ai.tactic
 
-import io.github.fiifoo.scarl.action.{ExplodeAction, MoveAction, PassAction}
-import io.github.fiifoo.scarl.core.action.{Action, Tactic}
+import io.github.fiifoo.scarl.action.{ExplodeAction, MoveAction}
+import io.github.fiifoo.scarl.core.action.Tactic.Result
+import io.github.fiifoo.scarl.core.action.{Behavior, PassAction}
 import io.github.fiifoo.scarl.core.creature.Missile
 import io.github.fiifoo.scarl.core.creature.Missile.Smart
 import io.github.fiifoo.scarl.core.entity._
@@ -10,13 +11,9 @@ import io.github.fiifoo.scarl.geometry.{Line, Obstacle, Path}
 
 import scala.util.Random
 
-case class MissileTactic(actor: CreatureId,
-                         destination: Location,
-                         target: Option[SafeCreatureId]
-                        ) extends Tactic {
-  type Result = (Tactic, Action)
+case class MissileTactic(destination: Location, target: Option[SafeCreatureId]) extends Behavior {
 
-  def apply(s: State, random: Random): Result = {
+  def behavior(s: State, actor: CreatureId, random: Random): Result = {
     actor(s).missile flatMap (missile => {
       val from = actor(s).location
 
@@ -36,7 +33,7 @@ case class MissileTactic(actor: CreatureId,
         })
       }
     }) getOrElse {
-      (this, PassAction())
+      (this, PassAction)
     }
   }
 

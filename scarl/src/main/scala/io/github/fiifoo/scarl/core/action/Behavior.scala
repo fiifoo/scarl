@@ -6,10 +6,11 @@ import io.github.fiifoo.scarl.core.entity.CreatureId
 
 import scala.util.Random
 
-object Tactic {
-  type Result = (Tactic, Action)
-}
+trait Behavior extends Tactic {
 
-trait Tactic {
-  def apply(s: State, actor: CreatureId, random: Random): Option[Result]
+  def apply(s: State, actor: CreatureId, random: Random): Option[Result] = {
+    Some(behavior(s, actor, random))
+  }
+
+  def behavior(s: State, actor: CreatureId, random: Random): Result
 }
