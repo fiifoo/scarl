@@ -1,6 +1,6 @@
 package models
 
-import io.github.fiifoo.scarl.ai.tactic.RoamTactic
+import io.github.fiifoo.scarl.ai.tactic.{FollowerTactic, RoamTactic}
 import io.github.fiifoo.scarl.area.shape.Rectangle
 import io.github.fiifoo.scarl.area.template.Template.FixedContent
 import io.github.fiifoo.scarl.area.template.{FixedTemplate, RandomizedTemplate, Template, TemplateId}
@@ -408,7 +408,7 @@ object Data {
       display = 'd',
       color = "Yellow",
       faction = FactionId("none"),
-      behavior = RoamTactic,
+      behavior = FollowerTactic,
       stats = Stats(
         health = 50,
         melee = Melee(attack = 10, damage = 10),

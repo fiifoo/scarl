@@ -8,6 +8,7 @@ import play.api.libs.json._
 
 object FormatTactic {
   private implicit val formatChargeTactic = Json.format[ChargeTactic]
+  private implicit val formatFollowTactic = Json.format[FollowTactic]
   private implicit val formatMissileTactic = Json.format[MissileTactic]
   private implicit val formatPursueTactic = Json.format[PursueTactic]
 
@@ -15,10 +16,12 @@ object FormatTactic {
     def writes(tactic: Tactic) = JsObject(Map(
       "type" -> JsString(tacticName(tactic)),
       "value" -> (tactic match {
+        case FollowerTactic => JsNull
         case PassTactic => JsNull
         case RoamTactic => JsNull
 
         case tactic: ChargeTactic => formatChargeTactic.writes(tactic)
+        case tactic: FollowTactic => formatFollowTactic.writes(tactic)
         case tactic: MissileTactic => formatMissileTactic.writes(tactic)
         case tactic: PursueTactic => formatPursueTactic.writes(tactic)
       })
@@ -29,10 +32,12 @@ object FormatTactic {
       val value = obj("value")
 
       val tactic = obj("type").as[String] match {
+        case "FollowerTactic" => FollowerTactic
         case "PassTactic" => PassTactic
         case "RoamTactic" => RoamTactic
 
         case "ChargeTactic" => value.as[ChargeTactic]
+        case "FollowTactic" => value.as[FollowTactic]
         case "MissileTactic" => value.as[MissileTactic]
         case "PursueTactic" => value.as[PursueTactic]
       }
