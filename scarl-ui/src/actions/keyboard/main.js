@@ -66,8 +66,12 @@ const directionAction = (command, dispatch, getState) => {
     const target = getLocationCreature(to, fov.cumulative)
     const door = getLocationDoor(to, fov.cumulative)
 
-    if (target && isEnemyChecker(player, factions)(target)) {
-        playerActions.attack(target.id)(dispatch)
+    if (target) {
+        if (isEnemyChecker(player, factions)(target)) {
+            playerActions.attack(target.id)()
+        } else {
+            playerActions.displace(target.id)()
+        }
     } else if (door && !door.door.open) {
         playerActions.useDoor(door.id)(dispatch, getState)
     } else {

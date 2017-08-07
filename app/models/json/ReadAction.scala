@@ -22,6 +22,7 @@ object ReadAction {
       JsSuccess(CommunicateAction(target))
     }
   }
+  implicit val readDisplaceAction = Json.reads[DisplaceAction]
   implicit val readDropItemAction = Json.reads[DropItemAction]
   implicit val readEnterConduitAction = Json.reads[EnterConduitAction]
   implicit val readEquipItemAction = Json.reads[EquipItemAction]
@@ -43,6 +44,7 @@ object ReadAction {
       JsSuccess(actionType match {
         case "Attack" => data.as[AttackAction]
         case "Communicate" => data.as[CommunicateAction]
+        case "Displace" => data.as[DisplaceAction]
         case "DropItem" => data.as[DropItemAction]
         case "EnterConduit" => data.as[EnterConduitAction]
         case "EquipItem" => data.as[EquipItemAction]

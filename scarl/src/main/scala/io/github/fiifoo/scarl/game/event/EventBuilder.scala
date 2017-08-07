@@ -29,6 +29,7 @@ class EventBuilder(s: State, player: CreatureId, fov: Set[Location]) {
       case e: CollideEffect => build(e) map GenericEvent
       case e: CommunicateEffect => build(e) map GenericEvent
       case e: DeathEffect => build(e) map GenericEvent
+      case e: DisplaceEffect => build(e) map GenericEvent
       case e: DoorBlockedEffect => build(e) map GenericEvent
       case e: DoorUsedEffect => build(e) map GenericEvent
       case e: DropItemEffect => build(e) map GenericEvent
@@ -103,6 +104,16 @@ class EventBuilder(s: State, player: CreatureId, fov: Set[Location]) {
       Some("You die...")
     } else if (fov contains target(s).location) {
       Some(s"${kind(target)} is killed.")
+    } else {
+      None
+    }
+  }
+
+  private def build(effect: DisplaceEffect): Option[String] = {
+    if (effect.displacer == player) {
+      Some(s"You displace ${kind(effect.displaced)}.")
+    } else if (effect.displaced == player) {
+      Some(s"${kind(effect.displacer)} displaces you.")
     } else {
       None
     }

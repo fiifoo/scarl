@@ -12,6 +12,10 @@ object ValidatorUtils {
       Math.abs(actorLocation.y - location.y) <= 1
   }
 
+  def isEnemy(s: State, actor: CreatureId, creature: CreatureId): Boolean = {
+    actor(s).faction(s).enemies.contains(creature(s).faction)
+  }
+
   def entityExists(s: State)(entity: EntityId): Boolean = {
     s.entities.isDefinedAt(entity)
   }

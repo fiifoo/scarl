@@ -18,6 +18,10 @@ export const communicate = () => (dispatch, getState) => {
     }
 }
 
+export const displace = target => () => {
+    sendAction('Displace', {target})
+}
+
 export const dropItem = item => () => {
     sendAction('DropItem', {item})
     sendInventoryQuery()

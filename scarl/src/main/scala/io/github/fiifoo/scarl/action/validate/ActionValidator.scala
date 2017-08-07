@@ -13,6 +13,7 @@ object ActionValidator {
     action match {
       case action: AttackAction => validate(s, actor, action)
       case action: CommunicateAction => validate(s, actor, action)
+      case action: DisplaceAction => validate(s, actor, action)
       case action: DropItemAction => validate(s, actor, action)
       case action: EnterConduitAction => validate(s, actor, action)
       case action: EquipItemAction => EquipItemValidator(s, actor, action)
@@ -37,6 +38,10 @@ object ActionValidator {
   private def validate(s: State, actor: CreatureId, action: CommunicateAction): Boolean = {
     entityExists(s)(action.target) &&
       isAdjacentLocation(s, actor)(action.target(s).location)
+  }
+
+  private def validate(s: State, actor: CreatureId, action: DisplaceAction): Boolean = {
+    !isEnemy(s, actor, action.target) && isAdjacentLocation(s, actor)(action.target(s).location)
   }
 
   private def validate(s: State, actor: CreatureId, action: DropItemAction): Boolean = {
