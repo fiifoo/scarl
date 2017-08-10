@@ -1,12 +1,10 @@
 package io.github.fiifoo.scarl.ai.tactic
 
-import io.github.fiifoo.scarl.action.MoveAction
 import io.github.fiifoo.scarl.ai.SeekEnemy
 import io.github.fiifoo.scarl.core.State
 import io.github.fiifoo.scarl.core.action.Tactic.Result
 import io.github.fiifoo.scarl.core.action.{PassAction, Tactic}
 import io.github.fiifoo.scarl.core.entity.{Creature, CreatureId, SafeCreatureId}
-import io.github.fiifoo.scarl.geometry.Path
 
 import scala.util.Random
 
@@ -25,11 +23,7 @@ case class FollowTactic(target: SafeCreatureId) extends Tactic {
   }
 
   private def follow(s: State, actor: CreatureId, target: Creature): Option[Result] = {
-    Path(s)(actor(s).location, target.location) map (path => {
-      val action = MoveAction(path.head)
-
-      (this, action)
-    })
+    Utils.move(s, actor, target.location, displace = true) map ((this, _))
   }
 
   private def charge(s: State, actor: CreatureId, target: Creature, random: Random): Option[Result] = {

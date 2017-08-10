@@ -40,11 +40,7 @@ case class ChargeTactic(target: SafeCreatureId, destination: Location) extends T
     } else if (shouldShoot(s, actor, line)) {
       ShootAction(target.location)
     } else {
-      Path(s)(actor(s).location, target.location) map (path => {
-        MoveAction(path.head)
-      }) getOrElse {
-        PassAction
-      }
+      Utils.move(s, actor, target.location) getOrElse PassAction
     }
 
     Some((tactic, action))
@@ -71,6 +67,6 @@ case class ChargeTactic(target: SafeCreatureId, destination: Location) extends T
   private def couldShoot(s: State, line: Vector[Location], range: Int): Boolean = {
     val distance = line.length - 1
 
-    range >= distance && !line.tail.init.exists(Obstacle.shot(s)(_).isDefined)
+    range >= distance && !line.tail.init.exists(Obstacle.has(Obstacle.shot(s)))
   }
 }

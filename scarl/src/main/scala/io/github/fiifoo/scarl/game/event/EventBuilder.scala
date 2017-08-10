@@ -1,6 +1,6 @@
 package io.github.fiifoo.scarl.game.event
 
-import io.github.fiifoo.scarl.core.Selectors.{getContainerItems, getLocationEntities}
+import io.github.fiifoo.scarl.core.Selectors.{getContainerItems, getItemLocation, getLocationEntities}
 import io.github.fiifoo.scarl.core.communication.Message
 import io.github.fiifoo.scarl.core.effect.Effect
 import io.github.fiifoo.scarl.core.entity.{ContainerId, CreatureId, ItemId, WallId}
@@ -133,6 +133,12 @@ class EventBuilder(s: State, player: CreatureId, fov: Set[Location]) {
         Some("You open the door.")
       } else {
         Some("You close the door.")
+      }
+    } else if (getItemLocation(s)(effect.door).exists(fov.contains)) {
+      if (effect.opened) {
+        Some(s"${kind(effect.user)} opens a door.")
+      } else {
+        Some(s"${kind(effect.user)} closes a door.")
       }
     } else {
       None

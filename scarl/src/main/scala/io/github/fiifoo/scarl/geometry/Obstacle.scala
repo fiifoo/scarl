@@ -6,6 +6,10 @@ import io.github.fiifoo.scarl.core.{Location, State}
 
 object Obstacle {
 
+  def has(obstacle: Location => Option[EntityId])(location: Location): Boolean = {
+    obstacle(location).isDefined
+  }
+
   def explosion(s: State)(location: Location): Option[EntityId] = sight(s)(location)
 
   def movement(s: State)(location: Location): Option[EntityId] = {
@@ -27,7 +31,13 @@ object Obstacle {
     }
   }
 
-  private def getClosedDoor(s: State)(location: Location): Option[ItemId] = {
+  def travel(s: State)(location: Location): Option[EntityId] = {
+    getLocationEntities(s)(location) collectFirst {
+      case wall: WallId => wall
+    }
+  }
+
+  def getClosedDoor(s: State)(location: Location): Option[ItemId] = {
     getLocationItems(s)(location) find (_ (s).door.exists(!_.open))
   }
 }

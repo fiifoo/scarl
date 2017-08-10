@@ -18,11 +18,15 @@ import scala.collection.mutable
 object Path {
 
   def apply(s: State)(from: Location, to: Location): Option[Vector[Location]] = {
+    calc(Obstacle.has(Obstacle.movement(s)))(from, to)
+  }
+
+  def calc(blocked: Location => Boolean)(from: Location, to: Location): Option[Vector[Location]] = {
     if (from == to) {
       return None
     }
 
-    val p = new Process(from, to, Distance.chebyshev, blocked(s))
+    val p = new Process(from, to, Distance.chebyshev, blocked)
     process(p)
 
     p.result
@@ -138,10 +142,6 @@ object Path {
       Location(l.x + 1, l.y - 1),
       Location(l.x, l.y - 1)
     )
-  }
-
-  private def blocked(s: State)(location: Location): Boolean = {
-    Obstacle.movement(s)(location).isDefined
   }
 
   private def backtrace(location: Location, parent: Node, nodes: Map[Location, Node]): Vector[Location] = {
