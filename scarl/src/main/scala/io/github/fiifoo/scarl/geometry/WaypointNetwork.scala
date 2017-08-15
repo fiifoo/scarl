@@ -23,6 +23,16 @@ object WaypointNetwork {
     sectors.foldLeft(WaypointNetwork())(calculate)
   }
 
+  def isNearbyLocation(s: State, a: Location, b: Location): Boolean = {
+    val network = s.cache.waypointNetwork
+
+    network.locationWaypoint.get(a) exists (aw => {
+      network.locationWaypoint.get(b) exists (bw => {
+        aw == bw || network.adjacentWaypoints.get(aw).exists(_.contains(bw))
+      })
+    })
+  }
+
   def nearbyCreatures(s: State, locations: Set[Location]): Set[CreatureId] = {
     val network = s.cache.waypointNetwork
     val waypoints = locations flatMap network.locationWaypoint.get

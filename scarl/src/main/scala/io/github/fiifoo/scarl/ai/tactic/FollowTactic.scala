@@ -5,6 +5,7 @@ import io.github.fiifoo.scarl.core.State
 import io.github.fiifoo.scarl.core.action.Tactic.Result
 import io.github.fiifoo.scarl.core.action.{PassAction, Tactic}
 import io.github.fiifoo.scarl.core.entity.{Creature, CreatureId, SafeCreatureId}
+import io.github.fiifoo.scarl.geometry.WaypointNetwork
 
 import scala.util.Random
 
@@ -23,7 +24,11 @@ case class FollowTactic(target: SafeCreatureId) extends Tactic {
   }
 
   private def follow(s: State, actor: CreatureId, target: Creature): Option[Result] = {
-    Utils.move(s, actor, target.location, displace = true) map ((this, _))
+    if (WaypointNetwork.isNearbyLocation(s, actor(s).location, target.location)) {
+      Utils.move(s, actor, target.location, displace = true) map ((this, _))
+    } else {
+      None
+    }
   }
 
   private def charge(s: State, actor: CreatureId, target: Creature, random: Random): Option[Result] = {
