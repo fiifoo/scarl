@@ -18,6 +18,6 @@ class SeekEnemySpec extends FlatSpec with Matchers {
 
     val s = NewFactionMutation(faction)(NewEntityMutation(c3)(NewEntityMutation(c2)(NewEntityMutation(c1)(State()))))
 
-    SeekEnemy(s, CreatureId(1)(s)) should ===(Some(c3))
+    SeekEnemy(s, CreatureId(1)) should ===(Some(c3))
   }
 }

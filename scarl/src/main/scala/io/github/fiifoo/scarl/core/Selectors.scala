@@ -9,6 +9,12 @@ object Selectors {
     s.index.containerItems.getOrElse(container, Set())
   }
 
+  def getCreatureComrades(s: State)(creature: CreatureId): Set[CreatureId] = {
+    val party = creature(s).party
+
+    s.index.partyMembers(party) - creature
+  }
+
   def getCreatureStats(s: State)(creature: CreatureId): Stats = {
     creature(s).stats add getEquipmentStats(s)(creature)
   }

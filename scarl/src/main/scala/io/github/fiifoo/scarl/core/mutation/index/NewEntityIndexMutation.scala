@@ -23,6 +23,10 @@ case class NewEntityIndexMutation(entity: Entity) {
         case trigger: TriggerStatus => TriggerLocationIndexAddMutation(trigger.id, trigger.target(s).location)(index.locationTriggers)
         case _ => index.locationTriggers
       },
+      partyMembers = entity match {
+        case member: Creature => PartyMemberIndexAddMutation(member.id, member.party)(index.partyMembers)
+        case _ => index.partyMembers
+      },
       targetStatuses = entity match {
         case status: Status => StatusTargetIndexAddMutation(status.id, status.target)(index.targetStatuses)
         case _ => index.targetStatuses

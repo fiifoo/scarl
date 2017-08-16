@@ -2,7 +2,7 @@ package io.github.fiifoo.scarl.core.test_assets
 
 import io.github.fiifoo.scarl.core.action.{Behavior, PassTactic}
 import io.github.fiifoo.scarl.core.creature.Stats.{Melee, Sight}
-import io.github.fiifoo.scarl.core.creature.{Character, FactionId, Stats}
+import io.github.fiifoo.scarl.core.creature.{Character, FactionId, Party, Stats}
 import io.github.fiifoo.scarl.core.entity.{Creature, CreatureId}
 import io.github.fiifoo.scarl.core.kind.{CreatureKind, CreatureKindId}
 import io.github.fiifoo.scarl.core.mutation.NewEntityMutation
@@ -37,6 +37,8 @@ object TestCreatureFactory {
       id,
       kind,
       faction,
+      solitary = true,
+      party = Party(id),
       behavior,
       location,
       tick,
@@ -51,7 +53,8 @@ object TestCreatureFactory {
   def generate(s: State, count: Int = 1, prototype: Creature = create()): State = {
 
     val result = (0 until count).foldLeft(s)((s, _) => {
-      val creature = prototype.copy(CreatureId(s.nextEntityId))
+      val id = CreatureId(s.nextEntityId)
+      val creature = prototype.copy(id = id, party = Party(id))
 
       NewEntityMutation(creature)(s)
     })

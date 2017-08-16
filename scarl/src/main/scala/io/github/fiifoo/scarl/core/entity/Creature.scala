@@ -9,6 +9,8 @@ import io.github.fiifoo.scarl.core.power.CreaturePowerId
 case class Creature(id: CreatureId,
                     kind: CreatureKindId,
                     faction: FactionId,
+                    solitary: Boolean = false,
+                    party: Party,
                     behavior: Behavior,
                     location: Location,
                     tick: Int,
@@ -26,4 +28,12 @@ case class Creature(id: CreatureId,
   def setLocation(location: Location): Creature = copy(location = location)
 
   def setTick(tick: Int): Creature = copy(tick = tick)
+
+  def leader: Option[CreatureId] = {
+    if (party.leader == id) {
+      None
+    } else {
+      Some(party.leader)
+    }
+  }
 }

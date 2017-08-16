@@ -1,7 +1,7 @@
 package models.json
 
 import io.github.fiifoo.scarl.core.creature.Missile.{Guidance, Guided, Smart}
-import io.github.fiifoo.scarl.core.creature.{Character, Missile, Stats}
+import io.github.fiifoo.scarl.core.creature.{Character, Missile, Party, Stats}
 import io.github.fiifoo.scarl.core.entity._
 import io.github.fiifoo.scarl.status._
 import models.json.FormatBase._
@@ -35,6 +35,7 @@ object FormatEntity {
 
   implicit val formatCharacter = Json.format[Character]
   implicit val formatMissile = Json.format[Missile]
+  implicit val formatParty = Json.format[Party]
 
   implicit val formatContainer = Json.format[Container]
   implicit val formatCreature = Json.format[Creature]

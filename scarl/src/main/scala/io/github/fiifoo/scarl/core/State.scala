@@ -34,6 +34,7 @@ object State {
                    locationConduit: Map[Location, ConduitId] = Map(),
                    locationEntities: Map[Location, Set[LocatableId]] = Map(),
                    locationTriggers: Map[Location, Set[TriggerStatusId]] = Map(),
+                   partyMembers: Map[Party, Set[CreatureId]] = Map(),
                    targetStatuses: Map[EntityId, Set[StatusId]] = Map()
                   )
 

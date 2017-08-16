@@ -33,6 +33,10 @@ object WaypointNetwork {
     })
   }
 
+  def nearbyCreatures(s: State, location: Location): Set[CreatureId] = {
+    nearbyCreatures(s, Set(location))
+  }
+
   def nearbyCreatures(s: State, locations: Set[Location]): Set[CreatureId] = {
     val network = s.cache.waypointNetwork
     val waypoints = locations flatMap network.locationWaypoint.get

@@ -12,7 +12,7 @@ import scala.util.Random
 case object RoamTactic extends Behavior {
 
   def behavior(s: State, actor: CreatureId, random: Random): Result = {
-    val enemy = SeekEnemy(s, actor(s))
+    val enemy = SeekEnemy(s, actor)
 
     enemy flatMap (enemy => {
       charge(s, actor, enemy, random)

@@ -94,6 +94,10 @@ case class RemoveEntitiesMutation() extends Mutation {
         case trigger: TriggerStatus => TriggerLocationIndexRemoveMutation(trigger.id, trigger.target(s).location)(index.locationTriggers)
         case _ => index.locationTriggers
       },
+      partyMembers = entity match {
+        case member: Creature => PartyMemberIndexRemoveMutation(member.id, member.party)(index.partyMembers)
+        case _ => index.partyMembers
+      },
       targetStatuses = entity match {
         case status: Status => StatusTargetIndexRemoveMutation(status.id, status.target)(index.targetStatuses)
         case _ => index.targetStatuses

@@ -16,7 +16,7 @@ object Greeting {
 
     val factions = greetings.keys.toSet
 
-    SeekTargets(s, actor(s), factions, 1).headOption flatMap (target => {
+    SeekTargets(s, actor, factions, 1).headOption flatMap (target => {
       val faction = target.faction
       val greeting = nextGreeting(s, target.id, greetings(faction))
 

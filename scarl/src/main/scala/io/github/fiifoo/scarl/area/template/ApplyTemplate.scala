@@ -23,41 +23,23 @@ object ApplyTemplate {
       height = template.shape.outerHeight,
       width = template.shape.outerWidth
     ))
-    state = process(state, template)
+    state = addLayout(state, template)
+    state = addWaypoints(state)
+    state = addContent(state, template)
     state = addConduits(state, template, in, out, random)
     state = addGateways(state, template)
-    state = buildCache(state)
 
     state
   }
 
-  private def process(initial: State,
-                      template: Template.Result,
-                      offset: Location = Location(0, 0)
-                     ): State = {
+  private def addLayout(initial: State,
+                        template: Template.Result,
+                        offset: Location = Location(0, 0)
+                       ): State = {
+    var state = initial
 
-    val creatures = processUniqueEntities(
-      s = initial,
-      elements = template.content.creatures,
-      getEntities = (s: State, location: Location, kind: CreatureKindId) => {
-        val creature = kind(s)(s, offset.add(location))
-
-        List(creature)
-      }
-    )
-
-    val items = processEntities(
-      s = creatures,
-      elements = template.content.items,
-      getEntities = (s: State, location: Location, kind: ItemKindId) => {
-        val (container, item) = kind(s)(s, offset.add(location))
-
-        List(container, item)
-      }
-    )
-
-    val terrains = processUniqueEntities(
-      s = items,
+    state = processUniqueEntities(
+      s = state,
       elements = template.content.terrains,
       getEntities = (s: State, location: Location, kind: TerrainKindId) => {
         val terrain = kind(s)(s, offset.add(location))
@@ -66,8 +48,8 @@ object ApplyTemplate {
       }
     )
 
-    val walls = processUniqueEntities(
-      s = terrains,
+    state = processUniqueEntities(
+      s = state,
       elements = template.content.walls,
       getEntities = (s: State, location: Location, kind: WallKindId) => {
         val wall = kind(s)(s, offset.add(location))
@@ -76,8 +58,41 @@ object ApplyTemplate {
       }
     )
 
-    val widgets = processUniqueEntities(
-      s = walls,
+    template.templates.foldLeft(state)((s, data) => {
+      val (location, sub) = data
+
+      addLayout(s, sub, offset.add(location))
+    })
+  }
+
+  private def addContent(initial: State,
+                         template: Template.Result,
+                         offset: Location = Location(0, 0)
+                        ): State = {
+    var state = initial
+
+    state = processUniqueEntities(
+      s = state,
+      elements = template.content.creatures,
+      getEntities = (s: State, location: Location, kind: CreatureKindId) => {
+        val creature = kind(s)(s, offset.add(location))
+
+        List(creature)
+      }
+    )
+
+    state = processEntities(
+      s = state,
+      elements = template.content.items,
+      getEntities = (s: State, location: Location, kind: ItemKindId) => {
+        val (container, item) = kind(s)(s, offset.add(location))
+
+        List(container, item)
+      }
+    )
+
+    state = processUniqueEntities(
+      s = state,
       elements = template.content.widgets,
       getEntities = (s: State, location: Location, kind: WidgetKindId) => {
         val (container, item, status) = kind(s)(s, offset.add(location))
@@ -86,13 +101,11 @@ object ApplyTemplate {
       }
     )
 
-    val subs = template.templates.foldLeft(widgets)((s, data) => {
+    template.templates.foldLeft(state)((s, data) => {
       val (location, sub) = data
 
-      process(s, sub, offset.add(location))
+      addContent(s, sub, offset.add(location))
     })
-
-    subs
   }
 
   private def processEntities[T](s: State,
@@ -204,7 +217,7 @@ object ApplyTemplate {
     })
   }
 
-  private def buildCache(s: State): State = {
+  private def addWaypoints(s: State): State = {
     s.copy(cache = s.cache.copy(
       waypointNetwork = WaypointNetwork(s)
     ))

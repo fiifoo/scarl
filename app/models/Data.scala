@@ -273,6 +273,7 @@ object Data {
       display = '@',
       color = "Yellow",
       faction = FactionId("justice"),
+      solitary = true,
       behavior = RoamTactic,
       stats = Stats(
         health = 30,

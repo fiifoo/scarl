@@ -13,7 +13,7 @@ case class FollowTactic(target: SafeCreatureId) extends Tactic {
 
   def apply(s: State, actor: CreatureId, random: Random): Option[Result] = {
     target(s) flatMap (target => {
-      val enemy = SeekEnemy(s, actor(s))
+      val enemy = SeekEnemy(s, actor)
 
       enemy flatMap (enemy => {
         charge(s, actor, enemy, random)
