@@ -33,11 +33,11 @@ export default () => {
     const renderWaypoint = ({network}) => {
         network.waypoints.forEach(draw.dot('blue'))
 
-        network.adjacent.forEach((adjacent, waypoint) => {
+        network.adjacentWaypoints.forEach((adjacent, waypoint) => {
             adjacent.forEach(draw.line('blue')(waypoint))
         })
 
-        network.areas.forEach(locations => {
+        network.waypointLocations.forEach(locations => {
             locations.forEach(draw.fill(getRandomColor('0.2')))
         })
     }

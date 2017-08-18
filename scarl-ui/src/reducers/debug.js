@@ -9,10 +9,10 @@ const Debug = Record({
 const buildMap = data => Map(data.map(x => [x.key, x.value]))
 
 const buildWaypointNetwork = data => ({
-    adjacent: buildMap(data.adjacent),
-    areas: buildMap(data.areas),
-    locations: buildMap(data.locations),
     waypoints: data.waypoints,
+    adjacentWaypoints: buildMap(data.adjacentWaypoints),
+    locationWaypoint: buildMap(data.locationWaypoint),
+    waypointLocations: buildMap(data.waypointLocations),
 })
 
 export default (state = Debug(), action) => {
