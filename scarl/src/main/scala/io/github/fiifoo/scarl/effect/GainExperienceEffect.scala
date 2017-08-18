@@ -24,7 +24,7 @@ case class GainExperienceEffect(target: CreatureId,
   }
 
   private def progressionSteps(s: State, character: Character): List[Step] = {
-    val progression = s.progressions(character.progression)
+    val progression = s.assets.progressions(character.progression)
 
     val filter = (step: Step) => {
       step.requirements.experience > character.experience &&

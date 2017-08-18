@@ -365,10 +365,10 @@ class EventBuilder(s: State, player: CreatureId, fov: Set[Location]) {
   }
 
   private def kind(creature: CreatureId): String = {
-    s.kinds.creatures(creature(s).kind).name
+    s.assets.kinds.creatures(creature(s).kind).name
   }
 
   private def kind(item: ItemId): String = {
-    s.kinds.items(item(s).kind).name
+    s.assets.kinds.items(item(s).kind).name
   }
 }

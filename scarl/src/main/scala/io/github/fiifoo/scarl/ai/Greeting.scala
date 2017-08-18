@@ -8,7 +8,7 @@ import io.github.fiifoo.scarl.core.entity.CreatureId
 object Greeting {
 
   def apply(s: State, actor: CreatureId): Option[CommunicateAction] = {
-    val greetings = s.kinds.creatures(actor(s).kind).greetings
+    val greetings = s.assets.kinds.creatures(actor(s).kind).greetings
 
     if (greetings.isEmpty) {
       return None
@@ -25,7 +25,7 @@ object Greeting {
   }
 
   private def nextGreeting(s: State, target: CreatureId, greetings: List[CommunicationId]): Option[CommunicationId] = {
-    val received = s.communications.received.getOrElse(target, Set())
+    val received = s.receivedCommunications.getOrElse(target, Set())
 
     (greetings filterNot received.contains).headOption
   }

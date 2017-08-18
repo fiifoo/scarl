@@ -1,10 +1,10 @@
 package io.github.fiifoo.scarl.effect
 
-import io.github.fiifoo.scarl.core.State
 import io.github.fiifoo.scarl.core.creature.{Character, Progression, ProgressionId, Stats}
 import io.github.fiifoo.scarl.core.effect.{Effect, EffectResolver}
 import io.github.fiifoo.scarl.core.entity.CreatureId
 import io.github.fiifoo.scarl.core.test_assets.TestCreatureFactory
+import io.github.fiifoo.scarl.core.{Assets, State}
 import org.scalatest._
 
 class GainExperienceSpec extends FlatSpec with Matchers {
@@ -63,7 +63,8 @@ class GainExperienceSpec extends FlatSpec with Matchers {
       )
     )
 
-    val initial = State(progressions = Map(progression.id -> progression))
+    val assets = Assets(progressions = Map(progression.id -> progression))
+    val initial = State(assets = assets)
     val prototype = TestCreatureFactory.create(character = Some(Character(progression.id)))
     val state = TestCreatureFactory.generate(initial, 1, prototype)
     val creature = CreatureId(1)

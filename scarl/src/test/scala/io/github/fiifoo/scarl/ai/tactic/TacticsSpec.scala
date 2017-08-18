@@ -3,25 +3,25 @@ package io.github.fiifoo.scarl.ai.tactic
 import io.github.fiifoo.scarl.core.action.PassTactic
 import io.github.fiifoo.scarl.core.creature.{Faction, FactionId}
 import io.github.fiifoo.scarl.core.entity.{CreatureId, SafeCreatureId}
-import io.github.fiifoo.scarl.core.mutation.{LocatableLocationMutation, NewFactionMutation}
+import io.github.fiifoo.scarl.core.mutation.LocatableLocationMutation
 import io.github.fiifoo.scarl.core.test_assets.TestCreatureFactory
-import io.github.fiifoo.scarl.core.{Location, RealityBubble, State}
+import io.github.fiifoo.scarl.core.{Assets, Location, RealityBubble, State}
 import org.scalatest._
 
 class TacticsSpec extends FlatSpec with Matchers {
 
   val faction = Faction(FactionId("people"), Set(FactionId("people")))
+  val assets = Assets(factions = Map(faction.id -> faction))
 
-  val initial = NewFactionMutation(faction)(
+  val initial =
     TestCreatureFactory.generate(
       TestCreatureFactory.generate(
-        State(),
+        State(assets = assets),
         1,
         TestCreatureFactory.create(health = 100, faction = faction.id, behavior = RoamTactic)
       ),
       1,
       TestCreatureFactory.create(health = 100, faction = faction.id, behavior = PassTactic))
-  )
 
   var s: State = initial
 

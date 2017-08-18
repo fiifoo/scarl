@@ -6,8 +6,8 @@ import io.github.fiifoo.scarl.core.assets.CombatPower
 import io.github.fiifoo.scarl.core.creature.{Faction, FactionId}
 import io.github.fiifoo.scarl.core.entity.SafeCreatureId
 import io.github.fiifoo.scarl.core.kind.{CreatureKind, CreatureKindId, Kinds}
-import io.github.fiifoo.scarl.core.mutation.{NewEntityMutation, NewFactionMutation}
-import io.github.fiifoo.scarl.core.{Location, Rng, State}
+import io.github.fiifoo.scarl.core.mutation.NewEntityMutation
+import io.github.fiifoo.scarl.core.{Assets, Location, Rng, State}
 
 object CombatPowerSimulation {
   private val matches = 20
@@ -118,12 +118,14 @@ object CombatPowerSimulation {
 
     val templateResult = CalculateTemplate(template, Map(template.id -> template), random)
 
-    val instance = factions.foldLeft(State(
+    val assets = Assets(
+      factions = factions.map(f => (f.id, f)).toMap,
       kinds = kinds,
+    )
+    val instance = State(
+      assets = assets,
       rng = rng
-    ))((s, faction) => {
-      NewFactionMutation(faction)(s)
-    })
+    )
 
     ApplyTemplate(instance, templateResult, List(), List(), random)
   }

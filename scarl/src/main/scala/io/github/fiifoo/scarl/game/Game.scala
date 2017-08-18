@@ -10,16 +10,14 @@ import io.github.fiifoo.scarl.game.api._
 import io.github.fiifoo.scarl.game.event.EventBuilder
 import io.github.fiifoo.scarl.game.map.MapBuilder
 import io.github.fiifoo.scarl.geometry.Fov
-import io.github.fiifoo.scarl.world.WorldManager
+import io.github.fiifoo.scarl.world.ChangeArea
 
 import scala.annotation.tailrec
 
 object Game {
 
-  def apply(gameState: GameState, worldManager: WorldManager): (Game, RunState) = {
-
+  def start(gameState: GameState): RunState = {
     val instance = gameState.world.states(gameState.area)
-    val game = new Game(worldManager)
 
     var state = RunState(
       areaMap = gameState.maps.getOrElse(gameState.area, Map()),
@@ -29,15 +27,11 @@ object Game {
       statistics = gameState.statistics
     )
 
-    state = game.sendGameStart(state)
-    state = game.run(state)
+    state = sendGameStart(state)
+    state = run(state)
 
-    (game, state)
+    state
   }
-
-}
-
-class Game(worldManager: WorldManager) {
 
   def receive(state: RunState, message: InMessage): RunState = {
     message match {
@@ -136,14 +130,14 @@ class Game(worldManager: WorldManager) {
     )
 
     if (traveler.creature.id == state.gameState.player) {
-      switchArea(nextState, conduit, traveler)
+      changeArea(nextState, conduit, traveler)
     } else {
       nextState
     }
   }
 
-  private def switchArea(state: RunState, conduit: ConduitId, traveler: Traveler): RunState = {
-    val (nextWorld, nextArea) = worldManager.switchArea(
+  private def changeArea(state: RunState, conduit: ConduitId, traveler: Traveler): RunState = {
+    val (nextWorld, nextArea) = ChangeArea(
       state.gameState.world,
       state.gameState.area,
       state.instance,
@@ -172,8 +166,8 @@ class Game(worldManager: WorldManager) {
   private def sendGameStart(state: RunState): RunState = {
     val message = GameStart(
       area = state.gameState.area,
-      factions = state.instance.factions.values,
-      kinds = state.instance.kinds,
+      factions = state.instance.assets.factions.values,
+      kinds = state.instance.assets.kinds,
       map = state.areaMap
     )
 

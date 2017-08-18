@@ -1,31 +1,20 @@
 import game.json.FormatWorldState
-import game.{Data, GameUtils, Simulations}
+import game.{Data, LoadGame}
 import io.github.fiifoo.scarl.area.AreaId
 import io.github.fiifoo.scarl.core.State
 import io.github.fiifoo.scarl.core.kind.CreatureKindId
-import io.github.fiifoo.scarl.world.{WorldManager, WorldState}
+import io.github.fiifoo.scarl.world.{CreateWorld, WorldState}
 import org.scalatestplus.play._
 
 class FormatWorldStateSpec extends PlaySpec {
-
-  val worldManager = new WorldManager(
-    Data.areas,
-    Simulations.combatPower(),
-    Data.communications,
-    Data.factions,
-    Data.kinds,
-    Data.powers,
-    Data.progressions,
-    Data.templates
-  )
-
+  val assets = Data()
   val world = createWorld()
 
   "FormatWorldState" must {
     "read and write WorldState" in {
       val json = FormatWorldState.formatWorldState.writes(world)
       val loaded = FormatWorldState.formatWorldState.reads(json).get
-      val result = GameUtils.finalizeLoadedWorld(loaded, worldManager)
+      val result = LoadGame.finalize(assets, loaded)
 
       world.hashCode mustBe result.hashCode
     }
@@ -34,7 +23,7 @@ class FormatWorldStateSpec extends PlaySpec {
   private def createWorld(): WorldState = {
     val area = AreaId("first")
 
-    val (world, _) = worldManager.create(area, CreatureKindId("hero"))
+    val (world, _) = CreateWorld(assets, area, CreatureKindId("hero"))
     val state = world.states(area)
 
     world.copy(

@@ -59,10 +59,12 @@ object TestCreatureFactory {
       NewEntityMutation(creature)(s)
     })
 
-    if (result.kinds.creatures.isEmpty) {
-      result.copy(kinds = result.kinds.copy(
-        creatures = Map(defaultKind.id -> defaultKind)
-      ))
+    if (result.assets.kinds.creatures.isEmpty) {
+      result.copy(
+        assets = result.assets.copy(
+          kinds = result.assets.kinds.copy(
+            creatures = Map(defaultKind.id -> defaultKind)
+          )))
     } else {
       result
     }

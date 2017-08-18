@@ -31,10 +31,10 @@ case class CommunicateEffect(source: CreatureId,
 
   private def nextResponse(s: State): Option[CommunicationId] = {
     val faction = source(s).faction
-    val responses = s.kinds.creatures(target(s).kind).responses.get(faction)
+    val responses = s.assets.kinds.creatures(target(s).kind).responses.get(faction)
 
     responses map (responses => {
-      val received = s.communications.received.getOrElse(source, Set())
+      val received = s.receivedCommunications.getOrElse(source, Set())
       val nextResponses = responses filterNot received.contains
 
       if (nextResponses.isEmpty) {

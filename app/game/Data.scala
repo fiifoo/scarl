@@ -8,6 +8,7 @@ import io.github.fiifoo.scarl.area.{Area, AreaId}
 import io.github.fiifoo.scarl.core.Location
 import io.github.fiifoo.scarl.core.Rng.WeightedChoices
 import io.github.fiifoo.scarl.core.action.PassTactic
+import io.github.fiifoo.scarl.core.assets.CombatPower
 import io.github.fiifoo.scarl.core.communication.{Communication, CommunicationId, Message}
 import io.github.fiifoo.scarl.core.creature.Missile.Guided
 import io.github.fiifoo.scarl.core.creature.Stats._
@@ -18,8 +19,22 @@ import io.github.fiifoo.scarl.core.kind._
 import io.github.fiifoo.scarl.core.power.{CreaturePowerId, ItemPowerId, Powers}
 import io.github.fiifoo.scarl.power.{TransformCreaturePower, TransformItemPower}
 import io.github.fiifoo.scarl.widget._
+import io.github.fiifoo.scarl.world.WorldAssets
 
 object Data {
+
+  def apply(): WorldAssets = {
+    WorldAssets(
+      areas,
+      combatPower,
+      communications,
+      factions,
+      kinds,
+      powers,
+      progressions,
+      templates
+    )
+  }
 
   def areas: Map[AreaId, Area] = {
     val first = Area(
@@ -39,6 +54,10 @@ object Data {
       first.id -> first,
       second.id -> second
     )
+  }
+
+  def combatPower: CombatPower = {
+    Simulations.combatPower(creatures.values)
   }
 
   def communications: Map[CommunicationId, Communication] = {

@@ -1,29 +1,44 @@
 package game
 
-import io.github.fiifoo.scarl.core.State.Assets
 import io.github.fiifoo.scarl.core.mutation.cache.EquipmentStatsCacheMutation
 import io.github.fiifoo.scarl.core.mutation.index.{ConduitLocationIndexAddMutation, NewEntityIndexMutation}
 import io.github.fiifoo.scarl.core.{ActorQueue, State}
+import io.github.fiifoo.scarl.game.GameState
 import io.github.fiifoo.scarl.geometry.WaypointNetwork
-import io.github.fiifoo.scarl.world.{WorldManager, WorldState}
+import io.github.fiifoo.scarl.world.{WorldAssets, WorldState}
+import models.GameSave
+import play.api.libs.json.JsValue
 
-object GameUtils {
+object LoadGame {
 
-  def finalizeLoadedWorld(world: WorldState, manager: WorldManager): WorldState = {
+  def apply(assets: WorldAssets)(json: JsValue): GameState = {
+    val data = GameSave.format.reads(json).get
+    val world = finalize(assets, data.state.world)
+
+    val gameState = GameState(
+      area = data.state.area,
+      player = data.state.player,
+      world = world,
+      maps = data.state.maps,
+      statistics = data.state.statistics
+    )
+
+    if (data.checkHashCode != gameState.hashCode) {
+      throw new Exception("Corrupt save data.")
+    }
+
+    gameState
+  }
+
+  def finalize(assets: WorldAssets, world: WorldState): WorldState = {
     world.copy(
-      areas = manager.areas,
+      assets = assets,
       states = world.states.map(x => {
         var (area, state) = x
 
         state = state.copy(
-          assets = Assets(
-            combatPower = manager.combatPower
-          ),
-          communications = state.communications.copy(manager.communications),
+          assets = assets.instance(),
           index = calculateStateIndex(state),
-          kinds = manager.kinds,
-          powers = manager.powers,
-          progressions = manager.progressions
         )
         state = state.copy(
           cache = calculateStateCache(state)
