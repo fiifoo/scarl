@@ -1,10 +1,10 @@
-package models.json
+package game.json
 
+import game.json.FormatBase._
+import game.json.FormatId._
+import game.json.FormatItem.formatSlot
+import game.json.ReadAction.readAction
 import io.github.fiifoo.scarl.game.api._
-import models.json.FormatBase._
-import models.json.FormatId._
-import models.json.FormatItem.formatSlot
-import models.json.ReadAction.readAction
 import play.api.libs.json._
 
 object ReadInMessage {

@@ -1,11 +1,11 @@
-package models.json
+package game.json
 
+import game.json.FormatBase._
+import game.json.FormatId._
+import game.json.FormatUtils._
+import game.json.FormatWorldState._
 import io.github.fiifoo.scarl.game.map.MapLocation
 import io.github.fiifoo.scarl.game.{GameState, Statistics}
-import models.json.FormatBase._
-import models.json.FormatId._
-import models.json.FormatUtils._
-import models.json.FormatWorldState._
 import play.api.libs.json._
 
 object FormatGameState {

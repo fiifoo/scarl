@@ -1,9 +1,9 @@
+import game.json.FormatWorldState
+import game.{Data, GameUtils, Simulations}
 import io.github.fiifoo.scarl.area.AreaId
 import io.github.fiifoo.scarl.core.State
 import io.github.fiifoo.scarl.core.kind.CreatureKindId
 import io.github.fiifoo.scarl.world.{WorldManager, WorldState}
-import models.json.FormatWorldState
-import models.{Data, GameUtils, Simulations}
 import org.scalatestplus.play._
 
 class FormatWorldStateSpec extends PlaySpec {

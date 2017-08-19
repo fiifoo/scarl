@@ -1,11 +1,11 @@
-package models.json
+package game.json
 
+import game.json.FormatBase._
+import game.json.FormatId._
+import game.json.FormatItem.formatSlot
 import io.github.fiifoo.scarl.action._
 import io.github.fiifoo.scarl.core.action.{Action, PassAction}
 import io.github.fiifoo.scarl.core.entity.CreatureId
-import models.json.FormatBase._
-import models.json.FormatId._
-import models.json.FormatItem.formatSlot
 import play.api.libs.json._
 
 object ReadAction {

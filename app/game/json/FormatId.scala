@@ -1,5 +1,6 @@
-package models.json
+package game.json
 
+import game.json.FormatUtils._
 import io.github.fiifoo.scarl.area.AreaId
 import io.github.fiifoo.scarl.area.template.TemplateId
 import io.github.fiifoo.scarl.core.communication.CommunicationId
@@ -8,7 +9,6 @@ import io.github.fiifoo.scarl.core.entity._
 import io.github.fiifoo.scarl.core.kind._
 import io.github.fiifoo.scarl.core.power.{CreaturePowerId, ItemPowerId}
 import io.github.fiifoo.scarl.core.world.ConduitId
-import models.json.FormatUtils._
 import play.api.libs.json._
 
 object FormatId {

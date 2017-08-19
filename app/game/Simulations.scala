@@ -1,4 +1,4 @@
-package models
+package game
 
 import io.github.fiifoo.scarl.core.assets.CombatPower
 import io.github.fiifoo.scarl.simulation.CombatPowerSimulation

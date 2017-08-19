@@ -1,16 +1,16 @@
-package models.json
+package game.json
 
+import game.json.FormatBase._
+import game.json.FormatEntities._
+import game.json.FormatId._
+import game.json.FormatItem.formatSlot
+import game.json.FormatTactic._
+import game.json.FormatUtils._
 import io.github.fiifoo.scarl.core.communication.{Communication, CommunicationId}
 import io.github.fiifoo.scarl.core.creature.{Faction, Progression, ProgressionId}
 import io.github.fiifoo.scarl.core.kind.Kinds
 import io.github.fiifoo.scarl.core.power.Powers
 import io.github.fiifoo.scarl.core.{Rng, State}
-import models.json.FormatBase._
-import models.json.FormatEntities._
-import models.json.FormatId._
-import models.json.FormatItem.formatSlot
-import models.json.FormatTactic._
-import models.json.FormatUtils._
 import play.api.libs.json._
 
 object FormatState {

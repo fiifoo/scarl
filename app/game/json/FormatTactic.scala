@@ -1,9 +1,9 @@
-package models.json
+package game.json
 
+import game.json.FormatBase._
+import game.json.FormatId._
 import io.github.fiifoo.scarl.ai.tactic._
 import io.github.fiifoo.scarl.core.action.{Behavior, PassTactic, Tactic}
-import models.json.FormatBase._
-import models.json.FormatId._
 import play.api.libs.json._
 
 object FormatTactic {

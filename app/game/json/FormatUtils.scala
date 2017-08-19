@@ -1,4 +1,4 @@
-package models.json
+package game.json
 
 import io.github.fiifoo.scarl.core.Rng.WeightedChoices
 import play.api.libs.json._

@@ -4,10 +4,10 @@ import javax.inject.Inject
 
 import akka.actor._
 import akka.stream.Materializer
+import game.GameManager
+import game.json.{ReadInMessage, WriteOutMessage}
+import game.save.{FileSaveStorage, NullSaveStorage}
 import io.github.fiifoo.scarl.game.api.OutMessage
-import models.GameManager
-import models.json.{ReadInMessage, WriteOutMessage}
-import models.save.{FileSaveStorage, NullSaveStorage}
 import play.Environment
 import play.api.libs.json.JsValue
 import play.api.libs.streams._

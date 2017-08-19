@@ -1,10 +1,10 @@
-package models.json
+package game.json
 
+import game.json.FormatId._
+import game.json.FormatState._
+import game.json.FormatUtils._
 import io.github.fiifoo.scarl.area.{Area, AreaId}
 import io.github.fiifoo.scarl.world.{Conduit, WorldState}
-import models.json.FormatId._
-import models.json.FormatState._
-import models.json.FormatUtils._
 import play.api.libs.json._
 
 object FormatWorldState {

@@ -1,9 +1,9 @@
-package models.json
+package game.json
 
+import game.json.FormatId._
 import io.github.fiifoo.scarl.core.creature.Stats
 import io.github.fiifoo.scarl.core.item.Equipment._
 import io.github.fiifoo.scarl.core.item._
-import models.json.FormatId._
 import play.api.libs.json._
 
 object FormatItem {

@@ -1,4 +1,4 @@
-package models.save
+package game.save
 
 import java.nio.charset.StandardCharsets.UTF_8
 import java.nio.file.{Files, Paths, StandardOpenOption}

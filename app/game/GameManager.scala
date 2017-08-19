@@ -1,12 +1,12 @@
-package models
+package game
 
+import game.json.FormatGameState._
+import game.save.SaveStorage
 import io.github.fiifoo.scarl.area.AreaId
 import io.github.fiifoo.scarl.core.Rng
 import io.github.fiifoo.scarl.core.kind.CreatureKindId
 import io.github.fiifoo.scarl.game._
 import io.github.fiifoo.scarl.world.WorldManager
-import models.json.FormatGameState._
-import models.save.SaveStorage
 import play.api.libs.json._
 
 import scala.util.Random

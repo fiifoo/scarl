@@ -1,4 +1,4 @@
-package models.save
+package game.save
 
 import play.api.libs.json.JsValue
 

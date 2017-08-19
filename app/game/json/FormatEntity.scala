@@ -1,14 +1,14 @@
-package models.json
+package game.json
 
+import game.json.FormatBase._
+import game.json.FormatId._
+import game.json.FormatItem._
+import game.json.FormatTactic._
+import game.json.FormatUtils._
 import io.github.fiifoo.scarl.core.creature.Missile.{Guidance, Guided, Smart}
 import io.github.fiifoo.scarl.core.creature.{Character, Missile, Party, Stats}
 import io.github.fiifoo.scarl.core.entity._
 import io.github.fiifoo.scarl.status._
-import models.json.FormatBase._
-import models.json.FormatId._
-import models.json.FormatItem._
-import models.json.FormatTactic._
-import models.json.FormatUtils._
 import play.api.libs.json._
 
 object FormatEntity {

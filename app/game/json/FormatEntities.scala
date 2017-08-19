@@ -1,7 +1,7 @@
-package models.json
+package game.json
 
+import game.json.FormatEntity._
 import io.github.fiifoo.scarl.core.entity._
-import models.json.FormatEntity._
 import play.api.libs.json._
 
 object FormatEntities {

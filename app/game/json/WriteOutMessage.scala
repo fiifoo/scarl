@@ -1,5 +1,12 @@
-package models.json
+package game.json
 
+import game.json.FormatBase._
+import game.json.FormatEntity._
+import game.json.FormatGameState.{formatAreaMap, formatStatistics}
+import game.json.FormatId._
+import game.json.FormatItem._
+import game.json.FormatTactic.formatBehavior
+import game.json.FormatUtils._
 import io.github.fiifoo.scarl.core.Location
 import io.github.fiifoo.scarl.core.communication.CommunicationId
 import io.github.fiifoo.scarl.core.creature.{Faction, FactionId}
@@ -8,13 +15,6 @@ import io.github.fiifoo.scarl.game.api._
 import io.github.fiifoo.scarl.game.event._
 import io.github.fiifoo.scarl.game.{LocationEntities, PlayerFov, PlayerInfo}
 import io.github.fiifoo.scarl.geometry.WaypointNetwork
-import models.json.FormatBase._
-import models.json.FormatEntity._
-import models.json.FormatGameState.{formatAreaMap, formatStatistics}
-import models.json.FormatId._
-import models.json.FormatItem._
-import models.json.FormatTactic.formatBehavior
-import models.json.FormatUtils._
 import play.api.libs.json._
 
 object WriteOutMessage {

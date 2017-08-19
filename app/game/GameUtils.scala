@@ -1,4 +1,4 @@
-package models
+package game
 
 import io.github.fiifoo.scarl.core.State.Assets
 import io.github.fiifoo.scarl.core.mutation.cache.EquipmentStatsCacheMutation

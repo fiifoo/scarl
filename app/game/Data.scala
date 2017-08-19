@@ -1,4 +1,4 @@
-package models
+package game
 
 import io.github.fiifoo.scarl.ai.tactic.{FollowerTactic, RoamTactic}
 import io.github.fiifoo.scarl.area.shape.Rectangle
