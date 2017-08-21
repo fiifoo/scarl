@@ -4,8 +4,10 @@ import javax.inject.Inject
 
 import akka.actor._
 import akka.stream.Materializer
-import game.GameContainer
-import game.save.{FileSaveStorage, NullSaveStorage}
+import dal.GameRepository
+import game.GameInstance
+import models.Game
+import models.message._
 import play.Environment
 import play.api.libs.json.JsValue
 import play.api.libs.streams._
@@ -13,10 +15,11 @@ import play.api.mvc._
 
 import scala.concurrent.ExecutionContext
 
-class GameController @Inject()(cc: ControllerComponents
+class GameController @Inject()(games: GameRepository,
+                               cc: ControllerComponents
                               )(
-                                implicit val ec: ExecutionContext,
-                                implicit val system: ActorSystem,
+                                implicit ec: ExecutionContext,
+                                system: ActorSystem,
                                 mat: Materializer,
                                 environment: Environment
                               ) extends AbstractController(cc) {
@@ -25,12 +28,6 @@ class GameController @Inject()(cc: ControllerComponents
     "http://localhost:80"
   } else {
     routes.Assets.versioned("").toString
-  }
-
-  val saveStorage = if (environment.isDev) {
-    new FileSaveStorage("user")
-  } else {
-    NullSaveStorage
   }
 
   def index = Action {
@@ -46,14 +43,41 @@ class GameController @Inject()(cc: ControllerComponents
   }
 
   class WebSocketActor(out: ActorRef) extends Actor {
-    val game = GameContainer(out, saveStorage)
+    games.list() foreach sendGames
+
+    var instance: Option[GameInstance] = None
 
     def receive = {
-      case json: JsValue => game.receive(json)
+      case json: JsValue =>
+        if (instance.isEmpty) {
+          createInstance(json)
+        } else {
+          instance foreach (_.receive(json))
+        }
     }
 
     override def postStop() = {
-      game.end()
+      instance foreach (_.stop())
+    }
+
+    private def sendGames(games: Seq[Game]) = {
+      out ! OutMessage.writes.writes(Games(games))
+    }
+
+    private def sendCreateGameFailed(games: Seq[Game]) = {
+      out ! OutMessage.writes.writes(CreateGameFailed(games))
+    }
+
+    private def createInstance(json: JsValue) = {
+      CreateGameMessage.reads.reads(json) foreach (message => {
+        GameInstance(games, message, out) foreach (created => {
+          instance = created
+
+          if (created.isEmpty) {
+            games.list() foreach sendCreateGameFailed
+          }
+        })
+      })
     }
   }
 

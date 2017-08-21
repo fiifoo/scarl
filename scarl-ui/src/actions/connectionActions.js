@@ -5,13 +5,17 @@ import { debugReceiveMessage } from './debugActions'
 import { log } from '../utils/debug'
 
 const receiveActionMap = {
-    'DebugFov': types.RECEIVE_DEBUG_FOV,
-    'DebugWaypoint': types.RECEIVE_DEBUG_WAYPOINT,
+    'Games': types.RECEIVE_GAMES,
+    'CreateGameFailed': types.RECEIVE_CREATE_GAME_FAILED,
+
     'GameStart': types.RECEIVE_GAME_START,
     'GameUpdate': types.RECEIVE_GAME_UPDATE,
     'GameOver': types.RECEIVE_GAME_OVER,
     'AreaChange': types.RECEIVE_AREA_CHANGE,
     'PlayerInventory': types.RECEIVE_PLAYER_INVENTORY,
+
+    'DebugFov': types.RECEIVE_DEBUG_FOV,
+    'DebugWaypoint': types.RECEIVE_DEBUG_WAYPOINT,
 }
 
 let connection = null
@@ -66,6 +70,14 @@ export const sendDebugWaypointQuery = () => {
 
 export const sendInventoryQuery = () => {
     sendMessage('InventoryQuery')
+}
+
+export const sendCreateExistingGame = game => {
+    sendMessage('CreateExistingGame', {game})
+}
+
+export const sendCreateNewGame = player => {
+    sendMessage('CreateNewGame', {player})
 }
 
 const sendMessage = (type, data = {}) => {

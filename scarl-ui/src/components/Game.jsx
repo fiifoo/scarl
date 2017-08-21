@@ -12,32 +12,28 @@ import StatisticsContainer from '../containers/StatisticsContainer'
 
 const Spacer = () => <div>&nbsp;</div>
 
-const Game = ({game, focusKeyboard}) => (
-    game.running ? (
-        <div onClick={focusKeyboard}>
-            <KeyboardContainer />
+const Game = ({focusKeyboard}) => (
+    <div onClick={focusKeyboard}>
+        <KeyboardContainer />
 
-            <MessageBarContainer />
-            <Spacer />
+        <MessageBarContainer />
+        <Spacer />
 
-            <div className="game-main-view">
-                <ScreenContainer />
+        <div className="game-main-view">
+            <ScreenContainer />
 
-                <InventoryContainer />
-                <KeyBindingsContainer />
-                <StatisticsContainer />
-                <MessageLogContainer />
-            </div>
-
-            <PlayerInfoContainer />
-            <Spacer />
-            <ActionBarContainer />
-            <Spacer />
-            <DebugBarContainer />
+            <InventoryContainer />
+            <KeyBindingsContainer />
+            <StatisticsContainer />
+            <MessageLogContainer />
         </div>
-    ) : (
-        <div></div>
-    )
+
+        <PlayerInfoContainer />
+        <Spacer />
+        <ActionBarContainer />
+        <Spacer />
+        <DebugBarContainer />
+    </div>
 )
 
 export default Game

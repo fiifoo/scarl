@@ -1,5 +1,6 @@
 import React from 'react'
 import ConnectionContainer from '../containers/ConnectionContainer'
+import CreateGameContainer from '../containers/CreateGameContainer'
 import GameContainer from '../containers/GameContainer'
 
 import './App.css'
@@ -18,6 +19,7 @@ const App = () => (
         </nav>
 
         <div className="container-fluid">
+            <CreateGameContainer />
             <GameContainer />
         </div>
     </div>

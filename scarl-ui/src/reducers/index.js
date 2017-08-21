@@ -7,6 +7,7 @@ import events from './events'
 import factions from './factions'
 import fov from './fov'
 import game from './game'
+import games from './games'
 import inventory from './inventory'
 import kinds from './kinds'
 import player from './player'
@@ -22,6 +23,7 @@ export default combineReducers({
     factions,
     fov,
     game,
+    games,
     inventory,
     kinds,
     player,

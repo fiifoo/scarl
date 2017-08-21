@@ -8,6 +8,14 @@
     position: absolute;
 }
 
+.form-inline > .form-group > * {
+    margin-right: 10px;
+}
+
+.form-inline > .form-group > *:last-child {
+    margin-right: 0;
+}
+
 /* colors */
 html, body {
     background-color: #000;
@@ -40,4 +48,8 @@ html, body {
 
 .table > tbody > tr.active > td {
     background-color: #024;
+}
+
+.panel {
+    background-color: #171717;
 }
