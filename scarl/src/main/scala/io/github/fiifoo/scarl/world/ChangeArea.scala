@@ -17,17 +17,17 @@ object ChangeArea {
     val currentWorld = world.copy(states = world.states + (currentArea -> currentState))
     val nextArea = getConduitExit(world.conduits(conduit), currentArea)
     val nextWorld = if (world.states.get(nextArea).isDefined) {
-      reloadArea(currentWorld, nextArea, currentState.nextEntityId)
+      reloadArea(currentWorld, nextArea, currentState.idSeq)
     } else {
-      GenerateArea(currentWorld, nextArea, currentState.rng, currentState.nextEntityId)
+      GenerateArea(currentWorld, nextArea, currentState.rng, currentState.idSeq)
     }
     val finalWorld = applyConduitExit(nextWorld, nextArea, conduit, traveler)
 
     (finalWorld, nextArea)
   }
 
-  private def reloadArea(world: WorldState, area: AreaId, nextEntityId: Int): WorldState = {
-    val state = world.states(area).copy(nextEntityId = nextEntityId)
+  private def reloadArea(world: WorldState, area: AreaId, idSeq: IdSeq): WorldState = {
+    val state = world.states(area).copy(idSeq = idSeq)
 
     world.copy(
       states = world.states + (area -> state)

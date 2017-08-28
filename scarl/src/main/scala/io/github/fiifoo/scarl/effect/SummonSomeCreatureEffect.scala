@@ -15,11 +15,10 @@ case class SummonSomeCreatureEffect(choices: WeightedChoices[CreatureKindId],
 
   def apply(s: State): EffectResult = {
     val (kind, rng) = s.rng.nextChoice(choices)
-    val creature = kind(s)(s, location)
 
     EffectResult(
       RngMutation(rng),
-      SummonCreatureEffect(creature, source)
+      SummonCreatureEffect(kind, location, source, Some(this))
     )
   }
 }

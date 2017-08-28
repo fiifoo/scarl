@@ -4,7 +4,7 @@ import io.github.fiifoo.scarl.core.effect.EffectResult
 import io.github.fiifoo.scarl.core.entity.{Container, ContainerId, CreatureId, TriggerStatusId}
 import io.github.fiifoo.scarl.core.mutation.{LocatableLocationMutation, NewEntityMutation}
 import io.github.fiifoo.scarl.core.test_assets.{TestCreatureFactory, TestDamageEffect, TestTriggerStatus}
-import io.github.fiifoo.scarl.core.{Location, State}
+import io.github.fiifoo.scarl.core.{IdSeq, Location, State}
 import org.scalatest._
 
 class MoveEffectSpec extends FlatSpec with Matchers {
@@ -29,7 +29,7 @@ class MoveEffectSpec extends FlatSpec with Matchers {
 
     val New = NewEntityMutation
     val s = TestCreatureFactory.generate(
-      New(s3)(New(s2)(New(s1)(New(c3)(New(c2)(New(c1)(State()))))))
+      New(s3)(New(s2)(New(s1)(New(c3)(New(c2)(New(c1)(State(idSeq = IdSeq(7))))))))
     )
     val creature = CreatureId(7)
     val damageEffect = TestDamageEffect(creature, s1.damage)

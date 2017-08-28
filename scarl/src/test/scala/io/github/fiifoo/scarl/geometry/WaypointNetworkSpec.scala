@@ -3,7 +3,7 @@ package io.github.fiifoo.scarl.geometry
 import io.github.fiifoo.scarl.core.State.Area
 import io.github.fiifoo.scarl.core.entity.{Wall, WallId}
 import io.github.fiifoo.scarl.core.kind.WallKindId
-import io.github.fiifoo.scarl.core.mutation.NewEntityMutation
+import io.github.fiifoo.scarl.core.mutation.{IdSeqMutation, NewEntityMutation}
 import io.github.fiifoo.scarl.core.{Location, State}
 import org.scalatest._
 
@@ -68,9 +68,10 @@ class WaypointNetworkSpec extends FlatSpec with Matchers {
     val s = State(area = area)
 
     walls.foldLeft(s)((s, location) => {
-      val wall = Wall(WallId(s.nextEntityId), WallKindId("wall"), location)
+      val (nextId, nextIdSeq) = s.idSeq()
+      val wall = Wall(WallId(nextId), WallKindId("wall"), location)
 
-      NewEntityMutation(wall)(s)
+      NewEntityMutation(wall)(IdSeqMutation(nextIdSeq)(s))
     })
   }
 }

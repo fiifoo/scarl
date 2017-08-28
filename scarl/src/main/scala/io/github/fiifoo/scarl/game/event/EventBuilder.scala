@@ -3,7 +3,7 @@ package io.github.fiifoo.scarl.game.event
 import io.github.fiifoo.scarl.core.Selectors.{getContainerItems, getItemLocation, getLocationEntities}
 import io.github.fiifoo.scarl.core.communication.Message
 import io.github.fiifoo.scarl.core.effect.Effect
-import io.github.fiifoo.scarl.core.entity.{ContainerId, CreatureId, ItemId, WallId}
+import io.github.fiifoo.scarl.core.entity._
 import io.github.fiifoo.scarl.core.{Location, State}
 import io.github.fiifoo.scarl.effect._
 
@@ -43,8 +43,8 @@ class EventBuilder(s: State, player: CreatureId, fov: Set[Location]) {
       case e: PickItemEffect => build(e) map GenericEvent
       case e: ShootMissileEffect => build(e) map GenericEvent
       case e: ShotEffect => build(e)
-      case e: TransformedEffect => build(e) map GenericEvent
-      case e: TransformFailedEffect => build(e) map GenericEvent
+      case e: TransformedEffect[_] => build(e) map GenericEvent
+      case e: TransformFailedEffect[_] => build(e) map GenericEvent
       case e: TriggerTrapEffect => build(e) map GenericEvent
       case e: UnequipItemEffect => build(e) map GenericEvent
       case e: UseCreatureEffect => build(e) map GenericEvent
@@ -301,7 +301,7 @@ class EventBuilder(s: State, player: CreatureId, fov: Set[Location]) {
     }
   }
 
-  private def build(effect: TransformedEffect): Option[String] = {
+  private def build(effect: TransformedEffect[_]): Option[String] = {
     effect.description flatMap (description => {
       if (fov.contains(effect.location)) {
         Some(description)
@@ -311,7 +311,7 @@ class EventBuilder(s: State, player: CreatureId, fov: Set[Location]) {
     })
   }
 
-  private def build(effect: TransformFailedEffect): Option[String] = {
+  private def build(effect: TransformFailedEffect[_]): Option[String] = {
     effect.description flatMap (description => {
       if (effect.owner.contains(player)) {
         Some(description)

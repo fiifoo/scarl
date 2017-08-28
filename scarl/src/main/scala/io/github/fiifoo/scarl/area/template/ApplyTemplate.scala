@@ -1,8 +1,8 @@
 package io.github.fiifoo.scarl.area.template
 
-import io.github.fiifoo.scarl.core.entity.Entity
+import io.github.fiifoo.scarl.core.entity.Locatable
 import io.github.fiifoo.scarl.core.kind._
-import io.github.fiifoo.scarl.core.mutation.{NewConduitMutation, NewEntityMutation, NewGatewayMutation}
+import io.github.fiifoo.scarl.core.mutation.{NewConduitMutation, NewGatewayMutation}
 import io.github.fiifoo.scarl.core.world.ConduitId
 import io.github.fiifoo.scarl.core.{Location, Rng, State}
 import io.github.fiifoo.scarl.geometry.WaypointNetwork
@@ -38,25 +38,8 @@ object ApplyTemplate {
                        ): State = {
     var state = initial
 
-    state = processUniqueEntities(
-      s = state,
-      elements = template.content.terrains,
-      getEntities = (s: State, location: Location, kind: TerrainKindId) => {
-        val terrain = kind(s)(s, offset.add(location))
-
-        List(terrain)
-      }
-    )
-
-    state = processUniqueEntities(
-      s = state,
-      elements = template.content.walls,
-      getEntities = (s: State, location: Location, kind: WallKindId) => {
-        val wall = kind(s)(s, offset.add(location))
-
-        List(wall)
-      }
-    )
+    state = processUniqueEntities(state, template.content.terrains, offset)
+    state = processUniqueEntities(state, template.content.walls, offset)
 
     template.templates.foldLeft(state)((s, data) => {
       val (location, sub) = data
@@ -71,35 +54,9 @@ object ApplyTemplate {
                         ): State = {
     var state = initial
 
-    state = processUniqueEntities(
-      s = state,
-      elements = template.content.creatures,
-      getEntities = (s: State, location: Location, kind: CreatureKindId) => {
-        val creature = kind(s)(s, offset.add(location))
-
-        List(creature)
-      }
-    )
-
-    state = processEntities(
-      s = state,
-      elements = template.content.items,
-      getEntities = (s: State, location: Location, kind: ItemKindId) => {
-        val (container, item) = kind(s)(s, offset.add(location))
-
-        List(container, item)
-      }
-    )
-
-    state = processUniqueEntities(
-      s = state,
-      elements = template.content.widgets,
-      getEntities = (s: State, location: Location, kind: WidgetKindId) => {
-        val (container, item, status) = kind(s)(s, offset.add(location))
-
-        List(container, item, status)
-      }
-    )
+    state = processUniqueEntities(state, template.content.creatures, offset)
+    state = processEntities(state, template.content.items, offset)
+    state = processUniqueEntities(state, template.content.widgets, offset)
 
     template.templates.foldLeft(state)((s, data) => {
       val (location, sub) = data
@@ -108,32 +65,29 @@ object ApplyTemplate {
     })
   }
 
-  private def processEntities[T](s: State,
-                                 elements: Map[Location, List[T]],
-                                 getEntities: (State, Location, T) => List[Entity]
-                                ): State = {
+  private def processEntities[T <: Locatable](s: State,
+                                              elements: Map[Location, List[KindId[T]]],
+                                              offset: Location,
+                                             ): State = {
 
     elements.foldLeft(s)((s, data) => {
       val (location, locationElements) = data
 
       locationElements.foldLeft(s)((s, element) => {
-        val entities = getEntities(s, location, element)
-
-        entities.foldLeft(s)((s, entity) => NewEntityMutation(entity)(s))
+        element(s).toLocation(s, s.idSeq, location.add(offset)).write(s)
       })
     })
   }
 
-  private def processUniqueEntities[T](s: State,
-                                       elements: Map[Location, T],
-                                       getEntities: (State, Location, T) => List[Entity]
-                                      ): State = {
+  private def processUniqueEntities[T <: Locatable](s: State,
+                                                    elements: Map[Location, KindId[T]],
+                                                    offset: Location,
+                                                   ): State = {
 
     elements.foldLeft(s)((s, data) => {
       val (location, element) = data
-      val entities = getEntities(s, location, element)
 
-      entities.foldLeft(s)((s, entity) => NewEntityMutation(entity)(s))
+      element(s).toLocation(s, s.idSeq, location.add(offset)).write(s)
     })
   }
 
@@ -174,12 +128,8 @@ object ApplyTemplate {
                          item: ItemKindId,
                          location: Location
                         ): State = {
-
-    val (container, _item) = item(s)(s, location)
-
     NewConduitMutation(conduit, location)(
-      NewEntityMutation(_item)(
-        NewEntityMutation(container)(s))
+      item(s).toLocation(s, s.idSeq, location).write(s)
     )
   }
 

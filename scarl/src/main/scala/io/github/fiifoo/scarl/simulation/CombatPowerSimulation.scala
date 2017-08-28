@@ -6,7 +6,6 @@ import io.github.fiifoo.scarl.core.assets.CombatPower
 import io.github.fiifoo.scarl.core.creature.{Faction, FactionId}
 import io.github.fiifoo.scarl.core.entity.SafeCreatureId
 import io.github.fiifoo.scarl.core.kind.{CreatureKind, CreatureKindId, Kinds}
-import io.github.fiifoo.scarl.core.mutation.NewEntityMutation
 import io.github.fiifoo.scarl.core.{Assets, Location, Rng, State}
 
 object CombatPowerSimulation {
@@ -149,9 +148,9 @@ object CombatPowerSimulation {
 
     (0 until teamSize).foldLeft((instance, Set[SafeCreatureId]()))((carry, y) => {
       val (instance, creatures) = carry
-      val creature = kind(instance, Location(x, y))
+      val result = kind.toLocation(instance, instance.idSeq, Location(x, y))
 
-      (NewEntityMutation(creature)(instance), creatures + SafeCreatureId(creature.id))
+      (result.write(instance), creatures + SafeCreatureId(result.entity.id))
     })
   }
 

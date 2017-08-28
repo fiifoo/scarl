@@ -3,7 +3,7 @@ package io.github.fiifoo.scarl.core.mutation
 import io.github.fiifoo.scarl.core.entity.{ActiveStatusId, CreatureId, Item, PassiveStatusId}
 import io.github.fiifoo.scarl.core.test_assets.{TestActiveStatus, TestCreatureFactory, TestItemFactory, TestStatus}
 import io.github.fiifoo.scarl.core.world.ConduitId
-import io.github.fiifoo.scarl.core.{Location, State}
+import io.github.fiifoo.scarl.core.{IdSeq, Location, State}
 import org.scalatest._
 
 class ConduitEntryMutationSpec extends FlatSpec with Matchers {
@@ -36,10 +36,11 @@ class ConduitEntryMutationSpec extends FlatSpec with Matchers {
       case item: Item if item.container == creature => item
     }.get
 
-    s = NewEntityMutation(TestActiveStatus(ActiveStatusId(s.nextEntityId), s.tick, creature))(s)
-    s = NewEntityMutation(TestActiveStatus(ActiveStatusId(s.nextEntityId), s.tick + 50, creature))(s)
-    s = NewEntityMutation(TestStatus(PassiveStatusId(s.nextEntityId), creature))(s)
-    s = NewEntityMutation(TestStatus(PassiveStatusId(s.nextEntityId), item.id))(s)
+    s = NewEntityMutation(TestActiveStatus(ActiveStatusId(s.idSeq.value), s.tick, creature))(s)
+    s = NewEntityMutation(TestActiveStatus(ActiveStatusId(s.idSeq.value + 1), s.tick + 50, creature))(s)
+    s = NewEntityMutation(TestStatus(PassiveStatusId(s.idSeq.value + 2), creature))(s)
+    s = NewEntityMutation(TestStatus(PassiveStatusId(s.idSeq.value + 3), item.id))(s)
+    s = IdSeqMutation(IdSeq(s.idSeq.value + 3))(s)
 
     s
   }

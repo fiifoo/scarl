@@ -4,7 +4,7 @@ import io.github.fiifoo.scarl.core.creature.FactionId
 import io.github.fiifoo.scarl.core.entity._
 import io.github.fiifoo.scarl.core.kind.ItemKindId
 import io.github.fiifoo.scarl.core.test_assets.{TestActiveStatus, TestCreatureFactory, TestItemFactory, TestTriggerStatus}
-import io.github.fiifoo.scarl.core.{ActorQueue, Location, State}
+import io.github.fiifoo.scarl.core.{ActorQueue, IdSeq, Location, State}
 import org.scalatest._
 
 class NewEntityMutationSpec extends FlatSpec with Matchers {
@@ -12,7 +12,7 @@ class NewEntityMutationSpec extends FlatSpec with Matchers {
   "NewEntityMutation" should "mutate new entity" in {
     val existingCreature = TestCreatureFactory.create(CreatureId(1))
     val newCreature = TestCreatureFactory.create(CreatureId(2))
-    val initial = State(entities = Map(existingCreature.id -> existingCreature), nextEntityId = 2)
+    val initial = State(entities = Map(existingCreature.id -> existingCreature), idSeq = IdSeq(2))
 
     val mutated = NewEntityMutation(newCreature)(initial)
     mutated.entities.size should ===(2)

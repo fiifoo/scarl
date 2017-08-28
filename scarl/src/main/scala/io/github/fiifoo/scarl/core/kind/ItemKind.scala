@@ -2,8 +2,10 @@ package io.github.fiifoo.scarl.core.kind
 
 import io.github.fiifoo.scarl.core.entity._
 import io.github.fiifoo.scarl.core.item._
+import io.github.fiifoo.scarl.core.kind.Kind.Result
+import io.github.fiifoo.scarl.core.mutation.{IdSeqMutation, NewEntityMutation}
 import io.github.fiifoo.scarl.core.power.ItemPowerId
-import io.github.fiifoo.scarl.core.{Location, State}
+import io.github.fiifoo.scarl.core.{IdSeq, Location, State}
 
 case class ItemKind(id: ItemKindId,
                     name: String,
@@ -18,21 +20,35 @@ case class ItemKind(id: ItemKindId,
                     shield: Option[Shield] = None,
                     usable: Option[ItemPowerId] = None,
                     weapon: Option[Weapon] = None
-                   ) extends Kind {
+                   ) extends Kind[Container] {
 
-  def apply(s: State, container: EntityId): Item = {
-    createItem(s.nextEntityId, container)
+  def toContainer(s: State, idSeq: IdSeq, container: EntityId): Result[Item] = {
+    val (item, nextIdSeq) = createItem(idSeq, container)
+
+    Result(
+      mutations = List(IdSeqMutation(nextIdSeq), NewEntityMutation(item)),
+      nextIdSeq,
+      item,
+    )
   }
 
-  def apply(s: State, location: Location): (Container, Item) = {
-    val container = Container(ContainerId(s.nextEntityId), location)
-    val item = createItem(s.nextEntityId + 1, container.id)
+  def toLocation(s: State, idSeq: IdSeq, location: Location): Result[Container] = {
+    val (containerId, containerIdSeq) = idSeq()
 
-    (container, item)
+    val container = Container(ContainerId(containerId), location)
+    val (item, nextIdSeq) = createItem(containerIdSeq, container.id)
+
+    Result(
+      mutations = List(IdSeqMutation(nextIdSeq), NewEntityMutation(container), NewEntityMutation(item)),
+      nextIdSeq,
+      container,
+    )
   }
 
-  private def createItem(nextId: Int, container: EntityId): Item = {
-    Item(
+  private def createItem(idSeq: IdSeq, container: EntityId): (Item, IdSeq) = {
+    val (nextId, nextIdSeq) = idSeq()
+
+    val item = Item(
       id = ItemId(nextId),
       kind = id,
       container = container,
@@ -46,5 +62,7 @@ case class ItemKind(id: ItemKindId,
       usable = usable,
       weapon = weapon
     )
+
+    (item, nextIdSeq)
   }
 }

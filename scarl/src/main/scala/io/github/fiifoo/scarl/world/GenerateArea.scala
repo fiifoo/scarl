@@ -10,15 +10,15 @@ object GenerateArea {
   def apply(world: WorldState,
             area: AreaId,
             rng: Rng,
-            nextEntityId: Int = 1
+            idSeq: IdSeq = IdSeq(1),
            ): WorldState = {
 
     val assets = world.assets
 
     var state = State(
       assets = assets.instance(),
-      nextEntityId = nextEntityId,
-      rng = rng
+      idSeq = idSeq,
+      rng = rng,
     )
 
     val (random, _) = state.rng()

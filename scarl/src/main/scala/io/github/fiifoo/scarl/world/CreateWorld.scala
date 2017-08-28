@@ -4,7 +4,6 @@ import io.github.fiifoo.scarl.area.AreaId
 import io.github.fiifoo.scarl.core._
 import io.github.fiifoo.scarl.core.entity._
 import io.github.fiifoo.scarl.core.kind.CreatureKindId
-import io.github.fiifoo.scarl.core.mutation.NewEntityMutation
 
 object CreateWorld {
 
@@ -31,13 +30,13 @@ object CreateWorld {
     }
 
     val (location, _) = state.rng.nextChoice(state.gateways)
-    val creature = player(state)(state, location)
+    val result = player(state).toLocation(state, state.idSeq, location)
 
-    val nextState = NewEntityMutation(creature)(state)
+    val nextState = result.write(state)
     val nextWorld = world.copy(
       states = world.states + (area -> nextState)
     )
 
-    (nextWorld, creature.id)
+    (nextWorld, result.entity.id)
   }
 }

@@ -3,7 +3,7 @@ package io.github.fiifoo.scarl.effect
 import io.github.fiifoo.scarl.core.Selectors.{getItemLocation, getLocationEntities}
 import io.github.fiifoo.scarl.core.effect.{Effect, EffectResult}
 import io.github.fiifoo.scarl.core.entity.{CreatureId, ItemId}
-import io.github.fiifoo.scarl.core.mutation.{NewEntityMutation, RemovableEntityMutation}
+import io.github.fiifoo.scarl.core.mutation.RemovableEntityMutation
 import io.github.fiifoo.scarl.core.{Location, State}
 
 case class UseDoorEffect(user: CreatureId,
@@ -20,16 +20,11 @@ case class UseDoorEffect(user: CreatureId,
       }) orElse {
         target(s).door map (door => {
           val opening = !door.open
-          val next = door.transformTo(s)(s, target(s).container)
+          val result = door.transformTo(s).toContainer(s, s.idSeq, target(s).container)
 
           EffectResult(
-            List(
-              NewEntityMutation(next),
-              RemovableEntityMutation(target)
-            ),
-            List(
-              DoorUsedEffect(user, target, opening, Some(this))
-            ))
+            RemovableEntityMutation(target) :: result.mutations,
+            List(DoorUsedEffect(user, target, opening, Some(this))))
         })
       }
     }) getOrElse EffectResult()

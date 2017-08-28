@@ -5,7 +5,7 @@ import io.github.fiifoo.scarl.core.creature.Stats.{Melee, Sight}
 import io.github.fiifoo.scarl.core.creature.{Character, FactionId, Party, Stats}
 import io.github.fiifoo.scarl.core.entity.{Creature, CreatureId}
 import io.github.fiifoo.scarl.core.kind.{CreatureKind, CreatureKindId}
-import io.github.fiifoo.scarl.core.mutation.NewEntityMutation
+import io.github.fiifoo.scarl.core.mutation.{IdSeqMutation, NewEntityMutation}
 import io.github.fiifoo.scarl.core.{Location, State}
 
 object TestCreatureFactory {
@@ -53,10 +53,11 @@ object TestCreatureFactory {
   def generate(s: State, count: Int = 1, prototype: Creature = create()): State = {
 
     val result = (0 until count).foldLeft(s)((s, _) => {
-      val id = CreatureId(s.nextEntityId)
+      val (nextId, nextIdSeq) = s.idSeq()
+      val id = CreatureId(nextId)
       val creature = prototype.copy(id = id, party = Party(id))
 
-      NewEntityMutation(creature)(s)
+      NewEntityMutation(creature)(IdSeqMutation(nextIdSeq)(s))
     })
 
     if (result.assets.kinds.creatures.isEmpty) {

@@ -2,7 +2,7 @@ package io.github.fiifoo.scarl.core.test_assets
 
 import io.github.fiifoo.scarl.core.entity._
 import io.github.fiifoo.scarl.core.kind.ItemKindId
-import io.github.fiifoo.scarl.core.mutation.NewEntityMutation
+import io.github.fiifoo.scarl.core.mutation.{IdSeqMutation, NewEntityMutation}
 import io.github.fiifoo.scarl.core.{Location, State}
 
 object TestItemFactory {
@@ -14,20 +14,23 @@ object TestItemFactory {
   def generate(s: State, count: Int, container: EntityId): State = {
 
     (0 until count).foldLeft(s)((s, _) => {
-      val item = create(ItemId(s.nextEntityId), container = container)
+      val (nextId, nextIdSeq) = s.idSeq()
+      val item = create(ItemId(nextId), container = container)
 
-      NewEntityMutation(item)(s)
+      NewEntityMutation(item)(IdSeqMutation(nextIdSeq)(s))
     })
   }
 
   def generate(s: State, count: Int, location: Location): State = {
 
     (0 until count).foldLeft(s)((s, _) => {
-      val container = Container(ContainerId(s.nextEntityId), location)
-      val _s = NewEntityMutation(container)(s)
+      val (containerId, containerIdSeq) = s.idSeq()
+      val container = Container(ContainerId(containerId), location)
+      val ns = NewEntityMutation(container)(s)
 
-      val item = create(ItemId(_s.nextEntityId), container = container.id)
-      NewEntityMutation(item)(_s)
+      val (itemId, itemIdSeq) = containerIdSeq()
+      val item = create(ItemId(itemId), container = container.id)
+      NewEntityMutation(item)(IdSeqMutation(itemIdSeq)(ns))
     })
   }
 }
