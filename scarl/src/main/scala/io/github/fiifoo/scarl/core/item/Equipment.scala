@@ -1,6 +1,7 @@
 package io.github.fiifoo.scarl.core.item
 
 import io.github.fiifoo.scarl.core.creature.Stats
+import io.github.fiifoo.scarl.core.entity.Item
 import io.github.fiifoo.scarl.core.item.Equipment._
 
 object Equipment {
@@ -27,6 +28,19 @@ object Equipment {
 
   case object FootArmor extends ArmorSlot
 
+  def selectEquipment(slot: Slot, item: Item): Option[Equipment] = {
+    val valid: PartialFunction[Equipment, Equipment] = {
+      case e: Equipment if e.slots contains slot => e
+    }
+
+    // Order might matter eg. two handed weapon + shield
+    List(
+      item.weapon collect valid,
+      item.rangedWeapon collect valid,
+      item.shield collect valid,
+      item.armor collect valid
+    ).flatten.headOption
+  }
 }
 
 sealed trait Equipment {

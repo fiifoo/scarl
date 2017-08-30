@@ -2,7 +2,7 @@ package io.github.fiifoo.scarl.effect
 
 import io.github.fiifoo.scarl.core.State
 import io.github.fiifoo.scarl.core.effect.{Effect, EffectResult}
-import io.github.fiifoo.scarl.core.entity.{CreatureId, Item, ItemId}
+import io.github.fiifoo.scarl.core.entity.{CreatureId, ItemId}
 import io.github.fiifoo.scarl.core.item.Equipment.Slot
 import io.github.fiifoo.scarl.core.item._
 import io.github.fiifoo.scarl.core.mutation.EquipItemMutation
@@ -19,7 +19,7 @@ case class EquipItemEffect(creature: CreatureId,
                           ) extends Effect {
 
   def apply(s: State): EffectResult = {
-    getEquipment(item(s)) map (equipment => {
+    Equipment.selectEquipment(slot, item(s)) map (equipment => {
 
       parent collect {
         case _: EquipItemEffect => getEquipResult(equipment)
@@ -34,20 +34,6 @@ case class EquipItemEffect(creature: CreatureId,
       }
 
     }) getOrElse EffectResult()
-  }
-
-  private def getEquipment(item: Item): Option[Equipment] = {
-    val valid: PartialFunction[Equipment, Equipment] = {
-      case e: Equipment if e.slots contains slot => e
-    }
-
-    // Order might matter eg. two handed weapon + shield
-    List(
-      item.weapon collect valid,
-      item.rangedWeapon collect valid,
-      item.shield collect valid,
-      item.armor collect valid
-    ).flatten.headOption
   }
 
   private def getUnequipItems(s: State, equipment: Equipment): List[ItemId] = {

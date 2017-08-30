@@ -303,7 +303,14 @@ object Data {
       ),
       character = Some(Character(
         progression = ProgressionId("some")
-      ))
+      )),
+      equipments = Map(
+        MainHand -> ItemKindId("long-sword"),
+        RangedSlot -> ItemKindId("musket"),
+      ),
+      inventory = List(
+        ItemKindId("drone"),
+      ),
     )
 
     val avatarOfJustice = CreatureKind(
