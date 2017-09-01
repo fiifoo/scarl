@@ -53,6 +53,10 @@ object Rng {
     0 until min + random.nextInt(max - min + 1)
   }
 
+  def nextRange(random: Random, distribution: Distribution): Range = {
+    0 until distribution.value(random)
+  }
+
   case class WeightedChoice[T](value: T, weight: Int)
 
   case class WeightedChoices[T](choices: Iterable[WeightedChoice[T]]) {
