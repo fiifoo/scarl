@@ -7,7 +7,7 @@ export default (state = Map(), action) => {
             return Map()
         }
         case types.RECEIVE_PLAYER_INVENTORY: {
-            return Map(action.data.equipments.map(x => [x.key, x.value]))
+            return Map(action.data.equipments)
         }
         default: {
             return state

@@ -1,0 +1,1329 @@
+{
+  "areas" : [ [ "first", {
+    "id" : "first",
+    "template" : "main",
+    "conduits" : [ {
+      "_1" : "second",
+      "_2" : "stairs-down",
+      "_3" : "stairs-up"
+    }, {
+      "_1" : "second",
+      "_2" : "stairs-down",
+      "_3" : "stairs-up"
+    } ]
+  } ], [ "second", {
+    "id" : "second",
+    "template" : "main",
+    "conduits" : [ ]
+  } ] ],
+  "communications" : [ [ "greet-justice-1", {
+    "type" : "Message",
+    "data" : {
+      "id" : "greet-justice-1",
+      "value" : "I greet you. We will fight by your side."
+    }
+  } ], [ "greet-justice-2", {
+    "type" : "Message",
+    "data" : {
+      "id" : "greet-justice-2",
+      "value" : "Justice prevails."
+    }
+  } ], [ "response-justice-1", {
+    "type" : "Message",
+    "data" : {
+      "id" : "response-justice-1",
+      "value" : "Let us strike at our foes."
+    }
+  } ], [ "response-justice-2", {
+    "type" : "Message",
+    "data" : {
+      "id" : "response-justice-2",
+      "value" : "Chaos will be undone."
+    }
+  } ] ],
+  "factions" : [ [ "none", {
+    "id" : "none",
+    "enemies" : [ ]
+  } ], [ "justice", {
+    "id" : "justice",
+    "enemies" : [ "chaos", "marines" ]
+  } ], [ "chaos", {
+    "id" : "chaos",
+    "enemies" : [ "justice", "marines" ]
+  } ], [ "marines", {
+    "id" : "marines",
+    "enemies" : [ "justice", "chaos" ]
+  } ] ],
+  "kinds" : {
+    "creatures" : [ [ "avatar-of-justice", {
+      "display" : "A",
+      "color" : "White",
+      "equipments" : [ ],
+      "character" : {
+        "progression" : "some",
+        "experience" : 0,
+        "level" : 1
+      },
+      "name" : "Avatar of Justice",
+      "solitary" : false,
+      "flying" : false,
+      "responses" : [ [ "justice", [ "response-justice-1", "response-justice-2" ] ] ],
+      "behavior" : {
+        "type" : "RoamTactic",
+        "data" : null
+      },
+      "greetings" : [ [ "justice", [ "greet-justice-1", "greet-justice-2" ] ] ],
+      "id" : "avatar-of-justice",
+      "inventory" : [ ],
+      "faction" : "justice",
+      "stats" : {
+        "explosive" : {
+          "attack" : 0,
+          "damage" : 0,
+          "radius" : 0
+        },
+        "missileLauncher" : {
+          "range" : 0
+        },
+        "speed" : 1,
+        "ranged" : {
+          "attack" : 0,
+          "damage" : 0,
+          "range" : 0
+        },
+        "defence" : 20,
+        "melee" : {
+          "attack" : 20,
+          "damage" : 10
+        },
+        "health" : 1000,
+        "sight" : {
+          "range" : 5
+        },
+        "armor" : 5
+      }
+    } ], [ "hero", {
+      "display" : "@",
+      "color" : "Yellow",
+      "equipments" : [ [ "MainHand", "long-sword" ], [ "RangedSlot", "musket" ], [ "FootArmor", "leather-boots" ], [ "OffHand", "steel-shield" ] ],
+      "character" : {
+        "progression" : "some",
+        "experience" : 0,
+        "level" : 1
+      },
+      "name" : "Hero",
+      "solitary" : true,
+      "flying" : false,
+      "responses" : [ ],
+      "behavior" : {
+        "type" : "RoamTactic",
+        "data" : null
+      },
+      "greetings" : [ ],
+      "id" : "hero",
+      "inventory" : [ "drone" ],
+      "faction" : "justice",
+      "stats" : {
+        "explosive" : {
+          "attack" : 0,
+          "damage" : 0,
+          "radius" : 0
+        },
+        "missileLauncher" : {
+          "range" : 0
+        },
+        "speed" : 1,
+        "ranged" : {
+          "attack" : 0,
+          "damage" : 0,
+          "range" : 0
+        },
+        "defence" : 20,
+        "melee" : {
+          "attack" : 20,
+          "damage" : 10
+        },
+        "health" : 30,
+        "sight" : {
+          "range" : 10
+        },
+        "armor" : 5
+      }
+    } ], [ "guided-missile", {
+      "display" : "x",
+      "color" : "White",
+      "equipments" : [ ],
+      "missile" : {
+        "guidance" : {
+          "type" : "Guided",
+          "data" : null
+        }
+      },
+      "name" : "Missile",
+      "solitary" : false,
+      "flying" : true,
+      "responses" : [ ],
+      "behavior" : {
+        "type" : "PassTactic",
+        "data" : null
+      },
+      "greetings" : [ ],
+      "id" : "guided-missile",
+      "inventory" : [ ],
+      "faction" : "none",
+      "stats" : {
+        "explosive" : {
+          "attack" : 50,
+          "damage" : 20,
+          "radius" : 2
+        },
+        "missileLauncher" : {
+          "range" : 0
+        },
+        "speed" : 3,
+        "ranged" : {
+          "attack" : 0,
+          "damage" : 0,
+          "range" : 0
+        },
+        "defence" : 100,
+        "melee" : {
+          "attack" : 0,
+          "damage" : 0
+        },
+        "health" : 10,
+        "sight" : {
+          "range" : 0
+        },
+        "armor" : 10
+      }
+    } ], [ "drone", {
+      "display" : "d",
+      "color" : "Yellow",
+      "equipments" : [ ],
+      "name" : "Drone",
+      "solitary" : false,
+      "flying" : false,
+      "responses" : [ ],
+      "behavior" : {
+        "type" : "FollowerTactic",
+        "data" : null
+      },
+      "usable" : "transform-drone",
+      "greetings" : [ ],
+      "id" : "drone",
+      "inventory" : [ ],
+      "faction" : "none",
+      "stats" : {
+        "explosive" : {
+          "attack" : 0,
+          "damage" : 0,
+          "radius" : 0
+        },
+        "missileLauncher" : {
+          "ammo" : "guided-missile",
+          "range" : 10
+        },
+        "speed" : 1,
+        "ranged" : {
+          "attack" : 20,
+          "damage" : 10,
+          "range" : 5
+        },
+        "defence" : 30,
+        "melee" : {
+          "attack" : 10,
+          "damage" : 10
+        },
+        "health" : 50,
+        "sight" : {
+          "range" : 10
+        },
+        "armor" : 10
+      }
+    } ], [ "hound-of-chaos", {
+      "display" : "c",
+      "color" : "Purple",
+      "equipments" : [ ],
+      "name" : "Hound of Chaos",
+      "solitary" : false,
+      "flying" : false,
+      "responses" : [ ],
+      "behavior" : {
+        "type" : "RoamTactic",
+        "data" : null
+      },
+      "greetings" : [ ],
+      "id" : "hound-of-chaos",
+      "inventory" : [ ],
+      "faction" : "chaos",
+      "stats" : {
+        "explosive" : {
+          "attack" : 0,
+          "damage" : 0,
+          "radius" : 0
+        },
+        "missileLauncher" : {
+          "range" : 0
+        },
+        "speed" : 1,
+        "ranged" : {
+          "attack" : 0,
+          "damage" : 0,
+          "range" : 0
+        },
+        "defence" : 10,
+        "melee" : {
+          "attack" : 10,
+          "damage" : 10
+        },
+        "health" : 10,
+        "sight" : {
+          "range" : 5
+        },
+        "armor" : 5
+      }
+    } ], [ "colonial-marine", {
+      "display" : "m",
+      "color" : "Green",
+      "equipments" : [ ],
+      "name" : "Colonial Marine",
+      "solitary" : false,
+      "flying" : false,
+      "responses" : [ ],
+      "behavior" : {
+        "type" : "RoamTactic",
+        "data" : null
+      },
+      "greetings" : [ ],
+      "id" : "colonial-marine",
+      "inventory" : [ ],
+      "faction" : "marines",
+      "stats" : {
+        "explosive" : {
+          "attack" : 0,
+          "damage" : 0,
+          "radius" : 0
+        },
+        "missileLauncher" : {
+          "range" : 0
+        },
+        "speed" : 1,
+        "ranged" : {
+          "attack" : 10,
+          "damage" : 10,
+          "range" : 5
+        },
+        "defence" : 10,
+        "melee" : {
+          "attack" : 10,
+          "damage" : 10
+        },
+        "health" : 10,
+        "sight" : {
+          "range" : 5
+        },
+        "armor" : 5
+      }
+    } ], [ "avatar-of-chaos", {
+      "display" : "A",
+      "color" : "Red",
+      "equipments" : [ ],
+      "name" : "Avatar of Chaos",
+      "solitary" : false,
+      "flying" : false,
+      "responses" : [ ],
+      "behavior" : {
+        "type" : "RoamTactic",
+        "data" : null
+      },
+      "greetings" : [ ],
+      "id" : "avatar-of-chaos",
+      "inventory" : [ ],
+      "faction" : "chaos",
+      "stats" : {
+        "explosive" : {
+          "attack" : 0,
+          "damage" : 0,
+          "radius" : 0
+        },
+        "missileLauncher" : {
+          "range" : 0
+        },
+        "speed" : 1,
+        "ranged" : {
+          "attack" : 0,
+          "damage" : 0,
+          "range" : 0
+        },
+        "defence" : 30,
+        "melee" : {
+          "attack" : 30,
+          "damage" : 15
+        },
+        "health" : 50,
+        "sight" : {
+          "range" : 5
+        },
+        "armor" : 5
+      }
+    } ], [ "herald-of-chaos", {
+      "display" : "C",
+      "color" : "Blue",
+      "equipments" : [ ],
+      "name" : "Herald of Chaos",
+      "solitary" : false,
+      "flying" : false,
+      "responses" : [ ],
+      "behavior" : {
+        "type" : "RoamTactic",
+        "data" : null
+      },
+      "greetings" : [ ],
+      "id" : "herald-of-chaos",
+      "inventory" : [ ],
+      "faction" : "chaos",
+      "stats" : {
+        "explosive" : {
+          "attack" : 0,
+          "damage" : 0,
+          "radius" : 0
+        },
+        "missileLauncher" : {
+          "range" : 0
+        },
+        "speed" : 1,
+        "ranged" : {
+          "attack" : 0,
+          "damage" : 0,
+          "range" : 0
+        },
+        "defence" : 20,
+        "melee" : {
+          "attack" : 20,
+          "damage" : 10
+        },
+        "health" : 10,
+        "sight" : {
+          "range" : 5
+        },
+        "armor" : 5
+      }
+    } ] ],
+    "items" : [ [ "stairs-down", {
+      "id" : "stairs-down",
+      "name" : "Stairs down",
+      "display" : ">",
+      "color" : "LightGrey",
+      "hidden" : false,
+      "pickable" : false
+    } ], [ "chain-shirt", {
+      "id" : "chain-shirt",
+      "name" : "Chain shirt",
+      "display" : "]",
+      "color" : "LightGrey",
+      "armor" : {
+        "stats" : {
+          "explosive" : {
+            "attack" : 0,
+            "damage" : 0,
+            "radius" : 0
+          },
+          "missileLauncher" : {
+            "range" : 0
+          },
+          "speed" : 1,
+          "ranged" : {
+            "attack" : 0,
+            "damage" : 0,
+            "range" : 0
+          },
+          "defence" : 0,
+          "melee" : {
+            "attack" : 0,
+            "damage" : 0
+          },
+          "health" : 0,
+          "sight" : {
+            "range" : 0
+          },
+          "armor" : 2
+        },
+        "slot" : "ChestArmor"
+      },
+      "hidden" : false,
+      "pickable" : true
+    } ], [ "steel-shield", {
+      "id" : "steel-shield",
+      "name" : "Steel shield",
+      "display" : "[",
+      "color" : "DarkGrey",
+      "hidden" : false,
+      "pickable" : true,
+      "shield" : {
+        "stats" : {
+          "explosive" : {
+            "attack" : 0,
+            "damage" : 0,
+            "radius" : 0
+          },
+          "missileLauncher" : {
+            "range" : 0
+          },
+          "speed" : 1,
+          "ranged" : {
+            "attack" : 0,
+            "damage" : 0,
+            "range" : 0
+          },
+          "defence" : 10,
+          "melee" : {
+            "attack" : 0,
+            "damage" : 0
+          },
+          "health" : 0,
+          "sight" : {
+            "range" : 0
+          },
+          "armor" : 1
+        }
+      }
+    } ], [ "guided-missile-launcher", {
+      "id" : "guided-missile-launcher",
+      "name" : "Guided missile launcher",
+      "display" : "!",
+      "color" : "White",
+      "hidden" : false,
+      "pickable" : true,
+      "rangedWeapon" : {
+        "stats" : {
+          "explosive" : {
+            "attack" : 0,
+            "damage" : 0,
+            "radius" : 0
+          },
+          "missileLauncher" : {
+            "ammo" : "guided-missile",
+            "range" : 10
+          },
+          "speed" : 1,
+          "ranged" : {
+            "attack" : 0,
+            "damage" : 0,
+            "range" : 0
+          },
+          "defence" : 0,
+          "melee" : {
+            "attack" : 0,
+            "damage" : 0
+          },
+          "health" : 0,
+          "sight" : {
+            "range" : 0
+          },
+          "armor" : 0
+        }
+      }
+    } ], [ "grey-altar", {
+      "id" : "grey-altar",
+      "name" : "Grey altar",
+      "display" : "T",
+      "color" : "Grey",
+      "hidden" : false,
+      "pickable" : false
+    } ], [ "long-sword", {
+      "id" : "long-sword",
+      "name" : "Long sword",
+      "display" : "(",
+      "color" : "LightGrey",
+      "hidden" : false,
+      "pickable" : true,
+      "weapon" : {
+        "stats" : {
+          "explosive" : {
+            "attack" : 0,
+            "damage" : 0,
+            "radius" : 0
+          },
+          "missileLauncher" : {
+            "range" : 0
+          },
+          "speed" : 1,
+          "ranged" : {
+            "attack" : 0,
+            "damage" : 0,
+            "range" : 0
+          },
+          "defence" : 5,
+          "melee" : {
+            "attack" : 5,
+            "damage" : 5
+          },
+          "health" : 0,
+          "sight" : {
+            "range" : 0
+          },
+          "armor" : 0
+        },
+        "twoHanded" : false
+      }
+    } ], [ "musket", {
+      "id" : "musket",
+      "name" : "Musket",
+      "display" : "!",
+      "color" : "Brown",
+      "hidden" : false,
+      "pickable" : true,
+      "rangedWeapon" : {
+        "stats" : {
+          "explosive" : {
+            "attack" : 0,
+            "damage" : 0,
+            "radius" : 0
+          },
+          "missileLauncher" : {
+            "range" : 0
+          },
+          "speed" : 1,
+          "ranged" : {
+            "attack" : 20,
+            "damage" : 10,
+            "range" : 5
+          },
+          "defence" : 0,
+          "melee" : {
+            "attack" : 0,
+            "damage" : 0
+          },
+          "health" : 0,
+          "sight" : {
+            "range" : 0
+          },
+          "armor" : 0
+        }
+      }
+    } ], [ "arrow-trap", {
+      "id" : "arrow-trap",
+      "name" : "Arrow trap",
+      "display" : "^",
+      "color" : "Red",
+      "hidden" : true,
+      "pickable" : false
+    } ], [ "leather-helmet", {
+      "id" : "leather-helmet",
+      "name" : "Leather helmet",
+      "display" : "]",
+      "color" : "Brown",
+      "armor" : {
+        "stats" : {
+          "explosive" : {
+            "attack" : 0,
+            "damage" : 0,
+            "radius" : 0
+          },
+          "missileLauncher" : {
+            "range" : 0
+          },
+          "speed" : 1,
+          "ranged" : {
+            "attack" : 0,
+            "damage" : 0,
+            "range" : 0
+          },
+          "defence" : 0,
+          "melee" : {
+            "attack" : 0,
+            "damage" : 0
+          },
+          "health" : 0,
+          "sight" : {
+            "range" : 0
+          },
+          "armor" : 1
+        },
+        "slot" : "HeadArmor"
+      },
+      "hidden" : false,
+      "pickable" : true
+    } ], [ "wooden-door-open", {
+      "id" : "wooden-door-open",
+      "name" : "Wooden door",
+      "display" : "/",
+      "color" : "Brown",
+      "door" : {
+        "open" : true,
+        "transformTo" : "wooden-door-closed"
+      },
+      "hidden" : false,
+      "pickable" : false
+    } ], [ "wooden-door-closed", {
+      "id" : "wooden-door-closed",
+      "name" : "Wooden door",
+      "display" : "+",
+      "color" : "Brown",
+      "door" : {
+        "open" : false,
+        "transformTo" : "wooden-door-open"
+      },
+      "hidden" : false,
+      "pickable" : false
+    } ], [ "shining-altar", {
+      "id" : "shining-altar",
+      "name" : "Shining altar",
+      "display" : "T",
+      "color" : "Yellow",
+      "hidden" : false,
+      "pickable" : false
+    } ], [ "white-altar", {
+      "id" : "white-altar",
+      "name" : "White altar",
+      "display" : "T",
+      "color" : "White",
+      "hidden" : false,
+      "pickable" : false
+    } ], [ "claymore", {
+      "id" : "claymore",
+      "name" : "Claymore",
+      "display" : "(",
+      "color" : "White",
+      "hidden" : false,
+      "pickable" : true,
+      "weapon" : {
+        "stats" : {
+          "explosive" : {
+            "attack" : 0,
+            "damage" : 0,
+            "radius" : 0
+          },
+          "missileLauncher" : {
+            "range" : 0
+          },
+          "speed" : 1,
+          "ranged" : {
+            "attack" : 0,
+            "damage" : 0,
+            "range" : 0
+          },
+          "defence" : 0,
+          "melee" : {
+            "attack" : 10,
+            "damage" : 10
+          },
+          "health" : 0,
+          "sight" : {
+            "range" : 0
+          },
+          "armor" : 0
+        },
+        "twoHanded" : true
+      }
+    } ], [ "chain-leggings", {
+      "id" : "chain-leggings",
+      "name" : "Chain leggings",
+      "display" : "]",
+      "color" : "LightGrey",
+      "armor" : {
+        "stats" : {
+          "explosive" : {
+            "attack" : 0,
+            "damage" : 0,
+            "radius" : 0
+          },
+          "missileLauncher" : {
+            "range" : 0
+          },
+          "speed" : 1,
+          "ranged" : {
+            "attack" : 0,
+            "damage" : 0,
+            "range" : 0
+          },
+          "defence" : 0,
+          "melee" : {
+            "attack" : 0,
+            "damage" : 0
+          },
+          "health" : 0,
+          "sight" : {
+            "range" : 0
+          },
+          "armor" : 2
+        },
+        "slot" : "LegArmor"
+      },
+      "hidden" : false,
+      "pickable" : true
+    } ], [ "drone", {
+      "id" : "drone",
+      "name" : "Drone",
+      "display" : "d",
+      "color" : "LightGrey",
+      "hidden" : false,
+      "pickable" : true,
+      "usable" : "transform-drone"
+    } ], [ "chaos-portal", {
+      "id" : "chaos-portal",
+      "name" : "Chaos portal",
+      "display" : "O",
+      "color" : "Red",
+      "hidden" : false,
+      "pickable" : false
+    } ], [ "leather-boots", {
+      "id" : "leather-boots",
+      "name" : "Leather boots",
+      "display" : "]",
+      "color" : "Brown",
+      "armor" : {
+        "stats" : {
+          "explosive" : {
+            "attack" : 0,
+            "damage" : 0,
+            "radius" : 0
+          },
+          "missileLauncher" : {
+            "range" : 0
+          },
+          "speed" : 1,
+          "ranged" : {
+            "attack" : 0,
+            "damage" : 0,
+            "range" : 0
+          },
+          "defence" : 0,
+          "melee" : {
+            "attack" : 0,
+            "damage" : 0
+          },
+          "health" : 0,
+          "sight" : {
+            "range" : 0
+          },
+          "armor" : 1
+        },
+        "slot" : "FootArmor"
+      },
+      "hidden" : false,
+      "pickable" : true
+    } ], [ "stairs-up", {
+      "id" : "stairs-up",
+      "name" : "Stairs up",
+      "display" : "<",
+      "color" : "LightGrey",
+      "hidden" : false,
+      "pickable" : false
+    } ], [ "leather-gloves", {
+      "id" : "leather-gloves",
+      "name" : "Leather gloves",
+      "display" : "]",
+      "color" : "Brown",
+      "armor" : {
+        "stats" : {
+          "explosive" : {
+            "attack" : 0,
+            "damage" : 0,
+            "radius" : 0
+          },
+          "missileLauncher" : {
+            "range" : 0
+          },
+          "speed" : 1,
+          "ranged" : {
+            "attack" : 0,
+            "damage" : 0,
+            "range" : 0
+          },
+          "defence" : 0,
+          "melee" : {
+            "attack" : 0,
+            "damage" : 0
+          },
+          "health" : 0,
+          "sight" : {
+            "range" : 0
+          },
+          "armor" : 1
+        },
+        "slot" : "HandArmor"
+      },
+      "hidden" : false,
+      "pickable" : true
+    } ] ],
+    "terrains" : [ [ "stone-floor", {
+      "id" : "stone-floor",
+      "name" : "Stone floor",
+      "display" : ".",
+      "color" : "LightGrey"
+    } ], [ "rubble", {
+      "id" : "rubble",
+      "name" : "Rubble",
+      "display" : ".",
+      "color" : "Brown"
+    } ] ],
+    "walls" : [ [ "stone-wall", {
+      "id" : "stone-wall",
+      "name" : "Stone wall",
+      "display" : "#",
+      "color" : "DarkGrey"
+    } ] ],
+    "widgets" : [ [ "arrow-trap-widget", {
+      "type" : "DamagingTrapWidget",
+      "data" : {
+        "id" : "arrow-trap-widget",
+        "item" : "arrow-trap",
+        "damage" : 10,
+        "triggerDescription" : "You step on pressure plate. Arrow shoots from the wall and hits you."
+      }
+    } ], [ "chaos-portal-widget", {
+      "type" : "SummonCreatureWidget",
+      "data" : {
+        "id" : "chaos-portal-widget",
+        "item" : "chaos-portal",
+        "summon" : {
+          "choices" : [ {
+            "value" : "hound-of-chaos",
+            "weight" : 100
+          }, {
+            "value" : "herald-of-chaos",
+            "weight" : 10
+          }, {
+            "value" : "avatar-of-chaos",
+            "weight" : 2
+          } ]
+        },
+        "interval" : 1000
+      }
+    } ], [ "activate-healing-altar-widget", {
+      "type" : "TriggeredTransformingWidget",
+      "data" : {
+        "id" : "activate-healing-altar-widget",
+        "item" : "white-altar",
+        "transformDescription" : "Altar shines in golden light.",
+        "transformTo" : "active-healing-altar-widget"
+      }
+    } ], [ "active-healing-altar-widget", {
+      "type" : "HealLocationWidget",
+      "data" : {
+        "id" : "active-healing-altar-widget",
+        "item" : "shining-altar",
+        "amount" : 5,
+        "interval" : 100,
+        "duration" : 400,
+        "transformDescription" : "Altar goes dark.",
+        "transformTo" : "inactive-healing-altar-widget"
+      }
+    } ], [ "inactive-healing-altar-widget", {
+      "type" : "DelayedTransformingWidget",
+      "data" : {
+        "id" : "inactive-healing-altar-widget",
+        "item" : "grey-altar",
+        "transformTo" : "activate-healing-altar-widget",
+        "transformDescription" : null,
+        "delay" : 5000
+      }
+    } ] ]
+  },
+  "powers" : {
+    "creatures" : [ [ "transform-drone", {
+      "type" : "TransformCreaturePower[Locatable]",
+      "data" : {
+        "id" : "transform-drone",
+        "to" : {
+          "type" : "ItemKind",
+          "value" : "drone"
+        },
+        "description" : "Drone shuts down."
+      }
+    } ] ],
+    "items" : [ [ "transform-drone", {
+      "type" : "TransformItemPower[Locatable]",
+      "data" : {
+        "id" : "transform-drone",
+        "to" : {
+          "type" : "CreatureKind",
+          "value" : "drone"
+        },
+        "description" : "Drone starts humming."
+      }
+    } ] ]
+  },
+  "progressions" : [ [ "some", {
+    "id" : "some",
+    "steps" : [ {
+      "requirements" : {
+        "experience" : 10
+      },
+      "stats" : {
+        "explosive" : {
+          "attack" : 0,
+          "damage" : 0,
+          "radius" : 0
+        },
+        "missileLauncher" : {
+          "range" : 0
+        },
+        "speed" : 1,
+        "ranged" : {
+          "attack" : 0,
+          "damage" : 0,
+          "range" : 0
+        },
+        "defence" : 1,
+        "melee" : {
+          "attack" : 1,
+          "damage" : 1
+        },
+        "health" : 2,
+        "sight" : {
+          "range" : 0
+        },
+        "armor" : 0
+      }
+    }, {
+      "requirements" : {
+        "experience" : 20
+      },
+      "stats" : {
+        "explosive" : {
+          "attack" : 0,
+          "damage" : 0,
+          "radius" : 0
+        },
+        "missileLauncher" : {
+          "range" : 0
+        },
+        "speed" : 1,
+        "ranged" : {
+          "attack" : 0,
+          "damage" : 0,
+          "range" : 0
+        },
+        "defence" : 2,
+        "melee" : {
+          "attack" : 2,
+          "damage" : 2
+        },
+        "health" : 4,
+        "sight" : {
+          "range" : 0
+        },
+        "armor" : 0
+      }
+    } ]
+  } ] ],
+  "templates" : [ [ "main", {
+    "type" : "RandomizedTemplate",
+    "data" : {
+      "id" : "main",
+      "shape" : {
+        "type" : "Rectangle",
+        "data" : {
+          "width" : 70,
+          "height" : 25,
+          "variance" : 0
+        }
+      },
+      "border" : "stone-wall",
+      "fill" : "stone-wall",
+      "content" : {
+        "creatures" : [ {
+          "_1" : "hound-of-chaos",
+          "_2" : 4,
+          "_3" : 7
+        } ],
+        "items" : [ ],
+        "terrains" : [ ],
+        "widgets" : [ ],
+        "conduitLocations" : {
+          "_1" : 0,
+          "_2" : 0
+        }
+      },
+      "templates" : [ {
+        "_1" : "big-room",
+        "_2" : 1,
+        "_3" : 1
+      }, {
+        "_1" : "room",
+        "_2" : 2,
+        "_3" : 4
+      }, {
+        "_1" : "gateway-room",
+        "_2" : 1,
+        "_3" : 1
+      } ],
+      "entrances" : [ ]
+    }
+  } ], [ "big-room", {
+    "type" : "RandomizedTemplate",
+    "data" : {
+      "id" : "big-room",
+      "shape" : {
+        "type" : "Rectangle",
+        "data" : {
+          "width" : 30,
+          "height" : 20,
+          "variance" : 0
+        }
+      },
+      "entrances" : [ {
+        "_1" : "wooden-door-closed",
+        "_2" : 4,
+        "_3" : 4
+      } ],
+      "border" : "stone-wall",
+      "terrain" : "rubble",
+      "content" : {
+        "creatures" : [ {
+          "_1" : "avatar-of-justice",
+          "_2" : 5,
+          "_3" : 5
+        } ],
+        "items" : [ {
+          "_1" : "grey-altar",
+          "_2" : 5,
+          "_3" : 5
+        }, {
+          "_1" : "musket",
+          "_2" : 1,
+          "_3" : 1
+        }, {
+          "_1" : "long-sword",
+          "_2" : 0,
+          "_3" : 1
+        }, {
+          "_1" : "claymore",
+          "_2" : 0,
+          "_3" : 1
+        }, {
+          "_1" : "steel-shield",
+          "_2" : 0,
+          "_3" : 1
+        }, {
+          "_1" : "chain-shirt",
+          "_2" : 0,
+          "_3" : 1
+        }, {
+          "_1" : "chain-leggings",
+          "_2" : 0,
+          "_3" : 1
+        }, {
+          "_1" : "leather-helmet",
+          "_2" : 0,
+          "_3" : 1
+        }, {
+          "_1" : "leather-boots",
+          "_2" : 0,
+          "_3" : 1
+        }, {
+          "_1" : "leather-gloves",
+          "_2" : 0,
+          "_3" : 1
+        } ],
+        "widgets" : [ {
+          "_1" : "chaos-portal-widget",
+          "_2" : 4,
+          "_3" : 4
+        }, {
+          "_1" : "activate-healing-altar-widget",
+          "_2" : 3,
+          "_3" : 3
+        }, {
+          "_1" : "arrow-trap-widget",
+          "_2" : 3,
+          "_3" : 3
+        } ],
+        "terrains" : [ ],
+        "conduitLocations" : {
+          "_1" : 0,
+          "_2" : 0
+        }
+      },
+      "templates" : [ {
+        "_1" : "room",
+        "_2" : 1,
+        "_3" : 1
+      } ]
+    }
+  } ], [ "room", {
+    "type" : "RandomizedTemplate",
+    "data" : {
+      "id" : "room",
+      "shape" : {
+        "type" : "Rectangle",
+        "data" : {
+          "width" : 12,
+          "height" : 10,
+          "variance" : 0.4
+        }
+      },
+      "entrances" : [ {
+        "_1" : "wooden-door-closed",
+        "_2" : 1,
+        "_3" : 2
+      } ],
+      "border" : "stone-wall",
+      "content" : {
+        "conduitLocations" : {
+          "_1" : 1,
+          "_2" : 1
+        },
+        "creatures" : [ {
+          "_1" : "hound-of-chaos",
+          "_2" : 0,
+          "_3" : 2
+        }, {
+          "_1" : "colonial-marine",
+          "_2" : 0,
+          "_3" : 5
+        } ],
+        "items" : [ {
+          "_1" : "grey-altar",
+          "_2" : 0,
+          "_3" : 1
+        }, {
+          "_1" : "musket",
+          "_2" : 0,
+          "_3" : 1
+        }, {
+          "_1" : "long-sword",
+          "_2" : 0,
+          "_3" : 1
+        }, {
+          "_1" : "claymore",
+          "_2" : 0,
+          "_3" : 1
+        }, {
+          "_1" : "steel-shield",
+          "_2" : 0,
+          "_3" : 1
+        }, {
+          "_1" : "chain-shirt",
+          "_2" : 0,
+          "_3" : 1
+        }, {
+          "_1" : "chain-leggings",
+          "_2" : 0,
+          "_3" : 1
+        }, {
+          "_1" : "leather-helmet",
+          "_2" : 0,
+          "_3" : 1
+        }, {
+          "_1" : "leather-boots",
+          "_2" : 0,
+          "_3" : 1
+        }, {
+          "_1" : "leather-gloves",
+          "_2" : 0,
+          "_3" : 1
+        } ],
+        "widgets" : [ {
+          "_1" : "chaos-portal-widget",
+          "_2" : 0,
+          "_3" : 1
+        }, {
+          "_1" : "activate-healing-altar-widget",
+          "_2" : 0,
+          "_3" : 1
+        }, {
+          "_1" : "arrow-trap-widget",
+          "_2" : 0,
+          "_3" : 1
+        } ],
+        "terrains" : [ ]
+      },
+      "templates" : [ ]
+    }
+  } ], [ "gateway-room", {
+    "type" : "FixedTemplate",
+    "data" : {
+      "id" : "gateway-room",
+      "shape" : {
+        "type" : "Rectangle",
+        "data" : {
+          "width" : 5,
+          "height" : 5,
+          "variance" : 0
+        }
+      },
+      "entrances" : [ [ {
+        "x" : 2,
+        "y" : 0
+      }, "wooden-door-closed" ] ],
+      "fixedContent" : {
+        "gatewayLocations" : [ {
+          "x" : 2,
+          "y" : 2
+        } ],
+        "items" : [ [ {
+          "x" : 2,
+          "y" : 1
+        }, [ "guided-missile-launcher" ] ], [ {
+          "x" : 2,
+          "y" : 3
+        }, [ "drone" ] ] ],
+        "walls" : [ [ {
+          "x" : 0,
+          "y" : 0
+        }, "stone-wall" ], [ {
+          "x" : 1,
+          "y" : 0
+        }, "stone-wall" ], [ {
+          "x" : 3,
+          "y" : 0
+        }, "stone-wall" ], [ {
+          "x" : 4,
+          "y" : 0
+        }, "stone-wall" ], [ {
+          "x" : 0,
+          "y" : 4
+        }, "stone-wall" ], [ {
+          "x" : 1,
+          "y" : 4
+        }, "stone-wall" ], [ {
+          "x" : 2,
+          "y" : 4
+        }, "stone-wall" ], [ {
+          "x" : 3,
+          "y" : 4
+        }, "stone-wall" ], [ {
+          "x" : 4,
+          "y" : 4
+        }, "stone-wall" ], [ {
+          "x" : 0,
+          "y" : 1
+        }, "stone-wall" ], [ {
+          "x" : 0,
+          "y" : 2
+        }, "stone-wall" ], [ {
+          "x" : 0,
+          "y" : 3
+        }, "stone-wall" ], [ {
+          "x" : 4,
+          "y" : 1
+        }, "stone-wall" ], [ {
+          "x" : 4,
+          "y" : 2
+        }, "stone-wall" ], [ {
+          "x" : 4,
+          "y" : 3
+        }, "stone-wall" ] ],
+        "conduitLocations" : [ ],
+        "creatures" : [ ],
+        "terrains" : [ ],
+        "widgets" : [ ]
+      },
+      "templates" : [ ],
+      "randomizedContent" : {
+        "creatures" : [ ],
+        "items" : [ ],
+        "terrains" : [ ],
+        "widgets" : [ ],
+        "conduitLocations" : {
+          "_1" : 0,
+          "_2" : 0
+        }
+      }
+    }
+  } ] ]
+}

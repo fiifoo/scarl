@@ -17,3 +17,5 @@ libraryDependencies += "com.typesafe.play" %% "play-slick-evolutions" % "3.0.1"
 libraryDependencies += "org.postgresql" % "postgresql" % "42.1.4"
 
 unmanagedResourceDirectories in Assets += (baseDirectory.value / "scarl-ui" / "dist")
+
+mappings in Universal ++= (baseDirectory.value / "data" * "*").get map (x => x -> ("data/" + x.getName))

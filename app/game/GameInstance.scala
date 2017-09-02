@@ -2,11 +2,11 @@ package game
 
 import akka.actor.ActorRef
 import dal.GameRepository
-import game.json.FormatGameState._
-import game.json.{ReadInMessage, WriteOutMessage}
 import io.github.fiifoo.scarl.game.api.OutMessage
 import io.github.fiifoo.scarl.game.{Game => Engine}
+import io.github.fiifoo.scarl.world.WorldAssets
 import models.Game
+import models.json.{ReadInMessage, WriteOutMessage}
 import models.message.{CreateExistingGame, CreateGameMessage, CreateNewGame}
 import play.api.libs.json._
 
@@ -14,7 +14,7 @@ import scala.concurrent.{ExecutionContext, Future}
 
 object GameInstance {
 
-  def apply(games: GameRepository, message: CreateGameMessage, out: ActorRef)
+  def apply(games: GameRepository, assets: WorldAssets, message: CreateGameMessage, out: ActorRef)
            (implicit ec: ExecutionContext): Future[Option[GameInstance]] = {
 
     val game = message match {
@@ -22,14 +22,14 @@ object GameInstance {
       case message: CreateExistingGame => games.start(message.game)
     }
 
-    game map (_ map (game => new GameInstance(games, game, out)))
+    game map (_ map (game => new GameInstance(games, assets, game, out)))
   }
 }
 
-class GameInstance(games: GameRepository, game: Game, out: ActorRef)
+class GameInstance(games: GameRepository, assets: WorldAssets, game: Game, out: ActorRef)
                   (implicit ec: ExecutionContext) {
 
-  var state = StartGame(game.save map Json.parse)
+  var state = StartGame(assets, game.save map Json.parse)
   sendMessages()
 
   def receive(json: JsValue): Unit = {

@@ -53,8 +53,10 @@ object Rng {
     0 until min + random.nextInt(max - min + 1)
   }
 
-  case class WeightedChoices[T](choices: Iterable[(T, Int)]) {
-    type BuildResult = (List[(T, Int)], Int)
+  case class WeightedChoice[T](value: T, weight: Int)
+
+  case class WeightedChoices[T](choices: Iterable[WeightedChoice[T]]) {
+    type BuildResult = (List[WeightedChoice[T]], Int)
 
     val (cumulative, total) = build()
 
@@ -62,16 +64,16 @@ object Rng {
       val value = random.nextInt(total) + 1
 
       val result = cumulative find (choice => {
-        choice._2 >= value
+        choice.weight >= value
       })
 
-      result.get._1
+      result.get.value
     }
 
     private def build(): BuildResult = {
       val (cumulative, total) = choices.foldLeft[BuildResult]((List(), 0))((result, choice) => {
-        val total = result._2 + choice._2
-        val cumulative = (choice._1, total) :: result._1
+        val total = result._2 + choice.weight
+        val cumulative = WeightedChoice(choice.value, total) :: result._1
 
         (cumulative, total)
       })

@@ -9,13 +9,13 @@ const buildMap = data => {
     const map = []
 
     data.forEach(item => {
-        const x = item.key.x
-        const y = item.key.y
+        const x = item[0].x
+        const y = item[0].y
 
         if (map[x] === undefined) {
             map[x] = []
         }
-        map[x][y] = item.value
+        map[x][y] = item[1]
     })
 
     return map

@@ -10,22 +10,16 @@ case class Games(games: Seq[Game]) extends OutMessage
 case class CreateGameFailed(games: Seq[Game]) extends OutMessage
 
 object OutMessage {
-  private implicit val gameWrites = Game.writesWithoutSave
 
-  private val gamesWrites = Json.writes[Games]
-  private val createGameFailedWrites = Json.writes[CreateGameFailed]
+  import models.json.JsonBase.polymorphicTypeWrites
 
-  val writes = new Writes[OutMessage] {
-    def writes(message: OutMessage): JsValue = {
-      val data = message match {
-        case message: Games => gamesWrites.writes(message)
-        case message: CreateGameFailed => createGameFailedWrites.writes(message)
-      }
+  lazy private implicit val gameWrites = Game.writesWithoutSave
 
-      JsObject(Map(
-        "type" -> JsString(message.getClass.getSimpleName),
-        "data" -> data
-      ))
-    }
-  }
+  lazy private val gamesWrites = Json.writes[Games]
+  lazy private val createGameFailedWrites = Json.writes[CreateGameFailed]
+
+  lazy val writes: Writes[OutMessage] = polymorphicTypeWrites({
+    case message: Games => gamesWrites.writes(message)
+    case message: CreateGameFailed => createGameFailedWrites.writes(message)
+  })
 }

@@ -1,13 +1,15 @@
 package models
 
-import game.json.FormatGameState._
 import io.github.fiifoo.scarl.game.GameState
-import play.api.libs.json.Json
+import models.json.JsonGameState
+import play.api.libs.json.{Format, Json}
 
 case class GameSave(state: GameState,
                     checkHashCode: Int
                    )
 
 object GameSave {
-  val format = Json.format[GameSave]
+  lazy private implicit val gameStateFormat = JsonGameState.gameStateFormat
+
+  lazy val format: Format[GameSave] = Json.format
 }

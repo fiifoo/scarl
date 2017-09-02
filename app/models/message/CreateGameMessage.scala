@@ -3,21 +3,16 @@ package models.message
 import play.api.libs.json._
 
 object CreateGameMessage {
-  private implicit val createNewGameReads = Json.reads[CreateNewGame]
-  private implicit val createExistingGameReads = Json.reads[CreateExistingGame]
 
-  val reads = new Reads[CreateGameMessage] {
-    def reads(json: JsValue): JsResult[CreateGameMessage] = {
-      val container = json.as[JsObject].value
-      val messageType = container("type").as[String]
-      val data = container("data")
+  import models.json.JsonBase.polymorphicTypeReads
 
-      JsSuccess(messageType match {
-        case "CreateNewGame" => data.as[CreateNewGame]
-        case "CreateExistingGame" => data.as[CreateExistingGame]
-      })
-    }
-  }
+  lazy private implicit val createNewGameReads = Json.reads[CreateNewGame]
+  lazy private implicit val createExistingGameReads = Json.reads[CreateExistingGame]
+
+  lazy val reads: Reads[CreateGameMessage] = polymorphicTypeReads(data => {
+    case "CreateNewGame" => data.as[CreateNewGame]
+    case "CreateExistingGame" => data.as[CreateExistingGame]
+  })
 }
 
 sealed trait CreateGameMessage

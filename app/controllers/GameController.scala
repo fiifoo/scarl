@@ -6,8 +6,8 @@ import akka.actor._
 import akka.stream.Materializer
 import dal.GameRepository
 import game.GameInstance
-import models.Game
 import models.message._
+import models.{DataManager, Game}
 import play.Environment
 import play.api.libs.json.JsValue
 import play.api.libs.streams._
@@ -15,7 +15,8 @@ import play.api.mvc._
 
 import scala.concurrent.ExecutionContext
 
-class GameController @Inject()(games: GameRepository,
+class GameController @Inject()(dataManager: DataManager,
+                               games: GameRepository,
                                cc: ControllerComponents
                               )(
                                 implicit ec: ExecutionContext,
@@ -69,8 +70,10 @@ class GameController @Inject()(games: GameRepository,
     }
 
     private def createInstance(json: JsValue) = {
+      val assets = dataManager.build()
+
       CreateGameMessage.reads.reads(json) foreach (message => {
-        GameInstance(games, message, out) foreach (created => {
+        GameInstance(games, assets, message, out) foreach (created => {
           instance = created
 
           if (created.isEmpty) {

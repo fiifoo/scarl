@@ -1,6 +1,6 @@
 package io.github.fiifoo.scarl.core
 
-import io.github.fiifoo.scarl.core.Rng.WeightedChoices
+import io.github.fiifoo.scarl.core.Rng.{WeightedChoice, WeightedChoices}
 import org.scalatest._
 
 class RngSpec extends FlatSpec with Matchers {
@@ -46,9 +46,9 @@ class RngSpec extends FlatSpec with Matchers {
 
   it should "give weighted choice" in {
     val d1 = getWeightedChoiceDistribution(WeightedChoices(List(
-      ('A', 1),
-      ('B', 1),
-      ('C', 1)
+      WeightedChoice('A', 1),
+      WeightedChoice('B', 1),
+      WeightedChoice('C', 1)
     )))
 
     Math.round(d1('A').toDouble / d1('B').toDouble) should ===(1)
@@ -56,9 +56,9 @@ class RngSpec extends FlatSpec with Matchers {
     Math.round(d1('B').toDouble / d1('C').toDouble) should ===(1)
 
     val d2 = getWeightedChoiceDistribution(WeightedChoices(List(
-      ('A', 10),
-      ('B', 2),
-      ('C', 1)
+      WeightedChoice('A', 10),
+      WeightedChoice('B', 2),
+      WeightedChoice('C', 1)
     )))
 
     Math.round(d2('A').toDouble / d2('B').toDouble) should ===(5)

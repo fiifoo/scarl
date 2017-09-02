@@ -18,17 +18,13 @@ object Game {
   private val dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SS'Z'")
   dateFormat.setTimeZone(TimeZone.getTimeZone("UTC"))
 
-  private implicit val formatTimestamp = new Format[Timestamp] {
+  lazy private implicit val formatTimestamp = new Format[Timestamp] {
     def writes(ts: Timestamp) = JsString(dateFormat.format(ts))
 
     def reads(json: JsValue) = JsSuccess(new Timestamp(dateFormat.parse(json.as[String]).getTime))
   }
 
-  val format = Json.format[Game]
+  lazy val format: Format[Game] = Json.format
 
-  val writesWithoutSave = new Writes[Game] {
-    def writes(game: Game): JsValue = {
-      format.writes(game.copy(save = None))
-    }
-  }
+  lazy val writesWithoutSave: Writes[Game] = game => format.writes(game.copy(save = None))
 }
