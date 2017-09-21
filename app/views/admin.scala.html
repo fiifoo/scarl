@@ -1,0 +1,20 @@
+@(assets: String, data: String, models: String, readonly: Boolean)
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Scarl - Admin</title>
+    <link rel="stylesheet" href="@assets/admin.css">
+</head>
+<body>
+    <div id="root"></div>
+    <script>
+        window.STATE_FROM_SERVER = {
+            "data": @Html(data),
+            "models": @Html(models),
+            "readonly": @readonly
+        };
+    </script>
+    <script src="@assets/admin.js"></script>
+</body>
+</html>

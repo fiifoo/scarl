@@ -1,0 +1,22 @@
+.item-form {
+    padding-right: 120px;
+    margin-bottom: 500px;
+}
+
+.item-form .delete-field {
+    float: right;
+    width: 100px;
+    margin-right: -120px;
+}
+
+.item-form .form-group {
+    margin-bottom: 2px;
+}
+
+.item-form .boolean-select {
+    min-height: 34px;
+}
+
+.Select-menu-outer {
+    z-index: 9;
+}
