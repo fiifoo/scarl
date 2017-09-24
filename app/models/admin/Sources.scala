@@ -73,7 +73,7 @@ object Sources {
       typeOf[HandArmor.type],
       typeOf[LegArmor.type],
       typeOf[FootArmor.type],
-    )),
+    ), objectPolymorphism = true),
     SubModelSource(typeOf[Slot], List(
       typeOf[MainHand.type],
       typeOf[OffHand.type],
