@@ -1,14 +1,16 @@
+import dal.AssetsRepository
 import game.LoadGame
 import io.github.fiifoo.scarl.area.AreaId
 import io.github.fiifoo.scarl.core.State
 import io.github.fiifoo.scarl.core.kind.CreatureKindId
 import io.github.fiifoo.scarl.world.{CreateWorld, WorldState}
-import models.Data
 import models.json.JsonWorldState
 import org.scalatestplus.play._
+import play.api.inject.guice.GuiceApplicationBuilder
 
 class JsonWorldStateSpec extends PlaySpec {
-  val assets = Data.build()
+  val environment = new GuiceApplicationBuilder().build().environment
+  val assets = new AssetsRepository(environment).build()
   val world = createWorld()
 
   "JsonWorldState" must {

@@ -2,12 +2,12 @@ package controllers
 
 import javax.inject.Inject
 
-import models.DataManager
+import dal.AssetsRepository
 import models.admin.Models
 import play.Environment
 import play.api.mvc._
 
-class AdminController @Inject()(dataManager: DataManager,
+class AdminController @Inject()(gameAssets: AssetsRepository,
                                 cc: ControllerComponents)
                                (environment: Environment) extends AbstractController(cc) {
 
@@ -20,7 +20,7 @@ class AdminController @Inject()(dataManager: DataManager,
   val readonly = !environment.isDev
 
   def index = Action {
-    val data = dataManager.read()
+    val data = gameAssets.read()
     val models = Models()
 
     Ok(views.html.admin(
@@ -36,7 +36,7 @@ class AdminController @Inject()(dataManager: DataManager,
       throw new Exception("Dev environment only.")
     }
 
-    dataManager.write(request.body)
+    gameAssets.write(request.body)
 
     Ok(request.body)
   }

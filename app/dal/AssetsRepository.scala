@@ -1,4 +1,4 @@
-package models
+package dal
 
 import java.nio.charset.StandardCharsets.UTF_8
 import java.nio.file.{Files, StandardOpenOption}
@@ -7,11 +7,12 @@ import javax.inject.{Inject, Singleton}
 import game.Simulations
 import io.github.fiifoo.scarl.core.assets.CombatPower
 import io.github.fiifoo.scarl.world.WorldAssets
-import play.Environment
+import models.Data
+import play.api.Environment
 import play.api.libs.json.{JsValue, Json}
 
 @Singleton
-class DataManager @Inject()(environment: Environment) {
+class AssetsRepository @Inject()(environment: Environment) {
 
   lazy private val dataFile = environment.getFile("data/data.json").toPath
   lazy private implicit val dataReads = Data.dataReads
