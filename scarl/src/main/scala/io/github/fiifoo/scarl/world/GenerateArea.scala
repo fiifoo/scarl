@@ -23,7 +23,8 @@ object GenerateArea {
 
     val (random, _) = state.rng()
     val template = assets.templates(assets.areas(area).template)
-    val templateResult = CalculateTemplate(template, assets.templates, random)
+    val theme = assets.themes(assets.areas(area).theme)
+    val templateResult = CalculateTemplate(assets, theme, template, random)
 
     val in = (world.conduits.values filter (_.target == area)).toList
     val (out, nextConduitId) = createConduits(assets.areas(area), world.nextConduitId)

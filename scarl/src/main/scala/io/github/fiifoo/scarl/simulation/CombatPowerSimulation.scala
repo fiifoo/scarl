@@ -2,11 +2,13 @@ package io.github.fiifoo.scarl.simulation
 
 import io.github.fiifoo.scarl.area.shape.Rectangle
 import io.github.fiifoo.scarl.area.template.{ApplyTemplate, CalculateTemplate, FixedTemplate, TemplateId}
+import io.github.fiifoo.scarl.area.theme.{Theme, ThemeId}
 import io.github.fiifoo.scarl.core.assets.CombatPower
 import io.github.fiifoo.scarl.core.creature.{Faction, FactionId}
 import io.github.fiifoo.scarl.core.entity.SafeCreatureId
-import io.github.fiifoo.scarl.core.kind.{CreatureKind, CreatureKindId, Kinds}
-import io.github.fiifoo.scarl.core.{Assets, Location, Rng, State}
+import io.github.fiifoo.scarl.core.kind._
+import io.github.fiifoo.scarl.core.{Location, Rng, State}
+import io.github.fiifoo.scarl.world.WorldAssets
 
 object CombatPowerSimulation {
   private val matches = 20
@@ -18,6 +20,12 @@ object CombatPowerSimulation {
   private val homeFaction = FactionId("home")
   private val visitorFaction = FactionId("visitor")
   private val dummyFaction = FactionId("dummy")
+
+  private val theme = Theme(
+    ThemeId("dummy"),
+    terrain = TerrainKindId("dummy"),
+    door = ItemKindId("dummy"),
+  )
 
   private val simulation = new Simulation[Null](
     listener = NullListener,
@@ -96,7 +104,7 @@ object CombatPowerSimulation {
         val kind = c(dummyFaction) // Kind faction hopefully doesn't matter...
 
         (kind.id, kind)
-      })).toMap
+      })).toMap,
     )
 
     val factions = List(
@@ -115,14 +123,16 @@ object CombatPowerSimulation {
       shape = Rectangle(teamDistance, teamSize, 0)
     )
 
-    val templateResult = CalculateTemplate(template, Map(template.id -> template), random)
-
-    val assets = Assets(
+    val assets = WorldAssets(
       factions = factions.map(f => (f.id, f)).toMap,
       kinds = kinds,
+      templates = Map(template.id -> template),
     )
+
+    val templateResult = CalculateTemplate(assets, theme, template, random)
+
     val instance = State(
-      assets = assets,
+      assets = assets.instance(),
       rng = rng
     )
 

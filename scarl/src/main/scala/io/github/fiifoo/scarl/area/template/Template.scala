@@ -2,41 +2,28 @@ package io.github.fiifoo.scarl.area.template
 
 import io.github.fiifoo.scarl.area.shape.Shape
 import io.github.fiifoo.scarl.area.template.Template.Result
+import io.github.fiifoo.scarl.area.theme.Theme
 import io.github.fiifoo.scarl.core.Location
 import io.github.fiifoo.scarl.core.kind._
+import io.github.fiifoo.scarl.world.WorldAssets
 
 import scala.util.Random
 
 trait Template {
   val id: TemplateId
 
-  def apply(t: Map[TemplateId, Template], random: Random): Result
+  def apply(assets: WorldAssets,
+            theme: Theme,
+            random: Random,
+           ): Result
 }
 
 object Template {
 
   case class Result(shape: Shape.Result,
                     templates: Map[Location, Result] = Map(),
-                    entrances: Map[Location, Option[ItemKindId]] = Map(),
-                    content: FixedContent = FixedContent(),
-                    terrain: Option[TerrainKindId] = None
+                    entrances: Map[Location, ItemKindId] = Map(),
+                    content: FixedContent = FixedContent()
                    )
-
-  case class FixedContent(conduitLocations: Set[Location] = Set(),
-                          creatures: Map[Location, CreatureKindId] = Map(),
-                          gatewayLocations: Set[Location] = Set(),
-                          items: Map[Location, List[ItemKindId]] = Map(),
-                          terrains: Map[Location, TerrainKindId] = Map(),
-                          walls: Map[Location, WallKindId] = Map(),
-                          widgets: Map[Location, WidgetKindId] = Map()
-                         )
-
-  /** List(what, min, max) */
-  case class RandomizedContent(conduitLocations: (Int, Int) = (0, 0),
-                               creatures: List[(CreatureKindId, Int, Int)] = List(),
-                               items: List[(ItemKindId, Int, Int)] = List(),
-                               terrains: List[(TerrainKindId, Int, Int)] = List(),
-                               widgets: List[(WidgetKindId, Int, Int)] = List()
-                              )
 
 }

@@ -2,8 +2,13 @@ package models.admin
 
 import io.github.fiifoo.scarl.ai.tactic.{FollowerTactic, RoamTactic}
 import io.github.fiifoo.scarl.area.Area
+import io.github.fiifoo.scarl.area.feature.{Feature, RandomizedContentFeature}
 import io.github.fiifoo.scarl.area.shape.{Rectangle, Shape}
 import io.github.fiifoo.scarl.area.template.{FixedTemplate, RandomizedTemplate, Template}
+import io.github.fiifoo.scarl.area.theme.ContentSelection.{FixedCreature, FixedItem, ThemeCreature, ThemeItem}
+import io.github.fiifoo.scarl.area.theme.{CreatureSelection, ItemSelection, Theme}
+import io.github.fiifoo.scarl.core.Distribution
+import io.github.fiifoo.scarl.core.Distribution.{Binomial, Uniform}
 import io.github.fiifoo.scarl.core.action.{Behavior, PassTactic}
 import io.github.fiifoo.scarl.core.communication.{Communication, Message}
 import io.github.fiifoo.scarl.core.creature.Missile.{Guidance, Guided, Smart}
@@ -53,10 +58,27 @@ object Sources {
       typeOf[RandomizedTemplate],
     )),
 
+    ModelSource(typeOf[Theme], List("themes")),
+
   ).map(s => s.relationId -> s).toMap
 
   // Needed only for polymorphic sub models. Others will be scanned recursively from main models.
   lazy val sub: Map[SubModel.Id, SubModelSource] = List(
+    SubModelSource(typeOf[CreatureSelection], List(
+      typeOf[ThemeCreature],
+      typeOf[FixedCreature],
+    )),
+    SubModelSource(typeOf[ItemSelection], List(
+      typeOf[ThemeItem.type],
+      typeOf[FixedItem],
+    )),
+    SubModelSource(typeOf[Distribution], List(
+      typeOf[Binomial],
+      typeOf[Uniform],
+    )),
+    SubModelSource(typeOf[Feature], List(
+      typeOf[RandomizedContentFeature],
+    )),
     SubModelSource(typeOf[Shape], List(
       typeOf[Rectangle],
     )),

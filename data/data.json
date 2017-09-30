@@ -10,11 +10,13 @@
       "_1" : "second",
       "_2" : "stairs-down",
       "_3" : "stairs-up"
-    } ]
+    } ],
+    "theme" : "war-eternal"
   } ], [ "second", {
     "id" : "second",
     "template" : "main",
-    "conduits" : [ ]
+    "conduits" : [ ],
+    "theme" : "war-eternal"
   } ] ],
   "communications" : [ [ "greet-justice-1", {
     "type" : "Message",
@@ -1024,20 +1026,32 @@
       },
       "border" : "stone-wall",
       "fill" : "stone-wall",
-      "content" : {
-        "creatures" : [ {
-          "_1" : "hound-of-chaos",
-          "_2" : 4,
-          "_3" : 7
-        } ],
-        "items" : [ ],
-        "terrains" : [ ],
-        "widgets" : [ ],
-        "conduitLocations" : {
-          "_1" : 0,
-          "_2" : 0
-        }
+      "conduitLocations" : {
+        "_1" : 0,
+        "_2" : 0
       },
+      "features" : [ {
+        "type" : "RandomizedContentFeature",
+        "data" : {
+          "creatures" : [ {
+            "selection" : {
+              "type" : "FixedCreature",
+              "data" : {
+                "kind" : "hound-of-chaos"
+              }
+            },
+            "distribution" : {
+              "type" : "Uniform",
+              "data" : {
+                "min" : 4,
+                "max" : 7
+              }
+            }
+          } ],
+          "items" : [ ],
+          "widgets" : [ ]
+        }
+      } ],
       "templates" : [ {
         "_1" : "big-room",
         "_2" : 1,
@@ -1072,72 +1086,76 @@
       } ],
       "border" : "stone-wall",
       "terrain" : "rubble",
-      "content" : {
-        "creatures" : [ {
-          "_1" : "avatar-of-justice",
-          "_2" : 5,
-          "_3" : 5
-        } ],
-        "items" : [ {
-          "_1" : "grey-altar",
-          "_2" : 5,
-          "_3" : 5
-        }, {
-          "_1" : "musket",
-          "_2" : 1,
-          "_3" : 1
-        }, {
-          "_1" : "long-sword",
-          "_2" : 0,
-          "_3" : 1
-        }, {
-          "_1" : "claymore",
-          "_2" : 0,
-          "_3" : 1
-        }, {
-          "_1" : "steel-shield",
-          "_2" : 0,
-          "_3" : 1
-        }, {
-          "_1" : "chain-shirt",
-          "_2" : 0,
-          "_3" : 1
-        }, {
-          "_1" : "chain-leggings",
-          "_2" : 0,
-          "_3" : 1
-        }, {
-          "_1" : "leather-helmet",
-          "_2" : 0,
-          "_3" : 1
-        }, {
-          "_1" : "leather-boots",
-          "_2" : 0,
-          "_3" : 1
-        }, {
-          "_1" : "leather-gloves",
-          "_2" : 0,
-          "_3" : 1
-        } ],
-        "widgets" : [ {
-          "_1" : "chaos-portal-widget",
-          "_2" : 4,
-          "_3" : 4
-        }, {
-          "_1" : "activate-healing-altar-widget",
-          "_2" : 3,
-          "_3" : 3
-        }, {
-          "_1" : "arrow-trap-widget",
-          "_2" : 3,
-          "_3" : 3
-        } ],
-        "terrains" : [ ],
-        "conduitLocations" : {
-          "_1" : 0,
-          "_2" : 0
-        }
+      "conduitLocations" : {
+        "_1" : 0,
+        "_2" : 0
       },
+      "features" : [ {
+        "type" : "RandomizedContentFeature",
+        "data" : {
+          "creatures" : [ {
+            "selection" : {
+              "type" : "FixedCreature",
+              "data" : {
+                "kind" : "avatar-of-justice"
+              }
+            },
+            "distribution" : {
+              "type" : "Uniform",
+              "data" : {
+                "min" : 5,
+                "max" : 5
+              }
+            }
+          } ],
+          "items" : [ {
+            "selection" : {
+              "type" : "FixedItem",
+              "data" : {
+                "kind" : "grey-altar"
+              }
+            },
+            "distribution" : {
+              "type" : "Uniform",
+              "data" : {
+                "min" : 5,
+                "max" : 5
+              }
+            }
+          }, {
+            "selection" : {
+              "type" : "ThemeItem",
+              "data" : null
+            },
+            "distribution" : {
+              "type" : "Binomial",
+              "data" : {
+                "p" : 50,
+                "n" : 10
+              }
+            }
+          } ],
+          "widgets" : [ {
+            "selection" : "chaos-portal-widget",
+            "distribution" : {
+              "type" : "Uniform",
+              "data" : {
+                "min" : 4,
+                "max" : 4
+              }
+            }
+          }, {
+            "selection" : "activate-healing-altar-widget",
+            "distribution" : {
+              "type" : "Uniform",
+              "data" : {
+                "min" : 3,
+                "max" : 3
+              }
+            }
+          } ]
+        }
+      } ],
       "templates" : [ {
         "_1" : "room",
         "_2" : 1,
@@ -1162,76 +1180,100 @@
         "_3" : 2
       } ],
       "border" : "stone-wall",
-      "content" : {
-        "conduitLocations" : {
-          "_1" : 1,
-          "_2" : 1
-        },
-        "creatures" : [ {
-          "_1" : "hound-of-chaos",
-          "_2" : 0,
-          "_3" : 2
-        }, {
-          "_1" : "colonial-marine",
-          "_2" : 0,
-          "_3" : 5
-        } ],
-        "items" : [ {
-          "_1" : "grey-altar",
-          "_2" : 0,
-          "_3" : 1
-        }, {
-          "_1" : "musket",
-          "_2" : 0,
-          "_3" : 1
-        }, {
-          "_1" : "long-sword",
-          "_2" : 0,
-          "_3" : 1
-        }, {
-          "_1" : "claymore",
-          "_2" : 0,
-          "_3" : 1
-        }, {
-          "_1" : "steel-shield",
-          "_2" : 0,
-          "_3" : 1
-        }, {
-          "_1" : "chain-shirt",
-          "_2" : 0,
-          "_3" : 1
-        }, {
-          "_1" : "chain-leggings",
-          "_2" : 0,
-          "_3" : 1
-        }, {
-          "_1" : "leather-helmet",
-          "_2" : 0,
-          "_3" : 1
-        }, {
-          "_1" : "leather-boots",
-          "_2" : 0,
-          "_3" : 1
-        }, {
-          "_1" : "leather-gloves",
-          "_2" : 0,
-          "_3" : 1
-        } ],
-        "widgets" : [ {
-          "_1" : "chaos-portal-widget",
-          "_2" : 0,
-          "_3" : 1
-        }, {
-          "_1" : "activate-healing-altar-widget",
-          "_2" : 0,
-          "_3" : 1
-        }, {
-          "_1" : "arrow-trap-widget",
-          "_2" : 0,
-          "_3" : 1
-        } ],
-        "terrains" : [ ]
+      "conduitLocations" : {
+        "_1" : 1,
+        "_2" : 1
       },
+      "features" : [ {
+        "type" : "RandomizedContentFeature",
+        "data" : {
+          "creatures" : [ {
+            "selection" : {
+              "type" : "FixedCreature",
+              "data" : {
+                "kind" : "hound-of-chaos"
+              }
+            },
+            "distribution" : {
+              "type" : "Uniform",
+              "data" : {
+                "min" : 0,
+                "max" : 2
+              }
+            }
+          }, {
+            "selection" : {
+              "type" : "FixedCreature",
+              "data" : {
+                "kind" : "colonial-marine"
+              }
+            },
+            "distribution" : {
+              "type" : "Uniform",
+              "data" : {
+                "min" : 0,
+                "max" : 5
+              }
+            }
+          }, {
+            "selection" : {
+              "type" : "ThemeCreature",
+              "data" : {
+                "minCombatPower" : 0,
+                "maxCombatPower" : 50
+              }
+            },
+            "distribution" : {
+              "type" : "Uniform",
+              "data" : {
+                "min" : 0,
+                "max" : 5
+              }
+            }
+          } ],
+          "widgets" : [ {
+            "selection" : "activate-healing-altar-widget",
+            "distribution" : {
+              "type" : "Binomial",
+              "data" : {
+                "p" : 90,
+                "n" : 1
+              }
+            }
+          }, {
+            "selection" : "chaos-portal-widget",
+            "distribution" : {
+              "type" : "Uniform",
+              "data" : {
+                "min" : 0,
+                "max" : 1
+              }
+            }
+          }, {
+            "selection" : "arrow-trap-widget",
+            "distribution" : {
+              "type" : "Uniform",
+              "data" : {
+                "min" : 0,
+                "max" : 1
+              }
+            }
+          } ],
+          "items" : [ {
+            "selection" : {
+              "type" : "ThemeItem",
+              "data" : null
+            },
+            "distribution" : {
+              "type" : "Uniform",
+              "data" : {
+                "min" : 0,
+                "max" : 3
+              }
+            }
+          } ]
+        }
+      } ],
       "templates" : [ ]
     }
   } ], [ "gateway-room", {
@@ -1250,7 +1292,7 @@
         "x" : 2,
         "y" : 0
       }, "wooden-door-closed" ] ],
-      "fixedContent" : {
+      "content" : {
         "gatewayLocations" : [ {
           "x" : 2,
           "y" : 2
@@ -1314,16 +1356,14 @@
         "widgets" : [ ]
       },
       "templates" : [ ],
-      "randomizedContent" : {
-        "creatures" : [ ],
-        "items" : [ ],
-        "terrains" : [ ],
-        "widgets" : [ ],
-        "conduitLocations" : {
-          "_1" : 0,
-          "_2" : 0
-        }
-      }
+      "features" : [ ]
     }
+  } ] ],
+  "themes" : [ [ "war-eternal", {
+    "id" : "war-eternal",
+    "creatures" : [ "avatar-of-chaos", "avatar-of-justice", "herald-of-chaos", "hound-of-chaos" ],
+    "items" : [ "chain-leggings", "chain-shirt", "claymore", "leather-boots", "leather-gloves", "leather-helmet", "long-sword", "steel-shield" ],
+    "terrain" : "stone-floor",
+    "door" : "wooden-door-closed"
   } ] ]
 }

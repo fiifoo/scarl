@@ -1,31 +1,36 @@
 package io.github.fiifoo.scarl.area.template
 
+import io.github.fiifoo.scarl.area.feature.Feature
 import io.github.fiifoo.scarl.area.shape.Shape
-import io.github.fiifoo.scarl.area.template.Template.{FixedContent, RandomizedContent, Result}
+import io.github.fiifoo.scarl.area.template.Template.Result
+import io.github.fiifoo.scarl.area.theme.Theme
 import io.github.fiifoo.scarl.core.Location
 import io.github.fiifoo.scarl.core.kind._
+import io.github.fiifoo.scarl.world.WorldAssets
 
 import scala.util.Random
 
 case class FixedTemplate(id: TemplateId,
                          shape: Shape,
                          templates: Map[Location, TemplateId] = Map(),
-                         entrances: Map[Location, Option[ItemKindId]] = Map(),
-                         fixedContent: FixedContent = FixedContent(),
-                         randomizedContent: RandomizedContent = RandomizedContent(),
-                         terrain: Option[TerrainKindId] = None
+                         entrances: Map[Location, ItemKindId] = Map(),
+                         content: FixedContent = FixedContent(),
+                         features: List[Feature] = List(),
                         ) extends Template {
 
-  def apply(t: Map[TemplateId, Template], random: Random): Result = {
+  def apply(assets: WorldAssets, theme: Theme, random: Random): Result = {
     val shapeResult = shape(random)
-    val subResults = templates mapValues (_ (t)(t, random))
+    val subResults = templates mapValues (_ (assets.templates)(assets, theme, random))
     val contained = CalculateUtils.templateContainedLocations(shapeResult, subResults)
     val contentResult = CalculateContent(
+      assets = assets,
+      theme = theme,
       locations = contained,
-      source = randomizedContent,
-      target = fixedContent,
+      target = content,
       entrances = entrances,
-      terrain = terrain,
+      conduits = (0, 0),
+      features = features,
+      terrain = None,
       random = random
     )
 
@@ -34,7 +39,6 @@ case class FixedTemplate(id: TemplateId,
       templates = subResults,
       entrances = entrances,
       content = contentResult,
-      terrain = terrain
     )
   }
 }

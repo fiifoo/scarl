@@ -1,12 +1,21 @@
 package io.github.fiifoo.scarl.area.template
 
 import io.github.fiifoo.scarl.area.shape.Rectangle
+import io.github.fiifoo.scarl.area.theme.{Theme, ThemeId}
 import io.github.fiifoo.scarl.core.Location
+import io.github.fiifoo.scarl.core.kind.{ItemKindId, TerrainKindId}
+import io.github.fiifoo.scarl.world.WorldAssets
 import org.scalatest._
 
 import scala.util.Random
 
 class CalculateTemplateSpec extends FlatSpec with Matchers {
+
+  private val theme = Theme(
+    ThemeId("dummy"),
+    terrain = TerrainKindId("dummy"),
+    door = ItemKindId("dummy"),
+  )
 
   "CalculateTemplate" should "calculate template tree" in {
     val t1 = RandomizedTemplate(
@@ -34,8 +43,10 @@ class CalculateTemplateSpec extends FlatSpec with Matchers {
       shape = Rectangle(3, 3, 0.5)
     )
 
-    val t = Map(t1.id -> t1, t2.id -> t2, t3.id -> t3, t4.id -> t4)
+    val assets = WorldAssets(
+      templates = Map(t1.id -> t1, t2.id -> t2, t3.id -> t3, t4.id -> t4),
+    )
 
-    CalculateTemplate(t1, t, new Random(1), Some(1))
+    CalculateTemplate(assets, theme, t1, new Random(1), Some(1))
   }
 }

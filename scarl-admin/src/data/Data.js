@@ -46,6 +46,7 @@ const Data = Record({
     powers: Powers(),
     progressions: Map(),
     templates: Map(),
+    themes: Map(),
 })
 Data.read = raw => Data({
     areas: readMap(raw.areas),
@@ -55,6 +56,7 @@ Data.read = raw => Data({
     powers: Powers.read(raw.powers),
     progressions: readMap(raw.progressions),
     templates: readMap(raw.templates),
+    themes: readMap(raw.themes),
 })
 Data.write = data => ({
     areas: writeMap(data.areas),
@@ -64,6 +66,7 @@ Data.write = data => ({
     powers: Powers.write(data.powers),
     progressions: writeMap(data.progressions),
     templates: writeMap(data.templates),
+    themes: writeMap(data.themes),
 })
 
 export default Data

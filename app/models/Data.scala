@@ -1,6 +1,7 @@
 package models
 
 import io.github.fiifoo.scarl.area.template.{Template, TemplateId}
+import io.github.fiifoo.scarl.area.theme.{Theme, ThemeId}
 import io.github.fiifoo.scarl.area.{Area, AreaId}
 import io.github.fiifoo.scarl.core.communication.{Communication, CommunicationId}
 import io.github.fiifoo.scarl.core.creature.{Faction, FactionId, Progression, ProgressionId}
@@ -15,7 +16,8 @@ case class Data(areas: Map[AreaId, Area],
                 kinds: Kinds,
                 powers: Powers,
                 progressions: Map[ProgressionId, Progression],
-                templates: Map[TemplateId, Template]
+                templates: Map[TemplateId, Template],
+                themes: Map[ThemeId, Theme],
                )
 
 object Data {
@@ -26,6 +28,7 @@ object Data {
   lazy private implicit val powersReads = JsonPowers.powersReads
   lazy private implicit val progressionMapReads = JsonProgression.progressionMapReads
   lazy private implicit val templateMapReads = JsonTemplate.templateMapReads
+  lazy private implicit val themeMapReads = JsonTheme.themeMapReads
 
   lazy val dataReads: Reads[Data] = Json.reads[Data]
 }

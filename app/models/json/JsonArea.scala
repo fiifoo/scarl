@@ -10,6 +10,7 @@ object JsonArea {
 
   lazy private implicit val itemKindIdFormat = JsonItemKind.itemKindIdFormat
   lazy private implicit val templateIdFormat = JsonTemplate.templateIdFormat
+  lazy private implicit val themeIdFormat = JsonTheme.themeIdFormat
 
   lazy implicit val areaIdFormat: Format[AreaId] = stringIdFormat(_.value, AreaId.apply)
 

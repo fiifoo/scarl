@@ -28,7 +28,8 @@ class AssetsRepository @Inject()(environment: Environment) {
       data.kinds,
       data.powers,
       data.progressions,
-      data.templates
+      data.templates,
+      data.themes,
     )
   }
 
