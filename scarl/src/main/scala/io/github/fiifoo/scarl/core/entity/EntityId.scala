@@ -43,6 +43,11 @@ case class ItemId(value: Int) extends EntityId {
   override def apply(s: State): Item = s.entities(this).asInstanceOf[Item]
 }
 
+case class MachineryId(value: Int) extends EntityId {
+
+  override def apply(s: State): Machinery = s.entities(this).asInstanceOf[Machinery]
+}
+
 case class PassiveStatusId(value: Int) extends EntityId with StatusId {
 
   override def apply(s: State): PassiveStatus = s.entities(this).asInstanceOf[PassiveStatus]

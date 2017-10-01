@@ -3,7 +3,7 @@ package io.github.fiifoo.scarl.status
 import io.github.fiifoo.scarl.core.State
 import io.github.fiifoo.scarl.core.effect.{Effect, TickEffect}
 import io.github.fiifoo.scarl.core.entity._
-import io.github.fiifoo.scarl.effect.{HealEffect, RemoveStatusEffect}
+import io.github.fiifoo.scarl.effect.{HealEffect, RemoveEntityEffect}
 
 case class SleepStatus(id: ActiveStatusId,
                        tick: Int,
@@ -20,7 +20,7 @@ case class SleepStatus(id: ActiveStatusId,
     List(
       Some(TickEffect(id, interval)),
       if (damage > 0) Some(HealEffect(target, heal)) else None,
-      if (damage - heal <= 0) Some(RemoveStatusEffect(id)) else None
+      if (damage - heal <= 0) Some(RemoveEntityEffect(id)) else None
     ).flatten
   }
 }

@@ -83,6 +83,10 @@ case class RemoveEntitiesMutation() extends Mutation {
         case locatable: Locatable => LocatableLocationIndexRemoveMutation(locatable.id, locatable.location)(index.locationEntities)
         case _ => index.locationEntities
       },
+      locationMachinery = entity match {
+        case machinery: Machinery => LocationMachineryIndexRemoveMutation(machinery.id, machinery.controls)(index.locationMachinery)
+        case _ => index.locationMachinery
+      },
       locationTriggers = entity match {
         case trigger: TriggerStatus => TriggerLocationIndexRemoveMutation(trigger.id, trigger.target(s).location)(index.locationTriggers)
         case _ => index.locationTriggers

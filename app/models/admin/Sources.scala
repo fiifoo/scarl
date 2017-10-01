@@ -14,8 +14,10 @@ import io.github.fiifoo.scarl.core.communication.{Communication, Message}
 import io.github.fiifoo.scarl.core.creature.Missile.{Guidance, Guided, Smart}
 import io.github.fiifoo.scarl.core.creature.{Faction, Progression}
 import io.github.fiifoo.scarl.core.item.Equipment._
+import io.github.fiifoo.scarl.core.item.Mechanism
 import io.github.fiifoo.scarl.core.kind._
 import io.github.fiifoo.scarl.core.power.{CreaturePower, ItemPower}
+import io.github.fiifoo.scarl.mechanism.{CreateEntityMechanism, RemoveWallMechanism, UseDoorMechanism}
 import io.github.fiifoo.scarl.power.{TransformCreaturePower, TransformItemPower}
 import io.github.fiifoo.scarl.widget._
 
@@ -40,6 +42,7 @@ object Sources {
       typeOf[DelayedTransformingWidget],
       typeOf[HealLocationWidget],
       typeOf[SummonCreatureWidget],
+      typeOf[TriggeredMachineryWidget],
       typeOf[TriggeredTransformingWidget],
     )),
 
@@ -63,13 +66,14 @@ object Sources {
 
   // Needed only for polymorphic sub models. Others will be scanned recursively from main models.
   lazy val sub: Map[SubModel.Id, SubModelSource] = List(
+    SubModelSource(typeOf[Behavior], List(
+      typeOf[PassTactic.type],
+      typeOf[FollowerTactic.type],
+      typeOf[RoamTactic.type],
+    )),
     SubModelSource(typeOf[CreatureSelection], List(
       typeOf[ThemeCreature],
       typeOf[FixedCreature],
-    )),
-    SubModelSource(typeOf[ItemSelection], List(
-      typeOf[ThemeItem.type],
-      typeOf[FixedItem],
     )),
     SubModelSource(typeOf[Distribution], List(
       typeOf[Binomial],
@@ -78,15 +82,23 @@ object Sources {
     SubModelSource(typeOf[Feature], List(
       typeOf[RandomizedContentFeature],
     )),
+    SubModelSource(typeOf[Guidance], List(
+      typeOf[Guided.type],
+      typeOf[Smart.type],
+    )),
+    SubModelSource(typeOf[ItemSelection], List(
+      typeOf[ThemeItem.type],
+      typeOf[FixedItem],
+    )),
+    SubModelSource(typeOf[Mechanism], List(
+      typeOf[CreateEntityMechanism],
+      typeOf[RemoveWallMechanism],
+      typeOf[UseDoorMechanism],
+    )),
     SubModelSource(typeOf[Shape], List(
       typeOf[Rectangle],
     )),
 
-    SubModelSource(typeOf[Behavior], List(
-      typeOf[PassTactic.type],
-      typeOf[FollowerTactic.type],
-      typeOf[RoamTactic.type],
-    )),
 
     SubModelSource(typeOf[ArmorSlot], List(
       typeOf[HeadArmor.type],
@@ -105,10 +117,6 @@ object Sources {
       typeOf[LegArmor.type],
       typeOf[FootArmor.type],
     ), objectPolymorphism = true),
-    SubModelSource(typeOf[Guidance], List(
-      typeOf[Guided.type],
-      typeOf[Smart.type],
-    )),
   ).map(s => s.id -> s).toMap
 
   lazy val polymorphicRelation: Map[Model.RelationId, PolymorphicRelationSource] = List(

@@ -4,7 +4,7 @@ import io.github.fiifoo.scarl.core.Selectors.getLocationEntities
 import io.github.fiifoo.scarl.core.State
 import io.github.fiifoo.scarl.core.effect.{Effect, TickEffect}
 import io.github.fiifoo.scarl.core.entity._
-import io.github.fiifoo.scarl.effect.{DamageEffect, RemoveStatusEffect}
+import io.github.fiifoo.scarl.effect.{DamageEffect, RemoveEntityEffect}
 
 case class BurnStatus(id: ActiveStatusId,
                       tick: Int,
@@ -25,7 +25,7 @@ case class BurnStatus(id: ActiveStatusId,
     if (expires.forall(_ > tick)) {
       TickEffect(id, interval) :: effects
     } else {
-      RemoveStatusEffect(id) :: effects
+      RemoveEntityEffect(id) :: effects
     }
   }
 }

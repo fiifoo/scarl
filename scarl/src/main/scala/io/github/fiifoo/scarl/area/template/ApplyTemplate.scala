@@ -56,6 +56,7 @@ object ApplyTemplate {
     state = processUniqueEntities(state, template.content.creatures, offset)
     state = processEntities(state, template.content.items, offset)
     state = processUniqueEntities(state, template.content.widgets, offset)
+    state = (template.content.machinery foldLeft state) ((s, machinery) => machinery(s, offset))
 
     template.templates.foldLeft(state)((s, data) => {
       val (location, sub) = data

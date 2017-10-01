@@ -6,7 +6,7 @@ import io.github.fiifoo.scarl.core.entity.{CreatureId, ItemId}
 import io.github.fiifoo.scarl.core.mutation.RemovableEntityMutation
 import io.github.fiifoo.scarl.core.{Location, State}
 
-case class UseDoorEffect(user: CreatureId,
+case class UseDoorEffect(user: Option[CreatureId],
                          target: ItemId,
                          parent: Option[Effect] = None
                         ) extends Effect {

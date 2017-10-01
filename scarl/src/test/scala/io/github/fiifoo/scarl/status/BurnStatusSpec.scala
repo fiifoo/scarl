@@ -6,7 +6,7 @@ import io.github.fiifoo.scarl.core.kind.WallKindId
 import io.github.fiifoo.scarl.core.mutation.NewEntityMutation
 import io.github.fiifoo.scarl.core.test_assets.TestCreatureFactory
 import io.github.fiifoo.scarl.core.{Location, State}
-import io.github.fiifoo.scarl.effect.{DamageEffect, RemoveStatusEffect}
+import io.github.fiifoo.scarl.effect.{DamageEffect, RemoveEntityEffect}
 import org.scalatest._
 
 class BurnStatusSpec extends FlatSpec with Matchers {
@@ -63,7 +63,7 @@ class BurnStatusSpec extends FlatSpec with Matchers {
       DamageEffect(creature.id, status1.damage)
     ))
     status2(s) should ===(List(
-      RemoveStatusEffect(status2.id),
+      RemoveEntityEffect(status2.id),
       DamageEffect(creature.id, status1.damage)
     ))
   }

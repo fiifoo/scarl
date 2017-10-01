@@ -17,6 +17,7 @@ object JsonWidgetKind {
   lazy private implicit val delayedTransformingReads = Json.reads[DelayedTransformingWidget]
   lazy private implicit val healLocationReads = Json.reads[HealLocationWidget]
   lazy private implicit val summonCreatureReads = Json.reads[SummonCreatureWidget]
+  lazy private implicit val triggeredMachineryWidgetReads = Json.reads[TriggeredMachineryWidget]
   lazy private implicit val triggeredTransformingReads = Json.reads[TriggeredTransformingWidget]
 
   lazy implicit val widgetKindIdFormat: Format[WidgetKindId] = stringIdFormat(_.value, WidgetKindId.apply)
@@ -26,6 +27,7 @@ object JsonWidgetKind {
     case "DelayedTransformingWidget" => data.as[DelayedTransformingWidget]
     case "HealLocationWidget" => data.as[HealLocationWidget]
     case "SummonCreatureWidget" => data.as[SummonCreatureWidget]
+    case "TriggeredMachineryWidget" => data.as[TriggeredMachineryWidget]
     case "TriggeredTransformingWidget" => data.as[TriggeredTransformingWidget]
   })
 

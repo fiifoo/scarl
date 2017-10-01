@@ -12,7 +12,7 @@ case class UseDoorAction(target: ItemId) extends Action {
   def apply(s: State, actor: CreatureId): List[Effect] = {
     List(
       TickEffect(actor, cost),
-      UseDoorEffect(actor, target)
+      UseDoorEffect(Some(actor), target)
     )
   }
 }

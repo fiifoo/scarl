@@ -101,6 +101,15 @@ case class Item(id: ItemId,
                 weapon: Option[Weapon] = None,
                ) extends Entity
 
+case class Machinery(id: MachineryId,
+                     mechanism: Mechanism,
+                     controls: Set[Location],
+                     targets: Set[Location]
+                    ) extends Entity {
+
+  def interact(s: State, control: Location): List[Effect] = mechanism.interact(s, this, control)
+}
+
 case class Terrain(id: TerrainId,
                    kind: TerrainKindId,
                    location: Location,

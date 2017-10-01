@@ -26,6 +26,7 @@ class EventBuilder(s: State, player: CreatureId, fov: Set[Location]) {
   def apply(effect: Effect): Option[Event] = {
     effect match {
       case e: BadShotEffect => build(e) map GenericEvent
+      case e: CreateEntityEffect => build(e) map GenericEvent
       case e: CollideEffect => build(e) map GenericEvent
       case e: CommunicateEffect => build(e) map GenericEvent
       case e: DeathEffect => build(e) map GenericEvent
@@ -63,6 +64,16 @@ class EventBuilder(s: State, player: CreatureId, fov: Set[Location]) {
     } else {
       None
     }
+  }
+
+  private def build(effect: CreateEntityEffect): Option[String] = {
+    effect.description flatMap (description => {
+      if (fov.contains(effect.location)) {
+        Some(description)
+      } else {
+        None
+      }
+    })
   }
 
   private def build(effect: CollideEffect): Option[String] = {
@@ -120,7 +131,7 @@ class EventBuilder(s: State, player: CreatureId, fov: Set[Location]) {
   }
 
   private def build(effect: DoorBlockedEffect): Option[String] = {
-    if (effect.opener == player) {
+    if (effect.user.contains(player)) {
       Some(s"${kind(effect.obstacle)} blocks the doorway.")
     } else {
       None
@@ -128,17 +139,25 @@ class EventBuilder(s: State, player: CreatureId, fov: Set[Location]) {
   }
 
   private def build(effect: DoorUsedEffect): Option[String] = {
-    if (effect.user == player) {
+    if (effect.user.contains(player)) {
       if (effect.opened) {
         Some("You open the door.")
       } else {
         Some("You close the door.")
       }
     } else if (getItemLocation(s)(effect.door).exists(fov.contains)) {
-      if (effect.opened) {
-        Some(s"${kind(effect.user)} opens a door.")
-      } else {
-        Some(s"${kind(effect.user)} closes a door.")
+      (effect.user map (user => {
+        if (effect.opened) {
+          Some(s"${kind(user)} opens a door.")
+        } else {
+          Some(s"${kind(user)} closes a door.")
+        }
+      })) getOrElse {
+        if (effect.opened) {
+          Some("Door opens.")
+        } else {
+          Some("Door closes.")
+        }
       }
     } else {
       None

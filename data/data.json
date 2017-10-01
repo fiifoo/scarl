@@ -1353,7 +1353,8 @@
         "conduitLocations" : [ ],
         "creatures" : [ ],
         "terrains" : [ ],
-        "widgets" : [ ]
+        "widgets" : [ ],
+        "machinery" : [ ]
       },
       "templates" : [ ],
       "features" : [ ]

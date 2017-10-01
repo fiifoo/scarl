@@ -1,6 +1,7 @@
 package io.github.fiifoo.scarl.area.feature
 
 import io.github.fiifoo.scarl.area.feature.RandomizedContentFeature.{CreatureSource, ItemSource, WidgetSource}
+import io.github.fiifoo.scarl.area.feature.Utils.freeLocations
 import io.github.fiifoo.scarl.area.template.{CalculateFailedException, FixedContent}
 import io.github.fiifoo.scarl.area.theme.ContentSelection.{FixedCreature, FixedItem, ThemeCreature, ThemeItem}
 import io.github.fiifoo.scarl.area.theme.{CreatureSelection, ItemSelection, Theme}
@@ -22,7 +23,7 @@ case class RandomizedContentFeature(creatures: List[CreatureSource] = List(),
             entrances: Set[Location],
             random: Random
            ): FixedContent = {
-    val free = locations -- content.gatewayLocations -- content.conduitLocations -- content.walls.keys
+    val free = freeLocations(content, locations)
 
     val creatures = RandomizedContentFeature.randomUniqueElementLocations(
       assets = assets,

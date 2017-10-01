@@ -15,6 +15,10 @@ case class NewEntityIndexMutation(entity: Entity) {
         case member: Creature => FactionMemberIndexAddMutation(member.id, member.faction)(index.factionMembers)
         case _ => index.factionMembers
       },
+      locationMachinery = entity match {
+        case machinery: Machinery => LocationMachineryIndexAddMutation(machinery.id, machinery.controls)(index.locationMachinery)
+        case _ => index.locationMachinery
+      },
       locationEntities = entity match {
         case locatable: Locatable => LocatableLocationIndexAddMutation(locatable.id, locatable.location)(index.locationEntities)
         case _ => index.locationEntities

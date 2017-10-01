@@ -10,6 +10,7 @@ object JsonEntity {
   lazy private implicit val containerFormat = JsonContainer.containerFormat
   lazy private implicit val creatureFormat = JsonCreature.creatureFormat
   lazy private implicit val itemFormat = JsonItem.itemFormat
+  lazy private implicit val machineryFormat = JsonMachinery.machineryFormat
   lazy private implicit val statusFormat = JsonStatus.statusFormat
   lazy private implicit val terrainFormat = JsonTerrain.terrainFormat
   lazy private implicit val wallFormat = JsonWall.wallFormat
@@ -20,6 +21,7 @@ object JsonEntity {
       case "ContainerId" => ContainerId(value)
       case "CreatureId" => CreatureId(value)
       case "ItemId" => ItemId(value)
+      case "MachineryId" => MachineryId(value)
       case "PassiveStatusId" => PassiveStatusId(value)
       case "TerrainId" => TerrainId(value)
       case "TriggerStatusId" => TriggerStatusId(value)
@@ -34,6 +36,7 @@ object JsonEntity {
       "containers" -> Json.toJson(entities.values collect { case container: Container => container }),
       "creatures" -> Json.toJson(entities.values collect { case creature: Creature => creature }),
       "items" -> Json.toJson(entities.values collect { case item: Item => item }),
+      "machinery" -> Json.toJson(entities.values collect { case machinery: Machinery => machinery }),
       "statuses" -> Json.toJson(entities.values collect { case status: Status => status }),
       "terrains" -> Json.toJson(entities.values collect { case terrain: Terrain => terrain }),
       "walls" -> Json.toJson(entities.values collect { case wall: Wall => wall })
@@ -46,6 +49,7 @@ object JsonEntity {
         obj("containers").as[List[Container]] :::
           obj("creatures").as[List[Creature]] :::
           obj("items").as[List[Item]] :::
+          obj("machinery").as[List[Machinery]] :::
           obj("statuses").as[List[Status]] :::
           obj("terrains").as[List[Terrain]] :::
           obj("walls").as[List[Wall]]

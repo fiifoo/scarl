@@ -12,21 +12,22 @@ object State {
 
   case class Area(width: Int = 10,
                   height: Int = 10,
-                  sectorSize: Int = 10
+                  sectorSize: Int = 10,
                  )
 
   case class Cache(actorQueue: ActorQueue = ActorQueue(),
                    equipmentStats: Map[CreatureId, Stats] = Map(),
-                   waypointNetwork: WaypointNetwork = WaypointNetwork()
+                   waypointNetwork: WaypointNetwork = WaypointNetwork(),
                   )
 
   case class Index(containerItems: Map[EntityId, Set[ItemId]] = Map(),
                    factionMembers: Map[FactionId, Set[CreatureId]] = Map(),
                    locationConduit: Map[Location, ConduitId] = Map(),
                    locationEntities: Map[Location, Set[LocatableId]] = Map(),
+                   locationMachinery: Map[Location, Set[MachineryId]] = Map(),
                    locationTriggers: Map[Location, Set[TriggerStatusId]] = Map(),
                    partyMembers: Map[Party, Set[CreatureId]] = Map(),
-                   targetStatuses: Map[EntityId, Set[StatusId]] = Map()
+                   targetStatuses: Map[EntityId, Set[StatusId]] = Map(),
                   )
 
   case class Simulation(running: Boolean = false,
@@ -34,7 +35,7 @@ object State {
                        )
 
   case class Temporary(conduitEntry: Option[(ConduitId, Traveler)] = None,
-                       removableEntities: Set[EntityId] = Set()
+                       removableEntities: Set[EntityId] = Set(),
                       )
 
 }
@@ -53,5 +54,5 @@ case class State(area: State.Area = State.Area(),
                  simulation: State.Simulation = State.Simulation(),
                  tactics: Map[CreatureId, Tactic] = Map(),
                  tick: Int = 1,
-                 tmp: State.Temporary = State.Temporary()
+                 tmp: State.Temporary = State.Temporary(),
                 )

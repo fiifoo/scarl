@@ -34,7 +34,7 @@ case class HealLocationStatus(id: ActiveStatusId,
         description = transformDescription
       ))
     } else {
-      RemoveStatusEffect(id) :: effects
+      RemoveEntityEffect(id) :: effects
     }
   }
 }

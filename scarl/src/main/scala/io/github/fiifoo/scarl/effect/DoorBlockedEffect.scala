@@ -4,7 +4,7 @@ import io.github.fiifoo.scarl.core.State
 import io.github.fiifoo.scarl.core.effect.{Effect, EffectResult}
 import io.github.fiifoo.scarl.core.entity.{CreatureId, ItemId}
 
-case class DoorBlockedEffect(opener: CreatureId,
+case class DoorBlockedEffect(user: Option[CreatureId],
                              door: ItemId,
                              obstacle: CreatureId,
                              parent: Option[Effect] = None

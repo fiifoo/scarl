@@ -26,6 +26,8 @@ object JsonState {
   lazy private implicit val creatureIdFormat = JsonCreature.creatureIdFormat
   lazy private implicit val itemIdFormat = JsonItem.itemIdFormat
   lazy private implicit val locationFormat = Json.format[Location]
+  lazy private implicit val machineryFormat = JsonMachinery.machineryFormat
+  lazy private implicit val machineryIdFormat = JsonMachinery.machineryIdFormat
   lazy private implicit val slotFormat = JsonItemEquipment.slotFormat
   lazy private implicit val tacticFormat = JsonTactic.tacticFormat
 

@@ -25,7 +25,7 @@ case class ConduitExitMutation(traveler: Traveler, location: Location) extends M
   }
 
   private def add(s: State, entity: Entity): State = {
-    NewEntityMutation(entity, existing = true)(s)
+    NewEntityMutation(entity)(s)
   }
 
   private def getStatuses(s: State): Set[Status] = {
