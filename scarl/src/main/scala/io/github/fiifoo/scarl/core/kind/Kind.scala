@@ -1,14 +1,14 @@
 package io.github.fiifoo.scarl.core.kind
 
-import io.github.fiifoo.scarl.core.entity.{Entity, Locatable}
+import io.github.fiifoo.scarl.core.entity.Entity
 import io.github.fiifoo.scarl.core.kind.Kind.Result
 import io.github.fiifoo.scarl.core.mutation.Mutation
 import io.github.fiifoo.scarl.core.{IdSeq, Location, State}
 
-trait Kind[T <: Locatable] {
-  val id: KindId[T]
+trait Kind {
+  val id: KindId
 
-  def toLocation(s: State, idSeq: IdSeq, location: Location): Result[T]
+  def toLocation(s: State, idSeq: IdSeq, location: Location): Result[_]
 }
 
 object Kind {

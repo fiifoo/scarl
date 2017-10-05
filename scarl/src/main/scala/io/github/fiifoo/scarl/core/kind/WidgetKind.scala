@@ -5,7 +5,7 @@ import io.github.fiifoo.scarl.core.kind.Kind.Result
 import io.github.fiifoo.scarl.core.mutation.{IdSeqMutation, NewEntityMutation}
 import io.github.fiifoo.scarl.core.{IdSeq, Location, State}
 
-trait WidgetKind extends Kind[Container] {
+trait WidgetKind extends Kind {
   val id: WidgetKindId
   val item: ItemKindId
 

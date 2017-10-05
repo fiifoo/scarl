@@ -13,7 +13,6 @@ import io.github.fiifoo.scarl.core.action.{Behavior, PassTactic}
 import io.github.fiifoo.scarl.core.communication.{Communication, Message}
 import io.github.fiifoo.scarl.core.creature.Missile.{Guidance, Guided, Smart}
 import io.github.fiifoo.scarl.core.creature.{Faction, Progression}
-import io.github.fiifoo.scarl.core.entity.Locatable
 import io.github.fiifoo.scarl.core.item.Equipment._
 import io.github.fiifoo.scarl.core.kind._
 import io.github.fiifoo.scarl.core.power.{CreaturePower, ItemPower}
@@ -45,10 +44,10 @@ object Sources {
     )),
 
     ModelSource(typeOf[CreaturePower], List("powers", "creatures"), List(
-      typeOf[TransformCreaturePower[Locatable]],
+      typeOf[TransformCreaturePower],
     )),
     ModelSource(typeOf[ItemPower], List("powers", "items"), List(
-      typeOf[TransformItemPower[Locatable]],
+      typeOf[TransformItemPower],
     )),
 
     ModelSource(typeOf[Progression], List("progressions")),
@@ -113,7 +112,7 @@ object Sources {
   ).map(s => s.id -> s).toMap
 
   lazy val polymorphicRelation: Map[Model.RelationId, PolymorphicRelationSource] = List(
-    PolymorphicRelationSource(typeOf[KindId[Locatable]], List(
+    PolymorphicRelationSource(typeOf[KindId], List(
       typeOf[CreatureKind],
       typeOf[ItemKind],
       typeOf[TerrainKind],

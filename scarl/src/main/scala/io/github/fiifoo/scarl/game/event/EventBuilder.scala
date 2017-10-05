@@ -43,8 +43,8 @@ class EventBuilder(s: State, player: CreatureId, fov: Set[Location]) {
       case e: PickItemEffect => build(e) map GenericEvent
       case e: ShootMissileEffect => build(e) map GenericEvent
       case e: ShotEffect => build(e)
-      case e: TransformedEffect[_] => build(e) map GenericEvent
-      case e: TransformFailedEffect[_] => build(e) map GenericEvent
+      case e: TransformedEffect => build(e) map GenericEvent
+      case e: TransformFailedEffect => build(e) map GenericEvent
       case e: TriggerTrapEffect => build(e) map GenericEvent
       case e: UnequipItemEffect => build(e) map GenericEvent
       case e: UseCreatureEffect => build(e) map GenericEvent
@@ -301,7 +301,7 @@ class EventBuilder(s: State, player: CreatureId, fov: Set[Location]) {
     }
   }
 
-  private def build(effect: TransformedEffect[_]): Option[String] = {
+  private def build(effect: TransformedEffect): Option[String] = {
     effect.description flatMap (description => {
       if (fov.contains(effect.location)) {
         Some(description)
@@ -311,7 +311,7 @@ class EventBuilder(s: State, player: CreatureId, fov: Set[Location]) {
     })
   }
 
-  private def build(effect: TransformFailedEffect[_]): Option[String] = {
+  private def build(effect: TransformFailedEffect): Option[String] = {
     effect.description flatMap (description => {
       if (effect.owner.contains(player)) {
         Some(description)

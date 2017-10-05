@@ -926,7 +926,7 @@
   },
   "powers" : {
     "creatures" : [ [ "transform-drone", {
-      "type" : "TransformCreaturePower[Locatable]",
+      "type" : "TransformCreaturePower",
       "data" : {
         "id" : "transform-drone",
         "to" : {
@@ -937,7 +937,7 @@
       }
     } ] ],
     "items" : [ [ "transform-drone", {
-      "type" : "TransformItemPower[Locatable]",
+      "type" : "TransformItemPower",
       "data" : {
         "id" : "transform-drone",
         "to" : {

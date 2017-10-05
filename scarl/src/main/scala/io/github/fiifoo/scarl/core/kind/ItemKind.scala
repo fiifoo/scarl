@@ -20,7 +20,7 @@ case class ItemKind(id: ItemKindId,
                     shield: Option[Shield] = None,
                     usable: Option[ItemPowerId] = None,
                     weapon: Option[Weapon] = None
-                   ) extends Kind[Container] {
+                   ) extends Kind {
 
   def toContainer(s: State, idSeq: IdSeq, container: EntityId): Result[Item] = {
     val (item, nextIdSeq) = createItem(idSeq, container)

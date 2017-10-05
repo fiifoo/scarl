@@ -30,7 +30,7 @@ case class CreatureKind(id: CreatureKindId,
 
                         greetings: Map[FactionId, List[CommunicationId]] = Map(),
                         responses: Map[FactionId, List[CommunicationId]] = Map()
-                       ) extends Kind[Creature] {
+                       ) extends Kind {
 
   def toLocation(s: State, idSeq: IdSeq, location: Location, owner: Option[SafeCreatureId]): Result[Creature] = {
     val (nextId, creatureIdSeq) = idSeq()

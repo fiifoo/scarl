@@ -9,7 +9,7 @@ case class WallKind(id: WallKindId,
                     name: String,
                     display: Char,
                     color: String
-                   ) extends Kind[Wall] {
+                   ) extends Kind {
 
   def toLocation(s: State, idSeq: IdSeq, location: Location): Result[Wall] = {
     val (nextId, nextIdSeq) = idSeq()

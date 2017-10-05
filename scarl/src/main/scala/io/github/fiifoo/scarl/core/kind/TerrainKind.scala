@@ -9,7 +9,7 @@ case class TerrainKind(id: TerrainKindId,
                        name: String,
                        display: Char,
                        color: String
-                      ) extends Kind[Terrain] {
+                      ) extends Kind {
 
   def toLocation(s: State, idSeq: IdSeq, location: Location): Result[Terrain] = {
     val (nextId, nextIdSeq) = idSeq()

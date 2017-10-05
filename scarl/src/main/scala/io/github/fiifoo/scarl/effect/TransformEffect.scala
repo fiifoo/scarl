@@ -8,12 +8,12 @@ import io.github.fiifoo.scarl.core.mutation.RemovableEntityMutation
 import io.github.fiifoo.scarl.core.{Location, State}
 import io.github.fiifoo.scarl.geometry.{Obstacle, Shape}
 
-case class TransformEffect[T <: Locatable](from: EntityId,
-                                           to: KindId[T],
-                                           owner: Option[CreatureId] = None,
-                                           description: Option[String] = None,
-                                           parent: Option[Effect] = None
-                                          ) extends Effect {
+case class TransformEffect(from: EntityId,
+                           to: KindId,
+                           owner: Option[CreatureId] = None,
+                           description: Option[String] = None,
+                           parent: Option[Effect] = None
+                          ) extends Effect {
 
   def apply(s: State): EffectResult = {
     getTargetLocation(s) map transform(s) getOrElse getFailedResult(Some("Not enough space."))
@@ -46,7 +46,7 @@ case class TransformEffect[T <: Locatable](from: EntityId,
   private def transform(s: State)(location: Location): EffectResult = {
     val result = to match {
       case kind: CreatureKindId => toCreature(s, kind, location)
-      case kind: KindId[T] => kind(s).toLocation(s, s.idSeq, location)
+      case kind: KindId => kind(s).toLocation(s, s.idSeq, location)
     }
 
     getSuccessResult(location, result)

@@ -5,12 +5,12 @@ import io.github.fiifoo.scarl.core.effect.{Effect, EffectResult}
 import io.github.fiifoo.scarl.core.entity._
 import io.github.fiifoo.scarl.core.kind.KindId
 
-case class TransformFailedEffect[T <: Locatable](from: EntityId,
-                                                 to: KindId[T],
-                                                 owner: Option[CreatureId] = None,
-                                                 description: Option[String] = None,
-                                                 parent: Option[Effect] = None
-                                                ) extends Effect {
+case class TransformFailedEffect(from: EntityId,
+                                 to: KindId,
+                                 owner: Option[CreatureId] = None,
+                                 description: Option[String] = None,
+                                 parent: Option[Effect] = None
+                                ) extends Effect {
 
   def apply(s: State): EffectResult = EffectResult()
 }

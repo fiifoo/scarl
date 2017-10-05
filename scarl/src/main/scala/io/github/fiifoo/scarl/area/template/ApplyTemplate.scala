@@ -1,6 +1,5 @@
 package io.github.fiifoo.scarl.area.template
 
-import io.github.fiifoo.scarl.core.entity.Locatable
 import io.github.fiifoo.scarl.core.kind._
 import io.github.fiifoo.scarl.core.mutation.{NewConduitMutation, NewGatewayMutation}
 import io.github.fiifoo.scarl.core.world.ConduitId
@@ -65,10 +64,10 @@ object ApplyTemplate {
     })
   }
 
-  private def processEntities[T <: Locatable](s: State,
-                                              elements: Map[Location, List[KindId[T]]],
-                                              offset: Location,
-                                             ): State = {
+  private def processEntities(s: State,
+                              elements: Map[Location, List[KindId]],
+                              offset: Location,
+                             ): State = {
 
     elements.foldLeft(s)((s, data) => {
       val (location, locationElements) = data
@@ -79,10 +78,10 @@ object ApplyTemplate {
     })
   }
 
-  private def processUniqueEntities[T <: Locatable](s: State,
-                                                    elements: Map[Location, KindId[T]],
-                                                    offset: Location,
-                                                   ): State = {
+  private def processUniqueEntities(s: State,
+                                    elements: Map[Location, KindId],
+                                    offset: Location,
+                                   ): State = {
 
     elements.foldLeft(s)((s, data) => {
       val (location, element) = data
