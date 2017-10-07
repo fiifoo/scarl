@@ -1,7 +1,9 @@
 import React from 'react'
 import TextInputRow from '../form/TextInputRow.jsx'
 
-const CharField = ({label, path, value, setValue}) => {
+const CharField = ({label, path, value, common}) => {
+    const {setValue} = common
+
     const onChange = value => {
         if (value === null || value.length <= 1) {
             setValue(path, value)

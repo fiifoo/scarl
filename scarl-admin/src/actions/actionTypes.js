@@ -5,3 +5,6 @@ export const SET_ADD_ITEM_ID = 'SET_ADD_ITEM_ID'
 export const SET_ITEM_VALUE = 'SET_ITEM_VALUE'
 export const SAVE = 'SAVE'
 export const SAVED = 'SAVED'
+
+export const SHOW_SIDE_FORM = 'SHOW_SIDE_FORM'
+export const HIDE_SIDE_FORM = 'HIDE_SIDE_FORM'

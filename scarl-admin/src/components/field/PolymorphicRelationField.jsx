@@ -2,7 +2,8 @@ import React from 'react'
 import FormRow from '../form/FormRow.jsx'
 import SelectRow from '../form/SelectRow.jsx'
 
-const PolymorphicRelationField = ({fieldType, label, required, path, value, setValue, data, models}) => {
+const PolymorphicRelationField = ({fieldType, label, required, path, value, common}) => {
+    const {data, models, setValue} = common
 
     if (! value && ! required) {
         return (

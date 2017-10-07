@@ -3,18 +3,20 @@ import React from 'react'
 import FormRow from '../form/FormRow.jsx'
 import { getFieldComponent, getFieldModel } from './utils'
 
-const MapField = ({label, fieldType, path, value, setValue, data, models}) => {
+const MapField = ({label, fieldType, path, value, common}) => {
+    const {models, setValue} = common
+
     if (! value) {
         value = List()
     }
 
     const keyFieldType = fieldType.data.key
-    const KeyComponent = getFieldComponent(keyFieldType)
     const keyModel = getFieldModel(keyFieldType, models)
+    const KeyComponent = getFieldComponent(keyFieldType, keyModel)
 
     const valueFieldType = fieldType.data.value
-    const ValueComponent = getFieldComponent(valueFieldType)
     const valueModel = getFieldModel(valueFieldType, models)
+    const ValueComponent = getFieldComponent(valueFieldType, valueModel)
 
     const renderFields = (subValue, index) => {
         const keyPath = path.concat([index, 0])
@@ -31,18 +33,14 @@ const MapField = ({label, fieldType, path, value, setValue, data, models}) => {
                     fieldType={keyFieldType}
                     path={keyPath}
                     value={keyValue}
-                    setValue={setValue}
-                    data={data}
-                    models={models} />
+                    common={common} />
                 <ValueComponent
                     label="value"
                     model={valueModel}
                     fieldType={valueFieldType}
                     path={valuePath}
                     value={valueValue}
-                    setValue={setValue}
-                    data={data}
-                    models={models} />
+                    common={common} />
             </div>
         )
     }

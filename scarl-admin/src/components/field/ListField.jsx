@@ -3,14 +3,16 @@ import React from 'react'
 import FormRow from '../form/FormRow.jsx'
 import { getFieldComponent, getFieldModel } from './utils'
 
-const ListField = ({label, fieldType, path, value, setValue, data, models }) => {
+const ListField = ({label, fieldType, path, value, common}) => {
+    const {models, setValue} = common
+
     if (! value) {
         value = List()
     }
 
     const valueFieldType = fieldType.data.value
-    const ValueComponent = getFieldComponent(valueFieldType)
     const valueModel = getFieldModel(valueFieldType, models)
+    const ValueComponent = getFieldComponent(valueFieldType, valueModel)
 
     const renderValueField = (subValue, index) => {
         const valuePath = path.concat([index])
@@ -23,9 +25,7 @@ const ListField = ({label, fieldType, path, value, setValue, data, models }) => 
                     fieldType={valueFieldType}
                     path={valuePath}
                     value={subValue}
-                    setValue={setValue}
-                    data={data}
-                    models={models} />
+                    common={common} />
             </div>
         )
     }

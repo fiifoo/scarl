@@ -20,26 +20,22 @@ const Nav = () => (
 )
 
 const Controls = ({model, ...props}) => (
-    <Row>
-        <Col md={6}>
-            <div className="form-horizontal">
-                <FormRow label="">
-                    <SaveButton {...props} />
-                </FormRow>
-                <FormRow label="Select model">
-                    <ModelSelectContainer />
-                </FormRow>
-                { model && (
-                    <FormRow label="Select item">
-                        <Row>
-                            <Col sm={6}><ItemSelectContainer /></Col>
-                            <Col sm={6}><ItemAddContainer /></Col>
-                        </Row>
-                    </FormRow>
-                )}
-            </div>
-        </Col>
-    </Row>
+    <div className="form-horizontal">
+        <FormRow label="">
+            <SaveButton {...props} />
+        </FormRow>
+        <FormRow label="Select model">
+            <ModelSelectContainer />
+        </FormRow>
+        { model && (
+            <FormRow label="Select item">
+                <Row>
+                    <Col sm={6}><ItemSelectContainer /></Col>
+                    <Col sm={6}><ItemAddContainer /></Col>
+                </Row>
+            </FormRow>
+        )}
+    </div>
 )
 
 const SaveButton = ({readonly, save, saving}) => (

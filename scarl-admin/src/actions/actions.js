@@ -41,3 +41,14 @@ export const save = () => (dispatch, getState) => {
         type: types.SAVE,
     })
 }
+
+export const showSideForm = (model, fieldType, path) => ({
+    type: types.SHOW_SIDE_FORM,
+    model,
+    fieldType,
+    path,
+})
+
+export const hideSideForm = () => ({
+    type: types.HIDE_SIDE_FORM,
+})

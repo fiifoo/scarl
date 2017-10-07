@@ -1,12 +1,23 @@
-.item-form {
+.container-fluid {
+    max-width: 1000px;
+}
+
+.form-horizontal {
     padding-right: 120px;
-    margin-bottom: 500px;
+}
+
+.item-form {
+    margin-bottom: 200px;
 }
 
 .item-form .delete-field {
     float: right;
     width: 100px;
     margin-right: -120px;
+}
+
+.item-form .btn {
+    min-width: 100px;
 }
 
 .item-form .form-group {
@@ -19,4 +30,10 @@
 
 .Select-menu-outer {
     z-index: 9;
+    max-height: 402px;
+}
+
+.Select-menu {
+  max-height: 400px;
+  overflow-y: auto;
 }

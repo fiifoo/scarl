@@ -1,7 +1,9 @@
 import React from 'react'
 import TextInputRow from '../form/TextInputRow.jsx'
 
-const IntegerField = ({label, path, value, setValue}) => {
+const IntegerField = ({label, path, value, common}) => {
+    const {setValue} = common
+
     const onChange = value => {
         if (value === null) {
             setValue(path, null)

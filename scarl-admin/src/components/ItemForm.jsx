@@ -1,11 +1,10 @@
 import React from 'react'
-import { Col, Row } from 'react-bootstrap'
 import { isPolymorphic, readItemId } from '../data/utils'
-import './field/utils' // needs to be imported before FormField for correct import order
-import FormField from './field/FormField.jsx'
+import { createFormFieldType, getFieldComponent } from './field/utils'
 import ReadonlyRow from './form/ReadonlyRow.jsx'
+import SideForm from './SideForm.jsx'
 
-const ItemForm = ({item, model, setItemValue, data, models}) => {
+const ItemForm = ({item, model, sideForm, data, models, setItemValue, showSideForm, hideSideForm}) => {
     const submit = event => {
         event.preventDefault()
 
@@ -16,22 +15,30 @@ const ItemForm = ({item, model, setItemValue, data, models}) => {
     const path = model.dataPath.concat([id])
     const label = isPolymorphic(model) ? 'type' : undefined
 
+    const fieldType = createFormFieldType(model)
+    const common = {
+        data,
+        models,
+        setValue: setItemValue,
+        showSideForm,
+        hideSideForm,
+    }
+    const Component = getFieldComponent(fieldType, model)
+
     return  (
         <form onSubmit={submit} className="form-horizontal item-form">
-            <Row>
-                <Col md={6}>
-                    <ReadonlyRow label="id" value={id} />
-                    <FormField
-                        label={label}
-                        required={true}
-                        model={model}
-                        path={path}
-                        value={item}
-                        setValue={setItemValue}
-                        data={data}
-                        models={models} />
-                </Col>
-            </Row>
+            <ReadonlyRow label="id" value={id} />
+            <Component
+                label={label}
+                required={true}
+                model={model}
+                fieldType={fieldType}
+                path={path}
+                value={item}
+                common={common} />
+            <SideForm
+                sideForm={sideForm}
+                common={common} />
         </form>
     )
 }

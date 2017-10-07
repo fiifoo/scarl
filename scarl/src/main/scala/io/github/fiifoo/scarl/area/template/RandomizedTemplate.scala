@@ -15,13 +15,13 @@ import scala.util.Random
 
 case class RandomizedTemplate(id: TemplateId,
                               shape: Shape,
+                              border: Option[WallKindId] = None,
+                              fill: Option[WallKindId] = None,
+                              terrain: Option[TerrainKindId] = None,
                               templates: List[(TemplateId, Int, Int)] = List(),
                               entrances: List[(Option[ItemKindId], Int, Int)] = List(),
                               conduitLocations: (Int, Int) = (0, 0),
                               features: List[Feature] = List(),
-                              border: Option[WallKindId] = None,
-                              fill: Option[WallKindId] = None,
-                              terrain: Option[TerrainKindId] = None
                              ) extends Template {
 
   def apply(assets: WorldAssets, theme: Theme, random: Random): Result = {

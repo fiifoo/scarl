@@ -6,6 +6,8 @@ const initial = Record({
     item: null,
     model: null,
     saving: false,
+
+    sideForm: null,
 })()
 
 export default (state = initial, action) => {
@@ -28,6 +30,18 @@ export default (state = initial, action) => {
         case types.SAVED: {
             return state.set('saving', false)
         }
+
+        case types.SHOW_SIDE_FORM: {
+            return state.set('sideForm', {
+                model: action.model,
+                fieldType: action.fieldType,
+                path: action.path,
+            })
+        }
+        case types.HIDE_SIDE_FORM: {
+            return state.set('sideForm', null)
+        }
+
         default: {
             return state
         }

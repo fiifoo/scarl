@@ -1,7 +1,9 @@
 import React from 'react'
 import SelectRow from '../form/SelectRow.jsx'
 
-const RelationField = ({fieldType, path, setValue, data, models, ...props}) => {
+const RelationField = ({label, path, value, fieldType, common}) => {
+    const {data, models, setValue} = common
+
     const targetModel = models.main.get(fieldType.data.model)
     const targetItems = data.getIn(targetModel.dataPath)
     const choices = targetItems.map((item, id) => ({
@@ -10,7 +12,7 @@ const RelationField = ({fieldType, path, setValue, data, models, ...props}) => {
     })).toArray()
 
     return (
-        <SelectRow choices={choices} onChange={value => setValue(path, value)} {...props} />
+        <SelectRow label={label} value={value} onChange={value => setValue(path, value)} choices={choices} />
     )
 }
 
