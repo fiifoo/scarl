@@ -14,8 +14,8 @@ case class FixedTemplate(id: TemplateId,
                          shape: Shape,
                          templates: Map[Location, TemplateId] = Map(),
                          entrances: Map[Location, ItemKindId] = Map(),
-                         content: FixedContent = FixedContent(),
                          features: List[Feature] = List(),
+                         content: FixedContent = FixedContent(),
                         ) extends Template {
 
   def apply(assets: WorldAssets, theme: Theme, random: Random): Result = {

@@ -50,3 +50,13 @@ export const showSideForm = (model, fieldType, path) => ({
 export const hideSideForm = () => ({
     type: types.HIDE_SIDE_FORM,
 })
+
+export const setEditorBrush = brush => ({
+    type: types.SET_EDITOR_BRUSH,
+    brush,
+})
+
+export const setEditorLocation = location => ({
+    type: types.SET_EDITOR_LOCATION,
+    location,
+})

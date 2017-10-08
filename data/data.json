@@ -569,6 +569,13 @@
         },
         "twoHanded" : false
       }
+    } ], [ "pressure-plate", {
+      "id" : "pressure-plate",
+      "name" : "Pressure plate",
+      "display" : "_",
+      "color" : "white",
+      "pickable" : false,
+      "hidden" : false
     } ], [ "musket", {
       "id" : "musket",
       "name" : "Musket",
@@ -922,6 +929,12 @@
         "transformDescription" : null,
         "delay" : 5000
       }
+    } ], [ "machinery-pressure-plate", {
+      "type" : "TriggeredMachineryWidget",
+      "data" : {
+        "id" : "machinery-pressure-plate",
+        "item" : "pressure-plate"
+      }
     } ] ]
   },
   "powers" : {
@@ -1058,12 +1071,16 @@
         "_3" : 1
       }, {
         "_1" : "room",
-        "_2" : 2,
+        "_2" : 1,
         "_3" : 4
       }, {
         "_1" : "gateway-room",
         "_2" : 1,
         "_3" : 1
+      }, {
+        "_1" : "corridor-marine-trap",
+        "_2" : 2,
+        "_3" : 2
       } ],
       "entrances" : [ ]
     }
@@ -1353,8 +1370,169 @@
         "conduitLocations" : [ ],
         "creatures" : [ ],
         "terrains" : [ ],
-        "widgets" : [ ],
+        "widgets" : [ [ {
+          "x" : 1,
+          "y" : 1
+        }, "activate-healing-altar-widget" ], [ {
+          "x" : 3,
+          "y" : 1
+        }, "activate-healing-altar-widget" ] ],
         "machinery" : [ ]
+      },
+      "templates" : [ ],
+      "features" : [ ]
+    }
+  } ], [ "corridor-marine-trap", {
+    "type" : "FixedTemplate",
+    "data" : {
+      "id" : "corridor-marine-trap",
+      "shape" : {
+        "type" : "Rectangle",
+        "data" : {
+          "width" : 5,
+          "height" : 7,
+          "variance" : 0
+        }
+      },
+      "entrances" : [ [ {
+        "x" : 0,
+        "y" : 3
+      }, "wooden-door-closed" ], [ {
+        "x" : 4,
+        "y" : 3
+      }, "wooden-door-closed" ] ],
+      "content" : {
+        "gatewayLocations" : [ ],
+        "items" : [ ],
+        "walls" : [ [ {
+          "x" : 0,
+          "y" : 0
+        }, "stone-wall" ], [ {
+          "x" : 1,
+          "y" : 0
+        }, "stone-wall" ], [ {
+          "x" : 3,
+          "y" : 0
+        }, "stone-wall" ], [ {
+          "x" : 4,
+          "y" : 0
+        }, "stone-wall" ], [ {
+          "x" : 2,
+          "y" : 0
+        }, "stone-wall" ], [ {
+          "x" : 4,
+          "y" : 2
+        }, "stone-wall" ], [ {
+          "x" : 0,
+          "y" : 2
+        }, "stone-wall" ], [ {
+          "x" : 0,
+          "y" : 4
+        }, "stone-wall" ], [ {
+          "x" : 4,
+          "y" : 4
+        }, "stone-wall" ], [ {
+          "x" : 4,
+          "y" : 6
+        }, "stone-wall" ], [ {
+          "x" : 3,
+          "y" : 6
+        }, "stone-wall" ], [ {
+          "x" : 2,
+          "y" : 6
+        }, "stone-wall" ], [ {
+          "x" : 1,
+          "y" : 6
+        }, "stone-wall" ], [ {
+          "x" : 0,
+          "y" : 6
+        }, "stone-wall" ], [ {
+          "x" : 4,
+          "y" : 5
+        }, "stone-wall" ], [ {
+          "x" : 4,
+          "y" : 1
+        }, "stone-wall" ], [ {
+          "x" : 0,
+          "y" : 1
+        }, "stone-wall" ], [ {
+          "x" : 0,
+          "y" : 5
+        }, "stone-wall" ], [ {
+          "x" : 1,
+          "y" : 2
+        }, "stone-wall" ], [ {
+          "x" : 2,
+          "y" : 2
+        }, "stone-wall" ], [ {
+          "x" : 3,
+          "y" : 2
+        }, "stone-wall" ], [ {
+          "x" : 1,
+          "y" : 4
+        }, "stone-wall" ], [ {
+          "x" : 2,
+          "y" : 4
+        }, "stone-wall" ], [ {
+          "x" : 3,
+          "y" : 4
+        }, "stone-wall" ] ],
+        "conduitLocations" : [ ],
+        "creatures" : [ [ {
+          "x" : 1,
+          "y" : 1
+        }, "colonial-marine" ], [ {
+          "x" : 2,
+          "y" : 1
+        }, "colonial-marine" ], [ {
+          "x" : 3,
+          "y" : 1
+        }, "colonial-marine" ], [ {
+          "x" : 3,
+          "y" : 5
+        }, "colonial-marine" ], [ {
+          "x" : 2,
+          "y" : 5
+        }, "colonial-marine" ], [ {
+          "x" : 1,
+          "y" : 5
+        }, "colonial-marine" ] ],
+        "terrains" : [ ],
+        "widgets" : [ [ {
+          "x" : 2,
+          "y" : 3
+        }, "machinery-pressure-plate" ] ],
+        "machinery" : [ {
+          "mechanism" : {
+            "type" : "RemoveWallMechanism",
+            "data" : {
+              "disposable" : true
+            }
+          },
+          "controls" : [ {
+            "x" : 2,
+            "y" : 3
+          } ],
+          "targets" : [ {
+            "x" : 1,
+            "y" : 2
+          }, {
+            "x" : 2,
+            "y" : 2
+          }, {
+            "x" : 3,
+            "y" : 2
+          }, {
+            "x" : 1,
+            "y" : 4
+          }, {
+            "x" : 2,
+            "y" : 4
+          }, {
+            "x" : 3,
+            "y" : 4
+          } ]
+        } ]
       },
       "templates" : [ ],
       "features" : [ ]

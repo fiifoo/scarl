@@ -1,12 +1,11 @@
 import { Record } from 'immutable'
-import * as types from '../actions/actionTypes'
+import * as types from '../../actions/actionTypes'
 
 const initial = Record({
     addItemId: null,
     item: null,
     model: null,
     saving: false,
-
     sideForm: null,
 })()
 
@@ -30,7 +29,6 @@ export default (state = initial, action) => {
         case types.SAVED: {
             return state.set('saving', false)
         }
-
         case types.SHOW_SIDE_FORM: {
             return state.set('sideForm', {
                 model: action.model,
@@ -41,7 +39,6 @@ export default (state = initial, action) => {
         case types.HIDE_SIDE_FORM: {
             return state.set('sideForm', null)
         }
-
         default: {
             return state
         }

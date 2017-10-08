@@ -4,7 +4,7 @@ import ModelSelect from '../components/ModelSelect.jsx'
 
 const ModelSelectContainer = connect(
     state => ({
-        model: state.ui.model,
+        model: state.ui.main.model,
         models: state.models,
     }), {
         selectModel,

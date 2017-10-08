@@ -7,13 +7,13 @@ const ItemFormIf = props => props.item ? <ItemForm {...props} /> : <div />
 
 const ModelContainer = connect(
     state => {
-        const model = state.ui.model && state.models.main.get(state.ui.model)
-        const item = model && state.ui.item && state.data.getIn(model.dataPath.concat([state.ui.item]))
+        const model = state.ui.main.model && state.models.main.get(state.ui.main.model)
+        const item = model && state.ui.main.item && state.data.getIn(model.dataPath.concat([state.ui.main.item]))
 
         return {
             item,
             model,
-            sideForm: state.ui.sideForm,
+            sideForm: state.ui.main.sideForm,
             data: state.data,
             models: state.models,
         }

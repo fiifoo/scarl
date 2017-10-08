@@ -1,0 +1,26 @@
+.area-editor {
+    font-size: 20px;
+    font-family: "Lucida Console", Monospace;
+    background-color: #000;
+    border: 1px solid #000;
+    border-collapse: separate;
+    cursor: pointer;
+}
+
+.area-editor td {
+    padding: 0px;
+    border: 1px solid transparent;
+    width: 25px;
+    height: 25px;
+    line-height: 24px;
+    vertical-align: middle;
+    text-align: center;
+}
+
+.area-editor td:hover {
+    background-color: rgb(255, 255, 255, 0.15);
+}
+
+.area-editor td.selected {
+    background-color: rgb(255, 255, 255, 0.25);
+}

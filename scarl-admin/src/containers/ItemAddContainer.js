@@ -7,11 +7,11 @@ const ItemAddIf = props => props.model ? <ItemAdd {...props} /> : <div />
 
 const ItemAddContainer = connect(
     state => {
-        const model = state.ui.model && state.models.main.get(state.ui.model)
+        const model = state.ui.main.model && state.models.main.get(state.ui.main.model)
 
         return {
             model,
-            id: state.ui.addItemId,
+            id: state.ui.main.addItemId,
         }
     }, {
         addItem,

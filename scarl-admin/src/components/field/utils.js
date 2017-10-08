@@ -1,4 +1,7 @@
 import { isPolymorphic } from '../../data/utils.js'
+import FixedContentField from '../area/FixedContentField.jsx'
+import FixedTemplateField from '../area/FixedTemplateField.jsx'
+import MachinerySourceField from '../area/MachinerySourceField.jsx'
 import BooleanField from './BooleanField.jsx'
 import CharField from './CharField.jsx'
 import DecimalField from './DecimalField.jsx'
@@ -27,6 +30,9 @@ const fieldComponents = {
 }
 
 const customFieldComponents = {
+    FixedContent: FixedContentField,
+    FixedTemplate: FixedTemplateField,
+    MachinerySource: MachinerySourceField,
     Stats: SideFormField,
 }
 

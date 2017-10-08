@@ -4,15 +4,22 @@ import FormRow from './FormRow.jsx'
 
 const sort = (a, b) => a.label < b.label ? -1 : 1
 
-const getValue = selection => selection ? selection.value : null
+const getValue = (multi, selection) => multi ? (
+    selection.map(selection => selection.value)
+) : (
+    selection ? selection.value : null
+)
 
-const SelectRow = ({choices, value, onChange, inputStyle, ...props}) => (
+const SelectRow = ({choices, value, onChange, inputStyle, multi = false, disabled = false, placeholder = undefined,  ...props}) => (
     <FormRow {...props}>
         <Select
             style={inputStyle}
             value={value}
-            onChange={selection => onChange(getValue(selection))}
-            options={choices.sort(sort)} />
+            multi={multi}
+            onChange={selection => onChange(getValue(multi, selection))}
+            options={choices.sort(sort)}
+            disabled={disabled}
+            placeholder={placeholder} />
     </FormRow>
 )
 
