@@ -31,11 +31,9 @@ export const setItemValue = (path, value) => ({
 
 export const save = () => (dispatch, getState) => {
     const data = getState().data
-    api.save(Data.write(data))
-
-    setTimeout(() => dispatch({
+    api.save(Data.write(data)).then(() => dispatch({
         type: types.SAVED,
-    }), 1000)
+    }))
 
     dispatch({
         type: types.SAVE,
