@@ -9,6 +9,10 @@ import './Editor.css'
 const Editor = ({path, value, common, editor, setEditorBrush, setEditorLocation}) => {
     const {data, setValue} = common
 
+    if (! value.getIn(['shape', 'type'])) {
+        return <div />
+    }
+
     const contents = LocationContent.read(value, data)
     const setLocationContent = location => content => setValue(path, LocationContent.write(value, location, content))
 

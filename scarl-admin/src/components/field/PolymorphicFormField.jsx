@@ -1,22 +1,37 @@
 import { Map } from 'immutable'
 import React from 'react'
+import { getNewValue } from '../../data/utils'
 import FormRow from '../form/FormRow.jsx'
 import SelectRow from '../form/SelectRow.jsx'
 import { createFormFieldType, getFieldComponent } from './utils'
 
-const PolymorphicFormField = ({label, required, model, path, value, common}) => {
+const PolymorphicFormField = ({label, required, model, fieldType, path, value, common}) => {
     const {models, setValue} = common
 
-    if (! value && ! required) {
+    if (! value) {
         return (
-            <FormRow label={label}>
-                <button type="button" className="btn btn-success" onClick={() => setValue(path, Map())}>Add</button>
+            <FormRow label={label} error={required}>
+                <button
+                    type="button"
+                    className="btn btn-success"
+                    onClick={() => setValue(path, getNewValue(fieldType, models))}>
+                    Add
+                </button>
             </FormRow>
         )
     }
 
     const type = value && value.get('type')
-    const setType = value => setValue(path.concat(['type']), value)
+    const setType = type => {
+        const subFieldType = createFormFieldType(models.sub.get(type))
+        const id = value.getIn(['data', 'id'])
+        const data = id ? (
+            getNewValue(subFieldType, models).set('id', id)
+        ) : (
+            getNewValue(subFieldType, models)
+        )
+        setValue(path, Map({type, data}))
+    }
     const typeChoices = model.polymorphic.map(type => ({value: type, label: type}))
 
     const renderForm = () => {
@@ -44,9 +59,19 @@ const PolymorphicFormField = ({label, required, model, path, value, common}) => 
     return (
         <div>
             {required ? null : (
-                <button type="button" className="btn btn-danger delete-field" onClick={() => setValue(path, null)}>Remove</button>
+                <button
+                    type="button"
+                    className="btn btn-danger delete-field"
+                    onClick={() => setValue(path, null)}>
+                    Remove
+                </button>
             )}
-            <SelectRow label={label} choices={typeChoices} value={type} onChange={setType} />
+            <SelectRow
+                label={label}
+                required={true}
+                choices={typeChoices}
+                value={type}
+                onChange={setType} />
             {! type ? <div /> : renderForm()}
         </div>
     )

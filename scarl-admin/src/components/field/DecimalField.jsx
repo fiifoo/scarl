@@ -1,7 +1,7 @@
 import React from 'react'
 import TextInputRow from '../form/TextInputRow.jsx'
 
-const DecimalField = ({label, path, value, common}) => {
+const DecimalField = ({label, required, path, value, common}) => {
     const {setValue} = common
 
     const onChange = value => {
@@ -19,7 +19,11 @@ const DecimalField = ({label, path, value, common}) => {
     }
 
     return (
-        <TextInputRow label={label} value={value} onChange={onChange} />
+        <TextInputRow
+            label={label}
+            required={required}
+            value={value}
+            onChange={onChange} />
     )
 }
 

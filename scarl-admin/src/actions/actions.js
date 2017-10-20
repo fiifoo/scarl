@@ -1,5 +1,6 @@
 import Data from '../data/Data'
 import * as api from '../api'
+import { createItem } from '../data/utils.js'
 import * as types from './actionTypes'
 
 export const selectModel = model => ({
@@ -12,11 +13,17 @@ export const selectItem = item => ({
     item,
 })
 
-export const addItem = (model, id) => ({
-    type: types.ADD_ITEM,
-    model,
-    id,
-})
+export const addItem = (model, id) => (dispatch, getState) => {
+    const models = getState().models
+    const item = createItem(model, id, models)
+
+    dispatch({
+        type: types.ADD_ITEM,
+        model,
+        id,
+        item,
+    })
+}
 
 export const setAddItemId = id => ({
     type: types.SET_ADD_ITEM_ID,

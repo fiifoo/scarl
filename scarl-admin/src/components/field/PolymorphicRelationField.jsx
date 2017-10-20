@@ -1,14 +1,21 @@
+import { Map } from 'immutable'
 import React from 'react'
+import { getNewValue } from '../../data/utils'
 import FormRow from '../form/FormRow.jsx'
 import SelectRow from '../form/SelectRow.jsx'
 
 const PolymorphicRelationField = ({fieldType, label, required, path, value, common}) => {
     const {data, models, setValue} = common
 
-    if (! value && ! required) {
+    if (! value) {
         return (
-            <FormRow label={label}>
-                <button type="button" className="btn btn-success" onClick={() => setValue(path, Map())}>Add</button>
+            <FormRow label={label} error={required}>
+                <button
+                    type="button"
+                    className="btn btn-success"
+                    onClick={() => setValue(path, getNewValue(fieldType, models))}>
+                    Add
+                </button>
             </FormRow>
         )
     }
@@ -22,17 +29,32 @@ const PolymorphicRelationField = ({fieldType, label, required, path, value, comm
         label: id
     })).toArray()
 
-    const setType = value => setValue(path.concat(['type']), value)
+    const setType = type => setValue(path, Map({type, data: null}))
     const typeChoices = fieldType.data.models.map(type => ({value: type, label: type}))
 
     return (
         <FormRow label={label}>
             {required ? null : (
-                <button type="button" className="btn btn-danger delete-field" onClick={() => setValue(path, null)}>Remove</button>
+                <button
+                    type="button"
+                    className="btn btn-danger delete-field"
+                    onClick={() => setValue(path, null)}>
+                    Remove
+                </button>
             )}
-            <SelectRow label="type" choices={typeChoices} value={type} onChange={setType} />
+            <SelectRow
+                label="type"
+                required={true}
+                choices={typeChoices}
+                value={type}
+                onChange={setType} />
             {! targetChoices ? <div /> : (
-                <SelectRow label="value" choices={targetChoices} value={targetValue} onChange={value => setValue(path.concat(['value']), value)} />
+                <SelectRow
+                    label="value"
+                    required={true}
+                    choices={targetChoices}
+                    value={targetValue}
+                    onChange={value => setValue(path.concat(['value']), value)} />
             )}
         </FormRow>
     )

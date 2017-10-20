@@ -2,8 +2,8 @@ import React from 'react'
 import FormRow from './FormRow.jsx'
 import { getValue, normalizeValue } from './utils.js'
 
-const TextInputRow = ({value, onChange, inputStyle, inputType = 'text', disabled = false, ...props}) => (
-    <FormRow {...props}>
+const TextInputRow = ({value, onChange, inputStyle, inputType = 'text', disabled = false, required = false, ...props}) => (
+    <FormRow {...props} error={required && (value === null || value === undefined)}>
         <input
             className="form-control"
             type={inputType}

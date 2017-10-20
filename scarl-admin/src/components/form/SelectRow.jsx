@@ -10,12 +10,13 @@ const getValue = (multi, selection) => multi ? (
     selection ? selection.value : null
 )
 
-const SelectRow = ({choices, value, onChange, inputStyle, multi = false, disabled = false, placeholder = undefined,  ...props}) => (
-    <FormRow {...props}>
+const SelectRow = ({choices, value, onChange, inputStyle, multi = false, disabled = false, required = false, placeholder = undefined,  ...props}) => (
+    <FormRow {...props} error={required && (value === null || value === undefined)}>
         <Select
             style={inputStyle}
             value={value}
             multi={multi}
+            clearable={! required}
             onChange={selection => onChange(getValue(multi, selection))}
             options={choices.sort(sort)}
             disabled={disabled}

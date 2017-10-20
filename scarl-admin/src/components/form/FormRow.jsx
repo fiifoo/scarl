@@ -1,29 +1,33 @@
 import React from 'react'
 
-const FormRow = ({children, label, horizontal = true}) => (
-    label === undefined ? (
-        horizontal ? (
-            <div className="form-group">
-                <div className="col-md-12">{children}</div>
-            </div>
+const FormRow = ({children, label, horizontal = true, error = false}) => {
+    const className = error ? 'form-group has-error' : 'form-group'
+
+    return (
+        label === undefined ? (
+            horizontal ? (
+                <div className={className}>
+                    <div className="col-md-12">{children}</div>
+                </div>
+            ) : (
+                <div className={className}>
+                    {children}
+                </div>
+            )
         ) : (
-            <div className="form-group">
-                {children}
-            </div>
-        )
-    ) : (
-        horizontal ? (
-            <div className="form-group">
-                <label className="col-md-2 control-label">{label}</label>
-                <div className="col-md-10">{children}</div>
-            </div>
-        ) : (
-            <div className="form-group">
-                <label>{label}</label>
-                {children}
-            </div>
+            horizontal ? (
+                <div className={className}>
+                    <label className="col-md-2 control-label">{label}</label>
+                    <div className="col-md-10">{children}</div>
+                </div>
+            ) : (
+                <div className={className}>
+                    <label>{label}</label>
+                    {children}
+                </div>
+            )
         )
     )
-)
+}
 
 export default FormRow
