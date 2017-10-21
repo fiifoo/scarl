@@ -4,34 +4,27 @@ import io.github.fiifoo.scarl.area.template.Template.Result
 import io.github.fiifoo.scarl.area.theme.Theme
 import io.github.fiifoo.scarl.world.WorldAssets
 
+import scala.annotation.tailrec
 import scala.util.Random
 
 object CalculateTemplate {
 
+  @tailrec
   def apply(assets: WorldAssets,
             theme: Theme,
-            template: Template,
             random: Random,
-            attemptLimit: Option[Int] = None
-           ): Result = {
+           )(template: Template): Result = {
 
-    var i = 0
-    var result: Option[Result] = None
-
-    while (result.isEmpty && attemptLimit.forall(_ > i)) {
-      try {
-        result = Some(template(assets, theme, random))
-      } catch {
-        case _: CalculateFailedException =>
-      }
-      i = i + 1
+    val result = try {
+      Some(template(assets, theme, random))
+    } catch {
+      case _: CalculateFailedException => None
     }
 
     if (result.isDefined) {
       result.get
     } else {
-      throw new CalculateFailedException
+      CalculateTemplate(assets, theme, random)(template)
     }
   }
-
 }

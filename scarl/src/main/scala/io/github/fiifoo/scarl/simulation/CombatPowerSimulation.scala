@@ -129,7 +129,7 @@ object CombatPowerSimulation {
       templates = Map(template.id -> template),
     )
 
-    val templateResult = CalculateTemplate(assets, theme, template, random)
+    val templateResult = CalculateTemplate(assets, theme, random)(template)
 
     val instance = State(
       assets = assets.instance(),

@@ -1,22 +1,28 @@
 import React from 'react'
-import { Col, Row } from 'react-bootstrap'
+import { Col, Nav, Navbar, NavItem, Row, } from 'react-bootstrap'
+import * as pages from '../const/pages'
 import ItemAddContainer from '../containers/ItemAddContainer'
 import ItemFormContainer from '../containers/ItemFormContainer'
 import ItemSelectContainer from '../containers/ItemSelectContainer'
 import ModelSelectContainer from '../containers/ModelSelectContainer'
+import SummaryContainer from '../containers/SummaryContainer'
 import FormRow from './form/FormRow.jsx'
 
 import 'react-select/dist/react-select.css'
 import './App.css'
 
-const Nav = () => (
-    <nav className="navbar navbar-default">
-        <div className="container-fluid">
-            <div className="navbar-header">
-                <div className="navbar-brand">Scarl - Admin</div>
-            </div>
-        </div>
-    </nav>
+const Navigation = ({page, changePage}) => (
+    <Navbar>
+        <Navbar.Header>
+            <Navbar.Brand>
+                Scarl - Admin
+            </Navbar.Brand>
+        </Navbar.Header>
+        <Nav bsStyle="pills" activeKey={page} onSelect={changePage}>
+            <NavItem eventKey={pages.MAIN}>Main</NavItem>
+            <NavItem eventKey={pages.SUMMARY}>Summary</NavItem>
+        </Nav>
+    </Navbar>
 )
 
 const Controls = ({model, ...props}) => (
@@ -48,13 +54,19 @@ const SaveButton = ({readonly, save, saving}) => (
     </button>
 )
 
-const App = props => (
+const App = ({page, changePage, ...props}) => (
     <div>
-        <Nav />
+        <Navigation page={page} changePage={changePage} />
         <div className="container-fluid">
-            <Controls {...props} />
-            <hr />
-            <ItemFormContainer />
+            {page === pages.SUMMARY ? (
+                <SummaryContainer />
+            ) : (
+                <div>
+                    <Controls {...props} />
+                    <hr />
+                    <ItemFormContainer />
+                </div>
+            )}
         </div>
     </div>
 )

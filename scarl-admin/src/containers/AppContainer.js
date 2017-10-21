@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { save } from '../actions/actions'
+import { changePage, save } from '../actions/actions'
 import App from '../components/App.jsx'
 
 const AppContainer = connect(
@@ -7,7 +7,9 @@ const AppContainer = connect(
         model: state.ui.main.model,
         readonly: state.readonly,
         saving: state.ui.main.saving,
+        page: state.ui.main.page,
     }), {
+        changePage,
         save,
     }
 )(App)

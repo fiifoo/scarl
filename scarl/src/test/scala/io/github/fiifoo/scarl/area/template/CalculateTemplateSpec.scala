@@ -47,6 +47,6 @@ class CalculateTemplateSpec extends FlatSpec with Matchers {
       templates = Map(t1.id -> t1, t2.id -> t2, t3.id -> t3, t4.id -> t4),
     )
 
-    CalculateTemplate(assets, theme, t1, new Random(1), Some(1))
+    t1(assets, theme, new Random(1))
   }
 }

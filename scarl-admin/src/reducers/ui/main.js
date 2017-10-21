@@ -1,5 +1,6 @@
 import { Record } from 'immutable'
 import * as types from '../../actions/actionTypes'
+import * as pages from '../../const/pages'
 
 const initial = Record({
     addItemId: null,
@@ -7,10 +8,14 @@ const initial = Record({
     model: null,
     saving: false,
     sideForm: null,
+    page: pages.MAIN,
 })()
 
 export default (state = initial, action) => {
     switch (action.type) {
+        case types.CHANGE_PAGE: {
+            return state.set('page', action.page)
+        }
         case types.SELECT_MODEL: {
             return state.set('model', action.model).set('item', null)
         }

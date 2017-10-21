@@ -1,7 +1,22 @@
 import Data from '../data/Data'
 import * as api from '../api'
+import { SUMMARY } from '../const/pages.js'
 import { createItem } from '../data/utils.js'
 import * as types from './actionTypes'
+
+export const changePage = page => (dispatch, getState) => {
+    if (page === SUMMARY && getState().summary === null) {
+        api.fetchSummary().then(summary => dispatch({
+            type: types.RECEIVE_SUMMARY,
+            summary,
+        }))
+    }
+
+    dispatch ({
+        type: types.CHANGE_PAGE,
+        page,
+    })
+}
 
 export const selectModel = model => ({
     type: types.SELECT_MODEL,
@@ -66,4 +81,9 @@ export const setEditorBrush = brush => ({
 export const setEditorLocation = location => ({
     type: types.SET_EDITOR_LOCATION,
     location,
+})
+
+export const selectSummaryCreature = creature => ({
+    type: types.SELECT_SUMMARY_CREATURE,
+    creature,
 })

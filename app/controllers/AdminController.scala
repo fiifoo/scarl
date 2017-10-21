@@ -3,7 +3,7 @@ package controllers
 import javax.inject.Inject
 
 import dal.AssetsRepository
-import models.admin.Models
+import models.admin.{Models, Summary}
 import play.Environment
 import play.api.mvc._
 
@@ -38,6 +38,16 @@ class AdminController @Inject()(gameAssets: AssetsRepository,
 
     gameAssets.write(request.body)
 
-    Ok(request.body)
+    NoContent
+  }
+
+  def summary = Action {
+    val summary = try {
+      Summary(gameAssets.build())
+    } catch {
+      case _: Exception => Summary(valid = false)
+    }
+
+    Ok(summary.toJson.toString)
   }
 }
