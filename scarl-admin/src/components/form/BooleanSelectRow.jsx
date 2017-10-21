@@ -1,13 +1,12 @@
 import React from 'react'
 import FormRow from './FormRow.jsx'
 
-const BooleanSelectRow = ({name, value, onChange, disabled = false, required = false,...props}) => (
+const BooleanSelectRow = ({value, onChange, disabled = false, required = false,...props}) => (
     <FormRow {...props} error={required && (value === null || value === undefined)}>
         <div className="boolean-select">
             <label className="radio-inline">
                 <input
                     type="radio"
-                    name={name}
                     value="1"
                     checked={!! value}
                     onChange={() => onChange(true)}
@@ -17,7 +16,6 @@ const BooleanSelectRow = ({name, value, onChange, disabled = false, required = f
             <label className="radio-inline">
                 <input
                     type="radio"
-                    name={name}
                     value="0"
                     checked={! value}
                     onChange={() => onChange(false)}
