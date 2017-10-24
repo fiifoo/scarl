@@ -1,3 +1,5 @@
+import { List } from 'immutable'
+import { interactions } from '../../game/interaction'
 import { getLocationCreature, getLocationDoor, isEnemyChecker } from '../../game/utils'
 import * as commands from '../../keyboard/commands'
 import { isDirectionCommand, getDirectionLocation } from '../../keyboard/utils'
@@ -17,7 +19,7 @@ export default (command, dispatch, getState) => {
             break
         }
         case commands.COMMUNICATE: {
-            playerActions.communicate()(dispatch, getState)
+            gameActions.interact(interactions.Communicate)(dispatch, getState)
             break
         }
         case commands.ENTER_CONDUIT: {
@@ -26,6 +28,10 @@ export default (command, dispatch, getState) => {
         }
         case commands.INVENTORY: {
             gameActions.inventory()(dispatch)
+            break
+        }
+        case commands.INTERACT: {
+            gameActions.interact()(dispatch, getState)
             break
         }
         case commands.KEY_BINDINGS: {
@@ -45,15 +51,15 @@ export default (command, dispatch, getState) => {
             break
         }
         case commands.PICK_ITEM: {
-            playerActions.pickItem()(dispatch, getState)
+            gameActions.interact(interactions.PickItem)(dispatch, getState)
             break
         }
         case commands.USE: {
-            playerActions.use()(dispatch, getState)
+            gameActions.interact(List([interactions.UseCreature, interactions.UseItem]))(dispatch, getState)
             break
         }
         case commands.USE_DOOR: {
-            playerActions.useDoor()(dispatch, getState)
+            gameActions.interact(interactions.UseDoor)(dispatch, getState)
             break
         }
     }

@@ -1,9 +1,11 @@
-import { Record } from 'immutable'
+import { List, Record } from 'immutable'
 import * as types from '../../actions/actionTypes'
 import * as modes from '../../game/modes'
 
 const initial = Record({
     cursor: null,
+    interaction: null,
+    interactions: List(),
     mode: modes.MAIN,
     reticule: null,
     trajectory: [],
@@ -23,6 +25,12 @@ export default (state = initial, action) => {
         }
         case types.SET_CURSOR: {
             return state.set('cursor', action.cursor)
+        }
+        case types.SET_INTERACTION: {
+            return state.set('interaction', action.interaction)
+        }
+        case types.SET_INTERACTIONS: {
+            return state.set('interactions', action.interactions).set('interaction', 0)
         }
         case types.SET_RETICULE: {
             return state.set('reticule', action.reticule).set('trajectory', action.trajectory)

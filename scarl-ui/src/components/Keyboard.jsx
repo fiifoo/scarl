@@ -35,8 +35,7 @@ class Keyboard extends Component {
                 style={style}
                 onBlur={this.props.blurKeyboard}
                 onKeyDown={keypress}
-                ref={input => this.element = input}
-                />
+                ref={input => this.element = input} />
         )
     }
 }

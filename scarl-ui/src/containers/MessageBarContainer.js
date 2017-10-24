@@ -1,7 +1,19 @@
+import { List } from 'immutable'
 import { connect } from 'react-redux'
 import MessageBar from '../components/MessageBar.jsx'
 import * as modes from '../game/modes.js'
+import { getInteractionDescription } from '../game/interaction.js'
 import { getLocationDescriptions } from '../game/utils.js'
+
+const interactionDescriptions = state => {
+    const kinds = state.kinds
+    const interaction = state.ui.game.interactions.get(state.ui.game.interaction)
+
+    return List([
+        'Interact:',
+        getInteractionDescription(kinds, interaction),
+    ])
+}
 
 const locationDescriptions = (state, location) => {
     const fov = state.fov.cumulative
@@ -21,6 +33,9 @@ const getMessages = state => {
     switch (mode) {
         case modes.AIM: {
             return locationDescriptions(state, state.ui.game.reticule)
+        }
+        case modes.INTERACT: {
+            return interactionDescriptions(state)
         }
         case modes.LOOK: {
             return locationDescriptions(state, state.ui.game.cursor)

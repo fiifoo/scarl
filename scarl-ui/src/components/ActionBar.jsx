@@ -5,27 +5,6 @@ const className = 'btn btn-default'
 const activeClassName = 'btn btn-warning'
 const getClassName = active => active ? activeClassName : className
 
-const AimButton = ({mode, cancelMode, aim}) => {
-    const active = mode === modes.AIM
-    const onClick = active ? cancelMode : aim
-
-    return (
-        <button
-            className={getClassName(active)}
-            onClick={onClick}
-            disabled={mode !== modes.MAIN && mode !== modes.AIM}
-            >Aim</button>
-    )
-}
-
-const EnterConduitButton = ({mode, enterConduit}) => (
-    <button
-        className={className}
-        onClick={enterConduit}
-        disabled={mode !== modes.MAIN}
-        >Use stairs</button>
-)
-
 const InventoryButton = ({mode, cancelMode, inventory}) => {
     const active = mode === modes.INVENTORY
     const onClick = active ? cancelMode : inventory
@@ -34,8 +13,9 @@ const InventoryButton = ({mode, cancelMode, inventory}) => {
         <button
             className={getClassName(active)}
             onClick={onClick}
-            disabled={mode !== modes.MAIN && mode !== modes.INVENTORY}
-            >Inventory</button>
+            disabled={mode !== modes.MAIN && mode !== modes.INVENTORY}>
+            Inventory
+        </button>
     )
 }
 
@@ -47,8 +27,9 @@ const KeyBindingsButton = ({mode, cancelMode, keyBindings}) => {
         <button
             className={getClassName(active)}
             onClick={onClick}
-            disabled={mode !== modes.MAIN && mode !== modes.KEY_BINDINGS}
-            >Key bindings</button>
+            disabled={mode !== modes.MAIN && mode !== modes.KEY_BINDINGS}>
+            Key bindings
+        </button>
     )
 }
 
@@ -60,8 +41,9 @@ const LookButton = ({mode, cancelMode, look}) => {
         <button
             className={getClassName(active)}
             onClick={onClick}
-            disabled={mode !== modes.MAIN && mode !== modes.LOOK}
-            >Look</button>
+            disabled={mode !== modes.MAIN && mode !== modes.LOOK}>
+            Look
+        </button>
     )
 }
 
@@ -73,85 +55,26 @@ const MessageLogButton = ({mode, cancelMode, messageLog}) => {
         <button
             className={getClassName(active)}
             onClick={onClick}
-            disabled={mode !== modes.MAIN && mode !== modes.MESSAGE_LOG}
-            >Message log</button>
+            disabled={mode !== modes.MAIN && mode !== modes.MESSAGE_LOG}>
+            Message log
+        </button>
     )
 }
 
-const PickItemButton = ({mode, pickItem}) => (
-    <button
-        className={className}
-        onClick={pickItem}
-        disabled={mode !== modes.MAIN}
-        >Pick item</button>
-)
-
-const TalkButton = ({mode, communicate}) => (
-    <button
-        className={className}
-        onClick={communicate}
-        disabled={mode !== modes.MAIN}
-        >Talk</button>
-)
-
-const UseButton = ({mode, use}) => (
-    <button
-        className={className}
-        onClick={use}
-        disabled={mode !== modes.MAIN}
-        >Use</button>
-)
-
-const UseDoorButton = ({mode, useDoor}) => (
-    <button
-        className={className}
-        onClick={useDoor}
-        disabled={mode !== modes.MAIN}
-        >Use door</button>
-)
-
 const ActionBar = props =>  {
     const {mode, cancelMode} = props
-    const {communicate, enterConduit, pickItem, use, useDoor} = props
-    const {aim, inventory, keyBindings, look, messageLog} = props
+    const {inventory, keyBindings, look, messageLog} = props
 
     return (
         <div className="btn-toolbar">
-            <AimButton
-                mode={mode}
-                cancelMode={cancelMode}
-                aim={aim}
-                />
             <LookButton
                 mode={mode}
                 cancelMode={cancelMode}
-                look={look}
-                />
-            <PickItemButton
-                mode={mode}
-                pickItem={pickItem}
-                />
-            <EnterConduitButton
-                mode={mode}
-                enterConduit={enterConduit}
-                />
-            <TalkButton
-                mode={mode}
-                communicate={communicate}
-                />
-            <UseDoorButton
-                mode={mode}
-                useDoor={useDoor}
-                />
-            <UseButton
-                mode={mode}
-                use={use}
-                />
+                look={look} />
             <InventoryButton
                 mode={mode}
                 cancelMode={cancelMode}
-                inventory={inventory}
-                />
+                inventory={inventory} />
             <MessageLogButton
                 mode={mode}
                 cancelMode={cancelMode}
@@ -159,8 +82,7 @@ const ActionBar = props =>  {
             <KeyBindingsButton
                 mode={mode}
                 cancelMode={cancelMode}
-                keyBindings={keyBindings}
-                />
+                keyBindings={keyBindings} />
         </div>
     )
 }

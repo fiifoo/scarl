@@ -1,7 +1,8 @@
 import * as modes from '../game/modes'
+import { seekInteractions } from '../game/interaction'
 import { calculateTrajectory, getRangedAttackRange, seekTargets } from '../game/utils'
 import * as types from './actionTypes'
-import { sendInventoryQuery } from './connectionActions'
+import { sendAction, sendInventoryQuery } from './connectionActions'
 
 export const addMessage = message => dispatch => dispatch({
     type: types.ADD_MESSAGE,
@@ -32,6 +33,29 @@ export const inventory = () => dispatch => {
     changeMode(modes.INVENTORY)(dispatch)
 }
 
+export const interact = (actions = undefined) => (dispatch, getState) => {
+    const {player, fov} = getState()
+
+    const interactions = seekInteractions(player, fov.cumulative, actions)
+
+    if (interactions.isEmpty()) {
+        addMessage('Nothing to interact with.')(dispatch)
+    } else if (actions && interactions.size === 1) {
+        const interaction = interactions.first()
+
+        sendAction(interaction.action, interaction.data)
+    } else {
+        dispatch({
+            type: types.SET_INTERACTIONS,
+            interactions,
+        })
+
+        const location = interactions.first().location
+        changeMode(modes.INTERACT)(dispatch)
+        setCursor(location)(dispatch)
+    }
+}
+
 export const keyBindings = () => dispatch => changeMode(modes.KEY_BINDINGS)(dispatch)
 
 export const look = () => (dispatch, getState) => {
@@ -42,6 +66,27 @@ export const look = () => (dispatch, getState) => {
 }
 
 export const messageLog = () => dispatch => changeMode(modes.MESSAGE_LOG)(dispatch)
+
+export const nextInteraction = () => (dispatch, getState) => {
+    const {interaction, interactions} = getState().ui.game
+
+    const next = interaction + 1 >= interactions.size ? 0 : interaction + 1
+    const location = interactions.get(next).location
+
+    setCursor(location)(dispatch)
+    dispatch({
+        type: types.SET_INTERACTION,
+        interaction: next,
+    })
+}
+
+export const selectInteraction = () => (dispatch, getState) => {
+    const {interaction, interactions} = getState().ui.game
+    const values = interactions.get(interaction)
+
+    cancelMode()(dispatch)
+    sendAction(values.action, values.data)
+}
 
 export const setCursor = cursor => dispatch => dispatch({
     type: types.SET_CURSOR,

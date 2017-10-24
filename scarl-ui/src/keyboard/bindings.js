@@ -22,6 +22,7 @@ const directions = Map([
 export default {
     [gameModes.MAIN]: Map([
         [keycodes.COMMA, commands.PICK_ITEM],
+        [keycodes.CONTROL, commands.INTERACT],
         [keycodes.ENTER, commands.PASS],
         [keycodes.LESS, commands.ENTER_CONDUIT],
         [keycodes.LESS2, commands.ENTER_CONDUIT],
@@ -47,6 +48,20 @@ export default {
     ]),
 
     [gameModes.GAME_OVER_SCREEN]: Map(),
+
+    [gameModes.INTERACT]: Map([
+        [keycodes.CONTROL, commands.INTERACT_NEXT],
+        [keycodes.SPACEBAR, commands.INTERACT_SELECT],
+        [keycodes.ESC, commands.CANCEL_MODE],
+
+        [keycodes.COMMA, commands.INTERACT_NEXT],
+        [keycodes.LESS, commands.INTERACT_NEXT],
+        [keycodes.LESS2, commands.INTERACT_NEXT],
+        [keycodes.D, commands.INTERACT_NEXT],
+        [keycodes.P, commands.INTERACT_NEXT],
+        [keycodes.T, commands.INTERACT_NEXT],
+        [keycodes.U, commands.INTERACT_NEXT],
+    ]),
 
     [gameModes.INVENTORY]: Map([
         [keycodes.ESC, commands.CANCEL_MODE],

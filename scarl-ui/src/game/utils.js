@@ -95,6 +95,12 @@ export const getLocationUsableItem = (location, fov) => {
     return entities ? entities.items.find(item => item.usable) : undefined
 }
 
+export const getLocationUsableItems = (location, fov) => {
+    const entities = getLocationEntities(location, fov)
+
+    return entities ? entities.items.filter(item => item.usable) : []
+}
+
 export const getMissileLauncherEquipped = player => {
     const creature = player.creature.stats
     const equipment = player.equipmentStats
