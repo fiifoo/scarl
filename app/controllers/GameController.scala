@@ -9,7 +9,7 @@ import game.GameInstance
 import models.Game
 import models.message._
 import play.Environment
-import play.api.libs.json.JsValue
+import play.api.libs.json.{JsNull, JsValue}
 import play.api.libs.streams._
 import play.api.mvc._
 
@@ -49,6 +49,7 @@ class GameController @Inject()(gameAssets: AssetsRepository,
     var instance: Option[GameInstance] = None
 
     def receive = {
+      case JsNull => // ping
       case json: JsValue =>
         if (instance.isEmpty) {
           createInstance(json)
