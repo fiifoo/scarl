@@ -29,6 +29,10 @@ export const SET_INTERACTIONS = 'SET_INTERACTIONS'
 export const SET_RETICULE = 'SET_RETICULE'
 export const SET_TARGET = 'SET_TARGET'
 
+// inventory
+export const SET_INVENTORY_TAB = 'SET_INVENTORY_TAB'
+export const SET_INVENTORY_ROW = 'SET_INVENTORY_ROW'
+
 // keyboard
 export const FOCUS_KEYBOARD = 'FOCUS_KEYBOARD'
 export const BLUR_KEYBOARD = 'BLUR_KEYBOARD'

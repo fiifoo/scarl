@@ -66,6 +66,18 @@ export default {
     [gameModes.INVENTORY]: Map([
         [keycodes.ESC, commands.CANCEL_MODE],
         [keycodes.I, commands.CANCEL_MODE],
+
+        [keycodes.SPACEBAR, commands.INVENTORY_USE],
+
+        [keycodes.ARROW_LEFT, commands.INVENTORY_TAB_LEFT],
+        [keycodes.ARROW_UP, commands.INVENTORY_ROW_UP],
+        [keycodes.ARROW_RIGHT, commands.INVENTORY_TAB_RIGHT],
+        [keycodes.ARROW_DOWN, commands.INVENTORY_ROW_DOWN],
+
+        [keycodes.NUMPAD_2, commands.INVENTORY_ROW_DOWN],
+        [keycodes.NUMPAD_4, commands.INVENTORY_TAB_LEFT],
+        [keycodes.NUMPAD_6, commands.INVENTORY_TAB_RIGHT],
+        [keycodes.NUMPAD_8, commands.INVENTORY_ROW_UP],
     ]),
 
     [gameModes.KEY_BINDINGS]: Map([

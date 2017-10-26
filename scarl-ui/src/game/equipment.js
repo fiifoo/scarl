@@ -50,7 +50,7 @@ export const groups = {
     Armor: Group({
         prop: 'armor',
         label: 'Armors',
-        getSlots: armor => List([armor.slot]),
+        getSlots: item => List([item.armor.slot]),
     }),
     Shield: Group({
         prop: 'shield',
@@ -65,7 +65,7 @@ export const groups = {
     Weapon: Group({
         prop: 'weapon',
         label: 'Weapons',
-        getSlots: weapon => List(weapon.twoHanded
+        getSlots: item => List(item.weapon.twoHanded
             ? [slots.MainHand.key]
             : [slots.MainHand.key, slots.OffHand.key]
         ),

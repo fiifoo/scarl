@@ -1,0 +1,30 @@
+.inventory-equipped {
+    position: fixed;
+    width: 380px;
+}
+
+.inventory-equipped th {
+    width: 140px;
+}
+
+.inventory-tabs {
+    margin-left: 400px;
+    max-width: 1000px;
+}
+
+.inventory-tabs > .tab-content {
+    margin-top: 1em;
+}
+
+.inventory-group td {
+    white-space: nowrap;
+}
+
+.inventory-group td.full-width {
+    width: 100%;
+}
+
+.inventory-group td > .btn,
+.inventory-group td > .btn-group {
+    min-width: 75px;
+}

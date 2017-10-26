@@ -6,6 +6,7 @@ import * as gameActions from '../gameActions'
 import aim from './aim'
 import gameOver from './gameOver'
 import interact from './interact'
+import inventory from './inventory'
 import main from './main'
 import look from './look'
 
@@ -20,7 +21,7 @@ const handlers = {
     [modes.AIM]: aim,
     [modes.GAME_OVER]: gameOver,
     [modes.INTERACT]: interact,
-    [modes.INVENTORY]: onlyCancelMode,
+    [modes.INVENTORY]: inventory,
     [modes.KEY_BINDINGS]: onlyCancelMode,
     [modes.LOOK]: look,
     [modes.MESSAGE_LOG]: onlyCancelMode,
