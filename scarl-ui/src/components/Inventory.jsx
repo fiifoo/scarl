@@ -13,8 +13,7 @@ const Empty = () => <i>Empty</i>
 const DropButton = ({item, dropItem}) => (
     <Button
         bsSize="xsmall"
-        onClick={() => dropItem(item.id)}
-        >
+        onClick={() => dropItem(item.id)}>
         Drop
     </Button>
 )
@@ -30,8 +29,7 @@ const EquipButton = ({item, allowedSlots, equipItem}) =>  {
             title="Equip"
             dropup
             bsSize="xsmall"
-            onClick={equipDefault}
-            >
+            onClick={equipDefault}>
             {allowedSlots.map(slot => (
                 <MenuItem key={slot} onClick={() => equipItem(item.id, slot)}>
                     {slots[slot].label}
@@ -41,8 +39,7 @@ const EquipButton = ({item, allowedSlots, equipItem}) =>  {
     ) : (
         <Button
             bsSize="xsmall"
-            onClick={equipDefault}
-            >
+            onClick={equipDefault}>
             Equip
         </Button>
     )
@@ -51,8 +48,7 @@ const EquipButton = ({item, allowedSlots, equipItem}) =>  {
 const UnequipButton = ({item, unequipItem}) => (
     <Button
         bsSize="xsmall"
-        onClick={() => unequipItem(item.id)}
-        >
+        onClick={() => unequipItem(item.id)}>
         Unequip
     </Button>
 )
@@ -60,8 +56,7 @@ const UnequipButton = ({item, unequipItem}) => (
 const UseButton = ({item, useItem}) => (
     <Button
         bsSize="xsmall"
-        onClick={() => useItem(item.id)}
-        >
+        onClick={() => useItem(item.id)}>
         Use
     </Button>
 )
@@ -77,14 +72,12 @@ const EquipmentItem = ({equipped, group, item, kind, dropItem, equipItem, unequi
                 {equipped ? (
                     <UnequipButton
                         item={item}
-                        unequipItem={unequipItem}
-                        />
+                        unequipItem={unequipItem} />
                 ) : (
                     <EquipButton
                         item={item}
                         allowedSlots={allowedSlots}
-                        equipItem={equipItem}
-                        />
+                        equipItem={equipItem} />
                 )}
             </td>
             <td><DropButton item={item} dropItem={dropItem} /></td>
@@ -123,8 +116,7 @@ const EquipmentGroup = ({equipments, group, items, kinds, dropItem, equipItem, u
                 kind={kinds.get(item.kind)}
                 dropItem={dropItem}
                 equipItem={equipItem}
-                unequipItem={unequipItem}
-                />
+                unequipItem={unequipItem} />
         ).toArray()}
     </tbody>
 )
@@ -141,8 +133,7 @@ const Equipments = ({equipments, inventory, kinds, dropItem, equipItem, unequipI
             kinds={kinds}
             dropItem={dropItem}
             equipItem={equipItem}
-            unequipItem={unequipItem}
-            />
+            unequipItem={unequipItem} />
     )
 
     return (
@@ -177,8 +168,7 @@ const Usables = ({inventory, kinds, dropItem, useItem}) => {
                         item={item}
                         kind={kinds.get(item.kind)}
                         dropItem={dropItem}
-                        useItem={useItem}
-                        />
+                        useItem={useItem} />
                 ).toArray()}
             </tbody>
         </Table>
@@ -219,8 +209,7 @@ const Inventory = ({equipments, inventory, kinds, dropItem, equipItem, unequipIt
             <Equipped
                 equipments={equipments}
                 inventory={inventory}
-                kinds={kinds.items}
-                />
+                kinds={kinds.items} />
         </Col>
         <Col xs={8}>
             <Equipments
@@ -229,14 +218,12 @@ const Inventory = ({equipments, inventory, kinds, dropItem, equipItem, unequipIt
                 kinds={kinds.items}
                 dropItem={dropItem}
                 equipItem={equipItem}
-                unequipItem={unequipItem}
-                />
+                unequipItem={unequipItem} />
             <Usables
                 inventory={inventory}
                 kinds={kinds.items}
                 dropItem={dropItem}
-                useItem={useItem}
-                />
+                useItem={useItem} />
         </Col>
     </Row>
 )

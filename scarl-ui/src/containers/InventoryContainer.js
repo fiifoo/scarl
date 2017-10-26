@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 import { dropItem, equipItem, unequipItem, useInventoryItem } from '../actions/playerActions'
+import GameView from '../components/GameView.jsx'
 import Inventory from '../components/Inventory.jsx'
-import LazyToggleable from '../components/LazyToggleable.jsx'
 import { INVENTORY } from '../game/modes'
 
 const InventoryContainer = connect(
@@ -18,6 +18,6 @@ const InventoryContainer = connect(
         unequipItem,
         useItem: useInventoryItem,
     }
-)(LazyToggleable)
+)(GameView)
 
 export default InventoryContainer
