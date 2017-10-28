@@ -22,7 +22,18 @@ object GameInstance {
       case message: CreateExistingGame => games.start(message.game)
     }
 
-    game map (_ map (game => new GameInstance(games, assets, game, out)))
+    game map (_ flatMap (game => {
+      try {
+        val instance = new GameInstance(games, assets, game, out)
+
+        Some(instance)
+      } catch {
+        case _: Exception =>
+          games.stop(game.id)
+
+          None
+      }
+    }))
   }
 }
 

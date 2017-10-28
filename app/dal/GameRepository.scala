@@ -13,6 +13,8 @@ trait GameRepository {
 
   def start(id: Long): Future[Option[Game]]
 
+  def stop(id: Long): Unit
+
   def save(id: Long, save: String): Unit
 
   def delete(id: Long): Unit

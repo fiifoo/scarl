@@ -41,6 +41,10 @@ class GameFilesystemRepository @Inject()(implicit ec: ExecutionContext) extends 
     Future(game)
   }
 
+  def stop(id: Long): Unit = {
+    readGame(id) map (_.copy(running = false)) foreach writeGame
+  }
+
   def save(id: Long, save: String): Unit = {
     readGame(id) map (_.copy(save = Some(save), running = false, lastPlayedAt = timestamp)) foreach writeGame
   }

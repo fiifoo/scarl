@@ -76,6 +76,13 @@ class GameDatabaseRepository @Inject()(dbConfigProvider: DatabaseConfigProvider)
     })
   }
 
+  def stop(id: Long): Unit = db.run {
+    games
+      .filter(_.id === id)
+      .map(_.running)
+      .update(false)
+  }
+
   def save(id: Long, save: String): Unit = db.run {
     games
       .filter(_.id === id)
