@@ -9,17 +9,14 @@ object LocationEntities {
     def removable(entity: EntityId) = s.tmp.removableEntities contains entity
 
     val entities = Selectors.getLocationEntities(s)(location) filterNot removable
-    val items = Selectors.getLocationItems(s)(location)
-      .filterNot(removable)
-      .map(_ (s))
-      .filterNot(_.hidden)
+    val items = Selectors.getLocationVisibleItems(s)(location)
 
     LocationEntities(
       s.index.locationConduit.get(location),
       entities collectFirst { case c: CreatureId => c(s) },
       entities collectFirst { case t: TerrainId => t(s) },
       entities collectFirst { case w: WallId => w(s) },
-      items
+      items map (_ (s))
     )
   }
 }

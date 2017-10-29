@@ -1,6 +1,6 @@
 package io.github.fiifoo.scarl.game.event
 
-import io.github.fiifoo.scarl.core.Selectors.{getContainerItems, getItemLocation, getLocationEntities}
+import io.github.fiifoo.scarl.core.Selectors.{getItemLocation, getLocationVisibleItems}
 import io.github.fiifoo.scarl.core.communication.Message
 import io.github.fiifoo.scarl.core.effect.Effect
 import io.github.fiifoo.scarl.core.entity._
@@ -266,9 +266,7 @@ class EventBuilder(s: State, player: CreatureId, fov: Set[Location]) {
     val target = effect.target
 
     if (target == player) {
-      val entities = getLocationEntities(s)(effect.to)
-      val containers = entities collect { case c: ContainerId => c }
-      val items = containers flatMap getContainerItems(s)
+      val items = getLocationVisibleItems(s)(effect.to)
       val messages = items map (item => s"${kind(item)}.")
 
       if (messages.nonEmpty) {

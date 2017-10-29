@@ -56,6 +56,12 @@ object Selectors {
     s.index.locationTriggers.getOrElse(location, Set())
   }
 
+  def getLocationVisibleItems(s: State)(location: Location): Set[ItemId] = {
+    def removable(entity: EntityId) = s.tmp.removableEntities contains entity
+
+    getLocationItems(s)(location) filterNot removable filterNot (_ (s).hidden)
+  }
+
   def getStatusLocation(s: State)(status: StatusId, deep: Boolean = false): Option[Location] = {
     status(s).target match {
       case target: ContainerId => Some(target(s).location)
