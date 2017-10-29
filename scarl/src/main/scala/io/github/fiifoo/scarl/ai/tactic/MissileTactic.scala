@@ -24,7 +24,7 @@ case class MissileTactic(destination: Location, target: Option[SafeCreatureId]) 
         val path = getPath(s, missile, from, nextDestination)
 
         path map (path => {
-          val to = path(1)
+          val to = path.head
           if (Obstacle.movement(s)(to).isDefined) {
             explode
           } else {
@@ -60,7 +60,7 @@ case class MissileTactic(destination: Location, target: Option[SafeCreatureId]) 
     missile.guidance collect {
       case Smart => Path(s)(from, to)
     } getOrElse {
-      Some(Line(from, to))
+      Some(Line(from, to).tail)
     }
   }
 
