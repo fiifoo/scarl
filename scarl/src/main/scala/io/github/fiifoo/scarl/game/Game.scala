@@ -224,8 +224,8 @@ object Game {
     val creature = state.playerInfo.creature
     val locations = Fov(state.instance)(creature.location, creature.stats.sight.range)
 
-    val areaMap = state.areaMap ++ MapBuilder(state.fov)
     val fov = state.fov.next(state.instance, locations)
+    val areaMap = state.areaMap ++ MapBuilder(fov)
 
     state.copy(
       fov = fov,
