@@ -22,6 +22,7 @@ object JsonTactic {
 
   lazy implicit val tacticFormat: Format[Tactic] = polymorphicTypeFormat(
     data => {
+      case "GreetTactic" => GreetTactic
       case "FollowerTactic" => FollowerTactic
       case "PassTactic" => PassTactic
       case "RoamTactic" => RoamTactic
@@ -31,6 +32,7 @@ object JsonTactic {
       case "MissileTactic" => data.as[MissileTactic]
       case "PursueTactic" => data.as[PursueTactic]
     }, {
+      case GreetTactic => JsNull
       case FollowerTactic => JsNull
       case PassTactic => JsNull
       case RoamTactic => JsNull

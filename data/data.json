@@ -1,19 +1,8009 @@
 {
-  "areas" : [ ],
-  "communications" : [ ],
-  "factions" : [ ],
+  "areas" : [ [ "level-1", {
+    "template" : "level-1",
+    "theme" : "theme-1",
+    "conduits" : [ {
+      "_1" : "conduit-level-2",
+      "_2" : "stairs-down",
+      "_3" : "stairs-up"
+    }, {
+      "_1" : "conduit-level-2",
+      "_2" : "stairs-down",
+      "_3" : "stairs-up"
+    } ],
+    "id" : "level-1"
+  } ], [ "level-2", {
+    "template" : "level-2",
+    "theme" : "theme-2",
+    "conduits" : [ {
+      "_1" : "conduit-level-3",
+      "_2" : "stairs-down",
+      "_3" : "stairs-up"
+    }, {
+      "_1" : "conduit-level-3",
+      "_2" : "stairs-down",
+      "_3" : "stairs-up"
+    } ],
+    "id" : "level-2"
+  } ], [ "level-3", {
+    "template" : "level-3",
+    "theme" : "theme-3",
+    "conduits" : [ {
+      "_1" : "conduit-level-4",
+      "_2" : "stairs-down",
+      "_3" : "stairs-up"
+    }, {
+      "_1" : "conduit-level-4",
+      "_2" : "stairs-down",
+      "_3" : "stairs-up"
+    } ],
+    "id" : "level-3"
+  } ], [ "level-4", {
+    "template" : "level-rest",
+    "theme" : "theme-3",
+    "conduits" : [ {
+      "_1" : "conduit-level-5",
+      "_2" : "stairs-down",
+      "_3" : "stairs-up"
+    }, {
+      "_1" : "conduit-level-5",
+      "_2" : "stairs-down",
+      "_3" : "stairs-up"
+    } ],
+    "id" : "level-4"
+  } ], [ "level-5", {
+    "template" : "level-rest",
+    "theme" : "theme-3",
+    "conduits" : [ {
+      "_1" : "end-level",
+      "_2" : "stairs-down",
+      "_3" : "stairs-up"
+    }, {
+      "_1" : "end-level",
+      "_2" : "stairs-down",
+      "_3" : "stairs-up"
+    } ],
+    "id" : "level-5"
+  } ], [ "end-level", {
+    "template" : "end-room",
+    "theme" : "theme-3",
+    "conduits" : [ ],
+    "id" : "end-level"
+  } ], [ "start-level", {
+    "template" : "conduit-room-1",
+    "theme" : "theme-1",
+    "conduits" : [ {
+      "_1" : "level-1",
+      "_2" : "stairs-down",
+      "_3" : "stairs-up"
+    }, {
+      "_1" : "level-1",
+      "_2" : "stairs-down",
+      "_3" : "stairs-up"
+    } ],
+    "id" : "start-level"
+  } ], [ "conduit-level-2", {
+    "template" : "conduit-room-2",
+    "theme" : "theme-2",
+    "conduits" : [ {
+      "_1" : "level-2",
+      "_2" : "stairs-down",
+      "_3" : "stairs-up"
+    }, {
+      "_1" : "level-2",
+      "_2" : "stairs-down",
+      "_3" : "stairs-up"
+    } ],
+    "id" : "conduit-level-2"
+  } ], [ "conduit-level-3", {
+    "template" : "conduit-room-3",
+    "theme" : "theme-3",
+    "conduits" : [ {
+      "_1" : "level-3",
+      "_2" : "stairs-down",
+      "_3" : "stairs-up"
+    }, {
+      "_1" : "level-3",
+      "_2" : "stairs-down",
+      "_3" : "stairs-up"
+    } ],
+    "id" : "conduit-level-3"
+  } ], [ "conduit-level-4", {
+    "template" : "conduit-room-4",
+    "theme" : "theme-3",
+    "conduits" : [ {
+      "_1" : "level-4",
+      "_2" : "stairs-down",
+      "_3" : "stairs-up"
+    }, {
+      "_1" : "level-4",
+      "_2" : "stairs-down",
+      "_3" : "stairs-up"
+    } ],
+    "id" : "conduit-level-4"
+  } ], [ "conduit-level-5", {
+    "template" : "conduit-room-5",
+    "theme" : "theme-3",
+    "conduits" : [ {
+      "_1" : "level-5",
+      "_2" : "stairs-down",
+      "_3" : "stairs-up"
+    }, {
+      "_1" : "level-5",
+      "_2" : "stairs-down",
+      "_3" : "stairs-up"
+    } ],
+    "id" : "conduit-level-5"
+  } ] ],
+  "communications" : [ [ "end-message", {
+    "type" : "Message",
+    "data" : {
+      "value" : "Thank you Mario! But our princess is in another castle!",
+      "id" : "end-message"
+    }
+  } ], [ "guide-goal", {
+    "type" : "Message",
+    "data" : {
+      "value" : "Your goal lies beyond level 5.",
+      "id" : "guide-goal"
+    }
+  } ], [ "guide-choose-one", {
+    "type" : "Message",
+    "data" : {
+      "value" : "Choose one item. Greed won't help you.",
+      "id" : "guide-choose-one"
+    }
+  } ], [ "warning-hurry", {
+    "type" : "Message",
+    "data" : {
+      "value" : "Be fast.",
+      "id" : "warning-hurry"
+    }
+  } ], [ "warning-hurry-repeat", {
+    "type" : "Message",
+    "data" : {
+      "value" : "Like I said. Be very fast.",
+      "id" : "warning-hurry-repeat"
+    }
+  } ] ],
+  "factions" : [ [ "player-faction", {
+    "enemies" : [ "enemy-faction", "them-faction" ],
+    "id" : "player-faction"
+  } ], [ "enemy-faction", {
+    "enemies" : [ "player-faction", "them-faction" ],
+    "id" : "enemy-faction"
+  } ], [ "none", {
+    "enemies" : [ ],
+    "id" : "none"
+  } ], [ "them-faction", {
+    "enemies" : [ "enemy-faction", "player-faction" ],
+    "id" : "them-faction"
+  } ] ],
   "kinds" : {
-    "creatures" : [ ],
-    "items" : [ ],
-    "terrains" : [ ],
-    "walls" : [ ],
-    "widgets" : [ ]
+    "creatures" : [ [ "them-leech", {
+      "display" : "Q",
+      "color" : "purple",
+      "equipments" : [ ],
+      "missile" : null,
+      "character" : {
+        "progression" : "leech-progression",
+        "experience" : 0,
+        "level" : 0
+      },
+      "name" : "Leech",
+      "solitary" : true,
+      "flying" : false,
+      "responses" : [ ],
+      "behavior" : {
+        "type" : "RoamTactic",
+        "data" : { }
+      },
+      "usable" : null,
+      "greetings" : [ ],
+      "id" : "them-leech",
+      "inventory" : [ ],
+      "faction" : "them-faction",
+      "stats" : {
+        "explosive" : {
+          "attack" : 0,
+          "damage" : 0,
+          "radius" : 0
+        },
+        "missileLauncher" : {
+          "ammo" : null,
+          "range" : 0
+        },
+        "speed" : 1.5,
+        "ranged" : {
+          "attack" : 0,
+          "damage" : 0,
+          "range" : 0
+        },
+        "defence" : 20,
+        "melee" : {
+          "attack" : 20,
+          "damage" : 10
+        },
+        "health" : 20,
+        "sight" : {
+          "range" : 10
+        },
+        "armor" : 10
+      }
+    } ], [ "player", {
+      "display" : "@",
+      "color" : "yellow",
+      "equipments" : [ ],
+      "missile" : null,
+      "character" : {
+        "progression" : "player-progression",
+        "experience" : 0,
+        "level" : 0
+      },
+      "name" : "Player",
+      "solitary" : true,
+      "flying" : false,
+      "responses" : [ ],
+      "behavior" : {
+        "type" : "RoamTactic",
+        "data" : { }
+      },
+      "usable" : null,
+      "greetings" : [ ],
+      "id" : "player",
+      "inventory" : [ ],
+      "faction" : "player-faction",
+      "stats" : {
+        "explosive" : {
+          "attack" : 0,
+          "damage" : 0,
+          "radius" : 0
+        },
+        "missileLauncher" : {
+          "ammo" : null,
+          "range" : 0
+        },
+        "speed" : 1.1,
+        "ranged" : {
+          "attack" : 10,
+          "damage" : 5,
+          "range" : 2
+        },
+        "defence" : 15,
+        "melee" : {
+          "attack" : 10,
+          "damage" : 10
+        },
+        "health" : 50,
+        "sight" : {
+          "range" : 10
+        },
+        "armor" : 5
+      }
+    } ], [ "friend-warner", {
+      "display" : "f",
+      "color" : "white",
+      "equipments" : [ ],
+      "missile" : null,
+      "character" : null,
+      "name" : "Just a friend",
+      "solitary" : true,
+      "flying" : false,
+      "responses" : [ [ "player-faction", [ "warning-hurry", "warning-hurry-repeat" ] ] ],
+      "behavior" : {
+        "type" : "GreetTactic",
+        "data" : { }
+      },
+      "usable" : null,
+      "greetings" : [ [ "player-faction", [ "warning-hurry" ] ] ],
+      "id" : "friend-warner",
+      "inventory" : [ ],
+      "faction" : "player-faction",
+      "stats" : {
+        "explosive" : {
+          "attack" : 0,
+          "damage" : 0,
+          "radius" : 0
+        },
+        "missileLauncher" : {
+          "ammo" : null,
+          "range" : 0
+        },
+        "speed" : 1,
+        "ranged" : {
+          "attack" : 0,
+          "damage" : 0,
+          "range" : 0
+        },
+        "defence" : 10,
+        "melee" : {
+          "attack" : 10,
+          "damage" : 5
+        },
+        "health" : 10,
+        "sight" : {
+          "range" : 5
+        },
+        "armor" : 5
+      }
+    } ], [ "enemy-assaulter-1", {
+      "display" : "A",
+      "color" : "green",
+      "equipments" : [ ],
+      "missile" : null,
+      "character" : null,
+      "name" : "Assaulter I",
+      "solitary" : false,
+      "flying" : false,
+      "responses" : [ ],
+      "behavior" : {
+        "type" : "RoamTactic",
+        "data" : { }
+      },
+      "usable" : null,
+      "greetings" : [ ],
+      "id" : "enemy-assaulter-1",
+      "inventory" : [ ],
+      "faction" : "enemy-faction",
+      "stats" : {
+        "explosive" : {
+          "attack" : 0,
+          "damage" : 0,
+          "radius" : 0
+        },
+        "missileLauncher" : {
+          "ammo" : null,
+          "range" : 0
+        },
+        "speed" : 0.75,
+        "ranged" : {
+          "attack" : 10,
+          "damage" : 5,
+          "range" : 5
+        },
+        "defence" : 10,
+        "melee" : {
+          "attack" : 10,
+          "damage" : 10
+        },
+        "health" : 20,
+        "sight" : {
+          "range" : 10
+        },
+        "armor" : 10
+      }
+    } ], [ "enemy-assaulter-2", {
+      "display" : "A",
+      "color" : "blue",
+      "equipments" : [ ],
+      "missile" : null,
+      "character" : null,
+      "name" : "Assaulter II",
+      "solitary" : false,
+      "flying" : false,
+      "responses" : [ ],
+      "behavior" : {
+        "type" : "RoamTactic",
+        "data" : { }
+      },
+      "usable" : null,
+      "greetings" : [ ],
+      "id" : "enemy-assaulter-2",
+      "inventory" : [ ],
+      "faction" : "enemy-faction",
+      "stats" : {
+        "explosive" : {
+          "attack" : 0,
+          "damage" : 0,
+          "radius" : 0
+        },
+        "missileLauncher" : {
+          "ammo" : null,
+          "range" : 0
+        },
+        "speed" : 0.75,
+        "ranged" : {
+          "attack" : 20,
+          "damage" : 10,
+          "range" : 5
+        },
+        "defence" : 20,
+        "melee" : {
+          "attack" : 20,
+          "damage" : 15
+        },
+        "health" : 25,
+        "sight" : {
+          "range" : 10
+        },
+        "armor" : 15
+      }
+    } ], [ "enemy-assaulter-3", {
+      "display" : "A",
+      "color" : "red",
+      "equipments" : [ ],
+      "missile" : null,
+      "character" : null,
+      "name" : "Assaulter III",
+      "solitary" : false,
+      "flying" : false,
+      "responses" : [ ],
+      "behavior" : {
+        "type" : "RoamTactic",
+        "data" : { }
+      },
+      "usable" : null,
+      "greetings" : [ ],
+      "id" : "enemy-assaulter-3",
+      "inventory" : [ ],
+      "faction" : "enemy-faction",
+      "stats" : {
+        "explosive" : {
+          "attack" : 0,
+          "damage" : 0,
+          "radius" : 0
+        },
+        "missileLauncher" : {
+          "ammo" : null,
+          "range" : 0
+        },
+        "speed" : 0.75,
+        "ranged" : {
+          "attack" : 30,
+          "damage" : 15,
+          "range" : 5
+        },
+        "defence" : 30,
+        "melee" : {
+          "attack" : 30,
+          "damage" : 20
+        },
+        "health" : 30,
+        "sight" : {
+          "range" : 10
+        },
+        "armor" : 20
+      }
+    } ], [ "enemy-shooter-1", {
+      "display" : "s",
+      "color" : "green",
+      "equipments" : [ ],
+      "missile" : null,
+      "character" : null,
+      "name" : "Shooter I",
+      "solitary" : false,
+      "flying" : false,
+      "responses" : [ ],
+      "behavior" : {
+        "type" : "RoamTactic",
+        "data" : { }
+      },
+      "usable" : null,
+      "greetings" : [ ],
+      "id" : "enemy-shooter-1",
+      "inventory" : [ ],
+      "faction" : "enemy-faction",
+      "stats" : {
+        "explosive" : {
+          "attack" : 0,
+          "damage" : 0,
+          "radius" : 0
+        },
+        "missileLauncher" : {
+          "ammo" : null,
+          "range" : 0
+        },
+        "speed" : 1,
+        "ranged" : {
+          "attack" : 10,
+          "damage" : 10,
+          "range" : 5
+        },
+        "defence" : 10,
+        "melee" : {
+          "attack" : 10,
+          "damage" : 10
+        },
+        "health" : 10,
+        "sight" : {
+          "range" : 10
+        },
+        "armor" : 5
+      }
+    } ], [ "enemy-shooter-2", {
+      "display" : "s",
+      "color" : "blue",
+      "equipments" : [ ],
+      "missile" : null,
+      "character" : null,
+      "name" : "Shooter II",
+      "solitary" : false,
+      "flying" : false,
+      "responses" : [ ],
+      "behavior" : {
+        "type" : "RoamTactic",
+        "data" : { }
+      },
+      "usable" : null,
+      "greetings" : [ ],
+      "id" : "enemy-shooter-2",
+      "inventory" : [ ],
+      "faction" : "enemy-faction",
+      "stats" : {
+        "explosive" : {
+          "attack" : 0,
+          "damage" : 0,
+          "radius" : 0
+        },
+        "missileLauncher" : {
+          "ammo" : null,
+          "range" : 0
+        },
+        "speed" : 1,
+        "ranged" : {
+          "attack" : 20,
+          "damage" : 15,
+          "range" : 5
+        },
+        "defence" : 20,
+        "melee" : {
+          "attack" : 20,
+          "damage" : 15
+        },
+        "health" : 15,
+        "sight" : {
+          "range" : 10
+        },
+        "armor" : 10
+      }
+    } ], [ "friend-toad", {
+      "display" : "t",
+      "color" : "white",
+      "equipments" : [ ],
+      "missile" : null,
+      "character" : null,
+      "name" : "Toad",
+      "solitary" : false,
+      "flying" : false,
+      "responses" : [ [ "player-faction", [ "end-message" ] ] ],
+      "behavior" : {
+        "type" : "GreetTactic",
+        "data" : { }
+      },
+      "usable" : null,
+      "greetings" : [ [ "player-faction", [ "end-message" ] ] ],
+      "id" : "friend-toad",
+      "inventory" : [ ],
+      "faction" : "player-faction",
+      "stats" : {
+        "explosive" : {
+          "attack" : 0,
+          "damage" : 0,
+          "radius" : 0
+        },
+        "missileLauncher" : {
+          "ammo" : null,
+          "range" : 0
+        },
+        "speed" : 1,
+        "ranged" : {
+          "attack" : 0,
+          "damage" : 0,
+          "range" : 0
+        },
+        "defence" : 10,
+        "melee" : {
+          "attack" : 10,
+          "damage" : 5
+        },
+        "health" : 10,
+        "sight" : {
+          "range" : 5
+        },
+        "armor" : 5
+      }
+    } ], [ "friend-drone-1", {
+      "display" : "d",
+      "color" : "yellow",
+      "equipments" : [ ],
+      "missile" : null,
+      "character" : null,
+      "name" : "Drone I",
+      "solitary" : false,
+      "flying" : true,
+      "responses" : [ ],
+      "behavior" : {
+        "type" : "FollowerTactic",
+        "data" : { }
+      },
+      "usable" : "transform-drone-1",
+      "greetings" : [ ],
+      "id" : "friend-drone-1",
+      "inventory" : [ ],
+      "faction" : "player-faction",
+      "stats" : {
+        "explosive" : {
+          "attack" : 0,
+          "damage" : 0,
+          "radius" : 0
+        },
+        "missileLauncher" : {
+          "ammo" : null,
+          "range" : 0
+        },
+        "speed" : 1.1,
+        "ranged" : {
+          "attack" : 20,
+          "damage" : 10,
+          "range" : 5
+        },
+        "defence" : 20,
+        "melee" : {
+          "attack" : 20,
+          "damage" : 10
+        },
+        "health" : 10,
+        "sight" : {
+          "range" : 10
+        },
+        "armor" : 10
+      }
+    } ], [ "friend-guide", {
+      "display" : "g",
+      "color" : "white",
+      "equipments" : [ ],
+      "missile" : null,
+      "character" : null,
+      "name" : "Guide",
+      "solitary" : true,
+      "flying" : false,
+      "responses" : [ [ "player-faction", [ "guide-goal", "guide-choose-one" ] ] ],
+      "behavior" : {
+        "type" : "GreetTactic",
+        "data" : { }
+      },
+      "usable" : null,
+      "greetings" : [ [ "player-faction", [ "guide-goal", "guide-choose-one" ] ] ],
+      "id" : "friend-guide",
+      "inventory" : [ ],
+      "faction" : "player-faction",
+      "stats" : {
+        "explosive" : {
+          "attack" : 0,
+          "damage" : 0,
+          "radius" : 0
+        },
+        "missileLauncher" : {
+          "ammo" : null,
+          "range" : 0
+        },
+        "speed" : 1,
+        "ranged" : {
+          "attack" : 0,
+          "damage" : 0,
+          "range" : 0
+        },
+        "defence" : 10,
+        "melee" : {
+          "attack" : 10,
+          "damage" : 5
+        },
+        "health" : 10,
+        "sight" : {
+          "range" : 5
+        },
+        "armor" : 5
+      }
+    } ], [ "enemy-shooter-3", {
+      "display" : "s",
+      "color" : "red",
+      "equipments" : [ ],
+      "missile" : null,
+      "character" : null,
+      "name" : "Shooter III",
+      "solitary" : false,
+      "flying" : false,
+      "responses" : [ ],
+      "behavior" : {
+        "type" : "RoamTactic",
+        "data" : { }
+      },
+      "usable" : null,
+      "greetings" : [ ],
+      "id" : "enemy-shooter-3",
+      "inventory" : [ ],
+      "faction" : "enemy-faction",
+      "stats" : {
+        "explosive" : {
+          "attack" : 0,
+          "damage" : 0,
+          "radius" : 0
+        },
+        "missileLauncher" : {
+          "ammo" : null,
+          "range" : 0
+        },
+        "speed" : 1,
+        "ranged" : {
+          "attack" : 30,
+          "damage" : 20,
+          "range" : 5
+        },
+        "defence" : 30,
+        "melee" : {
+          "attack" : 30,
+          "damage" : 20
+        },
+        "health" : 20,
+        "sight" : {
+          "range" : 10
+        },
+        "armor" : 15
+      }
+    } ], [ "friend-drone-2", {
+      "display" : "d",
+      "color" : "yellow",
+      "equipments" : [ ],
+      "missile" : null,
+      "character" : null,
+      "name" : "Drone II",
+      "solitary" : false,
+      "flying" : true,
+      "responses" : [ ],
+      "behavior" : {
+        "type" : "FollowerTactic",
+        "data" : { }
+      },
+      "usable" : "transform-drone-2",
+      "greetings" : [ ],
+      "id" : "friend-drone-2",
+      "inventory" : [ ],
+      "faction" : "player-faction",
+      "stats" : {
+        "explosive" : {
+          "attack" : 0,
+          "damage" : 0,
+          "radius" : 0
+        },
+        "missileLauncher" : {
+          "ammo" : null,
+          "range" : 0
+        },
+        "speed" : 1.1,
+        "ranged" : {
+          "attack" : 30,
+          "damage" : 15,
+          "range" : 5
+        },
+        "defence" : 30,
+        "melee" : {
+          "attack" : 30,
+          "damage" : 15
+        },
+        "health" : 15,
+        "sight" : {
+          "range" : 10
+        },
+        "armor" : 15
+      }
+    } ], [ "friend-drone-3", {
+      "display" : "d",
+      "color" : "yellow",
+      "equipments" : [ ],
+      "missile" : null,
+      "character" : null,
+      "name" : "Drone III",
+      "solitary" : false,
+      "flying" : true,
+      "responses" : [ ],
+      "behavior" : {
+        "type" : "FollowerTactic",
+        "data" : { }
+      },
+      "usable" : "transform-drone-3",
+      "greetings" : [ ],
+      "id" : "friend-drone-3",
+      "inventory" : [ ],
+      "faction" : "player-faction",
+      "stats" : {
+        "explosive" : {
+          "attack" : 0,
+          "damage" : 0,
+          "radius" : 0
+        },
+        "missileLauncher" : {
+          "ammo" : null,
+          "range" : 0
+        },
+        "speed" : 1.1,
+        "ranged" : {
+          "attack" : 40,
+          "damage" : 20,
+          "range" : 5
+        },
+        "defence" : 40,
+        "melee" : {
+          "attack" : 40,
+          "damage" : 20
+        },
+        "health" : 20,
+        "sight" : {
+          "range" : 10
+        },
+        "armor" : 20
+      }
+    } ], [ "enemy-brawler-1", {
+      "display" : "b",
+      "color" : "green",
+      "equipments" : [ ],
+      "missile" : null,
+      "character" : null,
+      "name" : "Brawler I",
+      "solitary" : false,
+      "flying" : false,
+      "responses" : [ ],
+      "behavior" : {
+        "type" : "RoamTactic",
+        "data" : { }
+      },
+      "usable" : null,
+      "greetings" : [ ],
+      "id" : "enemy-brawler-1",
+      "inventory" : [ ],
+      "faction" : "enemy-faction",
+      "stats" : {
+        "explosive" : {
+          "attack" : 0,
+          "damage" : 0,
+          "radius" : 0
+        },
+        "missileLauncher" : {
+          "ammo" : null,
+          "range" : 0
+        },
+        "speed" : 1,
+        "ranged" : {
+          "attack" : 0,
+          "damage" : 0,
+          "range" : 0
+        },
+        "defence" : 10,
+        "melee" : {
+          "attack" : 10,
+          "damage" : 10
+        },
+        "health" : 20,
+        "sight" : {
+          "range" : 10
+        },
+        "armor" : 5
+      }
+    } ], [ "enemy-brawler-2", {
+      "display" : "b",
+      "color" : "blue",
+      "equipments" : [ ],
+      "missile" : null,
+      "character" : null,
+      "name" : "Brawler II",
+      "solitary" : false,
+      "flying" : false,
+      "responses" : [ ],
+      "behavior" : {
+        "type" : "RoamTactic",
+        "data" : { }
+      },
+      "usable" : null,
+      "greetings" : [ ],
+      "id" : "enemy-brawler-2",
+      "inventory" : [ ],
+      "faction" : "enemy-faction",
+      "stats" : {
+        "explosive" : {
+          "attack" : 0,
+          "damage" : 0,
+          "radius" : 0
+        },
+        "missileLauncher" : {
+          "ammo" : null,
+          "range" : 0
+        },
+        "speed" : 1,
+        "ranged" : {
+          "attack" : 0,
+          "damage" : 0,
+          "range" : 0
+        },
+        "defence" : 20,
+        "melee" : {
+          "attack" : 20,
+          "damage" : 15
+        },
+        "health" : 25,
+        "sight" : {
+          "range" : 10
+        },
+        "armor" : 10
+      }
+    } ], [ "missile-guided-1", {
+      "display" : "x",
+      "color" : "white",
+      "equipments" : [ ],
+      "missile" : {
+        "guidance" : {
+          "type" : "Guided",
+          "data" : { }
+        }
+      },
+      "character" : null,
+      "name" : "Guided missile",
+      "solitary" : true,
+      "flying" : true,
+      "responses" : [ ],
+      "behavior" : {
+        "type" : "PassTactic",
+        "data" : { }
+      },
+      "usable" : null,
+      "greetings" : [ ],
+      "id" : "missile-guided-1",
+      "inventory" : [ ],
+      "faction" : "none",
+      "stats" : {
+        "explosive" : {
+          "attack" : 50,
+          "damage" : 10,
+          "radius" : 2
+        },
+        "missileLauncher" : {
+          "ammo" : null,
+          "range" : 0
+        },
+        "speed" : 3,
+        "ranged" : {
+          "attack" : 0,
+          "damage" : 0,
+          "range" : 0
+        },
+        "defence" : 100,
+        "melee" : {
+          "attack" : 0,
+          "damage" : 0
+        },
+        "health" : 10,
+        "sight" : {
+          "range" : 0
+        },
+        "armor" : 10
+      }
+    } ], [ "enemy-brawler-3", {
+      "display" : "b",
+      "color" : "red",
+      "equipments" : [ ],
+      "missile" : null,
+      "character" : null,
+      "name" : "Brawler III",
+      "solitary" : false,
+      "flying" : false,
+      "responses" : [ ],
+      "behavior" : {
+        "type" : "RoamTactic",
+        "data" : { }
+      },
+      "usable" : null,
+      "greetings" : [ ],
+      "id" : "enemy-brawler-3",
+      "inventory" : [ ],
+      "faction" : "enemy-faction",
+      "stats" : {
+        "explosive" : {
+          "attack" : 0,
+          "damage" : 0,
+          "radius" : 0
+        },
+        "missileLauncher" : {
+          "ammo" : null,
+          "range" : 0
+        },
+        "speed" : 1,
+        "ranged" : {
+          "attack" : 0,
+          "damage" : 0,
+          "range" : 0
+        },
+        "defence" : 30,
+        "melee" : {
+          "attack" : 30,
+          "damage" : 20
+        },
+        "health" : 30,
+        "sight" : {
+          "range" : 10
+        },
+        "armor" : 15
+      }
+    } ], [ "missile-guided-2", {
+      "display" : "x",
+      "color" : "white",
+      "equipments" : [ ],
+      "missile" : {
+        "guidance" : {
+          "type" : "Guided",
+          "data" : { }
+        }
+      },
+      "character" : null,
+      "name" : "Guided missile",
+      "solitary" : true,
+      "flying" : true,
+      "responses" : [ ],
+      "behavior" : {
+        "type" : "PassTactic",
+        "data" : { }
+      },
+      "usable" : null,
+      "greetings" : [ ],
+      "id" : "missile-guided-2",
+      "inventory" : [ ],
+      "faction" : "none",
+      "stats" : {
+        "explosive" : {
+          "attack" : 60,
+          "damage" : 15,
+          "radius" : 2
+        },
+        "missileLauncher" : {
+          "ammo" : null,
+          "range" : 0
+        },
+        "speed" : 3,
+        "ranged" : {
+          "attack" : 0,
+          "damage" : 0,
+          "range" : 0
+        },
+        "defence" : 100,
+        "melee" : {
+          "attack" : 0,
+          "damage" : 0
+        },
+        "health" : 10,
+        "sight" : {
+          "range" : 0
+        },
+        "armor" : 10
+      }
+    } ], [ "missile-guided-3", {
+      "display" : "x",
+      "color" : "white",
+      "equipments" : [ ],
+      "missile" : {
+        "guidance" : {
+          "type" : "Guided",
+          "data" : { }
+        }
+      },
+      "character" : null,
+      "name" : "Guided missile",
+      "solitary" : true,
+      "flying" : true,
+      "responses" : [ ],
+      "behavior" : {
+        "type" : "PassTactic",
+        "data" : { }
+      },
+      "usable" : null,
+      "greetings" : [ ],
+      "id" : "missile-guided-3",
+      "inventory" : [ ],
+      "faction" : "none",
+      "stats" : {
+        "explosive" : {
+          "attack" : 70,
+          "damage" : 20,
+          "radius" : 2
+        },
+        "missileLauncher" : {
+          "ammo" : null,
+          "range" : 0
+        },
+        "speed" : 3,
+        "ranged" : {
+          "attack" : 0,
+          "damage" : 0,
+          "range" : 0
+        },
+        "defence" : 100,
+        "melee" : {
+          "attack" : 0,
+          "damage" : 0
+        },
+        "health" : 10,
+        "sight" : {
+          "range" : 0
+        },
+        "armor" : 10
+      }
+    } ], [ "enemy-brute-1", {
+      "display" : "B",
+      "color" : "green",
+      "equipments" : [ ],
+      "missile" : null,
+      "character" : null,
+      "name" : "Brute I",
+      "solitary" : false,
+      "flying" : false,
+      "responses" : [ ],
+      "behavior" : {
+        "type" : "RoamTactic",
+        "data" : { }
+      },
+      "usable" : null,
+      "greetings" : [ ],
+      "id" : "enemy-brute-1",
+      "inventory" : [ ],
+      "faction" : "enemy-faction",
+      "stats" : {
+        "explosive" : {
+          "attack" : 0,
+          "damage" : 0,
+          "radius" : 0
+        },
+        "missileLauncher" : {
+          "ammo" : null,
+          "range" : 0
+        },
+        "speed" : 0.5,
+        "ranged" : {
+          "attack" : 0,
+          "damage" : 0,
+          "range" : 0
+        },
+        "defence" : 10,
+        "melee" : {
+          "attack" : 10,
+          "damage" : 20
+        },
+        "health" : 30,
+        "sight" : {
+          "range" : 10
+        },
+        "armor" : 5
+      }
+    } ], [ "enemy-brute-2", {
+      "display" : "B",
+      "color" : "blue",
+      "equipments" : [ ],
+      "missile" : null,
+      "character" : null,
+      "name" : "Brute II",
+      "solitary" : false,
+      "flying" : false,
+      "responses" : [ ],
+      "behavior" : {
+        "type" : "RoamTactic",
+        "data" : { }
+      },
+      "usable" : null,
+      "greetings" : [ ],
+      "id" : "enemy-brute-2",
+      "inventory" : [ ],
+      "faction" : "enemy-faction",
+      "stats" : {
+        "explosive" : {
+          "attack" : 0,
+          "damage" : 0,
+          "radius" : 0
+        },
+        "missileLauncher" : {
+          "ammo" : null,
+          "range" : 0
+        },
+        "speed" : 0.5,
+        "ranged" : {
+          "attack" : 0,
+          "damage" : 0,
+          "range" : 0
+        },
+        "defence" : 20,
+        "melee" : {
+          "attack" : 20,
+          "damage" : 25
+        },
+        "health" : 40,
+        "sight" : {
+          "range" : 10
+        },
+        "armor" : 10
+      }
+    } ], [ "enemy-brute-3", {
+      "display" : "B",
+      "color" : "red",
+      "equipments" : [ ],
+      "missile" : null,
+      "character" : null,
+      "name" : "Brute III",
+      "solitary" : false,
+      "flying" : false,
+      "responses" : [ ],
+      "behavior" : {
+        "type" : "RoamTactic",
+        "data" : { }
+      },
+      "usable" : null,
+      "greetings" : [ ],
+      "id" : "enemy-brute-3",
+      "inventory" : [ ],
+      "faction" : "enemy-faction",
+      "stats" : {
+        "explosive" : {
+          "attack" : 0,
+          "damage" : 0,
+          "radius" : 0
+        },
+        "missileLauncher" : {
+          "ammo" : null,
+          "range" : 0
+        },
+        "speed" : 0.5,
+        "ranged" : {
+          "attack" : 0,
+          "damage" : 0,
+          "range" : 0
+        },
+        "defence" : 30,
+        "melee" : {
+          "attack" : 30,
+          "damage" : 30
+        },
+        "health" : 50,
+        "sight" : {
+          "range" : 10
+        },
+        "armor" : 15
+      }
+    } ], [ "enemy-sniper-1", {
+      "display" : "S",
+      "color" : "green",
+      "equipments" : [ ],
+      "missile" : null,
+      "character" : null,
+      "name" : "Sniper I",
+      "solitary" : false,
+      "flying" : false,
+      "responses" : [ ],
+      "behavior" : {
+        "type" : "RoamTactic",
+        "data" : { }
+      },
+      "usable" : null,
+      "greetings" : [ ],
+      "id" : "enemy-sniper-1",
+      "inventory" : [ ],
+      "faction" : "enemy-faction",
+      "stats" : {
+        "explosive" : {
+          "attack" : 0,
+          "damage" : 0,
+          "radius" : 0
+        },
+        "missileLauncher" : {
+          "ammo" : null,
+          "range" : 0
+        },
+        "speed" : 0.5,
+        "ranged" : {
+          "attack" : 20,
+          "damage" : 10,
+          "range" : 7
+        },
+        "defence" : 10,
+        "melee" : {
+          "attack" : 20,
+          "damage" : 10
+        },
+        "health" : 10,
+        "sight" : {
+          "range" : 10
+        },
+        "armor" : 5
+      }
+    } ], [ "enemy-sniper-2", {
+      "display" : "S",
+      "color" : "blue",
+      "equipments" : [ ],
+      "missile" : null,
+      "character" : null,
+      "name" : "Sniper II",
+      "solitary" : false,
+      "flying" : false,
+      "responses" : [ ],
+      "behavior" : {
+        "type" : "RoamTactic",
+        "data" : { }
+      },
+      "usable" : null,
+      "greetings" : [ ],
+      "id" : "enemy-sniper-2",
+      "inventory" : [ ],
+      "faction" : "enemy-faction",
+      "stats" : {
+        "explosive" : {
+          "attack" : 0,
+          "damage" : 0,
+          "radius" : 0
+        },
+        "missileLauncher" : {
+          "ammo" : null,
+          "range" : 0
+        },
+        "speed" : 0.5,
+        "ranged" : {
+          "attack" : 35,
+          "damage" : 15,
+          "range" : 7
+        },
+        "defence" : 20,
+        "melee" : {
+          "attack" : 35,
+          "damage" : 15
+        },
+        "health" : 15,
+        "sight" : {
+          "range" : 10
+        },
+        "armor" : 10
+      }
+    } ], [ "enemy-sniper-3", {
+      "display" : "S",
+      "color" : "red",
+      "equipments" : [ ],
+      "missile" : null,
+      "character" : null,
+      "name" : "Sniper III",
+      "solitary" : false,
+      "flying" : false,
+      "responses" : [ ],
+      "behavior" : {
+        "type" : "RoamTactic",
+        "data" : { }
+      },
+      "usable" : null,
+      "greetings" : [ ],
+      "id" : "enemy-sniper-3",
+      "inventory" : [ ],
+      "faction" : "enemy-faction",
+      "stats" : {
+        "explosive" : {
+          "attack" : 0,
+          "damage" : 0,
+          "radius" : 0
+        },
+        "missileLauncher" : {
+          "ammo" : null,
+          "range" : 0
+        },
+        "speed" : 0.5,
+        "ranged" : {
+          "attack" : 50,
+          "damage" : 20,
+          "range" : 7
+        },
+        "defence" : 30,
+        "melee" : {
+          "attack" : 50,
+          "damage" : 20
+        },
+        "health" : 20,
+        "sight" : {
+          "range" : 10
+        },
+        "armor" : 15
+      }
+    } ] ],
+    "items" : [ [ "armor-foot-1", {
+      "display" : "]",
+      "color" : "green",
+      "rangedWeapon" : null,
+      "shield" : null,
+      "hidden" : false,
+      "name" : "Foot Armor I",
+      "door" : null,
+      "usable" : null,
+      "pickable" : true,
+      "id" : "armor-foot-1",
+      "weapon" : null,
+      "armor" : {
+        "stats" : {
+          "explosive" : {
+            "attack" : 0,
+            "damage" : 0,
+            "radius" : 0
+          },
+          "missileLauncher" : {
+            "ammo" : null,
+            "range" : 0
+          },
+          "speed" : 1,
+          "ranged" : {
+            "attack" : 0,
+            "damage" : 0,
+            "range" : 0
+          },
+          "defence" : 1,
+          "melee" : {
+            "attack" : 0,
+            "damage" : 0
+          },
+          "health" : 0,
+          "sight" : {
+            "range" : 0
+          },
+          "armor" : 1
+        },
+        "slot" : "FootArmor"
+      }
+    } ], [ "armor-hand-1", {
+      "display" : "]",
+      "color" : "green",
+      "rangedWeapon" : null,
+      "shield" : null,
+      "hidden" : false,
+      "name" : "Hand Armor I",
+      "door" : null,
+      "usable" : null,
+      "pickable" : true,
+      "id" : "armor-hand-1",
+      "weapon" : null,
+      "armor" : {
+        "stats" : {
+          "explosive" : {
+            "attack" : 0,
+            "damage" : 0,
+            "radius" : 0
+          },
+          "missileLauncher" : {
+            "ammo" : null,
+            "range" : 0
+          },
+          "speed" : 1,
+          "ranged" : {
+            "attack" : 0,
+            "damage" : 0,
+            "range" : 0
+          },
+          "defence" : 1,
+          "melee" : {
+            "attack" : 0,
+            "damage" : 0
+          },
+          "health" : 0,
+          "sight" : {
+            "range" : 0
+          },
+          "armor" : 1
+        },
+        "slot" : "HandArmor"
+      }
+    } ], [ "weapon-missile-launcher-guided-1", {
+      "display" : "!",
+      "color" : "white",
+      "rangedWeapon" : {
+        "stats" : {
+          "explosive" : {
+            "attack" : 0,
+            "damage" : 0,
+            "radius" : 0
+          },
+          "missileLauncher" : {
+            "ammo" : "missile-guided-1",
+            "range" : 10
+          },
+          "speed" : 1,
+          "ranged" : {
+            "attack" : 0,
+            "damage" : 0,
+            "range" : 0
+          },
+          "defence" : 0,
+          "melee" : {
+            "attack" : 0,
+            "damage" : 0
+          },
+          "health" : 0,
+          "sight" : {
+            "range" : 0
+          },
+          "armor" : 0
+        }
+      },
+      "shield" : null,
+      "hidden" : false,
+      "name" : "Guided missile launcher I",
+      "door" : null,
+      "usable" : null,
+      "pickable" : true,
+      "id" : "weapon-missile-launcher-guided-1",
+      "weapon" : null,
+      "armor" : null
+    } ], [ "armor-foot-2", {
+      "display" : "]",
+      "color" : "blue",
+      "rangedWeapon" : null,
+      "shield" : null,
+      "hidden" : false,
+      "name" : "Foot Armor 2",
+      "door" : null,
+      "usable" : null,
+      "pickable" : true,
+      "id" : "armor-foot-2",
+      "weapon" : null,
+      "armor" : {
+        "stats" : {
+          "explosive" : {
+            "attack" : 0,
+            "damage" : 0,
+            "radius" : 0
+          },
+          "missileLauncher" : {
+            "ammo" : null,
+            "range" : 0
+          },
+          "speed" : 1,
+          "ranged" : {
+            "attack" : 0,
+            "damage" : 0,
+            "range" : 0
+          },
+          "defence" : 2,
+          "melee" : {
+            "attack" : 0,
+            "damage" : 0
+          },
+          "health" : 0,
+          "sight" : {
+            "range" : 0
+          },
+          "armor" : 2
+        },
+        "slot" : "FootArmor"
+      }
+    } ], [ "armor-hand-2", {
+      "display" : "]",
+      "color" : "blue",
+      "rangedWeapon" : null,
+      "shield" : null,
+      "hidden" : false,
+      "name" : "Hand Armor 2",
+      "door" : null,
+      "usable" : null,
+      "pickable" : true,
+      "id" : "armor-hand-2",
+      "weapon" : null,
+      "armor" : {
+        "stats" : {
+          "explosive" : {
+            "attack" : 0,
+            "damage" : 0,
+            "radius" : 0
+          },
+          "missileLauncher" : {
+            "ammo" : null,
+            "range" : 0
+          },
+          "speed" : 1,
+          "ranged" : {
+            "attack" : 0,
+            "damage" : 0,
+            "range" : 0
+          },
+          "defence" : 2,
+          "melee" : {
+            "attack" : 0,
+            "damage" : 0
+          },
+          "health" : 0,
+          "sight" : {
+            "range" : 0
+          },
+          "armor" : 2
+        },
+        "slot" : "HandArmor"
+      }
+    } ], [ "weapon-missile-launcher-guided-2", {
+      "display" : "!",
+      "color" : "white",
+      "rangedWeapon" : {
+        "stats" : {
+          "explosive" : {
+            "attack" : 0,
+            "damage" : 0,
+            "radius" : 0
+          },
+          "missileLauncher" : {
+            "ammo" : "missile-guided-2",
+            "range" : 10
+          },
+          "speed" : 1,
+          "ranged" : {
+            "attack" : 0,
+            "damage" : 0,
+            "range" : 0
+          },
+          "defence" : 0,
+          "melee" : {
+            "attack" : 0,
+            "damage" : 0
+          },
+          "health" : 0,
+          "sight" : {
+            "range" : 0
+          },
+          "armor" : 0
+        }
+      },
+      "shield" : null,
+      "hidden" : false,
+      "name" : "Guided missile launcher II",
+      "door" : null,
+      "usable" : null,
+      "pickable" : true,
+      "id" : "weapon-missile-launcher-guided-2",
+      "weapon" : null,
+      "armor" : null
+    } ], [ "armor-foot-3", {
+      "display" : "]",
+      "color" : "red",
+      "rangedWeapon" : null,
+      "shield" : null,
+      "hidden" : false,
+      "name" : "Foot Armor 3",
+      "door" : null,
+      "usable" : null,
+      "pickable" : true,
+      "id" : "armor-foot-3",
+      "weapon" : null,
+      "armor" : {
+        "stats" : {
+          "explosive" : {
+            "attack" : 0,
+            "damage" : 0,
+            "radius" : 0
+          },
+          "missileLauncher" : {
+            "ammo" : null,
+            "range" : 0
+          },
+          "speed" : 1,
+          "ranged" : {
+            "attack" : 0,
+            "damage" : 0,
+            "range" : 0
+          },
+          "defence" : 3,
+          "melee" : {
+            "attack" : 0,
+            "damage" : 0
+          },
+          "health" : 0,
+          "sight" : {
+            "range" : 0
+          },
+          "armor" : 3
+        },
+        "slot" : "FootArmor"
+      }
+    } ], [ "armor-hand-3", {
+      "display" : "]",
+      "color" : "red",
+      "rangedWeapon" : null,
+      "shield" : null,
+      "hidden" : false,
+      "name" : "Hand Armor 3",
+      "door" : null,
+      "usable" : null,
+      "pickable" : true,
+      "id" : "armor-hand-3",
+      "weapon" : null,
+      "armor" : {
+        "stats" : {
+          "explosive" : {
+            "attack" : 0,
+            "damage" : 0,
+            "radius" : 0
+          },
+          "missileLauncher" : {
+            "ammo" : null,
+            "range" : 0
+          },
+          "speed" : 1,
+          "ranged" : {
+            "attack" : 0,
+            "damage" : 0,
+            "range" : 0
+          },
+          "defence" : 3,
+          "melee" : {
+            "attack" : 0,
+            "damage" : 0
+          },
+          "health" : 0,
+          "sight" : {
+            "range" : 0
+          },
+          "armor" : 3
+        },
+        "slot" : "HandArmor"
+      }
+    } ], [ "weapon-missile-launcher-guided-3", {
+      "display" : "!",
+      "color" : "white",
+      "rangedWeapon" : {
+        "stats" : {
+          "explosive" : {
+            "attack" : 0,
+            "damage" : 0,
+            "radius" : 0
+          },
+          "missileLauncher" : {
+            "ammo" : "missile-guided-3",
+            "range" : 10
+          },
+          "speed" : 1,
+          "ranged" : {
+            "attack" : 0,
+            "damage" : 0,
+            "range" : 0
+          },
+          "defence" : 0,
+          "melee" : {
+            "attack" : 0,
+            "damage" : 0
+          },
+          "health" : 0,
+          "sight" : {
+            "range" : 0
+          },
+          "armor" : 0
+        }
+      },
+      "shield" : null,
+      "hidden" : false,
+      "name" : "Guided missile launcher III",
+      "door" : null,
+      "usable" : null,
+      "pickable" : true,
+      "id" : "weapon-missile-launcher-guided-3",
+      "weapon" : null,
+      "armor" : null
+    } ], [ "armor-leg-1", {
+      "display" : "]",
+      "color" : "green",
+      "rangedWeapon" : null,
+      "shield" : null,
+      "hidden" : false,
+      "name" : "Leg Armor I",
+      "door" : null,
+      "usable" : null,
+      "pickable" : true,
+      "id" : "armor-leg-1",
+      "weapon" : null,
+      "armor" : {
+        "stats" : {
+          "explosive" : {
+            "attack" : 0,
+            "damage" : 0,
+            "radius" : 0
+          },
+          "missileLauncher" : {
+            "ammo" : null,
+            "range" : 0
+          },
+          "speed" : 1,
+          "ranged" : {
+            "attack" : 0,
+            "damage" : 0,
+            "range" : 0
+          },
+          "defence" : 3,
+          "melee" : {
+            "attack" : 0,
+            "damage" : 0
+          },
+          "health" : 0,
+          "sight" : {
+            "range" : 0
+          },
+          "armor" : 2
+        },
+        "slot" : "LegArmor"
+      }
+    } ], [ "armor-leg-2", {
+      "display" : "]",
+      "color" : "blue",
+      "rangedWeapon" : null,
+      "shield" : null,
+      "hidden" : false,
+      "name" : "Leg Armor 2",
+      "door" : null,
+      "usable" : null,
+      "pickable" : true,
+      "id" : "armor-leg-2",
+      "weapon" : null,
+      "armor" : {
+        "stats" : {
+          "explosive" : {
+            "attack" : 0,
+            "damage" : 0,
+            "radius" : 0
+          },
+          "missileLauncher" : {
+            "ammo" : null,
+            "range" : 0
+          },
+          "speed" : 1,
+          "ranged" : {
+            "attack" : 0,
+            "damage" : 0,
+            "range" : 0
+          },
+          "defence" : 5,
+          "melee" : {
+            "attack" : 0,
+            "damage" : 0
+          },
+          "health" : 0,
+          "sight" : {
+            "range" : 0
+          },
+          "armor" : 3
+        },
+        "slot" : "LegArmor"
+      }
+    } ], [ "stairs-down", {
+      "display" : ">",
+      "color" : "lightgrey",
+      "rangedWeapon" : null,
+      "shield" : null,
+      "hidden" : false,
+      "name" : "Stairs down",
+      "door" : null,
+      "usable" : null,
+      "pickable" : false,
+      "id" : "stairs-down",
+      "weapon" : null,
+      "armor" : null
+    } ], [ "armor-leg-3", {
+      "display" : "]",
+      "color" : "red",
+      "rangedWeapon" : null,
+      "shield" : null,
+      "hidden" : false,
+      "name" : "Leg Armor 3",
+      "door" : null,
+      "usable" : null,
+      "pickable" : true,
+      "id" : "armor-leg-3",
+      "weapon" : null,
+      "armor" : {
+        "stats" : {
+          "explosive" : {
+            "attack" : 0,
+            "damage" : 0,
+            "radius" : 0
+          },
+          "missileLauncher" : {
+            "ammo" : null,
+            "range" : 0
+          },
+          "speed" : 1,
+          "ranged" : {
+            "attack" : 0,
+            "damage" : 0,
+            "range" : 0
+          },
+          "defence" : 7,
+          "melee" : {
+            "attack" : 0,
+            "damage" : 0
+          },
+          "health" : 0,
+          "sight" : {
+            "range" : 0
+          },
+          "armor" : 4
+        },
+        "slot" : "LegArmor"
+      }
+    } ], [ "healing-chamber-active", {
+      "display" : "H",
+      "color" : "yellow",
+      "rangedWeapon" : null,
+      "shield" : null,
+      "hidden" : false,
+      "name" : "Active healing chamber",
+      "door" : null,
+      "usable" : null,
+      "pickable" : false,
+      "id" : "healing-chamber-active",
+      "weapon" : null,
+      "armor" : null
+    } ], [ "door-open", {
+      "display" : "/",
+      "color" : "brown",
+      "rangedWeapon" : null,
+      "shield" : null,
+      "hidden" : false,
+      "name" : "Door",
+      "door" : {
+        "open" : true,
+        "transformTo" : "door-closed"
+      },
+      "usable" : null,
+      "pickable" : false,
+      "id" : "door-open",
+      "weapon" : null,
+      "armor" : null
+    } ], [ "pressure-plate-hidden", {
+      "display" : "_",
+      "color" : "white",
+      "rangedWeapon" : null,
+      "shield" : null,
+      "hidden" : true,
+      "name" : "Pressure plate",
+      "door" : null,
+      "usable" : null,
+      "pickable" : false,
+      "id" : "pressure-plate-hidden",
+      "weapon" : null,
+      "armor" : null
+    } ], [ "door-closed", {
+      "display" : "+",
+      "color" : "brown",
+      "rangedWeapon" : null,
+      "shield" : null,
+      "hidden" : false,
+      "name" : "Door",
+      "door" : {
+        "open" : false,
+        "transformTo" : "door-open"
+      },
+      "usable" : null,
+      "pickable" : false,
+      "id" : "door-closed",
+      "weapon" : null,
+      "armor" : null
+    } ], [ "weapon-blade-1", {
+      "display" : "(",
+      "color" : "green",
+      "rangedWeapon" : null,
+      "shield" : null,
+      "hidden" : false,
+      "name" : "Blade I",
+      "door" : null,
+      "usable" : null,
+      "pickable" : true,
+      "id" : "weapon-blade-1",
+      "weapon" : {
+        "stats" : {
+          "explosive" : {
+            "attack" : 0,
+            "damage" : 0,
+            "radius" : 0
+          },
+          "missileLauncher" : {
+            "ammo" : null,
+            "range" : 0
+          },
+          "speed" : 1,
+          "ranged" : {
+            "attack" : 0,
+            "damage" : 0,
+            "range" : 0
+          },
+          "defence" : 2,
+          "melee" : {
+            "attack" : 10,
+            "damage" : 5
+          },
+          "health" : 0,
+          "sight" : {
+            "range" : 0
+          },
+          "armor" : 0
+        },
+        "twoHanded" : false
+      },
+      "armor" : null
+    } ], [ "healing-chamber", {
+      "display" : "H",
+      "color" : "white",
+      "rangedWeapon" : null,
+      "shield" : null,
+      "hidden" : false,
+      "name" : "Healing chamber",
+      "door" : null,
+      "usable" : null,
+      "pickable" : false,
+      "id" : "healing-chamber",
+      "weapon" : null,
+      "armor" : null
+    } ], [ "portal-enemy-1", {
+      "display" : "O",
+      "color" : "green",
+      "rangedWeapon" : null,
+      "shield" : null,
+      "hidden" : false,
+      "name" : "Portal I (incoming)",
+      "door" : null,
+      "usable" : null,
+      "pickable" : false,
+      "id" : "portal-enemy-1",
+      "weapon" : null,
+      "armor" : null
+    } ], [ "weapon-blade-2", {
+      "display" : "(",
+      "color" : "blue",
+      "rangedWeapon" : null,
+      "shield" : null,
+      "hidden" : false,
+      "name" : "Blade II",
+      "door" : null,
+      "usable" : null,
+      "pickable" : true,
+      "id" : "weapon-blade-2",
+      "weapon" : {
+        "stats" : {
+          "explosive" : {
+            "attack" : 0,
+            "damage" : 0,
+            "radius" : 0
+          },
+          "missileLauncher" : {
+            "ammo" : null,
+            "range" : 0
+          },
+          "speed" : 1,
+          "ranged" : {
+            "attack" : 0,
+            "damage" : 0,
+            "range" : 0
+          },
+          "defence" : 4,
+          "melee" : {
+            "attack" : 20,
+            "damage" : 10
+          },
+          "health" : 0,
+          "sight" : {
+            "range" : 0
+          },
+          "armor" : 0
+        },
+        "twoHanded" : false
+      },
+      "armor" : null
+    } ], [ "portal-enemy-2", {
+      "display" : "O",
+      "color" : "blue",
+      "rangedWeapon" : null,
+      "shield" : null,
+      "hidden" : false,
+      "name" : "Portal II (incoming)",
+      "door" : null,
+      "usable" : null,
+      "pickable" : false,
+      "id" : "portal-enemy-2",
+      "weapon" : null,
+      "armor" : null
+    } ], [ "weapon-blade-3", {
+      "display" : "(",
+      "color" : "red",
+      "rangedWeapon" : null,
+      "shield" : null,
+      "hidden" : false,
+      "name" : "Blade III",
+      "door" : null,
+      "usable" : null,
+      "pickable" : true,
+      "id" : "weapon-blade-3",
+      "weapon" : {
+        "stats" : {
+          "explosive" : {
+            "attack" : 0,
+            "damage" : 0,
+            "radius" : 0
+          },
+          "missileLauncher" : {
+            "ammo" : null,
+            "range" : 0
+          },
+          "speed" : 1,
+          "ranged" : {
+            "attack" : 0,
+            "damage" : 0,
+            "range" : 0
+          },
+          "defence" : 6,
+          "melee" : {
+            "attack" : 30,
+            "damage" : 15
+          },
+          "health" : 0,
+          "sight" : {
+            "range" : 0
+          },
+          "armor" : 0
+        },
+        "twoHanded" : false
+      },
+      "armor" : null
+    } ], [ "healing-chamber-inactive", {
+      "display" : "H",
+      "color" : "lightgrey",
+      "rangedWeapon" : null,
+      "shield" : null,
+      "hidden" : false,
+      "name" : "Inactive healing chamber",
+      "door" : null,
+      "usable" : null,
+      "pickable" : false,
+      "id" : "healing-chamber-inactive",
+      "weapon" : null,
+      "armor" : null
+    } ], [ "friend-drone-1", {
+      "display" : "d",
+      "color" : "white",
+      "rangedWeapon" : null,
+      "shield" : null,
+      "hidden" : false,
+      "name" : "Drone I",
+      "door" : null,
+      "usable" : "transform-drone-1",
+      "pickable" : true,
+      "id" : "friend-drone-1",
+      "weapon" : null,
+      "armor" : null
+    } ], [ "portal-enemy-3", {
+      "display" : "O",
+      "color" : "red",
+      "rangedWeapon" : null,
+      "shield" : null,
+      "hidden" : false,
+      "name" : "Portal III (incoming)",
+      "door" : null,
+      "usable" : null,
+      "pickable" : false,
+      "id" : "portal-enemy-3",
+      "weapon" : null,
+      "armor" : null
+    } ], [ "door-invisible", {
+      "display" : "/",
+      "color" : "brown",
+      "rangedWeapon" : null,
+      "shield" : null,
+      "hidden" : true,
+      "name" : "Doorway",
+      "door" : null,
+      "usable" : null,
+      "pickable" : false,
+      "id" : "door-invisible",
+      "weapon" : null,
+      "armor" : null
+    } ], [ "friend-drone-2", {
+      "display" : "d",
+      "color" : "white",
+      "rangedWeapon" : null,
+      "shield" : null,
+      "hidden" : false,
+      "name" : "Drone II",
+      "door" : null,
+      "usable" : "transform-drone-2",
+      "pickable" : true,
+      "id" : "friend-drone-2",
+      "weapon" : null,
+      "armor" : null
+    } ], [ "friend-drone-3", {
+      "display" : "d",
+      "color" : "white",
+      "rangedWeapon" : null,
+      "shield" : null,
+      "hidden" : false,
+      "name" : "Drone III",
+      "door" : null,
+      "usable" : "transform-drone-3",
+      "pickable" : true,
+      "id" : "friend-drone-3",
+      "weapon" : null,
+      "armor" : null
+    } ], [ "shield-deflector-1", {
+      "display" : "[",
+      "color" : "green",
+      "rangedWeapon" : null,
+      "shield" : {
+        "stats" : {
+          "explosive" : {
+            "attack" : 0,
+            "damage" : 0,
+            "radius" : 0
+          },
+          "missileLauncher" : {
+            "ammo" : null,
+            "range" : 0
+          },
+          "speed" : 1,
+          "ranged" : {
+            "attack" : 0,
+            "damage" : 0,
+            "range" : 0
+          },
+          "defence" : 10,
+          "melee" : {
+            "attack" : 0,
+            "damage" : 0
+          },
+          "health" : 0,
+          "sight" : {
+            "range" : 0
+          },
+          "armor" : 0
+        }
+      },
+      "hidden" : false,
+      "name" : "Deflector I",
+      "door" : null,
+      "usable" : null,
+      "pickable" : true,
+      "id" : "shield-deflector-1",
+      "weapon" : null,
+      "armor" : null
+    } ], [ "armor-head-1", {
+      "display" : "]",
+      "color" : "green",
+      "rangedWeapon" : null,
+      "shield" : null,
+      "hidden" : false,
+      "name" : "Head Armor I",
+      "door" : null,
+      "usable" : null,
+      "pickable" : true,
+      "id" : "armor-head-1",
+      "weapon" : null,
+      "armor" : {
+        "stats" : {
+          "explosive" : {
+            "attack" : 0,
+            "damage" : 0,
+            "radius" : 0
+          },
+          "missileLauncher" : {
+            "ammo" : null,
+            "range" : 0
+          },
+          "speed" : 1,
+          "ranged" : {
+            "attack" : 0,
+            "damage" : 0,
+            "range" : 0
+          },
+          "defence" : 1,
+          "melee" : {
+            "attack" : 0,
+            "damage" : 0
+          },
+          "health" : 0,
+          "sight" : {
+            "range" : 0
+          },
+          "armor" : 1
+        },
+        "slot" : "HeadArmor"
+      }
+    } ], [ "shield-deflector-2", {
+      "display" : "[",
+      "color" : "blue",
+      "rangedWeapon" : null,
+      "shield" : {
+        "stats" : {
+          "explosive" : {
+            "attack" : 0,
+            "damage" : 0,
+            "radius" : 0
+          },
+          "missileLauncher" : {
+            "ammo" : null,
+            "range" : 0
+          },
+          "speed" : 1,
+          "ranged" : {
+            "attack" : 0,
+            "damage" : 0,
+            "range" : 0
+          },
+          "defence" : 20,
+          "melee" : {
+            "attack" : 0,
+            "damage" : 0
+          },
+          "health" : 0,
+          "sight" : {
+            "range" : 0
+          },
+          "armor" : 0
+        }
+      },
+      "hidden" : false,
+      "name" : "Deflector II",
+      "door" : null,
+      "usable" : null,
+      "pickable" : true,
+      "id" : "shield-deflector-2",
+      "weapon" : null,
+      "armor" : null
+    } ], [ "armor-head-2", {
+      "display" : "]",
+      "color" : "blue",
+      "rangedWeapon" : null,
+      "shield" : null,
+      "hidden" : false,
+      "name" : "Head Armor 2",
+      "door" : null,
+      "usable" : null,
+      "pickable" : true,
+      "id" : "armor-head-2",
+      "weapon" : null,
+      "armor" : {
+        "stats" : {
+          "explosive" : {
+            "attack" : 0,
+            "damage" : 0,
+            "radius" : 0
+          },
+          "missileLauncher" : {
+            "ammo" : null,
+            "range" : 0
+          },
+          "speed" : 1,
+          "ranged" : {
+            "attack" : 0,
+            "damage" : 0,
+            "range" : 0
+          },
+          "defence" : 2,
+          "melee" : {
+            "attack" : 0,
+            "damage" : 0
+          },
+          "health" : 0,
+          "sight" : {
+            "range" : 0
+          },
+          "armor" : 2
+        },
+        "slot" : "HeadArmor"
+      }
+    } ], [ "shield-deflector-3", {
+      "display" : "[",
+      "color" : "red",
+      "rangedWeapon" : null,
+      "shield" : {
+        "stats" : {
+          "explosive" : {
+            "attack" : 0,
+            "damage" : 0,
+            "radius" : 0
+          },
+          "missileLauncher" : {
+            "ammo" : null,
+            "range" : 0
+          },
+          "speed" : 1,
+          "ranged" : {
+            "attack" : 0,
+            "damage" : 0,
+            "range" : 0
+          },
+          "defence" : 30,
+          "melee" : {
+            "attack" : 0,
+            "damage" : 0
+          },
+          "health" : 0,
+          "sight" : {
+            "range" : 0
+          },
+          "armor" : 0
+        }
+      },
+      "hidden" : false,
+      "name" : "Deflector III",
+      "door" : null,
+      "usable" : null,
+      "pickable" : true,
+      "id" : "shield-deflector-3",
+      "weapon" : null,
+      "armor" : null
+    } ], [ "armor-head-3", {
+      "display" : "]",
+      "color" : "red",
+      "rangedWeapon" : null,
+      "shield" : null,
+      "hidden" : false,
+      "name" : "Head Armor 3",
+      "door" : null,
+      "usable" : null,
+      "pickable" : true,
+      "id" : "armor-head-3",
+      "weapon" : null,
+      "armor" : {
+        "stats" : {
+          "explosive" : {
+            "attack" : 0,
+            "damage" : 0,
+            "radius" : 0
+          },
+          "missileLauncher" : {
+            "ammo" : null,
+            "range" : 0
+          },
+          "speed" : 1,
+          "ranged" : {
+            "attack" : 0,
+            "damage" : 0,
+            "range" : 0
+          },
+          "defence" : 3,
+          "melee" : {
+            "attack" : 0,
+            "damage" : 0
+          },
+          "health" : 0,
+          "sight" : {
+            "range" : 0
+          },
+          "armor" : 3
+        },
+        "slot" : "HeadArmor"
+      }
+    } ], [ "armor-chest-1", {
+      "display" : "]",
+      "color" : "green",
+      "rangedWeapon" : null,
+      "shield" : null,
+      "hidden" : false,
+      "name" : "Chest Armor I",
+      "door" : null,
+      "usable" : null,
+      "pickable" : true,
+      "id" : "armor-chest-1",
+      "weapon" : null,
+      "armor" : {
+        "stats" : {
+          "explosive" : {
+            "attack" : 0,
+            "damage" : 0,
+            "radius" : 0
+          },
+          "missileLauncher" : {
+            "ammo" : null,
+            "range" : 0
+          },
+          "speed" : 1,
+          "ranged" : {
+            "attack" : 0,
+            "damage" : 0,
+            "range" : 0
+          },
+          "defence" : 3,
+          "melee" : {
+            "attack" : 0,
+            "damage" : 0
+          },
+          "health" : 5,
+          "sight" : {
+            "range" : 0
+          },
+          "armor" : 2
+        },
+        "slot" : "ChestArmor"
+      }
+    } ], [ "armor-chest-2", {
+      "display" : "]",
+      "color" : "blue",
+      "rangedWeapon" : null,
+      "shield" : null,
+      "hidden" : false,
+      "name" : "Chest Armor 2",
+      "door" : null,
+      "usable" : null,
+      "pickable" : true,
+      "id" : "armor-chest-2",
+      "weapon" : null,
+      "armor" : {
+        "stats" : {
+          "explosive" : {
+            "attack" : 0,
+            "damage" : 0,
+            "radius" : 0
+          },
+          "missileLauncher" : {
+            "ammo" : null,
+            "range" : 0
+          },
+          "speed" : 1,
+          "ranged" : {
+            "attack" : 0,
+            "damage" : 0,
+            "range" : 0
+          },
+          "defence" : 5,
+          "melee" : {
+            "attack" : 0,
+            "damage" : 0
+          },
+          "health" : 10,
+          "sight" : {
+            "range" : 0
+          },
+          "armor" : 3
+        },
+        "slot" : "ChestArmor"
+      }
+    } ], [ "armor-chest-3", {
+      "display" : "]",
+      "color" : "red",
+      "rangedWeapon" : null,
+      "shield" : null,
+      "hidden" : false,
+      "name" : "Chest Armor 3",
+      "door" : null,
+      "usable" : null,
+      "pickable" : true,
+      "id" : "armor-chest-3",
+      "weapon" : null,
+      "armor" : {
+        "stats" : {
+          "explosive" : {
+            "attack" : 0,
+            "damage" : 0,
+            "radius" : 0
+          },
+          "missileLauncher" : {
+            "ammo" : null,
+            "range" : 0
+          },
+          "speed" : 1,
+          "ranged" : {
+            "attack" : 0,
+            "damage" : 0,
+            "range" : 0
+          },
+          "defence" : 7,
+          "melee" : {
+            "attack" : 0,
+            "damage" : 0
+          },
+          "health" : 15,
+          "sight" : {
+            "range" : 0
+          },
+          "armor" : 4
+        },
+        "slot" : "ChestArmor"
+      }
+    } ], [ "weapon-rifle-1", {
+      "display" : "!",
+      "color" : "green",
+      "rangedWeapon" : {
+        "stats" : {
+          "explosive" : {
+            "attack" : 0,
+            "damage" : 0,
+            "radius" : 0
+          },
+          "missileLauncher" : {
+            "ammo" : null,
+            "range" : 0
+          },
+          "speed" : 1,
+          "ranged" : {
+            "attack" : 10,
+            "damage" : 5,
+            "range" : 5
+          },
+          "defence" : 0,
+          "melee" : {
+            "attack" : 0,
+            "damage" : 0
+          },
+          "health" : 0,
+          "sight" : {
+            "range" : 0
+          },
+          "armor" : 0
+        }
+      },
+      "shield" : null,
+      "hidden" : false,
+      "name" : "Rifle I",
+      "door" : null,
+      "usable" : null,
+      "pickable" : true,
+      "id" : "weapon-rifle-1",
+      "weapon" : null,
+      "armor" : null
+    } ], [ "weapon-rifle-2", {
+      "display" : "!",
+      "color" : "blue",
+      "rangedWeapon" : {
+        "stats" : {
+          "explosive" : {
+            "attack" : 0,
+            "damage" : 0,
+            "radius" : 0
+          },
+          "missileLauncher" : {
+            "ammo" : null,
+            "range" : 0
+          },
+          "speed" : 1,
+          "ranged" : {
+            "attack" : 20,
+            "damage" : 10,
+            "range" : 6
+          },
+          "defence" : 0,
+          "melee" : {
+            "attack" : 0,
+            "damage" : 0
+          },
+          "health" : 0,
+          "sight" : {
+            "range" : 0
+          },
+          "armor" : 0
+        }
+      },
+      "shield" : null,
+      "hidden" : false,
+      "name" : "Rifle II",
+      "door" : null,
+      "usable" : null,
+      "pickable" : true,
+      "id" : "weapon-rifle-2",
+      "weapon" : null,
+      "armor" : null
+    } ], [ "armor-chest-invulnerability", {
+      "display" : "]",
+      "color" : "purple",
+      "rangedWeapon" : null,
+      "shield" : null,
+      "hidden" : false,
+      "name" : "Armor of Invulnerability",
+      "door" : null,
+      "usable" : null,
+      "pickable" : true,
+      "id" : "armor-chest-invulnerability",
+      "weapon" : null,
+      "armor" : {
+        "stats" : {
+          "explosive" : {
+            "attack" : 0,
+            "damage" : 0,
+            "radius" : 0
+          },
+          "missileLauncher" : {
+            "ammo" : null,
+            "range" : 0
+          },
+          "speed" : 1,
+          "ranged" : {
+            "attack" : 0,
+            "damage" : 0,
+            "range" : 0
+          },
+          "defence" : 1000,
+          "melee" : {
+            "attack" : 0,
+            "damage" : 0
+          },
+          "health" : 0,
+          "sight" : {
+            "range" : 0
+          },
+          "armor" : 1000
+        },
+        "slot" : "ChestArmor"
+      }
+    } ], [ "weapon-rifle-3", {
+      "display" : "!",
+      "color" : "red",
+      "rangedWeapon" : {
+        "stats" : {
+          "explosive" : {
+            "attack" : 0,
+            "damage" : 0,
+            "radius" : 0
+          },
+          "missileLauncher" : {
+            "ammo" : null,
+            "range" : 0
+          },
+          "speed" : 1,
+          "ranged" : {
+            "attack" : 30,
+            "damage" : 15,
+            "range" : 7
+          },
+          "defence" : 0,
+          "melee" : {
+            "attack" : 0,
+            "damage" : 0
+          },
+          "health" : 0,
+          "sight" : {
+            "range" : 0
+          },
+          "armor" : 0
+        }
+      },
+      "shield" : null,
+      "hidden" : false,
+      "name" : "Rifle III",
+      "door" : null,
+      "usable" : null,
+      "pickable" : true,
+      "id" : "weapon-rifle-3",
+      "weapon" : null,
+      "armor" : null
+    } ], [ "stairs-up", {
+      "display" : "<",
+      "color" : "lightgrey",
+      "rangedWeapon" : null,
+      "shield" : null,
+      "hidden" : false,
+      "name" : "Stairs up",
+      "door" : null,
+      "usable" : null,
+      "pickable" : false,
+      "id" : "stairs-up",
+      "weapon" : null,
+      "armor" : null
+    } ] ],
+    "terrains" : [ [ "floor", {
+      "name" : "Floor",
+      "display" : ".",
+      "color" : "lightgray",
+      "id" : "floor"
+    } ], [ "colored-floor", {
+      "name" : "Floor",
+      "display" : ".",
+      "color" : "red",
+      "id" : "colored-floor"
+    } ] ],
+    "walls" : [ [ "wall", {
+      "name" : "Wall",
+      "display" : "#",
+      "color" : "darkgrey",
+      "id" : "wall"
+    } ], [ "wall-reinforced", {
+      "name" : "Reinforced wall",
+      "display" : "#",
+      "color" : "white",
+      "id" : "wall-reinforced"
+    } ] ],
+    "widgets" : [ [ "pressure-plate-widget-hidden", {
+      "type" : "TriggeredMachineryWidget",
+      "data" : {
+        "item" : "pressure-plate-hidden",
+        "id" : "pressure-plate-widget-hidden"
+      }
+    } ], [ "healing-chamber-widget", {
+      "type" : "TriggeredTransformingWidget",
+      "data" : {
+        "item" : "healing-chamber",
+        "transformTo" : "healing-chamber-widget-active",
+        "transformDescription" : "Healing chamber activates.",
+        "id" : "healing-chamber-widget"
+      }
+    } ], [ "healing-chamber-widget-active", {
+      "type" : "HealLocationWidget",
+      "data" : {
+        "item" : "healing-chamber-active",
+        "amount" : 5,
+        "interval" : 100,
+        "duration" : 400,
+        "transformTo" : "healing-chamber-widget-inactive",
+        "transformDescription" : "Healing chamber deactivates.",
+        "id" : "healing-chamber-widget-active"
+      }
+    } ], [ "healing-chamber-widget-inactive", {
+      "type" : "DelayedTransformingWidget",
+      "data" : {
+        "item" : "healing-chamber-inactive",
+        "transformTo" : "healing-chamber-widget",
+        "transformDescription" : null,
+        "delay" : 9999999,
+        "id" : "healing-chamber-widget-inactive"
+      }
+    } ], [ "portal-enemy-widget-1", {
+      "type" : "SummonCreatureWidget",
+      "data" : {
+        "item" : "portal-enemy-1",
+        "summon" : {
+          "choices" : [ {
+            "value" : "enemy-assaulter-1",
+            "weight" : 5
+          }, {
+            "value" : "enemy-brawler-1",
+            "weight" : 20
+          }, {
+            "value" : "enemy-brute-1",
+            "weight" : 5
+          }, {
+            "value" : "enemy-shooter-1",
+            "weight" : 10
+          }, {
+            "value" : "enemy-sniper-1",
+            "weight" : 5
+          }, {
+            "value" : "enemy-assaulter-2",
+            "weight" : 1
+          }, {
+            "value" : "enemy-brawler-2",
+            "weight" : 3
+          }, {
+            "value" : "enemy-brute-2",
+            "weight" : 1
+          }, {
+            "value" : "enemy-shooter-2",
+            "weight" : 2
+          }, {
+            "value" : "enemy-sniper-2",
+            "weight" : 1
+          } ]
+        },
+        "interval" : 3000,
+        "id" : "portal-enemy-widget-1"
+      }
+    } ], [ "portal-enemy-widget-2", {
+      "type" : "SummonCreatureWidget",
+      "data" : {
+        "item" : "portal-enemy-2",
+        "summon" : {
+          "choices" : [ {
+            "value" : "enemy-assaulter-2",
+            "weight" : 5
+          }, {
+            "value" : "enemy-brawler-2",
+            "weight" : 20
+          }, {
+            "value" : "enemy-brute-2",
+            "weight" : 5
+          }, {
+            "value" : "enemy-shooter-2",
+            "weight" : 10
+          }, {
+            "value" : "enemy-sniper-2",
+            "weight" : 5
+          }, {
+            "value" : "enemy-assaulter-3",
+            "weight" : 1
+          }, {
+            "value" : "enemy-brawler-3",
+            "weight" : 3
+          }, {
+            "value" : "enemy-brute-3",
+            "weight" : 1
+          }, {
+            "value" : "enemy-shooter-3",
+            "weight" : 2
+          }, {
+            "value" : "enemy-sniper-3",
+            "weight" : 1
+          } ]
+        },
+        "interval" : 3000,
+        "id" : "portal-enemy-widget-2"
+      }
+    } ], [ "portal-enemy-widget-3", {
+      "type" : "SummonCreatureWidget",
+      "data" : {
+        "item" : "portal-enemy-3",
+        "summon" : {
+          "choices" : [ {
+            "value" : "enemy-assaulter-3",
+            "weight" : 5
+          }, {
+            "value" : "enemy-brawler-3",
+            "weight" : 20
+          }, {
+            "value" : "enemy-brute-3",
+            "weight" : 5
+          }, {
+            "value" : "enemy-shooter-3",
+            "weight" : 10
+          }, {
+            "value" : "enemy-sniper-3",
+            "weight" : 5
+          } ]
+        },
+        "interval" : 3000,
+        "id" : "portal-enemy-widget-3"
+      }
+    } ] ]
   },
   "powers" : {
-    "creatures" : [ ],
-    "items" : [ ]
+    "creatures" : [ [ "transform-drone-1", {
+      "type" : "TransformCreaturePower",
+      "data" : {
+        "to" : {
+          "type" : "ItemKind",
+          "data" : null,
+          "value" : "friend-drone-1"
+        },
+        "description" : "Drone shuts down.",
+        "id" : "transform-drone-1"
+      }
+    } ], [ "transform-drone-2", {
+      "type" : "TransformCreaturePower",
+      "data" : {
+        "to" : {
+          "type" : "ItemKind",
+          "data" : null,
+          "value" : "friend-drone-2"
+        },
+        "description" : "Drone shuts down.",
+        "id" : "transform-drone-2"
+      }
+    } ], [ "transform-drone-3", {
+      "type" : "TransformCreaturePower",
+      "data" : {
+        "to" : {
+          "type" : "ItemKind",
+          "data" : null,
+          "value" : "friend-drone-3"
+        },
+        "description" : "Drone shuts down.",
+        "id" : "transform-drone-3"
+      }
+    } ] ],
+    "items" : [ [ "transform-drone-1", {
+      "type" : "TransformItemPower",
+      "data" : {
+        "to" : {
+          "type" : "CreatureKind",
+          "data" : null,
+          "value" : "friend-drone-1"
+        },
+        "description" : "Drone starts humming.",
+        "id" : "transform-drone-1"
+      }
+    } ], [ "transform-drone-2", {
+      "type" : "TransformItemPower",
+      "data" : {
+        "to" : {
+          "type" : "CreatureKind",
+          "data" : null,
+          "value" : "friend-drone-2"
+        },
+        "description" : "Drone starts humming.",
+        "id" : "transform-drone-2"
+      }
+    } ], [ "transform-drone-3", {
+      "type" : "TransformItemPower",
+      "data" : {
+        "to" : {
+          "type" : "CreatureKind",
+          "data" : null,
+          "value" : "friend-drone-3"
+        },
+        "description" : "Drone starts humming.",
+        "id" : "transform-drone-3"
+      }
+    } ] ]
   },
-  "progressions" : [ ],
-  "templates" : [ ],
-  "themes" : [ ]
+  "progressions" : [ [ "player-progression", {
+    "steps" : [ {
+      "requirements" : {
+        "experience" : 10
+      },
+      "stats" : {
+        "explosive" : {
+          "attack" : 0,
+          "damage" : 0,
+          "radius" : 0
+        },
+        "missileLauncher" : {
+          "ammo" : null,
+          "range" : 0
+        },
+        "speed" : 1,
+        "ranged" : {
+          "attack" : 2,
+          "damage" : 0,
+          "range" : 0
+        },
+        "defence" : 2,
+        "melee" : {
+          "attack" : 2,
+          "damage" : 0
+        },
+        "health" : 5,
+        "sight" : {
+          "range" : 0
+        },
+        "armor" : 0
+      }
+    }, {
+      "requirements" : {
+        "experience" : 20
+      },
+      "stats" : {
+        "explosive" : {
+          "attack" : 0,
+          "damage" : 0,
+          "radius" : 0
+        },
+        "missileLauncher" : {
+          "ammo" : null,
+          "range" : 0
+        },
+        "speed" : 1,
+        "ranged" : {
+          "attack" : 2,
+          "damage" : 0,
+          "range" : 0
+        },
+        "defence" : 2,
+        "melee" : {
+          "attack" : 2,
+          "damage" : 0
+        },
+        "health" : 5,
+        "sight" : {
+          "range" : 0
+        },
+        "armor" : 0
+      }
+    }, {
+      "requirements" : {
+        "experience" : 30
+      },
+      "stats" : {
+        "explosive" : {
+          "attack" : 0,
+          "damage" : 0,
+          "radius" : 0
+        },
+        "missileLauncher" : {
+          "ammo" : null,
+          "range" : 0
+        },
+        "speed" : 1,
+        "ranged" : {
+          "attack" : 2,
+          "damage" : 0,
+          "range" : 0
+        },
+        "defence" : 2,
+        "melee" : {
+          "attack" : 2,
+          "damage" : 0
+        },
+        "health" : 5,
+        "sight" : {
+          "range" : 0
+        },
+        "armor" : 0
+      }
+    }, {
+      "requirements" : {
+        "experience" : 40
+      },
+      "stats" : {
+        "explosive" : {
+          "attack" : 0,
+          "damage" : 0,
+          "radius" : 0
+        },
+        "missileLauncher" : {
+          "ammo" : null,
+          "range" : 0
+        },
+        "speed" : 1,
+        "ranged" : {
+          "attack" : 2,
+          "damage" : 0,
+          "range" : 0
+        },
+        "defence" : 2,
+        "melee" : {
+          "attack" : 2,
+          "damage" : 0
+        },
+        "health" : 5,
+        "sight" : {
+          "range" : 0
+        },
+        "armor" : 0
+      }
+    }, {
+      "requirements" : {
+        "experience" : 50
+      },
+      "stats" : {
+        "explosive" : {
+          "attack" : 0,
+          "damage" : 0,
+          "radius" : 0
+        },
+        "missileLauncher" : {
+          "ammo" : null,
+          "range" : 0
+        },
+        "speed" : 1,
+        "ranged" : {
+          "attack" : 2,
+          "damage" : 0,
+          "range" : 0
+        },
+        "defence" : 2,
+        "melee" : {
+          "attack" : 2,
+          "damage" : 0
+        },
+        "health" : 5,
+        "sight" : {
+          "range" : 0
+        },
+        "armor" : 0
+      }
+    } ],
+    "id" : "player-progression"
+  } ], [ "leech-progression", {
+    "steps" : [ {
+      "requirements" : {
+        "experience" : 1
+      },
+      "stats" : {
+        "explosive" : {
+          "attack" : 0,
+          "damage" : 0,
+          "radius" : 0
+        },
+        "missileLauncher" : {
+          "ammo" : null,
+          "range" : 0
+        },
+        "speed" : 10,
+        "ranged" : {
+          "attack" : 0,
+          "damage" : 0,
+          "range" : 0
+        },
+        "defence" : 5,
+        "melee" : {
+          "attack" : 5,
+          "damage" : 5
+        },
+        "health" : 5,
+        "sight" : {
+          "range" : 0
+        },
+        "armor" : 1
+      }
+    }, {
+      "requirements" : {
+        "experience" : 2
+      },
+      "stats" : {
+        "explosive" : {
+          "attack" : 0,
+          "damage" : 0,
+          "radius" : 0
+        },
+        "missileLauncher" : {
+          "ammo" : null,
+          "range" : 0
+        },
+        "speed" : 10,
+        "ranged" : {
+          "attack" : 0,
+          "damage" : 0,
+          "range" : 0
+        },
+        "defence" : 5,
+        "melee" : {
+          "attack" : 5,
+          "damage" : 5
+        },
+        "health" : 5,
+        "sight" : {
+          "range" : 0
+        },
+        "armor" : 1
+      }
+    }, {
+      "requirements" : {
+        "experience" : 3
+      },
+      "stats" : {
+        "explosive" : {
+          "attack" : 0,
+          "damage" : 0,
+          "radius" : 0
+        },
+        "missileLauncher" : {
+          "ammo" : null,
+          "range" : 0
+        },
+        "speed" : 10,
+        "ranged" : {
+          "attack" : 0,
+          "damage" : 0,
+          "range" : 0
+        },
+        "defence" : 5,
+        "melee" : {
+          "attack" : 5,
+          "damage" : 5
+        },
+        "health" : 5,
+        "sight" : {
+          "range" : 0
+        },
+        "armor" : 1
+      }
+    }, {
+      "requirements" : {
+        "experience" : 4
+      },
+      "stats" : {
+        "explosive" : {
+          "attack" : 0,
+          "damage" : 0,
+          "radius" : 0
+        },
+        "missileLauncher" : {
+          "ammo" : null,
+          "range" : 0
+        },
+        "speed" : 10,
+        "ranged" : {
+          "attack" : 0,
+          "damage" : 0,
+          "range" : 0
+        },
+        "defence" : 5,
+        "melee" : {
+          "attack" : 5,
+          "damage" : 5
+        },
+        "health" : 5,
+        "sight" : {
+          "range" : 0
+        },
+        "armor" : 1
+      }
+    }, {
+      "requirements" : {
+        "experience" : 5
+      },
+      "stats" : {
+        "explosive" : {
+          "attack" : 0,
+          "damage" : 0,
+          "radius" : 0
+        },
+        "missileLauncher" : {
+          "ammo" : null,
+          "range" : 0
+        },
+        "speed" : 10,
+        "ranged" : {
+          "attack" : 0,
+          "damage" : 0,
+          "range" : 0
+        },
+        "defence" : 5,
+        "melee" : {
+          "attack" : 5,
+          "damage" : 5
+        },
+        "health" : 5,
+        "sight" : {
+          "range" : 0
+        },
+        "armor" : 1
+      }
+    } ],
+    "id" : "leech-progression"
+  } ] ],
+  "templates" : [ [ "portal-trap-room-3", {
+    "type" : "FixedTemplate",
+    "data" : {
+      "shape" : {
+        "type" : "Rectangle",
+        "data" : {
+          "width" : 9,
+          "height" : 7,
+          "variance" : 0
+        }
+      },
+      "templates" : [ ],
+      "entrances" : [ [ {
+        "x" : 8,
+        "y" : 3
+      }, "door-closed" ], [ {
+        "x" : 0,
+        "y" : 3
+      }, "door-closed" ] ],
+      "features" : [ ],
+      "content" : {
+        "conduitLocations" : [ ],
+        "creatures" : [ ],
+        "gatewayLocations" : [ ],
+        "items" : [ [ {
+          "x" : 4,
+          "y" : 3
+        }, [ "weapon-blade-3" ] ] ],
+        "machinery" : [ {
+          "mechanism" : {
+            "type" : "CreateEntityMechanism",
+            "data" : {
+              "kind" : {
+                "type" : "WidgetKind",
+                "data" : null,
+                "value" : "portal-enemy-widget-3"
+              },
+              "disposable" : true,
+              "description" : null
+            }
+          },
+          "controls" : [ {
+            "x" : 4,
+            "y" : 3
+          } ],
+          "targets" : [ {
+            "x" : 7,
+            "y" : 1
+          }, {
+            "x" : 7,
+            "y" : 5
+          }, {
+            "x" : 1,
+            "y" : 5
+          }, {
+            "x" : 1,
+            "y" : 1
+          } ]
+        } ],
+        "terrains" : [ ],
+        "walls" : [ [ {
+          "x" : 0,
+          "y" : 0
+        }, "wall" ], [ {
+          "x" : 1,
+          "y" : 0
+        }, "wall" ], [ {
+          "x" : 3,
+          "y" : 0
+        }, "wall" ], [ {
+          "x" : 2,
+          "y" : 0
+        }, "wall" ], [ {
+          "x" : 4,
+          "y" : 0
+        }, "wall" ], [ {
+          "x" : 5,
+          "y" : 0
+        }, "wall" ], [ {
+          "x" : 6,
+          "y" : 0
+        }, "wall" ], [ {
+          "x" : 7,
+          "y" : 0
+        }, "wall" ], [ {
+          "x" : 8,
+          "y" : 0
+        }, "wall" ], [ {
+          "x" : 8,
+          "y" : 1
+        }, "wall" ], [ {
+          "x" : 8,
+          "y" : 2
+        }, "wall" ], [ {
+          "x" : 8,
+          "y" : 4
+        }, "wall" ], [ {
+          "x" : 8,
+          "y" : 5
+        }, "wall" ], [ {
+          "x" : 8,
+          "y" : 6
+        }, "wall" ], [ {
+          "x" : 7,
+          "y" : 6
+        }, "wall" ], [ {
+          "x" : 6,
+          "y" : 6
+        }, "wall" ], [ {
+          "x" : 5,
+          "y" : 6
+        }, "wall" ], [ {
+          "x" : 4,
+          "y" : 6
+        }, "wall" ], [ {
+          "x" : 3,
+          "y" : 6
+        }, "wall" ], [ {
+          "x" : 2,
+          "y" : 6
+        }, "wall" ], [ {
+          "x" : 1,
+          "y" : 6
+        }, "wall" ], [ {
+          "x" : 0,
+          "y" : 6
+        }, "wall" ], [ {
+          "x" : 0,
+          "y" : 5
+        }, "wall" ], [ {
+          "x" : 0,
+          "y" : 4
+        }, "wall" ], [ {
+          "x" : 0,
+          "y" : 2
+        }, "wall" ], [ {
+          "x" : 0,
+          "y" : 1
+        }, "wall" ] ],
+        "widgets" : [ [ {
+          "x" : 4,
+          "y" : 3
+        }, "pressure-plate-widget-hidden" ] ]
+      },
+      "id" : "portal-trap-room-3"
+    }
+  } ], [ "room-2", {
+    "type" : "RandomizedTemplate",
+    "data" : {
+      "conduitLocations" : {
+        "_1" : 1,
+        "_2" : 1
+      },
+      "shape" : {
+        "type" : "Rectangle",
+        "data" : {
+          "width" : 8,
+          "height" : 7,
+          "variance" : 0.3
+        }
+      },
+      "fill" : null,
+      "border" : "wall",
+      "terrain" : null,
+      "templates" : [ ],
+      "id" : "room-2",
+      "features" : [ {
+        "type" : "RandomizedContentFeature",
+        "data" : {
+          "creatures" : [ {
+            "selection" : {
+              "type" : "ThemeCreature",
+              "data" : {
+                "minCombatPower" : 30,
+                "maxCombatPower" : 75
+              }
+            },
+            "distribution" : {
+              "type" : "Uniform",
+              "data" : {
+                "min" : 0,
+                "max" : 3
+              }
+            }
+          }, {
+            "selection" : {
+              "type" : "ThemeCreature",
+              "data" : {
+                "minCombatPower" : 75,
+                "maxCombatPower" : 100
+              }
+            },
+            "distribution" : {
+              "type" : "Binomial",
+              "data" : {
+                "p" : 25,
+                "n" : 1
+              }
+            }
+          } ],
+          "items" : [ {
+            "selection" : {
+              "type" : "ThemeItem",
+              "data" : { }
+            },
+            "distribution" : {
+              "type" : "Binomial",
+              "data" : {
+                "p" : 35,
+                "n" : 2
+              }
+            }
+          } ],
+          "widgets" : [ {
+            "selection" : "portal-enemy-widget-2",
+            "distribution" : {
+              "type" : "Binomial",
+              "data" : {
+                "p" : 5,
+                "n" : 1
+              }
+            }
+          } ]
+        }
+      } ],
+      "entrances" : [ {
+        "_1" : "door-closed",
+        "_2" : 1,
+        "_3" : 3
+      } ]
+    }
+  } ], [ "room-3", {
+    "type" : "RandomizedTemplate",
+    "data" : {
+      "conduitLocations" : {
+        "_1" : 1,
+        "_2" : 1
+      },
+      "shape" : {
+        "type" : "Rectangle",
+        "data" : {
+          "width" : 8,
+          "height" : 7,
+          "variance" : 0.3
+        }
+      },
+      "fill" : null,
+      "border" : "wall",
+      "terrain" : null,
+      "templates" : [ ],
+      "id" : "room-3",
+      "features" : [ {
+        "type" : "RandomizedContentFeature",
+        "data" : {
+          "creatures" : [ {
+            "selection" : {
+              "type" : "ThemeCreature",
+              "data" : {
+                "minCombatPower" : 50,
+                "maxCombatPower" : 100
+              }
+            },
+            "distribution" : {
+              "type" : "Uniform",
+              "data" : {
+                "min" : 0,
+                "max" : 4
+              }
+            }
+          } ],
+          "items" : [ {
+            "selection" : {
+              "type" : "ThemeItem",
+              "data" : { }
+            },
+            "distribution" : {
+              "type" : "Binomial",
+              "data" : {
+                "p" : 35,
+                "n" : 2
+              }
+            }
+          } ],
+          "widgets" : [ {
+            "selection" : "portal-enemy-widget-3",
+            "distribution" : {
+              "type" : "Binomial",
+              "data" : {
+                "p" : 5,
+                "n" : 1
+              }
+            }
+          } ]
+        }
+      } ],
+      "entrances" : [ {
+        "_1" : "door-closed",
+        "_2" : 1,
+        "_3" : 3
+      } ]
+    }
+  } ], [ "fake-stairs-room", {
+    "type" : "FixedTemplate",
+    "data" : {
+      "shape" : {
+        "type" : "Rectangle",
+        "data" : {
+          "width" : 6,
+          "height" : 6,
+          "variance" : 0
+        }
+      },
+      "templates" : [ ],
+      "entrances" : [ [ {
+        "x" : 0,
+        "y" : 3
+      }, "door-closed" ] ],
+      "features" : [ ],
+      "content" : {
+        "conduitLocations" : [ ],
+        "creatures" : [ ],
+        "gatewayLocations" : [ ],
+        "items" : [ [ {
+          "x" : 4,
+          "y" : 1
+        }, [ "stairs-down" ] ] ],
+        "machinery" : [ {
+          "mechanism" : {
+            "type" : "CreateEntityMechanism",
+            "data" : {
+              "kind" : {
+                "type" : "WallKind",
+                "data" : null,
+                "value" : "wall-reinforced"
+              },
+              "disposable" : true,
+              "description" : null
+            }
+          },
+          "controls" : [ {
+            "x" : 2,
+            "y" : 1
+          }, {
+            "x" : 2,
+            "y" : 2
+          }, {
+            "x" : 2,
+            "y" : 3
+          }, {
+            "x" : 3,
+            "y" : 3
+          }, {
+            "x" : 4,
+            "y" : 3
+          } ],
+          "targets" : [ {
+            "x" : 3,
+            "y" : 1
+          }, {
+            "x" : 3,
+            "y" : 2
+          }, {
+            "x" : 4,
+            "y" : 2
+          } ]
+        } ],
+        "terrains" : [ ],
+        "walls" : [ [ {
+          "x" : 4,
+          "y" : 0
+        }, "wall" ], [ {
+          "x" : 3,
+          "y" : 0
+        }, "wall" ], [ {
+          "x" : 2,
+          "y" : 0
+        }, "wall" ], [ {
+          "x" : 1,
+          "y" : 0
+        }, "wall" ], [ {
+          "x" : 0,
+          "y" : 0
+        }, "wall" ], [ {
+          "x" : 0,
+          "y" : 1
+        }, "wall" ], [ {
+          "x" : 0,
+          "y" : 2
+        }, "wall" ], [ {
+          "x" : 4,
+          "y" : 5
+        }, "wall" ], [ {
+          "x" : 3,
+          "y" : 5
+        }, "wall" ], [ {
+          "x" : 0,
+          "y" : 4
+        }, "wall" ], [ {
+          "x" : 0,
+          "y" : 5
+        }, "wall" ], [ {
+          "x" : 2,
+          "y" : 5
+        }, "wall" ], [ {
+          "x" : 1,
+          "y" : 5
+        }, "wall" ], [ {
+          "x" : 5,
+          "y" : 0
+        }, "wall" ], [ {
+          "x" : 5,
+          "y" : 1
+        }, "wall" ], [ {
+          "x" : 5,
+          "y" : 2
+        }, "wall" ], [ {
+          "x" : 5,
+          "y" : 3
+        }, "wall" ], [ {
+          "x" : 5,
+          "y" : 4
+        }, "wall" ], [ {
+          "x" : 5,
+          "y" : 5
+        }, "wall" ] ],
+        "widgets" : [ [ {
+          "x" : 2,
+          "y" : 1
+        }, "pressure-plate-widget-hidden" ], [ {
+          "x" : 2,
+          "y" : 2
+        }, "pressure-plate-widget-hidden" ], [ {
+          "x" : 2,
+          "y" : 3
+        }, "pressure-plate-widget-hidden" ], [ {
+          "x" : 3,
+          "y" : 3
+        }, "pressure-plate-widget-hidden" ], [ {
+          "x" : 4,
+          "y" : 3
+        }, "pressure-plate-widget-hidden" ] ]
+      },
+      "id" : "fake-stairs-room"
+    }
+  } ], [ "room-rest", {
+    "type" : "RandomizedTemplate",
+    "data" : {
+      "conduitLocations" : {
+        "_1" : 1,
+        "_2" : 1
+      },
+      "shape" : {
+        "type" : "Rectangle",
+        "data" : {
+          "width" : 8,
+          "height" : 7,
+          "variance" : 0.3
+        }
+      },
+      "fill" : null,
+      "border" : "wall",
+      "terrain" : null,
+      "templates" : [ ],
+      "id" : "room-rest",
+      "features" : [ {
+        "type" : "RandomizedContentFeature",
+        "data" : {
+          "creatures" : [ {
+            "selection" : {
+              "type" : "ThemeCreature",
+              "data" : {
+                "minCombatPower" : 50,
+                "maxCombatPower" : 100
+              }
+            },
+            "distribution" : {
+              "type" : "Uniform",
+              "data" : {
+                "min" : 1,
+                "max" : 4
+              }
+            }
+          } ],
+          "items" : [ {
+            "selection" : {
+              "type" : "ThemeItem",
+              "data" : { }
+            },
+            "distribution" : {
+              "type" : "Binomial",
+              "data" : {
+                "p" : 35,
+                "n" : 2
+              }
+            }
+          } ],
+          "widgets" : [ {
+            "selection" : "portal-enemy-widget-3",
+            "distribution" : {
+              "type" : "Binomial",
+              "data" : {
+                "p" : 50,
+                "n" : 1
+              }
+            }
+          } ]
+        }
+      } ],
+      "entrances" : [ {
+        "_1" : "door-closed",
+        "_2" : 1,
+        "_3" : 3
+      } ]
+    }
+  } ], [ "level-1", {
+    "type" : "RandomizedTemplate",
+    "data" : {
+      "conduitLocations" : {
+        "_1" : 0,
+        "_2" : 0
+      },
+      "shape" : {
+        "type" : "Rectangle",
+        "data" : {
+          "width" : 70,
+          "height" : 25,
+          "variance" : 0
+        }
+      },
+      "fill" : "wall",
+      "border" : "wall",
+      "terrain" : null,
+      "templates" : [ {
+        "_1" : "room-1",
+        "_2" : 4,
+        "_3" : 5
+      }, {
+        "_1" : "vault-1",
+        "_2" : 0,
+        "_3" : 1
+      }, {
+        "_1" : "portal-trap-room-1",
+        "_2" : 0,
+        "_3" : 1
+      }, {
+        "_1" : "corridor-trap-1",
+        "_2" : 0,
+        "_3" : 1
+      }, {
+        "_1" : "healing-chamber",
+        "_2" : 1,
+        "_3" : 1
+      } ],
+      "id" : "level-1",
+      "features" : [ {
+        "type" : "RandomizedContentFeature",
+        "data" : {
+          "creatures" : [ {
+            "selection" : {
+              "type" : "ThemeCreature",
+              "data" : {
+                "minCombatPower" : 0,
+                "maxCombatPower" : 30
+              }
+            },
+            "distribution" : {
+              "type" : "Uniform",
+              "data" : {
+                "min" : 0,
+                "max" : 6
+              }
+            }
+          } ],
+          "items" : [ {
+            "selection" : {
+              "type" : "ThemeItem",
+              "data" : { }
+            },
+            "distribution" : {
+              "type" : "Binomial",
+              "data" : {
+                "p" : 25,
+                "n" : 3
+              }
+            }
+          } ],
+          "widgets" : [ ]
+        }
+      } ],
+      "entrances" : [ ]
+    }
+  } ], [ "level-2", {
+    "type" : "RandomizedTemplate",
+    "data" : {
+      "conduitLocations" : {
+        "_1" : 0,
+        "_2" : 0
+      },
+      "shape" : {
+        "type" : "Rectangle",
+        "data" : {
+          "width" : 70,
+          "height" : 25,
+          "variance" : 0
+        }
+      },
+      "fill" : "wall",
+      "border" : "wall",
+      "terrain" : null,
+      "templates" : [ {
+        "_1" : "room-2",
+        "_2" : 4,
+        "_3" : 5
+      }, {
+        "_1" : "vault-2",
+        "_2" : 0,
+        "_3" : 1
+      }, {
+        "_1" : "portal-trap-room-2",
+        "_2" : 0,
+        "_3" : 1
+      }, {
+        "_1" : "corridor-trap-1",
+        "_2" : 0,
+        "_3" : 1
+      }, {
+        "_1" : "healing-chamber",
+        "_2" : 1,
+        "_3" : 1
+      } ],
+      "id" : "level-2",
+      "features" : [ {
+        "type" : "RandomizedContentFeature",
+        "data" : {
+          "creatures" : [ {
+            "selection" : {
+              "type" : "ThemeCreature",
+              "data" : {
+                "minCombatPower" : 0,
+                "maxCombatPower" : 75
+              }
+            },
+            "distribution" : {
+              "type" : "Uniform",
+              "data" : {
+                "min" : 0,
+                "max" : 6
+              }
+            }
+          } ],
+          "items" : [ {
+            "selection" : {
+              "type" : "ThemeItem",
+              "data" : { }
+            },
+            "distribution" : {
+              "type" : "Binomial",
+              "data" : {
+                "p" : 25,
+                "n" : 3
+              }
+            }
+          } ],
+          "widgets" : [ ]
+        }
+      } ],
+      "entrances" : [ ]
+    }
+  } ], [ "level-3", {
+    "type" : "RandomizedTemplate",
+    "data" : {
+      "conduitLocations" : {
+        "_1" : 0,
+        "_2" : 0
+      },
+      "shape" : {
+        "type" : "Rectangle",
+        "data" : {
+          "width" : 70,
+          "height" : 25,
+          "variance" : 0
+        }
+      },
+      "fill" : "wall",
+      "border" : "wall",
+      "terrain" : null,
+      "templates" : [ {
+        "_1" : "room-3",
+        "_2" : 4,
+        "_3" : 5
+      }, {
+        "_1" : "vault-3",
+        "_2" : 0,
+        "_3" : 1
+      }, {
+        "_1" : "portal-trap-room-3",
+        "_2" : 0,
+        "_3" : 1
+      }, {
+        "_1" : "corridor-trap-2",
+        "_2" : 0,
+        "_3" : 1
+      }, {
+        "_1" : "leech-room",
+        "_2" : 0,
+        "_3" : 1
+      }, {
+        "_1" : "healing-chamber",
+        "_2" : 1,
+        "_3" : 1
+      } ],
+      "id" : "level-3",
+      "features" : [ {
+        "type" : "RandomizedContentFeature",
+        "data" : {
+          "creatures" : [ {
+            "selection" : {
+              "type" : "ThemeCreature",
+              "data" : {
+                "minCombatPower" : 50,
+                "maxCombatPower" : 100
+              }
+            },
+            "distribution" : {
+              "type" : "Uniform",
+              "data" : {
+                "min" : 0,
+                "max" : 6
+              }
+            }
+          } ],
+          "items" : [ {
+            "selection" : {
+              "type" : "ThemeItem",
+              "data" : { }
+            },
+            "distribution" : {
+              "type" : "Binomial",
+              "data" : {
+                "p" : 25,
+                "n" : 3
+              }
+            }
+          } ],
+          "widgets" : [ ]
+        }
+      } ],
+      "entrances" : [ ]
+    }
+  } ], [ "healing-chamber", {
+    "type" : "FixedTemplate",
+    "data" : {
+      "shape" : {
+        "type" : "Rectangle",
+        "data" : {
+          "width" : 3,
+          "height" : 3,
+          "variance" : 0
+        }
+      },
+      "templates" : [ ],
+      "entrances" : [ [ {
+        "x" : 0,
+        "y" : 1
+      }, "door-closed" ] ],
+      "features" : [ ],
+      "content" : {
+        "conduitLocations" : [ ],
+        "creatures" : [ ],
+        "gatewayLocations" : [ ],
+        "items" : [ ],
+        "machinery" : [ ],
+        "terrains" : [ ],
+        "walls" : [ [ {
+          "x" : 0,
+          "y" : 0
+        }, "wall" ], [ {
+          "x" : 1,
+          "y" : 0
+        }, "wall" ], [ {
+          "x" : 2,
+          "y" : 0
+        }, "wall" ], [ {
+          "x" : 2,
+          "y" : 1
+        }, "wall" ], [ {
+          "x" : 2,
+          "y" : 2
+        }, "wall" ], [ {
+          "x" : 1,
+          "y" : 2
+        }, "wall" ], [ {
+          "x" : 0,
+          "y" : 2
+        }, "wall" ] ],
+        "widgets" : [ [ {
+          "x" : 1,
+          "y" : 1
+        }, "healing-chamber-widget" ] ]
+      },
+      "id" : "healing-chamber"
+    }
+  } ], [ "end-room", {
+    "type" : "FixedTemplate",
+    "data" : {
+      "shape" : {
+        "type" : "Rectangle",
+        "data" : {
+          "width" : 7,
+          "height" : 7,
+          "variance" : 0
+        }
+      },
+      "templates" : [ ],
+      "entrances" : [ ],
+      "features" : [ ],
+      "content" : {
+        "conduitLocations" : [ {
+          "x" : 2,
+          "y" : 2
+        }, {
+          "x" : 2,
+          "y" : 4
+        } ],
+        "creatures" : [ [ {
+          "x" : 4,
+          "y" : 3
+        }, "friend-toad" ] ],
+        "gatewayLocations" : [ ],
+        "items" : [ ],
+        "machinery" : [ ],
+        "terrains" : [ ],
+        "walls" : [ [ {
+          "x" : 0,
+          "y" : 0
+        }, "wall" ], [ {
+          "x" : 0,
+          "y" : 1
+        }, "wall" ], [ {
+          "x" : 0,
+          "y" : 2
+        }, "wall" ], [ {
+          "x" : 0,
+          "y" : 3
+        }, "wall" ], [ {
+          "x" : 0,
+          "y" : 4
+        }, "wall" ], [ {
+          "x" : 0,
+          "y" : 5
+        }, "wall" ], [ {
+          "x" : 0,
+          "y" : 6
+        }, "wall" ], [ {
+          "x" : 1,
+          "y" : 6
+        }, "wall" ], [ {
+          "x" : 2,
+          "y" : 6
+        }, "wall" ], [ {
+          "x" : 3,
+          "y" : 6
+        }, "wall" ], [ {
+          "x" : 4,
+          "y" : 6
+        }, "wall" ], [ {
+          "x" : 5,
+          "y" : 6
+        }, "wall" ], [ {
+          "x" : 6,
+          "y" : 6
+        }, "wall" ], [ {
+          "x" : 6,
+          "y" : 5
+        }, "wall" ], [ {
+          "x" : 6,
+          "y" : 4
+        }, "wall" ], [ {
+          "x" : 6,
+          "y" : 3
+        }, "wall" ], [ {
+          "x" : 6,
+          "y" : 2
+        }, "wall" ], [ {
+          "x" : 6,
+          "y" : 1
+        }, "wall" ], [ {
+          "x" : 6,
+          "y" : 0
+        }, "wall" ], [ {
+          "x" : 5,
+          "y" : 0
+        }, "wall" ], [ {
+          "x" : 4,
+          "y" : 0
+        }, "wall" ], [ {
+          "x" : 3,
+          "y" : 0
+        }, "wall" ], [ {
+          "x" : 2,
+          "y" : 0
+        }, "wall" ], [ {
+          "x" : 1,
+          "y" : 0
+        }, "wall" ] ],
+        "widgets" : [ ]
+      },
+      "id" : "end-room"
+    }
+  } ], [ "conduit-room-1", {
+    "type" : "FixedTemplate",
+    "data" : {
+      "shape" : {
+        "type" : "Rectangle",
+        "data" : {
+          "width" : 25,
+          "height" : 20,
+          "variance" : 0
+        }
+      },
+      "templates" : [ ],
+      "entrances" : [ ],
+      "features" : [ ],
+      "content" : {
+        "conduitLocations" : [ {
+          "x" : 17,
+          "y" : 4
+        }, {
+          "x" : 17,
+          "y" : 8
+        } ],
+        "creatures" : [ [ {
+          "x" : 7,
+          "y" : 6
+        }, "friend-guide" ] ],
+        "gatewayLocations" : [ {
+          "x" : 3,
+          "y" : 6
+        } ],
+        "items" : [ [ {
+          "x" : 10,
+          "y" : 4
+        }, [ "weapon-blade-1" ] ], [ {
+          "x" : 10,
+          "y" : 6
+        }, [ "weapon-rifle-1" ] ], [ {
+          "x" : 10,
+          "y" : 8
+        }, [ "armor-chest-1" ] ], [ {
+          "x" : 16,
+          "y" : 13
+        }, [ "armor-chest-3", "armor-foot-3", "armor-hand-3", "armor-head-3", "armor-leg-3", "shield-deflector-3", "weapon-blade-3", "weapon-rifle-3" ] ], [ {
+          "x" : 18,
+          "y" : 13
+        }, [ "weapon-blade-3", "weapon-missile-launcher-guided-3", "friend-drone-3" ] ], [ {
+          "x" : 17,
+          "y" : 13
+        }, [ "armor-chest-invulnerability" ] ] ],
+        "machinery" : [ {
+          "mechanism" : {
+            "type" : "CreateEntityMechanism",
+            "data" : {
+              "kind" : {
+                "type" : "WallKind",
+                "data" : null,
+                "value" : "wall"
+              },
+              "disposable" : true,
+              "description" : null
+            }
+          },
+          "controls" : [ {
+            "x" : 10,
+            "y" : 4
+          } ],
+          "targets" : [ {
+            "x" : 9,
+            "y" : 6
+          }, {
+            "x" : 11,
+            "y" : 6
+          }, {
+            "x" : 9,
+            "y" : 8
+          }, {
+            "x" : 11,
+            "y" : 8
+          } ]
+        }, {
+          "mechanism" : {
+            "type" : "CreateEntityMechanism",
+            "data" : {
+              "kind" : {
+                "type" : "WallKind",
+                "data" : null,
+                "value" : "wall"
+              },
+              "disposable" : true,
+              "description" : null
+            }
+          },
+          "controls" : [ {
+            "x" : 10,
+            "y" : 6
+          } ],
+          "targets" : [ {
+            "x" : 9,
+            "y" : 8
+          }, {
+            "x" : 11,
+            "y" : 8
+          }, {
+            "x" : 9,
+            "y" : 4
+          }, {
+            "x" : 11,
+            "y" : 4
+          } ]
+        }, {
+          "mechanism" : {
+            "type" : "CreateEntityMechanism",
+            "data" : {
+              "kind" : {
+                "type" : "WallKind",
+                "data" : null,
+                "value" : "wall"
+              },
+              "disposable" : true,
+              "description" : null
+            }
+          },
+          "controls" : [ {
+            "x" : 10,
+            "y" : 8
+          } ],
+          "targets" : [ {
+            "x" : 9,
+            "y" : 6
+          }, {
+            "x" : 11,
+            "y" : 6
+          }, {
+            "x" : 9,
+            "y" : 4
+          }, {
+            "x" : 11,
+            "y" : 4
+          } ]
+        }, {
+          "mechanism" : {
+            "type" : "CreateEntityMechanism",
+            "data" : {
+              "kind" : {
+                "type" : "WidgetKind",
+                "data" : null,
+                "value" : "pressure-plate-widget-hidden"
+              },
+              "disposable" : true,
+              "description" : null
+            }
+          },
+          "controls" : [ {
+            "x" : 2,
+            "y" : 3
+          } ],
+          "targets" : [ {
+            "x" : 18,
+            "y" : 9
+          } ]
+        }, {
+          "mechanism" : {
+            "type" : "RemoveWallMechanism",
+            "data" : {
+              "disposable" : true
+            }
+          },
+          "controls" : [ {
+            "x" : 18,
+            "y" : 9
+          } ],
+          "targets" : [ {
+            "x" : 17,
+            "y" : 10
+          } ]
+        } ],
+        "terrains" : [ [ {
+          "x" : 6,
+          "y" : 4
+        }, "colored-floor" ], [ {
+          "x" : 5,
+          "y" : 5
+        }, "colored-floor" ], [ {
+          "x" : 6,
+          "y" : 5
+        }, "colored-floor" ], [ {
+          "x" : 6,
+          "y" : 6
+        }, "colored-floor" ], [ {
+          "x" : 6,
+          "y" : 7
+        }, "colored-floor" ], [ {
+          "x" : 6,
+          "y" : 8
+        }, "colored-floor" ], [ {
+          "x" : 5,
+          "y" : 8
+        }, "colored-floor" ], [ {
+          "x" : 7,
+          "y" : 8
+        }, "colored-floor" ], [ {
+          "x" : 13,
+          "y" : 5
+        }, "colored-floor" ], [ {
+          "x" : 14,
+          "y" : 4
+        }, "colored-floor" ], [ {
+          "x" : 14,
+          "y" : 5
+        }, "colored-floor" ], [ {
+          "x" : 14,
+          "y" : 7
+        }, "colored-floor" ], [ {
+          "x" : 14,
+          "y" : 6
+        }, "colored-floor" ], [ {
+          "x" : 13,
+          "y" : 8
+        }, "colored-floor" ], [ {
+          "x" : 14,
+          "y" : 8
+        }, "colored-floor" ], [ {
+          "x" : 15,
+          "y" : 8
+        }, "colored-floor" ] ],
+        "walls" : [ [ {
+          "x" : 9,
+          "y" : 3
+        }, "wall" ], [ {
+          "x" : 10,
+          "y" : 3
+        }, "wall" ], [ {
+          "x" : 11,
+          "y" : 3
+        }, "wall" ], [ {
+          "x" : 9,
+          "y" : 5
+        }, "wall" ], [ {
+          "x" : 10,
+          "y" : 5
+        }, "wall" ], [ {
+          "x" : 11,
+          "y" : 5
+        }, "wall" ], [ {
+          "x" : 9,
+          "y" : 7
+        }, "wall" ], [ {
+          "x" : 10,
+          "y" : 7
+        }, "wall" ], [ {
+          "x" : 11,
+          "y" : 7
+        }, "wall" ], [ {
+          "x" : 9,
+          "y" : 9
+        }, "wall" ], [ {
+          "x" : 10,
+          "y" : 9
+        }, "wall" ], [ {
+          "x" : 11,
+          "y" : 9
+        }, "wall" ], [ {
+          "x" : 1,
+          "y" : 5
+        }, "wall" ], [ {
+          "x" : 1,
+          "y" : 4
+        }, "wall" ], [ {
+          "x" : 1,
+          "y" : 3
+        }, "wall" ], [ {
+          "x" : 1,
+          "y" : 2
+        }, "wall" ], [ {
+          "x" : 9,
+          "y" : 2
+        }, "wall" ], [ {
+          "x" : 10,
+          "y" : 2
+        }, "wall" ], [ {
+          "x" : 8,
+          "y" : 2
+        }, "wall" ], [ {
+          "x" : 7,
+          "y" : 2
+        }, "wall" ], [ {
+          "x" : 6,
+          "y" : 2
+        }, "wall" ], [ {
+          "x" : 5,
+          "y" : 2
+        }, "wall" ], [ {
+          "x" : 4,
+          "y" : 2
+        }, "wall" ], [ {
+          "x" : 3,
+          "y" : 2
+        }, "wall" ], [ {
+          "x" : 2,
+          "y" : 2
+        }, "wall" ], [ {
+          "x" : 11,
+          "y" : 2
+        }, "wall" ], [ {
+          "x" : 12,
+          "y" : 2
+        }, "wall" ], [ {
+          "x" : 13,
+          "y" : 2
+        }, "wall" ], [ {
+          "x" : 14,
+          "y" : 2
+        }, "wall" ], [ {
+          "x" : 15,
+          "y" : 2
+        }, "wall" ], [ {
+          "x" : 16,
+          "y" : 2
+        }, "wall" ], [ {
+          "x" : 18,
+          "y" : 2
+        }, "wall" ], [ {
+          "x" : 17,
+          "y" : 2
+        }, "wall" ], [ {
+          "x" : 19,
+          "y" : 2
+        }, "wall" ], [ {
+          "x" : 19,
+          "y" : 3
+        }, "wall" ], [ {
+          "x" : 19,
+          "y" : 4
+        }, "wall" ], [ {
+          "x" : 19,
+          "y" : 5
+        }, "wall" ], [ {
+          "x" : 19,
+          "y" : 6
+        }, "wall" ], [ {
+          "x" : 19,
+          "y" : 7
+        }, "wall" ], [ {
+          "x" : 19,
+          "y" : 8
+        }, "wall" ], [ {
+          "x" : 19,
+          "y" : 9
+        }, "wall" ], [ {
+          "x" : 19,
+          "y" : 10
+        }, "wall" ], [ {
+          "x" : 11,
+          "y" : 10
+        }, "wall" ], [ {
+          "x" : 12,
+          "y" : 10
+        }, "wall" ], [ {
+          "x" : 13,
+          "y" : 10
+        }, "wall" ], [ {
+          "x" : 14,
+          "y" : 10
+        }, "wall" ], [ {
+          "x" : 15,
+          "y" : 10
+        }, "wall" ], [ {
+          "x" : 18,
+          "y" : 10
+        }, "wall" ], [ {
+          "x" : 16,
+          "y" : 10
+        }, "wall" ], [ {
+          "x" : 10,
+          "y" : 10
+        }, "wall" ], [ {
+          "x" : 9,
+          "y" : 10
+        }, "wall" ], [ {
+          "x" : 8,
+          "y" : 10
+        }, "wall" ], [ {
+          "x" : 7,
+          "y" : 10
+        }, "wall" ], [ {
+          "x" : 6,
+          "y" : 10
+        }, "wall" ], [ {
+          "x" : 5,
+          "y" : 10
+        }, "wall" ], [ {
+          "x" : 4,
+          "y" : 10
+        }, "wall" ], [ {
+          "x" : 3,
+          "y" : 10
+        }, "wall" ], [ {
+          "x" : 2,
+          "y" : 10
+        }, "wall" ], [ {
+          "x" : 1,
+          "y" : 10
+        }, "wall" ], [ {
+          "x" : 1,
+          "y" : 9
+        }, "wall" ], [ {
+          "x" : 1,
+          "y" : 8
+        }, "wall" ], [ {
+          "x" : 1,
+          "y" : 7
+        }, "wall" ], [ {
+          "x" : 1,
+          "y" : 6
+        }, "wall" ], [ {
+          "x" : 19,
+          "y" : 11
+        }, "wall-reinforced" ], [ {
+          "x" : 19,
+          "y" : 12
+        }, "wall-reinforced" ], [ {
+          "x" : 19,
+          "y" : 13
+        }, "wall-reinforced" ], [ {
+          "x" : 19,
+          "y" : 14
+        }, "wall-reinforced" ], [ {
+          "x" : 18,
+          "y" : 14
+        }, "wall-reinforced" ], [ {
+          "x" : 17,
+          "y" : 14
+        }, "wall-reinforced" ], [ {
+          "x" : 16,
+          "y" : 14
+        }, "wall-reinforced" ], [ {
+          "x" : 15,
+          "y" : 14
+        }, "wall-reinforced" ], [ {
+          "x" : 15,
+          "y" : 13
+        }, "wall-reinforced" ], [ {
+          "x" : 15,
+          "y" : 12
+        }, "wall-reinforced" ], [ {
+          "x" : 15,
+          "y" : 11
+        }, "wall-reinforced" ], [ {
+          "x" : 17,
+          "y" : 10
+        }, "wall" ] ],
+        "widgets" : [ [ {
+          "x" : 10,
+          "y" : 4
+        }, "pressure-plate-widget-hidden" ], [ {
+          "x" : 10,
+          "y" : 6
+        }, "pressure-plate-widget-hidden" ], [ {
+          "x" : 10,
+          "y" : 8
+        }, "pressure-plate-widget-hidden" ], [ {
+          "x" : 2,
+          "y" : 3
+        }, "pressure-plate-widget-hidden" ] ]
+      },
+      "id" : "conduit-room-1"
+    }
+  } ], [ "conduit-room-2", {
+    "type" : "FixedTemplate",
+    "data" : {
+      "shape" : {
+        "type" : "Rectangle",
+        "data" : {
+          "width" : 25,
+          "height" : 20,
+          "variance" : 0
+        }
+      },
+      "templates" : [ ],
+      "entrances" : [ ],
+      "features" : [ ],
+      "content" : {
+        "conduitLocations" : [ {
+          "x" : 3,
+          "y" : 4
+        }, {
+          "x" : 3,
+          "y" : 8
+        }, {
+          "x" : 17,
+          "y" : 8
+        }, {
+          "x" : 17,
+          "y" : 4
+        } ],
+        "creatures" : [ ],
+        "gatewayLocations" : [ ],
+        "items" : [ [ {
+          "x" : 10,
+          "y" : 4
+        }, [ "weapon-blade-2" ] ], [ {
+          "x" : 10,
+          "y" : 6
+        }, [ "weapon-rifle-2" ] ], [ {
+          "x" : 10,
+          "y" : 8
+        }, [ "armor-chest-2" ] ] ],
+        "machinery" : [ {
+          "mechanism" : {
+            "type" : "CreateEntityMechanism",
+            "data" : {
+              "kind" : {
+                "type" : "WallKind",
+                "data" : null,
+                "value" : "wall"
+              },
+              "disposable" : true,
+              "description" : null
+            }
+          },
+          "controls" : [ {
+            "x" : 10,
+            "y" : 4
+          } ],
+          "targets" : [ {
+            "x" : 9,
+            "y" : 6
+          }, {
+            "x" : 11,
+            "y" : 6
+          }, {
+            "x" : 9,
+            "y" : 8
+          }, {
+            "x" : 11,
+            "y" : 8
+          } ]
+        }, {
+          "mechanism" : {
+            "type" : "CreateEntityMechanism",
+            "data" : {
+              "kind" : {
+                "type" : "WallKind",
+                "data" : null,
+                "value" : "wall"
+              },
+              "disposable" : true,
+              "description" : null
+            }
+          },
+          "controls" : [ {
+            "x" : 10,
+            "y" : 6
+          } ],
+          "targets" : [ {
+            "x" : 9,
+            "y" : 8
+          }, {
+            "x" : 11,
+            "y" : 8
+          }, {
+            "x" : 9,
+            "y" : 4
+          }, {
+            "x" : 11,
+            "y" : 4
+          } ]
+        }, {
+          "mechanism" : {
+            "type" : "CreateEntityMechanism",
+            "data" : {
+              "kind" : {
+                "type" : "WallKind",
+                "data" : null,
+                "value" : "wall"
+              },
+              "disposable" : true,
+              "description" : null
+            }
+          },
+          "controls" : [ {
+            "x" : 10,
+            "y" : 8
+          } ],
+          "targets" : [ {
+            "x" : 9,
+            "y" : 6
+          }, {
+            "x" : 11,
+            "y" : 6
+          }, {
+            "x" : 9,
+            "y" : 4
+          }, {
+            "x" : 11,
+            "y" : 4
+          } ]
+        } ],
+        "terrains" : [ [ {
+          "x" : 5,
+          "y" : 4
+        }, "colored-floor" ], [ {
+          "x" : 6,
+          "y" : 4
+        }, "colored-floor" ], [ {
+          "x" : 7,
+          "y" : 4
+        }, "colored-floor" ], [ {
+          "x" : 7,
+          "y" : 5
+        }, "colored-floor" ], [ {
+          "x" : 7,
+          "y" : 6
+        }, "colored-floor" ], [ {
+          "x" : 6,
+          "y" : 6
+        }, "colored-floor" ], [ {
+          "x" : 5,
+          "y" : 6
+        }, "colored-floor" ], [ {
+          "x" : 5,
+          "y" : 7
+        }, "colored-floor" ], [ {
+          "x" : 5,
+          "y" : 8
+        }, "colored-floor" ], [ {
+          "x" : 6,
+          "y" : 8
+        }, "colored-floor" ], [ {
+          "x" : 7,
+          "y" : 8
+        }, "colored-floor" ], [ {
+          "x" : 13,
+          "y" : 4
+        }, "colored-floor" ], [ {
+          "x" : 14,
+          "y" : 4
+        }, "colored-floor" ], [ {
+          "x" : 15,
+          "y" : 4
+        }, "colored-floor" ], [ {
+          "x" : 15,
+          "y" : 5
+        }, "colored-floor" ], [ {
+          "x" : 15,
+          "y" : 6
+        }, "colored-floor" ], [ {
+          "x" : 14,
+          "y" : 6
+        }, "colored-floor" ], [ {
+          "x" : 13,
+          "y" : 6
+        }, "colored-floor" ], [ {
+          "x" : 13,
+          "y" : 7
+        }, "colored-floor" ], [ {
+          "x" : 13,
+          "y" : 8
+        }, "colored-floor" ], [ {
+          "x" : 14,
+          "y" : 8
+        }, "colored-floor" ], [ {
+          "x" : 15,
+          "y" : 8
+        }, "colored-floor" ] ],
+        "walls" : [ [ {
+          "x" : 9,
+          "y" : 3
+        }, "wall" ], [ {
+          "x" : 10,
+          "y" : 3
+        }, "wall" ], [ {
+          "x" : 11,
+          "y" : 3
+        }, "wall" ], [ {
+          "x" : 9,
+          "y" : 5
+        }, "wall" ], [ {
+          "x" : 10,
+          "y" : 5
+        }, "wall" ], [ {
+          "x" : 11,
+          "y" : 5
+        }, "wall" ], [ {
+          "x" : 9,
+          "y" : 7
+        }, "wall" ], [ {
+          "x" : 10,
+          "y" : 7
+        }, "wall" ], [ {
+          "x" : 11,
+          "y" : 7
+        }, "wall" ], [ {
+          "x" : 9,
+          "y" : 9
+        }, "wall" ], [ {
+          "x" : 10,
+          "y" : 9
+        }, "wall" ], [ {
+          "x" : 11,
+          "y" : 9
+        }, "wall" ], [ {
+          "x" : 1,
+          "y" : 5
+        }, "wall" ], [ {
+          "x" : 1,
+          "y" : 4
+        }, "wall" ], [ {
+          "x" : 1,
+          "y" : 3
+        }, "wall" ], [ {
+          "x" : 1,
+          "y" : 2
+        }, "wall" ], [ {
+          "x" : 9,
+          "y" : 2
+        }, "wall" ], [ {
+          "x" : 10,
+          "y" : 2
+        }, "wall" ], [ {
+          "x" : 8,
+          "y" : 2
+        }, "wall" ], [ {
+          "x" : 7,
+          "y" : 2
+        }, "wall" ], [ {
+          "x" : 6,
+          "y" : 2
+        }, "wall" ], [ {
+          "x" : 5,
+          "y" : 2
+        }, "wall" ], [ {
+          "x" : 4,
+          "y" : 2
+        }, "wall" ], [ {
+          "x" : 3,
+          "y" : 2
+        }, "wall" ], [ {
+          "x" : 2,
+          "y" : 2
+        }, "wall" ], [ {
+          "x" : 11,
+          "y" : 2
+        }, "wall" ], [ {
+          "x" : 12,
+          "y" : 2
+        }, "wall" ], [ {
+          "x" : 13,
+          "y" : 2
+        }, "wall" ], [ {
+          "x" : 14,
+          "y" : 2
+        }, "wall" ], [ {
+          "x" : 15,
+          "y" : 2
+        }, "wall" ], [ {
+          "x" : 16,
+          "y" : 2
+        }, "wall" ], [ {
+          "x" : 18,
+          "y" : 2
+        }, "wall" ], [ {
+          "x" : 17,
+          "y" : 2
+        }, "wall" ], [ {
+          "x" : 19,
+          "y" : 2
+        }, "wall" ], [ {
+          "x" : 19,
+          "y" : 3
+        }, "wall" ], [ {
+          "x" : 19,
+          "y" : 4
+        }, "wall" ], [ {
+          "x" : 19,
+          "y" : 5
+        }, "wall" ], [ {
+          "x" : 19,
+          "y" : 6
+        }, "wall" ], [ {
+          "x" : 19,
+          "y" : 7
+        }, "wall" ], [ {
+          "x" : 19,
+          "y" : 8
+        }, "wall" ], [ {
+          "x" : 19,
+          "y" : 9
+        }, "wall" ], [ {
+          "x" : 19,
+          "y" : 10
+        }, "wall" ], [ {
+          "x" : 11,
+          "y" : 10
+        }, "wall" ], [ {
+          "x" : 12,
+          "y" : 10
+        }, "wall" ], [ {
+          "x" : 13,
+          "y" : 10
+        }, "wall" ], [ {
+          "x" : 14,
+          "y" : 10
+        }, "wall" ], [ {
+          "x" : 15,
+          "y" : 10
+        }, "wall" ], [ {
+          "x" : 17,
+          "y" : 10
+        }, "wall" ], [ {
+          "x" : 18,
+          "y" : 10
+        }, "wall" ], [ {
+          "x" : 16,
+          "y" : 10
+        }, "wall" ], [ {
+          "x" : 10,
+          "y" : 10
+        }, "wall" ], [ {
+          "x" : 9,
+          "y" : 10
+        }, "wall" ], [ {
+          "x" : 8,
+          "y" : 10
+        }, "wall" ], [ {
+          "x" : 7,
+          "y" : 10
+        }, "wall" ], [ {
+          "x" : 6,
+          "y" : 10
+        }, "wall" ], [ {
+          "x" : 5,
+          "y" : 10
+        }, "wall" ], [ {
+          "x" : 4,
+          "y" : 10
+        }, "wall" ], [ {
+          "x" : 3,
+          "y" : 10
+        }, "wall" ], [ {
+          "x" : 2,
+          "y" : 10
+        }, "wall" ], [ {
+          "x" : 1,
+          "y" : 10
+        }, "wall" ], [ {
+          "x" : 1,
+          "y" : 9
+        }, "wall" ], [ {
+          "x" : 1,
+          "y" : 8
+        }, "wall" ], [ {
+          "x" : 1,
+          "y" : 7
+        }, "wall" ], [ {
+          "x" : 1,
+          "y" : 6
+        }, "wall" ] ],
+        "widgets" : [ [ {
+          "x" : 10,
+          "y" : 4
+        }, "pressure-plate-widget-hidden" ], [ {
+          "x" : 10,
+          "y" : 6
+        }, "pressure-plate-widget-hidden" ], [ {
+          "x" : 10,
+          "y" : 8
+        }, "pressure-plate-widget-hidden" ] ]
+      },
+      "id" : "conduit-room-2"
+    }
+  } ], [ "conduit-room-3", {
+    "type" : "FixedTemplate",
+    "data" : {
+      "shape" : {
+        "type" : "Rectangle",
+        "data" : {
+          "width" : 25,
+          "height" : 20,
+          "variance" : 0
+        }
+      },
+      "templates" : [ ],
+      "entrances" : [ ],
+      "features" : [ ],
+      "content" : {
+        "conduitLocations" : [ {
+          "x" : 3,
+          "y" : 4
+        }, {
+          "x" : 3,
+          "y" : 8
+        }, {
+          "x" : 17,
+          "y" : 8
+        }, {
+          "x" : 17,
+          "y" : 4
+        } ],
+        "creatures" : [ ],
+        "gatewayLocations" : [ ],
+        "items" : [ [ {
+          "x" : 10,
+          "y" : 4
+        }, [ "weapon-blade-3" ] ], [ {
+          "x" : 10,
+          "y" : 6
+        }, [ "weapon-rifle-3" ] ], [ {
+          "x" : 10,
+          "y" : 8
+        }, [ "armor-chest-3" ] ] ],
+        "machinery" : [ {
+          "mechanism" : {
+            "type" : "CreateEntityMechanism",
+            "data" : {
+              "kind" : {
+                "type" : "WallKind",
+                "data" : null,
+                "value" : "wall"
+              },
+              "disposable" : true,
+              "description" : null
+            }
+          },
+          "controls" : [ {
+            "x" : 10,
+            "y" : 4
+          } ],
+          "targets" : [ {
+            "x" : 9,
+            "y" : 6
+          }, {
+            "x" : 11,
+            "y" : 6
+          }, {
+            "x" : 9,
+            "y" : 8
+          }, {
+            "x" : 11,
+            "y" : 8
+          } ]
+        }, {
+          "mechanism" : {
+            "type" : "CreateEntityMechanism",
+            "data" : {
+              "kind" : {
+                "type" : "WallKind",
+                "data" : null,
+                "value" : "wall"
+              },
+              "disposable" : true,
+              "description" : null
+            }
+          },
+          "controls" : [ {
+            "x" : 10,
+            "y" : 6
+          } ],
+          "targets" : [ {
+            "x" : 9,
+            "y" : 8
+          }, {
+            "x" : 11,
+            "y" : 8
+          }, {
+            "x" : 9,
+            "y" : 4
+          }, {
+            "x" : 11,
+            "y" : 4
+          } ]
+        }, {
+          "mechanism" : {
+            "type" : "CreateEntityMechanism",
+            "data" : {
+              "kind" : {
+                "type" : "WallKind",
+                "data" : null,
+                "value" : "wall"
+              },
+              "disposable" : true,
+              "description" : null
+            }
+          },
+          "controls" : [ {
+            "x" : 10,
+            "y" : 8
+          } ],
+          "targets" : [ {
+            "x" : 9,
+            "y" : 6
+          }, {
+            "x" : 11,
+            "y" : 6
+          }, {
+            "x" : 9,
+            "y" : 4
+          }, {
+            "x" : 11,
+            "y" : 4
+          } ]
+        } ],
+        "terrains" : [ [ {
+          "x" : 5,
+          "y" : 4
+        }, "colored-floor" ], [ {
+          "x" : 6,
+          "y" : 4
+        }, "colored-floor" ], [ {
+          "x" : 7,
+          "y" : 4
+        }, "colored-floor" ], [ {
+          "x" : 7,
+          "y" : 5
+        }, "colored-floor" ], [ {
+          "x" : 7,
+          "y" : 6
+        }, "colored-floor" ], [ {
+          "x" : 6,
+          "y" : 6
+        }, "colored-floor" ], [ {
+          "x" : 7,
+          "y" : 7
+        }, "colored-floor" ], [ {
+          "x" : 7,
+          "y" : 8
+        }, "colored-floor" ], [ {
+          "x" : 6,
+          "y" : 8
+        }, "colored-floor" ], [ {
+          "x" : 5,
+          "y" : 8
+        }, "colored-floor" ], [ {
+          "x" : 13,
+          "y" : 4
+        }, "colored-floor" ], [ {
+          "x" : 14,
+          "y" : 4
+        }, "colored-floor" ], [ {
+          "x" : 15,
+          "y" : 4
+        }, "colored-floor" ], [ {
+          "x" : 15,
+          "y" : 5
+        }, "colored-floor" ], [ {
+          "x" : 15,
+          "y" : 6
+        }, "colored-floor" ], [ {
+          "x" : 14,
+          "y" : 6
+        }, "colored-floor" ], [ {
+          "x" : 15,
+          "y" : 7
+        }, "colored-floor" ], [ {
+          "x" : 15,
+          "y" : 8
+        }, "colored-floor" ], [ {
+          "x" : 14,
+          "y" : 8
+        }, "colored-floor" ], [ {
+          "x" : 13,
+          "y" : 8
+        }, "colored-floor" ] ],
+        "walls" : [ [ {
+          "x" : 9,
+          "y" : 3
+        }, "wall" ], [ {
+          "x" : 10,
+          "y" : 3
+        }, "wall" ], [ {
+          "x" : 11,
+          "y" : 3
+        }, "wall" ], [ {
+          "x" : 9,
+          "y" : 5
+        }, "wall" ], [ {
+          "x" : 10,
+          "y" : 5
+        }, "wall" ], [ {
+          "x" : 11,
+          "y" : 5
+        }, "wall" ], [ {
+          "x" : 9,
+          "y" : 7
+        }, "wall" ], [ {
+          "x" : 10,
+          "y" : 7
+        }, "wall" ], [ {
+          "x" : 11,
+          "y" : 7
+        }, "wall" ], [ {
+          "x" : 9,
+          "y" : 9
+        }, "wall" ], [ {
+          "x" : 10,
+          "y" : 9
+        }, "wall" ], [ {
+          "x" : 11,
+          "y" : 9
+        }, "wall" ], [ {
+          "x" : 1,
+          "y" : 5
+        }, "wall" ], [ {
+          "x" : 1,
+          "y" : 4
+        }, "wall" ], [ {
+          "x" : 1,
+          "y" : 3
+        }, "wall" ], [ {
+          "x" : 1,
+          "y" : 2
+        }, "wall" ], [ {
+          "x" : 9,
+          "y" : 2
+        }, "wall" ], [ {
+          "x" : 10,
+          "y" : 2
+        }, "wall" ], [ {
+          "x" : 8,
+          "y" : 2
+        }, "wall" ], [ {
+          "x" : 7,
+          "y" : 2
+        }, "wall" ], [ {
+          "x" : 6,
+          "y" : 2
+        }, "wall" ], [ {
+          "x" : 5,
+          "y" : 2
+        }, "wall" ], [ {
+          "x" : 4,
+          "y" : 2
+        }, "wall" ], [ {
+          "x" : 3,
+          "y" : 2
+        }, "wall" ], [ {
+          "x" : 2,
+          "y" : 2
+        }, "wall" ], [ {
+          "x" : 11,
+          "y" : 2
+        }, "wall" ], [ {
+          "x" : 12,
+          "y" : 2
+        }, "wall" ], [ {
+          "x" : 13,
+          "y" : 2
+        }, "wall" ], [ {
+          "x" : 14,
+          "y" : 2
+        }, "wall" ], [ {
+          "x" : 15,
+          "y" : 2
+        }, "wall" ], [ {
+          "x" : 16,
+          "y" : 2
+        }, "wall" ], [ {
+          "x" : 18,
+          "y" : 2
+        }, "wall" ], [ {
+          "x" : 17,
+          "y" : 2
+        }, "wall" ], [ {
+          "x" : 19,
+          "y" : 2
+        }, "wall" ], [ {
+          "x" : 19,
+          "y" : 3
+        }, "wall" ], [ {
+          "x" : 19,
+          "y" : 4
+        }, "wall" ], [ {
+          "x" : 19,
+          "y" : 5
+        }, "wall" ], [ {
+          "x" : 19,
+          "y" : 6
+        }, "wall" ], [ {
+          "x" : 19,
+          "y" : 7
+        }, "wall" ], [ {
+          "x" : 19,
+          "y" : 8
+        }, "wall" ], [ {
+          "x" : 19,
+          "y" : 9
+        }, "wall" ], [ {
+          "x" : 19,
+          "y" : 10
+        }, "wall" ], [ {
+          "x" : 11,
+          "y" : 10
+        }, "wall" ], [ {
+          "x" : 12,
+          "y" : 10
+        }, "wall" ], [ {
+          "x" : 13,
+          "y" : 10
+        }, "wall" ], [ {
+          "x" : 14,
+          "y" : 10
+        }, "wall" ], [ {
+          "x" : 15,
+          "y" : 10
+        }, "wall" ], [ {
+          "x" : 17,
+          "y" : 10
+        }, "wall" ], [ {
+          "x" : 18,
+          "y" : 10
+        }, "wall" ], [ {
+          "x" : 16,
+          "y" : 10
+        }, "wall" ], [ {
+          "x" : 10,
+          "y" : 10
+        }, "wall" ], [ {
+          "x" : 9,
+          "y" : 10
+        }, "wall" ], [ {
+          "x" : 8,
+          "y" : 10
+        }, "wall" ], [ {
+          "x" : 7,
+          "y" : 10
+        }, "wall" ], [ {
+          "x" : 6,
+          "y" : 10
+        }, "wall" ], [ {
+          "x" : 5,
+          "y" : 10
+        }, "wall" ], [ {
+          "x" : 4,
+          "y" : 10
+        }, "wall" ], [ {
+          "x" : 3,
+          "y" : 10
+        }, "wall" ], [ {
+          "x" : 2,
+          "y" : 10
+        }, "wall" ], [ {
+          "x" : 1,
+          "y" : 10
+        }, "wall" ], [ {
+          "x" : 1,
+          "y" : 9
+        }, "wall" ], [ {
+          "x" : 1,
+          "y" : 8
+        }, "wall" ], [ {
+          "x" : 1,
+          "y" : 7
+        }, "wall" ], [ {
+          "x" : 1,
+          "y" : 6
+        }, "wall" ] ],
+        "widgets" : [ [ {
+          "x" : 10,
+          "y" : 4
+        }, "pressure-plate-widget-hidden" ], [ {
+          "x" : 10,
+          "y" : 6
+        }, "pressure-plate-widget-hidden" ], [ {
+          "x" : 10,
+          "y" : 8
+        }, "pressure-plate-widget-hidden" ] ]
+      },
+      "id" : "conduit-room-3"
+    }
+  } ], [ "conduit-room-4", {
+    "type" : "FixedTemplate",
+    "data" : {
+      "shape" : {
+        "type" : "Rectangle",
+        "data" : {
+          "width" : 25,
+          "height" : 20,
+          "variance" : 0
+        }
+      },
+      "templates" : [ ],
+      "entrances" : [ ],
+      "features" : [ ],
+      "content" : {
+        "conduitLocations" : [ {
+          "x" : 3,
+          "y" : 4
+        }, {
+          "x" : 3,
+          "y" : 8
+        }, {
+          "x" : 17,
+          "y" : 8
+        }, {
+          "x" : 17,
+          "y" : 4
+        } ],
+        "creatures" : [ ],
+        "gatewayLocations" : [ ],
+        "items" : [ [ {
+          "x" : 10,
+          "y" : 4
+        }, [ "weapon-blade-3" ] ], [ {
+          "x" : 10,
+          "y" : 6
+        }, [ "weapon-rifle-3" ] ], [ {
+          "x" : 10,
+          "y" : 8
+        }, [ "armor-chest-3" ] ] ],
+        "machinery" : [ {
+          "mechanism" : {
+            "type" : "CreateEntityMechanism",
+            "data" : {
+              "kind" : {
+                "type" : "WallKind",
+                "data" : null,
+                "value" : "wall"
+              },
+              "disposable" : true,
+              "description" : null
+            }
+          },
+          "controls" : [ {
+            "x" : 10,
+            "y" : 4
+          } ],
+          "targets" : [ {
+            "x" : 9,
+            "y" : 6
+          }, {
+            "x" : 11,
+            "y" : 6
+          }, {
+            "x" : 9,
+            "y" : 8
+          }, {
+            "x" : 11,
+            "y" : 8
+          } ]
+        }, {
+          "mechanism" : {
+            "type" : "CreateEntityMechanism",
+            "data" : {
+              "kind" : {
+                "type" : "WallKind",
+                "data" : null,
+                "value" : "wall"
+              },
+              "disposable" : true,
+              "description" : null
+            }
+          },
+          "controls" : [ {
+            "x" : 10,
+            "y" : 6
+          } ],
+          "targets" : [ {
+            "x" : 9,
+            "y" : 8
+          }, {
+            "x" : 11,
+            "y" : 8
+          }, {
+            "x" : 9,
+            "y" : 4
+          }, {
+            "x" : 11,
+            "y" : 4
+          } ]
+        }, {
+          "mechanism" : {
+            "type" : "CreateEntityMechanism",
+            "data" : {
+              "kind" : {
+                "type" : "WallKind",
+                "data" : null,
+                "value" : "wall"
+              },
+              "disposable" : true,
+              "description" : null
+            }
+          },
+          "controls" : [ {
+            "x" : 10,
+            "y" : 8
+          } ],
+          "targets" : [ {
+            "x" : 9,
+            "y" : 6
+          }, {
+            "x" : 11,
+            "y" : 6
+          }, {
+            "x" : 9,
+            "y" : 4
+          }, {
+            "x" : 11,
+            "y" : 4
+          } ]
+        } ],
+        "terrains" : [ [ {
+          "x" : 7,
+          "y" : 4
+        }, "colored-floor" ], [ {
+          "x" : 6,
+          "y" : 5
+        }, "colored-floor" ], [ {
+          "x" : 5,
+          "y" : 6
+        }, "colored-floor" ], [ {
+          "x" : 6,
+          "y" : 6
+        }, "colored-floor" ], [ {
+          "x" : 7,
+          "y" : 6
+        }, "colored-floor" ], [ {
+          "x" : 7,
+          "y" : 5
+        }, "colored-floor" ], [ {
+          "x" : 7,
+          "y" : 7
+        }, "colored-floor" ], [ {
+          "x" : 7,
+          "y" : 8
+        }, "colored-floor" ], [ {
+          "x" : 15,
+          "y" : 4
+        }, "colored-floor" ], [ {
+          "x" : 14,
+          "y" : 5
+        }, "colored-floor" ], [ {
+          "x" : 13,
+          "y" : 6
+        }, "colored-floor" ], [ {
+          "x" : 14,
+          "y" : 6
+        }, "colored-floor" ], [ {
+          "x" : 15,
+          "y" : 6
+        }, "colored-floor" ], [ {
+          "x" : 15,
+          "y" : 5
+        }, "colored-floor" ], [ {
+          "x" : 15,
+          "y" : 7
+        }, "colored-floor" ], [ {
+          "x" : 15,
+          "y" : 8
+        }, "colored-floor" ] ],
+        "walls" : [ [ {
+          "x" : 9,
+          "y" : 3
+        }, "wall" ], [ {
+          "x" : 10,
+          "y" : 3
+        }, "wall" ], [ {
+          "x" : 11,
+          "y" : 3
+        }, "wall" ], [ {
+          "x" : 9,
+          "y" : 5
+        }, "wall" ], [ {
+          "x" : 10,
+          "y" : 5
+        }, "wall" ], [ {
+          "x" : 11,
+          "y" : 5
+        }, "wall" ], [ {
+          "x" : 9,
+          "y" : 7
+        }, "wall" ], [ {
+          "x" : 10,
+          "y" : 7
+        }, "wall" ], [ {
+          "x" : 11,
+          "y" : 7
+        }, "wall" ], [ {
+          "x" : 9,
+          "y" : 9
+        }, "wall" ], [ {
+          "x" : 10,
+          "y" : 9
+        }, "wall" ], [ {
+          "x" : 11,
+          "y" : 9
+        }, "wall" ], [ {
+          "x" : 1,
+          "y" : 5
+        }, "wall" ], [ {
+          "x" : 1,
+          "y" : 4
+        }, "wall" ], [ {
+          "x" : 1,
+          "y" : 3
+        }, "wall" ], [ {
+          "x" : 1,
+          "y" : 2
+        }, "wall" ], [ {
+          "x" : 9,
+          "y" : 2
+        }, "wall" ], [ {
+          "x" : 10,
+          "y" : 2
+        }, "wall" ], [ {
+          "x" : 8,
+          "y" : 2
+        }, "wall" ], [ {
+          "x" : 7,
+          "y" : 2
+        }, "wall" ], [ {
+          "x" : 6,
+          "y" : 2
+        }, "wall" ], [ {
+          "x" : 5,
+          "y" : 2
+        }, "wall" ], [ {
+          "x" : 4,
+          "y" : 2
+        }, "wall" ], [ {
+          "x" : 3,
+          "y" : 2
+        }, "wall" ], [ {
+          "x" : 2,
+          "y" : 2
+        }, "wall" ], [ {
+          "x" : 11,
+          "y" : 2
+        }, "wall" ], [ {
+          "x" : 12,
+          "y" : 2
+        }, "wall" ], [ {
+          "x" : 13,
+          "y" : 2
+        }, "wall" ], [ {
+          "x" : 14,
+          "y" : 2
+        }, "wall" ], [ {
+          "x" : 15,
+          "y" : 2
+        }, "wall" ], [ {
+          "x" : 16,
+          "y" : 2
+        }, "wall" ], [ {
+          "x" : 18,
+          "y" : 2
+        }, "wall" ], [ {
+          "x" : 17,
+          "y" : 2
+        }, "wall" ], [ {
+          "x" : 19,
+          "y" : 2
+        }, "wall" ], [ {
+          "x" : 19,
+          "y" : 3
+        }, "wall" ], [ {
+          "x" : 19,
+          "y" : 4
+        }, "wall" ], [ {
+          "x" : 19,
+          "y" : 5
+        }, "wall" ], [ {
+          "x" : 19,
+          "y" : 6
+        }, "wall" ], [ {
+          "x" : 19,
+          "y" : 7
+        }, "wall" ], [ {
+          "x" : 19,
+          "y" : 8
+        }, "wall" ], [ {
+          "x" : 19,
+          "y" : 9
+        }, "wall" ], [ {
+          "x" : 19,
+          "y" : 10
+        }, "wall" ], [ {
+          "x" : 11,
+          "y" : 10
+        }, "wall" ], [ {
+          "x" : 12,
+          "y" : 10
+        }, "wall" ], [ {
+          "x" : 13,
+          "y" : 10
+        }, "wall" ], [ {
+          "x" : 14,
+          "y" : 10
+        }, "wall" ], [ {
+          "x" : 15,
+          "y" : 10
+        }, "wall" ], [ {
+          "x" : 17,
+          "y" : 10
+        }, "wall" ], [ {
+          "x" : 18,
+          "y" : 10
+        }, "wall" ], [ {
+          "x" : 16,
+          "y" : 10
+        }, "wall" ], [ {
+          "x" : 10,
+          "y" : 10
+        }, "wall" ], [ {
+          "x" : 9,
+          "y" : 10
+        }, "wall" ], [ {
+          "x" : 8,
+          "y" : 10
+        }, "wall" ], [ {
+          "x" : 7,
+          "y" : 10
+        }, "wall" ], [ {
+          "x" : 6,
+          "y" : 10
+        }, "wall" ], [ {
+          "x" : 5,
+          "y" : 10
+        }, "wall" ], [ {
+          "x" : 4,
+          "y" : 10
+        }, "wall" ], [ {
+          "x" : 3,
+          "y" : 10
+        }, "wall" ], [ {
+          "x" : 2,
+          "y" : 10
+        }, "wall" ], [ {
+          "x" : 1,
+          "y" : 10
+        }, "wall" ], [ {
+          "x" : 1,
+          "y" : 9
+        }, "wall" ], [ {
+          "x" : 1,
+          "y" : 8
+        }, "wall" ], [ {
+          "x" : 1,
+          "y" : 7
+        }, "wall" ], [ {
+          "x" : 1,
+          "y" : 6
+        }, "wall" ] ],
+        "widgets" : [ [ {
+          "x" : 10,
+          "y" : 4
+        }, "pressure-plate-widget-hidden" ], [ {
+          "x" : 10,
+          "y" : 6
+        }, "pressure-plate-widget-hidden" ], [ {
+          "x" : 10,
+          "y" : 8
+        }, "pressure-plate-widget-hidden" ] ]
+      },
+      "id" : "conduit-room-4"
+    }
+  } ], [ "conduit-room-5", {
+    "type" : "FixedTemplate",
+    "data" : {
+      "shape" : {
+        "type" : "Rectangle",
+        "data" : {
+          "width" : 25,
+          "height" : 20,
+          "variance" : 0
+        }
+      },
+      "templates" : [ ],
+      "entrances" : [ ],
+      "features" : [ ],
+      "content" : {
+        "conduitLocations" : [ {
+          "x" : 3,
+          "y" : 4
+        }, {
+          "x" : 3,
+          "y" : 8
+        }, {
+          "x" : 17,
+          "y" : 8
+        }, {
+          "x" : 17,
+          "y" : 4
+        } ],
+        "creatures" : [ ],
+        "gatewayLocations" : [ ],
+        "items" : [ [ {
+          "x" : 10,
+          "y" : 4
+        }, [ "weapon-blade-3" ] ], [ {
+          "x" : 10,
+          "y" : 6
+        }, [ "weapon-rifle-3" ] ], [ {
+          "x" : 10,
+          "y" : 8
+        }, [ "armor-chest-3" ] ] ],
+        "machinery" : [ {
+          "mechanism" : {
+            "type" : "CreateEntityMechanism",
+            "data" : {
+              "kind" : {
+                "type" : "WallKind",
+                "data" : null,
+                "value" : "wall"
+              },
+              "disposable" : true,
+              "description" : null
+            }
+          },
+          "controls" : [ {
+            "x" : 10,
+            "y" : 4
+          } ],
+          "targets" : [ {
+            "x" : 9,
+            "y" : 6
+          }, {
+            "x" : 11,
+            "y" : 6
+          }, {
+            "x" : 9,
+            "y" : 8
+          }, {
+            "x" : 11,
+            "y" : 8
+          } ]
+        }, {
+          "mechanism" : {
+            "type" : "CreateEntityMechanism",
+            "data" : {
+              "kind" : {
+                "type" : "WallKind",
+                "data" : null,
+                "value" : "wall"
+              },
+              "disposable" : true,
+              "description" : null
+            }
+          },
+          "controls" : [ {
+            "x" : 10,
+            "y" : 6
+          } ],
+          "targets" : [ {
+            "x" : 9,
+            "y" : 8
+          }, {
+            "x" : 11,
+            "y" : 8
+          }, {
+            "x" : 9,
+            "y" : 4
+          }, {
+            "x" : 11,
+            "y" : 4
+          } ]
+        }, {
+          "mechanism" : {
+            "type" : "CreateEntityMechanism",
+            "data" : {
+              "kind" : {
+                "type" : "WallKind",
+                "data" : null,
+                "value" : "wall"
+              },
+              "disposable" : true,
+              "description" : null
+            }
+          },
+          "controls" : [ {
+            "x" : 10,
+            "y" : 8
+          } ],
+          "targets" : [ {
+            "x" : 9,
+            "y" : 6
+          }, {
+            "x" : 11,
+            "y" : 6
+          }, {
+            "x" : 9,
+            "y" : 4
+          }, {
+            "x" : 11,
+            "y" : 4
+          } ]
+        } ],
+        "terrains" : [ [ {
+          "x" : 5,
+          "y" : 4
+        }, "colored-floor" ], [ {
+          "x" : 6,
+          "y" : 4
+        }, "colored-floor" ], [ {
+          "x" : 7,
+          "y" : 4
+        }, "colored-floor" ], [ {
+          "x" : 5,
+          "y" : 5
+        }, "colored-floor" ], [ {
+          "x" : 5,
+          "y" : 6
+        }, "colored-floor" ], [ {
+          "x" : 6,
+          "y" : 6
+        }, "colored-floor" ], [ {
+          "x" : 7,
+          "y" : 6
+        }, "colored-floor" ], [ {
+          "x" : 7,
+          "y" : 7
+        }, "colored-floor" ], [ {
+          "x" : 7,
+          "y" : 8
+        }, "colored-floor" ], [ {
+          "x" : 6,
+          "y" : 8
+        }, "colored-floor" ], [ {
+          "x" : 5,
+          "y" : 8
+        }, "colored-floor" ], [ {
+          "x" : 14,
+          "y" : 4
+        }, "colored-floor" ], [ {
+          "x" : 15,
+          "y" : 4
+        }, "colored-floor" ], [ {
+          "x" : 13,
+          "y" : 4
+        }, "colored-floor" ], [ {
+          "x" : 13,
+          "y" : 5
+        }, "colored-floor" ], [ {
+          "x" : 13,
+          "y" : 6
+        }, "colored-floor" ], [ {
+          "x" : 14,
+          "y" : 6
+        }, "colored-floor" ], [ {
+          "x" : 15,
+          "y" : 6
+        }, "colored-floor" ], [ {
+          "x" : 15,
+          "y" : 7
+        }, "colored-floor" ], [ {
+          "x" : 15,
+          "y" : 8
+        }, "colored-floor" ], [ {
+          "x" : 14,
+          "y" : 8
+        }, "colored-floor" ], [ {
+          "x" : 13,
+          "y" : 8
+        }, "colored-floor" ] ],
+        "walls" : [ [ {
+          "x" : 9,
+          "y" : 3
+        }, "wall" ], [ {
+          "x" : 10,
+          "y" : 3
+        }, "wall" ], [ {
+          "x" : 11,
+          "y" : 3
+        }, "wall" ], [ {
+          "x" : 9,
+          "y" : 5
+        }, "wall" ], [ {
+          "x" : 10,
+          "y" : 5
+        }, "wall" ], [ {
+          "x" : 11,
+          "y" : 5
+        }, "wall" ], [ {
+          "x" : 9,
+          "y" : 7
+        }, "wall" ], [ {
+          "x" : 10,
+          "y" : 7
+        }, "wall" ], [ {
+          "x" : 11,
+          "y" : 7
+        }, "wall" ], [ {
+          "x" : 9,
+          "y" : 9
+        }, "wall" ], [ {
+          "x" : 10,
+          "y" : 9
+        }, "wall" ], [ {
+          "x" : 11,
+          "y" : 9
+        }, "wall" ], [ {
+          "x" : 1,
+          "y" : 5
+        }, "wall" ], [ {
+          "x" : 1,
+          "y" : 4
+        }, "wall" ], [ {
+          "x" : 1,
+          "y" : 3
+        }, "wall" ], [ {
+          "x" : 1,
+          "y" : 2
+        }, "wall" ], [ {
+          "x" : 9,
+          "y" : 2
+        }, "wall" ], [ {
+          "x" : 10,
+          "y" : 2
+        }, "wall" ], [ {
+          "x" : 8,
+          "y" : 2
+        }, "wall" ], [ {
+          "x" : 7,
+          "y" : 2
+        }, "wall" ], [ {
+          "x" : 6,
+          "y" : 2
+        }, "wall" ], [ {
+          "x" : 5,
+          "y" : 2
+        }, "wall" ], [ {
+          "x" : 4,
+          "y" : 2
+        }, "wall" ], [ {
+          "x" : 3,
+          "y" : 2
+        }, "wall" ], [ {
+          "x" : 2,
+          "y" : 2
+        }, "wall" ], [ {
+          "x" : 11,
+          "y" : 2
+        }, "wall" ], [ {
+          "x" : 12,
+          "y" : 2
+        }, "wall" ], [ {
+          "x" : 13,
+          "y" : 2
+        }, "wall" ], [ {
+          "x" : 14,
+          "y" : 2
+        }, "wall" ], [ {
+          "x" : 15,
+          "y" : 2
+        }, "wall" ], [ {
+          "x" : 16,
+          "y" : 2
+        }, "wall" ], [ {
+          "x" : 18,
+          "y" : 2
+        }, "wall" ], [ {
+          "x" : 17,
+          "y" : 2
+        }, "wall" ], [ {
+          "x" : 19,
+          "y" : 2
+        }, "wall" ], [ {
+          "x" : 19,
+          "y" : 3
+        }, "wall" ], [ {
+          "x" : 19,
+          "y" : 4
+        }, "wall" ], [ {
+          "x" : 19,
+          "y" : 5
+        }, "wall" ], [ {
+          "x" : 19,
+          "y" : 6
+        }, "wall" ], [ {
+          "x" : 19,
+          "y" : 7
+        }, "wall" ], [ {
+          "x" : 19,
+          "y" : 8
+        }, "wall" ], [ {
+          "x" : 19,
+          "y" : 9
+        }, "wall" ], [ {
+          "x" : 19,
+          "y" : 10
+        }, "wall" ], [ {
+          "x" : 11,
+          "y" : 10
+        }, "wall" ], [ {
+          "x" : 12,
+          "y" : 10
+        }, "wall" ], [ {
+          "x" : 13,
+          "y" : 10
+        }, "wall" ], [ {
+          "x" : 14,
+          "y" : 10
+        }, "wall" ], [ {
+          "x" : 15,
+          "y" : 10
+        }, "wall" ], [ {
+          "x" : 17,
+          "y" : 10
+        }, "wall" ], [ {
+          "x" : 18,
+          "y" : 10
+        }, "wall" ], [ {
+          "x" : 16,
+          "y" : 10
+        }, "wall" ], [ {
+          "x" : 10,
+          "y" : 10
+        }, "wall" ], [ {
+          "x" : 9,
+          "y" : 10
+        }, "wall" ], [ {
+          "x" : 8,
+          "y" : 10
+        }, "wall" ], [ {
+          "x" : 7,
+          "y" : 10
+        }, "wall" ], [ {
+          "x" : 6,
+          "y" : 10
+        }, "wall" ], [ {
+          "x" : 5,
+          "y" : 10
+        }, "wall" ], [ {
+          "x" : 4,
+          "y" : 10
+        }, "wall" ], [ {
+          "x" : 3,
+          "y" : 10
+        }, "wall" ], [ {
+          "x" : 2,
+          "y" : 10
+        }, "wall" ], [ {
+          "x" : 1,
+          "y" : 10
+        }, "wall" ], [ {
+          "x" : 1,
+          "y" : 9
+        }, "wall" ], [ {
+          "x" : 1,
+          "y" : 8
+        }, "wall" ], [ {
+          "x" : 1,
+          "y" : 7
+        }, "wall" ], [ {
+          "x" : 1,
+          "y" : 6
+        }, "wall" ] ],
+        "widgets" : [ [ {
+          "x" : 10,
+          "y" : 4
+        }, "pressure-plate-widget-hidden" ], [ {
+          "x" : 10,
+          "y" : 6
+        }, "pressure-plate-widget-hidden" ], [ {
+          "x" : 10,
+          "y" : 8
+        }, "pressure-plate-widget-hidden" ] ]
+      },
+      "id" : "conduit-room-5"
+    }
+  } ], [ "corridor-trap-1", {
+    "type" : "FixedTemplate",
+    "data" : {
+      "shape" : {
+        "type" : "Rectangle",
+        "data" : {
+          "width" : 5,
+          "height" : 7,
+          "variance" : 0
+        }
+      },
+      "templates" : [ ],
+      "entrances" : [ [ {
+        "x" : 0,
+        "y" : 3
+      }, "door-invisible" ], [ {
+        "x" : 4,
+        "y" : 3
+      }, "door-invisible" ] ],
+      "features" : [ ],
+      "content" : {
+        "conduitLocations" : [ ],
+        "creatures" : [ [ {
+          "x" : 1,
+          "y" : 1
+        }, "enemy-brawler-1" ], [ {
+          "x" : 2,
+          "y" : 1
+        }, "enemy-brawler-1" ], [ {
+          "x" : 3,
+          "y" : 1
+        }, "enemy-brawler-1" ], [ {
+          "x" : 3,
+          "y" : 5
+        }, "enemy-brawler-1" ], [ {
+          "x" : 2,
+          "y" : 5
+        }, "enemy-brawler-1" ], [ {
+          "x" : 1,
+          "y" : 5
+        }, "enemy-brawler-1" ] ],
+        "gatewayLocations" : [ ],
+        "items" : [ ],
+        "machinery" : [ {
+          "mechanism" : {
+            "type" : "RemoveWallMechanism",
+            "data" : {
+              "disposable" : false
+            }
+          },
+          "controls" : [ {
+            "x" : 2,
+            "y" : 3
+          } ],
+          "targets" : [ {
+            "x" : 1,
+            "y" : 2
+          }, {
+            "x" : 2,
+            "y" : 2
+          }, {
+            "x" : 3,
+            "y" : 2
+          }, {
+            "x" : 3,
+            "y" : 4
+          }, {
+            "x" : 2,
+            "y" : 4
+          }, {
+            "x" : 1,
+            "y" : 4
+          } ]
+        } ],
+        "terrains" : [ ],
+        "walls" : [ [ {
+          "x" : 0,
+          "y" : 0
+        }, "wall" ], [ {
+          "x" : 1,
+          "y" : 0
+        }, "wall" ], [ {
+          "x" : 2,
+          "y" : 0
+        }, "wall" ], [ {
+          "x" : 3,
+          "y" : 0
+        }, "wall" ], [ {
+          "x" : 4,
+          "y" : 0
+        }, "wall" ], [ {
+          "x" : 4,
+          "y" : 1
+        }, "wall" ], [ {
+          "x" : 4,
+          "y" : 4
+        }, "wall" ], [ {
+          "x" : 0,
+          "y" : 4
+        }, "wall" ], [ {
+          "x" : 0,
+          "y" : 1
+        }, "wall" ], [ {
+          "x" : 4,
+          "y" : 2
+        }, "wall" ], [ {
+          "x" : 0,
+          "y" : 2
+        }, "wall" ], [ {
+          "x" : 4,
+          "y" : 5
+        }, "wall" ], [ {
+          "x" : 4,
+          "y" : 6
+        }, "wall" ], [ {
+          "x" : 3,
+          "y" : 6
+        }, "wall" ], [ {
+          "x" : 2,
+          "y" : 6
+        }, "wall" ], [ {
+          "x" : 1,
+          "y" : 6
+        }, "wall" ], [ {
+          "x" : 0,
+          "y" : 6
+        }, "wall" ], [ {
+          "x" : 0,
+          "y" : 5
+        }, "wall" ], [ {
+          "x" : 1,
+          "y" : 2
+        }, "wall" ], [ {
+          "x" : 2,
+          "y" : 2
+        }, "wall" ], [ {
+          "x" : 3,
+          "y" : 2
+        }, "wall" ], [ {
+          "x" : 3,
+          "y" : 4
+        }, "wall" ], [ {
+          "x" : 2,
+          "y" : 4
+        }, "wall" ], [ {
+          "x" : 1,
+          "y" : 4
+        }, "wall" ] ],
+        "widgets" : [ [ {
+          "x" : 2,
+          "y" : 3
+        }, "pressure-plate-widget-hidden" ] ]
+      },
+      "id" : "corridor-trap-1"
+    }
+  } ], [ "corridor-trap-2", {
+    "type" : "FixedTemplate",
+    "data" : {
+      "shape" : {
+        "type" : "Rectangle",
+        "data" : {
+          "width" : 5,
+          "height" : 7,
+          "variance" : 0
+        }
+      },
+      "templates" : [ ],
+      "entrances" : [ [ {
+        "x" : 0,
+        "y" : 3
+      }, "door-invisible" ], [ {
+        "x" : 4,
+        "y" : 3
+      }, "door-invisible" ] ],
+      "features" : [ ],
+      "content" : {
+        "conduitLocations" : [ ],
+        "creatures" : [ [ {
+          "x" : 2,
+          "y" : 1
+        }, "enemy-brawler-2" ], [ {
+          "x" : 1,
+          "y" : 1
+        }, "enemy-brawler-2" ], [ {
+          "x" : 3,
+          "y" : 1
+        }, "enemy-brawler-2" ], [ {
+          "x" : 3,
+          "y" : 5
+        }, "enemy-brawler-2" ], [ {
+          "x" : 2,
+          "y" : 5
+        }, "enemy-brawler-2" ], [ {
+          "x" : 1,
+          "y" : 5
+        }, "enemy-brawler-2" ] ],
+        "gatewayLocations" : [ ],
+        "items" : [ ],
+        "machinery" : [ {
+          "mechanism" : {
+            "type" : "RemoveWallMechanism",
+            "data" : {
+              "disposable" : false
+            }
+          },
+          "controls" : [ {
+            "x" : 2,
+            "y" : 3
+          } ],
+          "targets" : [ {
+            "x" : 1,
+            "y" : 2
+          }, {
+            "x" : 2,
+            "y" : 2
+          }, {
+            "x" : 3,
+            "y" : 2
+          }, {
+            "x" : 3,
+            "y" : 4
+          }, {
+            "x" : 2,
+            "y" : 4
+          }, {
+            "x" : 1,
+            "y" : 4
+          } ]
+        } ],
+        "terrains" : [ ],
+        "walls" : [ [ {
+          "x" : 0,
+          "y" : 0
+        }, "wall" ], [ {
+          "x" : 1,
+          "y" : 0
+        }, "wall" ], [ {
+          "x" : 2,
+          "y" : 0
+        }, "wall" ], [ {
+          "x" : 3,
+          "y" : 0
+        }, "wall" ], [ {
+          "x" : 4,
+          "y" : 0
+        }, "wall" ], [ {
+          "x" : 4,
+          "y" : 1
+        }, "wall" ], [ {
+          "x" : 4,
+          "y" : 4
+        }, "wall" ], [ {
+          "x" : 0,
+          "y" : 4
+        }, "wall" ], [ {
+          "x" : 0,
+          "y" : 1
+        }, "wall" ], [ {
+          "x" : 4,
+          "y" : 2
+        }, "wall" ], [ {
+          "x" : 0,
+          "y" : 2
+        }, "wall" ], [ {
+          "x" : 4,
+          "y" : 5
+        }, "wall" ], [ {
+          "x" : 4,
+          "y" : 6
+        }, "wall" ], [ {
+          "x" : 3,
+          "y" : 6
+        }, "wall" ], [ {
+          "x" : 2,
+          "y" : 6
+        }, "wall" ], [ {
+          "x" : 1,
+          "y" : 6
+        }, "wall" ], [ {
+          "x" : 0,
+          "y" : 6
+        }, "wall" ], [ {
+          "x" : 0,
+          "y" : 5
+        }, "wall" ], [ {
+          "x" : 1,
+          "y" : 2
+        }, "wall" ], [ {
+          "x" : 2,
+          "y" : 2
+        }, "wall" ], [ {
+          "x" : 3,
+          "y" : 2
+        }, "wall" ], [ {
+          "x" : 3,
+          "y" : 4
+        }, "wall" ], [ {
+          "x" : 2,
+          "y" : 4
+        }, "wall" ], [ {
+          "x" : 1,
+          "y" : 4
+        }, "wall" ] ],
+        "widgets" : [ [ {
+          "x" : 2,
+          "y" : 3
+        }, "pressure-plate-widget-hidden" ] ]
+      },
+      "id" : "corridor-trap-2"
+    }
+  } ], [ "vault-1", {
+    "type" : "FixedTemplate",
+    "data" : {
+      "shape" : {
+        "type" : "Rectangle",
+        "data" : {
+          "width" : 9,
+          "height" : 9,
+          "variance" : 0
+        }
+      },
+      "templates" : [ ],
+      "entrances" : [ [ {
+        "x" : 4,
+        "y" : 8
+      }, "door-closed" ], [ {
+        "x" : 4,
+        "y" : 0
+      }, "door-closed" ] ],
+      "features" : [ {
+        "type" : "RandomizedContentFeature",
+        "data" : {
+          "creatures" : [ {
+            "selection" : {
+              "type" : "ThemeCreature",
+              "data" : {
+                "minCombatPower" : 0,
+                "maxCombatPower" : 75
+              }
+            },
+            "distribution" : {
+              "type" : "Uniform",
+              "data" : {
+                "min" : 2,
+                "max" : 4
+              }
+            }
+          } ],
+          "items" : [ {
+            "selection" : {
+              "type" : "ThemeItem",
+              "data" : { }
+            },
+            "distribution" : {
+              "type" : "Uniform",
+              "data" : {
+                "min" : 3,
+                "max" : 4
+              }
+            }
+          } ],
+          "widgets" : [ ]
+        }
+      } ],
+      "content" : {
+        "conduitLocations" : [ ],
+        "creatures" : [ [ {
+          "x" : 7,
+          "y" : 1
+        }, "enemy-sniper-1" ], [ {
+          "x" : 7,
+          "y" : 7
+        }, "enemy-sniper-1" ], [ {
+          "x" : 1,
+          "y" : 7
+        }, "enemy-sniper-1" ], [ {
+          "x" : 1,
+          "y" : 1
+        }, "enemy-sniper-1" ], [ {
+          "x" : 4,
+          "y" : 4
+        }, "enemy-brute-2" ] ],
+        "gatewayLocations" : [ ],
+        "items" : [ [ {
+          "x" : 6,
+          "y" : 4
+        }, [ "door-closed" ] ], [ {
+          "x" : 2,
+          "y" : 4
+        }, [ "door-closed" ] ] ],
+        "machinery" : [ ],
+        "terrains" : [ ],
+        "walls" : [ [ {
+          "x" : 0,
+          "y" : 0
+        }, "wall-reinforced" ], [ {
+          "x" : 1,
+          "y" : 0
+        }, "wall-reinforced" ], [ {
+          "x" : 2,
+          "y" : 0
+        }, "wall-reinforced" ], [ {
+          "x" : 3,
+          "y" : 0
+        }, "wall-reinforced" ], [ {
+          "x" : 5,
+          "y" : 0
+        }, "wall-reinforced" ], [ {
+          "x" : 6,
+          "y" : 0
+        }, "wall-reinforced" ], [ {
+          "x" : 7,
+          "y" : 0
+        }, "wall-reinforced" ], [ {
+          "x" : 8,
+          "y" : 0
+        }, "wall-reinforced" ], [ {
+          "x" : 8,
+          "y" : 1
+        }, "wall-reinforced" ], [ {
+          "x" : 8,
+          "y" : 2
+        }, "wall-reinforced" ], [ {
+          "x" : 8,
+          "y" : 3
+        }, "wall-reinforced" ], [ {
+          "x" : 8,
+          "y" : 4
+        }, "wall-reinforced" ], [ {
+          "x" : 8,
+          "y" : 5
+        }, "wall-reinforced" ], [ {
+          "x" : 8,
+          "y" : 6
+        }, "wall-reinforced" ], [ {
+          "x" : 8,
+          "y" : 7
+        }, "wall-reinforced" ], [ {
+          "x" : 8,
+          "y" : 8
+        }, "wall-reinforced" ], [ {
+          "x" : 7,
+          "y" : 8
+        }, "wall-reinforced" ], [ {
+          "x" : 6,
+          "y" : 8
+        }, "wall-reinforced" ], [ {
+          "x" : 5,
+          "y" : 8
+        }, "wall-reinforced" ], [ {
+          "x" : 3,
+          "y" : 8
+        }, "wall-reinforced" ], [ {
+          "x" : 2,
+          "y" : 8
+        }, "wall-reinforced" ], [ {
+          "x" : 0,
+          "y" : 8
+        }, "wall-reinforced" ], [ {
+          "x" : 1,
+          "y" : 8
+        }, "wall-reinforced" ], [ {
+          "x" : 0,
+          "y" : 7
+        }, "wall-reinforced" ], [ {
+          "x" : 0,
+          "y" : 6
+        }, "wall-reinforced" ], [ {
+          "x" : 0,
+          "y" : 5
+        }, "wall-reinforced" ], [ {
+          "x" : 0,
+          "y" : 4
+        }, "wall-reinforced" ], [ {
+          "x" : 0,
+          "y" : 3
+        }, "wall-reinforced" ], [ {
+          "x" : 0,
+          "y" : 2
+        }, "wall-reinforced" ], [ {
+          "x" : 0,
+          "y" : 1
+        }, "wall-reinforced" ], [ {
+          "x" : 2,
+          "y" : 2
+        }, "wall-reinforced" ], [ {
+          "x" : 2,
+          "y" : 3
+        }, "wall-reinforced" ], [ {
+          "x" : 3,
+          "y" : 2
+        }, "wall-reinforced" ], [ {
+          "x" : 5,
+          "y" : 2
+        }, "wall-reinforced" ], [ {
+          "x" : 4,
+          "y" : 2
+        }, "wall-reinforced" ], [ {
+          "x" : 6,
+          "y" : 2
+        }, "wall-reinforced" ], [ {
+          "x" : 6,
+          "y" : 3
+        }, "wall-reinforced" ], [ {
+          "x" : 6,
+          "y" : 5
+        }, "wall-reinforced" ], [ {
+          "x" : 6,
+          "y" : 6
+        }, "wall-reinforced" ], [ {
+          "x" : 5,
+          "y" : 6
+        }, "wall-reinforced" ], [ {
+          "x" : 4,
+          "y" : 6
+        }, "wall-reinforced" ], [ {
+          "x" : 3,
+          "y" : 6
+        }, "wall-reinforced" ], [ {
+          "x" : 2,
+          "y" : 6
+        }, "wall-reinforced" ], [ {
+          "x" : 2,
+          "y" : 5
+        }, "wall-reinforced" ] ],
+        "widgets" : [ ]
+      },
+      "id" : "vault-1"
+    }
+  } ], [ "leech-room", {
+    "type" : "FixedTemplate",
+    "data" : {
+      "shape" : {
+        "type" : "Rectangle",
+        "data" : {
+          "width" : 11,
+          "height" : 7,
+          "variance" : 0
+        }
+      },
+      "templates" : [ ],
+      "entrances" : [ [ {
+        "x" : 10,
+        "y" : 3
+      }, "door-closed" ] ],
+      "features" : [ ],
+      "content" : {
+        "conduitLocations" : [ ],
+        "creatures" : [ [ {
+          "x" : 2,
+          "y" : 1
+        }, "enemy-brawler-1" ], [ {
+          "x" : 3,
+          "y" : 1
+        }, "enemy-brawler-1" ], [ {
+          "x" : 4,
+          "y" : 1
+        }, "enemy-brawler-1" ], [ {
+          "x" : 5,
+          "y" : 1
+        }, "enemy-brawler-1" ], [ {
+          "x" : 6,
+          "y" : 1
+        }, "enemy-brawler-1" ], [ {
+          "x" : 6,
+          "y" : 5
+        }, "enemy-brawler-1" ], [ {
+          "x" : 5,
+          "y" : 5
+        }, "enemy-brawler-1" ], [ {
+          "x" : 4,
+          "y" : 5
+        }, "enemy-brawler-1" ], [ {
+          "x" : 3,
+          "y" : 5
+        }, "enemy-brawler-1" ], [ {
+          "x" : 2,
+          "y" : 5
+        }, "enemy-brawler-1" ], [ {
+          "x" : 1,
+          "y" : 3
+        }, "them-leech" ], [ {
+          "x" : 9,
+          "y" : 2
+        }, "friend-warner" ] ],
+        "gatewayLocations" : [ ],
+        "items" : [ [ {
+          "x" : 3,
+          "y" : 3
+        }, [ "weapon-missile-launcher-guided-3" ] ], [ {
+          "x" : 8,
+          "y" : 3
+        }, [ "door-closed" ] ] ],
+        "machinery" : [ {
+          "mechanism" : {
+            "type" : "RemoveWallMechanism",
+            "data" : {
+              "disposable" : true
+            }
+          },
+          "controls" : [ {
+            "x" : 7,
+            "y" : 3
+          } ],
+          "targets" : [ {
+            "x" : 6,
+            "y" : 4
+          }, {
+            "x" : 5,
+            "y" : 4
+          }, {
+            "x" : 4,
+            "y" : 4
+          }, {
+            "x" : 3,
+            "y" : 4
+          }, {
+            "x" : 2,
+            "y" : 4
+          }, {
+            "x" : 2,
+            "y" : 3
+          }, {
+            "x" : 3,
+            "y" : 2
+          }, {
+            "x" : 4,
+            "y" : 2
+          }, {
+            "x" : 5,
+            "y" : 2
+          }, {
+            "x" : 6,
+            "y" : 2
+          }, {
+            "x" : 2,
+            "y" : 2
+          } ]
+        } ],
+        "terrains" : [ ],
+        "walls" : [ [ {
+          "x" : 0,
+          "y" : 0
+        }, "wall" ], [ {
+          "x" : 1,
+          "y" : 0
+        }, "wall" ], [ {
+          "x" : 2,
+          "y" : 0
+        }, "wall" ], [ {
+          "x" : 3,
+          "y" : 0
+        }, "wall" ], [ {
+          "x" : 4,
+          "y" : 0
+        }, "wall" ], [ {
+          "x" : 5,
+          "y" : 0
+        }, "wall" ], [ {
+          "x" : 7,
+          "y" : 0
+        }, "wall" ], [ {
+          "x" : 6,
+          "y" : 0
+        }, "wall" ], [ {
+          "x" : 0,
+          "y" : 1
+        }, "wall" ], [ {
+          "x" : 0,
+          "y" : 2
+        }, "wall" ], [ {
+          "x" : 0,
+          "y" : 3
+        }, "wall" ], [ {
+          "x" : 0,
+          "y" : 4
+        }, "wall" ], [ {
+          "x" : 0,
+          "y" : 6
+        }, "wall" ], [ {
+          "x" : 0,
+          "y" : 5
+        }, "wall" ], [ {
+          "x" : 7,
+          "y" : 2
+        }, "wall" ], [ {
+          "x" : 1,
+          "y" : 2
+        }, "wall" ], [ {
+          "x" : 1,
+          "y" : 4
+        }, "wall" ], [ {
+          "x" : 8,
+          "y" : 4
+        }, "wall" ], [ {
+          "x" : 1,
+          "y" : 6
+        }, "wall" ], [ {
+          "x" : 2,
+          "y" : 6
+        }, "wall" ], [ {
+          "x" : 4,
+          "y" : 6
+        }, "wall" ], [ {
+          "x" : 3,
+          "y" : 6
+        }, "wall" ], [ {
+          "x" : 5,
+          "y" : 6
+        }, "wall" ], [ {
+          "x" : 6,
+          "y" : 6
+        }, "wall" ], [ {
+          "x" : 7,
+          "y" : 6
+        }, "wall" ], [ {
+          "x" : 8,
+          "y" : 6
+        }, "wall" ], [ {
+          "x" : 8,
+          "y" : 2
+        }, "wall" ], [ {
+          "x" : 8,
+          "y" : 0
+        }, "wall" ], [ {
+          "x" : 8,
+          "y" : 1
+        }, "wall" ], [ {
+          "x" : 8,
+          "y" : 5
+        }, "wall" ], [ {
+          "x" : 6,
+          "y" : 4
+        }, "wall" ], [ {
+          "x" : 5,
+          "y" : 4
+        }, "wall" ], [ {
+          "x" : 4,
+          "y" : 4
+        }, "wall" ], [ {
+          "x" : 3,
+          "y" : 4
+        }, "wall" ], [ {
+          "x" : 2,
+          "y" : 4
+        }, "wall" ], [ {
+          "x" : 2,
+          "y" : 3
+        }, "wall" ], [ {
+          "x" : 3,
+          "y" : 2
+        }, "wall" ], [ {
+          "x" : 4,
+          "y" : 2
+        }, "wall" ], [ {
+          "x" : 5,
+          "y" : 2
+        }, "wall" ], [ {
+          "x" : 6,
+          "y" : 2
+        }, "wall" ], [ {
+          "x" : 7,
+          "y" : 4
+        }, "wall" ], [ {
+          "x" : 2,
+          "y" : 2
+        }, "wall" ], [ {
+          "x" : 9,
+          "y" : 1
+        }, "wall" ], [ {
+          "x" : 10,
+          "y" : 1
+        }, "wall" ], [ {
+          "x" : 9,
+          "y" : 0
+        }, "wall" ], [ {
+          "x" : 10,
+          "y" : 0
+        }, "wall" ], [ {
+          "x" : 10,
+          "y" : 2
+        }, "wall" ], [ {
+          "x" : 10,
+          "y" : 4
+        }, "wall" ], [ {
+          "x" : 9,
+          "y" : 4
+        }, "wall" ], [ {
+          "x" : 9,
+          "y" : 5
+        }, "wall" ], [ {
+          "x" : 9,
+          "y" : 6
+        }, "wall" ], [ {
+          "x" : 10,
+          "y" : 6
+        }, "wall" ], [ {
+          "x" : 10,
+          "y" : 5
+        }, "wall" ] ],
+        "widgets" : [ [ {
+          "x" : 7,
+          "y" : 3
+        }, "pressure-plate-widget-hidden" ] ]
+      },
+      "id" : "leech-room"
+    }
+  } ], [ "vault-2", {
+    "type" : "FixedTemplate",
+    "data" : {
+      "shape" : {
+        "type" : "Rectangle",
+        "data" : {
+          "width" : 9,
+          "height" : 9,
+          "variance" : 0
+        }
+      },
+      "templates" : [ ],
+      "entrances" : [ [ {
+        "x" : 4,
+        "y" : 8
+      }, "door-closed" ], [ {
+        "x" : 4,
+        "y" : 0
+      }, "door-closed" ] ],
+      "features" : [ {
+        "type" : "RandomizedContentFeature",
+        "data" : {
+          "creatures" : [ {
+            "selection" : {
+              "type" : "ThemeCreature",
+              "data" : {
+                "minCombatPower" : 30,
+                "maxCombatPower" : 100
+              }
+            },
+            "distribution" : {
+              "type" : "Uniform",
+              "data" : {
+                "min" : 2,
+                "max" : 4
+              }
+            }
+          } ],
+          "items" : [ {
+            "selection" : {
+              "type" : "ThemeItem",
+              "data" : { }
+            },
+            "distribution" : {
+              "type" : "Uniform",
+              "data" : {
+                "min" : 3,
+                "max" : 4
+              }
+            }
+          } ],
+          "widgets" : [ ]
+        }
+      } ],
+      "content" : {
+        "conduitLocations" : [ ],
+        "creatures" : [ [ {
+          "x" : 4,
+          "y" : 4
+        }, "enemy-brute-3" ], [ {
+          "x" : 7,
+          "y" : 1
+        }, "enemy-sniper-2" ], [ {
+          "x" : 7,
+          "y" : 7
+        }, "enemy-sniper-2" ], [ {
+          "x" : 1,
+          "y" : 7
+        }, "enemy-sniper-2" ], [ {
+          "x" : 1,
+          "y" : 1
+        }, "enemy-sniper-2" ] ],
+        "gatewayLocations" : [ ],
+        "items" : [ [ {
+          "x" : 6,
+          "y" : 4
+        }, [ "door-closed" ] ], [ {
+          "x" : 2,
+          "y" : 4
+        }, [ "door-closed" ] ] ],
+        "machinery" : [ ],
+        "terrains" : [ ],
+        "walls" : [ [ {
+          "x" : 0,
+          "y" : 0
+        }, "wall-reinforced" ], [ {
+          "x" : 1,
+          "y" : 0
+        }, "wall-reinforced" ], [ {
+          "x" : 2,
+          "y" : 0
+        }, "wall-reinforced" ], [ {
+          "x" : 3,
+          "y" : 0
+        }, "wall-reinforced" ], [ {
+          "x" : 5,
+          "y" : 0
+        }, "wall-reinforced" ], [ {
+          "x" : 6,
+          "y" : 0
+        }, "wall-reinforced" ], [ {
+          "x" : 7,
+          "y" : 0
+        }, "wall-reinforced" ], [ {
+          "x" : 8,
+          "y" : 0
+        }, "wall-reinforced" ], [ {
+          "x" : 8,
+          "y" : 1
+        }, "wall-reinforced" ], [ {
+          "x" : 8,
+          "y" : 2
+        }, "wall-reinforced" ], [ {
+          "x" : 8,
+          "y" : 3
+        }, "wall-reinforced" ], [ {
+          "x" : 8,
+          "y" : 4
+        }, "wall-reinforced" ], [ {
+          "x" : 8,
+          "y" : 5
+        }, "wall-reinforced" ], [ {
+          "x" : 8,
+          "y" : 6
+        }, "wall-reinforced" ], [ {
+          "x" : 8,
+          "y" : 7
+        }, "wall-reinforced" ], [ {
+          "x" : 8,
+          "y" : 8
+        }, "wall-reinforced" ], [ {
+          "x" : 7,
+          "y" : 8
+        }, "wall-reinforced" ], [ {
+          "x" : 6,
+          "y" : 8
+        }, "wall-reinforced" ], [ {
+          "x" : 5,
+          "y" : 8
+        }, "wall-reinforced" ], [ {
+          "x" : 3,
+          "y" : 8
+        }, "wall-reinforced" ], [ {
+          "x" : 2,
+          "y" : 8
+        }, "wall-reinforced" ], [ {
+          "x" : 0,
+          "y" : 8
+        }, "wall-reinforced" ], [ {
+          "x" : 1,
+          "y" : 8
+        }, "wall-reinforced" ], [ {
+          "x" : 0,
+          "y" : 7
+        }, "wall-reinforced" ], [ {
+          "x" : 0,
+          "y" : 6
+        }, "wall-reinforced" ], [ {
+          "x" : 0,
+          "y" : 5
+        }, "wall-reinforced" ], [ {
+          "x" : 0,
+          "y" : 4
+        }, "wall-reinforced" ], [ {
+          "x" : 0,
+          "y" : 3
+        }, "wall-reinforced" ], [ {
+          "x" : 0,
+          "y" : 2
+        }, "wall-reinforced" ], [ {
+          "x" : 0,
+          "y" : 1
+        }, "wall-reinforced" ], [ {
+          "x" : 2,
+          "y" : 2
+        }, "wall-reinforced" ], [ {
+          "x" : 2,
+          "y" : 3
+        }, "wall-reinforced" ], [ {
+          "x" : 3,
+          "y" : 2
+        }, "wall-reinforced" ], [ {
+          "x" : 5,
+          "y" : 2
+        }, "wall-reinforced" ], [ {
+          "x" : 4,
+          "y" : 2
+        }, "wall-reinforced" ], [ {
+          "x" : 6,
+          "y" : 2
+        }, "wall-reinforced" ], [ {
+          "x" : 6,
+          "y" : 3
+        }, "wall-reinforced" ], [ {
+          "x" : 6,
+          "y" : 5
+        }, "wall-reinforced" ], [ {
+          "x" : 6,
+          "y" : 6
+        }, "wall-reinforced" ], [ {
+          "x" : 5,
+          "y" : 6
+        }, "wall-reinforced" ], [ {
+          "x" : 4,
+          "y" : 6
+        }, "wall-reinforced" ], [ {
+          "x" : 3,
+          "y" : 6
+        }, "wall-reinforced" ], [ {
+          "x" : 2,
+          "y" : 6
+        }, "wall-reinforced" ], [ {
+          "x" : 2,
+          "y" : 5
+        }, "wall-reinforced" ] ],
+        "widgets" : [ ]
+      },
+      "id" : "vault-2"
+    }
+  } ], [ "vault-3", {
+    "type" : "FixedTemplate",
+    "data" : {
+      "shape" : {
+        "type" : "Rectangle",
+        "data" : {
+          "width" : 9,
+          "height" : 9,
+          "variance" : 0
+        }
+      },
+      "templates" : [ ],
+      "entrances" : [ [ {
+        "x" : 4,
+        "y" : 8
+      }, "door-closed" ], [ {
+        "x" : 4,
+        "y" : 0
+      }, "door-closed" ] ],
+      "features" : [ {
+        "type" : "RandomizedContentFeature",
+        "data" : {
+          "creatures" : [ {
+            "selection" : {
+              "type" : "ThemeCreature",
+              "data" : {
+                "minCombatPower" : 50,
+                "maxCombatPower" : 100
+              }
+            },
+            "distribution" : {
+              "type" : "Uniform",
+              "data" : {
+                "min" : 2,
+                "max" : 4
+              }
+            }
+          } ],
+          "items" : [ {
+            "selection" : {
+              "type" : "ThemeItem",
+              "data" : { }
+            },
+            "distribution" : {
+              "type" : "Uniform",
+              "data" : {
+                "min" : 3,
+                "max" : 4
+              }
+            }
+          } ],
+          "widgets" : [ ]
+        }
+      } ],
+      "content" : {
+        "conduitLocations" : [ ],
+        "creatures" : [ [ {
+          "x" : 4,
+          "y" : 4
+        }, "enemy-brute-3" ], [ {
+          "x" : 7,
+          "y" : 1
+        }, "enemy-sniper-3" ], [ {
+          "x" : 7,
+          "y" : 7
+        }, "enemy-sniper-3" ], [ {
+          "x" : 1,
+          "y" : 7
+        }, "enemy-sniper-3" ], [ {
+          "x" : 1,
+          "y" : 1
+        }, "enemy-sniper-3" ] ],
+        "gatewayLocations" : [ ],
+        "items" : [ [ {
+          "x" : 6,
+          "y" : 4
+        }, [ "door-closed" ] ], [ {
+          "x" : 2,
+          "y" : 4
+        }, [ "door-closed" ] ] ],
+        "machinery" : [ ],
+        "terrains" : [ ],
+        "walls" : [ [ {
+          "x" : 0,
+          "y" : 0
+        }, "wall-reinforced" ], [ {
+          "x" : 1,
+          "y" : 0
+        }, "wall-reinforced" ], [ {
+          "x" : 2,
+          "y" : 0
+        }, "wall-reinforced" ], [ {
+          "x" : 3,
+          "y" : 0
+        }, "wall-reinforced" ], [ {
+          "x" : 5,
+          "y" : 0
+        }, "wall-reinforced" ], [ {
+          "x" : 6,
+          "y" : 0
+        }, "wall-reinforced" ], [ {
+          "x" : 7,
+          "y" : 0
+        }, "wall-reinforced" ], [ {
+          "x" : 8,
+          "y" : 0
+        }, "wall-reinforced" ], [ {
+          "x" : 8,
+          "y" : 1
+        }, "wall-reinforced" ], [ {
+          "x" : 8,
+          "y" : 2
+        }, "wall-reinforced" ], [ {
+          "x" : 8,
+          "y" : 3
+        }, "wall-reinforced" ], [ {
+          "x" : 8,
+          "y" : 4
+        }, "wall-reinforced" ], [ {
+          "x" : 8,
+          "y" : 5
+        }, "wall-reinforced" ], [ {
+          "x" : 8,
+          "y" : 6
+        }, "wall-reinforced" ], [ {
+          "x" : 8,
+          "y" : 7
+        }, "wall-reinforced" ], [ {
+          "x" : 8,
+          "y" : 8
+        }, "wall-reinforced" ], [ {
+          "x" : 7,
+          "y" : 8
+        }, "wall-reinforced" ], [ {
+          "x" : 6,
+          "y" : 8
+        }, "wall-reinforced" ], [ {
+          "x" : 5,
+          "y" : 8
+        }, "wall-reinforced" ], [ {
+          "x" : 3,
+          "y" : 8
+        }, "wall-reinforced" ], [ {
+          "x" : 2,
+          "y" : 8
+        }, "wall-reinforced" ], [ {
+          "x" : 0,
+          "y" : 8
+        }, "wall-reinforced" ], [ {
+          "x" : 1,
+          "y" : 8
+        }, "wall-reinforced" ], [ {
+          "x" : 0,
+          "y" : 7
+        }, "wall-reinforced" ], [ {
+          "x" : 0,
+          "y" : 6
+        }, "wall-reinforced" ], [ {
+          "x" : 0,
+          "y" : 5
+        }, "wall-reinforced" ], [ {
+          "x" : 0,
+          "y" : 4
+        }, "wall-reinforced" ], [ {
+          "x" : 0,
+          "y" : 3
+        }, "wall-reinforced" ], [ {
+          "x" : 0,
+          "y" : 2
+        }, "wall-reinforced" ], [ {
+          "x" : 0,
+          "y" : 1
+        }, "wall-reinforced" ], [ {
+          "x" : 2,
+          "y" : 2
+        }, "wall-reinforced" ], [ {
+          "x" : 2,
+          "y" : 3
+        }, "wall-reinforced" ], [ {
+          "x" : 3,
+          "y" : 2
+        }, "wall-reinforced" ], [ {
+          "x" : 5,
+          "y" : 2
+        }, "wall-reinforced" ], [ {
+          "x" : 4,
+          "y" : 2
+        }, "wall-reinforced" ], [ {
+          "x" : 6,
+          "y" : 2
+        }, "wall-reinforced" ], [ {
+          "x" : 6,
+          "y" : 3
+        }, "wall-reinforced" ], [ {
+          "x" : 6,
+          "y" : 5
+        }, "wall-reinforced" ], [ {
+          "x" : 6,
+          "y" : 6
+        }, "wall-reinforced" ], [ {
+          "x" : 5,
+          "y" : 6
+        }, "wall-reinforced" ], [ {
+          "x" : 4,
+          "y" : 6
+        }, "wall-reinforced" ], [ {
+          "x" : 3,
+          "y" : 6
+        }, "wall-reinforced" ], [ {
+          "x" : 2,
+          "y" : 6
+        }, "wall-reinforced" ], [ {
+          "x" : 2,
+          "y" : 5
+        }, "wall-reinforced" ] ],
+        "widgets" : [ ]
+      },
+      "id" : "vault-3"
+    }
+  } ], [ "level-rest", {
+    "type" : "RandomizedTemplate",
+    "data" : {
+      "conduitLocations" : {
+        "_1" : 0,
+        "_2" : 0
+      },
+      "shape" : {
+        "type" : "Rectangle",
+        "data" : {
+          "width" : 70,
+          "height" : 25,
+          "variance" : 0
+        }
+      },
+      "fill" : "wall",
+      "border" : "wall",
+      "terrain" : null,
+      "templates" : [ {
+        "_1" : "room-rest",
+        "_2" : 4,
+        "_3" : 4
+      }, {
+        "_1" : "vault-3",
+        "_2" : 1,
+        "_3" : 1
+      }, {
+        "_1" : "portal-trap-room-3",
+        "_2" : 1,
+        "_3" : 1
+      }, {
+        "_1" : "healing-chamber",
+        "_2" : 1,
+        "_3" : 1
+      }, {
+        "_1" : "fake-stairs-room",
+        "_2" : 1,
+        "_3" : 1
+      } ],
+      "id" : "level-rest",
+      "features" : [ {
+        "type" : "RandomizedContentFeature",
+        "data" : {
+          "creatures" : [ {
+            "selection" : {
+              "type" : "ThemeCreature",
+              "data" : {
+                "minCombatPower" : 50,
+                "maxCombatPower" : 100
+              }
+            },
+            "distribution" : {
+              "type" : "Uniform",
+              "data" : {
+                "min" : 3,
+                "max" : 9
+              }
+            }
+          } ],
+          "items" : [ {
+            "selection" : {
+              "type" : "ThemeItem",
+              "data" : { }
+            },
+            "distribution" : {
+              "type" : "Binomial",
+              "data" : {
+                "p" : 25,
+                "n" : 3
+              }
+            }
+          } ],
+          "widgets" : [ ]
+        }
+      } ],
+      "entrances" : [ ]
+    }
+  } ], [ "portal-trap-room-1", {
+    "type" : "FixedTemplate",
+    "data" : {
+      "shape" : {
+        "type" : "Rectangle",
+        "data" : {
+          "width" : 9,
+          "height" : 7,
+          "variance" : 0
+        }
+      },
+      "templates" : [ ],
+      "entrances" : [ [ {
+        "x" : 8,
+        "y" : 3
+      }, "door-closed" ], [ {
+        "x" : 0,
+        "y" : 3
+      }, "door-closed" ] ],
+      "features" : [ ],
+      "content" : {
+        "conduitLocations" : [ ],
+        "creatures" : [ ],
+        "gatewayLocations" : [ ],
+        "items" : [ [ {
+          "x" : 4,
+          "y" : 3
+        }, [ "weapon-blade-1" ] ] ],
+        "machinery" : [ {
+          "mechanism" : {
+            "type" : "CreateEntityMechanism",
+            "data" : {
+              "kind" : {
+                "type" : "WidgetKind",
+                "data" : null,
+                "value" : "portal-enemy-widget-1"
+              },
+              "disposable" : true,
+              "description" : null
+            }
+          },
+          "controls" : [ {
+            "x" : 4,
+            "y" : 3
+          } ],
+          "targets" : [ {
+            "x" : 7,
+            "y" : 1
+          }, {
+            "x" : 7,
+            "y" : 5
+          }, {
+            "x" : 1,
+            "y" : 5
+          }, {
+            "x" : 1,
+            "y" : 1
+          } ]
+        } ],
+        "terrains" : [ ],
+        "walls" : [ [ {
+          "x" : 0,
+          "y" : 0
+        }, "wall" ], [ {
+          "x" : 1,
+          "y" : 0
+        }, "wall" ], [ {
+          "x" : 3,
+          "y" : 0
+        }, "wall" ], [ {
+          "x" : 2,
+          "y" : 0
+        }, "wall" ], [ {
+          "x" : 4,
+          "y" : 0
+        }, "wall" ], [ {
+          "x" : 5,
+          "y" : 0
+        }, "wall" ], [ {
+          "x" : 6,
+          "y" : 0
+        }, "wall" ], [ {
+          "x" : 7,
+          "y" : 0
+        }, "wall" ], [ {
+          "x" : 8,
+          "y" : 0
+        }, "wall" ], [ {
+          "x" : 8,
+          "y" : 1
+        }, "wall" ], [ {
+          "x" : 8,
+          "y" : 2
+        }, "wall" ], [ {
+          "x" : 8,
+          "y" : 4
+        }, "wall" ], [ {
+          "x" : 8,
+          "y" : 5
+        }, "wall" ], [ {
+          "x" : 8,
+          "y" : 6
+        }, "wall" ], [ {
+          "x" : 7,
+          "y" : 6
+        }, "wall" ], [ {
+          "x" : 6,
+          "y" : 6
+        }, "wall" ], [ {
+          "x" : 5,
+          "y" : 6
+        }, "wall" ], [ {
+          "x" : 4,
+          "y" : 6
+        }, "wall" ], [ {
+          "x" : 3,
+          "y" : 6
+        }, "wall" ], [ {
+          "x" : 2,
+          "y" : 6
+        }, "wall" ], [ {
+          "x" : 1,
+          "y" : 6
+        }, "wall" ], [ {
+          "x" : 0,
+          "y" : 6
+        }, "wall" ], [ {
+          "x" : 0,
+          "y" : 5
+        }, "wall" ], [ {
+          "x" : 0,
+          "y" : 4
+        }, "wall" ], [ {
+          "x" : 0,
+          "y" : 2
+        }, "wall" ], [ {
+          "x" : 0,
+          "y" : 1
+        }, "wall" ] ],
+        "widgets" : [ [ {
+          "x" : 4,
+          "y" : 3
+        }, "pressure-plate-widget-hidden" ] ]
+      },
+      "id" : "portal-trap-room-1"
+    }
+  } ], [ "portal-trap-room-2", {
+    "type" : "FixedTemplate",
+    "data" : {
+      "shape" : {
+        "type" : "Rectangle",
+        "data" : {
+          "width" : 9,
+          "height" : 7,
+          "variance" : 0
+        }
+      },
+      "templates" : [ ],
+      "entrances" : [ [ {
+        "x" : 8,
+        "y" : 3
+      }, "door-closed" ], [ {
+        "x" : 0,
+        "y" : 3
+      }, "door-closed" ] ],
+      "features" : [ ],
+      "content" : {
+        "conduitLocations" : [ ],
+        "creatures" : [ ],
+        "gatewayLocations" : [ ],
+        "items" : [ [ {
+          "x" : 4,
+          "y" : 3
+        }, [ "weapon-blade-2" ] ] ],
+        "machinery" : [ {
+          "mechanism" : {
+            "type" : "CreateEntityMechanism",
+            "data" : {
+              "kind" : {
+                "type" : "WidgetKind",
+                "data" : null,
+                "value" : "portal-enemy-widget-2"
+              },
+              "disposable" : true,
+              "description" : null
+            }
+          },
+          "controls" : [ {
+            "x" : 4,
+            "y" : 3
+          } ],
+          "targets" : [ {
+            "x" : 7,
+            "y" : 1
+          }, {
+            "x" : 7,
+            "y" : 5
+          }, {
+            "x" : 1,
+            "y" : 5
+          }, {
+            "x" : 1,
+            "y" : 1
+          } ]
+        } ],
+        "terrains" : [ ],
+        "walls" : [ [ {
+          "x" : 0,
+          "y" : 0
+        }, "wall" ], [ {
+          "x" : 1,
+          "y" : 0
+        }, "wall" ], [ {
+          "x" : 3,
+          "y" : 0
+        }, "wall" ], [ {
+          "x" : 2,
+          "y" : 0
+        }, "wall" ], [ {
+          "x" : 4,
+          "y" : 0
+        }, "wall" ], [ {
+          "x" : 5,
+          "y" : 0
+        }, "wall" ], [ {
+          "x" : 6,
+          "y" : 0
+        }, "wall" ], [ {
+          "x" : 7,
+          "y" : 0
+        }, "wall" ], [ {
+          "x" : 8,
+          "y" : 0
+        }, "wall" ], [ {
+          "x" : 8,
+          "y" : 1
+        }, "wall" ], [ {
+          "x" : 8,
+          "y" : 2
+        }, "wall" ], [ {
+          "x" : 8,
+          "y" : 4
+        }, "wall" ], [ {
+          "x" : 8,
+          "y" : 5
+        }, "wall" ], [ {
+          "x" : 8,
+          "y" : 6
+        }, "wall" ], [ {
+          "x" : 7,
+          "y" : 6
+        }, "wall" ], [ {
+          "x" : 6,
+          "y" : 6
+        }, "wall" ], [ {
+          "x" : 5,
+          "y" : 6
+        }, "wall" ], [ {
+          "x" : 4,
+          "y" : 6
+        }, "wall" ], [ {
+          "x" : 3,
+          "y" : 6
+        }, "wall" ], [ {
+          "x" : 2,
+          "y" : 6
+        }, "wall" ], [ {
+          "x" : 1,
+          "y" : 6
+        }, "wall" ], [ {
+          "x" : 0,
+          "y" : 6
+        }, "wall" ], [ {
+          "x" : 0,
+          "y" : 5
+        }, "wall" ], [ {
+          "x" : 0,
+          "y" : 4
+        }, "wall" ], [ {
+          "x" : 0,
+          "y" : 2
+        }, "wall" ], [ {
+          "x" : 0,
+          "y" : 1
+        }, "wall" ] ],
+        "widgets" : [ [ {
+          "x" : 4,
+          "y" : 3
+        }, "pressure-plate-widget-hidden" ] ]
+      },
+      "id" : "portal-trap-room-2"
+    }
+  } ], [ "room-1", {
+    "type" : "RandomizedTemplate",
+    "data" : {
+      "conduitLocations" : {
+        "_1" : 1,
+        "_2" : 1
+      },
+      "shape" : {
+        "type" : "Rectangle",
+        "data" : {
+          "width" : 8,
+          "height" : 7,
+          "variance" : 0.3
+        }
+      },
+      "fill" : null,
+      "border" : "wall",
+      "terrain" : null,
+      "templates" : [ ],
+      "id" : "room-1",
+      "features" : [ {
+        "type" : "RandomizedContentFeature",
+        "data" : {
+          "creatures" : [ {
+            "selection" : {
+              "type" : "ThemeCreature",
+              "data" : {
+                "minCombatPower" : 0,
+                "maxCombatPower" : 30
+              }
+            },
+            "distribution" : {
+              "type" : "Uniform",
+              "data" : {
+                "min" : 0,
+                "max" : 3
+              }
+            }
+          }, {
+            "selection" : {
+              "type" : "ThemeCreature",
+              "data" : {
+                "minCombatPower" : 30,
+                "maxCombatPower" : 75
+              }
+            },
+            "distribution" : {
+              "type" : "Binomial",
+              "data" : {
+                "p" : 25,
+                "n" : 1
+              }
+            }
+          } ],
+          "items" : [ {
+            "selection" : {
+              "type" : "ThemeItem",
+              "data" : { }
+            },
+            "distribution" : {
+              "type" : "Binomial",
+              "data" : {
+                "p" : 35,
+                "n" : 2
+              }
+            }
+          } ],
+          "widgets" : [ {
+            "selection" : "portal-enemy-widget-1",
+            "distribution" : {
+              "type" : "Binomial",
+              "data" : {
+                "p" : 5,
+                "n" : 1
+              }
+            }
+          } ]
+        }
+      } ],
+      "entrances" : [ {
+        "_1" : "door-closed",
+        "_2" : 1,
+        "_3" : 3
+      } ]
+    }
+  } ] ],
+  "themes" : [ [ "theme-1", {
+    "creatures" : [ "enemy-assaulter-1", "enemy-assaulter-2", "enemy-assaulter-3", "enemy-brawler-1", "enemy-brawler-2", "enemy-brawler-3", "enemy-brute-1", "enemy-brute-2", "enemy-brute-3", "enemy-shooter-1", "enemy-shooter-2", "enemy-shooter-3", "enemy-sniper-1", "enemy-sniper-2", "enemy-sniper-3" ],
+    "items" : [ "armor-chest-1", "armor-chest-2", "armor-foot-1", "armor-foot-2", "armor-hand-1", "armor-hand-2", "armor-head-1", "armor-head-2", "armor-leg-1", "armor-leg-2", "shield-deflector-1", "shield-deflector-2", "weapon-blade-1", "weapon-blade-2", "weapon-rifle-1", "weapon-rifle-2", "friend-drone-1", "weapon-missile-launcher-guided-1" ],
+    "terrain" : "floor",
+    "door" : "door-closed",
+    "id" : "theme-1"
+  } ], [ "theme-2", {
+    "creatures" : [ "enemy-assaulter-1", "enemy-assaulter-2", "enemy-assaulter-3", "enemy-brawler-1", "enemy-brawler-2", "enemy-brawler-3", "enemy-brute-1", "enemy-brute-2", "enemy-brute-3", "enemy-shooter-1", "enemy-shooter-2", "enemy-shooter-3", "enemy-sniper-1", "enemy-sniper-2", "enemy-sniper-3" ],
+    "items" : [ "armor-chest-3", "armor-chest-2", "armor-foot-3", "armor-foot-2", "armor-hand-3", "armor-hand-2", "armor-head-3", "armor-head-2", "armor-leg-3", "armor-leg-2", "shield-deflector-3", "shield-deflector-2", "weapon-blade-3", "weapon-blade-2", "weapon-rifle-3", "weapon-rifle-2", "friend-drone-1", "friend-drone-2", "weapon-missile-launcher-guided-1", "weapon-missile-launcher-guided-2" ],
+    "terrain" : "floor",
+    "door" : "door-closed",
+    "id" : "theme-2"
+  } ], [ "theme-3", {
+    "creatures" : [ "enemy-assaulter-1", "enemy-assaulter-2", "enemy-assaulter-3", "enemy-brawler-1", "enemy-brawler-2", "enemy-brawler-3", "enemy-brute-1", "enemy-brute-2", "enemy-brute-3", "enemy-shooter-1", "enemy-shooter-2", "enemy-shooter-3", "enemy-sniper-1", "enemy-sniper-2", "enemy-sniper-3" ],
+    "items" : [ "armor-chest-3", "armor-foot-3", "armor-hand-3", "armor-head-3", "armor-leg-3", "shield-deflector-3", "weapon-blade-3", "weapon-rifle-3", "friend-drone-2", "friend-drone-3", "weapon-missile-launcher-guided-2", "weapon-missile-launcher-guided-3" ],
+    "terrain" : "floor",
+    "door" : "door-closed",
+    "id" : "theme-3"
+  } ] ]
 }

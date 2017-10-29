@@ -12,8 +12,8 @@ object GenerateGame {
 
   def apply(assets: WorldAssets): GameState = {
     val rng = Rng(Random.nextInt())
-    val area = AreaId("first")
-    val (world, player) = CreateWorld(assets, area, CreatureKindId("hero"), rng)
+    val area = AreaId("start-level")
+    val (world, player) = CreateWorld(assets, area, CreatureKindId("player"), rng)
 
     GameState(area, player, world)
   }

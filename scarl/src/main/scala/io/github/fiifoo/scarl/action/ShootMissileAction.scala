@@ -8,7 +8,7 @@ import io.github.fiifoo.scarl.core.{Location, Selectors, State}
 import io.github.fiifoo.scarl.effect.ShootMissileEffect
 
 case class ShootMissileAction(location: Location) extends Action {
-  val cost = 100
+  val cost = 150
 
   def apply(s: State, actor: CreatureId): List[Effect] = {
     getMissileAmmo(s, actor) map (ammo => {

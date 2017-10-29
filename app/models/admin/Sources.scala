@@ -1,6 +1,6 @@
 package models.admin
 
-import io.github.fiifoo.scarl.ai.tactic.{FollowerTactic, RoamTactic}
+import io.github.fiifoo.scarl.ai.tactic.{FollowerTactic, GreetTactic, RoamTactic}
 import io.github.fiifoo.scarl.area.Area
 import io.github.fiifoo.scarl.area.feature.{Feature, RandomizedContentFeature}
 import io.github.fiifoo.scarl.area.shape.{Rectangle, Shape}
@@ -67,8 +67,9 @@ object Sources {
   // Needed only for polymorphic sub models. Others will be scanned recursively from main models.
   lazy val sub: Map[SubModel.Id, SubModelSource] = List(
     SubModelSource(typeOf[Behavior], List(
-      typeOf[PassTactic.type],
       typeOf[FollowerTactic.type],
+      typeOf[GreetTactic.type],
+      typeOf[PassTactic.type],
       typeOf[RoamTactic.type],
     )),
     SubModelSource(typeOf[CreatureSelection], List(

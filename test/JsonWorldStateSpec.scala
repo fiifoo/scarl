@@ -24,9 +24,9 @@ class JsonWorldStateSpec extends PlaySpec {
   }
 
   private def createWorld(): WorldState = {
-    val area = AreaId("first")
+    val area = AreaId("start-level")
 
-    val (world, _) = CreateWorld(assets, area, CreatureKindId("hero"))
+    val (world, _) = CreateWorld(assets, area, CreatureKindId("player"))
     val state = world.states(area)
 
     world.copy(
