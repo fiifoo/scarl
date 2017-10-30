@@ -23,6 +23,7 @@ const EquipmentItem = ({equipped, group, item, kind, selected, dropItem, equipIt
             </td>
             <td><DropButton item={item} dropItem={dropItem} /></td>
             <td className="full-width">{kind.name}</td>
+            <td>{stats.health}</td>
             <td>{stats.melee.attack}</td>
             <td>{stats.melee.damage}</td>
             <td>{stats.ranged.attack}</td>
@@ -31,7 +32,7 @@ const EquipmentItem = ({equipped, group, item, kind, selected, dropItem, equipIt
             <td>{stats.defence}</td>
             <td>{stats.armor}</td>
             <td>{stats.sight.range}</td>
-            <td>{stats.speed}</td>
+            <td>{stats.speed * 100}</td>
         </tr>
     )
 }
@@ -41,6 +42,7 @@ const Equipments = ({equipments, group, items, kinds, row, dropItem, equipItem, 
         <tbody>
             <tr>
                 <td colSpan="3" className="full-width"><b>{group.label}</b></td>
+                <td>Health</td>
                 <td>Attack</td>
                 <td>Damage</td>
                 <td>Ranged attack</td>

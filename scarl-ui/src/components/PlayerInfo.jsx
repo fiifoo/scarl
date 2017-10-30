@@ -17,6 +17,7 @@ const addStats = (a, b) => {
         defence: a.defence + b.defence,
         armor: a.armor + b.armor,
         sight: {range: a.sight.range + b.sight.range},
+        speed: Math.round(100 * a.speed * b.speed)
     }
 }
 
@@ -36,6 +37,7 @@ const PlayerInfo = ({player}) => {
             <div>Defence {stats.defence}</div>
             <div>Armor {stats.armor}</div>
             <div>Sight {stats.sight.range}</div>
+            <div>Speed {stats.speed}</div>
         </div>
     )
 }
