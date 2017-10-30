@@ -1,7 +1,7 @@
 package io.github.fiifoo.scarl.simulation
 
 import io.github.fiifoo.scarl.core.action.Action
-import io.github.fiifoo.scarl.core.mutation.RemoveEntitiesMutation
+import io.github.fiifoo.scarl.core.mutation.FinalizeTickMutation
 import io.github.fiifoo.scarl.core.{RealityBubble, State}
 
 import scala.annotation.tailrec
@@ -28,7 +28,7 @@ class Simulation[T](listener: SimulationListener[T],
       state
     } else {
       val next = RealityBubble(state.instance, fixedAction) map (data => {
-        val nextState = state.copy(instance = RemoveEntitiesMutation()(data.state))
+        val nextState = state.copy(instance = FinalizeTickMutation()(data.state))
 
         listener(nextState, data)
       }) getOrElse {

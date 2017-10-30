@@ -4,7 +4,7 @@ import io.github.fiifoo.scarl.action.validate.ActionValidator
 import io.github.fiifoo.scarl.core.RealityBubble
 import io.github.fiifoo.scarl.core.Selectors.getContainerItems
 import io.github.fiifoo.scarl.core.action.Action
-import io.github.fiifoo.scarl.core.mutation.{RemoveEntitiesMutation, ResetConduitEntryMutation}
+import io.github.fiifoo.scarl.core.mutation.{FinalizeTickMutation, ResetConduitEntryMutation}
 import io.github.fiifoo.scarl.core.world.{ConduitId, Traveler}
 import io.github.fiifoo.scarl.game.api._
 import io.github.fiifoo.scarl.game.event.EventBuilder
@@ -107,7 +107,7 @@ object Game {
       state.copy(
         ended = state.gameState.player(instance).dead,
         events = events,
-        instance = RemoveEntitiesMutation()(instance),
+        instance = FinalizeTickMutation()(instance),
         playerInfo = PlayerInfo(instance, state.gameState.player),
         statistics = statistics
       )

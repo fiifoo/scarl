@@ -22,11 +22,19 @@ case class NewEntityMutation(entity: Entity) extends Mutation {
       s.simulation
     }
 
+    val tmp = entity.id match {
+      case _: WallId => s.tmp.copy(
+        waypointNetworkChanged = true,
+      )
+      case _ => s.tmp
+    }
+
     s.copy(
       cache = s.cache.copy(actorQueue = actorQueue),
       entities = s.entities + (entity.id -> entity),
       index = NewEntityIndexMutation(entity)(s, s.index),
       simulation = simulation,
+      tmp = tmp,
     )
   }
 }

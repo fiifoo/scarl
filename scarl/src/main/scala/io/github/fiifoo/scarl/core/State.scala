@@ -36,6 +36,7 @@ object State {
 
   case class Temporary(conduitEntry: Option[(ConduitId, Traveler)] = None,
                        removableEntities: Set[EntityId] = Set(),
+                       waypointNetworkChanged: Boolean = false,
                       )
 
 }

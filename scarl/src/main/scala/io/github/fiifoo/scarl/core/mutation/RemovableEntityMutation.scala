@@ -2,7 +2,7 @@ package io.github.fiifoo.scarl.core.mutation
 
 import io.github.fiifoo.scarl.core.Selectors.{getContainerItems, getTargetStatuses}
 import io.github.fiifoo.scarl.core.State
-import io.github.fiifoo.scarl.core.entity.EntityId
+import io.github.fiifoo.scarl.core.entity.{EntityId, WallId}
 
 case class RemovableEntityMutation(id: EntityId) extends Mutation {
 
@@ -21,6 +21,13 @@ case class RemovableEntityMutation(id: EntityId) extends Mutation {
     result = getTargetStatuses(s)(id).foldLeft(result)((s, status) => {
       RemovableEntityMutation(status)(s)
     })
+
+    result = id match {
+      case _: WallId => result.copy(tmp = result.tmp.copy(
+        waypointNetworkChanged = true,
+      ))
+      case _ => result
+    }
 
     result
   }
