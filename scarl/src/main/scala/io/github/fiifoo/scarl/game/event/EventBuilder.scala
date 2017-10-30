@@ -225,22 +225,29 @@ class EventBuilder(s: State, player: CreatureId, fov: Set[Location]) {
   }
 
   private def build(effect: HitEffect): Option[Event] = {
+    val damage = effect.result.damage
     val bypass = effect.result.bypass
 
     val message = if (effect.attacker == player) {
-      Some(if (bypass.isDefined) {
+      Some(if (damage.isEmpty) {
+        s"You hit ${kind(effect.target)} with no effect."
+      } else if (bypass.isDefined) {
         s"You hit ${kind(effect.target)} bypassing some of it's armor."
       } else {
         s"You hit ${kind(effect.target)}."
       })
     } else if (effect.target == player) {
-      Some(if (bypass.isDefined) {
+      Some(if (damage.isEmpty) {
+        s"${kind(effect.attacker)} hits you with no effect."
+      } else if (bypass.isDefined) {
         s"${kind(effect.attacker)} hits you bypassing some of your armor."
       } else {
         s"${kind(effect.attacker)} hits you."
       })
     } else if (fov contains effect.target(s).location) {
-      Some(if (bypass.isDefined) {
+      Some(if (damage.isEmpty) {
+        s"${kind(effect.attacker)} hits ${kind(effect.target)} with no effect."
+      } else if (bypass.isDefined) {
         s"${kind(effect.attacker)} hits ${kind(effect.target)} bypassing some of it's armor."
       } else {
         s"${kind(effect.attacker)} hits ${kind(effect.target)}."
