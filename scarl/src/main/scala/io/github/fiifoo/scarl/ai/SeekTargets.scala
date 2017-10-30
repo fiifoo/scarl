@@ -13,7 +13,7 @@ object SeekTargets {
     val location = creature(s).location
 
     val filter = (target: Creature) =>
-      target.id != creature && inRange(location, target, range)
+      target.id != creature && inRange(location, target, range) && target.missile.isEmpty
 
     val targets = factions.foldLeft(Set[Creature]())((targets, faction) => {
       val filtered = s.index.factionMembers getOrElse(faction, Set()) map (_ (s)) filter filter
