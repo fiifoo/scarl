@@ -2,8 +2,8 @@ package io.github.fiifoo.scarl.ai.tactic
 
 import io.github.fiifoo.scarl.action._
 import io.github.fiifoo.scarl.core.Selectors.getCreatureStats
+import io.github.fiifoo.scarl.core.action.Tactic
 import io.github.fiifoo.scarl.core.action.Tactic.Result
-import io.github.fiifoo.scarl.core.action.{PassAction, Tactic}
 import io.github.fiifoo.scarl.core.entity.{Creature, CreatureId, SafeCreatureId}
 import io.github.fiifoo.scarl.core.{Location, State}
 import io.github.fiifoo.scarl.geometry._
@@ -32,18 +32,21 @@ case class ChargeTactic(target: SafeCreatureId, destination: Location) extends T
                      adjacent: Boolean,
                      line: Vector[Location]
                     ): Option[Result] = {
-    val tactic = copy(destination = target.location)
     val action = if (adjacent) {
-      AttackAction(target.id)
+      Some(AttackAction(target.id))
     } else if (shouldShootMissile(s, actor, line)) {
-      ShootMissileAction(target.location)
+      Some(ShootMissileAction(target.location))
     } else if (shouldShoot(s, actor, line)) {
-      ShootAction(target.location)
+      Some(ShootAction(target.location))
     } else {
-      Utils.move(s, actor, target.location) getOrElse PassAction
+      Utils.move(s, actor, target.location)
     }
 
-    Some((tactic, action))
+    action map (action => {
+      val tactic = copy(destination = target.location)
+
+      (tactic, action)
+    })
   }
 
   private def pursue(s: State, actor: CreatureId, random: Random): Option[Result] = {

@@ -16,15 +16,22 @@ object Utils {
     Path(s)(from, to) map (path => {
       MoveAction(path.head)
     }) orElse {
-      Path.calc(Obstacle.has(Obstacle.travel(s)))(from, to) map (path => {
+      Path.calc(Obstacle.has(Obstacle.travel(s)))(from, to) flatMap (path => {
         val location = path.head
 
         (getLocationEntities(s)(location) collectFirst {
-          case creature: CreatureId if displace => DisplaceAction(creature)
+          case creature: CreatureId => if (displace) {
+            Some(DisplaceAction(creature))
+          } else {
+            None
+          }
         }) orElse {
-          getClosedDoor(s)(location) map (door => UseDoorAction(door))
-        } getOrElse
-          MoveAction(location)
+          getClosedDoor(s)(location) map (door => {
+            Some(UseDoorAction(door))
+          })
+        } getOrElse {
+          Some(MoveAction(location))
+        }
       })
     }
   }
