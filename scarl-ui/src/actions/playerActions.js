@@ -1,6 +1,7 @@
 import * as utils from '../game/utils'
 import { sendAction, sendInventoryQuery } from './connectionActions'
 import { addMessage, cancelMode, setTarget } from './gameActions'
+import { focusKeyboard } from './keyboard'
 import { getMissileLauncherEquipped } from '../game/utils'
 
 export const attack = target => () => {
@@ -28,9 +29,10 @@ export const enterConduit = () => (dispatch, getState) => {
     }
 }
 
-export const equipItem = (item, slot) => () => {
+export const equipItem = (item, slot) => dispatch => {
     sendAction('EquipItem', {item, slot})
     sendInventoryQuery()
+    setTimeout(() => dispatch(focusKeyboard()), 0) // SplitButton captures focus...
 }
 
 export const move = location => () => {
