@@ -1,20 +1,39 @@
 /* eslint no-console: 0 */
 
-const PING_INTERVAL = 30000 // 30s
+const HTTP_PING_INTERVAL = 600000 // 10min
+const WEBSOCKET_PING_INTERVAL = 30000 // 30s
 const MAX_IDLE_TIME = 1800000 // 30min
 
 const createKeepAlive = websocket => {
-    let id = null
+    let started = false
+    let httpId = null
+    let websocketId = null
     let latest = Date.now()
 
     return {
-        start: () => id = setInterval(() => {
-            if (Date.now() - latest < MAX_IDLE_TIME) {
-                websocket.send(null)
+        start: () => {
+            started = true
+            httpId = setInterval(() => {
+                if (Date.now() - latest < MAX_IDLE_TIME) {
+                    window.fetch('ping')
+                }
+            }, HTTP_PING_INTERVAL)
+            websocketId = setInterval(() => {
+                if (Date.now() - latest < MAX_IDLE_TIME) {
+                    websocket.send(null)
+                }
+            }, WEBSOCKET_PING_INTERVAL)
+        },
+        clear: () => {
+            if (started) {
+                started = false
+                clearInterval(httpId)
+                clearInterval(websocketId)
             }
-        }, PING_INTERVAL),
-        refresh: () => latest = Date.now(),
-        clear: () => id && clearInterval(id),
+        },
+        refresh: () => {
+            latest = Date.now()
+        },
     }
 }
 

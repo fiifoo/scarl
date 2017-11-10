@@ -35,6 +35,10 @@ class GameController @Inject()(gameAssets: AssetsRepository,
     Ok(views.html.index(assets))
   }
 
+  def ping = Action {
+    Ok
+  }
+
   def socket = WebSocket.accept[JsValue, JsValue] { _ =>
     ActorFlow.actorRef(out => WebSocketActor.props(out))
   }

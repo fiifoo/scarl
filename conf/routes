@@ -3,6 +3,7 @@
 # ~~~~
 
 GET     /                           controllers.GameController.index
+GET     /ping                       controllers.GameController.ping
 GET     /ws                         controllers.GameController.socket
 
 GET     /admin                      controllers.AdminController.index
