@@ -33,7 +33,7 @@ export default (state = initial, action) => {
             }
         }
         case types.RECEIVE_GAME_UPDATE: {
-            const events = List(action.data.events.reverse())
+            const events = List(action.data.events)
 
             return {
                 latest: events,

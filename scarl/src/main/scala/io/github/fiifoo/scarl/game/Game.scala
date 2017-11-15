@@ -95,12 +95,12 @@ object Game {
       val instance = result.state
       val effects = result.effects
 
-      val events = EventBuilder(
+      val events = state.events ::: EventBuilder(
         instance,
         state.gameState.player,
         state.fov.locations,
         effects
-      ) ::: state.events
+      )
 
       val statistics = StatisticsBuilder(instance, state.statistics, effects)
 

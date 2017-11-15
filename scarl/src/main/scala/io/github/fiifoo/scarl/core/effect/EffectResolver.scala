@@ -2,25 +2,23 @@ package io.github.fiifoo.scarl.core.effect
 
 import io.github.fiifoo.scarl.core.State
 
-import scala.collection.mutable
-
 object EffectResolver {
 
-  def apply(state: State, effects: List[Effect]): (State, List[Effect]) = {
+  def apply(s: State, effects: List[Effect]): (State, List[Effect]) = {
+    (effects foldLeft(s, List[Effect]())) ((x, effect) => {
+      val (s, prev) = x
+      val (ns, resolved) = resolve(s, effect)
 
-    val queue = mutable.Queue[Effect]() ++= effects
-    var resolved: List[Effect] = List()
-    var s = state
+      (ns, prev ::: resolved)
+    })
+  }
 
-    while (queue.nonEmpty) {
-      val effect = queue.dequeue()
-      val result = effect(s)
+  private def resolve(s: State, effect: Effect): (State, List[Effect]) = {
+    val result = effect(s)
+    val mutated = (result.mutations foldLeft s) ((s, mutation) => mutation(s))
 
-      result.mutations.foreach(mutation => s = mutation(s))
-      result.effects.foreach(effect => queue.enqueue(effect))
-      resolved = effect :: resolved
-    }
+    val (ns, resolved) = EffectResolver(mutated, result.effects)
 
-    (s, resolved)
+    (ns, effect :: resolved)
   }
 }
