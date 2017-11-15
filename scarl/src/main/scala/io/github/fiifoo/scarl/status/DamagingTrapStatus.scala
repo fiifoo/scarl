@@ -3,7 +3,8 @@ package io.github.fiifoo.scarl.status
 import io.github.fiifoo.scarl.core.State
 import io.github.fiifoo.scarl.core.effect.Effect
 import io.github.fiifoo.scarl.core.entity._
-import io.github.fiifoo.scarl.effect.{DamageEffect, TriggerTrapEffect}
+import io.github.fiifoo.scarl.effect.combat.DamageEffect
+import io.github.fiifoo.scarl.effect.movement.TriggerTrapEffect
 
 case class DamagingTrapStatus(id: TriggerStatusId,
                               target: ContainerId,
@@ -13,7 +14,7 @@ case class DamagingTrapStatus(id: TriggerStatusId,
 
   def apply(s: State, triggerer: CreatureId): List[Effect] = {
     List(
-      TriggerTrapEffect(triggerer, target, triggerDescription),
+      TriggerTrapEffect(triggerer, target, target(s).location, Some(triggerDescription)),
       DamageEffect(triggerer, damage)
     )
   }

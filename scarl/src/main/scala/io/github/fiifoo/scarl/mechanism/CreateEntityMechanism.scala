@@ -5,7 +5,7 @@ import io.github.fiifoo.scarl.core.entity.Machinery
 import io.github.fiifoo.scarl.core.item.Mechanism
 import io.github.fiifoo.scarl.core.kind.KindId
 import io.github.fiifoo.scarl.core.{Location, State}
-import io.github.fiifoo.scarl.effect.CreateEntityEffect
+import io.github.fiifoo.scarl.effect.area.CreateEntityEffect
 
 case class CreateEntityMechanism(kind: KindId, disposable: Boolean, description: Option[String]) extends Mechanism {
   def interact(s: State, machinery: Machinery, control: Location): List[Effect] = {

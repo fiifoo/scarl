@@ -5,7 +5,7 @@ import io.github.fiifoo.scarl.core.effect.{Effect, TickEffect}
 import io.github.fiifoo.scarl.core.entity._
 import io.github.fiifoo.scarl.core.kind.CreatureKindId
 import io.github.fiifoo.scarl.core.{Selectors, State}
-import io.github.fiifoo.scarl.effect.SummonSomeCreatureEffect
+import io.github.fiifoo.scarl.effect.area.SummonCreatureEffect
 
 case class SummonCreatureStatus(id: ActiveStatusId,
                                 tick: Int,
@@ -26,7 +26,7 @@ case class SummonCreatureStatus(id: ActiveStatusId,
     } else {
       List(
         TickEffect(id, interval),
-        SummonSomeCreatureEffect(summon, location, target)
+        SummonCreatureEffect(summon, location)
       )
     }
   }

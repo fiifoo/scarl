@@ -3,7 +3,7 @@ package io.github.fiifoo.scarl.rule
 import io.github.fiifoo.scarl.core.State
 import io.github.fiifoo.scarl.core.effect.Effect
 import io.github.fiifoo.scarl.core.entity.CreatureId
-import io.github.fiifoo.scarl.effect.{DeathEffect, HitEffect}
+import io.github.fiifoo.scarl.effect.combat.{DeathEffect, HitEffect}
 
 object GainExperienceRule {
   val default = 1

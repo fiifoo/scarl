@@ -4,7 +4,7 @@ import io.github.fiifoo.scarl.core.State
 import io.github.fiifoo.scarl.core.effect.Effect
 import io.github.fiifoo.scarl.core.entity._
 import io.github.fiifoo.scarl.core.kind.WidgetKindId
-import io.github.fiifoo.scarl.effect.TransformEffect
+import io.github.fiifoo.scarl.effect.area.TransformEffect
 
 case class TriggeredTransformingWidgetStatus(id: TriggerStatusId,
                                              target: ContainerId,

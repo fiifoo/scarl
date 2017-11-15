@@ -1,11 +1,15 @@
 package io.github.fiifoo.scarl.game.event
 
-import io.github.fiifoo.scarl.core.Selectors.{getItemLocation, getLocationVisibleItems}
+import io.github.fiifoo.scarl.core.Selectors.getLocationVisibleItems
 import io.github.fiifoo.scarl.core.communication.Message
-import io.github.fiifoo.scarl.core.effect.Effect
+import io.github.fiifoo.scarl.core.effect.{Effect, LocalizedDescriptionEffect}
 import io.github.fiifoo.scarl.core.entity._
 import io.github.fiifoo.scarl.core.{Location, State}
-import io.github.fiifoo.scarl.effect._
+import io.github.fiifoo.scarl.effect.area.{RemoveEntityEffect, TransformBlockedEffect}
+import io.github.fiifoo.scarl.effect.combat._
+import io.github.fiifoo.scarl.effect.creature.{GainLevelEffect, HealEffect}
+import io.github.fiifoo.scarl.effect.interact._
+import io.github.fiifoo.scarl.effect.movement.{CollideEffect, DisplaceEffect, MovedEffect}
 
 object EventBuilder {
 
@@ -26,7 +30,6 @@ class EventBuilder(s: State, player: CreatureId, fov: Set[Location]) {
   def apply(effect: Effect): Option[Event] = {
     effect match {
       case e: BadShotEffect => build(e) map GenericEvent
-      case e: CreateEntityEffect => build(e) map GenericEvent
       case e: CollideEffect => build(e) map GenericEvent
       case e: CommunicateEffect => build(e) map GenericEvent
       case e: DeathEffect => build(e) map GenericEvent
@@ -39,14 +42,14 @@ class EventBuilder(s: State, player: CreatureId, fov: Set[Location]) {
       case e: GainLevelEffect => build(e) map GenericEvent
       case e: HealEffect => build(e) map GenericEvent
       case e: HitEffect => build(e)
+      case e: LocalizedDescriptionEffect => build(e) map GenericEvent
       case e: MissEffect => build(e) map GenericEvent
-      case e: MoveEffect => build(e)
+      case e: MovedEffect => build(e)
       case e: PickItemEffect => build(e) map GenericEvent
+      case e: RemoveEntityEffect => build(e) map GenericEvent
       case e: ShootMissileEffect => build(e) map GenericEvent
       case e: ShotEffect => build(e)
-      case e: TransformedEffect => build(e) map GenericEvent
-      case e: TransformFailedEffect => build(e) map GenericEvent
-      case e: TriggerTrapEffect => build(e) map GenericEvent
+      case e: TransformBlockedEffect => build(e) map GenericEvent
       case e: UnequipItemEffect => build(e) map GenericEvent
       case e: UseCreatureEffect => build(e) map GenericEvent
       case e: UseItemEffect => build(e) map GenericEvent
@@ -64,16 +67,6 @@ class EventBuilder(s: State, player: CreatureId, fov: Set[Location]) {
     } else {
       None
     }
-  }
-
-  private def build(effect: CreateEntityEffect): Option[String] = {
-    effect.description flatMap (description => {
-      if (fov.contains(effect.location)) {
-        Some(description)
-      } else {
-        None
-      }
-    })
   }
 
   private def build(effect: CollideEffect): Option[String] = {
@@ -113,7 +106,7 @@ class EventBuilder(s: State, player: CreatureId, fov: Set[Location]) {
 
     if (target == player) {
       Some("You die...")
-    } else if (fov contains target(s).location) {
+    } else if (fov contains effect.location) {
       Some(s"${kind(target)} is killed.")
     } else {
       None
@@ -131,7 +124,7 @@ class EventBuilder(s: State, player: CreatureId, fov: Set[Location]) {
   }
 
   private def build(effect: DoorBlockedEffect): Option[String] = {
-    if (effect.user.contains(player)) {
+    if (effect.user contains player) {
       Some(s"${kind(effect.obstacle)} blocks the doorway.")
     } else {
       None
@@ -139,13 +132,13 @@ class EventBuilder(s: State, player: CreatureId, fov: Set[Location]) {
   }
 
   private def build(effect: DoorUsedEffect): Option[String] = {
-    if (effect.user.contains(player)) {
+    if (effect.user contains player) {
       if (effect.opened) {
         Some("You open the door.")
       } else {
         Some("You close the door.")
       }
-    } else if (getItemLocation(s)(effect.door).exists(fov.contains)) {
+    } else if (fov contains effect.location) {
       (effect.user map (user => {
         if (effect.opened) {
           Some(s"${kind(user)} opens a door.")
@@ -170,7 +163,7 @@ class EventBuilder(s: State, player: CreatureId, fov: Set[Location]) {
 
     if (creature == player) {
       Some(s"You drop ${kind(item)}.")
-    } else if (fov contains creature(s).location) {
+    } else if (fov contains effect.location) {
       Some(s"${kind(creature)} drops ${kind(item)}.")
     } else {
       None
@@ -185,7 +178,7 @@ class EventBuilder(s: State, player: CreatureId, fov: Set[Location]) {
       None
     } else if (creature == player) {
       Some(s"You equip ${kind(item)}.")
-    } else if (fov contains creature(s).location) {
+    } else if (fov contains effect.location) {
       Some(s"${kind(creature)} equips ${kind(item)}.")
     } else {
       None
@@ -205,7 +198,7 @@ class EventBuilder(s: State, player: CreatureId, fov: Set[Location]) {
 
     if (target == player) {
       Some("You feel stronger.")
-    } else if (fov contains target(s).location) {
+    } else if (fov contains effect.location) {
       Some(s"${kind(target)} looks stronger.")
     } else {
       None
@@ -217,7 +210,7 @@ class EventBuilder(s: State, player: CreatureId, fov: Set[Location]) {
 
     if (target == player) {
       Some("You feel better.")
-    } else if (fov contains target(s).location) {
+    } else if (fov contains effect.location) {
       Some(s"${kind(target)} looks better.")
     } else {
       None
@@ -244,7 +237,7 @@ class EventBuilder(s: State, player: CreatureId, fov: Set[Location]) {
       } else {
         s"${kind(effect.attacker)} hits you."
       })
-    } else if (fov contains effect.target(s).location) {
+    } else if (fov contains effect.location) {
       Some(if (damage.isEmpty) {
         s"${kind(effect.attacker)} hits ${kind(effect.target)} with no effect."
       } else if (bypass.isDefined) {
@@ -256,7 +249,17 @@ class EventBuilder(s: State, player: CreatureId, fov: Set[Location]) {
       None
     }
 
-    message map (HitEvent(effect.target, effect.target(s).location, _))
+    message map (HitEvent(effect.target, effect.location, _))
+  }
+
+  private def build(effect: LocalizedDescriptionEffect): Option[String] = {
+    effect.description flatMap (description => {
+      if (fov contains effect.location) {
+        Some(description)
+      } else {
+        None
+      }
+    })
   }
 
   private def build(effect: MissEffect): Option[String] = {
@@ -269,7 +272,7 @@ class EventBuilder(s: State, player: CreatureId, fov: Set[Location]) {
     }
   }
 
-  private def build(effect: MoveEffect): Option[Event] = {
+  private def build(effect: MovedEffect): Option[Event] = {
     val target = effect.target
 
     if (target == player) {
@@ -298,11 +301,21 @@ class EventBuilder(s: State, player: CreatureId, fov: Set[Location]) {
 
     if (creature == player) {
       Some(s"You pick up ${kind(item)}.")
-    } else if (fov contains creature(s).location) {
+    } else if (fov contains effect.location) {
       Some(s"${kind(creature)} picks up ${kind(item)}.")
     } else {
       None
     }
+  }
+
+  private def build(effect: RemoveEntityEffect): Option[String] = {
+    effect.description flatMap (description => effect.location flatMap (location => {
+      if (fov contains location) {
+        Some(description)
+      } else {
+        None
+      }
+    }))
   }
 
   private def build(effect: ShootMissileEffect): Option[String] = {
@@ -310,7 +323,7 @@ class EventBuilder(s: State, player: CreatureId, fov: Set[Location]) {
 
     if (attacker == player) {
       Some("You fire missile.")
-    } else if (fov contains attacker(s).location) {
+    } else if (fov contains effect.sourceLocation) {
       Some(s"${kind(attacker)} fires missile.")
     } else {
       None
@@ -325,29 +338,9 @@ class EventBuilder(s: State, player: CreatureId, fov: Set[Location]) {
     }
   }
 
-  private def build(effect: TransformedEffect): Option[String] = {
-    effect.description flatMap (description => {
-      if (fov.contains(effect.location)) {
-        Some(description)
-      } else {
-        None
-      }
-    })
-  }
-
-  private def build(effect: TransformFailedEffect): Option[String] = {
-    effect.description flatMap (description => {
-      if (effect.owner.contains(player)) {
-        Some(description)
-      } else {
-        None
-      }
-    })
-  }
-
-  private def build(effect: TriggerTrapEffect): Option[String] = {
-    if (effect.triggerer == player) {
-      Some(effect.description)
+  private def build(effect: TransformBlockedEffect): Option[String] = {
+    if (effect.owner.contains(player)) {
+      Some("Not enough space.")
     } else {
       None
     }
@@ -361,7 +354,7 @@ class EventBuilder(s: State, player: CreatureId, fov: Set[Location]) {
       None
     } else if (creature == player) {
       Some(s"You unequip ${kind(item)}.")
-    } else if (fov contains creature(s).location) {
+    } else if (fov contains effect.location) {
       Some(s"${kind(creature)} unequips ${kind(item)}.")
     } else {
       None
@@ -371,7 +364,7 @@ class EventBuilder(s: State, player: CreatureId, fov: Set[Location]) {
   private def build(effect: UseCreatureEffect): Option[String] = {
     if (effect.user == player) {
       Some(s"You use ${kind(effect.target)}.")
-    } else if (fov contains effect.user(s).location) {
+    } else if (fov contains effect.location) {
       Some(s"${kind(effect.user)} uses ${kind(effect.target)}.")
     } else {
       None
@@ -381,7 +374,7 @@ class EventBuilder(s: State, player: CreatureId, fov: Set[Location]) {
   private def build(effect: UseItemEffect): Option[String] = {
     if (effect.user == player) {
       Some(s"You use ${kind(effect.target)}.")
-    } else if (fov contains effect.user(s).location) {
+    } else if (fov contains effect.location) {
       Some(s"${kind(effect.user)} uses ${kind(effect.target)}.")
     } else {
       None

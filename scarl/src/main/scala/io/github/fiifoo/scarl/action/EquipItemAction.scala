@@ -5,7 +5,7 @@ import io.github.fiifoo.scarl.core.action.Action
 import io.github.fiifoo.scarl.core.effect.{Effect, TickEffect}
 import io.github.fiifoo.scarl.core.entity.{CreatureId, ItemId}
 import io.github.fiifoo.scarl.core.item.Equipment.Slot
-import io.github.fiifoo.scarl.effect.EquipItemEffect
+import io.github.fiifoo.scarl.effect.interact.EquipItemEffect
 
 case class EquipItemAction(item: ItemId, slot: Slot) extends Action {
   val cost = 100
@@ -13,7 +13,7 @@ case class EquipItemAction(item: ItemId, slot: Slot) extends Action {
   def apply(s: State, actor: CreatureId): List[Effect] = {
     List(
       TickEffect(actor, cost),
-      EquipItemEffect(actor, item, slot)
+      EquipItemEffect(actor, item, slot, actor(s).location)
     )
   }
 }

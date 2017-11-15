@@ -1,12 +1,10 @@
 package io.github.fiifoo.scarl.action.test_assets
 
-import io.github.fiifoo.scarl.action.SleepAction
 import io.github.fiifoo.scarl.core.Selectors.getTargetStatuses
 import io.github.fiifoo.scarl.core.State
 import io.github.fiifoo.scarl.core.action.Tactic.Result
 import io.github.fiifoo.scarl.core.action.{Behavior, PassAction}
 import io.github.fiifoo.scarl.core.entity.CreatureId
-import io.github.fiifoo.scarl.status.SleepStatus
 
 import scala.util.Random
 

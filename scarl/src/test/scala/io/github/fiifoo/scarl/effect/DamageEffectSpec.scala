@@ -5,6 +5,7 @@ import io.github.fiifoo.scarl.core.effect.EffectResult
 import io.github.fiifoo.scarl.core.entity.CreatureId
 import io.github.fiifoo.scarl.core.mutation.CreatureDamageMutation
 import io.github.fiifoo.scarl.core.test_assets.TestCreatureFactory
+import io.github.fiifoo.scarl.effect.combat.{DamageEffect, DeathEffect}
 import org.scalatest._
 
 class DamageEffectSpec extends FlatSpec with Matchers {
@@ -24,11 +25,13 @@ class DamageEffectSpec extends FlatSpec with Matchers {
     val damage = 5
 
     val s = TestCreatureFactory.generate(State(), 1, TestCreatureFactory.create(health = health))
-    val effect = DamageEffect(CreatureId(1), damage)
+    val creature = CreatureId(1)
+    val creatureLocation = creature(s).location
+    val effect = DamageEffect(creature, damage)
 
     effect(s) should ===(EffectResult(
-      CreatureDamageMutation(CreatureId(1), damage),
-      DeathEffect(CreatureId(1), Some(effect))
+      CreatureDamageMutation(creature, damage),
+      DeathEffect(creature, creatureLocation, Some(effect))
     ))
   }
 

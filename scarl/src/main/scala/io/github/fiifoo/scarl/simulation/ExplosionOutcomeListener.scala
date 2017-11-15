@@ -3,7 +3,7 @@ package io.github.fiifoo.scarl.simulation
 import io.github.fiifoo.scarl.core.creature.FactionId
 import io.github.fiifoo.scarl.core.entity.CreatureId
 import io.github.fiifoo.scarl.core.{RealityBubble, State}
-import io.github.fiifoo.scarl.effect.{ExplodeEffect, ExplosionEffect}
+import io.github.fiifoo.scarl.effect.combat.{ExplodeEffect, ExplosionEffect}
 
 class ExplosionOutcomeListener(enemies: Set[FactionId]) extends SimulationListener[Outcome] {
 

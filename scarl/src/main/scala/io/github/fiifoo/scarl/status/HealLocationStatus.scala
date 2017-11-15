@@ -5,7 +5,8 @@ import io.github.fiifoo.scarl.core.State
 import io.github.fiifoo.scarl.core.effect.{Effect, TickEffect}
 import io.github.fiifoo.scarl.core.entity._
 import io.github.fiifoo.scarl.core.kind.WidgetKindId
-import io.github.fiifoo.scarl.effect._
+import io.github.fiifoo.scarl.effect.area.{RemoveEntityEffect, TransformEffect}
+import io.github.fiifoo.scarl.effect.creature.HealEffect
 
 case class HealLocationStatus(id: ActiveStatusId,
                               tick: Int,
@@ -22,7 +23,7 @@ case class HealLocationStatus(id: ActiveStatusId,
   def apply(s: State): List[Effect] = {
     val location = target(s).location
     val effects = getLocationEntities(s)(location).toList collect {
-      case target: CreatureId => HealEffect(target, amount)
+      case target: CreatureId => HealEffect(target, amount, location)
     }
 
     if (expireAt.forall(_ > tick)) {

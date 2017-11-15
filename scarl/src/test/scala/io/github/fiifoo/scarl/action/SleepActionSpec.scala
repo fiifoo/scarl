@@ -1,11 +1,10 @@
 package io.github.fiifoo.scarl.action
 
-import io.github.fiifoo.scarl.action.test_assets.TestSleepTactic
+import io.github.fiifoo.scarl.action.test_assets.{SleepStatus, TestSleepTactic}
 import io.github.fiifoo.scarl.core.entity.{ActiveStatusId, CreatureId}
 import io.github.fiifoo.scarl.core.mutation.RemoveEntitiesMutation
 import io.github.fiifoo.scarl.core.test_assets.TestCreatureFactory
 import io.github.fiifoo.scarl.core.{RealityBubble, State}
-import io.github.fiifoo.scarl.status.SleepStatus
 import org.scalatest._
 
 class SleepActionSpec extends FlatSpec with Matchers {

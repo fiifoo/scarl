@@ -4,7 +4,7 @@ import io.github.fiifoo.scarl.core.State
 import io.github.fiifoo.scarl.core.effect.Effect
 import io.github.fiifoo.scarl.core.entity._
 import io.github.fiifoo.scarl.core.world.ConduitId
-import io.github.fiifoo.scarl.effect.ConduitEntryEffect
+import io.github.fiifoo.scarl.effect.interact.ConduitEntryEffect
 
 case class TriggeredConduitStatus(id: TriggerStatusId,
                                   target: ContainerId,

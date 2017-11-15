@@ -5,7 +5,7 @@ import io.github.fiifoo.scarl.core.effect.{Effect, TickEffect}
 import io.github.fiifoo.scarl.core.entity.CreatureId
 import io.github.fiifoo.scarl.core.kind.CreatureKindId
 import io.github.fiifoo.scarl.core.{Location, Selectors, State}
-import io.github.fiifoo.scarl.effect.ShootMissileEffect
+import io.github.fiifoo.scarl.effect.combat.ShootMissileEffect
 
 case class ShootMissileAction(location: Location) extends Action {
   val cost = 150
@@ -14,7 +14,7 @@ case class ShootMissileAction(location: Location) extends Action {
     getMissileAmmo(s, actor) map (ammo => {
       List(
         TickEffect(actor, cost),
-        ShootMissileEffect(actor, location, ammo)
+        ShootMissileEffect(actor, location, actor(s).location, ammo)
       )
     }) getOrElse List()
   }

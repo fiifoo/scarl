@@ -5,6 +5,7 @@ import io.github.fiifoo.scarl.core.effect.{Effect, EffectResolver}
 import io.github.fiifoo.scarl.core.entity.CreatureId
 import io.github.fiifoo.scarl.core.test_assets.TestCreatureFactory
 import io.github.fiifoo.scarl.core.{Assets, State}
+import io.github.fiifoo.scarl.effect.creature.GainExperienceEffect
 import org.scalatest._
 
 class GainExperienceSpec extends FlatSpec with Matchers {

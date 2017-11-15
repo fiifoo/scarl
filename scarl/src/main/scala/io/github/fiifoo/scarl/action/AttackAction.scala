@@ -4,7 +4,7 @@ import io.github.fiifoo.scarl.core.State
 import io.github.fiifoo.scarl.core.action.Action
 import io.github.fiifoo.scarl.core.effect.{Effect, TickEffect}
 import io.github.fiifoo.scarl.core.entity.CreatureId
-import io.github.fiifoo.scarl.effect.StrikeEffect
+import io.github.fiifoo.scarl.effect.combat.StrikeEffect
 
 case class AttackAction(target: CreatureId) extends Action {
   val cost = 100

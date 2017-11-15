@@ -6,7 +6,9 @@ import io.github.fiifoo.scarl.core.kind.WallKindId
 import io.github.fiifoo.scarl.core.mutation.NewEntityMutation
 import io.github.fiifoo.scarl.core.test_assets.TestCreatureFactory
 import io.github.fiifoo.scarl.core.{Location, State}
-import io.github.fiifoo.scarl.effect.{DamageEffect, RemoveEntityEffect}
+import io.github.fiifoo.scarl.effect.area.RemoveEntityEffect
+import io.github.fiifoo.scarl.effect.combat.DamageEffect
+import io.github.fiifoo.scarl.status.test_assets.BurnStatus
 import org.scalatest._
 
 class BurnStatusSpec extends FlatSpec with Matchers {

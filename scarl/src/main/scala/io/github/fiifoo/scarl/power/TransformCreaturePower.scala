@@ -5,7 +5,7 @@ import io.github.fiifoo.scarl.core.effect.Effect
 import io.github.fiifoo.scarl.core.entity.CreatureId
 import io.github.fiifoo.scarl.core.kind.KindId
 import io.github.fiifoo.scarl.core.power.{CreaturePower, CreaturePowerId}
-import io.github.fiifoo.scarl.effect.TransformEffect
+import io.github.fiifoo.scarl.effect.area.TransformEffect
 
 case class TransformCreaturePower(id: CreaturePowerId,
                                   to: KindId,

@@ -2,7 +2,7 @@ package io.github.fiifoo.scarl.game
 
 import io.github.fiifoo.scarl.core.State
 import io.github.fiifoo.scarl.core.effect.Effect
-import io.github.fiifoo.scarl.effect.DeathEffect
+import io.github.fiifoo.scarl.effect.combat.DeathEffect
 
 object StatisticsBuilder {
 

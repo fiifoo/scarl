@@ -5,7 +5,7 @@ import io.github.fiifoo.scarl.core.effect.Effect
 import io.github.fiifoo.scarl.core.entity.Machinery
 import io.github.fiifoo.scarl.core.item.Mechanism
 import io.github.fiifoo.scarl.core.{Location, State}
-import io.github.fiifoo.scarl.effect.UseDoorEffect
+import io.github.fiifoo.scarl.effect.interact.UseDoorEffect
 
 case class UseDoorMechanism(disposable: Boolean) extends Mechanism {
 

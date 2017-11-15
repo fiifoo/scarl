@@ -5,7 +5,7 @@ import io.github.fiifoo.scarl.core.effect.Effect
 import io.github.fiifoo.scarl.core.entity.{Machinery, WallId}
 import io.github.fiifoo.scarl.core.item.Mechanism
 import io.github.fiifoo.scarl.core.{Location, State}
-import io.github.fiifoo.scarl.effect.RemoveEntityEffect
+import io.github.fiifoo.scarl.effect.area.RemoveEntityEffect
 
 case class RemoveWallMechanism(disposable: Boolean) extends Mechanism {
   def interact(s: State, machinery: Machinery, control: Location): List[Effect] = {

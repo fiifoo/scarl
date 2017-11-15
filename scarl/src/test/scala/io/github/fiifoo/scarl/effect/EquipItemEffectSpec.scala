@@ -1,6 +1,5 @@
 package io.github.fiifoo.scarl.effect
 
-import io.github.fiifoo.scarl.core.State
 import io.github.fiifoo.scarl.core.creature.Stats
 import io.github.fiifoo.scarl.core.creature.Stats.Melee
 import io.github.fiifoo.scarl.core.effect.{Effect, EffectResolver}
@@ -10,6 +9,8 @@ import io.github.fiifoo.scarl.core.item._
 import io.github.fiifoo.scarl.core.kind.ItemKindId
 import io.github.fiifoo.scarl.core.mutation.NewEntityMutation
 import io.github.fiifoo.scarl.core.test_assets.TestCreatureFactory
+import io.github.fiifoo.scarl.core.{Location, State}
+import io.github.fiifoo.scarl.effect.interact.EquipItemEffect
 import org.scalatest._
 
 class EquipItemEffectSpec extends FlatSpec with Matchers {
@@ -17,8 +18,8 @@ class EquipItemEffectSpec extends FlatSpec with Matchers {
   def resolve(s: State, effects: List[Effect]): State = EffectResolver(s, effects)._1
 
   "EquipItemEffect" should "equip item" in {
-    var (s, creature, items) = testStuff
-    val effect = EquipItemEffect(creature, items("sword").id, MainHand)
+    var (s, creature, location, items) = testStuff
+    val effect = EquipItemEffect(creature, items("sword").id, MainHand, location)
 
     s = resolve(s, List(effect))
     s.equipments should ===(Map(
@@ -27,10 +28,10 @@ class EquipItemEffectSpec extends FlatSpec with Matchers {
   }
 
   it should "unequip previous item in same slot" in {
-    var (s, creature, items) = testStuff
-    val e1 = EquipItemEffect(creature, items("sword").id, MainHand)
-    val e2 = EquipItemEffect(creature, items("shield").id, OffHand)
-    val e3 = EquipItemEffect(creature, items("otherSword").id, MainHand)
+    var (s, creature, location, items) = testStuff
+    val e1 = EquipItemEffect(creature, items("sword").id, MainHand, location)
+    val e2 = EquipItemEffect(creature, items("shield").id, OffHand, location)
+    val e3 = EquipItemEffect(creature, items("otherSword").id, MainHand, location)
 
     s = resolve(s, List(e1, e2))
     s.equipments should ===(Map(
@@ -43,9 +44,9 @@ class EquipItemEffectSpec extends FlatSpec with Matchers {
   }
 
   it should "unequip equipped item from any slot" in {
-    var (s, creature, items) = testStuff
-    val e1 = EquipItemEffect(creature, items("sword").id, MainHand)
-    val e2 = EquipItemEffect(creature, items("sword").id, OffHand)
+    var (s, creature, location, items) = testStuff
+    val e1 = EquipItemEffect(creature, items("sword").id, MainHand, location)
+    val e2 = EquipItemEffect(creature, items("sword").id, OffHand, location)
 
     s = resolve(s, List(e1, e2))
     s.equipments should ===(Map(
@@ -54,10 +55,10 @@ class EquipItemEffectSpec extends FlatSpec with Matchers {
   }
 
   it should "work correctly with item with multiple slots" in {
-    var (s, creature, items) = testStuff
-    val e1 = EquipItemEffect(creature, items("sword").id, MainHand)
-    val e2 = EquipItemEffect(creature, items("shield").id, OffHand)
-    val e3 = EquipItemEffect(creature, items("bigSword").id, MainHand)
+    var (s, creature, location, items) = testStuff
+    val e1 = EquipItemEffect(creature, items("sword").id, MainHand, location)
+    val e2 = EquipItemEffect(creature, items("shield").id, OffHand, location)
+    val e3 = EquipItemEffect(creature, items("bigSword").id, MainHand, location)
 
     s = resolve(s, List(e1, e2, e3))
     s.equipments should ===(Map(
@@ -70,16 +71,16 @@ class EquipItemEffectSpec extends FlatSpec with Matchers {
   }
 
   it should "not equip item in incorrect slot" in {
-    var (s, creature, items) = testStuff
-    val effect = EquipItemEffect(creature, items("shield").id, MainHand)
+    var (s, creature, location, items) = testStuff
+    val effect = EquipItemEffect(creature, items("shield").id, MainHand, location)
 
     s = resolve(s, List(effect))
     s.equipments should ===(Map())
   }
 
   it should "equip item with multiple equipments correctly" in {
-    var (s, creature, items) = testStuff
-    val effect = EquipItemEffect(creature, items("armorOrSword").id, HeadArmor)
+    var (s, creature, location, items) = testStuff
+    val effect = EquipItemEffect(creature, items("armorOrSword").id, HeadArmor, location)
 
     s = resolve(s, List(effect))
     s.equipments should ===(Map(
@@ -88,11 +89,11 @@ class EquipItemEffectSpec extends FlatSpec with Matchers {
   }
 
   it should "calculate equipment stats correctly" in {
-    var (s, creature, items) = testStuff
-    val e1 = EquipItemEffect(creature, items("sword").id, MainHand)
-    val e2 = EquipItemEffect(creature, items("shield").id, OffHand)
-    val e3 = EquipItemEffect(creature, items("bigSword").id, MainHand)
-    val e4 = EquipItemEffect(creature, items("armorOrSword").id, HeadArmor)
+    var (s, creature, location, items) = testStuff
+    val e1 = EquipItemEffect(creature, items("sword").id, MainHand, location)
+    val e2 = EquipItemEffect(creature, items("shield").id, OffHand, location)
+    val e3 = EquipItemEffect(creature, items("bigSword").id, MainHand, location)
+    val e4 = EquipItemEffect(creature, items("armorOrSword").id, HeadArmor, location)
 
     s = resolve(s, List(e1, e2, e3, e3, e4))
     s.cache.equipmentStats should ===(Map(
@@ -103,7 +104,7 @@ class EquipItemEffectSpec extends FlatSpec with Matchers {
     ))
   }
 
-  private def testStuff: (State, CreatureId, Map[String, Item]) = {
+  private def testStuff: (State, CreatureId, Location, Map[String, Item]) = {
     val initial = TestCreatureFactory.generate(State())
     val creature = CreatureId(1)
 
@@ -173,7 +174,8 @@ class EquipItemEffectSpec extends FlatSpec with Matchers {
       armorOrSword
     ).foldLeft(initial)((state, item) => NewEntityMutation(item)(state))
 
-    (state, creature, Map(
+    (
+      state, creature, creature(state).location, Map(
       "sword" -> sword,
       "otherSword" -> otherSword,
       "bigSword" -> bigSword,
