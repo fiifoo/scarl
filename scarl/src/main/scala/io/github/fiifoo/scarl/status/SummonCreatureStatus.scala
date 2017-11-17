@@ -11,6 +11,7 @@ case class SummonCreatureStatus(id: ActiveStatusId,
                                 tick: Int,
                                 target: ContainerId,
                                 summon: WeightedChoices[CreatureKindId],
+                                summonDescription: Option[String] = None,
                                 interval: Int
                                ) extends ActiveStatus {
   def setTick(tick: Int): SummonCreatureStatus = copy(tick = tick)
@@ -26,7 +27,7 @@ case class SummonCreatureStatus(id: ActiveStatusId,
     } else {
       List(
         TickEffect(id, interval),
-        SummonCreatureEffect(summon, location)
+        SummonCreatureEffect(summon, location, summonDescription)
       )
     }
   }

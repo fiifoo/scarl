@@ -1,17 +1,20 @@
 package io.github.fiifoo.scarl.game.event
 
-import io.github.fiifoo.scarl.core.Selectors.getLocationVisibleItems
+import io.github.fiifoo.scarl.core.Selectors.{getContainerItems, getLocationVisibleItems}
 import io.github.fiifoo.scarl.core.communication.Message
 import io.github.fiifoo.scarl.core.effect.{Effect, LocalizedDescriptionEffect}
 import io.github.fiifoo.scarl.core.entity._
+import io.github.fiifoo.scarl.core.kind._
 import io.github.fiifoo.scarl.core.{Location, State}
-import io.github.fiifoo.scarl.effect.area.{RemoveEntityEffect, TransformBlockedEffect}
+import io.github.fiifoo.scarl.effect.area.{CreateEntityEffect, RemoveEntityEffect, TransformBlockedEffect}
 import io.github.fiifoo.scarl.effect.combat._
 import io.github.fiifoo.scarl.effect.creature.{GainLevelEffect, HealEffect}
 import io.github.fiifoo.scarl.effect.interact._
 import io.github.fiifoo.scarl.effect.movement.{CollideEffect, DisplaceEffect, MovedEffect}
 
 object EventBuilder {
+
+  val PARAM_TARGET = "target"
 
   def apply(s: State,
             player: CreatureId,
@@ -32,6 +35,7 @@ class EventBuilder(s: State, player: CreatureId, fov: Set[Location]) {
       case e: BadShotEffect => build(e) map GenericEvent
       case e: CollideEffect => build(e) map GenericEvent
       case e: CommunicateEffect => build(e) map GenericEvent
+      case e: CreateEntityEffect => build(e) map GenericEvent
       case e: DeathEffect => build(e) map GenericEvent
       case e: DisplaceEffect => build(e) map GenericEvent
       case e: DoorBlockedEffect => build(e) map GenericEvent
@@ -99,6 +103,19 @@ class EventBuilder(s: State, player: CreatureId, fov: Set[Location]) {
     } else {
       None
     }
+  }
+
+  private def build(effect: CreateEntityEffect): Option[String] = {
+    effect.description flatMap (description => {
+      if (fov contains effect.location) {
+        val target = kind(effect.kind)
+        val result = target map parse(description, EventBuilder.PARAM_TARGET) getOrElse description
+
+        Some(result)
+      } else {
+        None
+      }
+    })
   }
 
   private def build(effect: DeathEffect): Option[String] = {
@@ -311,7 +328,10 @@ class EventBuilder(s: State, player: CreatureId, fov: Set[Location]) {
   private def build(effect: RemoveEntityEffect): Option[String] = {
     effect.description flatMap (description => effect.location flatMap (location => {
       if (fov contains location) {
-        Some(description)
+        val target = kind(effect.target)
+        val result = target map parse(description, EventBuilder.PARAM_TARGET) getOrElse description
+
+        Some(result)
       } else {
         None
       }
@@ -381,11 +401,57 @@ class EventBuilder(s: State, player: CreatureId, fov: Set[Location]) {
     }
   }
 
+  private def kind(mixed: KindId): Option[String] = {
+    mixed match {
+      case t: CreatureKindId => Some(kind(t))
+      case t: ItemKindId => Some(kind(t))
+      case t: WallKindId => Some(kind(t))
+      case t: WidgetKindId => Some(kind(t))
+      case _ => None
+    }
+  }
+
+  private def kind(mixed: EntityId): Option[String] = {
+    mixed match {
+      case t: ContainerId => getContainerItems(s)(t).headOption map kind
+      case t: CreatureId => Some(kind(t))
+      case t: ItemId => Some(kind(t))
+      case t: WallId => Some(kind(t))
+      case _ => None
+    }
+  }
+
   private def kind(creature: CreatureId): String = {
     s.assets.kinds.creatures(creature(s).kind).name
   }
 
+  private def kind(creature: CreatureKindId): String = {
+    s.assets.kinds.creatures(creature).name
+  }
+
   private def kind(item: ItemId): String = {
     s.assets.kinds.items(item(s).kind).name
+  }
+
+  private def kind(item: ItemKindId): String = {
+    s.assets.kinds.items(item).name
+  }
+
+  private def kind(wall: WallId): String = {
+    s.assets.kinds.walls(wall(s).kind).name
+  }
+
+  private def kind(wall: WallKindId): String = {
+    s.assets.kinds.walls(wall).name
+  }
+
+  private def kind(widget: WidgetKindId): String = {
+    val item = s.assets.kinds.widgets(widget).item
+
+    kind(item)
+  }
+
+  private def parse(description: String, parameter: String)(value: String): String = {
+    description.replace(s"{$parameter}", value)
   }
 }

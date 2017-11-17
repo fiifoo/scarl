@@ -2795,7 +2795,8 @@
       "type" : "TriggeredMachineryWidget",
       "data" : {
         "item" : "pressure-plate-hidden",
-        "id" : "pressure-plate-widget-hidden"
+        "id" : "pressure-plate-widget-hidden",
+        "description" : "Click."
       }
     } ], [ "healing-chamber-widget", {
       "type" : "TriggeredTransformingWidget",
@@ -2863,7 +2864,8 @@
           } ]
         },
         "interval" : 3000,
-        "id" : "portal-enemy-widget-1"
+        "id" : "portal-enemy-widget-1",
+        "summonDescription" : "{target} steps out of portal."
       }
     } ], [ "portal-enemy-widget-2", {
       "type" : "SummonCreatureWidget",
@@ -2903,7 +2905,8 @@
           } ]
         },
         "interval" : 3000,
-        "id" : "portal-enemy-widget-2"
+        "id" : "portal-enemy-widget-2",
+        "summonDescription" : "{target} steps out of portal."
       }
     } ], [ "portal-enemy-widget-3", {
       "type" : "SummonCreatureWidget",
@@ -2928,7 +2931,8 @@
           } ]
         },
         "interval" : 3000,
-        "id" : "portal-enemy-widget-3"
+        "id" : "portal-enemy-widget-3",
+        "summonDescription" : "{target} steps out of portal."
       }
     } ] ]
   },
@@ -4392,7 +4396,8 @@
           "mechanism" : {
             "type" : "RemoveWallMechanism",
             "data" : {
-              "disposable" : true
+              "disposable" : true,
+              "description" : "{target} opens."
             }
           },
           "controls" : [ {

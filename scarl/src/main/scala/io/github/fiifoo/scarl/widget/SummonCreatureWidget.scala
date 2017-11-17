@@ -9,6 +9,7 @@ import io.github.fiifoo.scarl.status.SummonCreatureStatus
 case class SummonCreatureWidget(id: WidgetKindId,
                                 item: ItemKindId,
                                 summon: WeightedChoices[CreatureKindId],
+                                summonDescription: Option[String] = None,
                                 interval: Int
                                ) extends WidgetKind {
 
@@ -18,6 +19,7 @@ case class SummonCreatureWidget(id: WidgetKindId,
       tick = s.tick,
       target = target,
       summon = summon,
+      summonDescription = summonDescription,
       interval = interval
     )
   }
