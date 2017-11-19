@@ -38,7 +38,7 @@ object Sources {
     ModelSource(typeOf[TerrainKind], List("kinds", "terrains")),
     ModelSource(typeOf[WallKind], List("kinds", "walls")),
     ModelSource(typeOf[WidgetKind], List("kinds", "widgets"), List(
-      typeOf[DamagingTrapWidget],
+      typeOf[AttackingTrapWidget],
       typeOf[DelayedTransformingWidget],
       typeOf[HealLocationWidget],
       typeOf[SummonCreatureWidget],

@@ -13,7 +13,7 @@ object JsonWidgetKind {
 
   implicitly(weightedChoicesReads[CreatureKindId])
 
-  lazy private implicit val damagingTrapReads = Json.reads[DamagingTrapWidget]
+  lazy private implicit val attackingTrapReads = Json.reads[AttackingTrapWidget]
   lazy private implicit val delayedTransformingReads = Json.reads[DelayedTransformingWidget]
   lazy private implicit val healLocationReads = Json.reads[HealLocationWidget]
   lazy private implicit val summonCreatureReads = Json.reads[SummonCreatureWidget]
@@ -23,7 +23,7 @@ object JsonWidgetKind {
   lazy implicit val widgetKindIdFormat: Format[WidgetKindId] = stringIdFormat(_.value, WidgetKindId.apply)
 
   lazy implicit val widgetKindReads: Reads[WidgetKind] = polymorphicTypeReads(data => {
-    case "DamagingTrapWidget" => data.as[DamagingTrapWidget]
+    case "AttackingTrapWidget" => data.as[AttackingTrapWidget]
     case "DelayedTransformingWidget" => data.as[DelayedTransformingWidget]
     case "HealLocationWidget" => data.as[HealLocationWidget]
     case "SummonCreatureWidget" => data.as[SummonCreatureWidget]

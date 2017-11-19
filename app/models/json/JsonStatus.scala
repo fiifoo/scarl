@@ -20,7 +20,7 @@ object JsonStatus {
 
   implicitly(weightedChoicesFormat[CreatureKindId])
 
-  lazy private implicit val damagingTrapFormat = Json.format[DamagingTrapStatus]
+  lazy private implicit val attackingTrapFormat = Json.format[AttackingTrapStatus]
   lazy private implicit val delayedTransformingWidgetFormat = Json.format[DelayedTransformingWidgetStatus]
   lazy private implicit val healLocationFormat = Json.format[HealLocationStatus]
   lazy private implicit val summonCreatureFormat = Json.format[SummonCreatureStatus]
@@ -30,7 +30,7 @@ object JsonStatus {
 
   lazy val statusFormat: Format[Status] = polymorphicTypeFormat(
     data => {
-      case "DamagingTrapStatus" => data.as[DamagingTrapStatus]
+      case "AttackingTrapStatus" => data.as[AttackingTrapStatus]
       case "DelayedTransformingWidgetStatus" => data.as[DelayedTransformingWidgetStatus]
       case "HealLocationStatus" => data.as[HealLocationStatus]
       case "SummonCreatureStatus" => data.as[SummonCreatureStatus]
@@ -38,7 +38,7 @@ object JsonStatus {
       case "TriggeredMachineryStatus" => data.as[TriggeredMachineryStatus]
       case "TriggeredTransformingWidgetStatus" => data.as[TriggeredTransformingWidgetStatus]
     }, {
-      case status: DamagingTrapStatus => damagingTrapFormat.writes(status)
+      case status: AttackingTrapStatus => attackingTrapFormat.writes(status)
       case status: DelayedTransformingWidgetStatus => delayedTransformingWidgetFormat.writes(status)
       case status: HealLocationStatus => healLocationFormat.writes(status)
       case status: SummonCreatureStatus => summonCreatureFormat.writes(status)

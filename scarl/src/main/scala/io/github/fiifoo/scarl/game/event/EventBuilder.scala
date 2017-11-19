@@ -54,6 +54,8 @@ class EventBuilder(s: State, player: CreatureId, fov: Set[Location]) {
       case e: ShootMissileEffect => build(e) map GenericEvent
       case e: ShotEffect => build(e)
       case e: TransformBlockedEffect => build(e) map GenericEvent
+      case e: TrapHitEffect => build(e)
+      case e: TrapMissEffect => build(e) map GenericEvent
       case e: UnequipItemEffect => build(e) map GenericEvent
       case e: UseCreatureEffect => build(e) map GenericEvent
       case e: UseItemEffect => build(e) map GenericEvent
@@ -246,21 +248,15 @@ class EventBuilder(s: State, player: CreatureId, fov: Set[Location]) {
       } else {
         s"You hit ${kind(effect.target)}."
       })
-    } else if (effect.target == player) {
+    } else if (effect.target == player || (fov contains effect.location)) {
+      val target = if (effect.target == player) "you" else kind(effect.target)
+
       Some(if (damage.isEmpty) {
-        s"${kind(effect.attacker)} hits you with no effect."
+        s"${kind(effect.attacker)} hits $target with no effect."
       } else if (bypass.isDefined) {
-        s"${kind(effect.attacker)} hits you bypassing some of your armor."
+        s"${kind(effect.attacker)} hits $target bypassing some of it's armor."
       } else {
-        s"${kind(effect.attacker)} hits you."
-      })
-    } else if (fov contains effect.location) {
-      Some(if (damage.isEmpty) {
-        s"${kind(effect.attacker)} hits ${kind(effect.target)} with no effect."
-      } else if (bypass.isDefined) {
-        s"${kind(effect.attacker)} hits ${kind(effect.target)} bypassing some of it's armor."
-      } else {
-        s"${kind(effect.attacker)} hits ${kind(effect.target)}."
+        s"${kind(effect.attacker)} hits $target."
       })
     } else {
       None
@@ -361,6 +357,33 @@ class EventBuilder(s: State, player: CreatureId, fov: Set[Location]) {
   private def build(effect: TransformBlockedEffect): Option[String] = {
     if (effect.owner.contains(player)) {
       Some("Not enough space.")
+    } else {
+      None
+    }
+  }
+
+  private def build(effect: TrapHitEffect): Option[Event] = {
+    if (effect.target == player || (fov contains effect.location)) {
+      val description = effect.result.damage map (_ => effect.description) getOrElse effect.deflectDescription
+
+      description map (description => {
+        val target = if (effect.target == player) "you" else kind(effect.target)
+        val message = parse(description, EventBuilder.PARAM_TARGET)(target)
+
+        HitEvent(effect.target, effect.location, message)
+      })
+    } else {
+      None
+    }
+  }
+
+  private def build(effect: TrapMissEffect): Option[String] = {
+    if (effect.target == player || fov.contains(effect.location)) {
+      effect.description map (description => {
+        val target = if (effect.target == player) "you" else kind(effect.target)
+
+        parse(description, EventBuilder.PARAM_TARGET)(target)
+      })
     } else {
       None
     }

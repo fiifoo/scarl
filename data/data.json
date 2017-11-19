@@ -1692,6 +1692,19 @@
         },
         "slot" : "FootArmor"
       }
+    } ], [ "trap-plasma", {
+      "display" : "^",
+      "color" : "purple",
+      "rangedWeapon" : null,
+      "shield" : null,
+      "hidden" : true,
+      "name" : "Plasma trap",
+      "door" : null,
+      "usable" : null,
+      "pickable" : false,
+      "id" : "trap-plasma",
+      "weapon" : null,
+      "armor" : null
     } ], [ "armor-hand-3", {
       "display" : "]",
       "color" : "red",
@@ -1954,6 +1967,19 @@
       "usable" : null,
       "pickable" : false,
       "id" : "pressure-plate-hidden",
+      "weapon" : null,
+      "armor" : null
+    } ], [ "trap-laser", {
+      "display" : "^",
+      "color" : "red",
+      "rangedWeapon" : null,
+      "shield" : null,
+      "hidden" : true,
+      "name" : "Laser trap",
+      "door" : null,
+      "usable" : null,
+      "pickable" : false,
+      "id" : "trap-laser",
       "weapon" : null,
       "armor" : null
     } ], [ "door-closed", {
@@ -2791,20 +2817,25 @@
       "color" : "white",
       "id" : "wall-reinforced"
     } ] ],
-    "widgets" : [ [ "pressure-plate-widget-hidden", {
-      "type" : "TriggeredMachineryWidget",
-      "data" : {
-        "item" : "pressure-plate-hidden",
-        "id" : "pressure-plate-widget-hidden",
-        "description" : "Click."
-      }
-    } ], [ "healing-chamber-widget", {
+    "widgets" : [ [ "healing-chamber-widget", {
       "type" : "TriggeredTransformingWidget",
       "data" : {
         "item" : "healing-chamber",
         "transformTo" : "healing-chamber-widget-active",
         "transformDescription" : "Healing chamber activates.",
         "id" : "healing-chamber-widget"
+      }
+    } ], [ "trap-laser-widget", {
+      "type" : "AttackingTrapWidget",
+      "data" : {
+        "item" : "trap-laser",
+        "attack" : 50,
+        "damage" : 10,
+        "triggerDescription" : "Click.",
+        "hitDescription" : "Laser beam shoots from ceiling and hits {target}.",
+        "deflectDescription" : "Laser beam shoots from ceiling and hits {target} with no effect.",
+        "missDescription" : "Laser beam shoots from ceiling narrowly missing {target}.",
+        "id" : "trap-laser-widget"
       }
     } ], [ "healing-chamber-widget-active", {
       "type" : "HealLocationWidget",
@@ -2816,15 +2847,6 @@
         "transformTo" : "healing-chamber-widget-inactive",
         "transformDescription" : "Healing chamber deactivates.",
         "id" : "healing-chamber-widget-active"
-      }
-    } ], [ "healing-chamber-widget-inactive", {
-      "type" : "DelayedTransformingWidget",
-      "data" : {
-        "item" : "healing-chamber-inactive",
-        "transformTo" : "healing-chamber-widget",
-        "transformDescription" : null,
-        "delay" : 9999999,
-        "id" : "healing-chamber-widget-inactive"
       }
     } ], [ "portal-enemy-widget-1", {
       "type" : "SummonCreatureWidget",
@@ -2866,6 +2888,18 @@
         "interval" : 3000,
         "id" : "portal-enemy-widget-1",
         "summonDescription" : "{target} steps out of portal."
+      }
+    } ], [ "trap-plasma-widget", {
+      "type" : "AttackingTrapWidget",
+      "data" : {
+        "item" : "trap-plasma",
+        "attack" : 20,
+        "damage" : 30,
+        "triggerDescription" : "Click.",
+        "hitDescription" : "Pulse of plasma shoots from ceiling and hits {target}.",
+        "deflectDescription" : "Pulse of plasma shoots from ceiling and hits {target} with no effect.",
+        "missDescription" : "Pulse of plasma shoots from ceiling narrowly missing {target}.",
+        "id" : "trap-plasma-widget"
       }
     } ], [ "portal-enemy-widget-2", {
       "type" : "SummonCreatureWidget",
@@ -2933,6 +2967,22 @@
         "interval" : 3000,
         "id" : "portal-enemy-widget-3",
         "summonDescription" : "{target} steps out of portal."
+      }
+    } ], [ "healing-chamber-widget-inactive", {
+      "type" : "DelayedTransformingWidget",
+      "data" : {
+        "item" : "healing-chamber-inactive",
+        "transformTo" : "healing-chamber-widget",
+        "transformDescription" : null,
+        "delay" : 9999999,
+        "id" : "healing-chamber-widget-inactive"
+      }
+    } ], [ "pressure-plate-widget-hidden", {
+      "type" : "TriggeredMachineryWidget",
+      "data" : {
+        "item" : "pressure-plate-hidden",
+        "id" : "pressure-plate-widget-hidden",
+        "description" : "Click."
       }
     } ] ]
   },
