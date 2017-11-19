@@ -289,7 +289,7 @@ class EventBuilder(s: State, player: CreatureId, fov: Set[Location]) {
     val target = effect.target
 
     if (target == player) {
-      val items = getLocationVisibleItems(s)(effect.to)
+      val items = getLocationVisibleItems(s, effect.target)(effect.to)
       val messages = items map (item => s"${kind(item)}.")
 
       if (messages.nonEmpty) {

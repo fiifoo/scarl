@@ -56,10 +56,12 @@ object Selectors {
     s.index.locationTriggers.getOrElse(location, Set())
   }
 
-  def getLocationVisibleItems(s: State)(location: Location): Set[ItemId] = {
+  def getLocationVisibleItems(s: State, creature: CreatureId)(location: Location): Set[ItemId] = {
     def removable(entity: EntityId) = s.tmp.removableEntities contains entity
 
-    getLocationItems(s)(location) filterNot removable filterNot (_ (s).hidden)
+    def visible(item: ItemId) = !item(s).hidden || s.foundItems.get(creature).exists(_.contains(item))
+
+    getLocationItems(s)(location) filterNot removable filter visible
   }
 
   def getStatusLocation(s: State)(status: StatusId, deep: Boolean = false): Option[Location] = {

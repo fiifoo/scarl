@@ -26,6 +26,7 @@ case class RemoveEntitiesMutation() extends Mutation {
 
     s.copy(
       cache = mutateCache(s, removable),
+      foundItems = mutateFoundItems(s, removable),
       receivedCommunications = s.receivedCommunications -- collectCreatures(removable),
       entities = s.entities -- removable,
       equipments = mutateEquipments(s.equipments, removable),
@@ -34,6 +35,22 @@ case class RemoveEntitiesMutation() extends Mutation {
       tactics = mutateTactics(s.tactics, removable),
       tmp = s.tmp.copy(removableEntities = Set())
     )
+  }
+
+  private def mutateFoundItems(s: State, removable: Set[EntityId]): Map[CreatureId, Set[ItemId]] = {
+    (collectItems(removable) foldLeft s.foundItems) ((found, item) => {
+      (s.index.itemFinders.get(item) map (finders => {
+        (finders foldLeft found) ((found, finder) => {
+          val next = found(finder) - item
+
+          if (next.isEmpty) {
+            found - finder
+          } else {
+            found + (finder -> next)
+          }
+        })
+      })) getOrElse found
+    }) -- collectCreatures(removable)
   }
 
   private def mutateEquipments(equipments: Equipments, removable: Set[EntityId]): Equipments = {
@@ -79,6 +96,13 @@ case class RemoveEntitiesMutation() extends Mutation {
         case member: Creature => FactionMemberIndexRemoveMutation(member.id, member.faction)(index.factionMembers)
         case _ => index.factionMembers
       },
+      itemFinders = entity match {
+        case creature: Creature => s.foundItems.get(creature.id) map (items => {
+          ItemFinderIndexRemoveMutation(creature.id, items)(index.itemFinders)
+        }) getOrElse index.itemFinders
+        case item: Item => index.itemFinders - item.id
+        case _ => index.itemFinders
+      },
       locationEntities = entity match {
         case locatable: Locatable => LocatableLocationIndexRemoveMutation(locatable.id, locatable.location)(index.locationEntities)
         case _ => index.locationEntities
@@ -104,5 +128,9 @@ case class RemoveEntitiesMutation() extends Mutation {
 
   private def collectCreatures(removable: Set[EntityId]): Set[CreatureId] = {
     removable collect { case c: CreatureId => c }
+  }
+
+  private def collectItems(removable: Set[EntityId]): Set[ItemId] = {
+    removable collect { case i: ItemId => i }
   }
 }

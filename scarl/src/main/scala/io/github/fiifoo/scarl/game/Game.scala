@@ -9,7 +9,6 @@ import io.github.fiifoo.scarl.core.world.{ConduitId, Traveler}
 import io.github.fiifoo.scarl.game.api._
 import io.github.fiifoo.scarl.game.event.EventBuilder
 import io.github.fiifoo.scarl.game.map.MapBuilder
-import io.github.fiifoo.scarl.geometry.Fov
 import io.github.fiifoo.scarl.world.ChangeArea
 
 import scala.annotation.tailrec
@@ -103,10 +102,12 @@ object Game {
       )
 
       val statistics = StatisticsBuilder(instance, state.statistics, effects)
+      val ended = state.gameState.player(instance).dead
 
       state.copy(
-        ended = state.gameState.player(instance).dead,
+        ended = ended,
         events = events,
+        fov = if (ended) state.fov.next(instance, state.gameState.player) else state.fov,
         instance = FinalizeTickMutation()(instance),
         playerInfo = PlayerInfo(instance, state.gameState.player),
         statistics = statistics
@@ -221,10 +222,7 @@ object Game {
   }
 
   private def updateFov(state: RunState): RunState = {
-    val creature = state.playerInfo.creature
-    val locations = Fov(state.instance)(creature.location, creature.stats.sight.range)
-
-    val fov = state.fov.next(state.instance, locations)
+    val fov = if (state.ended) state.fov else state.fov.next(state.instance, state.gameState.player)
     val areaMap = state.areaMap ++ MapBuilder(fov)
 
     state.copy(

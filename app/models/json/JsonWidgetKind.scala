@@ -12,6 +12,7 @@ object JsonWidgetKind {
   lazy private implicit val itemKindIdFormat = JsonItemKind.itemKindIdFormat
 
   implicitly(weightedChoicesReads[CreatureKindId])
+  lazy private implicit val discoverFormat = JsonItemDiscover.discoverFormat
 
   lazy private implicit val attackingTrapReads = Json.reads[AttackingTrapWidget]
   lazy private implicit val delayedTransformingReads = Json.reads[DelayedTransformingWidget]

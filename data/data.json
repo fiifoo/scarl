@@ -2828,13 +2828,14 @@
     } ], [ "trap-laser-widget", {
       "type" : "AttackingTrapWidget",
       "data" : {
-        "item" : "trap-laser",
-        "attack" : 50,
-        "damage" : 10,
-        "triggerDescription" : "Click.",
-        "hitDescription" : "Laser beam shoots from ceiling and hits {target}.",
-        "deflectDescription" : "Laser beam shoots from ceiling and hits {target} with no effect.",
         "missDescription" : "Laser beam shoots from ceiling narrowly missing {target}.",
+        "triggerDescription" : "Click.",
+        "attack" : 50,
+        "hitDescription" : "Laser beam shoots from ceiling and hits {target}.",
+        "discover" : "DiscoverTriggerer",
+        "deflectDescription" : "Laser beam shoots from ceiling and hits {target} with no effect.",
+        "damage" : 10,
+        "item" : "trap-laser",
         "id" : "trap-laser-widget"
       }
     } ], [ "healing-chamber-widget-active", {
@@ -2892,13 +2893,14 @@
     } ], [ "trap-plasma-widget", {
       "type" : "AttackingTrapWidget",
       "data" : {
-        "item" : "trap-plasma",
-        "attack" : 20,
-        "damage" : 30,
-        "triggerDescription" : "Click.",
-        "hitDescription" : "Pulse of plasma shoots from ceiling and hits {target}.",
-        "deflectDescription" : "Pulse of plasma shoots from ceiling and hits {target} with no effect.",
         "missDescription" : "Pulse of plasma shoots from ceiling narrowly missing {target}.",
+        "triggerDescription" : "Click.",
+        "attack" : 20,
+        "hitDescription" : "Pulse of plasma shoots from ceiling and hits {target}.",
+        "discover" : "DiscoverTriggerer",
+        "deflectDescription" : "Pulse of plasma shoots from ceiling and hits {target} with no effect.",
+        "damage" : 30,
+        "item" : "trap-plasma",
         "id" : "trap-plasma-widget"
       }
     } ], [ "portal-enemy-widget-2", {
@@ -2982,7 +2984,8 @@
       "data" : {
         "item" : "pressure-plate-hidden",
         "id" : "pressure-plate-widget-hidden",
-        "description" : "Click."
+        "description" : "Click.",
+        "discover" : "DiscoverTriggerer"
       }
     } ] ]
   },

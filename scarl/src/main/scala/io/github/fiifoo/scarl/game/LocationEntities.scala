@@ -5,11 +5,11 @@ import io.github.fiifoo.scarl.core.world.ConduitId
 import io.github.fiifoo.scarl.core.{Location, Selectors, State}
 
 object LocationEntities {
-  def apply(s: State, location: Location): LocationEntities = {
+  def apply(s: State, player: CreatureId, location: Location): LocationEntities = {
     def removable(entity: EntityId) = s.tmp.removableEntities contains entity
 
     val entities = Selectors.getLocationEntities(s)(location) filterNot removable
-    val items = Selectors.getLocationVisibleItems(s)(location)
+    val items = Selectors.getLocationVisibleItems(s, player)(location)
 
     LocationEntities(
       s.index.locationConduit.get(location),

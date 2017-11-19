@@ -2,6 +2,7 @@ package io.github.fiifoo.scarl.widget
 
 import io.github.fiifoo.scarl.core.State
 import io.github.fiifoo.scarl.core.entity._
+import io.github.fiifoo.scarl.core.item.Discover
 import io.github.fiifoo.scarl.core.kind._
 import io.github.fiifoo.scarl.status.AttackingTrapStatus
 
@@ -9,6 +10,7 @@ case class AttackingTrapWidget(id: WidgetKindId,
                                item: ItemKindId,
                                attack: Int,
                                damage: Int,
+                               discover: Option[Discover] = None,
                                triggerDescription: Option[String] = None,
                                hitDescription: Option[String] = None,
                                deflectDescription: Option[String] = None,
@@ -21,6 +23,7 @@ case class AttackingTrapWidget(id: WidgetKindId,
       target,
       attack,
       damage,
+      discover,
       triggerDescription,
       hitDescription,
       deflectDescription,

@@ -1,7 +1,7 @@
 package game
 
 import io.github.fiifoo.scarl.core.mutation.cache.EquipmentStatsCacheMutation
-import io.github.fiifoo.scarl.core.mutation.index.{ConduitLocationIndexAddMutation, NewEntityIndexMutation}
+import io.github.fiifoo.scarl.core.mutation.index.{ConduitLocationIndexAddMutation, ItemFinderIndexAddMutation, NewEntityIndexMutation}
 import io.github.fiifoo.scarl.core.{ActorQueue, State}
 import io.github.fiifoo.scarl.game.GameState
 import io.github.fiifoo.scarl.geometry.WaypointNetwork
@@ -75,6 +75,15 @@ object LoadGame {
       index.copy(
         locationConduit = ConduitLocationIndexAddMutation(conduit, location)(index.locationConduit)
       )
+    })
+    index = s.foundItems.foldLeft(index)((index, x) => {
+      val (finder, items) = x
+
+      (items foldLeft index) ((index, item) => {
+        index.copy(
+          itemFinders = ItemFinderIndexAddMutation(finder, item)(index.itemFinders)
+        )
+      })
     })
 
     index

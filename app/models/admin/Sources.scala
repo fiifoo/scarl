@@ -14,7 +14,7 @@ import io.github.fiifoo.scarl.core.communication.{Communication, Message}
 import io.github.fiifoo.scarl.core.creature.Missile.{Guidance, Guided, Smart}
 import io.github.fiifoo.scarl.core.creature.{Faction, Progression}
 import io.github.fiifoo.scarl.core.item.Equipment._
-import io.github.fiifoo.scarl.core.item.Mechanism
+import io.github.fiifoo.scarl.core.item.{Discover, DiscoverEveryone, DiscoverTriggerer, Mechanism}
 import io.github.fiifoo.scarl.core.kind._
 import io.github.fiifoo.scarl.core.power.{CreaturePower, ItemPower}
 import io.github.fiifoo.scarl.mechanism.{CreateEntityMechanism, RemoveWallMechanism, UseDoorMechanism}
@@ -76,6 +76,10 @@ object Sources {
       typeOf[ThemeCreature],
       typeOf[FixedCreature],
     )),
+    SubModelSource(typeOf[Discover], List(
+      typeOf[DiscoverTriggerer.type],
+      typeOf[DiscoverEveryone.type],
+    ), objectPolymorphism = true),
     SubModelSource(typeOf[Distribution], List(
       typeOf[Binomial],
       typeOf[Uniform],
