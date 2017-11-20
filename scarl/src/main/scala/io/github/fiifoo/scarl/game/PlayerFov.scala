@@ -16,7 +16,7 @@ case class PlayerFov(locations: Set[Location] = Set(),
 
     val next = (locations map { location => location -> LocationEntities(s, player, location) }).toMap
     val delta = next filterNot (n => previous.contains(n._1) && previous(n._1) == n._2)
-    val shouldHide = (previous -- next.keys filter (_._2.creature.isDefined)).keys.toSet
+    val shouldHide = (previous -- next.keys filter (_._2.creatures.nonEmpty)).keys.toSet
 
     PlayerFov(locations, delta, shouldHide, next)
   }

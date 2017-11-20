@@ -1,6 +1,6 @@
 import { List } from 'immutable'
 import { interactions } from '../../game/interaction'
-import { getLocationCreature, getLocationDoor, isEnemyChecker } from '../../game/utils'
+import { getLocationCreatures, getLocationDoor, isEnemyChecker } from '../../game/utils'
 import * as commands from '../../keyboard/commands'
 import { isDirectionCommand, getDirectionLocation } from '../../keyboard/utils'
 import * as gameActions from '../gameActions'
@@ -69,14 +69,18 @@ const directionAction = (command, dispatch, getState) => {
     const {factions, fov, player} = getState()
 
     const to = getDirectionLocation(command, player.creature.location)
-    const target = getLocationCreature(to, fov.cumulative)
+    const creatures = getLocationCreatures(to, fov.cumulative)
     const door = getLocationDoor(to, fov.cumulative)
 
-    if (target) {
-        if (isEnemyChecker(player, factions)(target)) {
-            playerActions.attack(target.id)()
+    if (creatures.length > 0) {
+        const isEnemy = isEnemyChecker(player, factions)
+        const enemies = creatures.filter(isEnemy)
+        if (enemies.length > 0) {
+            const enemy = enemies[0]
+            playerActions.attack(enemy.id)()
         } else {
-            playerActions.displace(target.id)()
+            const friend = creatures[0]
+            playerActions.displace(friend.id)()
         }
     } else if (door && !door.door.open) {
         playerActions.useDoor(door.id)(dispatch, getState)

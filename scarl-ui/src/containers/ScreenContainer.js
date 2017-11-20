@@ -20,6 +20,7 @@ const ScreenContainer = connect(
         fov: state.fov,
         game: state.game,
         kinds: state.kinds,
+        player: state.player,
         reticule: state.ui.game.reticule,
         trajectory: state.ui.game.trajectory,
     })

@@ -18,7 +18,7 @@ const buildCumulative = (data, cumulative) => {
     build(data.delta, cumulative)
 
     data.shouldHide.forEach(l => {
-        cumulative[l.x][l.y].creature = undefined
+        cumulative[l.x][l.y].creatures = []
     })
 
     return cumulative

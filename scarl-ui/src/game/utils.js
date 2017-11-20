@@ -17,7 +17,7 @@ export const calculateTrajectory = (player, location, fov) => {
         const entities = getLocationEntities(location, fov)
 
         if (entities && (
-            entities.creature
+            entities.creatures.length > 0
             || entities.wall
             || entities.items.find(item => item.door && !item.door.open)
         )) {
@@ -45,10 +45,10 @@ export const getLocationConduit = (location, fov) => {
     return entities ? entities.conduit : undefined
 }
 
-export const getLocationCreature = (location, fov) => {
+export const getLocationCreatures = (location, fov) => {
     const entities = getLocationEntities(location, fov)
 
-    return entities ? entities.creature : undefined
+    return entities ? entities.creatures : []
 }
 
 export const getLocationDoor = (location, fov) => {
@@ -70,23 +70,19 @@ export const getLocationDescriptions = (location, fov, map, kinds) => {
         return List()
     }
 
-    const creature = content.creature ? kinds.creatures.get(content.creature).name : undefined
-    const wall = content.wall ? kinds.walls.get(content.wall).name : undefined
+    const creatures = content.creatures ? content.creatures.map(creature => kinds.creatures.get(creature).name) : []
+    const walls = content.wall ? [kinds.walls.get(content.wall).name] : []
     const items = content.items.map(item => kinds.items.get(item).name)
 
-    const descriptions = [creature, wall].filter(x => x !== undefined).concat(items)
+    const descriptions = creatures.concat(walls).concat(items)
 
     return List(descriptions.map (d => d + '.'))
 }
 
-export const getLocationUsableCreature = (location, fov) => {
-    const creature = getLocationCreature(location, fov)
+export const getLocationUsableCreatures = (location, fov) => {
+    const creatures = getLocationCreatures(location, fov)
 
-    if (creature && creature.usable) {
-        return creature
-    } else {
-        return undefined
-    }
+    return creatures.filter(creature => creature.usable)
 }
 
 export const getLocationUsableItem = (location, fov) => {
@@ -130,13 +126,10 @@ export const seekTargets = (player, factions, fov) => {
     const range = getRangedAttackRange(player)
     const isEnemy = isEnemyChecker(player, factions)
 
-    const targets = []
+    let targets = []
     for (let x = location.x - range; x <= location.x + range; x++) {
         for (let y = location.y - range; y <= location.y + range; y++) {
-            const creature = getLocationCreature({x, y}, fov)
-            if (creature && isEnemy(creature)) {
-                targets.push(creature)
-            }
+            targets = targets.concat(getLocationCreatures({x, y}, fov).filter(isEnemy))
         }
     }
 
@@ -152,8 +145,8 @@ const getLocationKinds = (l, fov, map) => {
 
     if (entities) {
         return {
-            creature: entities.creature ? entities.creature.kind : undefined,
-            items: entities.items.map (item => item.kind),
+            creatures: entities.creatures.map(creature => creature.kind),
+            items: entities.items.map(item => item.kind),
             terrain: entities.terrain ? entities.terrain.kind : undefined,
             wall: entities.wall ? entities.wall.kind : undefined,
         }

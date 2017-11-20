@@ -45,9 +45,10 @@ export const pass = () => () => {
 
 export const shoot = location => (dispatch, getState) => {
     const {fov, player} = getState()
-    const target = utils.getLocationCreature(location, fov.cumulative)
+    const targets = utils.getLocationCreatures(location, fov.cumulative)
 
-    if (target) {
+    if (targets.length > 0) {
+        const target = targets[0]
         setTarget(target.id)(dispatch)
     }
 

@@ -53,14 +53,12 @@ const weights = Map({
 })
 
 const extractors = Map({
-    [Communicate]: (location, fov) => {
-        const creature = utils.getLocationCreature(location, fov)
-
-        return creature ? List([{
+    [Communicate]: (location, fov) => (
+        List(utils.getLocationCreatures(location, fov)).map(creature => ({
             data: {target: creature.id},
             kind: creature.kind,
-        }]) : List()
-    },
+        }))
+    ),
     [EnterConduit]: (location, fov) => {
         const conduit = utils.getLocationConduit(location, fov)
 
@@ -75,14 +73,12 @@ const extractors = Map({
             kind: item.kind,
         }))
     ),
-    [UseCreature]: (location, fov) => {
-        const creature = utils.getLocationUsableCreature(location, fov)
-
-        return creature ? List([{
+    [UseCreature]: (location, fov) => (
+        List(utils.getLocationUsableCreatures(location, fov)).map(creature => ({
             data: {target: creature.id},
             kind: creature.kind,
-        }]) : List()
-    },
+        }))
+    ),
     [UseDoor]: (location, fov) => {
         const door = utils.getLocationDoor(location, fov)
 

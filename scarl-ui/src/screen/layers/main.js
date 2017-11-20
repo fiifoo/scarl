@@ -34,8 +34,8 @@ export default kinds => {
     }
 
     const renderFovTile = (x, y, entities, visible = true) => {
-        if (visible && entities.creature) {
-            renderEntity(x, y, entities.creature, kinds.creatures)
+        if (visible && entities.creatures.length > 0) {
+            renderEntity(x, y, entities.creatures[entities.creatures.length - 1], kinds.creatures)
         } else if (entities.items.length > 0) {
             renderEntity(x, y, entities.items[entities.items.length - 1], kinds.items)
         } else if (entities.wall) {

@@ -13,7 +13,7 @@ object LocationEntities {
 
     LocationEntities(
       s.index.locationConduit.get(location),
-      entities collectFirst { case c: CreatureId => c(s) },
+      entities collect { case c: CreatureId => c(s) },
       entities collectFirst { case t: TerrainId => t(s) },
       entities collectFirst { case w: WallId => w(s) },
       items map (_ (s))
@@ -22,7 +22,7 @@ object LocationEntities {
 }
 
 case class LocationEntities(conduit: Option[ConduitId],
-                            creature: Option[Creature],
+                            creatures: Set[Creature],
                             terrain: Option[Terrain],
                             wall: Option[Wall],
                             items: Set[Item]
