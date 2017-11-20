@@ -58,7 +58,7 @@ const use = (dispatch, getState) => {
                 const group = groups[tab.key]
                 const slot = group.getSlots(item).first()
 
-                playerActions.equipItem(item.id, slot)()
+                playerActions.equipItem(item.id, slot)(dispatch)
             }
             break
         }
