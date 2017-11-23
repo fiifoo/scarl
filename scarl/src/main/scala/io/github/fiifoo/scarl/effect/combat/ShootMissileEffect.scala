@@ -2,6 +2,7 @@ package io.github.fiifoo.scarl.effect.combat
 
 import io.github.fiifoo.scarl.ai.tactic.MissileTactic
 import io.github.fiifoo.scarl.core.Selectors.{getCreatureStats, getLocationEntities}
+import io.github.fiifoo.scarl.core.creature.Stats
 import io.github.fiifoo.scarl.core.effect.{Effect, EffectResult}
 import io.github.fiifoo.scarl.core.entity.{CreatureId, SafeCreatureId}
 import io.github.fiifoo.scarl.core.kind.CreatureKindId
@@ -16,7 +17,8 @@ case class ShootMissileEffect(attacker: CreatureId,
                              ) extends Effect {
 
   def apply(s: State): EffectResult = {
-    val range = getCreatureStats(s)(attacker).missileLauncher.range
+    val attackerStats = getCreatureStats(s)(attacker)
+    val range = attackerStats.missileLauncher.range
     val from = attacker(s).location
     val destination = (Line(from, targetLocation) take range + 1).last
     val behavior = MissileTactic(
@@ -29,13 +31,22 @@ case class ShootMissileEffect(attacker: CreatureId,
     val result = kind(s).copy(
       behavior = behavior,
       faction = attacker(s).faction,
+      stats = getMissileStats(s, attackerStats)
     ).toLocation(
       s = s,
       idSeq = s.idSeq,
       location = from,
-      owner = Some(SafeCreatureId(attacker))
+      owner = Some(SafeCreatureId(attacker)),
     )
 
     result.entity.missile map (_ => EffectResult(result.mutations)) getOrElse EffectResult()
+  }
+
+  private def getMissileStats(s: State, attackerStats: Stats): Stats = {
+    val stats = kind(s).stats
+
+    stats.copy(
+      explosive = stats.explosive.add(attackerStats.explosive)
+    )
   }
 }
