@@ -11,7 +11,7 @@ class ExplosionOutcomeListener(enemies: Set[FactionId]) extends SimulationListen
     val s = data.state
 
     val explode = data.effects.collectFirst {
-      case explode: ExplodeEffect if s.simulation.entities contains explode.attacker => explode
+      case explode: ExplodeEffect if s.simulation.entities contains explode.explosive => explode
     }
 
     explode map (explode => {

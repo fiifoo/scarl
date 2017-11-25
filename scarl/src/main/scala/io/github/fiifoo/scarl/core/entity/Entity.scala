@@ -50,7 +50,10 @@ trait TriggerStatus extends Entity with Status {
   def apply(s: State, triggerer: CreatureId): List[Effect]
 }
 
-case class Container(id: ContainerId, location: Location) extends Entity with Locatable {
+case class Container(id: ContainerId,
+                     location: Location,
+                     owner: Option[SafeCreatureId] = None
+                    ) extends Entity with Locatable {
 
   def setLocation(location: Location): Container = copy(location = location)
 }

@@ -36,16 +36,6 @@ object AttackRule {
     )
   }
 
-  def explosive(s: State, random: Random)(attacker: CreatureId, defender: CreatureId): Result = {
-    val attackerStats = getCreatureStats(s)(attacker)
-    val defenderStats = getCreatureStats(s)(defender)
-
-    AttackRule(random)(
-      Attacker(attackerStats.explosive.attack, attackerStats.explosive.damage),
-      Defender(defenderStats.defence, defenderStats.armor)
-    )
-  }
-
   def apply(random: Random)(attacker: Attacker, defender: Defender): Result = {
     val hit = rollHit(random, attacker, defender)
 

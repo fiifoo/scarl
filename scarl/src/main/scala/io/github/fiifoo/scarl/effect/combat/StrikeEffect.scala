@@ -18,7 +18,7 @@ case class StrikeEffect(attacker: CreatureId,
     val effect = if (result.hit) {
       HitEffect(attacker, target, result, target(s).location, Some(this))
     } else {
-      MissEffect(attacker, target, Some(this))
+      MissEffect(attacker, target, target(s).location, Some(this))
     }
 
     EffectResult(

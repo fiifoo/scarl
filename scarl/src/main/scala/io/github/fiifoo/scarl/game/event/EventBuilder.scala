@@ -42,7 +42,10 @@ class EventBuilder(s: State, player: CreatureId, fov: Set[Location]) {
       case e: DoorUsedEffect => build(e) map GenericEvent
       case e: DropItemEffect => build(e) map GenericEvent
       case e: EquipItemEffect => build(e) map GenericEvent
+      case e: ExplodeEffect => build(e) map GenericEvent
       case e: ExplosionEffect => build(e)
+      case e: ExplosionHitEffect => build(e)
+      case e: ExplosionMissEffect => build(e) map GenericEvent
       case e: GainLevelEffect => build(e) map GenericEvent
       case e: HealEffect => build(e) map GenericEvent
       case e: HitEffect => build(e)
@@ -204,9 +207,45 @@ class EventBuilder(s: State, player: CreatureId, fov: Set[Location]) {
     }
   }
 
+  private def build(effect: ExplodeEffect): Option[String] = {
+    if (fov contains effect.location) {
+      kind(effect.explosive) map (explosive => s"$explosive explodes.")
+    } else {
+      None
+    }
+  }
+
   private def build(effect: ExplosionEffect): Option[Event] = {
     if (fov contains effect.location) {
       Some(ExplosionEvent(effect.location))
+    } else {
+      None
+    }
+  }
+
+  private def build(effect: ExplosionHitEffect): Option[Event] = {
+    val message = if (effect.target == player) {
+      Some(if (effect.result.damage.isEmpty) {
+        "You are hit with no effect by explosion."
+      } else {
+        "You are hit by explosion."
+      })
+    } else if (fov contains effect.location) {
+      Some(if (effect.result.damage.isEmpty) {
+        s"${kind(effect.target)} is hit with no effect by explosion."
+      } else {
+        s"${kind(effect.target)} is hit by explosion."
+      })
+    } else {
+      None
+    }
+
+    message map (HitEvent(effect.target, effect.location, _))
+  }
+
+  private def build(effect: ExplosionMissEffect): Option[String] = {
+    if (effect.target == player) {
+      Some(s"You evade explosion.")
     } else {
       None
     }

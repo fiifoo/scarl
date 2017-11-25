@@ -1,42 +1,49 @@
 package io.github.fiifoo.scarl.effect.combat
 
+import io.github.fiifoo.scarl.core.Selectors.getCreatureStats
 import io.github.fiifoo.scarl.core.creature.Stats.Explosive
 import io.github.fiifoo.scarl.core.effect.{Effect, EffectResult}
-import io.github.fiifoo.scarl.core.entity.CreatureId
+import io.github.fiifoo.scarl.core.entity.{CreatureId, LocatableId}
 import io.github.fiifoo.scarl.core.mutation.RngMutation
 import io.github.fiifoo.scarl.core.{Location, Selectors, State}
 import io.github.fiifoo.scarl.rule.AttackRule
-import io.github.fiifoo.scarl.rule.AttackRule.Result
+import io.github.fiifoo.scarl.rule.AttackRule.{Attacker, Defender}
 
-case class ExplosionEffect(attacker: CreatureId,
+import scala.util.Random
+
+case class ExplosionEffect(source: LocatableId,
                            location: Location,
-                           explosive: Explosive,
+                           stats: Explosive,
                            parent: Option[Effect] = None
                           ) extends Effect {
 
   def apply(s: State): EffectResult = {
     val (random, rng) = s.rng()
-    val rule = AttackRule.explosive(s, random) _
 
     EffectResult(
       RngMutation(rng),
-      (targets(s) map attack(rule)).toList
+      (targets(s) map attack(s, random)).toList
     )
   }
 
   def targets(s: State): Set[CreatureId] = {
-    (Selectors.getLocationEntities(s)(location) collect {
+    (Selectors.getLocationEntities(s)(location) - source) collect {
       case c: CreatureId => c
-    }) - attacker
+    }
   }
 
-  private def attack(rule: (CreatureId, CreatureId) => Result)(target: CreatureId): Effect = {
-    val result = rule(attacker, target)
+  private def attack(s: State, random: Random)(target: CreatureId): Effect = {
+    val targetStats = getCreatureStats(s)(target)
+
+    val result = AttackRule(random)(
+      Attacker(stats.attack, stats.damage),
+      Defender(targetStats.defence, targetStats.armor)
+    )
 
     if (result.hit) {
-      HitEffect(attacker, target, result, location, Some(this))
+      ExplosionHitEffect(source, target, result, location, Some(this))
     } else {
-      MissEffect(attacker, target, Some(this))
+      ExplosionMissEffect(source, target, location, Some(this))
     }
   }
 }
