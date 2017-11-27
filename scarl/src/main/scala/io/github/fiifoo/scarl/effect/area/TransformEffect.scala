@@ -50,7 +50,7 @@ case class TransformEffect(from: EntityId,
       case kind: KindId => kind(s).toLocation(s, s.idSeq, location)
     }
 
-    getSuccessResult(location, result)
+    getSuccessResult(s, location, result)
   }
 
   private def toCreature(s: State, kind: CreatureKindId, location: Location): Kind.Result[Creature] = {
@@ -67,8 +67,16 @@ case class TransformEffect(from: EntityId,
     )
   }
 
-  private def getSuccessResult(location: Location, result: Kind.Result[_]): EffectResult = {
-    val mutations = RemovableEntityMutation(from) :: result.mutations
+  private def getSuccessResult(s: State, location: Location, result: Kind.Result[_]): EffectResult = {
+    val remove = from match {
+      case item: ItemId => item(s).container match {
+        case container: ContainerId => container
+        case _ => from
+      }
+      case _ => from
+    }
+
+    val mutations = RemovableEntityMutation(remove) :: result.mutations
 
     EffectResult(
       mutations,

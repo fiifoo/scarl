@@ -1873,7 +1873,17 @@
       "hidden" : true,
       "name" : "Mine",
       "door" : null,
-      "usable" : null,
+      "usable" : {
+        "type" : "TransformItemPower",
+        "data" : {
+          "to" : {
+            "type" : "ItemKind",
+            "data" : null,
+            "value" : "explosive-triggered"
+          },
+          "description" : "Mine deactivates."
+        }
+      },
       "pickable" : false,
       "id" : "explosive-triggered-active",
       "weapon" : null,
@@ -1888,10 +1898,20 @@
         "radius" : 5
       },
       "shield" : null,
-      "hidden" : false,
+      "hidden" : true,
       "name" : "Explosive",
       "door" : null,
-      "usable" : null,
+      "usable" : {
+        "type" : "TransformItemPower",
+        "data" : {
+          "to" : {
+            "type" : "ItemKind",
+            "data" : null,
+            "value" : "explosive-timed"
+          },
+          "description" : "Explosive deactivates."
+        }
+      },
       "pickable" : false,
       "id" : "explosive-timed-active",
       "weapon" : null,
