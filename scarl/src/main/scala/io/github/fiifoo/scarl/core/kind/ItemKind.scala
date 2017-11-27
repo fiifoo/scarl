@@ -2,10 +2,9 @@ package io.github.fiifoo.scarl.core.kind
 
 import io.github.fiifoo.scarl.core.creature.Stats.Explosive
 import io.github.fiifoo.scarl.core.entity._
-import io.github.fiifoo.scarl.core.item._
+import io.github.fiifoo.scarl.core.item.{ItemPower, _}
 import io.github.fiifoo.scarl.core.kind.Kind.Result
 import io.github.fiifoo.scarl.core.mutation.{IdSeqMutation, ItemFoundMutation, Mutation, NewEntityMutation}
-import io.github.fiifoo.scarl.core.power.ItemPowerId
 import io.github.fiifoo.scarl.core.{IdSeq, Location, State}
 
 case class ItemKind(id: ItemKindId,
@@ -20,7 +19,7 @@ case class ItemKind(id: ItemKindId,
                     pickable: Boolean = false,
                     rangedWeapon: Option[RangedWeapon] = None,
                     shield: Option[Shield] = None,
-                    usable: Option[ItemPowerId] = None,
+                    usable: Option[ItemPower] = None,
                     weapon: Option[Weapon] = None
                    ) extends Kind {
 

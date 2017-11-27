@@ -12,11 +12,10 @@ import io.github.fiifoo.scarl.core.Distribution.{Binomial, Uniform}
 import io.github.fiifoo.scarl.core.action.{Behavior, PassTactic}
 import io.github.fiifoo.scarl.core.communication.{Communication, Message}
 import io.github.fiifoo.scarl.core.creature.Missile.{Guidance, Guided, Smart}
-import io.github.fiifoo.scarl.core.creature.{Faction, Progression}
+import io.github.fiifoo.scarl.core.creature.{CreaturePower, Faction, Progression}
 import io.github.fiifoo.scarl.core.item.Equipment._
-import io.github.fiifoo.scarl.core.item.{Discover, DiscoverEveryone, DiscoverTriggerer, Mechanism}
+import io.github.fiifoo.scarl.core.item._
 import io.github.fiifoo.scarl.core.kind._
-import io.github.fiifoo.scarl.core.power.{CreaturePower, ItemPower}
 import io.github.fiifoo.scarl.mechanism.{CreateEntityMechanism, RemoveWallMechanism, UseDoorMechanism}
 import io.github.fiifoo.scarl.power.{TransformCreaturePower, TransformItemPower}
 import io.github.fiifoo.scarl.widget._
@@ -48,13 +47,6 @@ object Sources {
       typeOf[TriggeredTransformingWidget],
     )),
 
-    ModelSource(typeOf[CreaturePower], List("powers", "creatures"), List(
-      typeOf[TransformCreaturePower],
-    )),
-    ModelSource(typeOf[ItemPower], List("powers", "items"), List(
-      typeOf[TransformItemPower],
-    )),
-
     ModelSource(typeOf[Progression], List("progressions")),
 
     ModelSource(typeOf[Template], List("templates"), List(
@@ -74,6 +66,9 @@ object Sources {
       typeOf[PassTactic.type],
       typeOf[RoamTactic.type],
     )),
+    SubModelSource(typeOf[CreaturePower], List(
+      typeOf[TransformCreaturePower],
+    )),
     SubModelSource(typeOf[CreatureSelection], List(
       typeOf[ThemeCreature],
       typeOf[FixedCreature],
@@ -92,6 +87,9 @@ object Sources {
     SubModelSource(typeOf[Guidance], List(
       typeOf[Guided.type],
       typeOf[Smart.type],
+    )),
+    SubModelSource(typeOf[ItemPower], List(
+      typeOf[TransformItemPower],
     )),
     SubModelSource(typeOf[ItemSelection], List(
       typeOf[ThemeItem.type],

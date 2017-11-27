@@ -616,7 +616,17 @@
         "type" : "FollowerTactic",
         "data" : { }
       },
-      "usable" : "transform-drone-1",
+      "usable" : {
+        "type" : "TransformCreaturePower",
+        "data" : {
+          "to" : {
+            "type" : "ItemKind",
+            "data" : null,
+            "value" : "friend-drone-1"
+          },
+          "description" : "Drone shuts down."
+        }
+      },
       "greetings" : [ ],
       "id" : "friend-drone-1",
       "inventory" : [ ],
@@ -754,7 +764,17 @@
         "type" : "FollowerTactic",
         "data" : { }
       },
-      "usable" : "transform-drone-2",
+      "usable" : {
+        "type" : "TransformCreaturePower",
+        "data" : {
+          "to" : {
+            "type" : "ItemKind",
+            "data" : null,
+            "value" : "friend-drone-2"
+          },
+          "description" : "Drone shuts down."
+        }
+      },
       "greetings" : [ ],
       "id" : "friend-drone-2",
       "inventory" : [ ],
@@ -800,7 +820,17 @@
         "type" : "FollowerTactic",
         "data" : { }
       },
-      "usable" : "transform-drone-3",
+      "usable" : {
+        "type" : "TransformCreaturePower",
+        "data" : {
+          "to" : {
+            "type" : "ItemKind",
+            "data" : null,
+            "value" : "friend-drone-3"
+          },
+          "description" : "Drone shuts down."
+        }
+      },
       "greetings" : [ ],
       "id" : "friend-drone-3",
       "inventory" : [ ],
@@ -2220,7 +2250,17 @@
       "hidden" : false,
       "name" : "Drone I",
       "door" : null,
-      "usable" : "transform-drone-1",
+      "usable" : {
+        "type" : "TransformItemPower",
+        "data" : {
+          "to" : {
+            "type" : "CreatureKind",
+            "data" : null,
+            "value" : "friend-drone-1"
+          },
+          "description" : "Drone starts humming."
+        }
+      },
       "pickable" : true,
       "id" : "friend-drone-1",
       "weapon" : null,
@@ -2259,7 +2299,17 @@
       "hidden" : false,
       "name" : "Drone II",
       "door" : null,
-      "usable" : "transform-drone-2",
+      "usable" : {
+        "type" : "TransformItemPower",
+        "data" : {
+          "to" : {
+            "type" : "CreatureKind",
+            "data" : null,
+            "value" : "friend-drone-2"
+          },
+          "description" : "Drone starts humming."
+        }
+      },
       "pickable" : true,
       "id" : "friend-drone-2",
       "weapon" : null,
@@ -2273,7 +2323,17 @@
       "hidden" : false,
       "name" : "Mine",
       "door" : null,
-      "usable" : "transform-explosive-triggered-active",
+      "usable" : {
+        "type" : "TransformItemPower",
+        "data" : {
+          "to" : {
+            "type" : "WidgetKind",
+            "data" : null,
+            "value" : "explosive-triggered-widget"
+          },
+          "description" : "Mine activates."
+        }
+      },
       "pickable" : true,
       "id" : "explosive-triggered",
       "weapon" : null,
@@ -2286,7 +2346,17 @@
       "hidden" : false,
       "name" : "Drone III",
       "door" : null,
-      "usable" : "transform-drone-3",
+      "usable" : {
+        "type" : "TransformItemPower",
+        "data" : {
+          "to" : {
+            "type" : "CreatureKind",
+            "data" : null,
+            "value" : "friend-drone-3"
+          },
+          "description" : "Drone starts humming."
+        }
+      },
       "pickable" : true,
       "id" : "friend-drone-3",
       "weapon" : null,
@@ -2300,7 +2370,17 @@
       "hidden" : false,
       "name" : "Explosive",
       "door" : null,
-      "usable" : "transform-explosive-timed-active",
+      "usable" : {
+        "type" : "TransformItemPower",
+        "data" : {
+          "to" : {
+            "type" : "WidgetKind",
+            "data" : null,
+            "value" : "explosive-timed-widget"
+          },
+          "description" : "Explosive activates."
+        }
+      },
       "pickable" : true,
       "id" : "explosive-timed",
       "weapon" : null,
@@ -3065,98 +3145,6 @@
         "id" : "pressure-plate-widget-hidden",
         "description" : "Click.",
         "discover" : "DiscoverTriggerer"
-      }
-    } ] ]
-  },
-  "powers" : {
-    "creatures" : [ [ "transform-drone-1", {
-      "type" : "TransformCreaturePower",
-      "data" : {
-        "to" : {
-          "type" : "ItemKind",
-          "data" : null,
-          "value" : "friend-drone-1"
-        },
-        "description" : "Drone shuts down.",
-        "id" : "transform-drone-1"
-      }
-    } ], [ "transform-drone-2", {
-      "type" : "TransformCreaturePower",
-      "data" : {
-        "to" : {
-          "type" : "ItemKind",
-          "data" : null,
-          "value" : "friend-drone-2"
-        },
-        "description" : "Drone shuts down.",
-        "id" : "transform-drone-2"
-      }
-    } ], [ "transform-drone-3", {
-      "type" : "TransformCreaturePower",
-      "data" : {
-        "to" : {
-          "type" : "ItemKind",
-          "data" : null,
-          "value" : "friend-drone-3"
-        },
-        "description" : "Drone shuts down.",
-        "id" : "transform-drone-3"
-      }
-    } ] ],
-    "items" : [ [ "transform-drone-1", {
-      "type" : "TransformItemPower",
-      "data" : {
-        "to" : {
-          "type" : "CreatureKind",
-          "data" : null,
-          "value" : "friend-drone-1"
-        },
-        "description" : "Drone starts humming.",
-        "id" : "transform-drone-1"
-      }
-    } ], [ "transform-drone-2", {
-      "type" : "TransformItemPower",
-      "data" : {
-        "to" : {
-          "type" : "CreatureKind",
-          "data" : null,
-          "value" : "friend-drone-2"
-        },
-        "description" : "Drone starts humming.",
-        "id" : "transform-drone-2"
-      }
-    } ], [ "transform-drone-3", {
-      "type" : "TransformItemPower",
-      "data" : {
-        "to" : {
-          "type" : "CreatureKind",
-          "data" : null,
-          "value" : "friend-drone-3"
-        },
-        "description" : "Drone starts humming.",
-        "id" : "transform-drone-3"
-      }
-    } ], [ "transform-explosive-timed-active", {
-      "type" : "TransformItemPower",
-      "data" : {
-        "to" : {
-          "type" : "WidgetKind",
-          "data" : null,
-          "value" : "explosive-timed-widget"
-        },
-        "description" : null,
-        "id" : "transform-explosive-timed-active"
-      }
-    } ], [ "transform-explosive-triggered-active", {
-      "type" : "TransformItemPower",
-      "data" : {
-        "to" : {
-          "type" : "WidgetKind",
-          "data" : null,
-          "value" : "explosive-triggered-widget"
-        },
-        "description" : null,
-        "id" : "transform-explosive-triggered-active"
       }
     } ] ]
   },

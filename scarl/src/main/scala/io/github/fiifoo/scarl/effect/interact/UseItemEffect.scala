@@ -13,7 +13,7 @@ case class UseItemEffect(user: CreatureId,
   def apply(s: State): EffectResult = {
     target(s).usable map (power => {
       EffectResult(
-        power(s)(s, target, Some(user))
+        power(s, target, Some(user))
       )
     }) getOrElse EffectResult()
   }

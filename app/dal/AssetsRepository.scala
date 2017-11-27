@@ -26,7 +26,6 @@ class AssetsRepository @Inject()(environment: Environment) {
       data.communications,
       data.factions,
       data.kinds,
-      data.powers,
       data.progressions,
       data.templates,
       data.themes,

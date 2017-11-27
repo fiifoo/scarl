@@ -2,13 +2,12 @@ package io.github.fiifoo.scarl.core.kind
 
 import io.github.fiifoo.scarl.core.action.Behavior
 import io.github.fiifoo.scarl.core.communication.CommunicationId
-import io.github.fiifoo.scarl.core.creature.{Character, FactionId, Missile, Party, Stats}
+import io.github.fiifoo.scarl.core.creature.{Character, CreaturePower, FactionId, Missile, Party, Stats}
 import io.github.fiifoo.scarl.core.entity._
 import io.github.fiifoo.scarl.core.item.Equipment
 import io.github.fiifoo.scarl.core.item.Equipment.Slot
 import io.github.fiifoo.scarl.core.kind.Kind.Result
 import io.github.fiifoo.scarl.core.mutation.{EquipItemMutation, IdSeqMutation, Mutation, NewEntityMutation}
-import io.github.fiifoo.scarl.core.power.CreaturePowerId
 import io.github.fiifoo.scarl.core.{IdSeq, Location, State}
 
 case class CreatureKind(id: CreatureKindId,
@@ -23,7 +22,7 @@ case class CreatureKind(id: CreatureKindId,
                         character: Option[Character] = None,
                         flying: Boolean = false,
                         missile: Option[Missile] = None,
-                        usable: Option[CreaturePowerId] = None,
+                        usable: Option[CreaturePower] = None,
 
                         equipments: Map[Slot, ItemKindId] = Map(),
                         inventory: List[ItemKindId] = List(),

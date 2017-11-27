@@ -1,14 +1,13 @@
 package io.github.fiifoo.scarl.power
 
 import io.github.fiifoo.scarl.core.State
+import io.github.fiifoo.scarl.core.creature.CreaturePower
 import io.github.fiifoo.scarl.core.effect.Effect
 import io.github.fiifoo.scarl.core.entity.CreatureId
 import io.github.fiifoo.scarl.core.kind.KindId
-import io.github.fiifoo.scarl.core.power.{CreaturePower, CreaturePowerId}
 import io.github.fiifoo.scarl.effect.area.TransformEffect
 
-case class TransformCreaturePower(id: CreaturePowerId,
-                                  to: KindId,
+case class TransformCreaturePower(to: KindId,
                                   description: Option[String] = None
                                  ) extends CreaturePower {
 

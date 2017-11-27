@@ -2,11 +2,10 @@ package io.github.fiifoo.scarl.core.entity
 
 import io.github.fiifoo.scarl.core.action.Behavior
 import io.github.fiifoo.scarl.core.creature.Stats.Explosive
-import io.github.fiifoo.scarl.core.creature.{Character, FactionId, Missile, Party, Stats}
+import io.github.fiifoo.scarl.core.creature.{Character, CreaturePower, FactionId, Missile, Party, Stats}
 import io.github.fiifoo.scarl.core.effect.Effect
 import io.github.fiifoo.scarl.core.item._
 import io.github.fiifoo.scarl.core.kind.{CreatureKindId, ItemKindId, TerrainKindId, WallKindId}
-import io.github.fiifoo.scarl.core.power.{CreaturePowerId, ItemPowerId}
 import io.github.fiifoo.scarl.core.{Location, State}
 
 sealed trait Entity {
@@ -75,7 +74,7 @@ case class Creature(id: CreatureId,
                     character: Option[Character] = None,
                     flying: Boolean = false,
                     missile: Option[Missile] = None,
-                    usable: Option[CreaturePowerId] = None,
+                    usable: Option[CreaturePower] = None,
                    ) extends Entity with Actor with Locatable {
 
   def setLocation(location: Location): Creature = copy(location = location)
@@ -102,7 +101,7 @@ case class Item(id: ItemId,
                 pickable: Boolean = false,
                 rangedWeapon: Option[RangedWeapon] = None,
                 shield: Option[Shield] = None,
-                usable: Option[ItemPowerId] = None,
+                usable: Option[ItemPower] = None,
                 weapon: Option[Weapon] = None,
                ) extends Entity
 
