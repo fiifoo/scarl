@@ -1,6 +1,7 @@
 package io.github.fiifoo.scarl.core.entity
 
 import io.github.fiifoo.scarl.core.action.Behavior
+import io.github.fiifoo.scarl.core.creature.Stats.Explosive
 import io.github.fiifoo.scarl.core.creature.{Character, FactionId, Missile, Party, Stats}
 import io.github.fiifoo.scarl.core.effect.Effect
 import io.github.fiifoo.scarl.core.item._
@@ -96,6 +97,7 @@ case class Item(id: ItemId,
 
                 armor: Option[Armor] = None,
                 door: Option[Door] = None,
+                explosive: Option[Explosive] = None,
                 hidden: Boolean = false,
                 pickable: Boolean = false,
                 rangedWeapon: Option[RangedWeapon] = None,

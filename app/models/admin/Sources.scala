@@ -42,6 +42,8 @@ object Sources {
       typeOf[DelayedTransformingWidget],
       typeOf[HealLocationWidget],
       typeOf[SummonCreatureWidget],
+      typeOf[TimedExplosiveWidget],
+      typeOf[TriggeredExplosiveWidget],
       typeOf[TriggeredMachineryWidget],
       typeOf[TriggeredTransformingWidget],
     )),

@@ -1830,6 +1830,42 @@
         },
         "slot" : "LegArmor"
       }
+    } ], [ "explosive-triggered-active", {
+      "display" : "^",
+      "color" : "yellow",
+      "rangedWeapon" : null,
+      "explosive" : {
+        "attack" : 100,
+        "damage" : 30,
+        "radius" : 5
+      },
+      "shield" : null,
+      "hidden" : true,
+      "name" : "Mine",
+      "door" : null,
+      "usable" : null,
+      "pickable" : false,
+      "id" : "explosive-triggered-active",
+      "weapon" : null,
+      "armor" : null
+    } ], [ "explosive-timed-active", {
+      "display" : "x",
+      "color" : "yellow",
+      "rangedWeapon" : null,
+      "explosive" : {
+        "attack" : 100,
+        "damage" : 30,
+        "radius" : 5
+      },
+      "shield" : null,
+      "hidden" : false,
+      "name" : "Explosive",
+      "door" : null,
+      "usable" : null,
+      "pickable" : false,
+      "id" : "explosive-timed-active",
+      "weapon" : null,
+      "armor" : null
     } ], [ "armor-leg-2", {
       "display" : "]",
       "color" : "blue",
@@ -2228,6 +2264,20 @@
       "id" : "friend-drone-2",
       "weapon" : null,
       "armor" : null
+    } ], [ "explosive-triggered", {
+      "display" : "^",
+      "color" : "white",
+      "rangedWeapon" : null,
+      "explosive" : null,
+      "shield" : null,
+      "hidden" : false,
+      "name" : "Mine",
+      "door" : null,
+      "usable" : "transform-explosive-triggered-active",
+      "pickable" : true,
+      "id" : "explosive-triggered",
+      "weapon" : null,
+      "armor" : null
     } ], [ "friend-drone-3", {
       "display" : "d",
       "color" : "white",
@@ -2239,6 +2289,20 @@
       "usable" : "transform-drone-3",
       "pickable" : true,
       "id" : "friend-drone-3",
+      "weapon" : null,
+      "armor" : null
+    } ], [ "explosive-timed", {
+      "display" : "x",
+      "color" : "white",
+      "rangedWeapon" : null,
+      "explosive" : null,
+      "shield" : null,
+      "hidden" : false,
+      "name" : "Explosive",
+      "door" : null,
+      "usable" : "transform-explosive-timed-active",
+      "pickable" : true,
+      "id" : "explosive-timed",
       "weapon" : null,
       "armor" : null
     } ], [ "shield-deflector-1", {
@@ -2817,7 +2881,22 @@
       "color" : "white",
       "id" : "wall-reinforced"
     } ] ],
-    "widgets" : [ [ "healing-chamber-widget", {
+    "widgets" : [ [ "explosive-triggered-widget", {
+      "type" : "TriggeredExplosiveWidget",
+      "data" : {
+        "item" : "explosive-triggered-active",
+        "discover" : "DiscoverTriggerer",
+        "triggerDescription" : "Click.",
+        "id" : "explosive-triggered-widget"
+      }
+    } ], [ "explosive-timed-widget", {
+      "type" : "TimedExplosiveWidget",
+      "data" : {
+        "item" : "explosive-timed-active",
+        "timer" : 1000,
+        "id" : "explosive-timed-widget"
+      }
+    } ], [ "healing-chamber-widget", {
       "type" : "TriggeredTransformingWidget",
       "data" : {
         "item" : "healing-chamber",
@@ -3056,6 +3135,28 @@
         },
         "description" : "Drone starts humming.",
         "id" : "transform-drone-3"
+      }
+    } ], [ "transform-explosive-timed-active", {
+      "type" : "TransformItemPower",
+      "data" : {
+        "to" : {
+          "type" : "WidgetKind",
+          "data" : null,
+          "value" : "explosive-timed-widget"
+        },
+        "description" : null,
+        "id" : "transform-explosive-timed-active"
+      }
+    } ], [ "transform-explosive-triggered-active", {
+      "type" : "TransformItemPower",
+      "data" : {
+        "to" : {
+          "type" : "WidgetKind",
+          "data" : null,
+          "value" : "explosive-triggered-widget"
+        },
+        "description" : null,
+        "id" : "transform-explosive-triggered-active"
       }
     } ] ]
   },

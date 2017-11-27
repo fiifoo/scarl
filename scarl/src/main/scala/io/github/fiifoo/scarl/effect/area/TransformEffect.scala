@@ -46,6 +46,7 @@ case class TransformEffect(from: EntityId,
   private def transform(s: State)(location: Location): EffectResult = {
     val result = to match {
       case kind: CreatureKindId => toCreature(s, kind, location)
+      case kind: WidgetKindId => kind(s).toLocation(s, s.idSeq, location, owner map SafeCreatureId.apply)
       case kind: KindId => kind(s).toLocation(s, s.idSeq, location)
     }
 

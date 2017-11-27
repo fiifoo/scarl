@@ -75,4 +75,8 @@ object Selectors {
   def getTargetStatuses(s: State)(target: EntityId): Set[StatusId] = {
     s.index.targetStatuses.getOrElse(target, Set())
   }
+
+  def getWidgetItem(s: State)(container: ContainerId): Option[ItemId] = {
+    getContainerItems(s)(container).headOption
+  }
 }

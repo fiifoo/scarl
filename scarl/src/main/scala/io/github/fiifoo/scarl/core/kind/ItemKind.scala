@@ -1,9 +1,10 @@
 package io.github.fiifoo.scarl.core.kind
 
+import io.github.fiifoo.scarl.core.creature.Stats.Explosive
 import io.github.fiifoo.scarl.core.entity._
 import io.github.fiifoo.scarl.core.item._
 import io.github.fiifoo.scarl.core.kind.Kind.Result
-import io.github.fiifoo.scarl.core.mutation.{IdSeqMutation, NewEntityMutation}
+import io.github.fiifoo.scarl.core.mutation.{IdSeqMutation, ItemFoundMutation, Mutation, NewEntityMutation}
 import io.github.fiifoo.scarl.core.power.ItemPowerId
 import io.github.fiifoo.scarl.core.{IdSeq, Location, State}
 
@@ -14,6 +15,7 @@ case class ItemKind(id: ItemKindId,
 
                     armor: Option[Armor] = None,
                     door: Option[Door] = None,
+                    explosive: Option[Explosive] = None,
                     hidden: Boolean = false,
                     pickable: Boolean = false,
                     rangedWeapon: Option[RangedWeapon] = None,
@@ -23,7 +25,7 @@ case class ItemKind(id: ItemKindId,
                    ) extends Kind {
 
   def toContainer(s: State, idSeq: IdSeq, container: EntityId): Result[Item] = {
-    val (item, nextIdSeq) = createItem(idSeq, container)
+    val (item, nextIdSeq) = createItem(s, idSeq, container)
 
     Result(
       mutations = List(IdSeqMutation(nextIdSeq), NewEntityMutation(item)),
@@ -32,11 +34,29 @@ case class ItemKind(id: ItemKindId,
     )
   }
 
+  def toWidget(s: State, idSeq: IdSeq, location: Location, owner: Option[SafeCreatureId]): Result[Container] = {
+    val (containerId, containerIdSeq) = idSeq()
+
+    val container = Container(ContainerId(containerId), location, owner)
+    val (item, nextIdSeq) = createItem(s, containerIdSeq, container.id, owner)
+
+    Result(
+      mutations = List(
+        Some(IdSeqMutation(nextIdSeq)),
+        Some(NewEntityMutation(container)),
+        Some(NewEntityMutation(item)),
+        getItemFoundMutation(s, item, owner),
+      ).flatten,
+      nextIdSeq,
+      container,
+    )
+  }
+
   def toLocation(s: State, idSeq: IdSeq, location: Location): Result[Container] = {
     val (containerId, containerIdSeq) = idSeq()
 
     val container = Container(ContainerId(containerId), location)
-    val (item, nextIdSeq) = createItem(containerIdSeq, container.id)
+    val (item, nextIdSeq) = createItem(s, containerIdSeq, container.id)
 
     Result(
       mutations = List(IdSeqMutation(nextIdSeq), NewEntityMutation(container), NewEntityMutation(item)),
@@ -45,7 +65,11 @@ case class ItemKind(id: ItemKindId,
     )
   }
 
-  private def createItem(idSeq: IdSeq, container: EntityId): (Item, IdSeq) = {
+  private def createItem(s: State,
+                         idSeq: IdSeq,
+                         container: EntityId,
+                         owner: Option[SafeCreatureId] = None
+                        ): (Item, IdSeq) = {
     val (nextId, nextIdSeq) = idSeq()
 
     val item = Item(
@@ -55,6 +79,9 @@ case class ItemKind(id: ItemKindId,
 
       armor = armor,
       door = door,
+      explosive = explosive map (explosive => {
+        (owner flatMap (_ (s))) map (_.stats.explosive.add(explosive)) getOrElse explosive
+      }),
       hidden = hidden,
       pickable = pickable,
       rangedWeapon = rangedWeapon,
@@ -64,5 +91,13 @@ case class ItemKind(id: ItemKindId,
     )
 
     (item, nextIdSeq)
+  }
+
+  private def getItemFoundMutation(s: State, item: Item, owner: Option[SafeCreatureId]): Option[Mutation] = {
+    if (!item.hidden) {
+      return None
+    }
+
+    (owner flatMap (_ (s))) map (owner => ItemFoundMutation(item.id, owner.id))
   }
 }

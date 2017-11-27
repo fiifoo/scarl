@@ -1,5 +1,6 @@
 package models.json
 
+import io.github.fiifoo.scarl.core.creature.Stats.Explosive
 import io.github.fiifoo.scarl.core.entity._
 import play.api.libs.json._
 
@@ -10,6 +11,7 @@ object JsonItem {
   lazy private implicit val armorFormat = JsonItemEquipment.armorFormat
   lazy private implicit val doorFormat = JsonItemDoor.doorFormat
   lazy private implicit val entityIdFormat = JsonEntity.entityIdFormat
+  lazy private implicit val explosiveFormat = Json.format[Explosive]
   lazy private implicit val itemKindIdFormat = JsonItemKind.itemKindIdFormat
   lazy private implicit val itemPowerIdFormat = JsonItemPower.itemPowerIdFormat
   lazy private implicit val rangedWeaponFormat = JsonItemEquipment.rangedWeaponFormat
