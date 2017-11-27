@@ -6,7 +6,7 @@ import io.github.fiifoo.scarl.core.effect.{Effect, LocalizedDescriptionEffect}
 import io.github.fiifoo.scarl.core.entity._
 import io.github.fiifoo.scarl.core.kind._
 import io.github.fiifoo.scarl.core.{Location, State}
-import io.github.fiifoo.scarl.effect.area.{CreateEntityEffect, RemoveEntityEffect, TransformBlockedEffect}
+import io.github.fiifoo.scarl.effect.area.{CreateEntityEffect, ExplosiveTimerEffect, RemoveEntityEffect, TransformBlockedEffect}
 import io.github.fiifoo.scarl.effect.combat._
 import io.github.fiifoo.scarl.effect.creature.{GainLevelEffect, HealEffect}
 import io.github.fiifoo.scarl.effect.interact._
@@ -47,6 +47,7 @@ class EventBuilder(s: State, player: CreatureId, fov: Set[Location]) {
       case e: ExplosionHitEffect => build(e)
       case e: ExplosionLocationEffect => build(e)
       case e: ExplosionMissEffect => build(e) map GenericEvent
+      case e: ExplosiveTimerEffect => build(e) map GenericEvent
       case e: GainLevelEffect => build(e) map GenericEvent
       case e: HealEffect => build(e) map GenericEvent
       case e: HitEffect => build(e)
@@ -254,7 +255,15 @@ class EventBuilder(s: State, player: CreatureId, fov: Set[Location]) {
 
   private def build(effect: ExplosionMissEffect): Option[String] = {
     if (effect.target == player) {
-      Some(s"You evade explosion.")
+      Some("You evade explosion.")
+    } else {
+      None
+    }
+  }
+
+  private def build(effect: ExplosiveTimerEffect): Option[String] = {
+    if ((effect.explosive(s).owner flatMap (_ (s))) exists (_.id == player)) {
+      kind(effect.explosive) map (explosive => s"$explosive: ${effect.timer}")
     } else {
       None
     }
