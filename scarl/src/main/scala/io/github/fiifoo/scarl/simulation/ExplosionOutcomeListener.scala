@@ -3,7 +3,7 @@ package io.github.fiifoo.scarl.simulation
 import io.github.fiifoo.scarl.core.creature.FactionId
 import io.github.fiifoo.scarl.core.entity.CreatureId
 import io.github.fiifoo.scarl.core.{RealityBubble, State}
-import io.github.fiifoo.scarl.effect.combat.{ExplodeEffect, ExplosionEffect}
+import io.github.fiifoo.scarl.effect.combat.{ExplodeEffect, ExplosionLocationEffect}
 
 class ExplosionOutcomeListener(enemies: Set[FactionId]) extends SimulationListener[Outcome] {
 
@@ -16,7 +16,7 @@ class ExplosionOutcomeListener(enemies: Set[FactionId]) extends SimulationListen
 
     explode map (explode => {
       val explosions = data.effects collect {
-        case explosion: ExplosionEffect if explosion.parent contains explode => explosion
+        case explosion: ExplosionLocationEffect if explosion.parent contains explode => explosion
       }
       val targets = explosions flatMap (_.targets(s))
 

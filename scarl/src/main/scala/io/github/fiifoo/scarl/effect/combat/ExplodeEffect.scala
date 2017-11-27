@@ -5,7 +5,6 @@ import io.github.fiifoo.scarl.core.effect.{Effect, EffectResult}
 import io.github.fiifoo.scarl.core.entity.LocatableId
 import io.github.fiifoo.scarl.core.mutation.RemovableEntityMutation
 import io.github.fiifoo.scarl.core.{Location, State}
-import io.github.fiifoo.scarl.geometry.{Line, Obstacle, Shape}
 
 case class ExplodeEffect(explosive: LocatableId,
                          location: Location,
@@ -14,13 +13,9 @@ case class ExplodeEffect(explosive: LocatableId,
                         ) extends Effect {
 
   def apply(s: State): EffectResult = {
-    val obstacle = Obstacle.explosion(s) _
-    val locations = Shape.circle(location, stats.radius) filterNot
-      (Line(location, _).exists(obstacle(_).isDefined))
-
     EffectResult(
       RemovableEntityMutation(explosive),
-      (locations map (ExplosionEffect(explosive, _, stats, Some(this)))).toList
+      ExplosionEffect(explosive, location, stats, Some(this)),
     )
   }
 }

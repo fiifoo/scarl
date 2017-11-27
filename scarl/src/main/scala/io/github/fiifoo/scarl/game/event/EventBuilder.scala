@@ -43,8 +43,9 @@ class EventBuilder(s: State, player: CreatureId, fov: Set[Location]) {
       case e: DropItemEffect => build(e) map GenericEvent
       case e: EquipItemEffect => build(e) map GenericEvent
       case e: ExplodeEffect => build(e) map GenericEvent
-      case e: ExplosionEffect => build(e)
+      case e: ExplosionEffect => build(e) map GenericEvent
       case e: ExplosionHitEffect => build(e)
+      case e: ExplosionLocationEffect => build(e)
       case e: ExplosionMissEffect => build(e) map GenericEvent
       case e: GainLevelEffect => build(e) map GenericEvent
       case e: HealEffect => build(e) map GenericEvent
@@ -215,9 +216,9 @@ class EventBuilder(s: State, player: CreatureId, fov: Set[Location]) {
     }
   }
 
-  private def build(effect: ExplosionEffect): Option[Event] = {
-    if (fov contains effect.location) {
-      Some(ExplosionEvent(effect.location))
+  private def build(effect: ExplosionEffect): Option[String] = {
+    if (!(fov contains effect.location)) {
+      Some("You hear sound of explosion.")
     } else {
       None
     }
@@ -241,6 +242,14 @@ class EventBuilder(s: State, player: CreatureId, fov: Set[Location]) {
     }
 
     message map (HitEvent(effect.target, effect.location, _))
+  }
+
+  private def build(effect: ExplosionLocationEffect): Option[Event] = {
+    if (fov contains effect.location) {
+      Some(ExplosionEvent(effect.location))
+    } else {
+      None
+    }
   }
 
   private def build(effect: ExplosionMissEffect): Option[String] = {
