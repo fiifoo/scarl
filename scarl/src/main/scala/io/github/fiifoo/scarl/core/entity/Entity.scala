@@ -125,6 +125,7 @@ case class Terrain(id: TerrainId,
 case class Wall(id: WallId,
                 kind: WallKindId,
                 location: Location,
+                hardness: Option[Int] = None,
                ) extends Entity with Locatable {
 
   def setLocation(location: Location): Wall = copy(location = location)

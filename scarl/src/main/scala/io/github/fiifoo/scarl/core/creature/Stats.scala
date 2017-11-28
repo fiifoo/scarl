@@ -17,9 +17,9 @@ object Stats {
     }
   }
 
-  case class Explosive(attack: Int = 0, damage: Int = 0, radius: Int = 0) {
+  case class Explosive(attack: Int = 0, damage: Int = 0, radius: Int = 0, blast: Int = 0) {
     def add(x: Explosive): Explosive = {
-      copy(attack + x.attack, damage + x.damage, radius + x.radius)
+      copy(attack + x.attack, damage + x.damage, radius + x.radius, blast + x.blast)
     }
   }
 

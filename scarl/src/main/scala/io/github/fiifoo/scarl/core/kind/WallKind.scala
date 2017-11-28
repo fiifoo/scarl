@@ -8,7 +8,8 @@ import io.github.fiifoo.scarl.core.{IdSeq, Location, State}
 case class WallKind(id: WallKindId,
                     name: String,
                     display: Char,
-                    color: String
+                    color: String,
+                    hardness: Option[Int] = None,
                    ) extends Kind {
 
   def toLocation(s: State, idSeq: IdSeq, location: Location): Result[Wall] = {
@@ -17,7 +18,8 @@ case class WallKind(id: WallKindId,
     val wall = Wall(
       id = WallId(nextId),
       kind = id,
-      location = location
+      location = location,
+      hardness = hardness,
     )
 
     Result(

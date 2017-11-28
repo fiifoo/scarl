@@ -3,9 +3,11 @@ package io.github.fiifoo.scarl.effect.combat
 import io.github.fiifoo.scarl.core.Selectors.getCreatureStats
 import io.github.fiifoo.scarl.core.creature.Stats.Explosive
 import io.github.fiifoo.scarl.core.effect.{Effect, EffectResult}
-import io.github.fiifoo.scarl.core.entity.{CreatureId, LocatableId}
+import io.github.fiifoo.scarl.core.entity.{CreatureId, EntityId, LocatableId}
 import io.github.fiifoo.scarl.core.mutation.RngMutation
 import io.github.fiifoo.scarl.core.{Location, Selectors, State}
+import io.github.fiifoo.scarl.effect.area.RemoveEntityEffect
+import io.github.fiifoo.scarl.geometry.Obstacle
 import io.github.fiifoo.scarl.rule.AttackRule
 import io.github.fiifoo.scarl.rule.AttackRule.{Attacker, Defender}
 
@@ -19,10 +21,12 @@ case class ExplosionLocationEffect(source: LocatableId,
 
   def apply(s: State): EffectResult = {
     val (random, rng) = s.rng()
+    val effects = (targets(s) map attack(s, random)).toList
+    val destroyEffect = Obstacle.explosion(s)(location) map destroy(s)
 
     EffectResult(
       RngMutation(rng),
-      (targets(s) map attack(s, random)).toList
+      destroyEffect map (_ :: effects) getOrElse effects,
     )
   }
 
@@ -45,5 +49,14 @@ case class ExplosionLocationEffect(source: LocatableId,
     } else {
       ExplosionMissEffect(source, target, location, Some(this))
     }
+  }
+
+  private def destroy(state: State)(target: EntityId): Effect = {
+    RemoveEntityEffect(
+      target = target,
+      location = Some(location),
+      description = None,
+      parent = Some(this),
+    )
   }
 }
