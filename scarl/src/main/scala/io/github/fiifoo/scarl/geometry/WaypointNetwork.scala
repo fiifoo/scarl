@@ -13,14 +13,20 @@ object WaypointNetwork {
   type Waypoint = Location
 
   def apply(s: State): WaypointNetwork = {
-    def blocked(location: Location): Boolean = {
-      getLocationEntities(s)(location) exists (_.isInstanceOf[WallId])
-    }
-
     val sectors = Sector.sectors(s)
-    val calculate = calculateSector(blocked) _
+    val calculate = calculateSector(blocked(s)) _
 
     sectors.foldLeft(WaypointNetwork())(calculate)
+  }
+
+  def recalculate(s: State, network: WaypointNetwork, locations: Set[Location]): WaypointNetwork = {
+    val sectors = locations map Sector(s.area.sectorSize)
+
+    (sectors foldLeft network) ((network, sector) => {
+      val cleared = clearSector(network, sector)
+
+      calculateSector(blocked(s))(cleared, sector)
+    })
   }
 
   def isNearbyLocation(s: State, a: Location, b: Location): Boolean = {
@@ -44,6 +50,10 @@ object WaypointNetwork {
     waypoints flatMap network.waypointLocations flatMap getLocationEntities(s) collect {
       case c: CreatureId => c
     }
+  }
+
+  private def blocked(s: State): Location => Boolean = {
+    location => getLocationEntities(s)(location) exists (_.isInstanceOf[WallId])
   }
 
   private def calculateSector(blocked: Location => Boolean)
@@ -147,6 +157,36 @@ object WaypointNetwork {
       locationWaypoint = network.locationWaypoint + (location -> waypoint),
       waypointLocations = network.waypointLocations + (waypoint -> area)
     )
+  }
+
+  private def clearSector(network: WaypointNetwork, sector: Sector): WaypointNetwork = {
+    val locations = sector.locations
+    val waypoints = network.waypoints intersect locations
+
+    network.copy(
+      waypoints = network.waypoints -- waypoints,
+      adjacentWaypoints = clearAdjacentWaypoints(network, waypoints),
+      locationWaypoint = network.locationWaypoint -- locations,
+      waypointLocations = network.waypointLocations -- waypoints,
+    )
+  }
+
+  private def clearAdjacentWaypoints(network: WaypointNetwork, waypoints: Set[Waypoint]): Map[Waypoint, Set[Waypoint]] = {
+    val cleared = (waypoints foldLeft network.adjacentWaypoints) ((adjacentWaypoints, waypoint) => {
+      adjacentWaypoints.get(waypoint) map (adjacent => {
+        (adjacent foldLeft adjacentWaypoints) ((adjacentWaypoints, adjacentWaypoint) => {
+          val next = adjacentWaypoints(adjacentWaypoint) - waypoint
+
+          if (next.isEmpty) {
+            adjacentWaypoints - adjacentWaypoint
+          } else {
+            adjacentWaypoints + (adjacentWaypoint -> next)
+          }
+        })
+      }) getOrElse adjacentWaypoints
+    })
+
+    cleared -- waypoints
   }
 }
 

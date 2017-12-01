@@ -11,13 +11,13 @@ case class FinalizeTickMutation() extends Mutation {
     if (next.tmp.removableEntities.nonEmpty) {
       next = RemoveEntitiesMutation()(next)
     }
-    if (next.tmp.waypointNetworkChanged) {
+    if (next.tmp.waypointNetworkChanged.nonEmpty) {
       next = next.copy(
         cache = next.cache.copy(
-          waypointNetwork = WaypointNetworkCacheMutation()(next, next.cache.waypointNetwork)
+          waypointNetwork = WaypointNetworkCacheMutation(next.tmp.waypointNetworkChanged)(next, next.cache.waypointNetwork)
         ),
         tmp = next.tmp.copy(
-          waypointNetworkChanged = false,
+          waypointNetworkChanged = Set(),
         ),
       )
     }

@@ -22,9 +22,9 @@ case class NewEntityMutation(entity: Entity) extends Mutation {
       s.simulation
     }
 
-    val tmp = entity.id match {
-      case _: WallId => s.tmp.copy(
-        waypointNetworkChanged = true,
+    val tmp = entity match {
+      case wall: Wall => s.tmp.copy(
+        waypointNetworkChanged = s.tmp.waypointNetworkChanged + wall.location,
       )
       case _ => s.tmp
     }

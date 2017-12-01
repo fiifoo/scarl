@@ -4,7 +4,7 @@ import io.github.fiifoo.scarl.core.{Location, State}
 
 object Sector {
 
-  def apply(location: Location, size: Int): Sector = {
+  def apply(size: Int)(location: Location): Sector = {
     val x = ((location.x: Double) / size).floor.toInt
     val y = ((location.y: Double) / size).floor.toInt
 

@@ -23,8 +23,8 @@ case class RemovableEntityMutation(id: EntityId) extends Mutation {
     })
 
     result = id match {
-      case _: WallId => result.copy(tmp = result.tmp.copy(
-        waypointNetworkChanged = true,
+      case wall: WallId => result.copy(tmp = result.tmp.copy(
+        waypointNetworkChanged = result.tmp.waypointNetworkChanged + wall(s).location,
       ))
       case _ => result
     }
