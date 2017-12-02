@@ -1,5 +1,6 @@
 package io.github.fiifoo.scarl.status
 
+import io.github.fiifoo.scarl.core.Time.Tick
 import io.github.fiifoo.scarl.core.effect.{Effect, TickEffect}
 import io.github.fiifoo.scarl.core.entity._
 import io.github.fiifoo.scarl.core.{Selectors, State}
@@ -7,14 +8,14 @@ import io.github.fiifoo.scarl.effect.area.ExplosiveTimerEffect
 import io.github.fiifoo.scarl.effect.combat.ExplodeEffect
 
 case class TimedExplosiveStatus(id: ActiveStatusId,
-                                tick: Int,
+                                tick: Tick,
                                 target: ContainerId,
-                                explodeAt: Int,
+                                explodeAt: Tick,
                                ) extends ActiveStatus {
 
   val interval = 100
 
-  def setTick(tick: Int): TimedExplosiveStatus = copy(tick = tick)
+  def setTick(tick: Tick): TimedExplosiveStatus = copy(tick = tick)
 
   def apply(s: State): List[Effect] = {
     val tickEffect = TickEffect(id, interval)

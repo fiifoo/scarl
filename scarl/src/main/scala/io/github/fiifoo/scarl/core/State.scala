@@ -1,5 +1,6 @@
 package io.github.fiifoo.scarl.core
 
+import io.github.fiifoo.scarl.core.Time.Tick
 import io.github.fiifoo.scarl.core.action.Tactic
 import io.github.fiifoo.scarl.core.communication.CommunicationId
 import io.github.fiifoo.scarl.core.creature._
@@ -56,6 +57,6 @@ case class State(area: State.Area = State.Area(),
                  rng: Rng = Rng(1),
                  simulation: State.Simulation = State.Simulation(),
                  tactics: Map[CreatureId, Tactic] = Map(),
-                 tick: Int = 1,
+                 tick: Tick = 1,
                  tmp: State.Temporary = State.Temporary(),
                 )

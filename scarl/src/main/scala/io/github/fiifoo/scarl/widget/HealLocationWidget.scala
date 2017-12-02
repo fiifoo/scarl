@@ -1,6 +1,7 @@
 package io.github.fiifoo.scarl.widget
 
 import io.github.fiifoo.scarl.core.State
+import io.github.fiifoo.scarl.core.Time.Tick
 import io.github.fiifoo.scarl.core.entity._
 import io.github.fiifoo.scarl.core.kind.{ItemKindId, WidgetKind, WidgetKindId}
 import io.github.fiifoo.scarl.status.HealLocationStatus
@@ -8,8 +9,8 @@ import io.github.fiifoo.scarl.status.HealLocationStatus
 case class HealLocationWidget(id: WidgetKindId,
                               item: ItemKindId,
                               amount: Int,
-                              interval: Int,
-                              duration: Option[Int],
+                              interval: Tick,
+                              duration: Option[Tick],
                               transformTo: Option[WidgetKindId],
                               transformDescription: Option[String] = None
                              ) extends WidgetKind {
@@ -19,8 +20,8 @@ case class HealLocationWidget(id: WidgetKindId,
       id = ActiveStatusId(id),
       tick = s.tick,
       target = target,
-      amount: Int,
-      interval: Int,
+      amount,
+      interval,
       expireAt = duration map (s.tick + _),
       transformTo = transformTo,
       transformDescription = transformDescription

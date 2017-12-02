@@ -1,5 +1,6 @@
 package io.github.fiifoo.scarl.core.entity
 
+import io.github.fiifoo.scarl.core.Time.Tick
 import io.github.fiifoo.scarl.core.action.Behavior
 import io.github.fiifoo.scarl.core.creature.Stats.Explosive
 import io.github.fiifoo.scarl.core.creature.{Character, CreaturePower, FactionId, Missile, Party, Stats}
@@ -14,9 +15,9 @@ sealed trait Entity {
 
 sealed trait Actor extends Entity {
   val id: ActorId
-  val tick: Int
+  val tick: Tick
 
-  def setTick(tick: Int): Actor
+  def setTick(tick: Tick): Actor
 }
 
 sealed trait Locatable extends Entity {
@@ -36,7 +37,7 @@ trait ActiveStatus extends Entity with Status with Actor {
 
   def apply(s: State): List[Effect]
 
-  def setTick(tick: Int): ActiveStatus
+  def setTick(tick: Tick): ActiveStatus
 }
 
 trait PassiveStatus extends Entity with Status {
@@ -65,7 +66,7 @@ case class Creature(id: CreatureId,
                     party: Party,
                     behavior: Behavior,
                     location: Location,
-                    tick: Int,
+                    tick: Tick,
                     damage: Int,
                     stats: Stats,
                     dead: Boolean = false,
@@ -79,7 +80,7 @@ case class Creature(id: CreatureId,
 
   def setLocation(location: Location): Creature = copy(location = location)
 
-  def setTick(tick: Int): Creature = copy(tick = tick)
+  def setTick(tick: Tick): Creature = copy(tick = tick)
 
   def leader: Option[CreatureId] = {
     if (party.leader == id) {
