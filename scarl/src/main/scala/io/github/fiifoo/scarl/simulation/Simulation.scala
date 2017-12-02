@@ -2,18 +2,15 @@ package io.github.fiifoo.scarl.simulation
 
 import io.github.fiifoo.scarl.core.action.Action
 import io.github.fiifoo.scarl.core.mutation.FinalizeTickMutation
-import io.github.fiifoo.scarl.core.{RealityBubble, State}
+import io.github.fiifoo.scarl.core.{RealityBubble, State, Time}
 
 import scala.annotation.tailrec
 
 class Simulation[T](listener: SimulationListener[T],
                     turnLimit: Int
                    ) {
-
-  val turnTime: Int = 100
-
   def apply(state: SimulationState[T], fixedAction: Option[Action] = None): SimulationState[T] = {
-    val timeLimit = state.instance.tick + (turnLimit * turnTime)
+    val timeLimit = state.instance.tick + (turnLimit * Time.turn)
 
     run(
       state.copy(instance = state.instance.copy(simulation = State.Simulation(running = true))),

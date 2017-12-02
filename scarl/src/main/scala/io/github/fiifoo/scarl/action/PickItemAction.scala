@@ -7,11 +7,9 @@ import io.github.fiifoo.scarl.core.entity.{CreatureId, ItemId}
 import io.github.fiifoo.scarl.effect.interact.PickItemEffect
 
 case class PickItemAction(item: ItemId) extends Action {
-  val cost = 100
-
   def apply(s: State, actor: CreatureId): List[Effect] = {
     List(
-      TickEffect(actor, cost),
+      TickEffect(actor),
       PickItemEffect(item, actor, actor(s).location)
     )
   }

@@ -7,11 +7,9 @@ import io.github.fiifoo.scarl.core.entity.CreatureId
 import io.github.fiifoo.scarl.effect.interact.UseCreatureEffect
 
 case class UseCreatureAction(target: CreatureId) extends Action {
-  val cost = 100
-
   def apply(s: State, actor: CreatureId): List[Effect] = {
     List(
-      TickEffect(actor, cost),
+      TickEffect(actor),
       UseCreatureEffect(actor, target, actor(s).location)
     )
   }

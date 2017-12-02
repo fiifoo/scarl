@@ -7,13 +7,11 @@ import io.github.fiifoo.scarl.core.{Selectors, State}
 import io.github.fiifoo.scarl.effect.combat.ExplodeEffect
 
 case object ExplodeAction extends Action {
-  val cost = 100
-
   def apply(s: State, actor: CreatureId): List[Effect] = {
     val explosive = Selectors.getCreatureStats(s)(actor).explosive
 
     List(
-      TickEffect(actor, cost),
+      TickEffect(actor),
       ExplodeEffect(actor, actor(s).location, explosive)
     )
   }

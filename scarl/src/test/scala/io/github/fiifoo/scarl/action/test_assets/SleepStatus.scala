@@ -11,7 +11,6 @@ case class SleepStatus(id: ActiveStatusId,
                        tick: Tick,
                        target: CreatureId
                       ) extends ActiveStatus {
-  val interval = 100
   val heal = 1
 
   def setTick(tick: Tick): SleepStatus = copy(tick = tick)
@@ -20,7 +19,7 @@ case class SleepStatus(id: ActiveStatusId,
     val damage = target(s).damage
 
     List(
-      Some(TickEffect(id, interval)),
+      Some(TickEffect(id)),
       if (damage > 0) Some(HealEffect(target, heal, target(s).location)) else None,
       if (damage - heal <= 0) Some(RemoveEntityEffect(id)) else None
     ).flatten

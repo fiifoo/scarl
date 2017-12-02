@@ -7,11 +7,9 @@ import io.github.fiifoo.scarl.core.entity.CreatureId
 import io.github.fiifoo.scarl.effect.combat.StrikeEffect
 
 case class AttackAction(target: CreatureId) extends Action {
-  val cost = 100
-
   def apply(s: State, actor: CreatureId): List[Effect] = {
     List(
-      TickEffect(actor, cost),
+      TickEffect(actor),
       StrikeEffect(actor, target)
     )
   }

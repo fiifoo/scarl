@@ -13,7 +13,6 @@ case class BurnStatus(id: ActiveStatusId,
                       target: LocatableId,
                       expires: Option[Tick] = None
                      ) extends ActiveStatus {
-  val interval = 100
   val damage = 1
 
   def setTick(tick: Tick): BurnStatus = copy(tick = tick)
@@ -25,7 +24,7 @@ case class BurnStatus(id: ActiveStatusId,
     }
 
     if (expires.forall(_ > tick)) {
-      TickEffect(id, interval) :: effects
+      TickEffect(id) :: effects
     } else {
       RemoveEntityEffect(id) :: effects
     }

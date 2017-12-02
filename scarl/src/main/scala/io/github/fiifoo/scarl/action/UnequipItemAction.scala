@@ -7,11 +7,9 @@ import io.github.fiifoo.scarl.core.entity.{CreatureId, ItemId}
 import io.github.fiifoo.scarl.effect.interact.UnequipItemEffect
 
 case class UnequipItemAction(item: ItemId) extends Action {
-  val cost = 100
-
   def apply(s: State, actor: CreatureId): List[Effect] = {
     List(
-      TickEffect(actor, cost),
+      TickEffect(actor),
       UnequipItemEffect(actor, item, actor(s).location)
     )
   }

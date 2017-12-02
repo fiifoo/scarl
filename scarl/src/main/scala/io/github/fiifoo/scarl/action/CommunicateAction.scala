@@ -8,11 +8,9 @@ import io.github.fiifoo.scarl.core.entity.CreatureId
 import io.github.fiifoo.scarl.effect.interact.CommunicateEffect
 
 case class CommunicateAction(target: CreatureId, communication: Option[CommunicationId] = None) extends Action {
-  val cost = 100
-
   def apply(s: State, actor: CreatureId): List[Effect] = {
     List(
-      TickEffect(actor, cost),
+      TickEffect(actor),
       CommunicateEffect(actor, target, communication)
     )
   }
