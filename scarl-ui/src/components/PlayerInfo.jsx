@@ -4,7 +4,18 @@ import React from 'react'
 
 const addStats = (a, b) => {
     return {
-        health: a.health + b.health,
+        health: {
+            max: a.health.max + b.health.max,
+            regen: a.health.regen + b.health.regen,
+        },
+        energy: {
+            max: a.energy.max + b.energy.max,
+            regen: a.energy.regen + b.energy.regen,
+        },
+        materials: {
+            max: a.materials.max + b.materials.max,
+            regen: a.materials.regen + b.materials.regen,
+        },
         melee: {
             attack: a.melee.attack + b.melee.attack,
             damage: a.melee.damage + b.melee.damage,
@@ -26,7 +37,9 @@ const PlayerInfo = ({player}) => {
 
     return (
         <div className="player-info">
-            <div>Health <b>{stats.health - player.creature.damage}/{stats.health}</b></div>
+            <div>Health <b>{stats.health.max - Math.floor(player.creature.damage)}/{stats.health.max}</b></div>
+            <div>Energy <b>{Math.floor(player.creature.energy)}/{stats.energy.max}</b></div>
+            <div>Materials <b>{Math.floor(player.creature.materials)}/{stats.materials.max}</b></div>
             <div>Level {player.creature.character.level}</div>
             <div>Experience {player.creature.character.experience}</div>
             <div>Attack {stats.melee.attack}</div>

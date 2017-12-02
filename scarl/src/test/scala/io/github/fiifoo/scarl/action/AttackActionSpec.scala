@@ -12,8 +12,8 @@ class AttackActionSpec extends FlatSpec with Matchers {
   "AttackAction" should "damage creatures" in {
     var s = TestCreatureFactory.generate(State(), 2, TestCreatureFactory.create(behavior = TestAttackTactic))
 
-    var damage1 = 0
-    var damage2 = 0
+    var damage1 = 0.0
+    var damage2 = 0.0
 
     s = RealityBubble(s).get.state
     CreatureId(1)(s).damage should ===(damage1)

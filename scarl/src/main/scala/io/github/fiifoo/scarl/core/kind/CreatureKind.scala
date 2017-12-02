@@ -44,7 +44,6 @@ case class CreatureKind(id: CreatureKindId,
       behavior = behavior,
       location = location,
       tick = s.tick,
-      damage = 0,
       stats = stats,
       owner = owner,
 

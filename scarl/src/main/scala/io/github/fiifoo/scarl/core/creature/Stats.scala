@@ -5,6 +5,24 @@ import io.github.fiifoo.scarl.core.kind.CreatureKindId
 
 object Stats {
 
+  case class Health(max: Int = 0, regen: Double = 0) {
+    def add(x: Health): Health = {
+      copy(max + x.max, regen + x.regen)
+    }
+  }
+
+  case class Energy(max: Int = 0, regen: Double = 0) {
+    def add(x: Energy): Energy = {
+      copy(max + x.max, regen + x.regen)
+    }
+  }
+
+  case class Materials(max: Int = 0, regen: Double = 0) {
+    def add(x: Materials): Materials = {
+      copy(max + x.max, regen + x.regen)
+    }
+  }
+
   case class Melee(attack: Int = 0, damage: Int = 0) {
     def add(x: Melee): Melee = {
       copy(attack + x.attack, damage + x.damage)
@@ -38,7 +56,9 @@ object Stats {
 }
 
 case class Stats(speed: Double = 1,
-                 health: Int = 0,
+                 health: Health = Health(),
+                 energy: Energy = Energy(),
+                 materials: Materials = Materials(),
                  defence: Int = 0,
                  armor: Int = 0,
                  melee: Melee = Melee(),
@@ -51,7 +71,9 @@ case class Stats(speed: Double = 1,
   def add(x: Stats): Stats = {
     copy(
       speed * x.speed,
-      health + x.health,
+      health.add(x.health),
+      energy.add(x.energy),
+      materials.add(x.materials),
       defence + x.defence,
       armor + x.armor,
       melee.add(x.melee),

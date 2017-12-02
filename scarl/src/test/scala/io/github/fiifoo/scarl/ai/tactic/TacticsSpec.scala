@@ -56,7 +56,7 @@ class TacticsSpec extends FlatSpec with Matchers {
     CreatureId(2)(s).damage should ===(0)
     s = RealityBubble(s).get.state
     CreatureId(1)(s).location should ===(Location(1, 0))
-    CreatureId(2)(s).damage should be > 0
+    CreatureId(2)(s).damage should be > 0.0
 
     s = RealityBubble(s).get.state // other creature
   }

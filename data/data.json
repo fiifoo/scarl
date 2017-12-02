@@ -220,12 +220,23 @@
           "damage" : 0,
           "range" : 0
         },
+        "energy" : {
+          "max" : 0,
+          "regen" : 0
+        },
+        "materials" : {
+          "max" : 0,
+          "regen" : 0
+        },
         "defence" : 20,
         "melee" : {
           "attack" : 20,
           "damage" : 10
         },
-        "health" : 20,
+        "health" : {
+          "max" : 20,
+          "regen" : 0
+        },
         "sight" : {
           "range" : 10
         },
@@ -271,12 +282,23 @@
           "damage" : 5,
           "range" : 2
         },
+        "energy" : {
+          "max" : 0,
+          "regen" : 0
+        },
+        "materials" : {
+          "max" : 0,
+          "regen" : 0
+        },
         "defence" : 15,
         "melee" : {
           "attack" : 10,
           "damage" : 10
         },
-        "health" : 50,
+        "health" : {
+          "max" : 50,
+          "regen" : 0
+        },
         "sight" : {
           "range" : 10
         },
@@ -318,12 +340,23 @@
           "damage" : 0,
           "range" : 0
         },
+        "energy" : {
+          "max" : 0,
+          "regen" : 0
+        },
+        "materials" : {
+          "max" : 0,
+          "regen" : 0
+        },
         "defence" : 10,
         "melee" : {
           "attack" : 10,
           "damage" : 5
         },
-        "health" : 10,
+        "health" : {
+          "max" : 10,
+          "regen" : 0
+        },
         "sight" : {
           "range" : 5
         },
@@ -365,12 +398,23 @@
           "damage" : 5,
           "range" : 5
         },
+        "energy" : {
+          "max" : 0,
+          "regen" : 0
+        },
+        "materials" : {
+          "max" : 0,
+          "regen" : 0
+        },
         "defence" : 10,
         "melee" : {
           "attack" : 10,
           "damage" : 10
         },
-        "health" : 20,
+        "health" : {
+          "max" : 20,
+          "regen" : 0
+        },
         "sight" : {
           "range" : 10
         },
@@ -412,12 +456,23 @@
           "damage" : 10,
           "range" : 5
         },
+        "energy" : {
+          "max" : 0,
+          "regen" : 0
+        },
+        "materials" : {
+          "max" : 0,
+          "regen" : 0
+        },
         "defence" : 20,
         "melee" : {
           "attack" : 20,
           "damage" : 15
         },
-        "health" : 25,
+        "health" : {
+          "max" : 25,
+          "regen" : 0
+        },
         "sight" : {
           "range" : 10
         },
@@ -459,12 +514,23 @@
           "damage" : 15,
           "range" : 5
         },
+        "energy" : {
+          "max" : 0,
+          "regen" : 0
+        },
+        "materials" : {
+          "max" : 0,
+          "regen" : 0
+        },
         "defence" : 30,
         "melee" : {
           "attack" : 30,
           "damage" : 20
         },
-        "health" : 30,
+        "health" : {
+          "max" : 30,
+          "regen" : 0
+        },
         "sight" : {
           "range" : 10
         },
@@ -506,12 +572,23 @@
           "damage" : 10,
           "range" : 5
         },
+        "energy" : {
+          "max" : 0,
+          "regen" : 0
+        },
+        "materials" : {
+          "max" : 0,
+          "regen" : 0
+        },
         "defence" : 10,
         "melee" : {
           "attack" : 10,
           "damage" : 10
         },
-        "health" : 10,
+        "health" : {
+          "max" : 10,
+          "regen" : 0
+        },
         "sight" : {
           "range" : 10
         },
@@ -553,12 +630,23 @@
           "damage" : 15,
           "range" : 5
         },
+        "energy" : {
+          "max" : 0,
+          "regen" : 0
+        },
+        "materials" : {
+          "max" : 0,
+          "regen" : 0
+        },
         "defence" : 20,
         "melee" : {
           "attack" : 20,
           "damage" : 15
         },
-        "health" : 15,
+        "health" : {
+          "max" : 15,
+          "regen" : 0
+        },
         "sight" : {
           "range" : 10
         },
@@ -600,12 +688,23 @@
           "damage" : 0,
           "range" : 0
         },
+        "energy" : {
+          "max" : 0,
+          "regen" : 0
+        },
+        "materials" : {
+          "max" : 0,
+          "regen" : 0
+        },
         "defence" : 10,
         "melee" : {
           "attack" : 10,
           "damage" : 5
         },
-        "health" : 10,
+        "health" : {
+          "max" : 10,
+          "regen" : 0
+        },
         "sight" : {
           "range" : 5
         },
@@ -657,12 +756,23 @@
           "damage" : 10,
           "range" : 5
         },
+        "energy" : {
+          "max" : 0,
+          "regen" : 0
+        },
+        "materials" : {
+          "max" : 0,
+          "regen" : 0
+        },
         "defence" : 20,
         "melee" : {
           "attack" : 20,
           "damage" : 10
         },
-        "health" : 10,
+        "health" : {
+          "max" : 10,
+          "regen" : 0
+        },
         "sight" : {
           "range" : 10
         },
@@ -704,12 +814,23 @@
           "damage" : 0,
           "range" : 0
         },
+        "energy" : {
+          "max" : 0,
+          "regen" : 0
+        },
+        "materials" : {
+          "max" : 0,
+          "regen" : 0
+        },
         "defence" : 10,
         "melee" : {
           "attack" : 10,
           "damage" : 5
         },
-        "health" : 10,
+        "health" : {
+          "max" : 10,
+          "regen" : 0
+        },
         "sight" : {
           "range" : 5
         },
@@ -751,12 +872,23 @@
           "damage" : 20,
           "range" : 5
         },
+        "energy" : {
+          "max" : 0,
+          "regen" : 0
+        },
+        "materials" : {
+          "max" : 0,
+          "regen" : 0
+        },
         "defence" : 30,
         "melee" : {
           "attack" : 30,
           "damage" : 20
         },
-        "health" : 20,
+        "health" : {
+          "max" : 20,
+          "regen" : 0
+        },
         "sight" : {
           "range" : 10
         },
@@ -808,12 +940,23 @@
           "damage" : 15,
           "range" : 5
         },
+        "energy" : {
+          "max" : 0,
+          "regen" : 0
+        },
+        "materials" : {
+          "max" : 0,
+          "regen" : 0
+        },
         "defence" : 30,
         "melee" : {
           "attack" : 30,
           "damage" : 15
         },
-        "health" : 15,
+        "health" : {
+          "max" : 15,
+          "regen" : 0
+        },
         "sight" : {
           "range" : 10
         },
@@ -865,12 +1008,23 @@
           "damage" : 20,
           "range" : 5
         },
+        "energy" : {
+          "max" : 0,
+          "regen" : 0
+        },
+        "materials" : {
+          "max" : 0,
+          "regen" : 0
+        },
         "defence" : 40,
         "melee" : {
           "attack" : 40,
           "damage" : 20
         },
-        "health" : 20,
+        "health" : {
+          "max" : 20,
+          "regen" : 0
+        },
         "sight" : {
           "range" : 10
         },
@@ -912,12 +1066,23 @@
           "damage" : 0,
           "range" : 0
         },
+        "energy" : {
+          "max" : 0,
+          "regen" : 0
+        },
+        "materials" : {
+          "max" : 0,
+          "regen" : 0
+        },
         "defence" : 10,
         "melee" : {
           "attack" : 10,
           "damage" : 10
         },
-        "health" : 20,
+        "health" : {
+          "max" : 20,
+          "regen" : 0
+        },
         "sight" : {
           "range" : 10
         },
@@ -959,12 +1124,23 @@
           "damage" : 0,
           "range" : 0
         },
+        "energy" : {
+          "max" : 0,
+          "regen" : 0
+        },
+        "materials" : {
+          "max" : 0,
+          "regen" : 0
+        },
         "defence" : 20,
         "melee" : {
           "attack" : 20,
           "damage" : 15
         },
-        "health" : 25,
+        "health" : {
+          "max" : 25,
+          "regen" : 0
+        },
         "sight" : {
           "range" : 10
         },
@@ -1011,12 +1187,23 @@
           "damage" : 0,
           "range" : 0
         },
+        "energy" : {
+          "max" : 0,
+          "regen" : 0
+        },
+        "materials" : {
+          "max" : 0,
+          "regen" : 0
+        },
         "defence" : 100,
         "melee" : {
           "attack" : 0,
           "damage" : 0
         },
-        "health" : 10,
+        "health" : {
+          "max" : 10,
+          "regen" : 0
+        },
         "sight" : {
           "range" : 0
         },
@@ -1058,12 +1245,23 @@
           "damage" : 0,
           "range" : 0
         },
+        "energy" : {
+          "max" : 0,
+          "regen" : 0
+        },
+        "materials" : {
+          "max" : 0,
+          "regen" : 0
+        },
         "defence" : 30,
         "melee" : {
           "attack" : 30,
           "damage" : 20
         },
-        "health" : 30,
+        "health" : {
+          "max" : 30,
+          "regen" : 0
+        },
         "sight" : {
           "range" : 10
         },
@@ -1110,12 +1308,23 @@
           "damage" : 0,
           "range" : 0
         },
+        "energy" : {
+          "max" : 0,
+          "regen" : 0
+        },
+        "materials" : {
+          "max" : 0,
+          "regen" : 0
+        },
         "defence" : 100,
         "melee" : {
           "attack" : 0,
           "damage" : 0
         },
-        "health" : 10,
+        "health" : {
+          "max" : 10,
+          "regen" : 0
+        },
         "sight" : {
           "range" : 0
         },
@@ -1162,12 +1371,23 @@
           "damage" : 0,
           "range" : 0
         },
+        "energy" : {
+          "max" : 0,
+          "regen" : 0
+        },
+        "materials" : {
+          "max" : 0,
+          "regen" : 0
+        },
         "defence" : 100,
         "melee" : {
           "attack" : 0,
           "damage" : 0
         },
-        "health" : 10,
+        "health" : {
+          "max" : 10,
+          "regen" : 0
+        },
         "sight" : {
           "range" : 0
         },
@@ -1209,12 +1429,23 @@
           "damage" : 0,
           "range" : 0
         },
+        "energy" : {
+          "max" : 0,
+          "regen" : 0
+        },
+        "materials" : {
+          "max" : 0,
+          "regen" : 0
+        },
         "defence" : 10,
         "melee" : {
           "attack" : 10,
           "damage" : 20
         },
-        "health" : 30,
+        "health" : {
+          "max" : 30,
+          "regen" : 0
+        },
         "sight" : {
           "range" : 10
         },
@@ -1256,12 +1487,23 @@
           "damage" : 0,
           "range" : 0
         },
+        "energy" : {
+          "max" : 0,
+          "regen" : 0
+        },
+        "materials" : {
+          "max" : 0,
+          "regen" : 0
+        },
         "defence" : 20,
         "melee" : {
           "attack" : 20,
           "damage" : 25
         },
-        "health" : 40,
+        "health" : {
+          "max" : 40,
+          "regen" : 0
+        },
         "sight" : {
           "range" : 10
         },
@@ -1303,12 +1545,23 @@
           "damage" : 0,
           "range" : 0
         },
+        "energy" : {
+          "max" : 0,
+          "regen" : 0
+        },
+        "materials" : {
+          "max" : 0,
+          "regen" : 0
+        },
         "defence" : 30,
         "melee" : {
           "attack" : 30,
           "damage" : 30
         },
-        "health" : 50,
+        "health" : {
+          "max" : 50,
+          "regen" : 0
+        },
         "sight" : {
           "range" : 10
         },
@@ -1350,12 +1603,23 @@
           "damage" : 10,
           "range" : 7
         },
+        "energy" : {
+          "max" : 0,
+          "regen" : 0
+        },
+        "materials" : {
+          "max" : 0,
+          "regen" : 0
+        },
         "defence" : 10,
         "melee" : {
           "attack" : 20,
           "damage" : 10
         },
-        "health" : 10,
+        "health" : {
+          "max" : 10,
+          "regen" : 0
+        },
         "sight" : {
           "range" : 10
         },
@@ -1397,12 +1661,23 @@
           "damage" : 15,
           "range" : 7
         },
+        "energy" : {
+          "max" : 0,
+          "regen" : 0
+        },
+        "materials" : {
+          "max" : 0,
+          "regen" : 0
+        },
         "defence" : 20,
         "melee" : {
           "attack" : 35,
           "damage" : 15
         },
-        "health" : 15,
+        "health" : {
+          "max" : 15,
+          "regen" : 0
+        },
         "sight" : {
           "range" : 10
         },
@@ -1444,12 +1719,23 @@
           "damage" : 20,
           "range" : 7
         },
+        "energy" : {
+          "max" : 0,
+          "regen" : 0
+        },
+        "materials" : {
+          "max" : 0,
+          "regen" : 0
+        },
         "defence" : 30,
         "melee" : {
           "attack" : 50,
           "damage" : 20
         },
-        "health" : 20,
+        "health" : {
+          "max" : 20,
+          "regen" : 0
+        },
         "sight" : {
           "range" : 10
         },
@@ -1486,12 +1772,23 @@
             "damage" : 0,
             "range" : 0
           },
+          "energy" : {
+            "max" : 0,
+            "regen" : 0
+          },
+          "materials" : {
+            "max" : 0,
+            "regen" : 0
+          },
           "defence" : 1,
           "melee" : {
             "attack" : 0,
             "damage" : 0
           },
-          "health" : 0,
+          "health" : {
+            "max" : 0,
+            "regen" : 0
+          },
           "sight" : {
             "range" : 0
           },
@@ -1529,12 +1826,23 @@
             "damage" : 0,
             "range" : 0
           },
+          "energy" : {
+            "max" : 0,
+            "regen" : 0
+          },
+          "materials" : {
+            "max" : 0,
+            "regen" : 0
+          },
           "defence" : 1,
           "melee" : {
             "attack" : 0,
             "damage" : 0
           },
-          "health" : 0,
+          "health" : {
+            "max" : 0,
+            "regen" : 0
+          },
           "sight" : {
             "range" : 0
           },
@@ -1563,12 +1871,23 @@
             "damage" : 0,
             "range" : 0
           },
+          "energy" : {
+            "max" : 0,
+            "regen" : 0
+          },
+          "materials" : {
+            "max" : 0,
+            "regen" : 0
+          },
           "defence" : 0,
           "melee" : {
             "attack" : 0,
             "damage" : 0
           },
-          "health" : 0,
+          "health" : {
+            "max" : 0,
+            "regen" : 0
+          },
           "sight" : {
             "range" : 0
           },
@@ -1614,12 +1933,23 @@
             "damage" : 0,
             "range" : 0
           },
+          "energy" : {
+            "max" : 0,
+            "regen" : 0
+          },
+          "materials" : {
+            "max" : 0,
+            "regen" : 0
+          },
           "defence" : 2,
           "melee" : {
             "attack" : 0,
             "damage" : 0
           },
-          "health" : 0,
+          "health" : {
+            "max" : 0,
+            "regen" : 0
+          },
           "sight" : {
             "range" : 0
           },
@@ -1657,12 +1987,23 @@
             "damage" : 0,
             "range" : 0
           },
+          "energy" : {
+            "max" : 0,
+            "regen" : 0
+          },
+          "materials" : {
+            "max" : 0,
+            "regen" : 0
+          },
           "defence" : 2,
           "melee" : {
             "attack" : 0,
             "damage" : 0
           },
-          "health" : 0,
+          "health" : {
+            "max" : 0,
+            "regen" : 0
+          },
           "sight" : {
             "range" : 0
           },
@@ -1691,12 +2032,23 @@
             "damage" : 0,
             "range" : 0
           },
+          "energy" : {
+            "max" : 0,
+            "regen" : 0
+          },
+          "materials" : {
+            "max" : 0,
+            "regen" : 0
+          },
           "defence" : 0,
           "melee" : {
             "attack" : 0,
             "damage" : 0
           },
-          "health" : 0,
+          "health" : {
+            "max" : 0,
+            "regen" : 0
+          },
           "sight" : {
             "range" : 0
           },
@@ -1742,12 +2094,23 @@
             "damage" : 0,
             "range" : 0
           },
+          "energy" : {
+            "max" : 0,
+            "regen" : 0
+          },
+          "materials" : {
+            "max" : 0,
+            "regen" : 0
+          },
           "defence" : 3,
           "melee" : {
             "attack" : 0,
             "damage" : 0
           },
-          "health" : 0,
+          "health" : {
+            "max" : 0,
+            "regen" : 0
+          },
           "sight" : {
             "range" : 0
           },
@@ -1798,12 +2161,23 @@
             "damage" : 0,
             "range" : 0
           },
+          "energy" : {
+            "max" : 0,
+            "regen" : 0
+          },
+          "materials" : {
+            "max" : 0,
+            "regen" : 0
+          },
           "defence" : 3,
           "melee" : {
             "attack" : 0,
             "damage" : 0
           },
-          "health" : 0,
+          "health" : {
+            "max" : 0,
+            "regen" : 0
+          },
           "sight" : {
             "range" : 0
           },
@@ -1832,12 +2206,23 @@
             "damage" : 0,
             "range" : 0
           },
+          "energy" : {
+            "max" : 0,
+            "regen" : 0
+          },
+          "materials" : {
+            "max" : 0,
+            "regen" : 0
+          },
           "defence" : 0,
           "melee" : {
             "attack" : 0,
             "damage" : 0
           },
-          "health" : 0,
+          "health" : {
+            "max" : 0,
+            "regen" : 0
+          },
           "sight" : {
             "range" : 0
           },
@@ -1883,12 +2268,23 @@
             "damage" : 0,
             "range" : 0
           },
+          "energy" : {
+            "max" : 0,
+            "regen" : 0
+          },
+          "materials" : {
+            "max" : 0,
+            "regen" : 0
+          },
           "defence" : 3,
           "melee" : {
             "attack" : 0,
             "damage" : 0
           },
-          "health" : 0,
+          "health" : {
+            "max" : 0,
+            "regen" : 0
+          },
           "sight" : {
             "range" : 0
           },
@@ -1984,12 +2380,23 @@
             "damage" : 0,
             "range" : 0
           },
+          "energy" : {
+            "max" : 0,
+            "regen" : 0
+          },
+          "materials" : {
+            "max" : 0,
+            "regen" : 0
+          },
           "defence" : 5,
           "melee" : {
             "attack" : 0,
             "damage" : 0
           },
-          "health" : 0,
+          "health" : {
+            "max" : 0,
+            "regen" : 0
+          },
           "sight" : {
             "range" : 0
           },
@@ -2040,12 +2447,23 @@
             "damage" : 0,
             "range" : 0
           },
+          "energy" : {
+            "max" : 0,
+            "regen" : 0
+          },
+          "materials" : {
+            "max" : 0,
+            "regen" : 0
+          },
           "defence" : 7,
           "melee" : {
             "attack" : 0,
             "damage" : 0
           },
-          "health" : 0,
+          "health" : {
+            "max" : 0,
+            "regen" : 0
+          },
           "sight" : {
             "range" : 0
           },
@@ -2154,12 +2572,23 @@
             "damage" : 0,
             "range" : 0
           },
+          "energy" : {
+            "max" : 0,
+            "regen" : 0
+          },
+          "materials" : {
+            "max" : 0,
+            "regen" : 0
+          },
           "defence" : 2,
           "melee" : {
             "attack" : 10,
             "damage" : 5
           },
-          "health" : 0,
+          "health" : {
+            "max" : 0,
+            "regen" : 0
+          },
           "sight" : {
             "range" : 0
           },
@@ -2223,12 +2652,23 @@
             "damage" : 0,
             "range" : 0
           },
+          "energy" : {
+            "max" : 0,
+            "regen" : 0
+          },
+          "materials" : {
+            "max" : 0,
+            "regen" : 0
+          },
           "defence" : 4,
           "melee" : {
             "attack" : 20,
             "damage" : 10
           },
-          "health" : 0,
+          "health" : {
+            "max" : 0,
+            "regen" : 0
+          },
           "sight" : {
             "range" : 0
           },
@@ -2279,12 +2719,23 @@
             "damage" : 0,
             "range" : 0
           },
+          "energy" : {
+            "max" : 0,
+            "regen" : 0
+          },
+          "materials" : {
+            "max" : 0,
+            "regen" : 0
+          },
           "defence" : 6,
           "melee" : {
             "attack" : 30,
             "damage" : 15
           },
-          "health" : 0,
+          "health" : {
+            "max" : 0,
+            "regen" : 0
+          },
           "sight" : {
             "range" : 0
           },
@@ -2471,12 +2922,23 @@
             "damage" : 0,
             "range" : 0
           },
+          "energy" : {
+            "max" : 0,
+            "regen" : 0
+          },
+          "materials" : {
+            "max" : 0,
+            "regen" : 0
+          },
           "defence" : 10,
           "melee" : {
             "attack" : 0,
             "damage" : 0
           },
-          "health" : 0,
+          "health" : {
+            "max" : 0,
+            "regen" : 0
+          },
           "sight" : {
             "range" : 0
           },
@@ -2521,12 +2983,23 @@
             "damage" : 0,
             "range" : 0
           },
+          "energy" : {
+            "max" : 0,
+            "regen" : 0
+          },
+          "materials" : {
+            "max" : 0,
+            "regen" : 0
+          },
           "defence" : 1,
           "melee" : {
             "attack" : 0,
             "damage" : 0
           },
-          "health" : 0,
+          "health" : {
+            "max" : 0,
+            "regen" : 0
+          },
           "sight" : {
             "range" : 0
           },
@@ -2556,12 +3029,23 @@
             "damage" : 0,
             "range" : 0
           },
+          "energy" : {
+            "max" : 0,
+            "regen" : 0
+          },
+          "materials" : {
+            "max" : 0,
+            "regen" : 0
+          },
           "defence" : 20,
           "melee" : {
             "attack" : 0,
             "damage" : 0
           },
-          "health" : 0,
+          "health" : {
+            "max" : 0,
+            "regen" : 0
+          },
           "sight" : {
             "range" : 0
           },
@@ -2606,12 +3090,23 @@
             "damage" : 0,
             "range" : 0
           },
+          "energy" : {
+            "max" : 0,
+            "regen" : 0
+          },
+          "materials" : {
+            "max" : 0,
+            "regen" : 0
+          },
           "defence" : 2,
           "melee" : {
             "attack" : 0,
             "damage" : 0
           },
-          "health" : 0,
+          "health" : {
+            "max" : 0,
+            "regen" : 0
+          },
           "sight" : {
             "range" : 0
           },
@@ -2641,12 +3136,23 @@
             "damage" : 0,
             "range" : 0
           },
+          "energy" : {
+            "max" : 0,
+            "regen" : 0
+          },
+          "materials" : {
+            "max" : 0,
+            "regen" : 0
+          },
           "defence" : 30,
           "melee" : {
             "attack" : 0,
             "damage" : 0
           },
-          "health" : 0,
+          "health" : {
+            "max" : 0,
+            "regen" : 0
+          },
           "sight" : {
             "range" : 0
           },
@@ -2691,12 +3197,23 @@
             "damage" : 0,
             "range" : 0
           },
+          "energy" : {
+            "max" : 0,
+            "regen" : 0
+          },
+          "materials" : {
+            "max" : 0,
+            "regen" : 0
+          },
           "defence" : 3,
           "melee" : {
             "attack" : 0,
             "damage" : 0
           },
-          "health" : 0,
+          "health" : {
+            "max" : 0,
+            "regen" : 0
+          },
           "sight" : {
             "range" : 0
           },
@@ -2734,12 +3251,23 @@
             "damage" : 0,
             "range" : 0
           },
+          "energy" : {
+            "max" : 0,
+            "regen" : 0
+          },
+          "materials" : {
+            "max" : 0,
+            "regen" : 0
+          },
           "defence" : 3,
           "melee" : {
             "attack" : 0,
             "damage" : 0
           },
-          "health" : 5,
+          "health" : {
+            "max" : 5,
+            "regen" : 0
+          },
           "sight" : {
             "range" : 0
           },
@@ -2777,12 +3305,23 @@
             "damage" : 0,
             "range" : 0
           },
+          "energy" : {
+            "max" : 0,
+            "regen" : 0
+          },
+          "materials" : {
+            "max" : 0,
+            "regen" : 0
+          },
           "defence" : 5,
           "melee" : {
             "attack" : 0,
             "damage" : 0
           },
-          "health" : 10,
+          "health" : {
+            "max" : 10,
+            "regen" : 0
+          },
           "sight" : {
             "range" : 0
           },
@@ -2820,12 +3359,23 @@
             "damage" : 0,
             "range" : 0
           },
+          "energy" : {
+            "max" : 0,
+            "regen" : 0
+          },
+          "materials" : {
+            "max" : 0,
+            "regen" : 0
+          },
           "defence" : 7,
           "melee" : {
             "attack" : 0,
             "damage" : 0
           },
-          "health" : 15,
+          "health" : {
+            "max" : 15,
+            "regen" : 0
+          },
           "sight" : {
             "range" : 0
           },
@@ -2854,12 +3404,23 @@
             "damage" : 5,
             "range" : 5
           },
+          "energy" : {
+            "max" : 0,
+            "regen" : 0
+          },
+          "materials" : {
+            "max" : 0,
+            "regen" : 0
+          },
           "defence" : 0,
           "melee" : {
             "attack" : 0,
             "damage" : 0
           },
-          "health" : 0,
+          "health" : {
+            "max" : 0,
+            "regen" : 0
+          },
           "sight" : {
             "range" : 0
           },
@@ -2896,12 +3457,23 @@
             "damage" : 10,
             "range" : 6
           },
+          "energy" : {
+            "max" : 0,
+            "regen" : 0
+          },
+          "materials" : {
+            "max" : 0,
+            "regen" : 0
+          },
           "defence" : 0,
           "melee" : {
             "attack" : 0,
             "damage" : 0
           },
-          "health" : 0,
+          "health" : {
+            "max" : 0,
+            "regen" : 0
+          },
           "sight" : {
             "range" : 0
           },
@@ -2947,12 +3519,23 @@
             "damage" : 0,
             "range" : 0
           },
+          "energy" : {
+            "max" : 0,
+            "regen" : 0
+          },
+          "materials" : {
+            "max" : 0,
+            "regen" : 0
+          },
           "defence" : 1000,
           "melee" : {
             "attack" : 0,
             "damage" : 0
           },
-          "health" : 0,
+          "health" : {
+            "max" : 0,
+            "regen" : 0
+          },
           "sight" : {
             "range" : 0
           },
@@ -2981,12 +3564,23 @@
             "damage" : 15,
             "range" : 7
           },
+          "energy" : {
+            "max" : 0,
+            "regen" : 0
+          },
+          "materials" : {
+            "max" : 0,
+            "regen" : 0
+          },
           "defence" : 0,
           "melee" : {
             "attack" : 0,
             "damage" : 0
           },
-          "health" : 0,
+          "health" : {
+            "max" : 0,
+            "regen" : 0
+          },
           "sight" : {
             "range" : 0
           },
@@ -3255,12 +3849,23 @@
           "damage" : 0,
           "range" : 0
         },
+        "energy" : {
+          "max" : 0,
+          "regen" : 0
+        },
+        "materials" : {
+          "max" : 0,
+          "regen" : 0
+        },
         "defence" : 2,
         "melee" : {
           "attack" : 2,
           "damage" : 0
         },
-        "health" : 5,
+        "health" : {
+          "max" : 5,
+          "regen" : 0
+        },
         "sight" : {
           "range" : 0
         },
@@ -3287,12 +3892,23 @@
           "damage" : 0,
           "range" : 0
         },
+        "energy" : {
+          "max" : 0,
+          "regen" : 0
+        },
+        "materials" : {
+          "max" : 0,
+          "regen" : 0
+        },
         "defence" : 2,
         "melee" : {
           "attack" : 2,
           "damage" : 0
         },
-        "health" : 5,
+        "health" : {
+          "max" : 5,
+          "regen" : 0
+        },
         "sight" : {
           "range" : 0
         },
@@ -3319,12 +3935,23 @@
           "damage" : 0,
           "range" : 0
         },
+        "energy" : {
+          "max" : 0,
+          "regen" : 0
+        },
+        "materials" : {
+          "max" : 0,
+          "regen" : 0
+        },
         "defence" : 2,
         "melee" : {
           "attack" : 2,
           "damage" : 0
         },
-        "health" : 5,
+        "health" : {
+          "max" : 5,
+          "regen" : 0
+        },
         "sight" : {
           "range" : 0
         },
@@ -3351,12 +3978,23 @@
           "damage" : 0,
           "range" : 0
         },
+        "energy" : {
+          "max" : 0,
+          "regen" : 0
+        },
+        "materials" : {
+          "max" : 0,
+          "regen" : 0
+        },
         "defence" : 2,
         "melee" : {
           "attack" : 2,
           "damage" : 0
         },
-        "health" : 5,
+        "health" : {
+          "max" : 5,
+          "regen" : 0
+        },
         "sight" : {
           "range" : 0
         },
@@ -3383,12 +4021,23 @@
           "damage" : 0,
           "range" : 0
         },
+        "energy" : {
+          "max" : 0,
+          "regen" : 0
+        },
+        "materials" : {
+          "max" : 0,
+          "regen" : 0
+        },
         "defence" : 2,
         "melee" : {
           "attack" : 2,
           "damage" : 0
         },
-        "health" : 5,
+        "health" : {
+          "max" : 5,
+          "regen" : 0
+        },
         "sight" : {
           "range" : 0
         },
@@ -3418,12 +4067,23 @@
           "damage" : 0,
           "range" : 0
         },
+        "energy" : {
+          "max" : 0,
+          "regen" : 0
+        },
+        "materials" : {
+          "max" : 0,
+          "regen" : 0
+        },
         "defence" : 5,
         "melee" : {
           "attack" : 5,
           "damage" : 5
         },
-        "health" : 5,
+        "health" : {
+          "max" : 5,
+          "regen" : 0
+        },
         "sight" : {
           "range" : 0
         },
@@ -3450,12 +4110,23 @@
           "damage" : 0,
           "range" : 0
         },
+        "energy" : {
+          "max" : 0,
+          "regen" : 0
+        },
+        "materials" : {
+          "max" : 0,
+          "regen" : 0
+        },
         "defence" : 5,
         "melee" : {
           "attack" : 5,
           "damage" : 5
         },
-        "health" : 5,
+        "health" : {
+          "max" : 5,
+          "regen" : 0
+        },
         "sight" : {
           "range" : 0
         },
@@ -3482,12 +4153,23 @@
           "damage" : 0,
           "range" : 0
         },
+        "energy" : {
+          "max" : 0,
+          "regen" : 0
+        },
+        "materials" : {
+          "max" : 0,
+          "regen" : 0
+        },
         "defence" : 5,
         "melee" : {
           "attack" : 5,
           "damage" : 5
         },
-        "health" : 5,
+        "health" : {
+          "max" : 5,
+          "regen" : 0
+        },
         "sight" : {
           "range" : 0
         },
@@ -3514,12 +4196,23 @@
           "damage" : 0,
           "range" : 0
         },
+        "energy" : {
+          "max" : 0,
+          "regen" : 0
+        },
+        "materials" : {
+          "max" : 0,
+          "regen" : 0
+        },
         "defence" : 5,
         "melee" : {
           "attack" : 5,
           "damage" : 5
         },
-        "health" : 5,
+        "health" : {
+          "max" : 5,
+          "regen" : 0
+        },
         "sight" : {
           "range" : 0
         },
@@ -3546,12 +4239,23 @@
           "damage" : 0,
           "range" : 0
         },
+        "energy" : {
+          "max" : 0,
+          "regen" : 0
+        },
+        "materials" : {
+          "max" : 0,
+          "regen" : 0
+        },
         "defence" : 5,
         "melee" : {
           "attack" : 5,
           "damage" : 5
         },
-        "health" : 5,
+        "health" : {
+          "max" : 5,
+          "regen" : 0
+        },
         "sight" : {
           "range" : 0
         },

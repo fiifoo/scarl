@@ -23,7 +23,7 @@ const EquipmentItem = ({equipped, group, item, kind, selected, dropItem, equipIt
             </td>
             <td><DropButton item={item} dropItem={dropItem} /></td>
             <td className="full-width">{kind.name}</td>
-            <td>{stats.health}</td>
+            <td>{stats.health.max}</td>
             <td>{stats.melee.attack}</td>
             <td>{stats.melee.damage}</td>
             <td>{stats.ranged.attack}</td>

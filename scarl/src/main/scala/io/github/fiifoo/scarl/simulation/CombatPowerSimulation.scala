@@ -87,7 +87,7 @@ object CombatPowerSimulation {
   private def calculateScore(instance: State, opponents: Set[SafeCreatureId]): Double = {
     opponents.foldLeft(0.0)((score, opponent) => {
       score + (opponent(instance) map (opponent => {
-        (opponent.damage: Double) / opponent.stats.health
+        opponent.damage / opponent.stats.health.max
       }) getOrElse 1.0)
     })
   }

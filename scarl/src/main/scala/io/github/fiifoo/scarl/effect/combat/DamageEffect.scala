@@ -13,7 +13,7 @@ case class DamageEffect(target: CreatureId,
   def apply(s: State): EffectResult = {
     val creature = target(s)
     val damage = creature.damage + amount
-    val health = creature.stats.health
+    val health = creature.stats.health.max
 
     val mutation = CreatureDamageMutation(target, damage)
 

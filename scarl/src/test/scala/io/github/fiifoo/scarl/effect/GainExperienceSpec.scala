@@ -1,5 +1,6 @@
 package io.github.fiifoo.scarl.effect
 
+import io.github.fiifoo.scarl.core.creature.Stats.Health
 import io.github.fiifoo.scarl.core.creature.{Character, Progression, ProgressionId, Stats}
 import io.github.fiifoo.scarl.core.effect.{Effect, EffectResolver}
 import io.github.fiifoo.scarl.core.entity.CreatureId
@@ -13,7 +14,7 @@ class GainExperienceSpec extends FlatSpec with Matchers {
   def resolve(s: State, effects: List[Effect]): State = EffectResolver(s, effects)._1
 
   val initialStats = TestCreatureFactory.defaultStats
-  val addStats = Stats(health = 10)
+  val addStats = Stats(health = Health(10))
 
   "GainExperienceEffect" should "add experience to creature" in {
     var (s, creature) = testStuff
@@ -33,7 +34,7 @@ class GainExperienceSpec extends FlatSpec with Matchers {
     creature(s).stats.health should ===(initialStats.health)
     s = resolve(s, List(GainExperienceEffect(creature, 1)))
     creature(s).character.get.level should ===(2)
-    creature(s).stats.health should ===(initialStats.health + addStats.health)
+    creature(s).stats.health.max should ===(initialStats.health.max + addStats.health.max)
   }
 
   it should "level up creature twice" in {
@@ -42,7 +43,7 @@ class GainExperienceSpec extends FlatSpec with Matchers {
 
     s = resolve(s, List(effect, effect))
     creature(s).character.get.level should ===(3)
-    creature(s).stats.health should ===(initialStats.health + addStats.health + addStats.health)
+    creature(s).stats.health.max should ===(initialStats.health.max + addStats.health.max + addStats.health.max)
   }
 
   it should "not mistakenly level up creature twice with multiple effects" in {

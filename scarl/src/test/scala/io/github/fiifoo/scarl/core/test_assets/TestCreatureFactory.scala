@@ -1,7 +1,7 @@
 package io.github.fiifoo.scarl.core.test_assets
 
 import io.github.fiifoo.scarl.core.action.{Behavior, PassTactic}
-import io.github.fiifoo.scarl.core.creature.Stats.{Melee, Sight}
+import io.github.fiifoo.scarl.core.creature.Stats.{Health, Melee, Sight}
 import io.github.fiifoo.scarl.core.creature.{Character, FactionId, Party, Stats}
 import io.github.fiifoo.scarl.core.entity.{Creature, CreatureId}
 import io.github.fiifoo.scarl.core.kind.{CreatureKind, CreatureKindId}
@@ -34,19 +34,19 @@ object TestCreatureFactory {
              character: Option[Character] = None
             ): Creature = {
     Creature(
-      id,
-      kind,
-      faction,
+      id = id,
+      kind = kind,
+      faction = faction,
       solitary = true,
       party = Party(id),
-      behavior,
-      location,
-      tick,
-      damage,
-      stats = defaultStats.copy(health = health),
-      dead,
+      behavior = behavior,
+      location = location,
+      tick = tick,
+      damage = damage,
+      stats = defaultStats.copy(health = Health(health)),
+      dead = dead,
       owner = None,
-      character
+      character = character,
     )
   }
 
