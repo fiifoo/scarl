@@ -1,0 +1,3 @@
+# Scarl
+
+Roguelike hobby project.
