@@ -11,15 +11,15 @@ case class ShootMissileAction(location: Location) extends Action {
   val cost = (Time.turn * 1.5).toInt
 
   def apply(s: State, actor: CreatureId): List[Effect] = {
-    getMissileAmmo(s, actor) map (ammo => {
+    getMissile(s, actor) map (missile => {
       List(
         TickEffect(actor, cost),
-        ShootMissileEffect(actor, location, actor(s).location, ammo)
+        ShootMissileEffect(actor, location, actor(s).location, missile)
       )
     }) getOrElse List()
   }
 
-  private def getMissileAmmo(s: State, actor: CreatureId): Option[CreatureKindId] = {
-    Selectors.getCreatureStats(s)(actor).missileLauncher.ammo
+  private def getMissile(s: State, actor: CreatureId): Option[CreatureKindId] = {
+    Selectors.getCreatureStats(s)(actor).launcher.missile
   }
 }

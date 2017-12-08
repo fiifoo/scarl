@@ -56,7 +56,7 @@ case class ChargeTactic(target: SafeCreatureId, destination: Location) extends T
   private def shouldShootMissile(s: State, actor: CreatureId, line: Vector[Location]): Boolean = {
     val stats = getCreatureStats(s)(actor)
 
-    if (s.simulation.running || stats.missileLauncher.ammo.isEmpty || !couldShoot(s, line, stats.missileLauncher.range)) {
+    if (s.simulation.running || stats.launcher.missile.isEmpty || !couldShoot(s, line, stats.launcher.range)) {
       false
     } else {
       ShootMissileOutcomeSimulation(s, actor, line.last) == Outcome.Good

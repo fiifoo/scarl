@@ -41,9 +41,9 @@ object Stats {
     }
   }
 
-  case class MissileLauncher(ammo: Option[CreatureKindId] = None, range: Int = 0) {
-    def add(x: MissileLauncher): MissileLauncher = {
-      copy(x.ammo.orElse(ammo), range + x.range)
+  case class Launcher(missile: Option[CreatureKindId] = None, range: Int = 0) {
+    def add(x: Launcher): Launcher = {
+      copy(x.missile.orElse(missile), range + x.range)
     }
   }
 
@@ -62,8 +62,8 @@ case class Stats(speed: Double = 1,
                  defence: Int = 0,
                  armor: Int = 0,
                  melee: Melee = Melee(),
-                 missileLauncher: MissileLauncher = MissileLauncher(),
                  ranged: Ranged = Ranged(),
+                 launcher: Launcher = Launcher(),
                  explosive: Explosive = Explosive(),
                  sight: Sight = Sight()
                 ) {
@@ -77,8 +77,8 @@ case class Stats(speed: Double = 1,
       defence + x.defence,
       armor + x.armor,
       melee.add(x.melee),
-      missileLauncher.add(x.missileLauncher),
       ranged.add(x.ranged),
+      launcher.add(x.launcher),
       explosive.add(x.explosive),
       sight.add(x.sight)
     )

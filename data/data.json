@@ -210,8 +210,8 @@
           "radius" : 0,
           "blast" : 0
         },
-        "missileLauncher" : {
-          "ammo" : null,
+        "launcher" : {
+          "missile" : null,
           "range" : 0
         },
         "speed" : 1.5,
@@ -272,8 +272,8 @@
           "radius" : 1,
           "blast" : 0
         },
-        "missileLauncher" : {
-          "ammo" : null,
+        "launcher" : {
+          "missile" : null,
           "range" : 0
         },
         "speed" : 1.1,
@@ -330,8 +330,8 @@
           "radius" : 0,
           "blast" : 0
         },
-        "missileLauncher" : {
-          "ammo" : null,
+        "launcher" : {
+          "missile" : null,
           "range" : 0
         },
         "speed" : 1,
@@ -388,8 +388,8 @@
           "radius" : 0,
           "blast" : 0
         },
-        "missileLauncher" : {
-          "ammo" : null,
+        "launcher" : {
+          "missile" : null,
           "range" : 0
         },
         "speed" : 0.75,
@@ -446,8 +446,8 @@
           "radius" : 0,
           "blast" : 0
         },
-        "missileLauncher" : {
-          "ammo" : null,
+        "launcher" : {
+          "missile" : null,
           "range" : 0
         },
         "speed" : 0.75,
@@ -504,8 +504,8 @@
           "radius" : 0,
           "blast" : 0
         },
-        "missileLauncher" : {
-          "ammo" : null,
+        "launcher" : {
+          "missile" : null,
           "range" : 0
         },
         "speed" : 0.75,
@@ -562,8 +562,8 @@
           "radius" : 0,
           "blast" : 0
         },
-        "missileLauncher" : {
-          "ammo" : null,
+        "launcher" : {
+          "missile" : null,
           "range" : 0
         },
         "speed" : 1,
@@ -620,8 +620,8 @@
           "radius" : 0,
           "blast" : 0
         },
-        "missileLauncher" : {
-          "ammo" : null,
+        "launcher" : {
+          "missile" : null,
           "range" : 0
         },
         "speed" : 1,
@@ -678,8 +678,8 @@
           "radius" : 0,
           "blast" : 0
         },
-        "missileLauncher" : {
-          "ammo" : null,
+        "launcher" : {
+          "missile" : null,
           "range" : 0
         },
         "speed" : 1,
@@ -746,8 +746,8 @@
           "radius" : 0,
           "blast" : 0
         },
-        "missileLauncher" : {
-          "ammo" : null,
+        "launcher" : {
+          "missile" : null,
           "range" : 0
         },
         "speed" : 1.1,
@@ -804,8 +804,8 @@
           "radius" : 0,
           "blast" : 0
         },
-        "missileLauncher" : {
-          "ammo" : null,
+        "launcher" : {
+          "missile" : null,
           "range" : 0
         },
         "speed" : 1,
@@ -862,8 +862,8 @@
           "radius" : 0,
           "blast" : 0
         },
-        "missileLauncher" : {
-          "ammo" : null,
+        "launcher" : {
+          "missile" : null,
           "range" : 0
         },
         "speed" : 1,
@@ -930,8 +930,8 @@
           "radius" : 0,
           "blast" : 0
         },
-        "missileLauncher" : {
-          "ammo" : null,
+        "launcher" : {
+          "missile" : null,
           "range" : 0
         },
         "speed" : 1.1,
@@ -998,8 +998,8 @@
           "radius" : 0,
           "blast" : 0
         },
-        "missileLauncher" : {
-          "ammo" : null,
+        "launcher" : {
+          "missile" : null,
           "range" : 0
         },
         "speed" : 1.1,
@@ -1056,8 +1056,8 @@
           "radius" : 0,
           "blast" : 0
         },
-        "missileLauncher" : {
-          "ammo" : null,
+        "launcher" : {
+          "missile" : null,
           "range" : 0
         },
         "speed" : 1,
@@ -1114,8 +1114,8 @@
           "radius" : 0,
           "blast" : 0
         },
-        "missileLauncher" : {
-          "ammo" : null,
+        "launcher" : {
+          "missile" : null,
           "range" : 0
         },
         "speed" : 1,
@@ -1177,8 +1177,8 @@
           "radius" : 2,
           "blast" : 90
         },
-        "missileLauncher" : {
-          "ammo" : null,
+        "launcher" : {
+          "missile" : null,
           "range" : 0
         },
         "speed" : 3,
@@ -1235,8 +1235,8 @@
           "radius" : 0,
           "blast" : 0
         },
-        "missileLauncher" : {
-          "ammo" : null,
+        "launcher" : {
+          "missile" : null,
           "range" : 0
         },
         "speed" : 1,
@@ -1298,8 +1298,8 @@
           "radius" : 2,
           "blast" : 90
         },
-        "missileLauncher" : {
-          "ammo" : null,
+        "launcher" : {
+          "missile" : null,
           "range" : 0
         },
         "speed" : 3,
@@ -1361,8 +1361,8 @@
           "radius" : 2,
           "blast" : 90
         },
-        "missileLauncher" : {
-          "ammo" : null,
+        "launcher" : {
+          "missile" : null,
           "range" : 0
         },
         "speed" : 3,
@@ -1419,8 +1419,8 @@
           "radius" : 0,
           "blast" : 0
         },
-        "missileLauncher" : {
-          "ammo" : null,
+        "launcher" : {
+          "missile" : null,
           "range" : 0
         },
         "speed" : 0.5,
@@ -1477,8 +1477,8 @@
           "radius" : 0,
           "blast" : 0
         },
-        "missileLauncher" : {
-          "ammo" : null,
+        "launcher" : {
+          "missile" : null,
           "range" : 0
         },
         "speed" : 0.5,
@@ -1535,8 +1535,8 @@
           "radius" : 0,
           "blast" : 0
         },
-        "missileLauncher" : {
-          "ammo" : null,
+        "launcher" : {
+          "missile" : null,
           "range" : 0
         },
         "speed" : 0.5,
@@ -1593,8 +1593,8 @@
           "radius" : 0,
           "blast" : 0
         },
-        "missileLauncher" : {
-          "ammo" : null,
+        "launcher" : {
+          "missile" : null,
           "range" : 0
         },
         "speed" : 0.5,
@@ -1651,8 +1651,8 @@
           "radius" : 0,
           "blast" : 0
         },
-        "missileLauncher" : {
-          "ammo" : null,
+        "launcher" : {
+          "missile" : null,
           "range" : 0
         },
         "speed" : 0.5,
@@ -1709,8 +1709,8 @@
           "radius" : 0,
           "blast" : 0
         },
-        "missileLauncher" : {
-          "ammo" : null,
+        "launcher" : {
+          "missile" : null,
           "range" : 0
         },
         "speed" : 0.5,
@@ -1762,8 +1762,8 @@
             "radius" : 0,
             "blast" : 0
           },
-          "missileLauncher" : {
-            "ammo" : null,
+          "launcher" : {
+            "missile" : null,
             "range" : 0
           },
           "speed" : 1,
@@ -1816,8 +1816,8 @@
             "radius" : 0,
             "blast" : 0
           },
-          "missileLauncher" : {
-            "ammo" : null,
+          "launcher" : {
+            "missile" : null,
             "range" : 0
           },
           "speed" : 1,
@@ -1861,8 +1861,8 @@
             "radius" : 0,
             "blast" : 0
           },
-          "missileLauncher" : {
-            "ammo" : "missile-guided-1",
+          "launcher" : {
+            "missile" : "missile-guided-1",
             "range" : 10
           },
           "speed" : 1,
@@ -1923,8 +1923,8 @@
             "radius" : 0,
             "blast" : 0
           },
-          "missileLauncher" : {
-            "ammo" : null,
+          "launcher" : {
+            "missile" : null,
             "range" : 0
           },
           "speed" : 1,
@@ -1977,8 +1977,8 @@
             "radius" : 0,
             "blast" : 0
           },
-          "missileLauncher" : {
-            "ammo" : null,
+          "launcher" : {
+            "missile" : null,
             "range" : 0
           },
           "speed" : 1,
@@ -2022,8 +2022,8 @@
             "radius" : 0,
             "blast" : 0
           },
-          "missileLauncher" : {
-            "ammo" : "missile-guided-2",
+          "launcher" : {
+            "missile" : "missile-guided-2",
             "range" : 10
           },
           "speed" : 1,
@@ -2084,8 +2084,8 @@
             "radius" : 0,
             "blast" : 0
           },
-          "missileLauncher" : {
-            "ammo" : null,
+          "launcher" : {
+            "missile" : null,
             "range" : 0
           },
           "speed" : 1,
@@ -2151,8 +2151,8 @@
             "radius" : 0,
             "blast" : 0
           },
-          "missileLauncher" : {
-            "ammo" : null,
+          "launcher" : {
+            "missile" : null,
             "range" : 0
           },
           "speed" : 1,
@@ -2196,8 +2196,8 @@
             "radius" : 0,
             "blast" : 0
           },
-          "missileLauncher" : {
-            "ammo" : "missile-guided-3",
+          "launcher" : {
+            "missile" : "missile-guided-3",
             "range" : 10
           },
           "speed" : 1,
@@ -2258,8 +2258,8 @@
             "radius" : 0,
             "blast" : 0
           },
-          "missileLauncher" : {
-            "ammo" : null,
+          "launcher" : {
+            "missile" : null,
             "range" : 0
           },
           "speed" : 1,
@@ -2370,8 +2370,8 @@
             "radius" : 0,
             "blast" : 0
           },
-          "missileLauncher" : {
-            "ammo" : null,
+          "launcher" : {
+            "missile" : null,
             "range" : 0
           },
           "speed" : 1,
@@ -2437,8 +2437,8 @@
             "radius" : 0,
             "blast" : 0
           },
-          "missileLauncher" : {
-            "ammo" : null,
+          "launcher" : {
+            "missile" : null,
             "range" : 0
           },
           "speed" : 1,
@@ -2562,8 +2562,8 @@
             "radius" : 0,
             "blast" : 0
           },
-          "missileLauncher" : {
-            "ammo" : null,
+          "launcher" : {
+            "missile" : null,
             "range" : 0
           },
           "speed" : 1,
@@ -2642,8 +2642,8 @@
             "radius" : 0,
             "blast" : 0
           },
-          "missileLauncher" : {
-            "ammo" : null,
+          "launcher" : {
+            "missile" : null,
             "range" : 0
           },
           "speed" : 1,
@@ -2709,8 +2709,8 @@
             "radius" : 0,
             "blast" : 0
           },
-          "missileLauncher" : {
-            "ammo" : null,
+          "launcher" : {
+            "missile" : null,
             "range" : 0
           },
           "speed" : 1,
@@ -2912,8 +2912,8 @@
             "radius" : 0,
             "blast" : 0
           },
-          "missileLauncher" : {
-            "ammo" : null,
+          "launcher" : {
+            "missile" : null,
             "range" : 0
           },
           "speed" : 1,
@@ -2973,8 +2973,8 @@
             "radius" : 0,
             "blast" : 0
           },
-          "missileLauncher" : {
-            "ammo" : null,
+          "launcher" : {
+            "missile" : null,
             "range" : 0
           },
           "speed" : 1,
@@ -3019,8 +3019,8 @@
             "radius" : 0,
             "blast" : 0
           },
-          "missileLauncher" : {
-            "ammo" : null,
+          "launcher" : {
+            "missile" : null,
             "range" : 0
           },
           "speed" : 1,
@@ -3080,8 +3080,8 @@
             "radius" : 0,
             "blast" : 0
           },
-          "missileLauncher" : {
-            "ammo" : null,
+          "launcher" : {
+            "missile" : null,
             "range" : 0
           },
           "speed" : 1,
@@ -3126,8 +3126,8 @@
             "radius" : 0,
             "blast" : 0
           },
-          "missileLauncher" : {
-            "ammo" : null,
+          "launcher" : {
+            "missile" : null,
             "range" : 0
           },
           "speed" : 1,
@@ -3187,8 +3187,8 @@
             "radius" : 0,
             "blast" : 0
           },
-          "missileLauncher" : {
-            "ammo" : null,
+          "launcher" : {
+            "missile" : null,
             "range" : 0
           },
           "speed" : 1,
@@ -3241,8 +3241,8 @@
             "radius" : 0,
             "blast" : 0
           },
-          "missileLauncher" : {
-            "ammo" : null,
+          "launcher" : {
+            "missile" : null,
             "range" : 0
           },
           "speed" : 1,
@@ -3295,8 +3295,8 @@
             "radius" : 0,
             "blast" : 0
           },
-          "missileLauncher" : {
-            "ammo" : null,
+          "launcher" : {
+            "missile" : null,
             "range" : 0
           },
           "speed" : 1,
@@ -3349,8 +3349,8 @@
             "radius" : 0,
             "blast" : 0
           },
-          "missileLauncher" : {
-            "ammo" : null,
+          "launcher" : {
+            "missile" : null,
             "range" : 0
           },
           "speed" : 1,
@@ -3394,8 +3394,8 @@
             "radius" : 0,
             "blast" : 0
           },
-          "missileLauncher" : {
-            "ammo" : null,
+          "launcher" : {
+            "missile" : null,
             "range" : 0
           },
           "speed" : 1,
@@ -3447,8 +3447,8 @@
             "radius" : 0,
             "blast" : 0
           },
-          "missileLauncher" : {
-            "ammo" : null,
+          "launcher" : {
+            "missile" : null,
             "range" : 0
           },
           "speed" : 1,
@@ -3509,8 +3509,8 @@
             "radius" : 0,
             "blast" : 0
           },
-          "missileLauncher" : {
-            "ammo" : null,
+          "launcher" : {
+            "missile" : null,
             "range" : 0
           },
           "speed" : 1,
@@ -3554,8 +3554,8 @@
             "radius" : 0,
             "blast" : 0
           },
-          "missileLauncher" : {
-            "ammo" : null,
+          "launcher" : {
+            "missile" : null,
             "range" : 0
           },
           "speed" : 1,
@@ -3839,8 +3839,8 @@
           "radius" : 0,
           "blast" : 0
         },
-        "missileLauncher" : {
-          "ammo" : null,
+        "launcher" : {
+          "missile" : null,
           "range" : 0
         },
         "speed" : 1,
@@ -3882,8 +3882,8 @@
           "radius" : 0,
           "blast" : 0
         },
-        "missileLauncher" : {
-          "ammo" : null,
+        "launcher" : {
+          "missile" : null,
           "range" : 0
         },
         "speed" : 1,
@@ -3925,8 +3925,8 @@
           "radius" : 0,
           "blast" : 0
         },
-        "missileLauncher" : {
-          "ammo" : null,
+        "launcher" : {
+          "missile" : null,
           "range" : 0
         },
         "speed" : 1,
@@ -3968,8 +3968,8 @@
           "radius" : 0,
           "blast" : 0
         },
-        "missileLauncher" : {
-          "ammo" : null,
+        "launcher" : {
+          "missile" : null,
           "range" : 0
         },
         "speed" : 1,
@@ -4011,8 +4011,8 @@
           "radius" : 0,
           "blast" : 0
         },
-        "missileLauncher" : {
-          "ammo" : null,
+        "launcher" : {
+          "missile" : null,
           "range" : 0
         },
         "speed" : 1,
@@ -4057,8 +4057,8 @@
           "radius" : 0,
           "blast" : 0
         },
-        "missileLauncher" : {
-          "ammo" : null,
+        "launcher" : {
+          "missile" : null,
           "range" : 0
         },
         "speed" : 10,
@@ -4100,8 +4100,8 @@
           "radius" : 0,
           "blast" : 0
         },
-        "missileLauncher" : {
-          "ammo" : null,
+        "launcher" : {
+          "missile" : null,
           "range" : 0
         },
         "speed" : 10,
@@ -4143,8 +4143,8 @@
           "radius" : 0,
           "blast" : 0
         },
-        "missileLauncher" : {
-          "ammo" : null,
+        "launcher" : {
+          "missile" : null,
           "range" : 0
         },
         "speed" : 10,
@@ -4186,8 +4186,8 @@
           "radius" : 0,
           "blast" : 0
         },
-        "missileLauncher" : {
-          "ammo" : null,
+        "launcher" : {
+          "missile" : null,
           "range" : 0
         },
         "speed" : 10,
@@ -4229,8 +4229,8 @@
           "radius" : 0,
           "blast" : 0
         },
-        "missileLauncher" : {
-          "ammo" : null,
+        "launcher" : {
+          "missile" : null,
           "range" : 0
         },
         "speed" : 10,

@@ -18,7 +18,7 @@ case class ShootMissileEffect(attacker: CreatureId,
 
   def apply(s: State): EffectResult = {
     val attackerStats = getCreatureStats(s)(attacker)
-    val range = attackerStats.missileLauncher.range
+    val range = attackerStats.launcher.range
     val from = attacker(s).location
     val destination = (Line(from, targetLocation) take range + 1).last
     val behavior = MissileTactic(
