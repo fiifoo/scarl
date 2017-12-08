@@ -101,7 +101,7 @@ export const getMissileLauncherEquipped = player => {
     const creature = player.creature.stats
     const equipment = player.equipmentStats
 
-    return !! (creature.missileLauncher.ammo || equipment.missileLauncher.ammo)
+    return !! (creature.launcher.missile || equipment.launcher.missile)
 }
 
 export const getRangedAttackRange = player => {
@@ -109,7 +109,7 @@ export const getRangedAttackRange = player => {
     const equipment = player.equipmentStats
 
     return getMissileLauncherEquipped(player) ? (
-        creature.missileLauncher.range + equipment.missileLauncher.range
+        creature.launcher.range + equipment.launcher.range
     ) : (
         creature.ranged.range + equipment.ranged.range
     )
