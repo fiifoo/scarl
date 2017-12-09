@@ -46,6 +46,69 @@ export const getNewValue = (fieldType, models) => {
     }
 }
 
+export const sanitize = (data, models) => (
+    models.main.reduce(
+        (data, model) => data.getIn(model.dataPath).reduce(
+            sanitizeItem(models, model),
+            data
+        ),
+        data
+    )
+)
+
+const sanitizeItem = (models, model) => {
+    const pass = sanitizeModel(models, model)
+
+    return (
+        (data, item) => pass(data, model.dataPath.concat([readItemId(model, item)]))
+    )
+}
+
+const sanitizeModel = (models, model) => (data, path) => (
+    // removing extraneous values not implemented
+
+    model.properties.reduce(
+        sanitizeProperty(models, path),
+        data
+    )
+)
+
+const sanitizeProperty = (models, path) => (data, property) => {
+    const fieldType = property.fieldType
+    const propertyPath = path.concat([property.name])
+    const value = data.getIn(propertyPath)
+
+    const next = value !== undefined || ! fieldType.data.required ? data : data.setIn(
+        propertyPath,
+        getNewValue(fieldType, models)
+    )
+
+    if (value != null || fieldType.data.required) {
+        switch (fieldType.type) {
+            case 'FormField': {
+                const model = models.sub.get(fieldType.data.model)
+
+                return sanitizeModel(models, model)(next, propertyPath)
+            }
+            case 'ListField':
+            case 'MapField': { // map field untested & key not supported
+                if (fieldType.data.value.type === 'FormField') {
+                    return value.reduce(
+                        (next, _, key) => {
+                            const model = models.sub.get(fieldType.data.value.data.model)
+
+                            return sanitizeModel(models, model)(next, propertyPath.concat([key]))
+                        },
+                        next
+                    )
+                }
+            }
+        }
+    }
+
+    return next
+}
+
 const getNewModelValue = (model, models) => Map(model.properties.map(property => [
     property.name,
     property.fieldType.data.required ? getNewValue(property.fieldType, models) : null,
