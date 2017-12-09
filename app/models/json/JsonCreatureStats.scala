@@ -5,6 +5,7 @@ import play.api.libs.json._
 
 object JsonCreatureStats {
   lazy private implicit val creatureKindIdFormat = JsonCreatureKind.creatureKindIdFormat
+  lazy private implicit val consumptionFormat = Json.format[Stats.Consumption]
 
   lazy private implicit val healthFormat = Json.format[Stats.Health]
   lazy private implicit val energyFormat = Json.format[Stats.Energy]

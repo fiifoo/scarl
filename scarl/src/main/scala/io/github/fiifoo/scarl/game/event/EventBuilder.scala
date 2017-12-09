@@ -8,7 +8,7 @@ import io.github.fiifoo.scarl.core.kind._
 import io.github.fiifoo.scarl.core.{Location, State}
 import io.github.fiifoo.scarl.effect.area.{CreateEntityEffect, ExplosiveTimerEffect, RemoveEntityEffect, TransformBlockedEffect}
 import io.github.fiifoo.scarl.effect.combat._
-import io.github.fiifoo.scarl.effect.creature.{GainLevelEffect, HealEffect}
+import io.github.fiifoo.scarl.effect.creature.{GainLevelEffect, HealEffect, ShortageEffect}
 import io.github.fiifoo.scarl.effect.interact._
 import io.github.fiifoo.scarl.effect.movement.{CollideEffect, DisplaceEffect, MovedEffect}
 
@@ -57,6 +57,7 @@ class EventBuilder(s: State, player: CreatureId, fov: Set[Location]) {
       case e: PickItemEffect => build(e) map GenericEvent
       case e: RemoveEntityEffect => build(e) map GenericEvent
       case e: ShootMissileEffect => build(e) map GenericEvent
+      case e: ShortageEffect => build(e) map GenericEvent
       case e: ShotEffect => build(e)
       case e: TransformBlockedEffect => build(e) map GenericEvent
       case e: TrapHitEffect => build(e)
@@ -398,6 +399,23 @@ class EventBuilder(s: State, player: CreatureId, fov: Set[Location]) {
       Some("You fire missile.")
     } else if (fov contains effect.sourceLocation) {
       Some(s"${kind(attacker)} fires missile.")
+    } else {
+      None
+    }
+  }
+
+
+  private def build(effect: ShortageEffect): Option[String] = {
+    if (effect.target == player) {
+      if (effect.energy && effect.materials) {
+        Some("Not enough energy or materials.")
+      } else if (effect.energy) {
+        Some("Not enough energy.")
+      } else if (effect.materials) {
+        Some("Not enough materials.")
+      } else {
+        None
+      }
     } else {
       None
     }

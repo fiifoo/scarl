@@ -204,21 +204,29 @@
       "inventory" : [ ],
       "faction" : "them-faction",
       "stats" : {
+        "launcher" : {
+          "missile" : null,
+          "range" : 0,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          }
+        },
         "explosive" : {
           "attack" : 0,
           "damage" : 0,
           "radius" : 0,
           "blast" : 0
         },
-        "launcher" : {
-          "missile" : null,
-          "range" : 0
-        },
         "speed" : 1.5,
         "ranged" : {
           "attack" : 0,
           "damage" : 0,
-          "range" : 0
+          "range" : 0,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          }
         },
         "energy" : {
           "max" : 0,
@@ -231,7 +239,11 @@
         "defence" : 20,
         "melee" : {
           "attack" : 20,
-          "damage" : 10
+          "damage" : 10,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          }
         },
         "health" : {
           "max" : 20,
@@ -266,21 +278,29 @@
       "inventory" : [ ],
       "faction" : "player-faction",
       "stats" : {
+        "launcher" : {
+          "missile" : null,
+          "range" : 0,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          }
+        },
         "explosive" : {
           "attack" : 0,
           "damage" : 0,
           "radius" : 1,
           "blast" : 0
         },
-        "launcher" : {
-          "missile" : null,
-          "range" : 0
-        },
         "speed" : 1.1,
         "ranged" : {
           "attack" : 10,
           "damage" : 5,
-          "range" : 2
+          "range" : 2,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          }
         },
         "energy" : {
           "max" : 0,
@@ -293,7 +313,11 @@
         "defence" : 15,
         "melee" : {
           "attack" : 10,
-          "damage" : 10
+          "damage" : 10,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          }
         },
         "health" : {
           "max" : 50,
@@ -324,21 +348,29 @@
       "inventory" : [ ],
       "faction" : "player-faction",
       "stats" : {
+        "launcher" : {
+          "missile" : null,
+          "range" : 0,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          }
+        },
         "explosive" : {
           "attack" : 0,
           "damage" : 0,
           "radius" : 0,
           "blast" : 0
         },
-        "launcher" : {
-          "missile" : null,
-          "range" : 0
-        },
         "speed" : 1,
         "ranged" : {
           "attack" : 0,
           "damage" : 0,
-          "range" : 0
+          "range" : 0,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          }
         },
         "energy" : {
           "max" : 0,
@@ -351,7 +383,11 @@
         "defence" : 10,
         "melee" : {
           "attack" : 10,
-          "damage" : 5
+          "damage" : 5,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          }
         },
         "health" : {
           "max" : 10,
@@ -382,21 +418,29 @@
       "inventory" : [ ],
       "faction" : "enemy-faction",
       "stats" : {
+        "launcher" : {
+          "missile" : null,
+          "range" : 0,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          }
+        },
         "explosive" : {
           "attack" : 0,
           "damage" : 0,
           "radius" : 0,
           "blast" : 0
         },
-        "launcher" : {
-          "missile" : null,
-          "range" : 0
-        },
         "speed" : 0.75,
         "ranged" : {
           "attack" : 10,
           "damage" : 5,
-          "range" : 5
+          "range" : 5,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          }
         },
         "energy" : {
           "max" : 0,
@@ -409,7 +453,11 @@
         "defence" : 10,
         "melee" : {
           "attack" : 10,
-          "damage" : 10
+          "damage" : 10,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          }
         },
         "health" : {
           "max" : 20,
@@ -440,21 +488,29 @@
       "inventory" : [ ],
       "faction" : "enemy-faction",
       "stats" : {
+        "launcher" : {
+          "missile" : null,
+          "range" : 0,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          }
+        },
         "explosive" : {
           "attack" : 0,
           "damage" : 0,
           "radius" : 0,
           "blast" : 0
         },
-        "launcher" : {
-          "missile" : null,
-          "range" : 0
-        },
         "speed" : 0.75,
         "ranged" : {
           "attack" : 20,
           "damage" : 10,
-          "range" : 5
+          "range" : 5,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          }
         },
         "energy" : {
           "max" : 0,
@@ -467,7 +523,11 @@
         "defence" : 20,
         "melee" : {
           "attack" : 20,
-          "damage" : 15
+          "damage" : 15,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          }
         },
         "health" : {
           "max" : 25,
@@ -498,21 +558,29 @@
       "inventory" : [ ],
       "faction" : "enemy-faction",
       "stats" : {
+        "launcher" : {
+          "missile" : null,
+          "range" : 0,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          }
+        },
         "explosive" : {
           "attack" : 0,
           "damage" : 0,
           "radius" : 0,
           "blast" : 0
         },
-        "launcher" : {
-          "missile" : null,
-          "range" : 0
-        },
         "speed" : 0.75,
         "ranged" : {
           "attack" : 30,
           "damage" : 15,
-          "range" : 5
+          "range" : 5,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          }
         },
         "energy" : {
           "max" : 0,
@@ -525,7 +593,11 @@
         "defence" : 30,
         "melee" : {
           "attack" : 30,
-          "damage" : 20
+          "damage" : 20,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          }
         },
         "health" : {
           "max" : 30,
@@ -556,21 +628,29 @@
       "inventory" : [ ],
       "faction" : "enemy-faction",
       "stats" : {
+        "launcher" : {
+          "missile" : null,
+          "range" : 0,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          }
+        },
         "explosive" : {
           "attack" : 0,
           "damage" : 0,
           "radius" : 0,
           "blast" : 0
         },
-        "launcher" : {
-          "missile" : null,
-          "range" : 0
-        },
         "speed" : 1,
         "ranged" : {
           "attack" : 10,
           "damage" : 10,
-          "range" : 5
+          "range" : 5,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          }
         },
         "energy" : {
           "max" : 0,
@@ -583,7 +663,11 @@
         "defence" : 10,
         "melee" : {
           "attack" : 10,
-          "damage" : 10
+          "damage" : 10,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          }
         },
         "health" : {
           "max" : 10,
@@ -614,21 +698,29 @@
       "inventory" : [ ],
       "faction" : "enemy-faction",
       "stats" : {
+        "launcher" : {
+          "missile" : null,
+          "range" : 0,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          }
+        },
         "explosive" : {
           "attack" : 0,
           "damage" : 0,
           "radius" : 0,
           "blast" : 0
         },
-        "launcher" : {
-          "missile" : null,
-          "range" : 0
-        },
         "speed" : 1,
         "ranged" : {
           "attack" : 20,
           "damage" : 15,
-          "range" : 5
+          "range" : 5,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          }
         },
         "energy" : {
           "max" : 0,
@@ -641,7 +733,11 @@
         "defence" : 20,
         "melee" : {
           "attack" : 20,
-          "damage" : 15
+          "damage" : 15,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          }
         },
         "health" : {
           "max" : 15,
@@ -672,21 +768,29 @@
       "inventory" : [ ],
       "faction" : "player-faction",
       "stats" : {
+        "launcher" : {
+          "missile" : null,
+          "range" : 0,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          }
+        },
         "explosive" : {
           "attack" : 0,
           "damage" : 0,
           "radius" : 0,
           "blast" : 0
         },
-        "launcher" : {
-          "missile" : null,
-          "range" : 0
-        },
         "speed" : 1,
         "ranged" : {
           "attack" : 0,
           "damage" : 0,
-          "range" : 0
+          "range" : 0,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          }
         },
         "energy" : {
           "max" : 0,
@@ -699,7 +803,11 @@
         "defence" : 10,
         "melee" : {
           "attack" : 10,
-          "damage" : 5
+          "damage" : 5,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          }
         },
         "health" : {
           "max" : 10,
@@ -740,21 +848,29 @@
       "inventory" : [ ],
       "faction" : "player-faction",
       "stats" : {
+        "launcher" : {
+          "missile" : null,
+          "range" : 0,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          }
+        },
         "explosive" : {
           "attack" : 0,
           "damage" : 0,
           "radius" : 0,
           "blast" : 0
         },
-        "launcher" : {
-          "missile" : null,
-          "range" : 0
-        },
         "speed" : 1.1,
         "ranged" : {
           "attack" : 20,
           "damage" : 10,
-          "range" : 5
+          "range" : 5,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          }
         },
         "energy" : {
           "max" : 0,
@@ -767,7 +883,11 @@
         "defence" : 20,
         "melee" : {
           "attack" : 20,
-          "damage" : 10
+          "damage" : 10,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          }
         },
         "health" : {
           "max" : 10,
@@ -798,21 +918,29 @@
       "inventory" : [ ],
       "faction" : "player-faction",
       "stats" : {
+        "launcher" : {
+          "missile" : null,
+          "range" : 0,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          }
+        },
         "explosive" : {
           "attack" : 0,
           "damage" : 0,
           "radius" : 0,
           "blast" : 0
         },
-        "launcher" : {
-          "missile" : null,
-          "range" : 0
-        },
         "speed" : 1,
         "ranged" : {
           "attack" : 0,
           "damage" : 0,
-          "range" : 0
+          "range" : 0,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          }
         },
         "energy" : {
           "max" : 0,
@@ -825,7 +953,11 @@
         "defence" : 10,
         "melee" : {
           "attack" : 10,
-          "damage" : 5
+          "damage" : 5,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          }
         },
         "health" : {
           "max" : 10,
@@ -856,21 +988,29 @@
       "inventory" : [ ],
       "faction" : "enemy-faction",
       "stats" : {
+        "launcher" : {
+          "missile" : null,
+          "range" : 0,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          }
+        },
         "explosive" : {
           "attack" : 0,
           "damage" : 0,
           "radius" : 0,
           "blast" : 0
         },
-        "launcher" : {
-          "missile" : null,
-          "range" : 0
-        },
         "speed" : 1,
         "ranged" : {
           "attack" : 30,
           "damage" : 20,
-          "range" : 5
+          "range" : 5,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          }
         },
         "energy" : {
           "max" : 0,
@@ -883,7 +1023,11 @@
         "defence" : 30,
         "melee" : {
           "attack" : 30,
-          "damage" : 20
+          "damage" : 20,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          }
         },
         "health" : {
           "max" : 20,
@@ -924,21 +1068,29 @@
       "inventory" : [ ],
       "faction" : "player-faction",
       "stats" : {
+        "launcher" : {
+          "missile" : null,
+          "range" : 0,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          }
+        },
         "explosive" : {
           "attack" : 0,
           "damage" : 0,
           "radius" : 0,
           "blast" : 0
         },
-        "launcher" : {
-          "missile" : null,
-          "range" : 0
-        },
         "speed" : 1.1,
         "ranged" : {
           "attack" : 30,
           "damage" : 15,
-          "range" : 5
+          "range" : 5,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          }
         },
         "energy" : {
           "max" : 0,
@@ -951,7 +1103,11 @@
         "defence" : 30,
         "melee" : {
           "attack" : 30,
-          "damage" : 15
+          "damage" : 15,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          }
         },
         "health" : {
           "max" : 15,
@@ -992,21 +1148,29 @@
       "inventory" : [ ],
       "faction" : "player-faction",
       "stats" : {
+        "launcher" : {
+          "missile" : null,
+          "range" : 0,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          }
+        },
         "explosive" : {
           "attack" : 0,
           "damage" : 0,
           "radius" : 0,
           "blast" : 0
         },
-        "launcher" : {
-          "missile" : null,
-          "range" : 0
-        },
         "speed" : 1.1,
         "ranged" : {
           "attack" : 40,
           "damage" : 20,
-          "range" : 5
+          "range" : 5,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          }
         },
         "energy" : {
           "max" : 0,
@@ -1019,7 +1183,11 @@
         "defence" : 40,
         "melee" : {
           "attack" : 40,
-          "damage" : 20
+          "damage" : 20,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          }
         },
         "health" : {
           "max" : 20,
@@ -1050,21 +1218,29 @@
       "inventory" : [ ],
       "faction" : "enemy-faction",
       "stats" : {
+        "launcher" : {
+          "missile" : null,
+          "range" : 0,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          }
+        },
         "explosive" : {
           "attack" : 0,
           "damage" : 0,
           "radius" : 0,
           "blast" : 0
         },
-        "launcher" : {
-          "missile" : null,
-          "range" : 0
-        },
         "speed" : 1,
         "ranged" : {
           "attack" : 0,
           "damage" : 0,
-          "range" : 0
+          "range" : 0,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          }
         },
         "energy" : {
           "max" : 0,
@@ -1077,7 +1253,11 @@
         "defence" : 10,
         "melee" : {
           "attack" : 10,
-          "damage" : 10
+          "damage" : 10,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          }
         },
         "health" : {
           "max" : 20,
@@ -1108,21 +1288,29 @@
       "inventory" : [ ],
       "faction" : "enemy-faction",
       "stats" : {
+        "launcher" : {
+          "missile" : null,
+          "range" : 0,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          }
+        },
         "explosive" : {
           "attack" : 0,
           "damage" : 0,
           "radius" : 0,
           "blast" : 0
         },
-        "launcher" : {
-          "missile" : null,
-          "range" : 0
-        },
         "speed" : 1,
         "ranged" : {
           "attack" : 0,
           "damage" : 0,
-          "range" : 0
+          "range" : 0,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          }
         },
         "energy" : {
           "max" : 0,
@@ -1135,7 +1323,11 @@
         "defence" : 20,
         "melee" : {
           "attack" : 20,
-          "damage" : 15
+          "damage" : 15,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          }
         },
         "health" : {
           "max" : 25,
@@ -1171,21 +1363,29 @@
       "inventory" : [ ],
       "faction" : "none",
       "stats" : {
+        "launcher" : {
+          "missile" : null,
+          "range" : 0,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          }
+        },
         "explosive" : {
           "attack" : 50,
           "damage" : 10,
           "radius" : 2,
           "blast" : 90
         },
-        "launcher" : {
-          "missile" : null,
-          "range" : 0
-        },
         "speed" : 3,
         "ranged" : {
           "attack" : 0,
           "damage" : 0,
-          "range" : 0
+          "range" : 0,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          }
         },
         "energy" : {
           "max" : 0,
@@ -1198,7 +1398,11 @@
         "defence" : 100,
         "melee" : {
           "attack" : 0,
-          "damage" : 0
+          "damage" : 0,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          }
         },
         "health" : {
           "max" : 10,
@@ -1229,21 +1433,29 @@
       "inventory" : [ ],
       "faction" : "enemy-faction",
       "stats" : {
+        "launcher" : {
+          "missile" : null,
+          "range" : 0,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          }
+        },
         "explosive" : {
           "attack" : 0,
           "damage" : 0,
           "radius" : 0,
           "blast" : 0
         },
-        "launcher" : {
-          "missile" : null,
-          "range" : 0
-        },
         "speed" : 1,
         "ranged" : {
           "attack" : 0,
           "damage" : 0,
-          "range" : 0
+          "range" : 0,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          }
         },
         "energy" : {
           "max" : 0,
@@ -1256,7 +1468,11 @@
         "defence" : 30,
         "melee" : {
           "attack" : 30,
-          "damage" : 20
+          "damage" : 20,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          }
         },
         "health" : {
           "max" : 30,
@@ -1292,21 +1508,29 @@
       "inventory" : [ ],
       "faction" : "none",
       "stats" : {
+        "launcher" : {
+          "missile" : null,
+          "range" : 0,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          }
+        },
         "explosive" : {
           "attack" : 60,
           "damage" : 15,
           "radius" : 2,
           "blast" : 90
         },
-        "launcher" : {
-          "missile" : null,
-          "range" : 0
-        },
         "speed" : 3,
         "ranged" : {
           "attack" : 0,
           "damage" : 0,
-          "range" : 0
+          "range" : 0,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          }
         },
         "energy" : {
           "max" : 0,
@@ -1319,7 +1543,11 @@
         "defence" : 100,
         "melee" : {
           "attack" : 0,
-          "damage" : 0
+          "damage" : 0,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          }
         },
         "health" : {
           "max" : 10,
@@ -1355,21 +1583,29 @@
       "inventory" : [ ],
       "faction" : "none",
       "stats" : {
+        "launcher" : {
+          "missile" : null,
+          "range" : 0,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          }
+        },
         "explosive" : {
           "attack" : 70,
           "damage" : 20,
           "radius" : 2,
           "blast" : 90
         },
-        "launcher" : {
-          "missile" : null,
-          "range" : 0
-        },
         "speed" : 3,
         "ranged" : {
           "attack" : 0,
           "damage" : 0,
-          "range" : 0
+          "range" : 0,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          }
         },
         "energy" : {
           "max" : 0,
@@ -1382,7 +1618,11 @@
         "defence" : 100,
         "melee" : {
           "attack" : 0,
-          "damage" : 0
+          "damage" : 0,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          }
         },
         "health" : {
           "max" : 10,
@@ -1413,21 +1653,29 @@
       "inventory" : [ ],
       "faction" : "enemy-faction",
       "stats" : {
+        "launcher" : {
+          "missile" : null,
+          "range" : 0,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          }
+        },
         "explosive" : {
           "attack" : 0,
           "damage" : 0,
           "radius" : 0,
           "blast" : 0
         },
-        "launcher" : {
-          "missile" : null,
-          "range" : 0
-        },
         "speed" : 0.5,
         "ranged" : {
           "attack" : 0,
           "damage" : 0,
-          "range" : 0
+          "range" : 0,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          }
         },
         "energy" : {
           "max" : 0,
@@ -1440,7 +1688,11 @@
         "defence" : 10,
         "melee" : {
           "attack" : 10,
-          "damage" : 20
+          "damage" : 20,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          }
         },
         "health" : {
           "max" : 30,
@@ -1471,21 +1723,29 @@
       "inventory" : [ ],
       "faction" : "enemy-faction",
       "stats" : {
+        "launcher" : {
+          "missile" : null,
+          "range" : 0,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          }
+        },
         "explosive" : {
           "attack" : 0,
           "damage" : 0,
           "radius" : 0,
           "blast" : 0
         },
-        "launcher" : {
-          "missile" : null,
-          "range" : 0
-        },
         "speed" : 0.5,
         "ranged" : {
           "attack" : 0,
           "damage" : 0,
-          "range" : 0
+          "range" : 0,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          }
         },
         "energy" : {
           "max" : 0,
@@ -1498,7 +1758,11 @@
         "defence" : 20,
         "melee" : {
           "attack" : 20,
-          "damage" : 25
+          "damage" : 25,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          }
         },
         "health" : {
           "max" : 40,
@@ -1529,21 +1793,29 @@
       "inventory" : [ ],
       "faction" : "enemy-faction",
       "stats" : {
+        "launcher" : {
+          "missile" : null,
+          "range" : 0,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          }
+        },
         "explosive" : {
           "attack" : 0,
           "damage" : 0,
           "radius" : 0,
           "blast" : 0
         },
-        "launcher" : {
-          "missile" : null,
-          "range" : 0
-        },
         "speed" : 0.5,
         "ranged" : {
           "attack" : 0,
           "damage" : 0,
-          "range" : 0
+          "range" : 0,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          }
         },
         "energy" : {
           "max" : 0,
@@ -1556,7 +1828,11 @@
         "defence" : 30,
         "melee" : {
           "attack" : 30,
-          "damage" : 30
+          "damage" : 30,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          }
         },
         "health" : {
           "max" : 50,
@@ -1587,21 +1863,29 @@
       "inventory" : [ ],
       "faction" : "enemy-faction",
       "stats" : {
+        "launcher" : {
+          "missile" : null,
+          "range" : 0,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          }
+        },
         "explosive" : {
           "attack" : 0,
           "damage" : 0,
           "radius" : 0,
           "blast" : 0
         },
-        "launcher" : {
-          "missile" : null,
-          "range" : 0
-        },
         "speed" : 0.5,
         "ranged" : {
           "attack" : 20,
           "damage" : 10,
-          "range" : 7
+          "range" : 7,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          }
         },
         "energy" : {
           "max" : 0,
@@ -1614,7 +1898,11 @@
         "defence" : 10,
         "melee" : {
           "attack" : 20,
-          "damage" : 10
+          "damage" : 10,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          }
         },
         "health" : {
           "max" : 10,
@@ -1645,21 +1933,29 @@
       "inventory" : [ ],
       "faction" : "enemy-faction",
       "stats" : {
+        "launcher" : {
+          "missile" : null,
+          "range" : 0,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          }
+        },
         "explosive" : {
           "attack" : 0,
           "damage" : 0,
           "radius" : 0,
           "blast" : 0
         },
-        "launcher" : {
-          "missile" : null,
-          "range" : 0
-        },
         "speed" : 0.5,
         "ranged" : {
           "attack" : 35,
           "damage" : 15,
-          "range" : 7
+          "range" : 7,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          }
         },
         "energy" : {
           "max" : 0,
@@ -1672,7 +1968,11 @@
         "defence" : 20,
         "melee" : {
           "attack" : 35,
-          "damage" : 15
+          "damage" : 15,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          }
         },
         "health" : {
           "max" : 15,
@@ -1703,21 +2003,29 @@
       "inventory" : [ ],
       "faction" : "enemy-faction",
       "stats" : {
+        "launcher" : {
+          "missile" : null,
+          "range" : 0,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          }
+        },
         "explosive" : {
           "attack" : 0,
           "damage" : 0,
           "radius" : 0,
           "blast" : 0
         },
-        "launcher" : {
-          "missile" : null,
-          "range" : 0
-        },
         "speed" : 0.5,
         "ranged" : {
           "attack" : 50,
           "damage" : 20,
-          "range" : 7
+          "range" : 7,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          }
         },
         "energy" : {
           "max" : 0,
@@ -1730,7 +2038,11 @@
         "defence" : 30,
         "melee" : {
           "attack" : 50,
-          "damage" : 20
+          "damage" : 20,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          }
         },
         "health" : {
           "max" : 20,
@@ -1756,21 +2068,29 @@
       "weapon" : null,
       "armor" : {
         "stats" : {
+          "launcher" : {
+            "missile" : null,
+            "range" : 0,
+            "consumption" : {
+              "energy" : 0,
+              "materials" : 0
+            }
+          },
           "explosive" : {
             "attack" : 0,
             "damage" : 0,
             "radius" : 0,
             "blast" : 0
           },
-          "launcher" : {
-            "missile" : null,
-            "range" : 0
-          },
           "speed" : 1,
           "ranged" : {
             "attack" : 0,
             "damage" : 0,
-            "range" : 0
+            "range" : 0,
+            "consumption" : {
+              "energy" : 0,
+              "materials" : 0
+            }
           },
           "energy" : {
             "max" : 0,
@@ -1783,7 +2103,11 @@
           "defence" : 1,
           "melee" : {
             "attack" : 0,
-            "damage" : 0
+            "damage" : 0,
+            "consumption" : {
+              "energy" : 0,
+              "materials" : 0
+            }
           },
           "health" : {
             "max" : 0,
@@ -1810,21 +2134,29 @@
       "weapon" : null,
       "armor" : {
         "stats" : {
+          "launcher" : {
+            "missile" : null,
+            "range" : 0,
+            "consumption" : {
+              "energy" : 0,
+              "materials" : 0
+            }
+          },
           "explosive" : {
             "attack" : 0,
             "damage" : 0,
             "radius" : 0,
             "blast" : 0
           },
-          "launcher" : {
-            "missile" : null,
-            "range" : 0
-          },
           "speed" : 1,
           "ranged" : {
             "attack" : 0,
             "damage" : 0,
-            "range" : 0
+            "range" : 0,
+            "consumption" : {
+              "energy" : 0,
+              "materials" : 0
+            }
           },
           "energy" : {
             "max" : 0,
@@ -1837,7 +2169,11 @@
           "defence" : 1,
           "melee" : {
             "attack" : 0,
-            "damage" : 0
+            "damage" : 0,
+            "consumption" : {
+              "energy" : 0,
+              "materials" : 0
+            }
           },
           "health" : {
             "max" : 0,
@@ -1855,21 +2191,29 @@
       "color" : "white",
       "rangedWeapon" : {
         "stats" : {
+          "launcher" : {
+            "missile" : "missile-guided-1",
+            "range" : 10,
+            "consumption" : {
+              "energy" : 0,
+              "materials" : 0
+            }
+          },
           "explosive" : {
             "attack" : 0,
             "damage" : 0,
             "radius" : 0,
             "blast" : 0
           },
-          "launcher" : {
-            "missile" : "missile-guided-1",
-            "range" : 10
-          },
           "speed" : 1,
           "ranged" : {
             "attack" : 0,
             "damage" : 0,
-            "range" : 0
+            "range" : 0,
+            "consumption" : {
+              "energy" : 0,
+              "materials" : 0
+            }
           },
           "energy" : {
             "max" : 0,
@@ -1882,7 +2226,11 @@
           "defence" : 0,
           "melee" : {
             "attack" : 0,
-            "damage" : 0
+            "damage" : 0,
+            "consumption" : {
+              "energy" : 0,
+              "materials" : 0
+            }
           },
           "health" : {
             "max" : 0,
@@ -1917,21 +2265,29 @@
       "weapon" : null,
       "armor" : {
         "stats" : {
+          "launcher" : {
+            "missile" : null,
+            "range" : 0,
+            "consumption" : {
+              "energy" : 0,
+              "materials" : 0
+            }
+          },
           "explosive" : {
             "attack" : 0,
             "damage" : 0,
             "radius" : 0,
             "blast" : 0
           },
-          "launcher" : {
-            "missile" : null,
-            "range" : 0
-          },
           "speed" : 1,
           "ranged" : {
             "attack" : 0,
             "damage" : 0,
-            "range" : 0
+            "range" : 0,
+            "consumption" : {
+              "energy" : 0,
+              "materials" : 0
+            }
           },
           "energy" : {
             "max" : 0,
@@ -1944,7 +2300,11 @@
           "defence" : 2,
           "melee" : {
             "attack" : 0,
-            "damage" : 0
+            "damage" : 0,
+            "consumption" : {
+              "energy" : 0,
+              "materials" : 0
+            }
           },
           "health" : {
             "max" : 0,
@@ -1971,21 +2331,29 @@
       "weapon" : null,
       "armor" : {
         "stats" : {
+          "launcher" : {
+            "missile" : null,
+            "range" : 0,
+            "consumption" : {
+              "energy" : 0,
+              "materials" : 0
+            }
+          },
           "explosive" : {
             "attack" : 0,
             "damage" : 0,
             "radius" : 0,
             "blast" : 0
           },
-          "launcher" : {
-            "missile" : null,
-            "range" : 0
-          },
           "speed" : 1,
           "ranged" : {
             "attack" : 0,
             "damage" : 0,
-            "range" : 0
+            "range" : 0,
+            "consumption" : {
+              "energy" : 0,
+              "materials" : 0
+            }
           },
           "energy" : {
             "max" : 0,
@@ -1998,7 +2366,11 @@
           "defence" : 2,
           "melee" : {
             "attack" : 0,
-            "damage" : 0
+            "damage" : 0,
+            "consumption" : {
+              "energy" : 0,
+              "materials" : 0
+            }
           },
           "health" : {
             "max" : 0,
@@ -2016,21 +2388,29 @@
       "color" : "white",
       "rangedWeapon" : {
         "stats" : {
+          "launcher" : {
+            "missile" : "missile-guided-2",
+            "range" : 10,
+            "consumption" : {
+              "energy" : 0,
+              "materials" : 0
+            }
+          },
           "explosive" : {
             "attack" : 0,
             "damage" : 0,
             "radius" : 0,
             "blast" : 0
           },
-          "launcher" : {
-            "missile" : "missile-guided-2",
-            "range" : 10
-          },
           "speed" : 1,
           "ranged" : {
             "attack" : 0,
             "damage" : 0,
-            "range" : 0
+            "range" : 0,
+            "consumption" : {
+              "energy" : 0,
+              "materials" : 0
+            }
           },
           "energy" : {
             "max" : 0,
@@ -2043,7 +2423,11 @@
           "defence" : 0,
           "melee" : {
             "attack" : 0,
-            "damage" : 0
+            "damage" : 0,
+            "consumption" : {
+              "energy" : 0,
+              "materials" : 0
+            }
           },
           "health" : {
             "max" : 0,
@@ -2078,21 +2462,29 @@
       "weapon" : null,
       "armor" : {
         "stats" : {
+          "launcher" : {
+            "missile" : null,
+            "range" : 0,
+            "consumption" : {
+              "energy" : 0,
+              "materials" : 0
+            }
+          },
           "explosive" : {
             "attack" : 0,
             "damage" : 0,
             "radius" : 0,
             "blast" : 0
           },
-          "launcher" : {
-            "missile" : null,
-            "range" : 0
-          },
           "speed" : 1,
           "ranged" : {
             "attack" : 0,
             "damage" : 0,
-            "range" : 0
+            "range" : 0,
+            "consumption" : {
+              "energy" : 0,
+              "materials" : 0
+            }
           },
           "energy" : {
             "max" : 0,
@@ -2105,7 +2497,11 @@
           "defence" : 3,
           "melee" : {
             "attack" : 0,
-            "damage" : 0
+            "damage" : 0,
+            "consumption" : {
+              "energy" : 0,
+              "materials" : 0
+            }
           },
           "health" : {
             "max" : 0,
@@ -2145,21 +2541,29 @@
       "weapon" : null,
       "armor" : {
         "stats" : {
+          "launcher" : {
+            "missile" : null,
+            "range" : 0,
+            "consumption" : {
+              "energy" : 0,
+              "materials" : 0
+            }
+          },
           "explosive" : {
             "attack" : 0,
             "damage" : 0,
             "radius" : 0,
             "blast" : 0
           },
-          "launcher" : {
-            "missile" : null,
-            "range" : 0
-          },
           "speed" : 1,
           "ranged" : {
             "attack" : 0,
             "damage" : 0,
-            "range" : 0
+            "range" : 0,
+            "consumption" : {
+              "energy" : 0,
+              "materials" : 0
+            }
           },
           "energy" : {
             "max" : 0,
@@ -2172,7 +2576,11 @@
           "defence" : 3,
           "melee" : {
             "attack" : 0,
-            "damage" : 0
+            "damage" : 0,
+            "consumption" : {
+              "energy" : 0,
+              "materials" : 0
+            }
           },
           "health" : {
             "max" : 0,
@@ -2190,21 +2598,29 @@
       "color" : "white",
       "rangedWeapon" : {
         "stats" : {
+          "launcher" : {
+            "missile" : "missile-guided-3",
+            "range" : 10,
+            "consumption" : {
+              "energy" : 0,
+              "materials" : 0
+            }
+          },
           "explosive" : {
             "attack" : 0,
             "damage" : 0,
             "radius" : 0,
             "blast" : 0
           },
-          "launcher" : {
-            "missile" : "missile-guided-3",
-            "range" : 10
-          },
           "speed" : 1,
           "ranged" : {
             "attack" : 0,
             "damage" : 0,
-            "range" : 0
+            "range" : 0,
+            "consumption" : {
+              "energy" : 0,
+              "materials" : 0
+            }
           },
           "energy" : {
             "max" : 0,
@@ -2217,7 +2633,11 @@
           "defence" : 0,
           "melee" : {
             "attack" : 0,
-            "damage" : 0
+            "damage" : 0,
+            "consumption" : {
+              "energy" : 0,
+              "materials" : 0
+            }
           },
           "health" : {
             "max" : 0,
@@ -2252,21 +2672,29 @@
       "weapon" : null,
       "armor" : {
         "stats" : {
+          "launcher" : {
+            "missile" : null,
+            "range" : 0,
+            "consumption" : {
+              "energy" : 0,
+              "materials" : 0
+            }
+          },
           "explosive" : {
             "attack" : 0,
             "damage" : 0,
             "radius" : 0,
             "blast" : 0
           },
-          "launcher" : {
-            "missile" : null,
-            "range" : 0
-          },
           "speed" : 1,
           "ranged" : {
             "attack" : 0,
             "damage" : 0,
-            "range" : 0
+            "range" : 0,
+            "consumption" : {
+              "energy" : 0,
+              "materials" : 0
+            }
           },
           "energy" : {
             "max" : 0,
@@ -2279,7 +2707,11 @@
           "defence" : 3,
           "melee" : {
             "attack" : 0,
-            "damage" : 0
+            "damage" : 0,
+            "consumption" : {
+              "energy" : 0,
+              "materials" : 0
+            }
           },
           "health" : {
             "max" : 0,
@@ -2364,21 +2796,29 @@
       "weapon" : null,
       "armor" : {
         "stats" : {
+          "launcher" : {
+            "missile" : null,
+            "range" : 0,
+            "consumption" : {
+              "energy" : 0,
+              "materials" : 0
+            }
+          },
           "explosive" : {
             "attack" : 0,
             "damage" : 0,
             "radius" : 0,
             "blast" : 0
           },
-          "launcher" : {
-            "missile" : null,
-            "range" : 0
-          },
           "speed" : 1,
           "ranged" : {
             "attack" : 0,
             "damage" : 0,
-            "range" : 0
+            "range" : 0,
+            "consumption" : {
+              "energy" : 0,
+              "materials" : 0
+            }
           },
           "energy" : {
             "max" : 0,
@@ -2391,7 +2831,11 @@
           "defence" : 5,
           "melee" : {
             "attack" : 0,
-            "damage" : 0
+            "damage" : 0,
+            "consumption" : {
+              "energy" : 0,
+              "materials" : 0
+            }
           },
           "health" : {
             "max" : 0,
@@ -2431,21 +2875,29 @@
       "weapon" : null,
       "armor" : {
         "stats" : {
+          "launcher" : {
+            "missile" : null,
+            "range" : 0,
+            "consumption" : {
+              "energy" : 0,
+              "materials" : 0
+            }
+          },
           "explosive" : {
             "attack" : 0,
             "damage" : 0,
             "radius" : 0,
             "blast" : 0
           },
-          "launcher" : {
-            "missile" : null,
-            "range" : 0
-          },
           "speed" : 1,
           "ranged" : {
             "attack" : 0,
             "damage" : 0,
-            "range" : 0
+            "range" : 0,
+            "consumption" : {
+              "energy" : 0,
+              "materials" : 0
+            }
           },
           "energy" : {
             "max" : 0,
@@ -2458,7 +2910,11 @@
           "defence" : 7,
           "melee" : {
             "attack" : 0,
-            "damage" : 0
+            "damage" : 0,
+            "consumption" : {
+              "energy" : 0,
+              "materials" : 0
+            }
           },
           "health" : {
             "max" : 0,
@@ -2556,21 +3012,29 @@
       "id" : "weapon-blade-1",
       "weapon" : {
         "stats" : {
+          "launcher" : {
+            "missile" : null,
+            "range" : 0,
+            "consumption" : {
+              "energy" : 0,
+              "materials" : 0
+            }
+          },
           "explosive" : {
             "attack" : 0,
             "damage" : 0,
             "radius" : 0,
             "blast" : 0
           },
-          "launcher" : {
-            "missile" : null,
-            "range" : 0
-          },
           "speed" : 1,
           "ranged" : {
             "attack" : 0,
             "damage" : 0,
-            "range" : 0
+            "range" : 0,
+            "consumption" : {
+              "energy" : 0,
+              "materials" : 0
+            }
           },
           "energy" : {
             "max" : 0,
@@ -2583,7 +3047,11 @@
           "defence" : 2,
           "melee" : {
             "attack" : 10,
-            "damage" : 5
+            "damage" : 5,
+            "consumption" : {
+              "energy" : 0,
+              "materials" : 0
+            }
           },
           "health" : {
             "max" : 0,
@@ -2636,21 +3104,29 @@
       "id" : "weapon-blade-2",
       "weapon" : {
         "stats" : {
+          "launcher" : {
+            "missile" : null,
+            "range" : 0,
+            "consumption" : {
+              "energy" : 0,
+              "materials" : 0
+            }
+          },
           "explosive" : {
             "attack" : 0,
             "damage" : 0,
             "radius" : 0,
             "blast" : 0
           },
-          "launcher" : {
-            "missile" : null,
-            "range" : 0
-          },
           "speed" : 1,
           "ranged" : {
             "attack" : 0,
             "damage" : 0,
-            "range" : 0
+            "range" : 0,
+            "consumption" : {
+              "energy" : 0,
+              "materials" : 0
+            }
           },
           "energy" : {
             "max" : 0,
@@ -2663,7 +3139,11 @@
           "defence" : 4,
           "melee" : {
             "attack" : 20,
-            "damage" : 10
+            "damage" : 10,
+            "consumption" : {
+              "energy" : 0,
+              "materials" : 0
+            }
           },
           "health" : {
             "max" : 0,
@@ -2703,21 +3183,29 @@
       "id" : "weapon-blade-3",
       "weapon" : {
         "stats" : {
+          "launcher" : {
+            "missile" : null,
+            "range" : 0,
+            "consumption" : {
+              "energy" : 0,
+              "materials" : 0
+            }
+          },
           "explosive" : {
             "attack" : 0,
             "damage" : 0,
             "radius" : 0,
             "blast" : 0
           },
-          "launcher" : {
-            "missile" : null,
-            "range" : 0
-          },
           "speed" : 1,
           "ranged" : {
             "attack" : 0,
             "damage" : 0,
-            "range" : 0
+            "range" : 0,
+            "consumption" : {
+              "energy" : 0,
+              "materials" : 0
+            }
           },
           "energy" : {
             "max" : 0,
@@ -2730,7 +3218,11 @@
           "defence" : 6,
           "melee" : {
             "attack" : 30,
-            "damage" : 15
+            "damage" : 15,
+            "consumption" : {
+              "energy" : 0,
+              "materials" : 0
+            }
           },
           "health" : {
             "max" : 0,
@@ -2906,21 +3398,29 @@
       "rangedWeapon" : null,
       "shield" : {
         "stats" : {
+          "launcher" : {
+            "missile" : null,
+            "range" : 0,
+            "consumption" : {
+              "energy" : 0,
+              "materials" : 0
+            }
+          },
           "explosive" : {
             "attack" : 0,
             "damage" : 0,
             "radius" : 0,
             "blast" : 0
           },
-          "launcher" : {
-            "missile" : null,
-            "range" : 0
-          },
           "speed" : 1,
           "ranged" : {
             "attack" : 0,
             "damage" : 0,
-            "range" : 0
+            "range" : 0,
+            "consumption" : {
+              "energy" : 0,
+              "materials" : 0
+            }
           },
           "energy" : {
             "max" : 0,
@@ -2933,7 +3433,11 @@
           "defence" : 10,
           "melee" : {
             "attack" : 0,
-            "damage" : 0
+            "damage" : 0,
+            "consumption" : {
+              "energy" : 0,
+              "materials" : 0
+            }
           },
           "health" : {
             "max" : 0,
@@ -2967,21 +3471,29 @@
       "weapon" : null,
       "armor" : {
         "stats" : {
+          "launcher" : {
+            "missile" : null,
+            "range" : 0,
+            "consumption" : {
+              "energy" : 0,
+              "materials" : 0
+            }
+          },
           "explosive" : {
             "attack" : 0,
             "damage" : 0,
             "radius" : 0,
             "blast" : 0
           },
-          "launcher" : {
-            "missile" : null,
-            "range" : 0
-          },
           "speed" : 1,
           "ranged" : {
             "attack" : 0,
             "damage" : 0,
-            "range" : 0
+            "range" : 0,
+            "consumption" : {
+              "energy" : 0,
+              "materials" : 0
+            }
           },
           "energy" : {
             "max" : 0,
@@ -2994,7 +3506,11 @@
           "defence" : 1,
           "melee" : {
             "attack" : 0,
-            "damage" : 0
+            "damage" : 0,
+            "consumption" : {
+              "energy" : 0,
+              "materials" : 0
+            }
           },
           "health" : {
             "max" : 0,
@@ -3013,21 +3529,29 @@
       "rangedWeapon" : null,
       "shield" : {
         "stats" : {
+          "launcher" : {
+            "missile" : null,
+            "range" : 0,
+            "consumption" : {
+              "energy" : 0,
+              "materials" : 0
+            }
+          },
           "explosive" : {
             "attack" : 0,
             "damage" : 0,
             "radius" : 0,
             "blast" : 0
           },
-          "launcher" : {
-            "missile" : null,
-            "range" : 0
-          },
           "speed" : 1,
           "ranged" : {
             "attack" : 0,
             "damage" : 0,
-            "range" : 0
+            "range" : 0,
+            "consumption" : {
+              "energy" : 0,
+              "materials" : 0
+            }
           },
           "energy" : {
             "max" : 0,
@@ -3040,7 +3564,11 @@
           "defence" : 20,
           "melee" : {
             "attack" : 0,
-            "damage" : 0
+            "damage" : 0,
+            "consumption" : {
+              "energy" : 0,
+              "materials" : 0
+            }
           },
           "health" : {
             "max" : 0,
@@ -3074,21 +3602,29 @@
       "weapon" : null,
       "armor" : {
         "stats" : {
+          "launcher" : {
+            "missile" : null,
+            "range" : 0,
+            "consumption" : {
+              "energy" : 0,
+              "materials" : 0
+            }
+          },
           "explosive" : {
             "attack" : 0,
             "damage" : 0,
             "radius" : 0,
             "blast" : 0
           },
-          "launcher" : {
-            "missile" : null,
-            "range" : 0
-          },
           "speed" : 1,
           "ranged" : {
             "attack" : 0,
             "damage" : 0,
-            "range" : 0
+            "range" : 0,
+            "consumption" : {
+              "energy" : 0,
+              "materials" : 0
+            }
           },
           "energy" : {
             "max" : 0,
@@ -3101,7 +3637,11 @@
           "defence" : 2,
           "melee" : {
             "attack" : 0,
-            "damage" : 0
+            "damage" : 0,
+            "consumption" : {
+              "energy" : 0,
+              "materials" : 0
+            }
           },
           "health" : {
             "max" : 0,
@@ -3120,21 +3660,29 @@
       "rangedWeapon" : null,
       "shield" : {
         "stats" : {
+          "launcher" : {
+            "missile" : null,
+            "range" : 0,
+            "consumption" : {
+              "energy" : 0,
+              "materials" : 0
+            }
+          },
           "explosive" : {
             "attack" : 0,
             "damage" : 0,
             "radius" : 0,
             "blast" : 0
           },
-          "launcher" : {
-            "missile" : null,
-            "range" : 0
-          },
           "speed" : 1,
           "ranged" : {
             "attack" : 0,
             "damage" : 0,
-            "range" : 0
+            "range" : 0,
+            "consumption" : {
+              "energy" : 0,
+              "materials" : 0
+            }
           },
           "energy" : {
             "max" : 0,
@@ -3147,7 +3695,11 @@
           "defence" : 30,
           "melee" : {
             "attack" : 0,
-            "damage" : 0
+            "damage" : 0,
+            "consumption" : {
+              "energy" : 0,
+              "materials" : 0
+            }
           },
           "health" : {
             "max" : 0,
@@ -3181,21 +3733,29 @@
       "weapon" : null,
       "armor" : {
         "stats" : {
+          "launcher" : {
+            "missile" : null,
+            "range" : 0,
+            "consumption" : {
+              "energy" : 0,
+              "materials" : 0
+            }
+          },
           "explosive" : {
             "attack" : 0,
             "damage" : 0,
             "radius" : 0,
             "blast" : 0
           },
-          "launcher" : {
-            "missile" : null,
-            "range" : 0
-          },
           "speed" : 1,
           "ranged" : {
             "attack" : 0,
             "damage" : 0,
-            "range" : 0
+            "range" : 0,
+            "consumption" : {
+              "energy" : 0,
+              "materials" : 0
+            }
           },
           "energy" : {
             "max" : 0,
@@ -3208,7 +3768,11 @@
           "defence" : 3,
           "melee" : {
             "attack" : 0,
-            "damage" : 0
+            "damage" : 0,
+            "consumption" : {
+              "energy" : 0,
+              "materials" : 0
+            }
           },
           "health" : {
             "max" : 0,
@@ -3235,21 +3799,29 @@
       "weapon" : null,
       "armor" : {
         "stats" : {
+          "launcher" : {
+            "missile" : null,
+            "range" : 0,
+            "consumption" : {
+              "energy" : 0,
+              "materials" : 0
+            }
+          },
           "explosive" : {
             "attack" : 0,
             "damage" : 0,
             "radius" : 0,
             "blast" : 0
           },
-          "launcher" : {
-            "missile" : null,
-            "range" : 0
-          },
           "speed" : 1,
           "ranged" : {
             "attack" : 0,
             "damage" : 0,
-            "range" : 0
+            "range" : 0,
+            "consumption" : {
+              "energy" : 0,
+              "materials" : 0
+            }
           },
           "energy" : {
             "max" : 0,
@@ -3262,7 +3834,11 @@
           "defence" : 3,
           "melee" : {
             "attack" : 0,
-            "damage" : 0
+            "damage" : 0,
+            "consumption" : {
+              "energy" : 0,
+              "materials" : 0
+            }
           },
           "health" : {
             "max" : 5,
@@ -3289,21 +3865,29 @@
       "weapon" : null,
       "armor" : {
         "stats" : {
+          "launcher" : {
+            "missile" : null,
+            "range" : 0,
+            "consumption" : {
+              "energy" : 0,
+              "materials" : 0
+            }
+          },
           "explosive" : {
             "attack" : 0,
             "damage" : 0,
             "radius" : 0,
             "blast" : 0
           },
-          "launcher" : {
-            "missile" : null,
-            "range" : 0
-          },
           "speed" : 1,
           "ranged" : {
             "attack" : 0,
             "damage" : 0,
-            "range" : 0
+            "range" : 0,
+            "consumption" : {
+              "energy" : 0,
+              "materials" : 0
+            }
           },
           "energy" : {
             "max" : 0,
@@ -3316,7 +3900,11 @@
           "defence" : 5,
           "melee" : {
             "attack" : 0,
-            "damage" : 0
+            "damage" : 0,
+            "consumption" : {
+              "energy" : 0,
+              "materials" : 0
+            }
           },
           "health" : {
             "max" : 10,
@@ -3343,21 +3931,29 @@
       "weapon" : null,
       "armor" : {
         "stats" : {
+          "launcher" : {
+            "missile" : null,
+            "range" : 0,
+            "consumption" : {
+              "energy" : 0,
+              "materials" : 0
+            }
+          },
           "explosive" : {
             "attack" : 0,
             "damage" : 0,
             "radius" : 0,
             "blast" : 0
           },
-          "launcher" : {
-            "missile" : null,
-            "range" : 0
-          },
           "speed" : 1,
           "ranged" : {
             "attack" : 0,
             "damage" : 0,
-            "range" : 0
+            "range" : 0,
+            "consumption" : {
+              "energy" : 0,
+              "materials" : 0
+            }
           },
           "energy" : {
             "max" : 0,
@@ -3370,7 +3966,11 @@
           "defence" : 7,
           "melee" : {
             "attack" : 0,
-            "damage" : 0
+            "damage" : 0,
+            "consumption" : {
+              "energy" : 0,
+              "materials" : 0
+            }
           },
           "health" : {
             "max" : 15,
@@ -3388,21 +3988,29 @@
       "color" : "green",
       "rangedWeapon" : {
         "stats" : {
+          "launcher" : {
+            "missile" : null,
+            "range" : 0,
+            "consumption" : {
+              "energy" : 0,
+              "materials" : 0
+            }
+          },
           "explosive" : {
             "attack" : 0,
             "damage" : 0,
             "radius" : 0,
             "blast" : 0
           },
-          "launcher" : {
-            "missile" : null,
-            "range" : 0
-          },
           "speed" : 1,
           "ranged" : {
             "attack" : 10,
             "damage" : 5,
-            "range" : 5
+            "range" : 5,
+            "consumption" : {
+              "energy" : 0,
+              "materials" : 0
+            }
           },
           "energy" : {
             "max" : 0,
@@ -3415,7 +4023,11 @@
           "defence" : 0,
           "melee" : {
             "attack" : 0,
-            "damage" : 0
+            "damage" : 0,
+            "consumption" : {
+              "energy" : 0,
+              "materials" : 0
+            }
           },
           "health" : {
             "max" : 0,
@@ -3441,21 +4053,29 @@
       "color" : "blue",
       "rangedWeapon" : {
         "stats" : {
+          "launcher" : {
+            "missile" : null,
+            "range" : 0,
+            "consumption" : {
+              "energy" : 0,
+              "materials" : 0
+            }
+          },
           "explosive" : {
             "attack" : 0,
             "damage" : 0,
             "radius" : 0,
             "blast" : 0
           },
-          "launcher" : {
-            "missile" : null,
-            "range" : 0
-          },
           "speed" : 1,
           "ranged" : {
             "attack" : 20,
             "damage" : 10,
-            "range" : 6
+            "range" : 6,
+            "consumption" : {
+              "energy" : 0,
+              "materials" : 0
+            }
           },
           "energy" : {
             "max" : 0,
@@ -3468,7 +4088,11 @@
           "defence" : 0,
           "melee" : {
             "attack" : 0,
-            "damage" : 0
+            "damage" : 0,
+            "consumption" : {
+              "energy" : 0,
+              "materials" : 0
+            }
           },
           "health" : {
             "max" : 0,
@@ -3503,21 +4127,29 @@
       "weapon" : null,
       "armor" : {
         "stats" : {
+          "launcher" : {
+            "missile" : null,
+            "range" : 0,
+            "consumption" : {
+              "energy" : 0,
+              "materials" : 0
+            }
+          },
           "explosive" : {
             "attack" : 0,
             "damage" : 0,
             "radius" : 0,
             "blast" : 0
           },
-          "launcher" : {
-            "missile" : null,
-            "range" : 0
-          },
           "speed" : 1,
           "ranged" : {
             "attack" : 0,
             "damage" : 0,
-            "range" : 0
+            "range" : 0,
+            "consumption" : {
+              "energy" : 0,
+              "materials" : 0
+            }
           },
           "energy" : {
             "max" : 0,
@@ -3530,7 +4162,11 @@
           "defence" : 1000,
           "melee" : {
             "attack" : 0,
-            "damage" : 0
+            "damage" : 0,
+            "consumption" : {
+              "energy" : 0,
+              "materials" : 0
+            }
           },
           "health" : {
             "max" : 0,
@@ -3548,21 +4184,29 @@
       "color" : "red",
       "rangedWeapon" : {
         "stats" : {
+          "launcher" : {
+            "missile" : null,
+            "range" : 0,
+            "consumption" : {
+              "energy" : 0,
+              "materials" : 0
+            }
+          },
           "explosive" : {
             "attack" : 0,
             "damage" : 0,
             "radius" : 0,
             "blast" : 0
           },
-          "launcher" : {
-            "missile" : null,
-            "range" : 0
-          },
           "speed" : 1,
           "ranged" : {
             "attack" : 30,
             "damage" : 15,
-            "range" : 7
+            "range" : 7,
+            "consumption" : {
+              "energy" : 0,
+              "materials" : 0
+            }
           },
           "energy" : {
             "max" : 0,
@@ -3575,7 +4219,11 @@
           "defence" : 0,
           "melee" : {
             "attack" : 0,
-            "damage" : 0
+            "damage" : 0,
+            "consumption" : {
+              "energy" : 0,
+              "materials" : 0
+            }
           },
           "health" : {
             "max" : 0,
@@ -3833,21 +4481,29 @@
         "experience" : 10
       },
       "stats" : {
+        "launcher" : {
+          "missile" : null,
+          "range" : 0,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          }
+        },
         "explosive" : {
           "attack" : 0,
           "damage" : 0,
           "radius" : 0,
           "blast" : 0
         },
-        "launcher" : {
-          "missile" : null,
-          "range" : 0
-        },
         "speed" : 1,
         "ranged" : {
           "attack" : 2,
           "damage" : 0,
-          "range" : 0
+          "range" : 0,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          }
         },
         "energy" : {
           "max" : 0,
@@ -3860,7 +4516,11 @@
         "defence" : 2,
         "melee" : {
           "attack" : 2,
-          "damage" : 0
+          "damage" : 0,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          }
         },
         "health" : {
           "max" : 5,
@@ -3876,21 +4536,29 @@
         "experience" : 20
       },
       "stats" : {
+        "launcher" : {
+          "missile" : null,
+          "range" : 0,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          }
+        },
         "explosive" : {
           "attack" : 0,
           "damage" : 0,
           "radius" : 0,
           "blast" : 0
         },
-        "launcher" : {
-          "missile" : null,
-          "range" : 0
-        },
         "speed" : 1,
         "ranged" : {
           "attack" : 2,
           "damage" : 0,
-          "range" : 0
+          "range" : 0,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          }
         },
         "energy" : {
           "max" : 0,
@@ -3903,7 +4571,11 @@
         "defence" : 2,
         "melee" : {
           "attack" : 2,
-          "damage" : 0
+          "damage" : 0,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          }
         },
         "health" : {
           "max" : 5,
@@ -3919,21 +4591,29 @@
         "experience" : 30
       },
       "stats" : {
+        "launcher" : {
+          "missile" : null,
+          "range" : 0,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          }
+        },
         "explosive" : {
           "attack" : 0,
           "damage" : 0,
           "radius" : 0,
           "blast" : 0
         },
-        "launcher" : {
-          "missile" : null,
-          "range" : 0
-        },
         "speed" : 1,
         "ranged" : {
           "attack" : 2,
           "damage" : 0,
-          "range" : 0
+          "range" : 0,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          }
         },
         "energy" : {
           "max" : 0,
@@ -3946,7 +4626,11 @@
         "defence" : 2,
         "melee" : {
           "attack" : 2,
-          "damage" : 0
+          "damage" : 0,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          }
         },
         "health" : {
           "max" : 5,
@@ -3962,21 +4646,29 @@
         "experience" : 40
       },
       "stats" : {
+        "launcher" : {
+          "missile" : null,
+          "range" : 0,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          }
+        },
         "explosive" : {
           "attack" : 0,
           "damage" : 0,
           "radius" : 0,
           "blast" : 0
         },
-        "launcher" : {
-          "missile" : null,
-          "range" : 0
-        },
         "speed" : 1,
         "ranged" : {
           "attack" : 2,
           "damage" : 0,
-          "range" : 0
+          "range" : 0,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          }
         },
         "energy" : {
           "max" : 0,
@@ -3989,7 +4681,11 @@
         "defence" : 2,
         "melee" : {
           "attack" : 2,
-          "damage" : 0
+          "damage" : 0,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          }
         },
         "health" : {
           "max" : 5,
@@ -4005,21 +4701,29 @@
         "experience" : 50
       },
       "stats" : {
+        "launcher" : {
+          "missile" : null,
+          "range" : 0,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          }
+        },
         "explosive" : {
           "attack" : 0,
           "damage" : 0,
           "radius" : 0,
           "blast" : 0
         },
-        "launcher" : {
-          "missile" : null,
-          "range" : 0
-        },
         "speed" : 1,
         "ranged" : {
           "attack" : 2,
           "damage" : 0,
-          "range" : 0
+          "range" : 0,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          }
         },
         "energy" : {
           "max" : 0,
@@ -4032,7 +4736,11 @@
         "defence" : 2,
         "melee" : {
           "attack" : 2,
-          "damage" : 0
+          "damage" : 0,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          }
         },
         "health" : {
           "max" : 5,
@@ -4051,21 +4759,29 @@
         "experience" : 1
       },
       "stats" : {
+        "launcher" : {
+          "missile" : null,
+          "range" : 0,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          }
+        },
         "explosive" : {
           "attack" : 0,
           "damage" : 0,
           "radius" : 0,
           "blast" : 0
         },
-        "launcher" : {
-          "missile" : null,
-          "range" : 0
-        },
         "speed" : 10,
         "ranged" : {
           "attack" : 0,
           "damage" : 0,
-          "range" : 0
+          "range" : 0,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          }
         },
         "energy" : {
           "max" : 0,
@@ -4078,7 +4794,11 @@
         "defence" : 5,
         "melee" : {
           "attack" : 5,
-          "damage" : 5
+          "damage" : 5,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          }
         },
         "health" : {
           "max" : 5,
@@ -4094,21 +4814,29 @@
         "experience" : 2
       },
       "stats" : {
+        "launcher" : {
+          "missile" : null,
+          "range" : 0,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          }
+        },
         "explosive" : {
           "attack" : 0,
           "damage" : 0,
           "radius" : 0,
           "blast" : 0
         },
-        "launcher" : {
-          "missile" : null,
-          "range" : 0
-        },
         "speed" : 10,
         "ranged" : {
           "attack" : 0,
           "damage" : 0,
-          "range" : 0
+          "range" : 0,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          }
         },
         "energy" : {
           "max" : 0,
@@ -4121,7 +4849,11 @@
         "defence" : 5,
         "melee" : {
           "attack" : 5,
-          "damage" : 5
+          "damage" : 5,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          }
         },
         "health" : {
           "max" : 5,
@@ -4137,21 +4869,29 @@
         "experience" : 3
       },
       "stats" : {
+        "launcher" : {
+          "missile" : null,
+          "range" : 0,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          }
+        },
         "explosive" : {
           "attack" : 0,
           "damage" : 0,
           "radius" : 0,
           "blast" : 0
         },
-        "launcher" : {
-          "missile" : null,
-          "range" : 0
-        },
         "speed" : 10,
         "ranged" : {
           "attack" : 0,
           "damage" : 0,
-          "range" : 0
+          "range" : 0,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          }
         },
         "energy" : {
           "max" : 0,
@@ -4164,7 +4904,11 @@
         "defence" : 5,
         "melee" : {
           "attack" : 5,
-          "damage" : 5
+          "damage" : 5,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          }
         },
         "health" : {
           "max" : 5,
@@ -4180,21 +4924,29 @@
         "experience" : 4
       },
       "stats" : {
+        "launcher" : {
+          "missile" : null,
+          "range" : 0,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          }
+        },
         "explosive" : {
           "attack" : 0,
           "damage" : 0,
           "radius" : 0,
           "blast" : 0
         },
-        "launcher" : {
-          "missile" : null,
-          "range" : 0
-        },
         "speed" : 10,
         "ranged" : {
           "attack" : 0,
           "damage" : 0,
-          "range" : 0
+          "range" : 0,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          }
         },
         "energy" : {
           "max" : 0,
@@ -4207,7 +4959,11 @@
         "defence" : 5,
         "melee" : {
           "attack" : 5,
-          "damage" : 5
+          "damage" : 5,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          }
         },
         "health" : {
           "max" : 5,
@@ -4223,21 +4979,29 @@
         "experience" : 5
       },
       "stats" : {
+        "launcher" : {
+          "missile" : null,
+          "range" : 0,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          }
+        },
         "explosive" : {
           "attack" : 0,
           "damage" : 0,
           "radius" : 0,
           "blast" : 0
         },
-        "launcher" : {
-          "missile" : null,
-          "range" : 0
-        },
         "speed" : 10,
         "ranged" : {
           "attack" : 0,
           "damage" : 0,
-          "range" : 0
+          "range" : 0,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          }
         },
         "energy" : {
           "max" : 0,
@@ -4250,7 +5014,11 @@
         "defence" : 5,
         "melee" : {
           "attack" : 5,
-          "damage" : 5
+          "damage" : 5,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          }
         },
         "health" : {
           "max" : 5,
