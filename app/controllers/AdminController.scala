@@ -11,6 +11,8 @@ class AdminController @Inject()(gameAssets: AssetsRepository,
                                 cc: ControllerComponents)
                                (environment: Environment) extends AbstractController(cc) {
 
+  val saveMaxSize = 1024 * 1000 * 10 // 10MB
+
   val assets = if (environment.isDev) {
     "http://localhost:81"
   } else {
@@ -31,7 +33,7 @@ class AdminController @Inject()(gameAssets: AssetsRepository,
     ))
   }
 
-  def save = Action(parse.json) { request =>
+  def save = Action(parse.json(saveMaxSize)) { request =>
     if (readonly) {
       throw new Exception("Dev environment only.")
     }
