@@ -4,6 +4,7 @@ import { groups } from '../../game/equipment'
 import { createItemReader, tabs } from '../../game/inventory'
 import Equipments from './Equipments.jsx'
 import Equipped from './Equipped.jsx'
+import Others from './Others.jsx'
 import Usables from './Usables.jsx'
 
 import './Inventory.css'
@@ -24,6 +25,15 @@ const Inventory = ({equipments, inventory, kinds, ui, dropItem, equipItem, unequ
             setRow={setRow} />
     )
 
+    const renderOthers = items => (
+        <Others
+            items={items}
+            kinds={kinds.items}
+            row={ui.row}
+            dropItem={dropItem}
+            setRow={setRow} />
+    )
+
     const renderUsables = items => (
         <Usables
             items={items}
@@ -37,13 +47,24 @@ const Inventory = ({equipments, inventory, kinds, ui, dropItem, equipItem, unequ
     const renderTab = (tab, index) => {
         const items = getItems(tab)
 
+        let content
+        switch (tab.key) {
+            case 'Other': {
+                content = renderOthers(items)
+                break
+            }
+            case 'Usable': {
+                content = renderUsables(items)
+                break
+            }
+            default: {
+                content = renderEquipments(groups[tab.key], items)
+            }
+        }
+
         return (
             <Tab key={index} eventKey={index} title={tab.label}>
-                {tab.key === 'Usable' ? (
-                    renderUsables(items)
-                ) : (
-                    renderEquipments(groups[tab.key], items)
-                )}
+                {content}
             </Tab>
         )
     }

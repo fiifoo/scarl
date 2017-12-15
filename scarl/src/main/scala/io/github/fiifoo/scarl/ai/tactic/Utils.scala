@@ -16,7 +16,9 @@ object Utils {
     Path(s)(from, to) map (path => {
       MoveAction(path.head)
     }) orElse {
-      Path.calc(Obstacle.has(Obstacle.travel(s)))(from, to) flatMap (path => {
+      val keys = s.keys.getOrElse(actor, Set())
+
+      Path.calc(Obstacle.has(Obstacle.travel(s, keys)))(from, to) flatMap (path => {
         val location = path.head
 
         (getLocationEntities(s)(location) collectFirst {

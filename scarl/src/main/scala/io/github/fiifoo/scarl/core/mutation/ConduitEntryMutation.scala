@@ -20,7 +20,8 @@ case class ConduitEntryMutation(creature: CreatureId, conduit: ConduitId) extend
       creature = creature(s),
       items = items map (_ (s)),
       statuses = statuses map (_ (s)),
-      equipments = s.equipments getOrElse(creature, Map())
+      equipments = s.equipments getOrElse(creature, Map()),
+      keys = s.keys.getOrElse(creature, Set())
     )
 
     s.copy(tmp = s.tmp.copy(

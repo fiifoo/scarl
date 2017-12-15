@@ -32,6 +32,8 @@ object Sources {
     )),
 
     ModelSource(typeOf[Faction], List("factions")),
+    ModelSource(typeOf[KeyKind], List("keys")),
+
     ModelSource(typeOf[CreatureKind], List("kinds", "creatures")),
     ModelSource(typeOf[ItemKind], List("kinds", "items")),
     ModelSource(typeOf[TerrainKind], List("kinds", "terrains")),

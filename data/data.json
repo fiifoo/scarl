@@ -179,6 +179,7 @@
     "enemies" : [ "enemy-faction", "player-faction" ],
     "id" : "them-faction"
   } ] ],
+  "keys" : [ ],
   "kinds" : {
     "creatures" : [ [ "them-leech", {
       "display" : "Q",
@@ -2055,6 +2056,7 @@
       }
     } ] ],
     "items" : [ [ "armor-foot-1", {
+      "personal" : false,
       "display" : "]",
       "color" : "green",
       "rangedWeapon" : null,
@@ -2121,6 +2123,7 @@
         "slot" : "FootArmor"
       }
     } ], [ "armor-hand-1", {
+      "personal" : false,
       "display" : "]",
       "color" : "green",
       "rangedWeapon" : null,
@@ -2187,6 +2190,7 @@
         "slot" : "HandArmor"
       }
     } ], [ "weapon-missile-launcher-guided-1", {
+      "personal" : false,
       "display" : "!",
       "color" : "white",
       "rangedWeapon" : {
@@ -2252,6 +2256,7 @@
       "weapon" : null,
       "armor" : null
     } ], [ "armor-foot-2", {
+      "personal" : false,
       "display" : "]",
       "color" : "blue",
       "rangedWeapon" : null,
@@ -2318,6 +2323,7 @@
         "slot" : "FootArmor"
       }
     } ], [ "armor-hand-2", {
+      "personal" : false,
       "display" : "]",
       "color" : "blue",
       "rangedWeapon" : null,
@@ -2384,6 +2390,7 @@
         "slot" : "HandArmor"
       }
     } ], [ "weapon-missile-launcher-guided-2", {
+      "personal" : false,
       "display" : "!",
       "color" : "white",
       "rangedWeapon" : {
@@ -2449,6 +2456,7 @@
       "weapon" : null,
       "armor" : null
     } ], [ "armor-foot-3", {
+      "personal" : false,
       "display" : "]",
       "color" : "red",
       "rangedWeapon" : null,
@@ -2515,6 +2523,7 @@
         "slot" : "FootArmor"
       }
     } ], [ "trap-plasma", {
+      "personal" : false,
       "display" : "^",
       "color" : "purple",
       "rangedWeapon" : null,
@@ -2528,6 +2537,7 @@
       "weapon" : null,
       "armor" : null
     } ], [ "armor-hand-3", {
+      "personal" : false,
       "display" : "]",
       "color" : "red",
       "rangedWeapon" : null,
@@ -2594,6 +2604,7 @@
         "slot" : "HandArmor"
       }
     } ], [ "weapon-missile-launcher-guided-3", {
+      "personal" : false,
       "display" : "!",
       "color" : "white",
       "rangedWeapon" : {
@@ -2659,6 +2670,7 @@
       "weapon" : null,
       "armor" : null
     } ], [ "armor-leg-1", {
+      "personal" : false,
       "display" : "]",
       "color" : "green",
       "rangedWeapon" : null,
@@ -2725,6 +2737,7 @@
         "slot" : "LegArmor"
       }
     } ], [ "explosive-triggered-active", {
+      "personal" : false,
       "display" : "^",
       "color" : "yellow",
       "rangedWeapon" : null,
@@ -2754,6 +2767,7 @@
       "weapon" : null,
       "armor" : null
     } ], [ "explosive-timed-active", {
+      "personal" : false,
       "display" : "x",
       "color" : "yellow",
       "rangedWeapon" : null,
@@ -2783,6 +2797,7 @@
       "weapon" : null,
       "armor" : null
     } ], [ "armor-leg-2", {
+      "personal" : false,
       "display" : "]",
       "color" : "blue",
       "rangedWeapon" : null,
@@ -2849,6 +2864,7 @@
         "slot" : "LegArmor"
       }
     } ], [ "stairs-down", {
+      "personal" : false,
       "display" : ">",
       "color" : "lightgrey",
       "rangedWeapon" : null,
@@ -2862,6 +2878,7 @@
       "weapon" : null,
       "armor" : null
     } ], [ "armor-leg-3", {
+      "personal" : false,
       "display" : "]",
       "color" : "red",
       "rangedWeapon" : null,
@@ -2928,6 +2945,7 @@
         "slot" : "LegArmor"
       }
     } ], [ "healing-chamber-active", {
+      "personal" : false,
       "display" : "H",
       "color" : "yellow",
       "rangedWeapon" : null,
@@ -2941,6 +2959,7 @@
       "weapon" : null,
       "armor" : null
     } ], [ "door-open", {
+      "personal" : false,
       "display" : "/",
       "color" : "brown",
       "rangedWeapon" : null,
@@ -2957,6 +2976,7 @@
       "weapon" : null,
       "armor" : null
     } ], [ "pressure-plate-hidden", {
+      "personal" : false,
       "display" : "_",
       "color" : "white",
       "rangedWeapon" : null,
@@ -2970,6 +2990,7 @@
       "weapon" : null,
       "armor" : null
     } ], [ "trap-laser", {
+      "personal" : false,
       "display" : "^",
       "color" : "red",
       "rangedWeapon" : null,
@@ -2983,6 +3004,7 @@
       "weapon" : null,
       "armor" : null
     } ], [ "door-closed", {
+      "personal" : false,
       "display" : "+",
       "color" : "brown",
       "rangedWeapon" : null,
@@ -3000,6 +3022,7 @@
       "weapon" : null,
       "armor" : null
     } ], [ "weapon-blade-1", {
+      "personal" : false,
       "display" : "(",
       "color" : "green",
       "rangedWeapon" : null,
@@ -3066,6 +3089,7 @@
       },
       "armor" : null
     } ], [ "healing-chamber", {
+      "personal" : false,
       "display" : "H",
       "color" : "white",
       "rangedWeapon" : null,
@@ -3079,6 +3103,7 @@
       "weapon" : null,
       "armor" : null
     } ], [ "portal-enemy-1", {
+      "personal" : false,
       "display" : "O",
       "color" : "green",
       "rangedWeapon" : null,
@@ -3092,6 +3117,7 @@
       "weapon" : null,
       "armor" : null
     } ], [ "weapon-blade-2", {
+      "personal" : false,
       "display" : "(",
       "color" : "blue",
       "rangedWeapon" : null,
@@ -3158,6 +3184,7 @@
       },
       "armor" : null
     } ], [ "portal-enemy-2", {
+      "personal" : false,
       "display" : "O",
       "color" : "blue",
       "rangedWeapon" : null,
@@ -3171,6 +3198,7 @@
       "weapon" : null,
       "armor" : null
     } ], [ "weapon-blade-3", {
+      "personal" : false,
       "display" : "(",
       "color" : "red",
       "rangedWeapon" : null,
@@ -3237,6 +3265,7 @@
       },
       "armor" : null
     } ], [ "healing-chamber-inactive", {
+      "personal" : false,
       "display" : "H",
       "color" : "lightgrey",
       "rangedWeapon" : null,
@@ -3250,6 +3279,7 @@
       "weapon" : null,
       "armor" : null
     } ], [ "friend-drone-1", {
+      "personal" : false,
       "display" : "d",
       "color" : "white",
       "rangedWeapon" : null,
@@ -3273,6 +3303,7 @@
       "weapon" : null,
       "armor" : null
     } ], [ "portal-enemy-3", {
+      "personal" : false,
       "display" : "O",
       "color" : "red",
       "rangedWeapon" : null,
@@ -3286,6 +3317,7 @@
       "weapon" : null,
       "armor" : null
     } ], [ "door-invisible", {
+      "personal" : false,
       "display" : "/",
       "color" : "brown",
       "rangedWeapon" : null,
@@ -3299,6 +3331,7 @@
       "weapon" : null,
       "armor" : null
     } ], [ "friend-drone-2", {
+      "personal" : false,
       "display" : "d",
       "color" : "white",
       "rangedWeapon" : null,
@@ -3322,6 +3355,7 @@
       "weapon" : null,
       "armor" : null
     } ], [ "explosive-triggered", {
+      "personal" : false,
       "display" : "^",
       "color" : "white",
       "rangedWeapon" : null,
@@ -3346,6 +3380,7 @@
       "weapon" : null,
       "armor" : null
     } ], [ "friend-drone-3", {
+      "personal" : false,
       "display" : "d",
       "color" : "white",
       "rangedWeapon" : null,
@@ -3369,6 +3404,7 @@
       "weapon" : null,
       "armor" : null
     } ], [ "explosive-timed", {
+      "personal" : false,
       "display" : "x",
       "color" : "white",
       "rangedWeapon" : null,
@@ -3393,6 +3429,7 @@
       "weapon" : null,
       "armor" : null
     } ], [ "shield-deflector-1", {
+      "personal" : false,
       "display" : "[",
       "color" : "green",
       "rangedWeapon" : null,
@@ -3458,6 +3495,7 @@
       "weapon" : null,
       "armor" : null
     } ], [ "armor-head-1", {
+      "personal" : false,
       "display" : "]",
       "color" : "green",
       "rangedWeapon" : null,
@@ -3524,6 +3562,7 @@
         "slot" : "HeadArmor"
       }
     } ], [ "shield-deflector-2", {
+      "personal" : false,
       "display" : "[",
       "color" : "blue",
       "rangedWeapon" : null,
@@ -3588,7 +3627,29 @@
       "id" : "shield-deflector-2",
       "weapon" : null,
       "armor" : null
+    } ], [ "fence-energy-open", {
+      "personal" : true,
+      "display" : "/",
+      "color" : "blue",
+      "rangedWeapon" : null,
+      "explosive" : null,
+      "shield" : null,
+      "hidden" : false,
+      "lock" : null,
+      "name" : "Energy fence",
+      "door" : {
+        "open" : true,
+        "transformTo" : "fence-energy-closed",
+        "hardness" : null
+      },
+      "usable" : null,
+      "pickable" : true,
+      "id" : "fence-energy-open",
+      "weapon" : null,
+      "armor" : null,
+      "key" : null
     } ], [ "armor-head-2", {
+      "personal" : false,
       "display" : "]",
       "color" : "blue",
       "rangedWeapon" : null,
@@ -3655,6 +3716,7 @@
         "slot" : "HeadArmor"
       }
     } ], [ "shield-deflector-3", {
+      "personal" : false,
       "display" : "[",
       "color" : "red",
       "rangedWeapon" : null,
@@ -3720,6 +3782,7 @@
       "weapon" : null,
       "armor" : null
     } ], [ "armor-head-3", {
+      "personal" : false,
       "display" : "]",
       "color" : "red",
       "rangedWeapon" : null,
@@ -3785,7 +3848,29 @@
         },
         "slot" : "HeadArmor"
       }
+    } ], [ "fence-energy-closed", {
+      "personal" : true,
+      "display" : "+",
+      "color" : "blue",
+      "rangedWeapon" : null,
+      "explosive" : null,
+      "shield" : null,
+      "hidden" : false,
+      "lock" : null,
+      "name" : "Energy fence",
+      "door" : {
+        "open" : false,
+        "transformTo" : "fence-energy-open",
+        "hardness" : 20
+      },
+      "usable" : null,
+      "pickable" : false,
+      "id" : "fence-energy-closed",
+      "weapon" : null,
+      "armor" : null,
+      "key" : null
     } ], [ "armor-chest-1", {
+      "personal" : false,
       "display" : "]",
       "color" : "green",
       "rangedWeapon" : null,
@@ -3852,6 +3937,7 @@
         "slot" : "ChestArmor"
       }
     } ], [ "armor-chest-2", {
+      "personal" : false,
       "display" : "]",
       "color" : "blue",
       "rangedWeapon" : null,
@@ -3918,6 +4004,7 @@
         "slot" : "ChestArmor"
       }
     } ], [ "armor-chest-3", {
+      "personal" : false,
       "display" : "]",
       "color" : "red",
       "rangedWeapon" : null,
@@ -3984,6 +4071,7 @@
         "slot" : "ChestArmor"
       }
     } ], [ "weapon-rifle-1", {
+      "personal" : false,
       "display" : "!",
       "color" : "green",
       "rangedWeapon" : {
@@ -4049,6 +4137,7 @@
       "weapon" : null,
       "armor" : null
     } ], [ "weapon-rifle-2", {
+      "personal" : false,
       "display" : "!",
       "color" : "blue",
       "rangedWeapon" : {
@@ -4114,6 +4203,7 @@
       "weapon" : null,
       "armor" : null
     } ], [ "armor-chest-invulnerability", {
+      "personal" : false,
       "display" : "]",
       "color" : "purple",
       "rangedWeapon" : null,
@@ -4180,6 +4270,7 @@
         "slot" : "ChestArmor"
       }
     } ], [ "weapon-rifle-3", {
+      "personal" : false,
       "display" : "!",
       "color" : "red",
       "rangedWeapon" : {
@@ -4245,6 +4336,7 @@
       "weapon" : null,
       "armor" : null
     } ], [ "stairs-up", {
+      "personal" : false,
       "display" : "<",
       "color" : "lightgrey",
       "rangedWeapon" : null,

@@ -1,4 +1,4 @@
-import { List, Record } from 'immutable'
+import { List, Map, Record } from 'immutable'
 
 const Tab = Record({
     key: undefined,
@@ -26,20 +26,30 @@ export const tabs = List([
         key: 'Usable',
         label: 'Usables',
     }),
+    Tab({
+        key: 'Other',
+        label: 'Other',
+    }),
 ])
 
-const props = {
+const props = Map({
     Weapon: 'weapon',
     RangedWeapon: 'rangedWeapon',
     Shield: 'shield',
     Armor: 'armor',
     Usable: 'usable',
-}
+})
 
 export const createItemReader = (inventory, kinds) => tab => {
-    const prop = props[tab.key]
+    const prop = props.get(tab.key)
 
-    return inventory.filter(createFilter(prop)).sort(createSorter(kinds))
+    const items = prop ? (
+        inventory.filter(createFilter(prop))
+    ) : (
+        inventory.filter(item => props.find(prop => item[prop] !== undefined) === undefined)
+    )
+
+    return items.sort(createSorter(kinds))
 }
 
 const createFilter = prop => item => item[prop] !== undefined

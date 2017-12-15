@@ -6,6 +6,7 @@ import io.github.fiifoo.scarl.core.communication.CommunicationId
 import io.github.fiifoo.scarl.core.creature._
 import io.github.fiifoo.scarl.core.entity._
 import io.github.fiifoo.scarl.core.item.Equipment.Slot
+import io.github.fiifoo.scarl.core.item.Key
 import io.github.fiifoo.scarl.core.world.{ConduitId, Traveler}
 import io.github.fiifoo.scarl.geometry.WaypointNetwork
 
@@ -53,6 +54,7 @@ case class State(area: State.Area = State.Area(),
                  gateways: Set[Location] = Set(),
                  idSeq: IdSeq = IdSeq(1),
                  index: State.Index = State.Index(),
+                 keys: Map[CreatureId, Set[Key]] = Map(),
                  receivedCommunications: Map[CreatureId, Set[CommunicationId]] = Map(),
                  rng: Rng = Rng(1),
                  simulation: State.Simulation = State.Simulation(),

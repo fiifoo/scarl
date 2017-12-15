@@ -2,6 +2,7 @@ package io.github.fiifoo.scarl.geometry
 
 import io.github.fiifoo.scarl.core.Selectors.{getLocationEntities, getLocationItems}
 import io.github.fiifoo.scarl.core.entity.{CreatureId, EntityId, ItemId, WallId}
+import io.github.fiifoo.scarl.core.item.Key
 import io.github.fiifoo.scarl.core.{Location, State}
 
 object Obstacle {
@@ -31,13 +32,25 @@ object Obstacle {
     }
   }
 
-  def travel(s: State)(location: Location): Option[EntityId] = {
-    getLocationEntities(s)(location) collectFirst {
+  def travel(s: State, keys: Set[Key] = Set())(location: Location): Option[EntityId] = {
+    (getLocationEntities(s)(location) collectFirst {
       case wall: WallId => wall
+    }) orElse {
+      getLockedDoor(s, keys)(location)
     }
   }
 
   def getClosedDoor(s: State)(location: Location): Option[ItemId] = {
     getLocationItems(s)(location) find (_ (s).door.exists(!_.open))
+  }
+
+  def getLockedDoor(s: State, keys: Set[Key] = Set())(location: Location): Option[ItemId] = {
+    getLocationItems(s)(location) find (id => {
+      val item = id(s)
+
+      item.door.exists(door => {
+        !door.open && !(item.lock forall keys.contains)
+      })
+    })
   }
 }

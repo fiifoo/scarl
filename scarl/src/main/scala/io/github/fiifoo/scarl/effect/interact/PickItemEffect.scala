@@ -4,6 +4,7 @@ import io.github.fiifoo.scarl.core.effect.{Effect, EffectResult}
 import io.github.fiifoo.scarl.core.entity.{ContainerId, CreatureId, ItemId}
 import io.github.fiifoo.scarl.core.mutation.{ItemContainerMutation, RemovableEntityMutation}
 import io.github.fiifoo.scarl.core.{Location, State}
+import io.github.fiifoo.scarl.effect.creature.ReceiveKeyEffect
 
 case class PickItemEffect(target: ItemId,
                           picker: CreatureId,
@@ -12,14 +13,23 @@ case class PickItemEffect(target: ItemId,
                          ) extends Effect {
 
   def apply(s: State): EffectResult = {
-    val removeContainer = target(s).container match {
+    val item = target(s)
+
+    val removeContainer = item.container match {
       case container: ContainerId => Some(RemovableEntityMutation(container))
       case _ => None
     }
 
-    EffectResult(List(
-      Some(ItemContainerMutation(target, picker)),
-      removeContainer
-    ).flatten)
+    val receiveKey = item.key map (ReceiveKeyEffect(picker, _))
+
+    EffectResult(
+      List(
+        Some(ItemContainerMutation(target, picker)),
+        removeContainer
+      ).flatten,
+      List(
+        receiveKey
+      ).flatten
+    )
   }
 }

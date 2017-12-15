@@ -21,6 +21,10 @@ case class ConduitExitMutation(traveler: Traveler, location: Location) extends M
       EquipItemMutation(traveler.creature.id, item, Set(slot))(r)
     })
 
+    if (traveler.keys.nonEmpty) {
+      r = CreatureKeysMutation(traveler.creature.id, traveler.keys)(r)
+    }
+
     r
   }
 

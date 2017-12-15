@@ -2,6 +2,7 @@ package io.github.fiifoo.scarl.core
 
 import io.github.fiifoo.scarl.core.creature.Stats
 import io.github.fiifoo.scarl.core.entity._
+import io.github.fiifoo.scarl.core.item.Key
 
 object Selectors {
 
@@ -78,5 +79,9 @@ object Selectors {
 
   def getWidgetItem(s: State)(container: ContainerId): Option[ItemId] = {
     getContainerItems(s)(container).headOption
+  }
+
+  def hasKey(s: State)(creature: CreatureId)(key: Key): Boolean = {
+    s.keys.getOrElse(creature, Set()) contains key
   }
 }

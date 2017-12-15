@@ -24,15 +24,18 @@ case class RemoveEntitiesMutation() extends Mutation {
       s.simulation
     }
 
+    val creatures = collectCreatures(removable)
+
     s.copy(
       cache = mutateCache(s, removable),
       foundItems = mutateFoundItems(s, removable),
-      receivedCommunications = s.receivedCommunications -- collectCreatures(removable),
+      receivedCommunications = s.receivedCommunications -- creatures,
       entities = s.entities -- removable,
-      equipments = mutateEquipments(s.equipments, removable),
+      equipments = s.equipments -- creatures,
       index = mutateIndex(s, removable),
+      keys = s.keys -- creatures,
       simulation = simulation,
-      tactics = mutateTactics(s.tactics, removable),
+      tactics = s.tactics -- creatures,
       tmp = s.tmp.copy(removableEntities = Set())
     )
   }
@@ -51,14 +54,6 @@ case class RemoveEntitiesMutation() extends Mutation {
         })
       })) getOrElse found
     }) -- collectCreatures(removable)
-  }
-
-  private def mutateEquipments(equipments: Equipments, removable: Set[EntityId]): Equipments = {
-    equipments -- collectCreatures(removable)
-  }
-
-  private def mutateTactics(tactics: Tactics, removable: Set[EntityId]): Tactics = {
-    tactics -- collectCreatures(removable)
   }
 
   private def mutateCache(s: State, removable: Set[EntityId]): State.Cache = {

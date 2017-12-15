@@ -25,10 +25,11 @@ class AssetsRepository @Inject()(environment: Environment) {
       simulateCombatPower(data),
       data.communications,
       data.factions,
+      data.keys,
       data.kinds,
       data.progressions,
       data.templates,
-      data.themes,
+      data.themes
     )
   }
 

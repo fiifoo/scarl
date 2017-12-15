@@ -46,6 +46,10 @@ const use = (dispatch, getState) => {
     }
 
     switch (tab.key) {
+        case 'Other': {
+            playerActions.dropItem(item.id)()
+            break
+        }
         case 'Usable': {
             playerActions.useInventoryItem(item.id)()
             break

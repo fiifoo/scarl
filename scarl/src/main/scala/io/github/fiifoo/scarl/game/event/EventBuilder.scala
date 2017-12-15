@@ -4,11 +4,12 @@ import io.github.fiifoo.scarl.core.Selectors.{getContainerItems, getLocationVisi
 import io.github.fiifoo.scarl.core.communication.Message
 import io.github.fiifoo.scarl.core.effect.{Effect, LocalizedDescriptionEffect}
 import io.github.fiifoo.scarl.core.entity._
+import io.github.fiifoo.scarl.core.item.{KeyKindId, SharedKey}
 import io.github.fiifoo.scarl.core.kind._
 import io.github.fiifoo.scarl.core.{Location, State}
 import io.github.fiifoo.scarl.effect.area.{CreateEntityEffect, ExplosiveTimerEffect, RemoveEntityEffect, TransformBlockedEffect}
 import io.github.fiifoo.scarl.effect.combat._
-import io.github.fiifoo.scarl.effect.creature.{GainLevelEffect, HealEffect, ShortageEffect}
+import io.github.fiifoo.scarl.effect.creature.{GainLevelEffect, HealEffect, ReceiveKeyEffect, ShortageEffect}
 import io.github.fiifoo.scarl.effect.interact._
 import io.github.fiifoo.scarl.effect.movement.{CollideEffect, DisplaceEffect, MovedEffect}
 
@@ -51,10 +52,12 @@ class EventBuilder(s: State, player: CreatureId, fov: Set[Location]) {
       case e: GainLevelEffect => build(e) map GenericEvent
       case e: HealEffect => build(e) map GenericEvent
       case e: HitEffect => build(e)
+      case e: ItemLockedEffect => build(e) map GenericEvent
       case e: LocalizedDescriptionEffect => build(e) map GenericEvent
       case e: MissEffect => build(e) map GenericEvent
       case e: MovedEffect => build(e)
       case e: PickItemEffect => build(e) map GenericEvent
+      case e: ReceiveKeyEffect => build(e) map GenericEvent
       case e: RemoveEntityEffect => build(e) map GenericEvent
       case e: ShootMissileEffect => build(e) map GenericEvent
       case e: ShortageEffect => build(e) map GenericEvent
@@ -150,7 +153,15 @@ class EventBuilder(s: State, player: CreatureId, fov: Set[Location]) {
 
   private def build(effect: DoorBlockedEffect): Option[String] = {
     if (effect.user contains player) {
-      Some(s"${kind(effect.obstacle)} blocks the doorway.")
+      Some(s"${kind(effect.obstacle)} is in way.")
+    } else {
+      None
+    }
+  }
+
+  private def build(effect: ItemLockedEffect): Option[String] = {
+    if (effect.user == player) {
+      Some(s"${kind(effect.item)} is locked.")
     } else {
       None
     }
@@ -159,22 +170,22 @@ class EventBuilder(s: State, player: CreatureId, fov: Set[Location]) {
   private def build(effect: DoorUsedEffect): Option[String] = {
     if (effect.user contains player) {
       if (effect.opened) {
-        Some("You open the door.")
+        Some(s"You open ${kind(effect.door)}.")
       } else {
-        Some("You close the door.")
+        Some(s"You close ${kind(effect.door)}.")
       }
     } else if (fov contains effect.location) {
       (effect.user map (user => {
         if (effect.opened) {
-          Some(s"${kind(user)} opens a door.")
+          Some(s"${kind(user)} opens ${kind(effect.door)}.")
         } else {
-          Some(s"${kind(user)} closes a door.")
+          Some(s"${kind(user)} closes ${kind(effect.door)}.")
         }
       })) getOrElse {
         if (effect.opened) {
-          Some("Door opens.")
+          Some(s"${kind(effect.door)} opens.")
         } else {
-          Some("Door closes.")
+          Some(s"${kind(effect.door)} closes.")
         }
       }
     } else {
@@ -379,6 +390,17 @@ class EventBuilder(s: State, player: CreatureId, fov: Set[Location]) {
     }
   }
 
+  private def build(effect: ReceiveKeyEffect): Option[String] = {
+    if (effect.target == player) {
+      effect.key match {
+        case key: SharedKey => Some(s"You acquire ${kind(key.kind)}.")
+        case _ => None
+      }
+    } else {
+      None
+    }
+  }
+
   private def build(effect: RemoveEntityEffect): Option[String] = {
     effect.description flatMap (description => effect.location flatMap (location => {
       if (fov contains location) {
@@ -547,6 +569,10 @@ class EventBuilder(s: State, player: CreatureId, fov: Set[Location]) {
     val item = s.assets.kinds.widgets(widget).item
 
     kind(item)
+  }
+
+  private def kind(key: KeyKindId): String = {
+    s.assets.keys(key).name
   }
 
   private def parse(description: String, parameter: String)(value: String): String = {
