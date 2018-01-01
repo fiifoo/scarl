@@ -1,8 +1,9 @@
-import { Record } from 'immutable'
+import { Record, Set } from 'immutable'
 import * as types from '../../actions/actionTypes'
 
 const initial = Record({
     location: null,
+    locations: Set(),
     brush: Record({
         property: null,
         value: null,
@@ -19,7 +20,7 @@ export default (state = initial, action) => {
             return state.set('brush', action.brush)
         }
         case types.SET_EDITOR_LOCATION: {
-            return state.set('location', action.location)
+            return state.set('location', action.location).set('locations', action.locations)
         }
         default: {
             return state

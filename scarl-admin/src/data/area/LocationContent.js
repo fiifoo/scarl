@@ -184,4 +184,20 @@ LocationContent.write = (template, location, content) => writers.reduce((templat
     return writer(template, location, content, path, property)
 }, template)
 
+LocationContent.merge = (source, target) => (
+    LocationContent({
+        conduit: source.conduit || target.conduit,
+        creature: source.creature || target.creature,
+        entrance: source.entrance || target.entrance,
+        gateway: source.gateway || target.gateway,
+        items: target.items.concat(source.items),
+        template: source.template || target.template,
+        terrain: source.terrain || target.terrain,
+        wall: source.wall || target.wall,
+        widget: source.widget || target.widget,
+        machineryControls: target.machineryControls.concat(source.machineryControls),
+        machineryTargets: target.machineryTargets.concat(source.machineryTargets),
+    })
+)
+
 export default LocationContent

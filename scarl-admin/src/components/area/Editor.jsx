@@ -15,6 +15,13 @@ const Editor = ({path, value, common, editor, setEditorBrush, setEditorLocation}
 
     const contents = LocationContent.read(value, data)
     const setLocationContent = location => content => setValue(path, LocationContent.write(value, location, content))
+    const setContents = contents => {
+        const next = contents.reduce((value, content, location) => (
+            LocationContent.write(value, location, content)
+        ), value)
+
+        setValue(path, next)
+    }
 
     const editorView = (
         <div>
@@ -25,19 +32,20 @@ const Editor = ({path, value, common, editor, setEditorBrush, setEditorLocation}
                 editor={editor}
                 shape={value.get('shape')}
                 setEditorLocation={setEditorLocation}
-                setLocationContent={setLocationContent} />
+                setContents={setContents} />
         </div>
 
     )
 
-    const editorBrush = (
+    const renderEditorBrush = () => (
         <div>
-            {editor.brush.property && <b className="pull-right text-danger">ACTIVE</b>}
             <h4 className="text-center">Brush</h4>
             <EditorBrush
                 common={common}
-                brush={editor.brush}
-                setBrush={setEditorBrush} />
+                contents={contents}
+                editor={editor}
+                setBrush={setEditorBrush}
+                setContents={setContents} />
         </div>
     )
 
@@ -58,8 +66,8 @@ const Editor = ({path, value, common, editor, setEditorBrush, setEditorLocation}
                 {editorView}
             </div>
             <div className="pull-right" style={{minWidth: '50%'}}>
-                {editorBrush}
-                {editor.location && renderEditorLocation(editor.location)}
+                {editor.locations.size > 1 && renderEditorBrush()}
+                {editor.locations.size == 1 && renderEditorLocation(editor.location)}
             </div>
         </div>
     )

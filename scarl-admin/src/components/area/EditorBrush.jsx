@@ -1,7 +1,11 @@
 import { List, Map } from 'immutable'
 import React from 'react'
+import FormRow from '../form/FormRow.jsx'
 import SelectRow from '../form/SelectRow.jsx'
+import LocationContent from '../../data/area/LocationContent'
 import Models from '../../data/Models'
+
+const emptyContent = LocationContent()
 
 const specs = {
     creature: {
@@ -21,6 +25,10 @@ const specs = {
         label: 'Wall',
         model: 'WallKind',
     },
+    widget: {
+        label: 'Widget',
+        model: 'WidgetKind',
+    },
 }
 
 const choices = Map(specs).map((spec, property) => ({
@@ -28,12 +36,23 @@ const choices = Map(specs).map((spec, property) => ({
     label: spec.label,
 })).toArray()
 
-const EditorBrush = ({common, brush, setBrush}) => {
+const EditorBrush = ({common, contents, editor, setBrush, setContents}) => {
     const {data, models} = common
+    const {brush, locations} = editor
 
     const setProperty = property => setBrush(brush.set('property', property).set('value', null))
     const setValue = value => setBrush(brush.set('value', value))
     const setMultiValue = value => setBrush(brush.set('value', List(value)))
+
+    const paint = () => {
+        const next = Map(locations.toArray().map(location => {
+            const next = contents.get(location, emptyContent).set(brush.property, brush.value)
+
+            return [location, next]
+        }))
+
+        setContents(next)
+    }
 
     const renderValueSelect = () => {
         const spec = specs[brush.property]
@@ -49,6 +68,14 @@ const EditorBrush = ({common, brush, setBrush}) => {
         )
     }
 
+    const renderPaintButton = () => (
+        <FormRow label="">
+            <button type="button" className="btn btn-primary" onClick={paint}>
+                Paint
+            </button>
+        </FormRow>
+    )
+
     return (
         <div>
             <SelectRow
@@ -57,6 +84,7 @@ const EditorBrush = ({common, brush, setBrush}) => {
                 value={brush.property}
                 onChange={setProperty} />
             {brush.property && renderValueSelect()}
+            {brush.property && renderPaintButton()}
         </div>
     )
 }

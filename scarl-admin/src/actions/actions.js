@@ -78,9 +78,10 @@ export const setEditorBrush = brush => ({
     brush,
 })
 
-export const setEditorLocation = location => ({
+export const setEditorLocation = (location, locations) => ({
     type: types.SET_EDITOR_LOCATION,
     location,
+    locations,
 })
 
 export const selectSummaryCreature = creature => ({
