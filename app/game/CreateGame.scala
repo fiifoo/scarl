@@ -1,12 +1,12 @@
 package game
 
-import io.github.fiifoo.scarl.game.{Game, RunState}
+import io.github.fiifoo.scarl.game.{RunState, StartGame}
 import io.github.fiifoo.scarl.world.WorldAssets
 import play.api.libs.json.JsValue
 
-object StartGame {
+object CreateGame {
 
   def apply(assets: WorldAssets, save: Option[JsValue]): RunState = {
-    Game.start(save map LoadGame(assets) getOrElse GenerateGame(assets))
+    StartGame(save map LoadGame(assets) getOrElse GenerateGame(assets))
   }
 }

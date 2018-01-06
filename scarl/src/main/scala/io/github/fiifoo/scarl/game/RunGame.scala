@@ -1,9 +1,7 @@
 package io.github.fiifoo.scarl.game
 
-import io.github.fiifoo.scarl.action.validate.ActionValidator
 import io.github.fiifoo.scarl.core.RealityBubble
 import io.github.fiifoo.scarl.core.action.Action
-import io.github.fiifoo.scarl.core.entity.Selectors.getContainerItems
 import io.github.fiifoo.scarl.core.mutation.{FinalizeTickMutation, ResetConduitEntryMutation}
 import io.github.fiifoo.scarl.core.world.{ConduitId, Traveler}
 import io.github.fiifoo.scarl.game.api._
@@ -15,53 +13,10 @@ import io.github.fiifoo.scarl.world.ChangeArea
 
 import scala.annotation.tailrec
 
-object Game {
+object RunGame {
 
-  def start(gameState: GameState): RunState = {
-    val instance = gameState.world.states(gameState.area)
-
-    var state = RunState(
-      areaMap = gameState.maps.getOrElse(gameState.area, Map()),
-      gameState = gameState,
-      instance = instance,
-      playerInfo = PlayerInfo(instance, gameState.player),
-      statistics = gameState.statistics
-    )
-
-    state = sendGameStart(state)
-    state = run(state)
-
-    state
-  }
-
-  def receive(state: RunState, message: InMessage): RunState = {
-    message match {
-      case DebugFovQuery => sendMessage(state, DebugFov(state.fov.locations))
-      case DebugWaypointQuery => sendMessage(state, DebugWaypoint(state.instance.cache.waypointNetwork))
-      case message: GameAction => receiveAction(state, message.action)
-      case InventoryQuery => sendPlayerInventory(state)
-    }
-  }
-
-  def save(state: RunState): GameState = {
-    val maps = state.gameState.maps
-    val world = state.gameState.world
-    val area = state.gameState.area
-
-    state.gameState.copy(
-      maps = maps + (area -> state.areaMap),
-      statistics = state.statistics,
-      world = world.copy(
-        states = world.states + (area -> state.instance)
-      ))
-  }
-
-  private def receiveAction(state: RunState, action: Action): RunState = {
-    if (state.ended || !ActionValidator(state.instance, state.gameState.player, action)) {
-      return state
-    }
-
-    run(state.copy(stopped = false), Some(action))
+  def apply(state: RunState, action: Option[Action] = None): RunState = {
+    run(state.copy(stopped = false), action)
   }
 
   @tailrec
@@ -160,21 +115,10 @@ object Game {
       fov = PlayerFov(),
       gameState = nextGameState,
       instance = nextInstance,
-      playerInfo = PlayerInfo(nextInstance, nextGameState.player),
+      playerInfo = PlayerInfo(nextInstance, nextGameState.player)
     )
 
     sendAreaChange(nextState)
-  }
-
-  private def sendGameStart(state: RunState): RunState = {
-    val message = GameStart(
-      area = state.gameState.area,
-      factions = state.instance.assets.factions.values,
-      kinds = state.instance.assets.kinds,
-      map = state.areaMap
-    )
-
-    sendMessage(state, message)
   }
 
   private def sendGameUpdate(state: RunState): RunState = {
@@ -203,15 +147,6 @@ object Game {
     val message = AreaChange(
       area = state.gameState.area,
       map = state.areaMap
-    )
-
-    sendMessage(state, message)
-  }
-
-  private def sendPlayerInventory(state: RunState): RunState = {
-    val message = PlayerInventory(
-      inventory = getContainerItems(state.instance)(state.gameState.player) map (_ (state.instance)),
-      equipments = state.instance.equipments.getOrElse(state.gameState.player, Map())
     )
 
     sendMessage(state, message)
