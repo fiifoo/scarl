@@ -169,8 +169,13 @@ object ApplyTemplate {
   }
 
   private def addWaypoints(s: State): State = {
-    s.copy(cache = s.cache.copy(
-      waypointNetwork = WaypointNetwork(s)
-    ))
+    s.copy(
+      cache = s.cache.copy(
+        waypointNetwork = WaypointNetwork(s)
+      ),
+      tmp = s.tmp.copy(
+        waypointNetworkChanged = Set()
+      )
+    )
   }
 }
