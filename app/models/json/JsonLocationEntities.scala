@@ -1,6 +1,6 @@
 package models.json
 
-import io.github.fiifoo.scarl.game.LocationEntities
+import io.github.fiifoo.scarl.game.map.LocationEntities
 import play.api.libs.json._
 
 object JsonLocationEntities {

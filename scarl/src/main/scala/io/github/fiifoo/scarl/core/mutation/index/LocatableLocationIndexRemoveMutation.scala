@@ -1,7 +1,7 @@
 package io.github.fiifoo.scarl.core.mutation.index
 
-import io.github.fiifoo.scarl.core.Location
 import io.github.fiifoo.scarl.core.entity.LocatableId
+import io.github.fiifoo.scarl.core.geometry.Location
 
 case class LocatableLocationIndexRemoveMutation(locatable: LocatableId, location: Location) {
   type Index = Map[Location, Set[LocatableId]]

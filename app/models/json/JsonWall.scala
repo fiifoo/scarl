@@ -1,7 +1,7 @@
 package models.json
 
-import io.github.fiifoo.scarl.core.Location
 import io.github.fiifoo.scarl.core.entity.{Wall, WallId}
+import io.github.fiifoo.scarl.core.geometry.Location
 import play.api.libs.json._
 
 object JsonWall {

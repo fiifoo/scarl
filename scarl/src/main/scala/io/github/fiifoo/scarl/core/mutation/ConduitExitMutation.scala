@@ -1,8 +1,9 @@
 package io.github.fiifoo.scarl.core.mutation
 
+import io.github.fiifoo.scarl.core.State
 import io.github.fiifoo.scarl.core.entity.{ActiveStatus, Entity, Status}
+import io.github.fiifoo.scarl.core.geometry.Location
 import io.github.fiifoo.scarl.core.world.Traveler
-import io.github.fiifoo.scarl.core.{Location, State}
 
 case class ConduitExitMutation(traveler: Traveler, location: Location) extends Mutation {
 

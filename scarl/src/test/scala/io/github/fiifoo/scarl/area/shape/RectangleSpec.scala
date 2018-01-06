@@ -1,7 +1,7 @@
 package io.github.fiifoo.scarl.area.shape
 
 import io.github.fiifoo.scarl.area.shape.Shape.Result
-import io.github.fiifoo.scarl.core.Location
+import io.github.fiifoo.scarl.core.geometry.Location
 import org.scalatest._
 
 import scala.util.Random

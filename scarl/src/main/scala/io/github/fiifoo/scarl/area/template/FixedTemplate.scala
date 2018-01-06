@@ -4,7 +4,7 @@ import io.github.fiifoo.scarl.area.feature.Feature
 import io.github.fiifoo.scarl.area.shape.Shape
 import io.github.fiifoo.scarl.area.template.Template.Result
 import io.github.fiifoo.scarl.area.theme.Theme
-import io.github.fiifoo.scarl.core.Location
+import io.github.fiifoo.scarl.core.geometry.Location
 import io.github.fiifoo.scarl.core.kind._
 import io.github.fiifoo.scarl.world.WorldAssets
 

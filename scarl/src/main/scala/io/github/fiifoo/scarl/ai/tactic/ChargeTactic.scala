@@ -1,12 +1,12 @@
 package io.github.fiifoo.scarl.ai.tactic
 
 import io.github.fiifoo.scarl.action._
-import io.github.fiifoo.scarl.core.Selectors.getCreatureStats
-import io.github.fiifoo.scarl.core.action.Tactic
-import io.github.fiifoo.scarl.core.action.Tactic.Result
+import io.github.fiifoo.scarl.core.State
+import io.github.fiifoo.scarl.core.ai.Tactic
+import io.github.fiifoo.scarl.core.ai.Tactic.Result
+import io.github.fiifoo.scarl.core.entity.Selectors.getCreatureStats
 import io.github.fiifoo.scarl.core.entity.{Creature, CreatureId, SafeCreatureId}
-import io.github.fiifoo.scarl.core.{Location, State}
-import io.github.fiifoo.scarl.geometry._
+import io.github.fiifoo.scarl.core.geometry._
 import io.github.fiifoo.scarl.simulation.{Outcome, ShootMissileOutcomeSimulation}
 
 import scala.util.Random

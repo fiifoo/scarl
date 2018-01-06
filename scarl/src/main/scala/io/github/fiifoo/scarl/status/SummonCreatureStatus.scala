@@ -1,11 +1,12 @@
 package io.github.fiifoo.scarl.status
 
-import io.github.fiifoo.scarl.core.Rng.WeightedChoices
+import io.github.fiifoo.scarl.core.State
 import io.github.fiifoo.scarl.core.Time.Tick
-import io.github.fiifoo.scarl.core.effect.{Effect, TickEffect}
+import io.github.fiifoo.scarl.core.effect.Effect
 import io.github.fiifoo.scarl.core.entity._
 import io.github.fiifoo.scarl.core.kind.CreatureKindId
-import io.github.fiifoo.scarl.core.{Selectors, State}
+import io.github.fiifoo.scarl.core.math.Rng.WeightedChoices
+import io.github.fiifoo.scarl.effect.TickEffect
 import io.github.fiifoo.scarl.effect.area.SummonCreatureEffect
 
 case class SummonCreatureStatus(id: ActiveStatusId,

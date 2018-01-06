@@ -1,8 +1,9 @@
 package io.github.fiifoo.scarl.effect.interact
 
+import io.github.fiifoo.scarl.core.State
 import io.github.fiifoo.scarl.core.effect.{Effect, EffectResult, LocalizedDescriptionEffect}
 import io.github.fiifoo.scarl.core.entity.{CreatureId, MachineryId}
-import io.github.fiifoo.scarl.core.{Location, State}
+import io.github.fiifoo.scarl.core.geometry.Location
 
 case class ActivateMachineryEffect(activator: CreatureId,
                                    location: Location,

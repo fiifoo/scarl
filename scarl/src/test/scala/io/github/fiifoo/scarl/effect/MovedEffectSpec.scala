@@ -1,10 +1,11 @@
 package io.github.fiifoo.scarl.effect
 
+import io.github.fiifoo.scarl.core.State
 import io.github.fiifoo.scarl.core.effect.EffectResult
-import io.github.fiifoo.scarl.core.entity.{Container, ContainerId, CreatureId, TriggerStatusId}
+import io.github.fiifoo.scarl.core.entity._
+import io.github.fiifoo.scarl.core.geometry.Location
 import io.github.fiifoo.scarl.core.mutation.{LocatableLocationMutation, NewEntityMutation}
 import io.github.fiifoo.scarl.core.test_assets.{TestCreatureFactory, TestDamageEffect, TestTriggerStatus}
-import io.github.fiifoo.scarl.core.{IdSeq, Location, State}
 import io.github.fiifoo.scarl.effect.movement.MovedEffect
 import org.scalatest._
 

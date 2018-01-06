@@ -1,9 +1,9 @@
 package io.github.fiifoo.scarl.ai
 
+import io.github.fiifoo.scarl.core.State
 import io.github.fiifoo.scarl.core.creature.FactionId
 import io.github.fiifoo.scarl.core.entity.{Creature, CreatureId}
-import io.github.fiifoo.scarl.core.{Location, State}
-import io.github.fiifoo.scarl.geometry.Distance
+import io.github.fiifoo.scarl.core.geometry.{Distance, Location}
 
 object SeekTargets {
 

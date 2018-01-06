@@ -1,9 +1,9 @@
 package io.github.fiifoo.scarl.world
 
 import io.github.fiifoo.scarl.area.AreaId
-import io.github.fiifoo.scarl.core._
 import io.github.fiifoo.scarl.core.entity._
 import io.github.fiifoo.scarl.core.kind.CreatureKindId
+import io.github.fiifoo.scarl.core.math.Rng
 
 object CreateWorld {
 

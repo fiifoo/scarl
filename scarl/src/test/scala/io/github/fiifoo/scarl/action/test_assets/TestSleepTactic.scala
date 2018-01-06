@@ -1,10 +1,11 @@
 package io.github.fiifoo.scarl.action.test_assets
 
-import io.github.fiifoo.scarl.core.Selectors.getTargetStatuses
+import io.github.fiifoo.scarl.action.PassAction
 import io.github.fiifoo.scarl.core.State
-import io.github.fiifoo.scarl.core.action.Tactic.Result
-import io.github.fiifoo.scarl.core.action.{Behavior, PassAction}
+import io.github.fiifoo.scarl.core.ai.Behavior
+import io.github.fiifoo.scarl.core.ai.Tactic.Result
 import io.github.fiifoo.scarl.core.entity.CreatureId
+import io.github.fiifoo.scarl.core.entity.Selectors.getTargetStatuses
 
 import scala.util.Random
 

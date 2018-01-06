@@ -1,9 +1,9 @@
 package io.github.fiifoo.scarl.rule
 
+import io.github.fiifoo.scarl.core.State
 import io.github.fiifoo.scarl.core.creature.Stats.Explosive
 import io.github.fiifoo.scarl.core.entity.{EntityId, ItemId, WallId}
-import io.github.fiifoo.scarl.core.{Location, State}
-import io.github.fiifoo.scarl.geometry.{Line, Obstacle, Shape}
+import io.github.fiifoo.scarl.core.geometry.{Line, Location, Obstacle, Shape}
 
 object ExplosionRule {
 

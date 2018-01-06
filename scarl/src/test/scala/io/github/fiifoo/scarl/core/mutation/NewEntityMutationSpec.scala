@@ -1,10 +1,11 @@
 package io.github.fiifoo.scarl.core.mutation
 
+import io.github.fiifoo.scarl.core.State
 import io.github.fiifoo.scarl.core.creature.FactionId
 import io.github.fiifoo.scarl.core.entity._
+import io.github.fiifoo.scarl.core.geometry.Location
 import io.github.fiifoo.scarl.core.kind.ItemKindId
 import io.github.fiifoo.scarl.core.test_assets.{TestActiveStatus, TestCreatureFactory, TestItemFactory, TestTriggerStatus}
-import io.github.fiifoo.scarl.core.{ActorQueue, IdSeq, Location, State}
 import org.scalatest._
 
 class NewEntityMutationSpec extends FlatSpec with Matchers {

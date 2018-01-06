@@ -2,7 +2,7 @@ package io.github.fiifoo.scarl.area.template
 
 import io.github.fiifoo.scarl.area.feature.Feature
 import io.github.fiifoo.scarl.area.theme.Theme
-import io.github.fiifoo.scarl.core.Location
+import io.github.fiifoo.scarl.core.geometry.Location
 import io.github.fiifoo.scarl.core.kind.{ItemKindId, TerrainKindId}
 import io.github.fiifoo.scarl.world.WorldAssets
 

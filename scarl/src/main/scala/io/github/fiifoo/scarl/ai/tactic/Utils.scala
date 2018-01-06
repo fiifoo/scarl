@@ -1,12 +1,12 @@
 package io.github.fiifoo.scarl.ai.tactic
 
 import io.github.fiifoo.scarl.action.{DisplaceAction, MoveAction, UseDoorAction}
-import io.github.fiifoo.scarl.core.Selectors.getLocationEntities
+import io.github.fiifoo.scarl.core.State
 import io.github.fiifoo.scarl.core.action.Action
 import io.github.fiifoo.scarl.core.entity.CreatureId
-import io.github.fiifoo.scarl.core.{Location, State}
-import io.github.fiifoo.scarl.geometry.Obstacle.getClosedDoor
-import io.github.fiifoo.scarl.geometry.{Obstacle, Path}
+import io.github.fiifoo.scarl.core.entity.Selectors.getLocationEntities
+import io.github.fiifoo.scarl.core.geometry.Obstacle.getClosedDoor
+import io.github.fiifoo.scarl.core.geometry.{Location, Obstacle, Path}
 
 object Utils {
 

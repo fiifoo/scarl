@@ -1,7 +1,7 @@
 package io.github.fiifoo.scarl.game.event
 
-import io.github.fiifoo.scarl.core.Location
 import io.github.fiifoo.scarl.core.entity.CreatureId
+import io.github.fiifoo.scarl.core.geometry.Location
 
 sealed trait Event
 

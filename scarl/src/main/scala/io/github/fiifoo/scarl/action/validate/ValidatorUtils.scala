@@ -1,7 +1,8 @@
 package io.github.fiifoo.scarl.action.validate
 
+import io.github.fiifoo.scarl.core.State
 import io.github.fiifoo.scarl.core.entity.{CreatureId, EntityId}
-import io.github.fiifoo.scarl.core.{Location, State}
+import io.github.fiifoo.scarl.core.geometry.Location
 
 object ValidatorUtils {
   def isAdjacentLocation(s: State, actor: CreatureId)(location: Location): Boolean = {

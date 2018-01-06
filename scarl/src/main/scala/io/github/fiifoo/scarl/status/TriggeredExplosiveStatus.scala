@@ -1,9 +1,9 @@
 package io.github.fiifoo.scarl.status
 
+import io.github.fiifoo.scarl.core.State
 import io.github.fiifoo.scarl.core.effect.Effect
 import io.github.fiifoo.scarl.core.entity._
 import io.github.fiifoo.scarl.core.item.Discover
-import io.github.fiifoo.scarl.core.{Selectors, State}
 import io.github.fiifoo.scarl.effect.combat.ExplodeEffect
 import io.github.fiifoo.scarl.effect.movement.TriggerWidgetEffect
 

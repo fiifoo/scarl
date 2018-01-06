@@ -1,10 +1,11 @@
 package io.github.fiifoo.scarl.effect.movement
 
-import io.github.fiifoo.scarl.core.Selectors.getLocationTriggers
+import io.github.fiifoo.scarl.core.State
 import io.github.fiifoo.scarl.core.effect.{Effect, EffectResult}
 import io.github.fiifoo.scarl.core.entity.CreatureId
+import io.github.fiifoo.scarl.core.entity.Selectors.getLocationTriggers
+import io.github.fiifoo.scarl.core.geometry.Location
 import io.github.fiifoo.scarl.core.mutation.LocatableLocationMutation
-import io.github.fiifoo.scarl.core.{Location, State}
 
 case class MovedEffect(target: CreatureId,
                        from: Location,

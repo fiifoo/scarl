@@ -1,6 +1,6 @@
 package models.json
 
-import io.github.fiifoo.scarl.core.Rng.{WeightedChoice, WeightedChoices}
+import io.github.fiifoo.scarl.core.math.Rng.{WeightedChoice, WeightedChoices}
 import play.api.libs.json._
 
 object JsonBase {

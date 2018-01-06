@@ -1,7 +1,6 @@
 package io.github.fiifoo.scarl.game.map
 
 import io.github.fiifoo.scarl.core.kind.{ItemKindId, TerrainKindId, WallKindId}
-import io.github.fiifoo.scarl.game.LocationEntities
 
 object MapLocation {
   def apply(entities: LocationEntities): MapLocation = {

@@ -1,10 +1,11 @@
 package io.github.fiifoo.scarl.area.template
 
+import io.github.fiifoo.scarl.core.State
+import io.github.fiifoo.scarl.core.geometry.{Location, WaypointNetwork}
 import io.github.fiifoo.scarl.core.kind._
+import io.github.fiifoo.scarl.core.math.Rng
 import io.github.fiifoo.scarl.core.mutation.{NewConduitMutation, NewGatewayMutation}
 import io.github.fiifoo.scarl.core.world.ConduitId
-import io.github.fiifoo.scarl.core.{Location, Rng, State}
-import io.github.fiifoo.scarl.geometry.WaypointNetwork
 import io.github.fiifoo.scarl.world.Conduit
 
 import scala.util.Random

@@ -1,6 +1,6 @@
 package io.github.fiifoo.scarl.core
 
-import io.github.fiifoo.scarl.core.entity.{Actor, ActorId, CreatureId}
+import io.github.fiifoo.scarl.core.entity.{Actor, ActorId, ActorQueue, CreatureId}
 import io.github.fiifoo.scarl.core.test_assets.TestCreatureFactory
 import org.scalatest._
 

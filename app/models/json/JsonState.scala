@@ -1,11 +1,14 @@
 package models.json
 
 import io.github.fiifoo.scarl.core._
-import io.github.fiifoo.scarl.core.action.Tactic
+import io.github.fiifoo.scarl.core.ai.Tactic
+import io.github.fiifoo.scarl.core.assets.Assets
 import io.github.fiifoo.scarl.core.communication.CommunicationId
-import io.github.fiifoo.scarl.core.entity.{CreatureId, ItemId}
+import io.github.fiifoo.scarl.core.entity.{CreatureId, IdSeq, ItemId}
+import io.github.fiifoo.scarl.core.geometry.Location
 import io.github.fiifoo.scarl.core.item.Equipment.Slot
 import io.github.fiifoo.scarl.core.item.Key
+import io.github.fiifoo.scarl.core.math.Rng
 import io.github.fiifoo.scarl.core.world.ConduitId
 import play.api.libs.json._
 

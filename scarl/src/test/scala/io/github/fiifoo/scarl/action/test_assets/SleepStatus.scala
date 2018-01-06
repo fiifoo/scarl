@@ -2,9 +2,9 @@ package io.github.fiifoo.scarl.action.test_assets
 
 import io.github.fiifoo.scarl.core.State
 import io.github.fiifoo.scarl.core.Time.Tick
-import io.github.fiifoo.scarl.core.effect.{Effect, TickEffect}
+import io.github.fiifoo.scarl.core.effect.{Effect, RemoveEntityEffect}
 import io.github.fiifoo.scarl.core.entity._
-import io.github.fiifoo.scarl.effect.area.RemoveEntityEffect
+import io.github.fiifoo.scarl.effect.TickEffect
 import io.github.fiifoo.scarl.effect.creature.HealEffect
 
 case class SleepStatus(id: ActiveStatusId,

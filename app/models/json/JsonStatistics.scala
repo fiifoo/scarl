@@ -1,7 +1,7 @@
 package models.json
 
 import io.github.fiifoo.scarl.core.kind.CreatureKindId
-import io.github.fiifoo.scarl.game.Statistics
+import io.github.fiifoo.scarl.game.statistics.Statistics
 import play.api.libs.json._
 
 object JsonStatistics {

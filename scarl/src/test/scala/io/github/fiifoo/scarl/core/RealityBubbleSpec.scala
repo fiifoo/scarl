@@ -1,6 +1,7 @@
 package io.github.fiifoo.scarl.core
 
 import io.github.fiifoo.scarl.core.entity.{ActiveStatusId, CreatureId}
+import io.github.fiifoo.scarl.core.geometry.Location
 import io.github.fiifoo.scarl.core.mutation.{RemovableEntityMutation, RemoveEntitiesMutation}
 import io.github.fiifoo.scarl.core.test_assets._
 import org.scalatest._

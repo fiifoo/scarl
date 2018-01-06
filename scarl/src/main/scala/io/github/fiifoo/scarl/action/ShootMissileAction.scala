@@ -1,12 +1,14 @@
 package io.github.fiifoo.scarl.action
 
 import io.github.fiifoo.scarl.action.Utils._
-import io.github.fiifoo.scarl.core.Selectors.getCreatureStats
 import io.github.fiifoo.scarl.core.action.Action
-import io.github.fiifoo.scarl.core.effect.{Effect, TickEffect}
-import io.github.fiifoo.scarl.core.entity.CreatureId
+import io.github.fiifoo.scarl.core.effect.Effect
+import io.github.fiifoo.scarl.core.entity.Selectors.getCreatureStats
+import io.github.fiifoo.scarl.core.entity.{CreatureId, Selectors}
+import io.github.fiifoo.scarl.core.geometry.Location
 import io.github.fiifoo.scarl.core.kind.CreatureKindId
-import io.github.fiifoo.scarl.core.{Location, Selectors, State, Time}
+import io.github.fiifoo.scarl.core.{State, Time}
+import io.github.fiifoo.scarl.effect.TickEffect
 import io.github.fiifoo.scarl.effect.combat.ShootMissileEffect
 
 case class ShootMissileAction(location: Location) extends Action {

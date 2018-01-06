@@ -1,7 +1,7 @@
 package io.github.fiifoo.scarl.area.feature
 
 import io.github.fiifoo.scarl.area.template.FixedContent
-import io.github.fiifoo.scarl.core.Location
+import io.github.fiifoo.scarl.core.geometry.Location
 
 object Utils {
   def freeLocations(content: FixedContent, locations: Set[Location]): Set[Location] = {

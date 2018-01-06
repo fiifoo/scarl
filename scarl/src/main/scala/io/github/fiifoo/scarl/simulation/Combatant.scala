@@ -1,6 +1,6 @@
 package io.github.fiifoo.scarl.simulation
 
-import io.github.fiifoo.scarl.core.action.Behavior
+import io.github.fiifoo.scarl.core.ai.Behavior
 import io.github.fiifoo.scarl.core.creature.{FactionId, Stats}
 import io.github.fiifoo.scarl.core.kind.{CreatureKind, CreatureKindId}
 

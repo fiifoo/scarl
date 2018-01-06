@@ -1,11 +1,12 @@
 package io.github.fiifoo.scarl.effect.interact
 
-import io.github.fiifoo.scarl.core.Selectors.{getItemLocation, getLocationEntities, hasKey}
+import io.github.fiifoo.scarl.core.State
 import io.github.fiifoo.scarl.core.effect.{Effect, EffectResult}
+import io.github.fiifoo.scarl.core.entity.Selectors.{getItemLocation, getLocationEntities, hasKey}
 import io.github.fiifoo.scarl.core.entity.{CreatureId, Item, ItemId}
+import io.github.fiifoo.scarl.core.geometry.Location
 import io.github.fiifoo.scarl.core.item.Door
 import io.github.fiifoo.scarl.core.mutation.RemovableEntityMutation
-import io.github.fiifoo.scarl.core.{Location, State}
 
 case class UseDoorEffect(user: Option[CreatureId],
                          target: ItemId,

@@ -1,11 +1,12 @@
 package io.github.fiifoo.scarl.effect.interact
 
+import io.github.fiifoo.scarl.core.State
 import io.github.fiifoo.scarl.core.effect.{Effect, EffectResult}
 import io.github.fiifoo.scarl.core.entity.{CreatureId, ItemId}
+import io.github.fiifoo.scarl.core.geometry.Location
 import io.github.fiifoo.scarl.core.item.Equipment.Slot
 import io.github.fiifoo.scarl.core.item._
 import io.github.fiifoo.scarl.core.mutation.EquipItemMutation
-import io.github.fiifoo.scarl.core.{Location, State}
 
 /**
   * Equips given item & unequips items from needed slots

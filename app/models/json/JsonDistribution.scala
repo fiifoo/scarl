@@ -1,7 +1,7 @@
 package models.json
 
-import io.github.fiifoo.scarl.core.Distribution
-import io.github.fiifoo.scarl.core.Distribution.{Binomial, Uniform}
+import io.github.fiifoo.scarl.core.math.Distribution
+import io.github.fiifoo.scarl.core.math.Distribution.{Binomial, Uniform}
 import play.api.libs.json._
 
 object JsonDistribution {

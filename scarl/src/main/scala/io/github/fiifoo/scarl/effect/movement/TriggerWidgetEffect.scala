@@ -1,10 +1,11 @@
 package io.github.fiifoo.scarl.effect.movement
 
+import io.github.fiifoo.scarl.core.State
 import io.github.fiifoo.scarl.core.effect.{Effect, EffectResult, LocalizedDescriptionEffect}
-import io.github.fiifoo.scarl.core.entity.{ContainerId, CreatureId, ItemId}
+import io.github.fiifoo.scarl.core.entity.{ContainerId, CreatureId, ItemId, Selectors}
+import io.github.fiifoo.scarl.core.geometry.Location
 import io.github.fiifoo.scarl.core.item.{Discover, DiscoverEveryone, DiscoverTriggerer}
 import io.github.fiifoo.scarl.core.mutation.{ItemFoundMutation, ItemHiddenMutation}
-import io.github.fiifoo.scarl.core.{Location, Selectors, State}
 
 case class TriggerWidgetEffect(triggerer: CreatureId,
                                trap: ContainerId,

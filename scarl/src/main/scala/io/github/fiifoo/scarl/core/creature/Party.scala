@@ -1,9 +1,9 @@
 package io.github.fiifoo.scarl.core.creature
 
+import io.github.fiifoo.scarl.core.State
 import io.github.fiifoo.scarl.core.entity.CreatureId
+import io.github.fiifoo.scarl.core.geometry.{Location, WaypointNetwork}
 import io.github.fiifoo.scarl.core.kind.CreatureKind
-import io.github.fiifoo.scarl.core.{Location, State}
-import io.github.fiifoo.scarl.geometry.WaypointNetwork
 
 object Party {
 

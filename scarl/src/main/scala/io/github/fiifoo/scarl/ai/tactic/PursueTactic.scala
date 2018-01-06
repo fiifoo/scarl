@@ -1,10 +1,10 @@
 package io.github.fiifoo.scarl.ai.tactic
 
-import io.github.fiifoo.scarl.core.action.Tactic
-import io.github.fiifoo.scarl.core.action.Tactic.Result
+import io.github.fiifoo.scarl.core.State
+import io.github.fiifoo.scarl.core.ai.Tactic
+import io.github.fiifoo.scarl.core.ai.Tactic.Result
 import io.github.fiifoo.scarl.core.entity.{Creature, CreatureId, SafeCreatureId}
-import io.github.fiifoo.scarl.core.{Location, State}
-import io.github.fiifoo.scarl.geometry.{Line, Los}
+import io.github.fiifoo.scarl.core.geometry.{Line, Location, Los}
 
 import scala.util.Random
 

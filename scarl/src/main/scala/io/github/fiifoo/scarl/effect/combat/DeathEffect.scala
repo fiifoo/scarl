@@ -1,10 +1,11 @@
 package io.github.fiifoo.scarl.effect.combat
 
+import io.github.fiifoo.scarl.core.State
 import io.github.fiifoo.scarl.core.creature.Party
 import io.github.fiifoo.scarl.core.effect.{Effect, EffectResult}
 import io.github.fiifoo.scarl.core.entity.CreatureId
+import io.github.fiifoo.scarl.core.geometry.Location
 import io.github.fiifoo.scarl.core.mutation.{CreatureDeadMutation, CreaturePartyMutation, Mutation, RemovableEntityMutation}
-import io.github.fiifoo.scarl.core.{Location, State}
 import io.github.fiifoo.scarl.effect.creature.GainExperienceEffect
 import io.github.fiifoo.scarl.rule.GainExperienceRule
 

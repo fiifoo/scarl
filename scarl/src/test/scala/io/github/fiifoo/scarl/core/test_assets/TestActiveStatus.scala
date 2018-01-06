@@ -2,7 +2,7 @@ package io.github.fiifoo.scarl.core.test_assets
 
 import io.github.fiifoo.scarl.core.State
 import io.github.fiifoo.scarl.core.Time.Tick
-import io.github.fiifoo.scarl.core.effect.{Effect, TickEffect}
+import io.github.fiifoo.scarl.core.effect.Effect
 import io.github.fiifoo.scarl.core.entity._
 
 case class TestActiveStatus(id: ActiveStatusId,
@@ -16,7 +16,7 @@ case class TestActiveStatus(id: ActiveStatusId,
 
   def apply(s: State): List[Effect] = {
     List(
-      TickEffect(id, interval),
+      TestTickEffect(id, interval),
       TestDamageEffect(target, damage)
     )
   }

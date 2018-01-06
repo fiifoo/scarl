@@ -1,12 +1,12 @@
 package io.github.fiifoo.scarl.effect.area
 
-import io.github.fiifoo.scarl.core.Selectors.getEntityLocation
+import io.github.fiifoo.scarl.core.State
 import io.github.fiifoo.scarl.core.effect.{Effect, EffectResult}
+import io.github.fiifoo.scarl.core.entity.Selectors.getEntityLocation
 import io.github.fiifoo.scarl.core.entity._
+import io.github.fiifoo.scarl.core.geometry.{Location, Obstacle, Shape}
 import io.github.fiifoo.scarl.core.kind._
 import io.github.fiifoo.scarl.core.mutation.RemovableEntityMutation
-import io.github.fiifoo.scarl.core.{Location, State}
-import io.github.fiifoo.scarl.geometry.{Obstacle, Shape}
 
 case class TransformEffect(from: EntityId,
                            to: KindId,

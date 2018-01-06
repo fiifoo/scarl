@@ -1,11 +1,12 @@
 package io.github.fiifoo.scarl.effect
 
+import io.github.fiifoo.scarl.core.State
+import io.github.fiifoo.scarl.core.assets.Assets
 import io.github.fiifoo.scarl.core.creature.Stats.Health
 import io.github.fiifoo.scarl.core.creature.{Character, Progression, ProgressionId, Stats}
 import io.github.fiifoo.scarl.core.effect.{Effect, EffectResolver}
 import io.github.fiifoo.scarl.core.entity.CreatureId
 import io.github.fiifoo.scarl.core.test_assets.TestCreatureFactory
-import io.github.fiifoo.scarl.core.{Assets, State}
 import io.github.fiifoo.scarl.effect.creature.GainExperienceEffect
 import org.scalatest._
 

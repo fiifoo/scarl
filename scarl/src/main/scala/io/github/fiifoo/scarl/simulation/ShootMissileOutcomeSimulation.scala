@@ -1,10 +1,10 @@
 package io.github.fiifoo.scarl.simulation
 
 import io.github.fiifoo.scarl.action.ShootMissileAction
+import io.github.fiifoo.scarl.core.State
 import io.github.fiifoo.scarl.core.creature.FactionId
-import io.github.fiifoo.scarl.core.entity.{ActorId, CreatureId}
-import io.github.fiifoo.scarl.core.{ActorQueue, Location, State}
-import io.github.fiifoo.scarl.geometry.WaypointNetwork
+import io.github.fiifoo.scarl.core.entity.{ActorId, ActorQueue, CreatureId}
+import io.github.fiifoo.scarl.core.geometry.{Location, WaypointNetwork}
 
 import scala.collection.SortedSet
 

@@ -1,8 +1,8 @@
 package io.github.fiifoo.scarl.effect.combat
 
-import io.github.fiifoo.scarl.core.Selectors.getCreatureStats
 import io.github.fiifoo.scarl.core.State
 import io.github.fiifoo.scarl.core.effect.{Effect, EffectResult}
+import io.github.fiifoo.scarl.core.entity.Selectors.getCreatureStats
 import io.github.fiifoo.scarl.core.entity.{ContainerId, CreatureId}
 import io.github.fiifoo.scarl.core.mutation.RngMutation
 import io.github.fiifoo.scarl.rule.AttackRule

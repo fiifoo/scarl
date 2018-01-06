@@ -1,9 +1,10 @@
 package io.github.fiifoo.scarl.core.mutation
 
-import io.github.fiifoo.scarl.core.entity.{ActiveStatusId, CreatureId, Item, PassiveStatusId}
+import io.github.fiifoo.scarl.core.State
+import io.github.fiifoo.scarl.core.entity._
+import io.github.fiifoo.scarl.core.geometry.Location
 import io.github.fiifoo.scarl.core.test_assets.{TestActiveStatus, TestCreatureFactory, TestItemFactory, TestStatus}
 import io.github.fiifoo.scarl.core.world.ConduitId
-import io.github.fiifoo.scarl.core.{IdSeq, Location, State}
 import org.scalatest._
 
 class ConduitEntryMutationSpec extends FlatSpec with Matchers {

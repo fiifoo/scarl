@@ -1,7 +1,7 @@
 package io.github.fiifoo.scarl.core.mutation
 
-import io.github.fiifoo.scarl.core.Selectors.{getContainerItems, getTargetStatuses}
 import io.github.fiifoo.scarl.core.State
+import io.github.fiifoo.scarl.core.entity.Selectors.{getContainerItems, getTargetStatuses}
 import io.github.fiifoo.scarl.core.entity.{EntityId, WallId}
 
 case class RemovableEntityMutation(id: EntityId) extends Mutation {

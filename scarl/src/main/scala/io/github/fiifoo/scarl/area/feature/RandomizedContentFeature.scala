@@ -5,8 +5,9 @@ import io.github.fiifoo.scarl.area.feature.Utils.freeLocations
 import io.github.fiifoo.scarl.area.template.{CalculateFailedException, FixedContent}
 import io.github.fiifoo.scarl.area.theme.ContentSelection.{FixedCreature, FixedItem, ThemeCreature, ThemeItem}
 import io.github.fiifoo.scarl.area.theme.{CreatureSelection, ItemSelection, Theme}
+import io.github.fiifoo.scarl.core.geometry.Location
 import io.github.fiifoo.scarl.core.kind.{CreatureKindId, ItemKindId, WidgetKindId}
-import io.github.fiifoo.scarl.core.{Distribution, Location, Rng}
+import io.github.fiifoo.scarl.core.math.{Distribution, Rng}
 import io.github.fiifoo.scarl.world.WorldAssets
 
 import scala.util.Random

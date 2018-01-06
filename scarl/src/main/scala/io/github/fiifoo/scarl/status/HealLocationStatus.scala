@@ -1,12 +1,13 @@
 package io.github.fiifoo.scarl.status
 
-import io.github.fiifoo.scarl.core.Selectors.getLocationEntities
 import io.github.fiifoo.scarl.core.State
 import io.github.fiifoo.scarl.core.Time.Tick
-import io.github.fiifoo.scarl.core.effect.{Effect, TickEffect}
+import io.github.fiifoo.scarl.core.effect.{Effect, RemoveEntityEffect}
+import io.github.fiifoo.scarl.core.entity.Selectors.getLocationEntities
 import io.github.fiifoo.scarl.core.entity._
 import io.github.fiifoo.scarl.core.kind.WidgetKindId
-import io.github.fiifoo.scarl.effect.area.{RemoveEntityEffect, TransformEffect}
+import io.github.fiifoo.scarl.effect.TickEffect
+import io.github.fiifoo.scarl.effect.area.TransformEffect
 import io.github.fiifoo.scarl.effect.creature.HealEffect
 
 case class HealLocationStatus(id: ActiveStatusId,

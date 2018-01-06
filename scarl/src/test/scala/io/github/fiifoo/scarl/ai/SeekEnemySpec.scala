@@ -1,10 +1,12 @@
 package io.github.fiifoo.scarl.ai
 
+import io.github.fiifoo.scarl.core.State
+import io.github.fiifoo.scarl.core.assets.Assets
 import io.github.fiifoo.scarl.core.creature.{Faction, FactionId}
 import io.github.fiifoo.scarl.core.entity.CreatureId
+import io.github.fiifoo.scarl.core.geometry.Location
 import io.github.fiifoo.scarl.core.mutation.NewEntityMutation
 import io.github.fiifoo.scarl.core.test_assets.TestCreatureFactory
-import io.github.fiifoo.scarl.core.{Assets, Location, State}
 import org.scalatest._
 
 class SeekEnemySpec extends FlatSpec with Matchers {

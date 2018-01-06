@@ -1,9 +1,10 @@
 package io.github.fiifoo.scarl.core.kind
 
-import io.github.fiifoo.scarl.core.entity.Entity
+import io.github.fiifoo.scarl.core.State
+import io.github.fiifoo.scarl.core.entity.{Entity, IdSeq}
+import io.github.fiifoo.scarl.core.geometry.Location
 import io.github.fiifoo.scarl.core.kind.Kind.Result
 import io.github.fiifoo.scarl.core.mutation.Mutation
-import io.github.fiifoo.scarl.core.{IdSeq, Location, State}
 
 trait Kind {
   val id: KindId

@@ -7,7 +7,7 @@ import io.github.fiifoo.scarl.area.template.FixedContent.MachinerySource
 import io.github.fiifoo.scarl.area.template._
 import io.github.fiifoo.scarl.area.theme.ContentSelection.{FixedCreature, FixedItem, ThemeCreature, ThemeItem}
 import io.github.fiifoo.scarl.area.theme.{CreatureSelection, ItemSelection}
-import io.github.fiifoo.scarl.core.Location
+import io.github.fiifoo.scarl.core.geometry.Location
 import io.github.fiifoo.scarl.core.kind.ItemKindId
 import play.api.libs.json._
 

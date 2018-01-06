@@ -1,6 +1,7 @@
 package io.github.fiifoo.scarl.core
 
 import io.github.fiifoo.scarl.core.entity.CreatureId
+import io.github.fiifoo.scarl.core.geometry.Location
 import io.github.fiifoo.scarl.core.mutation.LocatableLocationMutation
 import io.github.fiifoo.scarl.core.test_assets.{TestCreatureFactory, TestMoveTactic}
 import org.scalatest._

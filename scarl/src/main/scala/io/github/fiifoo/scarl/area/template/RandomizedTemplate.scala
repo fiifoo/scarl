@@ -6,9 +6,10 @@ import io.github.fiifoo.scarl.area.shape.Shape
 import io.github.fiifoo.scarl.area.template.Template.Result
 import io.github.fiifoo.scarl.area.theme.ContentSelection.FixedItem
 import io.github.fiifoo.scarl.area.theme.Theme
-import io.github.fiifoo.scarl.core.Distribution.Uniform
+import io.github.fiifoo.scarl.core.geometry.Location
 import io.github.fiifoo.scarl.core.kind._
-import io.github.fiifoo.scarl.core.{Location, Rng}
+import io.github.fiifoo.scarl.core.math.Distribution.Uniform
+import io.github.fiifoo.scarl.core.math.Rng
 import io.github.fiifoo.scarl.world.WorldAssets
 
 import scala.util.Random

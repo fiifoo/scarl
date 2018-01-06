@@ -1,11 +1,12 @@
 package io.github.fiifoo.scarl.core.kind
 
+import io.github.fiifoo.scarl.core.State
 import io.github.fiifoo.scarl.core.creature.Stats.Explosive
 import io.github.fiifoo.scarl.core.entity._
+import io.github.fiifoo.scarl.core.geometry.Location
 import io.github.fiifoo.scarl.core.item.{ItemPower, _}
 import io.github.fiifoo.scarl.core.kind.Kind.Result
 import io.github.fiifoo.scarl.core.mutation.{IdSeqMutation, ItemFoundMutation, Mutation, NewEntityMutation}
-import io.github.fiifoo.scarl.core.{IdSeq, Location, State}
 
 case class ItemKind(id: ItemKindId,
                     name: String,

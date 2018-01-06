@@ -1,9 +1,9 @@
 package models.json
 
 import io.github.fiifoo.scarl.ai.tactic._
-import io.github.fiifoo.scarl.core.Location
-import io.github.fiifoo.scarl.core.action.{Behavior, PassTactic, Tactic}
+import io.github.fiifoo.scarl.core.ai.{Behavior, Tactic}
 import io.github.fiifoo.scarl.core.entity.CreatureId
+import io.github.fiifoo.scarl.core.geometry.Location
 import play.api.libs.json._
 
 object JsonTactic {

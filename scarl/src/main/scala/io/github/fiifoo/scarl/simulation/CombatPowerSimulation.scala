@@ -3,11 +3,13 @@ package io.github.fiifoo.scarl.simulation
 import io.github.fiifoo.scarl.area.shape.Rectangle
 import io.github.fiifoo.scarl.area.template.{ApplyTemplate, CalculateTemplate, FixedTemplate, TemplateId}
 import io.github.fiifoo.scarl.area.theme.{Theme, ThemeId}
+import io.github.fiifoo.scarl.core.State
 import io.github.fiifoo.scarl.core.assets.CombatPower
 import io.github.fiifoo.scarl.core.creature.{Faction, FactionId}
 import io.github.fiifoo.scarl.core.entity.SafeCreatureId
+import io.github.fiifoo.scarl.core.geometry.Location
 import io.github.fiifoo.scarl.core.kind._
-import io.github.fiifoo.scarl.core.{Location, Rng, State}
+import io.github.fiifoo.scarl.core.math.Rng
 import io.github.fiifoo.scarl.world.WorldAssets
 
 object CombatPowerSimulation {

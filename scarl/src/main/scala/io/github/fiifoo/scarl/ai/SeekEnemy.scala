@@ -1,10 +1,10 @@
 package io.github.fiifoo.scarl.ai
 
 import io.github.fiifoo.scarl.ai.tactic.ChargeTactic
-import io.github.fiifoo.scarl.core.Selectors.getCreatureComrades
 import io.github.fiifoo.scarl.core.State
+import io.github.fiifoo.scarl.core.entity.Selectors.getCreatureComrades
 import io.github.fiifoo.scarl.core.entity.{Creature, CreatureId}
-import io.github.fiifoo.scarl.geometry.{Line, Los}
+import io.github.fiifoo.scarl.core.geometry.{Line, Los}
 
 object SeekEnemy {
 

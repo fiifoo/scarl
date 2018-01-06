@@ -1,11 +1,12 @@
 package io.github.fiifoo.scarl.ai.tactic
 
+import io.github.fiifoo.scarl.action.PassAction
 import io.github.fiifoo.scarl.ai.SeekEnemy
 import io.github.fiifoo.scarl.core.State
-import io.github.fiifoo.scarl.core.action.Tactic.Result
-import io.github.fiifoo.scarl.core.action.{PassAction, Tactic}
+import io.github.fiifoo.scarl.core.ai.Tactic
+import io.github.fiifoo.scarl.core.ai.Tactic.Result
 import io.github.fiifoo.scarl.core.entity.{Creature, CreatureId, SafeCreatureId}
-import io.github.fiifoo.scarl.geometry.WaypointNetwork
+import io.github.fiifoo.scarl.core.geometry.WaypointNetwork
 
 import scala.util.Random
 

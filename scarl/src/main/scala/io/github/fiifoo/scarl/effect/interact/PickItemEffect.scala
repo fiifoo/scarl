@@ -1,9 +1,10 @@
 package io.github.fiifoo.scarl.effect.interact
 
+import io.github.fiifoo.scarl.core.State
 import io.github.fiifoo.scarl.core.effect.{Effect, EffectResult}
 import io.github.fiifoo.scarl.core.entity.{ContainerId, CreatureId, ItemId}
+import io.github.fiifoo.scarl.core.geometry.Location
 import io.github.fiifoo.scarl.core.mutation.{ItemContainerMutation, RemovableEntityMutation}
-import io.github.fiifoo.scarl.core.{Location, State}
 import io.github.fiifoo.scarl.effect.creature.ReceiveKeyEffect
 
 case class PickItemEffect(target: ItemId,

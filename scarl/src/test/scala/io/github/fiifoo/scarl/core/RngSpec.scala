@@ -1,6 +1,7 @@
 package io.github.fiifoo.scarl.core
 
-import io.github.fiifoo.scarl.core.Rng.{WeightedChoice, WeightedChoices}
+import io.github.fiifoo.scarl.core.math.Rng
+import io.github.fiifoo.scarl.core.math.Rng.{WeightedChoice, WeightedChoices}
 import org.scalatest._
 
 class RngSpec extends FlatSpec with Matchers {

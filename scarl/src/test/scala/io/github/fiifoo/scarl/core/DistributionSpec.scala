@@ -1,6 +1,7 @@
 package io.github.fiifoo.scarl.core
 
-import io.github.fiifoo.scarl.core.Distribution.{Binomial, Uniform}
+import io.github.fiifoo.scarl.core.math.Distribution
+import io.github.fiifoo.scarl.core.math.Distribution._
 import org.scalatest._
 
 import scala.util.Random

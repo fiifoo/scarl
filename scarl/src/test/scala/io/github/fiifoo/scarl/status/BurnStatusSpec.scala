@@ -1,12 +1,13 @@
 package io.github.fiifoo.scarl.status
 
-import io.github.fiifoo.scarl.core.effect.TickEffect
+import io.github.fiifoo.scarl.core.effect.RemoveEntityEffect
 import io.github.fiifoo.scarl.core.entity._
+import io.github.fiifoo.scarl.core.geometry.Location
 import io.github.fiifoo.scarl.core.kind.WallKindId
 import io.github.fiifoo.scarl.core.mutation.NewEntityMutation
 import io.github.fiifoo.scarl.core.test_assets.TestCreatureFactory
-import io.github.fiifoo.scarl.core.{Location, State, Time}
-import io.github.fiifoo.scarl.effect.area.RemoveEntityEffect
+import io.github.fiifoo.scarl.core.{State, Time}
+import io.github.fiifoo.scarl.effect.TickEffect
 import io.github.fiifoo.scarl.effect.combat.DamageEffect
 import io.github.fiifoo.scarl.status.test_assets.BurnStatus
 import org.scalatest._

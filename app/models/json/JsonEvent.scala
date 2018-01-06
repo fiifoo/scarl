@@ -1,6 +1,6 @@
 package models.json
 
-import io.github.fiifoo.scarl.core.Location
+import io.github.fiifoo.scarl.core.geometry.Location
 import io.github.fiifoo.scarl.game.event._
 import play.api.libs.json._
 

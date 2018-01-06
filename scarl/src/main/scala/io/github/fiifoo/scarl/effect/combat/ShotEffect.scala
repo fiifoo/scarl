@@ -1,9 +1,10 @@
 package io.github.fiifoo.scarl.effect.combat
 
+import io.github.fiifoo.scarl.core.State
 import io.github.fiifoo.scarl.core.effect.{Effect, EffectResult}
 import io.github.fiifoo.scarl.core.entity.{CreatureId, EntityId}
+import io.github.fiifoo.scarl.core.geometry.Location
 import io.github.fiifoo.scarl.core.mutation.RngMutation
-import io.github.fiifoo.scarl.core.{Location, State}
 import io.github.fiifoo.scarl.rule.AttackRule
 
 case class ShotEffect(attacker: CreatureId,

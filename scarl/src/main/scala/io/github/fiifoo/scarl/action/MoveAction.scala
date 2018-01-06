@@ -1,9 +1,11 @@
 package io.github.fiifoo.scarl.action
 
+import io.github.fiifoo.scarl.core.State
 import io.github.fiifoo.scarl.core.action.Action
-import io.github.fiifoo.scarl.core.effect.{Effect, TickEffect}
+import io.github.fiifoo.scarl.core.effect.Effect
 import io.github.fiifoo.scarl.core.entity.CreatureId
-import io.github.fiifoo.scarl.core.{Location, State}
+import io.github.fiifoo.scarl.core.geometry.Location
+import io.github.fiifoo.scarl.effect.TickEffect
 import io.github.fiifoo.scarl.effect.movement.MoveEffect
 import io.github.fiifoo.scarl.rule.MoveRule
 

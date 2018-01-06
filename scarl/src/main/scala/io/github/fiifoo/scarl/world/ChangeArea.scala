@@ -2,6 +2,7 @@ package io.github.fiifoo.scarl.world
 
 import io.github.fiifoo.scarl.area.AreaId
 import io.github.fiifoo.scarl.core._
+import io.github.fiifoo.scarl.core.entity.IdSeq
 import io.github.fiifoo.scarl.core.mutation.ConduitExitMutation
 import io.github.fiifoo.scarl.core.world.{ConduitId, Traveler}
 

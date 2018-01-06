@@ -1,13 +1,12 @@
 package io.github.fiifoo.scarl.effect.combat
 
-import io.github.fiifoo.scarl.core.Selectors.getCreatureStats
+import io.github.fiifoo.scarl.core.State
 import io.github.fiifoo.scarl.core.creature.Stats.Explosive
-import io.github.fiifoo.scarl.core.effect.{Effect, EffectResult}
-import io.github.fiifoo.scarl.core.entity.{CreatureId, EntityId, LocatableId}
+import io.github.fiifoo.scarl.core.effect.{Effect, EffectResult, RemoveEntityEffect}
+import io.github.fiifoo.scarl.core.entity.Selectors.getCreatureStats
+import io.github.fiifoo.scarl.core.entity.{CreatureId, EntityId, LocatableId, Selectors}
+import io.github.fiifoo.scarl.core.geometry.{Location, Obstacle}
 import io.github.fiifoo.scarl.core.mutation.RngMutation
-import io.github.fiifoo.scarl.core.{Location, Selectors, State}
-import io.github.fiifoo.scarl.effect.area.RemoveEntityEffect
-import io.github.fiifoo.scarl.geometry.Obstacle
 import io.github.fiifoo.scarl.rule.AttackRule
 import io.github.fiifoo.scarl.rule.AttackRule.{Attacker, Defender}
 

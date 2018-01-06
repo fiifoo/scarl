@@ -1,9 +1,10 @@
 package io.github.fiifoo.scarl.core.kind
 
-import io.github.fiifoo.scarl.core.entity.{Container, ContainerId, SafeCreatureId, Status}
+import io.github.fiifoo.scarl.core.State
+import io.github.fiifoo.scarl.core.entity._
+import io.github.fiifoo.scarl.core.geometry.Location
 import io.github.fiifoo.scarl.core.kind.Kind.Result
 import io.github.fiifoo.scarl.core.mutation.{IdSeqMutation, NewEntityMutation}
-import io.github.fiifoo.scarl.core.{IdSeq, Location, State}
 
 trait WidgetKind extends Kind {
   val id: WidgetKindId

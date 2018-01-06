@@ -1,9 +1,9 @@
 package models.json
 
 import io.github.fiifoo.scarl.action._
-import io.github.fiifoo.scarl.core.Location
-import io.github.fiifoo.scarl.core.action.{Action, PassAction}
+import io.github.fiifoo.scarl.core.action.Action
 import io.github.fiifoo.scarl.core.entity.CreatureId
+import io.github.fiifoo.scarl.core.geometry.Location
 import play.api.libs.json._
 
 object JsonAction {

@@ -1,21 +1,21 @@
 package models.admin
 
-import io.github.fiifoo.scarl.ai.tactic.{FollowerTactic, GreetTactic, RoamTactic}
+import io.github.fiifoo.scarl.ai.tactic.{FollowerTactic, GreetTactic, PassTactic, RoamTactic}
 import io.github.fiifoo.scarl.area.Area
 import io.github.fiifoo.scarl.area.feature.{Feature, RandomizedContentFeature}
 import io.github.fiifoo.scarl.area.shape.{Rectangle, Shape}
 import io.github.fiifoo.scarl.area.template.{FixedTemplate, RandomizedTemplate, Template}
 import io.github.fiifoo.scarl.area.theme.ContentSelection.{FixedCreature, FixedItem, ThemeCreature, ThemeItem}
 import io.github.fiifoo.scarl.area.theme.{CreatureSelection, ItemSelection, Theme}
-import io.github.fiifoo.scarl.core.Distribution
-import io.github.fiifoo.scarl.core.Distribution.{Binomial, Uniform}
-import io.github.fiifoo.scarl.core.action.{Behavior, PassTactic}
+import io.github.fiifoo.scarl.core.ai.Behavior
 import io.github.fiifoo.scarl.core.communication.{Communication, Message}
 import io.github.fiifoo.scarl.core.creature.Missile.{Guidance, Guided, Smart}
 import io.github.fiifoo.scarl.core.creature.{CreaturePower, Faction, Progression}
 import io.github.fiifoo.scarl.core.item.Equipment._
 import io.github.fiifoo.scarl.core.item._
 import io.github.fiifoo.scarl.core.kind._
+import io.github.fiifoo.scarl.core.math.Distribution
+import io.github.fiifoo.scarl.core.math.Distribution.{Binomial, Uniform}
 import io.github.fiifoo.scarl.mechanism.{CreateEntityMechanism, RemoveWallMechanism, UseDoorMechanism}
 import io.github.fiifoo.scarl.power.{TransformCreaturePower, TransformItemPower}
 import io.github.fiifoo.scarl.widget._

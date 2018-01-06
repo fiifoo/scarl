@@ -1,6 +1,7 @@
 package io.github.fiifoo.scarl.core.mutation
 
 import io.github.fiifoo.scarl.core._
+import io.github.fiifoo.scarl.core.geometry.Location
 import io.github.fiifoo.scarl.core.mutation.index.ConduitLocationIndexAddMutation
 import io.github.fiifoo.scarl.core.world.ConduitId
 

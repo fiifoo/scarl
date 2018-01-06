@@ -2,10 +2,11 @@ package io.github.fiifoo.scarl.action.validate
 
 import io.github.fiifoo.scarl.action._
 import io.github.fiifoo.scarl.action.validate.ValidatorUtils._
-import io.github.fiifoo.scarl.core.Selectors.getItemLocation
-import io.github.fiifoo.scarl.core.action.{Action, PassAction}
+import io.github.fiifoo.scarl.core.State
+import io.github.fiifoo.scarl.core.action.Action
 import io.github.fiifoo.scarl.core.entity.CreatureId
-import io.github.fiifoo.scarl.core.{Location, State}
+import io.github.fiifoo.scarl.core.entity.Selectors.getItemLocation
+import io.github.fiifoo.scarl.core.geometry.Location
 
 object ActionValidator {
 

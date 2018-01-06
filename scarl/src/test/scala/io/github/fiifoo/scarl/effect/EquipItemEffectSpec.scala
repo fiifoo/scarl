@@ -1,15 +1,16 @@
 package io.github.fiifoo.scarl.effect
 
+import io.github.fiifoo.scarl.core.State
 import io.github.fiifoo.scarl.core.creature.Stats
 import io.github.fiifoo.scarl.core.creature.Stats.Melee
 import io.github.fiifoo.scarl.core.effect.{Effect, EffectResolver}
 import io.github.fiifoo.scarl.core.entity.{CreatureId, Item, ItemId}
+import io.github.fiifoo.scarl.core.geometry.Location
 import io.github.fiifoo.scarl.core.item.Equipment._
 import io.github.fiifoo.scarl.core.item._
 import io.github.fiifoo.scarl.core.kind.ItemKindId
 import io.github.fiifoo.scarl.core.mutation.NewEntityMutation
 import io.github.fiifoo.scarl.core.test_assets.TestCreatureFactory
-import io.github.fiifoo.scarl.core.{Location, State}
 import io.github.fiifoo.scarl.effect.interact.EquipItemEffect
 import org.scalatest._
 

@@ -1,10 +1,11 @@
 package game
 
+import io.github.fiifoo.scarl.core.State
+import io.github.fiifoo.scarl.core.entity.ActorQueue
+import io.github.fiifoo.scarl.core.geometry.WaypointNetwork
 import io.github.fiifoo.scarl.core.mutation.cache.EquipmentStatsCacheMutation
 import io.github.fiifoo.scarl.core.mutation.index.{ConduitLocationIndexAddMutation, ItemFinderIndexAddMutation, NewEntityIndexMutation}
-import io.github.fiifoo.scarl.core.{ActorQueue, State}
 import io.github.fiifoo.scarl.game.GameState
-import io.github.fiifoo.scarl.geometry.WaypointNetwork
 import io.github.fiifoo.scarl.world.{WorldAssets, WorldState}
 import models.GameSave
 import play.api.libs.json.JsValue

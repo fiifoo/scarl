@@ -1,9 +1,10 @@
 package io.github.fiifoo.scarl.core.test_assets
 
-import io.github.fiifoo.scarl.core.action.Behavior
-import io.github.fiifoo.scarl.core.action.Tactic.Result
+import io.github.fiifoo.scarl.core.State
+import io.github.fiifoo.scarl.core.ai.Behavior
+import io.github.fiifoo.scarl.core.ai.Tactic.Result
 import io.github.fiifoo.scarl.core.entity.CreatureId
-import io.github.fiifoo.scarl.core.{Location, State}
+import io.github.fiifoo.scarl.core.geometry.Location
 
 import scala.util.Random
 

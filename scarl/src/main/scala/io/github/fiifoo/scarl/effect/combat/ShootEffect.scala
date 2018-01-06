@@ -1,10 +1,10 @@
 package io.github.fiifoo.scarl.effect.combat
 
-import io.github.fiifoo.scarl.core.Selectors.getCreatureStats
+import io.github.fiifoo.scarl.core.State
 import io.github.fiifoo.scarl.core.effect.{Effect, EffectResult}
+import io.github.fiifoo.scarl.core.entity.Selectors.getCreatureStats
 import io.github.fiifoo.scarl.core.entity.{CreatureId, EntityId}
-import io.github.fiifoo.scarl.core.{Location, State}
-import io.github.fiifoo.scarl.geometry.{Line, Obstacle}
+import io.github.fiifoo.scarl.core.geometry.{Line, Location, Obstacle}
 
 case class ShootEffect(attacker: CreatureId,
                        location: Location,

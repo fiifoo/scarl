@@ -1,9 +1,10 @@
 package io.github.fiifoo.scarl.core.kind
 
-import io.github.fiifoo.scarl.core.entity.{Terrain, TerrainId}
+import io.github.fiifoo.scarl.core.State
+import io.github.fiifoo.scarl.core.entity.{IdSeq, Terrain, TerrainId}
+import io.github.fiifoo.scarl.core.geometry.Location
 import io.github.fiifoo.scarl.core.kind.Kind.Result
 import io.github.fiifoo.scarl.core.mutation.{IdSeqMutation, NewEntityMutation}
-import io.github.fiifoo.scarl.core.{IdSeq, Location, State}
 
 case class TerrainKind(id: TerrainKindId,
                        name: String,

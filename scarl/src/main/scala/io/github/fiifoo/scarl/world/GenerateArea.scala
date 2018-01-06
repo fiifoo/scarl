@@ -3,6 +3,8 @@ package io.github.fiifoo.scarl.world
 import io.github.fiifoo.scarl.area.template.{ApplyTemplate, CalculateTemplate}
 import io.github.fiifoo.scarl.area.{Area, AreaId}
 import io.github.fiifoo.scarl.core._
+import io.github.fiifoo.scarl.core.entity.IdSeq
+import io.github.fiifoo.scarl.core.math.Rng
 import io.github.fiifoo.scarl.core.world.ConduitId
 
 object GenerateArea {

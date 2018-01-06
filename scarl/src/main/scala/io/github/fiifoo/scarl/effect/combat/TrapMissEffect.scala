@@ -1,8 +1,9 @@
 package io.github.fiifoo.scarl.effect.combat
 
+import io.github.fiifoo.scarl.core.State
 import io.github.fiifoo.scarl.core.effect.{Effect, EffectResult}
 import io.github.fiifoo.scarl.core.entity.{ContainerId, CreatureId}
-import io.github.fiifoo.scarl.core.{Location, State}
+import io.github.fiifoo.scarl.core.geometry.Location
 
 case class TrapMissEffect(trap: ContainerId,
                           target: CreatureId,

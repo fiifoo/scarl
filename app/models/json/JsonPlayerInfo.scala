@@ -1,6 +1,6 @@
 package models.json
 
-import io.github.fiifoo.scarl.game.PlayerInfo
+import io.github.fiifoo.scarl.game.player.PlayerInfo
 import play.api.libs.json._
 
 object JsonPlayerInfo {

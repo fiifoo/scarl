@@ -1,7 +1,8 @@
 package io.github.fiifoo.scarl.area.template
 
 import io.github.fiifoo.scarl.area.shape.Shape
-import io.github.fiifoo.scarl.core.{Location, Rng}
+import io.github.fiifoo.scarl.core.geometry.Location
+import io.github.fiifoo.scarl.core.math.Rng
 
 import scala.util.Random
 

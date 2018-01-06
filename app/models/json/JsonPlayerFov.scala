@@ -1,7 +1,7 @@
 package models.json
 
-import io.github.fiifoo.scarl.core.Location
-import io.github.fiifoo.scarl.game.PlayerFov
+import io.github.fiifoo.scarl.core.geometry.Location
+import io.github.fiifoo.scarl.game.player.PlayerFov
 import play.api.libs.json._
 
 object JsonPlayerFov {

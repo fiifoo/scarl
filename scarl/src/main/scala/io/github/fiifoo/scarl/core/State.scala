@@ -1,14 +1,16 @@
 package io.github.fiifoo.scarl.core
 
 import io.github.fiifoo.scarl.core.Time.Tick
-import io.github.fiifoo.scarl.core.action.Tactic
+import io.github.fiifoo.scarl.core.ai.Tactic
+import io.github.fiifoo.scarl.core.assets.Assets
 import io.github.fiifoo.scarl.core.communication.CommunicationId
 import io.github.fiifoo.scarl.core.creature._
 import io.github.fiifoo.scarl.core.entity._
+import io.github.fiifoo.scarl.core.geometry.{Location, WaypointNetwork}
 import io.github.fiifoo.scarl.core.item.Equipment.Slot
 import io.github.fiifoo.scarl.core.item.Key
+import io.github.fiifoo.scarl.core.math.Rng
 import io.github.fiifoo.scarl.core.world.{ConduitId, Traveler}
-import io.github.fiifoo.scarl.geometry.WaypointNetwork
 
 object State {
 

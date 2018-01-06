@@ -1,10 +1,11 @@
 package io.github.fiifoo.scarl.mechanism
 
-import io.github.fiifoo.scarl.core.Selectors.getLocationItems
+import io.github.fiifoo.scarl.core.State
 import io.github.fiifoo.scarl.core.effect.Effect
 import io.github.fiifoo.scarl.core.entity.Machinery
+import io.github.fiifoo.scarl.core.entity.Selectors.getLocationItems
+import io.github.fiifoo.scarl.core.geometry.Location
 import io.github.fiifoo.scarl.core.item.Mechanism
-import io.github.fiifoo.scarl.core.{Location, State}
 import io.github.fiifoo.scarl.effect.interact.UseDoorEffect
 
 case class UseDoorMechanism(disposable: Boolean) extends Mechanism {

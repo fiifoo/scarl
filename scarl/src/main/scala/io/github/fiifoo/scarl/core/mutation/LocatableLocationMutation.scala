@@ -1,8 +1,9 @@
 package io.github.fiifoo.scarl.core.mutation
 
+import io.github.fiifoo.scarl.core.State
 import io.github.fiifoo.scarl.core.entity.{ContainerId, Locatable, LocatableId}
+import io.github.fiifoo.scarl.core.geometry.Location
 import io.github.fiifoo.scarl.core.mutation.index.{LocatableLocationIndexAddMutation, LocatableLocationIndexRemoveMutation}
-import io.github.fiifoo.scarl.core.{Location, State}
 
 case class LocatableLocationMutation(locatable: LocatableId, location: Location) extends Mutation {
 

@@ -1,8 +1,8 @@
 package io.github.fiifoo.scarl.rule
 
-import io.github.fiifoo.scarl.core.Selectors.getCreatureStats
 import io.github.fiifoo.scarl.core.State
 import io.github.fiifoo.scarl.core.entity.CreatureId
+import io.github.fiifoo.scarl.core.entity.Selectors.getCreatureStats
 
 import scala.util.Random
 

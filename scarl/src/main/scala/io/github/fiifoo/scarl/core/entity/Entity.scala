@@ -1,13 +1,14 @@
 package io.github.fiifoo.scarl.core.entity
 
+import io.github.fiifoo.scarl.core.State
 import io.github.fiifoo.scarl.core.Time.Tick
-import io.github.fiifoo.scarl.core.action.Behavior
+import io.github.fiifoo.scarl.core.ai.Behavior
 import io.github.fiifoo.scarl.core.creature.Stats.Explosive
 import io.github.fiifoo.scarl.core.creature.{Character, CreaturePower, FactionId, Missile, Party, Stats}
 import io.github.fiifoo.scarl.core.effect.Effect
+import io.github.fiifoo.scarl.core.geometry.Location
 import io.github.fiifoo.scarl.core.item._
 import io.github.fiifoo.scarl.core.kind.{CreatureKindId, ItemKindId, TerrainKindId, WallKindId}
-import io.github.fiifoo.scarl.core.{Location, State}
 
 sealed trait Entity {
   val id: EntityId

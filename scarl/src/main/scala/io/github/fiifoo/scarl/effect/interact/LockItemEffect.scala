@@ -1,8 +1,8 @@
 package io.github.fiifoo.scarl.effect.interact
 
-import io.github.fiifoo.scarl.core.Selectors.hasKey
 import io.github.fiifoo.scarl.core.State
 import io.github.fiifoo.scarl.core.effect.{Effect, EffectResult}
+import io.github.fiifoo.scarl.core.entity.Selectors.hasKey
 import io.github.fiifoo.scarl.core.entity.{CreatureId, ItemId}
 import io.github.fiifoo.scarl.core.item.PrivateKey
 import io.github.fiifoo.scarl.core.mutation.ItemLockMutation

@@ -1,7 +1,7 @@
 package io.github.fiifoo.scarl.rule
 
-import io.github.fiifoo.scarl.core.entity.CreatureId
-import io.github.fiifoo.scarl.core.{Selectors, State, Time}
+import io.github.fiifoo.scarl.core.entity.{CreatureId, Selectors}
+import io.github.fiifoo.scarl.core.{State, Time}
 
 object MoveRule {
 

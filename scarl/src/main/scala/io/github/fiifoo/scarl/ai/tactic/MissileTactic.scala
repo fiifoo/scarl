@@ -1,13 +1,13 @@
 package io.github.fiifoo.scarl.ai.tactic
 
-import io.github.fiifoo.scarl.action.{ExplodeAction, MoveAction}
-import io.github.fiifoo.scarl.core.action.Tactic.Result
-import io.github.fiifoo.scarl.core.action.{Behavior, PassAction}
+import io.github.fiifoo.scarl.action.{ExplodeAction, MoveAction, PassAction}
+import io.github.fiifoo.scarl.core.State
+import io.github.fiifoo.scarl.core.ai.Behavior
+import io.github.fiifoo.scarl.core.ai.Tactic.Result
 import io.github.fiifoo.scarl.core.creature.Missile
 import io.github.fiifoo.scarl.core.creature.Missile.Smart
 import io.github.fiifoo.scarl.core.entity._
-import io.github.fiifoo.scarl.core.{Location, State}
-import io.github.fiifoo.scarl.geometry.{Line, Obstacle, Path}
+import io.github.fiifoo.scarl.core.geometry.{Line, Location, Obstacle, Path}
 
 import scala.util.Random
 

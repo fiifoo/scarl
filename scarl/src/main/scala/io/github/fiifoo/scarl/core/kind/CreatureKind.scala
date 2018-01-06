@@ -1,14 +1,15 @@
 package io.github.fiifoo.scarl.core.kind
 
-import io.github.fiifoo.scarl.core.action.Behavior
+import io.github.fiifoo.scarl.core.State
+import io.github.fiifoo.scarl.core.ai.Behavior
 import io.github.fiifoo.scarl.core.communication.CommunicationId
 import io.github.fiifoo.scarl.core.creature.{Character, CreaturePower, FactionId, Missile, Party, Stats}
 import io.github.fiifoo.scarl.core.entity._
+import io.github.fiifoo.scarl.core.geometry.Location
 import io.github.fiifoo.scarl.core.item.Equipment
 import io.github.fiifoo.scarl.core.item.Equipment.Slot
 import io.github.fiifoo.scarl.core.kind.Kind.Result
 import io.github.fiifoo.scarl.core.mutation.{EquipItemMutation, IdSeqMutation, Mutation, NewEntityMutation}
-import io.github.fiifoo.scarl.core.{IdSeq, Location, State}
 
 case class CreatureKind(id: CreatureKindId,
                         name: String,

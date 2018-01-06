@@ -1,13 +1,14 @@
 package io.github.fiifoo.scarl.game.event
 
-import io.github.fiifoo.scarl.core.Selectors.{getContainerItems, getLocationVisibleItems}
+import io.github.fiifoo.scarl.core.State
 import io.github.fiifoo.scarl.core.communication.Message
-import io.github.fiifoo.scarl.core.effect.{Effect, LocalizedDescriptionEffect}
+import io.github.fiifoo.scarl.core.effect.{CreateEntityEffect, Effect, LocalizedDescriptionEffect, RemoveEntityEffect}
+import io.github.fiifoo.scarl.core.entity.Selectors.{getContainerItems, getLocationVisibleItems}
 import io.github.fiifoo.scarl.core.entity._
+import io.github.fiifoo.scarl.core.geometry.Location
 import io.github.fiifoo.scarl.core.item.{KeyKindId, SharedKey}
 import io.github.fiifoo.scarl.core.kind._
-import io.github.fiifoo.scarl.core.{Location, State}
-import io.github.fiifoo.scarl.effect.area.{CreateEntityEffect, ExplosiveTimerEffect, RemoveEntityEffect, TransformBlockedEffect}
+import io.github.fiifoo.scarl.effect.area.{ExplosiveTimerEffect, TransformBlockedEffect}
 import io.github.fiifoo.scarl.effect.combat._
 import io.github.fiifoo.scarl.effect.creature.{GainLevelEffect, HealEffect, ReceiveKeyEffect, ShortageEffect}
 import io.github.fiifoo.scarl.effect.interact._

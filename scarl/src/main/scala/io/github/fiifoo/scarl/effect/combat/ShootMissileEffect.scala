@@ -1,13 +1,13 @@
 package io.github.fiifoo.scarl.effect.combat
 
 import io.github.fiifoo.scarl.ai.tactic.MissileTactic
-import io.github.fiifoo.scarl.core.Selectors.{getCreatureStats, getLocationEntities}
+import io.github.fiifoo.scarl.core.State
 import io.github.fiifoo.scarl.core.creature.Stats
 import io.github.fiifoo.scarl.core.effect.{Effect, EffectResult}
+import io.github.fiifoo.scarl.core.entity.Selectors.{getCreatureStats, getLocationEntities}
 import io.github.fiifoo.scarl.core.entity.{CreatureId, SafeCreatureId}
+import io.github.fiifoo.scarl.core.geometry.{Line, Location}
 import io.github.fiifoo.scarl.core.kind.CreatureKindId
-import io.github.fiifoo.scarl.core.{Location, State}
-import io.github.fiifoo.scarl.geometry.Line
 
 case class ShootMissileEffect(attacker: CreatureId,
                               targetLocation: Location,

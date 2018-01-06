@@ -1,13 +1,14 @@
 package io.github.fiifoo.scarl.core.mutation
 
 import io.github.fiifoo.scarl.ai.tactic.RoamTactic
+import io.github.fiifoo.scarl.core.State
 import io.github.fiifoo.scarl.core.communication.CommunicationId
 import io.github.fiifoo.scarl.core.creature.FactionId
 import io.github.fiifoo.scarl.core.entity._
+import io.github.fiifoo.scarl.core.geometry.Location
 import io.github.fiifoo.scarl.core.item.Equipment._
 import io.github.fiifoo.scarl.core.kind.ItemKindId
 import io.github.fiifoo.scarl.core.test_assets.{TestActiveStatus, TestCreatureFactory, TestTriggerStatus}
-import io.github.fiifoo.scarl.core.{Location, State}
 import org.scalatest._
 
 class RemoveEntitiesMutationSpec extends FlatSpec with Matchers {

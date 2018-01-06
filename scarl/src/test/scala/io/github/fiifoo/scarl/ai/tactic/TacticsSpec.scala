@@ -1,11 +1,12 @@
 package io.github.fiifoo.scarl.ai.tactic
 
-import io.github.fiifoo.scarl.core.action.PassTactic
+import io.github.fiifoo.scarl.core.assets.Assets
 import io.github.fiifoo.scarl.core.creature.{Faction, FactionId}
 import io.github.fiifoo.scarl.core.entity.{CreatureId, SafeCreatureId}
+import io.github.fiifoo.scarl.core.geometry.Location
 import io.github.fiifoo.scarl.core.mutation.LocatableLocationMutation
 import io.github.fiifoo.scarl.core.test_assets.TestCreatureFactory
-import io.github.fiifoo.scarl.core.{Assets, Location, RealityBubble, State}
+import io.github.fiifoo.scarl.core.{RealityBubble, State}
 import org.scalatest._
 
 class TacticsSpec extends FlatSpec with Matchers {
