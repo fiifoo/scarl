@@ -6,6 +6,6 @@ import io.github.fiifoo.scarl.core.entity.CreatureId
 
 import scala.util.Random
 
-trait Behavior extends Tactic {
-  def behavior(s: State, actor: CreatureId, random: Random): Result
+trait Intention {
+  def apply(s: State, actor: CreatureId, random: Random): Option[Result]
 }

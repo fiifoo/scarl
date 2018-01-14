@@ -2,13 +2,12 @@ package models.json
 
 import io.github.fiifoo.scarl.ai.tactic._
 import io.github.fiifoo.scarl.core.ai.{Behavior, Tactic}
-import io.github.fiifoo.scarl.core.entity.CreatureId
 import io.github.fiifoo.scarl.core.geometry.Location
 import play.api.libs.json._
 
 object JsonTactic {
 
-  import JsonBase.{mapReads, polymorphicTypeFormat}
+  import JsonBase.polymorphicTypeFormat
 
   lazy private implicit val charFormat = JsonBase.charFormat
   lazy private implicit val creatureIdFormat = JsonCreature.creatureIdFormat
@@ -19,6 +18,7 @@ object JsonTactic {
   lazy private implicit val followFormat = Json.format[FollowTactic]
   lazy private implicit val missileFormat = Json.format[MissileTactic]
   lazy private implicit val pursueFormat = Json.format[PursueTactic]
+  lazy private implicit val travelFormat = Json.format[TravelTactic]
 
   lazy implicit val tacticFormat: Format[Tactic] = polymorphicTypeFormat(
     data => {
@@ -31,6 +31,7 @@ object JsonTactic {
       case "FollowTactic" => data.as[FollowTactic]
       case "MissileTactic" => data.as[MissileTactic]
       case "PursueTactic" => data.as[PursueTactic]
+      case "TravelTactic" => data.as[TravelTactic]
     }, {
       case GreetTactic => JsNull
       case FollowerTactic => JsNull
@@ -41,10 +42,9 @@ object JsonTactic {
       case tactic: FollowTactic => followFormat.writes(tactic)
       case tactic: MissileTactic => missileFormat.writes(tactic)
       case tactic: PursueTactic => pursueFormat.writes(tactic)
+      case tactic: TravelTactic => travelFormat.writes(tactic)
     }
   )
-
-  lazy val tacticMapReads: Reads[Map[CreatureId, Tactic]] = mapReads
 
   lazy val behaviorFormat: Format[Behavior] = new Format[Behavior] {
     override def writes(o: Behavior): JsValue = tacticFormat.writes(o)

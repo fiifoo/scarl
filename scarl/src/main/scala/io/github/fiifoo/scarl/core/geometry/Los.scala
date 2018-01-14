@@ -8,4 +8,12 @@ object Los {
 
     !line.tail.dropRight(1).exists(obstacle(_).isDefined)
   }
+
+  def locations(s: State)(from: Location, to: Location, range: Int): Boolean = {
+    if (Distance(from, to) > range) {
+      false
+    } else {
+      Los(s)(Line(from, to))
+    }
+  }
 }

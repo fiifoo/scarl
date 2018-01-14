@@ -1,51 +1,24 @@
 package io.github.fiifoo.scarl.ai.tactic
 
-import io.github.fiifoo.scarl.action.MoveAction
-import io.github.fiifoo.scarl.ai.{Greeting, SeekEnemy}
+import io.github.fiifoo.scarl.ai.intention.{GreetIntention, SeekEnemyIntention}
 import io.github.fiifoo.scarl.core.State
-import io.github.fiifoo.scarl.core.ai.Behavior
 import io.github.fiifoo.scarl.core.ai.Tactic.Result
-import io.github.fiifoo.scarl.core.entity.{Creature, CreatureId, SafeCreatureId}
-import io.github.fiifoo.scarl.core.geometry.Location
+import io.github.fiifoo.scarl.core.ai.{Behavior, Intention, Priority}
+import io.github.fiifoo.scarl.core.entity.CreatureId
 
 import scala.util.Random
 
 case object RoamTactic extends Behavior {
 
+  val intentions: List[(Intention, Priority.Value)] = List((
+    SeekEnemyIntention,
+    Priority.high
+  ), (
+    GreetIntention,
+    Priority.low
+  ))
+
   def behavior(s: State, actor: CreatureId, random: Random): Result = {
-    val enemy = SeekEnemy(s, actor)
-
-    enemy flatMap (enemy => {
-      charge(s, actor, enemy, random)
-    }) getOrElse {
-      roam(s, actor, random)
-    }
-  }
-
-  private def roam(s: State, actor: CreatureId, random: Random): Result = {
-    val action = Greeting(s, actor) getOrElse {
-      val from = actor(s).location
-      val to = randomLocation(from, random)
-
-      MoveAction(to)
-    }
-
-    (this, action)
-  }
-
-  private def charge(s: State, actor: CreatureId, enemy: Creature, random: Random): Option[Result] = {
-    val tactic = ChargeTactic(SafeCreatureId(enemy.id), enemy.location)
-
-    tactic(s, actor, random)
-  }
-
-  private def randomLocation(from: Location, random: Random): Location = {
-    val to = Location(from.x + random.nextInt(3) - 1, from.y + random.nextInt(3) - 1)
-
-    if (to == from) {
-      randomLocation(from, random)
-    } else {
-      to
-    }
+    apply(s, actor, random) getOrElse Utils.roam(s, actor, this, random)
   }
 }

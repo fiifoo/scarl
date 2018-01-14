@@ -12,5 +12,17 @@ object Tactic {
 }
 
 trait Tactic {
-  def apply(s: State, actor: CreatureId, random: Random): Option[Result]
+  val intentions: List[(Intention, Priority.Value)]
+
+  def apply(s: State, actor: CreatureId, random: Random): Option[Result] = {
+    intentions foreach (x => {
+      val (intention, _) = x
+
+      intention(s, actor, random) foreach (result => {
+        return Some(result)
+      })
+    })
+
+    None
+  }
 }

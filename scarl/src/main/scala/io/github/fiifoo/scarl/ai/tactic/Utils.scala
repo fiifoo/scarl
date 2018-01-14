@@ -1,40 +1,31 @@
 package io.github.fiifoo.scarl.ai.tactic
 
-import io.github.fiifoo.scarl.action.{DisplaceAction, MoveAction, UseDoorAction}
+import io.github.fiifoo.scarl.action.MoveAction
 import io.github.fiifoo.scarl.core.State
-import io.github.fiifoo.scarl.core.action.Action
+import io.github.fiifoo.scarl.core.ai.Tactic
+import io.github.fiifoo.scarl.core.ai.Tactic.Result
 import io.github.fiifoo.scarl.core.entity.CreatureId
-import io.github.fiifoo.scarl.core.entity.Selectors.getLocationEntities
-import io.github.fiifoo.scarl.core.geometry.Obstacle.getClosedDoor
-import io.github.fiifoo.scarl.core.geometry.{Location, Obstacle, Path}
+import io.github.fiifoo.scarl.core.geometry.Location
+
+import scala.util.Random
 
 object Utils {
 
-  def move(s: State, actor: CreatureId, to: Location, displace: Boolean = false): Option[Action] = {
+  def roam(s: State, actor: CreatureId, tactic: Tactic, random: Random): Result = {
     val from = actor(s).location
+    val to = randomLocation(from, random)
+    val action = MoveAction(to)
 
-    Path(s)(from, to) map (path => {
-      MoveAction(path.head)
-    }) orElse {
-      val keys = s.keys.getOrElse(actor, Set())
+    (tactic, action)
+  }
 
-      Path.calc(Obstacle.has(Obstacle.travel(s, keys)))(from, to) flatMap (path => {
-        val location = path.head
+  private def randomLocation(from: Location, random: Random): Location = {
+    val to = Location(from.x + random.nextInt(3) - 1, from.y + random.nextInt(3) - 1)
 
-        (getLocationEntities(s)(location) collectFirst {
-          case creature: CreatureId => if (displace) {
-            Some(DisplaceAction(creature))
-          } else {
-            None
-          }
-        }) orElse {
-          getClosedDoor(s)(location) map (door => {
-            Some(UseDoorAction(door))
-          })
-        } getOrElse {
-          Some(MoveAction(location))
-        }
-      })
+    if (to == from) {
+      randomLocation(from, random)
+    } else {
+      to
     }
   }
 }
