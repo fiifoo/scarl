@@ -6,7 +6,7 @@ import io.github.fiifoo.scarl.action.validate.ActionValidator
 import io.github.fiifoo.scarl.core.action.Action
 import io.github.fiifoo.scarl.core.entity.Selectors.getContainerItems
 import io.github.fiifoo.scarl.game.api._
-import io.github.fiifoo.scarl.game.{RunGame, RunState}
+import io.github.fiifoo.scarl.game.{CalculateBrains, RunGame, RunState}
 import io.github.fiifoo.scarl.world.WorldAssets
 import models.Game
 import models.json.{ReadInMessage, WriteOutMessage}
@@ -79,7 +79,13 @@ class GameInstance(games: GameRepository, assets: WorldAssets, game: Game, out: 
 
   private def run(action: Action): Unit = {
     state = RunGame(state, Some(action))
+
+    val brains = CalculateBrains(state)
+
+    state = RunGame(state)
     state = sendMessages(state)
+
+    state = CalculateBrains.commit(state, brains)
   }
 
   private def save(): Unit = {

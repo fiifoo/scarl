@@ -7,6 +7,8 @@ object JsonFaction {
 
   import JsonBase.{mapReads, stringIdFormat}
 
+  lazy private implicit val strategyFormat = JsonStrategy.strategyFormat
+
   lazy implicit val factionIdFormat: Format[FactionId] = stringIdFormat(_.value, FactionId.apply)
 
   lazy implicit val factionFormat: Format[Faction] = Json.format

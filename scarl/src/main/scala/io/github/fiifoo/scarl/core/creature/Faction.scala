@@ -1,3 +1,8 @@
 package io.github.fiifoo.scarl.core.creature
 
-case class Faction(id: FactionId, enemies: Set[FactionId])
+import io.github.fiifoo.scarl.core.ai.Strategy
+
+case class Faction(id: FactionId,
+                   strategy: Option[Strategy] = None,
+                   enemies: Set[FactionId] = Set()
+                  )

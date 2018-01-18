@@ -15,6 +15,7 @@ case class RunState(areaMap: Map[Location, MapLocation],
                     gameState: GameState,
                     instance: State,
                     outMessages: List[OutMessage] = List(),
+                    paused: Boolean = false,
                     playerInfo: PlayerInfo,
                     statistics: Statistics,
                     stopped: Boolean = false

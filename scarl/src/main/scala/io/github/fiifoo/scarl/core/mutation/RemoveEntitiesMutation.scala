@@ -1,7 +1,8 @@
 package io.github.fiifoo.scarl.core.mutation
 
 import io.github.fiifoo.scarl.core._
-import io.github.fiifoo.scarl.core.ai.Tactic
+import io.github.fiifoo.scarl.core.ai.{Brain, Tactic}
+import io.github.fiifoo.scarl.core.creature.FactionId
 import io.github.fiifoo.scarl.core.entity._
 import io.github.fiifoo.scarl.core.item.Equipment.Slot
 import io.github.fiifoo.scarl.core.mutation.index._
@@ -27,6 +28,7 @@ case class RemoveEntitiesMutation() extends Mutation {
     val creatures = collectCreatures(removable)
 
     s.copy(
+      brains = mutateBrains(s.brains, creatures),
       cache = mutateCache(s, removable),
       foundItems = mutateFoundItems(s, removable),
       receivedCommunications = s.receivedCommunications -- creatures,
@@ -38,6 +40,16 @@ case class RemoveEntitiesMutation() extends Mutation {
       tactics = s.tactics -- creatures,
       tmp = s.tmp.copy(removableEntities = Set())
     )
+  }
+
+  private def mutateBrains(brains: Map[FactionId, Brain], creatures: Set[CreatureId]): Map[FactionId, Brain] = {
+    if (creatures.isEmpty) {
+      brains
+    } else {
+      brains mapValues (brain => brain.copy(
+        intentions = brain.intentions -- creatures
+      ))
+    }
   }
 
   private def mutateFoundItems(s: State, removable: Set[EntityId]): Map[CreatureId, Set[ItemId]] = {

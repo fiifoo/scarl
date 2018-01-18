@@ -16,7 +16,7 @@ import scala.annotation.tailrec
 object RunGame {
 
   def apply(state: RunState, action: Option[Action] = None): RunState = {
-    run(state.copy(stopped = false), action)
+    run(state.copy(stopped = false, paused = false), action)
   }
 
   @tailrec
@@ -25,11 +25,13 @@ object RunGame {
       return sendGameOver(sendGameUpdate(state))
     } else if (state.stopped) {
       return sendGameUpdate(state)
+    } else if (state.paused) {
+      return state
     }
 
     var (nextState, nextAction) = if (playerTurn(state)) {
       val nextState = if (action.isDefined) {
-        tick(state, action)
+        tick(state, action).copy(paused = true)
       } else {
         state.copy(stopped = true)
       }

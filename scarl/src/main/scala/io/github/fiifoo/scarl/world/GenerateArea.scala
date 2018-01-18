@@ -3,6 +3,8 @@ package io.github.fiifoo.scarl.world
 import io.github.fiifoo.scarl.area.template.{ApplyTemplate, CalculateTemplate}
 import io.github.fiifoo.scarl.area.{Area, AreaId}
 import io.github.fiifoo.scarl.core._
+import io.github.fiifoo.scarl.core.ai.Brain
+import io.github.fiifoo.scarl.core.creature.FactionId
 import io.github.fiifoo.scarl.core.entity.IdSeq
 import io.github.fiifoo.scarl.core.math.Rng
 import io.github.fiifoo.scarl.core.world.ConduitId
@@ -19,8 +21,9 @@ object GenerateArea {
 
     var state = State(
       assets = assets.instance(),
+      brains = createBrains(assets),
       idSeq = idSeq,
-      rng = rng,
+      rng = rng
     )
 
     val (random, _) = state.rng()
@@ -38,6 +41,14 @@ object GenerateArea {
       conduits = world.conduits ++ (out map (c => (c.id, c))).toMap,
       nextConduitId = nextConduitId
     )
+  }
+
+  private def createBrains(assets: WorldAssets): Map[FactionId, Brain] = {
+    (assets.factions.values flatMap (faction => {
+      faction.strategy map (strategy => {
+        (faction.id, Brain(faction.id, strategy))
+      })
+    })).toMap
   }
 
   private def createConduits(area: Area, nextId: Int): (List[Conduit], Int) = {

@@ -15,7 +15,7 @@ trait Tactic {
   val intentions: List[(Intention, Priority.Value)]
 
   def apply(s: State, actor: CreatureId, random: Random): Option[Result] = {
-    intentions foreach (x => {
+    mergeIntentions(s, actor) foreach (x => {
       val (intention, _) = x
 
       intention(s, actor, random) foreach (result => {
@@ -24,5 +24,15 @@ trait Tactic {
     })
 
     None
+  }
+
+  def mergeIntentions(s: State, actor: CreatureId): List[(Intention, Priority.Value)] = {
+    val brains = s.brains.get(actor(s).faction) flatMap (_.intentions.get(actor))
+
+    brains map (brains => {
+      (brains ::: intentions) sortWith ((a, b) => a._2 > b._2)
+    }) getOrElse {
+      intentions
+    }
   }
 }

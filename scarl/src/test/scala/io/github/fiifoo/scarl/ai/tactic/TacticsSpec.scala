@@ -11,7 +11,7 @@ import org.scalatest._
 
 class TacticsSpec extends FlatSpec with Matchers {
 
-  val faction = Faction(FactionId("people"), Set(FactionId("people")))
+  val faction = Faction(FactionId("people"), None, Set(FactionId("people")))
   val assets = Assets(factions = Map(faction.id -> faction))
 
   val initial =

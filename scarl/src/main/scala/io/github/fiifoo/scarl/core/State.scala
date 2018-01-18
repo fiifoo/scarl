@@ -1,7 +1,7 @@
 package io.github.fiifoo.scarl.core
 
 import io.github.fiifoo.scarl.core.Time.Tick
-import io.github.fiifoo.scarl.core.ai.Tactic
+import io.github.fiifoo.scarl.core.ai.{Brain, Tactic}
 import io.github.fiifoo.scarl.core.assets.Assets
 import io.github.fiifoo.scarl.core.communication.CommunicationId
 import io.github.fiifoo.scarl.core.creature._
@@ -48,6 +48,7 @@ object State {
 
 case class State(area: State.Area = State.Area(),
                  assets: Assets = Assets(),
+                 brains: Map[FactionId, Brain] = Map(),
                  cache: State.Cache = State.Cache(),
                  conduits: Map[ConduitId, Location] = Map(),
                  foundItems: Map[CreatureId, Set[ItemId]] = Map(),
