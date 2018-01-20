@@ -9,6 +9,7 @@ import io.github.fiifoo.scarl.core.creature.FactionId
 import io.github.fiifoo.scarl.core.entity.Selectors.getLocationEntities
 import io.github.fiifoo.scarl.core.entity.{Creature, CreatureId, SafeCreatureId}
 import io.github.fiifoo.scarl.core.geometry.Obstacle.getClosedDoor
+import io.github.fiifoo.scarl.core.geometry.WaypointNetwork.Waypoint
 import io.github.fiifoo.scarl.core.geometry._
 
 object Utils {
@@ -60,12 +61,30 @@ object Utils {
     }
   }
 
+  def travel(s: State, actor: CreatureId, to: Location, displace: Boolean = false): Option[Action] = {
+    getWaypointPath(s, actor(s).location, to) flatMap (path => {
+      val destination = if (path.size > 2) {
+        path(1)
+      } else {
+        to
+      }
+
+      move(s, actor, destination, displace)
+    })
+  }
+
   def follow(s: State, actor: CreatureId)(target: Creature): Option[Result] = {
-    if (WaypointNetwork.isNearbyLocation(s, actor(s).location, target.location)) {
-      Utils.move(s, actor, target.location, displace = true) map ((FollowTactic(SafeCreatureId(target.id)), _))
-    } else {
-      None
-    }
+    Utils.travel(s, actor, target.location, displace = true) map ((FollowTactic(SafeCreatureId(target.id)), _))
+  }
+
+  private def getWaypointPath(s: State, from: Location, to: Location): Option[Vector[Waypoint]] = {
+    val network = s.cache.waypointNetwork
+
+    network.locationWaypoint.get(from) flatMap (from => {
+      network.locationWaypoint.get(to) flatMap (to => {
+        WaypointPath(s)(from, to)
+      })
+    })
   }
 
   private def inRange(from: Location, target: Creature, range: Int): Boolean = {

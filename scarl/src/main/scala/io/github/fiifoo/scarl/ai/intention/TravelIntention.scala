@@ -9,12 +9,11 @@ import io.github.fiifoo.scarl.core.geometry.WaypointNetwork.Waypoint
 
 import scala.util.Random
 
-// todo: waypoint path finding
 case class TravelIntention(destination: Waypoint) extends Intention {
 
   def apply(s: State, actor: CreatureId, random: Random): Option[Result] = {
     if (actor(s).location != destination) {
-      Utils.move(s, actor, destination) map ((TravelTactic(destination), _))
+      Utils.travel(s, actor, destination) map ((TravelTactic(destination), _))
     } else {
       None
     }
