@@ -1,12 +1,12 @@
 package io.github.fiifoo.scarl.ai.intention
 
 import io.github.fiifoo.scarl.action.{DisplaceAction, MoveAction, UseDoorAction}
-import io.github.fiifoo.scarl.ai.tactic.FollowTactic
+import io.github.fiifoo.scarl.ai.tactic.{AttackTactic, FollowTactic}
 import io.github.fiifoo.scarl.core.State
 import io.github.fiifoo.scarl.core.action.Action
 import io.github.fiifoo.scarl.core.ai.Tactic.Result
 import io.github.fiifoo.scarl.core.creature.FactionId
-import io.github.fiifoo.scarl.core.entity.Selectors.getLocationEntities
+import io.github.fiifoo.scarl.core.entity.Selectors.{getCreatureComrades, getLocationEntities}
 import io.github.fiifoo.scarl.core.entity.{Creature, CreatureId, SafeCreatureId}
 import io.github.fiifoo.scarl.core.geometry.Obstacle.getClosedDoor
 import io.github.fiifoo.scarl.core.geometry.WaypointNetwork.Waypoint
@@ -15,6 +15,12 @@ import io.github.fiifoo.scarl.core.geometry._
 object Utils {
 
   private val distance = Distance.chebyshev _
+
+  def findPartyEnemy(s: State, creature: CreatureId): Option[Creature] = {
+    getCreatureComrades(s)(creature) flatMap s.tactics.get collectFirst {
+      case tactic: AttackTactic if tactic.target(s).isDefined => tactic.target(s).get
+    }
+  }
 
   def findTargets(s: State, creature: CreatureId, factions: Set[FactionId], range: Int): List[Creature] = {
     val location = creature(s).location
@@ -31,6 +37,21 @@ object Utils {
     targets
       .toList
       .sortWith((a, b) => distance(location, a.location) < distance(location, b.location))
+  }
+
+  def findVisibleEnemy(s: State, actor: CreatureId): Option[Creature] = {
+    val creature = actor(s)
+    val los = Los(s) _
+
+    val factions = creature.faction(s).enemies
+    val range = creature.stats.sight.range
+    val enemies = findTargets(s, creature.id, factions, range)
+
+    enemies find (candidate => {
+      val line = Line(creature.location, candidate.location)
+
+      los(line)
+    })
   }
 
   def move(s: State, actor: CreatureId, to: Location, displace: Boolean = false): Option[Action] = {
@@ -74,7 +95,7 @@ object Utils {
   }
 
   def follow(s: State, actor: CreatureId)(target: Creature): Option[Result] = {
-    Utils.travel(s, actor, target.location, displace = true) map ((FollowTactic(SafeCreatureId(target.id)), _))
+    travel(s, actor, target.location, displace = true) map ((FollowTactic(SafeCreatureId(target.id)), _))
   }
 
   private def getWaypointPath(s: State, from: Location, to: Location): Option[Vector[Waypoint]] = {

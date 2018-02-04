@@ -5,11 +5,11 @@ import io.github.fiifoo.scarl.core.State
 import io.github.fiifoo.scarl.core.ai.Intention
 import io.github.fiifoo.scarl.core.ai.Tactic.Result
 import io.github.fiifoo.scarl.core.entity.CreatureId
-import io.github.fiifoo.scarl.core.geometry.WaypointNetwork.Waypoint
+import io.github.fiifoo.scarl.core.geometry.Location
 
 import scala.util.Random
 
-case class TravelIntention(destination: Waypoint) extends Intention {
+case class TravelIntention(destination: Location) extends Intention {
 
   def apply(s: State, actor: CreatureId, random: Random): Option[Result] = {
     if (actor(s).location != destination) {

@@ -1,6 +1,6 @@
 package io.github.fiifoo.scarl.ai.intention
 
-import io.github.fiifoo.scarl.ai.tactic.ChargeTactic
+import io.github.fiifoo.scarl.ai.tactic.AttackTactic
 import io.github.fiifoo.scarl.core.State
 import io.github.fiifoo.scarl.core.ai.Intention
 import io.github.fiifoo.scarl.core.ai.Tactic.Result
@@ -19,7 +19,7 @@ case class ChargeIntention(target: SafeCreatureId) extends Intention {
 
       if (Los.locations(s)(from, to, range)) {
         Utils.move(s, actor, target.location) map (action => {
-          val tactic = ChargeTactic(SafeCreatureId(target.id), target.location)
+          val tactic = AttackTactic(SafeCreatureId(target.id), target.location)
 
           (tactic, action)
         })

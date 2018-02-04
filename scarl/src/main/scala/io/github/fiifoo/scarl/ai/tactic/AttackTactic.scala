@@ -5,7 +5,7 @@ import io.github.fiifoo.scarl.core.ai.{Intention, Priority, Tactic}
 import io.github.fiifoo.scarl.core.entity.SafeCreatureId
 import io.github.fiifoo.scarl.core.geometry._
 
-case class ChargeTactic(target: SafeCreatureId, destination: Location) extends Tactic {
+case class AttackTactic(target: SafeCreatureId, destination: Location) extends Tactic {
 
   val intentions: List[(Intention, Priority.Value)] = List((
     AttackIntention(target),

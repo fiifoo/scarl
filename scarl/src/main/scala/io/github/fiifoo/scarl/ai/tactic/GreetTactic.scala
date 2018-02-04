@@ -1,7 +1,7 @@
 package io.github.fiifoo.scarl.ai.tactic
 
 import io.github.fiifoo.scarl.action.PassAction
-import io.github.fiifoo.scarl.ai.intention.GreetIntention
+import io.github.fiifoo.scarl.ai.intention.CheckGreetIntention
 import io.github.fiifoo.scarl.core.State
 import io.github.fiifoo.scarl.core.ai.Tactic.Result
 import io.github.fiifoo.scarl.core.ai.{Behavior, Intention, Priority}
@@ -12,7 +12,7 @@ import scala.util.Random
 case object GreetTactic extends Behavior {
 
   val intentions: List[(Intention, Priority.Value)] = List((
-    GreetIntention,
+    CheckGreetIntention,
     Priority.infinite
   ))
 

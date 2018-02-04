@@ -1,6 +1,6 @@
 package io.github.fiifoo.scarl.ai.tactic
 
-import io.github.fiifoo.scarl.ai.intention.{FollowerIntention, SeekEnemyIntention}
+import io.github.fiifoo.scarl.ai.intention.{CheckAttackIntention, FollowOwnerIntention}
 import io.github.fiifoo.scarl.core.State
 import io.github.fiifoo.scarl.core.ai.Tactic.Result
 import io.github.fiifoo.scarl.core.ai.{Behavior, Intention, Priority}
@@ -8,13 +8,13 @@ import io.github.fiifoo.scarl.core.entity.CreatureId
 
 import scala.util.Random
 
-case object FollowerTactic extends Behavior {
+case object FollowOwnerTactic extends Behavior {
 
   val intentions: List[(Intention, Priority.Value)] = List((
-    SeekEnemyIntention,
+    CheckAttackIntention,
     Priority.high
   ), (
-    FollowerIntention,
+    FollowOwnerIntention,
     Priority.high
   ))
 

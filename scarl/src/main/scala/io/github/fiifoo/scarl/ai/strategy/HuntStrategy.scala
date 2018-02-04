@@ -1,7 +1,7 @@
 package io.github.fiifoo.scarl.ai.strategy
 
 import io.github.fiifoo.scarl.ai.intention.TravelIntention
-import io.github.fiifoo.scarl.ai.tactic.ChargeTactic
+import io.github.fiifoo.scarl.ai.tactic.AttackTactic
 import io.github.fiifoo.scarl.core.State
 import io.github.fiifoo.scarl.core.ai.Brain.Intentions
 import io.github.fiifoo.scarl.core.ai.{Brain, Priority, Strategy, Tactic}
@@ -23,8 +23,8 @@ case object HuntStrategy extends Strategy {
     val members = getMembers(s, brain)
 
     val beacon = (getTactics(s, members) collectFirst {
-      case charge: ChargeTactic =>
-        charge.target(s) map (_.location) flatMap getLocationWaypoint(s)
+      case attack: AttackTactic =>
+        attack.target(s) map (_.location) flatMap getLocationWaypoint(s)
     }).flatten
 
     beacon map (beacon => {

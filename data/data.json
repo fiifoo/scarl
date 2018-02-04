@@ -830,7 +830,7 @@
       "flying" : true,
       "responses" : [ ],
       "behavior" : {
-        "type" : "FollowerTactic",
+        "type" : "FollowOwnerTactic",
         "data" : { }
       },
       "usable" : {
@@ -1050,7 +1050,7 @@
       "flying" : true,
       "responses" : [ ],
       "behavior" : {
-        "type" : "FollowerTactic",
+        "type" : "FollowOwnerTactic",
         "data" : { }
       },
       "usable" : {
@@ -1130,7 +1130,7 @@
       "flying" : true,
       "responses" : [ ],
       "behavior" : {
-        "type" : "FollowerTactic",
+        "type" : "FollowOwnerTactic",
         "data" : { }
       },
       "usable" : {

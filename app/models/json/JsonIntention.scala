@@ -20,9 +20,10 @@ object JsonIntention {
 
   lazy val intentionFormat: Format[Intention] = polymorphicTypeFormat(
     data => {
-      case "FollowerIntention" => FollowerIntention
-      case "GreetIntention" => GreetIntention
-      case "SeekEnemyIntention" => SeekEnemyIntention
+      case "CheckAttackIntention" => CheckAttackIntention
+      case "CheckGreetIntention" => CheckGreetIntention
+      case "CheckPartyCombatIntention" => CheckPartyCombatIntention
+      case "FollowerIntention" => FollowOwnerIntention
 
       case "AttackIntention" => data.as[AttackIntention]
       case "ChargeIntention" => data.as[ChargeIntention]
@@ -31,9 +32,10 @@ object JsonIntention {
       case "TravelIntention" => data.as[TravelIntention]
 
     }, {
-      case FollowerIntention => JsNull
-      case GreetIntention => JsNull
-      case SeekEnemyIntention => JsNull
+      case CheckAttackIntention => JsNull
+      case CheckGreetIntention => JsNull
+      case CheckPartyCombatIntention => JsNull
+      case FollowOwnerIntention => JsNull
 
       case intention: AttackIntention => attackFormat.writes(intention)
       case intention: ChargeIntention => chargeFormat.writes(intention)

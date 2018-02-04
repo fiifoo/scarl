@@ -9,7 +9,7 @@ import io.github.fiifoo.scarl.core.entity.CreatureId
 
 import scala.util.Random
 
-case object GreetIntention extends Intention {
+case object CheckGreetIntention extends Intention {
 
   def apply(s: State, actor: CreatureId, random: Random): Option[Result] = {
     val greetings = s.assets.kinds.creatures(actor(s).kind).greetings

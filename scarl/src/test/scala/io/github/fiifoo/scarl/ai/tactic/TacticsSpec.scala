@@ -37,18 +37,18 @@ class TacticsSpec extends FlatSpec with Matchers {
     s = RealityBubble(s).get.state // other creature
   }
 
-  it should "switch tactic to charge when enemy is close by" in {
+  it should "switch tactic to attack when enemy is close by" in {
     s = LocatableLocationMutation(CreatureId(1), Location(0, 0))(s) // reset
     s = LocatableLocationMutation(CreatureId(2), Location(2, 0))(s) // welcome back
 
     s = RealityBubble(s).get.state
     CreatureId(1)(s).location should ===(Location(1, 0))
-    s.tactics(CreatureId(1)) should ===(ChargeTactic(SafeCreatureId(CreatureId(2)), Location(2, 0)))
+    s.tactics(CreatureId(1)) should ===(AttackTactic(SafeCreatureId(CreatureId(2)), Location(2, 0)))
 
     s = RealityBubble(s).get.state // other creature
   }
 
-  "ChargeTactic" should "move creature towards other" in {
+  "AttackTactic" should "move creature towards other" in {
     // already did
     CreatureId(1)(s).location should ===(Location(1, 0))
   }

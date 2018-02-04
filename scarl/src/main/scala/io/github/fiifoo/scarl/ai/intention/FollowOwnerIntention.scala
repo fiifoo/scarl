@@ -7,7 +7,7 @@ import io.github.fiifoo.scarl.core.entity.CreatureId
 
 import scala.util.Random
 
-case object FollowerIntention extends Intention {
+case object FollowOwnerIntention extends Intention {
 
   def apply(s: State, actor: CreatureId, random: Random): Option[Result] = {
     actor(s).owner flatMap (_ (s)) flatMap Utils.follow(s, actor)

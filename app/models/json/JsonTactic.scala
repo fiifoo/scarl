@@ -14,7 +14,7 @@ object JsonTactic {
   lazy private implicit val locationFormat = Json.format[Location]
   lazy private implicit val safeCreatureIdFormat = JsonCreature.safeCreatureIdFormat
 
-  lazy private implicit val chargeFormat = Json.format[ChargeTactic]
+  lazy private implicit val attackFormat = Json.format[AttackTactic]
   lazy private implicit val followFormat = Json.format[FollowTactic]
   lazy private implicit val missileFormat = Json.format[MissileTactic]
   lazy private implicit val pursueFormat = Json.format[PursueTactic]
@@ -23,22 +23,22 @@ object JsonTactic {
   lazy implicit val tacticFormat: Format[Tactic] = polymorphicTypeFormat(
     data => {
       case "GreetTactic" => GreetTactic
-      case "FollowerTactic" => FollowerTactic
+      case "FollowOwnerTactic" => FollowOwnerTactic
       case "PassTactic" => PassTactic
       case "RoamTactic" => RoamTactic
 
-      case "ChargeTactic" => data.as[ChargeTactic]
+      case "AttackTactic" => data.as[AttackTactic]
       case "FollowTactic" => data.as[FollowTactic]
       case "MissileTactic" => data.as[MissileTactic]
       case "PursueTactic" => data.as[PursueTactic]
       case "TravelTactic" => data.as[TravelTactic]
     }, {
       case GreetTactic => JsNull
-      case FollowerTactic => JsNull
+      case FollowOwnerTactic => JsNull
       case PassTactic => JsNull
       case RoamTactic => JsNull
 
-      case tactic: ChargeTactic => chargeFormat.writes(tactic)
+      case tactic: AttackTactic => attackFormat.writes(tactic)
       case tactic: FollowTactic => followFormat.writes(tactic)
       case tactic: MissileTactic => missileFormat.writes(tactic)
       case tactic: PursueTactic => pursueFormat.writes(tactic)

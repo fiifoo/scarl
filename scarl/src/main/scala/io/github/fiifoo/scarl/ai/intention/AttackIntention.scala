@@ -1,7 +1,7 @@
 package io.github.fiifoo.scarl.ai.intention
 
 import io.github.fiifoo.scarl.action._
-import io.github.fiifoo.scarl.ai.tactic.ChargeTactic
+import io.github.fiifoo.scarl.ai.tactic.AttackTactic
 import io.github.fiifoo.scarl.core.State
 import io.github.fiifoo.scarl.core.ai.Intention
 import io.github.fiifoo.scarl.core.ai.Tactic.Result
@@ -39,7 +39,7 @@ case class AttackIntention(target: SafeCreatureId) extends Intention {
     }
 
     action map (action => {
-      val tactic = ChargeTactic(SafeCreatureId(target.id), target.location)
+      val tactic = AttackTactic(SafeCreatureId(target.id), target.location)
 
       (tactic, action)
     })
