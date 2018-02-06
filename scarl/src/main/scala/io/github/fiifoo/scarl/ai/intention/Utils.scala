@@ -6,7 +6,7 @@ import io.github.fiifoo.scarl.core.State
 import io.github.fiifoo.scarl.core.action.Action
 import io.github.fiifoo.scarl.core.ai.Tactic.Result
 import io.github.fiifoo.scarl.core.creature.FactionId
-import io.github.fiifoo.scarl.core.entity.Selectors.{getCreatureComrades, getLocationEntities}
+import io.github.fiifoo.scarl.core.entity.Selectors.{getCreatureComrades, getLocationEntities, getLocationWaypoint}
 import io.github.fiifoo.scarl.core.entity.{Creature, CreatureId, SafeCreatureId}
 import io.github.fiifoo.scarl.core.geometry.Obstacle.getClosedDoor
 import io.github.fiifoo.scarl.core.geometry.WaypointNetwork.Waypoint
@@ -99,10 +99,8 @@ object Utils {
   }
 
   private def getWaypointPath(s: State, from: Location, to: Location): Option[Vector[Waypoint]] = {
-    val network = s.cache.waypointNetwork
-
-    network.locationWaypoint.get(from) flatMap (from => {
-      network.locationWaypoint.get(to) flatMap (to => {
+    getLocationWaypoint(s)(from) flatMap (from => {
+      getLocationWaypoint(s)(to) flatMap (to => {
         WaypointPath(s)(from, to)
       })
     })

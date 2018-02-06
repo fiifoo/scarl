@@ -13,9 +13,13 @@ object Selectors {
   }
 
   def getCreatureComrades(s: State)(creature: CreatureId): Set[CreatureId] = {
+    getCreaturePartyMembers(s)(creature) - creature
+  }
+
+  def getCreaturePartyMembers(s: State)(creature: CreatureId): Set[CreatureId] = {
     val party = creature(s).party
 
-    s.index.partyMembers(party) - creature
+    s.index.partyMembers(party)
   }
 
   def getCreatureStats(s: State)(creature: CreatureId): Stats = {
@@ -23,7 +27,7 @@ object Selectors {
   }
 
   def getCreatureWaypoint(s: State)(creature: CreatureId): Option[Waypoint] = {
-    s.cache.waypointNetwork.locationWaypoint.get(creature(s).location)
+    getLocationWaypoint(s)(creature(s).location)
   }
 
   def getEntityLocation(s: State)(entity: EntityId, deep: Boolean = false): Option[Location] = {
@@ -69,6 +73,10 @@ object Selectors {
     def visible(item: ItemId) = !item(s).hidden || s.foundItems.get(creature).exists(_.contains(item))
 
     getLocationItems(s)(location) filterNot removable filter visible
+  }
+
+  def getLocationWaypoint(s: State)(location: Location): Option[Waypoint] = {
+    s.cache.waypointNetwork.locationWaypoint.get(location)
   }
 
   def getStatusLocation(s: State)(status: StatusId, deep: Boolean = false): Option[Location] = {

@@ -14,33 +14,41 @@ object JsonIntention {
 
   lazy private implicit val attackFormat = Json.format[AttackIntention]
   lazy private implicit val chargeFormat = Json.format[ChargeIntention]
+  lazy private implicit val escapeFormat = Json.format[EscapeIntention]
   lazy private implicit val followFormat = Json.format[FollowIntention]
   lazy private implicit val pursueFormat = Json.format[PursueIntention]
+  lazy private implicit val scoutFormat = Json.format[ScoutIntention]
   lazy private implicit val travelFormat = Json.format[TravelIntention]
 
   lazy val intentionFormat: Format[Intention] = polymorphicTypeFormat(
     data => {
       case "CheckAttackIntention" => CheckAttackIntention
+      case "CheckEscapeIntention" => CheckEscapeIntention
       case "CheckGreetIntention" => CheckGreetIntention
       case "CheckPartyCombatIntention" => CheckPartyCombatIntention
       case "FollowerIntention" => FollowOwnerIntention
 
       case "AttackIntention" => data.as[AttackIntention]
       case "ChargeIntention" => data.as[ChargeIntention]
+      case "EscapeIntention" => data.as[EscapeIntention]
       case "FollowIntention" => data.as[FollowIntention]
       case "PursueIntention" => data.as[PursueIntention]
+      case "ScoutIntention" => data.as[ScoutIntention]
       case "TravelIntention" => data.as[TravelIntention]
 
     }, {
       case CheckAttackIntention => JsNull
+      case CheckEscapeIntention => JsNull
       case CheckGreetIntention => JsNull
       case CheckPartyCombatIntention => JsNull
       case FollowOwnerIntention => JsNull
 
       case intention: AttackIntention => attackFormat.writes(intention)
       case intention: ChargeIntention => chargeFormat.writes(intention)
+      case intention: EscapeIntention => escapeFormat.writes(intention)
       case intention: FollowIntention => followFormat.writes(intention)
       case intention: PursueIntention => pursueFormat.writes(intention)
+      case intention: ScoutIntention => scoutFormat.writes(intention)
       case intention: TravelIntention => travelFormat.writes(intention)
     }
   )

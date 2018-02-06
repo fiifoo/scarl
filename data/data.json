@@ -171,7 +171,11 @@
     "id" : "player-faction"
   } ], [ "enemy-faction", {
     "enemies" : [ "player-faction", "them-faction" ],
-    "id" : "enemy-faction"
+    "id" : "enemy-faction",
+    "strategy" : {
+      "type" : "RoamStrategy",
+      "data" : { }
+    }
   } ], [ "none", {
     "enemies" : [ ],
     "id" : "none"
@@ -1899,6 +1903,76 @@
         "defence" : 10,
         "melee" : {
           "attack" : 20,
+          "damage" : 10,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          }
+        },
+        "health" : {
+          "max" : 10,
+          "regen" : 0
+        },
+        "sight" : {
+          "range" : 10
+        },
+        "armor" : 5
+      }
+    } ], [ "enemy-runner-1", {
+      "display" : "r",
+      "color" : "green",
+      "equipments" : [ ],
+      "missile" : null,
+      "character" : null,
+      "name" : "Runner I",
+      "solitary" : true,
+      "flying" : false,
+      "responses" : [ ],
+      "behavior" : {
+        "type" : "ScoutTactic",
+        "data" : { }
+      },
+      "usable" : null,
+      "greetings" : [ ],
+      "id" : "enemy-runner-1",
+      "inventory" : [ ],
+      "faction" : "enemy-faction",
+      "stats" : {
+        "launcher" : {
+          "missile" : "missile-guided-1",
+          "range" : 10,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          }
+        },
+        "explosive" : {
+          "attack" : 0,
+          "damage" : 0,
+          "radius" : 0,
+          "blast" : 0
+        },
+        "speed" : 1.2,
+        "ranged" : {
+          "attack" : 10,
+          "damage" : 10,
+          "range" : 10,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          }
+        },
+        "energy" : {
+          "max" : 0,
+          "regen" : 0
+        },
+        "materials" : {
+          "max" : 0,
+          "regen" : 0
+        },
+        "defence" : 10,
+        "melee" : {
+          "attack" : 10,
           "damage" : 10,
           "consumption" : {
             "energy" : 0,
@@ -5694,6 +5768,20 @@
               "data" : {
                 "min" : 0,
                 "max" : 6
+              }
+            }
+          }, {
+            "selection" : {
+              "type" : "FixedCreature",
+              "data" : {
+                "kind" : "enemy-runner-1"
+              }
+            },
+            "distribution" : {
+              "type" : "Uniform",
+              "data" : {
+                "min" : 3,
+                "max" : 3
               }
             }
           } ],

@@ -10,32 +10,40 @@ import scala.collection.immutable.Queue
   * Start waypoint is excluded and end included
   */
 object WaypointPath {
-  def apply(s: State)(from: Waypoint, to: Waypoint): Option[Vector[Waypoint]] = {
-    if (from == to) {
-      return None
-    }
 
+  def apply(s: State)(from: Waypoint, to: Waypoint): Option[Vector[Waypoint]] = {
+    find(s)(from, _ == to)
+  }
+
+  def find(s: State)(from: Waypoint, to: Waypoint => Boolean, exclude: Set[Waypoint] = Set()): Option[Vector[Waypoint]] = {
     val network = s.cache.waypointNetwork
 
     @tailrec
-    def travel(paths: Queue[Vector[Waypoint]], visited: Set[Waypoint]): Option[Vector[Waypoint]] = {
+    def travel(paths: Queue[Vector[Waypoint]], exclude: Set[Waypoint]): Option[Vector[Waypoint]] = {
       val (path, dequeued) = paths.dequeue
       val waypoint = path.last
 
-      if (waypoint == to) {
+      if (to(waypoint)) {
         Some(path)
       } else {
-        val adjacent = network.adjacentWaypoints.getOrElse(waypoint, Set()) -- visited
+        val adjacent = network.adjacentWaypoints.getOrElse(waypoint, Set()) -- exclude
         val enqueued = dequeued enqueue (adjacent map (path :+ _))
 
         if (enqueued.isEmpty) {
           None
         } else {
-          travel(enqueued, visited ++ adjacent)
+          travel(enqueued, exclude ++ adjacent)
         }
       }
     }
 
-    travel(Queue(Vector(from)), Set(from)) map (_.tail)
+    val result = travel(Queue(Vector(from)), exclude + from) map (_.tail)
+
+    if (result exists (_.isEmpty)) {
+      None
+    } else {
+      result
+    }
   }
+
 }

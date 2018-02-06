@@ -3,6 +3,7 @@ package io.github.fiifoo.scarl.simulation
 import io.github.fiifoo.scarl.action.ShootMissileAction
 import io.github.fiifoo.scarl.core.State
 import io.github.fiifoo.scarl.core.creature.FactionId
+import io.github.fiifoo.scarl.core.entity.Selectors.getLocationWaypoint
 import io.github.fiifoo.scarl.core.entity.{ActorId, ActorQueue, CreatureId, Selectors}
 import io.github.fiifoo.scarl.core.geometry.Location
 
@@ -30,7 +31,7 @@ object ShootMissileOutcomeSimulation {
   private def queueActors(s: State, shooter: CreatureId, location: Location): State = {
     implicit val ordering = ActorQueue.ordering
 
-    val waypoints = Set(shooter(s).location, location) flatMap s.cache.waypointNetwork.locationWaypoint.get
+    val waypoints = Set(shooter(s).location, location) flatMap getLocationWaypoint(s)
     val actors = (waypoints flatMap Selectors.getWaypointCreatures(s)) + shooter
     val queue = (actors map (actor => (actor: ActorId, actor(s).tick))).to[SortedSet]
 

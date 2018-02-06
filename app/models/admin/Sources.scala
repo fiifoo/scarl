@@ -1,6 +1,6 @@
 package models.admin
 
-import io.github.fiifoo.scarl.ai.strategy.HuntStrategy
+import io.github.fiifoo.scarl.ai.strategy.RoamStrategy
 import io.github.fiifoo.scarl.ai.tactic._
 import io.github.fiifoo.scarl.area.Area
 import io.github.fiifoo.scarl.area.feature.{Feature, RandomizedContentFeature}
@@ -68,6 +68,7 @@ object Sources {
       typeOf[GreetTactic.type],
       typeOf[PassTactic.type],
       typeOf[RoamTactic.type],
+      typeOf[ScoutTactic.type],
     )),
     SubModelSource(typeOf[CreaturePower], List(
       typeOf[TransformCreaturePower],
@@ -107,7 +108,7 @@ object Sources {
       typeOf[Rectangle],
     )),
     SubModelSource(typeOf[Strategy], List(
-      typeOf[HuntStrategy.type],
+      typeOf[RoamStrategy.type],
     )),
 
     SubModelSource(typeOf[ArmorSlot], List(
