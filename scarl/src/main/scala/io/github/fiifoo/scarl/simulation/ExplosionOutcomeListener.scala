@@ -16,7 +16,7 @@ class ExplosionOutcomeListener(enemies: Set[FactionId]) extends SimulationListen
 
     explode map (explode => {
       val explosions = data.effects collect {
-        case explosion: ExplosionLocationEffect if explosion.parent contains explode => explosion
+        case explosion: ExplosionLocationEffect if explosion.parent exists (_.parent contains explode) => explosion
       }
       val targets = explosions flatMap (_.targets(s))
 
