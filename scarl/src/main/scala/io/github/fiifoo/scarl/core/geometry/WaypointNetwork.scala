@@ -2,7 +2,7 @@ package io.github.fiifoo.scarl.core.geometry
 
 import io.github.fiifoo.scarl.core.State
 import io.github.fiifoo.scarl.core.entity.Selectors.getLocationEntities
-import io.github.fiifoo.scarl.core.entity.{CreatureId, WallId}
+import io.github.fiifoo.scarl.core.entity.WallId
 import io.github.fiifoo.scarl.core.geometry.WaypointNetwork.Waypoint
 
 import scala.annotation.tailrec
@@ -14,62 +14,41 @@ object WaypointNetwork {
 
   def apply(s: State): WaypointNetwork = {
     val sectors = Sector.sectors(s)
-    val calculate = calculateSector(blocked(s)) _
+    val calculate = calculateSector(s, blocked(s)) _
 
     sectors.foldLeft(WaypointNetwork())(calculate)
   }
 
   def recalculate(s: State, network: WaypointNetwork, locations: Set[Location]): WaypointNetwork = {
-    val sectors = locations map Sector(s.area.sectorSize)
+    val sectors = locations map Sector(s)
 
     (sectors foldLeft network) ((network, sector) => {
-      val cleared = clearSector(network, sector)
+      val cleared = clearSector(s, network, sector)
 
-      calculateSector(blocked(s))(cleared, sector)
+      calculateSector(s, blocked(s))(cleared, sector)
     })
-  }
-
-  def isNearbyLocation(s: State, a: Location, b: Location): Boolean = {
-    val network = s.cache.waypointNetwork
-
-    network.locationWaypoint.get(a) exists (aw => {
-      network.locationWaypoint.get(b) exists (bw => {
-        aw == bw || network.adjacentWaypoints.get(aw).exists(_.contains(bw))
-      })
-    })
-  }
-
-  def nearbyCreatures(s: State, location: Location): Set[CreatureId] = {
-    nearbyCreatures(s, Set(location))
-  }
-
-  def nearbyCreatures(s: State, locations: Set[Location]): Set[CreatureId] = {
-    val network = s.cache.waypointNetwork
-    val waypoints = locations flatMap network.locationWaypoint.get
-
-    waypoints flatMap network.waypointLocations flatMap getLocationEntities(s) collect {
-      case c: CreatureId => c
-    }
   }
 
   private def blocked(s: State): Location => Boolean = {
     location => getLocationEntities(s)(location) exists (_.isInstanceOf[WallId])
   }
 
-  private def calculateSector(blocked: Location => Boolean)
+  private def calculateSector(s: State,
+                              blocked: Location => Boolean)
                              (network: WaypointNetwork,
                               sector: Sector
                              ): WaypointNetwork = {
-    val locations = sector.locations filterNot blocked
+    val locations = sector.locations(s) filterNot blocked
 
-    calculateWaypoint(network, sector, locations)
+    calculateWaypoint(s, network, sector, locations)
   }
 
-  private def calculateWaypoint(network: WaypointNetwork,
+  private def calculateWaypoint(s: State,
+                                network: WaypointNetwork,
                                 sector: Sector,
                                 locations: Set[Location]
                                ): WaypointNetwork = {
-    sector.center.closest(locations) map (waypoint => {
+    sector.center(s).closest(locations) map (waypoint => {
       val nextNetwork = calculateWaypointLocations(
         network = addWaypoint(network, waypoint),
         waypoint = waypoint,
@@ -79,7 +58,7 @@ object WaypointNetwork {
       val nextLocations = locations -- nextNetwork.locationWaypoint.keys
 
       if (nextLocations.nonEmpty) {
-        calculateWaypoint(nextNetwork, sector, nextLocations)
+        calculateWaypoint(s, nextNetwork, sector, nextLocations)
       } else {
         nextNetwork
       }
@@ -159,15 +138,15 @@ object WaypointNetwork {
     )
   }
 
-  private def clearSector(network: WaypointNetwork, sector: Sector): WaypointNetwork = {
-    val locations = sector.locations
+  private def clearSector(s: State, network: WaypointNetwork, sector: Sector): WaypointNetwork = {
+    val locations = sector.locations(s)
     val waypoints = network.waypoints intersect locations
 
     network.copy(
       waypoints = network.waypoints -- waypoints,
       adjacentWaypoints = clearAdjacentWaypoints(network, waypoints),
       locationWaypoint = network.locationWaypoint -- locations,
-      waypointLocations = network.waypointLocations -- waypoints,
+      waypointLocations = network.waypointLocations -- waypoints
     )
   }
 

@@ -6,7 +6,7 @@ import io.github.fiifoo.scarl.core.assets.Assets
 import io.github.fiifoo.scarl.core.communication.CommunicationId
 import io.github.fiifoo.scarl.core.creature._
 import io.github.fiifoo.scarl.core.entity._
-import io.github.fiifoo.scarl.core.geometry.{Location, WaypointNetwork}
+import io.github.fiifoo.scarl.core.geometry.{Location, Sector, WaypointNetwork}
 import io.github.fiifoo.scarl.core.item.Equipment.Slot
 import io.github.fiifoo.scarl.core.item.Key
 import io.github.fiifoo.scarl.core.math.Rng
@@ -32,6 +32,7 @@ object State {
                    locationMachinery: Map[Location, Set[MachineryId]] = Map(),
                    locationTriggers: Map[Location, Set[TriggerStatusId]] = Map(),
                    partyMembers: Map[Party, Set[CreatureId]] = Map(),
+                   sectorCreatures: Map[Sector, Set[CreatureId]] = Map(),
                    targetStatuses: Map[EntityId, Set[StatusId]] = Map(),
                   )
 

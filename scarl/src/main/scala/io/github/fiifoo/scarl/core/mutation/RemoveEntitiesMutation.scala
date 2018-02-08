@@ -4,6 +4,7 @@ import io.github.fiifoo.scarl.core._
 import io.github.fiifoo.scarl.core.ai.{Brain, Tactic}
 import io.github.fiifoo.scarl.core.creature.FactionId
 import io.github.fiifoo.scarl.core.entity._
+import io.github.fiifoo.scarl.core.geometry.Sector
 import io.github.fiifoo.scarl.core.item.Equipment.Slot
 import io.github.fiifoo.scarl.core.mutation.index._
 
@@ -125,6 +126,10 @@ case class RemoveEntitiesMutation() extends Mutation {
       partyMembers = entity match {
         case member: Creature => PartyMemberIndexRemoveMutation(member.id, member.party)(index.partyMembers)
         case _ => index.partyMembers
+      },
+      sectorCreatures = entity match {
+        case creature: Creature => CreatureSectorIndexRemoveMutation(creature.id, Sector(s)(creature.location))(index.sectorCreatures)
+        case _ => index.sectorCreatures
       },
       targetStatuses = entity match {
         case status: Status => StatusTargetIndexRemoveMutation(status.id, status.target)(index.targetStatuses)

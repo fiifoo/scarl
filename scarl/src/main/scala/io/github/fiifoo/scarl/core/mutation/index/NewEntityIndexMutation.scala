@@ -2,6 +2,7 @@ package io.github.fiifoo.scarl.core.mutation.index
 
 import io.github.fiifoo.scarl.core._
 import io.github.fiifoo.scarl.core.entity._
+import io.github.fiifoo.scarl.core.geometry.Sector
 
 case class NewEntityIndexMutation(entity: Entity) {
 
@@ -30,6 +31,10 @@ case class NewEntityIndexMutation(entity: Entity) {
       partyMembers = entity match {
         case member: Creature => PartyMemberIndexAddMutation(member.id, member.party)(index.partyMembers)
         case _ => index.partyMembers
+      },
+      sectorCreatures = entity match {
+        case creature: Creature => CreatureSectorIndexAddMutation(creature.id, Sector(s)(creature.location))(index.sectorCreatures)
+        case _ => index.sectorCreatures
       },
       targetStatuses = entity match {
         case status: Status => StatusTargetIndexAddMutation(status.id, status.target)(index.targetStatuses)
