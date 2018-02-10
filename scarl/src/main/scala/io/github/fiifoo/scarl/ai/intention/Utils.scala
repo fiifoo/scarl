@@ -1,6 +1,6 @@
 package io.github.fiifoo.scarl.ai.intention
 
-import io.github.fiifoo.scarl.action.{DisplaceAction, MoveAction, UseDoorAction}
+import io.github.fiifoo.scarl.action.{DisplaceAction, MoveAction, PassAction, UseDoorAction}
 import io.github.fiifoo.scarl.ai.tactic.{AttackTactic, FollowTactic}
 import io.github.fiifoo.scarl.core.State
 import io.github.fiifoo.scarl.core.action.Action
@@ -54,7 +54,12 @@ object Utils {
     })
   }
 
-  def move(s: State, actor: CreatureId, to: Location, displace: Boolean = false): Option[Action] = {
+  def move(s: State,
+           actor: CreatureId,
+           to: Location,
+           displace: Boolean = false,
+           wait: Boolean = false
+          ): Option[Action] = {
     val from = actor(s).location
 
     Path(s)(from, to) map (path => {
@@ -68,6 +73,8 @@ object Utils {
         (getLocationEntities(s)(location) collectFirst {
           case creature: CreatureId => if (displace) {
             Some(DisplaceAction(creature))
+          } else if (wait) {
+            Some(PassAction)
           } else {
             None
           }
@@ -82,7 +89,12 @@ object Utils {
     }
   }
 
-  def travel(s: State, actor: CreatureId, to: Location, displace: Boolean = false): Option[Action] = {
+  def travel(s: State,
+             actor: CreatureId,
+             to: Location,
+             displace: Boolean = false,
+             wait: Boolean = false
+            ): Option[Action] = {
     getWaypointPath(s, actor(s).location, to) flatMap (path => {
       val destination = if (path.size > 2) {
         path(1)
@@ -90,7 +102,7 @@ object Utils {
         to
       }
 
-      move(s, actor, destination, displace)
+      move(s, actor, destination, displace, wait)
     })
   }
 
