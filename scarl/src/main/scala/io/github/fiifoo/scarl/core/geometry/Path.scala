@@ -43,7 +43,7 @@ object Path {
                ) {
 
     val h: Int = distance(from, to)
-    val constraint: Constraint = Constraint(h + 1)
+    val constraint: Constraint = Constraint((h + 1) * 2)
     val start: Node = Node(
       location = from,
       parent = None,
