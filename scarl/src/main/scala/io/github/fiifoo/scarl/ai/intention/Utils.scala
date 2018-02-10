@@ -54,6 +54,16 @@ object Utils {
     })
   }
 
+  def follow(s: State, actor: CreatureId)(target: Creature): Option[Result] = {
+    travel(s, actor, target.location, displace = true) map ((FollowTactic(SafeCreatureId(target.id)), _))
+  }
+
+  def isEnemy(s: State, creature: CreatureId): CreatureId => Boolean = {
+    val factions = creature(s).faction(s).enemies
+
+    enemy => factions contains enemy(s).faction
+  }
+
   def move(s: State,
            actor: CreatureId,
            to: Location,
@@ -71,7 +81,7 @@ object Utils {
         val location = path.head
 
         (getLocationEntities(s)(location) collectFirst {
-          case creature: CreatureId => if (displace) {
+          case creature: CreatureId => if (displace && !isEnemy(s, actor)(creature)) {
             Some(DisplaceAction(creature))
           } else if (wait) {
             Some(PassAction)
@@ -104,10 +114,6 @@ object Utils {
 
       move(s, actor, destination, displace, wait)
     })
-  }
-
-  def follow(s: State, actor: CreatureId)(target: Creature): Option[Result] = {
-    travel(s, actor, target.location, displace = true) map ((FollowTactic(SafeCreatureId(target.id)), _))
   }
 
   private def getWaypointPath(s: State, from: Location, to: Location): Option[Vector[Waypoint]] = {
