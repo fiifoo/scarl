@@ -1,6 +1,6 @@
 package models.admin
 
-import io.github.fiifoo.scarl.ai.strategy.RoamStrategy
+import io.github.fiifoo.scarl.ai.strategy._
 import io.github.fiifoo.scarl.ai.tactic._
 import io.github.fiifoo.scarl.area.Area
 import io.github.fiifoo.scarl.area.feature.{Feature, RandomizedContentFeature}
@@ -108,6 +108,7 @@ object Sources {
       typeOf[Rectangle],
     )),
     SubModelSource(typeOf[Strategy], List(
+      typeOf[AttackStrategy.type],
       typeOf[RoamStrategy.type],
     )),
 
