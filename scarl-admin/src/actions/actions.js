@@ -1,7 +1,7 @@
 import Data from '../data/Data'
 import * as api from '../api'
 import { SUMMARY } from '../const/pages.js'
-import { createItem } from '../data/utils.js'
+import { createItem, getItemReferences } from '../data/utils.js'
 import * as types from './actionTypes'
 
 export const changePage = page => (dispatch, getState) => {
@@ -40,6 +40,26 @@ export const addItem = (model, id) => (dispatch, getState) => {
     })
 }
 
+export const deleteItem = (model, id) => (dispatch, getState) => {
+    const {data, models} = getState()
+    const references = getItemReferences(data, models)(model, id)
+
+    return references.isEmpty() ? (
+        dispatch({
+            type: types.DELETE_ITEM,
+            model,
+            id,
+        })
+    ) : (
+        dispatch({
+            type: types.SHOW_ITEM_REFERENCES,
+            model,
+            id,
+            references,
+        })
+    )
+}
+
 export const setAddItemId = id => ({
     type: types.SET_ADD_ITEM_ID,
     id,
@@ -61,6 +81,22 @@ export const save = () => (dispatch, getState) => {
         type: types.SAVE,
     })
 }
+
+export const showItemReferences = (model, id) => (dispatch, getState) => {
+    const {data, models} = getState()
+    const references = getItemReferences(data, models)(model, id)
+
+    dispatch({
+        type: types.SHOW_ITEM_REFERENCES,
+        model,
+        id,
+        references,
+    })
+}
+
+export const hideItemReferences = () => ({
+    type: types.HIDE_ITEM_REFERENCES,
+})
 
 export const showSideForm = (model, fieldType, path) => ({
     type: types.SHOW_SIDE_FORM,

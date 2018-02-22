@@ -4,7 +4,10 @@ import { createFormFieldType, getFieldComponent } from './field/utils'
 import ReadonlyRow from './form/ReadonlyRow.jsx'
 import SideForm from './SideForm.jsx'
 
-const ItemForm = ({item, model, sideForm, data, models, setItemValue, showSideForm, hideSideForm}) => {
+const ItemForm = ({
+    item, model, sideForm, data, models,
+    deleteItem, setItemValue, showItemReferences, showSideForm, hideSideForm
+}) => {
     const submit = event => {
         event.preventDefault()
 
@@ -25,8 +28,30 @@ const ItemForm = ({item, model, sideForm, data, models, setItemValue, showSideFo
     }
     const Component = getFieldComponent(fieldType, model)
 
+    const buttons = (
+        <div className="btn-toolbar">
+            <button
+                type="button"
+                onClick={() => showItemReferences(model, id)}
+                className="btn btn-default">
+                References
+            </button>
+            <button
+                type="button"
+                onClick={() => deleteItem(model, id)}
+                className="btn btn-danger">
+                DELETE
+            </button>
+        </div>
+    )
+
     return  (
         <form onSubmit={submit} className="form-horizontal item-form">
+            <div className="clearfix">
+                <div className="pull-right">
+                    {buttons}
+                </div>
+            </div>
             <ReadonlyRow label="id" value={id} />
             <Component
                 label={label}

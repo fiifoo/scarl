@@ -1,14 +1,21 @@
-import { Record } from 'immutable'
+import { List, Record } from 'immutable'
 import * as types from '../../actions/actionTypes'
 import * as pages from '../../const/pages'
+
+const ItemReferences = Record({
+    references: List(),
+    model: null,
+    id: null,
+})
 
 const initial = Record({
     addItemId: null,
     item: null,
+    itemReferences: null,
     model: null,
+    page: pages.MAIN,
     saving: false,
     sideForm: null,
-    page: pages.MAIN,
 })()
 
 export default (state = initial, action) => {
@@ -33,6 +40,12 @@ export default (state = initial, action) => {
         }
         case types.SAVED: {
             return state.set('saving', false)
+        }
+        case types.SHOW_ITEM_REFERENCES: {
+            return state.set('itemReferences', ItemReferences(action))
+        }
+        case types.HIDE_ITEM_REFERENCES: {
+            return state.set('itemReferences', null)
         }
         case types.SHOW_SIDE_FORM: {
             return state.set('sideForm', {

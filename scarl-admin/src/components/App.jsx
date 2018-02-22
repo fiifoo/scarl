@@ -3,6 +3,7 @@ import { Col, Nav, Navbar, NavItem, Row, } from 'react-bootstrap'
 import * as pages from '../const/pages'
 import ItemAddContainer from '../containers/ItemAddContainer'
 import ItemFormContainer from '../containers/ItemFormContainer'
+import ItemReferencesContainer from '../containers/ItemReferencesContainer'
 import ItemSelectContainer from '../containers/ItemSelectContainer'
 import ModelSelectContainer from '../containers/ModelSelectContainer'
 import SummaryContainer from '../containers/SummaryContainer'
@@ -57,6 +58,7 @@ const SaveButton = ({readonly, save, saving}) => (
 const App = ({page, changePage, ...props}) => (
     <div>
         <Navigation page={page} changePage={changePage} />
+        <ItemReferencesContainer />
         <div className="container-fluid">
             {page === pages.SUMMARY ? (
                 <SummaryContainer />

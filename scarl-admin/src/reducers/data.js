@@ -11,6 +11,13 @@ export default (state = Data(), action) => {
 
             return state.setIn(path, item)
         }
+        case types.DELETE_ITEM: {
+            const model = action.model
+            const id = action.id
+            const path = model.dataPath.concat([id])
+
+            return state.deleteIn(path)
+        }
         case types.SET_ITEM_VALUE: {
             return state.setIn(action.path, action.value)
         }
