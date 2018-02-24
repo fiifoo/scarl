@@ -1,7 +1,7 @@
 import Data from '../data/Data'
 import * as api from '../api'
 import { SUMMARY } from '../const/pages.js'
-import { createItem, getItemReferences } from '../data/utils.js'
+import { createItem, getItemReferences, isNewItemId } from '../data/utils.js'
 import * as types from './actionTypes'
 
 export const changePage = page => (dispatch, getState) => {
@@ -29,15 +29,22 @@ export const selectItem = item => ({
 })
 
 export const addItem = (model, id) => (dispatch, getState) => {
-    const models = getState().models
-    const item = createItem(model, id, models)
+    const {data, models} = getState()
 
-    dispatch({
-        type: types.ADD_ITEM,
-        model,
-        id,
-        item,
-    })
+    if (isNewItemId(data, model, id)) {
+        const item = createItem(model, id, models)
+
+        dispatch({
+            type: types.ADD_ITEM,
+            model,
+            id,
+            item,
+        })
+    } else {
+        dispatch({
+            type: types.SET_ITEM_ADD_INVALID,
+        })
+    }
 }
 
 export const deleteItem = (model, id) => (dispatch, getState) => {
@@ -60,8 +67,33 @@ export const deleteItem = (model, id) => (dispatch, getState) => {
     )
 }
 
-export const setAddItemId = id => ({
-    type: types.SET_ADD_ITEM_ID,
+export const renameItem = (model, id, newId) => (dispatch, getState) => {
+    const {data, models} = getState()
+
+    if (isNewItemId(data, model, newId)) {
+        const references = getItemReferences(data, models)(model, id)
+
+        dispatch({
+            type: types.RENAME_ITEM,
+            model,
+            id,
+            newId,
+            references,
+        })
+    } else {
+        dispatch({
+            type: types.SET_ITEM_RENAME_INVALID,
+        })
+    }
+}
+
+export const setItemAddId = id => ({
+    type: types.SET_ITEM_ADD_ID,
+    id,
+})
+
+export const setItemRenameId = id => ({
+    type: types.SET_ITEM_RENAME_ID,
     id,
 })
 

@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { deleteItem, setItemValue, showItemReferences, showSideForm, hideSideForm } from '../actions/actions'
+import { renameItem, deleteItem, setItemRenameId, setItemValue, showItemReferences, showSideForm, hideSideForm } from '../actions/actions'
 import ItemForm from '../components/ItemForm.jsx'
 
 const ItemFormIf = props => props.item ? <ItemForm {...props} /> : <div />
@@ -12,6 +12,7 @@ const ItemFormContainer = connect(
 
         return {
             item,
+            itemRename: state.ui.main.itemRename,
             model,
             sideForm: state.ui.main.sideForm,
             data: state.data,
@@ -19,6 +20,8 @@ const ItemFormContainer = connect(
         }
     }, {
         deleteItem,
+        renameItem,
+        setItemRenameId,
         setItemValue,
         showItemReferences,
         showSideForm,

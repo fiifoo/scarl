@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { addItem, setAddItemId } from '../actions/actions'
+import { addItem, setItemAddId } from '../actions/actions'
 import ItemAdd from '../components/ItemAdd.jsx'
 
 const ItemAddIf = props => props.model ? <ItemAdd {...props} /> : <div />
@@ -11,11 +11,12 @@ const ItemAddContainer = connect(
 
         return {
             model,
-            id: state.ui.main.addItemId,
+            id: state.ui.main.itemAdd.id,
+            invalid: state.ui.main.itemAdd.invalid,
         }
     }, {
         addItem,
-        setId: setAddItemId,
+        setId: setItemAddId,
     }
 )(ItemAddIf)
 

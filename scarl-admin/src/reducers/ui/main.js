@@ -8,10 +8,21 @@ const ItemReferences = Record({
     id: null,
 })
 
+const ItemAdd = Record({
+    id: null,
+    invalid: false,
+})
+
+const ItemRename = Record({
+    id: null,
+    invalid: false,
+})
+
 const initial = Record({
-    addItemId: null,
     item: null,
+    itemAdd: ItemAdd(),
     itemReferences: null,
+    itemRename: ItemRename(),
     model: null,
     page: pages.MAIN,
     saving: false,
@@ -24,16 +35,31 @@ export default (state = initial, action) => {
             return state.set('page', action.page)
         }
         case types.SELECT_MODEL: {
-            return state.set('model', action.model).set('item', null)
+            return state.set('model', action.model).set('item', null).set('itemRename', ItemRename())
         }
         case types.SELECT_ITEM: {
-            return state.set('item', action.item)
+            return state.set('item', action.item).set('itemRename', ItemRename())
         }
         case types.ADD_ITEM: {
-            return state.set('item', action.id).set('addItemId', null)
+            return state.set('item', action.id).set('itemAdd', ItemAdd()).set('itemRename', ItemRename())
         }
-        case types.SET_ADD_ITEM_ID: {
-            return state.set('addItemId', action.id)
+        case types.DELETE_ITEM: {
+            return state.set('item', null).set('itemRename', ItemRename())
+        }
+        case types.RENAME_ITEM: {
+            return state.set('item', action.newId).set('itemRename', ItemRename())
+        }
+        case types.SET_ITEM_ADD_ID: {
+            return state.set('itemAdd', ItemAdd({id: action.id}))
+        }
+        case types.SET_ITEM_ADD_INVALID: {
+            return state.setIn(['itemAdd', 'invalid'], true)
+        }
+        case types.SET_ITEM_RENAME_ID: {
+            return state.set('itemRename', ItemRename({id: action.id}))
+        }
+        case types.SET_ITEM_RENAME_INVALID: {
+            return state.setIn(['itemRename', 'invalid'], true)
         }
         case types.SAVE: {
             return state.set('saving', true)

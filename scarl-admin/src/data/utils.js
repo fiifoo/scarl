@@ -4,6 +4,10 @@ export const isPolymorphic = model => model.polymorphic.length > 0
 
 export const readItemId = (model, item) => isPolymorphic(model) ? item.getIn(['data', 'id']) : item.get('id')
 
+export const writeItemId = (model, item, id) => isPolymorphic(model) ? item.setIn(['data', 'id'], id) : item.set('id', id)
+
+export const isNewItemId = (data, model, id) => !data.hasIn(model.dataPath.concat([id]))
+
 export const createItem = (model, id, models) => (
     isPolymorphic(model) ? (
         Map({

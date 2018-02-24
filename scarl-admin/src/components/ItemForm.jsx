@@ -1,12 +1,12 @@
 import React from 'react'
 import { isPolymorphic, readItemId } from '../data/utils'
 import { createFormFieldType, getFieldComponent } from './field/utils'
-import ReadonlyRow from './form/ReadonlyRow.jsx'
+import FormRow from './form/FormRow.jsx'
 import SideForm from './SideForm.jsx'
 
 const ItemForm = ({
-    item, model, sideForm, data, models,
-    deleteItem, setItemValue, showItemReferences, showSideForm, hideSideForm
+    item, itemRename, model, sideForm, data, models,
+    deleteItem, renameItem, setItemRenameId, setItemValue, showItemReferences, showSideForm, hideSideForm
 }) => {
     const submit = event => {
         event.preventDefault()
@@ -47,12 +47,30 @@ const ItemForm = ({
 
     return  (
         <form onSubmit={submit} className="form-horizontal item-form">
-            <div className="clearfix">
+            <div className="clearfix" style={{marginBottom: '1em'}}>
                 <div className="pull-right">
                     {buttons}
                 </div>
             </div>
-            <ReadonlyRow label="id" value={id} />
+
+            <FormRow label="id" error={itemRename.id === '' || itemRename.invalid}>
+                <div className="input-group">
+                    <input
+                        type="text"
+                        className="form-control"
+                        value={itemRename.id !== null ? itemRename.id : id}
+                        onChange={event => setItemRenameId(event.target.value)} />
+                    <span className="input-group-btn">
+                        <button
+                            type="submit"
+                            className="btn btn-primary"
+                            disabled={!itemRename.id || itemRename.id === id}
+                            onClick={() => renameItem(model, id, itemRename.id)}>
+                            Rename item
+                        </button>
+                    </span>
+                </div>
+            </FormRow>
             <Component
                 label={label}
                 required={true}

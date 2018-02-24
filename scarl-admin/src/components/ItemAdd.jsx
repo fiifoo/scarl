@@ -1,6 +1,6 @@
 import React from 'react'
 
-const ItemAdd = ({model, id, addItem, setId}) => {
+const ItemAdd = ({model, id, invalid, addItem, setId}) => {
 
     const submit = event => {
         event.preventDefault()
@@ -10,7 +10,7 @@ const ItemAdd = ({model, id, addItem, setId}) => {
     }
 
     return (
-        <form className="input-group" onSubmit={submit}>
+        <form onSubmit={submit} className={invalid ? 'input-group has-error' : 'input-group'}>
             <span className="input-group-btn">
                 <button
                     type="submit"
