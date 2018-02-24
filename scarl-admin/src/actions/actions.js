@@ -1,7 +1,7 @@
 import Data from '../data/Data'
 import * as api from '../api'
 import { SUMMARY } from '../const/pages.js'
-import { createItem, getItemReferences, isNewItemId } from '../data/utils.js'
+import { copyItem, createItem, getItemReferences, isNewItemId } from '../data/utils.js'
 import * as types from './actionTypes'
 
 export const changePage = page => (dispatch, getState) => {
@@ -28,11 +28,11 @@ export const selectItem = item => ({
     item,
 })
 
-export const addItem = (model, id) => (dispatch, getState) => {
+export const addItem = (model, id, copyId = undefined) => (dispatch, getState) => {
     const {data, models} = getState()
 
     if (isNewItemId(data, model, id)) {
-        const item = createItem(model, id, models)
+        const item = copyId ? copyItem(model, copyId, id, data) : createItem(model, id, models)
 
         dispatch({
             type: types.ADD_ITEM,

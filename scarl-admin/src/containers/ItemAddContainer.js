@@ -13,6 +13,7 @@ const ItemAddContainer = connect(
             model,
             id: state.ui.main.itemAdd.id,
             invalid: state.ui.main.itemAdd.invalid,
+            copyId: state.ui.main.item,
         }
     }, {
         addItem,

@@ -19,6 +19,12 @@ export const createItem = (model, id, models) => (
     )
 )
 
+export const copyItem = (model, sourceId, targetId, data) => {
+    const source = data.getIn(model.dataPath.concat([sourceId]))
+
+    return writeItemId(model, source, targetId)
+}
+
 export const getNewValue = (fieldType, models) => {
     switch (fieldType.type) {
         case 'FormField': {
