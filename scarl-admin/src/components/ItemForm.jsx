@@ -6,7 +6,7 @@ import SideForm from './SideForm.jsx'
 
 const ItemForm = ({
     item, itemRename, model, sideForm, data, models,
-    deleteItem, renameItem, setItemRenameId, setItemValue, showItemReferences, showSideForm, hideSideForm
+    deleteItem, renameItem, setItemRenameId, setItemValue, showItem, showItemReferences, showSideForm, hideSideForm
 }) => {
     const submit = event => {
         event.preventDefault()
@@ -23,6 +23,7 @@ const ItemForm = ({
         data,
         models,
         setValue: setItemValue,
+        showItem,
         showSideForm,
         hideSideForm,
     }

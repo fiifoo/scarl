@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { hideItemReferences } from '../actions/actions'
+import { hideItemReferences, showReferenceItem } from '../actions/actions'
 import ItemReferences from '../components/ItemReferences.jsx'
 import { tabState } from '../reducers/ui/utils'
 
@@ -8,6 +8,7 @@ const ItemReferencesContainer = connect(
         references: tabState(state.ui.form).itemReferences,
     }), {
         hideItemReferences,
+        showReferenceItem,
     }
 )(ItemReferences)
 

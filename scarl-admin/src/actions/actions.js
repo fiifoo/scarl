@@ -50,6 +50,25 @@ export const deleteTab = tab => (dispatch, getState) => {
     })
 }
 
+export const showItem = (model, item) => (dispatch, getState) => {
+    addTab()(dispatch, getState)
+    dispatch(selectModel(model))
+    dispatch(selectItem(item))
+}
+
+export const showReferenceItem = reference => (dispatch, getState) => {
+    const {models} = getState()
+
+    const referenceString = reference.join('/')
+    const model = models.main.find(model => (
+        referenceString.indexOf(model.dataPath.join('/')) === 0
+    ))
+    const item = referenceString.replace(model.dataPath.join('/') + '/', '').split('/')[0]
+
+    dispatch(hideItemReferences())
+    showItem(model.id, item)(dispatch, getState)
+}
+
 export const save = () => (dispatch, getState) => {
     const data = getState().data
     api.save(Data.write(data)).then(() => dispatch({

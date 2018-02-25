@@ -32,6 +32,16 @@ const PolymorphicRelationField = ({fieldType, label, required, path, value, comm
     const setType = type => setValue(path, Map({type, data: null}))
     const typeChoices = fieldType.data.models.map(type => ({value: type, label: type}))
 
+    const link = targetChoices && (
+        <button
+            type="button"
+            className="btn btn-link"
+            onClick={() => common.showItem(targetModel.id, targetValue)}
+            disabled={!targetValue}>
+            Show
+        </button>
+    )
+
     return (
         <FormRow label={label}>
             {required ? null : (
@@ -54,7 +64,8 @@ const PolymorphicRelationField = ({fieldType, label, required, path, value, comm
                     required={true}
                     choices={targetChoices}
                     value={targetValue}
-                    onChange={value => setValue(path.concat(['value']), value)} />
+                    onChange={value => setValue(path.concat(['value']), value)}
+                    button={link} />
             )}
         </FormRow>
     )

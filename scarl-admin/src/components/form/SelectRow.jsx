@@ -10,18 +10,31 @@ const getValue = (multi, selection) => multi ? (
     selection ? selection.value : null
 )
 
-const SelectRow = ({choices, value, onChange, inputStyle, multi = false, disabled = false, required = false, placeholder = undefined,  ...props}) => (
-    <FormRow {...props} error={required && (value === null || value === undefined)}>
-        <Select
-            style={inputStyle}
-            value={value}
-            multi={multi}
-            clearable={! required}
-            onChange={selection => onChange(getValue(multi, selection))}
-            options={choices.sort(sort)}
-            disabled={disabled}
-            placeholder={placeholder} />
-    </FormRow>
-)
+const SelectRow = ({button, choices, value, onChange, inputStyle, multi = false, disabled = false, required = false, placeholder = undefined,  ...props}) => {
+    const input = <Select
+        style={inputStyle}
+        value={value}
+        multi={multi}
+        clearable={! required}
+        onChange={selection => onChange(getValue(multi, selection))}
+        options={choices.sort(sort)}
+        disabled={disabled}
+        placeholder={placeholder} />
+
+    return (
+        <FormRow {...props} error={required && (value === null || value === undefined)}>
+            {button ? (
+                <div className="input-group">
+                    {input}
+                    <span className="input-group-btn">
+                        {button}
+                    </span>
+                </div>
+            ) : (
+                input
+            )}
+        </FormRow>
+    )
+}
 
 export default SelectRow

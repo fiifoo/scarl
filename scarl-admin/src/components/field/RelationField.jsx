@@ -7,13 +7,25 @@ const RelationField = ({label, required, path, value, fieldType, common}) => {
 
     const choices = Models.choices(models, data, fieldType.data.model)
 
+    const linkModel = fieldType.data.model
+    const link = (
+        <button
+            type="button"
+            className="btn btn-link"
+            onClick={() => common.showItem(linkModel, value)}
+            disabled={!value}>
+            Show
+        </button>
+    )
+
     return (
         <SelectRow
             label={label}
             required={required}
             value={value}
             onChange={value => setValue(path, value)}
-            choices={choices} />
+            choices={choices}
+            button={link} />
     )
 }
 

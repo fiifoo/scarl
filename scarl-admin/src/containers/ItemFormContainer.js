@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { renameItem, deleteItem, setItemRenameId, setItemValue, showItemReferences, showSideForm, hideSideForm } from '../actions/actions'
+import { renameItem, deleteItem, setItemRenameId, setItemValue, showItem, showItemReferences, showSideForm, hideSideForm } from '../actions/actions'
 import ItemForm from '../components/ItemForm.jsx'
 import { tabState } from '../reducers/ui/utils'
 
@@ -26,6 +26,7 @@ const ItemFormContainer = connect(
         renameItem,
         setItemRenameId,
         setItemValue,
+        showItem,
         showItemReferences,
         showSideForm,
         hideSideForm,

@@ -3,7 +3,7 @@ import { Modal } from 'react-bootstrap'
 
 const NoReferences = () => <i className="text-muted">No references</i>
 
-const ItemReferences = ({references, hideItemReferences}) => {
+const ItemReferences = ({references, hideItemReferences, showReferenceItem}) => {
     const title = references && (
         <span>
             References: {references.model.id} ({references.id})
@@ -11,7 +11,14 @@ const ItemReferences = ({references, hideItemReferences}) => {
     )
 
     const renderReference = (reference, index) => (
-        <p key={index}>{reference.join(' / ')}</p>
+        <div key={index}>
+            <button
+                type="button"
+                className="btn btn-link"
+                onClick={() => showReferenceItem(reference)}>
+                {reference.join(' / ')}
+            </button>
+        </div>
     )
 
     return  (
