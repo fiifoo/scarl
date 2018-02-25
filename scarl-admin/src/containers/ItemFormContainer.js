@@ -2,19 +2,22 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { renameItem, deleteItem, setItemRenameId, setItemValue, showItemReferences, showSideForm, hideSideForm } from '../actions/actions'
 import ItemForm from '../components/ItemForm.jsx'
+import { tabState } from '../reducers/ui/utils'
 
 const ItemFormIf = props => props.item ? <ItemForm {...props} /> : <div />
 
 const ItemFormContainer = connect(
     state => {
-        const model = state.ui.main.model && state.models.main.get(state.ui.main.model)
-        const item = model && state.ui.main.item && state.data.getIn(model.dataPath.concat([state.ui.main.item]))
+        const formState = tabState(state.ui.form)
+
+        const model = formState.model && state.models.main.get(formState.model)
+        const item = model && formState.item && state.data.getIn(model.dataPath.concat([formState.item]))
 
         return {
             item,
-            itemRename: state.ui.main.itemRename,
+            itemRename: formState.itemRename,
             model,
-            sideForm: state.ui.main.sideForm,
+            sideForm: formState.sideForm,
             data: state.data,
             models: state.models,
         }

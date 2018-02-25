@@ -1,7 +1,7 @@
 import React from 'react'
 import { isPolymorphic, readItemId } from '../data/utils'
 import { createFormFieldType, getFieldComponent } from './field/utils'
-import FormRow from './form/FormRow.jsx'
+import TextInputRow from './form/TextInputRow.jsx'
 import SideForm from './SideForm.jsx'
 
 const ItemForm = ({
@@ -38,6 +38,13 @@ const ItemForm = ({
             </button>
             <button
                 type="button"
+                disabled={!itemRename.id || itemRename.id === id}
+                onClick={() => renameItem(model, id, itemRename.id)}
+                className={!itemRename.id || itemRename.id === id ? 'btn btn-default' : 'btn btn-primary'}>
+                Rename
+            </button>
+            <button
+                type="button"
                 onClick={() => deleteItem(model, id)}
                 className="btn btn-danger">
                 DELETE
@@ -53,24 +60,11 @@ const ItemForm = ({
                 </div>
             </div>
 
-            <FormRow label="id" error={itemRename.id === '' || itemRename.invalid}>
-                <div className="input-group">
-                    <input
-                        type="text"
-                        className="form-control"
-                        value={itemRename.id !== null ? itemRename.id : id}
-                        onChange={event => setItemRenameId(event.target.value)} />
-                    <span className="input-group-btn">
-                        <button
-                            type="submit"
-                            className="btn btn-primary"
-                            disabled={!itemRename.id || itemRename.id === id}
-                            onClick={() => renameItem(model, id, itemRename.id)}>
-                            Rename item
-                        </button>
-                    </span>
-                </div>
-            </FormRow>
+            <TextInputRow
+                label="id"
+                error={itemRename.id === '' || itemRename.invalid}
+                value={itemRename.id !== null ? itemRename.id : id}
+                onChange={setItemRenameId} />
             <Component
                 label={label}
                 required={true}

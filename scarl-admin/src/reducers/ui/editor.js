@@ -1,5 +1,6 @@
 import { Record, Set } from 'immutable'
 import * as types from '../../actions/actionTypes'
+import { tabbedReducer } from './utils'
 
 const initial = Record({
     location: null,
@@ -10,7 +11,7 @@ const initial = Record({
     })(),
 })()
 
-export default (state = initial, action) => {
+export default tabbedReducer(initial, (state, action) => {
     switch (action.type) {
         case types.SELECT_MODEL:
         case types.SELECT_ITEM: {
@@ -26,4 +27,4 @@ export default (state = initial, action) => {
             return state
         }
     }
-}
+})

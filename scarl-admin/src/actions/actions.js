@@ -18,6 +18,49 @@ export const changePage = page => (dispatch, getState) => {
     })
 }
 
+export const changeTab = tab => (dispatch, getState) => {
+    const tabs = getState().ui.main.tabs
+
+    if (tabs.includes(tab)) {
+        dispatch({
+            type: types.CHANGE_TAB,
+            tab,
+        })
+    }
+}
+
+export const addTab = () => (dispatch, getState) => {
+    const tabs = getState().ui.main.tabs
+    const tab = tabs.last() + 1
+
+    dispatch({
+        type: types.ADD_TAB,
+        tab,
+    })
+}
+
+export const deleteTab = tab => (dispatch, getState) => {
+    const ui = getState().ui.main
+    const nextTab = ui.tab === tab ? ui.tabs.find(t => t !== tab) : ui.tab
+
+    dispatch({
+        type: types.DELETE_TAB,
+        tab,
+        nextTab,
+    })
+}
+
+export const save = () => (dispatch, getState) => {
+    const data = getState().data
+    api.save(Data.write(data)).then(() => dispatch({
+        type: types.SAVED,
+    }))
+
+    dispatch({
+        type: types.SAVE,
+    })
+}
+
 export const selectModel = model => ({
     type: types.SELECT_MODEL,
     model,
@@ -102,17 +145,6 @@ export const setItemValue = (path, value) => ({
     path,
     value,
 })
-
-export const save = () => (dispatch, getState) => {
-    const data = getState().data
-    api.save(Data.write(data)).then(() => dispatch({
-        type: types.SAVED,
-    }))
-
-    dispatch({
-        type: types.SAVE,
-    })
-}
 
 export const showItemReferences = (model, id) => (dispatch, getState) => {
     const {data, models} = getState()
