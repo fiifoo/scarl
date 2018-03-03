@@ -3,8 +3,29 @@ package io.github.fiifoo.scarl.core.item
 import io.github.fiifoo.scarl.core.creature.Stats
 import io.github.fiifoo.scarl.core.entity.Item
 import io.github.fiifoo.scarl.core.item.Equipment._
+import io.github.fiifoo.scarl.core.kind.ItemKind
 
 object Equipment {
+
+  sealed trait Category {
+    def extractEquipment(item: ItemKind): Option[Equipment]
+  }
+
+  case object ArmorCategory extends Category {
+    def extractEquipment(item: ItemKind): Option[Equipment] = item.armor
+  }
+
+  case object RangedWeaponCategory extends Category {
+    def extractEquipment(item: ItemKind): Option[Equipment] = item.rangedWeapon
+  }
+
+  case object ShieldCategory extends Category {
+    def extractEquipment(item: ItemKind): Option[Equipment] = item.shield
+  }
+
+  case object WeaponCategory extends Category {
+    def extractEquipment(item: ItemKind): Option[Equipment] = item.weapon
+  }
 
   sealed trait Slot
 
@@ -47,24 +68,29 @@ sealed trait Equipment {
   val stats: Stats
   val slots: Set[Slot]
   val fillAll: Boolean
+  val category: Category
 }
 
 case class Armor(stats: Stats, slot: ArmorSlot) extends Equipment {
   val slots: Set[Slot] = Set(slot)
   val fillAll: Boolean = true
+  val category: Category = ArmorCategory
 }
 
 case class RangedWeapon(stats: Stats) extends Equipment {
   val slots: Set[Slot] = Set(RangedSlot)
   val fillAll: Boolean = true
+  val category: Category = RangedWeaponCategory
 }
 
 case class Shield(stats: Stats) extends Equipment {
   val slots: Set[Slot] = Set(OffHand)
   val fillAll: Boolean = true
+  val category: Category = ShieldCategory
 }
 
 case class Weapon(stats: Stats, twoHanded: Boolean) extends Equipment {
   val slots: Set[Slot] = Set(MainHand, OffHand)
   val fillAll: Boolean = twoHanded
+  val category: Category = WeaponCategory
 }

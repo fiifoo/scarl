@@ -16,6 +16,13 @@ object JsonItemEquipment {
     def reads(json: JsValue): JsResult[ArmorSlot] = slotFormat.reads(json) map (_.asInstanceOf[ArmorSlot])
   }
 
+  lazy implicit val categoryFormat: Format[Category] = polymorphicObjectFormat({
+    case "ArmorCategory" => ArmorCategory
+    case "RangedWeaponCategory" => RangedWeaponCategory
+    case "ShieldCategory" => ShieldCategory
+    case "WeaponCategory" => WeaponCategory
+  })
+
   lazy implicit val slotFormat: Format[Slot] = polymorphicObjectFormat({
     case "MainHand" => MainHand
     case "OffHand" => OffHand

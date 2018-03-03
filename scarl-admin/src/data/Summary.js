@@ -10,14 +10,16 @@ CombatPower.read = raw => CombatPower({
 })
 
 const Summary = Record({
-    valid: true,
     combatPower: CombatPower(),
+    equipmentCombatPower: Map(),
     templates: Map(),
+    valid: true,
 })
 Summary.read = raw => Summary({
-    valid: raw.valid,
+    equipmentCombatPower: Map(raw.equipmentCombatPower).map(Map),
     combatPower: CombatPower.read(raw.combatPower),
     templates: Map(raw.templates),
+    valid: raw.valid,
 })
 
 export default Summary

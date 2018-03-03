@@ -203,6 +203,11 @@ export const setEditorLocation = (location, locations) => ({
     locations,
 })
 
+export const changeSummaryTab = tab => ({
+    type: types.CHANGE_SUMMARY_TAB,
+    tab,
+})
+
 export const selectSummaryCreature = creature => ({
     type: types.SELECT_SUMMARY_CREATURE,
     creature,

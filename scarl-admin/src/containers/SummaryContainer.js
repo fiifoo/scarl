@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { selectSummaryCreature } from '../actions/actions'
-import Summary from '../components/Summary.jsx'
+import { changeSummaryTab, selectSummaryCreature } from '../actions/actions'
+import Summary from '../components/summary/Summary.jsx'
 
 const SummaryIf = props => props.summary ? (
     <Summary {...props} />
@@ -13,7 +13,9 @@ const SummaryContainer = connect(
     state => ({
         creature: state.ui.summary.creature,
         summary: state.summary,
+        tab: state.ui.summary.tab,
     }), {
+        changeTab: changeSummaryTab,
         selectCreature: selectSummaryCreature,
     }
 )(SummaryIf)

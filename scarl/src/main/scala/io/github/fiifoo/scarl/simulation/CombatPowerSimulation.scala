@@ -6,18 +6,18 @@ import io.github.fiifoo.scarl.area.theme.{Theme, ThemeId}
 import io.github.fiifoo.scarl.core.State
 import io.github.fiifoo.scarl.core.assets.CombatPower
 import io.github.fiifoo.scarl.core.creature.{Faction, FactionId}
-import io.github.fiifoo.scarl.core.entity.SafeCreatureId
+import io.github.fiifoo.scarl.core.entity.{ActorQueue, Creature, SafeCreatureId}
 import io.github.fiifoo.scarl.core.geometry.Location
 import io.github.fiifoo.scarl.core.kind._
 import io.github.fiifoo.scarl.core.math.Rng
+import io.github.fiifoo.scarl.core.mutation.ActorTickMutation
 import io.github.fiifoo.scarl.world.WorldAssets
 
-object CombatPowerSimulation {
-  private val matches = 20
-  private val turns = 100
-
-  private val teamSize = 1
-  private val teamDistance = 5
+case class CombatPowerSimulation(matches: Int = 25,
+                                 turns: Int = 50,
+                                 teamSize: Int = 1,
+                                 teamDistance: Int = 5
+                                ) {
 
   private val homeFaction = FactionId("home")
   private val visitorFaction = FactionId("visitor")
@@ -50,13 +50,13 @@ object CombatPowerSimulation {
   }
 
   private def runAll(instance: State, combatants: Iterable[Combatant]): CombatPower.Opposed = {
-    type Data = (CombatPower.Opposed, Iterable[Combatant])
+    val initial: (CombatPower.Opposed, Iterable[Combatant]) = (Map(), combatants)
 
-    val (result, _) = combatants.foldLeft[Data](Map(), combatants)((carry, combatant) => {
+    val (result, _) = (combatants foldLeft initial) ((carry, combatant) => {
       val (result, combatants) = carry
       val opponents = combatants.tail
 
-      val nextResult = opponents.foldLeft(result)((result, opponent) => {
+      val nextResult = (opponents foldLeft result) ((result, opponent) => {
         val scores = run(instance, combatant, opponent)
 
         addResult(result, combatant.id, opponent.id, scores)
@@ -70,24 +70,46 @@ object CombatPowerSimulation {
 
   private def run(emptyInstance: State, combatant: Combatant, opponent: Combatant): (Int, Int) = {
     val (instance, home, visitor) = addTeams(emptyInstance, combatant(homeFaction), opponent(visitorFaction))
-    val state = createState(instance)
+    val initialState = createState(instance)
 
-    val (homeScore, visitorScore, _) = (0 until matches).foldLeft((0.0, 0.0, state))((carry, _) => {
+    val (homeScore, visitorScore, _) = ((0 until matches) foldLeft(0.0, 0.0, initialState)) ((carry, _) => {
       val (homeScore, visitorScore, state) = carry
       val resultState = simulation(state)
+      val nextState = initialState.copy(
+        instance = randomizeInstanceActorOrder(initialState.instance.copy(rng = resultState.instance.rng))
+      )
 
       (
         homeScore + calculateScore(resultState.instance, visitor),
         visitorScore + calculateScore(resultState.instance, home),
-        state.copy(instance = state.instance.copy(rng = resultState.instance.rng))
+        nextState
       )
     })
 
     (normalizeScore(homeScore), normalizeScore(visitorScore))
   }
 
+  private def randomizeInstanceActorOrder(state: State): State = {
+    val (random, rng) = state.rng()
+
+    val creatures = state.entities.values collect {
+      case creature: Creature => creature
+    }
+    val winners = random.shuffle(creatures).take(creatures.size / 2)
+    val next = (winners foldLeft state) ((state, creature) => {
+      ActorTickMutation(creature.id, creature.tick + 1)(state)
+    })
+
+    next.copy(
+      rng = rng,
+      cache = next.cache.copy(
+        actorQueue = ActorQueue(next)
+      )
+    )
+  }
+
   private def calculateScore(instance: State, opponents: Set[SafeCreatureId]): Double = {
-    opponents.foldLeft(0.0)((score, opponent) => {
+    (opponents foldLeft 0.0) ((score, opponent) => {
       score + (opponent(instance) map (opponent => {
         opponent.damage / opponent.stats.health.max
       }) getOrElse 1.0)
@@ -107,6 +129,7 @@ object CombatPowerSimulation {
 
         (kind.id, kind)
       })).toMap,
+      items = (combatants flatMap (_.equipments.values) map (item => item.id -> item)).toMap
     )
 
     val factions = List(
@@ -158,7 +181,7 @@ object CombatPowerSimulation {
   private def addTeam(instance: State, kind: CreatureKind, isHome: Boolean): (State, Set[SafeCreatureId]) = {
     val x = if (isHome) 0 else teamDistance
 
-    (0 until teamSize).foldLeft((instance, Set[SafeCreatureId]()))((carry, y) => {
+    ((0 until teamSize) foldLeft(instance, Set[SafeCreatureId]())) ((carry, y) => {
       val (instance, creatures) = carry
       val result = kind.toLocation(instance, instance.idSeq, Location(x, y))
 

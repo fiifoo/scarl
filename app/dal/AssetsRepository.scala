@@ -2,11 +2,11 @@ package dal
 
 import java.nio.charset.StandardCharsets.UTF_8
 import java.nio.file.{Files, StandardOpenOption}
-import javax.inject.{Inject, Singleton}
 
 import game.Simulations
 import io.github.fiifoo.scarl.core.assets.CombatPower
 import io.github.fiifoo.scarl.world.WorldAssets
+import javax.inject.{Inject, Singleton}
 import models.Data
 import play.api.Environment
 import play.api.libs.json.{JsValue, Json}
@@ -24,6 +24,7 @@ class AssetsRepository @Inject()(environment: Environment) {
       data.areas,
       simulateCombatPower(data),
       data.communications,
+      simulateEquipmentCombatPower(data),
       data.factions,
       data.keys,
       data.kinds,
@@ -52,5 +53,9 @@ class AssetsRepository @Inject()(environment: Environment) {
 
   def simulateCombatPower(data: Data): CombatPower = {
     Simulations.combatPower(data.kinds.creatures.values)
+  }
+
+  def simulateEquipmentCombatPower(data: Data): CombatPower.Equipment = {
+    Simulations.equipmentCombatPower(data.kinds.items.values, data.kinds.creatures.values)
   }
 }

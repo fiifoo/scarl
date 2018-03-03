@@ -7,6 +7,7 @@ import io.github.fiifoo.scarl.core.kind.Kinds
 
 case class Assets(combatPower: CombatPower = CombatPower(),
                   communications: Map[CommunicationId, Communication] = Map(),
+                  equipmentCombatPower: CombatPower.Equipment = Map(),
                   factions: Map[FactionId, Faction] = Map(),
                   keys: Map[KeyKindId, KeyKind] = Map(),
                   kinds: Kinds = Kinds(),
