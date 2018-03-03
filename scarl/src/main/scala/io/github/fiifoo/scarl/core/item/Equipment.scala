@@ -11,8 +11,20 @@ object Equipment {
     def extractEquipment(item: ItemKind): Option[Equipment]
   }
 
-  case object ArmorCategory extends Category {
+  sealed trait ArmorCategory extends Category {
     def extractEquipment(item: ItemKind): Option[Equipment] = item.armor
+  }
+
+  case object HeadArmorCategory extends ArmorCategory
+
+  case object BodyArmorCategory extends ArmorCategory
+
+  case object HandArmorCategory extends ArmorCategory
+
+  case object FootArmorCategory extends ArmorCategory
+
+  case object LauncherCategory extends Category {
+    def extractEquipment(item: ItemKind): Option[Equipment] = item.launcher
   }
 
   case object RangedWeaponCategory extends Category {
@@ -39,13 +51,13 @@ object Equipment {
 
   case object RangedSlot extends Slot
 
+  case object LauncherSlot extends Slot
+
   case object HeadArmor extends ArmorSlot
 
-  case object ChestArmor extends ArmorSlot
+  case object BodyArmor extends ArmorSlot
 
   case object HandArmor extends ArmorSlot
-
-  case object LegArmor extends ArmorSlot
 
   case object FootArmor extends ArmorSlot
 
@@ -58,6 +70,7 @@ object Equipment {
     List(
       item.weapon collect valid,
       item.rangedWeapon collect valid,
+      item.launcher collect valid,
       item.shield collect valid,
       item.armor collect valid
     ).flatten.headOption
@@ -74,7 +87,18 @@ sealed trait Equipment {
 case class Armor(stats: Stats, slot: ArmorSlot) extends Equipment {
   val slots: Set[Slot] = Set(slot)
   val fillAll: Boolean = true
-  val category: Category = ArmorCategory
+  val category: Category = slot match {
+    case HeadArmor => HeadArmorCategory
+    case BodyArmor => BodyArmorCategory
+    case HandArmor => HandArmorCategory
+    case FootArmor => FootArmorCategory
+  }
+}
+
+case class MissileLauncher(stats: Stats) extends Equipment {
+  val slots: Set[Slot] = Set(LauncherSlot)
+  val fillAll: Boolean = true
+  val category: Category = LauncherCategory
 }
 
 case class RangedWeapon(stats: Stats) extends Equipment {

@@ -13,7 +13,10 @@ case class EquipmentCombatPowerSimulation(matches: Int = 25,
                                          ) {
 
   val categories: List[Category] = List(
-    ArmorCategory,
+    HeadArmorCategory,
+    BodyArmorCategory,
+    HandArmorCategory,
+    FootArmorCategory,
     RangedWeaponCategory,
     ShieldCategory,
     WeaponCategory,

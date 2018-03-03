@@ -2267,7 +2267,7 @@
       "personal" : false,
       "display" : "!",
       "color" : "white",
-      "rangedWeapon" : {
+      "launcher" : {
         "stats" : {
           "launcher" : {
             "missile" : "missile-guided-1",
@@ -2467,7 +2467,7 @@
       "personal" : false,
       "display" : "!",
       "color" : "white",
-      "rangedWeapon" : {
+      "launcher" : {
         "stats" : {
           "launcher" : {
             "missile" : "missile-guided-2",
@@ -2576,7 +2576,7 @@
             "max" : 0,
             "regen" : 0
           },
-          "defence" : 3,
+          "defence" : 2,
           "melee" : {
             "attack" : 0,
             "damage" : 0,
@@ -2657,7 +2657,7 @@
             "max" : 0,
             "regen" : 0
           },
-          "defence" : 3,
+          "defence" : 2,
           "melee" : {
             "attack" : 0,
             "damage" : 0,
@@ -2681,7 +2681,7 @@
       "personal" : false,
       "display" : "!",
       "color" : "white",
-      "rangedWeapon" : {
+      "launcher" : {
         "stats" : {
           "launcher" : {
             "missile" : "missile-guided-3",
@@ -2743,73 +2743,6 @@
       "id" : "weapon-missile-launcher-guided-3",
       "weapon" : null,
       "armor" : null
-    } ], [ "armor-leg-1", {
-      "personal" : false,
-      "display" : "]",
-      "color" : "green",
-      "rangedWeapon" : null,
-      "shield" : null,
-      "hidden" : false,
-      "name" : "Leg Armor I",
-      "door" : null,
-      "usable" : null,
-      "pickable" : true,
-      "id" : "armor-leg-1",
-      "weapon" : null,
-      "armor" : {
-        "stats" : {
-          "launcher" : {
-            "missile" : null,
-            "range" : 0,
-            "consumption" : {
-              "energy" : 0,
-              "materials" : 0
-            }
-          },
-          "explosive" : {
-            "attack" : 0,
-            "damage" : 0,
-            "radius" : 0,
-            "blast" : 0
-          },
-          "speed" : 1,
-          "ranged" : {
-            "attack" : 0,
-            "damage" : 0,
-            "range" : 0,
-            "consumption" : {
-              "energy" : 0,
-              "materials" : 0
-            }
-          },
-          "energy" : {
-            "max" : 0,
-            "regen" : 0
-          },
-          "materials" : {
-            "max" : 0,
-            "regen" : 0
-          },
-          "defence" : 3,
-          "melee" : {
-            "attack" : 0,
-            "damage" : 0,
-            "consumption" : {
-              "energy" : 0,
-              "materials" : 0
-            }
-          },
-          "health" : {
-            "max" : 0,
-            "regen" : 0
-          },
-          "sight" : {
-            "range" : 0
-          },
-          "armor" : 2
-        },
-        "slot" : "LegArmor"
-      }
     } ], [ "explosive-triggered-active", {
       "personal" : false,
       "display" : "^",
@@ -2870,73 +2803,6 @@
       "id" : "explosive-timed-active",
       "weapon" : null,
       "armor" : null
-    } ], [ "armor-leg-2", {
-      "personal" : false,
-      "display" : "]",
-      "color" : "blue",
-      "rangedWeapon" : null,
-      "shield" : null,
-      "hidden" : false,
-      "name" : "Leg Armor 2",
-      "door" : null,
-      "usable" : null,
-      "pickable" : true,
-      "id" : "armor-leg-2",
-      "weapon" : null,
-      "armor" : {
-        "stats" : {
-          "launcher" : {
-            "missile" : null,
-            "range" : 0,
-            "consumption" : {
-              "energy" : 0,
-              "materials" : 0
-            }
-          },
-          "explosive" : {
-            "attack" : 0,
-            "damage" : 0,
-            "radius" : 0,
-            "blast" : 0
-          },
-          "speed" : 1,
-          "ranged" : {
-            "attack" : 0,
-            "damage" : 0,
-            "range" : 0,
-            "consumption" : {
-              "energy" : 0,
-              "materials" : 0
-            }
-          },
-          "energy" : {
-            "max" : 0,
-            "regen" : 0
-          },
-          "materials" : {
-            "max" : 0,
-            "regen" : 0
-          },
-          "defence" : 5,
-          "melee" : {
-            "attack" : 0,
-            "damage" : 0,
-            "consumption" : {
-              "energy" : 0,
-              "materials" : 0
-            }
-          },
-          "health" : {
-            "max" : 0,
-            "regen" : 0
-          },
-          "sight" : {
-            "range" : 0
-          },
-          "armor" : 3
-        },
-        "slot" : "LegArmor"
-      }
     } ], [ "stairs-down", {
       "personal" : false,
       "display" : ">",
@@ -2951,73 +2817,6 @@
       "id" : "stairs-down",
       "weapon" : null,
       "armor" : null
-    } ], [ "armor-leg-3", {
-      "personal" : false,
-      "display" : "]",
-      "color" : "red",
-      "rangedWeapon" : null,
-      "shield" : null,
-      "hidden" : false,
-      "name" : "Leg Armor 3",
-      "door" : null,
-      "usable" : null,
-      "pickable" : true,
-      "id" : "armor-leg-3",
-      "weapon" : null,
-      "armor" : {
-        "stats" : {
-          "launcher" : {
-            "missile" : null,
-            "range" : 0,
-            "consumption" : {
-              "energy" : 0,
-              "materials" : 0
-            }
-          },
-          "explosive" : {
-            "attack" : 0,
-            "damage" : 0,
-            "radius" : 0,
-            "blast" : 0
-          },
-          "speed" : 1,
-          "ranged" : {
-            "attack" : 0,
-            "damage" : 0,
-            "range" : 0,
-            "consumption" : {
-              "energy" : 0,
-              "materials" : 0
-            }
-          },
-          "energy" : {
-            "max" : 0,
-            "regen" : 0
-          },
-          "materials" : {
-            "max" : 0,
-            "regen" : 0
-          },
-          "defence" : 7,
-          "melee" : {
-            "attack" : 0,
-            "damage" : 0,
-            "consumption" : {
-              "energy" : 0,
-              "materials" : 0
-            }
-          },
-          "health" : {
-            "max" : 0,
-            "regen" : 0
-          },
-          "sight" : {
-            "range" : 0
-          },
-          "armor" : 4
-        },
-        "slot" : "LegArmor"
-      }
     } ], [ "healing-chamber-active", {
       "personal" : false,
       "display" : "H",
@@ -3615,7 +3414,7 @@
             "max" : 0,
             "regen" : 0
           },
-          "defence" : 1,
+          "defence" : 2,
           "melee" : {
             "attack" : 0,
             "damage" : 0,
@@ -3631,7 +3430,7 @@
           "sight" : {
             "range" : 0
           },
-          "armor" : 1
+          "armor" : 2
         },
         "slot" : "HeadArmor"
       }
@@ -3785,7 +3584,7 @@
           "sight" : {
             "range" : 0
           },
-          "armor" : 2
+          "armor" : 3
         },
         "slot" : "HeadArmor"
       }
@@ -3918,7 +3717,7 @@
           "sight" : {
             "range" : 0
           },
-          "armor" : 3
+          "armor" : 4
         },
         "slot" : "HeadArmor"
       }
@@ -4008,7 +3807,7 @@
           },
           "armor" : 2
         },
-        "slot" : "ChestArmor"
+        "slot" : "BodyArmor"
       }
     } ], [ "armor-chest-2", {
       "personal" : false,
@@ -4075,7 +3874,7 @@
           },
           "armor" : 3
         },
-        "slot" : "ChestArmor"
+        "slot" : "BodyArmor"
       }
     } ], [ "armor-chest-3", {
       "personal" : false,
@@ -4124,7 +3923,7 @@
             "max" : 0,
             "regen" : 0
           },
-          "defence" : 7,
+          "defence" : 5,
           "melee" : {
             "attack" : 0,
             "damage" : 0,
@@ -4142,7 +3941,7 @@
           },
           "armor" : 4
         },
-        "slot" : "ChestArmor"
+        "slot" : "BodyArmor"
       }
     } ], [ "weapon-rifle-1", {
       "personal" : false,
@@ -4341,7 +4140,7 @@
           },
           "armor" : 1000
         },
-        "slot" : "ChestArmor"
+        "slot" : "BodyArmor"
       }
     } ], [ "weapon-rifle-3", {
       "personal" : false,
@@ -6161,15 +5960,15 @@
           "x" : 10,
           "y" : 8
         }, [ "armor-chest-1" ] ], [ {
-          "x" : 16,
-          "y" : 13
-        }, [ "armor-chest-3", "armor-foot-3", "armor-hand-3", "armor-head-3", "armor-leg-3", "shield-deflector-3", "weapon-blade-3", "weapon-rifle-3" ] ], [ {
           "x" : 18,
           "y" : 13
         }, [ "weapon-blade-3", "weapon-missile-launcher-guided-3", "friend-drone-3" ] ], [ {
           "x" : 17,
           "y" : 13
-        }, [ "armor-chest-invulnerability" ] ] ],
+        }, [ "armor-chest-invulnerability" ] ], [ {
+          "x" : 16,
+          "y" : 13
+        }, [ "armor-chest-3", "armor-foot-3", "armor-hand-3", "armor-head-3", "shield-deflector-3", "weapon-blade-3", "weapon-rifle-3" ] ] ],
         "machinery" : [ {
           "mechanism" : {
             "type" : "CreateEntityMechanism",
@@ -9883,19 +9682,19 @@
   } ] ],
   "themes" : [ [ "theme-1", {
     "creatures" : [ "enemy-assaulter-1", "enemy-assaulter-2", "enemy-assaulter-3", "enemy-brawler-1", "enemy-brawler-2", "enemy-brawler-3", "enemy-brute-1", "enemy-brute-2", "enemy-brute-3", "enemy-shooter-1", "enemy-shooter-2", "enemy-shooter-3", "enemy-sniper-1", "enemy-sniper-2", "enemy-sniper-3" ],
-    "items" : [ "armor-chest-1", "armor-chest-2", "armor-foot-1", "armor-foot-2", "armor-hand-1", "armor-hand-2", "armor-head-1", "armor-head-2", "armor-leg-1", "armor-leg-2", "shield-deflector-1", "shield-deflector-2", "weapon-blade-1", "weapon-blade-2", "weapon-rifle-1", "weapon-rifle-2", "friend-drone-1", "weapon-missile-launcher-guided-1" ],
+    "items" : [ "armor-chest-1", "armor-chest-2", "armor-foot-1", "armor-foot-2", "armor-hand-1", "armor-hand-2", "armor-head-1", "armor-head-2", "shield-deflector-1", "shield-deflector-2", "weapon-blade-1", "weapon-blade-2", "weapon-rifle-1", "weapon-rifle-2", "friend-drone-1", "weapon-missile-launcher-guided-1" ],
     "terrain" : "floor",
     "door" : "door-closed",
     "id" : "theme-1"
   } ], [ "theme-2", {
     "creatures" : [ "enemy-assaulter-1", "enemy-assaulter-2", "enemy-assaulter-3", "enemy-brawler-1", "enemy-brawler-2", "enemy-brawler-3", "enemy-brute-1", "enemy-brute-2", "enemy-brute-3", "enemy-shooter-1", "enemy-shooter-2", "enemy-shooter-3", "enemy-sniper-1", "enemy-sniper-2", "enemy-sniper-3" ],
-    "items" : [ "armor-chest-3", "armor-chest-2", "armor-foot-3", "armor-foot-2", "armor-hand-3", "armor-hand-2", "armor-head-3", "armor-head-2", "armor-leg-3", "armor-leg-2", "shield-deflector-3", "shield-deflector-2", "weapon-blade-3", "weapon-blade-2", "weapon-rifle-3", "weapon-rifle-2", "friend-drone-1", "friend-drone-2", "weapon-missile-launcher-guided-1", "weapon-missile-launcher-guided-2" ],
+    "items" : [ "armor-chest-3", "armor-chest-2", "armor-foot-3", "armor-foot-2", "armor-hand-3", "armor-hand-2", "armor-head-3", "armor-head-2", "shield-deflector-3", "shield-deflector-2", "weapon-blade-3", "weapon-blade-2", "weapon-rifle-3", "weapon-rifle-2", "friend-drone-1", "friend-drone-2", "weapon-missile-launcher-guided-1", "weapon-missile-launcher-guided-2" ],
     "terrain" : "floor",
     "door" : "door-closed",
     "id" : "theme-2"
   } ], [ "theme-3", {
     "creatures" : [ "enemy-assaulter-1", "enemy-assaulter-2", "enemy-assaulter-3", "enemy-brawler-1", "enemy-brawler-2", "enemy-brawler-3", "enemy-brute-1", "enemy-brute-2", "enemy-brute-3", "enemy-shooter-1", "enemy-shooter-2", "enemy-shooter-3", "enemy-sniper-1", "enemy-sniper-2", "enemy-sniper-3" ],
-    "items" : [ "armor-chest-3", "armor-foot-3", "armor-hand-3", "armor-head-3", "armor-leg-3", "shield-deflector-3", "weapon-blade-3", "weapon-rifle-3", "friend-drone-2", "friend-drone-3", "weapon-missile-launcher-guided-2", "weapon-missile-launcher-guided-3" ],
+    "items" : [ "armor-chest-3", "armor-foot-3", "armor-hand-3", "armor-head-3", "shield-deflector-3", "weapon-blade-3", "weapon-rifle-3", "friend-drone-2", "friend-drone-3", "weapon-missile-launcher-guided-2", "weapon-missile-launcher-guided-3" ],
     "terrain" : "floor",
     "door" : "door-closed",
     "id" : "theme-3"

@@ -28,6 +28,8 @@ case class EquipmentStatsCacheMutation(creature: CreatureId) {
             getStats(data.weapon) add getStats(data.shield)
           case RangedSlot =>
             getStats(data.rangedWeapon)
+          case LauncherSlot =>
+            getStats(data.launcher)
           case _: ArmorSlot =>
             getStats(data.armor)
         }

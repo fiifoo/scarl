@@ -114,19 +114,18 @@ object Sources {
 
     SubModelSource(typeOf[ArmorSlot], List(
       typeOf[HeadArmor.type],
-      typeOf[ChestArmor.type],
+      typeOf[BodyArmor.type],
       typeOf[HandArmor.type],
-      typeOf[LegArmor.type],
       typeOf[FootArmor.type],
     ), objectPolymorphism = true),
     SubModelSource(typeOf[Slot], List(
       typeOf[MainHand.type],
       typeOf[OffHand.type],
       typeOf[RangedSlot.type],
+      typeOf[LauncherSlot.type],
       typeOf[HeadArmor.type],
-      typeOf[ChestArmor.type],
+      typeOf[BodyArmor.type],
       typeOf[HandArmor.type],
-      typeOf[LegArmor.type],
       typeOf[FootArmor.type],
     ), objectPolymorphism = true),
   ).map(s => s.id -> s).toMap

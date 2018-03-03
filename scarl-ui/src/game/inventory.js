@@ -8,11 +8,15 @@ const Tab = Record({
 export const tabs = List([
     Tab({
         key: 'Weapon',
-        label: 'Weapons',
+        label: 'Melee weapons',
     }),
     Tab({
         key: 'RangedWeapon',
         label: 'Ranged weapons',
+    }),
+    Tab({
+        key: 'Launcher',
+        label: 'Launchers',
     }),
     Tab({
         key: 'Shield',
@@ -20,7 +24,7 @@ export const tabs = List([
     }),
     Tab({
         key: 'Armor',
-        label: 'Armors',
+        label: 'Wearables',
     }),
     Tab({
         key: 'Usable',
@@ -35,6 +39,7 @@ export const tabs = List([
 const props = Map({
     Weapon: 'weapon',
     RangedWeapon: 'rangedWeapon',
+    Launcher: 'launcher',
     Shield: 'shield',
     Armor: 'armor',
     Usable: 'usable',

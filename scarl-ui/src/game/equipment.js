@@ -24,33 +24,38 @@ export const slots = {
         key: 'RangedSlot',
         label: 'Ranged weapon',
     }),
+    LauncherSlot: Slot({
+        key: 'LauncherSlot',
+        label: 'Launcher',
+    }),
     HeadArmor: Slot({
         key: 'HeadArmor',
-        label: 'Head armor',
+        label: 'Head',
     }),
-    ChestArmor: Slot({
-        key: 'ChestArmor',
-        label: 'Chest armor',
+    BodyArmor: Slot({
+        key: 'BodyArmor',
+        label: 'Body',
     }),
     HandArmor: Slot({
         key: 'HandArmor',
-        label: 'Hand armor',
-    }),
-    LegArmor: Slot({
-        key: 'LegArmor',
-        label: 'Leg armor',
+        label: 'Hands',
     }),
     FootArmor: Slot({
         key: 'FootArmor',
-        label: 'Foot armor',
+        label: 'Feet',
     }),
 }
 
 export const groups = {
     Armor: Group({
         prop: 'armor',
-        label: 'Armors',
+        label: 'Wearables',
         getSlots: item => List([item.armor.slot]),
+    }),
+    Launcher: Group({
+        prop: 'launcher',
+        label: 'Launchers',
+        getSlots:() => List([slots.LauncherSlot.key]),
     }),
     Shield: Group({
         prop: 'shield',
@@ -64,7 +69,7 @@ export const groups = {
     }),
     Weapon: Group({
         prop: 'weapon',
-        label: 'Weapons',
+        label: 'Melee weapons',
         getSlots: item => List(item.weapon.twoHanded
             ? [slots.MainHand.key]
             : [slots.MainHand.key, slots.OffHand.key]
