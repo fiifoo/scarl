@@ -18,6 +18,10 @@ export default (command, dispatch, getState) => {
             gameActions.aim()(dispatch, getState)
             break
         }
+        case commands.AIM_MISSILE: {
+            gameActions.aimMissile()(dispatch, getState)
+            break
+        }
         case commands.COMMUNICATE: {
             gameActions.interact(interactions.Communicate)(dispatch, getState)
             break

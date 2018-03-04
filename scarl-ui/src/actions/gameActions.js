@@ -1,6 +1,6 @@
 import * as modes from '../game/modes'
 import { seekInteractions } from '../game/interaction'
-import { calculateTrajectory, getRangedAttackRange, seekTargets } from '../game/utils'
+import { calculateTrajectory, getMissileLauncherRange, getRangedAttackRange, seekTargets } from '../game/utils'
 import * as types from './actionTypes'
 import { sendAction, sendInventoryQuery } from './connectionActions'
 
@@ -13,13 +13,26 @@ export const aim = () => (dispatch, getState) => {
     const hasWeapon = getRangedAttackRange(getState().player) > 0
 
     if (! hasWeapon) {
-        addMessage('Nothing to aim with.')(dispatch)
+        addMessage('No ranged weapon equipped.')(dispatch)
 
         return
     }
 
     changeMode(modes.AIM)(dispatch)
     seekTarget()(dispatch, getState)
+}
+
+export const aimMissile = () => (dispatch, getState) => {
+    const hasWeapon = getMissileLauncherRange(getState().player) > 0
+
+    if (! hasWeapon) {
+        addMessage('No launcher equipped.')(dispatch)
+
+        return
+    }
+
+    changeMode(modes.AIM_MISSILE)(dispatch)
+    seekTarget(true)(dispatch, getState)
 }
 
 export const cancelMode = () => dispatch => changeMode(modes.MAIN)(dispatch)
@@ -93,9 +106,9 @@ export const setCursor = cursor => dispatch => dispatch({
     cursor,
 })
 
-export const setReticule = reticule => (dispatch, getState) => {
+export const setReticule = (reticule, missile = false) => (dispatch, getState) => {
     const {player, fov} = getState()
-    const trajectory = calculateTrajectory(player, reticule, fov.cumulative)
+    const trajectory = calculateTrajectory(player, reticule, fov.cumulative, missile)
 
     dispatch({
         type: types.SET_RETICULE,
@@ -109,22 +122,22 @@ export const setTarget = target => dispatch => dispatch({
     target,
 })
 
-const seekTarget = () => (dispatch, getState) => {
+const seekTarget = (missile = false) => (dispatch, getState) => {
     const {factions, fov, player, ui} = getState()
     const prev = ui.game.target
 
-    const targets = seekTargets(player, factions, fov.cumulative)
+    const targets = seekTargets(player, factions, fov.cumulative, missile)
 
     if (targets.length > 0) {
         const prevTarget = prev ? targets.find(target => target.id === prev) : undefined
 
         if (prevTarget) {
-            setReticule(prevTarget.location)(dispatch, getState)
+            setReticule(prevTarget.location, missile)(dispatch, getState)
         } else {
-            setReticule(targets[0].location)(dispatch, getState)
+            setReticule(targets[0].location, missile)(dispatch, getState)
         }
     } else {
-        setReticule(player.creature.location)(dispatch, getState)
+        setReticule(player.creature.location, missile)(dispatch, getState)
     }
 }
 

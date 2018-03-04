@@ -2,7 +2,6 @@ import * as utils from '../game/utils'
 import { sendAction, sendInventoryQuery } from './connectionActions'
 import { addMessage, cancelMode, setTarget } from './gameActions'
 import { focusKeyboard } from './keyboard'
-import { getMissileLauncherEquipped } from '../game/utils'
 
 export const attack = target => () => {
     sendAction('Attack', {target})
@@ -43,8 +42,8 @@ export const pass = () => () => {
     sendAction('Pass')
 }
 
-export const shoot = location => (dispatch, getState) => {
-    const {fov, player} = getState()
+export const shoot = (location, missile = false) => (dispatch, getState) => {
+    const {fov} = getState()
     const targets = utils.getLocationCreatures(location, fov.cumulative)
 
     if (targets.length > 0) {
@@ -52,7 +51,7 @@ export const shoot = location => (dispatch, getState) => {
         setTarget(target.id)(dispatch)
     }
 
-    const action = getMissileLauncherEquipped(player) ? 'ShootMissile' : 'Shoot'
+    const action = missile ? 'ShootMissile' : 'Shoot'
 
     cancelMode()(dispatch)
     sendAction(action, {location})

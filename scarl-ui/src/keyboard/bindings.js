@@ -36,11 +36,18 @@ export default {
         [keycodes.P, commands.PICK_ITEM],
         [keycodes.T, commands.COMMUNICATE],
         [keycodes.U, commands.USE],
+        [keycodes.Z, commands.AIM_MISSILE],
     ]).merge(directions),
 
     [gameModes.AIM]: Map([
         [keycodes.ESC, commands.CANCEL_MODE],
         [keycodes.SPACEBAR, commands.SHOOT],
+    ]).merge(directions),
+
+    [gameModes.AIM_MISSILE]: Map([
+        [keycodes.ESC, commands.CANCEL_MODE],
+        [keycodes.SPACEBAR, commands.SHOOT],
+        [keycodes.Z, commands.SHOOT],
     ]).merge(directions),
 
     [gameModes.GAME_OVER]: Map([

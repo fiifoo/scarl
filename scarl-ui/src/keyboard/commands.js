@@ -1,4 +1,5 @@
 export const AIM = 'AIM'
+export const AIM_MISSILE = 'AIM_MISSILE'
 export const CANCEL_MODE = 'CANCEL_MODE'
 export const COMMUNICATE = 'COMMUNICATE'
 export const DIRECTION_EAST = 'DIRECTION_EAST'

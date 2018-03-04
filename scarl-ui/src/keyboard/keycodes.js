@@ -29,3 +29,4 @@ export const M = 77
 export const P = 80
 export const T = 84
 export const U = 85
+export const Z = 90

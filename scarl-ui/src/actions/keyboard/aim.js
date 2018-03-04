@@ -3,11 +3,11 @@ import { isDirectionCommand, getDirectionLocation } from '../../keyboard/utils'
 import * as gameActions from '../gameActions'
 import * as playerActions from '../playerActions'
 
-export default (command, dispatch, getState) => {
+export default (missile = false) => (command, dispatch, getState) => {
     const reticule = getState().ui.game.reticule
 
     if (isDirectionCommand(command)) {
-        moveReticule(command, reticule, dispatch, getState)
+        moveReticule(command, reticule, missile, dispatch, getState)
 
         return
     }
@@ -18,14 +18,14 @@ export default (command, dispatch, getState) => {
             break
         }
         case commands.SHOOT: {
-            playerActions.shoot(reticule)(dispatch, getState)
+            playerActions.shoot(reticule, missile)(dispatch, getState)
             break
         }
     }
 }
 
-const moveReticule = (command, reticule, dispatch, getState) => {
+const moveReticule = (command, reticule, missile, dispatch, getState) => {
     const location = getDirectionLocation(command, reticule)
 
-    gameActions.setReticule(location)(dispatch, getState)
+    gameActions.setReticule(location, missile)(dispatch, getState)
 }

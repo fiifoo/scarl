@@ -1,9 +1,9 @@
 import { List } from 'immutable'
 import { distance, line } from './geometry'
 
-export const calculateTrajectory = (player, location, fov) => {
+export const calculateTrajectory = (player, location, fov, missile = false) => {
     const from = player.creature.location
-    const range = getRangedAttackRange(player)
+    const range = missile ? getMissileLauncherRange(player) : getRangedAttackRange(player)
     let blocked = false
 
     return line(from, location).filter((location, index) => {
@@ -97,22 +97,20 @@ export const getLocationUsableItems = (location, fov) => {
     return entities ? entities.items.filter(item => item.usable) : []
 }
 
-export const getMissileLauncherEquipped = player => {
+export const getMissileLauncherRange = player => {
     const creature = player.creature.stats
     const equipment = player.equipmentStats
 
-    return !! (creature.launcher.missile || equipment.launcher.missile)
+    return creature.launcher.missile || equipment.launcher.missile ? (
+        creature.launcher.range + equipment.launcher.range
+    ) : 0
 }
 
 export const getRangedAttackRange = player => {
     const creature = player.creature.stats
     const equipment = player.equipmentStats
 
-    return getMissileLauncherEquipped(player) ? (
-        creature.launcher.range + equipment.launcher.range
-    ) : (
-        creature.ranged.range + equipment.ranged.range
-    )
+    return creature.ranged.range + equipment.ranged.range
 }
 
 export const isEnemyChecker = (player, factions) => {
@@ -121,9 +119,9 @@ export const isEnemyChecker = (player, factions) => {
     return creature => enemyFactions.contains(creature.faction)
 }
 
-export const seekTargets = (player, factions, fov) => {
+export const seekTargets = (player, factions, fov, missile = false) => {
     const location = player.creature.location
-    const range = getRangedAttackRange(player)
+    const range = missile ? getMissileLauncherRange(player) : getRangedAttackRange(player)
     const isEnemy = isEnemyChecker(player, factions)
 
     let targets = []

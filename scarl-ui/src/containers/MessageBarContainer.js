@@ -31,7 +31,8 @@ const getMessages = state => {
     const mode = state.ui.game.mode
 
     switch (mode) {
-        case modes.AIM: {
+        case modes.AIM:
+        case modes.AIM_MISSILE: {
             return locationDescriptions(state, state.ui.game.reticule)
         }
         case modes.INTERACT: {
