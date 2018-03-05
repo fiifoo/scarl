@@ -11,37 +11,46 @@ const Group = Record({
     getSlots: undefined,
 })
 
+const MainHand = 'Equipment.MainHand'
+const OffHand = 'Equipment.OffHand'
+const RangedSlot = 'Equipment.RangedSlot'
+const LauncherSlot = 'Equipment.LauncherSlot'
+const HeadArmor = 'Equipment.HeadArmor'
+const BodyArmor = 'Equipment.BodyArmor'
+const HandArmor = 'Equipment.HandArmor'
+const FootArmor = 'Equipment.FootArmor'
+
 export const slots = {
-    MainHand: Slot({
-        key: 'MainHand',
+    [MainHand]: Slot({
+        key: MainHand,
         label: 'Main hand',
     }),
-    OffHand: Slot({
-        key: 'OffHand',
+    [OffHand]: Slot({
+        key: OffHand,
         label: 'Off-hand',
     }),
-    RangedSlot: Slot({
-        key: 'RangedSlot',
+    [RangedSlot]: Slot({
+        key: RangedSlot,
         label: 'Ranged weapon',
     }),
-    LauncherSlot: Slot({
-        key: 'LauncherSlot',
+    [LauncherSlot]: Slot({
+        key: LauncherSlot,
         label: 'Launcher',
     }),
-    HeadArmor: Slot({
-        key: 'HeadArmor',
+    [HeadArmor]: Slot({
+        key: HeadArmor,
         label: 'Head',
     }),
-    BodyArmor: Slot({
-        key: 'BodyArmor',
+    [BodyArmor]: Slot({
+        key: BodyArmor,
         label: 'Body',
     }),
-    HandArmor: Slot({
-        key: 'HandArmor',
+    [HandArmor]: Slot({
+        key: HandArmor,
         label: 'Hands',
     }),
-    FootArmor: Slot({
-        key: 'FootArmor',
+    [FootArmor]: Slot({
+        key: FootArmor,
         label: 'Feet',
     }),
 }
@@ -55,24 +64,24 @@ export const groups = {
     Launcher: Group({
         prop: 'launcher',
         label: 'Launchers',
-        getSlots:() => List([slots.LauncherSlot.key]),
+        getSlots:() => List([LauncherSlot]),
     }),
     Shield: Group({
         prop: 'shield',
         label: 'Shields',
-        getSlots: () => List([slots.OffHand.key]),
+        getSlots: () => List([OffHand]),
     }),
     RangedWeapon: Group({
         prop: 'rangedWeapon',
         label: 'Ranged weapons',
-        getSlots:() => List([slots.RangedSlot.key]),
+        getSlots:() => List([RangedSlot]),
     }),
     Weapon: Group({
         prop: 'weapon',
         label: 'Melee weapons',
         getSlots: item => List(item.weapon.twoHanded
-            ? [slots.MainHand.key]
-            : [slots.MainHand.key, slots.OffHand.key]
+            ? [MainHand]
+            : [MainHand, OffHand]
         ),
     }),
 }

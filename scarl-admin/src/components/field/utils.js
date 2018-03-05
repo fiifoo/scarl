@@ -32,7 +32,7 @@ const fieldComponents = {
 const customFieldComponents = {
     FixedContent: FixedContentField,
     FixedTemplate: FixedTemplateField,
-    MachinerySource: MachinerySourceField,
+    'FixedContent.MachinerySource': MachinerySourceField,
     Stats: SideFormField,
 }
 

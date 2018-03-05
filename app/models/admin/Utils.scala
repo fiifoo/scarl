@@ -5,11 +5,15 @@ import scala.reflect.runtime.universe.{Symbol, Type}
 object Utils {
 
   def getModelKey(t: Type): String = {
+    if (t.toString.headOption contains '(') {
+      return t.toString
+    }
+
     val base = t.toString
       .replaceAll("""\[.*\]""", "")
       .split('.')
-      .filterNot(_ == "type")
-      .last
+      .filter(_.matches("^[A-Z].*"))
+      .mkString(".")
 
     val args = t.typeArgs map getModelKey
 

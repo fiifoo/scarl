@@ -10,8 +10,8 @@ object JsonCreatureMissile {
 
   lazy implicit val guidanceFormat: Format[Guidance] = polymorphicTypeFormat(
     _ => {
-      case "Guided" => Guided
-      case "Smart" => Smart
+      case "Missile.Guided" => Guided
+      case "Missile.Smart" => Smart
     }, {
       _ => JsNull
     }

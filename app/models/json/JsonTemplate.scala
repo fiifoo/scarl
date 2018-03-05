@@ -37,13 +37,13 @@ object JsonTemplate {
   lazy private implicit val themeCreatureReads = Json.reads[ThemeCreature]
   lazy private implicit val fixedCreatureReads = Json.reads[FixedCreature]
   lazy private implicit val creatureSelectionReads: Reads[CreatureSelection] = polymorphicTypeReads(data => {
-    case "ThemeCreature" => data.as[ThemeCreature]
-    case "FixedCreature" => data.as[FixedCreature]
+    case "ContentSelection.ThemeCreature" => data.as[ThemeCreature]
+    case "ContentSelection.FixedCreature" => data.as[FixedCreature]
   })
   lazy private implicit val fixedItemReads = Json.reads[FixedItem]
   lazy private implicit val itemSelectionReads: Reads[ItemSelection] = polymorphicTypeReads(data => {
-    case "ThemeItem" => ThemeItem
-    case "FixedItem" => data.as[FixedItem]
+    case "ContentSelection.ThemeItem" => ThemeItem
+    case "ContentSelection.FixedItem" => data.as[FixedItem]
   })
 
   lazy private implicit val creatureSourceReads = Json.reads[CreatureSource]

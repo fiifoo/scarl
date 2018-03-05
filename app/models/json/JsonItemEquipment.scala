@@ -17,25 +17,25 @@ object JsonItemEquipment {
   }
 
   lazy implicit val categoryFormat: Format[Category] = polymorphicObjectFormat({
-    case "HeadArmorCategory" => HeadArmorCategory
-    case "BodyArmorCategory" => BodyArmorCategory
-    case "HandArmorCategory" => HandArmorCategory
-    case "FootArmorCategory" => FootArmorCategory
-    case "LauncherCategory" => LauncherCategory
-    case "RangedWeaponCategory" => RangedWeaponCategory
-    case "ShieldCategory" => ShieldCategory
-    case "WeaponCategory" => WeaponCategory
+    case "Equipment.HeadArmorCategory" => HeadArmorCategory
+    case "Equipment.BodyArmorCategory" => BodyArmorCategory
+    case "Equipment.HandArmorCategory" => HandArmorCategory
+    case "Equipment.FootArmorCategory" => FootArmorCategory
+    case "Equipment.LauncherCategory" => LauncherCategory
+    case "Equipment.RangedWeaponCategory" => RangedWeaponCategory
+    case "Equipment.ShieldCategory" => ShieldCategory
+    case "Equipment.WeaponCategory" => WeaponCategory
   })
 
   lazy implicit val slotFormat: Format[Slot] = polymorphicObjectFormat({
-    case "MainHand" => MainHand
-    case "OffHand" => OffHand
-    case "RangedSlot" => RangedSlot
-    case "LauncherSlot" => LauncherSlot
-    case "HeadArmor" => HeadArmor
-    case "BodyArmor" => BodyArmor
-    case "HandArmor" => HandArmor
-    case "FootArmor" => FootArmor
+    case "Equipment.MainHand" => MainHand
+    case "Equipment.OffHand" => OffHand
+    case "Equipment.RangedSlot" => RangedSlot
+    case "Equipment.LauncherSlot" => LauncherSlot
+    case "Equipment.HeadArmor" => HeadArmor
+    case "Equipment.BodyArmor" => BodyArmor
+    case "Equipment.HandArmor" => HandArmor
+    case "Equipment.FootArmor" => FootArmor
   })
 
   lazy implicit val armorFormat: Format[Armor] = Json.format[Armor]

@@ -13,8 +13,8 @@ object JsonDistribution {
 
   lazy val distributionFormat: Format[Distribution] = polymorphicTypeFormat(
     data => {
-      case "Binomial" => data.as[Binomial]
-      case "Uniform" => data.as[Uniform]
+      case "Distribution.Binomial" => data.as[Binomial]
+      case "Distribution.Uniform" => data.as[Uniform]
     }, {
       case distribution: Binomial => binomialFormat.writes(distribution)
       case distribution: Uniform => uniformFormat.writes(distribution)

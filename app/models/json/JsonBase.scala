@@ -207,5 +207,9 @@ object JsonBase {
     json => choicesWrites.writes(json)
   }
 
-  private def getTypeName[T](t: T): String = t.getClass.getSimpleName.replace("$", "")
+  private def getTypeName[T](t: T): String = t.getClass.getCanonicalName
+    .replace("$", "")
+    .split('.')
+    .filter(_.matches("^[A-Z].*"))
+    .mkString(".")
 }

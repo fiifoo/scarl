@@ -1349,7 +1349,7 @@
       "equipments" : [ ],
       "missile" : {
         "guidance" : {
-          "type" : "Guided",
+          "type" : "Missile.Guided",
           "data" : { }
         }
       },
@@ -1494,7 +1494,7 @@
       "equipments" : [ ],
       "missile" : {
         "guidance" : {
-          "type" : "Guided",
+          "type" : "Missile.Guided",
           "data" : { }
         }
       },
@@ -1569,7 +1569,7 @@
       "equipments" : [ ],
       "missile" : {
         "guidance" : {
-          "type" : "Guided",
+          "type" : "Missile.Guided",
           "data" : { }
         }
       },
@@ -2194,7 +2194,7 @@
           },
           "armor" : 1
         },
-        "slot" : "FootArmor"
+        "slot" : "Equipment.FootArmor"
       }
     } ], [ "armor-hand-1", {
       "personal" : false,
@@ -2261,12 +2261,10 @@
           },
           "armor" : 1
         },
-        "slot" : "HandArmor"
+        "slot" : "Equipment.HandArmor"
       }
     } ], [ "weapon-missile-launcher-guided-1", {
       "personal" : false,
-      "display" : "!",
-      "color" : "white",
       "launcher" : {
         "stats" : {
           "launcher" : {
@@ -2320,6 +2318,8 @@
           "armor" : 0
         }
       },
+      "display" : "!",
+      "color" : "white",
       "shield" : null,
       "hidden" : false,
       "name" : "Guided missile launcher I",
@@ -2394,7 +2394,7 @@
           },
           "armor" : 2
         },
-        "slot" : "FootArmor"
+        "slot" : "Equipment.FootArmor"
       }
     } ], [ "armor-hand-2", {
       "personal" : false,
@@ -2461,12 +2461,10 @@
           },
           "armor" : 2
         },
-        "slot" : "HandArmor"
+        "slot" : "Equipment.HandArmor"
       }
     } ], [ "weapon-missile-launcher-guided-2", {
       "personal" : false,
-      "display" : "!",
-      "color" : "white",
       "launcher" : {
         "stats" : {
           "launcher" : {
@@ -2520,6 +2518,8 @@
           "armor" : 0
         }
       },
+      "display" : "!",
+      "color" : "white",
       "shield" : null,
       "hidden" : false,
       "name" : "Guided missile launcher II",
@@ -2594,7 +2594,7 @@
           },
           "armor" : 3
         },
-        "slot" : "FootArmor"
+        "slot" : "Equipment.FootArmor"
       }
     } ], [ "trap-plasma", {
       "personal" : false,
@@ -2675,12 +2675,10 @@
           },
           "armor" : 3
         },
-        "slot" : "HandArmor"
+        "slot" : "Equipment.HandArmor"
       }
     } ], [ "weapon-missile-launcher-guided-3", {
       "personal" : false,
-      "display" : "!",
-      "color" : "white",
       "launcher" : {
         "stats" : {
           "launcher" : {
@@ -2734,6 +2732,8 @@
           "armor" : 0
         }
       },
+      "display" : "!",
+      "color" : "white",
       "shield" : null,
       "hidden" : false,
       "name" : "Guided missile launcher III",
@@ -3432,7 +3432,7 @@
           },
           "armor" : 2
         },
-        "slot" : "HeadArmor"
+        "slot" : "Equipment.HeadArmor"
       }
     } ], [ "shield-deflector-2", {
       "personal" : false,
@@ -3586,7 +3586,7 @@
           },
           "armor" : 3
         },
-        "slot" : "HeadArmor"
+        "slot" : "Equipment.HeadArmor"
       }
     } ], [ "shield-deflector-3", {
       "personal" : false,
@@ -3719,7 +3719,7 @@
           },
           "armor" : 4
         },
-        "slot" : "HeadArmor"
+        "slot" : "Equipment.HeadArmor"
       }
     } ], [ "fence-energy-closed", {
       "personal" : true,
@@ -3807,7 +3807,7 @@
           },
           "armor" : 2
         },
-        "slot" : "BodyArmor"
+        "slot" : "Equipment.BodyArmor"
       }
     } ], [ "armor-chest-2", {
       "personal" : false,
@@ -3874,7 +3874,7 @@
           },
           "armor" : 3
         },
-        "slot" : "BodyArmor"
+        "slot" : "Equipment.BodyArmor"
       }
     } ], [ "armor-chest-3", {
       "personal" : false,
@@ -3941,7 +3941,7 @@
           },
           "armor" : 4
         },
-        "slot" : "BodyArmor"
+        "slot" : "Equipment.BodyArmor"
       }
     } ], [ "weapon-rifle-1", {
       "personal" : false,
@@ -4140,7 +4140,7 @@
           },
           "armor" : 1000
         },
-        "slot" : "BodyArmor"
+        "slot" : "Equipment.BodyArmor"
       }
     } ], [ "weapon-rifle-3", {
       "personal" : false,
@@ -5168,14 +5168,14 @@
         "data" : {
           "creatures" : [ {
             "selection" : {
-              "type" : "ThemeCreature",
+              "type" : "ContentSelection.ThemeCreature",
               "data" : {
                 "minCombatPower" : 30,
                 "maxCombatPower" : 75
               }
             },
             "distribution" : {
-              "type" : "Uniform",
+              "type" : "Distribution.Uniform",
               "data" : {
                 "min" : 0,
                 "max" : 3
@@ -5183,14 +5183,14 @@
             }
           }, {
             "selection" : {
-              "type" : "ThemeCreature",
+              "type" : "ContentSelection.ThemeCreature",
               "data" : {
                 "minCombatPower" : 75,
                 "maxCombatPower" : 100
               }
             },
             "distribution" : {
-              "type" : "Binomial",
+              "type" : "Distribution.Binomial",
               "data" : {
                 "p" : 25,
                 "n" : 1
@@ -5199,11 +5199,11 @@
           } ],
           "items" : [ {
             "selection" : {
-              "type" : "ThemeItem",
+              "type" : "ContentSelection.ThemeItem",
               "data" : { }
             },
             "distribution" : {
-              "type" : "Binomial",
+              "type" : "Distribution.Binomial",
               "data" : {
                 "p" : 35,
                 "n" : 2
@@ -5213,7 +5213,7 @@
           "widgets" : [ {
             "selection" : "portal-enemy-widget-2",
             "distribution" : {
-              "type" : "Binomial",
+              "type" : "Distribution.Binomial",
               "data" : {
                 "p" : 5,
                 "n" : 1
@@ -5253,14 +5253,14 @@
         "data" : {
           "creatures" : [ {
             "selection" : {
-              "type" : "ThemeCreature",
+              "type" : "ContentSelection.ThemeCreature",
               "data" : {
                 "minCombatPower" : 50,
                 "maxCombatPower" : 100
               }
             },
             "distribution" : {
-              "type" : "Uniform",
+              "type" : "Distribution.Uniform",
               "data" : {
                 "min" : 0,
                 "max" : 4
@@ -5269,11 +5269,11 @@
           } ],
           "items" : [ {
             "selection" : {
-              "type" : "ThemeItem",
+              "type" : "ContentSelection.ThemeItem",
               "data" : { }
             },
             "distribution" : {
-              "type" : "Binomial",
+              "type" : "Distribution.Binomial",
               "data" : {
                 "p" : 35,
                 "n" : 2
@@ -5283,7 +5283,7 @@
           "widgets" : [ {
             "selection" : "portal-enemy-widget-3",
             "distribution" : {
-              "type" : "Binomial",
+              "type" : "Distribution.Binomial",
               "data" : {
                 "p" : 5,
                 "n" : 1
@@ -5466,14 +5466,14 @@
         "data" : {
           "creatures" : [ {
             "selection" : {
-              "type" : "ThemeCreature",
+              "type" : "ContentSelection.ThemeCreature",
               "data" : {
                 "minCombatPower" : 50,
                 "maxCombatPower" : 100
               }
             },
             "distribution" : {
-              "type" : "Uniform",
+              "type" : "Distribution.Uniform",
               "data" : {
                 "min" : 1,
                 "max" : 4
@@ -5482,11 +5482,11 @@
           } ],
           "items" : [ {
             "selection" : {
-              "type" : "ThemeItem",
+              "type" : "ContentSelection.ThemeItem",
               "data" : { }
             },
             "distribution" : {
-              "type" : "Binomial",
+              "type" : "Distribution.Binomial",
               "data" : {
                 "p" : 35,
                 "n" : 2
@@ -5496,7 +5496,7 @@
           "widgets" : [ {
             "selection" : "portal-enemy-widget-3",
             "distribution" : {
-              "type" : "Binomial",
+              "type" : "Distribution.Binomial",
               "data" : {
                 "p" : 50,
                 "n" : 1
@@ -5556,14 +5556,14 @@
         "data" : {
           "creatures" : [ {
             "selection" : {
-              "type" : "ThemeCreature",
+              "type" : "ContentSelection.ThemeCreature",
               "data" : {
                 "minCombatPower" : 0,
                 "maxCombatPower" : 30
               }
             },
             "distribution" : {
-              "type" : "Uniform",
+              "type" : "Distribution.Uniform",
               "data" : {
                 "min" : 0,
                 "max" : 6
@@ -5571,13 +5571,13 @@
             }
           }, {
             "selection" : {
-              "type" : "FixedCreature",
+              "type" : "ContentSelection.FixedCreature",
               "data" : {
                 "kind" : "enemy-runner-1"
               }
             },
             "distribution" : {
-              "type" : "Uniform",
+              "type" : "Distribution.Uniform",
               "data" : {
                 "min" : 3,
                 "max" : 3
@@ -5586,11 +5586,11 @@
           } ],
           "items" : [ {
             "selection" : {
-              "type" : "ThemeItem",
+              "type" : "ContentSelection.ThemeItem",
               "data" : { }
             },
             "distribution" : {
-              "type" : "Binomial",
+              "type" : "Distribution.Binomial",
               "data" : {
                 "p" : 25,
                 "n" : 3
@@ -5647,14 +5647,14 @@
         "data" : {
           "creatures" : [ {
             "selection" : {
-              "type" : "ThemeCreature",
+              "type" : "ContentSelection.ThemeCreature",
               "data" : {
                 "minCombatPower" : 0,
                 "maxCombatPower" : 75
               }
             },
             "distribution" : {
-              "type" : "Uniform",
+              "type" : "Distribution.Uniform",
               "data" : {
                 "min" : 0,
                 "max" : 6
@@ -5663,11 +5663,11 @@
           } ],
           "items" : [ {
             "selection" : {
-              "type" : "ThemeItem",
+              "type" : "ContentSelection.ThemeItem",
               "data" : { }
             },
             "distribution" : {
-              "type" : "Binomial",
+              "type" : "Distribution.Binomial",
               "data" : {
                 "p" : 25,
                 "n" : 3
@@ -5728,14 +5728,14 @@
         "data" : {
           "creatures" : [ {
             "selection" : {
-              "type" : "ThemeCreature",
+              "type" : "ContentSelection.ThemeCreature",
               "data" : {
                 "minCombatPower" : 50,
                 "maxCombatPower" : 100
               }
             },
             "distribution" : {
-              "type" : "Uniform",
+              "type" : "Distribution.Uniform",
               "data" : {
                 "min" : 0,
                 "max" : 6
@@ -5744,11 +5744,11 @@
           } ],
           "items" : [ {
             "selection" : {
-              "type" : "ThemeItem",
+              "type" : "ContentSelection.ThemeItem",
               "data" : { }
             },
             "distribution" : {
-              "type" : "Binomial",
+              "type" : "Distribution.Binomial",
               "data" : {
                 "p" : 25,
                 "n" : 3
@@ -8314,14 +8314,14 @@
         "data" : {
           "creatures" : [ {
             "selection" : {
-              "type" : "ThemeCreature",
+              "type" : "ContentSelection.ThemeCreature",
               "data" : {
                 "minCombatPower" : 0,
                 "maxCombatPower" : 75
               }
             },
             "distribution" : {
-              "type" : "Uniform",
+              "type" : "Distribution.Uniform",
               "data" : {
                 "min" : 2,
                 "max" : 4
@@ -8330,11 +8330,11 @@
           } ],
           "items" : [ {
             "selection" : {
-              "type" : "ThemeItem",
+              "type" : "ContentSelection.ThemeItem",
               "data" : { }
             },
             "distribution" : {
-              "type" : "Uniform",
+              "type" : "Distribution.Uniform",
               "data" : {
                 "min" : 3,
                 "max" : 4
@@ -8811,14 +8811,14 @@
         "data" : {
           "creatures" : [ {
             "selection" : {
-              "type" : "ThemeCreature",
+              "type" : "ContentSelection.ThemeCreature",
               "data" : {
                 "minCombatPower" : 30,
                 "maxCombatPower" : 100
               }
             },
             "distribution" : {
-              "type" : "Uniform",
+              "type" : "Distribution.Uniform",
               "data" : {
                 "min" : 2,
                 "max" : 4
@@ -8827,11 +8827,11 @@
           } ],
           "items" : [ {
             "selection" : {
-              "type" : "ThemeItem",
+              "type" : "ContentSelection.ThemeItem",
               "data" : { }
             },
             "distribution" : {
-              "type" : "Uniform",
+              "type" : "Distribution.Uniform",
               "data" : {
                 "min" : 3,
                 "max" : 4
@@ -9030,14 +9030,14 @@
         "data" : {
           "creatures" : [ {
             "selection" : {
-              "type" : "ThemeCreature",
+              "type" : "ContentSelection.ThemeCreature",
               "data" : {
                 "minCombatPower" : 50,
                 "maxCombatPower" : 100
               }
             },
             "distribution" : {
-              "type" : "Uniform",
+              "type" : "Distribution.Uniform",
               "data" : {
                 "min" : 2,
                 "max" : 4
@@ -9046,11 +9046,11 @@
           } ],
           "items" : [ {
             "selection" : {
-              "type" : "ThemeItem",
+              "type" : "ContentSelection.ThemeItem",
               "data" : { }
             },
             "distribution" : {
-              "type" : "Uniform",
+              "type" : "Distribution.Uniform",
               "data" : {
                 "min" : 3,
                 "max" : 4
@@ -9270,14 +9270,14 @@
         "data" : {
           "creatures" : [ {
             "selection" : {
-              "type" : "ThemeCreature",
+              "type" : "ContentSelection.ThemeCreature",
               "data" : {
                 "minCombatPower" : 50,
                 "maxCombatPower" : 100
               }
             },
             "distribution" : {
-              "type" : "Uniform",
+              "type" : "Distribution.Uniform",
               "data" : {
                 "min" : 3,
                 "max" : 9
@@ -9286,11 +9286,11 @@
           } ],
           "items" : [ {
             "selection" : {
-              "type" : "ThemeItem",
+              "type" : "ContentSelection.ThemeItem",
               "data" : { }
             },
             "distribution" : {
-              "type" : "Binomial",
+              "type" : "Distribution.Binomial",
               "data" : {
                 "p" : 25,
                 "n" : 3
@@ -9619,14 +9619,14 @@
         "data" : {
           "creatures" : [ {
             "selection" : {
-              "type" : "ThemeCreature",
+              "type" : "ContentSelection.ThemeCreature",
               "data" : {
                 "minCombatPower" : 0,
                 "maxCombatPower" : 30
               }
             },
             "distribution" : {
-              "type" : "Uniform",
+              "type" : "Distribution.Uniform",
               "data" : {
                 "min" : 0,
                 "max" : 3
@@ -9634,14 +9634,14 @@
             }
           }, {
             "selection" : {
-              "type" : "ThemeCreature",
+              "type" : "ContentSelection.ThemeCreature",
               "data" : {
                 "minCombatPower" : 30,
                 "maxCombatPower" : 75
               }
             },
             "distribution" : {
-              "type" : "Binomial",
+              "type" : "Distribution.Binomial",
               "data" : {
                 "p" : 25,
                 "n" : 1
@@ -9650,11 +9650,11 @@
           } ],
           "items" : [ {
             "selection" : {
-              "type" : "ThemeItem",
+              "type" : "ContentSelection.ThemeItem",
               "data" : { }
             },
             "distribution" : {
-              "type" : "Binomial",
+              "type" : "Distribution.Binomial",
               "data" : {
                 "p" : 35,
                 "n" : 2
@@ -9664,7 +9664,7 @@
           "widgets" : [ {
             "selection" : "portal-enemy-widget-1",
             "distribution" : {
-              "type" : "Binomial",
+              "type" : "Distribution.Binomial",
               "data" : {
                 "p" : 5,
                 "n" : 1
