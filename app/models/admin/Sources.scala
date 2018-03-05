@@ -6,9 +6,10 @@ import io.github.fiifoo.scarl.area.Area
 import io.github.fiifoo.scarl.area.feature.{Feature, RandomizedContentFeature}
 import io.github.fiifoo.scarl.area.shape.{Rectangle, Shape}
 import io.github.fiifoo.scarl.area.template.{FixedTemplate, RandomizedTemplate, Template}
-import io.github.fiifoo.scarl.area.theme.ContentSelection.{FixedCreature, FixedItem, ThemeCreature, ThemeItem}
+import io.github.fiifoo.scarl.area.theme.ContentSelection.{FixedCreature, FixedItem, ThemeCreature, ThemeEquipment}
 import io.github.fiifoo.scarl.area.theme.{CreatureSelection, ItemSelection, Theme}
 import io.github.fiifoo.scarl.core.ai.{Behavior, Strategy}
+import io.github.fiifoo.scarl.core.assets.CombatPower
 import io.github.fiifoo.scarl.core.communication.{Communication, Message}
 import io.github.fiifoo.scarl.core.creature.Missile.{Guidance, Guided, Smart}
 import io.github.fiifoo.scarl.core.creature.{CreaturePower, Faction, Progression}
@@ -85,9 +86,25 @@ object Sources {
       typeOf[Binomial],
       typeOf[Uniform],
     )),
+    SubModelSource(typeOf[Equipment.Category], List(
+      typeOf[HeadArmorCategory.type],
+      typeOf[BodyArmorCategory.type],
+      typeOf[HandArmorCategory.type],
+      typeOf[FootArmorCategory.type],
+      typeOf[LauncherCategory.type],
+      typeOf[RangedWeaponCategory.type],
+      typeOf[ShieldCategory.type],
+      typeOf[WeaponCategory.type],
+    ), objectPolymorphism = true),
     SubModelSource(typeOf[Feature], List(
       typeOf[RandomizedContentFeature],
     )),
+    SubModelSource(typeOf[CombatPower.Category], List(
+      typeOf[CombatPower.Top.type],
+      typeOf[CombatPower.High.type],
+      typeOf[CombatPower.Medium.type],
+      typeOf[CombatPower.Low.type],
+    ), objectPolymorphism = true),
     SubModelSource(typeOf[Guidance], List(
       typeOf[Guided.type],
       typeOf[Smart.type],
@@ -96,7 +113,7 @@ object Sources {
       typeOf[TransformItemPower],
     )),
     SubModelSource(typeOf[ItemSelection], List(
-      typeOf[ThemeItem.type],
+      typeOf[ThemeEquipment],
       typeOf[FixedItem],
     )),
     SubModelSource(typeOf[Mechanism], List(

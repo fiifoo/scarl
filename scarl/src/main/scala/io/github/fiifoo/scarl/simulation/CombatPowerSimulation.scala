@@ -3,6 +3,7 @@ package io.github.fiifoo.scarl.simulation
 import io.github.fiifoo.scarl.area.shape.Rectangle
 import io.github.fiifoo.scarl.area.template.{ApplyTemplate, CalculateTemplate, FixedTemplate, TemplateId}
 import io.github.fiifoo.scarl.area.theme.{Theme, ThemeId}
+import io.github.fiifoo.scarl.area.{Area, AreaId}
 import io.github.fiifoo.scarl.core.State
 import io.github.fiifoo.scarl.core.assets.CombatPower
 import io.github.fiifoo.scarl.core.creature.{Faction, FactionId}
@@ -148,13 +149,21 @@ case class CombatPowerSimulation(matches: Int = 25,
       shape = Rectangle(teamDistance, teamSize, 0)
     )
 
+    val area = Area(
+      AreaId("area"),
+      template.id,
+      theme.id
+    )
+
     val assets = WorldAssets(
+      areas = Map(area.id -> area),
       factions = factions.map(f => (f.id, f)).toMap,
       kinds = kinds,
       templates = Map(template.id -> template),
+      themes = Map(theme.id -> theme)
     )
 
-    val templateResult = CalculateTemplate(assets, theme, random)(template)
+    val templateResult = CalculateTemplate(assets, area, random)(template)
 
     val instance = State(
       assets = assets.instance(),

@@ -1,9 +1,9 @@
 package io.github.fiifoo.scarl.area.template
 
+import io.github.fiifoo.scarl.area.Area
 import io.github.fiifoo.scarl.area.feature.Feature
 import io.github.fiifoo.scarl.area.shape.Shape
 import io.github.fiifoo.scarl.area.template.Template.Result
-import io.github.fiifoo.scarl.area.theme.Theme
 import io.github.fiifoo.scarl.core.geometry.Location
 import io.github.fiifoo.scarl.core.kind._
 import io.github.fiifoo.scarl.world.WorldAssets
@@ -18,13 +18,13 @@ case class FixedTemplate(id: TemplateId,
                          content: FixedContent = FixedContent(),
                         ) extends Template {
 
-  def apply(assets: WorldAssets, theme: Theme, random: Random): Result = {
+  def apply(assets: WorldAssets, area: Area, random: Random): Result = {
     val shapeResult = shape(random)
-    val subResults = templates mapValues (_ (assets.templates)(assets, theme, random))
+    val subResults = templates mapValues (_ (assets.templates)(assets, area, random))
     val contained = CalculateUtils.templateContainedLocations(shapeResult, subResults)
     val contentResult = CalculateContent(
       assets = assets,
-      theme = theme,
+      area = area,
       locations = contained,
       target = content,
       entrances = entrances,
@@ -38,7 +38,7 @@ case class FixedTemplate(id: TemplateId,
       shape = shapeResult,
       templates = subResults,
       entrances = entrances,
-      content = contentResult,
+      content = contentResult
     )
   }
 }

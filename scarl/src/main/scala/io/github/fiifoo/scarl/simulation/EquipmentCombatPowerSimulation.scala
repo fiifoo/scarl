@@ -12,15 +12,7 @@ case class EquipmentCombatPowerSimulation(matches: Int = 25,
                                           teamDistance: Int = 5
                                          ) {
 
-  val categories: List[Category] = List(
-    HeadArmorCategory,
-    BodyArmorCategory,
-    HandArmorCategory,
-    FootArmorCategory,
-    RangedWeaponCategory,
-    ShieldCategory,
-    WeaponCategory,
-  )
+  val categories: List[Category] = Equipment.categories.toList
 
   val simulation = CombatPowerSimulation(matches, turns, teamSize, teamDistance)
 

@@ -1,11 +1,14 @@
 package io.github.fiifoo.scarl.area.feature
 
+import io.github.fiifoo.scarl.area.Area
 import io.github.fiifoo.scarl.area.feature.RandomizedContentFeature.{CreatureSource, ItemSource, WidgetSource}
 import io.github.fiifoo.scarl.area.feature.Utils.freeLocations
 import io.github.fiifoo.scarl.area.template.{CalculateFailedException, FixedContent}
-import io.github.fiifoo.scarl.area.theme.ContentSelection.{FixedCreature, FixedItem, ThemeCreature, ThemeItem}
-import io.github.fiifoo.scarl.area.theme.{CreatureSelection, ItemSelection, Theme}
+import io.github.fiifoo.scarl.area.theme.ContentSelection._
+import io.github.fiifoo.scarl.area.theme.{CreatureSelection, ItemSelection}
+import io.github.fiifoo.scarl.core.assets.CombatPower
 import io.github.fiifoo.scarl.core.geometry.Location
+import io.github.fiifoo.scarl.core.item.Equipment
 import io.github.fiifoo.scarl.core.kind.{CreatureKindId, ItemKindId, WidgetKindId}
 import io.github.fiifoo.scarl.core.math.{Distribution, Rng}
 import io.github.fiifoo.scarl.world.WorldAssets
@@ -18,7 +21,7 @@ case class RandomizedContentFeature(creatures: List[CreatureSource] = List(),
                                    ) extends Feature {
 
   def apply(assets: WorldAssets,
-            theme: Theme,
+            area: Area,
             content: FixedContent,
             locations: Set[Location],
             entrances: Set[Location],
@@ -28,28 +31,28 @@ case class RandomizedContentFeature(creatures: List[CreatureSource] = List(),
 
     val creatures = RandomizedContentFeature.randomUniqueElementLocations(
       assets = assets,
-      theme = theme,
+      area = area,
       locations = free,
       sources = this.creatures,
       existing = content.creatures,
-      random = random,
+      random = random
     )
 
     val widgets = RandomizedContentFeature.randomUniqueElementLocations(
       assets = assets,
-      theme = theme,
+      area = area,
       locations = free,
       sources = this.widgets,
       existing = content.widgets,
-      random = random,
+      random = random
     )
     val items = RandomizedContentFeature.randomElementLocations(
       assets = assets,
-      theme = theme,
+      area = area,
       locations = free -- widgets.keys,
       sources = this.items,
       existing = content.items,
-      random = random,
+      random = random
     )
 
     content.copy(
@@ -65,27 +68,33 @@ object RandomizedContentFeature {
   sealed trait ContentSource[T] {
     val distribution: Distribution
 
-    def getSelection(assets: WorldAssets, theme: Theme, random: Random): T
+    def getSelection(assets: WorldAssets, area: Area, random: Random): T
   }
 
   case class CreatureSource(selection: CreatureSelection,
                             distribution: Distribution
                            ) extends ContentSource[CreatureKindId] {
-    def getSelection(assets: WorldAssets, theme: Theme, random: Random): CreatureKindId = {
+    def getSelection(assets: WorldAssets, area: Area, random: Random): CreatureKindId = {
       selection match {
-        case selection: ThemeCreature => getThemeSelection(assets, theme, selection, random)
+        case selection: ThemeCreature => getThemeSelection(assets, area, selection, random)
         case selection: FixedCreature => selection.kind
       }
     }
 
-    private def getThemeSelection(assets: WorldAssets, theme: Theme, selection: ThemeCreature, random: Random): CreatureKindId = {
-      val choices = theme.creatures filter (creature => {
-        val power = assets.combatPower.average.get(creature)
+    private def getThemeSelection(assets: WorldAssets, area: Area, selection: ThemeCreature, random: Random): CreatureKindId = {
+      val constraints = if (selection.power.isEmpty) CombatPower.categories else selection.power
+      val constraint = Rng.nextChoice(random, constraints)
 
-        power.exists(power => {
-          power >= selection.minCombatPower && power <= selection.maxCombatPower
+      val choices = area.combatPower.get(constraint) map (x => {
+        val (min, max) = x
+
+        assets.themes(area.theme).creatures filter (creature => {
+          val power = assets.combatPower.average.get(creature)
+
+          power.exists(p => p >= min && p <= max)
         })
-      })
+      }) getOrElse Set()
+
       if (choices.isEmpty) {
         throw new CalculateFailedException
       }
@@ -97,26 +106,53 @@ object RandomizedContentFeature {
   case class ItemSource(selection: ItemSelection,
                         distribution: Distribution
                        ) extends ContentSource[ItemKindId] {
-    def getSelection(assets: WorldAssets, theme: Theme, random: Random): ItemKindId = {
+    def getSelection(assets: WorldAssets, area: Area, random: Random): ItemKindId = {
       selection match {
-        case ThemeItem => Rng.nextChoice(random, theme.items)
+        case selection: ThemeEquipment => getThemeEquipmentSelection(assets, area, selection, random)
         case selection: FixedItem => selection.kind
       }
+    }
+
+    private def getThemeEquipmentSelection(assets: WorldAssets,
+                                           area: Area,
+                                           selection: ThemeEquipment,
+                                           random: Random
+                                          ): ItemKindId = {
+      val categories = if (selection.category.isEmpty) Equipment.categories else selection.category
+      val category = Rng.nextChoice(random, categories)
+      val constraints = if (selection.power.isEmpty) CombatPower.categories else selection.power
+      val constraint = Rng.nextChoice(random, constraints)
+
+      val choices = area.combatPower.get(constraint) map (x => {
+        val (min, max) = x
+
+        assets.themes(area.theme).items filter (item => {
+          val power = assets.equipmentCombatPower.get(category) flatMap (_.get(item))
+
+          power.exists(p => p >= min && p <= max)
+        })
+      }) getOrElse Set()
+
+      if (choices.isEmpty) {
+        throw new CalculateFailedException
+      }
+
+      Rng.nextChoice(random, choices)
     }
   }
 
   case class WidgetSource(selection: WidgetKindId, distribution: Distribution) extends ContentSource[WidgetKindId] {
-    def getSelection(assets: WorldAssets, theme: Theme, random: Random): WidgetKindId = selection
+    def getSelection(assets: WorldAssets, area: Area, random: Random): WidgetKindId = selection
   }
 
   def randomUniqueElementLocations[T](assets: WorldAssets,
-                                      theme: Theme,
+                                      area: Area,
                                       locations: Set[Location],
                                       sources: List[ContentSource[T]],
                                       existing: Map[Location, T],
                                       random: Random,
                                      ): Map[Location, T] = {
-    val elements = getElements(assets, theme, sources, random)
+    val elements = getElements(assets, area, sources, random)
 
     val (result, _) = (elements foldLeft(existing, locations -- existing.keys)) ((carry, element) => {
       val (result, choices) = carry
@@ -132,7 +168,7 @@ object RandomizedContentFeature {
   }
 
   def randomElementLocations[T](assets: WorldAssets,
-                                theme: Theme,
+                                area: Area,
                                 locations: Set[Location],
                                 sources: List[ContentSource[T]],
                                 existing: Map[Location, List[T]],
@@ -142,7 +178,7 @@ object RandomizedContentFeature {
       throw new CalculateFailedException
     }
 
-    val elements = getElements(assets, theme, sources, random)
+    val elements = getElements(assets, area, sources, random)
 
     (elements foldLeft existing) ((result, element) => {
       val location = Rng.nextChoice(random, locations)
@@ -155,12 +191,12 @@ object RandomizedContentFeature {
     })
   }
 
-  private def getElements[T](assets: WorldAssets, theme: Theme, sources: List[ContentSource[T]], random: Random): List[T] = {
+  private def getElements[T](assets: WorldAssets, area: Area, sources: List[ContentSource[T]], random: Random): List[T] = {
     sources flatMap (source => {
       val distribution = source.distribution
       val range = Rng.nextRange(random, distribution)
 
-      range map (_ => source.getSelection(assets, theme, random))
+      range map (_ => source.getSelection(assets, area, random))
     })
   }
 

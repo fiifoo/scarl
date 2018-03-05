@@ -1,7 +1,7 @@
 package io.github.fiifoo.scarl.area.template
 
+import io.github.fiifoo.scarl.area.Area
 import io.github.fiifoo.scarl.area.feature.Feature
-import io.github.fiifoo.scarl.area.theme.Theme
 import io.github.fiifoo.scarl.core.geometry.Location
 import io.github.fiifoo.scarl.core.kind.{ItemKindId, TerrainKindId}
 import io.github.fiifoo.scarl.world.WorldAssets
@@ -11,7 +11,7 @@ import scala.util.Random
 object CalculateContent {
 
   def apply(assets: WorldAssets,
-            theme: Theme,
+            area: Area,
             target: FixedContent,
             locations: Set[Location],
             entrances: Map[Location, ItemKindId],
@@ -40,12 +40,12 @@ object CalculateContent {
 
     var result = target.copy(
       conduitLocations = target.conduitLocations ++ conduitLocations,
-      items = target.items ++ entranceItems,
+      items = target.items ++ entranceItems
     )
 
-    result = (features foldLeft result) ((content, feature) => feature(assets, theme, content, locations, entrances.keySet, random))
+    result = (features foldLeft result) ((content, feature) => feature(assets, area, content, locations, entrances.keySet, random))
 
-    val defaultTerrain = terrain getOrElse theme.terrain
+    val defaultTerrain = terrain getOrElse assets.themes(area.theme).terrain
     val defaultTerrains = (locations filterNot result.terrains.isDefinedAt map (location => {
       (location, defaultTerrain)
     })).toMap

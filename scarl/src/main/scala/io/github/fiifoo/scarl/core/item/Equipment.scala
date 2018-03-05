@@ -39,6 +39,17 @@ object Equipment {
     def extractEquipment(item: ItemKind): Option[Equipment] = item.weapon
   }
 
+  val categories: Set[Category] = Set(
+    HeadArmorCategory,
+    BodyArmorCategory,
+    HandArmorCategory,
+    FootArmorCategory,
+    LauncherCategory,
+    RangedWeaponCategory,
+    ShieldCategory,
+    WeaponCategory,
+  )
+
   sealed trait Slot
 
   sealed trait HandSlot extends Slot

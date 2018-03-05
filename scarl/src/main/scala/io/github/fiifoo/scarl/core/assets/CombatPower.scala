@@ -9,6 +9,24 @@ object CombatPower {
   type Opposed = Map[CreatureKindId, Map[CreatureKindId, Int]]
 
   type Equipment = Map[Equipment.Category, Map[ItemKindId, Int]]
+
+  sealed trait Category
+
+  case object Low extends Category
+
+  case object Medium extends Category
+
+  case object High extends Category
+
+  case object Top extends Category
+
+  val categories: Set[Category] = Set(
+    Low,
+    Medium,
+    High,
+    Top
+  )
+
 }
 
 case class CombatPower(average: Average = Map(), opposed: Opposed = Map())

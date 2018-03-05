@@ -2,6 +2,7 @@ package io.github.fiifoo.scarl.area.template
 
 import io.github.fiifoo.scarl.area.shape.Rectangle
 import io.github.fiifoo.scarl.area.theme.{Theme, ThemeId}
+import io.github.fiifoo.scarl.area.{Area, AreaId}
 import io.github.fiifoo.scarl.core.geometry.Location
 import io.github.fiifoo.scarl.core.kind.{ItemKindId, TerrainKindId}
 import io.github.fiifoo.scarl.world.WorldAssets
@@ -45,8 +46,15 @@ class CalculateTemplateSpec extends FlatSpec with Matchers {
 
     val assets = WorldAssets(
       templates = Map(t1.id -> t1, t2.id -> t2, t3.id -> t3, t4.id -> t4),
+      themes = Map(theme.id -> theme)
     )
 
-    t1(assets, theme, new Random(1))
+    val area = Area(
+      AreaId("area"),
+      t1.id,
+      theme.id
+    )
+
+    t1(assets, area, new Random(1))
   }
 }

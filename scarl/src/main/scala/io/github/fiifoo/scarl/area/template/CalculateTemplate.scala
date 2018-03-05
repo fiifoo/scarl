@@ -1,7 +1,7 @@
 package io.github.fiifoo.scarl.area.template
 
+import io.github.fiifoo.scarl.area.Area
 import io.github.fiifoo.scarl.area.template.Template.Result
-import io.github.fiifoo.scarl.area.theme.Theme
 import io.github.fiifoo.scarl.world.WorldAssets
 
 import scala.annotation.tailrec
@@ -11,12 +11,12 @@ object CalculateTemplate {
 
   @tailrec
   def apply(assets: WorldAssets,
-            theme: Theme,
+            area: Area,
             random: Random,
            )(template: Template): Result = {
 
     val result = try {
-      Some(template(assets, theme, random))
+      Some(template(assets, area, random))
     } catch {
       case _: CalculateFailedException => None
     }
@@ -24,7 +24,7 @@ object CalculateTemplate {
     if (result.isDefined) {
       result.get
     } else {
-      CalculateTemplate(assets, theme, random)(template)
+      CalculateTemplate(assets, area, random)(template)
     }
   }
 }

@@ -1,8 +1,8 @@
 package io.github.fiifoo.scarl.area.template
 
+import io.github.fiifoo.scarl.area.Area
 import io.github.fiifoo.scarl.area.shape.Shape
 import io.github.fiifoo.scarl.area.template.Template.Result
-import io.github.fiifoo.scarl.area.theme.Theme
 import io.github.fiifoo.scarl.core.geometry.Location
 import io.github.fiifoo.scarl.core.kind._
 import io.github.fiifoo.scarl.world.WorldAssets
@@ -13,7 +13,7 @@ trait Template {
   val id: TemplateId
 
   def apply(assets: WorldAssets,
-            theme: Theme,
+            area: Area,
             random: Random,
            ): Result
 }

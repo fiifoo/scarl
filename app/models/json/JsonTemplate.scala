@@ -5,7 +5,7 @@ import io.github.fiifoo.scarl.area.feature.{Feature, RandomizedContentFeature}
 import io.github.fiifoo.scarl.area.shape.{Rectangle, Shape}
 import io.github.fiifoo.scarl.area.template.FixedContent.MachinerySource
 import io.github.fiifoo.scarl.area.template._
-import io.github.fiifoo.scarl.area.theme.ContentSelection.{FixedCreature, FixedItem, ThemeCreature, ThemeItem}
+import io.github.fiifoo.scarl.area.theme.ContentSelection.{FixedCreature, FixedItem, ThemeCreature, ThemeEquipment}
 import io.github.fiifoo.scarl.area.theme.{CreatureSelection, ItemSelection}
 import io.github.fiifoo.scarl.core.geometry.Location
 import io.github.fiifoo.scarl.core.kind.ItemKindId
@@ -15,6 +15,7 @@ object JsonTemplate {
 
   import JsonBase.{mapReads, optionReads, polymorphicTypeReads, stringIdFormat, tuple2Format, tuple3Format}
 
+  lazy private implicit val equipmentCategoryFormat = JsonItemEquipment.categoryFormat
   lazy private implicit val creatureKindIdFormat = JsonCreatureKind.creatureKindIdFormat
   lazy private implicit val distributionFormat = JsonDistribution.distributionFormat
   lazy private implicit val itemKindIdFormat = JsonItemKind.itemKindIdFormat
@@ -29,6 +30,7 @@ object JsonTemplate {
   implicitly(tuple2Format[Int, Int])
   implicitly(tuple3Format[TemplateId, Int, Int])
 
+  lazy private implicit val combatPowerCategoryFormat = JsonCombatPower.categoryFormat
   lazy private implicit val rectangleReads = Json.reads[Rectangle]
   lazy private implicit val shapeReads: Reads[Shape] = polymorphicTypeReads(data => {
     case "Rectangle" => data.as[Rectangle]
@@ -40,9 +42,10 @@ object JsonTemplate {
     case "ContentSelection.ThemeCreature" => data.as[ThemeCreature]
     case "ContentSelection.FixedCreature" => data.as[FixedCreature]
   })
+  lazy private implicit val themeEquipmentReads = Json.reads[ThemeEquipment]
   lazy private implicit val fixedItemReads = Json.reads[FixedItem]
   lazy private implicit val itemSelectionReads: Reads[ItemSelection] = polymorphicTypeReads(data => {
-    case "ContentSelection.ThemeItem" => ThemeItem
+    case "ContentSelection.ThemeEquipment" => data.as[ThemeEquipment]
     case "ContentSelection.FixedItem" => data.as[FixedItem]
   })
 
