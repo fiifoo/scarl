@@ -1,15 +1,53 @@
 import { List } from 'immutable'
 import React from 'react'
-import { getNewValue } from '../../data/utils'
+import { getNewValue, isPolymorphic } from '../../data/utils'
 import FormRow from '../form/FormRow.jsx'
+import PolymorphicObjectField from './PolymorphicObjectField.jsx'
 import { getFieldComponent, getFieldModel } from './utils'
 
-const ListField = ({label, fieldType, path, value, common}) => {
-    const {models, setValue} = common
+const ListField = ({value, ...props}) => {
+    const {fieldType, common} = props
+    const {models} = common
 
     if (! value) {
         value = List()
     }
+
+    const valueFieldType = fieldType.data.value
+    const valueModel = getFieldModel(valueFieldType, models)
+
+    if (valueFieldType.type === 'FormField' && isPolymorphic(valueModel) && valueModel.objectPolymorphism) {
+        return (
+            <SelectComponent Component={PolymorphicObjectField} value={value} {...props} />
+        )
+    }
+
+    return (
+        <MultiComponent value={value} {...props} />
+    )
+}
+
+const SelectComponent = ({Component, label, fieldType, path, value, common}) => {
+    const {models} = common
+
+    const valueFieldType = fieldType.data.value
+    const valueModel = getFieldModel(valueFieldType, models)
+
+    return (
+        <Component
+            label={label}
+            required={valueFieldType.data.required}
+            model={valueModel}
+            fieldType={valueFieldType}
+            path={path}
+            value={value}
+            multi={true}
+            common={common} />
+    )
+}
+
+const MultiComponent = ({label, fieldType, path, value, common}) => {
+    const {models, setValue} = common
 
     const valueFieldType = fieldType.data.value
     const valueModel = getFieldModel(valueFieldType, models)
@@ -51,5 +89,6 @@ const ListField = ({label, fieldType, path, value, common}) => {
         </FormRow>
     )
 }
+
 
 export default ListField
