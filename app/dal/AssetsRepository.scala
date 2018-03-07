@@ -5,6 +5,7 @@ import java.nio.file.{Files, StandardOpenOption}
 
 import game.Simulations
 import io.github.fiifoo.scarl.core.assets.CombatPower
+import io.github.fiifoo.scarl.core.item.Equipment
 import io.github.fiifoo.scarl.world.WorldAssets
 import javax.inject.{Inject, Singleton}
 import models.Data
@@ -24,7 +25,7 @@ class AssetsRepository @Inject()(environment: Environment) {
       data.areas,
       simulateCombatPower(data),
       data.communications,
-      simulateEquipmentCombatPower(data),
+      getEquipmentCombatPower(data),
       data.factions,
       data.keys,
       data.kinds,
@@ -51,11 +52,31 @@ class AssetsRepository @Inject()(environment: Environment) {
     )
   }
 
-  def simulateCombatPower(data: Data): CombatPower = {
+  private def simulateCombatPower(data: Data): CombatPower = {
     Simulations.combatPower(data.kinds.creatures.values)
   }
 
-  def simulateEquipmentCombatPower(data: Data): CombatPower.Equipment = {
+  private def getEquipmentCombatPower(data: Data): CombatPower.Equipment = {
+    val simulated = simulateEquipmentCombatPower(data)
+    val fixed = data.kinds.items flatMap (x => {
+      val (id, item) = x
+
+      item.combatPower map (id -> _)
+    })
+
+    (Equipment.categories foldLeft simulated) ((result, category) => {
+      val items = fixed filter (x => {
+        val (id, _) = x
+        val item = data.kinds.items(id)
+
+        category.extractEquipment(item).isDefined
+      })
+
+      result + (category -> (result(category) ++ items))
+    })
+  }
+
+  private def simulateEquipmentCombatPower(data: Data): CombatPower.Equipment = {
     Simulations.equipmentCombatPower(data.kinds.items.values, data.kinds.creatures.values)
   }
 }

@@ -12,6 +12,7 @@ case class ItemKind(id: ItemKindId,
                     name: String,
                     display: Char,
                     color: String,
+                    combatPower: Option[Int] = None,
 
                     armor: Option[Armor] = None,
                     door: Option[Door] = None,
