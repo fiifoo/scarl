@@ -18,7 +18,7 @@ const Summary = Record({
 Summary.read = raw => Summary({
     equipmentCombatPower: Map(raw.equipmentCombatPower).map(Map),
     combatPower: CombatPower.read(raw.combatPower),
-    templates: Map(raw.templates),
+    templates: Map(raw.templates).map(Map),
     valid: raw.valid,
 })
 
