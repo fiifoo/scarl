@@ -78,7 +78,7 @@ object ContentSource {
         val (min, max) = x
 
         assets.themes(area.theme).items filter (item => {
-          val power = assets.equipmentCombatPower.get(category) flatMap (_.get(item))
+          val power = assets.combatPower.equipment.get(category) flatMap (_.get(item))
 
           power.exists(p => p >= min && p <= max)
         })

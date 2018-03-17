@@ -25,7 +25,6 @@ class AssetsRepository @Inject()(environment: Environment) {
       data.areas,
       simulateCombatPower(data),
       data.communications,
-      getEquipmentCombatPower(data),
       data.factions,
       data.keys,
       data.kinds,
@@ -53,7 +52,10 @@ class AssetsRepository @Inject()(environment: Environment) {
   }
 
   private def simulateCombatPower(data: Data): CombatPower = {
-    Simulations.combatPower(data.kinds.creatures.values)
+    val result = Simulations.combatPower(data.kinds.creatures.values)
+    val equipment = getEquipmentCombatPower(data)
+
+    result.copy(equipment = equipment)
   }
 
   private def getEquipmentCombatPower(data: Data): CombatPower.Equipment = {

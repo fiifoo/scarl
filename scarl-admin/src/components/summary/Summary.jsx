@@ -19,7 +19,7 @@ const Summary = ({creature, summary, tab, changeTab, selectCreature}) => {
                 <CombatPowerSummary combatPower={summary.combatPower} creature={creature} selectCreature={selectCreature} />
             </Tab>
             <Tab eventKey={tabs.EQUIPMENT_COMBAT_POWER} title="Equipment combat power">
-                <EquipmentCombatPowerSummary equipmentCombatPower={summary.equipmentCombatPower} />
+                <EquipmentCombatPowerSummary equipmentCombatPower={summary.combatPower.equipment} />
             </Tab>
 
         </Tabs>
