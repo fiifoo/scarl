@@ -1,11 +1,11 @@
 package io.github.fiifoo.scarl.area.template
 
 import io.github.fiifoo.scarl.area.Area
-import io.github.fiifoo.scarl.area.feature.RandomizedContentFeature.ItemSource
-import io.github.fiifoo.scarl.area.feature.{Feature, RandomizedContentFeature}
+import io.github.fiifoo.scarl.area.feature.{Feature, Utils}
 import io.github.fiifoo.scarl.area.shape.Shape
+import io.github.fiifoo.scarl.area.template.ContentSelection.FixedItem
+import io.github.fiifoo.scarl.area.template.ContentSource.ItemSource
 import io.github.fiifoo.scarl.area.template.Template.Result
-import io.github.fiifoo.scarl.area.theme.ContentSelection.FixedItem
 import io.github.fiifoo.scarl.core.geometry.Location
 import io.github.fiifoo.scarl.core.kind._
 import io.github.fiifoo.scarl.core.math.Distribution.Uniform
@@ -81,7 +81,7 @@ case class RandomizedTemplate(id: TemplateId,
       ItemSource(selection, distribution)
     })
 
-    RandomizedContentFeature.randomUniqueElementLocations(assets, area, locations, sources, Map(), random)
+    Utils.randomUniqueElementLocations(assets, area, locations, sources, Map(), random)
   }
 
   private def calculateRoutes(subResults: Map[Location, Result],

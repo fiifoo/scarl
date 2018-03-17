@@ -1,12 +1,11 @@
 package models.json
 
-import io.github.fiifoo.scarl.area.feature.RandomizedContentFeature.{CreatureSource, ItemSource, WidgetSource}
 import io.github.fiifoo.scarl.area.feature.{Feature, RandomizedContentFeature}
 import io.github.fiifoo.scarl.area.shape.{Rectangle, Shape}
+import io.github.fiifoo.scarl.area.template.ContentSelection._
+import io.github.fiifoo.scarl.area.template.ContentSource._
 import io.github.fiifoo.scarl.area.template.FixedContent.MachinerySource
 import io.github.fiifoo.scarl.area.template._
-import io.github.fiifoo.scarl.area.theme.ContentSelection.{FixedCreature, FixedItem, ThemeCreature, ThemeEquipment}
-import io.github.fiifoo.scarl.area.theme.{CreatureSelection, ItemSelection}
 import io.github.fiifoo.scarl.core.geometry.Location
 import io.github.fiifoo.scarl.core.kind.ItemKindId
 import play.api.libs.json._

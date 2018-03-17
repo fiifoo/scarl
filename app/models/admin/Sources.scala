@@ -5,9 +5,9 @@ import io.github.fiifoo.scarl.ai.tactic._
 import io.github.fiifoo.scarl.area.Area
 import io.github.fiifoo.scarl.area.feature.{Feature, RandomizedContentFeature}
 import io.github.fiifoo.scarl.area.shape.{Rectangle, Shape}
+import io.github.fiifoo.scarl.area.template.ContentSelection._
 import io.github.fiifoo.scarl.area.template.{FixedTemplate, RandomizedTemplate, Template}
-import io.github.fiifoo.scarl.area.theme.ContentSelection.{FixedCreature, FixedItem, ThemeCreature, ThemeEquipment}
-import io.github.fiifoo.scarl.area.theme.{CreatureSelection, ItemSelection, Theme}
+import io.github.fiifoo.scarl.area.theme.Theme
 import io.github.fiifoo.scarl.core.ai.{Behavior, Strategy}
 import io.github.fiifoo.scarl.core.assets.CombatPower
 import io.github.fiifoo.scarl.core.communication.{Communication, Message}
