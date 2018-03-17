@@ -4,11 +4,32 @@ import io.github.fiifoo.scarl.core.State
 import io.github.fiifoo.scarl.core.entity._
 import io.github.fiifoo.scarl.core.geometry.Location
 import io.github.fiifoo.scarl.core.kind.Kind.Result
+import io.github.fiifoo.scarl.core.kind.WidgetKind.Category
 import io.github.fiifoo.scarl.core.mutation.{IdSeqMutation, NewEntityMutation}
+
+
+object WidgetKind {
+
+  trait Category
+
+  case object HealCategory extends Category
+
+  case object PortalCategory extends Category
+
+  case object TrapCategory extends Category
+
+  val categories: Set[Category] = Set(
+    HealCategory,
+    PortalCategory,
+    TrapCategory,
+  )
+}
 
 trait WidgetKind extends Kind {
   val id: WidgetKindId
   val item: ItemKindId
+  val category: Option[Category]
+  val power: Option[Int]
 
   def toLocation(s: State, idSeq: IdSeq, location: Location, owner: Option[SafeCreatureId]): Result[Container] = {
     val itemResult = item(s).toWidget(s, idSeq, location, owner)

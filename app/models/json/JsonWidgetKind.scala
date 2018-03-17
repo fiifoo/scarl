@@ -1,12 +1,13 @@
 package models.json
 
+import io.github.fiifoo.scarl.core.kind.WidgetKind.{Category, HealCategory, PortalCategory, TrapCategory}
 import io.github.fiifoo.scarl.core.kind.{CreatureKindId, WidgetKind, WidgetKindId}
 import io.github.fiifoo.scarl.widget._
 import play.api.libs.json._
 
 object JsonWidgetKind {
 
-  import JsonBase.{mapReads, polymorphicTypeReads, stringIdFormat, weightedChoicesReads}
+  import JsonBase.{mapReads, polymorphicObjectFormat, polymorphicTypeReads, stringIdFormat, weightedChoicesReads}
 
   lazy private implicit val creatureKindIdFormat = JsonCreatureKind.creatureKindIdFormat
   lazy private implicit val itemKindIdFormat = JsonItemKind.itemKindIdFormat
@@ -34,6 +35,12 @@ object JsonWidgetKind {
     case "TriggeredExplosiveWidget" => data.as[TriggeredExplosiveWidget]
     case "TriggeredMachineryWidget" => data.as[TriggeredMachineryWidget]
     case "TriggeredTransformingWidget" => data.as[TriggeredTransformingWidget]
+  })
+
+  lazy implicit val categoryFormat: Format[Category] = polymorphicObjectFormat({
+    case "WidgetKind.HealCategory" => HealCategory
+    case "WidgetKind.PortalCategory" => PortalCategory
+    case "WidgetKind.TrapCategory" => TrapCategory
   })
 
   lazy val widgetKindMapReads: Reads[Map[WidgetKindId, WidgetKind]] = mapReads

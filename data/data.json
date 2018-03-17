@@ -5287,7 +5287,12 @@
             }
           } ],
           "widgets" : [ {
-            "selection" : "portal-enemy-widget-2",
+            "selection" : {
+              "type" : "ContentSelection.FixedWidget",
+              "data" : {
+                "kind" : "portal-enemy-widget-2"
+              }
+            },
             "distribution" : {
               "type" : "Distribution.Binomial",
               "data" : {
@@ -5373,7 +5378,12 @@
             }
           } ],
           "widgets" : [ {
-            "selection" : "portal-enemy-widget-3",
+            "selection" : {
+              "type" : "ContentSelection.FixedWidget",
+              "data" : {
+                "kind" : "portal-enemy-widget-3"
+              }
+            },
             "distribution" : {
               "type" : "Distribution.Binomial",
               "data" : {
@@ -5602,7 +5612,12 @@
             }
           } ],
           "widgets" : [ {
-            "selection" : "portal-enemy-widget-3",
+            "selection" : {
+              "type" : "ContentSelection.FixedWidget",
+              "data" : {
+                "kind" : "portal-enemy-widget-3"
+              }
+            },
             "distribution" : {
               "type" : "Distribution.Binomial",
               "data" : {
@@ -9785,7 +9800,12 @@
             }
           } ],
           "widgets" : [ {
-            "selection" : "portal-enemy-widget-1",
+            "selection" : {
+              "type" : "ContentSelection.FixedWidget",
+              "data" : {
+                "kind" : "portal-enemy-widget-1"
+              }
+            },
             "distribution" : {
               "type" : "Distribution.Binomial",
               "data" : {
@@ -9808,6 +9828,7 @@
     "items" : [ "armor-chest-1", "armor-chest-2", "armor-foot-1", "armor-foot-2", "armor-hand-1", "armor-hand-2", "armor-head-1", "armor-head-2", "shield-deflector-1", "shield-deflector-2", "weapon-blade-1", "weapon-blade-2", "weapon-rifle-1", "weapon-rifle-2", "friend-drone-1", "weapon-missile-launcher-guided-1", "armor-chest-3", "armor-foot-3", "armor-hand-3", "armor-head-3", "shield-deflector-3", "weapon-blade-3", "weapon-rifle-3", "friend-drone-2", "friend-drone-3", "weapon-missile-launcher-guided-2", "weapon-missile-launcher-guided-3" ],
     "terrain" : "floor",
     "door" : "door-closed",
-    "id" : "theme-1"
+    "id" : "theme-1",
+    "widgets" : [ ]
   } ] ]
 }

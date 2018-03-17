@@ -10,6 +10,7 @@ object JsonTheme {
   lazy private implicit val creatureKindIdFormat = JsonCreatureKind.creatureKindIdFormat
   lazy private implicit val itemKindIdFormat = JsonItemKind.itemKindIdFormat
   lazy private implicit val terrainKindIdFormat = JsonTerrainKind.terrainKindIdFormat
+  lazy private implicit val widgetKindIdFormat = JsonWidgetKind.widgetKindIdFormat
 
   lazy implicit val themeIdFormat: Format[ThemeId] = stringIdFormat(_.value, ThemeId.apply)
 

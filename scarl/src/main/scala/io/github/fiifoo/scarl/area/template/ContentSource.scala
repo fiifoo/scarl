@@ -4,7 +4,7 @@ import io.github.fiifoo.scarl.area.Area
 import io.github.fiifoo.scarl.area.template.ContentSelection._
 import io.github.fiifoo.scarl.core.assets.CombatPower
 import io.github.fiifoo.scarl.core.item.Equipment
-import io.github.fiifoo.scarl.core.kind.{CreatureKindId, ItemKindId, WidgetKindId}
+import io.github.fiifoo.scarl.core.kind.{CreatureKindId, ItemKindId, WidgetKind, WidgetKindId}
 import io.github.fiifoo.scarl.core.math.{Distribution, Rng}
 import io.github.fiifoo.scarl.world.WorldAssets
 
@@ -23,34 +23,24 @@ object ContentSource {
                            ) extends ContentSource[CreatureKindId] {
     def apply(assets: WorldAssets, area: Area, random: Random): CreatureKindId = {
       selection match {
-        case selection: ThemeCreature => selectThemeCreature(assets, area, selection, random)
+        case selection: ThemeCreature => select(assets, area, selection, random)
         case selection: FixedCreature => selection.kind
       }
     }
 
-    private def selectThemeCreature(assets: WorldAssets,
-                                    area: Area,
-                                    selection: ThemeCreature,
-                                    random: Random
-                                   ): CreatureKindId = {
+    private def select(assets: WorldAssets,
+                       area: Area,
+                       selection: ThemeCreature,
+                       random: Random
+                      ): CreatureKindId = {
+      val choices = assets.themes(area.theme).creatures
       val constraints = if (selection.power.isEmpty) CombatPower.categories else selection.power
-      val constraint = Rng.nextChoice(random, constraints)
 
-      val choices = area.combatPower.get(constraint) map (x => {
-        val (min, max) = x
-
-        assets.themes(area.theme).creatures filter (creature => {
-          val power = assets.combatPower.average.get(creature)
-
-          power.exists(p => p >= min && p <= max)
-        })
-      }) getOrElse Set()
-
-      if (choices.isEmpty) {
-        throw new CalculateFailedException
+      def getPower(choice: CreatureKindId): Option[Int] = {
+        assets.combatPower.average.get(choice)
       }
 
-      Rng.nextChoice(random, choices)
+      selectContent(area, choices, constraints, random, getPower)
     }
   }
 
@@ -59,41 +49,89 @@ object ContentSource {
                        ) extends ContentSource[ItemKindId] {
     def apply(assets: WorldAssets, area: Area, random: Random): ItemKindId = {
       selection match {
-        case selection: ThemeEquipment => selectThemeEquipment(assets, area, selection, random)
+        case selection: ThemeEquipment => selectEquipment(assets, area, selection, random)
         case selection: FixedItem => selection.kind
       }
     }
 
-    private def selectThemeEquipment(assets: WorldAssets,
-                                     area: Area,
-                                     selection: ThemeEquipment,
-                                     random: Random
-                                    ): ItemKindId = {
+    private def selectEquipment(assets: WorldAssets,
+                                area: Area,
+                                selection: ThemeEquipment,
+                                random: Random
+                               ): ItemKindId = {
+      val choices = assets.themes(area.theme).items
       val categories = if (selection.category.isEmpty) Equipment.categories else selection.category
-      val category = Rng.nextChoice(random, categories)
       val constraints = if (selection.power.isEmpty) CombatPower.categories else selection.power
-      val constraint = Rng.nextChoice(random, constraints)
 
-      val choices = area.combatPower.get(constraint) map (x => {
-        val (min, max) = x
-
-        assets.themes(area.theme).items filter (item => {
-          val power = assets.combatPower.equipment.get(category) flatMap (_.get(item))
-
-          power.exists(p => p >= min && p <= max)
-        })
-      }) getOrElse Set()
-
-      if (choices.isEmpty) {
-        throw new CalculateFailedException
+      def getPower(category: Equipment.Category, choice: ItemKindId): Option[Int] = {
+        assets.combatPower.equipment.get(category) flatMap (_.get(choice))
       }
 
-      Rng.nextChoice(random, choices)
+      selectCategoryContent(area, choices, categories, constraints, random, getPower)
     }
   }
 
-  case class WidgetSource(selection: WidgetKindId, distribution: Distribution) extends ContentSource[WidgetKindId] {
-    def apply(assets: WorldAssets, area: Area, random: Random): WidgetKindId = selection
+  case class WidgetSource(selection: WidgetSelection,
+                          distribution: Distribution
+                         ) extends ContentSource[WidgetKindId] {
+    def apply(assets: WorldAssets, area: Area, random: Random): WidgetKindId = {
+      selection match {
+        case selection: ThemeWidget => select(assets, area, selection, random)
+        case selection: FixedWidget => selection.kind
+      }
+    }
+
+    private def select(assets: WorldAssets,
+                       area: Area,
+                       selection: ThemeWidget,
+                       random: Random
+                      ): WidgetKindId = {
+      val choices = assets.themes(area.theme).widgets
+      val categories = if (selection.category.isEmpty) WidgetKind.categories else selection.category
+      val constraints = if (selection.power.isEmpty) CombatPower.categories else selection.power
+
+      def getPower(category: WidgetKind.Category, choice: WidgetKindId): Option[Int] = {
+        assets.combatPower.widget.get(category) flatMap (_.get(choice))
+      }
+
+      selectCategoryContent(area, choices, categories, constraints, random, getPower)
+    }
   }
 
+  private def selectCategoryContent[T, U](area: Area,
+                                          choices: Set[T],
+                                          categories: Set[U],
+                                          constraints: Set[CombatPower.Category],
+                                          random: Random,
+                                          getPower: (U, T) => Option[Int]
+                                         ): T = {
+    val category = Rng.nextChoice(random, categories)
+
+    selectContent(area, choices, constraints, random, (choice: T) => getPower(category, choice))
+  }
+
+  private def selectContent[T](area: Area,
+                               choices: Set[T],
+                               constraints: Set[CombatPower.Category],
+                               random: Random,
+                               getPower: T => Option[Int]
+                              ): T = {
+    val constraint = Rng.nextChoice(random, constraints)
+
+    val matching = area.combatPower.get(constraint) map (x => {
+      val (min, max) = x
+
+      choices filter (choice => {
+        val power = getPower(choice)
+
+        power.exists(p => p >= min && p <= max)
+      })
+    }) getOrElse Set()
+
+    if (matching.isEmpty) {
+      throw new CalculateFailedException
+    }
+
+    Rng.nextChoice(random, matching)
+  }
 }

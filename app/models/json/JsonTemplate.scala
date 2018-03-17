@@ -24,6 +24,7 @@ object JsonTemplate {
   lazy private implicit val terrainKindIdFormat = JsonTerrainKind.terrainKindIdFormat
   lazy private implicit val wallKindIdFormat = JsonWallKind.wallKindIdFormat
   lazy private implicit val widgetKindIdFormat = JsonWidgetKind.widgetKindIdFormat
+  lazy private implicit val widgetKindCategoryFormat = JsonWidgetKind.categoryFormat
 
   implicitly(optionReads[ItemKindId])
   implicitly(tuple2Format[Int, Int])
@@ -46,6 +47,13 @@ object JsonTemplate {
   lazy private implicit val itemSelectionReads: Reads[ItemSelection] = polymorphicTypeReads(data => {
     case "ContentSelection.ThemeEquipment" => data.as[ThemeEquipment]
     case "ContentSelection.FixedItem" => data.as[FixedItem]
+  })
+
+  lazy private implicit val themeWidgetReads = Json.reads[ThemeWidget]
+  lazy private implicit val fixedWidgetReads = Json.reads[FixedWidget]
+  lazy private implicit val widgetSelectionReads: Reads[WidgetSelection] = polymorphicTypeReads(data => {
+    case "ContentSelection.ThemeWidget" => data.as[ThemeWidget]
+    case "ContentSelection.FixedWidget" => data.as[FixedWidget]
   })
 
   lazy private implicit val creatureSourceReads = Json.reads[CreatureSource]

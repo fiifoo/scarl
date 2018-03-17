@@ -6,15 +6,16 @@ import io.github.fiifoo.scarl.area.Area
 import io.github.fiifoo.scarl.area.feature.{Feature, RandomizedContentFeature}
 import io.github.fiifoo.scarl.area.shape.{Rectangle, Shape}
 import io.github.fiifoo.scarl.area.template.ContentSelection._
-import io.github.fiifoo.scarl.area.template.{FixedTemplate, RandomizedTemplate, Template}
+import io.github.fiifoo.scarl.area.template.{ContentSelection, FixedTemplate, RandomizedTemplate, Template}
 import io.github.fiifoo.scarl.area.theme.Theme
 import io.github.fiifoo.scarl.core.ai.{Behavior, Strategy}
 import io.github.fiifoo.scarl.core.assets.CombatPower
 import io.github.fiifoo.scarl.core.communication.{Communication, Message}
-import io.github.fiifoo.scarl.core.creature.Missile.{Guidance, Guided, Smart}
-import io.github.fiifoo.scarl.core.creature.{CreaturePower, Faction, Progression}
+import io.github.fiifoo.scarl.core.creature.Missile.{Guided, Smart}
+import io.github.fiifoo.scarl.core.creature.{CreaturePower, Faction, Missile, Progression}
 import io.github.fiifoo.scarl.core.item.Equipment._
 import io.github.fiifoo.scarl.core.item._
+import io.github.fiifoo.scarl.core.kind.WidgetKind.{HealCategory, PortalCategory, TrapCategory}
 import io.github.fiifoo.scarl.core.kind._
 import io.github.fiifoo.scarl.core.math.Distribution
 import io.github.fiifoo.scarl.core.math.Distribution.{Binomial, Uniform}
@@ -64,6 +65,7 @@ object Sources {
 
   // Needed only for polymorphic sub models. Others will be scanned recursively from main models.
   lazy val sub: Map[SubModel.Id, SubModelSource] = List(
+
     SubModelSource(typeOf[Behavior], List(
       typeOf[FollowOwnerTactic.type],
       typeOf[GreetTactic.type],
@@ -71,21 +73,50 @@ object Sources {
       typeOf[RoamTactic.type],
       typeOf[ScoutTactic.type],
     )),
-    SubModelSource(typeOf[CreaturePower], List(
-      typeOf[TransformCreaturePower],
-    )),
-    SubModelSource(typeOf[CreatureSelection], List(
+
+    SubModelSource(typeOf[CombatPower.Category], List(
+      typeOf[CombatPower.Top.type],
+      typeOf[CombatPower.High.type],
+      typeOf[CombatPower.Medium.type],
+      typeOf[CombatPower.Low.type],
+    ), objectPolymorphism = true),
+
+    SubModelSource(typeOf[ContentSelection.CreatureSelection], List(
       typeOf[ThemeCreature],
       typeOf[FixedCreature],
     )),
+
+    SubModelSource(typeOf[ContentSelection.ItemSelection], List(
+      typeOf[ThemeEquipment],
+      typeOf[FixedItem],
+    )),
+
+    SubModelSource(typeOf[ContentSelection.WidgetSelection], List(
+      typeOf[ThemeWidget],
+      typeOf[FixedWidget],
+    )),
+
+    SubModelSource(typeOf[CreaturePower], List(
+      typeOf[TransformCreaturePower],
+    )),
+
     SubModelSource(typeOf[Discover], List(
       typeOf[DiscoverTriggerer.type],
       typeOf[DiscoverEveryone.type],
     ), objectPolymorphism = true),
+
     SubModelSource(typeOf[Distribution], List(
       typeOf[Binomial],
       typeOf[Uniform],
     )),
+
+    SubModelSource(typeOf[Equipment.ArmorSlot], List(
+      typeOf[HeadArmor.type],
+      typeOf[BodyArmor.type],
+      typeOf[HandArmor.type],
+      typeOf[FootArmor.type],
+    ), objectPolymorphism = true),
+
     SubModelSource(typeOf[Equipment.Category], List(
       typeOf[HeadArmorCategory.type],
       typeOf[BodyArmorCategory.type],
@@ -96,46 +127,8 @@ object Sources {
       typeOf[ShieldCategory.type],
       typeOf[WeaponCategory.type],
     ), objectPolymorphism = true),
-    SubModelSource(typeOf[Feature], List(
-      typeOf[RandomizedContentFeature],
-    )),
-    SubModelSource(typeOf[CombatPower.Category], List(
-      typeOf[CombatPower.Top.type],
-      typeOf[CombatPower.High.type],
-      typeOf[CombatPower.Medium.type],
-      typeOf[CombatPower.Low.type],
-    ), objectPolymorphism = true),
-    SubModelSource(typeOf[Guidance], List(
-      typeOf[Guided.type],
-      typeOf[Smart.type],
-    )),
-    SubModelSource(typeOf[ItemPower], List(
-      typeOf[TransformItemPower],
-    )),
-    SubModelSource(typeOf[ItemSelection], List(
-      typeOf[ThemeEquipment],
-      typeOf[FixedItem],
-    )),
-    SubModelSource(typeOf[Mechanism], List(
-      typeOf[CreateEntityMechanism],
-      typeOf[RemoveWallMechanism],
-      typeOf[UseDoorMechanism],
-    )),
-    SubModelSource(typeOf[Shape], List(
-      typeOf[Rectangle],
-    )),
-    SubModelSource(typeOf[Strategy], List(
-      typeOf[AttackStrategy.type],
-      typeOf[RoamStrategy.type],
-    )),
 
-    SubModelSource(typeOf[ArmorSlot], List(
-      typeOf[HeadArmor.type],
-      typeOf[BodyArmor.type],
-      typeOf[HandArmor.type],
-      typeOf[FootArmor.type],
-    ), objectPolymorphism = true),
-    SubModelSource(typeOf[Slot], List(
+    SubModelSource(typeOf[Equipment.Slot], List(
       typeOf[MainHand.type],
       typeOf[OffHand.type],
       typeOf[RangedSlot.type],
@@ -145,6 +138,41 @@ object Sources {
       typeOf[HandArmor.type],
       typeOf[FootArmor.type],
     ), objectPolymorphism = true),
+
+    SubModelSource(typeOf[Feature], List(
+      typeOf[RandomizedContentFeature],
+    )),
+
+    SubModelSource(typeOf[ItemPower], List(
+      typeOf[TransformItemPower],
+    )),
+
+    SubModelSource(typeOf[Missile.Guidance], List(
+      typeOf[Guided.type],
+      typeOf[Smart.type],
+    )),
+
+    SubModelSource(typeOf[Mechanism], List(
+      typeOf[CreateEntityMechanism],
+      typeOf[RemoveWallMechanism],
+      typeOf[UseDoorMechanism],
+    )),
+
+    SubModelSource(typeOf[Shape], List(
+      typeOf[Rectangle],
+    )),
+
+    SubModelSource(typeOf[Strategy], List(
+      typeOf[AttackStrategy.type],
+      typeOf[RoamStrategy.type],
+    )),
+
+    SubModelSource(typeOf[WidgetKind.Category], List(
+      typeOf[HealCategory.type],
+      typeOf[PortalCategory.type],
+      typeOf[TrapCategory.type],
+    ), objectPolymorphism = true),
+
   ).map(s => s.id -> s).toMap
 
   lazy val polymorphicRelation: Map[Model.RelationId, PolymorphicRelationSource] = List(
