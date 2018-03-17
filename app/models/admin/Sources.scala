@@ -15,6 +15,7 @@ import io.github.fiifoo.scarl.core.creature.Missile.{Guided, Smart}
 import io.github.fiifoo.scarl.core.creature.{CreaturePower, Faction, Missile, Progression}
 import io.github.fiifoo.scarl.core.item.Equipment._
 import io.github.fiifoo.scarl.core.item._
+import io.github.fiifoo.scarl.core.kind.ItemKind.UtilityCategory
 import io.github.fiifoo.scarl.core.kind.WidgetKind.{HealCategory, PortalCategory, TrapCategory}
 import io.github.fiifoo.scarl.core.kind._
 import io.github.fiifoo.scarl.core.math.Distribution
@@ -87,6 +88,7 @@ object Sources {
     )),
 
     SubModelSource(typeOf[ContentSelection.ItemSelection], List(
+      typeOf[ThemeItem],
       typeOf[ThemeEquipment],
       typeOf[FixedItem],
     )),
@@ -142,6 +144,10 @@ object Sources {
     SubModelSource(typeOf[Feature], List(
       typeOf[RandomizedContentFeature],
     )),
+
+    SubModelSource(typeOf[ItemKind.Category], List(
+      typeOf[UtilityCategory.type],
+    ), objectPolymorphism = true),
 
     SubModelSource(typeOf[ItemPower], List(
       typeOf[TransformItemPower],

@@ -5,14 +5,27 @@ import io.github.fiifoo.scarl.core.creature.Stats.Explosive
 import io.github.fiifoo.scarl.core.entity._
 import io.github.fiifoo.scarl.core.geometry.Location
 import io.github.fiifoo.scarl.core.item.{ItemPower, _}
+import io.github.fiifoo.scarl.core.kind.ItemKind.Category
 import io.github.fiifoo.scarl.core.kind.Kind.Result
 import io.github.fiifoo.scarl.core.mutation.{IdSeqMutation, ItemFoundMutation, Mutation, NewEntityMutation}
+
+object ItemKind {
+
+  trait Category
+
+  case object UtilityCategory extends Category
+
+  val categories: Set[Category] = Set(
+    UtilityCategory,
+  )
+}
 
 case class ItemKind(id: ItemKindId,
                     name: String,
                     display: Char,
                     color: String,
-                    combatPower: Option[Int] = None,
+                    category: Option[Category] = None,
+                    power: Option[Int] = None,
 
                     armor: Option[Armor] = None,
                     door: Option[Door] = None,

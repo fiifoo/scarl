@@ -4,7 +4,7 @@ import io.github.fiifoo.scarl.area.Area
 import io.github.fiifoo.scarl.area.template.ContentSelection._
 import io.github.fiifoo.scarl.core.assets.CombatPower
 import io.github.fiifoo.scarl.core.item.Equipment
-import io.github.fiifoo.scarl.core.kind.{CreatureKindId, ItemKindId, WidgetKind, WidgetKindId}
+import io.github.fiifoo.scarl.core.kind._
 import io.github.fiifoo.scarl.core.math.{Distribution, Rng}
 import io.github.fiifoo.scarl.world.WorldAssets
 
@@ -50,8 +50,25 @@ object ContentSource {
     def apply(assets: WorldAssets, area: Area, random: Random): ItemKindId = {
       selection match {
         case selection: ThemeEquipment => selectEquipment(assets, area, selection, random)
+        case selection: ThemeItem => selectItem(assets, area, selection, random)
         case selection: FixedItem => selection.kind
       }
+    }
+
+    private def selectItem(assets: WorldAssets,
+                           area: Area,
+                           selection: ThemeItem,
+                           random: Random
+                          ): ItemKindId = {
+      val choices = assets.themes(area.theme).items
+      val categories = if (selection.category.isEmpty) ItemKind.categories else selection.category
+      val constraints = if (selection.power.isEmpty) CombatPower.categories else selection.power
+
+      def getPower(category: ItemKind.Category, choice: ItemKindId): Option[Int] = {
+        assets.combatPower.item.get(category) flatMap (_.get(choice))
+      }
+
+      selectCategoryContent(area, choices, categories, constraints, random, getPower)
     }
 
     private def selectEquipment(assets: WorldAssets,
@@ -118,7 +135,7 @@ object ContentSource {
                               ): T = {
     val constraint = Rng.nextChoice(random, constraints)
 
-    val matching = area.combatPower.get(constraint) map (x => {
+    val matching = area.power.get(constraint) map (x => {
       val (min, max) = x
 
       choices filter (choice => {

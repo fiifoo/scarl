@@ -12,7 +12,7 @@
       "_3" : "stairs-up"
     } ],
     "id" : "level-1",
-    "combatPower" : [ [ "CombatPower.Low", {
+    "power" : [ [ "CombatPower.Low", {
       "_1" : 0,
       "_2" : 40
     } ], [ "CombatPower.Medium", {
@@ -38,7 +38,7 @@
       "_3" : "stairs-up"
     } ],
     "id" : "level-2",
-    "combatPower" : [ [ "CombatPower.Low", {
+    "power" : [ [ "CombatPower.Low", {
       "_1" : 0,
       "_2" : 40
     } ], [ "CombatPower.Medium", {
@@ -64,7 +64,7 @@
       "_3" : "stairs-up"
     } ],
     "id" : "level-3",
-    "combatPower" : [ [ "CombatPower.Low", {
+    "power" : [ [ "CombatPower.Low", {
       "_1" : 41,
       "_2" : 80
     } ], [ "CombatPower.Medium", {
@@ -90,7 +90,7 @@
       "_3" : "stairs-up"
     } ],
     "id" : "level-4",
-    "combatPower" : [ [ "CombatPower.Low", {
+    "power" : [ [ "CombatPower.Low", {
       "_1" : 81,
       "_2" : 100
     } ], [ "CombatPower.Medium", {
@@ -116,7 +116,7 @@
       "_3" : "stairs-up"
     } ],
     "id" : "level-5",
-    "combatPower" : [ [ "CombatPower.Low", {
+    "power" : [ [ "CombatPower.Low", {
       "_1" : 81,
       "_2" : 100
     } ], [ "CombatPower.Medium", {
@@ -134,7 +134,7 @@
     "theme" : "theme-1",
     "conduits" : [ ],
     "id" : "end-level",
-    "combatPower" : [ ]
+    "power" : [ ]
   } ], [ "start-level", {
     "template" : "conduit-room-1",
     "theme" : "theme-1",
@@ -148,7 +148,7 @@
       "_3" : "stairs-up"
     } ],
     "id" : "start-level",
-    "combatPower" : [ ]
+    "power" : [ ]
   } ], [ "conduit-level-2", {
     "template" : "conduit-room-2",
     "theme" : "theme-1",
@@ -162,7 +162,7 @@
       "_3" : "stairs-up"
     } ],
     "id" : "conduit-level-2",
-    "combatPower" : [ ]
+    "power" : [ ]
   } ], [ "conduit-level-3", {
     "template" : "conduit-room-3",
     "theme" : "theme-1",
@@ -176,7 +176,7 @@
       "_3" : "stairs-up"
     } ],
     "id" : "conduit-level-3",
-    "combatPower" : [ ]
+    "power" : [ ]
   } ], [ "conduit-level-4", {
     "template" : "conduit-room-4",
     "theme" : "theme-1",
@@ -190,7 +190,7 @@
       "_3" : "stairs-up"
     } ],
     "id" : "conduit-level-4",
-    "combatPower" : [ ]
+    "power" : [ ]
   } ], [ "conduit-level-5", {
     "template" : "conduit-room-5",
     "theme" : "theme-1",
@@ -204,7 +204,7 @@
       "_3" : "stairs-up"
     } ],
     "id" : "conduit-level-5",
-    "combatPower" : [ ]
+    "power" : [ ]
   } ] ],
   "communications" : [ [ "end-message", {
     "type" : "Message",
@@ -2391,11 +2391,11 @@
       },
       "display" : "!",
       "color" : "white",
+      "power" : 0,
       "shield" : null,
       "hidden" : false,
       "name" : "Guided missile launcher I",
       "door" : null,
-      "combatPower" : 0,
       "usable" : null,
       "pickable" : true,
       "id" : "weapon-missile-launcher-guided-1",
@@ -2592,11 +2592,11 @@
       },
       "display" : "!",
       "color" : "white",
+      "power" : 50,
       "shield" : null,
       "hidden" : false,
       "name" : "Guided missile launcher II",
       "door" : null,
-      "combatPower" : 50,
       "usable" : null,
       "pickable" : true,
       "id" : "weapon-missile-launcher-guided-2",
@@ -2807,11 +2807,11 @@
       },
       "display" : "!",
       "color" : "white",
+      "power" : 100,
       "shield" : null,
       "hidden" : false,
       "name" : "Guided missile launcher III",
       "door" : null,
-      "combatPower" : 100,
       "usable" : null,
       "pickable" : true,
       "id" : "weapon-missile-launcher-guided-3",
@@ -3230,6 +3230,7 @@
       "display" : "d",
       "color" : "white",
       "rangedWeapon" : null,
+      "power" : 0,
       "shield" : null,
       "hidden" : false,
       "name" : "Drone I",
@@ -3248,6 +3249,7 @@
       "pickable" : true,
       "id" : "friend-drone-1",
       "weapon" : null,
+      "category" : "ItemKind.UtilityCategory",
       "armor" : null
     } ], [ "portal-enemy-3", {
       "personal" : false,
@@ -3282,6 +3284,7 @@
       "display" : "d",
       "color" : "white",
       "rangedWeapon" : null,
+      "power" : 50,
       "shield" : null,
       "hidden" : false,
       "name" : "Drone II",
@@ -3300,6 +3303,7 @@
       "pickable" : true,
       "id" : "friend-drone-2",
       "weapon" : null,
+      "category" : "ItemKind.UtilityCategory",
       "armor" : null
     } ], [ "explosive-triggered", {
       "personal" : false,
@@ -3331,6 +3335,7 @@
       "display" : "d",
       "color" : "white",
       "rangedWeapon" : null,
+      "power" : 100,
       "shield" : null,
       "hidden" : false,
       "name" : "Drone III",
@@ -3349,6 +3354,7 @@
       "pickable" : true,
       "id" : "friend-drone-3",
       "weapon" : null,
+      "category" : "ItemKind.UtilityCategory",
       "armor" : null
     } ], [ "explosive-timed", {
       "personal" : false,
@@ -4154,11 +4160,11 @@
       "display" : "]",
       "color" : "purple",
       "rangedWeapon" : null,
+      "power" : 100,
       "shield" : null,
       "hidden" : false,
       "name" : "Armor of Invulnerability",
       "door" : null,
-      "combatPower" : 100,
       "usable" : null,
       "pickable" : true,
       "id" : "armor-chest-invulnerability",
@@ -9796,6 +9802,21 @@
               "data" : {
                 "p" : 35,
                 "n" : 2
+              }
+            }
+          }, {
+            "selection" : {
+              "type" : "ContentSelection.ThemeItem",
+              "data" : {
+                "category" : [ "ItemKind.UtilityCategory" ],
+                "power" : [ "CombatPower.Low", "CombatPower.Medium" ]
+              }
+            },
+            "distribution" : {
+              "type" : "Distribution.Binomial",
+              "data" : {
+                "p" : 10,
+                "n" : 1
               }
             }
           } ],

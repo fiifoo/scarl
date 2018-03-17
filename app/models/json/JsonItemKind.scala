@@ -1,12 +1,13 @@
 package models.json
 
 import io.github.fiifoo.scarl.core.creature.Stats.Explosive
+import io.github.fiifoo.scarl.core.kind.ItemKind.{Category, UtilityCategory}
 import io.github.fiifoo.scarl.core.kind.{ItemKind, ItemKindId}
 import play.api.libs.json._
 
 object JsonItemKind {
 
-  import JsonBase.{mapReads, stringIdFormat}
+  import JsonBase.{mapReads, polymorphicObjectFormat, stringIdFormat}
 
   lazy private implicit val armorFormat = JsonItemEquipment.armorFormat
   lazy private implicit val charFormat = JsonBase.charFormat
@@ -22,6 +23,10 @@ object JsonItemKind {
   lazy implicit val itemKindIdFormat: Format[ItemKindId] = stringIdFormat(_.value, ItemKindId.apply)
 
   lazy implicit val itemKindFormat: Format[ItemKind] = Json.format
+
+  lazy implicit val categoryFormat: Format[Category] = polymorphicObjectFormat({
+    case "ItemKind.UtilityCategory" => UtilityCategory
+  })
 
   lazy val itemKindMapReads: Reads[Map[ItemKindId, ItemKind]] = mapReads
 }

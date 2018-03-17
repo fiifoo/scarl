@@ -8,6 +8,6 @@ import io.github.fiifoo.scarl.core.kind.ItemKindId
 case class Area(id: AreaId,
                 template: TemplateId,
                 theme: ThemeId,
-                combatPower: Map[CombatPower.Category, (Int, Int)] = Map(),
+                power: Map[CombatPower.Category, (Int, Int)] = Map(),
                 conduits: List[(AreaId, ItemKindId, ItemKindId)] = List()
                )

@@ -6,7 +6,7 @@ import java.nio.file.{Files, StandardOpenOption}
 import game.Simulations
 import io.github.fiifoo.scarl.core.assets.CombatPower
 import io.github.fiifoo.scarl.core.item.Equipment
-import io.github.fiifoo.scarl.core.kind.WidgetKind
+import io.github.fiifoo.scarl.core.kind.{ItemKind, WidgetKind}
 import io.github.fiifoo.scarl.world.WorldAssets
 import javax.inject.{Inject, Singleton}
 import models.Data
@@ -56,6 +56,7 @@ class AssetsRepository @Inject()(environment: Environment) {
     Simulations.combatPower(data.kinds.creatures.values)
       .copy(
         equipment = getEquipmentCombatPower(data),
+        item = getItemCombatPower(data),
         widget = getWidgetCombatPower(data)
       )
   }
@@ -65,7 +66,7 @@ class AssetsRepository @Inject()(environment: Environment) {
     val fixed = data.kinds.items flatMap (x => {
       val (id, item) = x
 
-      item.combatPower map (id -> _)
+      item.power map (id -> _)
     })
 
     (Equipment.categories foldLeft simulated) ((result, category) => {
@@ -78,6 +79,18 @@ class AssetsRepository @Inject()(environment: Environment) {
 
       result + (category -> (result(category) ++ items))
     })
+  }
+
+  private def getItemCombatPower(data: Data): CombatPower.Item = {
+    (ItemKind.categories map (category => {
+      val items = data.kinds.items filter (_._2.category contains category) flatMap (x => {
+        val (id, item) = x
+
+        item.power map (id -> _)
+      })
+
+      category -> items
+    })).toMap
   }
 
   private def getWidgetCombatPower(data: Data): CombatPower.Widget = {
