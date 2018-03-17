@@ -105,15 +105,15 @@ object Utils {
              displace: Boolean = false,
              wait: Boolean = false
             ): Option[Action] = {
-    getWaypointPath(s, actor(s).location, to) flatMap (path => {
-      val destination = if (path.size > 2) {
-        path(1)
+    val destination = getWaypointPath(s, actor(s).location, to) flatMap (path => {
+      if (path.size > 2) {
+        Some(path(1))
       } else {
-        to
+        None
       }
+    }) getOrElse to
 
-      move(s, actor, destination, displace, wait)
-    })
+    move(s, actor, destination, displace, wait)
   }
 
   private def getWaypointPath(s: State, from: Location, to: Location): Option[Vector[Waypoint]] = {
