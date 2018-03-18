@@ -12,11 +12,15 @@ case object ContentSelection {
 
   sealed trait ItemSelection extends ContentSelection
 
+  sealed trait TemplateSelection extends ContentSelection
+
   sealed trait WidgetSelection extends ContentSelection
 
   case class FixedCreature(kind: CreatureKindId) extends CreatureSelection
 
   case class FixedItem(kind: ItemKindId) extends ItemSelection
+
+  case class FixedTemplate(template: TemplateId) extends TemplateSelection
 
   case class FixedWidget(kind: WidgetKindId) extends WidgetSelection
 
@@ -29,6 +33,10 @@ case object ContentSelection {
   case class ThemeEquipment(category: Set[Equipment.Category] = Set(),
                             power: Set[CombatPower.Category] = Set()
                            ) extends ItemSelection
+
+  case class ThemeTemplate(category: Set[Template.Category] = Set(),
+                           power: Set[CombatPower.Category] = Set()
+                          ) extends TemplateSelection
 
   case class ThemeWidget(category: Set[WidgetKind.Category] = Set(),
                          power: Set[CombatPower.Category] = Set()

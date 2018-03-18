@@ -1,6 +1,6 @@
 {
   "areas" : [ [ "level-1", {
-    "template" : "level-1",
+    "template" : "level-default",
     "theme" : "theme-1",
     "conduits" : [ {
       "_1" : "conduit-level-2",
@@ -26,7 +26,7 @@
       "_2" : 80
     } ] ]
   } ], [ "level-2", {
-    "template" : "level-2",
+    "template" : "level-default",
     "theme" : "theme-1",
     "conduits" : [ {
       "_1" : "conduit-level-3",
@@ -52,7 +52,7 @@
       "_2" : 100
     } ] ]
   } ], [ "level-3", {
-    "template" : "level-3",
+    "template" : "level-default",
     "theme" : "theme-1",
     "conduits" : [ {
       "_1" : "conduit-level-4",
@@ -78,7 +78,7 @@
       "_2" : 100
     } ] ]
   } ], [ "level-4", {
-    "template" : "level-rest",
+    "template" : "level-dangerous",
     "theme" : "theme-1",
     "conduits" : [ {
       "_1" : "conduit-level-5",
@@ -104,7 +104,7 @@
       "_2" : 100
     } ] ]
   } ], [ "level-5", {
-    "template" : "level-rest",
+    "template" : "level-dangerous",
     "theme" : "theme-1",
     "conduits" : [ {
       "_1" : "end-level",
@@ -4420,7 +4420,9 @@
         },
         "interval" : 3000,
         "id" : "portal-enemy-widget-1",
-        "summonDescription" : "{target} steps out of portal."
+        "summonDescription" : "{target} steps out of portal.",
+        "category" : "WidgetKind.PortalCategory",
+        "power" : 0
       }
     } ], [ "trap-plasma-widget", {
       "type" : "AttackingTrapWidget",
@@ -4474,7 +4476,9 @@
         },
         "interval" : 3000,
         "id" : "portal-enemy-widget-2",
-        "summonDescription" : "{target} steps out of portal."
+        "summonDescription" : "{target} steps out of portal.",
+        "category" : "WidgetKind.PortalCategory",
+        "power" : 50
       }
     } ], [ "portal-enemy-widget-3", {
       "type" : "SummonCreatureWidget",
@@ -4500,7 +4504,9 @@
         },
         "interval" : 3000,
         "id" : "portal-enemy-widget-3",
-        "summonDescription" : "{target} steps out of portal."
+        "summonDescription" : "{target} steps out of portal.",
+        "category" : "WidgetKind.PortalCategory",
+        "power" : 100
       }
     } ], [ "healing-chamber-widget-inactive", {
       "type" : "DelayedTransformingWidget",
@@ -5222,119 +5228,102 @@
           "y" : 3
         }, "pressure-plate-widget-hidden" ] ]
       },
-      "id" : "portal-trap-room-3"
+      "id" : "portal-trap-room-3",
+      "category" : "Template.TrapCategory",
+      "power" : 100
     }
-  } ], [ "room-2", {
+  } ], [ "level-dangerous", {
     "type" : "RandomizedTemplate",
     "data" : {
       "conduitLocations" : {
-        "_1" : 1,
-        "_2" : 1
+        "_1" : 0,
+        "_2" : 0
       },
       "shape" : {
         "type" : "Rectangle",
         "data" : {
-          "width" : 8,
-          "height" : 7,
-          "variance" : 0.3
+          "width" : 70,
+          "height" : 25,
+          "variance" : 0
         }
       },
-      "fill" : null,
-      "border" : "wall",
+      "fill" : "wall",
+      "border" : "wall-indestructible",
       "terrain" : null,
-      "templates" : [ ],
-      "id" : "room-2",
-      "features" : [ {
-        "type" : "RandomizedContentFeature",
-        "data" : {
-          "creatures" : [ {
-            "selection" : {
-              "type" : "ContentSelection.ThemeCreature",
-              "data" : {
-                "power" : [ "CombatPower.Low", "CombatPower.Medium" ]
-              }
-            },
-            "distribution" : {
-              "type" : "Distribution.Uniform",
-              "data" : {
-                "min" : 0,
-                "max" : 3
-              }
-            }
-          }, {
-            "selection" : {
-              "type" : "ContentSelection.ThemeCreature",
-              "data" : {
-                "power" : [ "CombatPower.High" ]
-              }
-            },
-            "distribution" : {
-              "type" : "Distribution.Binomial",
-              "data" : {
-                "p" : 25,
-                "n" : 1
-              }
-            }
-          } ],
-          "items" : [ {
-            "selection" : {
-              "type" : "ContentSelection.ThemeEquipment",
-              "data" : {
-                "power" : [ "CombatPower.Low" ],
-                "category" : [ ]
-              }
-            },
-            "distribution" : {
-              "type" : "Distribution.Binomial",
-              "data" : {
-                "p" : 35,
-                "n" : 2
-              }
-            }
-          } ],
-          "widgets" : [ {
-            "selection" : {
-              "type" : "ContentSelection.FixedWidget",
-              "data" : {
-                "kind" : "portal-enemy-widget-2"
-              }
-            },
-            "distribution" : {
-              "type" : "Distribution.Binomial",
-              "data" : {
-                "p" : 5,
-                "n" : 1
-              }
-            }
-          } ]
+      "templates" : [ {
+        "selection" : {
+          "type" : "ContentSelection.FixedTemplate",
+          "data" : {
+            "template" : "room-dangerous"
+          }
+        },
+        "distribution" : {
+          "type" : "Distribution.Uniform",
+          "data" : {
+            "min" : 4,
+            "max" : 4
+          }
+        }
+      }, {
+        "selection" : {
+          "type" : "ContentSelection.ThemeTemplate",
+          "data" : {
+            "category" : [ "Template.ChallengeCategory" ],
+            "power" : [ ]
+          }
+        },
+        "distribution" : {
+          "type" : "Distribution.Uniform",
+          "data" : {
+            "min" : 1,
+            "max" : 1
+          }
+        }
+      }, {
+        "selection" : {
+          "type" : "ContentSelection.ThemeTemplate",
+          "data" : {
+            "category" : [ "Template.TrapCategory" ],
+            "power" : [ ]
+          }
+        },
+        "distribution" : {
+          "type" : "Distribution.Uniform",
+          "data" : {
+            "min" : 1,
+            "max" : 1
+          }
+        }
+      }, {
+        "selection" : {
+          "type" : "ContentSelection.FixedTemplate",
+          "data" : {
+            "template" : "fake-stairs-room"
+          }
+        },
+        "distribution" : {
+          "type" : "Distribution.Uniform",
+          "data" : {
+            "min" : 1,
+            "max" : 1
+          }
+        }
+      }, {
+        "selection" : {
+          "type" : "ContentSelection.FixedTemplate",
+          "data" : {
+            "template" : "healing-chamber"
+          }
+        },
+        "distribution" : {
+          "type" : "Distribution.Uniform",
+          "data" : {
+            "min" : 1,
+            "max" : 1
+          }
         }
       } ],
-      "entrances" : [ {
-        "_1" : "door-closed",
-        "_2" : 1,
-        "_3" : 3
-      } ]
-    }
-  } ], [ "room-3", {
-    "type" : "RandomizedTemplate",
-    "data" : {
-      "conduitLocations" : {
-        "_1" : 1,
-        "_2" : 1
-      },
-      "shape" : {
-        "type" : "Rectangle",
-        "data" : {
-          "width" : 8,
-          "height" : 7,
-          "variance" : 0.3
-        }
-      },
-      "fill" : null,
-      "border" : "wall",
-      "terrain" : null,
-      "templates" : [ ],
-      "id" : "room-3",
+      "id" : "level-dangerous",
       "features" : [ {
         "type" : "RandomizedContentFeature",
         "data" : {
@@ -5348,22 +5337,8 @@
             "distribution" : {
               "type" : "Distribution.Uniform",
               "data" : {
-                "min" : 0,
-                "max" : 3
-              }
-            }
-          }, {
-            "selection" : {
-              "type" : "ContentSelection.ThemeCreature",
-              "data" : {
-                "power" : [ "CombatPower.High" ]
-              }
-            },
-            "distribution" : {
-              "type" : "Distribution.Binomial",
-              "data" : {
-                "p" : 25,
-                "n" : 1
+                "min" : 3,
+                "max" : 9
               }
             }
           } ],
@@ -5378,33 +5353,15 @@
             "distribution" : {
               "type" : "Distribution.Binomial",
               "data" : {
-                "p" : 35,
-                "n" : 2
+                "p" : 25,
+                "n" : 3
               }
             }
           } ],
-          "widgets" : [ {
-            "selection" : {
-              "type" : "ContentSelection.FixedWidget",
-              "data" : {
-                "kind" : "portal-enemy-widget-3"
-              }
-            },
-            "distribution" : {
-              "type" : "Distribution.Binomial",
-              "data" : {
-                "p" : 5,
-                "n" : 1
-              }
-            }
-          } ]
+          "widgets" : [ ]
         }
       } ],
-      "entrances" : [ {
-        "_1" : "door-closed",
-        "_2" : 1,
-        "_3" : 3
-      } ]
+      "entrances" : [ ]
     }
   } ], [ "fake-stairs-room", {
     "type" : "FixedTemplate",
@@ -5548,352 +5505,6 @@
         }, "pressure-plate-widget-hidden" ] ]
       },
       "id" : "fake-stairs-room"
-    }
-  } ], [ "room-rest", {
-    "type" : "RandomizedTemplate",
-    "data" : {
-      "conduitLocations" : {
-        "_1" : 1,
-        "_2" : 1
-      },
-      "shape" : {
-        "type" : "Rectangle",
-        "data" : {
-          "width" : 8,
-          "height" : 7,
-          "variance" : 0.3
-        }
-      },
-      "fill" : null,
-      "border" : "wall",
-      "terrain" : null,
-      "templates" : [ ],
-      "id" : "room-rest",
-      "features" : [ {
-        "type" : "RandomizedContentFeature",
-        "data" : {
-          "creatures" : [ {
-            "selection" : {
-              "type" : "ContentSelection.ThemeCreature",
-              "data" : {
-                "power" : [ "CombatPower.Low", "CombatPower.Medium" ]
-              }
-            },
-            "distribution" : {
-              "type" : "Distribution.Uniform",
-              "data" : {
-                "min" : 0,
-                "max" : 4
-              }
-            }
-          }, {
-            "selection" : {
-              "type" : "ContentSelection.ThemeCreature",
-              "data" : {
-                "power" : [ "CombatPower.High" ]
-              }
-            },
-            "distribution" : {
-              "type" : "Distribution.Binomial",
-              "data" : {
-                "p" : 25,
-                "n" : 1
-              }
-            }
-          } ],
-          "items" : [ {
-            "selection" : {
-              "type" : "ContentSelection.ThemeEquipment",
-              "data" : {
-                "power" : [ "CombatPower.Medium", "CombatPower.High" ],
-                "category" : [ ]
-              }
-            },
-            "distribution" : {
-              "type" : "Distribution.Binomial",
-              "data" : {
-                "p" : 35,
-                "n" : 2
-              }
-            }
-          } ],
-          "widgets" : [ {
-            "selection" : {
-              "type" : "ContentSelection.FixedWidget",
-              "data" : {
-                "kind" : "portal-enemy-widget-3"
-              }
-            },
-            "distribution" : {
-              "type" : "Distribution.Binomial",
-              "data" : {
-                "p" : 50,
-                "n" : 1
-              }
-            }
-          } ]
-        }
-      } ],
-      "entrances" : [ {
-        "_1" : "door-closed",
-        "_2" : 1,
-        "_3" : 3
-      } ]
-    }
-  } ], [ "level-1", {
-    "type" : "RandomizedTemplate",
-    "data" : {
-      "conduitLocations" : {
-        "_1" : 0,
-        "_2" : 0
-      },
-      "shape" : {
-        "type" : "Rectangle",
-        "data" : {
-          "width" : 70,
-          "height" : 25,
-          "variance" : 0
-        }
-      },
-      "fill" : "wall",
-      "border" : "wall-indestructible",
-      "terrain" : null,
-      "templates" : [ {
-        "_1" : "room-1",
-        "_2" : 4,
-        "_3" : 5
-      }, {
-        "_1" : "vault-1",
-        "_2" : 0,
-        "_3" : 1
-      }, {
-        "_1" : "portal-trap-room-1",
-        "_2" : 0,
-        "_3" : 1
-      }, {
-        "_1" : "corridor-trap-1",
-        "_2" : 0,
-        "_3" : 1
-      }, {
-        "_1" : "healing-chamber",
-        "_2" : 1,
-        "_3" : 1
-      } ],
-      "id" : "level-1",
-      "features" : [ {
-        "type" : "RandomizedContentFeature",
-        "data" : {
-          "creatures" : [ {
-            "selection" : {
-              "type" : "ContentSelection.ThemeCreature",
-              "data" : {
-                "power" : [ "CombatPower.Low", "CombatPower.Medium" ]
-              }
-            },
-            "distribution" : {
-              "type" : "Distribution.Uniform",
-              "data" : {
-                "min" : 0,
-                "max" : 6
-              }
-            }
-          }, {
-            "selection" : {
-              "type" : "ContentSelection.FixedCreature",
-              "data" : {
-                "kind" : "enemy-runner-1"
-              }
-            },
-            "distribution" : {
-              "type" : "Distribution.Uniform",
-              "data" : {
-                "min" : 3,
-                "max" : 3
-              }
-            }
-          } ],
-          "items" : [ {
-            "selection" : {
-              "type" : "ContentSelection.ThemeEquipment",
-              "data" : {
-                "power" : [ "CombatPower.Medium", "CombatPower.High" ],
-                "category" : [ ]
-              }
-            },
-            "distribution" : {
-              "type" : "Distribution.Binomial",
-              "data" : {
-                "p" : 25,
-                "n" : 3
-              }
-            }
-          } ],
-          "widgets" : [ ]
-        }
-      } ],
-      "entrances" : [ ]
-    }
-  } ], [ "level-2", {
-    "type" : "RandomizedTemplate",
-    "data" : {
-      "conduitLocations" : {
-        "_1" : 0,
-        "_2" : 0
-      },
-      "shape" : {
-        "type" : "Rectangle",
-        "data" : {
-          "width" : 70,
-          "height" : 25,
-          "variance" : 0
-        }
-      },
-      "fill" : "wall",
-      "border" : "wall-indestructible",
-      "terrain" : null,
-      "templates" : [ {
-        "_1" : "room-2",
-        "_2" : 4,
-        "_3" : 5
-      }, {
-        "_1" : "vault-2",
-        "_2" : 0,
-        "_3" : 1
-      }, {
-        "_1" : "portal-trap-room-2",
-        "_2" : 0,
-        "_3" : 1
-      }, {
-        "_1" : "corridor-trap-1",
-        "_2" : 0,
-        "_3" : 1
-      }, {
-        "_1" : "healing-chamber",
-        "_2" : 1,
-        "_3" : 1
-      } ],
-      "id" : "level-2",
-      "features" : [ {
-        "type" : "RandomizedContentFeature",
-        "data" : {
-          "creatures" : [ {
-            "selection" : {
-              "type" : "ContentSelection.ThemeCreature",
-              "data" : {
-                "power" : [ "CombatPower.Low", "CombatPower.Medium" ]
-              }
-            },
-            "distribution" : {
-              "type" : "Distribution.Uniform",
-              "data" : {
-                "min" : 0,
-                "max" : 6
-              }
-            }
-          } ],
-          "items" : [ {
-            "selection" : {
-              "type" : "ContentSelection.ThemeEquipment",
-              "data" : {
-                "power" : [ "CombatPower.Medium", "CombatPower.High" ],
-                "category" : [ ]
-              }
-            },
-            "distribution" : {
-              "type" : "Distribution.Binomial",
-              "data" : {
-                "p" : 25,
-                "n" : 3
-              }
-            }
-          } ],
-          "widgets" : [ ]
-        }
-      } ],
-      "entrances" : [ ]
-    }
-  } ], [ "level-3", {
-    "type" : "RandomizedTemplate",
-    "data" : {
-      "conduitLocations" : {
-        "_1" : 0,
-        "_2" : 0
-      },
-      "shape" : {
-        "type" : "Rectangle",
-        "data" : {
-          "width" : 70,
-          "height" : 25,
-          "variance" : 0
-        }
-      },
-      "fill" : "wall",
-      "border" : "wall-indestructible",
-      "terrain" : null,
-      "templates" : [ {
-        "_1" : "room-3",
-        "_2" : 4,
-        "_3" : 5
-      }, {
-        "_1" : "vault-3",
-        "_2" : 0,
-        "_3" : 1
-      }, {
-        "_1" : "portal-trap-room-3",
-        "_2" : 0,
-        "_3" : 1
-      }, {
-        "_1" : "corridor-trap-2",
-        "_2" : 0,
-        "_3" : 1
-      }, {
-        "_1" : "leech-room",
-        "_2" : 0,
-        "_3" : 1
-      }, {
-        "_1" : "healing-chamber",
-        "_2" : 1,
-        "_3" : 1
-      } ],
-      "id" : "level-3",
-      "features" : [ {
-        "type" : "RandomizedContentFeature",
-        "data" : {
-          "creatures" : [ {
-            "selection" : {
-              "type" : "ContentSelection.ThemeCreature",
-              "data" : {
-                "power" : [ "CombatPower.Low", "CombatPower.Medium" ]
-              }
-            },
-            "distribution" : {
-              "type" : "Distribution.Uniform",
-              "data" : {
-                "min" : 0,
-                "max" : 6
-              }
-            }
-          } ],
-          "items" : [ {
-            "selection" : {
-              "type" : "ContentSelection.ThemeEquipment",
-              "data" : {
-                "power" : [ "CombatPower.Medium", "CombatPower.High" ],
-                "category" : [ ]
-              }
-            },
-            "distribution" : {
-              "type" : "Distribution.Binomial",
-              "data" : {
-                "p" : 25,
-                "n" : 3
-              }
-            }
-          } ],
-          "widgets" : [ ]
-        }
-      } ],
-      "entrances" : [ ]
     }
   } ], [ "healing-chamber", {
     "type" : "FixedTemplate",
@@ -6926,6 +6537,113 @@
         }, "pressure-plate-widget-hidden" ] ]
       },
       "id" : "conduit-room-2"
+    }
+  } ], [ "room-default", {
+    "type" : "RandomizedTemplate",
+    "data" : {
+      "conduitLocations" : {
+        "_1" : 1,
+        "_2" : 1
+      },
+      "shape" : {
+        "type" : "Rectangle",
+        "data" : {
+          "width" : 8,
+          "height" : 7,
+          "variance" : 0.3
+        }
+      },
+      "fill" : null,
+      "border" : "wall",
+      "terrain" : null,
+      "templates" : [ ],
+      "id" : "room-default",
+      "features" : [ {
+        "type" : "RandomizedContentFeature",
+        "data" : {
+          "creatures" : [ {
+            "selection" : {
+              "type" : "ContentSelection.ThemeCreature",
+              "data" : {
+                "power" : [ "CombatPower.Low", "CombatPower.Medium" ]
+              }
+            },
+            "distribution" : {
+              "type" : "Distribution.Uniform",
+              "data" : {
+                "min" : 0,
+                "max" : 3
+              }
+            }
+          }, {
+            "selection" : {
+              "type" : "ContentSelection.ThemeCreature",
+              "data" : {
+                "power" : [ "CombatPower.High" ]
+              }
+            },
+            "distribution" : {
+              "type" : "Distribution.Binomial",
+              "data" : {
+                "p" : 25,
+                "n" : 1
+              }
+            }
+          } ],
+          "items" : [ {
+            "selection" : {
+              "type" : "ContentSelection.ThemeEquipment",
+              "data" : {
+                "power" : [ "CombatPower.Medium", "CombatPower.High" ],
+                "category" : [ ]
+              }
+            },
+            "distribution" : {
+              "type" : "Distribution.Binomial",
+              "data" : {
+                "p" : 35,
+                "n" : 2
+              }
+            }
+          }, {
+            "selection" : {
+              "type" : "ContentSelection.ThemeItem",
+              "data" : {
+                "category" : [ "ItemKind.UtilityCategory" ],
+                "power" : [ "CombatPower.Low", "CombatPower.Medium" ]
+              }
+            },
+            "distribution" : {
+              "type" : "Distribution.Binomial",
+              "data" : {
+                "p" : 10,
+                "n" : 1
+              }
+            }
+          } ],
+          "widgets" : [ {
+            "selection" : {
+              "type" : "ContentSelection.ThemeWidget",
+              "data" : {
+                "category" : [ "WidgetKind.PortalCategory" ],
+                "power" : [ ]
+              }
+            },
+            "distribution" : {
+              "type" : "Distribution.Binomial",
+              "data" : {
+                "p" : 5,
+                "n" : 1
+              }
+            }
+          } ]
+        }
+      } ],
+      "entrances" : [ {
+        "_1" : "door-closed",
+        "_2" : 1,
+        "_3" : 3
+      } ]
     }
   } ], [ "conduit-room-3", {
     "type" : "FixedTemplate",
@@ -8268,7 +7986,9 @@
           "y" : 3
         }, "pressure-plate-widget-hidden" ] ]
       },
-      "id" : "corridor-trap-1"
+      "id" : "corridor-trap-1",
+      "category" : "Template.TrapCategory",
+      "power" : 0
     }
   } ], [ "corridor-trap-2", {
     "type" : "FixedTemplate",
@@ -8423,7 +8143,9 @@
           "y" : 3
         }, "pressure-plate-widget-hidden" ] ]
       },
-      "id" : "corridor-trap-2"
+      "id" : "corridor-trap-2",
+      "category" : "Template.TrapCategory",
+      "power" : 50
     }
   } ], [ "vault-1", {
     "type" : "FixedTemplate",
@@ -8644,7 +8366,9 @@
         }, "wall-reinforced" ] ],
         "widgets" : [ ]
       },
-      "id" : "vault-1"
+      "id" : "vault-1",
+      "category" : "Template.ChallengeCategory",
+      "power" : 0
     }
   } ], [ "leech-room", {
     "type" : "FixedTemplate",
@@ -8922,7 +8646,9 @@
           "y" : 3
         }, "pressure-plate-widget-hidden" ] ]
       },
-      "id" : "leech-room"
+      "id" : "leech-room",
+      "category" : "Template.ChallengeCategory",
+      "power" : 100
     }
   } ], [ "vault-2", {
     "type" : "FixedTemplate",
@@ -9143,7 +8869,140 @@
         }, "wall-reinforced" ] ],
         "widgets" : [ ]
       },
-      "id" : "vault-2"
+      "id" : "vault-2",
+      "category" : "Template.ChallengeCategory",
+      "power" : 50
+    }
+  } ], [ "level-default", {
+    "type" : "RandomizedTemplate",
+    "data" : {
+      "conduitLocations" : {
+        "_1" : 0,
+        "_2" : 0
+      },
+      "shape" : {
+        "type" : "Rectangle",
+        "data" : {
+          "width" : 70,
+          "height" : 25,
+          "variance" : 0
+        }
+      },
+      "fill" : "wall",
+      "border" : "wall-indestructible",
+      "terrain" : null,
+      "templates" : [ {
+        "selection" : {
+          "type" : "ContentSelection.FixedTemplate",
+          "data" : {
+            "template" : "room-default"
+          }
+        },
+        "distribution" : {
+          "type" : "Distribution.Uniform",
+          "data" : {
+            "min" : 4,
+            "max" : 5
+          }
+        }
+      }, {
+        "selection" : {
+          "type" : "ContentSelection.ThemeTemplate",
+          "data" : {
+            "category" : [ "Template.ChallengeCategory" ],
+            "power" : [ ]
+          }
+        },
+        "distribution" : {
+          "type" : "Distribution.Uniform",
+          "data" : {
+            "min" : 0,
+            "max" : 1
+          }
+        }
+      }, {
+        "selection" : {
+          "type" : "ContentSelection.ThemeTemplate",
+          "data" : {
+            "category" : [ "Template.TrapCategory" ],
+            "power" : [ ]
+          }
+        },
+        "distribution" : {
+          "type" : "Distribution.Uniform",
+          "data" : {
+            "min" : 0,
+            "max" : 2
+          }
+        }
+      }, {
+        "selection" : {
+          "type" : "ContentSelection.FixedTemplate",
+          "data" : {
+            "template" : "healing-chamber"
+          }
+        },
+        "distribution" : {
+          "type" : "Distribution.Uniform",
+          "data" : {
+            "min" : 1,
+            "max" : 1
+          }
+        }
+      } ],
+      "id" : "level-default",
+      "features" : [ {
+        "type" : "RandomizedContentFeature",
+        "data" : {
+          "creatures" : [ {
+            "selection" : {
+              "type" : "ContentSelection.ThemeCreature",
+              "data" : {
+                "power" : [ "CombatPower.Low", "CombatPower.Medium" ]
+              }
+            },
+            "distribution" : {
+              "type" : "Distribution.Uniform",
+              "data" : {
+                "min" : 0,
+                "max" : 6
+              }
+            }
+          }, {
+            "selection" : {
+              "type" : "ContentSelection.FixedCreature",
+              "data" : {
+                "kind" : "enemy-runner-1"
+              }
+            },
+            "distribution" : {
+              "type" : "Distribution.Uniform",
+              "data" : {
+                "min" : 3,
+                "max" : 3
+              }
+            }
+          } ],
+          "items" : [ {
+            "selection" : {
+              "type" : "ContentSelection.ThemeEquipment",
+              "data" : {
+                "power" : [ "CombatPower.Medium", "CombatPower.High" ],
+                "category" : [ ]
+              }
+            },
+            "distribution" : {
+              "type" : "Distribution.Binomial",
+              "data" : {
+                "p" : 25,
+                "n" : 3
+              }
+            }
+          } ],
+          "widgets" : [ ]
+        }
+      } ],
+      "entrances" : [ ]
     }
   } ], [ "vault-3", {
     "type" : "FixedTemplate",
@@ -9364,48 +9223,30 @@
         }, "wall-reinforced" ] ],
         "widgets" : [ ]
       },
-      "id" : "vault-3"
+      "id" : "vault-3",
+      "power" : 100,
+      "category" : "Template.ChallengeCategory"
     }
-  } ], [ "level-rest", {
+  } ], [ "room-dangerous", {
     "type" : "RandomizedTemplate",
     "data" : {
       "conduitLocations" : {
-        "_1" : 0,
-        "_2" : 0
+        "_1" : 1,
+        "_2" : 1
       },
       "shape" : {
         "type" : "Rectangle",
         "data" : {
-          "width" : 70,
-          "height" : 25,
-          "variance" : 0
+          "width" : 8,
+          "height" : 7,
+          "variance" : 0.3
         }
       },
-      "fill" : "wall",
-      "border" : "wall-indestructible",
+      "fill" : null,
+      "border" : "wall",
       "terrain" : null,
-      "templates" : [ {
-        "_1" : "room-rest",
-        "_2" : 4,
-        "_3" : 4
-      }, {
-        "_1" : "vault-3",
-        "_2" : 1,
-        "_3" : 1
-      }, {
-        "_1" : "portal-trap-room-3",
-        "_2" : 1,
-        "_3" : 1
-      }, {
-        "_1" : "healing-chamber",
-        "_2" : 1,
-        "_3" : 1
-      }, {
-        "_1" : "fake-stairs-room",
-        "_2" : 1,
-        "_3" : 1
-      } ],
-      "id" : "level-rest",
+      "templates" : [ ],
+      "id" : "room-dangerous",
       "features" : [ {
         "type" : "RandomizedContentFeature",
         "data" : {
@@ -9419,8 +9260,22 @@
             "distribution" : {
               "type" : "Distribution.Uniform",
               "data" : {
-                "min" : 3,
-                "max" : 9
+                "min" : 0,
+                "max" : 3
+              }
+            }
+          }, {
+            "selection" : {
+              "type" : "ContentSelection.ThemeCreature",
+              "data" : {
+                "power" : [ "CombatPower.High" ]
+              }
+            },
+            "distribution" : {
+              "type" : "Distribution.Binomial",
+              "data" : {
+                "p" : 25,
+                "n" : 1
               }
             }
           } ],
@@ -9435,15 +9290,49 @@
             "distribution" : {
               "type" : "Distribution.Binomial",
               "data" : {
-                "p" : 25,
-                "n" : 3
+                "p" : 35,
+                "n" : 2
+              }
+            }
+          }, {
+            "selection" : {
+              "type" : "ContentSelection.ThemeItem",
+              "data" : {
+                "category" : [ "ItemKind.UtilityCategory" ],
+                "power" : [ "CombatPower.Low", "CombatPower.Medium" ]
+              }
+            },
+            "distribution" : {
+              "type" : "Distribution.Binomial",
+              "data" : {
+                "p" : 10,
+                "n" : 1
               }
             }
           } ],
-          "widgets" : [ ]
+          "widgets" : [ {
+            "selection" : {
+              "type" : "ContentSelection.ThemeWidget",
+              "data" : {
+                "category" : [ "WidgetKind.PortalCategory" ],
+                "power" : [ ]
+              }
+            },
+            "distribution" : {
+              "type" : "Distribution.Binomial",
+              "data" : {
+                "p" : 75,
+                "n" : 1
+              }
+            }
+          } ]
         }
       } ],
-      "entrances" : [ ]
+      "entrances" : [ {
+        "_1" : "door-closed",
+        "_2" : 1,
+        "_3" : 3
+      } ]
     }
   } ], [ "portal-trap-room-1", {
     "type" : "FixedTemplate",
@@ -9589,7 +9478,9 @@
           "y" : 3
         }, "pressure-plate-widget-hidden" ] ]
       },
-      "id" : "portal-trap-room-1"
+      "id" : "portal-trap-room-1",
+      "category" : "Template.TrapCategory",
+      "power" : 0
     }
   } ], [ "portal-trap-room-2", {
     "type" : "FixedTemplate",
@@ -9735,121 +9626,180 @@
           "y" : 3
         }, "pressure-plate-widget-hidden" ] ]
       },
-      "id" : "portal-trap-room-2"
-    }
-  } ], [ "room-1", {
-    "type" : "RandomizedTemplate",
-    "data" : {
-      "conduitLocations" : {
-        "_1" : 1,
-        "_2" : 1
-      },
-      "shape" : {
-        "type" : "Rectangle",
-        "data" : {
-          "width" : 8,
-          "height" : 7,
-          "variance" : 0.3
-        }
-      },
-      "fill" : null,
-      "border" : "wall",
-      "terrain" : null,
-      "templates" : [ ],
-      "id" : "room-1",
-      "features" : [ {
-        "type" : "RandomizedContentFeature",
-        "data" : {
-          "creatures" : [ {
-            "selection" : {
-              "type" : "ContentSelection.ThemeCreature",
-              "data" : {
-                "power" : [ "CombatPower.Low", "CombatPower.Medium" ]
-              }
-            },
-            "distribution" : {
-              "type" : "Distribution.Uniform",
-              "data" : {
-                "min" : 0,
-                "max" : 3
-              }
-            }
-          }, {
-            "selection" : {
-              "type" : "ContentSelection.ThemeCreature",
-              "data" : {
-                "power" : [ "CombatPower.High" ]
-              }
-            },
-            "distribution" : {
-              "type" : "Distribution.Binomial",
-              "data" : {
-                "p" : 25,
-                "n" : 1
-              }
-            }
-          } ],
-          "items" : [ {
-            "selection" : {
-              "type" : "ContentSelection.ThemeEquipment",
-              "data" : {
-                "power" : [ "CombatPower.Medium", "CombatPower.High" ],
-                "category" : [ ]
-              }
-            },
-            "distribution" : {
-              "type" : "Distribution.Binomial",
-              "data" : {
-                "p" : 35,
-                "n" : 2
-              }
-            }
-          }, {
-            "selection" : {
-              "type" : "ContentSelection.ThemeItem",
-              "data" : {
-                "category" : [ "ItemKind.UtilityCategory" ],
-                "power" : [ "CombatPower.Low", "CombatPower.Medium" ]
-              }
-            },
-            "distribution" : {
-              "type" : "Distribution.Binomial",
-              "data" : {
-                "p" : 10,
-                "n" : 1
-              }
-            }
-          } ],
-          "widgets" : [ {
-            "selection" : {
-              "type" : "ContentSelection.FixedWidget",
-              "data" : {
-                "kind" : "portal-enemy-widget-1"
-              }
-            },
-            "distribution" : {
-              "type" : "Distribution.Binomial",
-              "data" : {
-                "p" : 5,
-                "n" : 1
-              }
-            }
-          } ]
-        }
-      } ],
-      "entrances" : [ {
-        "_1" : "door-closed",
-        "_2" : 1,
-        "_3" : 3
-      } ]
+      "id" : "portal-trap-room-2",
+      "category" : "Template.TrapCategory",
+      "power" : 50
     }
   } ] ],
   "themes" : [ [ "theme-1", {
-    "creatures" : [ "enemy-assaulter-1", "enemy-assaulter-2", "enemy-assaulter-3", "enemy-brawler-1", "enemy-brawler-2", "enemy-brawler-3", "enemy-brute-1", "enemy-brute-2", "enemy-brute-3", "enemy-shooter-1", "enemy-shooter-2", "enemy-shooter-3", "enemy-sniper-1", "enemy-sniper-2", "enemy-sniper-3" ],
-    "items" : [ "armor-chest-1", "armor-chest-2", "armor-foot-1", "armor-foot-2", "armor-hand-1", "armor-hand-2", "armor-head-1", "armor-head-2", "shield-deflector-1", "shield-deflector-2", "weapon-blade-1", "weapon-blade-2", "weapon-rifle-1", "weapon-rifle-2", "friend-drone-1", "weapon-missile-launcher-guided-1", "armor-chest-3", "armor-foot-3", "armor-hand-3", "armor-head-3", "shield-deflector-3", "weapon-blade-3", "weapon-rifle-3", "friend-drone-2", "friend-drone-3", "weapon-missile-launcher-guided-2", "weapon-missile-launcher-guided-3" ],
+    "creatures" : [ {
+      "weight" : 100,
+      "value" : "enemy-assaulter-1"
+    }, {
+      "weight" : 100,
+      "value" : "enemy-assaulter-2"
+    }, {
+      "weight" : 100,
+      "value" : "enemy-assaulter-3"
+    }, {
+      "weight" : 100,
+      "value" : "enemy-brawler-1"
+    }, {
+      "weight" : 100,
+      "value" : "enemy-brawler-2"
+    }, {
+      "weight" : 100,
+      "value" : "enemy-brawler-3"
+    }, {
+      "weight" : 100,
+      "value" : "enemy-brute-1"
+    }, {
+      "weight" : 100,
+      "value" : "enemy-brute-2"
+    }, {
+      "weight" : 100,
+      "value" : "enemy-brute-3"
+    }, {
+      "weight" : 100,
+      "value" : "enemy-shooter-1"
+    }, {
+      "weight" : 100,
+      "value" : "enemy-shooter-2"
+    }, {
+      "weight" : 100,
+      "value" : "enemy-shooter-3"
+    }, {
+      "weight" : 100,
+      "value" : "enemy-sniper-1"
+    }, {
+      "weight" : 100,
+      "value" : "enemy-sniper-2"
+    }, {
+      "weight" : 100,
+      "value" : "enemy-sniper-3"
+    } ],
+    "items" : [ {
+      "weight" : 100,
+      "value" : "armor-chest-1"
+    }, {
+      "weight" : 100,
+      "value" : "armor-chest-2"
+    }, {
+      "weight" : 100,
+      "value" : "armor-foot-1"
+    }, {
+      "weight" : 100,
+      "value" : "armor-foot-2"
+    }, {
+      "weight" : 100,
+      "value" : "armor-hand-1"
+    }, {
+      "weight" : 100,
+      "value" : "armor-hand-2"
+    }, {
+      "weight" : 100,
+      "value" : "armor-head-1"
+    }, {
+      "weight" : 100,
+      "value" : "armor-head-2"
+    }, {
+      "weight" : 100,
+      "value" : "shield-deflector-1"
+    }, {
+      "weight" : 100,
+      "value" : "shield-deflector-2"
+    }, {
+      "weight" : 100,
+      "value" : "weapon-blade-1"
+    }, {
+      "weight" : 100,
+      "value" : "weapon-blade-2"
+    }, {
+      "weight" : 100,
+      "value" : "weapon-rifle-1"
+    }, {
+      "weight" : 100,
+      "value" : "weapon-rifle-2"
+    }, {
+      "weight" : 100,
+      "value" : "friend-drone-1"
+    }, {
+      "weight" : 100,
+      "value" : "weapon-missile-launcher-guided-1"
+    }, {
+      "weight" : 100,
+      "value" : "armor-chest-3"
+    }, {
+      "weight" : 100,
+      "value" : "armor-foot-3"
+    }, {
+      "weight" : 100,
+      "value" : "armor-hand-3"
+    }, {
+      "weight" : 100,
+      "value" : "armor-head-3"
+    }, {
+      "weight" : 100,
+      "value" : "shield-deflector-3"
+    }, {
+      "weight" : 100,
+      "value" : "weapon-blade-3"
+    }, {
+      "weight" : 100,
+      "value" : "weapon-rifle-3"
+    }, {
+      "weight" : 100,
+      "value" : "friend-drone-2"
+    }, {
+      "weight" : 100,
+      "value" : "friend-drone-3"
+    }, {
+      "weight" : 100,
+      "value" : "weapon-missile-launcher-guided-2"
+    }, {
+      "weight" : 100,
+      "value" : "weapon-missile-launcher-guided-3"
+    } ],
     "terrain" : "floor",
     "door" : "door-closed",
     "id" : "theme-1",
-    "widgets" : [ ]
+    "widgets" : [ {
+      "value" : "portal-enemy-widget-1",
+      "weight" : 100
+    }, {
+      "value" : "portal-enemy-widget-2",
+      "weight" : 100
+    }, {
+      "value" : "portal-enemy-widget-3",
+      "weight" : 100
+    } ],
+    "templates" : [ {
+      "value" : "corridor-trap-1",
+      "weight" : 100
+    }, {
+      "value" : "corridor-trap-2",
+      "weight" : 100
+    }, {
+      "value" : "leech-room",
+      "weight" : 100
+    }, {
+      "value" : "portal-trap-room-1",
+      "weight" : 100
+    }, {
+      "value" : "portal-trap-room-2",
+      "weight" : 100
+    }, {
+      "value" : "portal-trap-room-3",
+      "weight" : 100
+    }, {
+      "value" : "vault-1",
+      "weight" : 100
+    }, {
+      "value" : "vault-2",
+      "weight" : 100
+    }, {
+      "value" : "vault-3",
+      "weight" : 100
+    } ]
   } ] ]
 }

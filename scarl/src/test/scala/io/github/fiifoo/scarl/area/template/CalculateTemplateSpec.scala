@@ -5,6 +5,7 @@ import io.github.fiifoo.scarl.area.theme.{Theme, ThemeId}
 import io.github.fiifoo.scarl.area.{Area, AreaId}
 import io.github.fiifoo.scarl.core.geometry.Location
 import io.github.fiifoo.scarl.core.kind.{ItemKindId, TerrainKindId}
+import io.github.fiifoo.scarl.core.math.Distribution
 import io.github.fiifoo.scarl.world.WorldAssets
 import org.scalatest._
 
@@ -23,8 +24,14 @@ class CalculateTemplateSpec extends FlatSpec with Matchers {
       id = TemplateId("main"),
       shape = Rectangle(80, 25, 0),
       templates = List(
-        (TemplateId("fixed-sub"), 1, 1),
-        (TemplateId("random-sub-1"), 1, 1)
+        ContentSource.TemplateSource(
+          ContentSelection.FixedTemplate(TemplateId("fixed-sub")),
+          Distribution.Uniform(1, 1)
+        ),
+        ContentSource.TemplateSource(
+          ContentSelection.FixedTemplate(TemplateId("random-sub-1")),
+          Distribution.Uniform(1, 1)
+        )
       )
     )
     val t2 = FixedTemplate(

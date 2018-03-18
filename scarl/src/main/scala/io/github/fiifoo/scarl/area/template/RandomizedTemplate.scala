@@ -4,8 +4,8 @@ import io.github.fiifoo.scarl.area.Area
 import io.github.fiifoo.scarl.area.feature.{Feature, Utils}
 import io.github.fiifoo.scarl.area.shape.Shape
 import io.github.fiifoo.scarl.area.template.ContentSelection.FixedItem
-import io.github.fiifoo.scarl.area.template.ContentSource.ItemSource
-import io.github.fiifoo.scarl.area.template.Template.Result
+import io.github.fiifoo.scarl.area.template.ContentSource.{ItemSource, TemplateSource}
+import io.github.fiifoo.scarl.area.template.Template.{Category, Result}
 import io.github.fiifoo.scarl.core.geometry.Location
 import io.github.fiifoo.scarl.core.kind._
 import io.github.fiifoo.scarl.core.math.Distribution.Uniform
@@ -16,10 +16,12 @@ import scala.util.Random
 
 case class RandomizedTemplate(id: TemplateId,
                               shape: Shape,
+                              category: Option[Category] = None,
+                              power: Option[Int] = None,
                               border: Option[WallKindId] = None,
                               fill: Option[WallKindId] = None,
                               terrain: Option[TerrainKindId] = None,
-                              templates: List[(TemplateId, Int, Int)] = List(),
+                              templates: List[TemplateSource] = List(),
                               entrances: List[(Option[ItemKindId], Int, Int)] = List(),
                               conduitLocations: (Int, Int) = (0, 0),
                               features: List[Feature] = List(),
@@ -58,9 +60,9 @@ case class RandomizedTemplate(id: TemplateId,
                                     random: Random
                                    ): Map[Location, Result] = {
 
-    val subResults = templates flatMap (definition => {
-      val (sub, min, max) = definition
-      val range = Rng.nextRange(random, min, max)
+    val subResults = templates flatMap (source => {
+      val sub = source(assets, area, random)
+      val range = Rng.nextRange(random, source.distribution)
 
       range map (_ => sub(assets.templates)(assets, area, random))
     })

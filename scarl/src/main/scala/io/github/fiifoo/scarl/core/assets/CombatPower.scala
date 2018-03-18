@@ -1,5 +1,6 @@
 package io.github.fiifoo.scarl.core.assets
 
+import io.github.fiifoo.scarl.area.template.{Template, TemplateId}
 import io.github.fiifoo.scarl.core.item.Equipment
 import io.github.fiifoo.scarl.core.kind._
 
@@ -9,6 +10,7 @@ object CombatPower {
   type Equipment = Map[Equipment.Category, Map[ItemKindId, Int]]
   type Item = Map[ItemKind.Category, Map[ItemKindId, Int]]
   type Widget = Map[WidgetKind.Category, Map[WidgetKindId, Int]]
+  type Template = Map[Template.Category, Map[TemplateId, Int]]
 
   sealed trait Category
 
@@ -34,4 +36,5 @@ case class CombatPower(average: CombatPower.Average = Map(),
                        equipment: CombatPower.Equipment = Map(),
                        item: CombatPower.Item = Map(),
                        widget: CombatPower.Widget = Map(),
+                       template: CombatPower.Template = Map()
                       )

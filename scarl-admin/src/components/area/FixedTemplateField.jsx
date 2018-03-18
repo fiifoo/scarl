@@ -3,7 +3,7 @@ import FilteredFormField from '../field/FilteredFormField.jsx'
 import FormRow from '../form/FormRow.jsx'
 import EditorContainer from '../../containers/EditorContainer'
 
-const formProperties = ['shape', 'features', 'content']
+const formProperties = ['shape', 'category', 'power', 'features', 'content']
 
 const FixedTemplateField = ({model, fieldType, path, value, common}) =>  (
     <div>

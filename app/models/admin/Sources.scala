@@ -5,21 +5,15 @@ import io.github.fiifoo.scarl.ai.tactic._
 import io.github.fiifoo.scarl.area.Area
 import io.github.fiifoo.scarl.area.feature.{Feature, RandomizedContentFeature}
 import io.github.fiifoo.scarl.area.shape.{Rectangle, Shape}
-import io.github.fiifoo.scarl.area.template.ContentSelection._
 import io.github.fiifoo.scarl.area.template.{ContentSelection, FixedTemplate, RandomizedTemplate, Template}
 import io.github.fiifoo.scarl.area.theme.Theme
 import io.github.fiifoo.scarl.core.ai.{Behavior, Strategy}
 import io.github.fiifoo.scarl.core.assets.CombatPower
 import io.github.fiifoo.scarl.core.communication.{Communication, Message}
-import io.github.fiifoo.scarl.core.creature.Missile.{Guided, Smart}
 import io.github.fiifoo.scarl.core.creature.{CreaturePower, Faction, Missile, Progression}
-import io.github.fiifoo.scarl.core.item.Equipment._
 import io.github.fiifoo.scarl.core.item._
-import io.github.fiifoo.scarl.core.kind.ItemKind.UtilityCategory
-import io.github.fiifoo.scarl.core.kind.WidgetKind.{HealCategory, PortalCategory, TrapCategory}
 import io.github.fiifoo.scarl.core.kind._
 import io.github.fiifoo.scarl.core.math.Distribution
-import io.github.fiifoo.scarl.core.math.Distribution.{Binomial, Uniform}
 import io.github.fiifoo.scarl.mechanism.{CreateEntityMechanism, RemoveWallMechanism, UseDoorMechanism}
 import io.github.fiifoo.scarl.power.{TransformCreaturePower, TransformItemPower}
 import io.github.fiifoo.scarl.widget._
@@ -83,19 +77,24 @@ object Sources {
     ), objectPolymorphism = true),
 
     SubModelSource(typeOf[ContentSelection.CreatureSelection], List(
-      typeOf[ThemeCreature],
-      typeOf[FixedCreature],
+      typeOf[ContentSelection.ThemeCreature],
+      typeOf[ContentSelection.FixedCreature],
     )),
 
     SubModelSource(typeOf[ContentSelection.ItemSelection], List(
-      typeOf[ThemeItem],
-      typeOf[ThemeEquipment],
-      typeOf[FixedItem],
+      typeOf[ContentSelection.ThemeItem],
+      typeOf[ContentSelection.ThemeEquipment],
+      typeOf[ContentSelection.FixedItem],
+    )),
+
+    SubModelSource(typeOf[ContentSelection.TemplateSelection], List(
+      typeOf[ContentSelection.ThemeTemplate],
+      typeOf[ContentSelection.FixedTemplate],
     )),
 
     SubModelSource(typeOf[ContentSelection.WidgetSelection], List(
-      typeOf[ThemeWidget],
-      typeOf[FixedWidget],
+      typeOf[ContentSelection.ThemeWidget],
+      typeOf[ContentSelection.FixedWidget],
     )),
 
     SubModelSource(typeOf[CreaturePower], List(
@@ -108,37 +107,37 @@ object Sources {
     ), objectPolymorphism = true),
 
     SubModelSource(typeOf[Distribution], List(
-      typeOf[Binomial],
-      typeOf[Uniform],
+      typeOf[Distribution.Binomial],
+      typeOf[Distribution.Uniform],
     )),
 
     SubModelSource(typeOf[Equipment.ArmorSlot], List(
-      typeOf[HeadArmor.type],
-      typeOf[BodyArmor.type],
-      typeOf[HandArmor.type],
-      typeOf[FootArmor.type],
+      typeOf[Equipment.HeadArmor.type],
+      typeOf[Equipment.BodyArmor.type],
+      typeOf[Equipment.HandArmor.type],
+      typeOf[Equipment.FootArmor.type],
     ), objectPolymorphism = true),
 
     SubModelSource(typeOf[Equipment.Category], List(
-      typeOf[HeadArmorCategory.type],
-      typeOf[BodyArmorCategory.type],
-      typeOf[HandArmorCategory.type],
-      typeOf[FootArmorCategory.type],
-      typeOf[LauncherCategory.type],
-      typeOf[RangedWeaponCategory.type],
-      typeOf[ShieldCategory.type],
-      typeOf[WeaponCategory.type],
+      typeOf[Equipment.HeadArmorCategory.type],
+      typeOf[Equipment.BodyArmorCategory.type],
+      typeOf[Equipment.HandArmorCategory.type],
+      typeOf[Equipment.FootArmorCategory.type],
+      typeOf[Equipment.LauncherCategory.type],
+      typeOf[Equipment.RangedWeaponCategory.type],
+      typeOf[Equipment.ShieldCategory.type],
+      typeOf[Equipment.WeaponCategory.type],
     ), objectPolymorphism = true),
 
     SubModelSource(typeOf[Equipment.Slot], List(
-      typeOf[MainHand.type],
-      typeOf[OffHand.type],
-      typeOf[RangedSlot.type],
-      typeOf[LauncherSlot.type],
-      typeOf[HeadArmor.type],
-      typeOf[BodyArmor.type],
-      typeOf[HandArmor.type],
-      typeOf[FootArmor.type],
+      typeOf[Equipment.MainHand.type],
+      typeOf[Equipment.OffHand.type],
+      typeOf[Equipment.RangedSlot.type],
+      typeOf[Equipment.LauncherSlot.type],
+      typeOf[Equipment.HeadArmor.type],
+      typeOf[Equipment.BodyArmor.type],
+      typeOf[Equipment.HandArmor.type],
+      typeOf[Equipment.FootArmor.type],
     ), objectPolymorphism = true),
 
     SubModelSource(typeOf[Feature], List(
@@ -146,7 +145,7 @@ object Sources {
     )),
 
     SubModelSource(typeOf[ItemKind.Category], List(
-      typeOf[UtilityCategory.type],
+      typeOf[ItemKind.UtilityCategory.type],
     ), objectPolymorphism = true),
 
     SubModelSource(typeOf[ItemPower], List(
@@ -154,8 +153,8 @@ object Sources {
     )),
 
     SubModelSource(typeOf[Missile.Guidance], List(
-      typeOf[Guided.type],
-      typeOf[Smart.type],
+      typeOf[Missile.Guided.type],
+      typeOf[Missile.Smart.type],
     )),
 
     SubModelSource(typeOf[Mechanism], List(
@@ -173,10 +172,15 @@ object Sources {
       typeOf[RoamStrategy.type],
     )),
 
+    SubModelSource(typeOf[Template.Category], List(
+      typeOf[Template.ChallengeCategory.type],
+      typeOf[Template.TrapCategory.type],
+    ), objectPolymorphism = true),
+
     SubModelSource(typeOf[WidgetKind.Category], List(
-      typeOf[HealCategory.type],
-      typeOf[PortalCategory.type],
-      typeOf[TrapCategory.type],
+      typeOf[WidgetKind.HealCategory.type],
+      typeOf[WidgetKind.PortalCategory.type],
+      typeOf[WidgetKind.TrapCategory.type],
     ), objectPolymorphism = true),
 
   ).map(s => s.id -> s).toMap

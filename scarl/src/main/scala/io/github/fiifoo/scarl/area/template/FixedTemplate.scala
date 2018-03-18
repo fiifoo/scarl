@@ -3,7 +3,7 @@ package io.github.fiifoo.scarl.area.template
 import io.github.fiifoo.scarl.area.Area
 import io.github.fiifoo.scarl.area.feature.Feature
 import io.github.fiifoo.scarl.area.shape.Shape
-import io.github.fiifoo.scarl.area.template.Template.Result
+import io.github.fiifoo.scarl.area.template.Template.{Category, Result}
 import io.github.fiifoo.scarl.core.geometry.Location
 import io.github.fiifoo.scarl.core.kind._
 import io.github.fiifoo.scarl.world.WorldAssets
@@ -12,6 +12,8 @@ import scala.util.Random
 
 case class FixedTemplate(id: TemplateId,
                          shape: Shape,
+                         category: Option[Category] = None,
+                         power: Option[Int] = None,
                          templates: Map[Location, TemplateId] = Map(),
                          entrances: Map[Location, ItemKindId] = Map(),
                          features: List[Feature] = List(),

@@ -4,6 +4,7 @@ import java.nio.charset.StandardCharsets.UTF_8
 import java.nio.file.{Files, StandardOpenOption}
 
 import game.Simulations
+import io.github.fiifoo.scarl.area.template.Template
 import io.github.fiifoo.scarl.core.assets.CombatPower
 import io.github.fiifoo.scarl.core.item.Equipment
 import io.github.fiifoo.scarl.core.kind.{ItemKind, WidgetKind}
@@ -57,6 +58,7 @@ class AssetsRepository @Inject()(environment: Environment) {
       .copy(
         equipment = getEquipmentCombatPower(data),
         item = getItemCombatPower(data),
+        template = getTemplateCombatPower(data),
         widget = getWidgetCombatPower(data)
       )
   }
@@ -90,6 +92,18 @@ class AssetsRepository @Inject()(environment: Environment) {
       })
 
       category -> items
+    })).toMap
+  }
+
+  private def getTemplateCombatPower(data: Data): CombatPower.Template = {
+    (Template.categories map (category => {
+      val templates = data.templates filter (_._2.category contains category) flatMap (x => {
+        val (id, template) = x
+
+        template.power map (id -> _)
+      })
+
+      category -> templates
     })).toMap
   }
 
