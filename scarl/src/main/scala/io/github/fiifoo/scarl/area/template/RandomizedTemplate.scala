@@ -56,20 +56,22 @@ case class RandomizedTemplate(id: TemplateId,
 
   private def calculateSubTemplates(assets: WorldAssets,
                                     area: Area,
-                                    shapeResult: Shape.Result,
+                                    shape: Shape.Result,
                                     random: Random
                                    ): Map[Location, Result] = {
-
-    val subResults = templates flatMap (source => {
+    def calculate(source: TemplateSource): Iterable[Result] = {
       val sub = source(assets, area, random)
       val range = Rng.nextRange(random, source.distribution)
 
       range map (_ => sub(assets.templates)(assets, area, random))
-    })
+    }
+
+    val (optional, required) = this.templates partition (_.optional)
 
     CalculateTemplateLocations(
-      subResults,
-      shapeResult,
+      required flatMap calculate,
+      optional flatMap calculate,
+      shape,
       random
     )
   }

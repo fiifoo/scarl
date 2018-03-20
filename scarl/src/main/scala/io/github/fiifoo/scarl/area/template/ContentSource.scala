@@ -89,7 +89,8 @@ object ContentSource {
   }
 
   case class TemplateSource(selection: ContentSelection.TemplateSelection,
-                            distribution: Distribution
+                            distribution: Distribution,
+                            optional: Boolean = false,
                            ) extends ContentSource[TemplateId] {
     def apply(assets: WorldAssets, area: Area, random: Random): TemplateId = {
       selection match {

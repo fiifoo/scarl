@@ -12,31 +12,51 @@ object CalculateTemplateLocations {
   type Area = (Location, Location)
   type Areas = Set[Area]
 
-  def apply(templates: List[Template.Result],
+  def apply(required: List[Template.Result],
+            optional: List[Template.Result],
             shape: Shape.Result,
             random: Random
            ): Results = {
 
+    val calculateRequired = calculateTemplates(required.sortWith(sort), random, required = true) _
+    val calculateOptional = calculateTemplates(optional.sortWith(sort), random, required = false) _
+
     val area = (Location(1, 1), Location(shape.innerWidth - 1, shape.innerHeight - 1))
-    val sorted = templates.sortWith((a, b) => {
-      a.shape.outerWidth + a.shape.outerHeight > b.shape.outerWidth + b.shape.outerHeight
-    })
-    val foldTemplates = sorted.foldLeft[(Results, Areas)]((Map(), Set(area))) _
-
-    val (results, _) = foldTemplates((carry, template) => {
-      val (results, areas) = carry
-
-      val width = template.shape.outerWidth
-      val height = template.shape.outerHeight
-      val (location, nextAreas) = seek(width, height, areas, random)
-
-      (results + (location -> template), nextAreas)
-    })
+    val (results, _) = calculateOptional(calculateRequired((Map(), Set(area))))
 
     results
   }
 
-  private def seek(width: Int, height: Int, areas: Areas, random: Random): (Location, Areas) = {
+  private def sort(a: Template.Result, b: Template.Result): Boolean = {
+    a.shape.outerWidth + a.shape.outerHeight > b.shape.outerWidth + b.shape.outerHeight
+  }
+
+  private def calculateTemplates(templates: List[Template.Result], random: Random, required: Boolean)
+                                (carry: (Results, Areas)): (Results, Areas) = {
+    (templates foldLeft carry) (calculateTemplate(random, required))
+  }
+
+  private def calculateTemplate(random: Random, required: Boolean)
+                               (carry: (Results, Areas), template: Template.Result): (Results, Areas) = {
+    val (results, areas) = carry
+
+    val width = template.shape.outerWidth
+    val height = template.shape.outerHeight
+
+    seek(width, height, areas, random) map (result => {
+      val (location, nextAreas) = result
+
+      (results + (location -> template), nextAreas)
+    }) getOrElse {
+      if (required) {
+        throw new CalculateFailedException
+      }
+
+      (results, areas)
+    }
+  }
+
+  private def seek(width: Int, height: Int, areas: Areas, random: Random): Option[(Location, Areas)] = {
     val validAreas = areas filter (area => {
       val (a, b) = area
 
@@ -44,15 +64,15 @@ object CalculateTemplateLocations {
     })
 
     if (validAreas.isEmpty) {
-      throw new CalculateFailedException
+      None
+    } else {
+      val area = Rng.nextChoice(random, validAreas)
+      val location = getLocation(width, height, area, random)
+      val used = (location, Location(location.x + width, location.y + height))
+      val nextAreas = calculateNextAreas(areas, area, used)
+
+      Some((location, nextAreas))
     }
-
-    val area = Rng.nextChoice(random, validAreas)
-    val location = getLocation(width, height, area, random)
-    val used = (location, Location(location.x + width, location.y + height))
-    val nextAreas = calculateNextAreas(areas, area, used)
-
-    (location, nextAreas)
   }
 
   private def calculateNextAreas(areas: Areas, current: Area, used: Area): Areas = {
