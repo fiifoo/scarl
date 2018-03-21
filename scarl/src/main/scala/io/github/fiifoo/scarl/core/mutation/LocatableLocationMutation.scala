@@ -19,7 +19,7 @@ case class LocatableLocationMutation(locatable: LocatableId, location: Location)
 
   private def mutateIndex(s: State, previous: Locatable, next: Locatable): State.Index = {
     locatable match {
-      case _: ContainerId => throw new Exception("Mutating location trigger index not implemented. Moving container not allowed without it.")
+      case _: ContainerId => throw new Exception("Moving container not allowed (unsupported index mutations: location triggers, sector items).")
       case _ =>
     }
 

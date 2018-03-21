@@ -36,6 +36,13 @@ case class NewEntityIndexMutation(entity: Entity) {
         case creature: Creature => CreatureSectorIndexAddMutation(creature.id, Sector(s)(creature.location))(index.sectorCreatures)
         case _ => index.sectorCreatures
       },
+      sectorItems = entity match {
+        case item: Item => item.container match {
+          case container: ContainerId => ItemSectorIndexAddMutation(item.id, Sector(s)(container(s).location))(index.sectorItems)
+          case _ => index.sectorItems
+        }
+        case _ => index.sectorItems
+      },
       targetStatuses = entity match {
         case status: Status => StatusTargetIndexAddMutation(status.id, status.target)(index.targetStatuses)
         case _ => index.targetStatuses

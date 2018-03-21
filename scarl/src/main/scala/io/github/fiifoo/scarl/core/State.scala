@@ -33,6 +33,7 @@ object State {
                    locationTriggers: Map[Location, Set[TriggerStatusId]] = Map(),
                    partyMembers: Map[Party, Set[CreatureId]] = Map(),
                    sectorCreatures: Map[Sector, Set[CreatureId]] = Map(),
+                   sectorItems: Map[Sector, Set[ItemId]] = Map(),
                    targetStatuses: Map[EntityId, Set[StatusId]] = Map(),
                   )
 
