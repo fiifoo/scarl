@@ -5,7 +5,7 @@ import io.github.fiifoo.scarl.core.effect.{Effect, EffectResult}
 import io.github.fiifoo.scarl.core.entity.Selectors.hasKey
 import io.github.fiifoo.scarl.core.entity.{CreatureId, ItemId}
 import io.github.fiifoo.scarl.core.item.PrivateKey
-import io.github.fiifoo.scarl.core.mutation.ItemLockMutation
+import io.github.fiifoo.scarl.core.mutation.ItemLockedMutation
 import io.github.fiifoo.scarl.effect.creature.ReceiveKeyEffect
 
 case class LockItemEffect(target: ItemId,
@@ -23,7 +23,7 @@ case class LockItemEffect(target: ItemId,
     }
 
     EffectResult(
-      ItemLockMutation(target, Some(key)),
+      ItemLockedMutation(target, Some(key)),
       List(receiveKey).flatten
     )
   }

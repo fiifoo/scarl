@@ -16,7 +16,7 @@ case class UseItemEffect(user: CreatureId,
     val item = target(s)
 
     item.usable map (power => {
-      item.lock flatMap (lock => {
+      item.locked flatMap (lock => {
         if (hasKey(s)(user)(lock)) {
           None
         } else {

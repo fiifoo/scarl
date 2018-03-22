@@ -29,7 +29,7 @@ case class UseDoorEffect(user: Option[CreatureId],
         DoorBlockedEffect(user, target, obstacle, location, Some(this))
       )
     }) getOrElse {
-      item.lock flatMap (lock => {
+      item.locked flatMap (lock => {
         user flatMap (user => {
           if (hasKey(s)(user)(lock)) {
             None

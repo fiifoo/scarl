@@ -49,7 +49,7 @@ object Obstacle {
       val item = id(s)
 
       item.door.exists(door => {
-        !door.open && !(item.lock forall keys.contains)
+        !door.open && !(item.locked forall keys.contains)
       })
     })
   }

@@ -3588,7 +3588,7 @@
       "explosive" : null,
       "shield" : null,
       "hidden" : false,
-      "lock" : null,
+      "locked" : null,
       "name" : "Energy fence",
       "door" : {
         "open" : true,
@@ -3809,7 +3809,7 @@
       "explosive" : null,
       "shield" : null,
       "hidden" : false,
-      "lock" : null,
+      "locked" : null,
       "name" : "Energy fence",
       "door" : {
         "open" : false,
