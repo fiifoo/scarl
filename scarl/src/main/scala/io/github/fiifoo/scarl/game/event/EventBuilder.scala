@@ -10,7 +10,7 @@ import io.github.fiifoo.scarl.core.item.{KeyKindId, SharedKey}
 import io.github.fiifoo.scarl.core.kind._
 import io.github.fiifoo.scarl.effect.area.{ExplosiveTimerEffect, TransformBlockedEffect}
 import io.github.fiifoo.scarl.effect.combat._
-import io.github.fiifoo.scarl.effect.creature.{GainLevelEffect, HealEffect, ReceiveKeyEffect, ShortageEffect}
+import io.github.fiifoo.scarl.effect.creature._
 import io.github.fiifoo.scarl.effect.interact._
 import io.github.fiifoo.scarl.effect.movement.{CollideEffect, DisplaceEffect, MovedEffect}
 
@@ -39,6 +39,7 @@ class EventBuilder(s: State, player: CreatureId, fov: Set[Location]) {
       case e: CommunicateEffect => build(e) map GenericEvent
       case e: CreateEntityEffect => build(e) map GenericEvent
       case e: DeathEffect => build(e) map GenericEvent
+      case e: DetectEffect => build(e) map GenericEvent
       case e: DisplaceEffect => build(e) map GenericEvent
       case e: DoorBlockedEffect => build(e) map GenericEvent
       case e: DoorUsedEffect => build(e) map GenericEvent
@@ -137,6 +138,14 @@ class EventBuilder(s: State, player: CreatureId, fov: Set[Location]) {
       Some("You die...")
     } else if (fov contains effect.location) {
       Some(s"${kind(target)} is killed.")
+    } else {
+      None
+    }
+  }
+
+  private def build(effect: DetectEffect): Option[String] = {
+    if (effect.creature == player) {
+      Some(s"You detect ${kind(effect.item)}.")
     } else {
       None
     }

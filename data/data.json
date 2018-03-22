@@ -326,7 +326,8 @@
           "regen" : 0
         },
         "sight" : {
-          "range" : 10
+          "range" : 10,
+          "sensors" : 0
         },
         "armor" : 10
       }
@@ -400,7 +401,8 @@
           "regen" : 0
         },
         "sight" : {
-          "range" : 10
+          "range" : 10,
+          "sensors" : 10
         },
         "armor" : 5
       }
@@ -470,7 +472,8 @@
           "regen" : 0
         },
         "sight" : {
-          "range" : 5
+          "range" : 5,
+          "sensors" : 0
         },
         "armor" : 5
       }
@@ -540,7 +543,8 @@
           "regen" : 0
         },
         "sight" : {
-          "range" : 10
+          "range" : 10,
+          "sensors" : 0
         },
         "armor" : 10
       }
@@ -610,7 +614,8 @@
           "regen" : 0
         },
         "sight" : {
-          "range" : 10
+          "range" : 10,
+          "sensors" : 0
         },
         "armor" : 15
       }
@@ -680,7 +685,8 @@
           "regen" : 0
         },
         "sight" : {
-          "range" : 10
+          "range" : 10,
+          "sensors" : 0
         },
         "armor" : 20
       }
@@ -750,7 +756,8 @@
           "regen" : 0
         },
         "sight" : {
-          "range" : 10
+          "range" : 10,
+          "sensors" : 0
         },
         "armor" : 5
       }
@@ -820,7 +827,8 @@
           "regen" : 0
         },
         "sight" : {
-          "range" : 10
+          "range" : 10,
+          "sensors" : 0
         },
         "armor" : 10
       }
@@ -890,7 +898,8 @@
           "regen" : 0
         },
         "sight" : {
-          "range" : 5
+          "range" : 5,
+          "sensors" : 0
         },
         "armor" : 5
       }
@@ -970,7 +979,8 @@
           "regen" : 0
         },
         "sight" : {
-          "range" : 10
+          "range" : 10,
+          "sensors" : 0
         },
         "armor" : 10
       }
@@ -1040,7 +1050,8 @@
           "regen" : 0
         },
         "sight" : {
-          "range" : 5
+          "range" : 5,
+          "sensors" : 0
         },
         "armor" : 5
       }
@@ -1110,7 +1121,8 @@
           "regen" : 0
         },
         "sight" : {
-          "range" : 10
+          "range" : 10,
+          "sensors" : 0
         },
         "armor" : 15
       }
@@ -1190,7 +1202,8 @@
           "regen" : 0
         },
         "sight" : {
-          "range" : 10
+          "range" : 10,
+          "sensors" : 0
         },
         "armor" : 15
       }
@@ -1270,7 +1283,8 @@
           "regen" : 0
         },
         "sight" : {
-          "range" : 10
+          "range" : 10,
+          "sensors" : 0
         },
         "armor" : 20
       }
@@ -1340,7 +1354,8 @@
           "regen" : 0
         },
         "sight" : {
-          "range" : 10
+          "range" : 10,
+          "sensors" : 0
         },
         "armor" : 5
       }
@@ -1410,7 +1425,8 @@
           "regen" : 0
         },
         "sight" : {
-          "range" : 10
+          "range" : 10,
+          "sensors" : 0
         },
         "armor" : 10
       }
@@ -1485,7 +1501,8 @@
           "regen" : 0
         },
         "sight" : {
-          "range" : 0
+          "range" : 0,
+          "sensors" : 0
         },
         "armor" : 10
       }
@@ -1555,7 +1572,8 @@
           "regen" : 0
         },
         "sight" : {
-          "range" : 10
+          "range" : 10,
+          "sensors" : 0
         },
         "armor" : 15
       }
@@ -1630,7 +1648,8 @@
           "regen" : 0
         },
         "sight" : {
-          "range" : 0
+          "range" : 0,
+          "sensors" : 0
         },
         "armor" : 10
       }
@@ -1705,7 +1724,8 @@
           "regen" : 0
         },
         "sight" : {
-          "range" : 0
+          "range" : 0,
+          "sensors" : 0
         },
         "armor" : 10
       }
@@ -1775,7 +1795,8 @@
           "regen" : 0
         },
         "sight" : {
-          "range" : 10
+          "range" : 10,
+          "sensors" : 0
         },
         "armor" : 5
       }
@@ -1845,7 +1866,8 @@
           "regen" : 0
         },
         "sight" : {
-          "range" : 10
+          "range" : 10,
+          "sensors" : 0
         },
         "armor" : 10
       }
@@ -1915,7 +1937,8 @@
           "regen" : 0
         },
         "sight" : {
-          "range" : 10
+          "range" : 10,
+          "sensors" : 0
         },
         "armor" : 15
       }
@@ -1985,7 +2008,8 @@
           "regen" : 0
         },
         "sight" : {
-          "range" : 10
+          "range" : 10,
+          "sensors" : 0
         },
         "armor" : 5
       }
@@ -2055,7 +2079,8 @@
           "regen" : 0
         },
         "sight" : {
-          "range" : 10
+          "range" : 10,
+          "sensors" : 0
         },
         "armor" : 5
       }
@@ -2125,7 +2150,8 @@
           "regen" : 0
         },
         "sight" : {
-          "range" : 10
+          "range" : 10,
+          "sensors" : 0
         },
         "armor" : 10
       }
@@ -2195,7 +2221,8 @@
           "regen" : 0
         },
         "sight" : {
-          "range" : 10
+          "range" : 10,
+          "sensors" : 0
         },
         "armor" : 15
       }
@@ -2208,6 +2235,7 @@
       "shield" : null,
       "hidden" : false,
       "name" : "Foot Armor I",
+      "concealment" : 0,
       "door" : null,
       "usable" : null,
       "pickable" : true,
@@ -2261,7 +2289,8 @@
             "regen" : 0
           },
           "sight" : {
-            "range" : 0
+            "range" : 0,
+            "sensors" : 0
           },
           "armor" : 1
         },
@@ -2275,6 +2304,7 @@
       "shield" : null,
       "hidden" : false,
       "name" : "Hand Armor I",
+      "concealment" : 0,
       "door" : null,
       "usable" : null,
       "pickable" : true,
@@ -2328,7 +2358,8 @@
             "regen" : 0
           },
           "sight" : {
-            "range" : 0
+            "range" : 0,
+            "sensors" : 0
           },
           "armor" : 1
         },
@@ -2384,7 +2415,8 @@
             "regen" : 0
           },
           "sight" : {
-            "range" : 0
+            "range" : 0,
+            "sensors" : 0
           },
           "armor" : 0
         }
@@ -2395,6 +2427,7 @@
       "shield" : null,
       "hidden" : false,
       "name" : "Guided missile launcher I",
+      "concealment" : 0,
       "door" : null,
       "usable" : null,
       "pickable" : true,
@@ -2409,6 +2442,7 @@
       "shield" : null,
       "hidden" : false,
       "name" : "Foot Armor 2",
+      "concealment" : 0,
       "door" : null,
       "usable" : null,
       "pickable" : true,
@@ -2462,7 +2496,8 @@
             "regen" : 0
           },
           "sight" : {
-            "range" : 0
+            "range" : 0,
+            "sensors" : 0
           },
           "armor" : 2
         },
@@ -2476,6 +2511,7 @@
       "shield" : null,
       "hidden" : false,
       "name" : "Hand Armor 2",
+      "concealment" : 0,
       "door" : null,
       "usable" : null,
       "pickable" : true,
@@ -2529,7 +2565,8 @@
             "regen" : 0
           },
           "sight" : {
-            "range" : 0
+            "range" : 0,
+            "sensors" : 0
           },
           "armor" : 2
         },
@@ -2585,7 +2622,8 @@
             "regen" : 0
           },
           "sight" : {
-            "range" : 0
+            "range" : 0,
+            "sensors" : 0
           },
           "armor" : 0
         }
@@ -2596,6 +2634,7 @@
       "shield" : null,
       "hidden" : false,
       "name" : "Guided missile launcher II",
+      "concealment" : 0,
       "door" : null,
       "usable" : null,
       "pickable" : true,
@@ -2610,6 +2649,7 @@
       "shield" : null,
       "hidden" : false,
       "name" : "Foot Armor 3",
+      "concealment" : 0,
       "door" : null,
       "usable" : null,
       "pickable" : true,
@@ -2663,7 +2703,8 @@
             "regen" : 0
           },
           "sight" : {
-            "range" : 0
+            "range" : 0,
+            "sensors" : 0
           },
           "armor" : 3
         },
@@ -2677,11 +2718,13 @@
       "shield" : null,
       "hidden" : true,
       "name" : "Plasma trap",
+      "concealment" : 30,
       "door" : null,
       "usable" : null,
       "pickable" : false,
       "id" : "trap-plasma",
       "weapon" : null,
+      "category" : null,
       "armor" : null
     } ], [ "armor-hand-3", {
       "personal" : false,
@@ -2691,6 +2734,7 @@
       "shield" : null,
       "hidden" : false,
       "name" : "Hand Armor 3",
+      "concealment" : 0,
       "door" : null,
       "usable" : null,
       "pickable" : true,
@@ -2744,7 +2788,8 @@
             "regen" : 0
           },
           "sight" : {
-            "range" : 0
+            "range" : 0,
+            "sensors" : 0
           },
           "armor" : 3
         },
@@ -2800,7 +2845,8 @@
             "regen" : 0
           },
           "sight" : {
-            "range" : 0
+            "range" : 0,
+            "sensors" : 0
           },
           "armor" : 0
         }
@@ -2811,6 +2857,7 @@
       "shield" : null,
       "hidden" : false,
       "name" : "Guided missile launcher III",
+      "concealment" : 0,
       "door" : null,
       "usable" : null,
       "pickable" : true,
@@ -2831,6 +2878,7 @@
       "shield" : null,
       "hidden" : true,
       "name" : "Mine",
+      "concealment" : 30,
       "door" : null,
       "usable" : {
         "type" : "TransformItemPower",
@@ -2861,6 +2909,7 @@
       "shield" : null,
       "hidden" : true,
       "name" : "Explosive",
+      "concealment" : 30,
       "door" : null,
       "usable" : {
         "type" : "TransformItemPower",
@@ -2885,6 +2934,7 @@
       "shield" : null,
       "hidden" : false,
       "name" : "Stairs down",
+      "concealment" : 0,
       "door" : null,
       "usable" : null,
       "pickable" : false,
@@ -2899,6 +2949,7 @@
       "shield" : null,
       "hidden" : false,
       "name" : "Active healing chamber",
+      "concealment" : 0,
       "door" : null,
       "usable" : null,
       "pickable" : false,
@@ -2913,6 +2964,7 @@
       "shield" : null,
       "hidden" : false,
       "name" : "Door",
+      "concealment" : 0,
       "door" : {
         "open" : true,
         "transformTo" : "door-closed"
@@ -2930,6 +2982,7 @@
       "shield" : null,
       "hidden" : true,
       "name" : "Pressure plate",
+      "concealment" : 0,
       "door" : null,
       "usable" : null,
       "pickable" : false,
@@ -2944,6 +2997,7 @@
       "shield" : null,
       "hidden" : true,
       "name" : "Laser trap",
+      "concealment" : 30,
       "door" : null,
       "usable" : null,
       "pickable" : false,
@@ -2958,6 +3012,7 @@
       "shield" : null,
       "hidden" : false,
       "name" : "Door",
+      "concealment" : 0,
       "door" : {
         "open" : false,
         "transformTo" : "door-open",
@@ -2976,6 +3031,7 @@
       "shield" : null,
       "hidden" : false,
       "name" : "Blade I",
+      "concealment" : 0,
       "door" : null,
       "usable" : null,
       "pickable" : true,
@@ -3028,7 +3084,8 @@
             "regen" : 0
           },
           "sight" : {
-            "range" : 0
+            "range" : 0,
+            "sensors" : 0
           },
           "armor" : 0
         },
@@ -3043,6 +3100,7 @@
       "shield" : null,
       "hidden" : false,
       "name" : "Healing chamber",
+      "concealment" : 0,
       "door" : null,
       "usable" : null,
       "pickable" : false,
@@ -3057,6 +3115,7 @@
       "shield" : null,
       "hidden" : false,
       "name" : "Portal I (incoming)",
+      "concealment" : 0,
       "door" : null,
       "usable" : null,
       "pickable" : false,
@@ -3071,6 +3130,7 @@
       "shield" : null,
       "hidden" : false,
       "name" : "Blade II",
+      "concealment" : 0,
       "door" : null,
       "usable" : null,
       "pickable" : true,
@@ -3123,7 +3183,8 @@
             "regen" : 0
           },
           "sight" : {
-            "range" : 0
+            "range" : 0,
+            "sensors" : 0
           },
           "armor" : 0
         },
@@ -3138,6 +3199,7 @@
       "shield" : null,
       "hidden" : false,
       "name" : "Portal II (incoming)",
+      "concealment" : 0,
       "door" : null,
       "usable" : null,
       "pickable" : false,
@@ -3152,6 +3214,7 @@
       "shield" : null,
       "hidden" : false,
       "name" : "Blade III",
+      "concealment" : 0,
       "door" : null,
       "usable" : null,
       "pickable" : true,
@@ -3204,7 +3267,8 @@
             "regen" : 0
           },
           "sight" : {
-            "range" : 0
+            "range" : 0,
+            "sensors" : 0
           },
           "armor" : 0
         },
@@ -3219,6 +3283,7 @@
       "shield" : null,
       "hidden" : false,
       "name" : "Inactive healing chamber",
+      "concealment" : 0,
       "door" : null,
       "usable" : null,
       "pickable" : false,
@@ -3234,6 +3299,7 @@
       "shield" : null,
       "hidden" : false,
       "name" : "Drone I",
+      "concealment" : 0,
       "door" : null,
       "usable" : {
         "type" : "TransformItemPower",
@@ -3259,6 +3325,7 @@
       "shield" : null,
       "hidden" : false,
       "name" : "Portal III (incoming)",
+      "concealment" : 0,
       "door" : null,
       "usable" : null,
       "pickable" : false,
@@ -3273,6 +3340,7 @@
       "shield" : null,
       "hidden" : true,
       "name" : "Doorway",
+      "concealment" : 0,
       "door" : null,
       "usable" : null,
       "pickable" : false,
@@ -3288,6 +3356,7 @@
       "shield" : null,
       "hidden" : false,
       "name" : "Drone II",
+      "concealment" : 0,
       "door" : null,
       "usable" : {
         "type" : "TransformItemPower",
@@ -3310,10 +3379,12 @@
       "display" : "^",
       "color" : "white",
       "rangedWeapon" : null,
+      "power" : 50,
       "explosive" : null,
       "shield" : null,
       "hidden" : false,
       "name" : "Mine",
+      "concealment" : 0,
       "door" : null,
       "usable" : {
         "type" : "TransformItemPower",
@@ -3329,6 +3400,7 @@
       "pickable" : true,
       "id" : "explosive-triggered",
       "weapon" : null,
+      "category" : "ItemKind.UtilityCategory",
       "armor" : null
     } ], [ "friend-drone-3", {
       "personal" : false,
@@ -3339,6 +3411,7 @@
       "shield" : null,
       "hidden" : false,
       "name" : "Drone III",
+      "concealment" : 0,
       "door" : null,
       "usable" : {
         "type" : "TransformItemPower",
@@ -3361,10 +3434,12 @@
       "display" : "x",
       "color" : "white",
       "rangedWeapon" : null,
+      "power" : 0,
       "explosive" : null,
       "shield" : null,
       "hidden" : false,
       "name" : "Explosive",
+      "concealment" : 0,
       "door" : null,
       "usable" : {
         "type" : "TransformItemPower",
@@ -3380,6 +3455,7 @@
       "pickable" : true,
       "id" : "explosive-timed",
       "weapon" : null,
+      "category" : "ItemKind.UtilityCategory",
       "armor" : null
     } ], [ "shield-deflector-1", {
       "personal" : false,
@@ -3434,13 +3510,15 @@
             "regen" : 0
           },
           "sight" : {
-            "range" : 0
+            "range" : 0,
+            "sensors" : 0
           },
           "armor" : 0
         }
       },
       "hidden" : false,
       "name" : "Deflector I",
+      "concealment" : 0,
       "door" : null,
       "usable" : null,
       "pickable" : true,
@@ -3455,6 +3533,7 @@
       "shield" : null,
       "hidden" : false,
       "name" : "Head Armor I",
+      "concealment" : 0,
       "door" : null,
       "usable" : null,
       "pickable" : true,
@@ -3508,7 +3587,8 @@
             "regen" : 0
           },
           "sight" : {
-            "range" : 0
+            "range" : 0,
+            "sensors" : 0
           },
           "armor" : 2
         },
@@ -3567,13 +3647,15 @@
             "regen" : 0
           },
           "sight" : {
-            "range" : 0
+            "range" : 0,
+            "sensors" : 0
           },
           "armor" : 0
         }
       },
       "hidden" : false,
       "name" : "Deflector II",
+      "concealment" : 0,
       "door" : null,
       "usable" : null,
       "pickable" : true,
@@ -3590,6 +3672,7 @@
       "hidden" : false,
       "locked" : null,
       "name" : "Energy fence",
+      "concealment" : 0,
       "door" : {
         "open" : true,
         "transformTo" : "fence-energy-closed",
@@ -3609,6 +3692,7 @@
       "shield" : null,
       "hidden" : false,
       "name" : "Head Armor 2",
+      "concealment" : 0,
       "door" : null,
       "usable" : null,
       "pickable" : true,
@@ -3662,7 +3746,8 @@
             "regen" : 0
           },
           "sight" : {
-            "range" : 0
+            "range" : 0,
+            "sensors" : 0
           },
           "armor" : 3
         },
@@ -3721,13 +3806,15 @@
             "regen" : 0
           },
           "sight" : {
-            "range" : 0
+            "range" : 0,
+            "sensors" : 0
           },
           "armor" : 0
         }
       },
       "hidden" : false,
       "name" : "Deflector III",
+      "concealment" : 0,
       "door" : null,
       "usable" : null,
       "pickable" : true,
@@ -3742,6 +3829,7 @@
       "shield" : null,
       "hidden" : false,
       "name" : "Head Armor 3",
+      "concealment" : 0,
       "door" : null,
       "usable" : null,
       "pickable" : true,
@@ -3795,7 +3883,8 @@
             "regen" : 0
           },
           "sight" : {
-            "range" : 0
+            "range" : 0,
+            "sensors" : 0
           },
           "armor" : 4
         },
@@ -3811,6 +3900,7 @@
       "hidden" : false,
       "locked" : null,
       "name" : "Energy fence",
+      "concealment" : 0,
       "door" : {
         "open" : false,
         "transformTo" : "fence-energy-open",
@@ -3830,6 +3920,7 @@
       "shield" : null,
       "hidden" : false,
       "name" : "Chest Armor I",
+      "concealment" : 0,
       "door" : null,
       "usable" : null,
       "pickable" : true,
@@ -3883,7 +3974,8 @@
             "regen" : 0
           },
           "sight" : {
-            "range" : 0
+            "range" : 0,
+            "sensors" : 0
           },
           "armor" : 2
         },
@@ -3897,6 +3989,7 @@
       "shield" : null,
       "hidden" : false,
       "name" : "Chest Armor 2",
+      "concealment" : 0,
       "door" : null,
       "usable" : null,
       "pickable" : true,
@@ -3950,7 +4043,8 @@
             "regen" : 0
           },
           "sight" : {
-            "range" : 0
+            "range" : 0,
+            "sensors" : 0
           },
           "armor" : 3
         },
@@ -3964,6 +4058,7 @@
       "shield" : null,
       "hidden" : false,
       "name" : "Chest Armor 3",
+      "concealment" : 0,
       "door" : null,
       "usable" : null,
       "pickable" : true,
@@ -4017,7 +4112,8 @@
             "regen" : 0
           },
           "sight" : {
-            "range" : 0
+            "range" : 0,
+            "sensors" : 0
           },
           "armor" : 4
         },
@@ -4075,7 +4171,8 @@
             "regen" : 0
           },
           "sight" : {
-            "range" : 0
+            "range" : 0,
+            "sensors" : 0
           },
           "armor" : 0
         }
@@ -4083,6 +4180,7 @@
       "shield" : null,
       "hidden" : false,
       "name" : "Rifle I",
+      "concealment" : 0,
       "door" : null,
       "usable" : null,
       "pickable" : true,
@@ -4141,7 +4239,8 @@
             "regen" : 0
           },
           "sight" : {
-            "range" : 0
+            "range" : 0,
+            "sensors" : 0
           },
           "armor" : 0
         }
@@ -4149,6 +4248,7 @@
       "shield" : null,
       "hidden" : false,
       "name" : "Rifle II",
+      "concealment" : 0,
       "door" : null,
       "usable" : null,
       "pickable" : true,
@@ -4164,6 +4264,7 @@
       "shield" : null,
       "hidden" : false,
       "name" : "Armor of Invulnerability",
+      "concealment" : 0,
       "door" : null,
       "usable" : null,
       "pickable" : true,
@@ -4217,7 +4318,8 @@
             "regen" : 0
           },
           "sight" : {
-            "range" : 0
+            "range" : 0,
+            "sensors" : 0
           },
           "armor" : 1000
         },
@@ -4275,7 +4377,8 @@
             "regen" : 0
           },
           "sight" : {
-            "range" : 0
+            "range" : 0,
+            "sensors" : 0
           },
           "armor" : 0
         }
@@ -4283,6 +4386,7 @@
       "shield" : null,
       "hidden" : false,
       "name" : "Rifle III",
+      "concealment" : 0,
       "door" : null,
       "usable" : null,
       "pickable" : true,
@@ -4297,6 +4401,7 @@
       "shield" : null,
       "hidden" : false,
       "name" : "Stairs up",
+      "concealment" : 0,
       "door" : null,
       "usable" : null,
       "pickable" : false,
@@ -4340,7 +4445,9 @@
         "item" : "explosive-triggered-active",
         "discover" : "DiscoverTriggerer",
         "triggerDescription" : "Click.",
-        "id" : "explosive-triggered-widget"
+        "id" : "explosive-triggered-widget",
+        "category" : "WidgetKind.TrapCategory",
+        "power" : 100
       }
     } ], [ "explosive-timed-widget", {
       "type" : "TimedExplosiveWidget",
@@ -4362,13 +4469,15 @@
       "data" : {
         "missDescription" : "Laser beam shoots from ceiling narrowly missing {target}.",
         "triggerDescription" : "Click.",
+        "power" : 0,
         "attack" : 50,
         "hitDescription" : "Laser beam shoots from ceiling and hits {target}.",
         "discover" : "DiscoverTriggerer",
         "deflectDescription" : "Laser beam shoots from ceiling and hits {target} with no effect.",
         "damage" : 10,
         "item" : "trap-laser",
-        "id" : "trap-laser-widget"
+        "id" : "trap-laser-widget",
+        "category" : "WidgetKind.TrapCategory"
       }
     } ], [ "healing-chamber-widget-active", {
       "type" : "HealLocationWidget",
@@ -4429,13 +4538,15 @@
       "data" : {
         "missDescription" : "Pulse of plasma shoots from ceiling narrowly missing {target}.",
         "triggerDescription" : "Click.",
+        "power" : 50,
         "attack" : 20,
         "hitDescription" : "Pulse of plasma shoots from ceiling and hits {target}.",
         "discover" : "DiscoverTriggerer",
         "deflectDescription" : "Pulse of plasma shoots from ceiling and hits {target} with no effect.",
         "damage" : 30,
         "item" : "trap-plasma",
-        "id" : "trap-plasma-widget"
+        "id" : "trap-plasma-widget",
+        "category" : "WidgetKind.TrapCategory"
       }
     } ], [ "portal-enemy-widget-2", {
       "type" : "SummonCreatureWidget",
@@ -4579,7 +4690,8 @@
           "regen" : 0
         },
         "sight" : {
-          "range" : 0
+          "range" : 0,
+          "sensors" : 1
         },
         "armor" : 0
       }
@@ -4634,7 +4746,8 @@
           "regen" : 0
         },
         "sight" : {
-          "range" : 0
+          "range" : 0,
+          "sensors" : 1
         },
         "armor" : 0
       }
@@ -4689,7 +4802,8 @@
           "regen" : 0
         },
         "sight" : {
-          "range" : 0
+          "range" : 0,
+          "sensors" : 1
         },
         "armor" : 0
       }
@@ -4744,7 +4858,8 @@
           "regen" : 0
         },
         "sight" : {
-          "range" : 0
+          "range" : 0,
+          "sensors" : 1
         },
         "armor" : 0
       }
@@ -4799,7 +4914,8 @@
           "regen" : 0
         },
         "sight" : {
-          "range" : 0
+          "range" : 0,
+          "sensors" : 1
         },
         "armor" : 0
       }
@@ -4857,7 +4973,8 @@
           "regen" : 0
         },
         "sight" : {
-          "range" : 0
+          "range" : 0,
+          "sensors" : 0
         },
         "armor" : 1
       }
@@ -4912,7 +5029,8 @@
           "regen" : 0
         },
         "sight" : {
-          "range" : 0
+          "range" : 0,
+          "sensors" : 0
         },
         "armor" : 1
       }
@@ -4967,7 +5085,8 @@
           "regen" : 0
         },
         "sight" : {
-          "range" : 0
+          "range" : 0,
+          "sensors" : 0
         },
         "armor" : 1
       }
@@ -5022,7 +5141,8 @@
           "regen" : 0
         },
         "sight" : {
-          "range" : 0
+          "range" : 0,
+          "sensors" : 0
         },
         "armor" : 1
       }
@@ -5077,7 +5197,8 @@
           "regen" : 0
         },
         "sight" : {
-          "range" : 0
+          "range" : 0,
+          "sensors" : 0
         },
         "armor" : 1
       }
@@ -5378,7 +5499,22 @@
               }
             }
           } ],
-          "widgets" : [ ]
+          "widgets" : [ {
+            "selection" : {
+              "type" : "ContentSelection.ThemeWidget",
+              "data" : {
+                "category" : [ "WidgetKind.TrapCategory" ],
+                "power" : [ ]
+              }
+            },
+            "distribution" : {
+              "type" : "Distribution.Uniform",
+              "data" : {
+                "min" : 1,
+                "max" : 3
+              }
+            }
+          } ]
         }
       } ],
       "entrances" : [ ]
@@ -6654,6 +6790,21 @@
               "data" : {
                 "p" : 5,
                 "n" : 1
+              }
+            }
+          }, {
+            "selection" : {
+              "type" : "ContentSelection.ThemeWidget",
+              "data" : {
+                "category" : [ "WidgetKind.TrapCategory" ],
+                "power" : [ ]
+              }
+            },
+            "distribution" : {
+              "type" : "Distribution.Binomial",
+              "data" : {
+                "p" : 5,
+                "n" : 2
               }
             }
           } ]
@@ -9038,7 +9189,22 @@
               }
             }
           } ],
-          "widgets" : [ ]
+          "widgets" : [ {
+            "selection" : {
+              "type" : "ContentSelection.ThemeWidget",
+              "data" : {
+                "category" : [ "WidgetKind.TrapCategory" ],
+                "power" : [ ]
+              }
+            },
+            "distribution" : {
+              "type" : "Distribution.Binomial",
+              "data" : {
+                "p" : 0,
+                "n" : 2
+              }
+            }
+          } ]
         }
       } ],
       "entrances" : [ ]
@@ -9362,6 +9528,21 @@
               "data" : {
                 "p" : 75,
                 "n" : 1
+              }
+            }
+          }, {
+            "selection" : {
+              "type" : "ContentSelection.ThemeWidget",
+              "data" : {
+                "category" : [ "WidgetKind.TrapCategory" ],
+                "power" : [ ]
+              }
+            },
+            "distribution" : {
+              "type" : "Distribution.Binomial",
+              "data" : {
+                "p" : 5,
+                "n" : 2
               }
             }
           } ]
@@ -9798,6 +9979,12 @@
     }, {
       "weight" : 100,
       "value" : "weapon-missile-launcher-guided-3"
+    }, {
+      "value" : "explosive-timed",
+      "weight" : 100
+    }, {
+      "value" : "explosive-triggered",
+      "weight" : 100
     } ],
     "terrain" : "floor",
     "door" : "door-closed",
@@ -9810,6 +9997,15 @@
       "weight" : 100
     }, {
       "value" : "portal-enemy-widget-3",
+      "weight" : 100
+    }, {
+      "value" : "trap-laser-widget",
+      "weight" : 100
+    }, {
+      "value" : "trap-plasma-widget",
+      "weight" : 100
+    }, {
+      "value" : "explosive-triggered-widget",
       "weight" : 100
     } ],
     "templates" : [ {

@@ -98,6 +98,7 @@ case class Item(id: ItemId,
                 kind: ItemKindId,
                 container: EntityId,
 
+                concealment: Int = 0,
                 hidden: Boolean = false,
                 locked: Option[Key] = None,
                 personal: Boolean = false,

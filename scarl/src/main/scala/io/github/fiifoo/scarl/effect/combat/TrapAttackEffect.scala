@@ -5,13 +5,14 @@ import io.github.fiifoo.scarl.core.effect.{Effect, EffectResult}
 import io.github.fiifoo.scarl.core.entity.Selectors.getCreatureStats
 import io.github.fiifoo.scarl.core.entity.{ContainerId, CreatureId}
 import io.github.fiifoo.scarl.core.mutation.RngMutation
-import io.github.fiifoo.scarl.rule.AttackRule
 import io.github.fiifoo.scarl.rule.AttackRule.{Attacker, Defender}
+import io.github.fiifoo.scarl.rule.TrapAttackRule
 
 case class TrapAttackEffect(trap: ContainerId,
                             target: CreatureId,
                             attack: Int,
                             damage: Int,
+                            evade: Boolean,
                             hitDescription: Option[String] = None,
                             deflectDescription: Option[String] = None,
                             missDescription: Option[String] = None,
@@ -22,9 +23,10 @@ case class TrapAttackEffect(trap: ContainerId,
     val (random, rng) = s.rng()
     val defenderStats = getCreatureStats(s)(target)
 
-    val result = AttackRule(random)(
+    val result = TrapAttackRule(random)(
       Attacker(attack, damage),
-      Defender(defenderStats.defence, defenderStats.armor)
+      Defender(defenderStats.defence, defenderStats.armor),
+      evade
     )
 
     val effect = if (result.hit) {

@@ -70,9 +70,7 @@ object Selectors {
   def getLocationVisibleItems(s: State, creature: CreatureId)(location: Location): Set[ItemId] = {
     def removable(entity: EntityId) = s.tmp.removableEntities contains entity
 
-    def visible(item: ItemId) = !item(s).hidden || s.foundItems.get(creature).exists(_.contains(item))
-
-    getLocationItems(s)(location) filterNot removable filter visible
+    getLocationItems(s)(location) filterNot removable filter isVisibleItem(s, creature)
   }
 
   def getLocationWaypoint(s: State)(location: Location): Option[Waypoint] = {
@@ -104,5 +102,9 @@ object Selectors {
 
   def hasKey(s: State)(creature: CreatureId)(key: Key): Boolean = {
     s.keys.getOrElse(creature, Set()) contains key
+  }
+
+  def isVisibleItem(s: State, creature: CreatureId)(item: ItemId) = {
+    !item(s).hidden || (s.foundItems.get(creature) exists (_ contains item))
   }
 }

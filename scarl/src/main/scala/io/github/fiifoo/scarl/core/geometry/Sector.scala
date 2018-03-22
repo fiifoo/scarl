@@ -47,4 +47,17 @@ case class Sector(x: Int, y: Int) {
 
     Shape.square(location, size)
   }
+
+  def adjacent: Set[Sector] = {
+    Set(
+      Sector(x, y + 1),
+      Sector(x + 1, y + 1),
+      Sector(x + 1, y),
+      Sector(x + 1, y - 1),
+      Sector(x, y - 1),
+      Sector(x - 1, y - 1),
+      Sector(x - 1, y),
+      Sector(x - 1, y + 1)
+    )
+  }
 }

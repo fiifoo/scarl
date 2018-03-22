@@ -2,6 +2,7 @@ package io.github.fiifoo.scarl.status
 
 import io.github.fiifoo.scarl.core.State
 import io.github.fiifoo.scarl.core.effect.Effect
+import io.github.fiifoo.scarl.core.entity.Selectors.{getWidgetItem, isVisibleItem}
 import io.github.fiifoo.scarl.core.entity._
 import io.github.fiifoo.scarl.core.item.Discover
 import io.github.fiifoo.scarl.effect.combat.TrapAttackEffect
@@ -19,9 +20,11 @@ case class AttackingTrapStatus(id: TriggerStatusId,
                               ) extends TriggerStatus {
 
   def apply(s: State, triggerer: CreatureId): List[Effect] = {
+    val evade = getWidgetItem(s)(target) exists isVisibleItem(s, triggerer)
+
     List(
       TriggerWidgetEffect(triggerer, target, target(s).location, discover, triggerDescription),
-      TrapAttackEffect(target, triggerer, attack, damage, hitDescription, deflectDescription, missDescription),
+      TrapAttackEffect(target, triggerer, attack, damage, evade, hitDescription, deflectDescription, missDescription)
     )
   }
 }

@@ -47,9 +47,9 @@ object Stats {
     }
   }
 
-  case class Sight(range: Int = 0) {
+  case class Sight(range: Int = 0, sensors: Int = 0) {
     def add(x: Sight): Sight = {
-      copy(range + x.range)
+      copy(range + x.range, sensors + x.sensors)
     }
   }
 
