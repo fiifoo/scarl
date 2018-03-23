@@ -2720,7 +2720,12 @@
       "name" : "Plasma trap",
       "concealment" : 30,
       "door" : null,
-      "usable" : null,
+      "usable" : {
+        "type" : "RemoveItemPower",
+        "data" : {
+          "description" : "Trap is disabled."
+        }
+      },
       "pickable" : false,
       "id" : "trap-plasma",
       "weapon" : null,
@@ -2999,7 +3004,12 @@
       "name" : "Laser trap",
       "concealment" : 30,
       "door" : null,
-      "usable" : null,
+      "usable" : {
+        "type" : "RemoveItemPower",
+        "data" : {
+          "description" : "Trap is disabled."
+        }
+      },
       "pickable" : false,
       "id" : "trap-laser",
       "weapon" : null,

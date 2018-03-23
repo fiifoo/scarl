@@ -15,7 +15,7 @@ import io.github.fiifoo.scarl.core.item._
 import io.github.fiifoo.scarl.core.kind._
 import io.github.fiifoo.scarl.core.math.Distribution
 import io.github.fiifoo.scarl.mechanism.{CreateEntityMechanism, RemoveWallMechanism, UseDoorMechanism}
-import io.github.fiifoo.scarl.power.{TransformCreaturePower, TransformItemPower}
+import io.github.fiifoo.scarl.power.{RemoveItemPower, TransformCreaturePower, TransformItemPower}
 import io.github.fiifoo.scarl.widget._
 
 import scala.reflect.runtime.universe.typeOf
@@ -149,6 +149,7 @@ object Sources {
     ), objectPolymorphism = true),
 
     SubModelSource(typeOf[ItemPower], List(
+      typeOf[RemoveItemPower],
       typeOf[TransformItemPower],
     )),
 
