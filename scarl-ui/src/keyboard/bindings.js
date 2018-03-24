@@ -28,7 +28,6 @@ export default {
         [keycodes.LESS2, commands.ENTER_CONDUIT],
         [keycodes.NUMPAD_5, commands.PASS],
         [keycodes.SPACEBAR, commands.AIM],
-        [keycodes.D, commands.USE_DOOR],
         [keycodes.I, commands.INVENTORY],
         [keycodes.K, commands.KEY_BINDINGS],
         [keycodes.L, commands.LOOK],

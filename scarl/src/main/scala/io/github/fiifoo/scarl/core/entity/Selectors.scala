@@ -4,7 +4,7 @@ import io.github.fiifoo.scarl.core.State
 import io.github.fiifoo.scarl.core.creature.Stats
 import io.github.fiifoo.scarl.core.geometry.WaypointNetwork.Waypoint
 import io.github.fiifoo.scarl.core.geometry.{Location, Sector}
-import io.github.fiifoo.scarl.core.item.Key
+import io.github.fiifoo.scarl.core.item.{Key, Lock}
 
 object Selectors {
 
@@ -101,7 +101,11 @@ object Selectors {
   }
 
   def hasKey(s: State)(creature: CreatureId)(key: Key): Boolean = {
-    s.keys.getOrElse(creature, Set()) contains key
+    s.keys.get(creature) exists (_ contains key)
+  }
+
+  def hasLockKey(s: State)(creature: CreatureId)(lock: Lock): Boolean = {
+    lock.key exists hasKey(s)(creature)
   }
 
   def isVisibleItem(s: State, creature: CreatureId)(item: ItemId) = {

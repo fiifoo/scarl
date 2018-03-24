@@ -28,6 +28,7 @@ object JsonAction {
   lazy private implicit val dropItemReads = Json.reads[DropItemAction]
   lazy private implicit val enterConduitReads = Json.reads[EnterConduitAction]
   lazy private implicit val equipItemReads = Json.reads[EquipItemAction]
+  lazy private implicit val hackItemReads = Json.reads[HackItemAction]
   lazy private implicit val moveReads = Json.reads[MoveAction]
   lazy private implicit val pickItemReads = Json.reads[PickItemAction]
   lazy private implicit val shootReads = Json.reads[ShootAction]
@@ -44,6 +45,7 @@ object JsonAction {
     case "DropItem" => data.as[DropItemAction]
     case "EnterConduit" => data.as[EnterConduitAction]
     case "EquipItem" => data.as[EquipItemAction]
+    case "HackItem" => data.as[HackItemAction]
     case "Move" => data.as[MoveAction]
     case "Pass" => PassAction
     case "PickItem" => data.as[PickItemAction]

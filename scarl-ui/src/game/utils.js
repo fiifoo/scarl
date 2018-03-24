@@ -1,4 +1,4 @@
-import { List } from 'immutable'
+import { fromJS, List } from 'immutable'
 import { distance, line } from './geometry'
 
 export const calculateTrajectory = (player, location, fov, missile = false) => {
@@ -55,6 +55,13 @@ export const getLocationDoor = (location, fov) => {
     const entities = getLocationEntities(location, fov)
 
     return entities ? entities.items.find(item => !!item.door) : undefined
+}
+
+// keys: Set
+export const getLocationLockedItems = (location, fov, keys) => {
+    const entities = getLocationEntities(location, fov)
+
+    return entities ? entities.items.filter(isLockedItem(keys)) : []
 }
 
 export const getLocationPickableItems = (location, fov) => {
@@ -118,6 +125,11 @@ export const isEnemyChecker = (player, factions) => {
 
     return creature => enemyFactions.contains(creature.faction)
 }
+
+// keys: Set
+export const isLockedItem = keys => item =>   (
+    item.locked && (! item.locked.key || ! keys.contains(fromJS(item.locked.key)))
+)
 
 export const seekTargets = (player, factions, fov, missile = false) => {
     const location = player.creature.location

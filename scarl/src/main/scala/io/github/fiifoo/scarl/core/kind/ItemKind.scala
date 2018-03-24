@@ -29,7 +29,7 @@ case class ItemKind(id: ItemKindId,
 
                     concealment: Int = 0,
                     hidden: Boolean = false,
-                    locked: Option[SharedKey] = None,
+                    locked: Option[Lock.Source] = None,
                     personal: Boolean = false,
                     pickable: Boolean = false,
 
@@ -99,7 +99,7 @@ case class ItemKind(id: ItemKindId,
 
       concealment = concealment,
       hidden = hidden,
-      locked = locked,
+      locked = locked map Lock.apply,
       personal = personal,
       pickable = pickable,
 

@@ -3,7 +3,7 @@ package models.json
 import io.github.fiifoo.scarl.core.item._
 import play.api.libs.json._
 
-object JsonKey {
+object JsonItemKey {
 
   import JsonBase.{mapReads, polymorphicTypeFormat, stringIdFormat}
 

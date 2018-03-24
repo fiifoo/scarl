@@ -13,6 +13,10 @@ object ValidatorUtils {
       Math.abs(actorLocation.y - location.y) <= 1
   }
 
+  def isAdjacentOrCurrentLocation(s: State, actor: CreatureId)(location: Location): Boolean = {
+    location == actor(s).location || isAdjacentLocation(s, actor)(location)
+  }
+
   def isEnemy(s: State, actor: CreatureId, creature: CreatureId): Boolean = {
     actor(s).faction(s).enemies.contains(creature(s).faction)
   }

@@ -313,6 +313,9 @@
           "regen" : 0
         },
         "defence" : 20,
+        "skill" : {
+          "hacking" : 0
+        },
         "melee" : {
           "attack" : 20,
           "damage" : 10,
@@ -388,6 +391,9 @@
           "regen" : 0
         },
         "defence" : 15,
+        "skill" : {
+          "hacking" : 10
+        },
         "melee" : {
           "attack" : 10,
           "damage" : 10,
@@ -459,6 +465,9 @@
           "regen" : 0
         },
         "defence" : 10,
+        "skill" : {
+          "hacking" : 0
+        },
         "melee" : {
           "attack" : 10,
           "damage" : 5,
@@ -530,6 +539,9 @@
           "regen" : 0
         },
         "defence" : 10,
+        "skill" : {
+          "hacking" : 0
+        },
         "melee" : {
           "attack" : 10,
           "damage" : 10,
@@ -601,6 +613,9 @@
           "regen" : 0
         },
         "defence" : 20,
+        "skill" : {
+          "hacking" : 0
+        },
         "melee" : {
           "attack" : 20,
           "damage" : 15,
@@ -672,6 +687,9 @@
           "regen" : 0
         },
         "defence" : 30,
+        "skill" : {
+          "hacking" : 0
+        },
         "melee" : {
           "attack" : 30,
           "damage" : 20,
@@ -743,6 +761,9 @@
           "regen" : 0
         },
         "defence" : 10,
+        "skill" : {
+          "hacking" : 0
+        },
         "melee" : {
           "attack" : 10,
           "damage" : 10,
@@ -814,6 +835,9 @@
           "regen" : 0
         },
         "defence" : 20,
+        "skill" : {
+          "hacking" : 0
+        },
         "melee" : {
           "attack" : 20,
           "damage" : 15,
@@ -885,6 +909,9 @@
           "regen" : 0
         },
         "defence" : 10,
+        "skill" : {
+          "hacking" : 0
+        },
         "melee" : {
           "attack" : 10,
           "damage" : 5,
@@ -966,6 +993,9 @@
           "regen" : 0
         },
         "defence" : 20,
+        "skill" : {
+          "hacking" : 0
+        },
         "melee" : {
           "attack" : 20,
           "damage" : 10,
@@ -1037,6 +1067,9 @@
           "regen" : 0
         },
         "defence" : 10,
+        "skill" : {
+          "hacking" : 0
+        },
         "melee" : {
           "attack" : 10,
           "damage" : 5,
@@ -1108,6 +1141,9 @@
           "regen" : 0
         },
         "defence" : 30,
+        "skill" : {
+          "hacking" : 0
+        },
         "melee" : {
           "attack" : 30,
           "damage" : 20,
@@ -1189,6 +1225,9 @@
           "regen" : 0
         },
         "defence" : 30,
+        "skill" : {
+          "hacking" : 0
+        },
         "melee" : {
           "attack" : 30,
           "damage" : 15,
@@ -1270,6 +1309,9 @@
           "regen" : 0
         },
         "defence" : 40,
+        "skill" : {
+          "hacking" : 0
+        },
         "melee" : {
           "attack" : 40,
           "damage" : 20,
@@ -1341,6 +1383,9 @@
           "regen" : 0
         },
         "defence" : 10,
+        "skill" : {
+          "hacking" : 0
+        },
         "melee" : {
           "attack" : 10,
           "damage" : 10,
@@ -1412,6 +1457,9 @@
           "regen" : 0
         },
         "defence" : 20,
+        "skill" : {
+          "hacking" : 0
+        },
         "melee" : {
           "attack" : 20,
           "damage" : 15,
@@ -1488,6 +1536,9 @@
           "regen" : 0
         },
         "defence" : 100,
+        "skill" : {
+          "hacking" : 0
+        },
         "melee" : {
           "attack" : 0,
           "damage" : 0,
@@ -1559,6 +1610,9 @@
           "regen" : 0
         },
         "defence" : 30,
+        "skill" : {
+          "hacking" : 0
+        },
         "melee" : {
           "attack" : 30,
           "damage" : 20,
@@ -1635,6 +1689,9 @@
           "regen" : 0
         },
         "defence" : 100,
+        "skill" : {
+          "hacking" : 0
+        },
         "melee" : {
           "attack" : 0,
           "damage" : 0,
@@ -1711,6 +1768,9 @@
           "regen" : 0
         },
         "defence" : 100,
+        "skill" : {
+          "hacking" : 0
+        },
         "melee" : {
           "attack" : 0,
           "damage" : 0,
@@ -1782,6 +1842,9 @@
           "regen" : 0
         },
         "defence" : 10,
+        "skill" : {
+          "hacking" : 0
+        },
         "melee" : {
           "attack" : 10,
           "damage" : 20,
@@ -1853,6 +1916,9 @@
           "regen" : 0
         },
         "defence" : 20,
+        "skill" : {
+          "hacking" : 0
+        },
         "melee" : {
           "attack" : 20,
           "damage" : 25,
@@ -1924,6 +1990,9 @@
           "regen" : 0
         },
         "defence" : 30,
+        "skill" : {
+          "hacking" : 0
+        },
         "melee" : {
           "attack" : 30,
           "damage" : 30,
@@ -1995,6 +2064,9 @@
           "regen" : 0
         },
         "defence" : 10,
+        "skill" : {
+          "hacking" : 0
+        },
         "melee" : {
           "attack" : 20,
           "damage" : 10,
@@ -2066,6 +2138,9 @@
           "regen" : 0
         },
         "defence" : 10,
+        "skill" : {
+          "hacking" : 0
+        },
         "melee" : {
           "attack" : 10,
           "damage" : 10,
@@ -2137,6 +2212,9 @@
           "regen" : 0
         },
         "defence" : 20,
+        "skill" : {
+          "hacking" : 0
+        },
         "melee" : {
           "attack" : 35,
           "damage" : 15,
@@ -2208,6 +2286,9 @@
           "regen" : 0
         },
         "defence" : 30,
+        "skill" : {
+          "hacking" : 0
+        },
         "melee" : {
           "attack" : 50,
           "damage" : 20,
@@ -2276,6 +2357,9 @@
             "regen" : 0
           },
           "defence" : 1,
+          "skill" : {
+            "hacking" : 0
+          },
           "melee" : {
             "attack" : 0,
             "damage" : 0,
@@ -2345,6 +2429,9 @@
             "regen" : 0
           },
           "defence" : 1,
+          "skill" : {
+            "hacking" : 0
+          },
           "melee" : {
             "attack" : 0,
             "damage" : 0,
@@ -2402,6 +2489,9 @@
             "regen" : 0
           },
           "defence" : 0,
+          "skill" : {
+            "hacking" : 0
+          },
           "melee" : {
             "attack" : 0,
             "damage" : 0,
@@ -2483,6 +2573,9 @@
             "regen" : 0
           },
           "defence" : 2,
+          "skill" : {
+            "hacking" : 0
+          },
           "melee" : {
             "attack" : 0,
             "damage" : 0,
@@ -2552,6 +2645,9 @@
             "regen" : 0
           },
           "defence" : 2,
+          "skill" : {
+            "hacking" : 0
+          },
           "melee" : {
             "attack" : 0,
             "damage" : 0,
@@ -2609,6 +2705,9 @@
             "regen" : 0
           },
           "defence" : 0,
+          "skill" : {
+            "hacking" : 0
+          },
           "melee" : {
             "attack" : 0,
             "damage" : 0,
@@ -2690,6 +2789,9 @@
             "regen" : 0
           },
           "defence" : 2,
+          "skill" : {
+            "hacking" : 0
+          },
           "melee" : {
             "attack" : 0,
             "damage" : 0,
@@ -2717,6 +2819,10 @@
       "rangedWeapon" : null,
       "shield" : null,
       "hidden" : true,
+      "locked" : {
+        "key" : null,
+        "security" : 10
+      },
       "name" : "Plasma trap",
       "concealment" : 30,
       "door" : null,
@@ -2780,6 +2886,9 @@
             "regen" : 0
           },
           "defence" : 2,
+          "skill" : {
+            "hacking" : 0
+          },
           "melee" : {
             "attack" : 0,
             "damage" : 0,
@@ -2837,6 +2946,9 @@
             "regen" : 0
           },
           "defence" : 0,
+          "skill" : {
+            "hacking" : 0
+          },
           "melee" : {
             "attack" : 0,
             "damage" : 0,
@@ -3001,6 +3113,10 @@
       "rangedWeapon" : null,
       "shield" : null,
       "hidden" : true,
+      "locked" : {
+        "key" : null,
+        "security" : 10
+      },
       "name" : "Laser trap",
       "concealment" : 30,
       "door" : null,
@@ -3081,6 +3197,9 @@
             "regen" : 0
           },
           "defence" : 2,
+          "skill" : {
+            "hacking" : 0
+          },
           "melee" : {
             "attack" : 10,
             "damage" : 5,
@@ -3180,6 +3299,9 @@
             "regen" : 0
           },
           "defence" : 4,
+          "skill" : {
+            "hacking" : 0
+          },
           "melee" : {
             "attack" : 20,
             "damage" : 10,
@@ -3264,6 +3386,9 @@
             "regen" : 0
           },
           "defence" : 6,
+          "skill" : {
+            "hacking" : 0
+          },
           "melee" : {
             "attack" : 30,
             "damage" : 15,
@@ -3507,6 +3632,9 @@
             "regen" : 0
           },
           "defence" : 10,
+          "skill" : {
+            "hacking" : 0
+          },
           "melee" : {
             "attack" : 0,
             "damage" : 0,
@@ -3584,6 +3712,9 @@
             "regen" : 0
           },
           "defence" : 2,
+          "skill" : {
+            "hacking" : 0
+          },
           "melee" : {
             "attack" : 0,
             "damage" : 0,
@@ -3644,6 +3775,9 @@
             "regen" : 0
           },
           "defence" : 20,
+          "skill" : {
+            "hacking" : 0
+          },
           "melee" : {
             "attack" : 0,
             "damage" : 0,
@@ -3677,6 +3811,7 @@
       "display" : "/",
       "color" : "blue",
       "rangedWeapon" : null,
+      "power" : 0,
       "explosive" : null,
       "shield" : null,
       "hidden" : false,
@@ -3692,6 +3827,7 @@
       "pickable" : true,
       "id" : "fence-energy-open",
       "weapon" : null,
+      "category" : "ItemKind.UtilityCategory",
       "armor" : null,
       "key" : null
     } ], [ "armor-head-2", {
@@ -3743,6 +3879,9 @@
             "regen" : 0
           },
           "defence" : 2,
+          "skill" : {
+            "hacking" : 0
+          },
           "melee" : {
             "attack" : 0,
             "damage" : 0,
@@ -3803,6 +3942,9 @@
             "regen" : 0
           },
           "defence" : 30,
+          "skill" : {
+            "hacking" : 0
+          },
           "melee" : {
             "attack" : 0,
             "damage" : 0,
@@ -3880,6 +4022,9 @@
             "regen" : 0
           },
           "defence" : 3,
+          "skill" : {
+            "hacking" : 0
+          },
           "melee" : {
             "attack" : 0,
             "damage" : 0,
@@ -3971,6 +4116,9 @@
             "regen" : 0
           },
           "defence" : 3,
+          "skill" : {
+            "hacking" : 0
+          },
           "melee" : {
             "attack" : 0,
             "damage" : 0,
@@ -4040,6 +4188,9 @@
             "regen" : 0
           },
           "defence" : 5,
+          "skill" : {
+            "hacking" : 0
+          },
           "melee" : {
             "attack" : 0,
             "damage" : 0,
@@ -4109,6 +4260,9 @@
             "regen" : 0
           },
           "defence" : 5,
+          "skill" : {
+            "hacking" : 0
+          },
           "melee" : {
             "attack" : 0,
             "damage" : 0,
@@ -4168,6 +4322,9 @@
             "regen" : 0
           },
           "defence" : 0,
+          "skill" : {
+            "hacking" : 0
+          },
           "melee" : {
             "attack" : 0,
             "damage" : 0,
@@ -4236,6 +4393,9 @@
             "regen" : 0
           },
           "defence" : 0,
+          "skill" : {
+            "hacking" : 0
+          },
           "melee" : {
             "attack" : 0,
             "damage" : 0,
@@ -4315,6 +4475,9 @@
             "regen" : 0
           },
           "defence" : 1000,
+          "skill" : {
+            "hacking" : 0
+          },
           "melee" : {
             "attack" : 0,
             "damage" : 0,
@@ -4374,6 +4537,9 @@
             "regen" : 0
           },
           "defence" : 0,
+          "skill" : {
+            "hacking" : 0
+          },
           "melee" : {
             "attack" : 0,
             "damage" : 0,
@@ -4687,6 +4853,9 @@
           "regen" : 0
         },
         "defence" : 2,
+        "skill" : {
+          "hacking" : 0
+        },
         "melee" : {
           "attack" : 2,
           "damage" : 0,
@@ -4743,6 +4912,9 @@
           "regen" : 0
         },
         "defence" : 2,
+        "skill" : {
+          "hacking" : 0
+        },
         "melee" : {
           "attack" : 2,
           "damage" : 0,
@@ -4799,6 +4971,9 @@
           "regen" : 0
         },
         "defence" : 2,
+        "skill" : {
+          "hacking" : 0
+        },
         "melee" : {
           "attack" : 2,
           "damage" : 0,
@@ -4855,6 +5030,9 @@
           "regen" : 0
         },
         "defence" : 2,
+        "skill" : {
+          "hacking" : 0
+        },
         "melee" : {
           "attack" : 2,
           "damage" : 0,
@@ -4911,6 +5089,9 @@
           "regen" : 0
         },
         "defence" : 2,
+        "skill" : {
+          "hacking" : 0
+        },
         "melee" : {
           "attack" : 2,
           "damage" : 0,
@@ -4970,6 +5151,9 @@
           "regen" : 0
         },
         "defence" : 5,
+        "skill" : {
+          "hacking" : 0
+        },
         "melee" : {
           "attack" : 5,
           "damage" : 5,
@@ -5026,6 +5210,9 @@
           "regen" : 0
         },
         "defence" : 5,
+        "skill" : {
+          "hacking" : 0
+        },
         "melee" : {
           "attack" : 5,
           "damage" : 5,
@@ -5082,6 +5269,9 @@
           "regen" : 0
         },
         "defence" : 5,
+        "skill" : {
+          "hacking" : 0
+        },
         "melee" : {
           "attack" : 5,
           "damage" : 5,
@@ -5138,6 +5328,9 @@
           "regen" : 0
         },
         "defence" : 5,
+        "skill" : {
+          "hacking" : 0
+        },
         "melee" : {
           "attack" : 5,
           "damage" : 5,
@@ -5194,6 +5387,9 @@
           "regen" : 0
         },
         "defence" : 5,
+        "skill" : {
+          "hacking" : 0
+        },
         "melee" : {
           "attack" : 5,
           "damage" : 5,
@@ -9994,6 +10190,9 @@
       "weight" : 100
     }, {
       "value" : "explosive-triggered",
+      "weight" : 100
+    }, {
+      "value" : "fence-energy-open",
       "weight" : 100
     } ],
     "terrain" : "floor",

@@ -53,6 +53,12 @@ object Stats {
     }
   }
 
+  case class Skill(hacking: Int = 0) {
+    def add(x: Skill): Skill = {
+      copy(hacking + x.hacking)
+    }
+  }
+
   case class Consumption(energy: Double = 0, materials: Double = 0) {
     def add(x: Consumption): Consumption = {
       copy(energy + x.energy, materials + x.materials)
@@ -73,7 +79,8 @@ case class Stats(speed: Double = 1,
                  ranged: Ranged = Ranged(),
                  launcher: Launcher = Launcher(),
                  explosive: Explosive = Explosive(),
-                 sight: Sight = Sight()
+                 sight: Sight = Sight(),
+                 skill: Skill = Skill()
                 ) {
 
   def add(x: Stats): Stats = {
@@ -88,7 +95,8 @@ case class Stats(speed: Double = 1,
       ranged add x.ranged,
       launcher add x.launcher,
       explosive add x.explosive,
-      sight add x.sight
+      sight add x.sight,
+      skill add x.skill
     )
   }
 }

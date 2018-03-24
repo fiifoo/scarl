@@ -14,7 +14,8 @@ object JsonItem {
   lazy private implicit val explosiveFormat = Json.format[Explosive]
   lazy private implicit val itemKindIdFormat = JsonItemKind.itemKindIdFormat
   lazy private implicit val itemPowerFormat = JsonItemPower.itemPowerFormat
-  lazy private implicit val keyFormat = JsonKey.keyFormat
+  lazy private implicit val keyFormat = JsonItemKey.keyFormat
+  lazy private implicit val lockFormat = JsonItemLock.lockFormat
   lazy private implicit val missileLauncherFormat = JsonItemEquipment.missileLauncherFormat
   lazy private implicit val rangedWeaponFormat = JsonItemEquipment.rangedWeaponFormat
   lazy private implicit val shieldFormat = JsonItemEquipment.shieldFormat

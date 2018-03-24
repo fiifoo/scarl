@@ -2,7 +2,7 @@ package io.github.fiifoo.scarl.effect.interact
 
 import io.github.fiifoo.scarl.core.State
 import io.github.fiifoo.scarl.core.effect.{Effect, EffectResult}
-import io.github.fiifoo.scarl.core.entity.Selectors.{getItemLocation, getLocationEntities, hasKey}
+import io.github.fiifoo.scarl.core.entity.Selectors.{getItemLocation, getLocationEntities, hasLockKey}
 import io.github.fiifoo.scarl.core.entity.{CreatureId, Item, ItemId}
 import io.github.fiifoo.scarl.core.geometry.Location
 import io.github.fiifoo.scarl.core.item.Door
@@ -26,16 +26,16 @@ case class UseDoorEffect(user: Option[CreatureId],
   private def use(s: State, location: Location, item: Item)(door: Door): EffectResult = {
     getObstacle(s, location) map (obstacle => {
       EffectResult(
-        DoorBlockedEffect(user, target, obstacle, location, Some(this))
+        BlockedDoorEffect(user, target, obstacle, location, Some(this))
       )
     }) getOrElse {
       item.locked flatMap (lock => {
         user flatMap (user => {
-          if (hasKey(s)(user)(lock)) {
+          if (hasLockKey(s)(user)(lock)) {
             None
           } else {
             Some(EffectResult(
-              ItemLockedEffect(user, target, location, Some(this))
+              LockedItemEffect(user, target, location, Some(this))
             ))
           }
         })

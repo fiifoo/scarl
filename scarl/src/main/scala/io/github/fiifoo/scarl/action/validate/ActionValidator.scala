@@ -6,7 +6,6 @@ import io.github.fiifoo.scarl.core.State
 import io.github.fiifoo.scarl.core.action.Action
 import io.github.fiifoo.scarl.core.entity.CreatureId
 import io.github.fiifoo.scarl.core.entity.Selectors.getItemLocation
-import io.github.fiifoo.scarl.core.geometry.Location
 
 object ActionValidator {
 
@@ -18,11 +17,12 @@ object ActionValidator {
       case action: DropItemAction => validate(s, actor, action)
       case action: EnterConduitAction => validate(s, actor, action)
       case action: EquipItemAction => EquipItemValidator(s, actor, action)
+      case action: HackItemAction => validate(s, actor, action)
       case action: MoveAction => validate(s, actor, action)
       case PassAction => true
       case action: PickItemAction => validate(s, actor, action)
-      case action: ShootAction => true
-      case action: ShootMissileAction => true
+      case _: ShootAction => true
+      case _: ShootMissileAction => true
       case action: UnequipItemAction => validate(s, actor, action)
       case action: UseCreatureAction => validate(s, actor, action)
       case action: UseDoorAction => validate(s, actor, action)
@@ -53,6 +53,14 @@ object ActionValidator {
 
   private def validate(s: State, actor: CreatureId, action: EnterConduitAction): Boolean = {
     actor(s).location == s.conduits(action.conduit)
+  }
+
+  private def validate(s: State, actor: CreatureId, action: HackItemAction): Boolean = {
+    val item = action.target(s)
+
+    entityExists(s)(item.id) &&
+      item.locked.isDefined &&
+      (getItemLocation(s)(item.id) exists isAdjacentOrCurrentLocation(s, actor))
   }
 
   private def validate(s: State, actor: CreatureId, action: MoveAction): Boolean = {
@@ -88,12 +96,8 @@ object ActionValidator {
   private def validate(s: State, actor: CreatureId, action: UseItemAction): Boolean = {
     val item = action.target(s)
 
-    def validLocation(location: Location): Boolean = {
-      location == actor(s).location || isAdjacentLocation(s, actor)(location)
-    }
-
     entityExists(s)(item.id) &&
       item.usable.isDefined &&
-      (item.container == actor || (getItemLocation(s)(item.id) exists validLocation))
+      (item.container == actor || (getItemLocation(s)(item.id) exists isAdjacentOrCurrentLocation(s, actor)))
   }
 }

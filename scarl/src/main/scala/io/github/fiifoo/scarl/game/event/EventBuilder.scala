@@ -35,13 +35,13 @@ class EventBuilder(s: State, player: CreatureId, fov: Set[Location]) {
   def apply(effect: Effect): Option[Event] = {
     effect match {
       case e: BadShotEffect => build(e) map GenericEvent
+      case e: BlockedDoorEffect => build(e) map GenericEvent
       case e: CollideEffect => build(e) map GenericEvent
       case e: CommunicateEffect => build(e) map GenericEvent
       case e: CreateEntityEffect => build(e) map GenericEvent
       case e: DeathEffect => build(e) map GenericEvent
       case e: DetectEffect => build(e) map GenericEvent
       case e: DisplaceEffect => build(e) map GenericEvent
-      case e: DoorBlockedEffect => build(e) map GenericEvent
       case e: DoorUsedEffect => build(e) map GenericEvent
       case e: DropItemEffect => build(e) map GenericEvent
       case e: EquipItemEffect => build(e) map GenericEvent
@@ -54,8 +54,10 @@ class EventBuilder(s: State, player: CreatureId, fov: Set[Location]) {
       case e: GainLevelEffect => build(e) map GenericEvent
       case e: HealEffect => build(e) map GenericEvent
       case e: HitEffect => build(e)
-      case e: ItemLockedEffect => build(e) map GenericEvent
+      case e: ItemHackedEffect => build(e) map GenericEvent
+      case e: ItemHackFailedEffect => build(e) map GenericEvent
       case e: LocalizedDescriptionEffect => build(e) map GenericEvent
+      case e: LockedItemEffect => build(e) map GenericEvent
       case e: MissEffect => build(e) map GenericEvent
       case e: MovedEffect => build(e)
       case e: PickItemEffect => build(e) map GenericEvent
@@ -81,6 +83,14 @@ class EventBuilder(s: State, player: CreatureId, fov: Set[Location]) {
       } else {
         Some("You shoot at nothing.")
       }
+    } else {
+      None
+    }
+  }
+
+  private def build(effect: BlockedDoorEffect): Option[String] = {
+    if (effect.user contains player) {
+      Some(s"${kind(effect.obstacle)} is in way.")
     } else {
       None
     }
@@ -156,22 +166,6 @@ class EventBuilder(s: State, player: CreatureId, fov: Set[Location]) {
       Some(s"You displace ${kind(effect.displaced)}.")
     } else if (effect.displaced == player) {
       Some(s"${kind(effect.displacer)} displaces you.")
-    } else {
-      None
-    }
-  }
-
-  private def build(effect: DoorBlockedEffect): Option[String] = {
-    if (effect.user contains player) {
-      Some(s"${kind(effect.obstacle)} is in way.")
-    } else {
-      None
-    }
-  }
-
-  private def build(effect: ItemLockedEffect): Option[String] = {
-    if (effect.user == player) {
-      Some(s"${kind(effect.item)} is locked.")
     } else {
       None
     }
@@ -344,6 +338,26 @@ class EventBuilder(s: State, player: CreatureId, fov: Set[Location]) {
     message map (HitEvent(effect.target, effect.location, _))
   }
 
+  private def build(effect: ItemHackedEffect): Option[String] = {
+    if (effect.hacker == player) {
+      Some(s"You hack ${kind(effect.item)}.")
+    } else if (fov contains effect.location) {
+      Some(s"${kind(effect.hacker)} hacks ${kind(effect.item)}.")
+    } else {
+      None
+    }
+  }
+
+  private def build(effect: ItemHackFailedEffect): Option[String] = {
+    if (effect.hacker == player) {
+      Some(s"You fail to hack ${kind(effect.item)}.")
+    } else if (fov contains effect.location) {
+      Some(s"${kind(effect.hacker)} fails to hack ${kind(effect.item)}.")
+    } else {
+      None
+    }
+  }
+
   private def build(effect: LocalizedDescriptionEffect): Option[String] = {
     effect.description flatMap (description => {
       if (fov contains effect.location) {
@@ -352,6 +366,14 @@ class EventBuilder(s: State, player: CreatureId, fov: Set[Location]) {
         None
       }
     })
+  }
+
+  private def build(effect: LockedItemEffect): Option[String] = {
+    if (effect.user == player) {
+      Some(s"${kind(effect.item)} is locked.")
+    } else {
+      None
+    }
   }
 
   private def build(effect: MissEffect): Option[String] = {

@@ -15,6 +15,7 @@ object JsonCreatureStats {
   lazy private implicit val meleeFormat = Json.format[Stats.Melee]
   lazy private implicit val rangedFormat = Json.format[Stats.Ranged]
   lazy private implicit val sightFormat = Json.format[Stats.Sight]
+  lazy private implicit val skillFormat = Json.format[Stats.Skill]
 
   lazy val creatureStatsFormat: Format[Stats] = Json.format
 }

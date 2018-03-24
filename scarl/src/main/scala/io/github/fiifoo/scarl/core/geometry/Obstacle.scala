@@ -48,8 +48,10 @@ object Obstacle {
     getLocationItems(s)(location) find (id => {
       val item = id(s)
 
-      item.door.exists(door => {
-        !door.open && !(item.locked forall keys.contains)
+      item.door exists (door => {
+        !door.open && (item.locked exists (lock => {
+          lock.key forall (key => !(keys contains key))
+        }))
       })
     })
   }

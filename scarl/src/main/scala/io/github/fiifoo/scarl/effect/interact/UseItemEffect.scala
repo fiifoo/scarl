@@ -2,7 +2,7 @@ package io.github.fiifoo.scarl.effect.interact
 
 import io.github.fiifoo.scarl.core.State
 import io.github.fiifoo.scarl.core.effect.{Effect, EffectResult}
-import io.github.fiifoo.scarl.core.entity.Selectors.hasKey
+import io.github.fiifoo.scarl.core.entity.Selectors.hasLockKey
 import io.github.fiifoo.scarl.core.entity.{CreatureId, ItemId}
 import io.github.fiifoo.scarl.core.geometry.Location
 
@@ -17,11 +17,11 @@ case class UseItemEffect(user: CreatureId,
 
     item.usable map (power => {
       item.locked flatMap (lock => {
-        if (hasKey(s)(user)(lock)) {
+        if (hasLockKey(s)(user)(lock)) {
           None
         } else {
           Some(EffectResult(
-            ItemLockedEffect(user, target, location, Some(this))
+            LockedItemEffect(user, target, location, Some(this))
           ))
         }
       }) getOrElse {

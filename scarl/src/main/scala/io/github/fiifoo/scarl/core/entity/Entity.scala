@@ -100,7 +100,7 @@ case class Item(id: ItemId,
 
                 concealment: Int = 0,
                 hidden: Boolean = false,
-                locked: Option[Key] = None,
+                locked: Option[Lock] = None,
                 personal: Boolean = false,
                 pickable: Boolean = false,
 

@@ -24,7 +24,7 @@ object Data {
   lazy private implicit val areaMapReads = JsonArea.areaMapReads
   lazy private implicit val communicationMapReads = JsonCommunication.communicationMapReads
   lazy private implicit val factionMapReads = JsonFaction.factionMapReads
-  lazy private implicit val keyKindMapReads = JsonKey.keyKindMapReads
+  lazy private implicit val keyKindMapReads = JsonItemKey.keyKindMapReads
   lazy private implicit val kindsReads = JsonKind.kindsReads
   lazy private implicit val progressionMapReads = JsonProgression.progressionMapReads
   lazy private implicit val templateMapReads = JsonTemplate.templateMapReads
