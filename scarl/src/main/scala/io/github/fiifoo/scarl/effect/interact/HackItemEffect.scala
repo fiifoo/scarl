@@ -7,6 +7,7 @@ import io.github.fiifoo.scarl.core.entity.{CreatureId, ItemId}
 import io.github.fiifoo.scarl.core.geometry.Location
 import io.github.fiifoo.scarl.core.mutation.RngMutation
 import io.github.fiifoo.scarl.rule.HackRule
+import io.github.fiifoo.scarl.rule.HackRule.{FailureResult, Success}
 
 case class HackItemEffect(hacker: CreatureId,
                           target: ItemId,
@@ -19,10 +20,9 @@ case class HackItemEffect(hacker: CreatureId,
       val (random, rng) = s.rng()
       val skill = getCreatureStats(s)(hacker).skill.hacking
 
-      val effect = if (HackRule(random)(skill, lock.security)) {
-        ItemHackedEffect(hacker, target, location, Some(this))
-      } else {
-        ItemHackFailedEffect(hacker, target, location, Some(this))
+      val effect = HackRule(random)(skill, lock.security) match {
+        case Success => ItemHackedEffect(hacker, target, location, Some(this))
+        case failure: FailureResult => ItemHackFailedEffect(hacker, target, location, failure, Some(this))
       }
 
       EffectResult(

@@ -13,6 +13,7 @@ import io.github.fiifoo.scarl.effect.combat._
 import io.github.fiifoo.scarl.effect.creature._
 import io.github.fiifoo.scarl.effect.interact._
 import io.github.fiifoo.scarl.effect.movement.{CollideEffect, DisplaceEffect, MovedEffect}
+import io.github.fiifoo.scarl.rule.HackRule
 
 object EventBuilder {
 
@@ -349,10 +350,16 @@ class EventBuilder(s: State, player: CreatureId, fov: Set[Location]) {
   }
 
   private def build(effect: ItemHackFailedEffect): Option[String] = {
+    val level = effect.failure match {
+      case HackRule.Failure => ""
+      case HackRule.BadFailure => " badly"
+      case HackRule.CriticalFailure => " critically"
+    }
+
     if (effect.hacker == player) {
-      Some(s"You fail to hack ${kind(effect.item)}.")
+      Some(s"You fail$level at hacking ${kind(effect.item)}.")
     } else if (fov contains effect.location) {
-      Some(s"${kind(effect.hacker)} fails to hack ${kind(effect.item)}.")
+      Some(s"${kind(effect.hacker)} fails$level at hacking ${kind(effect.item)}.")
     } else {
       None
     }
