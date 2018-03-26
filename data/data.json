@@ -2825,6 +2825,16 @@
       },
       "name" : "Plasma trap",
       "concealment" : 30,
+      "trap" : {
+        "type" : "TrapAttackPower",
+        "data" : {
+          "attack" : 20,
+          "damage" : 30,
+          "hitDescription" : "Pulse of plasma shoots from ceiling and hits {target}.",
+          "deflectDescription" : "Pulse of plasma shoots from ceiling and hits {target} with no effect.",
+          "missDescription" : "Pulse of plasma shoots from ceiling narrowly missing {target}."
+        }
+      },
       "door" : null,
       "usable" : {
         "type" : "RemoveItemPower",
@@ -2996,6 +3006,10 @@
       "hidden" : true,
       "name" : "Mine",
       "concealment" : 30,
+      "trap" : {
+        "type" : "ExplodeItemPower",
+        "data" : { }
+      },
       "door" : null,
       "usable" : {
         "type" : "TransformItemPower",
@@ -3119,6 +3133,16 @@
       },
       "name" : "Laser trap",
       "concealment" : 30,
+      "trap" : {
+        "type" : "TrapAttackPower",
+        "data" : {
+          "attack" : 50,
+          "damage" : 10,
+          "hitDescription" : "Laser beam shoots from ceiling and hits {target}.",
+          "deflectDescription" : "Laser beam shoots from ceiling and hits {target} with no effect.",
+          "missDescription" : "Laser beam shoots from ceiling narrowly missing {target}."
+        }
+      },
       "door" : null,
       "usable" : {
         "type" : "RemoveItemPower",
@@ -4616,14 +4640,14 @@
       "id" : "wall-indestructible"
     } ] ],
     "widgets" : [ [ "explosive-triggered-widget", {
-      "type" : "TriggeredExplosiveWidget",
+      "type" : "TriggeredTrapWidget",
       "data" : {
         "item" : "explosive-triggered-active",
+        "category" : "WidgetKind.TrapCategory",
+        "power" : 100,
         "discover" : "DiscoverTriggerer",
         "triggerDescription" : "Click.",
-        "id" : "explosive-triggered-widget",
-        "category" : "WidgetKind.TrapCategory",
-        "power" : 100
+        "id" : "explosive-triggered-widget"
       }
     } ], [ "explosive-timed-widget", {
       "type" : "TimedExplosiveWidget",
@@ -4641,19 +4665,14 @@
         "id" : "healing-chamber-widget"
       }
     } ], [ "trap-laser-widget", {
-      "type" : "AttackingTrapWidget",
+      "type" : "TriggeredTrapWidget",
       "data" : {
-        "missDescription" : "Laser beam shoots from ceiling narrowly missing {target}.",
-        "triggerDescription" : "Click.",
-        "power" : 0,
-        "attack" : 50,
-        "hitDescription" : "Laser beam shoots from ceiling and hits {target}.",
-        "discover" : "DiscoverTriggerer",
-        "deflectDescription" : "Laser beam shoots from ceiling and hits {target} with no effect.",
-        "damage" : 10,
         "item" : "trap-laser",
-        "id" : "trap-laser-widget",
-        "category" : "WidgetKind.TrapCategory"
+        "category" : "WidgetKind.TrapCategory",
+        "power" : 0,
+        "discover" : "DiscoverTriggerer",
+        "triggerDescription" : "Click.",
+        "id" : "trap-laser-widget"
       }
     } ], [ "healing-chamber-widget-active", {
       "type" : "HealLocationWidget",
@@ -4710,19 +4729,14 @@
         "power" : 0
       }
     } ], [ "trap-plasma-widget", {
-      "type" : "AttackingTrapWidget",
+      "type" : "TriggeredTrapWidget",
       "data" : {
-        "missDescription" : "Pulse of plasma shoots from ceiling narrowly missing {target}.",
-        "triggerDescription" : "Click.",
-        "power" : 50,
-        "attack" : 20,
-        "hitDescription" : "Pulse of plasma shoots from ceiling and hits {target}.",
-        "discover" : "DiscoverTriggerer",
-        "deflectDescription" : "Pulse of plasma shoots from ceiling and hits {target} with no effect.",
-        "damage" : 30,
         "item" : "trap-plasma",
-        "id" : "trap-plasma-widget",
-        "category" : "WidgetKind.TrapCategory"
+        "category" : "WidgetKind.TrapCategory",
+        "power" : 50,
+        "discover" : "DiscoverTriggerer",
+        "triggerDescription" : "Click.",
+        "id" : "trap-plasma-widget"
       }
     } ], [ "portal-enemy-widget-2", {
       "type" : "SummonCreatureWidget",

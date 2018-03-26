@@ -21,37 +21,34 @@ object JsonStatus {
   implicitly(weightedChoicesFormat[CreatureKindId])
   lazy private implicit val discoverFormat = JsonItemDiscover.discoverFormat
 
-  lazy private implicit val attackingTrapFormat = Json.format[AttackingTrapStatus]
   lazy private implicit val delayedTransformingWidgetFormat = Json.format[DelayedTransformingWidgetStatus]
   lazy private implicit val healLocationFormat = Json.format[HealLocationStatus]
   lazy private implicit val summonCreatureFormat = Json.format[SummonCreatureStatus]
   lazy private implicit val timedExplosiveFormat = Json.format[TimedExplosiveStatus]
-  lazy private implicit val triggeredExplosiveFormat = Json.format[TriggeredExplosiveStatus]
   lazy private implicit val triggeredConduitFormat = Json.format[TriggeredConduitStatus]
   lazy private implicit val triggeredMachineryFormat = Json.format[TriggeredMachineryStatus]
   lazy private implicit val triggeredTransformingWidgetFormat = Json.format[TriggeredTransformingWidgetStatus]
+  lazy private implicit val triggeredTrapFormat = Json.format[TriggeredTrapStatus]
 
   lazy val statusFormat: Format[Status] = polymorphicTypeFormat(
     data => {
-      case "AttackingTrapStatus" => data.as[AttackingTrapStatus]
       case "DelayedTransformingWidgetStatus" => data.as[DelayedTransformingWidgetStatus]
       case "HealLocationStatus" => data.as[HealLocationStatus]
       case "SummonCreatureStatus" => data.as[SummonCreatureStatus]
       case "TimedExplosiveStatus" => data.as[TimedExplosiveStatus]
-      case "TriggeredExplosiveStatus" => data.as[TriggeredExplosiveStatus]
       case "TriggeredConduitStatus" => data.as[TriggeredConduitStatus]
       case "TriggeredMachineryStatus" => data.as[TriggeredMachineryStatus]
       case "TriggeredTransformingWidgetStatus" => data.as[TriggeredTransformingWidgetStatus]
+      case "TriggeredTrapStatus" => data.as[TriggeredTrapStatus]
     }, {
-      case status: AttackingTrapStatus => attackingTrapFormat.writes(status)
       case status: DelayedTransformingWidgetStatus => delayedTransformingWidgetFormat.writes(status)
       case status: HealLocationStatus => healLocationFormat.writes(status)
       case status: SummonCreatureStatus => summonCreatureFormat.writes(status)
       case status: TimedExplosiveStatus => timedExplosiveFormat.writes(status)
-      case status: TriggeredExplosiveStatus => triggeredExplosiveFormat.writes(status)
       case status: TriggeredConduitStatus => triggeredConduitFormat.writes(status)
       case status: TriggeredMachineryStatus => triggeredMachineryFormat.writes(status)
       case status: TriggeredTransformingWidgetStatus => triggeredTransformingWidgetFormat.writes(status)
+      case status: TriggeredTrapStatus => triggeredTrapFormat.writes(status)
     }
   )
 

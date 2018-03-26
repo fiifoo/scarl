@@ -111,6 +111,7 @@ case class Item(id: ItemId,
                 launcher: Option[MissileLauncher] = None,
                 rangedWeapon: Option[RangedWeapon] = None,
                 shield: Option[Shield] = None,
+                trap: Option[ItemPower] = None,
                 usable: Option[ItemPower] = None,
                 weapon: Option[Weapon] = None,
                ) extends Entity

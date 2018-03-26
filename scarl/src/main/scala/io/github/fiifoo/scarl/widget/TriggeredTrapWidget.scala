@@ -5,32 +5,22 @@ import io.github.fiifoo.scarl.core.entity._
 import io.github.fiifoo.scarl.core.item.Discover
 import io.github.fiifoo.scarl.core.kind.WidgetKind.Category
 import io.github.fiifoo.scarl.core.kind._
-import io.github.fiifoo.scarl.status.AttackingTrapStatus
+import io.github.fiifoo.scarl.status.TriggeredTrapStatus
 
-case class AttackingTrapWidget(id: WidgetKindId,
+case class TriggeredTrapWidget(id: WidgetKindId,
                                item: ItemKindId,
                                category: Option[Category] = None,
                                power: Option[Int] = None,
-                               attack: Int,
-                               damage: Int,
                                discover: Option[Discover] = None,
                                triggerDescription: Option[String] = None,
-                               hitDescription: Option[String] = None,
-                               deflectDescription: Option[String] = None,
-                               missDescription: Option[String] = None,
                               ) extends WidgetKind {
 
   def createStatus(s: State, id: Int, target: ContainerId): Status = {
-    AttackingTrapStatus(
+    TriggeredTrapStatus(
       id = TriggerStatusId(id),
       target,
-      attack,
-      damage,
       discover,
-      triggerDescription,
-      hitDescription,
-      deflectDescription,
-      missDescription
+      triggerDescription
     )
   }
 }

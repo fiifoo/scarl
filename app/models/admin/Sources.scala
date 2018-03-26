@@ -15,7 +15,7 @@ import io.github.fiifoo.scarl.core.item._
 import io.github.fiifoo.scarl.core.kind._
 import io.github.fiifoo.scarl.core.math.Distribution
 import io.github.fiifoo.scarl.mechanism.{CreateEntityMechanism, RemoveWallMechanism, UseDoorMechanism}
-import io.github.fiifoo.scarl.power.{RemoveItemPower, TransformCreaturePower, TransformItemPower}
+import io.github.fiifoo.scarl.power._
 import io.github.fiifoo.scarl.widget._
 
 import scala.reflect.runtime.universe.typeOf
@@ -37,14 +37,13 @@ object Sources {
     ModelSource(typeOf[TerrainKind], List("kinds", "terrains")),
     ModelSource(typeOf[WallKind], List("kinds", "walls")),
     ModelSource(typeOf[WidgetKind], List("kinds", "widgets"), List(
-      typeOf[AttackingTrapWidget],
       typeOf[DelayedTransformingWidget],
       typeOf[HealLocationWidget],
       typeOf[SummonCreatureWidget],
       typeOf[TimedExplosiveWidget],
-      typeOf[TriggeredExplosiveWidget],
       typeOf[TriggeredMachineryWidget],
       typeOf[TriggeredTransformingWidget],
+      typeOf[TriggeredTrapWidget],
     )),
 
     ModelSource(typeOf[Progression], List("progressions")),
@@ -149,8 +148,10 @@ object Sources {
     ), objectPolymorphism = true),
 
     SubModelSource(typeOf[ItemPower], List(
+      typeOf[ExplodeItemPower.type],
       typeOf[RemoveItemPower],
       typeOf[TransformItemPower],
+      typeOf[TrapAttackPower],
     )),
 
     SubModelSource(typeOf[Missile.Guidance], List(

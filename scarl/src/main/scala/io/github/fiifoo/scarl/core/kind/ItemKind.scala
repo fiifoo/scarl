@@ -40,6 +40,7 @@ case class ItemKind(id: ItemKindId,
                     launcher: Option[MissileLauncher] = None,
                     rangedWeapon: Option[RangedWeapon] = None,
                     shield: Option[Shield] = None,
+                    trap: Option[ItemPower] = None,
                     usable: Option[ItemPower] = None,
                     weapon: Option[Weapon] = None
                    ) extends Kind {
@@ -112,6 +113,7 @@ case class ItemKind(id: ItemKindId,
       launcher = launcher,
       rangedWeapon = rangedWeapon,
       shield = shield,
+      trap = trap,
       usable = usable,
       weapon = weapon
     )
