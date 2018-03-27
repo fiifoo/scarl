@@ -8,13 +8,13 @@ lazy val root = (project in file("."))
 
 lazy val scarl = project
 
-scalaVersion := "2.12.4"
+scalaVersion := "2.12.5"
 
 libraryDependencies += guice
-libraryDependencies += "org.scalatestplus.play" %% "scalatestplus-play" % "3.1.0" % Test
+libraryDependencies += "org.scalatestplus.play" %% "scalatestplus-play" % "3.1.2" % Test
 libraryDependencies += "com.typesafe.play" %% "play-slick" % "3.0.1"
 libraryDependencies += "com.typesafe.play" %% "play-slick-evolutions" % "3.0.1"
-libraryDependencies += "org.postgresql" % "postgresql" % "42.1.4"
+libraryDependencies += "org.postgresql" % "postgresql" % "42.2.2"
 
 unmanagedResourceDirectories in Assets += (baseDirectory.value / "scarl-ui" / "dist")
 unmanagedResourceDirectories in Assets += (baseDirectory.value / "scarl-admin" / "dist")
