@@ -46,9 +46,9 @@ object ActionValidator {
   }
 
   private def validate(s: State, actor: CreatureId, action: DropItemAction): Boolean = {
-    val item = action.item(s)
-
-    entityExists(s)(item.id) && item.pickable && item.container == actor
+    entityExists(s)(action.item) &&
+      action.item(s).pickable &&
+      action.item(s).container == actor
   }
 
   private def validate(s: State, actor: CreatureId, action: EnterConduitAction): Boolean = {
@@ -56,11 +56,9 @@ object ActionValidator {
   }
 
   private def validate(s: State, actor: CreatureId, action: HackItemAction): Boolean = {
-    val item = action.target(s)
-
-    entityExists(s)(item.id) &&
-      item.locked.isDefined &&
-      (getItemLocation(s)(item.id) exists isAdjacentOrCurrentLocation(s, actor))
+    entityExists(s)(action.target) &&
+      action.target(s).locked.isDefined &&
+      (getItemLocation(s)(action.target) exists isAdjacentOrCurrentLocation(s, actor))
   }
 
   private def validate(s: State, actor: CreatureId, action: MoveAction): Boolean = {
@@ -74,11 +72,9 @@ object ActionValidator {
   }
 
   private def validate(s: State, actor: CreatureId, action: UnequipItemAction): Boolean = {
-    val item = action.item(s)
-
-    entityExists(s)(item.id) &&
-      item.container == actor &&
-      (s.equipments.get(actor) exists (_.values exists (_ == item.id)))
+    entityExists(s)(action.item) &&
+      action.item(s).container == actor &&
+      (s.equipments.get(actor) exists (_.values exists (_ == action.item)))
   }
 
   private def validate(s: State, actor: CreatureId, action: UseCreatureAction): Boolean = {
@@ -94,10 +90,8 @@ object ActionValidator {
   }
 
   private def validate(s: State, actor: CreatureId, action: UseItemAction): Boolean = {
-    val item = action.target(s)
-
-    entityExists(s)(item.id) &&
-      item.usable.isDefined &&
-      (item.container == actor || (getItemLocation(s)(item.id) exists isAdjacentOrCurrentLocation(s, actor)))
+    entityExists(s)(action.target) &&
+      action.target(s).usable.isDefined &&
+      (action.target(s).container == actor || (getItemLocation(s)(action.target) exists isAdjacentOrCurrentLocation(s, actor)))
   }
 }
