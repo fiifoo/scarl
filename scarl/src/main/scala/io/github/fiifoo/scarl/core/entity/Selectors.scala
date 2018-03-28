@@ -4,7 +4,7 @@ import io.github.fiifoo.scarl.core.State
 import io.github.fiifoo.scarl.core.creature.Stats
 import io.github.fiifoo.scarl.core.geometry.WaypointNetwork.Waypoint
 import io.github.fiifoo.scarl.core.geometry.{Location, Sector}
-import io.github.fiifoo.scarl.core.item.{Key, Lock}
+import io.github.fiifoo.scarl.core.item.{Key, Lock, PrivateKey}
 
 object Selectors {
 
@@ -14,6 +14,12 @@ object Selectors {
 
   def getCreatureComrades(s: State)(creature: CreatureId): Set[CreatureId] = {
     getCreaturePartyMembers(s)(creature) - creature
+  }
+
+  def getCreatureKeys(s: State)(creature: CreatureId): Set[Key] = {
+    val keys = s.keys.getOrElse(creature, Set())
+
+    keys + PrivateKey(creature)
   }
 
   def getCreaturePartyMembers(s: State)(creature: CreatureId): Set[CreatureId] = {
@@ -101,7 +107,7 @@ object Selectors {
   }
 
   def hasKey(s: State)(creature: CreatureId)(key: Key): Boolean = {
-    s.keys.get(creature) exists (_ contains key)
+    getCreatureKeys(s)(creature) contains key
   }
 
   def hasLockKey(s: State)(creature: CreatureId)(lock: Lock): Boolean = {

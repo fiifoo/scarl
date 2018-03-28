@@ -32,21 +32,21 @@ case class CreatureKind(id: CreatureKindId,
                         responses: Map[FactionId, List[CommunicationId]] = Map()
                        ) extends Kind {
 
-  def toLocation(s: State, idSeq: IdSeq, location: Location, owner: Option[SafeCreatureId]): Result[Creature] = {
+  def toLocation(s: State, idSeq: IdSeq, location: Location, owner: Option[CreatureId]): Result[Creature] = {
     val (nextId, creatureIdSeq) = idSeq()
     val creatureId = CreatureId(nextId)
 
     val creature = Creature(
       id = creatureId,
       kind = id,
-      faction = faction,
+      faction = owner map (_ (s).faction) getOrElse faction,
       solitary = solitary,
       party = getParty(s, location, creatureId),
       behavior = behavior,
       location = location,
       tick = s.tick,
       stats = stats,
-      owner = owner,
+      owner = owner map SafeCreatureId.apply,
 
       character = character,
       flying = flying,
@@ -62,7 +62,7 @@ case class CreatureKind(id: CreatureKindId,
         equipmentMutations :::
         inventoryMutations,
       idSeq = nextIdSeq,
-      entity = creature,
+      entity = creature
     )
   }
 

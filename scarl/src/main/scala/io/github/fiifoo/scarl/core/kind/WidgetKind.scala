@@ -31,15 +31,15 @@ trait WidgetKind extends Kind {
   val category: Option[Category]
   val power: Option[Int]
 
-  def toLocation(s: State, idSeq: IdSeq, location: Location, owner: Option[SafeCreatureId]): Result[Container] = {
-    val itemResult = item(s).toWidget(s, idSeq, location, owner)
+  def toLocation(s: State, idSeq: IdSeq, location: Location, owner: Option[CreatureId]): Result[Container] = {
+    val itemResult = item(s).toLocation(s, idSeq, location, owner)
     val (nextId, nextIdSeq) = itemResult.idSeq()
     val status = createStatus(s, nextId, itemResult.entity.id)
 
     Result(
       mutations = itemResult.mutations ::: List(IdSeqMutation(nextIdSeq), NewEntityMutation(status)),
       idSeq = nextIdSeq,
-      entity = itemResult.entity,
+      entity = itemResult.entity
     )
   }
 

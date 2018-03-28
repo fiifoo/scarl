@@ -41,21 +41,11 @@ case class UseDoorEffect(user: Option[CreatureId],
         })
       }) getOrElse {
         val opening = !door.open
-        val result = door.transformTo(s).toContainer(s, s.idSeq, target(s).container)
-        val item = result.entity
-
-        val lockEffect = if (item.personal) {
-          user map (LockItemEffect(item.id, _))
-        } else {
-          None
-        }
+        val result = door.transformTo(s).toContainer(s, s.idSeq, target(s).container, user)
 
         EffectResult(
           RemovableEntityMutation(target) :: result.mutations,
-          List(
-            lockEffect,
-            Some(DoorUsedEffect(user, target, opening, location, Some(this)))
-          ).flatten
+          DoorUsedEffect(user, target, opening, location, Some(this))
         )
       }
     }

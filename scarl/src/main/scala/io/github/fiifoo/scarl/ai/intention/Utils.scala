@@ -6,7 +6,7 @@ import io.github.fiifoo.scarl.core.State
 import io.github.fiifoo.scarl.core.action.Action
 import io.github.fiifoo.scarl.core.ai.Tactic.Result
 import io.github.fiifoo.scarl.core.creature.FactionId
-import io.github.fiifoo.scarl.core.entity.Selectors.{getCreatureComrades, getLocationEntities, getLocationWaypoint}
+import io.github.fiifoo.scarl.core.entity.Selectors.{getCreatureComrades, getCreatureKeys, getLocationEntities, getLocationWaypoint}
 import io.github.fiifoo.scarl.core.entity.{Creature, CreatureId, SafeCreatureId}
 import io.github.fiifoo.scarl.core.geometry.Obstacle.getClosedDoor
 import io.github.fiifoo.scarl.core.geometry.WaypointNetwork.Waypoint
@@ -75,7 +75,7 @@ object Utils {
     Path(s)(from, to) map (path => {
       MoveAction(path.head)
     }) orElse {
-      val keys = s.keys.getOrElse(actor, Set())
+      val keys = getCreatureKeys(s)(actor)
 
       Path.calc(Obstacle.has(Obstacle.travel(s, keys)))(from, to) flatMap (path => {
         val location = path.head

@@ -30,7 +30,6 @@ case class ItemKind(id: ItemKindId,
                     concealment: Int = 0,
                     hidden: Boolean = false,
                     locked: Option[Lock.Source] = None,
-                    personal: Boolean = false,
                     pickable: Boolean = false,
 
                     armor: Option[Armor] = None,
@@ -45,8 +44,8 @@ case class ItemKind(id: ItemKindId,
                     weapon: Option[Weapon] = None
                    ) extends Kind {
 
-  def toContainer(s: State, idSeq: IdSeq, container: EntityId): Result[Item] = {
-    val (item, nextIdSeq) = createItem(s, idSeq, container)
+  def toContainer(s: State, idSeq: IdSeq, container: EntityId, owner: Option[CreatureId] = None): Result[Item] = {
+    val (item, nextIdSeq) = createItem(s, idSeq, container, owner)
 
     Result(
       mutations = List(IdSeqMutation(nextIdSeq), NewEntityMutation(item)),
@@ -55,10 +54,10 @@ case class ItemKind(id: ItemKindId,
     )
   }
 
-  def toWidget(s: State, idSeq: IdSeq, location: Location, owner: Option[SafeCreatureId]): Result[Container] = {
+  def toLocation(s: State, idSeq: IdSeq, location: Location, owner: Option[CreatureId]): Result[Container] = {
     val (containerId, containerIdSeq) = idSeq()
 
-    val container = Container(ContainerId(containerId), location, owner)
+    val container = Container(ContainerId(containerId), location, owner map SafeCreatureId.apply)
     val (item, nextIdSeq) = createItem(s, containerIdSeq, container.id, owner)
 
     Result(
@@ -66,30 +65,21 @@ case class ItemKind(id: ItemKindId,
         Some(IdSeqMutation(nextIdSeq)),
         Some(NewEntityMutation(container)),
         Some(NewEntityMutation(item)),
-        getItemFoundMutation(s, item, owner),
+        getItemFoundMutation(s, item, owner)
       ).flatten,
       nextIdSeq,
-      container,
+      container
     )
   }
 
   def toLocation(s: State, idSeq: IdSeq, location: Location): Result[Container] = {
-    val (containerId, containerIdSeq) = idSeq()
-
-    val container = Container(ContainerId(containerId), location)
-    val (item, nextIdSeq) = createItem(s, containerIdSeq, container.id)
-
-    Result(
-      mutations = List(IdSeqMutation(nextIdSeq), NewEntityMutation(container), NewEntityMutation(item)),
-      nextIdSeq,
-      container,
-    )
+    toLocation(s, idSeq, location, None)
   }
 
   private def createItem(s: State,
                          idSeq: IdSeq,
                          container: EntityId,
-                         owner: Option[SafeCreatureId] = None
+                         owner: Option[CreatureId]
                         ): (Item, IdSeq) = {
     val (nextId, nextIdSeq) = idSeq()
 
@@ -100,14 +90,13 @@ case class ItemKind(id: ItemKindId,
 
       concealment = concealment,
       hidden = hidden,
-      locked = locked map Lock.apply,
-      personal = personal,
+      locked = locked map (Lock(_, owner)),
       pickable = pickable,
 
       armor = armor,
       door = door,
       explosive = explosive map (explosive => {
-        (owner flatMap (_ (s))) map (_.stats.explosive.add(explosive)) getOrElse explosive
+        (owner map (_ (s))) map (_.stats.explosive.add(explosive)) getOrElse explosive
       }),
       key = key,
       launcher = launcher,
@@ -121,11 +110,11 @@ case class ItemKind(id: ItemKindId,
     (item, nextIdSeq)
   }
 
-  private def getItemFoundMutation(s: State, item: Item, owner: Option[SafeCreatureId]): Option[Mutation] = {
+  private def getItemFoundMutation(s: State, item: Item, owner: Option[CreatureId]): Option[Mutation] = {
     if (!item.hidden) {
       return None
     }
 
-    (owner flatMap (_ (s))) map (owner => ItemFoundMutation(item.id, owner.id))
+    (owner map (_ (s))) map (owner => ItemFoundMutation(item.id, owner.id))
   }
 }

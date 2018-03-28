@@ -10,7 +10,7 @@ object PlayerInfo {
     PlayerInfo(
       creature(s),
       Selectors.getEquipmentStats(s)(creature),
-      s.keys.getOrElse(creature, Set())
+      Selectors.getCreatureKeys(s)(creature)
     )
   }
 }

@@ -30,13 +30,12 @@ case class ShootMissileEffect(attacker: CreatureId,
 
     val result = kind(s).copy(
       behavior = behavior,
-      faction = attacker(s).faction,
       stats = getMissileStats(s, attackerStats)
     ).toLocation(
       s = s,
       idSeq = s.idSeq,
       location = from,
-      owner = Some(SafeCreatureId(attacker)),
+      owner = Some(attacker)
     )
 
     result.entity.missile map (_ => EffectResult(result.mutations)) getOrElse EffectResult()
