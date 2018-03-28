@@ -7,7 +7,7 @@ import io.github.fiifoo.scarl.core.entity.{Creature, CreatureId, SafeCreatureId}
 
 import scala.util.Random
 
-object CheckAttackIntention extends Intention {
+case object CheckAttackIntention extends Intention {
 
   def apply(s: State, actor: CreatureId, random: Random): Option[Result] = {
     Utils.findVisibleEnemy(s, actor) flatMap attack(s, actor, random)

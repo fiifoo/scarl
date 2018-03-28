@@ -10,7 +10,7 @@ import io.github.fiifoo.scarl.core.geometry.{Location, WaypointPath}
 
 import scala.util.Random
 
-object CheckEscapeIntention extends Intention {
+case object CheckEscapeIntention extends Intention {
 
   def apply(s: State, actor: CreatureId, random: Random): Option[Result] = {
     Utils.findVisibleEnemy(s, actor) flatMap escape(s, actor, random)

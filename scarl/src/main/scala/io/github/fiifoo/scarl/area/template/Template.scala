@@ -25,9 +25,9 @@ object Template {
 
   trait Category
 
-  object ChallengeCategory extends Category
+  case object ChallengeCategory extends Category
 
-  object TrapCategory extends Category
+  case object TrapCategory extends Category
 
   val categories: Set[Category] = Set(
     ChallengeCategory,

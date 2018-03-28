@@ -7,7 +7,7 @@ import io.github.fiifoo.scarl.core.entity.{Creature, CreatureId}
 
 import scala.util.Random
 
-object CheckPartyCombatIntention extends Intention {
+case object CheckPartyCombatIntention extends Intention {
 
   def apply(s: State, actor: CreatureId, random: Random): Option[Result] = {
     Utils.findPartyEnemy(s, actor) flatMap travel(s, actor, random)
