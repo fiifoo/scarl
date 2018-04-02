@@ -1,14 +1,12 @@
 import { DEFAULT_TERRAIN, MAIN_FONT, TILE_SIZE, TILE_MIDDLE } from '../const'
-import { clearContext, createCanvas } from '../utils'
+import { createCanvas } from '../utils'
 
-export default kinds => {
-    const canvas = createCanvas()
+export default (area, kinds) => {
+    const canvas = createCanvas(area)
     const context = canvas.getContext('2d')
     context.font = MAIN_FONT
     context.textAlign = 'center'
     context.textBaseline = 'middle'
-
-    const clear = () => clearContext(context)
 
     const update = fov => {
         fov.delta.forEach((rows, x) => {
@@ -90,7 +88,6 @@ export default kinds => {
 
     return {
         canvas,
-        clear,
         update,
         updateMap,
     }

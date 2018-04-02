@@ -2,27 +2,29 @@ import * as modes from '../../debug/modes'
 import { HIGHLIGHT_COLOR } from '../const'
 import { clearContext, createCanvas, createDraw, getRandomColor } from '../utils'
 
-export default () => {
-    const canvas = createCanvas()
+export default area => {
+    const canvas = createCanvas(area)
     const context = canvas.getContext('2d')
     const draw = createDraw(context)
 
-    const clear = () => clearContext(context)
+    const clear = () => clearContext(area, context)
 
     const update = (mode, debug) => {
         clear()
 
         switch (mode) {
-            case modes.FOV:
+            case modes.FOV: {
                 if (debug.fov) {
                     renderFov(debug.fov)
                 }
                 break
-            case modes.WAYPOINT:
+            }
+            case modes.WAYPOINT: {
                 if (debug.waypoint) {
                     renderWaypoint(debug.waypoint)
                 }
                 break
+            }
         }
     }
 
@@ -44,7 +46,6 @@ export default () => {
 
     return {
         canvas,
-        clear,
         update,
     }
 }

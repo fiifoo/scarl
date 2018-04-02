@@ -122,6 +122,17 @@ export const setTarget = target => dispatch => dispatch({
     target,
 })
 
+export const storeGameViewSize = size => (dispatch, getState) => {
+    const {area, player} = getState()
+
+    dispatch({
+        type: types.STORE_GAME_VIEW_SIZE,
+        size,
+        area,
+        player,
+    })
+}
+
 const seekTarget = (missile = false) => (dispatch, getState) => {
     const {factions, fov, player, ui} = getState()
     const prev = ui.game.target

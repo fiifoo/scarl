@@ -3,11 +3,11 @@ import { clearContext, createCanvas } from '../utils'
 
 const SIZE_ADJUST = 3
 
-export default kinds => {
-    const canvas = createCanvas()
+export default (area, kinds) => {
+    const canvas = createCanvas(area)
     const context = canvas.getContext('2d')
 
-    const clear = () => clearContext(context)
+    const clear = () => clearContext(area, context)
 
     const update = player => {
         const location = player.creature.location
@@ -26,7 +26,6 @@ export default kinds => {
 
     return {
         canvas,
-        clear,
         update,
     }
 }

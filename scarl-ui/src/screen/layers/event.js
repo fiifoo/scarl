@@ -3,12 +3,12 @@ import { clearContext, createCanvas, createDraw } from '../utils'
 
 const filterEvents = e => e.type !== 'GenericEvent'
 
-export default () => {
-    const canvas = createCanvas()
+export default area => {
+    const canvas = createCanvas(area)
     const context = canvas.getContext('2d')
     const draw = createDraw(context)
 
-    const clear = () => clearContext(context)
+    const clear = () => clearContext(area, context)
 
     const update = events => {
         events.filter(filterEvents).forEach(renderEvent)
@@ -56,7 +56,6 @@ export default () => {
 
     return {
         canvas,
-        clear,
         update,
     }
 }

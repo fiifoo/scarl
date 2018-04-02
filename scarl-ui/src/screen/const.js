@@ -1,5 +1,4 @@
-export const COLS = 70
-export const ROWS = 25
+export const SCREEN_MARGIN = 10
 export const TILE_SIZE = 17
 export const TILE_MIDDLE = Math.ceil(TILE_SIZE / 2)
 

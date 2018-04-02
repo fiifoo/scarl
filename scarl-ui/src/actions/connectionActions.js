@@ -4,18 +4,46 @@ import { debugReceiveMessage } from './debugActions'
 
 import { log } from '../utils/debug'
 
-const receiveActionMap = {
-    'Games': types.RECEIVE_GAMES,
-    'CreateGameFailed': types.RECEIVE_CREATE_GAME_FAILED,
+const receiveActionMappers = {
+    Games: data => ({
+        type: types.RECEIVE_GAMES,
+        data,
+    }),
+    CreateGameFailed: data => ({
+        type: types.RECEIVE_CREATE_GAME_FAILED,
+        data,
+    }),
 
-    'GameStart': types.RECEIVE_GAME_START,
-    'GameUpdate': types.RECEIVE_GAME_UPDATE,
-    'GameOver': types.RECEIVE_GAME_OVER,
-    'AreaChange': types.RECEIVE_AREA_CHANGE,
-    'PlayerInventory': types.RECEIVE_PLAYER_INVENTORY,
+    GameStart: data => ({
+        type: types.RECEIVE_GAME_START,
+        data,
+    }),
+    GameUpdate: (data, state) => ({
+        type: types.RECEIVE_GAME_UPDATE,
+        data,
+        area: state.area,
+    }),
+    GameOver: data => ({
+        type: types.RECEIVE_GAME_OVER,
+        data,
+    }),
+    AreaChange: data => ({
+        type: types.RECEIVE_AREA_CHANGE,
+        data,
+    }),
+    PlayerInventory: data => ({
+        type: types.RECEIVE_PLAYER_INVENTORY,
+        data,
+    }),
 
-    'DebugFov': types.RECEIVE_DEBUG_FOV,
-    'DebugWaypoint': types.RECEIVE_DEBUG_WAYPOINT,
+    DebugFov: data => ({
+        type: types.RECEIVE_DEBUG_FOV,
+        data,
+    }),
+    DebugWaypoint: data => ({
+        type: types.RECEIVE_DEBUG_WAYPOINT,
+        data,
+    }),
 }
 
 let connection = null
@@ -89,23 +117,20 @@ const sendMessage = (type, data = {}) => {
 }
 
 const createMessageReceiver = (dispatch, getState) => ({type, data}) => {
-    if (! receiveActionMap[type]) {
+    if (! receiveActionMappers[type]) {
         throw new Error(`Unknown message type ${type}.`)
     }
 
     log('Received')
+    const state = getState()
 
-    const mappedType = receiveActionMap[type]
-    const debugging = getState().ui.debug.mode !== null
-
+    const debugging = state.ui.debug.mode !== null
     if (debugging) {
-        debugReceiveMessage(mappedType, data)(dispatch, getState)
+        debugReceiveMessage(type, data)(dispatch, getState)
     }
 
-    dispatch({
-        type: mappedType,
-        data,
-    })
+    const mapper = receiveActionMappers[type]
+    dispatch(mapper(data, state))
 
     log('Done')
 }

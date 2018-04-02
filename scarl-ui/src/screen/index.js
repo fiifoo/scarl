@@ -8,15 +8,15 @@ import createPlayer from './layers/player'
 export default (container, kinds) => {
     const layers = {}
 
-    const build = map => {
-        layers.cursor = createCursor()
-        layers.debug = createDebug()
-        layers.event = createEvent()
-        layers.highlight = createHighlight()
-        layers.main = createMain(kinds)
-        layers.player = createPlayer(kinds)
+    const build = area => {
+        layers.cursor = createCursor(area)
+        layers.debug = createDebug(area)
+        layers.event = createEvent(area)
+        layers.highlight = createHighlight(area)
+        layers.main = createMain(area, kinds)
+        layers.player = createPlayer(area, kinds)
 
-        layers.main.updateMap(map)
+        layers.main.updateMap(area.map)
 
         container.appendChild(layers.highlight.canvas)
         container.appendChild(layers.main.canvas)
@@ -26,15 +26,12 @@ export default (container, kinds) => {
         container.appendChild(layers.player.canvas)
     }
 
-    const reset = map => {
-        layers.cursor.clear()
-        layers.debug.clear()
-        layers.event.clear()
-        layers.highlight.clear()
-        layers.main.clear()
-        layers.player.clear()
+    const reset = area => {
+        while (container.firstChild) {
+            container.removeChild(container.firstChild)
+        }
 
-        layers.main.updateMap(map)
+        build(area)
     }
 
     const update = (fov, events, player) => {

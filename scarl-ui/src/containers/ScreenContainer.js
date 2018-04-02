@@ -10,6 +10,7 @@ const ScreenContainer = connect(
     state => ({
         component: Screen,
         lazy: false,
+        scrollable: false,
         visible: validModes.contains(state.ui.game.mode),
 
         area: state.area,
@@ -20,6 +21,7 @@ const ScreenContainer = connect(
         fov: state.fov,
         game: state.game,
         kinds: state.kinds,
+        offset: state.ui.game.screenOffset,
         player: state.player,
         reticule: state.ui.game.reticule,
         trajectory: state.ui.game.trajectory,

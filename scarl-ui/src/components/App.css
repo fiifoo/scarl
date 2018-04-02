@@ -1,7 +1,16 @@
 .game-view {
+    overflow: hidden;
+    height: 100%;
+}
+
+.game-view.scrollable {
+    overflow: visible;
     overflow-y: auto;
-    height: 426px;
     padding-right: 15px;
+}
+
+.screen {
+    position: relative;
 }
 
 .screen > canvas {

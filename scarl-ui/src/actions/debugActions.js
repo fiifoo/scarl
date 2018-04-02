@@ -8,11 +8,12 @@ export const debugReceiveMessage = type => (dispatch, getState) => {
     const mode = getState().ui.debug.mode
 
     switch (type) {
-        case types.RECEIVE_GAME_UPDATE:
+        case 'GameUpdate': {
             if (mode === modes.FOV) {
                 sendDebugFovQuery()
             }
             break
+        }
         default:
     }
 }

@@ -1,6 +1,7 @@
 import { List, Record } from 'immutable'
 import * as types from '../../actions/actionTypes'
 import * as modes from '../../game/modes'
+import { calculateScreenOffset, ScreenOffset } from '../../screen/utils'
 
 const initial = Record({
     cursor: null,
@@ -8,14 +9,24 @@ const initial = Record({
     interactions: List(),
     mode: modes.MAIN,
     reticule: null,
+    screenOffset: ScreenOffset(),
     trajectory: [],
     target: null,
+    viewSize: null,
 })()
 
 export default (state = initial, action) => {
     switch (action.type) {
         case types.CONNECTION_CLOSED: {
             return initial
+        }
+        case types.RECEIVE_GAME_UPDATE: {
+            return state.set('screenOffset', calculateScreenOffset(
+                action.area,
+                state.viewSize,
+                state.screenOffset,
+                action.data.player
+            ))
         }
         case types.RECEIVE_GAME_OVER: {
             return changeMode(state, modes.GAME_OVER)
@@ -37,6 +48,14 @@ export default (state = initial, action) => {
         }
         case types.SET_TARGET: {
             return state.set('target', action.target)
+        }
+        case types.STORE_GAME_VIEW_SIZE: {
+            return state.set('viewSize', action.size).set('screenOffset', calculateScreenOffset(
+                action.area,
+                action.size,
+                state.screenOffset,
+                action.player
+            ))
         }
         default: {
             return state

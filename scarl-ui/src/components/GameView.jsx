@@ -8,11 +8,12 @@ class GameView extends Component {
 
     render() {
         // eslint-disable-next-line no-unused-vars
-        const {component, lazy, visible, ...props} = this.props
+        const {component, lazy, scrollable = true, visible, ...props} = this.props
         const Component = component
+        const className = scrollable ? 'game-view scrollable' : 'game-view'
 
         return (
-            <div className="game-view" style={{display: visible ? 'block' : 'none'}}>
+            <div className={className} style={{display: visible ? 'block' : 'none'}}>
                 <Component {...props} />
             </div>
         )
