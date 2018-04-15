@@ -3,6 +3,7 @@ package models.json
 import io.github.fiifoo.scarl.core.geometry.{Location, WaypointNetwork}
 import io.github.fiifoo.scarl.core.kind.Kinds
 import io.github.fiifoo.scarl.game.api._
+import io.github.fiifoo.scarl.game.area.AreaInfo
 import play.api.libs.json._
 
 object WriteOutMessage {
@@ -42,6 +43,8 @@ object WriteOutMessage {
       "walls" -> Json.toJson(k.walls)
     ))
   }
+
+  lazy private implicit val areaInfoWrites = Json.writes[AreaInfo]
 
   lazy private val debugFovWrites = Json.writes[DebugFov]
   lazy private val debugWaypointWrites = Json.writes[DebugWaypoint]

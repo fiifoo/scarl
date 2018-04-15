@@ -1,6 +1,7 @@
 package io.github.fiifoo.scarl.game
 
 import io.github.fiifoo.scarl.game.api._
+import io.github.fiifoo.scarl.game.area.AreaInfo
 import io.github.fiifoo.scarl.game.player.PlayerInfo
 
 object StartGame {
@@ -24,10 +25,9 @@ object StartGame {
 
   private def send(state: RunState): RunState = {
     val message = GameStart(
-      area = state.gameState.area,
+      area = AreaInfo(state),
       factions = state.instance.assets.factions.values,
-      kinds = state.instance.assets.kinds,
-      map = state.areaMap
+      kinds = state.instance.assets.kinds
     )
 
     state.copy(
