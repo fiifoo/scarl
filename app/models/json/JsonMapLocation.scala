@@ -1,7 +1,7 @@
 package models.json
 
 import io.github.fiifoo.scarl.core.geometry.Location
-import io.github.fiifoo.scarl.game.map.MapLocation
+import io.github.fiifoo.scarl.game.area.MapLocation
 import play.api.libs.json._
 
 object JsonMapLocation {

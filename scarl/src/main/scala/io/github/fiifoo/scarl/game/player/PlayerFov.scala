@@ -3,7 +3,7 @@ package io.github.fiifoo.scarl.game.player
 import io.github.fiifoo.scarl.core.State
 import io.github.fiifoo.scarl.core.entity.{CreatureId, Selectors}
 import io.github.fiifoo.scarl.core.geometry.{Fov, Location}
-import io.github.fiifoo.scarl.game.map.LocationEntities
+import io.github.fiifoo.scarl.game.area.LocationEntities
 
 case class PlayerFov(locations: Set[Location] = Set(),
                      delta: Map[Location, LocationEntities] = Map(),

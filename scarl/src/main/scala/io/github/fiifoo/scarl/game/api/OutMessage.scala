@@ -6,8 +6,8 @@ import io.github.fiifoo.scarl.core.entity._
 import io.github.fiifoo.scarl.core.geometry.{Location, WaypointNetwork}
 import io.github.fiifoo.scarl.core.item.Equipment.Slot
 import io.github.fiifoo.scarl.core.kind.Kinds
+import io.github.fiifoo.scarl.game.area.MapLocation
 import io.github.fiifoo.scarl.game.event.Event
-import io.github.fiifoo.scarl.game.map.MapLocation
 import io.github.fiifoo.scarl.game.player.{PlayerFov, PlayerInfo}
 import io.github.fiifoo.scarl.game.statistics.Statistics
 

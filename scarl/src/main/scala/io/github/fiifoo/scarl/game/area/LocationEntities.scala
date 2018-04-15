@@ -1,4 +1,4 @@
-package io.github.fiifoo.scarl.game.map
+package io.github.fiifoo.scarl.game.area
 
 import io.github.fiifoo.scarl.core.State
 import io.github.fiifoo.scarl.core.entity._

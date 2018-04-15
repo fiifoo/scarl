@@ -3,7 +3,7 @@ package io.github.fiifoo.scarl.game
 import io.github.fiifoo.scarl.area.AreaId
 import io.github.fiifoo.scarl.core.entity.CreatureId
 import io.github.fiifoo.scarl.core.geometry.Location
-import io.github.fiifoo.scarl.game.map.MapLocation
+import io.github.fiifoo.scarl.game.area.MapLocation
 import io.github.fiifoo.scarl.game.statistics.Statistics
 import io.github.fiifoo.scarl.world.WorldState
 

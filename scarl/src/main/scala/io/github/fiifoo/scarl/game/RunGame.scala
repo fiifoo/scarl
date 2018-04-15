@@ -5,8 +5,8 @@ import io.github.fiifoo.scarl.core.action.Action
 import io.github.fiifoo.scarl.core.mutation.{FinalizeTickMutation, ResetConduitEntryMutation}
 import io.github.fiifoo.scarl.core.world.{ConduitId, Traveler}
 import io.github.fiifoo.scarl.game.api._
+import io.github.fiifoo.scarl.game.area.MapBuilder
 import io.github.fiifoo.scarl.game.event.EventBuilder
-import io.github.fiifoo.scarl.game.map.MapBuilder
 import io.github.fiifoo.scarl.game.player.{PlayerFov, PlayerInfo}
 import io.github.fiifoo.scarl.game.statistics.StatisticsBuilder
 import io.github.fiifoo.scarl.world.ChangeArea
