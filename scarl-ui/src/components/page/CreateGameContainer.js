@@ -1,13 +1,13 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { createExistingGame, createNewGame, setNewGamePlayer } from '../actions/createActions'
-import CreateGame from '../components/CreateGame.jsx'
+import { createExistingGame, createNewGame, setNewGamePlayer } from '../../actions/createActions'
+import CreateGame from './CreateGame.jsx'
 
 const ComponentIf = ({connection, created, ...props}) => (
     connection && ! created ? (
         <CreateGame {...props} />
     ) : (
-        <div></div>
+        <div />
     )
 )
 

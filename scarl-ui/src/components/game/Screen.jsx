@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import createScreen from '../screen'
-import { TILE_SIZE } from '../screen/const'
+import createScreen from '../../screen'
+import { TILE_SIZE } from '../../screen/const'
 
 const position = (element, offset) => {
     const left = -offset.x * TILE_SIZE

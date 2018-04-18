@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
-import GameView from '../components/GameView.jsx'
-import KeyBindings from '../components/KeyBindings.jsx'
-import { KEY_BINDINGS } from '../game/modes'
+import { KEY_BINDINGS } from '../../game/modes'
+import GameView from './GameView.jsx'
+import KeyBindings from './KeyBindings.jsx'
 
 const KeyBindingsContainer = connect(
     state => ({

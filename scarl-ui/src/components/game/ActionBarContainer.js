@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
-import ActionBar from '../components/ActionBar.jsx'
-import { cancelMode, inventory, look, keyBindings, messageLog } from '../actions/gameActions'
+import { cancelMode, inventory, look, keyBindings, messageLog } from '../../actions/gameActions'
+import ActionBar from './ActionBar.jsx'
 
 const ActionBarContainer = connect(
     state => ({

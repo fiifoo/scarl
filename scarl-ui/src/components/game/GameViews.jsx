@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
-import GameOverContainer from '../containers/GameOverContainer'
-import InventoryContainer from '../containers/InventoryContainer'
-import KeyBindingsContainer from '../containers/KeyBindingsContainer'
-import MessageLogContainer from '../containers/MessageLogContainer'
-import ScreenContainer from '../containers/ScreenContainer'
+import InventoryContainer from '../inventory/InventoryContainer'
+import GameOverContainer from './GameOverContainer'
+import KeyBindingsContainer from './KeyBindingsContainer'
+import MessageLogContainer from './MessageLogContainer'
+import ScreenContainer from './ScreenContainer'
 
 class GameViews extends Component {
 

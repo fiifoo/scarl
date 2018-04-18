@@ -1,9 +1,9 @@
 import { List } from 'immutable'
 import { connect } from 'react-redux'
-import MessageBar from '../components/MessageBar.jsx'
-import * as modes from '../game/modes.js'
-import { getInteractionDescription } from '../game/interaction.js'
-import { getLocationDescriptions } from '../game/utils.js'
+import * as modes from '../../game/modes.js'
+import { getInteractionDescription } from '../../game/interaction.js'
+import { getLocationDescriptions } from '../../game/utils.js'
+import MessageBar from './MessageBar.jsx'
 
 const interactionDescriptions = state => {
     const kinds = state.kinds

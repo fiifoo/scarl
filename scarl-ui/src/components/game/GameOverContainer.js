@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
-import GameView from '../components/GameView.jsx'
-import GameOver from '../components/GameOver.jsx'
-import { GAME_OVER_SCREEN } from '../game/modes'
+import { GAME_OVER_SCREEN } from '../../game/modes'
+import GameView from './GameView.jsx'
+import GameOver from './GameOver.jsx'
 
 const GameOverContainer = connect(
     state => ({

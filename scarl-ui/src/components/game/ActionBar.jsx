@@ -1,5 +1,5 @@
 import React from 'react'
-import * as modes from '../game/modes'
+import * as modes from '../../game/modes'
 
 const className = 'btn btn-default'
 const activeClassName = 'btn btn-warning'

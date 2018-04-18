@@ -1,5 +1,6 @@
 import React from 'react'
-import { formatDateTime } from '../utils/date'
+import Header from '../Header.jsx'
+import { formatDateTime } from '../../utils/date'
 
 const NewGame = ({player, createNewGame, setNewGamePlayer}) => (
     <div>
@@ -13,12 +14,12 @@ const NewGame = ({player, createNewGame, setNewGamePlayer}) => (
                     className="form-control"
                     value={player || ''}
                     onChange={event => setNewGamePlayer(event.target.value)}
-                    autoFocus
-                    />
+                    autoFocus />
                 <button
                     type="submit"
-                    className="btn btn-default"
-                    >Create</button>
+                    className="btn btn-default">
+                    Create
+                </button>
             </div>
         </form>
     </div>
@@ -36,8 +37,9 @@ const ExistingGames = ({games, createExistingGame}) => {
                     type="button"
                     className="btn btn-default"
                     disabled={game.running}
-                    onClick={() => createExistingGame(game.id)}
-                    >Load</button>
+                    onClick={() => createExistingGame(game.id)}>
+                    Load
+                </button>
             </td>
             <td className="text-danger">{game.running && 'Running'}</td>
         </tr>
@@ -73,13 +75,18 @@ const ExistingGamesIf = props => (
 )
 
 const CreateGame = ({error, games, player, createExistingGame, createNewGame, setNewGamePlayer}) => (
-    <div className="row">
-        <div className="col-md-6">
-            <div className="panel panel-default">
-                <div className="panel-body">
-                    {error && <div className="alert alert-danger">Creating game failed.</div>}
-                    <NewGame player={player} createNewGame={createNewGame} setNewGamePlayer={setNewGamePlayer} />
-                    <ExistingGamesIf games={games} createExistingGame={createExistingGame} />
+    <div>
+        <Header />
+        <div className="container-fluid">
+            <div className="row">
+                <div className="col-md-6">
+                    <div className="panel panel-default">
+                        <div className="panel-body">
+                            {error && <div className="alert alert-danger">Creating game failed.</div>}
+                            <NewGame player={player} createNewGame={createNewGame} setNewGamePlayer={setNewGamePlayer} />
+                            <ExistingGamesIf games={games} createExistingGame={createExistingGame} />
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

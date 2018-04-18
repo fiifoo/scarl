@@ -1,8 +1,8 @@
 import { Set } from 'immutable'
 import { connect } from 'react-redux'
-import Screen from '../components/Screen.jsx'
-import GameView from '../components/GameView.jsx'
-import * as modes from '../game/modes'
+import * as modes from '../../game/modes'
+import Screen from './Screen.jsx'
+import GameView from './GameView.jsx'
 
 const validModes = Set([modes.MAIN, modes.AIM, modes.AIM_MISSILE, modes.GAME_OVER, modes.INTERACT, modes.LOOK])
 

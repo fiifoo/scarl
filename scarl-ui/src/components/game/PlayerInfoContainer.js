@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import PlayerInfo from '../components/PlayerInfo.jsx'
+import PlayerInfo from './PlayerInfo.jsx'
 
 const PlayerInfoContainer = connect(
     state => ({

@@ -1,5 +1,5 @@
 import React from 'react'
-import * as modes from '../debug/modes'
+import * as modes from '../../debug/modes'
 
 const className = 'btn btn-default'
 const activeClassName = 'btn btn-warning'
@@ -12,8 +12,9 @@ const FovButton = ({mode, cancelMode, debugFov}) => {
     return (
         <button
             className={getClassName(active)}
-            onClick={onClick}
-            >Debug FOV</button>
+            onClick={onClick}>
+            Debug FOV
+        </button>
     )
 }
 
@@ -24,8 +25,9 @@ const WaypointButton = ({mode, cancelMode, debugWaypoint}) => {
     return (
         <button
             className={getClassName(active)}
-            onClick={onClick}
-            >Debug waypoints</button>
+            onClick={onClick}>
+            Debug waypoints
+        </button>
     )
 }
 
@@ -38,13 +40,11 @@ const DebugBar = props =>  {
             <FovButton
                 mode={mode}
                 cancelMode={cancelMode}
-                debugFov={debugFov}
-                />
+                debugFov={debugFov} />
             <WaypointButton
                 mode={mode}
                 cancelMode={cancelMode}
-                debugWaypoint={debugWaypoint}
-                />
+                debugWaypoint={debugWaypoint} />
         </div>
     )
 }

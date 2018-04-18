@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
-import { blurKeyboard, keypress } from '../actions/keyboard'
-import Keyboard from '../components/Keyboard.jsx'
+import { blurKeyboard, keypress } from '../../actions/keyboard'
+import Keyboard from './Keyboard.jsx'
 
 const KeyboardContainer = connect(
     state => ({

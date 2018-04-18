@@ -1,9 +1,9 @@
 import { Map } from 'immutable'
 import React from 'react'
 import { Tab, Tabs } from 'react-bootstrap'
-import * as modes from '../game/modes'
-import * as keycodes from '../keyboard/keycodes'
-import bindings from '../keyboard/bindings'
+import * as modes from '../../game/modes'
+import * as keycodes from '../../keyboard/keycodes'
+import bindings from '../../keyboard/bindings'
 
 const keycodeNames = Map(keycodes).flip()
 

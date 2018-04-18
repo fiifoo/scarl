@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
-import { storeGameViewSize } from '../actions/gameActions'
-import GameViews from '../components/GameViews.jsx'
+import { storeGameViewSize } from '../../actions/gameActions'
+import GameViews from './GameViews.jsx'
 
 const GameViewsContainer = connect(
     state => ({

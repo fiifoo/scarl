@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import { closeConnection, openConnection } from '../actions/connectionActions'
-import Connection from '../components/Connection.jsx'
+import Connection from './Connection.jsx'
 
 const ConnectionContainer = connect(
     state => ({

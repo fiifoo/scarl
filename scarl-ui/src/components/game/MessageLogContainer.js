@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
-import GameView from '../components/GameView.jsx'
-import MessageLog from '../components/MessageLog.jsx'
-import { MESSAGE_LOG } from '../game/modes'
+import { MESSAGE_LOG } from '../../game/modes'
+import GameView from './GameView.jsx'
+import MessageLog from './MessageLog.jsx'
 
 const MessageLogContainer = connect(
     state => ({
