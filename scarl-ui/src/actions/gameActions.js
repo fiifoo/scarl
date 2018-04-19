@@ -80,6 +80,8 @@ export const look = () => (dispatch, getState) => {
 
 export const messageLog = () => dispatch => changeMode(modes.MESSAGE_LOG)(dispatch)
 
+export const menu = () => dispatch => changeMode(modes.MENU)(dispatch)
+
 export const nextInteraction = () => (dispatch, getState) => {
     const {interaction, interactions} = getState().ui.game
 

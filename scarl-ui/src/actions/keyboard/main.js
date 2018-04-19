@@ -46,6 +46,10 @@ export default (command, dispatch, getState) => {
             gameActions.look()(dispatch, getState)
             break
         }
+        case commands.MENU: {
+            gameActions.menu()(dispatch)
+            break
+        }
         case commands.MESSAGE_LOG: {
             gameActions.messageLog()(dispatch)
             break

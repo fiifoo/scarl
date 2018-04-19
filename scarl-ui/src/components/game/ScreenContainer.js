@@ -4,7 +4,7 @@ import * as modes from '../../game/modes'
 import Screen from './Screen.jsx'
 import GameView from './GameView.jsx'
 
-const validModes = Set([modes.MAIN, modes.AIM, modes.AIM_MISSILE, modes.GAME_OVER, modes.INTERACT, modes.LOOK])
+const validModes = Set([modes.MAIN, modes.AIM, modes.AIM_MISSILE, modes.GAME_OVER, modes.INTERACT, modes.LOOK, modes.MENU])
 
 const ScreenContainer = connect(
     state => ({

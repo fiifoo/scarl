@@ -24,6 +24,7 @@ export default {
         [keycodes.COMMA, commands.PICK_ITEM],
         [keycodes.CONTROL, commands.INTERACT],
         [keycodes.ENTER, commands.PASS],
+        [keycodes.ESC, commands.MENU],
         [keycodes.LESS, commands.ENTER_CONDUIT],
         [keycodes.LESS2, commands.ENTER_CONDUIT],
         [keycodes.NUMPAD_5, commands.PASS],
@@ -99,5 +100,9 @@ export default {
     [gameModes.MESSAGE_LOG]: Map([
         [keycodes.ESC, commands.CANCEL_MODE],
         [keycodes.M, commands.CANCEL_MODE],
+    ]),
+
+    [gameModes.MENU]: Map([
+        [keycodes.ESC, commands.CANCEL_MODE],
     ]),
 }
