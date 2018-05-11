@@ -45,6 +45,7 @@ class BurrowFeatureSpec extends FlatSpec with Matchers {
     val result = BurrowFeature(min, max, noise)(
       assets,
       area,
+      template.shape,
       template.content,
       template.locations,
       Set(),

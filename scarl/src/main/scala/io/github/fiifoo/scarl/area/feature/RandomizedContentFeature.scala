@@ -2,6 +2,7 @@ package io.github.fiifoo.scarl.area.feature
 
 import io.github.fiifoo.scarl.area.Area
 import io.github.fiifoo.scarl.area.feature.Utils._
+import io.github.fiifoo.scarl.area.shape.Shape
 import io.github.fiifoo.scarl.area.template.ContentSource._
 import io.github.fiifoo.scarl.area.template.FixedContent
 import io.github.fiifoo.scarl.core.geometry.Location
@@ -16,6 +17,7 @@ case class RandomizedContentFeature(creatures: List[CreatureSource] = List(),
 
   def apply(assets: WorldAssets,
             area: Area,
+            shape: Shape.Result,
             content: FixedContent,
             locations: Set[Location],
             entrances: Set[Location],

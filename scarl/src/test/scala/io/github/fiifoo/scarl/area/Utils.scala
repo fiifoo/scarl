@@ -1,5 +1,6 @@
 package io.github.fiifoo.scarl.area
 
+import io.github.fiifoo.scarl.area.shape.Shape
 import io.github.fiifoo.scarl.area.template.FixedContent
 import io.github.fiifoo.scarl.core.geometry.Location
 import io.github.fiifoo.scarl.core.kind.WallKindId
@@ -53,6 +54,18 @@ object Utils {
 
     def sketch: String = {
       ((0 until this.height) foldLeft "") (writeLine)
+    }
+
+    def shape: Shape.Result = {
+      Shape.Result(
+        outerWidth = this.width + 2,
+        outerHeight = this.height + 2,
+        innerWidth = this.width + 2,
+        innerHeight = this.height + 2,
+        border = Set(),
+        contained = this.locations,
+        entranceCandidates = Set()
+      )
     }
 
     private def writeLine(sketch: String, y: Int): String = {
