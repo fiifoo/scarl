@@ -1,6 +1,6 @@
 package models.json
 
-import io.github.fiifoo.scarl.area.feature.{BurrowFeature, Feature, RandomizedContentFeature}
+import io.github.fiifoo.scarl.area.feature.{BurrowFeature, Feature, HouseFeature, RandomizedContentFeature}
 import io.github.fiifoo.scarl.area.shape.{Rectangle, Shape}
 import io.github.fiifoo.scarl.area.template.FixedContent.MachinerySource
 import io.github.fiifoo.scarl.area.template.Template.{Category, ChallengeCategory, TrapCategory}
@@ -63,9 +63,11 @@ object JsonTemplate {
   lazy private implicit val widgetSourceReads = Json.reads[ContentSource.WidgetSource]
 
   lazy private implicit val burrowFeatureReads = Json.reads[BurrowFeature]
+  lazy private implicit val houseFeatureReads = Json.reads[HouseFeature]
   lazy private implicit val randomizedContentFeatureReads = Json.reads[RandomizedContentFeature]
   lazy private implicit val featureReads: Reads[Feature] = polymorphicTypeReads(data => {
     case "BurrowFeature" => data.as[BurrowFeature]
+    case "HouseFeature" => data.as[HouseFeature]
     case "RandomizedContentFeature" => data.as[RandomizedContentFeature]
   })
 

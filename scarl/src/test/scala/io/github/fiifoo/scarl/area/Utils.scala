@@ -3,12 +3,13 @@ package io.github.fiifoo.scarl.area
 import io.github.fiifoo.scarl.area.shape.Shape
 import io.github.fiifoo.scarl.area.template.FixedContent
 import io.github.fiifoo.scarl.core.geometry.Location
-import io.github.fiifoo.scarl.core.kind.WallKindId
+import io.github.fiifoo.scarl.core.kind.{ItemKindId, WallKindId}
 
 object Utils {
 
   object TemplateMock {
     private val wall = WallKindId("")
+    private val item = ItemKindId("")
 
     def apply(sketch: String): TemplateMock = {
       val lines = sketch.lines.toList
@@ -36,6 +37,12 @@ object Utils {
           locations = template.locations + location,
           content = template.content.copy(
             walls = template.content.walls + (location -> wall)
+          )
+        )
+        case '/' => template.copy(
+          locations = template.locations + location,
+          content = template.content.copy(
+            items = template.content.items + (location -> List(item))
           )
         )
         case '.' => template.copy(
@@ -76,8 +83,10 @@ object Utils {
       val location = Location(x + 1, y + 1)
 
       val char = if (this.locations contains location) {
-        if (this.content.walls isDefinedAt location) {
+        if (this.content.walls.isDefinedAt(location)) {
           '#'
+        } else if (this.content.items.isDefinedAt(location)) {
+          '/'
         } else {
           '.'
         }
