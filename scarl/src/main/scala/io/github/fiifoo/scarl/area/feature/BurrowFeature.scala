@@ -24,10 +24,11 @@ case class BurrowFeature(min: Int, max: Int, noise: Int) extends Feature {
             subEntrances: Set[Location],
             random: Random
            ): FixedContent = {
-    val limit = 100 - (min + random.nextInt(this.max - this.min + 1))
-
     val allLocations = locations ++ entrances
     val walls = content.walls.keys.toSet intersect allLocations
+
+    val percentage = this.min + random.nextInt(this.max - this.min + 1)
+    val limit = (walls.size - (walls.size * percentage.toDouble / 100)).toInt
 
     val resistances = CalculateResistance(allLocations, walls, this.noise, random)
     val burrowed = Burrow(allLocations, walls, resistances, limit, random)
@@ -115,7 +116,7 @@ object BurrowFeature {
              ): Set[Location] = {
       @tailrec
       def step(walls: Set[Location], targets: SortedSet[(Location, Int)]): Set[Location] = {
-        if (targets.isEmpty || walls.size * 100 / locations.size <= limit) {
+        if (targets.isEmpty || walls.size <= limit) {
           walls
         } else {
           val target = targets.head

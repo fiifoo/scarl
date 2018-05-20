@@ -35,7 +35,7 @@ class BurrowFeatureSpec extends FlatSpec with Matchers {
       """
         |###############
         |######........#
-        |#####......####
+        |#####......##.#
         |#####...#.#####
         |###############
       """.stripMargin.trim)
