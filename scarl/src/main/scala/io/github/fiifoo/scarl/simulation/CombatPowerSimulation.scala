@@ -25,9 +25,10 @@ case class CombatPowerSimulation(matches: Int = 25,
   private val dummyFaction = FactionId("dummy")
 
   private val theme = Theme(
-    ThemeId("dummy"),
-    terrain = TerrainKindId("dummy"),
-    door = ItemKindId("dummy"),
+    ThemeId(""),
+    ItemKindId(""),
+    TerrainKindId(""),
+    WallKindId("")
   )
 
   private val simulation = new Simulation[Null](

@@ -10221,6 +10221,7 @@
     }, {
       "value" : "vault-3",
       "weight" : 100
-    } ]
+    } ],
+    "wall" : "wall"
   } ] ]
 }

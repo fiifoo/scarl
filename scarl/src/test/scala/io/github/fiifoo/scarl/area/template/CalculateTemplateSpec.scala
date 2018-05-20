@@ -4,7 +4,7 @@ import io.github.fiifoo.scarl.area.shape.Rectangle
 import io.github.fiifoo.scarl.area.theme.{Theme, ThemeId}
 import io.github.fiifoo.scarl.area.{Area, AreaId}
 import io.github.fiifoo.scarl.core.geometry.Location
-import io.github.fiifoo.scarl.core.kind.{ItemKindId, TerrainKindId}
+import io.github.fiifoo.scarl.core.kind.{ItemKindId, TerrainKindId, WallKindId}
 import io.github.fiifoo.scarl.core.math.Distribution
 import io.github.fiifoo.scarl.world.WorldAssets
 import org.scalatest._
@@ -14,9 +14,10 @@ import scala.util.Random
 class CalculateTemplateSpec extends FlatSpec with Matchers {
 
   private val theme = Theme(
-    ThemeId("dummy"),
-    terrain = TerrainKindId("dummy"),
-    door = ItemKindId("dummy"),
+    ThemeId(""),
+    ItemKindId(""),
+    TerrainKindId(""),
+    WallKindId("")
   )
 
   "CalculateTemplate" should "calculate template tree" in {

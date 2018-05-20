@@ -13,8 +13,9 @@ object JsonTheme {
   lazy private implicit val creatureKindIdFormat = JsonCreatureKind.creatureKindIdFormat
   lazy private implicit val itemKindIdFormat = JsonItemKind.itemKindIdFormat
   lazy private implicit val terrainKindIdFormat = JsonTerrainKind.terrainKindIdFormat
-  lazy private implicit val widgetKindIdFormat = JsonWidgetKind.widgetKindIdFormat
   lazy private implicit val templateIdFormat = JsonTemplate.templateIdFormat
+  lazy private implicit val wallKindIdFormat = JsonWallKind.wallKindIdFormat
+  lazy private implicit val widgetKindIdFormat = JsonWidgetKind.widgetKindIdFormat
 
   lazy private implicit val creatureChoiceReads = Json.reads[WeightedChoice[CreatureKindId]]
   lazy private implicit val itemChoiceReads = Json.reads[WeightedChoice[ItemKindId]]
