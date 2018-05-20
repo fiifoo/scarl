@@ -30,9 +30,15 @@ case class RandomizedTemplate(id: TemplateId,
   def apply(assets: WorldAssets, area: Area, random: Random): Result = {
     val shapeResult = shape(random)
     val subResults = calculateSubTemplates(assets, area, shapeResult, random)
+    val subEntrances = (subResults map (x => {
+      val (location, subResult) = x
+
+      subResult.entrances.keys map location.add
+    })).toSet.flatten
+
     val contained = CalculateUtils.templateContainedLocations(shapeResult, subResults)
     val entranceResults = calculateEntrances(assets, area, shapeResult.entranceCandidates, random)
-    val routeResults = calculateRoutes(subResults, entranceResults, contained, random)
+    val routeResults = calculateRoutes(entranceResults, subEntrances, contained, random)
     val wallResults = calculateBorderWalls(shapeResult.border, entranceResults) ++ calculateFilledWalls(contained, routeResults)
     val contentResult = CalculateContent(
       assets = assets,
@@ -41,6 +47,7 @@ case class RandomizedTemplate(id: TemplateId,
       target = FixedContent(walls = wallResults),
       locations = contained,
       entrances = entranceResults,
+      subEntrances = subEntrances,
       conduits = conduitLocations,
       features = features,
       terrain = terrain,
@@ -51,7 +58,7 @@ case class RandomizedTemplate(id: TemplateId,
       shape = shapeResult,
       templates = subResults,
       entrances = entranceResults,
-      content = contentResult,
+      content = contentResult
     )
   }
 
@@ -89,8 +96,8 @@ case class RandomizedTemplate(id: TemplateId,
     Utils.randomUniqueElementLocations(assets, area, locations, sources, Map(), random)
   }
 
-  private def calculateRoutes(subResults: Map[Location, Result],
-                              entranceResults: Map[Location, ItemKindId],
+  private def calculateRoutes(entranceResults: Map[Location, ItemKindId],
+                              subEntrances: Set[Location],
                               contained: Set[Location],
                               random: Random
                              ): Set[Location] = {
@@ -98,13 +105,7 @@ case class RandomizedTemplate(id: TemplateId,
       return Set()
     }
 
-    val fold = subResults.foldLeft(entranceResults.keys.toSet) _
-
-    val shouldConnect = fold((shouldConnect, data) => {
-      val (location, subResult) = data
-
-      shouldConnect ++ (subResult.entrances.keys.toSet map location.add)
-    })
+    val shouldConnect = entranceResults.keys.toSet ++ subEntrances
 
     CalculateRoutes(shouldConnect, contained, random)
   }

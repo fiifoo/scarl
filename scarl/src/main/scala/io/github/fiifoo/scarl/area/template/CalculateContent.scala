@@ -17,6 +17,7 @@ object CalculateContent {
             target: FixedContent,
             locations: Set[Location],
             entrances: Map[Location, ItemKindId],
+            subEntrances: Set[Location],
             conduits: (Int, Int) = (0, 0),
             features: List[Feature],
             terrain: Option[TerrainKindId],
@@ -46,7 +47,7 @@ object CalculateContent {
     )
 
     result = (features foldLeft result) ((content, feature) => {
-      feature(assets, area, shape, content, locations, entrances.keySet, random)
+      feature(assets, area, shape, content, locations, entrances.keySet, subEntrances, random)
     })
 
     val defaultTerrain = terrain getOrElse assets.themes(area.theme).terrain

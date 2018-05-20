@@ -49,6 +49,7 @@ class BurrowFeatureSpec extends FlatSpec with Matchers {
       template.content,
       template.locations,
       Set(),
+      Set(),
       new Random(1)
     )
 

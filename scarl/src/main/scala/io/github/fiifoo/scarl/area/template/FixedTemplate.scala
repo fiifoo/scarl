@@ -23,6 +23,12 @@ case class FixedTemplate(id: TemplateId,
   def apply(assets: WorldAssets, area: Area, random: Random): Result = {
     val shapeResult = shape(random)
     val subResults = templates mapValues (_ (assets.templates)(assets, area, random))
+    val subEntrances = (subResults map (x => {
+      val (location, subResult) = x
+
+      subResult.entrances.keys map location.add
+    })).toSet.flatten
+
     val contained = CalculateUtils.templateContainedLocations(shapeResult, subResults)
     val contentResult = CalculateContent(
       assets = assets,
@@ -31,6 +37,7 @@ case class FixedTemplate(id: TemplateId,
       target = content,
       locations = contained,
       entrances = entrances,
+      subEntrances = subEntrances,
       conduits = (0, 0),
       features = features,
       terrain = None,

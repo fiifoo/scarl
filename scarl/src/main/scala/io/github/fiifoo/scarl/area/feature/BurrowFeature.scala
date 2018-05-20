@@ -21,6 +21,7 @@ case class BurrowFeature(min: Int, max: Int, noise: Int) extends Feature {
             content: FixedContent,
             locations: Set[Location],
             entrances: Set[Location],
+            subEntrances: Set[Location],
             random: Random
            ): FixedContent = {
     val limit = 100 - (min + random.nextInt(this.max - this.min + 1))

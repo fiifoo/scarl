@@ -15,6 +15,7 @@ trait Feature {
             content: FixedContent,
             locations: Set[Location],
             entrances: Set[Location],
+            subEntrances: Set[Location],
             random: Random
            ): FixedContent
 }
