@@ -27,7 +27,7 @@ case class HouseFeature(iterations: Int,
             subEntrances: Set[Location],
             random: Random
            ): FixedContent = {
-    val rotation = Rotation(random)
+    val rotation = Rotation(random, shape.outerWidth, shape.outerHeight)
 
     val reserved = entrances ++
       subEntrances ++
@@ -42,18 +42,20 @@ case class HouseFeature(iterations: Int,
 
     val (result, _) = ((0 until this.iterations) foldLeft(content, rotation)) ((carry, _) => {
       val (content, rotation) = carry
-      val hasWall = (location: Location) => {
-        val normalized = rotation.denormalize(location)
+      val (width, height) = rotation.shape
+
+      def hasWall(location: Location): Boolean = {
+        val normalized = rotation(location)
 
         (!locations.contains(normalized) && !entrances.contains(normalized) && !subEntrances.contains(normalized)) ||
           content.walls.isDefinedAt(normalized)
       }
-      val hasReserved = (location: Location) => {
-        reserved.contains(rotation.denormalize(location))
+
+      def hasReserved(location: Location): Boolean = {
+        reserved.contains(rotation(location))
       }
 
-      val target = rotation.normalize(Location(shape.innerWidth - 1, shape.innerHeight - 1))
-      val foundations = Scan(target, hasWall, hasReserved)
+      val foundations = Scan(width, height, hasWall, hasReserved)
       val result = Build(foundations, roomSize, doorFactor, random)
 
       (write(content, rotation, result, wall, door), rotation.next)
@@ -68,8 +70,8 @@ case class HouseFeature(iterations: Int,
                     wall: WallKindId,
                     door: ItemKindId
                    ): FixedContent = {
-    val walls = (result.walls map rotation.denormalize map (_ -> wall)).toMap
-    val items = (result.doors map rotation.denormalize map (location => {
+    val walls = (result.walls map rotation.apply map (_ -> wall)).toMap
+    val items = (result.doors map rotation.apply map (location => {
       val items = content.items.getOrElse(location, List())
 
       location -> (door :: items)
@@ -135,9 +137,8 @@ object HouseFeature {
                        )
 
   object Scan {
-    def apply(target: Location, wall: HasWall, reserved: HasReserved): Iterable[Foundation] = {
-      val range = if (target.y < 0) target.y to 0 else 0 to target.y
-      val result = (range foldLeft Foundations()) (scanRow(target, wall, reserved))
+    def apply(width: Int, height: Int, wall: HasWall, reserved: HasReserved): Iterable[Foundation] = {
+      val result = (0 until height foldLeft Foundations()) (scanRow(width, wall, reserved))
 
       result.complete.values
     }
@@ -237,10 +238,9 @@ object HouseFeature {
 
     private val scanners = List(scanFrom _, scanFloor _, scanReserved _, scanTo _)
 
-    private def scanRow(target: Location, wall: HasWall, reserved: HasReserved)
+    private def scanRow(width: Int, wall: HasWall, reserved: HasReserved)
                        (foundations: Foundations, y: Y): Foundations = {
-      val range = if (target.x < 0) target.x to 0 else 0 to target.x
-      val (result, buffers) = (range foldLeft(foundations, Buffers())) (scanLocation(y, wall, reserved))
+      val (result, buffers) = (0 until width foldLeft(foundations, Buffers())) (scanLocation(y, wall, reserved))
 
       buffers.flush(result)
     }
