@@ -41,4 +41,8 @@ case class Rotation(value: Int, width: Int, height: Int) {
       case 3 => Location(-l.y, l.x) add Location(this.width - 1, 0)
     }
   }
+
+  def mapKey[T](xs: Map[Location, T]): Map[Location, T] = {
+    xs map (x => this.apply(x._1) -> x._2)
+  }
 }

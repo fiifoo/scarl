@@ -6,7 +6,7 @@ import io.github.fiifoo.scarl.area.shape.Shape
 import io.github.fiifoo.scarl.area.template.ContentSelection.FixedItem
 import io.github.fiifoo.scarl.area.template.ContentSource.{ItemSource, TemplateSource}
 import io.github.fiifoo.scarl.area.template.Template.{Category, Result}
-import io.github.fiifoo.scarl.core.geometry.Location
+import io.github.fiifoo.scarl.core.geometry.{Location, Rotation}
 import io.github.fiifoo.scarl.core.kind._
 import io.github.fiifoo.scarl.core.math.Distribution.Uniform
 import io.github.fiifoo.scarl.core.math.Rng
@@ -71,7 +71,12 @@ case class RandomizedTemplate(id: TemplateId,
       val sub = source(assets, area, random)
       val range = Rng.nextRange(random, source.distribution)
 
-      range map (_ => sub(assets.templates)(assets, area, random))
+      range map (_ => {
+        val result = sub(assets.templates)(assets, area, random)
+        val rotation = Rotation(random, result.shape.outerWidth, result.shape.outerHeight)
+
+        result.rotate(rotation)
+      })
     }
 
     val (optional, required) = this.templates partition (_.optional)

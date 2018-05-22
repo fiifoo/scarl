@@ -3,7 +3,7 @@ package io.github.fiifoo.scarl.area.template
 import io.github.fiifoo.scarl.area.template.FixedContent.MachinerySource
 import io.github.fiifoo.scarl.core.State
 import io.github.fiifoo.scarl.core.entity.{Machinery, MachineryId}
-import io.github.fiifoo.scarl.core.geometry.Location
+import io.github.fiifoo.scarl.core.geometry.{Location, Rotation}
 import io.github.fiifoo.scarl.core.item.Mechanism
 import io.github.fiifoo.scarl.core.kind._
 import io.github.fiifoo.scarl.core.mutation.{IdSeqMutation, NewEntityMutation}
@@ -16,7 +16,28 @@ case class FixedContent(conduitLocations: Set[Location] = Set(),
                         terrains: Map[Location, TerrainKindId] = Map(),
                         walls: Map[Location, WallKindId] = Map(),
                         widgets: Map[Location, WidgetKindId] = Map()
-                       )
+                       ) {
+
+  def rotate(rotation: Rotation): FixedContent = FixedContent(
+    conduitLocations = this.conduitLocations map rotation.apply,
+    creatures = rotation.mapKey(this.creatures),
+    gatewayLocations = this.gatewayLocations map rotation.apply,
+    items = rotation.mapKey(this.items),
+    machinery = rotateMachinery(rotation),
+    terrains = rotation.mapKey(this.terrains),
+    walls = rotation.mapKey(this.walls),
+    widgets = rotation.mapKey(this.widgets),
+  )
+
+  private def rotateMachinery(rotation: Rotation): Set[MachinerySource] = {
+    this.machinery map (machinery => {
+      machinery.copy(
+        controls = machinery.controls map rotation.apply,
+        targets = machinery.targets map rotation.apply
+      )
+    })
+  }
+}
 
 object FixedContent {
 
