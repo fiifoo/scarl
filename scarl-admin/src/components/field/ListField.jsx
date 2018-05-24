@@ -1,13 +1,14 @@
 import { List } from 'immutable'
 import React from 'react'
+import {SortableContainer, SortableElement, SortableHandle} from 'react-sortable-hoc'
 import { getNewValue, isPolymorphic } from '../../data/utils'
 import FormRow from '../form/FormRow.jsx'
 import PolymorphicObjectField from './PolymorphicObjectField.jsx'
 import { getFieldComponent, getFieldModel } from './utils'
 
 const ListField = ({value, ...props}) => {
-    const {fieldType, common} = props
-    const {models} = common
+    const {fieldType, path, common} = props
+    const {models, setValue} = common
 
     if (! value) {
         value = List()
@@ -22,8 +23,20 @@ const ListField = ({value, ...props}) => {
         )
     }
 
+    const onSortEnd = ({oldIndex, newIndex}) => {
+        const item = value.get(oldIndex)
+        const newValue = value.delete(oldIndex).insert(newIndex, item)
+
+        setValue(path, newValue)
+    }
+
     return (
-        <MultiComponent value={value} {...props} />
+        <ListComponent
+            value={value}
+            onSortEnd={onSortEnd}
+            useDragHandle={true}
+            useWindowAsScrollContainer={true}
+            {...props} />
     )
 }
 
@@ -46,7 +59,7 @@ const SelectComponent = ({Component, label, fieldType, path, value, common}) => 
     )
 }
 
-const MultiComponent = ({label, fieldType, path, value, common}) => {
+const ListComponent = SortableContainer(({label, fieldType, path, value, common}) => {
     const {models, setValue} = common
 
     const valueFieldType = fieldType.data.value
@@ -55,27 +68,19 @@ const MultiComponent = ({label, fieldType, path, value, common}) => {
 
     const add = () => setValue(path, value.push(getNewValue(valueFieldType, models)))
 
-    const renderValueField = (subValue, index) => {
-        const valuePath = path.concat([index])
-
-        return (
-            <div key={index}>
-                <button
-                    type="button"
-                    className="btn btn-danger delete-field"
-                    onClick={() => setValue(path, value.remove(index))}>
-                    Remove
-                </button>
-                <ValueComponent
-                    required={valueFieldType.data.required}
-                    model={valueModel}
-                    fieldType={valueFieldType}
-                    path={valuePath}
-                    value={subValue}
-                    common={common} />
-            </div>
-        )
-    }
+    const renderValueField = (subValue, index) => (
+        <Item
+            key={index}
+            index={index}
+            valueIndex={index}
+            subValue={subValue}
+            valueFieldType={valueFieldType}
+            valueModel={valueModel}
+            ValueComponent={ValueComponent}
+            path={path}
+            value={value}
+            common={common} />
+    )
 
     return (
         <FormRow label={label}>
@@ -88,7 +93,37 @@ const MultiComponent = ({label, fieldType, path, value, common}) => {
             </button>
         </FormRow>
     )
-}
+})
 
+const Item = SortableElement(props => {
+    const {valueIndex, subValue, valueFieldType, valueModel, ValueComponent} = props
+    const {path, value, common} = props
+    const {setValue} = common
+
+    const valuePath = path.concat([valueIndex])
+
+    return (
+        <div className="item-form-sortable-row">
+            <div className="row-extras">
+                <button
+                    type="button"
+                    className="btn btn-danger"
+                    onClick={() => setValue(path, value.remove(valueIndex))}>
+                    Remove
+                </button>
+                <DragHandle />
+            </div>
+            <ValueComponent
+                required={valueFieldType.data.required}
+                model={valueModel}
+                fieldType={valueFieldType}
+                path={valuePath}
+                value={subValue}
+                common={common} />
+        </div>
+    )
+})
+
+const DragHandle = SortableHandle(() => <span className="noselect drag-handle"></span>)
 
 export default ListField

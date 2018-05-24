@@ -16,15 +16,24 @@
     margin-right: -120px;
 }
 
-.item-form .btn {
+.item-form .row-extras,
+.item-form-sortable-row .row-extras {
+    float: right;
+    margin-right: -140px;
+}
+
+.item-form .btn,
+.item-form-sortable-row .btn {
     min-width: 100px;
 }
 
-.item-form .form-group {
+.item-form .form-group,
+.item-form-sortable-row .form.group {
     margin-bottom: 2px;
 }
 
-.item-form .boolean-select {
+.item-form .boolean-select,
+.item-form-sortable-row .boolean-select {
     min-height: 34px;
 }
 
@@ -43,6 +52,34 @@
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
+}
+
+.noselect {
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none; /* Non-prefixed version, currently
+    supported by Chrome and Opera */
+}
+
+.drag-handle {
+    margin-left: 4px;
+    display: inline-block;
+    width: 16px;
+    height: 11px;
+    opacity: 0.50;
+    cursor: row-resize;
+
+    background: linear-gradient(
+        to bottom,
+        black, black 20%,
+        white 20%, white 40%,
+        black 40%, black 60%,
+        white 60%, white 80%,
+        black 80%, black 100%
+    );
 }
 
 .Select-menu-outer {
