@@ -8,6 +8,7 @@ GET     /ws                         controllers.GameController.socket
 
 GET     /admin                      controllers.AdminController.index
 PUT     /admin                      controllers.AdminController.save
+PUT     /admin/simulate             controllers.AdminController.simulate
 GET     /admin/summary              controllers.AdminController.summary
 
 # Map static resources from the /public folder to the /assets URL path

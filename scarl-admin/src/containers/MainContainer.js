@@ -1,6 +1,6 @@
 import { Map } from 'immutable'
 import { connect } from 'react-redux'
-import { addTab, changeTab, deleteTab, save } from '../actions/actions'
+import { addTab, changeTab, deleteTab, save, simulate } from '../actions/actions'
 import Main from '../components/Main.jsx'
 import { tabState } from '../reducers/ui/utils'
 
@@ -14,11 +14,13 @@ const MainContainer = connect(
         model: tabState(state.ui.form).model,
         readonly: state.readonly,
         saving: state.ui.main.saving,
+        simulating: state.ui.main.simulating,
         tab: state.ui.main.tab,
         tabs: state.ui.main.tabs,
     }), {
         addTab, changeTab, deleteTab,
         save,
+        simulate,
     }
 )(Main)
 

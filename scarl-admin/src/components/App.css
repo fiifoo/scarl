@@ -28,12 +28,29 @@
     min-height: 34px;
 }
 
+.loader {
+    border: 2px solid #f3f3f3;
+    border-top: 2px solid #555;
+    border-radius: 50%;
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    margin-left: 4px;
+    margin-bottom: -3px;
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
 .Select-menu-outer {
     z-index: 9;
     max-height: 402px;
 }
 
 .Select-menu {
-  max-height: 400px;
-  overflow-y: auto;
+    max-height: 400px;
+    overflow-y: auto;
 }

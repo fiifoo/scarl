@@ -3,11 +3,6 @@ package dal
 import java.nio.charset.StandardCharsets.UTF_8
 import java.nio.file.{Files, StandardOpenOption}
 
-import game.Simulations
-import io.github.fiifoo.scarl.area.template.Template
-import io.github.fiifoo.scarl.core.assets.CombatPower
-import io.github.fiifoo.scarl.core.item.Equipment
-import io.github.fiifoo.scarl.core.kind.{ItemKind, WidgetKind}
 import io.github.fiifoo.scarl.world.WorldAssets
 import javax.inject.{Inject, Singleton}
 import models.Data
@@ -15,17 +10,19 @@ import play.api.Environment
 import play.api.libs.json.{JsValue, Json}
 
 @Singleton
-class AssetsRepository @Inject()(environment: Environment) {
+class AssetsRepository @Inject()(environment: Environment, simulationsRepository: SimulationsRepository) {
 
   lazy private val dataFile = environment.getFile("data/data.json").toPath
   lazy private implicit val dataReads = Data.dataReads
 
   def build(): WorldAssets = {
-    val data = read().as[Data]
+    val data = readObject()
+
+    val simulations = simulationsRepository.build()
 
     WorldAssets(
       data.areas,
-      simulateCombatPower(data),
+      simulations.combatPower,
       data.communications,
       data.factions,
       data.keys,
@@ -34,6 +31,10 @@ class AssetsRepository @Inject()(environment: Environment) {
       data.templates,
       data.themes
     )
+  }
+
+  def readObject(): Data = {
+    read().as[Data]
   }
 
   def read(): JsValue = {
@@ -51,71 +52,5 @@ class AssetsRepository @Inject()(environment: Environment) {
       StandardOpenOption.CREATE,
       StandardOpenOption.TRUNCATE_EXISTING
     )
-  }
-
-  private def simulateCombatPower(data: Data): CombatPower = {
-    Simulations.combatPower(data.kinds.creatures.values)
-      .copy(
-        equipment = getEquipmentCombatPower(data),
-        item = getItemCombatPower(data),
-        template = getTemplateCombatPower(data),
-        widget = getWidgetCombatPower(data)
-      )
-  }
-
-  private def getEquipmentCombatPower(data: Data): CombatPower.Equipment = {
-    val simulated = Simulations.equipmentCombatPower(data.kinds.items.values, data.kinds.creatures.values)
-    val fixed = data.kinds.items flatMap (x => {
-      val (id, item) = x
-
-      item.power map (id -> _)
-    })
-
-    (Equipment.categories foldLeft simulated) ((result, category) => {
-      val items = fixed filter (x => {
-        val (id, _) = x
-        val item = data.kinds.items(id)
-
-        category.extractEquipment(item).isDefined
-      })
-
-      result + (category -> (result(category) ++ items))
-    })
-  }
-
-  private def getItemCombatPower(data: Data): CombatPower.Item = {
-    (ItemKind.categories map (category => {
-      val items = data.kinds.items filter (_._2.category contains category) flatMap (x => {
-        val (id, item) = x
-
-        item.power map (id -> _)
-      })
-
-      category -> items
-    })).toMap
-  }
-
-  private def getTemplateCombatPower(data: Data): CombatPower.Template = {
-    (Template.categories map (category => {
-      val templates = data.templates filter (_._2.category contains category) flatMap (x => {
-        val (id, template) = x
-
-        template.power map (id -> _)
-      })
-
-      category -> templates
-    })).toMap
-  }
-
-  private def getWidgetCombatPower(data: Data): CombatPower.Widget = {
-    (WidgetKind.categories map (category => {
-      val widgets = data.kinds.widgets filter (_._2.category contains category) flatMap (x => {
-        val (id, widget) = x
-
-        widget.power map (id -> _)
-      })
-
-      category -> widgets
-    })).toMap
   }
 }

@@ -6,6 +6,10 @@ import * as types from './actionTypes'
 
 export const changePage = page => (dispatch, getState) => {
     if (page === SUMMARY && getState().summary === null) {
+        dispatch ({
+            type: types.FETCH_SUMMARY,
+        })
+
         api.fetchSummary().then(summary => dispatch({
             type: types.RECEIVE_SUMMARY,
             summary,
@@ -77,6 +81,16 @@ export const save = () => (dispatch, getState) => {
 
     dispatch({
         type: types.SAVE,
+    })
+}
+
+export const simulate = () => dispatch => {
+    api.simulate().then(() => dispatch({
+        type: types.SIMULATED,
+    }))
+
+    dispatch({
+        type: types.SIMULATE,
     })
 }
 

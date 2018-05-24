@@ -12,10 +12,21 @@ const ADD = 'ADD'
 const SaveButton = ({readonly, save, saving}) => (
     <button
         type="button"
-        className="btn btn-primary pull-right"
+        className="btn btn-primary"
         onClick={save}
         disabled={saving || readonly}>
         Save
+    </button>
+)
+
+const SimulateButton = ({readonly, simulate, simulating}) => (
+    <button
+        type="button"
+        className="btn btn-default"
+        onClick={simulate}
+        disabled={simulating || readonly}>
+        <span>Run simulations</span>
+        {simulating && <div className="loader" />}
     </button>
 )
 
@@ -76,7 +87,10 @@ const Main = ({labels, model, tab, tabs, addTab, changeTab, deleteTab, ...props}
     return (
         <Tab.Container id="main-tabs" activeKey={tab} onSelect={onSelect}>
             <div>
-                <SaveButton {...props} />
+                <div className="btn-toolbar pull-right">
+                    <SimulateButton {...props} />
+                    <SaveButton {...props} />
+                </div>
                 {tabItems}
                 <Tab.Content style={{marginTop: '1em'}}>
                     <Content model={model} />

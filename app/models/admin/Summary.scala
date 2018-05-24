@@ -25,7 +25,7 @@ object Summary {
   }
 
   lazy private implicit val areaIdFormat = JsonArea.areaIdFormat
-  lazy private implicit val combatPowerWrites = JsonCombatPower.combatPowerWrites
+  lazy private implicit val combatPowerFormat = JsonCombatPower.combatPowerFormat
   lazy private implicit val templateIdFormat = JsonTemplate.templateIdFormat
 
   import models.json.JsonBase.mapFormat

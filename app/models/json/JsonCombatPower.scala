@@ -28,7 +28,7 @@ object JsonCombatPower {
   implicitly(mapReads[WidgetKindId, Int])
   implicitly(mapReads[WidgetKind.Category, Map[WidgetKindId, Int]])
 
-  lazy val combatPowerWrites: Writes[CombatPower] = Json.writes[CombatPower]
+  lazy val combatPowerFormat: Format[CombatPower] = Json.format[CombatPower]
 
   lazy implicit val categoryFormat: Format[CombatPower.Category] = polymorphicObjectFormat({
     case "CombatPower.Top" => CombatPower.Top

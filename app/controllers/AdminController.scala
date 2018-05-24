@@ -1,13 +1,14 @@
 package controllers
 
+import dal.{AssetsRepository, SimulationsRepository}
 import javax.inject.Inject
-
-import dal.AssetsRepository
+import models.Simulations
 import models.admin.{Models, Summary}
 import play.Environment
 import play.api.mvc._
 
 class AdminController @Inject()(gameAssets: AssetsRepository,
+                                gameSimulations: SimulationsRepository,
                                 cc: ControllerComponents)
                                (environment: Environment) extends AbstractController(cc) {
 
@@ -23,13 +24,14 @@ class AdminController @Inject()(gameAssets: AssetsRepository,
 
   def index = Action {
     val data = gameAssets.read()
+
     val models = Models()
 
     Ok(views.html.admin(
       assets = assets,
       data = data.toString,
       models = Models.writes.writes(models).toString,
-      readonly = readonly,
+      readonly = readonly
     ))
   }
 
@@ -39,6 +41,17 @@ class AdminController @Inject()(gameAssets: AssetsRepository,
     }
 
     gameAssets.write(request.body)
+
+    NoContent
+  }
+
+  def simulate = Action {
+    if (readonly) {
+      throw new Exception("Dev environment only.")
+    }
+
+    val simulations = Simulations(gameAssets.readObject())
+    gameSimulations.write(simulations)
 
     NoContent
   }

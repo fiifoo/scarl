@@ -9,7 +9,8 @@ const initial = Record({
 
 export default (state = initial, action) => {
     switch (action.type) {
-        case types.SAVE: {
+        case types.SAVE:
+        case types.SIMULATE: {
             return initial
         }
         case types.CHANGE_SUMMARY_TAB: {

@@ -1,4 +1,4 @@
-import dal.AssetsRepository
+import dal.{AssetsRepository, SimulationsRepository}
 import game.LoadGame
 import io.github.fiifoo.scarl.area.AreaId
 import io.github.fiifoo.scarl.core.State
@@ -10,7 +10,8 @@ import play.api.inject.guice.GuiceApplicationBuilder
 
 class JsonWorldStateSpec extends PlaySpec {
   val environment = new GuiceApplicationBuilder().build().environment
-  val assets = new AssetsRepository(environment).build()
+  val simulationsRepository = new SimulationsRepository(environment)
+  val assets = new AssetsRepository(environment, simulationsRepository).build()
   val world = createWorld()
 
   "JsonWorldState" must {

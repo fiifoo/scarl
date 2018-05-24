@@ -4,7 +4,7 @@ import io.github.fiifoo.scarl.core.assets.CombatPower
 import io.github.fiifoo.scarl.core.kind.{CreatureKind, ItemKind}
 import io.github.fiifoo.scarl.simulation.{CombatPowerSimulation, EquipmentCombatPowerSimulation}
 
-object Simulations {
+object Simulate {
 
   def combatPower(creatures: Iterable[CreatureKind]): CombatPower = {
     CombatPowerSimulation()(combatants(creatures))
