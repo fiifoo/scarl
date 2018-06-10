@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Table } from 'react-bootstrap'
+import { Button } from 'react-bootstrap'
 import { DropButton } from './buttons.jsx'
 
 const UseButton = ({item, useItem}) => (
@@ -19,12 +19,9 @@ const UsableItem = ({item, kind, selected, dropItem, useItem, select}) => (
 )
 
 const Usables = ({items, kinds, row, dropItem, useItem, setRow}) => (
-    <Table condensed className="inventory-group">
+    <table>
         <tbody>
-            <tr>
-                <td colSpan="3"><b>Usables</b></td>
-            </tr>
-            {items.toArray().map((item, index) =>
+            {items.map((item, index) =>
                 <UsableItem
                     key={item.id}
                     item={item}
@@ -35,7 +32,7 @@ const Usables = ({items, kinds, row, dropItem, useItem, setRow}) => (
                     select={() => setRow(index)} />
             )}
         </tbody>
-    </Table>
+    </table>
 )
 
 export default Usables

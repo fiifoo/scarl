@@ -1,5 +1,4 @@
 import React from 'react'
-import { Table } from 'react-bootstrap'
 import { DropButton } from './buttons.jsx'
 
 const OtherItem = ({item, kind, selected, dropItem, select}) => (
@@ -10,12 +9,9 @@ const OtherItem = ({item, kind, selected, dropItem, select}) => (
 )
 
 const Others = ({items, kinds, row, dropItem, setRow}) => (
-    <Table condensed className="inventory-group">
+    <table>
         <tbody>
-            <tr>
-                <td colSpan="2"><b>Other</b></td>
-            </tr>
-            {items.toArray().map((item, index) =>
+            {items.map((item, index) =>
                 <OtherItem
                     key={item.id}
                     item={item}
@@ -25,7 +21,7 @@ const Others = ({items, kinds, row, dropItem, setRow}) => (
                     select={() => setRow(index)} />
             )}
         </tbody>
-    </Table>
+    </table>
 )
 
 export default Others
