@@ -67,13 +67,15 @@ const Inventory = ({equipments, inventory, kinds, ui, dropItem, equipItem, unequ
                 <div className="inventory-details">
                     {item ? (
                         <Details
+                            equipments={equipments}
+                            inventory={inventory}
                             item={item}
                             kinds={kinds}
                             tab={tab} />
                     ) : '\u00A0'}
                 </div>
                 <div className="inventory-equipped">
-                    <h4>Equipments</h4>
+                    <h4>Equipment</h4>
                     <Equipped
                         equipments={equipments}
                         inventory={inventory}

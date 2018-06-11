@@ -60,7 +60,7 @@ const use = (dispatch, getState) => {
                 playerActions.unequipItem(item.id)()
             } else {
                 const group = groups[tab.key]
-                const slot = group.getSlots(item).first()
+                const slot = group.slots(item).first()
 
                 playerActions.equipItem(item.id, slot)(dispatch)
             }

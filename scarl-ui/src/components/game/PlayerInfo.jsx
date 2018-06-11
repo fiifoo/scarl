@@ -1,36 +1,7 @@
 import './PlayerInfo.css'
+import { addStats } from '../../game/utils'
 
 import React from 'react'
-
-const addStats = (a, b) => {
-    return {
-        health: {
-            max: a.health.max + b.health.max,
-            regen: a.health.regen + b.health.regen,
-        },
-        energy: {
-            max: a.energy.max + b.energy.max,
-            regen: a.energy.regen + b.energy.regen,
-        },
-        materials: {
-            max: a.materials.max + b.materials.max,
-            regen: a.materials.regen + b.materials.regen,
-        },
-        melee: {
-            attack: a.melee.attack + b.melee.attack,
-            damage: a.melee.damage + b.melee.damage,
-        },
-        ranged: {
-            attack: a.ranged.attack + b.ranged.attack,
-            damage: a.ranged.damage + b.ranged.damage,
-            range: a.ranged.range + b.ranged.range,
-        },
-        defence: a.defence + b.defence,
-        armor: a.armor + b.armor,
-        sight: {range: a.sight.range + b.sight.range},
-        speed: Math.round(100 * a.speed * b.speed)
-    }
-}
 
 const PlayerInfo = ({player}) => {
     const stats = addStats(player.creature.stats, player.equipmentStats)

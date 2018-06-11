@@ -1,6 +1,6 @@
 import React from 'react'
 import { Button, MenuItem, SplitButton } from 'react-bootstrap'
-import { slots } from '../../game/equipment'
+import { slots as equipmentSlots } from '../../game/equipment'
 
 export const DropButton = ({item, dropItem}) => (
     <Button
@@ -10,21 +10,21 @@ export const DropButton = ({item, dropItem}) => (
     </Button>
 )
 
-export const EquipButton = ({item, allowedSlots, equipItem}) =>  {
-    const defaultSlot = allowedSlots.get(0)
+export const EquipButton = ({item, slots, fillAll, equipItem}) =>  {
+    const defaultSlot = slots.get(0)
     const equipDefault = () => equipItem(item.id, defaultSlot)
     const id = `equip-${defaultSlot}-${item.id}`
 
-    return allowedSlots.size > 1 ? (
+    return !fillAll && slots.size > 1 ? (
         <SplitButton
             id={id}
             title="Equip"
             dropup
             bsSize="xsmall"
             onClick={equipDefault}>
-            {allowedSlots.map(slot => (
+            {slots.map(slot => (
                 <MenuItem key={slot} onClick={() => equipItem(item.id, slot)}>
-                    {slots[slot].label}
+                    {equipmentSlots[slot].label}
                 </MenuItem>
             )).toArray()}
         </SplitButton>

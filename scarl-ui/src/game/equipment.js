@@ -8,17 +8,18 @@ const Slot = Record({
 const Group = Record({
     prop: undefined,
     label: undefined,
-    getSlots: undefined,
+    slots: undefined,
+    fillAll: undefined,
 })
 
-const MainHand = 'Equipment.MainHand'
-const OffHand = 'Equipment.OffHand'
-const RangedSlot = 'Equipment.RangedSlot'
-const LauncherSlot = 'Equipment.LauncherSlot'
-const HeadArmor = 'Equipment.HeadArmor'
-const BodyArmor = 'Equipment.BodyArmor'
-const HandArmor = 'Equipment.HandArmor'
-const FootArmor = 'Equipment.FootArmor'
+export const MainHand = 'Equipment.MainHand'
+export const OffHand = 'Equipment.OffHand'
+export const RangedSlot = 'Equipment.RangedSlot'
+export const LauncherSlot = 'Equipment.LauncherSlot'
+export const HeadArmor = 'Equipment.HeadArmor'
+export const BodyArmor = 'Equipment.BodyArmor'
+export const HandArmor = 'Equipment.HandArmor'
+export const FootArmor = 'Equipment.FootArmor'
 
 export const slots = {
     [MainHand]: Slot({
@@ -59,30 +60,32 @@ export const groups = {
     Armor: Group({
         prop: 'armor',
         label: 'Wearable',
-        getSlots: item => List([item.armor.slot]),
+        slots: item => List([item.armor.slot]),
+        fillAll: () => true
     }),
     Launcher: Group({
         prop: 'launcher',
         label: 'Launcher',
-        getSlots:() => List([LauncherSlot]),
+        slots:() => List([LauncherSlot]),
+        fillAll: () => true
     }),
     Shield: Group({
         prop: 'shield',
         label: 'Shield',
-        getSlots: () => List([OffHand]),
+        slots: () => List([OffHand]),
+        fillAll: () => true
     }),
     RangedWeapon: Group({
         prop: 'rangedWeapon',
         label: 'Ranged weapon',
-        getSlots:() => List([RangedSlot]),
+        slots:() => List([RangedSlot]),
+        fillAll: () => true
     }),
     Weapon: Group({
         prop: 'weapon',
         label: 'Melee weapon',
-        getSlots: item => List(item.weapon.twoHanded
-            ? [MainHand]
-            : [MainHand, OffHand]
-        ),
+        slots: () => List([MainHand, OffHand]),
+        fillAll: item => !!item.weapon.twoHanded
     }),
 }
 

@@ -1,28 +1,25 @@
 import React from 'react'
 import { DropButton, EquipButton, UnequipButton } from './buttons.jsx'
 
-const EquipmentItem = ({equipped, group, item, kind, selected, dropItem, equipItem, unequipItem, select}) => {
-    const allowedSlots = group.getSlots(item)
-
-    return (
-        <tr className={selected ? 'active' : null} onClick={select}>
-            <td>
-                {equipped ? (
-                    <UnequipButton
-                        item={item}
-                        unequipItem={unequipItem} />
-                ) : (
-                    <EquipButton
-                        item={item}
-                        allowedSlots={allowedSlots}
-                        equipItem={equipItem} />
-                )}
-            </td>
-            <td><DropButton item={item} dropItem={dropItem} /></td>
-            <td className="full-width">{kind.name}</td>
-        </tr>
-    )
-}
+const EquipmentItem = ({equipped, group, item, kind, selected, dropItem, equipItem, unequipItem, select}) =>  (
+    <tr className={selected ? 'active' : null} onClick={select}>
+        <td>
+            {equipped ? (
+                <UnequipButton
+                    item={item}
+                    unequipItem={unequipItem} />
+            ) : (
+                <EquipButton
+                    item={item}
+                    slots={group.slots(item)}
+                    fillAll={group.fillAll(item)}
+                    equipItem={equipItem} />
+            )}
+        </td>
+        <td><DropButton item={item} dropItem={dropItem} /></td>
+        <td className="full-width">{kind.name}</td>
+    </tr>
+)
 
 const Equipments = ({equipments, group, items, kinds, row, dropItem, equipItem, unequipItem, setRow}) => (
     <table>
