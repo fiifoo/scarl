@@ -1,7 +1,8 @@
 import { fromJS, List, Map, Set } from 'immutable'
 import React from 'react'
 import { LauncherSlot } from '../../game/equipment'
-import { groups as equipmentGroups, slots as equipmentSlots, stats as equipmentStats } from '../../game/equipment'
+import { stats as equipmentStats } from '../../game/creature'
+import { groups as equipmentGroups, slots as equipmentSlots } from '../../game/equipment'
 import { addStats } from '../../game/utils'
 
 const Diff = ({amount}) => (

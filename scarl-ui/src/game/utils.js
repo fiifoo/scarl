@@ -1,34 +1,14 @@
 import { fromJS, List } from 'immutable'
+import { stats } from './creature'
 import { distance, line } from './geometry'
 
 export const addStats = (a, b) => {
-    return {
-        health: {
-            max: a.health.max + b.health.max,
-            regen: a.health.regen + b.health.regen,
-        },
-        energy: {
-            max: a.energy.max + b.energy.max,
-            regen: a.energy.regen + b.energy.regen,
-        },
-        materials: {
-            max: a.materials.max + b.materials.max,
-            regen: a.materials.regen + b.materials.regen,
-        },
-        melee: {
-            attack: a.melee.attack + b.melee.attack,
-            damage: a.melee.damage + b.melee.damage,
-        },
-        ranged: {
-            attack: a.ranged.attack + b.ranged.attack,
-            damage: a.ranged.damage + b.ranged.damage,
-            range: a.ranged.range + b.ranged.range,
-        },
-        defence: a.defence + b.defence,
-        armor: a.armor + b.armor,
-        sight: {range: a.sight.range + b.sight.range},
-        speed: a.speed * b.speed
-    }
+    a = fromJS(a)
+    b = fromJS(b)
+
+    return stats.reduce((a, _, stat) => (
+        a.setIn(stat, a.getIn(stat) + b.getIn(stat))
+    ), a).toJS()
 }
 
 export const calculateTrajectory = (player, location, fov, missile = false) => {

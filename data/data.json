@@ -294,7 +294,7 @@
           "radius" : 0,
           "blast" : 0
         },
-        "speed" : 1.5,
+        "speed" : 50,
         "ranged" : {
           "attack" : 0,
           "damage" : 0,
@@ -372,7 +372,7 @@
           "radius" : 1,
           "blast" : 0
         },
-        "speed" : 1.1,
+        "speed" : 10,
         "ranged" : {
           "attack" : 10,
           "damage" : 5,
@@ -446,7 +446,7 @@
           "radius" : 0,
           "blast" : 0
         },
-        "speed" : 1,
+        "speed" : 0,
         "ranged" : {
           "attack" : 0,
           "damage" : 0,
@@ -520,7 +520,7 @@
           "radius" : 0,
           "blast" : 0
         },
-        "speed" : 0.75,
+        "speed" : -25,
         "ranged" : {
           "attack" : 10,
           "damage" : 5,
@@ -594,7 +594,7 @@
           "radius" : 0,
           "blast" : 0
         },
-        "speed" : 0.75,
+        "speed" : -25,
         "ranged" : {
           "attack" : 20,
           "damage" : 10,
@@ -668,7 +668,7 @@
           "radius" : 0,
           "blast" : 0
         },
-        "speed" : 0.75,
+        "speed" : -25,
         "ranged" : {
           "attack" : 30,
           "damage" : 15,
@@ -742,7 +742,7 @@
           "radius" : 0,
           "blast" : 0
         },
-        "speed" : 1,
+        "speed" : 0,
         "ranged" : {
           "attack" : 10,
           "damage" : 10,
@@ -816,7 +816,7 @@
           "radius" : 0,
           "blast" : 0
         },
-        "speed" : 1,
+        "speed" : 0,
         "ranged" : {
           "attack" : 20,
           "damage" : 15,
@@ -890,7 +890,7 @@
           "radius" : 0,
           "blast" : 0
         },
-        "speed" : 1,
+        "speed" : 0,
         "ranged" : {
           "attack" : 0,
           "damage" : 0,
@@ -974,7 +974,7 @@
           "radius" : 0,
           "blast" : 0
         },
-        "speed" : 1.1,
+        "speed" : 10,
         "ranged" : {
           "attack" : 20,
           "damage" : 10,
@@ -1048,7 +1048,7 @@
           "radius" : 0,
           "blast" : 0
         },
-        "speed" : 1,
+        "speed" : 0,
         "ranged" : {
           "attack" : 0,
           "damage" : 0,
@@ -1122,7 +1122,7 @@
           "radius" : 0,
           "blast" : 0
         },
-        "speed" : 1,
+        "speed" : 0,
         "ranged" : {
           "attack" : 30,
           "damage" : 20,
@@ -1206,7 +1206,7 @@
           "radius" : 0,
           "blast" : 0
         },
-        "speed" : 1.1,
+        "speed" : 10,
         "ranged" : {
           "attack" : 30,
           "damage" : 15,
@@ -1290,7 +1290,7 @@
           "radius" : 0,
           "blast" : 0
         },
-        "speed" : 1.1,
+        "speed" : 10,
         "ranged" : {
           "attack" : 40,
           "damage" : 20,
@@ -1364,7 +1364,7 @@
           "radius" : 0,
           "blast" : 0
         },
-        "speed" : 1,
+        "speed" : 0,
         "ranged" : {
           "attack" : 0,
           "damage" : 0,
@@ -1438,7 +1438,7 @@
           "radius" : 0,
           "blast" : 0
         },
-        "speed" : 1,
+        "speed" : 0,
         "ranged" : {
           "attack" : 0,
           "damage" : 0,
@@ -1517,7 +1517,7 @@
           "radius" : 2,
           "blast" : 90
         },
-        "speed" : 3,
+        "speed" : 200,
         "ranged" : {
           "attack" : 0,
           "damage" : 0,
@@ -1591,7 +1591,7 @@
           "radius" : 0,
           "blast" : 0
         },
-        "speed" : 1,
+        "speed" : 0,
         "ranged" : {
           "attack" : 0,
           "damage" : 0,
@@ -1670,7 +1670,7 @@
           "radius" : 2,
           "blast" : 90
         },
-        "speed" : 3,
+        "speed" : 200,
         "ranged" : {
           "attack" : 0,
           "damage" : 0,
@@ -1749,7 +1749,7 @@
           "radius" : 2,
           "blast" : 90
         },
-        "speed" : 3,
+        "speed" : 200,
         "ranged" : {
           "attack" : 0,
           "damage" : 0,
@@ -1823,7 +1823,7 @@
           "radius" : 0,
           "blast" : 0
         },
-        "speed" : 0.5,
+        "speed" : -50,
         "ranged" : {
           "attack" : 0,
           "damage" : 0,
@@ -1897,7 +1897,7 @@
           "radius" : 0,
           "blast" : 0
         },
-        "speed" : 0.5,
+        "speed" : -50,
         "ranged" : {
           "attack" : 0,
           "damage" : 0,
@@ -1971,7 +1971,7 @@
           "radius" : 0,
           "blast" : 0
         },
-        "speed" : 0.5,
+        "speed" : -50,
         "ranged" : {
           "attack" : 0,
           "damage" : 0,
@@ -2045,7 +2045,7 @@
           "radius" : 0,
           "blast" : 0
         },
-        "speed" : 0.5,
+        "speed" : -50,
         "ranged" : {
           "attack" : 20,
           "damage" : 10,
@@ -2119,7 +2119,7 @@
           "radius" : 0,
           "blast" : 0
         },
-        "speed" : 1.2,
+        "speed" : 20,
         "ranged" : {
           "attack" : 10,
           "damage" : 10,
@@ -2193,7 +2193,7 @@
           "radius" : 0,
           "blast" : 0
         },
-        "speed" : 0.5,
+        "speed" : -50,
         "ranged" : {
           "attack" : 35,
           "damage" : 15,
@@ -2267,7 +2267,7 @@
           "radius" : 0,
           "blast" : 0
         },
-        "speed" : 0.5,
+        "speed" : -50,
         "ranged" : {
           "attack" : 50,
           "damage" : 20,
@@ -2337,7 +2337,7 @@
             "radius" : 0,
             "blast" : 0
           },
-          "speed" : 1,
+          "speed" : 0,
           "ranged" : {
             "attack" : 0,
             "damage" : 0,
@@ -2408,7 +2408,7 @@
             "radius" : 0,
             "blast" : 0
           },
-          "speed" : 1,
+          "speed" : 0,
           "ranged" : {
             "attack" : 0,
             "damage" : 0,
@@ -2467,7 +2467,7 @@
             "radius" : 0,
             "blast" : 0
           },
-          "speed" : 1,
+          "speed" : 0,
           "ranged" : {
             "attack" : 0,
             "damage" : 0,
@@ -2550,7 +2550,7 @@
             "radius" : 0,
             "blast" : 0
           },
-          "speed" : 1,
+          "speed" : 0,
           "ranged" : {
             "attack" : 0,
             "damage" : 0,
@@ -2621,7 +2621,7 @@
             "radius" : 0,
             "blast" : 0
           },
-          "speed" : 1,
+          "speed" : 0,
           "ranged" : {
             "attack" : 0,
             "damage" : 0,
@@ -2680,7 +2680,7 @@
             "radius" : 0,
             "blast" : 0
           },
-          "speed" : 1,
+          "speed" : 0,
           "ranged" : {
             "attack" : 0,
             "damage" : 0,
@@ -2763,7 +2763,7 @@
             "radius" : 0,
             "blast" : 0
           },
-          "speed" : 1,
+          "speed" : 0,
           "ranged" : {
             "attack" : 0,
             "damage" : 0,
@@ -2868,7 +2868,7 @@
             "radius" : 0,
             "blast" : 0
           },
-          "speed" : 1,
+          "speed" : 0,
           "ranged" : {
             "attack" : 0,
             "damage" : 0,
@@ -2927,7 +2927,7 @@
             "radius" : 0,
             "blast" : 0
           },
-          "speed" : 1,
+          "speed" : 0,
           "ranged" : {
             "attack" : 0,
             "damage" : 0,
@@ -3191,7 +3191,7 @@
             "radius" : 0,
             "blast" : 0
           },
-          "speed" : 1,
+          "speed" : 0,
           "ranged" : {
             "attack" : 0,
             "damage" : 0,
@@ -3290,7 +3290,7 @@
             "radius" : 0,
             "blast" : 0
           },
-          "speed" : 1,
+          "speed" : 0,
           "ranged" : {
             "attack" : 0,
             "damage" : 0,
@@ -3375,7 +3375,7 @@
             "radius" : 0,
             "blast" : 0
           },
-          "speed" : 1,
+          "speed" : 0,
           "ranged" : {
             "attack" : 0,
             "damage" : 0,
@@ -3612,7 +3612,7 @@
             "radius" : 0,
             "blast" : 0
           },
-          "speed" : 1,
+          "speed" : 0,
           "ranged" : {
             "attack" : 0,
             "damage" : 0,
@@ -3691,7 +3691,7 @@
             "radius" : 0,
             "blast" : 0
           },
-          "speed" : 1,
+          "speed" : 0,
           "ranged" : {
             "attack" : 0,
             "damage" : 0,
@@ -3753,7 +3753,7 @@
             "radius" : 0,
             "blast" : 0
           },
-          "speed" : 1,
+          "speed" : 0,
           "ranged" : {
             "attack" : 0,
             "damage" : 0,
@@ -3855,7 +3855,7 @@
             "radius" : 0,
             "blast" : 0
           },
-          "speed" : 1,
+          "speed" : 0,
           "ranged" : {
             "attack" : 0,
             "damage" : 0,
@@ -3917,7 +3917,7 @@
             "radius" : 0,
             "blast" : 0
           },
-          "speed" : 1,
+          "speed" : 0,
           "ranged" : {
             "attack" : 0,
             "damage" : 0,
@@ -3996,7 +3996,7 @@
             "radius" : 0,
             "blast" : 0
           },
-          "speed" : 1,
+          "speed" : 0,
           "ranged" : {
             "attack" : 0,
             "damage" : 0,
@@ -4091,7 +4091,7 @@
             "radius" : 0,
             "blast" : 0
           },
-          "speed" : 1,
+          "speed" : 0,
           "ranged" : {
             "attack" : 0,
             "damage" : 0,
@@ -4162,7 +4162,7 @@
             "radius" : 0,
             "blast" : 0
           },
-          "speed" : 1,
+          "speed" : 0,
           "ranged" : {
             "attack" : 0,
             "damage" : 0,
@@ -4233,7 +4233,7 @@
             "radius" : 0,
             "blast" : 0
           },
-          "speed" : 1,
+          "speed" : 0,
           "ranged" : {
             "attack" : 0,
             "damage" : 0,
@@ -4294,7 +4294,7 @@
             "radius" : 0,
             "blast" : 0
           },
-          "speed" : 1,
+          "speed" : 0,
           "ranged" : {
             "attack" : 10,
             "damage" : 5,
@@ -4364,7 +4364,7 @@
             "radius" : 0,
             "blast" : 0
           },
-          "speed" : 1,
+          "speed" : 0,
           "ranged" : {
             "attack" : 20,
             "damage" : 10,
@@ -4445,7 +4445,7 @@
             "radius" : 0,
             "blast" : 0
           },
-          "speed" : 1,
+          "speed" : 0,
           "ranged" : {
             "attack" : 0,
             "damage" : 0,
@@ -4506,7 +4506,7 @@
             "radius" : 0,
             "blast" : 0
           },
-          "speed" : 1,
+          "speed" : 0,
           "ranged" : {
             "attack" : 30,
             "damage" : 15,
@@ -4811,7 +4811,7 @@
           "radius" : 0,
           "blast" : 0
         },
-        "speed" : 1,
+        "speed" : 0,
         "ranged" : {
           "attack" : 2,
           "damage" : 0,
@@ -4870,7 +4870,7 @@
           "radius" : 0,
           "blast" : 0
         },
-        "speed" : 1,
+        "speed" : 0,
         "ranged" : {
           "attack" : 2,
           "damage" : 0,
@@ -4929,7 +4929,7 @@
           "radius" : 0,
           "blast" : 0
         },
-        "speed" : 1,
+        "speed" : 0,
         "ranged" : {
           "attack" : 2,
           "damage" : 0,
@@ -4988,7 +4988,7 @@
           "radius" : 0,
           "blast" : 0
         },
-        "speed" : 1,
+        "speed" : 0,
         "ranged" : {
           "attack" : 2,
           "damage" : 0,
@@ -5047,7 +5047,7 @@
           "radius" : 0,
           "blast" : 0
         },
-        "speed" : 1,
+        "speed" : 0,
         "ranged" : {
           "attack" : 2,
           "damage" : 0,

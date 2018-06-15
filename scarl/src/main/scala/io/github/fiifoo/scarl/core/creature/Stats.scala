@@ -69,7 +69,7 @@ object Stats {
 
 }
 
-case class Stats(speed: Double = 1,
+case class Stats(speed: Int = 0,
                  health: Health = Health(),
                  energy: Energy = Energy(),
                  materials: Materials = Materials(),
@@ -85,7 +85,7 @@ case class Stats(speed: Double = 1,
 
   def add(x: Stats): Stats = {
     copy(
-      speed * x.speed,
+      speed + x.speed,
       health add x.health,
       energy add x.energy,
       materials add x.materials,
