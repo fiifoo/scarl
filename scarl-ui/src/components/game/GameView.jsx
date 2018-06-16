@@ -20,4 +20,8 @@ class GameView extends Component {
     }
 }
 
+GameView.defaultProps = {
+    lazy: true,
+}
+
 export default GameView
