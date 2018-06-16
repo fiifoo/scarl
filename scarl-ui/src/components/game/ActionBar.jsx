@@ -9,13 +9,14 @@ const Button = ({label, onClick}) =>  (
 )
 
 const ActionBar = props =>  {
-    const {inventory, keyBindings, messageLog} = props
+    const {inventory, keyBindings, messageLog, playerInfo} = props
 
     return (
         <div className="btn-toolbar">
             <Button onClick={keyBindings} label="Key bindings"/>
             <Button onClick={inventory} label="Inventory" />
             <Button onClick={messageLog} label="Message log" />
+            <Button onClick={playerInfo} label="Player character" />
         </div>
     )
 }

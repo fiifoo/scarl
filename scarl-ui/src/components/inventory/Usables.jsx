@@ -19,7 +19,7 @@ const UsableItem = ({item, kind, selected, dropItem, useItem, select}) => (
 )
 
 const Usables = ({items, kinds, row, dropItem, useItem, setRow}) => (
-    <table>
+    <table className="scarl-table">
         <tbody>
             {items.map((item, index) =>
                 <UsableItem

@@ -125,7 +125,7 @@ const Details = ({equipments, inventory, item, kinds}) => {
     return (
         <div>
             <h4>{kind.name}</h4>
-            <table>
+            <table className="scarl-table">
                 {stats}
                 {missile}
             </table>

@@ -3,6 +3,7 @@ import InventoryContainer from '../inventory/InventoryContainer'
 import GameOverContainer from './GameOverContainer'
 import KeyBindingsContainer from './KeyBindingsContainer'
 import MessageLogContainer from './MessageLogContainer'
+import PlayerInfoContainer from './PlayerInfoContainer'
 import ScreenContainer from './ScreenContainer'
 
 class GameViews extends Component {
@@ -44,10 +45,12 @@ class GameViews extends Component {
                 ) : (
                     <React.Fragment>
                         <ScreenContainer size={size} />
+
+                        <GameOverContainer />
                         <InventoryContainer />
                         <KeyBindingsContainer />
                         <MessageLogContainer />
-                        <GameOverContainer />
+                        <PlayerInfoContainer />
                     </React.Fragment>
                 )}
             </div>

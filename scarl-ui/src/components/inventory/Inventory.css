@@ -3,7 +3,7 @@
 }
 
 .inventory-list {
-    margin-right: 800px;
+    margin-right: 820px;
     min-width: 400px;
     padding-top: 6px;
 }
@@ -12,44 +12,11 @@
     float: right;
 }
 
-.inventory-details {
-    float: left;
-    width: 380px;
-    margin-right: 20px;
-}
-
-.inventory-equipped {
-    float: left;
-    width: 380px;
-}
-
 .inventory > .nav {
     margin-bottom: 1em;
-}
-
-.inventory td,
-.inventory th {
-    padding: 3px;
-    white-space: nowrap;
-}
-
-.inventory tr.active > td,
-.inventory tr.active > th {
-    background-color: #024;
-}
-
-.inventory td.full-width {
-    width: 100%;
 }
 
 .inventory-list td > .btn,
 .inventory-list td > .btn-group {
     min-width: 75px;
-}
-
-.inventory-details h4,
-.inventory-equipped h4 {
-    text-align: center;
-    border-bottom: 1px solid #ccc;
-    padding-bottom: 5px;
 }

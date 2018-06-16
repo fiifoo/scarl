@@ -62,6 +62,10 @@ export default (command, dispatch, getState) => {
             gameActions.interact(interactions.PickItem)(dispatch, getState)
             break
         }
+        case commands.PLAYER_INFO: {
+            gameActions.playerInfo()(dispatch)
+            break
+        }
         case commands.USE: {
             gameActions.interact(List([
                 interactions.HackItem,

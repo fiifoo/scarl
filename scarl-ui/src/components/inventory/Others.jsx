@@ -9,7 +9,7 @@ const OtherItem = ({item, kind, selected, dropItem, select}) => (
 )
 
 const Others = ({items, kinds, row, dropItem, setRow}) => (
-    <table>
+    <table className="scarl-table">
         <tbody>
             {items.map((item, index) =>
                 <OtherItem

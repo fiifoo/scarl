@@ -64,7 +64,7 @@ const Inventory = ({equipments, inventory, kinds, ui, dropItem, equipItem, unequ
             </Nav>
 
             <div className="inventory-panels">
-                <div className="inventory-details">
+                <div className="scarl-panel">
                     {item ? (
                         <Details
                             equipments={equipments}
@@ -74,8 +74,7 @@ const Inventory = ({equipments, inventory, kinds, ui, dropItem, equipItem, unequ
                             tab={tab} />
                     ) : '\u00A0'}
                 </div>
-                <div className="inventory-equipped">
-                    <h4>Equipment</h4>
+                <div className="scarl-panel">
                     <Equipped
                         equipments={equipments}
                         inventory={inventory}

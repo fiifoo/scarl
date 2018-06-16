@@ -22,7 +22,7 @@ const EquipmentItem = ({equipped, group, item, kind, selected, dropItem, equipIt
 )
 
 const Equipments = ({equipments, group, items, kinds, row, dropItem, equipItem, unequipItem, setRow}) => (
-    <table>
+    <table className="scarl-table">
         <tbody>
             {items.map((item, index) =>
                 <EquipmentItem

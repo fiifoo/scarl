@@ -33,7 +33,7 @@ export default {
         [keycodes.K, commands.KEY_BINDINGS],
         [keycodes.L, commands.LOOK],
         [keycodes.M, commands.MESSAGE_LOG],
-        [keycodes.P, commands.PICK_ITEM],
+        [keycodes.P, commands.PLAYER_INFO],
         [keycodes.T, commands.COMMUNICATE],
         [keycodes.U, commands.USE],
         [keycodes.Z, commands.AIM_MISSILE],
@@ -65,7 +65,6 @@ export default {
         [keycodes.LESS, commands.INTERACT_NEXT],
         [keycodes.LESS2, commands.INTERACT_NEXT],
         [keycodes.D, commands.INTERACT_NEXT],
-        [keycodes.P, commands.INTERACT_NEXT],
         [keycodes.T, commands.INTERACT_NEXT],
         [keycodes.U, commands.INTERACT_NEXT],
     ]),
@@ -104,5 +103,10 @@ export default {
 
     [gameModes.MENU]: Map([
         [keycodes.ESC, commands.CANCEL_MODE],
+    ]),
+
+    [gameModes.PLAYER_INFO]: Map([
+        [keycodes.ESC, commands.CANCEL_MODE],
+        [keycodes.P, commands.CANCEL_MODE],
     ]),
 }

@@ -1,15 +1,18 @@
-import { Map } from 'immutable'
+import { OrderedMap } from 'immutable'
 
-export const stats = Map([
+export const stats = OrderedMap([
     [['speed'], 'Speed'],
+    [['sight', 'range'], 'Sight range'],
+    [['sight', 'sensors'], 'Sensors'],
+    [['skill', 'hacking'], 'Hacking'],
+    [['defence'], 'Defence'],
+    [['armor'], 'Armor'],
     [['health', 'max'], 'Health'],
     [['health', 'regen'], 'Health regeneration'],
     [['energy', 'max'], 'Energy'],
     [['energy', 'regen'], 'Energy regeneration'],
     [['materials', 'max'], 'Materials'],
     [['materials', 'regen'], 'Materials regeneration'],
-    [['defence'], 'Defence'],
-    [['armor'], 'Armor'],
     [['melee', 'attack'], 'Melee attack'],
     [['melee', 'damage'], 'Melee damage'],
     [['melee', 'consumption', 'energy'], 'Melee energy consumption'],
@@ -26,7 +29,4 @@ export const stats = Map([
     [['explosive', 'damage'], 'Explosive damage'],
     [['explosive', 'radius'], 'Explosive radius'],
     [['explosive', 'blast'], 'Explosive blast'],
-    [['sight', 'range'], 'Sight range'],
-    [['sight', 'sensors'], 'Sensors'],
-    [['skill', 'hacking'], 'Hacking'],
 ])

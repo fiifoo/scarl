@@ -95,6 +95,8 @@ export const nextInteraction = () => (dispatch, getState) => {
     })
 }
 
+export const playerInfo = () => dispatch => changeMode(modes.PLAYER_INFO)(dispatch)
+
 export const selectInteraction = () => (dispatch, getState) => {
     const {interaction, interactions} = getState().ui.game
     const values = interactions.get(interaction)

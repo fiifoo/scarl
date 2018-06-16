@@ -62,3 +62,30 @@ html, body {
 .panel {
     background-color: #171717;
 }
+
+.scarl-table td,
+.scarl-table th {
+    padding: 3px;
+    white-space: nowrap;
+}
+
+.scarl-table tr.active > td,
+.scarl-table tr.active > th {
+    background-color: #024;
+}
+
+.scarl-table td.full-width {
+    width: 100%;
+}
+
+.scarl-panel {
+    float: left;
+    width: 380px;
+    margin-right: 20px;
+}
+
+.scarl-panel h4 {
+    text-align: center;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 5px;
+}

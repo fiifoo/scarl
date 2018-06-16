@@ -27,6 +27,7 @@ const handlers = {
     [modes.LOOK]: look,
     [modes.MESSAGE_LOG]: onlyCancelMode,
     [modes.MENU]: onlyCancelMode,
+    [modes.PLAYER_INFO]: onlyCancelMode,
 }
 
 export const focusKeyboard = () => ({
