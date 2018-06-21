@@ -9,6 +9,7 @@ import interact from './interact'
 import inventory from './inventory'
 import main from './main'
 import look from './look'
+import playerInfo from './playerInfo'
 
 const onlyCancelMode = (command, dispatch) => {
     if (command === commands.CANCEL_MODE) {
@@ -28,7 +29,7 @@ const handlers = {
     [modes.LOOK]: look,
     [modes.MESSAGE_LOG]: onlyCancelMode,
     [modes.MENU]: onlyCancelMode,
-    [modes.PLAYER_INFO]: onlyCancelMode,
+    [modes.PLAYER_INFO]: playerInfo,
 }
 
 export const focusKeyboard = () => ({

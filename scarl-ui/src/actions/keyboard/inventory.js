@@ -75,6 +75,10 @@ export default (command, dispatch, getState) => {
             gameActions.cancelMode()(dispatch)
             break
         }
+        case commands.PLAYER_INFO: {
+            gameActions.playerInfo()(dispatch)
+            break
+        }
         case commands.INVENTORY_TAB_LEFT: {
             changeTab(dispatch, getState, true)
             break

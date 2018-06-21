@@ -82,6 +82,8 @@ export default {
         [keycodes.ESC, commands.CANCEL_MODE],
         [keycodes.I, commands.CANCEL_MODE],
 
+        [keycodes.P, commands.PLAYER_INFO],
+
         [keycodes.ENTER, commands.INVENTORY_USE],
         [keycodes.SPACEBAR, commands.INVENTORY_USE],
 
@@ -118,5 +120,7 @@ export default {
     [gameModes.PLAYER_INFO]: Map([
         [keycodes.ESC, commands.CANCEL_MODE],
         [keycodes.P, commands.CANCEL_MODE],
+
+        [keycodes.I, commands.INVENTORY],
     ]),
 }
