@@ -1,5 +1,6 @@
 import React from 'react'
 import GameViewsContainer from '../game/GameViewsContainer'
+import InteractionSelectContainer from '../game/InteractionSelectContainer'
 import KeyboardContainer from '../game/KeyboardContainer'
 import MenuContainer from '../game/MenuContainer'
 import MessageBarContainer from '../game/MessageBarContainer'
@@ -13,6 +14,7 @@ const Game = ({focusKeyboard}) => (
                 <StatusBarContainer />
             </div>
             <div style={{marginBottom: 6}}>
+                <InteractionSelectContainer />
                 <MessageBarContainer />
             </div>
             <div>

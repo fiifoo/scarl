@@ -97,9 +97,28 @@ export const nextInteraction = () => (dispatch, getState) => {
 
 export const playerInfo = () => dispatch => changeMode(modes.PLAYER_INFO)(dispatch)
 
-export const selectInteraction = () => (dispatch, getState) => {
+export const previousInteraction = () => (dispatch, getState) => {
     const {interaction, interactions} = getState().ui.game
-    const values = interactions.get(interaction)
+
+    const previous = interaction <= 0 ? interactions.size - 1 : interaction - 1
+    const location = interactions.get(previous).location
+
+    setCursor(location)(dispatch)
+    dispatch({
+        type: types.SET_INTERACTION,
+        interaction: previous,
+    })
+}
+
+export const selectCurrentInteraction = () => (dispatch, getState) => {
+    const {interaction} = getState().ui.game
+
+    selectInteraction(interaction)(dispatch, getState)
+}
+
+export const selectInteraction = key => (dispatch, getState) => {
+    const {interactions} = getState().ui.game
+    const values = interactions.get(key)
 
     cancelMode()(dispatch)
     sendAction(values.action, values.data)

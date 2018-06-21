@@ -57,22 +57,28 @@ export default {
     [gameModes.GAME_OVER_SCREEN]: Map(),
 
     [gameModes.INTERACT]: Map([
-        [keycodes.CONTROL, commands.INTERACT_NEXT],
-        [keycodes.SPACEBAR, commands.INTERACT_SELECT],
         [keycodes.ESC, commands.CANCEL_MODE],
 
-        [keycodes.COMMA, commands.INTERACT_NEXT],
-        [keycodes.LESS, commands.INTERACT_NEXT],
-        [keycodes.LESS2, commands.INTERACT_NEXT],
-        [keycodes.D, commands.INTERACT_NEXT],
-        [keycodes.T, commands.INTERACT_NEXT],
-        [keycodes.U, commands.INTERACT_NEXT],
+        [keycodes.ARROW_UP, commands.INTERACT_PREVIOUS],
+        [keycodes.NUMPAD_8, commands.INTERACT_PREVIOUS],
+        [keycodes.ARROW_DOWN, commands.INTERACT_NEXT],
+        [keycodes.NUMPAD_2, commands.INTERACT_NEXT],
+
+        [keycodes.CONTROL, commands.INTERACT_SELECT],
+        [keycodes.ENTER, commands.INTERACT_SELECT],
+        [keycodes.SPACEBAR, commands.INTERACT_SELECT],
+        [keycodes.COMMA, commands.INTERACT_SELECT],
+        [keycodes.LESS, commands.INTERACT_SELECT],
+        [keycodes.LESS2, commands.INTERACT_SELECT],
+        [keycodes.T, commands.INTERACT_SELECT],
+        [keycodes.U, commands.INTERACT_SELECT],
     ]),
 
     [gameModes.INVENTORY]: Map([
         [keycodes.ESC, commands.CANCEL_MODE],
         [keycodes.I, commands.CANCEL_MODE],
 
+        [keycodes.ENTER, commands.INVENTORY_USE],
         [keycodes.SPACEBAR, commands.INVENTORY_USE],
 
         [keycodes.ARROW_LEFT, commands.INVENTORY_TAB_LEFT],

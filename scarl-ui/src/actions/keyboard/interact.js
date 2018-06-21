@@ -11,8 +11,12 @@ export default (command, dispatch, getState) => {
             gameActions.nextInteraction()(dispatch, getState)
             break
         }
+        case commands.INTERACT_PREVIOUS: {
+            gameActions.previousInteraction()(dispatch, getState)
+            break
+        }
         case commands.INTERACT_SELECT: {
-            gameActions.selectInteraction()(dispatch, getState)
+            gameActions.selectCurrentInteraction()(dispatch, getState)
             break
         }
     }

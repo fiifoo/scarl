@@ -1,0 +1,13 @@
+.interaction-select {
+    position: absolute;
+    z-index: 99;
+    padding-right: 5px;
+    padding-bottom: 5px;
+    border-right: 1px solid #777;
+    border-bottom: 1px solid #777;
+    background-color: #000;
+}
+
+.interaction-select > div {
+    cursor: pointer;
+}
