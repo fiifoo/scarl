@@ -4,7 +4,7 @@ import { stats as creatureStats } from '../../game/creature'
 import { addStats } from '../../game/utils'
 import Equipped from '../inventory/Equipped.jsx'
 
-const Stats = ({stats}) => {
+const Player = ({character, stats}) => {
 
     const renderStat = (label, path) => {
         const value = stats.getIn(path)
@@ -22,6 +22,14 @@ const Stats = ({stats}) => {
             <h4>Player character</h4>
             <table className="scarl-table">
                 <tbody>
+                    <tr>
+                        <th className="text-right">Level</th>
+                        <td>{character.level}</td>
+                    </tr>
+                    <tr>
+                        <th className="text-right">Experience</th>
+                        <td>{character.experience}</td>
+                    </tr>
                     {creatureStats.map(renderStat).toArray()}
                 </tbody>
             </table>
@@ -35,7 +43,7 @@ const PlayerInfo = ({equipments, inventory, kinds, player}) => {
     return (
         <div>
             <div className="scarl-panel">
-                <Stats stats={stats} />
+                <Player character={player.creature.character} stats={stats} />
             </div>
             <div className="scarl-panel">
                 <Equipped
