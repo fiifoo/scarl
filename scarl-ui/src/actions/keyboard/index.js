@@ -21,6 +21,7 @@ const handlers = {
     [modes.AIM]: aim(),
     [modes.AIM_MISSILE]: aim(true),
     [modes.GAME_OVER]: gameOver,
+    [modes.GAME_OVER_SCREEN]: gameOver,
     [modes.INTERACT]: interact,
     [modes.INVENTORY]: inventory,
     [modes.KEY_BINDINGS]: onlyCancelMode,

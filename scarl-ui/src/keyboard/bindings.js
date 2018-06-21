@@ -52,9 +52,13 @@ export default {
 
     [gameModes.GAME_OVER]: Map([
         [keycodes.ENTER, commands.SHOW_GAME_OVER_SCREEN],
+        [keycodes.ESC, commands.SHOW_GAME_OVER_SCREEN],
     ]),
 
-    [gameModes.GAME_OVER_SCREEN]: Map(),
+    [gameModes.GAME_OVER_SCREEN]: Map([
+        [keycodes.ENTER, commands.QUIT_GAME],
+        [keycodes.ESC, commands.QUIT_GAME],
+    ]),
 
     [gameModes.INTERACT]: Map([
         [keycodes.ESC, commands.CANCEL_MODE],

@@ -1,8 +1,16 @@
 import * as commands from '../../keyboard/commands'
-import * as gameActions from '../gameActions'
+import { gameOverScreen } from '../gameActions'
+import { closeConnection } from '../connectionActions'
 
 export default (command, dispatch) => {
-    if (command === commands.SHOW_GAME_OVER_SCREEN) {
-        gameActions.gameOverScreen()(dispatch)
+    switch (command) {
+        case commands.SHOW_GAME_OVER_SCREEN: {
+            gameOverScreen()(dispatch)
+            break
+        }
+        case commands.QUIT_GAME: {
+            closeConnection()(dispatch)
+            break
+        }
     }
 }
