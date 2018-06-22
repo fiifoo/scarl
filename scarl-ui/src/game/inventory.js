@@ -1,4 +1,12 @@
 import { List, Map, Record } from 'immutable'
+import { groups as equipmentGroups, slots as equipmentSlots } from './equipment'
+
+const Action = Record({
+    label: undefined,
+    execute: undefined,
+    active: false,
+    subs: List(),
+})
 
 const Tab = Record({
     key: undefined,
@@ -44,6 +52,62 @@ const props = Map({
     Armor: 'armor',
     Usable: 'usable',
 })
+
+export const getItemActions = (actions, equipments, tab) => item => {
+    const dropAction = Action({
+        label: 'Drop',
+        execute: () => actions.dropItem(item.id),
+    })
+
+    switch (tab.key) {
+        case 'Other': {
+            return [
+                dropAction,
+            ]
+        }
+        case 'Usable': {
+            return [
+                Action({
+                    label: 'Use',
+                    execute: () => actions.useItem(item.id),
+                }),
+                dropAction,
+            ]
+        }
+        default: {
+            const group = equipmentGroups[tab.key]
+            const slots = group.slots(item)
+            const fillAll = group.fillAll(item)
+
+            const defaultSlot = slots.get(0)
+            const equipped = equipments.contains(item.id)
+
+            const equipAction = equipped ? (
+                Action({
+                    label: 'Unequip',
+                    execute: () => actions.unequipItem(item.id),
+                    active: true,
+                })
+            ) : (
+                Action({
+                    label: 'Equip',
+                    execute: () => actions.equipItem(item.id, defaultSlot),
+                    subs: !fillAll && slots.size > 1 ? (
+                        slots.map(slot => Action({
+                            label: equipmentSlots[slot].label,
+                            execute: () => actions.equipItem(item.id, slot),
+                        }))
+                    ) : List(),
+                })
+            )
+
+            return [
+                equipAction,
+                dropAction,
+            ]
+        }
+    }
+}
 
 export const createItemReader = (inventory, kinds) => tab => {
     const prop = props.get(tab.key)
