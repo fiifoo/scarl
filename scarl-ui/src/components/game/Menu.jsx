@@ -1,7 +1,8 @@
 import React from 'react'
+import { ESC } from '../../keyboard/keycodes'
 import Header from '../Header.jsx'
-import ActionBarContainer from '../game/ActionBarContainer'
-import DebugBarContainer from '../game/DebugBarContainer'
+import ActionBarContainer from './ActionBarContainer'
+import DebugBarContainer from './DebugBarContainer'
 
 const style = {
     position: 'fixed',
@@ -15,14 +16,20 @@ const style = {
 
 const Spacer = () => <div>&nbsp;</div>
 
-const Menu = () => (
-    <div style={style}>
+const cancel = (cancelMode, focusKeyboard) => event => {
+    if (event.which === ESC) {
+        focusKeyboard()
+        cancelMode()
+    }
+}
+
+const Menu = ({cancelMode, focusKeyboard}) => (
+    <div style={style} onKeyDown={cancel(cancelMode, focusKeyboard)}>
         <Header />
-        <div className="container-fluid">
-            <ActionBarContainer />
-            <Spacer />
-            <DebugBarContainer />
-        </div>
+        <Spacer />
+        <ActionBarContainer />
+        <Spacer />
+        <DebugBarContainer />
     </div>
 )
 

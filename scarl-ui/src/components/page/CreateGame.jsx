@@ -3,7 +3,7 @@ import Header from '../Header.jsx'
 import { formatDateTime } from '../../utils/date'
 
 const NewGame = ({player, createNewGame, setNewGamePlayer}) => (
-    <div>
+    <div className="text-center">
         <h4>New Game</h4>
         <form className="form-inline" onSubmit={createNewGame}>
             <div className="form-group">
@@ -47,7 +47,7 @@ const ExistingGames = ({games, createExistingGame}) => {
 
     return (
         <div style={{marginTop: '3em'}}>
-            <h4>Existing Games</h4>
+            <h4 className="text-center">Existing Games</h4>
             <table className="table">
                 <thead>
                     <tr>
@@ -77,16 +77,12 @@ const ExistingGamesIf = props => (
 const CreateGame = ({error, games, player, createExistingGame, createNewGame, setNewGamePlayer}) => (
     <div>
         <Header />
-        <div className="container-fluid">
-            <div className="row">
-                <div className="col-md-6">
-                    <div className="panel panel-default">
-                        <div className="panel-body">
-                            {error && <div className="alert alert-danger">Creating game failed.</div>}
-                            <NewGame player={player} createNewGame={createNewGame} setNewGamePlayer={setNewGamePlayer} />
-                            <ExistingGamesIf games={games} createExistingGame={createExistingGame} />
-                        </div>
-                    </div>
+        <div style={{maxWidth: 500, marginLeft: 'auto', marginRight: 'auto'}}>
+            <div className="panel panel-default">
+                <div className="panel-body">
+                    {error && <div className="alert alert-danger">Creating game failed.</div>}
+                    <NewGame player={player} createNewGame={createNewGame} setNewGamePlayer={setNewGamePlayer} />
+                    <ExistingGamesIf games={games} createExistingGame={createExistingGame} />
                 </div>
             </div>
         </div>

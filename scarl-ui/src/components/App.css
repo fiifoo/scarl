@@ -63,6 +63,24 @@ html, body {
     background-color: #171717;
 }
 
+
+
+.scarl-menu-item {
+    text-align: center;
+}
+
+.scarl-menu-item > .btn-link {
+    font-size: 20px;
+}
+
+.scarl-menu-item > .btn-link.active,
+.scarl-menu-item > .btn-link:active,
+.scarl-menu-item > .btn-link:focus,
+.scarl-menu-item > .btn-link:hover {
+    color: #5594c9;
+    text-decoration: underline;
+}
+
 .scarl-table td,
 .scarl-table th {
     padding: 3px;

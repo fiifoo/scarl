@@ -1,34 +1,19 @@
 import React from 'react'
+import MenuItem from '../MenuItem.jsx'
 import * as modes from '../../debug/modes'
-
-const className = 'btn btn-default'
-const activeClassName = 'btn btn-warning'
-const getClassName = active => active ? activeClassName : className
 
 const FovButton = ({mode, cancelMode, debugFov}) => {
     const active = mode === modes.FOV
     const onClick = active ? cancelMode : debugFov
 
-    return (
-        <button
-            className={getClassName(active)}
-            onClick={onClick}>
-            Debug FOV
-        </button>
-    )
+    return <MenuItem onClick={onClick} label="Debug FOV" />
 }
 
 const WaypointButton = ({mode, cancelMode, debugWaypoint}) => {
     const active = mode === modes.WAYPOINT
     const onClick = active ? cancelMode : debugWaypoint
 
-    return (
-        <button
-            className={getClassName(active)}
-            onClick={onClick}>
-            Debug waypoints
-        </button>
-    )
+    return <MenuItem onClick={onClick} label="Debug waypoints" />
 }
 
 const DebugBar = props =>  {
@@ -36,7 +21,7 @@ const DebugBar = props =>  {
     const {debugFov, debugWaypoint} = props
 
     return (
-        <div className="btn-toolbar">
+        <div>
             <FovButton
                 mode={mode}
                 cancelMode={cancelMode}

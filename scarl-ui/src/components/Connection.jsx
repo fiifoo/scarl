@@ -1,22 +1,20 @@
 import React from 'react'
+import MenuItem from './MenuItem.jsx'
 
 const Connection = ({closeConnection, closingConnection, connection, openConnection, openingConnection}) => (
-    <div className="btn-toolbar">
-        <button
-            type="button"
-            className="btn btn-default navbar-btn"
-            onClick={openConnection}
-            disabled={connection || openingConnection}>
-            Connect
-        </button>
-        <button
-            type="button"
-            className="btn btn-default navbar-btn"
+    connection ? (
+        <MenuItem
+            autoFocus
             onClick={closeConnection}
-            disabled={! connection || closingConnection}>
-            Disconnect
-        </button>
-    </div>
+            disabled={closingConnection}
+            label="Quit game" />
+    ) : (
+        <MenuItem
+            autoFocus
+            onClick={openConnection}
+            disabled={openingConnection}
+            label="Start game" />
+    )
 )
 
 export default Connection
