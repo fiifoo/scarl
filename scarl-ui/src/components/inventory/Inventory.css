@@ -20,3 +20,38 @@
 .inventory-list td > .btn-group {
     min-width: 75px;
 }
+
+.actions-dropdown > .toggle {
+    position: absolute;
+    margin-top: -37px;
+    width: 380px;
+    text-align: right;
+    cursor: pointer;
+}
+
+.actions-dropdown > .menu {
+    position: absolute;
+    width: 380px;
+    border-left: 1px solid #777;
+    border-right: 1px solid #777;
+    border-bottom: 1px solid #777;
+    background-color: #000;
+}
+
+.actions-dropdown > .menu.closed {
+    display: none;
+}
+
+.actions-dropdown > .menu > div {
+    text-align: center;
+    cursor: pointer;
+}
+
+.actions-dropdown > .menu > div:last-child {
+    padding-bottom: 5px;
+}
+
+.actions-dropdown > .menu > div.active {
+    background-color: #024;
+    color: #fff;
+}

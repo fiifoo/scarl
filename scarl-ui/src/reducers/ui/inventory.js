@@ -5,6 +5,7 @@ import * as modes from '../../game/modes'
 const initial = Record({
     tab: 0,
     row: 0,
+    action: null,
 })()
 
 export default (state = initial, action) => {
@@ -13,13 +14,19 @@ export default (state = initial, action) => {
             return initial
         }
         case types.CHANGE_GAME_MODE: {
-            return action.mode !== modes.INVENTORY ? state : state.set('row', 0)
+            return action.mode !== modes.INVENTORY ? state : initial.set('tab', state.tab)
+        }
+        case types.RECEIVE_PLAYER_INVENTORY: {
+            return state.set('action', null)
         }
         case types.SET_INVENTORY_TAB: {
-            return state.set('tab', action.tab).set('row', 0)
+            return initial.set('tab', action.tab)
         }
         case types.SET_INVENTORY_ROW: {
             return state.set('row', action.row)
+        }
+        case types.SET_INVENTORY_ACTION: {
+            return state.set('action', action.action)
         }
         default: {
             return state

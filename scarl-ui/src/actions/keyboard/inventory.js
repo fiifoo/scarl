@@ -1,9 +1,44 @@
+import { List } from 'immutable'
+import { compose } from 'redux'
 import * as commands from '../../keyboard/commands'
+
 import * as gameActions from '../gameActions'
 import * as inventoryActions from '../inventoryActions'
 import * as playerActions from '../playerActions'
-import { groups } from '../../game/equipment'
-import { createItemReader, tabs } from '../../game/inventory'
+import { getItemActionsFlat, getTabItems, tabs } from '../../game/inventory'
+
+const getItem = getState => {
+    const row = getState().ui.inventory.row
+
+    return getItems(getState).toArray()[row]
+}
+
+const getItems = getState => {
+    const {inventory, kinds, ui} = getState()
+    const tab = tabs.get(ui.inventory.tab)
+
+    return getTabItems(inventory, kinds.items)(tab)
+}
+
+const getActions = (dispatch, getState) => {
+    const item = getItem(getState)
+
+    if (! item) {
+        return List()
+    }
+
+    const {equipments, ui} = getState()
+    const tab = tabs.get(ui.inventory.tab)
+
+    return getItemActionsFlat(composeActions(dispatch), equipments, tab)(item)
+}
+
+const composeActions = dispatch => ({
+    dropItem: compose(dispatch, playerActions.dropItem),
+    equipItem: compose(dispatch, playerActions.equipItem),
+    unequipItem: compose(dispatch, playerActions.unequipItem),
+    useItem: compose(dispatch, playerActions.useInventoryItem),
+})
 
 const changeTab = (dispatch, getState, left) => {
     const current = getState().ui.inventory.tab
@@ -17,15 +52,12 @@ const changeTab = (dispatch, getState, left) => {
 }
 
 const changeRow = (dispatch, getState, up) => {
-    const {inventory, kinds, ui} = getState()
-    const tab = tabs.get(ui.inventory.tab)
-    const count = createItemReader(inventory, kinds.items)(tab).size
+    const current = getState().ui.inventory.row
+    const count = getItems(getState).size
 
     if (count === 0) {
         return
     }
-
-    const current = ui.inventory.row
 
     const next = up ? (
         current <= 0 ? count - 1 : current - 1
@@ -36,45 +68,40 @@ const changeRow = (dispatch, getState, up) => {
     dispatch(inventoryActions.setInventoryRow(next))
 }
 
-const use = (dispatch, getState) => {
-    const {equipments, inventory, kinds, ui} = getState()
-    const tab = tabs.get(ui.inventory.tab)
-    const item = createItemReader(inventory, kinds.items)(tab).toArray()[ui.inventory.row]
+const changeAction = (dispatch, getState, up) => {
+    const current = getState().ui.inventory.action
+    const count = getActions(dispatch, getState).size
 
-    if (! item) {
+    if (count === 0) {
         return
     }
 
-    switch (tab.key) {
-        case 'Other': {
-            playerActions.dropItem(item.id)()
-            break
-        }
-        case 'Usable': {
-            playerActions.useInventoryItem(item.id)()
-            break
-        }
-        default: {
-            const equipped = equipments.contains(item.id)
-            if (equipped) {
-                playerActions.unequipItem(item.id)()
-            } else {
-                const group = groups[tab.key]
-                const slot = group.slots(item).first()
+    const next = up ? (
+        current <= 0 ? count - 1 : current - 1
+    ) : (
+        current + 1 >= count ? 0 : current + 1
+    )
 
-                playerActions.equipItem(item.id, slot)(dispatch)
-            }
-            break
-        }
-    }
+    setAction(dispatch, next)
 }
 
-export default (command, dispatch, getState) => {
+const setAction = (dispatch, action) => {
+    dispatch(inventoryActions.setInventoryAction(action))
+}
+
+const use = (dispatch, getState) => {
+    const action = getState().ui.inventory.action || 0
+    const actions = getActions(dispatch, getState)
+
+    if (actions.isEmpty()) {
+        return
+    }
+
+    actions.get(action).execute()
+}
+
+const handleCommon = (command, dispatch, getState) => {
     switch (command) {
-        case commands.CANCEL_MODE: {
-            gameActions.cancelMode()(dispatch)
-            break
-        }
         case commands.PLAYER_INFO: {
             gameActions.playerInfo()(dispatch)
             break
@@ -87,6 +114,19 @@ export default (command, dispatch, getState) => {
             changeTab(dispatch, getState, false)
             break
         }
+        case commands.INVENTORY_USE: {
+            use(dispatch, getState)
+            break
+        }
+    }
+}
+
+const handleNormal = (command, dispatch, getState) => {
+    switch (command) {
+        case commands.CANCEL_MODE: {
+            gameActions.cancelMode()(dispatch)
+            break
+        }
         case commands.INVENTORY_ROW_UP: {
             changeRow(dispatch, getState, true)
             break
@@ -95,9 +135,42 @@ export default (command, dispatch, getState) => {
             changeRow(dispatch, getState, false)
             break
         }
-        case commands.INVENTORY_USE: {
+        case commands.INVENTORY_INTERACT: {
+            if (! getActions(dispatch, getState).isEmpty()) {
+                setAction(dispatch, 0)
+            }
+            break
+        }
+    }
+}
+
+const handleInteract = (command, dispatch, getState) => {
+    switch (command) {
+        case commands.CANCEL_MODE: {
+            setAction(dispatch, null)
+            break
+        }
+        case commands.INVENTORY_ROW_UP: {
+            changeAction(dispatch, getState, true)
+            break
+        }
+        case commands.INVENTORY_ROW_DOWN: {
+            changeAction(dispatch, getState, false)
+            break
+        }
+        case commands.INVENTORY_INTERACT: {
             use(dispatch, getState)
             break
         }
+    }
+}
+
+export default (command, dispatch, getState) => {
+    handleCommon(command, dispatch, getState)
+
+    if (getState().ui.inventory.action !== null) {
+        handleInteract(command, dispatch, getState)
+    } else {
+        handleNormal(command, dispatch, getState)
     }
 }

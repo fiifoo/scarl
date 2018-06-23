@@ -12,7 +12,7 @@ const InteractionSelect = ({selected, interactions, kinds, selectInteraction}) =
     const renderInteraction = (interaction, key) => (
         <div
             key={key}
-            className={key === selected ? 'text-primary' : null}
+            className={key === selected ? 'active' : null}
             onClick={() => selectInteraction(key)}>
             {getDescription(interaction)}
         </div>

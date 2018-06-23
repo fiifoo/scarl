@@ -84,6 +84,7 @@ export default {
 
         [keycodes.P, commands.PLAYER_INFO],
 
+        [keycodes.CONTROL, commands.INVENTORY_INTERACT],
         [keycodes.ENTER, commands.INVENTORY_USE],
         [keycodes.SPACEBAR, commands.INVENTORY_USE],
 

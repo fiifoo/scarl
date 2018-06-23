@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { setInventoryRow, setInventoryTab } from '../../actions/inventoryActions'
+import { setInventoryAction, setInventoryRow, setInventoryTab } from '../../actions/inventoryActions'
 import { dropItem, equipItem, unequipItem, useInventoryItem } from '../../actions/playerActions'
 import { INVENTORY } from '../../game/modes'
 import GameView from '../game/GameView.jsx'
@@ -19,6 +19,7 @@ const InventoryContainer = connect(
         equipItem,
         unequipItem,
         useItem: useInventoryItem,
+        setAction: setInventoryAction,
         setRow: setInventoryRow,
         setTab: setInventoryTab,
     }

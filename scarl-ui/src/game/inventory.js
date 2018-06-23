@@ -61,18 +61,18 @@ export const getItemActions = (actions, equipments, tab) => item => {
 
     switch (tab.key) {
         case 'Other': {
-            return [
+            return List([
                 dropAction,
-            ]
+            ])
         }
         case 'Usable': {
-            return [
+            return List([
                 Action({
                     label: 'Use',
                     execute: () => actions.useItem(item.id),
                 }),
                 dropAction,
-            ]
+            ])
         }
         default: {
             const group = equipmentGroups[tab.key]
@@ -101,15 +101,25 @@ export const getItemActions = (actions, equipments, tab) => item => {
                 })
             )
 
-            return [
+            return List([
                 equipAction,
                 dropAction,
-            ]
+            ])
         }
     }
 }
 
-export const createItemReader = (inventory, kinds) => tab => {
+export const getItemActionsFlat = (actions, equipments, tab) => {
+    const get = getItemActions(actions, equipments, tab)
+
+    return item => get(item).flatMap(action => (
+        action.subs.isEmpty() ? List([action]) : action.subs.map(sub => (
+            sub.set('label', `${action.label} (${sub.label})`)
+        ))
+    ))
+}
+
+export const getTabItems = (inventory, kinds) => tab => {
     const prop = props.get(tab.key)
 
     const items = prop ? (

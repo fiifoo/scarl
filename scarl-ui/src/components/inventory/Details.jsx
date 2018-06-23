@@ -57,7 +57,27 @@ const MissileStats = ({equipments, inventory, item, kinds}) => {
     return <Stats label="Missile" stats={stats} compare={compare} />
 }
 
-const Details = ({equipments, inventory, item, kinds}) => {
+const ActionsDropdown = ({selected, actions, setAction}) =>  (
+    <div className="actions-dropdown">
+        <div
+            className="toggle"
+            onClick={() => setAction(selected === null ? 0 : null)}>
+            ▼
+        </div>
+        <div className={selected === null ? 'menu closed' : 'menu'}>
+            {actions.map((action, key) => (
+                <div
+                    key={key}
+                    className={key === selected ? 'active' : null}
+                    onClick={action.execute}>
+                    {action.label}
+                </div>
+            ))}
+        </div>
+    </div>
+)
+
+const Details = ({action, actions, equipments, inventory, item, kinds, setAction}) => {
     const kind = kinds.items.get(item.kind)
 
     const renderStats = (group, stats) => (slots, index = 0) => {
@@ -125,6 +145,12 @@ const Details = ({equipments, inventory, item, kinds}) => {
     return (
         <div>
             <h4>{kind.name}</h4>
+            {actions.isEmpty() ? null : (
+                <ActionsDropdown
+                    selected={action}
+                    actions={actions}
+                    setAction={setAction} />
+            )}
             <table className="scarl-table">
                 {stats}
                 {missile}

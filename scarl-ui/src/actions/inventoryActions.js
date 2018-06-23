@@ -9,3 +9,8 @@ export const setInventoryRow = row => ({
     type: types.SET_INVENTORY_ROW,
     row,
 })
+
+export const setInventoryAction = action => ({
+    type: types.SET_INVENTORY_ACTION,
+    action,
+})
