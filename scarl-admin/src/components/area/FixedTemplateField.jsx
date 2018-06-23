@@ -1,7 +1,7 @@
 import React from 'react'
 import FilteredFormField from '../field/FilteredFormField.jsx'
 import FormRow from '../form/FormRow.jsx'
-import EditorContainer from '../../containers/EditorContainer'
+import AreaEditorContainer from '../../containers/AreaEditorContainer'
 
 const formProperties = ['shape', 'category', 'power', 'features', 'content']
 
@@ -18,7 +18,7 @@ const FixedTemplateField = ({model, fieldType, path, value, common}) =>  (
                 common={common} />
         </FormRow>
         <hr />
-        <EditorContainer
+        <AreaEditorContainer
             path={path}
             value={value}
             common={common} />

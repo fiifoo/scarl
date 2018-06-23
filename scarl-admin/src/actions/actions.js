@@ -206,13 +206,13 @@ export const hideSideForm = () => ({
     type: types.HIDE_SIDE_FORM,
 })
 
-export const setEditorBrush = brush => ({
-    type: types.SET_EDITOR_BRUSH,
+export const setAreaEditorBrush = brush => ({
+    type: types.SET_AREA_EDITOR_BRUSH,
     brush,
 })
 
-export const setEditorLocation = (location, locations) => ({
-    type: types.SET_EDITOR_LOCATION,
+export const setAreaEditorLocation = (location, locations) => ({
+    type: types.SET_AREA_EDITOR_LOCATION,
     location,
     locations,
 })

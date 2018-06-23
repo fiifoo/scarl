@@ -17,10 +17,10 @@ export default tabbedReducer(initial, (state, action) => {
         case types.SELECT_ITEM: {
             return initial
         }
-        case types.SET_EDITOR_BRUSH: {
+        case types.SET_AREA_EDITOR_BRUSH: {
             return state.set('brush', action.brush)
         }
-        case types.SET_EDITOR_LOCATION: {
+        case types.SET_AREA_EDITOR_LOCATION: {
             return state.set('location', action.location).set('locations', action.locations)
         }
         default: {
