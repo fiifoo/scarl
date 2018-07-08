@@ -11,6 +11,7 @@ const SideFormField = ({label, required, model, fieldType, path, value, common})
                 <button
                     type="button"
                     className="btn btn-success"
+                    disabled={! showSideForm}
                     onClick={() => {
                         setValue(path, getNewValue(fieldType, models))
                         showSideForm(model, fieldType, path)
@@ -33,7 +34,11 @@ const SideFormField = ({label, required, model, fieldType, path, value, common})
                     Remove
                 </button>
             )}
-            <button type="button" className="btn btn-info" onClick={show}>Show</button>
+            <button
+                type="button"
+                className="btn btn-info"
+                onClick={show}
+                disabled={! showSideForm}>Show</button>
         </FormRow>
     )
 }

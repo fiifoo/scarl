@@ -1,3 +1,4 @@
+import { List } from 'immutable'
 import Data from '../data/Data'
 import * as api from '../api'
 import { SUMMARY } from '../const/pages.js'
@@ -215,6 +216,27 @@ export const setAreaEditorLocation = (location, locations) => ({
     type: types.SET_AREA_EDITOR_LOCATION,
     location,
     locations,
+})
+
+export const setColumnEditorModel = model => (dispatch, getState) => {
+    const {data, models} = getState()
+    const items = List(data.getIn(models.main.get(model).dataPath).keys())
+
+    dispatch({
+        type: types.SET_COLUMN_EDITOR_MODEL,
+        model,
+        items,
+    })
+}
+
+export const setColumnEditorItems = items => ({
+    type: types.SET_COLUMN_EDITOR_ITEMS,
+    items,
+})
+
+export const setColumnEditorProperties = properties => ({
+    type: types.SET_COLUMN_EDITOR_PROPERTIES,
+    properties,
 })
 
 export const changeSummaryTab = tab => ({

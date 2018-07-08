@@ -37,6 +37,29 @@
     min-height: 34px;
 }
 
+.column-editor table {
+    width: 100%;
+}
+
+.column-editor table > thead > tr > th {
+    text-align: center;
+    vertical-align: bottom;
+    padding-bottom: 5px;
+}
+
+.column-editor table > tbody > tr:nth-of-type(2n+1) {
+    background-color: #f9f9f9;
+}
+
+.column-editor td,
+.column-editor th {
+    padding: 2px;
+}
+
+.column-editor table .form-group {
+    margin-bottom: 0px;
+}
+
 .loader {
     border: 2px solid #f3f3f3;
     border-top: 2px solid #555;

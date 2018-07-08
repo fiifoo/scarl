@@ -8,7 +8,7 @@ const RelationField = ({label, required, path, value, fieldType, common}) => {
     const choices = Models.choices(models, data, fieldType.data.model)
 
     const linkModel = fieldType.data.model
-    const link = (
+    const link = common.showItem && (
         <button
             type="button"
             className="btn btn-link"
