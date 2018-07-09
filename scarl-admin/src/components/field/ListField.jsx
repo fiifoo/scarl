@@ -60,7 +60,7 @@ const SelectComponent = ({Component, label, fieldType, path, value, common}) => 
 }
 
 const ListComponent = SortableContainer(({label, fieldType, path, value, common}) => {
-    const {models, setValue} = common
+    const {horizontal, models, setValue} = common
 
     const valueFieldType = fieldType.data.value
     const valueModel = getFieldModel(valueFieldType, models)
@@ -83,7 +83,7 @@ const ListComponent = SortableContainer(({label, fieldType, path, value, common}
     )
 
     return (
-        <FormRow label={label}>
+        <FormRow label={label} horizontal={horizontal}>
             {value.map(renderValueField)}
             <button
                 type="button"

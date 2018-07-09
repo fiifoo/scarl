@@ -5,11 +5,11 @@ import FormRow from '../form/FormRow.jsx'
 import SelectRow from '../form/SelectRow.jsx'
 
 const PolymorphicRelationField = ({fieldType, label, required, path, value, common}) => {
-    const {data, models, setValue} = common
+    const {data, horizontal, models, setValue} = common
 
     if (! value) {
         return (
-            <FormRow label={label} error={required}>
+            <FormRow label={label} error={required} horizontal={horizontal}>
                 <button
                     type="button"
                     className="btn btn-success"
@@ -43,7 +43,7 @@ const PolymorphicRelationField = ({fieldType, label, required, path, value, comm
     )
 
     return (
-        <FormRow label={label}>
+        <FormRow label={label} horizontal={horizontal}>
             {required ? null : (
                 <button
                     type="button"
@@ -53,6 +53,7 @@ const PolymorphicRelationField = ({fieldType, label, required, path, value, comm
                 </button>
             )}
             <SelectRow
+                horizontal={horizontal}
                 label="type"
                 required={true}
                 choices={typeChoices}
@@ -60,6 +61,7 @@ const PolymorphicRelationField = ({fieldType, label, required, path, value, comm
                 onChange={setType} />
             {! targetChoices ? <div /> : (
                 <SelectRow
+                    horizontal={horizontal}
                     label="value"
                     required={true}
                     choices={targetChoices}

@@ -3,7 +3,7 @@ import React from 'react'
 import SelectRow from '../form/SelectRow.jsx'
 
 const PolymorphicObjectField = ({label, required, model, path, value, multi = false, common}) => {
-    const {setValue} = common
+    const {horizontal, setValue} = common
 
     const choices = model.polymorphic.map(type => ({value: type, label: type}))
 
@@ -19,6 +19,7 @@ const PolymorphicObjectField = ({label, required, model, path, value, multi = fa
 
     return (
         <SelectRow
+            horizontal={horizontal}
             label={label}
             required={required}
             choices={choices}

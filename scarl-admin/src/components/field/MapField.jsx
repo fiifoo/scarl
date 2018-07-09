@@ -5,7 +5,7 @@ import FormRow from '../form/FormRow.jsx'
 import { getFieldComponent, getFieldModel } from './utils'
 
 const MapField = ({label, fieldType, path, value, common}) => {
-    const {models, setValue} = common
+    const {horizontal, models, setValue} = common
 
     if (! value) {
         value = List()
@@ -59,7 +59,7 @@ const MapField = ({label, fieldType, path, value, common}) => {
     }
 
     return (
-        <FormRow label={label}>
+        <FormRow label={label} horizontal={horizontal}>
             {value.map(renderFields)}
             <button
                 type="button"

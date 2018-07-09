@@ -8,12 +8,6 @@ const ItemForm = ({
     item, itemRename, model, sideForm, data, models,
     deleteItem, renameItem, setItemRenameId, setItemValue, showItem, showItemReferences, showSideForm, hideSideForm
 }) => {
-    const submit = event => {
-        event.preventDefault()
-
-        return false
-    }
-
     const id = readItemId(model, item)
     const path = model.dataPath.concat([id])
     const label = isPolymorphic(model) ? 'type' : undefined
@@ -54,7 +48,10 @@ const ItemForm = ({
     )
 
     return  (
-        <form onSubmit={submit} className="form-horizontal item-form">
+        <div className="form-horizontal item-form">
+            <SideForm
+                sideForm={sideForm}
+                common={common} />
             <div className="clearfix" style={{marginBottom: '1em'}}>
                 <div className="pull-right">
                     {buttons}
@@ -74,10 +71,7 @@ const ItemForm = ({
                 path={path}
                 value={item}
                 common={common} />
-            <SideForm
-                sideForm={sideForm}
-                common={common} />
-        </form>
+        </div>
     )
 }
 

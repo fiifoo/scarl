@@ -3,11 +3,11 @@ import { getNewValue } from '../../data/utils'
 import FormRow from '../form/FormRow.jsx'
 
 const SideFormField = ({label, required, model, fieldType, path, value, common}) => {
-    const {models, setValue, showSideForm} = common
+    const {horizontal, models, setValue, showSideForm} = common
 
     if (! value) {
         return (
-            <FormRow label={label} error={required}>
+            <FormRow label={label} error={required} horizontal={horizontal}>
                 <button
                     type="button"
                     className="btn btn-success"
@@ -25,7 +25,7 @@ const SideFormField = ({label, required, model, fieldType, path, value, common})
     const show = () => showSideForm(model, fieldType, path)
 
     return (
-        <FormRow label={label}>
+        <FormRow label={label} horizontal={horizontal}>
             {required ? null : (
                 <button
                     type="button"

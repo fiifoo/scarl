@@ -8,15 +8,17 @@ const ColumnEditor = ({
     data, models, ui,
     setModel, setItems, setProperties, setItemValue,
 }) =>  (
-    <div className="form-horizontal column-editor">
-        <ModelSelect models={models} ui={ui} setModel={setModel} />
+    <div className="column-editor">
+        <div className="form-horizontal left-content">
+            <ModelSelect models={models} ui={ui} setModel={setModel} />
 
-        {ui.model && (
-            <PropertyAdd models={models} ui={ui} setProperties={setProperties} />
-        )}
-        {ui.model && (
-            <ItemAdd data={data} models={models} ui={ui} setItems={setItems} />
-        )}
+            {ui.model && (
+                <PropertyAdd models={models} ui={ui} setProperties={setProperties} />
+            )}
+            {ui.model && (
+                <ItemAdd data={data} models={models} ui={ui} setItems={setItems} />
+            )}
+        </div>
         {ui.model && (
             <Editor
                 data={data}

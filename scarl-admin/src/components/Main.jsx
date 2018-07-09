@@ -1,5 +1,5 @@
 import React from 'react'
-import { Col, Nav, NavItem, Row, Tab } from 'react-bootstrap'
+import { Col, Nav, NavItem, Row } from 'react-bootstrap'
 import ItemAddContainer from '../containers/ItemAddContainer'
 import ItemFormContainer from '../containers/ItemFormContainer'
 import ItemReferencesContainer from '../containers/ItemReferencesContainer'
@@ -31,7 +31,7 @@ const SimulateButton = ({readonly, simulate, simulating}) => (
 )
 
 const Content = ({model}) => (
-    <div>
+    <div className="left-content">
         <ItemReferencesContainer />
         <Selects model={model} />
         <ItemFormContainer />
@@ -39,7 +39,7 @@ const Content = ({model}) => (
 )
 
 const Selects = ({model}) => (
-    <div className="form-horizontal">
+    <div className="item-form-header form-horizontal">
         <FormRow label="Select model">
             <ModelSelectContainer />
         </FormRow>
@@ -63,8 +63,8 @@ const Main = ({labels, model, tab, tabs, addTab, changeTab, deleteTab, ...props}
         }
     }
 
-    const tabItems = (
-        <Nav bsStyle="tabs" style={{paddingRight: 100}}>
+    const nav = (
+        <Nav activeKey={tab} onSelect={onSelect} bsStyle="tabs" style={{paddingRight: 100}}>
             {tabs.map(t => (
                 <NavItem key={t} eventKey={t}>
                     <div style={{display: 'inline-block', minWidth: 100}}>
@@ -85,18 +85,18 @@ const Main = ({labels, model, tab, tabs, addTab, changeTab, deleteTab, ...props}
     )
 
     return (
-        <Tab.Container id="main-tabs" activeKey={tab} onSelect={onSelect}>
+        <div>
             <div>
                 <div className="btn-toolbar pull-right">
                     <SimulateButton {...props} />
                     <SaveButton {...props} />
                 </div>
-                {tabItems}
-                <Tab.Content style={{marginTop: '1em'}}>
-                    <Content model={model} />
-                </Tab.Content>
+                {nav}
             </div>
-        </Tab.Container>
+            <div style={{marginTop: '1em'}}>
+                <Content key={tab} model={model} />
+            </div>
+        </div>
     )
 }
 

@@ -11,18 +11,20 @@ const Summary = ({creature, summary, tab, changeTab, selectCreature}) => {
     }
 
     return (
-        <Tabs id="summary-tabs" activeKey={tab} onSelect={changeTab}>
-            <Tab eventKey={tabs.TEMPLATES} title="Templates">
-                <TemplateSummary templates={summary.templates} />
-            </Tab>
-            <Tab eventKey={tabs.COMBAT_POWER} title="Combat power">
-                <CombatPowerSummary combatPower={summary.combatPower} creature={creature} selectCreature={selectCreature} />
-            </Tab>
-            <Tab eventKey={tabs.EQUIPMENT_COMBAT_POWER} title="Equipment combat power">
-                <EquipmentCombatPowerSummary equipmentCombatPower={summary.combatPower.equipment} />
-            </Tab>
+        <div className="left-content">
+            <Tabs id="summary-tabs" activeKey={tab} onSelect={changeTab}>
+                <Tab eventKey={tabs.TEMPLATES} title="Templates">
+                    <TemplateSummary templates={summary.templates} />
+                </Tab>
+                <Tab eventKey={tabs.COMBAT_POWER} title="Combat power">
+                    <CombatPowerSummary combatPower={summary.combatPower} creature={creature} selectCreature={selectCreature} />
+                </Tab>
+                <Tab eventKey={tabs.EQUIPMENT_COMBAT_POWER} title="Equipment combat power">
+                    <EquipmentCombatPowerSummary equipmentCombatPower={summary.combatPower.equipment} />
+                </Tab>
 
-        </Tabs>
+            </Tabs>
+        </div>
     )
 }
 

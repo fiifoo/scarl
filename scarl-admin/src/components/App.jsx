@@ -9,7 +9,7 @@ import 'react-select/dist/react-select.css'
 import './App.css'
 
 const Navigation = ({page, changePage, fetchingSummary}) => (
-    <Navbar>
+    <Navbar fluid={true}>
         <Navbar.Header>
             <Navbar.Brand>
                 Scarl - Admin

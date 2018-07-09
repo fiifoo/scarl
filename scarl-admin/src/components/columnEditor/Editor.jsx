@@ -30,6 +30,7 @@ const Editor = ({
     const dataPath = models.main.get(ui.model).dataPath
 
     const common = {
+        horizontal: false,
         data,
         models,
         setValue: setItemValue,

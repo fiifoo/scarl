@@ -6,11 +6,11 @@ import SelectRow from '../form/SelectRow.jsx'
 import { createFormFieldType, getFieldComponent } from './utils'
 
 const PolymorphicFormField = ({label, required, model, fieldType, path, value, common}) => {
-    const {models, setValue} = common
+    const {horizontal, models, setValue} = common
 
     if (! value) {
         return (
-            <FormRow label={label} error={required}>
+            <FormRow label={label} error={required} horizontal={horizontal}>
                 <button
                     type="button"
                     className="btn btn-success"
@@ -67,6 +67,7 @@ const PolymorphicFormField = ({label, required, model, fieldType, path, value, c
                 </button>
             )}
             <SelectRow
+                horizontal={horizontal}
                 label={label}
                 required={true}
                 choices={typeChoices}

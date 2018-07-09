@@ -1,10 +1,13 @@
 import { Record, Set } from 'immutable'
 import * as types from '../../actions/actionTypes'
+import Location from '../../data/area/Location'
 import { tabbedReducer } from './utils'
 
+const defaultLocation = Location({x: 0, y: 0})
+
 const initial = Record({
-    location: null,
-    locations: Set(),
+    location: defaultLocation,
+    locations: Set([defaultLocation]),
     brush: Record({
         property: null,
         value: null,

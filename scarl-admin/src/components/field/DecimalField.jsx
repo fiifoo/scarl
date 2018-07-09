@@ -2,7 +2,7 @@ import React from 'react'
 import TextInputRow from '../form/TextInputRow.jsx'
 
 const DecimalField = ({label, required, path, value, common}) => {
-    const {setValue} = common
+    const {horizontal, setValue} = common
 
     const onChange = value => {
         if (value === null || value.match(/^\d*(\.\d*)?$/)) {
@@ -20,6 +20,7 @@ const DecimalField = ({label, required, path, value, common}) => {
 
     return (
         <TextInputRow
+            horizontal={horizontal}
             label={label}
             required={required}
             value={value}
