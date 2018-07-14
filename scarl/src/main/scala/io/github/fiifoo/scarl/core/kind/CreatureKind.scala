@@ -45,6 +45,8 @@ case class CreatureKind(id: CreatureKindId,
       behavior = behavior,
       location = location,
       tick = s.tick,
+      energy = stats.energy.max,
+      materials = stats.materials.max,
       stats = stats,
       owner = owner map SafeCreatureId.apply,
 
