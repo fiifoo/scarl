@@ -8,7 +8,7 @@ lazy val root = (project in file("."))
 
 lazy val scarl = project
 
-scalaVersion := "2.12.5"
+scalaVersion := "2.12.6"
 
 libraryDependencies += guice
 libraryDependencies += "org.scalatestplus.play" %% "scalatestplus-play" % "3.1.2" % Test

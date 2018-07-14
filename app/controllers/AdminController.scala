@@ -7,10 +7,16 @@ import models.admin.{Models, Summary}
 import play.Environment
 import play.api.mvc._
 
-class AdminController @Inject()(gameAssets: AssetsRepository,
-                                gameSimulations: SimulationsRepository,
-                                cc: ControllerComponents)
-                               (environment: Environment) extends AbstractController(cc) {
+import scala.concurrent.{ExecutionContext, Future}
+
+class AdminController @Inject()(
+                                 gameAssets: AssetsRepository,
+                                 gameSimulations: SimulationsRepository,
+                                 cc: ControllerComponents
+                               )(
+                                 implicit ec: ExecutionContext,
+                                 environment: Environment
+                               ) extends AbstractController(cc) {
 
   val saveMaxSize = 1024 * 1000 * 10 // 10MB
 
@@ -35,14 +41,16 @@ class AdminController @Inject()(gameAssets: AssetsRepository,
     ))
   }
 
-  def save = Action(parse.json(saveMaxSize)) { request =>
+  def save = Action.async(parse.json(saveMaxSize)) { request =>
     if (readonly) {
       throw new Exception("Dev environment only.")
     }
 
     gameAssets.write(request.body)
 
-    NoContent
+    Future {
+      NoContent
+    }
   }
 
   def simulate = Action {
