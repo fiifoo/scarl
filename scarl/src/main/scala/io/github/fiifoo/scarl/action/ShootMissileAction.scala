@@ -1,21 +1,19 @@
 package io.github.fiifoo.scarl.action
 
 import io.github.fiifoo.scarl.action.Utils._
+import io.github.fiifoo.scarl.core.State
 import io.github.fiifoo.scarl.core.action.Action
 import io.github.fiifoo.scarl.core.effect.Effect
 import io.github.fiifoo.scarl.core.entity.Selectors.getCreatureStats
 import io.github.fiifoo.scarl.core.entity.{CreatureId, Selectors}
 import io.github.fiifoo.scarl.core.geometry.Location
 import io.github.fiifoo.scarl.core.kind.CreatureKindId
-import io.github.fiifoo.scarl.core.{State, Time}
 import io.github.fiifoo.scarl.effect.TickEffect
 import io.github.fiifoo.scarl.effect.combat.ShootMissileEffect
 
 case class ShootMissileAction(location: Location) extends Action {
-  val cost = (Time.turn * 1.5).toInt
-
   def apply(s: State, actor: CreatureId): List[Effect] = {
-    val tick = TickEffect(actor, cost)
+    val tick = TickEffect(actor)
 
     getMissile(s, actor) map (missile => {
       val creature = actor(s)
