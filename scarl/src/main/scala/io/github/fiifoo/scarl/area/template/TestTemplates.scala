@@ -7,7 +7,7 @@ import scala.util.Random
 
 object TestTemplates {
 
-  val iterations = 100
+  val iterations = 10
 
   def apply(assets: WorldAssets, random: Random = new Random(1)): Map[AreaId, Map[TemplateId, Int]] = {
     assets.areas mapValues testArea(assets, random)

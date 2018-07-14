@@ -4,7 +4,7 @@ import game.Simulate
 import io.github.fiifoo.scarl.area.template.Template
 import io.github.fiifoo.scarl.core.assets.CombatPower
 import io.github.fiifoo.scarl.core.item.Equipment
-import io.github.fiifoo.scarl.core.kind.{ItemKind, WidgetKind}
+import io.github.fiifoo.scarl.core.kind.{CreatureKind, ItemKind, WidgetKind}
 import models.json.JsonCombatPower
 import play.api.libs.json.{Format, Json}
 
@@ -19,7 +19,7 @@ object Simulations {
   lazy val simulationsFormat: Format[Simulations] = Json.format[Simulations]
 
   private def simulateCombatPower(data: Data): CombatPower = {
-    Simulate.combatPower(data.kinds.creatures.values)
+    Simulate.combatPower(getCombatants(data))
       .copy(
         equipment = getEquipmentCombatPower(data),
         item = getItemCombatPower(data),
@@ -29,7 +29,7 @@ object Simulations {
   }
 
   private def getEquipmentCombatPower(data: Data): CombatPower.Equipment = {
-    val simulated = Simulate.equipmentCombatPower(data.kinds.items.values, data.kinds.creatures.values)
+    val simulated = Simulate.equipmentCombatPower(data.kinds.items.values, getCombatants(data))
     val fixed = data.kinds.items flatMap (x => {
       val (id, item) = x
 
@@ -82,5 +82,9 @@ object Simulations {
 
       category -> widgets
     })).toMap
+  }
+
+  private def getCombatants(data: Data): Iterable[CreatureKind] = {
+    data.kinds.creatures.values filter (_.stats.melee.damage > 0)
   }
 }
