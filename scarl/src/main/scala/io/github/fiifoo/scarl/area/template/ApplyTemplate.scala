@@ -4,7 +4,7 @@ import io.github.fiifoo.scarl.core.State
 import io.github.fiifoo.scarl.core.geometry.{Location, WaypointNetwork}
 import io.github.fiifoo.scarl.core.kind._
 import io.github.fiifoo.scarl.core.math.Rng
-import io.github.fiifoo.scarl.core.mutation.{NewConduitMutation, NewGatewayMutation}
+import io.github.fiifoo.scarl.core.mutation.{NewConduitEntranceMutation, NewConduitExitMutation, NewGatewayMutation}
 import io.github.fiifoo.scarl.core.world.ConduitId
 import io.github.fiifoo.scarl.world.Conduit
 
@@ -104,16 +104,25 @@ object ApplyTemplate {
       throw new CalculateFailedException
     }
 
-    val data: List[(ConduitId, ItemKindId)] =
-      (in map (conduit => (conduit.id, conduit.targetItem))) :::
-        (out map (conduit => (conduit.id, conduit.sourceItem)))
+    val data: List[(ConduitId, Option[ItemKindId], Option[String])] =
+      (in map (conduit => (conduit.id, conduit.targetItem, conduit.tag))) :::
+        (out map (conduit => (conduit.id, Some(conduit.sourceItem), conduit.tag)))
 
-    val fold = data.foldLeft((s, locations)) _
-
-    val (result, _) = fold((carry, x) => {
+    val (result, _) = (data foldLeft ((s, locations))) ((carry, x) => {
       val (result, locations) = carry
-      val (conduit, item) = x
-      val location = Rng.nextChoice(random, locations)
+      val (conduit, item, tag) = x
+
+      val choices = (tag map (tag => {
+        locations filter { case (_, b) => b.contains(tag) }
+      }) getOrElse {
+        locations filter { case (_, b) => b.isEmpty }
+      }).keys
+
+      if (choices.isEmpty) {
+        throw new CalculateFailedException
+      }
+
+      val location = Rng.nextChoice(random, choices)
 
       (
         addConduit(result, conduit, item, location),
@@ -126,17 +135,39 @@ object ApplyTemplate {
 
   private def addConduit(s: State,
                          conduit: ConduitId,
-                         item: ItemKindId,
+                         item: Option[ItemKindId],
                          location: Location
                         ): State = {
-    NewConduitMutation(conduit, location)(
+    val mutations = if (item.isDefined) {
+      List(
+        NewConduitEntranceMutation(conduit, location),
+        NewConduitExitMutation(conduit, location)
+      )
+    } else {
+      List(
+        NewConduitExitMutation(conduit, location)
+      )
+    }
+
+    val initial = item map (item => {
       item(s).toLocation(s, s.idSeq, location).write(s)
-    )
+    }) getOrElse {
+      s
+    }
+
+    (mutations foldLeft initial) ((s, mutation) => mutation(s))
   }
 
-  private def getConduitLocations(template: Template.Result): Set[Location] = {
-    extractLocations(template, template => {
-      template.content.conduitLocations
+  private def getConduitLocations(template: Template.Result,
+                                  offset: Location = Location(0, 0),
+                                  result: Map[Location, Option[String]] = Map()
+                                 ): Map[Location, Option[String]] = {
+    val locations = template.content.conduitLocations map { case (k, v) => (offset.add(k), v) }
+
+    (template.templates foldLeft (result ++ locations)) ((result, x) => {
+      val (location, template) = x
+
+      getConduitLocations(template, offset.add(location), result)
     })
   }
 

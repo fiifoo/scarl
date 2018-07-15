@@ -17,16 +17,13 @@ object CalculateUtils {
   }
 
   def randomUniqueLocations(locations: Set[Location],
-                            count: (Int, Int),
-                            existing: Set[Location],
+                            min: Int,
+                            max: Int,
                             random: Random
                            ): Set[Location] = {
 
-    val (min, max) = count
     val range = Rng.nextRange(random, min, max)
-    val fold = range.foldLeft[(Set[Location], Set[Location])](Set(), locations -- existing) _
-
-    val (results, _) = fold((carry, _) => {
+    val (results, _) = (range foldLeft(Set[Location](), locations)) ((carry, _) => {
       val (results, choices) = carry
       if (choices.isEmpty) {
         throw new CalculateFailedException

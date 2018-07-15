@@ -38,7 +38,6 @@ case class FixedTemplate(id: TemplateId,
       locations = contained,
       entrances = entrances,
       subEntrances = subEntrances,
-      conduits = (0, 0),
       features = features,
       terrain = None,
       random = random

@@ -31,7 +31,7 @@ case class HouseFeature(iterations: Int,
 
     val reserved = entrances ++
       subEntrances ++
-      content.conduitLocations ++
+      content.conduitLocations.keys ++
       content.creatures.keys ++
       content.gatewayLocations ++
       content.items.keys ++

@@ -2,6 +2,7 @@ import { List } from 'immutable'
 import React from 'react'
 import BooleanSelectRow from '../form/BooleanSelectRow.jsx'
 import SelectRow from '../form/SelectRow.jsx'
+import TextInputRow from '../form/TextInputRow.jsx'
 import Models from '../../data/Models'
 
 const getMachineryChoices = machinery => machinery.map((machinery, key) => ({
@@ -51,6 +52,11 @@ const EditorLocation = ({common, machinery, content, setContent}) => {
                 onChange={setValue('entrance')} />
             <BooleanSelectRow
                 label="Conduit"
+                value={content.conduit !== undefined}
+                onChange={value => value ? setValue('conduit')(null) : setValue('conduit')(undefined)} />
+            <TextInputRow
+                label="Conduit tag"
+                disabled={content.conduit === undefined}
                 value={content.conduit}
                 onChange={setValue('conduit')} />
             <BooleanSelectRow

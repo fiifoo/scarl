@@ -52,7 +52,7 @@ object ActionValidator {
   }
 
   private def validate(s: State, actor: CreatureId, action: EnterConduitAction): Boolean = {
-    actor(s).location == s.conduits(action.conduit)
+    actor(s).location == s.conduits.entrances(action.conduit)
   }
 
   private def validate(s: State, actor: CreatureId, action: HackItemAction): Boolean = {

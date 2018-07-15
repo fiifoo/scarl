@@ -40,6 +40,7 @@ object JsonState {
   lazy private implicit val tacticFormat = JsonTactic.tacticFormat
 
   lazy private implicit val areaFormat = Json.format[State.Area]
+  lazy private implicit val conduitsFormat = Json.format[State.Conduits]
   implicitly(mapFormat[FactionId, Brain])
   implicitly(mapFormat[ConduitId, Location])
   lazy private implicit val entityMapFormat = JsonEntity.entityMapFormat

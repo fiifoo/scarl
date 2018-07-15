@@ -36,9 +36,8 @@ object CreateWorld {
   private def createAreaConduits(area: Area, nextId: Int): (List[Conduit], Int) = {
     (area.conduits foldLeft(List[Conduit](), nextId)) ((carry, x) => {
       val (result, nextId) = carry
-      val (target, sourceItem, targetItem) = x
 
-      val conduit = Conduit(ConduitId(nextId), area.id, target, sourceItem, targetItem)
+      val conduit = Conduit(ConduitId(nextId), area.id, x.target, x.sourceItem, x.targetItem, x.tag)
 
       (conduit :: result, nextId + 1)
     })

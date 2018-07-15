@@ -3,6 +3,7 @@ package io.github.fiifoo.scarl.area.template
 import io.github.fiifoo.scarl.area.Area
 import io.github.fiifoo.scarl.area.feature.Feature
 import io.github.fiifoo.scarl.area.shape.Shape
+import io.github.fiifoo.scarl.area.template.RandomizedTemplate.ConduitLocations
 import io.github.fiifoo.scarl.core.geometry.Location
 import io.github.fiifoo.scarl.core.kind.{ItemKindId, TerrainKindId}
 import io.github.fiifoo.scarl.world.WorldAssets
@@ -18,7 +19,7 @@ object CalculateContent {
             locations: Set[Location],
             entrances: Map[Location, ItemKindId],
             subEntrances: Set[Location],
-            conduits: (Int, Int) = (0, 0),
+            conduits: ConduitLocations = ConduitLocations(),
             features: List[Feature],
             terrain: Option[TerrainKindId],
             random: Random
@@ -35,11 +36,11 @@ object CalculateContent {
     })
 
     val conduitLocations = CalculateUtils.randomUniqueLocations(
-      locations -- target.walls.keys -- target.gatewayLocations,
-      conduits,
-      target.conduitLocations,
+      locations -- target.walls.keys -- target.gatewayLocations -- target.conduitLocations.keys,
+      conduits.min,
+      conduits.max,
       random
-    )
+    ).map(x => x -> conduits.tag).toMap
 
     var result = target.copy(
       conduitLocations = target.conduitLocations ++ conduitLocations,

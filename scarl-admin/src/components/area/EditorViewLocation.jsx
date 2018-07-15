@@ -89,7 +89,7 @@ const renderKind = (data, id, branch) => {
 const getBorderColor = content => {
     if (content.gateway) {
         return gatewayColor
-    } else if (content.conduit) {
+    } else if (content.conduit !== undefined) {
         return conduitColor
     } else if (content.templateLocation) {
         return templateLocationColor

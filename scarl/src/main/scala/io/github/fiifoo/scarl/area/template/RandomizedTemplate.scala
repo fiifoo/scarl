@@ -5,6 +5,7 @@ import io.github.fiifoo.scarl.area.feature.{Feature, Utils}
 import io.github.fiifoo.scarl.area.shape.Shape
 import io.github.fiifoo.scarl.area.template.ContentSelection.FixedItem
 import io.github.fiifoo.scarl.area.template.ContentSource.{ItemSource, TemplateSource}
+import io.github.fiifoo.scarl.area.template.RandomizedTemplate.{ConduitLocations, Entrances}
 import io.github.fiifoo.scarl.area.template.Template.{Category, Result}
 import io.github.fiifoo.scarl.core.geometry.{Location, Rotation}
 import io.github.fiifoo.scarl.core.kind._
@@ -14,6 +15,20 @@ import io.github.fiifoo.scarl.world.WorldAssets
 
 import scala.util.Random
 
+object RandomizedTemplate {
+
+  case class Entrances(min: Int = 0,
+                       max: Int = 0,
+                       door: Option[ItemKindId] = None
+                      )
+
+  case class ConduitLocations(min: Int = 0,
+                              max: Int = 0,
+                              tag: Option[String] = None
+                             )
+
+}
+
 case class RandomizedTemplate(id: TemplateId,
                               shape: Shape,
                               category: Option[Category] = None,
@@ -22,8 +37,8 @@ case class RandomizedTemplate(id: TemplateId,
                               fill: Option[WallKindId] = None,
                               terrain: Option[TerrainKindId] = None,
                               templates: List[TemplateSource] = List(),
-                              entrances: List[(Option[ItemKindId], Int, Int)] = List(),
-                              conduitLocations: (Int, Int) = (0, 0),
+                              entrances: Entrances = Entrances(),
+                              conduitLocations: ConduitLocations = ConduitLocations(),
                               features: List[Feature] = List(),
                              ) extends Template {
 
@@ -40,7 +55,7 @@ case class RandomizedTemplate(id: TemplateId,
     val entranceResults = calculateEntrances(assets, area, shapeResult.entranceCandidates, random)
     val routeResults = calculateRoutes(entranceResults, subEntrances, contained, random)
     val wallResults = calculateBorderWalls(shapeResult.border, entranceResults) ++ calculateFilledWalls(contained, routeResults)
-    val contentResult = CalculateContent(
+    val contentResult = CalculateContent.apply(
       assets = assets,
       area = area,
       shape = shapeResult,
@@ -89,16 +104,15 @@ case class RandomizedTemplate(id: TemplateId,
     )
   }
 
-  private def calculateEntrances(assets: WorldAssets, area: Area, locations: Set[Location], random: Random): Map[Location, ItemKindId] = {
-    val sources = this.entrances map (entrance => {
-      val (item, min, max) = entrance
-      val selection = FixedItem(item getOrElse assets.themes(area.theme).door)
-      val distribution = Uniform(min, max)
+  private def calculateEntrances(assets: WorldAssets,
+                                 area: Area, locations: Set[Location],
+                                 random: Random
+                                ): Map[Location, ItemKindId] = {
+    val selection = FixedItem(this.entrances.door getOrElse assets.themes(area.theme).door)
+    val distribution = Uniform(this.entrances.min, this.entrances.max)
+    val source = ItemSource(selection, distribution)
 
-      ItemSource(selection, distribution)
-    })
-
-    Utils.randomUniqueElementLocations(assets, area, locations, sources, Map(), random)
+    Utils.randomUniqueElementLocations(assets, area, locations, List(source), Map(), random)
   }
 
   private def calculateRoutes(entranceResults: Map[Location, ItemKindId],

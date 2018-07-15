@@ -8,5 +8,6 @@ case class Conduit(id: ConduitId,
                    source: AreaId,
                    target: AreaId,
                    sourceItem: ItemKindId,
-                   targetItem: ItemKindId
+                   targetItem: Option[ItemKindId],
+                   tag: Option[String]
                   )

@@ -53,7 +53,7 @@ object LoadGame {
   private def calculateStateCache(s: State): State.Cache = {
     val cache = s.cache
 
-    val equipmentStats = s.equipments.keys.foldLeft(cache.equipmentStats)((stats, creature) => {
+    val equipmentStats = (s.equipments.keys foldLeft cache.equipmentStats) ((stats, creature) => {
       EquipmentStatsCacheMutation(creature)(s, stats)
     })
 
@@ -67,17 +67,17 @@ object LoadGame {
   private def calculateStateIndex(s: State): State.Index = {
     var index = s.index
 
-    index = s.entities.values.foldLeft(index)((index, entity) => {
+    index = (s.entities.values foldLeft index) ((index, entity) => {
       NewEntityIndexMutation(entity)(s, index)
     })
-    index = s.conduits.foldLeft(index)((index, x) => {
+    index = (s.conduits.entrances foldLeft index) ((index, x) => {
       val (conduit, location) = x
 
       index.copy(
         locationConduit = ConduitLocationIndexAddMutation(conduit, location)(index.locationConduit)
       )
     })
-    index = s.foundItems.foldLeft(index)((index, x) => {
+    index = (s.foundItems foldLeft index) ((index, x) => {
       val (finder, items) = x
 
       (items foldLeft index) ((index, item) => {

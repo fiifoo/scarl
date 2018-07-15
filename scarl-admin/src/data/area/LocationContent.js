@@ -3,7 +3,7 @@ import { calculateDimensions } from './Shape'
 import Location from './Location'
 
 const LocationContent = Record({
-    conduit: false,
+    conduit: undefined,
     creature: null,
     entrance: null,
     gateway: false,
@@ -19,7 +19,11 @@ const LocationContent = Record({
 
 const empty = LocationContent()
 
-const isEmptyValue = value => ! value || (value instanceof List && value.size === 0)
+const isEmptyValue = (property, value) => property === 'conduit' ? (
+    value === undefined
+) : (
+    ! value || (value instanceof List && value.size === 0)
+)
 
 const readMap = (contents, template, path, property) => (
     template.getIn(path).reduce((contents, x) => {
@@ -84,7 +88,7 @@ const readTemplateLocation = (contents, template, path, property, data) => (
 const writeMap = (template, location, content, path, property) => {
     const current = template.getIn(path)
     const cleared = current.filter(x => ! is(x.first(), location))
-    const next = isEmptyValue(content.get(property)) ? (
+    const next = isEmptyValue(property, content.get(property)) ? (
         cleared
     )  : (
         cleared.push(List([location, content.get(property)]))
@@ -142,7 +146,7 @@ const paths = {
 }
 
 const readers = Map({
-    conduit: readSet,
+    conduit: readMap,
     creature: readMap,
     entrance: readMap,
     gateway: readSet,
@@ -157,7 +161,7 @@ const readers = Map({
 })
 
 const writers = Map({
-    conduit: writeSet,
+    conduit: writeMap,
     creature: writeMap,
     entrance: writeMap,
     gateway: writeSet,

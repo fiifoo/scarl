@@ -3,6 +3,7 @@ package models.json
 import io.github.fiifoo.scarl.area.feature.{BurrowFeature, Feature, HouseFeature, RandomizedContentFeature}
 import io.github.fiifoo.scarl.area.shape.{Rectangle, Shape}
 import io.github.fiifoo.scarl.area.template.FixedContent.MachinerySource
+import io.github.fiifoo.scarl.area.template.RandomizedTemplate.{ConduitLocations, Entrances}
 import io.github.fiifoo.scarl.area.template.Template.{Category, ChallengeCategory, TrapCategory}
 import io.github.fiifoo.scarl.area.template.{ContentSelection, ContentSource, _}
 import io.github.fiifoo.scarl.core.geometry.Location
@@ -11,7 +12,7 @@ import play.api.libs.json._
 
 object JsonTemplate {
 
-  import JsonBase.{mapReads, optionReads, polymorphicObjectFormat, polymorphicTypeReads, stringIdFormat, tuple2Format, tuple3Format}
+  import JsonBase.{mapReads, optionReads, polymorphicObjectFormat, polymorphicTypeReads, stringIdFormat}
 
   lazy private implicit val equipmentCategoryFormat = JsonItemEquipment.categoryFormat
   lazy private implicit val creatureKindIdFormat = JsonCreatureKind.creatureKindIdFormat
@@ -27,8 +28,8 @@ object JsonTemplate {
   lazy private implicit val widgetKindCategoryFormat = JsonWidgetKind.categoryFormat
 
   implicitly(optionReads[ItemKindId])
-  implicitly(tuple2Format[Int, Int])
-  implicitly(tuple3Format[Option[ItemKindId], Int, Int])
+  lazy private implicit val entrancesFormat = Json.format[Entrances]
+  lazy private implicit val conduitLocationsFormat = Json.format[ConduitLocations]
 
   lazy private implicit val combatPowerCategoryFormat = JsonCombatPower.categoryFormat
   lazy private implicit val rectangleReads = Json.reads[Rectangle]

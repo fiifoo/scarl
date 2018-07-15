@@ -49,7 +49,7 @@ object ChangeArea {
                                traveler: Traveler
                               ): WorldState = {
     val state = world.states(area)
-    val location = state.conduits(conduit)
+    val location = state.conduits.exits(conduit)
     val nextState = ConduitExitMutation(traveler, location)(state)
 
     world.copy(

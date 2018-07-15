@@ -8,7 +8,7 @@ import io.github.fiifoo.scarl.core.item.Mechanism
 import io.github.fiifoo.scarl.core.kind._
 import io.github.fiifoo.scarl.core.mutation.{IdSeqMutation, NewEntityMutation}
 
-case class FixedContent(conduitLocations: Set[Location] = Set(),
+case class FixedContent(conduitLocations: Map[Location, Option[String]] = Map(),
                         creatures: Map[Location, CreatureKindId] = Map(),
                         gatewayLocations: Set[Location] = Set(),
                         items: Map[Location, List[ItemKindId]] = Map(),
@@ -19,7 +19,7 @@ case class FixedContent(conduitLocations: Set[Location] = Set(),
                        ) {
 
   def rotate(rotation: Rotation): FixedContent = FixedContent(
-    conduitLocations = this.conduitLocations map rotation.apply,
+    conduitLocations = rotation.mapKey(this.conduitLocations),
     creatures = rotation.mapKey(this.creatures),
     gatewayLocations = this.gatewayLocations map rotation.apply,
     items = rotation.mapKey(this.items),
