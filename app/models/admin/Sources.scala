@@ -151,6 +151,7 @@ object Sources {
 
     SubModelSource(typeOf[ItemPower], List(
       typeOf[ExplodeItemPower.type],
+      typeOf[ReceiveKeyPower.type],
       typeOf[RemoveItemPower],
       typeOf[TransformItemPower],
       typeOf[TrapAttackPower],
