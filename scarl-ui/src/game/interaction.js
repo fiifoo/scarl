@@ -11,6 +11,7 @@ export const Interaction = Record({
 
 const Communicate = 'Communicate'
 const EnterConduit = 'EnterConduit'
+const HackCreature = 'HackCreature'
 const HackItem = 'HackItem'
 const PickItem = 'PickItem'
 const UseCreature = 'UseCreature'
@@ -20,6 +21,7 @@ const UseItem = 'UseItem'
 export const interactions = {
     Communicate,
     EnterConduit,
+    HackCreature,
     HackItem,
     PickItem,
     UseCreature,
@@ -35,6 +37,10 @@ const weights = Map({
     [EnterConduit]: [
         100,
         null,
+    ],
+    [HackCreature]: [
+        66,
+        65
     ],
     [HackItem]: [
         66,
@@ -73,22 +79,26 @@ const extractors = Map({
             kind: null,
         }]) : List()
     },
-    [HackItem]: (location, fov, keys) => {
-        const items = List(utils.getLocationLockedItems(location, fov, keys))
-
-        return items.map(item => ({
+    [HackCreature]: (location, fov, keys) => (
+        List(utils.getLocationLockedCreatures(location, fov, keys)).map(creature => ({
+            data: {target: creature.id},
+            kind: creature.kind,
+        }))
+    ),
+    [HackItem]: (location, fov, keys) => (
+        List(utils.getLocationLockedItems(location, fov, keys)).map(item => ({
             data: {target: item.id},
             kind: item.kind,
         }))
-    },
+    ),
     [PickItem]: (location, fov) => (
         List(utils.getLocationPickableItems(location, fov)).map(item => ({
             data: {item: item.id},
             kind: item.kind,
         }))
     ),
-    [UseCreature]: (location, fov) => (
-        List(utils.getLocationUsableCreatures(location, fov)).map(creature => ({
+    [UseCreature]: (location, fov, keys) => (
+        List(utils.getLocationUsableCreatures(location, fov, keys)).map(creature => ({
             data: {target: creature.id},
             kind: creature.kind,
         }))
@@ -96,27 +106,23 @@ const extractors = Map({
     [UseDoor]: (location, fov, keys) => {
         const door = utils.getLocationDoor(location, fov)
 
-        return door && ! utils.isLockedItem(keys)(door) ? List([{
+        return door && ! utils.isLocked(keys)(door) ? List([{
             data: {target: door.id},
             kind: door.kind,
         }]) : List()
     },
-    [UseItem]: (location, fov, keys) => {
-        const items = List(utils.getLocationUsableItems(location, fov))
-
-        const isLocked = utils.isLockedItem(keys)
-        const isNotLocked = item => ! isLocked(item)
-
-        return items.filter(isNotLocked).map(item => ({
+    [UseItem]: (location, fov, keys) => (
+        List(utils.getLocationUsableItems(location, fov, keys)).map(item => ({
             data: {target: item.id},
             kind: item.kind,
         }))
-    },
+    ),
 })
 
 const descriptions = Map({
     [Communicate]: (kinds, interaction) => `Talk to ${kinds.creatures.get(interaction.kind).name}`,
     [EnterConduit]: () => 'Use stairs',
+    [HackCreature]: (kinds, interaction) => `Hack ${kinds.creatures.get(interaction.kind).name}`,
     [HackItem]: (kinds, interaction) => `Hack ${kinds.items.get(interaction.kind).name}`,
     [PickItem]: (kinds, interaction) => `Pick up ${kinds.items.get(interaction.kind).name}`,
     [UseCreature]: (kinds, interaction) => `Use ${kinds.creatures.get(interaction.kind).name}`,

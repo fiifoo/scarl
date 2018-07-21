@@ -17,6 +17,7 @@ object ActionValidator {
       case action: DropItemAction => validate(s, actor, action)
       case action: EnterConduitAction => validate(s, actor, action)
       case action: EquipItemAction => EquipItemValidator(s, actor, action)
+      case action: HackCreatureAction => validate(s, actor, action)
       case action: HackItemAction => validate(s, actor, action)
       case action: MoveAction => validate(s, actor, action)
       case PassAction => true
@@ -53,6 +54,12 @@ object ActionValidator {
 
   private def validate(s: State, actor: CreatureId, action: EnterConduitAction): Boolean = {
     actor(s).location == s.conduits.entrances(action.conduit)
+  }
+
+  private def validate(s: State, actor: CreatureId, action: HackCreatureAction): Boolean = {
+    entityExists(s)(action.target) &&
+      action.target(s).locked.isDefined &&
+      isAdjacentLocation(s, actor)(action.target(s).location)
   }
 
   private def validate(s: State, actor: CreatureId, action: HackItemAction): Boolean = {

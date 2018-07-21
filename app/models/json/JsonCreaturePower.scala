@@ -1,6 +1,6 @@
 package models.json
 
-import io.github.fiifoo.scarl.core.creature.CreaturePower
+import io.github.fiifoo.scarl.core.entity.CreaturePower
 import io.github.fiifoo.scarl.power.TransformCreaturePower
 import play.api.libs.json._
 

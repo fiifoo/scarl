@@ -10,7 +10,8 @@ import io.github.fiifoo.scarl.area.theme.Theme
 import io.github.fiifoo.scarl.core.ai.{Behavior, Strategy}
 import io.github.fiifoo.scarl.core.assets.CombatPower
 import io.github.fiifoo.scarl.core.communication.{Communication, Message}
-import io.github.fiifoo.scarl.core.creature.{CreaturePower, Faction, Missile, Progression}
+import io.github.fiifoo.scarl.core.creature.{Faction, Missile, Progression}
+import io.github.fiifoo.scarl.core.entity.{CreaturePower, ItemPower}
 import io.github.fiifoo.scarl.core.item._
 import io.github.fiifoo.scarl.core.kind._
 import io.github.fiifoo.scarl.core.math.Distribution

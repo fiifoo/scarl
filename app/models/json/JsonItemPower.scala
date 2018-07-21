@@ -1,6 +1,6 @@
 package models.json
 
-import io.github.fiifoo.scarl.core.item.ItemPower
+import io.github.fiifoo.scarl.core.entity.ItemPower
 import io.github.fiifoo.scarl.power._
 import play.api.libs.json._
 

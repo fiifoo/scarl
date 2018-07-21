@@ -2,8 +2,7 @@ package io.github.fiifoo.scarl.power
 
 import io.github.fiifoo.scarl.core.State
 import io.github.fiifoo.scarl.core.effect.Effect
-import io.github.fiifoo.scarl.core.entity.{ContainerId, CreatureId, ItemId}
-import io.github.fiifoo.scarl.core.item.ItemPower
+import io.github.fiifoo.scarl.core.entity.{ContainerId, CreatureId, ItemId, ItemPower}
 import io.github.fiifoo.scarl.effect.combat.ExplodeEffect
 
 case object ExplodeItemPower extends ItemPower {

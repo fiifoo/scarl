@@ -35,7 +35,7 @@ case class UseDoorEffect(user: Option[CreatureId],
             None
           } else {
             Some(EffectResult(
-              LockedItemEffect(user, target, location, Some(this))
+              LockedUsableEffect(user, target, location, Some(this))
             ))
           }
         })

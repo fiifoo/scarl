@@ -68,9 +68,10 @@ export default (command, dispatch, getState) => {
         }
         case commands.USE: {
             gameActions.interact(List([
+                interactions.HackCreature,
                 interactions.HackItem,
-                interactions.UseDoor,
                 interactions.UseCreature,
+                interactions.UseDoor,
                 interactions.UseItem
             ]))(dispatch, getState)
             break

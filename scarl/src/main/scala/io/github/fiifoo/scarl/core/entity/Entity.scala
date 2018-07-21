@@ -4,7 +4,7 @@ import io.github.fiifoo.scarl.core.State
 import io.github.fiifoo.scarl.core.Time.Tick
 import io.github.fiifoo.scarl.core.ai.Behavior
 import io.github.fiifoo.scarl.core.creature.Stats.Explosive
-import io.github.fiifoo.scarl.core.creature.{Character, CreaturePower, FactionId, Missile, Party, Stats}
+import io.github.fiifoo.scarl.core.creature.{Character, FactionId, Missile, Party, Stats}
 import io.github.fiifoo.scarl.core.effect.Effect
 import io.github.fiifoo.scarl.core.geometry.Location
 import io.github.fiifoo.scarl.core.item._
@@ -26,6 +26,18 @@ sealed trait Locatable extends Entity {
   val location: Location
 
   def setLocation(location: Location): Locatable
+}
+
+sealed trait Lockable extends Entity {
+  val id: LockableId
+  val locked: Option[Lock]
+
+  def setLocked(locked: Option[Lock]): Lockable
+}
+
+sealed trait Usable extends Lockable {
+  val id: UsableId
+  val usable: Option[Power]
 }
 
 trait Status extends Entity {
@@ -77,11 +89,14 @@ case class Creature(id: CreatureId,
 
                     character: Option[Character] = None,
                     flying: Boolean = false,
+                    locked: Option[Lock] = None,
                     missile: Option[Missile] = None,
                     usable: Option[CreaturePower] = None,
-                   ) extends Entity with Actor with Locatable {
+                   ) extends Entity with Actor with Locatable with Usable {
 
   def setLocation(location: Location): Creature = copy(location = location)
+
+  def setLocked(locked: Option[Lock]): Creature = copy(locked = locked)
 
   def setTick(tick: Tick): Creature = copy(tick = tick)
 
@@ -113,7 +128,10 @@ case class Item(id: ItemId,
                 trap: Option[ItemPower] = None,
                 usable: Option[ItemPower] = None,
                 weapon: Option[Weapon] = None,
-               ) extends Entity
+               ) extends Entity with Usable {
+
+  def setLocked(locked: Option[Lock]): Item = copy(locked = locked)
+}
 
 case class Machinery(id: MachineryId,
                      mechanism: Mechanism,

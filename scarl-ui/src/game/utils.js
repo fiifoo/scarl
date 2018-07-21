@@ -68,10 +68,17 @@ export const getLocationDoor = (location, fov) => {
 }
 
 // keys: Set
+export const getLocationLockedCreatures = (location, fov, keys) => {
+    const entities = getLocationEntities(location, fov)
+
+    return entities ? entities.creatures.filter(isLocked(keys)) : []
+}
+
+// keys: Set
 export const getLocationLockedItems = (location, fov, keys) => {
     const entities = getLocationEntities(location, fov)
 
-    return entities ? entities.items.filter(isLockedItem(keys)) : []
+    return entities ? entities.items.filter(isLocked(keys)) : []
 }
 
 export const getLocationPickableItems = (location, fov) => {
@@ -96,22 +103,20 @@ export const getLocationDescriptions = (location, fov, map, kinds) => {
     return List(descriptions.map (d => d + '.'))
 }
 
-export const getLocationUsableCreatures = (location, fov) => {
+export const getLocationUsableCreatures = (location, fov, keys) => {
     const creatures = getLocationCreatures(location, fov)
 
-    return creatures.filter(creature => creature.usable)
+    const isNotLocked = item => ! isLocked(keys)(item)
+
+    return creatures.filter(creature => creature.usable).filter(isNotLocked)
 }
 
-export const getLocationUsableItem = (location, fov) => {
+export const getLocationUsableItems = (location, fov, keys) => {
     const entities = getLocationEntities(location, fov)
 
-    return entities ? entities.items.find(item => item.usable) : undefined
-}
+    const isNotLocked = item => ! isLocked(keys)(item)
 
-export const getLocationUsableItems = (location, fov) => {
-    const entities = getLocationEntities(location, fov)
-
-    return entities ? entities.items.filter(item => item.usable) : []
+    return entities ? entities.items.filter(item => item.usable).filter(isNotLocked) : []
 }
 
 export const getMissileLauncherRange = player => {
@@ -137,8 +142,8 @@ export const isEnemyChecker = (player, factions) => {
 }
 
 // keys: Set
-export const isLockedItem = keys => item =>   (
-    item.locked && (! item.locked.key || ! keys.contains(fromJS(item.locked.key)))
+export const isLocked = keys => lockable =>   (
+    lockable.locked && (! lockable.locked.key || ! keys.contains(fromJS(lockable.locked.key)))
 )
 
 export const seekTargets = (player, factions, fov, missile = false) => {

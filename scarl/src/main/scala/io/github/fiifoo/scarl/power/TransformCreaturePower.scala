@@ -1,9 +1,8 @@
 package io.github.fiifoo.scarl.power
 
 import io.github.fiifoo.scarl.core.State
-import io.github.fiifoo.scarl.core.creature.CreaturePower
 import io.github.fiifoo.scarl.core.effect.Effect
-import io.github.fiifoo.scarl.core.entity.CreatureId
+import io.github.fiifoo.scarl.core.entity.{CreatureId, CreaturePower}
 import io.github.fiifoo.scarl.core.kind.KindId
 import io.github.fiifoo.scarl.effect.area.TransformEffect
 

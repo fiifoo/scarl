@@ -4,7 +4,6 @@ import io.github.fiifoo.scarl.area.template.{Template, TemplateId}
 import io.github.fiifoo.scarl.core.assets.CombatPower
 import io.github.fiifoo.scarl.core.item.Equipment
 import io.github.fiifoo.scarl.core.kind._
-import models.json.JsonBase.mapFormat
 import play.api.libs.json._
 
 object JsonCombatPower {

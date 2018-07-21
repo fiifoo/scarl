@@ -55,10 +55,10 @@ class EventBuilder(s: State, player: CreatureId, fov: Set[Location]) {
       case e: GainLevelEffect => build(e) map GenericEvent
       case e: HealEffect => build(e) map GenericEvent
       case e: HitEffect => build(e)
-      case e: ItemHackedEffect => build(e) map GenericEvent
-      case e: ItemHackFailedEffect => build(e) map GenericEvent
+      case e: HackedEffect => build(e) map GenericEvent
+      case e: HackFailedEffect => build(e) map GenericEvent
       case e: LocalizedDescriptionEffect => build(e) map GenericEvent
-      case e: LockedItemEffect => build(e) map GenericEvent
+      case e: LockedUsableEffect => build(e) map GenericEvent
       case e: MissEffect => build(e) map GenericEvent
       case e: MovedEffect => build(e)
       case e: PickItemEffect => build(e) map GenericEvent
@@ -71,8 +71,7 @@ class EventBuilder(s: State, player: CreatureId, fov: Set[Location]) {
       case e: TrapHitEffect => build(e)
       case e: TrapMissEffect => build(e) map GenericEvent
       case e: UnequipItemEffect => build(e) map GenericEvent
-      case e: UseCreatureEffect => build(e) map GenericEvent
-      case e: UseItemEffect => build(e) map GenericEvent
+      case e: UseUsableEffect => build(e) map GenericEvent
       case _ => None
     }
   }
@@ -339,17 +338,17 @@ class EventBuilder(s: State, player: CreatureId, fov: Set[Location]) {
     message map (HitEvent(effect.target, effect.location, _))
   }
 
-  private def build(effect: ItemHackedEffect): Option[String] = {
+  private def build(effect: HackedEffect): Option[String] = {
     if (effect.hacker == player) {
-      Some(s"You hack ${kind(effect.item)}.")
+      Some(s"You hack ${kind(effect.target)}.")
     } else if (fov contains effect.location) {
-      Some(s"${kind(effect.hacker)} hacks ${kind(effect.item)}.")
+      Some(s"${kind(effect.hacker)} hacks ${kind(effect.target)}.")
     } else {
       None
     }
   }
 
-  private def build(effect: ItemHackFailedEffect): Option[String] = {
+  private def build(effect: HackFailedEffect): Option[String] = {
     val level = effect.failure match {
       case HackRule.Failure => ""
       case HackRule.BadFailure => " badly"
@@ -357,9 +356,9 @@ class EventBuilder(s: State, player: CreatureId, fov: Set[Location]) {
     }
 
     if (effect.hacker == player) {
-      Some(s"You fail$level at hacking ${kind(effect.item)}.")
+      Some(s"You fail$level at hacking ${kind(effect.target)}.")
     } else if (fov contains effect.location) {
-      Some(s"${kind(effect.hacker)} fails$level at hacking ${kind(effect.item)}.")
+      Some(s"${kind(effect.hacker)} fails$level at hacking ${kind(effect.target)}.")
     } else {
       None
     }
@@ -375,9 +374,9 @@ class EventBuilder(s: State, player: CreatureId, fov: Set[Location]) {
     })
   }
 
-  private def build(effect: LockedItemEffect): Option[String] = {
+  private def build(effect: LockedUsableEffect): Option[String] = {
     if (effect.user == player) {
-      Some(s"${kind(effect.item)} is locked.")
+      Some(s"${kind(effect.usable)} is locked.")
     } else {
       None
     }
@@ -540,17 +539,7 @@ class EventBuilder(s: State, player: CreatureId, fov: Set[Location]) {
     }
   }
 
-  private def build(effect: UseCreatureEffect): Option[String] = {
-    if (effect.user == player) {
-      Some(s"You use ${kind(effect.target)}.")
-    } else if (fov contains effect.location) {
-      Some(s"${kind(effect.user)} uses ${kind(effect.target)}.")
-    } else {
-      None
-    }
-  }
-
-  private def build(effect: UseItemEffect): Option[String] = {
+  private def build(effect: UseUsableEffect): Option[String] = {
     if (effect.user == player) {
       Some(s"You use ${kind(effect.target)}.")
     } else if (fov contains effect.location) {
@@ -577,6 +566,20 @@ class EventBuilder(s: State, player: CreatureId, fov: Set[Location]) {
       case t: ItemId => Some(kind(t))
       case t: WallId => Some(kind(t))
       case _ => None
+    }
+  }
+
+  private def kind(lockable: LockableId): String = {
+    lockable match {
+      case creature: CreatureId => kind(creature)
+      case item: ItemId => kind(item)
+    }
+  }
+
+  private def kind(usable: UsableId): String = {
+    usable match {
+      case creature: CreatureId => kind(creature)
+      case item: ItemId => kind(item)
     }
   }
 
