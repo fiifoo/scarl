@@ -88,7 +88,7 @@ case class RandomizedTemplate(id: TemplateId,
 
       range map (_ => {
         val result = sub(assets.templates)(assets, area, random)
-        val rotation = Rotation(random, result.shape.outerWidth, result.shape.outerHeight)
+        val rotation = Rotation(random, result.shape.outerWidth, result.shape.outerHeight).reverse
 
         result.rotate(rotation)
       })
