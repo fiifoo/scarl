@@ -142,9 +142,13 @@ export const isEnemyChecker = (player, factions) => {
 }
 
 // keys: Set
-export const isLocked = keys => lockable =>   (
-    lockable.locked && (! lockable.locked.key || ! keys.contains(fromJS(lockable.locked.key)))
-)
+export const isLocked = keys => lockable => {
+    const check = lock => (
+        ! lock.key || ! keys.contains(fromJS(lock.key)) || (lock.sub && check(lock.sub))
+    )
+
+    return lockable.locked && check(lockable.locked)
+}
 
 export const seekTargets = (player, factions, fov, missile = false) => {
     const location = player.creature.location

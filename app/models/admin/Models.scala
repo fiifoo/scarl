@@ -71,25 +71,25 @@ object Models {
 
   private def scanProperty(t: Type)(s: Symbol): (Property, List[SubModel]) = {
     val name = getPropertyName(s)
-    val (fieldType, subs) = scanField(s.typeSignatureIn(t))
+    val (fieldType, subs) = scanField(t, s.typeSignatureIn(t))
 
     val property = Property(name.toString, fieldType)
 
     (property, subs)
   }
 
-  private def scanField(t: Type, required: Boolean = true): (FieldType, List[SubModel]) = {
+  private def scanField(parent: Type, t: Type, required: Boolean = true): (FieldType, List[SubModel]) = {
     t match {
-      case t if t <:< typeOf[Option[_]] => scanField(t.typeArgs.head, required = false)
+      case t if t <:< typeOf[Option[_]] => scanField(parent, t.typeArgs.head, required = false)
 
       case t if t <:< typeOf[Map[_, _]] =>
-        val (keyFieldType, keySubs) = scanField(t.typeArgs.head)
-        val (valueFieldType, valueSubs) = scanField(t.typeArgs(1))
+        val (keyFieldType, keySubs) = scanField(parent, t.typeArgs.head)
+        val (valueFieldType, valueSubs) = scanField(parent, t.typeArgs(1))
 
         (MapField(keyFieldType, valueFieldType, required), keySubs ::: valueSubs)
 
       case t if t <:< typeOf[Iterable[_]] =>
-        val (valueFieldType, subs) = scanField(t.typeArgs.head)
+        val (valueFieldType, subs) = scanField(parent, t.typeArgs.head)
 
         (ListField(valueFieldType, required), subs)
 
@@ -113,7 +113,7 @@ object Models {
 
       case t if isSubType(t) || t <:< typeOf[(_, _)] || t <:< typeOf[(_, _, _)] =>
         val id = SubModel.Id(t)
-        val subs = scanSubModel(t)
+        val subs = if (t =:= parent) List() else scanSubModel(t)
 
         (FormField(id, required), subs)
 

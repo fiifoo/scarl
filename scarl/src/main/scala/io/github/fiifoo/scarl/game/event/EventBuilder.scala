@@ -340,7 +340,11 @@ class EventBuilder(s: State, player: CreatureId, fov: Set[Location]) {
 
   private def build(effect: HackedEffect): Option[String] = {
     if (effect.hacker == player) {
-      Some(s"You hack ${kind(effect.target)}.")
+      if (effect.lock.sub.isDefined) {
+        Some(s"You manage to hack ${kind(effect.target)} partially.")
+      } else {
+        Some(s"You manage to hack ${kind(effect.target)}!")
+      }
     } else if (fov contains effect.location) {
       Some(s"${kind(effect.hacker)} hacks ${kind(effect.target)}.")
     } else {
@@ -350,13 +354,17 @@ class EventBuilder(s: State, player: CreatureId, fov: Set[Location]) {
 
   private def build(effect: HackFailedEffect): Option[String] = {
     val level = effect.failure match {
-      case HackRule.Failure => ""
+      case HackRule.Failure | HackRule.CertainFailure => ""
       case HackRule.BadFailure => " badly"
       case HackRule.CriticalFailure => " critically"
     }
 
     if (effect.hacker == player) {
-      Some(s"You fail$level at hacking ${kind(effect.target)}.")
+      if (effect.failure == HackRule.CertainFailure) {
+        Some(s"Hacking ${kind(effect.target)} does not seem possible.")
+      } else {
+        Some(s"You fail$level at hacking ${kind(effect.target)}.")
+      }
     } else if (fov contains effect.location) {
       Some(s"${kind(effect.hacker)} fails$level at hacking ${kind(effect.target)}.")
     } else {

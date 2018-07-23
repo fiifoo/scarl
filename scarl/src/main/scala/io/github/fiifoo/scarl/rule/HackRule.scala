@@ -1,7 +1,5 @@
 package io.github.fiifoo.scarl.rule
 
-import io.github.fiifoo.scarl.core.item.Lock
-
 import scala.util.Random
 
 object HackRule {
@@ -14,6 +12,8 @@ object HackRule {
 
   case object Failure extends FailureResult
 
+  case object CertainFailure extends FailureResult
+
   case object BadFailure extends FailureResult
 
   case object CriticalFailure extends FailureResult
@@ -21,11 +21,11 @@ object HackRule {
   private val bad = 0.75
   private val critical = 0.25
 
-  private val lockFailure = 1.5
+  private val securityIncrease = 1.5
 
   def apply(random: Random)(skill: Int, security: Int): Result = {
     if (skill <= 0 || security <= 0) {
-      Failure
+      CertainFailure
     } else {
       random.nextInt(skill) - random.nextInt(security) match {
         case 0 => if (random.nextBoolean()) Success else Failure
@@ -41,19 +41,17 @@ object HackRule {
     }
   }
 
-  def failureTrap(failure: FailureResult): Boolean = {
+  def shouldTriggerTrap(failure: FailureResult): Boolean = {
     failure match {
       case CriticalFailure => true
       case _ => false
     }
   }
 
-  def failureLock(failure: FailureResult)(lock: Lock): Option[Lock] = {
+  def increaseSecurity(failure: FailureResult)(security: Int): Option[Int] = {
     failure match {
-      case Failure => None
-      case _ => Some(lock.copy(
-        security = (lock.security * lockFailure).toInt
-      ))
+      case Failure | CertainFailure => None
+      case _ => Some((security * securityIncrease).toInt)
     }
   }
 }

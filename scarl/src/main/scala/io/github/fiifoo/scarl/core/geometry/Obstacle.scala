@@ -3,7 +3,7 @@ package io.github.fiifoo.scarl.core.geometry
 import io.github.fiifoo.scarl.core.State
 import io.github.fiifoo.scarl.core.entity.Selectors.{getLocationEntities, getLocationItems}
 import io.github.fiifoo.scarl.core.entity.{CreatureId, EntityId, ItemId, WallId}
-import io.github.fiifoo.scarl.core.item.Key
+import io.github.fiifoo.scarl.core.item.{Key, Lock}
 
 object Obstacle {
 
@@ -49,10 +49,12 @@ object Obstacle {
       val item = id(s)
 
       item.door exists (door => {
-        !door.open && (item.locked exists (lock => {
-          lock.key forall (key => !(keys contains key))
-        }))
+        !door.open && (item.locked exists (lock => !hasLockKey(keys)(lock)))
       })
     })
+  }
+
+  private def hasLockKey(keys: Set[Key])(lock: Lock): Boolean = {
+    (lock.key exists keys.contains) && (lock.sub forall hasLockKey(keys))
   }
 }

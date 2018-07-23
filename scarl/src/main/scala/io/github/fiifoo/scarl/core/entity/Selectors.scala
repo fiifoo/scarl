@@ -111,7 +111,7 @@ object Selectors {
   }
 
   def hasLockKey(s: State)(creature: CreatureId)(lock: Lock): Boolean = {
-    lock.key exists hasKey(s)(creature)
+    (lock.key exists hasKey(s)(creature)) && (lock.sub forall hasLockKey(s)(creature))
   }
 
   def isVisibleItem(s: State, creature: CreatureId)(item: ItemId) = {
