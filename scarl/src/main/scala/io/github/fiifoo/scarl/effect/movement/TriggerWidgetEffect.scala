@@ -4,7 +4,7 @@ import io.github.fiifoo.scarl.core.State
 import io.github.fiifoo.scarl.core.effect.{Effect, EffectResult, LocalizedDescriptionEffect}
 import io.github.fiifoo.scarl.core.entity.{ContainerId, CreatureId, ItemId, Selectors}
 import io.github.fiifoo.scarl.core.geometry.Location
-import io.github.fiifoo.scarl.core.item.{Discover, DiscoverEveryone, DiscoverTriggerer}
+import io.github.fiifoo.scarl.core.item.Discover
 import io.github.fiifoo.scarl.core.mutation.{ItemFoundMutation, ItemHiddenMutation}
 
 case class TriggerWidgetEffect(triggerer: CreatureId,
@@ -17,10 +17,11 @@ case class TriggerWidgetEffect(triggerer: CreatureId,
 
   def apply(s: State): EffectResult = {
     val discoverMutation = discover flatMap (discover => {
-      getHiddenItem(s) map (item => {
+      getHiddenItem(s) flatMap (item => {
         discover match {
-          case DiscoverTriggerer => ItemFoundMutation(item, triggerer)
-          case DiscoverEveryone => ItemHiddenMutation(item, hidden = false)
+          case Discover.Triggerer => Some(ItemFoundMutation(item, triggerer))
+          case Discover.Everyone => Some(ItemHiddenMutation(item, hidden = false))
+          case Discover.Nobody => None
         }
       })
     })

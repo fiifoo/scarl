@@ -2,6 +2,12 @@ package io.github.fiifoo.scarl.core.item
 
 sealed trait Discover
 
-case object DiscoverTriggerer extends Discover
+object Discover {
 
-case object DiscoverEveryone extends Discover
+  case object Everyone extends Discover
+
+  case object Nobody extends Discover
+
+  case object Triggerer extends Discover
+
+}

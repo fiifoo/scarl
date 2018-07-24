@@ -102,8 +102,9 @@ object Sources {
     )),
 
     SubModelSource(typeOf[Discover], List(
-      typeOf[DiscoverTriggerer.type],
-      typeOf[DiscoverEveryone.type],
+      typeOf[Discover.Everyone.type],
+      typeOf[Discover.Nobody.type],
+      typeOf[Discover.Triggerer.type],
     ), objectPolymorphism = true),
 
     SubModelSource(typeOf[Distribution], List(
