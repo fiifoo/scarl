@@ -25,13 +25,14 @@ case class UseUsableEffect(user: CreatureId,
           ))
         }
       }) getOrElse {
+        val usedEffect = PowerUsedEffect(user, power.useDescription, Some(this))
 
         val effects = power match {
           case power: CreaturePower => power(s, target, Some(user))
           case power: ItemPower => power(s, target, Some(user))
         }
 
-        EffectResult(effects)
+        EffectResult(usedEffect :: effects)
       }
     }) getOrElse EffectResult()
   }

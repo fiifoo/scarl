@@ -5,7 +5,7 @@ import io.github.fiifoo.scarl.core.effect.Effect
 import io.github.fiifoo.scarl.core.entity.{ContainerId, CreatureId, ItemId, ItemPower}
 import io.github.fiifoo.scarl.effect.combat.ExplodeEffect
 
-case object ExplodeItemPower extends ItemPower {
+case class ExplodeItemPower(useDescription: Option[String] = None) extends ItemPower {
 
   def apply(s: State, item: ItemId, user: Option[CreatureId] = None): List[Effect] = {
     val container = item(s).container match {

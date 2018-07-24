@@ -12,7 +12,7 @@ case class TriggeredMachineryWidget(id: WidgetKindId,
                                     category: Option[Category] = None,
                                     power: Option[Int] = None,
                                     discover: Option[Discover] = None,
-                                    description: Option[String] = None,
+                                    triggerDescription: Option[String] = None,
                                    ) extends WidgetKind {
 
   def createStatus(s: State, id: Int, target: ContainerId): Status = {
@@ -20,7 +20,7 @@ case class TriggeredMachineryWidget(id: WidgetKindId,
       TriggerStatusId(id),
       target,
       discover,
-      description,
+      triggerDescription
     )
   }
 }

@@ -151,8 +151,8 @@ object Sources {
     ), objectPolymorphism = true),
 
     SubModelSource(typeOf[ItemPower], List(
-      typeOf[ExplodeItemPower.type],
-      typeOf[ReceiveKeyPower.type],
+      typeOf[ExplodeItemPower],
+      typeOf[ReceiveKeyPower],
       typeOf[RemoveItemPower],
       typeOf[TransformItemPower],
       typeOf[TrapAttackPower],

@@ -5,7 +5,7 @@ import io.github.fiifoo.scarl.core.effect.Effect
 import io.github.fiifoo.scarl.core.entity.{CreatureId, ItemId, ItemPower}
 import io.github.fiifoo.scarl.effect.creature.ReceiveKeyEffect
 
-case object ReceiveKeyPower extends ItemPower {
+case class ReceiveKeyPower(useDescription: Option[String] = None) extends ItemPower {
 
   def apply(s: State, item: ItemId, user: Option[CreatureId] = None): List[Effect] = {
     val effect = item(s).key flatMap (key => {

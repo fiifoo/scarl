@@ -10,7 +10,8 @@ case class TrapAttackPower(attack: Int,
                            damage: Int,
                            hitDescription: Option[String] = None,
                            deflectDescription: Option[String] = None,
-                           missDescription: Option[String] = None
+                           missDescription: Option[String] = None,
+                           useDescription: Option[String] = None,
                           ) extends ItemPower {
 
   def apply(s: State, item: ItemId, user: Option[CreatureId] = None): List[Effect] = {

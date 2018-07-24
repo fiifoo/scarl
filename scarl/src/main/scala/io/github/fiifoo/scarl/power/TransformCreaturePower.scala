@@ -7,7 +7,8 @@ import io.github.fiifoo.scarl.core.kind.KindId
 import io.github.fiifoo.scarl.effect.area.TransformEffect
 
 case class TransformCreaturePower(to: KindId,
-                                  description: Option[String] = None
+                                  transformDescription: Option[String] = None,
+                                  useDescription: Option[String] = None,
                                  ) extends CreaturePower {
 
   def apply(s: State, creature: CreatureId, user: Option[CreatureId] = None): List[Effect] = {
@@ -15,7 +16,7 @@ case class TransformCreaturePower(to: KindId,
       from = creature,
       to = to,
       owner = user,
-      description = description
+      description = transformDescription
     ))
   }
 }

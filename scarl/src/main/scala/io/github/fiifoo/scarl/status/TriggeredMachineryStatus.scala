@@ -10,7 +10,7 @@ import io.github.fiifoo.scarl.effect.movement.TriggerWidgetEffect
 case class TriggeredMachineryStatus(id: TriggerStatusId,
                                     target: ContainerId,
                                     discover: Option[Discover] = None,
-                                    description: Option[String] = None,
+                                    triggerDescription: Option[String] = None,
                                    ) extends TriggerStatus {
 
   def apply(s: State, triggerer: CreatureId): List[Effect] = {
@@ -21,7 +21,7 @@ case class TriggeredMachineryStatus(id: TriggerStatusId,
       return List()
     }
 
-    val triggerEffect = TriggerWidgetEffect(triggerer, target, target(s).location, discover, description)
+    val triggerEffect = TriggerWidgetEffect(triggerer, target, target(s).location, discover, triggerDescription)
     val machineryEffects = machinery.toList map (machinery => {
       ActivateMachineryEffect(triggerer, target(s).location, machinery)
     })

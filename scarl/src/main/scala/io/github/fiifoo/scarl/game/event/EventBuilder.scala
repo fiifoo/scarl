@@ -62,6 +62,7 @@ class EventBuilder(s: State, player: CreatureId, fov: Set[Location]) {
       case e: MissEffect => build(e) map GenericEvent
       case e: MovedEffect => build(e)
       case e: PickItemEffect => build(e) map GenericEvent
+      case e: PowerUsedEffect => build(e) map GenericEvent
       case e: ReceiveKeyEffect => build(e) map GenericEvent
       case e: RemoveEntityEffect => build(e) map GenericEvent
       case e: ShootMissileEffect => build(e) map GenericEvent
@@ -418,6 +419,14 @@ class EventBuilder(s: State, player: CreatureId, fov: Set[Location]) {
       } else {
         None
       }
+    } else {
+      None
+    }
+  }
+
+  private def build(effect: PowerUsedEffect): Option[String] = {
+    if (effect.user == player) {
+      effect.description
     } else {
       None
     }
