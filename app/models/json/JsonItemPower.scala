@@ -10,6 +10,7 @@ object JsonItemPower {
 
   lazy private implicit val kindIdFormat = JsonKind.kindIdFormat
 
+  lazy private implicit val activateMachineryFormat = Json.format[ActivateMachineryPower]
   lazy private implicit val explodeItemFormat = Json.format[ExplodeItemPower]
   lazy private implicit val receiveKeyFormat = Json.format[ReceiveKeyPower]
   lazy private implicit val removeItemFormat = Json.format[RemoveItemPower]
@@ -18,12 +19,14 @@ object JsonItemPower {
 
   lazy implicit val itemPowerFormat: Format[ItemPower] = polymorphicTypeFormat(
     data => {
+      case "ActivateMachineryPower" => data.as[ActivateMachineryPower]
       case "ExplodeItemPower" => data.as[ExplodeItemPower]
       case "ReceiveKeyPower" => data.as[ReceiveKeyPower]
       case "RemoveItemPower" => data.as[RemoveItemPower]
       case "TransformItemPower" => data.as[TransformItemPower]
       case "TrapAttackPower" => data.as[TrapAttackPower]
     }, {
+      case power: ActivateMachineryPower => activateMachineryFormat.writes(power)
       case power: ExplodeItemPower => explodeItemFormat.writes(power)
       case power: ReceiveKeyPower => receiveKeyFormat.writes(power)
       case power: RemoveItemPower => removeItemFormat.writes(power)
