@@ -59,6 +59,7 @@ class EventBuilder(s: State, player: CreatureId, fov: Set[Location]) {
       case e: HackFailedEffect => build(e) map GenericEvent
       case e: LocalizedDescriptionEffect => build(e) map GenericEvent
       case e: LockedUsableEffect => build(e) map GenericEvent
+      case e: MachineryActivatedEffect => build(e) map GenericEvent
       case e: MissEffect => build(e) map GenericEvent
       case e: MovedEffect => build(e)
       case e: PickItemEffect => build(e) map GenericEvent
@@ -386,6 +387,15 @@ class EventBuilder(s: State, player: CreatureId, fov: Set[Location]) {
   private def build(effect: LockedUsableEffect): Option[String] = {
     if (effect.user == player) {
       Some(s"${kind(effect.usable)} is locked.")
+    } else {
+      None
+    }
+  }
+
+
+  private def build(effect: MachineryActivatedEffect): Option[String] = {
+    if (effect.activator == player) {
+      effect.description
     } else {
       None
     }

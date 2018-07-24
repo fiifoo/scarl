@@ -8,7 +8,7 @@ import io.github.fiifoo.scarl.core.geometry.Location
 import io.github.fiifoo.scarl.core.item.Mechanism
 import io.github.fiifoo.scarl.effect.interact.UseDoorEffect
 
-case class UseDoorMechanism(disposable: Boolean) extends Mechanism {
+case class UseDoorMechanism(disposable: Boolean, activateDescription: Option[String]) extends Mechanism {
 
   def interact(s: State, machinery: Machinery, control: Location): List[Effect] = {
     val doors = machinery.targets flatMap getLocationItems(s) filter (_ (s).door.isDefined)

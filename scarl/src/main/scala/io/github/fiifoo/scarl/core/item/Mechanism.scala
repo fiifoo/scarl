@@ -7,6 +7,7 @@ import io.github.fiifoo.scarl.core.geometry.Location
 
 trait Mechanism {
   val disposable: Boolean
+  val activateDescription: Option[String]
 
   def interact(s: State, machinery: Machinery, control: Location): List[Effect]
 
