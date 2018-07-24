@@ -50,7 +50,10 @@ object AttackRule {
   }
 
   private def rollHit(random: Random, attacker: Attacker, defender: Defender): Boolean = {
-    random.nextInt(attacker.attack) - random.nextInt(defender.defence) match {
+    val attack = math.max(attacker.attack, 1)
+    val defence = math.max(defender.defence, 1)
+
+    random.nextInt(attack) - random.nextInt(defence) match {
       case 0 => random.nextBoolean()
       case x if x > 0 => true
       case x if x < 0 => false
@@ -58,10 +61,10 @@ object AttackRule {
   }
 
   private def rollBypass(random: Random, attacker: Attacker, defender: Defender): Option[Int] = {
-    val defence = defender.defence
-    val attack = Math.max(0, attacker.attack - defence) + Math.round(defence / 10)
+    val defence = math.max(defender.defence, 1)
+    val attack = math.max(0, attacker.attack - defence) + defence / 10
 
-    if (attack == 0) {
+    if (attack <= 0) {
       return None
     }
 
@@ -77,12 +80,15 @@ object AttackRule {
   }
 
   private def rollDamage(random: Random, attacker: Attacker, defender: Defender, bypass: Option[Int]): Option[Int] = {
-    val variance = Math.round(attacker.damage * DamageVariance).toInt
-    val damage = attacker.damage + random.nextInt(variance * 2 + 1) - variance
-    val armor = defender.armor * (100 - (bypass getOrElse 0)) / 100
+    val damage = math.max(attacker.damage, 1)
+    val armor = math.max(defender.armor, 0)
 
-    if (damage > armor) {
-      Some(damage - armor)
+    val variance = math.round(damage * DamageVariance).toInt
+    val dealt = damage + random.nextInt(variance * 2 + 1) - variance
+    val blocked = armor * (100 - (bypass getOrElse 0)) / 100
+
+    if (dealt > blocked) {
+      Some(dealt - blocked)
     } else {
       None
     }
