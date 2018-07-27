@@ -12,6 +12,7 @@ const options = models => models.main.map((_, id) => id).sort(sort).map(id => ({
 
 const ModelSelect = ({model, models, selectModel}) => (
     <Select
+        autoFocus
         value={model}
         onChange={selection => selectModel(getValue(selection))}
         options={options(models)} />
