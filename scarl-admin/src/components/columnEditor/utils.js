@@ -14,11 +14,11 @@ export const getColumnEditorProperties = models => mainModel => {
     }
 
     const reduceModel = path => (carry, model) => (
-        model.properties.reduce(reduceProperty(path), carry)
+        model.properties.reduce(reduceProperty(model, path), carry)
     )
 
-    const reduceProperty = modelPath => (carry, property) => {
-        const path = modelPath.push(property.name)
+    const reduceProperty = (model, parentPath) => (carry, property) => {
+        const path = parentPath.push(property.name)
         const fieldType = property.fieldType
 
         const next = carry.push(ColumnEditorProperty({
@@ -34,7 +34,9 @@ export const getColumnEditorProperties = models => mainModel => {
             case 'FormField': {
                 const subModel = models.sub.get(fieldType.data.model)
 
-                if (! isPolymorphic(subModel)) {
+                if (subModel.id === model.id) {
+                    return carry // can't support infinite recursion
+                } else if (! isPolymorphic(subModel)) {
                     return reduceModel(path)(next, subModel)
                 }
             }
