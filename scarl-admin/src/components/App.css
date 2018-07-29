@@ -1,9 +1,12 @@
+body {
+    padding-bottom: 200px;
+}
+
 .left-content {
     max-width: 1000px;
 }
 
 .item-form {
-    margin-bottom: 200px;
     padding-right: 120px;
 }
 

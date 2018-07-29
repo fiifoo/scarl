@@ -60,7 +60,7 @@ const Editor = ({path, value, common, editor, setEditorBrush, setEditorLocation}
     )
 
     return (
-        <div style={{position: 'absolute'}}>
+        <div>
             <div style={{display: 'table-cell', paddingRight: 40, width: 400}}>
                 {editor.locations.size > 1 && renderEditorBrush()}
                 {editor.locations.size == 1 && renderEditorLocation(editor.location)}
