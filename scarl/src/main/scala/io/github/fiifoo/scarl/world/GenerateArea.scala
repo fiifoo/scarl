@@ -19,6 +19,7 @@ object GenerateArea {
     val assets = world.assets
 
     var state = State(
+      area = State.Area(owner = assets.areas(area).owner),
       assets = assets.instance(),
       brains = createBrains(assets),
       idSeq = idSeq,

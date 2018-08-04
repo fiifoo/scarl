@@ -8,6 +8,7 @@ object JsonArea {
 
   import JsonBase.{mapReads, stringIdFormat, tuple2Format}
 
+  lazy private implicit val factionIdFormat = JsonFaction.factionIdFormat
   lazy private implicit val itemKindIdFormat = JsonItemKind.itemKindIdFormat
   lazy private implicit val combatPowerCategoryFormat = JsonCombatPower.categoryFormat
   lazy private implicit val templateIdFormat = JsonTemplate.templateIdFormat

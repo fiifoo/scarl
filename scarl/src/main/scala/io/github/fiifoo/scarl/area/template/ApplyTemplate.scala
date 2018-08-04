@@ -19,7 +19,7 @@ object ApplyTemplate {
             random: Random
            ): State = {
 
-    var state = initial.copy(area = State.Area(
+    var state = initial.copy(area = initial.area.copy(
       height = template.shape.outerHeight,
       width = template.shape.outerWidth
     ))
