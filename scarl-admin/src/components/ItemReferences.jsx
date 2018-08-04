@@ -16,7 +16,7 @@ const ItemReferences = ({references, hideItemReferences, showReferenceItem}) => 
                 type="button"
                 className="btn btn-link"
                 onClick={() => showReferenceItem(reference)}>
-                {reference.join(' / ')}
+                {reference.join(' \\ ')}
             </button>
         </div>
     )

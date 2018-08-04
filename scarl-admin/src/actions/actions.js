@@ -63,12 +63,13 @@ export const showItem = (model, item) => (dispatch, getState) => {
 
 export const showReferenceItem = reference => (dispatch, getState) => {
     const {models} = getState()
+    const separator = '|'
 
-    const referenceString = reference.join('/')
+    const referenceString = reference.join(separator)
     const model = models.main.find(model => (
-        referenceString.indexOf(model.dataPath.join('/')) === 0
+        referenceString.indexOf(model.dataPath.join(separator)) === 0
     ))
-    const item = referenceString.replace(model.dataPath.join('/') + '/', '').split('/')[0]
+    const item = referenceString.replace(model.dataPath.join(separator) + separator, '').split(separator)[0]
 
     dispatch(hideItemReferences())
     showItem(model.id, item)(dispatch, getState)
