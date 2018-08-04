@@ -9,6 +9,7 @@ import io.github.fiifoo.scarl.effect.movement.TriggerWidgetEffect
 
 case class TriggeredMachineryStatus(id: TriggerStatusId,
                                     target: ContainerId,
+                                    smart: Boolean = false,
                                     discover: Option[Discover] = None,
                                     triggerDescription: Option[String] = None,
                                    ) extends TriggerStatus {
@@ -18,6 +19,10 @@ case class TriggeredMachineryStatus(id: TriggerStatusId,
     val machinery = s.index.locationMachinery.getOrElse(location, Set())
 
     if (machinery.isEmpty) {
+      return List()
+    }
+
+    if (smart && !Utils.isSmartWidgetEnemy(s, target)(triggerer)) {
       return List()
     }
 

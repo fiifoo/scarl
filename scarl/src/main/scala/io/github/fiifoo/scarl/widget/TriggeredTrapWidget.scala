@@ -9,6 +9,7 @@ import io.github.fiifoo.scarl.status.TriggeredTrapStatus
 
 case class TriggeredTrapWidget(id: WidgetKindId,
                                item: ItemKindId,
+                               smart: Boolean = false,
                                category: Option[Category] = None,
                                power: Option[Int] = None,
                                discover: Option[Discover] = None,
@@ -19,6 +20,7 @@ case class TriggeredTrapWidget(id: WidgetKindId,
     TriggeredTrapStatus(
       id = TriggerStatusId(id),
       target,
+      smart,
       discover,
       triggerDescription
     )
