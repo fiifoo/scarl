@@ -36,7 +36,7 @@ object CalculateContent {
     })
 
     val conduitLocations = CalculateUtils.randomUniqueLocations(
-      locations -- target.walls.keys -- target.gatewayLocations -- target.conduitLocations.keys,
+      locations -- target.restrictedLocations -- target.walls.keys -- target.gatewayLocations -- target.conduitLocations.keys,
       conduits.min,
       conduits.max,
       random

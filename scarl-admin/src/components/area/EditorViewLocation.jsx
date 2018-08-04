@@ -9,6 +9,7 @@ const gatewayColor = 'yellow'
 const machineryControlColor = 'red'
 const machineryTargetColor = 'blue'
 const templateLocationColor = 'white'
+const restrictedColor = '#555'
 
 const EditorViewLocation = ({common, contents, editor, location, setEditorLocation}) => {
     const {data} = common
@@ -97,6 +98,8 @@ const getBorderColor = content => {
         return machineryControlColor
     } else if (content.machineryTargets.size > 0) {
         return machineryTargetColor
+    } else if (content.restricted) {
+        return restrictedColor
     } else {
         return null
     }

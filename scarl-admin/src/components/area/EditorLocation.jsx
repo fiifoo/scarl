@@ -63,6 +63,10 @@ const EditorLocation = ({common, machinery, content, setContent}) => {
                 label="Gateway"
                 value={content.gateway}
                 onChange={setValue('gateway')} />
+            <BooleanSelectRow
+                label="Restricted"
+                value={content.restricted}
+                onChange={setValue('restricted')} />
             <SelectRow
                 label="Template"
                 choices={Models.choices(models, data, 'Template')}

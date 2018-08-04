@@ -11,7 +11,11 @@ import scala.util.Random
 object Utils {
 
   def freeLocations(content: FixedContent, locations: Set[Location]): Set[Location] = {
-    locations -- content.gatewayLocations -- content.conduitLocations.keys -- content.walls.keys
+    locations --
+      content.restrictedLocations --
+      content.gatewayLocations --
+      content.conduitLocations.keys --
+      content.walls.keys
   }
 
   def randomUniqueElementLocations[T](assets: WorldAssets,
