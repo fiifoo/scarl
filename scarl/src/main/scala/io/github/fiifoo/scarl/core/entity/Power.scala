@@ -5,10 +5,12 @@ import io.github.fiifoo.scarl.core.effect.Effect
 
 sealed trait Power {
   val useDescription: Option[String]
+
+  def apply(s: State, usable: UsableId, user: Option[CreatureId]): List[Effect]
 }
 
 trait CreaturePower extends Power {
-  def apply(s: State, creature: CreatureId, user: Option[CreatureId] = None): List[Effect]
+  def apply(s: State, creature: CreatureId, user: Option[CreatureId]): List[Effect]
 
   def apply(s: State, usable: UsableId, user: Option[CreatureId]): List[Effect] = {
     usable match {
@@ -19,7 +21,7 @@ trait CreaturePower extends Power {
 }
 
 trait ItemPower extends Power {
-  def apply(s: State, item: ItemId, user: Option[CreatureId] = None): List[Effect]
+  def apply(s: State, item: ItemId, user: Option[CreatureId]): List[Effect]
 
   def apply(s: State, usable: UsableId, user: Option[CreatureId]): List[Effect] = {
     usable match {

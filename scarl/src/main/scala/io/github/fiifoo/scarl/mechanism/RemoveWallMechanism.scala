@@ -7,9 +7,9 @@ import io.github.fiifoo.scarl.core.entity.{Machinery, WallId}
 import io.github.fiifoo.scarl.core.geometry.Location
 import io.github.fiifoo.scarl.core.item.Mechanism
 
-case class RemoveWallMechanism(disposable: Boolean,
+case class RemoveWallMechanism(description: Option[String],
+                               disposable: Boolean,
                                removeDescription: Option[String],
-                               activateDescription: Option[String],
                               ) extends Mechanism {
   def interact(s: State, machinery: Machinery, control: Location): List[Effect] = {
     val walls = machinery.targets flatMap getLocationEntities(s) collect {

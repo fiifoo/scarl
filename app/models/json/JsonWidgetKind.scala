@@ -19,7 +19,6 @@ object JsonWidgetKind {
   lazy private implicit val healLocationReads = Json.reads[HealLocationWidget]
   lazy private implicit val summonCreatureReads = Json.reads[SummonCreatureWidget]
   lazy private implicit val timedExplosiveWidgetReads = Json.reads[TimedExplosiveWidget]
-  lazy private implicit val triggeredMachineryWidgetReads = Json.reads[TriggeredMachineryWidget]
   lazy private implicit val triggeredTransformingReads = Json.reads[TriggeredTransformingWidget]
   lazy private implicit val triggeredTrapReads = Json.reads[TriggeredTrapWidget]
 
@@ -30,7 +29,6 @@ object JsonWidgetKind {
     case "HealLocationWidget" => data.as[HealLocationWidget]
     case "SummonCreatureWidget" => data.as[SummonCreatureWidget]
     case "TimedExplosiveWidget" => data.as[TimedExplosiveWidget]
-    case "TriggeredMachineryWidget" => data.as[TriggeredMachineryWidget]
     case "TriggeredTransformingWidget" => data.as[TriggeredTransformingWidget]
     case "TriggeredTrapWidget" => data.as[TriggeredTrapWidget]
   })

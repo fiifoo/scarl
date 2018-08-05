@@ -14,7 +14,7 @@ case class TrapAttackPower(attack: Int,
                            useDescription: Option[String] = None,
                           ) extends ItemPower {
 
-  def apply(s: State, item: ItemId, user: Option[CreatureId] = None): List[Effect] = {
+  def apply(s: State, item: ItemId, user: Option[CreatureId]): List[Effect] = {
     val container = item(s).container match {
       case container: ContainerId => Some(container)
       case _ => None

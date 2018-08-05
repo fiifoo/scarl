@@ -42,7 +42,6 @@ object Sources {
       typeOf[HealLocationWidget],
       typeOf[SummonCreatureWidget],
       typeOf[TimedExplosiveWidget],
-      typeOf[TriggeredMachineryWidget],
       typeOf[TriggeredTransformingWidget],
       typeOf[TriggeredTrapWidget],
     )),
@@ -98,7 +97,7 @@ object Sources {
     )),
 
     SubModelSource(typeOf[CreaturePower], List(
-      typeOf[TransformCreaturePower],
+      typeOf[TransformPower],
     )),
 
     SubModelSource(typeOf[Discover], List(
@@ -156,7 +155,7 @@ object Sources {
       typeOf[ExplodeItemPower],
       typeOf[ReceiveKeyPower],
       typeOf[RemoveItemPower],
-      typeOf[TransformItemPower],
+      typeOf[TransformPower],
       typeOf[TrapAttackPower],
     )),
 

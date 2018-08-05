@@ -3,7 +3,7 @@ package io.github.fiifoo.scarl.effect.interact
 import io.github.fiifoo.scarl.core.State
 import io.github.fiifoo.scarl.core.effect.{Effect, EffectResult}
 import io.github.fiifoo.scarl.core.entity.Selectors.hasLockKey
-import io.github.fiifoo.scarl.core.entity.{CreatureId, CreaturePower, ItemPower, UsableId}
+import io.github.fiifoo.scarl.core.entity.{CreatureId, UsableId}
 import io.github.fiifoo.scarl.core.geometry.Location
 
 case class UseUsableEffect(user: CreatureId,
@@ -26,11 +26,7 @@ case class UseUsableEffect(user: CreatureId,
         }
       }) getOrElse {
         val usedEffect = PowerUsedEffect(user, power.useDescription, Some(this))
-
-        val effects = power match {
-          case power: CreaturePower => power(s, target, Some(user))
-          case power: ItemPower => power(s, target, Some(user))
-        }
+        val effects = power(s, target, Some(user))
 
         EffectResult(usedEffect :: effects)
       }

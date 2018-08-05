@@ -26,7 +26,6 @@ object JsonStatus {
   lazy private implicit val summonCreatureFormat = Json.format[SummonCreatureStatus]
   lazy private implicit val timedExplosiveFormat = Json.format[TimedExplosiveStatus]
   lazy private implicit val triggeredConduitFormat = Json.format[TriggeredConduitStatus]
-  lazy private implicit val triggeredMachineryFormat = Json.format[TriggeredMachineryStatus]
   lazy private implicit val triggeredTransformingWidgetFormat = Json.format[TriggeredTransformingWidgetStatus]
   lazy private implicit val triggeredTrapFormat = Json.format[TriggeredTrapStatus]
 
@@ -37,7 +36,6 @@ object JsonStatus {
       case "SummonCreatureStatus" => data.as[SummonCreatureStatus]
       case "TimedExplosiveStatus" => data.as[TimedExplosiveStatus]
       case "TriggeredConduitStatus" => data.as[TriggeredConduitStatus]
-      case "TriggeredMachineryStatus" => data.as[TriggeredMachineryStatus]
       case "TriggeredTransformingWidgetStatus" => data.as[TriggeredTransformingWidgetStatus]
       case "TriggeredTrapStatus" => data.as[TriggeredTrapStatus]
     }, {
@@ -46,7 +44,6 @@ object JsonStatus {
       case status: SummonCreatureStatus => summonCreatureFormat.writes(status)
       case status: TimedExplosiveStatus => timedExplosiveFormat.writes(status)
       case status: TriggeredConduitStatus => triggeredConduitFormat.writes(status)
-      case status: TriggeredMachineryStatus => triggeredMachineryFormat.writes(status)
       case status: TriggeredTransformingWidgetStatus => triggeredTransformingWidgetFormat.writes(status)
       case status: TriggeredTrapStatus => triggeredTrapFormat.writes(status)
     }

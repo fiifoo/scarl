@@ -8,7 +8,7 @@ import io.github.fiifoo.scarl.effect.interact.ActivateMachineryEffect
 
 case class ActivateMachineryPower(useDescription: Option[String] = None) extends ItemPower {
 
-  def apply(s: State, item: ItemId, user: Option[CreatureId] = None): List[Effect] = {
+  def apply(s: State, item: ItemId, user: Option[CreatureId]): List[Effect] = {
     getItemLocation(s)(item) flatMap (location => {
       s.index.locationMachinery.get(location) flatMap (machinery => {
         user map (user => {

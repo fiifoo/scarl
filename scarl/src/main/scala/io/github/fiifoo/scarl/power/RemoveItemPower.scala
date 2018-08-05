@@ -8,7 +8,7 @@ case class RemoveItemPower(removeDescription: Option[String] = None,
                            useDescription: Option[String] = None,
                           ) extends ItemPower {
 
-  def apply(s: State, item: ItemId, user: Option[CreatureId] = None): List[Effect] = {
+  def apply(s: State, item: ItemId, user: Option[CreatureId]): List[Effect] = {
     List(RemoveEntityEffect(
       target = item,
       location = Selectors.getItemLocation(s)(item),
