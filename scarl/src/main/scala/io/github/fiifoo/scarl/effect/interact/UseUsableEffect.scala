@@ -25,10 +25,9 @@ case class UseUsableEffect(user: CreatureId,
           ))
         }
       }) getOrElse {
-        val usedEffect = PowerUsedEffect(user, power.useDescription, Some(this))
-        val effects = power(s, target, Some(user))
-
-        EffectResult(usedEffect :: effects)
+        EffectResult(
+          PowerUseEffect(user, target, power, requireResources = true, Some(this))
+        )
       }
     }) getOrElse EffectResult()
   }

@@ -4,6 +4,7 @@ import io.github.fiifoo.scarl.core.State
 import io.github.fiifoo.scarl.core.effect.Effect
 import io.github.fiifoo.scarl.core.entity._
 import io.github.fiifoo.scarl.core.item.Discover
+import io.github.fiifoo.scarl.effect.interact.PowerUseEffect
 import io.github.fiifoo.scarl.effect.movement.TriggerWidgetEffect
 
 case class TriggeredTrapStatus(id: TriggerStatusId,
@@ -18,12 +19,23 @@ case class TriggeredTrapStatus(id: TriggerStatusId,
       return List()
     }
 
-    val effects = Selectors.getWidgetItem(s)(target) flatMap (item => {
-      item(s).trap map (trap => {
-        trap(s, item, Some(triggerer))
-      })
-    }) getOrElse List()
+    val triggerEffect = TriggerWidgetEffect(triggerer, target, target(s).location, discover, triggerDescription)
 
-    TriggerWidgetEffect(triggerer, target, target(s).location, discover, triggerDescription) :: effects
+    val trapEffect = Selectors.getWidgetItem(s)(target) flatMap (item => {
+      item(s).trap map (trap => {
+        PowerUseEffect(triggerer, item, trap, requireResources = false)
+      })
+    })
+
+    trapEffect map (trapEffect => {
+      List(
+        triggerEffect,
+        trapEffect
+      )
+    }) getOrElse {
+      List(
+        triggerEffect
+      )
+    }
   }
 }

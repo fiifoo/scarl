@@ -1,6 +1,6 @@
 package models.json
 
-import io.github.fiifoo.scarl.core.entity.{CreaturePower, ItemPower}
+import io.github.fiifoo.scarl.core.entity.{CreaturePower, ItemPower, Power}
 import io.github.fiifoo.scarl.power._
 import play.api.libs.json._
 
@@ -9,6 +9,7 @@ object JsonPower {
   import JsonBase.polymorphicTypeFormat
 
   lazy private implicit val kindIdFormat = JsonKind.kindIdFormat
+  lazy private implicit val resourcesFormat = Json.format[Power.Resources]
 
   lazy private implicit val activateMachineryFormat = Json.format[ActivateMachineryPower]
   lazy private implicit val explodeItemFormat = Json.format[ExplodeItemPower]
@@ -16,12 +17,15 @@ object JsonPower {
   lazy private implicit val removeItemFormat = Json.format[RemoveItemPower]
   lazy private implicit val transformFormat = Json.format[TransformPower]
   lazy private implicit val trapAttackFormat = Json.format[TrapAttackPower]
+  lazy private implicit val voidFormat = Json.format[VoidPower]
 
   lazy implicit val creaturePowerFormat: Format[CreaturePower] = polymorphicTypeFormat(
     data => {
       case "TransformPower" => data.as[TransformPower]
+      case "VoidPower" => data.as[VoidPower]
     }, {
       case power: TransformPower => transformFormat.writes(power)
+      case power: VoidPower => voidFormat.writes(power)
     }
   )
 
@@ -33,6 +37,7 @@ object JsonPower {
       case "RemoveItemPower" => data.as[RemoveItemPower]
       case "TransformPower" => data.as[TransformPower]
       case "TrapAttackPower" => data.as[TrapAttackPower]
+      case "VoidPower" => data.as[VoidPower]
     }, {
       case power: ActivateMachineryPower => activateMachineryFormat.writes(power)
       case power: ExplodeItemPower => explodeItemFormat.writes(power)
@@ -40,6 +45,7 @@ object JsonPower {
       case power: RemoveItemPower => removeItemFormat.writes(power)
       case power: TransformPower => transformFormat.writes(power)
       case power: TrapAttackPower => trapAttackFormat.writes(power)
+      case power: VoidPower => voidFormat.writes(power)
     }
   )
 }

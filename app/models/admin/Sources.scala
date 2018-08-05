@@ -98,6 +98,7 @@ object Sources {
 
     SubModelSource(typeOf[CreaturePower], List(
       typeOf[TransformPower],
+      typeOf[VoidPower],
     )),
 
     SubModelSource(typeOf[Discover], List(
@@ -157,6 +158,7 @@ object Sources {
       typeOf[RemoveItemPower],
       typeOf[TransformPower],
       typeOf[TrapAttackPower],
+      typeOf[VoidPower],
     )),
 
     SubModelSource(typeOf[Missile.Guidance], List(

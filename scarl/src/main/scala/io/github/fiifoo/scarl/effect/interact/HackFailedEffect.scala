@@ -27,7 +27,7 @@ case class HackFailedEffect(hacker: CreatureId,
     }
 
     val effects = (target match {
-      case item: ItemId => trap(s, item)
+      case item: ItemId => triggerTrap(s, item)
       case _ => None
     }) getOrElse List()
 
@@ -48,10 +48,12 @@ case class HackFailedEffect(hacker: CreatureId,
     }
   }
 
-  private def trap(s: State, item: ItemId): Option[List[Effect]] = {
+  private def triggerTrap(s: State, item: ItemId): Option[List[Effect]] = {
     item(s).trap flatMap (trap => {
       if (HackRule.shouldTriggerTrap(failure)) {
-        Some(trap(s, item, Some(hacker)))
+        Some(List(
+          PowerUseEffect(hacker, item, trap, requireResources = false)
+        ))
       } else {
         None
       }

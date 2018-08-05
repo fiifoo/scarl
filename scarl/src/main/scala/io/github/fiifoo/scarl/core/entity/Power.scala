@@ -2,9 +2,20 @@ package io.github.fiifoo.scarl.core.entity
 
 import io.github.fiifoo.scarl.core.State
 import io.github.fiifoo.scarl.core.effect.Effect
+import io.github.fiifoo.scarl.core.entity.Power.Resources
+
+object Power {
+
+  case class Resources(health: Int = 0,
+                       energy: Int = 0,
+                       materials: Int = 0,
+                      )
+
+}
 
 sealed trait Power {
-  val useDescription: Option[String]
+  val description: Option[String]
+  val resources: Option[Resources]
 
   def apply(s: State, usable: UsableId, user: Option[CreatureId]): List[Effect]
 }
