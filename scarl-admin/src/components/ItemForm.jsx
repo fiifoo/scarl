@@ -1,5 +1,5 @@
 import React from 'react'
-import { isPolymorphic, readItemId } from '../data/utils'
+import { readItemId } from '../data/utils'
 import { createFormFieldType, getFieldComponent } from './field/utils'
 import TextInputRow from './form/TextInputRow.jsx'
 import SideForm from './SideForm.jsx'
@@ -10,7 +10,6 @@ const ItemForm = ({
 }) => {
     const id = readItemId(model, item)
     const path = model.dataPath.concat([id])
-    const label = isPolymorphic(model) ? 'type' : undefined
 
     const fieldType = createFormFieldType(model)
     const common = {
@@ -64,7 +63,6 @@ const ItemForm = ({
                 value={itemRename.id !== null ? itemRename.id : id}
                 onChange={setItemRenameId} />
             <Component
-                label={label}
                 required={true}
                 model={model}
                 fieldType={fieldType}

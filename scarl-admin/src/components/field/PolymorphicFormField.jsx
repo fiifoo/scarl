@@ -57,7 +57,7 @@ const PolymorphicFormField = ({label, required, model, fieldType, path, value, c
     }
 
     return (
-        <div>
+        <FormRow label={label} horizontal={horizontal}>
             {required ? null : (
                 <button
                     type="button"
@@ -68,13 +68,13 @@ const PolymorphicFormField = ({label, required, model, fieldType, path, value, c
             )}
             <SelectRow
                 horizontal={horizontal}
-                label={label}
+                label="type"
                 required={true}
                 choices={typeChoices}
                 value={type}
                 onChange={setType} />
             {! type ? <div /> : renderForm()}
-        </div>
+        </FormRow>
     )
 }
 
