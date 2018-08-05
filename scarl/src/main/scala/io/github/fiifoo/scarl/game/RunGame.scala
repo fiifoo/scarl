@@ -16,7 +16,11 @@ import scala.annotation.tailrec
 object RunGame {
 
   def apply(state: RunState, action: Option[Action] = None): RunState = {
-    run(state.copy(stopped = false, paused = false), action)
+    if (state.ended) {
+      state
+    } else {
+      run(state.copy(stopped = false, paused = false), action)
+    }
   }
 
   @tailrec
