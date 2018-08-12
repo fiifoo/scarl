@@ -4,6 +4,7 @@ import io.github.fiifoo.scarl.action.{DisplaceAction, MoveAction, PassAction, Us
 import io.github.fiifoo.scarl.ai.tactic.{AttackTactic, FollowTactic}
 import io.github.fiifoo.scarl.core.State
 import io.github.fiifoo.scarl.core.action.Action
+import io.github.fiifoo.scarl.core.ai.Tactic
 import io.github.fiifoo.scarl.core.ai.Tactic.Result
 import io.github.fiifoo.scarl.core.creature.FactionId
 import io.github.fiifoo.scarl.core.entity.Selectors.{getCreatureComrades, getCreatureKeys, getLocationEntities, getLocationWaypoint}
@@ -15,6 +16,10 @@ import io.github.fiifoo.scarl.core.geometry._
 object Utils {
 
   private val distance = Distance.chebyshev _
+
+  def getTactic(s: State, actor: CreatureId): Tactic = {
+    s.tactics.getOrElse(actor, actor(s).behavior)
+  }
 
   def findPartyEnemy(s: State, creature: CreatureId): Option[Creature] = {
     getCreatureComrades(s)(creature) flatMap s.tactics.get collectFirst {
@@ -81,7 +86,7 @@ object Utils {
         val location = path.head
 
         (getLocationEntities(s)(location) collectFirst {
-          case creature: CreatureId => if (displace && !isEnemy(s, actor)(creature)) {
+          case creature: CreatureId => if (displace && !isEnemy(s, actor)(creature) && !creature(s).immobile) {
             Some(DisplaceAction(creature))
           } else if (wait) {
             Some(PassAction)

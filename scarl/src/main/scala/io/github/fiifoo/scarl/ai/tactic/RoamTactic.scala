@@ -11,7 +11,7 @@ import scala.util.Random
 case object RoamTactic extends Behavior {
 
   val intentions: List[(Intention, Priority.Value)] = List((
-    CheckAttackIntention,
+    CheckAttackIntention(),
     Priority.high
   ), (
     CheckPartyCombatIntention,

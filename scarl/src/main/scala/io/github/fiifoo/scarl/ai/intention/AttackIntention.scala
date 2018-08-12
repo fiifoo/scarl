@@ -12,7 +12,7 @@ import io.github.fiifoo.scarl.simulation.{Outcome, ShootMissileOutcomeSimulation
 
 import scala.util.Random
 
-case class AttackIntention(target: SafeCreatureId) extends Intention {
+case class AttackIntention(target: SafeCreatureId, enableMove: Boolean = true) extends Intention {
 
   def apply(s: State, actor: CreatureId, random: Random): Option[Result] = {
     target(s) flatMap (target => {
@@ -39,7 +39,7 @@ case class AttackIntention(target: SafeCreatureId) extends Intention {
     }
 
     action map (action => {
-      val tactic = AttackTactic(SafeCreatureId(target.id), target.location)
+      val tactic = AttackTactic(SafeCreatureId(target.id), target.location, enableMove)
 
       (tactic, action)
     })

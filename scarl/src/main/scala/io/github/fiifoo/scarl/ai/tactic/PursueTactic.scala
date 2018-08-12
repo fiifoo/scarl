@@ -8,7 +8,7 @@ import io.github.fiifoo.scarl.core.geometry.Location
 case class PursueTactic(target: SafeCreatureId, destination: Location) extends Tactic {
 
   val intentions: List[(Intention, Priority.Value)] = List((
-    CheckAttackIntention,
+    CheckAttackIntention(),
     Priority.high
   ), (
     PursueIntention(target, destination),

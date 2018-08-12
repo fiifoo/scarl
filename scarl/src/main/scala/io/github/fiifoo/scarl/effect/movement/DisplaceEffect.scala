@@ -11,12 +11,19 @@ case class DisplaceEffect(displacer: CreatureId,
                          ) extends Effect {
 
   def apply(s: State): EffectResult = {
-    val from = displacer(s).location
-    val to = displaced(s).location
+    val displacer = this.displacer(s)
+    val displaced = this.displaced(s)
+
+    if (displacer.immobile || displaced.immobile) {
+      return EffectResult()
+    }
+
+    val from = displacer.location
+    val to = displaced.location
 
     EffectResult(
-      LocatableLocationMutation(displaced, from),
-      MovedEffect(displacer, from, to, Some(this))
+      LocatableLocationMutation(this.displaced, from),
+      MovedEffect(this.displacer, from, to, Some(this))
     )
   }
 }

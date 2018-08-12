@@ -66,6 +66,7 @@ object Sources {
       typeOf[PassTactic.type],
       typeOf[RoamTactic.type],
       typeOf[ScoutTactic.type],
+      typeOf[TurretTactic.type],
     )),
 
     SubModelSource(typeOf[CombatPower.Category], List(

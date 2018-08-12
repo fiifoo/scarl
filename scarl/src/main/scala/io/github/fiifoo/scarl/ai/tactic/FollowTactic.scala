@@ -7,7 +7,7 @@ import io.github.fiifoo.scarl.core.entity.SafeCreatureId
 case class FollowTactic(target: SafeCreatureId) extends Tactic {
 
   val intentions: List[(Intention, Priority.Value)] = List((
-    CheckAttackIntention,
+    CheckAttackIntention(),
     Priority.high
   ), (
     FollowIntention(target),

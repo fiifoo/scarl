@@ -28,6 +28,7 @@ object JsonTactic {
       case "FollowOwnerTactic" => FollowOwnerTactic
       case "PassTactic" => PassTactic
       case "RoamTactic" => RoamTactic
+      case "TurretTactic" => TurretTactic
 
       case "AttackTactic" => data.as[AttackTactic]
       case "EscapeTactic" => data.as[EscapeTactic]
@@ -41,6 +42,7 @@ object JsonTactic {
       case FollowOwnerTactic => JsNull
       case PassTactic => JsNull
       case RoamTactic => JsNull
+      case TurretTactic => JsNull
 
       case tactic: AttackTactic => attackFormat.writes(tactic)
       case tactic: EscapeTactic => escapeFormat.writes(tactic)

@@ -7,7 +7,7 @@ import io.github.fiifoo.scarl.core.geometry.Location
 case class TravelTactic(destination: Location, waiting: Boolean = false) extends Tactic {
 
   val intentions: List[(Intention, Priority.Value)] = List((
-    CheckAttackIntention,
+    CheckAttackIntention(),
     Priority.high
   ), (
     TravelIntention(destination, waiting),

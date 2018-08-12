@@ -40,7 +40,7 @@ case class AttackStrategy(assault: Set[Waypoint] = Set(),
                                   members: Set[CreatureId]
                                  ): Intentions = {
     val (scouts, leaders) = members
-      .filter(x => x(s).party.leader == x)
+      .filter(x => x(s).party.leader == x && !x(s).immobile)
       .partition(_ (s).behavior.isInstanceOf[ScoutTactic])
 
     calculateScoutIntentions(s, scoutWaypoints, scouts) ++
@@ -82,7 +82,7 @@ case class AttackStrategy(assault: Set[Waypoint] = Set(),
     (leaders flatMap (leader => {
       getCreatureWaypoint(s)(leader) flatMap (from => {
         WaypointPath.find(s)(from, waypoints.contains) map (_.last) map (waypoint => {
-          val party = getCreaturePartyMembers(s)(leader)
+          val party = getCreaturePartyMembers(s)(leader) filterNot (_ (s).immobile)
           val intention = (TravelIntention(waypoint), Priority.medium)
 
           party map (_ -> List(intention))

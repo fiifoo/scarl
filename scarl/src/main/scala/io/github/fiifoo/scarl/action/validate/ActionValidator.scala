@@ -43,7 +43,11 @@ object ActionValidator {
   }
 
   private def validate(s: State, actor: CreatureId, action: DisplaceAction): Boolean = {
-    !isEnemy(s, actor, action.target) && isAdjacentLocation(s, actor)(action.target(s).location)
+    entityExists(s)(action.target) &&
+      isAdjacentLocation(s, actor)(action.target(s).location) &&
+      !isEnemy(s, actor, action.target) &&
+      !actor(s).immobile &&
+      !action.target(s).immobile
   }
 
   private def validate(s: State, actor: CreatureId, action: DropItemAction): Boolean = {
@@ -69,7 +73,8 @@ object ActionValidator {
   }
 
   private def validate(s: State, actor: CreatureId, action: MoveAction): Boolean = {
-    isAdjacentLocation(s, actor)(action.location)
+    isAdjacentLocation(s, actor)(action.location) &&
+      !actor(s).immobile
   }
 
   private def validate(s: State, actor: CreatureId, action: PickItemAction): Boolean = {

@@ -12,6 +12,10 @@ case class MoveEffect(target: CreatureId,
                      ) extends Effect {
 
   def apply(s: State): EffectResult = {
+    if (target(s).immobile) {
+      return EffectResult()
+    }
+
     Obstacle.movement(s)(to) map (obstacle => {
       EffectResult(
         CollideEffect(target, obstacle, Some(this))

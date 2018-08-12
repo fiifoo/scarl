@@ -15,7 +15,7 @@ case class ScoutTactic(destination: Option[Location] = None) extends Behavior {
     CheckEscapeIntention,
     Priority.high
   ), (
-    CheckAttackIntention,
+    CheckAttackIntention(),
     Priority.high
   ), (
     ScoutIntention(destination),

@@ -14,6 +14,7 @@ object JsonIntention {
 
   lazy private implicit val attackFormat = Json.format[AttackIntention]
   lazy private implicit val chargeFormat = Json.format[ChargeIntention]
+  lazy private implicit val checkAttackFormat = Json.format[CheckAttackIntention]
   lazy private implicit val escapeFormat = Json.format[EscapeIntention]
   lazy private implicit val followFormat = Json.format[FollowIntention]
   lazy private implicit val pursueFormat = Json.format[PursueIntention]
@@ -22,14 +23,15 @@ object JsonIntention {
 
   lazy val intentionFormat: Format[Intention] = polymorphicTypeFormat(
     data => {
-      case "CheckAttackIntention" => CheckAttackIntention
       case "CheckEscapeIntention" => CheckEscapeIntention
       case "CheckGreetIntention" => CheckGreetIntention
       case "CheckPartyCombatIntention" => CheckPartyCombatIntention
       case "FollowerIntention" => FollowOwnerIntention
+      case "PassIntention" => PassIntention
 
       case "AttackIntention" => data.as[AttackIntention]
       case "ChargeIntention" => data.as[ChargeIntention]
+      case "CheckAttackIntention" => data.as[CheckAttackIntention]
       case "EscapeIntention" => data.as[EscapeIntention]
       case "FollowIntention" => data.as[FollowIntention]
       case "PursueIntention" => data.as[PursueIntention]
@@ -37,14 +39,15 @@ object JsonIntention {
       case "TravelIntention" => data.as[TravelIntention]
 
     }, {
-      case CheckAttackIntention => JsNull
       case CheckEscapeIntention => JsNull
       case CheckGreetIntention => JsNull
       case CheckPartyCombatIntention => JsNull
       case FollowOwnerIntention => JsNull
+      case PassIntention => JsNull
 
       case intention: AttackIntention => attackFormat.writes(intention)
       case intention: ChargeIntention => chargeFormat.writes(intention)
+      case intention: CheckAttackIntention => checkAttackFormat.writes(intention)
       case intention: EscapeIntention => escapeFormat.writes(intention)
       case intention: FollowIntention => followFormat.writes(intention)
       case intention: PursueIntention => pursueFormat.writes(intention)
