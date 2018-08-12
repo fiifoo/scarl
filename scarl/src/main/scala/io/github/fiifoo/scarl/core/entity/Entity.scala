@@ -4,7 +4,7 @@ import io.github.fiifoo.scarl.core.State
 import io.github.fiifoo.scarl.core.Time.Tick
 import io.github.fiifoo.scarl.core.ai.Behavior
 import io.github.fiifoo.scarl.core.creature.Stats.Explosive
-import io.github.fiifoo.scarl.core.creature.{Character, FactionId, Missile, Party, Stats}
+import io.github.fiifoo.scarl.core.creature.{Character, Events, FactionId, Missile, Party, Stats}
 import io.github.fiifoo.scarl.core.effect.Effect
 import io.github.fiifoo.scarl.core.geometry.Location
 import io.github.fiifoo.scarl.core.item._
@@ -88,6 +88,7 @@ case class Creature(id: CreatureId,
                     owner: Option[SafeCreatureId] = None,
 
                     character: Option[Character] = None,
+                    events: Option[Events] = None,
                     flying: Boolean = false,
                     locked: Option[Lock] = None,
                     missile: Option[Missile] = None,

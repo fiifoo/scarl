@@ -11,6 +11,7 @@ object JsonCreatureKind {
   lazy private implicit val charFormat = JsonBase.charFormat
   lazy private implicit val communicationIdFormat = JsonCommunication.communicationIdFormat
   lazy private implicit val creatureCharacterFormat = JsonCreatureCharacter.creatureCharacterFormat
+  lazy private implicit val creatureEventsFormat = JsonCreatureEvents.creatureEventsFormat
   lazy private implicit val creatureMissileFormat = JsonCreatureMissile.creatureMissileFormat
   lazy private implicit val creaturePowerFormat = JsonPower.creaturePowerFormat
   lazy private implicit val creatureStatsFormat = JsonCreatureStats.creatureStatsFormat

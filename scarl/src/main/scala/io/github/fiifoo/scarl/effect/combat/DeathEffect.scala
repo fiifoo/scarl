@@ -7,6 +7,7 @@ import io.github.fiifoo.scarl.core.entity.CreatureId
 import io.github.fiifoo.scarl.core.geometry.Location
 import io.github.fiifoo.scarl.core.mutation.{CreatureDeadMutation, CreaturePartyMutation, Mutation, RemovableEntityMutation}
 import io.github.fiifoo.scarl.effect.creature.GainExperienceEffect
+import io.github.fiifoo.scarl.effect.interact.PowerUseEffect
 import io.github.fiifoo.scarl.rule.GainExperienceRule
 
 case class DeathEffect(target: CreatureId,
@@ -24,13 +25,20 @@ case class DeathEffect(target: CreatureId,
       RemovableEntityMutation(target)
     ) ::: leaderDeath(s)
 
-    val effects = GainExperienceRule(s, this) map (x => {
+    val eventEffect = target(s).events flatMap (_.death) map (power => {
+      PowerUseEffect(target, target, power, requireResources = false, Some(this))
+    })
+
+    val experienceEffect = GainExperienceRule(s, this) map (x => {
       val (creature, experience) = x
 
-      List(GainExperienceEffect(creature, experience, Some(this)))
-    }) getOrElse List()
+      GainExperienceEffect(creature, experience, Some(this))
+    })
 
-    EffectResult(mutations, effects)
+    EffectResult(mutations, List(
+      eventEffect,
+      experienceEffect,
+    ).flatten)
   }
 
   private def leaderDeath(s: State): List[Mutation] = {

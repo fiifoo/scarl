@@ -12,7 +12,7 @@ object JsonPower {
   lazy private implicit val resourcesFormat = Json.format[Power.Resources]
 
   lazy private implicit val activateMachineryFormat = Json.format[ActivateMachineryPower]
-  lazy private implicit val explodeItemFormat = Json.format[ExplodeItemPower]
+  lazy private implicit val explodeFormat = Json.format[ExplodePower]
   lazy private implicit val receiveKeyFormat = Json.format[ReceiveKeyPower]
   lazy private implicit val removeItemFormat = Json.format[RemoveItemPower]
   lazy private implicit val transformFormat = Json.format[TransformPower]
@@ -21,9 +21,13 @@ object JsonPower {
 
   lazy implicit val creaturePowerFormat: Format[CreaturePower] = polymorphicTypeFormat(
     data => {
+      case "ActivateMachineryPower" => data.as[ActivateMachineryPower]
+      case "ExplodePower" => data.as[ExplodePower]
       case "TransformPower" => data.as[TransformPower]
       case "VoidPower" => data.as[VoidPower]
     }, {
+      case power: ActivateMachineryPower => activateMachineryFormat.writes(power)
+      case power: ExplodePower => explodeFormat.writes(power)
       case power: TransformPower => transformFormat.writes(power)
       case power: VoidPower => voidFormat.writes(power)
     }
@@ -32,7 +36,7 @@ object JsonPower {
   lazy implicit val itemPowerFormat: Format[ItemPower] = polymorphicTypeFormat(
     data => {
       case "ActivateMachineryPower" => data.as[ActivateMachineryPower]
-      case "ExplodeItemPower" => data.as[ExplodeItemPower]
+      case "ExplodePower" => data.as[ExplodePower]
       case "ReceiveKeyPower" => data.as[ReceiveKeyPower]
       case "RemoveItemPower" => data.as[RemoveItemPower]
       case "TransformPower" => data.as[TransformPower]
@@ -40,7 +44,7 @@ object JsonPower {
       case "VoidPower" => data.as[VoidPower]
     }, {
       case power: ActivateMachineryPower => activateMachineryFormat.writes(power)
-      case power: ExplodeItemPower => explodeItemFormat.writes(power)
+      case power: ExplodePower => explodeFormat.writes(power)
       case power: ReceiveKeyPower => receiveKeyFormat.writes(power)
       case power: RemoveItemPower => removeItemFormat.writes(power)
       case power: TransformPower => transformFormat.writes(power)

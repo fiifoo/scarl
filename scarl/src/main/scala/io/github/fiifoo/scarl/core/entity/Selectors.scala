@@ -83,6 +83,16 @@ object Selectors {
     s.cache.waypointNetwork.locationWaypoint.get(location)
   }
 
+  def getLocationWidgets(s: State)(location: Location): Set[ContainerId] = {
+    val isWidget = this.isWidget(s) _
+
+    s.index.locationEntities.get(location) map (entities => {
+      (entities collect {
+        case container: ContainerId if isWidget(container) => container
+      })
+    }) getOrElse Set()
+  }
+
   def getStatusLocation(s: State)(status: StatusId, deep: Boolean = false): Option[Location] = {
     status(s).target match {
       case target: ContainerId => Some(target(s).location)
@@ -116,5 +126,9 @@ object Selectors {
 
   def isVisibleItem(s: State, creature: CreatureId)(item: ItemId) = {
     !item(s).hidden || (s.foundItems.get(creature) exists (_ contains item))
+  }
+
+  def isWidget(s: State)(container: ContainerId): Boolean = {
+    getContainerItems(s)(container).size == 1 && getTargetStatuses(s)(container).size == 1
   }
 }

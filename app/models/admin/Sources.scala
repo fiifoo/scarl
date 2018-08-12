@@ -15,7 +15,7 @@ import io.github.fiifoo.scarl.core.entity.{CreaturePower, ItemPower}
 import io.github.fiifoo.scarl.core.item._
 import io.github.fiifoo.scarl.core.kind._
 import io.github.fiifoo.scarl.core.math.Distribution
-import io.github.fiifoo.scarl.mechanism.{CreateEntityMechanism, RemoveWallMechanism, UseDoorMechanism}
+import io.github.fiifoo.scarl.mechanism._
 import io.github.fiifoo.scarl.power._
 import io.github.fiifoo.scarl.widget._
 
@@ -97,6 +97,8 @@ object Sources {
     )),
 
     SubModelSource(typeOf[CreaturePower], List(
+      typeOf[ActivateMachineryPower],
+      typeOf[ExplodePower],
       typeOf[TransformPower],
       typeOf[VoidPower],
     )),
@@ -153,7 +155,7 @@ object Sources {
 
     SubModelSource(typeOf[ItemPower], List(
       typeOf[ActivateMachineryPower],
-      typeOf[ExplodeItemPower],
+      typeOf[ExplodePower],
       typeOf[ReceiveKeyPower],
       typeOf[RemoveItemPower],
       typeOf[TransformPower],
@@ -169,6 +171,7 @@ object Sources {
     SubModelSource(typeOf[Mechanism], List(
       typeOf[CreateEntityMechanism],
       typeOf[RemoveWallMechanism],
+      typeOf[RemoveWidgetMechanism],
       typeOf[UseDoorMechanism],
     )),
 

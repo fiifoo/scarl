@@ -392,9 +392,8 @@ class EventBuilder(s: State, player: CreatureId, fov: Set[Location]) {
     }
   }
 
-
   private def build(effect: MachineryActivatedEffect): Option[String] = {
-    if (effect.activator == player) {
+    if (effect.activator == player || (fov contains effect.location)) {
       effect.description
     } else {
       None

@@ -3,7 +3,7 @@ package io.github.fiifoo.scarl.core.kind
 import io.github.fiifoo.scarl.core.State
 import io.github.fiifoo.scarl.core.ai.Behavior
 import io.github.fiifoo.scarl.core.communication.CommunicationId
-import io.github.fiifoo.scarl.core.creature.{Character, FactionId, Missile, Party, Stats}
+import io.github.fiifoo.scarl.core.creature.{Character, Events, FactionId, Missile, Party, Stats}
 import io.github.fiifoo.scarl.core.entity._
 import io.github.fiifoo.scarl.core.geometry.Location
 import io.github.fiifoo.scarl.core.item.Equipment.Slot
@@ -21,6 +21,7 @@ case class CreatureKind(id: CreatureKindId,
                         stats: Stats,
 
                         character: Option[Character] = None,
+                        events: Option[Events] = None,
                         flying: Boolean = false,
                         locked: Option[Lock.Source] = None,
                         missile: Option[Missile] = None,
@@ -52,6 +53,7 @@ case class CreatureKind(id: CreatureKindId,
       owner = owner map SafeCreatureId.apply,
 
       character = character,
+      events = events,
       flying = flying,
       locked = locked map (Lock(_, Some(creatureId))),
       missile = missile,

@@ -13,7 +13,7 @@ case class ActivateMachineryEffect(activator: CreatureId,
 
   def apply(s: State): EffectResult = {
     val mechanism = machinery(s).mechanism
-    val usedEffect = MachineryActivatedEffect(activator, mechanism.description, Some(this))
+    val usedEffect = MachineryActivatedEffect(activator, location, mechanism.description, Some(this))
     val effects = machinery(s).interact(s, location)
 
     EffectResult(usedEffect :: effects)

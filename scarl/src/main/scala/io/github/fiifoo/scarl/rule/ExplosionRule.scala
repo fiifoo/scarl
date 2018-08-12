@@ -8,10 +8,12 @@ import io.github.fiifoo.scarl.core.geometry.{Line, Location, Obstacle, Shape}
 object ExplosionRule {
 
   def apply(s: State, location: Location, stats: Explosive): Set[Location] = {
-    val step = stats.blast / stats.radius / 2
+    val radius = math.max(1, stats.radius)
+
+    val step = stats.blast / radius / 2
     val obstacle = Obstacle.explosion(s) _
 
-    Shape.circle(location, stats.radius) filterNot blocked(s, step, location, stats, obstacle)
+    Shape.circle(location, radius) filterNot blocked(s, step, location, stats, obstacle)
   }
 
   private def blocked(s: State,

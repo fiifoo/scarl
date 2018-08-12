@@ -10,6 +10,7 @@ object JsonCreature {
 
   lazy private implicit val behaviorFormat = JsonTactic.behaviorFormat
   lazy private implicit val creatureCharacterFormat = JsonCreatureCharacter.creatureCharacterFormat
+  lazy private implicit val creatureEventsFormat = JsonCreatureEvents.creatureEventsFormat
   lazy private implicit val creatureKindIdFormat = JsonCreatureKind.creatureKindIdFormat
   lazy private implicit val creatureMissileFormat = JsonCreatureMissile.creatureMissileFormat
   lazy private implicit val creaturePartyFormat = JsonCreatureParty.creaturePartyFormat
