@@ -1,6 +1,7 @@
 {
   "name": "scarl-ui",
   "version": "0.1.0",
+  "main": "main.js",
   "devDependencies": {
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.4",
@@ -8,6 +9,7 @@
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
     "css-loader": "^0.28.11",
+    "electron": "^2.0.7",
     "eslint": "^4.19.1",
     "eslint-plugin-react": "^7.7.0",
     "file-loader": "^1.1.11",
@@ -30,6 +32,7 @@
     "redux-thunk": "^2.2.0"
   },
   "scripts": {
-    "start": "./node_modules/.bin/webpack-dev-server --mode=development"
+    "start": "./node_modules/.bin/webpack-dev-server --mode=development",
+    "electron": "electron ."
   }
 }

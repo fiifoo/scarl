@@ -1,6 +1,6 @@
 /* eslint no-console: 0 */
 
-const enabled = false
+const enabled = true
 
 let previous = null
 
