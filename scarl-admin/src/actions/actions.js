@@ -181,6 +181,11 @@ export const setItemValue = (path, value) => ({
     value,
 })
 
+export const addTag = tag => ({
+    type: types.ADD_TAG,
+    tag,
+})
+
 export const showItemReferences = (model, id) => (dispatch, getState) => {
     const {data, models} = getState()
     const references = getItemReferences(data, models)(model, id)

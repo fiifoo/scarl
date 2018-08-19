@@ -3,6 +3,7 @@ import data from './data'
 import models from './models'
 import summary from './summary'
 import ui from './ui'
+import tags from './tags'
 
 export default combineReducers({
     data,
@@ -10,4 +11,5 @@ export default combineReducers({
     readonly: (state = false) => state,
     summary,
     ui,
+    tags,
 })

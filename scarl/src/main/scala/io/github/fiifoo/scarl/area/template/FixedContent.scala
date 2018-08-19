@@ -1,14 +1,14 @@
 package io.github.fiifoo.scarl.area.template
 
 import io.github.fiifoo.scarl.area.template.FixedContent.MachinerySource
-import io.github.fiifoo.scarl.core.State
 import io.github.fiifoo.scarl.core.entity.{Machinery, MachineryId}
 import io.github.fiifoo.scarl.core.geometry.{Location, Rotation}
 import io.github.fiifoo.scarl.core.item.Mechanism
 import io.github.fiifoo.scarl.core.kind._
 import io.github.fiifoo.scarl.core.mutation.{IdSeqMutation, NewEntityMutation}
+import io.github.fiifoo.scarl.core.{State, Tag}
 
-case class FixedContent(conduitLocations: Map[Location, Option[String]] = Map(),
+case class FixedContent(conduitLocations: Map[Location, Option[Tag]] = Map(),
                         creatures: Map[Location, CreatureKindId] = Map(),
                         gatewayLocations: Set[Location] = Set(),
                         items: Map[Location, List[ItemKindId]] = Map(),

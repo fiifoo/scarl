@@ -5,8 +5,8 @@ import ModelSelect from './ModelSelect.jsx'
 import PropertyAdd from './PropertyAdd.jsx'
 
 const ColumnEditor = ({
-    data, models, ui,
-    setModel, setItems, setProperties, setItemValue,
+    data, models, tags, ui,
+    setModel, setItems, setProperties, setItemValue, addTag,
 }) =>  (
     <div className="column-editor">
         <div className="form-horizontal left-content">
@@ -23,10 +23,12 @@ const ColumnEditor = ({
             <Editor
                 data={data}
                 models={models}
+                tags={tags}
                 ui={ui}
                 setItems={setItems}
                 setProperties={setProperties}
-                setItemValue={setItemValue} />
+                setItemValue={setItemValue}
+                addTag={addTag} />
         )}
     </div>
 )

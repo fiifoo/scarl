@@ -1,5 +1,6 @@
 import React from 'react'
 import Select from 'react-select'
+import CreatableSelect from 'react-select/lib/Creatable'
 import FormRow from './FormRow.jsx'
 
 const sort = (a, b) => a.label < b.label ? -1 : 1
@@ -12,10 +13,12 @@ const getValue = (multi, selection) => multi ? (
 
 const SelectRow = ({
     button, choices, value, onChange,
-    multi = false, disabled = false, required = false,
+    multi = false, disabled = false, required = false, creatable = false,
     inputStyle, placeholder = undefined, input = {}, ...props,
 }) => {
-    const component = <Select
+    const Component = creatable ? CreatableSelect : Select
+
+    const component = <Component
         style={inputStyle}
         value={value}
         multi={multi}

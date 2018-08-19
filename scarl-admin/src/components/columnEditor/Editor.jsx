@@ -12,8 +12,8 @@ const RemoveButton = props => (
 )
 
 const Editor = ({
-    data, models, ui,
-    setItems, setProperties, setItemValue,
+    data, models, tags, ui,
+    setItems, setProperties, setItemValue, addTag,
 }) => {
 
     const removeItem = item => {
@@ -33,7 +33,9 @@ const Editor = ({
         horizontal: false,
         data,
         models,
+        tags,
         setValue: setItemValue,
+        addTag,
     }
 
     const renderHeader = () => (

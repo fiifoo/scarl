@@ -16,6 +16,7 @@ import PolymorphicRelationField from './PolymorphicRelationField.jsx'
 import RelationField from './RelationField.jsx'
 import SideFormField from './SideFormField.jsx'
 import StringField from './StringField.jsx'
+import TagField from './TagField.jsx'
 
 const fieldComponents = {
     BooleanField,
@@ -31,7 +32,8 @@ const fieldComponents = {
 }
 
 const aliasFieldComponents = {
-    Color: ColorField
+    Color: ColorField,
+    Tag: TagField,
 }
 
 const modelFieldComponents = {

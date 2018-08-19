@@ -7,6 +7,7 @@ import io.github.fiifoo.scarl.area.template.ContentSelection.FixedItem
 import io.github.fiifoo.scarl.area.template.ContentSource.{ItemSource, TemplateSource}
 import io.github.fiifoo.scarl.area.template.RandomizedTemplate.{ConduitLocations, Entrances}
 import io.github.fiifoo.scarl.area.template.Template.{Category, Result}
+import io.github.fiifoo.scarl.core.Tag
 import io.github.fiifoo.scarl.core.geometry.{Location, Rotation}
 import io.github.fiifoo.scarl.core.kind._
 import io.github.fiifoo.scarl.core.math.Distribution.Uniform
@@ -24,7 +25,7 @@ object RandomizedTemplate {
 
   case class ConduitLocations(min: Int = 0,
                               max: Int = 0,
-                              tag: Option[String] = None
+                              tag: Option[Tag] = None
                              )
 
 }

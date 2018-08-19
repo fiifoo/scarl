@@ -1,4 +1,4 @@
-import { List, Map } from 'immutable'
+import { List, Map, Set } from 'immutable'
 
 export const isPolymorphic = model => model.polymorphic.length > 0
 
@@ -98,6 +98,20 @@ export const getItemReferences = (data, models) => (model, id) => {
     }
 
     return reduceModels(models, reducer, {data, references: List()}).references
+}
+
+export const getTags = (data, models) => {
+    const reducer = ({data, tags}, {path, fieldType}) => {
+        const value = data.getIn(path)
+
+        if (value != null && fieldType.data.alias === 'Tag') {
+            tags = tags.add(value)
+        }
+
+        return {data, tags}
+    }
+
+    return reduceModels(models, reducer, {data, tags: Set()}).tags
 }
 
 const getNewModelValue = (model, models) => Map(model.properties.map(property => [

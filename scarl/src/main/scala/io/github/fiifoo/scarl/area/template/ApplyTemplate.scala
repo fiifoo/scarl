@@ -1,11 +1,11 @@
 package io.github.fiifoo.scarl.area.template
 
-import io.github.fiifoo.scarl.core.State
 import io.github.fiifoo.scarl.core.geometry.{Location, WaypointNetwork}
 import io.github.fiifoo.scarl.core.kind._
 import io.github.fiifoo.scarl.core.math.Rng
 import io.github.fiifoo.scarl.core.mutation.{NewConduitEntranceMutation, NewConduitExitMutation, NewGatewayMutation}
 import io.github.fiifoo.scarl.core.world.ConduitId
+import io.github.fiifoo.scarl.core.{State, Tag}
 import io.github.fiifoo.scarl.world.Conduit
 
 import scala.util.Random
@@ -104,7 +104,7 @@ object ApplyTemplate {
       throw new CalculateFailedException
     }
 
-    val data: List[(ConduitId, Option[ItemKindId], Option[String])] =
+    val data: List[(ConduitId, Option[ItemKindId], Option[Tag])] =
       (in map (conduit => (conduit.id, conduit.targetItem, conduit.tag))) :::
         (out map (conduit => (conduit.id, Some(conduit.sourceItem), conduit.tag)))
 
@@ -160,8 +160,8 @@ object ApplyTemplate {
 
   private def getConduitLocations(template: Template.Result,
                                   offset: Location = Location(0, 0),
-                                  result: Map[Location, Option[String]] = Map()
-                                 ): Map[Location, Option[String]] = {
+                                  result: Map[Location, Option[Tag]] = Map()
+                                 ): Map[Location, Option[Tag]] = {
     val locations = template.content.conduitLocations map { case (k, v) => (offset.add(k), v) }
 
     (template.templates foldLeft (result ++ locations)) ((result, x) => {

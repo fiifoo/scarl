@@ -5,8 +5,8 @@ import TextInputRow from './form/TextInputRow.jsx'
 import SideForm from './SideForm.jsx'
 
 const ItemForm = ({
-    item, itemRename, model, sideForm, data, models,
-    deleteItem, renameItem, setItemRenameId, setItemValue, showItem, showItemReferences, showSideForm, hideSideForm
+    item, itemRename, model, sideForm, data, models, tags,
+    deleteItem, renameItem, setItemRenameId, setItemValue, addTag, showItem, showItemReferences, showSideForm, hideSideForm
 }) => {
     const id = readItemId(model, item)
     const path = model.dataPath.concat([id])
@@ -15,7 +15,9 @@ const ItemForm = ({
     const common = {
         data,
         models,
+        tags,
         setValue: setItemValue,
+        addTag,
         showItem,
         showSideForm,
         hideSideForm,
