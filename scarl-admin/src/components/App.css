@@ -41,6 +41,10 @@ body {
     min-height: 34px;
 }
 
+.color-field .input-group {
+    max-width: 130px;
+}
+
 .side-form {
     position: absolute;
     right: 0;

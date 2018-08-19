@@ -40,7 +40,7 @@ object Utils {
 
   def getPropertyName(s: Symbol): String = s.name.toString.trim
 
-  def isSubType(t: Type): Boolean = {
+  def isOwnType(t: Type): Boolean = {
     t.toString.startsWith("io.github.fiifoo.scarl.")
   }
 }

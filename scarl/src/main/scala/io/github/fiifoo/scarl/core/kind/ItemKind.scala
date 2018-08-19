@@ -1,6 +1,6 @@
 package io.github.fiifoo.scarl.core.kind
 
-import io.github.fiifoo.scarl.core.State
+import io.github.fiifoo.scarl.core.{Color, State}
 import io.github.fiifoo.scarl.core.creature.Stats.Explosive
 import io.github.fiifoo.scarl.core.entity._
 import io.github.fiifoo.scarl.core.geometry.Location
@@ -23,7 +23,7 @@ object ItemKind {
 case class ItemKind(id: ItemKindId,
                     name: String,
                     display: Char,
-                    color: String,
+                    color: Color,
                     category: Option[Category] = None,
                     power: Option[Int] = None,
 

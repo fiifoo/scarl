@@ -1,6 +1,6 @@
 package io.github.fiifoo.scarl.core.kind
 
-import io.github.fiifoo.scarl.core.State
+import io.github.fiifoo.scarl.core.{Color, State}
 import io.github.fiifoo.scarl.core.ai.Behavior
 import io.github.fiifoo.scarl.core.communication.CommunicationId
 import io.github.fiifoo.scarl.core.creature.{Character, Events, FactionId, Missile, Party, Stats}
@@ -14,7 +14,7 @@ import io.github.fiifoo.scarl.core.mutation.{EquipItemMutation, IdSeqMutation, M
 case class CreatureKind(id: CreatureKindId,
                         name: String,
                         display: Char,
-                        color: String,
+                        color: Color,
                         faction: FactionId,
                         solitary: Boolean = false,
                         behavior: Behavior,

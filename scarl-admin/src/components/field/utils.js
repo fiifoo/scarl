@@ -4,6 +4,7 @@ import FixedTemplateField from '../area/FixedTemplateField.jsx'
 import MachinerySourceField from '../area/MachinerySourceField.jsx'
 import BooleanField from './BooleanField.jsx'
 import CharField from './CharField.jsx'
+import ColorField from './ColorField.jsx'
 import DecimalField from './DecimalField.jsx'
 import FormField from './FormField.jsx'
 import IntegerField from './IntegerField.jsx'
@@ -29,7 +30,11 @@ const fieldComponents = {
     StringField,
 }
 
-const customFieldComponents = {
+const aliasFieldComponents = {
+    Color: ColorField
+}
+
+const modelFieldComponents = {
     FixedContent: FixedContentField,
     FixedTemplate: FixedTemplateField,
     'FixedContent.MachinerySource': MachinerySourceField,
@@ -45,8 +50,12 @@ export const createFormFieldType = model => ({
 })
 
 export const getFieldComponent = (fieldType, model = null, allowCustom = true) => {
-    if (model && allowCustom && customFieldComponents[model.id]) {
-        return customFieldComponents[model.id]
+    if (allowCustom && fieldType.data.alias && aliasFieldComponents[fieldType.data.alias]) {
+        return aliasFieldComponents[fieldType.data.alias]
+    }
+
+    if (model && allowCustom && modelFieldComponents[model.id]) {
+        return modelFieldComponents[model.id]
     }
 
     const component = fieldComponents[fieldType.type]

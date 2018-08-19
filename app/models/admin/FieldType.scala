@@ -8,15 +8,15 @@ sealed trait FieldType {
 
 object FieldType {
 
-  case class IntegerField(required: Boolean = true) extends FieldType
+  case class IntegerField(required: Boolean = true, alias: Option[String]) extends FieldType
 
-  case class DecimalField(required: Boolean = true) extends FieldType
+  case class DecimalField(required: Boolean = true, alias: Option[String]) extends FieldType
 
-  case class BooleanField(required: Boolean = true) extends FieldType
+  case class BooleanField(required: Boolean = true, alias: Option[String]) extends FieldType
 
-  case class CharField(required: Boolean = true) extends FieldType
+  case class CharField(required: Boolean = true, alias: Option[String]) extends FieldType
 
-  case class StringField(required: Boolean = true) extends FieldType
+  case class StringField(required: Boolean = true, alias: Option[String]) extends FieldType
 
   case class RelationField(model: Model.Id, required: Boolean = true) extends FieldType
 

@@ -93,13 +93,13 @@ object Models {
 
         (ListField(valueFieldType, required), subs)
 
-      case t if t =:= typeOf[Int] => (IntegerField(required), List())
-      case t if t =:= typeOf[Long] => (IntegerField(required), List())
-      case t if t =:= typeOf[Double] => (DecimalField(required), List())
-      case t if t =:= typeOf[Float] => (DecimalField(required), List())
-      case t if t =:= typeOf[Boolean] => (BooleanField(required), List())
-      case t if t =:= typeOf[Char] => (CharField(required), List())
-      case t if t =:= typeOf[String] => (StringField(required), List())
+      case t if t =:= typeOf[Int] => (IntegerField(required, getScalarFieldAlias(t)), List())
+      case t if t =:= typeOf[Long] => (IntegerField(required, getScalarFieldAlias(t)), List())
+      case t if t =:= typeOf[Double] => (DecimalField(required, getScalarFieldAlias(t)), List())
+      case t if t =:= typeOf[Float] => (DecimalField(required, getScalarFieldAlias(t)), List())
+      case t if t =:= typeOf[Boolean] => (BooleanField(required, getScalarFieldAlias(t)), List())
+      case t if t =:= typeOf[Char] => (CharField(required, getScalarFieldAlias(t)), List())
+      case t if t =:= typeOf[String] => (StringField(required, getScalarFieldAlias(t)), List())
 
       case t if Sources.main.isDefinedAt(Model.RelationId.fromProperty(t)) =>
         val source = Sources.main(Model.RelationId.fromProperty(t))
@@ -111,13 +111,21 @@ object Models {
 
         (PolymorphicRelationField(source.models, required), List())
 
-      case t if isSubType(t) || t <:< typeOf[(_, _)] || t <:< typeOf[(_, _, _)] =>
+      case t if isOwnType(t) || t <:< typeOf[(_, _)] || t <:< typeOf[(_, _, _)] =>
         val id = SubModel.Id(t)
         val subs = if (t =:= parent) List() else scanSubModel(t)
 
         (FormField(id, required), subs)
 
       case _ => throw new Exception("Unknown field type " + t)
+    }
+  }
+
+  private def getScalarFieldAlias(t: Type): Option[String] = {
+    if (isOwnType(t)) {
+      Some(getModelKey(t))
+    } else {
+      None
     }
   }
 
