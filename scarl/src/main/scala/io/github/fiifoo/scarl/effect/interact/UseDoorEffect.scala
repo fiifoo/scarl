@@ -42,7 +42,7 @@ case class UseDoorEffect(user: Option[CreatureId],
         })
       }) getOrElse {
         val opening = !door.open
-        val result = door.transformTo(s).apply(s, s.idSeq, target(s).container, Options(user))
+        val result = door.transformTo(s).apply(s, s.idSeq, target(s).container, Options(user, target(s).tags))
 
         EffectResult(
           RemovableEntityMutation(target) :: result.mutations,

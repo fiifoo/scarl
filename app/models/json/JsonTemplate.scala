@@ -52,6 +52,16 @@ object JsonTemplate {
     case "ContentSelection.FixedItem" => data.as[ContentSelection.FixedItem]
   })
 
+  lazy private implicit val fixedTerrainSelectionReads = Json.reads[ContentSelection.FixedTerrain]
+  lazy private implicit val TerrainSelectionReads: Reads[ContentSelection.TerrainSelection] = polymorphicTypeReads(data => {
+    case "ContentSelection.FixedTerrain" => data.as[ContentSelection.FixedTerrain]
+  })
+
+  lazy private implicit val fixedWallSelectionReads = Json.reads[ContentSelection.FixedWall]
+  lazy private implicit val wallSelectionReads: Reads[ContentSelection.WallSelection] = polymorphicTypeReads(data => {
+    case "ContentSelection.FixedWall" => data.as[ContentSelection.FixedWall]
+  })
+
   lazy private implicit val themeWidgetReads = Json.reads[ContentSelection.ThemeWidget]
   lazy private implicit val fixedWidgetReads = Json.reads[ContentSelection.FixedWidget]
   lazy private implicit val widgetSelectionReads: Reads[ContentSelection.WidgetSelection] = polymorphicTypeReads(data => {

@@ -13,6 +13,7 @@ const Editor = ({path, value, common, editor, setEditorBrush, setEditorLocation}
         return <div />
     }
 
+    const machinery = value.getIn(['content', 'machinery'])
     const contents = LocationContent.read(value, data)
     const setLocationContent = location => content => setValue(path, LocationContent.write(value, location, content))
     const setContents = contents => {
@@ -41,6 +42,7 @@ const Editor = ({path, value, common, editor, setEditorBrush, setEditorLocation}
             <h4 className="text-center">Brush</h4>
             <EditorBrush
                 common={common}
+                machinery={machinery}
                 contents={contents}
                 editor={editor}
                 setBrush={setEditorBrush}
@@ -53,7 +55,7 @@ const Editor = ({path, value, common, editor, setEditorBrush, setEditorLocation}
             <h4 className="text-center">Location ({location.x},{location.y})</h4>
             <EditorLocation
                 common={common}
-                machinery={value.getIn(['content', 'machinery'])}
+                machinery={machinery}
                 content={contents.get(location, LocationContent())}
                 setContent={setLocationContent(location)} />
         </div>
@@ -61,13 +63,9 @@ const Editor = ({path, value, common, editor, setEditorBrush, setEditorLocation}
 
     return (
         <div>
-            <div style={{display: 'table-cell', paddingRight: 40, width: 500}}>
-                {editor.locations.size > 1 && renderEditorBrush()}
-                {editor.locations.size == 1 && renderEditorLocation(editor.location)}
-            </div>
-            <div style={{display: 'table-cell'}}>
-                {editorView}
-            </div>
+            {editorView}
+            {editor.locations.size > 1 && renderEditorBrush()}
+            {editor.locations.size == 1 && renderEditorLocation(editor.location)}
         </div>
     )
 }

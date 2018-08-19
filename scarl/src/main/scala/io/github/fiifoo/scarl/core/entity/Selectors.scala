@@ -84,12 +84,10 @@ object Selectors {
   }
 
   def getLocationWidgets(s: State)(location: Location): Set[ContainerId] = {
-    val isWidget = this.isWidget(s) _
-
     s.index.locationEntities.get(location) map (entities => {
-      (entities collect {
-        case container: ContainerId if isWidget(container) => container
-      })
+      entities collect {
+        case container: ContainerId if container(s).widget => container
+      }
     }) getOrElse Set()
   }
 
@@ -126,9 +124,5 @@ object Selectors {
 
   def isVisibleItem(s: State, creature: CreatureId)(item: ItemId) = {
     !item(s).hidden || (s.foundItems.get(creature) exists (_ contains item))
-  }
-
-  def isWidget(s: State)(container: ContainerId): Boolean = {
-    getContainerItems(s)(container).size == 1 && getTargetStatuses(s)(container).size == 1
   }
 }

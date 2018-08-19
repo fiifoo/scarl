@@ -1,6 +1,7 @@
 package io.github.fiifoo.scarl.area.template
 
 import io.github.fiifoo.scarl.core.geometry.{Location, WaypointNetwork}
+import io.github.fiifoo.scarl.core.kind.Kind.Options
 import io.github.fiifoo.scarl.core.kind._
 import io.github.fiifoo.scarl.core.math.Rng
 import io.github.fiifoo.scarl.core.mutation.{NewConduitEntranceMutation, NewConduitExitMutation, NewGatewayMutation}
@@ -67,28 +68,34 @@ object ApplyTemplate {
   }
 
   private def processEntities(s: State,
-                              elements: Map[Location, List[KindId]],
+                              elements: Map[Location, List[(KindId, Set[Tag])]],
                               offset: Location,
                              ): State = {
 
-    elements.foldLeft(s)((s, data) => {
-      val (location, locationElements) = data
+    elements.foldLeft(s)((s, x) => {
+      val (location, elements) = x
 
-      locationElements.foldLeft(s)((s, element) => {
-        element(s).apply(s, s.idSeq, location.add(offset)).write(s)
+      elements.foldLeft(s)((s, x) => {
+        val (element, tags) = x
+
+        element(s)
+          .apply(s, s.idSeq, location.add(offset), Options(tags = tags))
+          .write(s)
       })
     })
   }
 
   private def processUniqueEntities(s: State,
-                                    elements: Map[Location, KindId],
+                                    elements: Map[Location, (KindId, Set[Tag])],
                                     offset: Location,
                                    ): State = {
 
-    elements.foldLeft(s)((s, data) => {
-      val (location, element) = data
+    elements.foldLeft(s)((s, x) => {
+      val (location, (element, tags)) = x
 
-      element(s).apply(s, s.idSeq, location.add(offset)).write(s)
+      element(s)
+        .apply(s, s.idSeq, location.add(offset), Options(tags = tags))
+        .write(s)
     })
   }
 

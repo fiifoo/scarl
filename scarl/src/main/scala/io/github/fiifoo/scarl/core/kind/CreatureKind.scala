@@ -52,6 +52,7 @@ case class CreatureKind(id: CreatureKindId,
       materials = stats.materials.max,
       stats = stats,
       owner = options.owner map SafeCreatureId.apply,
+      tags = options.tags,
 
       character = character,
       events = events,

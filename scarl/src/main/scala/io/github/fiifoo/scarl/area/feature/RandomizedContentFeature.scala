@@ -26,26 +26,20 @@ case class RandomizedContentFeature(creatures: List[CreatureSource] = List(),
            ): FixedContent = {
     val free = freeLocations(content, locations)
 
-    val creatures = randomUniqueElementLocations(
-      assets = assets,
-      area = area,
+    val creatures = randomUniqueSelectionLocations(
       locations = free,
       sources = this.creatures,
       existing = content.creatures,
       random = random
     )
 
-    val widgets = randomUniqueElementLocations(
-      assets = assets,
-      area = area,
+    val widgets = randomUniqueSelectionLocations(
       locations = free,
       sources = this.widgets,
       existing = content.widgets,
       random = random
     )
-    val items = randomElementLocations(
-      assets = assets,
-      area = area,
+    val items = randomSelectionLocations(
       locations = free -- widgets.keys,
       sources = this.items,
       existing = content.items,

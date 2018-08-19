@@ -1,6 +1,7 @@
 package io.github.fiifoo.scarl.area.template
 
 import io.github.fiifoo.scarl.area.Area
+import io.github.fiifoo.scarl.core.Tag
 import io.github.fiifoo.scarl.core.assets.CombatPower
 import io.github.fiifoo.scarl.core.item.Equipment
 import io.github.fiifoo.scarl.core.kind._
@@ -12,35 +13,53 @@ import scala.util.Random
 
 sealed trait ContentSelection[T] {
   def apply(assets: WorldAssets, area: Area, random: Random): Option[T]
+
+  val tags: Set[Tag]
 }
 
 case object ContentSelection {
 
-  sealed trait CreatureSelection extends ContentSelection[CreatureKindId]
+  type CreatureSelection = ContentSelection[CreatureKindId]
 
-  sealed trait ItemSelection extends ContentSelection[ItemKindId]
+  type ItemSelection = ContentSelection[ItemKindId]
 
-  sealed trait TemplateSelection extends ContentSelection[TemplateId]
+  type TemplateSelection = ContentSelection[TemplateId]
 
-  sealed trait WidgetSelection extends ContentSelection[WidgetKindId]
+  type TerrainSelection = ContentSelection[TerrainKindId]
 
-  case class FixedCreature(kind: CreatureKindId) extends CreatureSelection {
+  type WidgetSelection = ContentSelection[WidgetKindId]
+
+  type WallSelection = ContentSelection[WallKindId]
+
+  case class FixedCreature(kind: CreatureKindId, tags: Set[Tag] = Set()) extends CreatureSelection {
     def apply(assets: WorldAssets, area: Area, random: Random): Option[CreatureKindId] = Some(this.kind)
   }
 
-  case class FixedItem(kind: ItemKindId) extends ItemSelection {
+  case class FixedItem(kind: ItemKindId, tags: Set[Tag] = Set()) extends ItemSelection {
     def apply(assets: WorldAssets, area: Area, random: Random): Option[ItemKindId] = Some(this.kind)
   }
 
   case class FixedTemplate(template: TemplateId) extends TemplateSelection {
+    val tags: Set[Tag] = Set()
+
     def apply(assets: WorldAssets, area: Area, random: Random): Option[TemplateId] = Some(this.template)
   }
 
-  case class FixedWidget(kind: WidgetKindId) extends WidgetSelection {
+  case class FixedTerrain(kind: TerrainKindId, tags: Set[Tag] = Set()) extends TerrainSelection {
+    def apply(assets: WorldAssets, area: Area, random: Random): Option[TerrainKindId] = Some(this.kind)
+  }
+
+  case class FixedWall(kind: WallKindId, tags: Set[Tag] = Set()) extends WallSelection {
+    def apply(assets: WorldAssets, area: Area, random: Random): Option[WallKindId] = Some(this.kind)
+  }
+
+  case class FixedWidget(kind: WidgetKindId, tags: Set[Tag] = Set()) extends WidgetSelection {
     def apply(assets: WorldAssets, area: Area, random: Random): Option[WidgetKindId] = Some(this.kind)
   }
 
-  case class ThemeCreature(power: Set[CombatPower.Category] = Set()) extends CreatureSelection {
+  case class ThemeCreature(power: Set[CombatPower.Category] = Set(),
+                           tags: Set[Tag] = Set()
+                          ) extends CreatureSelection {
     def apply(assets: WorldAssets, area: Area, random: Random): Option[CreatureKindId] = {
       val choices = assets.themes(area.theme).creatures
       val constraints = if (this.power.isEmpty) CombatPower.categories else this.power
@@ -54,7 +73,8 @@ case object ContentSelection {
   }
 
   case class ThemeItem(category: Set[ItemKind.Category] = Set(),
-                       power: Set[CombatPower.Category] = Set()
+                       power: Set[CombatPower.Category] = Set(),
+                       tags: Set[Tag] = Set()
                       ) extends ItemSelection {
     def apply(assets: WorldAssets, area: Area, random: Random): Option[ItemKindId] = {
       val choices = assets.themes(area.theme).items
@@ -70,7 +90,8 @@ case object ContentSelection {
   }
 
   case class ThemeEquipment(category: Set[Equipment.Category] = Set(),
-                            power: Set[CombatPower.Category] = Set()
+                            power: Set[CombatPower.Category] = Set(),
+                            tags: Set[Tag] = Set()
                            ) extends ItemSelection {
     def apply(assets: WorldAssets, area: Area, random: Random): Option[ItemKindId] = {
       val choices = assets.themes(area.theme).items
@@ -86,7 +107,8 @@ case object ContentSelection {
   }
 
   case class ThemeTemplate(category: Set[Template.Category] = Set(),
-                           power: Set[CombatPower.Category] = Set()
+                           power: Set[CombatPower.Category] = Set(),
+                           tags: Set[Tag] = Set()
                           ) extends TemplateSelection {
     def apply(assets: WorldAssets, area: Area, random: Random): Option[TemplateId] = {
       val choices = assets.themes(area.theme).templates
@@ -102,7 +124,8 @@ case object ContentSelection {
   }
 
   case class ThemeWidget(category: Set[WidgetKind.Category] = Set(),
-                         power: Set[CombatPower.Category] = Set()
+                         power: Set[CombatPower.Category] = Set(),
+                         tags: Set[Tag] = Set()
                         ) extends WidgetSelection {
     def apply(assets: WorldAssets, area: Area, random: Random): Option[WidgetKindId] = {
       val choices = assets.themes(area.theme).widgets

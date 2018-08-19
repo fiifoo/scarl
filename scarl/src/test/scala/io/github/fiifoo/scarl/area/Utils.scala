@@ -1,6 +1,7 @@
 package io.github.fiifoo.scarl.area
 
 import io.github.fiifoo.scarl.area.shape.Shape
+import io.github.fiifoo.scarl.area.template.ContentSelection.{FixedItem, FixedWall}
 import io.github.fiifoo.scarl.area.template.FixedContent
 import io.github.fiifoo.scarl.core.geometry.Location
 import io.github.fiifoo.scarl.core.kind.{ItemKindId, WallKindId}
@@ -36,13 +37,13 @@ object Utils {
         case '#' => template.copy(
           locations = template.locations + location,
           content = template.content.copy(
-            walls = template.content.walls + (location -> wall)
+            walls = template.content.walls + (location -> FixedWall(wall))
           )
         )
         case '/' => template.copy(
           locations = template.locations + location,
           content = template.content.copy(
-            items = template.content.items + (location -> List(item))
+            items = template.content.items + (location -> List(FixedItem(item)))
           )
         )
         case '.' => template.copy(

@@ -3,6 +3,7 @@ package io.github.fiifoo.scarl.area.feature
 import io.github.fiifoo.scarl.area.Area
 import io.github.fiifoo.scarl.area.feature.HouseFeature.{Build, Scan}
 import io.github.fiifoo.scarl.area.shape.Shape
+import io.github.fiifoo.scarl.area.template.ContentSelection.{FixedItem, FixedWall}
 import io.github.fiifoo.scarl.area.template.FixedContent
 import io.github.fiifoo.scarl.core.geometry.{Location, Rotation}
 import io.github.fiifoo.scarl.core.kind.{ItemKindId, WallKindId}
@@ -71,11 +72,11 @@ case class HouseFeature(iterations: Int,
                     wall: WallKindId,
                     door: ItemKindId
                    ): FixedContent = {
-    val walls = (result.walls map rotation.apply map (_ -> wall)).toMap
+    val walls = (result.walls map rotation.apply map (_ -> FixedWall(wall))).toMap
     val items = (result.doors map rotation.apply map (location => {
       val items = content.items.getOrElse(location, List())
 
-      location -> (door :: items)
+      location -> (FixedItem(door) :: items)
     })).toMap
 
     content.copy(

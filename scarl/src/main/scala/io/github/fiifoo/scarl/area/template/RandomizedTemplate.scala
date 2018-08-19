@@ -3,7 +3,7 @@ package io.github.fiifoo.scarl.area.template
 import io.github.fiifoo.scarl.area.Area
 import io.github.fiifoo.scarl.area.feature.{Feature, Utils}
 import io.github.fiifoo.scarl.area.shape.Shape
-import io.github.fiifoo.scarl.area.template.ContentSelection.FixedItem
+import io.github.fiifoo.scarl.area.template.ContentSelection.{FixedItem, FixedWall}
 import io.github.fiifoo.scarl.area.template.ContentSource.{ItemSource, TemplateSource}
 import io.github.fiifoo.scarl.area.template.RandomizedTemplate.{ConduitLocations, Entrances}
 import io.github.fiifoo.scarl.area.template.Template.{Category, Result}
@@ -55,8 +55,9 @@ case class RandomizedTemplate(id: TemplateId,
     val contained = CalculateUtils.templateContainedLocations(shapeResult, subResults)
     val entranceResults = calculateEntrances(assets, area, shapeResult.entranceCandidates, random)
     val routeResults = calculateRoutes(entranceResults, subEntrances, contained, random)
-    val wallResults = calculateBorderWalls(shapeResult.border, entranceResults) ++ calculateFilledWalls(contained, routeResults)
-    val contentResult = CalculateContent.apply(
+    val wallResults = (calculateBorderWalls(shapeResult.border, entranceResults) ++
+      calculateFilledWalls(contained, routeResults)) mapValues (FixedWall(_))
+    val contentResult = CalculateContent(
       assets = assets,
       area = area,
       shape = shapeResult,
@@ -120,7 +121,17 @@ case class RandomizedTemplate(id: TemplateId,
     val distribution = Uniform(this.entrances.min, this.entrances.max)
     val source = ItemSource(selection, distribution)
 
-    Utils.randomUniqueElementLocations(assets, area, locations, List(source), Map(), random)
+    val selections = Utils.randomUniqueSelectionLocations(locations, List(source), Map(), random)
+
+    selections mapValues (selection => {
+      val result = selection.apply(assets, area, random)
+
+      if (result.isEmpty) {
+        throw new CalculateFailedException
+      }
+
+      result.get
+    })
   }
 
   private def calculateRoutes(entranceResults: Map[Location, ItemKindId],

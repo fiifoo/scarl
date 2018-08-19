@@ -2,7 +2,9 @@ package io.github.fiifoo.scarl.area.template
 
 import io.github.fiifoo.scarl.area.Area
 import io.github.fiifoo.scarl.area.shape.Shape
+import io.github.fiifoo.scarl.area.template.FixedContent.MachinerySource
 import io.github.fiifoo.scarl.area.template.Template.{Category, Result}
+import io.github.fiifoo.scarl.core.Tag
 import io.github.fiifoo.scarl.core.geometry.{Location, Rotation}
 import io.github.fiifoo.scarl.core.kind._
 import io.github.fiifoo.scarl.world.WorldAssets
@@ -37,7 +39,7 @@ object Template {
   case class Result(shape: Shape.Result,
                     templates: Map[Location, Result] = Map(),
                     entrances: Map[Location, ItemKindId] = Map(),
-                    content: FixedContent = FixedContent()
+                    content: ResultContent = ResultContent()
                    ) {
 
     def rotate(rotation: Rotation): Result = Result(
@@ -52,6 +54,39 @@ object Template {
         val (location, result) = x
 
         rotation(location) -> result.rotate(rotation)
+      })
+    }
+  }
+
+  case class ResultContent(conduitLocations: Map[Location, Option[Tag]] = Map(),
+                           creatures: Map[Location, (CreatureKindId, Set[Tag])] = Map(),
+                           gatewayLocations: Set[Location] = Set(),
+                           items: Map[Location, List[(ItemKindId, Set[Tag])]] = Map(),
+                           machinery: Set[MachinerySource] = Set(),
+                           restrictedLocations: Set[Location] = Set(),
+                           terrains: Map[Location, (TerrainKindId, Set[Tag])] = Map(),
+                           walls: Map[Location, (WallKindId, Set[Tag])] = Map(),
+                           widgets: Map[Location, (WidgetKindId, Set[Tag])] = Map()
+                          ) {
+
+    def rotate(rotation: Rotation): ResultContent = ResultContent(
+      conduitLocations = rotation.mapKey(this.conduitLocations),
+      creatures = rotation.mapKey(this.creatures),
+      gatewayLocations = this.gatewayLocations map rotation.apply,
+      items = rotation.mapKey(this.items),
+      machinery = rotateMachinery(rotation),
+      restrictedLocations = this.restrictedLocations map rotation.apply,
+      terrains = rotation.mapKey(this.terrains),
+      walls = rotation.mapKey(this.walls),
+      widgets = rotation.mapKey(this.widgets),
+    )
+
+    private def rotateMachinery(rotation: Rotation): Set[MachinerySource] = {
+      this.machinery map (machinery => {
+        machinery.copy(
+          controls = machinery.controls map rotation.apply,
+          targets = machinery.targets map rotation.apply
+        )
       })
     }
   }

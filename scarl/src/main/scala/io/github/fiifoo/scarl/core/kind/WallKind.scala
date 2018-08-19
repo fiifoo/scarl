@@ -20,13 +20,14 @@ case class WallKind(id: WallKindId,
       id = WallId(nextId),
       kind = id,
       location = location,
-      hardness = hardness,
+      tags = options.tags,
+      hardness = hardness
     )
 
     Result(
       mutations = List(IdSeqMutation(nextIdSeq), NewEntityMutation(wall)),
       nextIdSeq,
-      wall,
+      wall
     )
   }
 }

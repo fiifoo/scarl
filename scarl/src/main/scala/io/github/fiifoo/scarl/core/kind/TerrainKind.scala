@@ -18,7 +18,8 @@ case class TerrainKind(id: TerrainKindId,
     val terrain = Terrain(
       id = TerrainId(nextId),
       kind = id,
-      location = location
+      location = location,
+      tags = options.tags
     )
 
     Result(

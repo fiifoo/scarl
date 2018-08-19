@@ -92,6 +92,14 @@ object Sources {
       typeOf[ContentSelection.FixedTemplate],
     )),
 
+    SubModelSource(typeOf[ContentSelection.TerrainSelection], List(
+      typeOf[ContentSelection.FixedTerrain],
+    )),
+
+    SubModelSource(typeOf[ContentSelection.WallSelection], List(
+      typeOf[ContentSelection.FixedWall],
+    )),
+
     SubModelSource(typeOf[ContentSelection.WidgetSelection], List(
       typeOf[ContentSelection.ThemeWidget],
       typeOf[ContentSelection.FixedWidget],
@@ -171,8 +179,8 @@ object Sources {
 
     SubModelSource(typeOf[Mechanism], List(
       typeOf[CreateEntityMechanism],
+      typeOf[RemoveEntityMechanism],
       typeOf[RemoveWallMechanism],
-      typeOf[RemoveWidgetMechanism],
       typeOf[UseDoorMechanism],
     )),
 

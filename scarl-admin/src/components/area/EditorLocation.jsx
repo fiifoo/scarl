@@ -1,50 +1,17 @@
-import { List } from 'immutable'
 import React from 'react'
+import Models from '../../data/Models'
 import BooleanSelectRow from '../form/BooleanSelectRow.jsx'
 import SelectRow from '../form/SelectRow.jsx'
 import TextInputRow from '../form/TextInputRow.jsx'
-import Models from '../../data/Models'
-
-const getMachineryChoices = machinery => machinery.map((machinery, key) => ({
-    value: key,
-    label: `${machinery.getIn(['mechanism', 'type'])} (${key})`,
-})).toArray()
+import EditorLocationField from './EditorLocationField.jsx'
 
 const EditorLocation = ({common, machinery, content, setContent}) => {
     const {data, models} = common
 
-    const machineryChoices = getMachineryChoices(machinery)
     const setValue = property => value => setContent(content.set(property, value))
-    const setMultiValue = property => value => setContent(content.set(property, List(value)))
 
     return (
         <div>
-            <SelectRow
-                label="Creature"
-                choices={Models.choices(models, data, 'CreatureKind')}
-                value={content.creature}
-                onChange={setValue('creature')} />
-            <SelectRow
-                label="Items"
-                choices={Models.choices(models, data, 'ItemKind')}
-                value={content.items.toArray()}
-                multi={true}
-                onChange={setMultiValue('items')} />
-            <SelectRow
-                label="Terrain"
-                choices={Models.choices(models, data, 'TerrainKind')}
-                value={content.terrain}
-                onChange={setValue('terrain')} />
-            <SelectRow
-                label="Wall"
-                choices={Models.choices(models, data, 'WallKind')}
-                value={content.wall}
-                onChange={setValue('wall')} />
-            <SelectRow
-                label="Widget"
-                choices={Models.choices(models, data, 'WidgetKind')}
-                value={content.widget}
-                onChange={setValue('widget')} />
             <SelectRow
                 label="Entrance"
                 choices={Models.choices(models, data, 'ItemKind')}
@@ -72,18 +39,43 @@ const EditorLocation = ({common, machinery, content, setContent}) => {
                 choices={Models.choices(models, data, 'Template')}
                 value={content.template}
                 onChange={setValue('template')} />
-            <SelectRow
-                label="Machinery controls"
-                choices={machineryChoices}
-                value={content.machineryControls.toArray()}
-                multi={true}
-                onChange={setMultiValue('machineryControls')} />
-            <SelectRow
-                label="Machinery targets"
-                choices={machineryChoices}
-                value={content.machineryTargets.toArray()}
-                multi={true}
-                onChange={setMultiValue('machineryTargets')} />
+            <EditorLocationField
+                property="machineryControls"
+                value={content.machineryControls}
+                setValue={setValue('machineryControls')}
+                machinery={machinery}
+                common={common} />
+            <EditorLocationField
+                property="machineryTargets"
+                value={content.machineryTargets}
+                setValue={setValue('machineryTargets')}
+                machinery={machinery}
+                common={common} />
+            <EditorLocationField
+                property="creature"
+                value={content.creature}
+                setValue={setValue('creature')}
+                common={common} />
+            <EditorLocationField
+                property="items"
+                value={content.items}
+                setValue={setValue('items')}
+                common={common} />
+            <EditorLocationField
+                property="terrain"
+                value={content.terrain}
+                setValue={setValue('terrain')}
+                common={common} />
+            <EditorLocationField
+                property="wall"
+                value={content.wall}
+                setValue={setValue('wall')}
+                common={common} />
+            <EditorLocationField
+                property="widget"
+                value={content.widget}
+                setValue={setValue('widget')}
+                common={common} />
         </div>
     )
 }

@@ -1,6 +1,5 @@
 package io.github.fiifoo.scarl.core.entity
 
-import io.github.fiifoo.scarl.core.State
 import io.github.fiifoo.scarl.core.Time.Tick
 import io.github.fiifoo.scarl.core.ai.Behavior
 import io.github.fiifoo.scarl.core.creature.Stats.Explosive
@@ -9,6 +8,7 @@ import io.github.fiifoo.scarl.core.effect.Effect
 import io.github.fiifoo.scarl.core.geometry.Location
 import io.github.fiifoo.scarl.core.item._
 import io.github.fiifoo.scarl.core.kind.{CreatureKindId, ItemKindId, TerrainKindId, WallKindId}
+import io.github.fiifoo.scarl.core.{State, Tag}
 
 sealed trait Entity {
   val id: EntityId
@@ -40,6 +40,10 @@ sealed trait Usable extends Lockable {
   val usable: Option[Power]
 }
 
+sealed trait Taggable extends Entity {
+  val tags: Set[Tag]
+}
+
 trait Status extends Entity {
   val id: StatusId
   val target: EntityId
@@ -66,8 +70,10 @@ trait TriggerStatus extends Entity with Status {
 
 case class Container(id: ContainerId,
                      location: Location,
-                     owner: Option[SafeCreatureId] = None
-                    ) extends Entity with Locatable {
+                     owner: Option[SafeCreatureId] = None,
+                     tags: Set[Tag] = Set(),
+                     widget: Boolean = false,
+                    ) extends Entity with Locatable with Taggable {
 
   def setLocation(location: Location): Container = copy(location = location)
 }
@@ -86,6 +92,7 @@ case class Creature(id: CreatureId,
                     stats: Stats,
                     dead: Boolean = false,
                     owner: Option[SafeCreatureId] = None,
+                    tags: Set[Tag] = Set(),
 
                     character: Option[Character] = None,
                     events: Option[Events] = None,
@@ -94,7 +101,7 @@ case class Creature(id: CreatureId,
                     locked: Option[Lock] = None,
                     missile: Option[Missile] = None,
                     usable: Option[CreaturePower] = None,
-                   ) extends Entity with Actor with Locatable with Usable {
+                   ) extends Entity with Actor with Locatable with Usable with Taggable {
 
   def setLocation(location: Location): Creature = copy(location = location)
 
@@ -114,6 +121,7 @@ case class Creature(id: CreatureId,
 case class Item(id: ItemId,
                 kind: ItemKindId,
                 container: EntityId,
+                tags: Set[Tag] = Set(),
 
                 concealment: Int = 0,
                 hidden: Boolean = false,
@@ -130,7 +138,7 @@ case class Item(id: ItemId,
                 trap: Option[ItemPower] = None,
                 usable: Option[ItemPower] = None,
                 weapon: Option[Weapon] = None,
-               ) extends Entity with Usable {
+               ) extends Entity with Usable with Taggable {
 
   def setLocked(locked: Option[Lock]): Item = copy(locked = locked)
 }
@@ -147,7 +155,8 @@ case class Machinery(id: MachineryId,
 case class Terrain(id: TerrainId,
                    kind: TerrainKindId,
                    location: Location,
-                  ) extends Entity with Locatable {
+                   tags: Set[Tag] = Set(),
+                  ) extends Entity with Locatable with Taggable {
 
   def setLocation(location: Location): Terrain = copy(location = location)
 }
@@ -155,8 +164,9 @@ case class Terrain(id: TerrainId,
 case class Wall(id: WallId,
                 kind: WallKindId,
                 location: Location,
+                tags: Set[Tag] = Set(),
                 hardness: Option[Int] = None,
-               ) extends Entity with Locatable {
+               ) extends Entity with Locatable with Taggable {
 
   def setLocation(location: Location): Wall = copy(location = location)
 }

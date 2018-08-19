@@ -10,6 +10,7 @@ const machineryControlColor = 'red'
 const machineryTargetColor = 'blue'
 const templateLocationColor = 'white'
 const restrictedColor = '#555'
+const nonFixedSelectionColor = 'white'
 
 const EditorViewLocation = ({common, contents, editor, location, setEditorLocation}) => {
     const {data} = common
@@ -54,27 +55,39 @@ const onMouseDown = event => {
 
 const renderContent = (data, content) => {
     if (content.creature) {
-        return renderKind(data, content.creature, 'creatures')
+        return renderSelection(data, content.creature, 'creatures')
     } else if (content.entrance) {
         return renderKind(data, content.entrance, 'items')
     } else if (content.widget) {
         return renderWidget(data, content.widget)
     } else if (content.items.size > 0) {
-        return renderKind(data, content.items.last(), 'items')
+        return renderSelection(data, content.items.last(), 'items')
     } else if (content.wall) {
-        return renderKind(data, content.wall, 'walls')
+        return renderSelection(data, content.wall, 'walls')
     } else if (content.terrain) {
-        return renderKind(data, content.terrain, 'terrains')
+        return renderSelection(data, content.terrain, 'terrains')
     } else {
         return '\u00A0'
     }
 }
 
-const renderWidget = (data, id) => {
-    const widget = data.getIn(['kinds', 'widgets', id])
-    const itemId = widget.getIn(['data', 'item'])
+const renderWidget = (data, selection) => {
+    if (isFixed(selection)) {
+        const widget = data.getIn(['kinds', 'widgets', selection.getIn(['data', 'kind'])])
+        const itemId = widget.getIn(['data', 'item'])
 
-    return renderKind(data, itemId, 'items')
+        return renderKind(data, itemId, 'items')
+    } else {
+        return <div style={{color: nonFixedSelectionColor}}>w</div>
+    }
+}
+
+const renderSelection = (data, selection, branch) => {
+    if (isFixed(selection)) {
+        return renderKind(data, selection.getIn(['data', 'kind']), branch)
+    } else {
+        return <div style={{color: nonFixedSelectionColor}}>{branch.charAt(0)}</div>
+    }
 }
 
 const renderKind = (data, id, branch) => {
@@ -86,6 +99,10 @@ const renderKind = (data, id, branch) => {
         <div style={{color}}>{display}</div>
     )
 }
+
+const isFixed = selection => (
+    selection.get('type') && selection.get('type').match(/^ContentSelection.Fixed/) && selection.getIn(['data', 'kind'])
+)
 
 const getBorderColor = content => {
     if (content.gateway) {

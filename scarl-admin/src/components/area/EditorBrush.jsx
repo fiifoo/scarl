@@ -1,48 +1,32 @@
-import { List, Map } from 'immutable'
+import { Map } from 'immutable'
 import React from 'react'
+import LocationContent from '../../data/area/LocationContent'
 import FormRow from '../form/FormRow.jsx'
 import SelectRow from '../form/SelectRow.jsx'
-import LocationContent from '../../data/area/LocationContent'
-import Models from '../../data/Models'
+import EditorLocationField from './EditorLocationField.jsx'
 
 const emptyContent = LocationContent()
 
-const specs = {
-    creature: {
-        label: 'Creature',
-        model: 'CreatureKind',
-    },
-    items: {
-        label: 'Items',
-        model: 'ItemKind',
-        multi: true,
-    },
-    terrain: {
-        label: 'Terrain',
-        model: 'TerrainKind',
-    },
-    wall: {
-        label: 'Wall',
-        model: 'WallKind',
-    },
-    widget: {
-        label: 'Widget',
-        model: 'WidgetKind',
-    },
+const fields = {
+    creature: 'Creature',
+    items: 'Items',
+    terrain: 'Terrain',
+    wall: 'Wall',
+    widget: 'Widget',
+    machineryControls: 'Machinery controls',
+    machineryTargets: 'Machinery targets',
 }
 
-const choices = Map(specs).map((spec, property) => ({
+const choices = Map(fields).map((label, property) => ({
     value: property,
-    label: spec.label,
+    label: label,
 })).toArray()
 
-const EditorBrush = ({common, contents, editor, setBrush, setContents}) => {
-    const {data, models} = common
+const EditorBrush = ({common, machinery, contents, editor, setBrush, setContents}) => {
     const {brush, locations} = editor
 
     const setProperty = property => setBrush(brush.set('property', property).set('value', null))
     const setValue = value => setBrush(brush.set('value', value))
-    const setMultiValue = value => setBrush(brush.set('value', List(value)))
 
     const paint = () => {
         const next = Map(locations.toArray().map(location => {
@@ -54,19 +38,14 @@ const EditorBrush = ({common, contents, editor, setBrush, setContents}) => {
         setContents(next)
     }
 
-    const renderValueSelect = () => {
-        const spec = specs[brush.property]
-
-        return (
-            <SelectRow
-                label={spec.label}
-                placeholder="Erase"
-                choices={Models.choices(models, data, spec.model)}
-                value={spec.multi ? (brush.value ? brush.value.toArray() : []) : brush.value}
-                onChange={spec.multi ? setMultiValue : setValue}
-                multi={spec.multi} />
-        )
-    }
+    const renderValueSelect = () => (
+        <EditorLocationField
+            property={brush.property}
+            value={brush.value}
+            setValue={setValue}
+            machinery={machinery}
+            common={common} />
+    )
 
     const renderPaintButton = () => (
         <FormRow label="">

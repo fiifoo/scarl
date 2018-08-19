@@ -32,14 +32,26 @@ trait WidgetKind extends Kind {
   val power: Option[Int]
 
   def apply(s: State, idSeq: IdSeq, location: Location, options: Options = Options()): Result[Container] = {
-    val itemResult = item(s).apply(s, idSeq, location, options)
-    val (nextId, nextIdSeq) = itemResult.idSeq()
-    val status = createStatus(s, nextId, itemResult.entity.id)
+    val (containerId, containerIdSeq) = idSeq()
+    val container = Container(
+      id = ContainerId(containerId),
+      location = location,
+      owner = options.owner map SafeCreatureId.apply,
+      tags = options.tags,
+      widget = true
+    )
+
+    val itemResult = item(s).apply(s, containerIdSeq, container.id, options)
+    val (statusId, nextIdSeq) = itemResult.idSeq()
+    val status = createStatus(s, statusId, container.id)
 
     Result(
-      mutations = itemResult.mutations ::: List(IdSeqMutation(nextIdSeq), NewEntityMutation(status)),
+      mutations = NewEntityMutation(container) :: itemResult.mutations ::: List(
+        IdSeqMutation(nextIdSeq),
+        NewEntityMutation(status)
+      ),
       idSeq = nextIdSeq,
-      entity = itemResult.entity
+      entity = container
     )
   }
 

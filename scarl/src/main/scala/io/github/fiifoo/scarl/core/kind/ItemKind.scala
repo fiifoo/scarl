@@ -47,8 +47,13 @@ case class ItemKind(id: ItemKindId,
   def apply(s: State, idSeq: IdSeq, location: Location, options: Options = Options()): Result[Container] = {
     val (containerId, containerIdSeq) = idSeq()
 
-    val container = Container(ContainerId(containerId), location, options.owner map SafeCreatureId.apply)
-    val (item, nextIdSeq) = createItem(s, containerIdSeq, container.id, options.owner)
+    val container = Container(
+      id = ContainerId(containerId),
+      location = location,
+      owner = options.owner map SafeCreatureId.apply,
+      tags = options.tags
+    )
+    val (item, nextIdSeq) = createItem(s, containerIdSeq, container.id, options)
 
     Result(
       mutations = List(
@@ -63,19 +68,23 @@ case class ItemKind(id: ItemKindId,
   }
 
   def apply(s: State, idSeq: IdSeq, container: EntityId, options: Options): Result[Item] = {
-    val (item, nextIdSeq) = createItem(s, idSeq, container, options.owner)
+    val (item, nextIdSeq) = createItem(s, idSeq, container, options)
 
     Result(
-      mutations = List(IdSeqMutation(nextIdSeq), NewEntityMutation(item)),
+      mutations = List(
+        Some(IdSeqMutation(nextIdSeq)),
+        Some(NewEntityMutation(item)),
+        getItemFoundMutation(s, item, options.owner)
+      ).flatten,
       nextIdSeq,
-      item,
+      item
     )
   }
 
   private def createItem(s: State,
                          idSeq: IdSeq,
                          container: EntityId,
-                         owner: Option[CreatureId]
+                         options: Options
                         ): (Item, IdSeq) = {
     val (nextId, nextIdSeq) = idSeq()
 
@@ -83,16 +92,17 @@ case class ItemKind(id: ItemKindId,
       id = ItemId(nextId),
       kind = id,
       container = container,
+      tags = options.tags,
 
       concealment = concealment,
       hidden = hidden,
-      locked = locked map (Lock(_, owner)),
+      locked = locked map (Lock(_, options.owner)),
       pickable = pickable,
 
       armor = armor,
       door = door,
       explosive = explosive map (explosive => {
-        (owner map (_ (s))) map (_.stats.explosive.add(explosive)) getOrElse explosive
+        (options.owner map (_ (s))) map (_.stats.explosive.add(explosive)) getOrElse explosive
       }),
       key = key,
       launcher = launcher,
