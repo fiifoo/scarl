@@ -29,6 +29,7 @@ object CombatPower {
     Top
   )
 
+  val all = (0, 100)
 }
 
 case class CombatPower(average: CombatPower.Average = Map(),

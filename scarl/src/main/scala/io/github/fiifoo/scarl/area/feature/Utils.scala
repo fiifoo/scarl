@@ -69,7 +69,15 @@ object Utils {
       val distribution = source.distribution
       val range = Rng.nextRange(random, distribution)
 
-      range map (_ => source(assets, area, random))
+      range map (_ => {
+        val result = source.selection.apply(assets, area, random)
+
+        if (result.isEmpty) {
+          throw new CalculateFailedException
+        }
+
+        result.get
+      })
     })
   }
 }
