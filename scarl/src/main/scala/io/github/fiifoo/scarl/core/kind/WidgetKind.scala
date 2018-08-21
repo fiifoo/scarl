@@ -3,7 +3,7 @@ package io.github.fiifoo.scarl.core.kind
 import io.github.fiifoo.scarl.core.State
 import io.github.fiifoo.scarl.core.entity._
 import io.github.fiifoo.scarl.core.geometry.Location
-import io.github.fiifoo.scarl.core.kind.Kind.Result
+import io.github.fiifoo.scarl.core.kind.Kind.{Options, Result}
 import io.github.fiifoo.scarl.core.kind.WidgetKind.Category
 import io.github.fiifoo.scarl.core.mutation.{IdSeqMutation, NewEntityMutation}
 
@@ -31,8 +31,8 @@ trait WidgetKind extends Kind {
   val category: Option[Category]
   val power: Option[Int]
 
-  def toLocation(s: State, idSeq: IdSeq, location: Location, owner: Option[CreatureId]): Result[Container] = {
-    val itemResult = item(s).toLocation(s, idSeq, location, owner)
+  def apply(s: State, idSeq: IdSeq, location: Location, options: Options = Options()): Result[Container] = {
+    val itemResult = item(s).apply(s, idSeq, location, options)
     val (nextId, nextIdSeq) = itemResult.idSeq()
     val status = createStatus(s, nextId, itemResult.entity.id)
 
@@ -41,10 +41,6 @@ trait WidgetKind extends Kind {
       idSeq = nextIdSeq,
       entity = itemResult.entity
     )
-  }
-
-  def toLocation(s: State, idSeq: IdSeq, location: Location): Result[Container] = {
-    toLocation(s, idSeq, location, None)
   }
 
   def createStatus(s: State, id: Int, target: ContainerId): Status

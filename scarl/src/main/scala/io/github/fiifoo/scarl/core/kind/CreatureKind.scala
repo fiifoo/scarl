@@ -1,6 +1,5 @@
 package io.github.fiifoo.scarl.core.kind
 
-import io.github.fiifoo.scarl.core.{Color, State}
 import io.github.fiifoo.scarl.core.ai.Behavior
 import io.github.fiifoo.scarl.core.communication.CommunicationId
 import io.github.fiifoo.scarl.core.creature.{Character, Events, FactionId, Missile, Party, Stats}
@@ -8,8 +7,9 @@ import io.github.fiifoo.scarl.core.entity._
 import io.github.fiifoo.scarl.core.geometry.Location
 import io.github.fiifoo.scarl.core.item.Equipment.Slot
 import io.github.fiifoo.scarl.core.item.{Equipment, Lock}
-import io.github.fiifoo.scarl.core.kind.Kind.Result
+import io.github.fiifoo.scarl.core.kind.Kind.{Options, Result}
 import io.github.fiifoo.scarl.core.mutation.{EquipItemMutation, IdSeqMutation, Mutation, NewEntityMutation}
+import io.github.fiifoo.scarl.core.{Color, State}
 
 case class CreatureKind(id: CreatureKindId,
                         name: String,
@@ -35,14 +35,14 @@ case class CreatureKind(id: CreatureKindId,
                         responses: Map[FactionId, List[CommunicationId]] = Map()
                        ) extends Kind {
 
-  def toLocation(s: State, idSeq: IdSeq, location: Location, owner: Option[CreatureId]): Result[Creature] = {
+  def apply(s: State, idSeq: IdSeq, location: Location, options: Options = Options()): Result[Creature] = {
     val (nextId, creatureIdSeq) = idSeq()
     val creatureId = CreatureId(nextId)
 
     val creature = Creature(
       id = creatureId,
       kind = id,
-      faction = owner map (_ (s).faction) getOrElse faction,
+      faction = options.owner map (_ (s).faction) getOrElse faction,
       solitary = solitary,
       party = getParty(s, location, creatureId),
       behavior = behavior,
@@ -51,7 +51,7 @@ case class CreatureKind(id: CreatureKindId,
       energy = stats.energy.max,
       materials = stats.materials.max,
       stats = stats,
-      owner = owner map SafeCreatureId.apply,
+      owner = options.owner map SafeCreatureId.apply,
 
       character = character,
       events = events,
@@ -74,10 +74,6 @@ case class CreatureKind(id: CreatureKindId,
     )
   }
 
-  def toLocation(s: State, idSeq: IdSeq, location: Location): Result[Creature] = {
-    toLocation(s, idSeq, location, None)
-  }
-
   private def getParty(s: State, location: Location, self: CreatureId): Party = {
     if (solitary) {
       Party(self)
@@ -90,7 +86,7 @@ case class CreatureKind(id: CreatureKindId,
     (equipments foldLeft(List[Mutation](), idSeq)) ((carry, element) => {
       val (mutations, idSeq) = carry
       val (slot, item) = element
-      val result = item(s).toContainer(s, idSeq, creature)
+      val result = item(s).apply(s, idSeq, creature, Options())
 
       Equipment.selectEquipment(slot, result.entity) map (equipment => {
         val slots = if (equipment.fillAll) equipment.slots else Set(slot)
@@ -105,7 +101,7 @@ case class CreatureKind(id: CreatureKindId,
   private def processInventory(s: State, idSeq: IdSeq, creature: CreatureId): (List[Mutation], IdSeq) = {
     (inventory foldLeft(List[Mutation](), idSeq)) ((carry, item) => {
       val (mutations, idSeq) = carry
-      val result = item(s).toContainer(s, idSeq, creature)
+      val result = item(s).apply(s, idSeq, creature, Options())
 
       (mutations ::: result.mutations, result.idSeq)
     })

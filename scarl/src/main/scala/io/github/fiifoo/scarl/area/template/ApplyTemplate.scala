@@ -75,7 +75,7 @@ object ApplyTemplate {
       val (location, locationElements) = data
 
       locationElements.foldLeft(s)((s, element) => {
-        element(s).toLocation(s, s.idSeq, location.add(offset)).write(s)
+        element(s).apply(s, s.idSeq, location.add(offset)).write(s)
       })
     })
   }
@@ -88,7 +88,7 @@ object ApplyTemplate {
     elements.foldLeft(s)((s, data) => {
       val (location, element) = data
 
-      element(s).toLocation(s, s.idSeq, location.add(offset)).write(s)
+      element(s).apply(s, s.idSeq, location.add(offset)).write(s)
     })
   }
 
@@ -150,7 +150,7 @@ object ApplyTemplate {
     }
 
     val initial = item map (item => {
-      item(s).toLocation(s, s.idSeq, location).write(s)
+      item(s).apply(s, s.idSeq, location).write(s)
     }) getOrElse {
       s
     }

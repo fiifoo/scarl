@@ -193,7 +193,7 @@ case class CombatPowerSimulation(matches: Int = 25,
 
     ((0 until teamSize) foldLeft(instance, Set[SafeCreatureId]())) ((carry, y) => {
       val (instance, creatures) = carry
-      val result = kind.toLocation(instance, instance.idSeq, Location(x, y))
+      val result = kind.apply(instance, instance.idSeq, Location(x, y))
 
       (result.write(instance), creatures + SafeCreatureId(result.entity.id))
     })

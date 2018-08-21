@@ -6,6 +6,7 @@ import io.github.fiifoo.scarl.core.entity.Selectors.{getItemLocation, getLocatio
 import io.github.fiifoo.scarl.core.entity.{CreatureId, Item, ItemId}
 import io.github.fiifoo.scarl.core.geometry.Location
 import io.github.fiifoo.scarl.core.item.Door
+import io.github.fiifoo.scarl.core.kind.Kind.Options
 import io.github.fiifoo.scarl.core.mutation.RemovableEntityMutation
 
 case class UseDoorEffect(user: Option[CreatureId],
@@ -41,7 +42,7 @@ case class UseDoorEffect(user: Option[CreatureId],
         })
       }) getOrElse {
         val opening = !door.open
-        val result = door.transformTo(s).toContainer(s, s.idSeq, target(s).container, user)
+        val result = door.transformTo(s).apply(s, s.idSeq, target(s).container, Options(user))
 
         EffectResult(
           RemovableEntityMutation(target) :: result.mutations,

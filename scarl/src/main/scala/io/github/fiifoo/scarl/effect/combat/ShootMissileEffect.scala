@@ -8,6 +8,7 @@ import io.github.fiifoo.scarl.core.entity.Selectors.{getCreatureStats, getLocati
 import io.github.fiifoo.scarl.core.entity.{CreatureId, SafeCreatureId}
 import io.github.fiifoo.scarl.core.geometry.{Line, Location}
 import io.github.fiifoo.scarl.core.kind.CreatureKindId
+import io.github.fiifoo.scarl.core.kind.Kind.Options
 
 case class ShootMissileEffect(attacker: CreatureId,
                               targetLocation: Location,
@@ -28,15 +29,11 @@ case class ShootMissileEffect(attacker: CreatureId,
       })
     )
 
-    val result = kind(s).copy(
-      behavior = behavior,
-      stats = getMissileStats(s, attackerStats)
-    ).toLocation(
-      s = s,
-      idSeq = s.idSeq,
-      location = from,
-      owner = Some(attacker)
-    )
+    val result = kind(s)
+      .copy(
+        behavior = behavior,
+        stats = getMissileStats(s, attackerStats)
+      ).apply(s, s.idSeq, from, Options(Some(attacker)))
 
     result.entity.missile map (_ => EffectResult(result.mutations)) getOrElse EffectResult()
   }

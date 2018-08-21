@@ -54,7 +54,7 @@ object CreateWorld {
     }
 
     val (location, _) = state.rng.nextChoice(state.gateways)
-    val result = player(state).toLocation(state, state.idSeq, location)
+    val result = player(state).apply(state, state.idSeq, location)
 
     val nextState = result.write(state)
     val nextWorld = world.copy(

@@ -1,13 +1,13 @@
 package io.github.fiifoo.scarl.core.kind
 
-import io.github.fiifoo.scarl.core.{Color, State}
 import io.github.fiifoo.scarl.core.creature.Stats.Explosive
 import io.github.fiifoo.scarl.core.entity._
 import io.github.fiifoo.scarl.core.geometry.Location
 import io.github.fiifoo.scarl.core.item._
 import io.github.fiifoo.scarl.core.kind.ItemKind.Category
-import io.github.fiifoo.scarl.core.kind.Kind.Result
+import io.github.fiifoo.scarl.core.kind.Kind.{Options, Result}
 import io.github.fiifoo.scarl.core.mutation.{IdSeqMutation, ItemFoundMutation, Mutation, NewEntityMutation}
+import io.github.fiifoo.scarl.core.{Color, State}
 
 object ItemKind {
 
@@ -44,36 +44,32 @@ case class ItemKind(id: ItemKindId,
                     weapon: Option[Weapon] = None
                    ) extends Kind {
 
-  def toContainer(s: State, idSeq: IdSeq, container: EntityId, owner: Option[CreatureId] = None): Result[Item] = {
-    val (item, nextIdSeq) = createItem(s, idSeq, container, owner)
-
-    Result(
-      mutations = List(IdSeqMutation(nextIdSeq), NewEntityMutation(item)),
-      nextIdSeq,
-      item,
-    )
-  }
-
-  def toLocation(s: State, idSeq: IdSeq, location: Location, owner: Option[CreatureId]): Result[Container] = {
+  def apply(s: State, idSeq: IdSeq, location: Location, options: Options = Options()): Result[Container] = {
     val (containerId, containerIdSeq) = idSeq()
 
-    val container = Container(ContainerId(containerId), location, owner map SafeCreatureId.apply)
-    val (item, nextIdSeq) = createItem(s, containerIdSeq, container.id, owner)
+    val container = Container(ContainerId(containerId), location, options.owner map SafeCreatureId.apply)
+    val (item, nextIdSeq) = createItem(s, containerIdSeq, container.id, options.owner)
 
     Result(
       mutations = List(
         Some(IdSeqMutation(nextIdSeq)),
         Some(NewEntityMutation(container)),
         Some(NewEntityMutation(item)),
-        getItemFoundMutation(s, item, owner)
+        getItemFoundMutation(s, item, options.owner)
       ).flatten,
       nextIdSeq,
       container
     )
   }
 
-  def toLocation(s: State, idSeq: IdSeq, location: Location): Result[Container] = {
-    toLocation(s, idSeq, location, None)
+  def apply(s: State, idSeq: IdSeq, container: EntityId, options: Options): Result[Item] = {
+    val (item, nextIdSeq) = createItem(s, idSeq, container, options.owner)
+
+    Result(
+      mutations = List(IdSeqMutation(nextIdSeq), NewEntityMutation(item)),
+      nextIdSeq,
+      item,
+    )
   }
 
   private def createItem(s: State,

@@ -5,6 +5,7 @@ import io.github.fiifoo.scarl.core.effect.{Effect, EffectResult}
 import io.github.fiifoo.scarl.core.entity.Selectors.getEntityLocation
 import io.github.fiifoo.scarl.core.entity._
 import io.github.fiifoo.scarl.core.geometry.{Location, Obstacle, Shape}
+import io.github.fiifoo.scarl.core.kind.Kind.Options
 import io.github.fiifoo.scarl.core.kind._
 import io.github.fiifoo.scarl.core.mutation.RemovableEntityMutation
 
@@ -45,10 +46,10 @@ case class TransformEffect(from: EntityId,
 
   private def transform(s: State)(location: Location): EffectResult = {
     val result = to match {
-      case kind: CreatureKindId => kind(s).toLocation(s, s.idSeq, location, owner)
-      case kind: ItemKindId => kind(s).toLocation(s, s.idSeq, location, owner)
-      case kind: WidgetKindId => kind(s).toLocation(s, s.idSeq, location, owner)
-      case kind: KindId => kind(s).toLocation(s, s.idSeq, location)
+      case kind: CreatureKindId => kind(s).apply(s, s.idSeq, location, Options(owner))
+      case kind: ItemKindId => kind(s).apply(s, s.idSeq, location, Options(owner))
+      case kind: WidgetKindId => kind(s).apply(s, s.idSeq, location, Options(owner))
+      case kind: KindId => kind(s).apply(s, s.idSeq, location)
     }
 
     getSuccessResult(s, location, result)
