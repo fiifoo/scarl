@@ -61,7 +61,9 @@ case object ContentSelection {
                            tags: Set[Tag] = Set()
                           ) extends CreatureSelection {
     def apply(assets: WorldAssets, area: Area, random: Random): Option[CreatureKindId] = {
-      val choices = assets.themes(area.theme).creatures
+      val choices = assets.catalogues.creatures(assets.themes(area.theme).creatures)
+        .apply(assets.catalogues.creatures)
+
       val constraints = if (this.power.isEmpty) CombatPower.categories else this.power
 
       def getPower(choice: CreatureKindId): Option[Int] = {
@@ -77,7 +79,8 @@ case object ContentSelection {
                        tags: Set[Tag] = Set()
                       ) extends ItemSelection {
     def apply(assets: WorldAssets, area: Area, random: Random): Option[ItemKindId] = {
-      val choices = assets.themes(area.theme).items
+      val choices = assets.catalogues.items(assets.themes(area.theme).items)
+        .apply(assets.catalogues.items)
       val categories = if (this.category.isEmpty) ItemKind.categories else this.category
       val constraints = if (this.power.isEmpty) CombatPower.categories else this.power
 
@@ -94,7 +97,8 @@ case object ContentSelection {
                             tags: Set[Tag] = Set()
                            ) extends ItemSelection {
     def apply(assets: WorldAssets, area: Area, random: Random): Option[ItemKindId] = {
-      val choices = assets.themes(area.theme).items
+      val choices = assets.catalogues.items(assets.themes(area.theme).items)
+        .apply(assets.catalogues.items)
       val categories = if (this.category.isEmpty) Equipment.categories else this.category
       val constraints = if (this.power.isEmpty) CombatPower.categories else this.power
 
@@ -111,7 +115,8 @@ case object ContentSelection {
                            tags: Set[Tag] = Set()
                           ) extends TemplateSelection {
     def apply(assets: WorldAssets, area: Area, random: Random): Option[TemplateId] = {
-      val choices = assets.themes(area.theme).templates
+      val choices = assets.catalogues.templates(assets.themes(area.theme).templates)
+        .apply(assets.catalogues.templates)
       val categories = if (this.category.isEmpty) Template.categories else this.category
       val constraints = if (this.power.isEmpty) CombatPower.categories else this.power
 
@@ -128,7 +133,8 @@ case object ContentSelection {
                          tags: Set[Tag] = Set()
                         ) extends WidgetSelection {
     def apply(assets: WorldAssets, area: Area, random: Random): Option[WidgetKindId] = {
-      val choices = assets.themes(area.theme).widgets
+      val choices = assets.catalogues.widgets(assets.themes(area.theme).widgets)
+        .apply(assets.catalogues.widgets)
       val categories = if (this.category.isEmpty) WidgetKind.categories else this.category
       val constraints = if (this.power.isEmpty) CombatPower.categories else this.power
 

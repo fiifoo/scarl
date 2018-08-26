@@ -22,6 +22,7 @@ class AssetsRepository @Inject()(environment: Environment, simulationsRepository
 
     WorldAssets(
       data.areas,
+      data.catalogues,
       simulations.combatPower,
       data.communications,
       data.factions,

@@ -7,10 +7,12 @@ import io.github.fiifoo.scarl.core.communication.{Communication, CommunicationId
 import io.github.fiifoo.scarl.core.creature.{Faction, FactionId, Progression, ProgressionId}
 import io.github.fiifoo.scarl.core.item.{KeyKind, KeyKindId}
 import io.github.fiifoo.scarl.core.kind._
+import io.github.fiifoo.scarl.world.WorldCatalogues
 import models.json._
 import play.api.libs.json._
 
 case class Data(areas: Map[AreaId, Area],
+                catalogues: WorldCatalogues,
                 communications: Map[CommunicationId, Communication],
                 factions: Map[FactionId, Faction],
                 keys: Map[KeyKindId, KeyKind],
@@ -22,6 +24,7 @@ case class Data(areas: Map[AreaId, Area],
 
 object Data {
   lazy private implicit val areaMapReads = JsonArea.areaMapReads
+  lazy private implicit val worldCataloguesReads = JsonWorldCatalogues.worldCataloguesReads
   lazy private implicit val communicationMapReads = JsonCommunication.communicationMapReads
   lazy private implicit val factionMapReads = JsonFaction.factionMapReads
   lazy private implicit val keyKindMapReads = JsonItemKey.keyKindMapReads

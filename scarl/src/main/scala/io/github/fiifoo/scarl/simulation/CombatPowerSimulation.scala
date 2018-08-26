@@ -5,14 +5,14 @@ import io.github.fiifoo.scarl.area.template.{ApplyTemplate, CalculateTemplate, F
 import io.github.fiifoo.scarl.area.theme.{Theme, ThemeId}
 import io.github.fiifoo.scarl.area.{Area, AreaId}
 import io.github.fiifoo.scarl.core.State
-import io.github.fiifoo.scarl.core.assets.CombatPower
+import io.github.fiifoo.scarl.core.assets.{CombatPower, CreatureCatalogueId, ItemCatalogueId, WidgetCatalogueId}
 import io.github.fiifoo.scarl.core.creature.{Faction, FactionId}
 import io.github.fiifoo.scarl.core.entity.{ActorQueue, Creature, SafeCreatureId}
 import io.github.fiifoo.scarl.core.geometry.Location
 import io.github.fiifoo.scarl.core.kind._
 import io.github.fiifoo.scarl.core.math.Rng
 import io.github.fiifoo.scarl.core.mutation.ActorTickMutation
-import io.github.fiifoo.scarl.world.WorldAssets
+import io.github.fiifoo.scarl.world.{TemplateCatalogueId, WorldAssets}
 
 case class CombatPowerSimulation(matches: Int = 25,
                                  turns: Int = 50,
@@ -28,7 +28,11 @@ case class CombatPowerSimulation(matches: Int = 25,
     ThemeId(""),
     ItemKindId(""),
     TerrainKindId(""),
-    WallKindId("")
+    WallKindId(""),
+    TemplateCatalogueId(""),
+    CreatureCatalogueId(""),
+    ItemCatalogueId(""),
+    WidgetCatalogueId(""),
   )
 
   private val simulation = new Simulation[Null](

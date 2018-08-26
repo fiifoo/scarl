@@ -5,7 +5,8 @@ import io.github.fiifoo.scarl.core.creature.{Faction, FactionId, Progression, Pr
 import io.github.fiifoo.scarl.core.item.{KeyKind, KeyKindId}
 import io.github.fiifoo.scarl.core.kind.Kinds
 
-case class Assets(combatPower: CombatPower = CombatPower(),
+case class Assets(catalogues: Catalogues = Catalogues(),
+                  combatPower: CombatPower = CombatPower(),
                   communications: Map[CommunicationId, Communication] = Map(),
                   factions: Map[FactionId, Faction] = Map(),
                   keys: Map[KeyKindId, KeyKind] = Map(),

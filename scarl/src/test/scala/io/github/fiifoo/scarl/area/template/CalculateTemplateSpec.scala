@@ -3,10 +3,11 @@ package io.github.fiifoo.scarl.area.template
 import io.github.fiifoo.scarl.area.shape.Rectangle
 import io.github.fiifoo.scarl.area.theme.{Theme, ThemeId}
 import io.github.fiifoo.scarl.area.{Area, AreaId}
+import io.github.fiifoo.scarl.core.assets.{CreatureCatalogueId, ItemCatalogueId, WidgetCatalogueId}
 import io.github.fiifoo.scarl.core.geometry.Location
 import io.github.fiifoo.scarl.core.kind.{ItemKindId, TerrainKindId, WallKindId}
 import io.github.fiifoo.scarl.core.math.Distribution
-import io.github.fiifoo.scarl.world.WorldAssets
+import io.github.fiifoo.scarl.world.{TemplateCatalogueId, WorldAssets}
 import org.scalatest._
 
 import scala.util.Random
@@ -17,7 +18,11 @@ class CalculateTemplateSpec extends FlatSpec with Matchers {
     ThemeId(""),
     ItemKindId(""),
     TerrainKindId(""),
-    WallKindId("")
+    WallKindId(""),
+    TemplateCatalogueId(""),
+    CreatureCatalogueId(""),
+    ItemCatalogueId(""),
+    WidgetCatalogueId(""),
   )
 
   "CalculateTemplate" should "calculate template tree" in {

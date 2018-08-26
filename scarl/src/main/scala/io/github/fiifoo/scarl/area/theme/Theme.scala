@@ -1,15 +1,15 @@
 package io.github.fiifoo.scarl.area.theme
 
-import io.github.fiifoo.scarl.area.template.TemplateId
+import io.github.fiifoo.scarl.core.assets.{CreatureCatalogueId, ItemCatalogueId, WidgetCatalogueId}
 import io.github.fiifoo.scarl.core.kind._
-import io.github.fiifoo.scarl.core.math.Rng.WeightedChoice
+import io.github.fiifoo.scarl.world.TemplateCatalogueId
 
 case class Theme(id: ThemeId,
                  door: ItemKindId,
                  terrain: TerrainKindId,
                  wall: WallKindId,
-                 templates: List[WeightedChoice[TemplateId]] = List(),
-                 creatures: List[WeightedChoice[CreatureKindId]] = List(),
-                 items: List[WeightedChoice[ItemKindId]] = List(),
-                 widgets: List[WeightedChoice[WidgetKindId]] = List(),
+                 templates: TemplateCatalogueId,
+                 creatures: CreatureCatalogueId,
+                 items: ItemCatalogueId,
+                 widgets: WidgetCatalogueId,
                 )

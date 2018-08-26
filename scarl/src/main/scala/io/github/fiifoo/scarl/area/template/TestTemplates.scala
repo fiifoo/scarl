@@ -18,7 +18,11 @@ object TestTemplates {
     val fromArea = extractTemplates(assets)(template)
     val fromTheme = template match {
       case _: FixedTemplate => Set()
-      case _: RandomizedTemplate => assets.themes(area.theme).templates map (_.value) map assets.templates
+      case _: RandomizedTemplate =>
+        assets.catalogues.templates(assets.themes(area.theme).templates)
+          .apply(assets.catalogues.templates)
+          .map(_.value)
+          .map(assets.templates)
     }
 
     val templates = ((fromArea ++ fromTheme) map (t => t.id -> t)).toMap

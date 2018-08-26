@@ -10,6 +10,7 @@ import io.github.fiifoo.scarl.core.item.{KeyKind, KeyKindId}
 import io.github.fiifoo.scarl.core.kind.Kinds
 
 case class WorldAssets(areas: Map[AreaId, Area] = Map(),
+                       catalogues: WorldCatalogues = WorldCatalogues(),
                        combatPower: CombatPower = CombatPower(),
                        communications: Map[CommunicationId, Communication] = Map(),
                        factions: Map[FactionId, Faction] = Map(),
@@ -22,6 +23,7 @@ case class WorldAssets(areas: Map[AreaId, Area] = Map(),
 
   def instance(): Assets = {
     Assets(
+      catalogues.instance(),
       combatPower,
       communications,
       factions,

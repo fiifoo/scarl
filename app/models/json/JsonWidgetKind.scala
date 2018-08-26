@@ -1,18 +1,18 @@
 package models.json
 
 import io.github.fiifoo.scarl.core.kind.WidgetKind.{Category, HealCategory, PortalCategory, TrapCategory}
-import io.github.fiifoo.scarl.core.kind.{CreatureKindId, WidgetKind, WidgetKindId}
+import io.github.fiifoo.scarl.core.kind.{WidgetKind, WidgetKindId}
 import io.github.fiifoo.scarl.widget._
 import play.api.libs.json._
 
 object JsonWidgetKind {
 
-  import JsonBase.{mapReads, polymorphicObjectFormat, polymorphicTypeReads, stringIdFormat, weightedChoicesReads}
+  import JsonBase.{mapReads, polymorphicObjectFormat, polymorphicTypeReads, stringIdFormat}
 
+  lazy private implicit val creatureCatalogueIdFormat = JsonCatalogues.creatureCatalogueIdFormat
   lazy private implicit val creatureKindIdFormat = JsonCreatureKind.creatureKindIdFormat
   lazy private implicit val itemKindIdFormat = JsonItemKind.itemKindIdFormat
 
-  implicitly(weightedChoicesReads[CreatureKindId])
   lazy private implicit val discoverFormat = JsonItemDiscover.discoverFormat
 
   lazy private implicit val delayedTransformingReads = Json.reads[DelayedTransformingWidget]

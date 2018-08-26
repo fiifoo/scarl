@@ -8,7 +8,7 @@ import io.github.fiifoo.scarl.area.shape.{Rectangle, Shape}
 import io.github.fiifoo.scarl.area.template.{ContentSelection, FixedTemplate, RandomizedTemplate, Template}
 import io.github.fiifoo.scarl.area.theme.Theme
 import io.github.fiifoo.scarl.core.ai.{Behavior, Strategy}
-import io.github.fiifoo.scarl.core.assets.CombatPower
+import io.github.fiifoo.scarl.core.assets._
 import io.github.fiifoo.scarl.core.communication.{Communication, Message}
 import io.github.fiifoo.scarl.core.creature.{Faction, Missile, Progression}
 import io.github.fiifoo.scarl.core.entity.{CreaturePower, ItemPower}
@@ -18,6 +18,7 @@ import io.github.fiifoo.scarl.core.math.Distribution
 import io.github.fiifoo.scarl.mechanism._
 import io.github.fiifoo.scarl.power._
 import io.github.fiifoo.scarl.widget._
+import io.github.fiifoo.scarl.world.TemplateCatalogue
 
 import scala.reflect.runtime.universe.typeOf
 
@@ -25,6 +26,13 @@ object Sources {
 
   lazy val main: Map[Model.RelationId, ModelSource] = List(
     ModelSource(typeOf[Area], List("areas")),
+
+    ModelSource(typeOf[CreatureCatalogue], List("catalogues", "creatures")),
+    ModelSource(typeOf[ItemCatalogue], List("catalogues", "items")),
+    ModelSource(typeOf[TemplateCatalogue], List("catalogues", "templates")),
+    ModelSource(typeOf[TerrainCatalogue], List("catalogues", "terrains")),
+    ModelSource(typeOf[WallCatalogue], List("catalogues", "walls")),
+    ModelSource(typeOf[WidgetCatalogue], List("catalogues", "widgets")),
 
     ModelSource(typeOf[Communication], List("communications"), List(
       typeOf[Message],

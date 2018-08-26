@@ -182,6 +182,16 @@ object JsonBase {
     }
   }
 
+  implicit def weightedChoiceFormat[T](implicit valueFormat: Format[T]): Format[WeightedChoice[T]] = {
+    val choiceFormat = Json.format[WeightedChoice[T]]
+
+    new Format[WeightedChoice[T]] {
+      def reads(json: JsValue): JsResult[WeightedChoice[T]] = choiceFormat.reads(json)
+
+      def writes(o: WeightedChoice[T]): JsValue = choiceFormat.writes(o)
+    }
+  }
+
   implicit def weightedChoicesFormat[T](implicit valueFormat: Format[T]): Format[WeightedChoices[T]] = {
     implicit val choiceFormat = Json.format[WeightedChoice[T]]
     val choicesFormat = Json.format[WeightedChoices[T]]
