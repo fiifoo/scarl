@@ -4,6 +4,7 @@ const readMap = raw => Map(raw).map(item => fromJS(item))
 const writeMap = data => data.map(item => item.toJS()).map((v, k) => [k, v]).toArray()
 
 const Catalogues = Record({
+    contentSources: Map(),
     creatures: Map(),
     items: Map(),
     templates: Map(),
@@ -12,6 +13,7 @@ const Catalogues = Record({
     widgets: Map(),
 })
 Catalogues.read = raw => Catalogues({
+    contentSources: readMap(raw.contentSources),
     creatures: readMap(raw.creatures),
     items: readMap(raw.items),
     templates: readMap(raw.templates),
@@ -20,6 +22,7 @@ Catalogues.read = raw => Catalogues({
     widgets: readMap(raw.widgets),
 })
 Catalogues.write = data => ({
+    contentSources: writeMap(data.contentSources),
     creatures: writeMap(data.creatures),
     items: writeMap(data.items),
     templates: writeMap(data.templates),

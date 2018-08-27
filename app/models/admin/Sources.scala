@@ -18,7 +18,7 @@ import io.github.fiifoo.scarl.core.math.Distribution
 import io.github.fiifoo.scarl.mechanism._
 import io.github.fiifoo.scarl.power._
 import io.github.fiifoo.scarl.widget._
-import io.github.fiifoo.scarl.world.TemplateCatalogue
+import io.github.fiifoo.scarl.world.{ContentSourceCatalogue, TemplateCatalogue}
 
 import scala.reflect.runtime.universe.typeOf
 
@@ -27,6 +27,7 @@ object Sources {
   lazy val main: Map[Model.RelationId, ModelSource] = List(
     ModelSource(typeOf[Area], List("areas")),
 
+    ModelSource(typeOf[ContentSourceCatalogue], List("catalogues", "contentSources")),
     ModelSource(typeOf[CreatureCatalogue], List("catalogues", "creatures")),
     ModelSource(typeOf[ItemCatalogue], List("catalogues", "items")),
     ModelSource(typeOf[TemplateCatalogue], List("catalogues", "templates")),

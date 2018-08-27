@@ -6,11 +6,12 @@ import io.github.fiifoo.scarl.area.shape.Shape
 import io.github.fiifoo.scarl.area.template.ContentSource._
 import io.github.fiifoo.scarl.area.template.FixedContent
 import io.github.fiifoo.scarl.core.geometry.Location
-import io.github.fiifoo.scarl.world.WorldAssets
+import io.github.fiifoo.scarl.world.{ContentSourceCatalogue, ContentSourceCatalogueId, WorldAssets}
 
 import scala.util.Random
 
-case class RandomizedContentFeature(creatures: List[CreatureSource] = List(),
+case class RandomizedContentFeature(catalogues: List[ContentSourceCatalogueId] = List(),
+                                    creatures: List[CreatureSource] = List(),
                                     items: List[ItemSource] = List(),
                                     widgets: List[WidgetSource] = List()
                                    ) extends Feature {
@@ -25,23 +26,23 @@ case class RandomizedContentFeature(creatures: List[CreatureSource] = List(),
             random: Random
            ): FixedContent = {
     val free = freeLocations(content, locations)
+    val (creatureSources, itemSources, widgetSources) = getSources(assets)
 
     val creatures = randomUniqueSelectionLocations(
       locations = free,
-      sources = this.creatures,
+      sources = creatureSources,
       existing = content.creatures,
       random = random
     )
-
     val widgets = randomUniqueSelectionLocations(
       locations = free,
-      sources = this.widgets,
+      sources = widgetSources,
       existing = content.widgets,
       random = random
     )
     val items = randomSelectionLocations(
       locations = free -- widgets.keys,
-      sources = this.items,
+      sources = itemSources,
       existing = content.items,
       random = random
     )
@@ -51,5 +52,17 @@ case class RandomizedContentFeature(creatures: List[CreatureSource] = List(),
       items = items,
       widgets = widgets
     )
+  }
+
+  private def getSources(assets: WorldAssets): (List[CreatureSource], List[ItemSource], List[WidgetSource]) = {
+    val catalogue = ContentSourceCatalogue(
+      ContentSourceCatalogueId(""),
+      this.catalogues,
+      this.creatures,
+      this.items,
+      this.widgets
+    )
+
+    catalogue(assets.catalogues.contentSources)
   }
 }
