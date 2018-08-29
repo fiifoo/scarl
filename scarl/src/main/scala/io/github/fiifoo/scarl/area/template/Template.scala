@@ -53,7 +53,7 @@ object Template {
       this.templates map (x => {
         val (location, result) = x
 
-        rotation(location) -> result.rotate(rotation)
+        rotation(location) -> result.rotate(Rotation(rotation.value, 0, 0))
       })
     }
   }

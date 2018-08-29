@@ -34,11 +34,14 @@ case class Rotation(value: Int, width: Int, height: Int) {
   }
 
   def apply(l: Location): Location = {
+    val width = if (this.width == 0) 0 else this.width - 1
+    val height = if (this.height == 0) 0 else this.height - 1
+
     this.value match {
       case 0 => l
-      case 1 => Location(l.y, -l.x) add Location(0, this.height - 1)
-      case 2 => Location(-l.x, -l.y) add Location(this.width - 1, this.height - 1)
-      case 3 => Location(-l.y, l.x) add Location(this.width - 1, 0)
+      case 1 => Location(l.y, -l.x) add Location(0, height)
+      case 2 => Location(-l.x, -l.y) add Location(width, height)
+      case 3 => Location(-l.y, l.x) add Location(width, 0)
     }
   }
 
