@@ -205,6 +205,7 @@ object Sources {
     SubModelSource(typeOf[Template.Category], List(
       typeOf[Template.ChallengeCategory.type],
       typeOf[Template.RoomCategory.type],
+      typeOf[Template.SpaceCategory.type],
       typeOf[Template.TrapCategory.type],
     ), objectPolymorphism = true),
 

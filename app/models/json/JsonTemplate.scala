@@ -66,6 +66,7 @@ object JsonTemplate {
   lazy implicit val categoryFormat: Format[Category] = polymorphicObjectFormat({
     case "Template.ChallengeCategory" => ChallengeCategory
     case "Template.RoomCategory" => RoomCategory
+    case "Template.SpaceCategory" => SpaceCategory
     case "Template.TrapCategory" => TrapCategory
   })
 

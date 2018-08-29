@@ -31,11 +31,14 @@ object Template {
 
   case object RoomCategory extends Category
 
+  case object SpaceCategory extends Category
+
   case object TrapCategory extends Category
 
   val categories: Set[Category] = Set(
     ChallengeCategory,
     RoomCategory,
+    SpaceCategory,
     TrapCategory,
   )
 
