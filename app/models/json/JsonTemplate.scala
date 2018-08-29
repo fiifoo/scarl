@@ -4,7 +4,7 @@ import io.github.fiifoo.scarl.area.feature.{BurrowFeature, Feature, HouseFeature
 import io.github.fiifoo.scarl.area.shape.{Rectangle, Shape}
 import io.github.fiifoo.scarl.area.template.FixedContent.MachinerySource
 import io.github.fiifoo.scarl.area.template.RandomizedTemplate.{ConduitLocations, Entrances}
-import io.github.fiifoo.scarl.area.template.Template.{Category, ChallengeCategory, TrapCategory}
+import io.github.fiifoo.scarl.area.template.Template._
 import io.github.fiifoo.scarl.area.template._
 import io.github.fiifoo.scarl.core.geometry.Location
 import io.github.fiifoo.scarl.core.kind.ItemKindId
@@ -65,6 +65,7 @@ object JsonTemplate {
 
   lazy implicit val categoryFormat: Format[Category] = polymorphicObjectFormat({
     case "Template.ChallengeCategory" => ChallengeCategory
+    case "Template.RoomCategory" => RoomCategory
     case "Template.TrapCategory" => TrapCategory
   })
 
