@@ -84,11 +84,15 @@ case object ContentSelection {
       val categories = if (this.category.isEmpty) ItemKind.categories else this.category
       val constraints = if (this.power.isEmpty) CombatPower.categories else this.power
 
+      def hasCategory(category: ItemKind.Category, choice: ItemKindId): Boolean = {
+        assets.kinds.items(choice).category.contains(category)
+      }
+
       def getPower(category: ItemKind.Category, choice: ItemKindId): Option[Int] = {
         assets.combatPower.item.get(category) flatMap (_.get(choice))
       }
 
-      selectCategoryContent(area, choices, categories, constraints, random, getPower)
+      selectCategoryContent(area, choices, categories, constraints, random, hasCategory, getPower)
     }
   }
 
@@ -102,11 +106,15 @@ case object ContentSelection {
       val categories = if (this.category.isEmpty) Equipment.categories else this.category
       val constraints = if (this.power.isEmpty) CombatPower.categories else this.power
 
+      def hasCategory(category: Equipment.Category, choice: ItemKindId): Boolean = {
+        getPower(category, choice).isDefined
+      }
+
       def getPower(category: Equipment.Category, choice: ItemKindId): Option[Int] = {
         assets.combatPower.equipment.get(category) flatMap (_.get(choice))
       }
 
-      selectCategoryContent(area, choices, categories, constraints, random, getPower)
+      selectCategoryContent(area, choices, categories, constraints, random, hasCategory, getPower)
     }
   }
 
@@ -120,11 +128,15 @@ case object ContentSelection {
       val categories = if (this.category.isEmpty) Template.categories else this.category
       val constraints = if (this.power.isEmpty) CombatPower.categories else this.power
 
+      def hasCategory(category: Template.Category, choice: TemplateId): Boolean = {
+        assets.templates(choice).category.contains(category)
+      }
+
       def getPower(category: Template.Category, choice: TemplateId): Option[Int] = {
         assets.combatPower.template.get(category) flatMap (_.get(choice))
       }
 
-      selectCategoryContent(area, choices, categories, constraints, random, getPower)
+      selectCategoryContent(area, choices, categories, constraints, random, hasCategory, getPower)
     }
   }
 
@@ -138,11 +150,15 @@ case object ContentSelection {
       val categories = if (this.category.isEmpty) WidgetKind.categories else this.category
       val constraints = if (this.power.isEmpty) CombatPower.categories else this.power
 
+      def hasCategory(category: WidgetKind.Category, choice: WidgetKindId): Boolean = {
+        assets.kinds.widgets(choice).category.contains(category)
+      }
+
       def getPower(category: WidgetKind.Category, choice: WidgetKindId): Option[Int] = {
         assets.combatPower.widget.get(category) flatMap (_.get(choice))
       }
 
-      selectCategoryContent(area, choices, categories, constraints, random, getPower)
+      selectCategoryContent(area, choices, categories, constraints, random, hasCategory, getPower)
     }
   }
 
@@ -151,6 +167,7 @@ case object ContentSelection {
                                           categories: Set[U],
                                           constraints: Set[CombatPower.Category],
                                           random: Random,
+                                          hasCategory: (U, T) => Boolean,
                                           getPower: (U, T) => Option[Int]
                                          ): Option[T] = {
     def select(categories: Set[U]): Option[T] = {
@@ -158,7 +175,8 @@ case object ContentSelection {
         None
       } else {
         val category = Rng.nextChoice(random, categories)
-        val result = selectContent(area, choices, constraints, random, (choice: T) => getPower(category, choice))
+        val categoryChoices = choices.filter(choice => hasCategory(category, choice.value))
+        val result = selectContent(area, categoryChoices, constraints, random, (choice: T) => getPower(category, choice))
 
         result orElse select(categories - category)
       }
