@@ -56,7 +56,7 @@ object CalculateContent {
     })
 
     val defaultTerrain = terrain getOrElse assets.themes(area.theme).terrain
-    val defaultTerrains = (locations filterNot fixed.terrains.isDefinedAt map (location => {
+    val defaultTerrains = ((shape.border ++ locations) filterNot fixed.terrains.isDefinedAt map (location => {
       (location, FixedTerrain(defaultTerrain))
     })).toMap
 
