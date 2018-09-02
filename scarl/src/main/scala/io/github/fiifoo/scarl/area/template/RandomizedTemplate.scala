@@ -12,7 +12,7 @@ import io.github.fiifoo.scarl.core.geometry.{Location, Rotation}
 import io.github.fiifoo.scarl.core.kind._
 import io.github.fiifoo.scarl.core.math.Distribution.Uniform
 import io.github.fiifoo.scarl.core.math.Rng
-import io.github.fiifoo.scarl.world.WorldAssets
+import io.github.fiifoo.scarl.world.{TemplateSourceCatalogueId, WorldAssets}
 
 import scala.util.Random
 
@@ -37,6 +37,7 @@ case class RandomizedTemplate(id: TemplateId,
                               border: Option[WallKindId] = None,
                               fill: Option[WallKindId] = None,
                               terrain: Option[TerrainKindId] = None,
+                              templateCatalogue: Option[TemplateSourceCatalogueId] = None,
                               templates: List[TemplateSource] = List(),
                               entrances: Entrances = Entrances(),
                               conduitLocations: ConduitLocations = ConduitLocations(),
@@ -104,8 +105,13 @@ case class RandomizedTemplate(id: TemplateId,
       result.get
     }
 
+    val templates = this.templates ::: this.templateCatalogue
+      .flatMap(assets.catalogues.templateSources.get)
+      .map(_.apply(assets.catalogues.templateSources))
+      .getOrElse(Nil)
+
     CalculateTemplateLocations(
-      this.templates flatMap calculate,
+      templates flatMap calculate,
       shape,
       random
     )

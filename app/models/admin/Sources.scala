@@ -18,7 +18,7 @@ import io.github.fiifoo.scarl.core.math.Distribution
 import io.github.fiifoo.scarl.mechanism._
 import io.github.fiifoo.scarl.power._
 import io.github.fiifoo.scarl.widget._
-import io.github.fiifoo.scarl.world.{ContentSourceCatalogue, TemplateCatalogue}
+import io.github.fiifoo.scarl.world.{ContentSourceCatalogue, TemplateCatalogue, TemplateSourceCatalogue}
 
 import scala.reflect.runtime.universe.typeOf
 
@@ -31,6 +31,7 @@ object Sources {
     ModelSource(typeOf[CreatureCatalogue], List("catalogues", "creatures")),
     ModelSource(typeOf[ItemCatalogue], List("catalogues", "items")),
     ModelSource(typeOf[TemplateCatalogue], List("catalogues", "templates")),
+    ModelSource(typeOf[TemplateSourceCatalogue], List("catalogues", "templateSources")),
     ModelSource(typeOf[TerrainCatalogue], List("catalogues", "terrains")),
     ModelSource(typeOf[WallCatalogue], List("catalogues", "walls")),
     ModelSource(typeOf[WidgetCatalogue], List("catalogues", "widgets")),

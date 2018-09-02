@@ -1,6 +1,6 @@
 package io.github.fiifoo.scarl.world
 
-import io.github.fiifoo.scarl.area.template.ContentSource.{CreatureSource, ItemSource, WidgetSource}
+import io.github.fiifoo.scarl.area.template.ContentSource.{CreatureSource, ItemSource, TemplateSource, WidgetSource}
 import io.github.fiifoo.scarl.area.template.TemplateId
 import io.github.fiifoo.scarl.core.assets._
 import io.github.fiifoo.scarl.core.math.Rng.WeightedChoice
@@ -8,6 +8,7 @@ import io.github.fiifoo.scarl.core.math.Rng.WeightedChoice
 case class WorldCatalogues(contentSources: Map[ContentSourceCatalogueId, ContentSourceCatalogue] = Map(),
                            creatures: Map[CreatureCatalogueId, CreatureCatalogue] = Map(),
                            items: Map[ItemCatalogueId, ItemCatalogue] = Map(),
+                           templateSources: Map[TemplateSourceCatalogueId, TemplateSourceCatalogue] = Map(),
                            templates: Map[TemplateCatalogueId, TemplateCatalogue] = Map(),
                            terrains: Map[TerrainCatalogueId, TerrainCatalogue] = Map(),
                            walls: Map[WallCatalogueId, WallCatalogue] = Map(),
@@ -49,3 +50,10 @@ case class TemplateCatalogue(id: TemplateCatalogueId,
                              subs: List[TemplateCatalogueId] = List(),
                              items: List[WeightedChoice[TemplateId]] = List()
                             ) extends ListCatalogue[TemplateCatalogueId, WeightedChoice[TemplateId]]
+
+case class TemplateSourceCatalogueId(value: String) extends ListCatalogueId
+
+case class TemplateSourceCatalogue(id: TemplateSourceCatalogueId,
+                                   subs: List[TemplateSourceCatalogueId] = List(),
+                                   items: List[TemplateSource] = List()
+                                  ) extends ListCatalogue[TemplateSourceCatalogueId, TemplateSource]
