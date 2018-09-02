@@ -20,7 +20,7 @@ object ContentSource {
 
   case class TemplateSource(selection: ContentSelection.TemplateSelection,
                             distribution: Distribution,
-                            optional: Boolean = false,
+                            required: Int = 0,
                            ) extends ContentSource[TemplateId]
 
   case class WidgetSource(selection: ContentSelection.WidgetSelection,

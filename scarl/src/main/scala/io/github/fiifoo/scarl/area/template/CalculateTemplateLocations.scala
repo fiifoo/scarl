@@ -8,37 +8,45 @@ import scala.util.Random
 
 object CalculateTemplateLocations {
 
+  private val requiredMultiplier = 1.5
+
+  type Source = (Template.Result, Boolean)
   type Results = Map[Location, Template.Result]
   type Area = (Location, Location)
   type Areas = Set[Area]
 
-  def apply(required: List[Template.Result],
-            optional: List[Template.Result],
+  def apply(templates: List[Source],
             shape: Shape.Result,
             random: Random
            ): Results = {
-
-    val calculateRequired = calculateTemplates(required.sortWith(sort), random, required = true) _
-    val calculateOptional = calculateTemplates(optional.sortWith(sort), random, required = false) _
-
     val area = (Location(1, 1), Location(shape.innerWidth - 1, shape.innerHeight - 1))
-    val (results, _) = calculateOptional(calculateRequired((Map(), Set(area))))
+    val initial: (Results, Areas) = (Map(), Set(area))
+
+    val (results, _) = (templates sortWith sort foldLeft initial) (calculateTemplate(random))
 
     results
   }
 
-  private def sort(a: Template.Result, b: Template.Result): Boolean = {
-    a.shape.outerWidth + a.shape.outerHeight > b.shape.outerWidth + b.shape.outerHeight
+  private def sort(a: Source, b: Source): Boolean = {
+    weight(a) > weight(b)
   }
 
-  private def calculateTemplates(templates: List[Template.Result], random: Random, required: Boolean)
-                                (carry: (Results, Areas)): (Results, Areas) = {
-    (templates foldLeft carry) (calculateTemplate(random, required))
+  private def weight(source: Source): Int = {
+    val (template, required) = source
+
+    val weight = template.shape.outerWidth + template.shape.outerHeight
+
+    if (required) {
+      (weight * requiredMultiplier).toInt
+    } else {
+      weight
+    }
   }
 
-  private def calculateTemplate(random: Random, required: Boolean)
-                               (carry: (Results, Areas), template: Template.Result): (Results, Areas) = {
+  private def calculateTemplate(random: Random)
+                               (carry: (Results, Areas), source: Source): (Results, Areas) = {
     val (results, areas) = carry
+    val (template, required) = source
 
     val width = template.shape.outerWidth
     val height = template.shape.outerHeight

@@ -84,15 +84,16 @@ case class RandomizedTemplate(id: TemplateId,
                                     shape: Shape.Result,
                                     random: Random
                                    ): Map[Location, Result] = {
-    def calculate(source: TemplateSource): Iterable[Result] = {
+    def calculate(source: TemplateSource): Iterable[(Result, Boolean)] = {
       val result = source.selection.apply(assets, area, random) map (sub => {
         val range = Rng.nextRange(random, source.distribution)
 
-        range map (_ => {
+        range map (i => {
+          val required = i < source.required
           val result = sub(assets.templates)(assets, area, random)
           val rotation = Rotation(random, result.shape.outerWidth, result.shape.outerHeight).reverse
 
-          result.rotate(rotation)
+          (result.rotate(rotation), required)
         })
       })
 
@@ -103,11 +104,8 @@ case class RandomizedTemplate(id: TemplateId,
       result.get
     }
 
-    val (optional, required) = this.templates partition (_.optional)
-
     CalculateTemplateLocations(
-      required flatMap calculate,
-      optional flatMap calculate,
+      this.templates flatMap calculate,
       shape,
       random
     )
