@@ -23,11 +23,12 @@ case class CombatPowerSimulation(matches: Int = 25,
   private val homeFaction = FactionId("home")
   private val visitorFaction = FactionId("visitor")
   private val dummyFaction = FactionId("dummy")
+  private val terrain = TerrainKind(TerrainKindId(""), "", '.', "")
 
   private val theme = Theme(
     ThemeId(""),
     ItemKindId(""),
-    TerrainKindId(""),
+    terrain.id,
     WallKindId(""),
     TemplateCatalogueId(""),
     CreatureCatalogueId(""),
@@ -135,7 +136,8 @@ case class CombatPowerSimulation(matches: Int = 25,
 
         (kind.id, kind)
       })).toMap,
-      items = (combatants flatMap (_.equipments.values) map (item => item.id -> item)).toMap
+      items = (combatants flatMap (_.equipments.values) map (item => item.id -> item)).toMap,
+      terrains = Map(terrain.id -> terrain)
     )
 
     val factions = List(
