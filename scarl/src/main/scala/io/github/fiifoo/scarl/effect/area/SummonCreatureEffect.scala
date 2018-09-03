@@ -18,7 +18,12 @@ case class SummonCreatureEffect(choices: WeightedChoices[CreatureKindId],
 
     EffectResult(
       RngMutation(rng),
-      CreateEntityEffect(kind, location, description, Some(this))
+      CreateEntityEffect(
+        kind = kind,
+        location = location,
+        description = description,
+        parent = Some(this)
+      )
     )
   }
 }

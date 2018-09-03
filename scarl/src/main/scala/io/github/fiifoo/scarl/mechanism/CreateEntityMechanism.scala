@@ -13,7 +13,12 @@ case class CreateEntityMechanism(description: Option[String],
                                  createDescription: Option[String],
                                 ) extends Mechanism {
   def interact(s: State, machinery: Machinery, control: Location): List[Effect] = {
-    val effects = machinery.targets.toList map (CreateEntityEffect(kind, _, createDescription))
+    val effects = machinery.targets.toList map (location =>
+      CreateEntityEffect(
+        kind = kind,
+        location = location,
+        description = createDescription
+      ))
 
     activate(machinery, effects)
   }

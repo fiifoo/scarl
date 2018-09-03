@@ -117,6 +117,7 @@ object Sources {
 
     SubModelSource(typeOf[CreaturePower], List(
       typeOf[ActivateMachineryPower],
+      typeOf[CreateEntityPower],
       typeOf[ExplodePower],
       typeOf[TransformPower],
       typeOf[VoidPower],
@@ -174,6 +175,7 @@ object Sources {
 
     SubModelSource(typeOf[ItemPower], List(
       typeOf[ActivateMachineryPower],
+      typeOf[CreateEntityPower],
       typeOf[ExplodePower],
       typeOf[ReceiveKeyPower],
       typeOf[RemoveItemPower],
