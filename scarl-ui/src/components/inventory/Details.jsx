@@ -1,12 +1,18 @@
 import { fromJS, List, Map, Set } from 'immutable'
 import React from 'react'
 import { LauncherSlot } from '../../game/equipment'
-import { stats as equipmentStats } from '../../game/creature'
+import { stats as equipmentStats, negativeStats } from '../../game/creature'
 import { groups as equipmentGroups, slots as equipmentSlots } from '../../game/equipment'
 import { addStats } from '../../game/utils'
 
-const Diff = ({amount}) => (
-    <span className="text-muted">(<span className={amount > 0 ? 'text-success' : 'text-danger'}>
+const isPositive = (path, amount) => {
+    const positiveStat = ! negativeStats.contains(path)
+
+    return amount >= 0 ? positiveStat : ! positiveStat
+}
+
+const Diff = ({path, amount}) => (
+    <span className="text-muted">(<span className={isPositive(path, amount) ? 'text-success' : 'text-danger'}>
         {amount > 0 ? '+' : null}{amount}
     </span>)</span>
 )
@@ -24,13 +30,13 @@ const Stats = ({label, compare, stats}) => {
             <tr key={path.join('.')} className={value === 0 ? 'text-muted' : null}>
                 <th className="text-right">{label}</th>
                 <td>{value}</td>
-                <td>{diff !== 0 ? <Diff amount={diff} /> : null}</td>
+                <td>{diff !== 0 ? <Diff path={path} amount={diff} /> : null}</td>
             </tr>
         )
     }
 
-    const filterStat = (_, path) => stats.getIn(path) > 0
-    const filterCompareStat = (_, path) => stats.getIn(path) === 0 && compare.getIn(path) > 0
+    const filterStat = (_, path) => stats.getIn(path) !== 0
+    const filterCompareStat = (_, path) => stats.getIn(path) === 0 && compare.getIn(path) !== 0
 
     return (
         <tbody>
