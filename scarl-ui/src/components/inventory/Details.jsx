@@ -1,8 +1,9 @@
 import { fromJS, List, Map, Set } from 'immutable'
-import React from 'react'
+import React, { Fragment } from 'react'
 import { LauncherSlot } from '../../game/equipment'
-import { stats as equipmentStats, negativeStats } from '../../game/creature'
+import { stats as creatureStats, negativeStats } from '../../game/creature'
 import { groups as equipmentGroups, slots as equipmentSlots } from '../../game/equipment'
+import { resourceStats } from '../../game/power'
 import { addStats } from '../../game/utils'
 
 const isPositive = (path, amount) => {
@@ -44,9 +45,9 @@ const Stats = ({label, compare, stats}) => {
                 <th></th>
                 <th colSpan="2">{label}</th>
             </tr>
-            {equipmentStats.filter(filterStat).map(renderStat).toArray()}
+            {creatureStats.filter(filterStat).map(renderStat).toArray()}
             {compare
-                ? equipmentStats.filter(filterCompareStat).map(renderStat).toArray()
+                ? creatureStats.filter(filterCompareStat).map(renderStat).toArray()
                 : null
             }
         </tbody>
@@ -63,29 +64,33 @@ const MissileStats = ({equipments, inventory, item, kinds}) => {
     return <Stats label="Missile" stats={stats} compare={compare} />
 }
 
-const ActionsDropdown = ({selected, actions, setAction}) =>  (
-    <div className="actions-dropdown">
-        <div
-            className="toggle"
-            onClick={() => setAction(selected === null ? 0 : null)}>
-            ▼
-        </div>
-        <div className={selected === null ? 'menu closed' : 'menu'}>
-            {actions.map((action, key) => (
-                <div
-                    key={key}
-                    className={key === selected ? 'active' : null}
-                    onClick={action.execute}>
-                    {action.label}
-                </div>
-            ))}
-        </div>
-    </div>
-)
+const UsableStats = ({item}) => {
+    const power = fromJS(item.usable.data)
 
-const Details = ({action, actions, equipments, inventory, item, kinds, setAction}) => {
-    const kind = kinds.items.get(item.kind)
+    const renderResource = (label, path) => {
+        const value = power.getIn(path)
 
+        return (
+            <tr key={path.join('.')}>
+                <th className="text-right">{label}</th>
+                <td className={value > 0 ? 'text-success' : 'text-danger'}>
+                    {value > 0 ? '+' : null}{value}
+                </td>
+                <td></td>
+            </tr>
+        )
+    }
+
+    const filterResource = (_, path) => power.getIn(path) !== 0
+
+    return (
+        <tbody>
+            {resourceStats.filter(filterResource).map(renderResource).toArray()}
+        </tbody>
+    )
+}
+
+const EquipmentStats = ({equipments, inventory, item}) => {
     const renderStats = (group, stats) => (slots, index = 0) => {
         const compare = slots.reduce((carry, slot) => {
             const compareItemId = equipments.get(slot)
@@ -132,37 +137,71 @@ const Details = ({action, actions, equipments, inventory, item, kinds, setAction
         )
 
         return (
-            <React.Fragment key={key}>
+            <Fragment key={key}>
                 {content}
-            </React.Fragment>
+            </Fragment>
         )
     }
 
-    const stats = Map(equipmentGroups).filter(group => item[group.prop]).map(renderEquipment).toArray()
-
-    const missile = item.launcher && item.launcher.stats.launcher.missile ? (
-        <MissileStats
-            equipments={equipments}
-            inventory={inventory}
-            item={item}
-            kinds={kinds} />
-    ) : null
-
     return (
-        <div>
-            <h4>{kind.name}</h4>
-            {actions.isEmpty() ? null : (
-                <ActionsDropdown
-                    selected={action}
-                    actions={actions}
-                    setAction={setAction} />
-            )}
-            <table className="scarl-table">
-                {stats}
-                {missile}
-            </table>
-        </div>
+        <Fragment>
+            {Map(equipmentGroups).filter(group => item[group.prop]).map(renderEquipment).toArray()}
+        </Fragment>
     )
 }
+
+const ActionsDropdown = ({selected, actions, setAction}) =>  (
+    <div className="actions-dropdown">
+        <div
+            className="toggle"
+            onClick={() => setAction(selected === null ? 0 : null)}>
+            ▼
+        </div>
+        <div className={selected === null ? 'menu closed' : 'menu'}>
+            {actions.map((action, key) => (
+                <div
+                    key={key}
+                    className={key === selected ? 'active' : null}
+                    onClick={action.execute}>
+                    {action.label}
+                </div>
+            ))}
+        </div>
+    </div>
+)
+
+const Details = ({action, actions, equipments, inventory, item, kinds, setAction}) => (
+    <div>
+        <h4>{kinds.items.get(item.kind).name}</h4>
+
+        {actions.isEmpty() ? null : (
+            <ActionsDropdown
+                selected={action}
+                actions={actions}
+                setAction={setAction} />
+        )}
+
+        <table className="scarl-table">
+
+            <EquipmentStats
+                equipments={equipments}
+                inventory={inventory}
+                item={item} />
+
+            {item.launcher && item.launcher.stats.launcher.missile ? (
+                <MissileStats
+                    equipments={equipments}
+                    inventory={inventory}
+                    item={item}
+                    kinds={kinds} />
+            ) : null}
+
+            {item.usable ? (
+                <UsableStats item={item} />
+            ) : null}
+
+        </table>
+    </div>
+)
 
 export default Details
