@@ -6,6 +6,7 @@ const Kinds = Record({
     items: Map(),
     terrains: Map(),
     walls: Map(),
+    widgets: Map(),
 })
 
 export default (state = Kinds(), action) => {
@@ -19,6 +20,7 @@ export default (state = Kinds(), action) => {
                 items: Map(action.data.kinds.items),
                 terrains: Map(action.data.kinds.terrains),
                 walls: Map(action.data.kinds.walls),
+                widgets: Map(action.data.kinds.widgets),
             })
         }
         default: {

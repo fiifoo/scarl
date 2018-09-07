@@ -7,7 +7,7 @@ import play.api.libs.json._
 
 object JsonWidgetKind {
 
-  import JsonBase.{mapReads, polymorphicObjectFormat, polymorphicTypeReads, stringIdFormat}
+  import JsonBase.{mapReads, polymorphicObjectFormat, polymorphicTypeFormat, stringIdFormat}
 
   lazy private implicit val creatureCatalogueIdFormat = JsonCatalogues.creatureCatalogueIdFormat
   lazy private implicit val creatureKindIdFormat = JsonCreatureKind.creatureKindIdFormat
@@ -15,23 +15,32 @@ object JsonWidgetKind {
 
   lazy private implicit val discoverFormat = JsonItemDiscover.discoverFormat
 
-  lazy private implicit val delayedTransformingReads = Json.reads[DelayedTransformingWidget]
-  lazy private implicit val healLocationReads = Json.reads[HealLocationWidget]
-  lazy private implicit val summonCreatureReads = Json.reads[SummonCreatureWidget]
-  lazy private implicit val timedExplosiveWidgetReads = Json.reads[TimedExplosiveWidget]
-  lazy private implicit val triggeredTransformingReads = Json.reads[TriggeredTransformingWidget]
-  lazy private implicit val triggeredTrapReads = Json.reads[TriggeredTrapWidget]
+  lazy private implicit val delayedTransformingFormat = Json.format[DelayedTransformingWidget]
+  lazy private implicit val healLocationFormat = Json.format[HealLocationWidget]
+  lazy private implicit val summonCreatureFormat = Json.format[SummonCreatureWidget]
+  lazy private implicit val timedExplosiveWidgetFormat = Json.format[TimedExplosiveWidget]
+  lazy private implicit val triggeredTransformingFormat = Json.format[TriggeredTransformingWidget]
+  lazy private implicit val triggeredTrapFormat = Json.format[TriggeredTrapWidget]
 
   lazy implicit val widgetKindIdFormat: Format[WidgetKindId] = stringIdFormat(_.value, WidgetKindId.apply)
 
-  lazy implicit val widgetKindReads: Reads[WidgetKind] = polymorphicTypeReads(data => {
-    case "DelayedTransformingWidget" => data.as[DelayedTransformingWidget]
-    case "HealLocationWidget" => data.as[HealLocationWidget]
-    case "SummonCreatureWidget" => data.as[SummonCreatureWidget]
-    case "TimedExplosiveWidget" => data.as[TimedExplosiveWidget]
-    case "TriggeredTransformingWidget" => data.as[TriggeredTransformingWidget]
-    case "TriggeredTrapWidget" => data.as[TriggeredTrapWidget]
-  })
+  lazy implicit val widgetKindFormat: Format[WidgetKind] = polymorphicTypeFormat(
+    data => {
+      case "DelayedTransformingWidget" => data.as[DelayedTransformingWidget]
+      case "HealLocationWidget" => data.as[HealLocationWidget]
+      case "SummonCreatureWidget" => data.as[SummonCreatureWidget]
+      case "TimedExplosiveWidget" => data.as[TimedExplosiveWidget]
+      case "TriggeredTransformingWidget" => data.as[TriggeredTransformingWidget]
+      case "TriggeredTrapWidget" => data.as[TriggeredTrapWidget]
+    }, {
+      case widget: DelayedTransformingWidget => delayedTransformingFormat.writes(widget)
+      case widget: HealLocationWidget => healLocationFormat.writes(widget)
+      case widget: SummonCreatureWidget => summonCreatureFormat.writes(widget)
+      case widget: TimedExplosiveWidget => timedExplosiveWidgetFormat.writes(widget)
+      case widget: TriggeredTransformingWidget => triggeredTransformingFormat.writes(widget)
+      case widget: TriggeredTrapWidget => triggeredTrapFormat.writes(widget)
+    }
+  )
 
   lazy implicit val categoryFormat: Format[Category] = polymorphicObjectFormat({
     case "WidgetKind.HealCategory" => HealCategory

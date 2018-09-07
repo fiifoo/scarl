@@ -21,6 +21,10 @@
     min-width: 75px;
 }
 
+.actions-dropdown {
+    position: relative;
+}
+
 .actions-dropdown > .toggle {
     position: absolute;
     margin-top: -37px;

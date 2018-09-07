@@ -18,6 +18,36 @@ const Diff = ({path, amount}) => (
     </span>)</span>
 )
 
+const SimpleStats = ({label, values, properties}) => {
+    values = fromJS(values)
+
+    const renderStat = (label, path) => {
+        const value = values.getIn(path)
+
+        return (
+            <tr key={path.join('.')}>
+                <th className="text-right">{label}</th>
+                <td>{value}</td>
+                <td></td>
+            </tr>
+        )
+    }
+
+    const filterStat = (_, path) => values.getIn(path) !== 0
+
+    return (
+        <tbody>
+            {label && (
+                <tr>
+                    <th></th>
+                    <th colSpan="2">{label}</th>
+                </tr>
+            )}
+            {properties.filter(filterStat).map(renderStat).toArray()}
+        </tbody>
+    )
+}
+
 const Stats = ({label, compare, stats}) => {
     compare = compare ? fromJS(compare) : null
     stats = fromJS(stats)
@@ -41,10 +71,12 @@ const Stats = ({label, compare, stats}) => {
 
     return (
         <tbody>
-            <tr>
-                <th></th>
-                <th colSpan="2">{label}</th>
-            </tr>
+            {label && (
+                <tr>
+                    <th></th>
+                    <th colSpan="2">{label}</th>
+                </tr>
+            )}
             {creatureStats.filter(filterStat).map(renderStat).toArray()}
             {compare
                 ? creatureStats.filter(filterCompareStat).map(renderStat).toArray()
@@ -64,8 +96,48 @@ const MissileStats = ({equipments, inventory, item, kinds}) => {
     return <Stats label="Missile" stats={stats} compare={compare} />
 }
 
-const UsableStats = ({item}) => {
+const ExplosiveStats = ({explosive}) => {
+    const properties = creatureStats.filter((_, path) => path.first() === 'explosive')
+
+    return <SimpleStats values={{explosive}} properties={properties} />
+}
+
+const KindStats = ({id, kinds}) => {
+    switch (id.get('type')) {
+        case 'CreatureKindId': {
+            const creature = kinds.creatures.get(id.get('value'))
+
+            return <SimpleStats values={creature.stats} properties={creatureStats} />
+        }
+        case 'WidgetKindId': {
+            const itemId = kinds.widgets.get(id.get('value')).data.item
+            const item = kinds.items.get(itemId)
+
+            return item.explosive ? <ExplosiveStats explosive={item.explosive} /> : null
+        }
+        default: {
+            return null
+        }
+    }
+}
+
+const UsableStats = ({item, kinds}) => {
+    const type = item.usable.type
     const power = fromJS(item.usable.data)
+
+    const target = (() => {
+        switch (type) {
+            case 'CreateEntityPower': {
+                return power.get('kind')
+            }
+            case 'TransformPower': {
+                return power.get('transformTo')
+            }
+            default: {
+                return null
+            }
+        }
+    })()
 
     const renderResource = (label, path) => {
         const value = power.getIn(path)
@@ -84,9 +156,14 @@ const UsableStats = ({item}) => {
     const filterResource = (_, path) => power.getIn(path) !== 0
 
     return (
-        <tbody>
-            {resourceStats.filter(filterResource).map(renderResource).toArray()}
-        </tbody>
+        <Fragment>
+            {power.has('resources') && (
+                <tbody>
+                    {resourceStats.filter(filterResource).map(renderResource).toArray()}
+                </tbody>
+            )}
+            {target && <KindStats id={target} kinds={kinds} />}
+        </Fragment>
     )
 }
 
@@ -197,7 +274,7 @@ const Details = ({action, actions, equipments, inventory, item, kinds, setAction
             ) : null}
 
             {item.usable ? (
-                <UsableStats item={item} />
+                <UsableStats item={item} kinds={kinds} />
             ) : null}
 
         </table>

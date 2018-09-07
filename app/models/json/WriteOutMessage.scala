@@ -35,12 +35,16 @@ object WriteOutMessage {
   lazy private implicit val terrainKindIdFormat = JsonTerrainKind.terrainKindIdFormat
   lazy private implicit val wallKindFormat = JsonWallKind.wallKindFormat
   lazy private implicit val wallKindIdFormat = JsonWallKind.wallKindIdFormat
+  lazy private implicit val widgetKindFormat = JsonWidgetKind.widgetKindFormat
+  lazy private implicit val widgetKindIdFormat = JsonWidgetKind.widgetKindIdFormat
+
   lazy private implicit val kindsWrites = new Writes[Kinds] {
     def writes(k: Kinds) = JsObject(Map(
       "creatures" -> Json.toJson(k.creatures),
       "items" -> Json.toJson(k.items),
       "terrains" -> Json.toJson(k.terrains),
-      "walls" -> Json.toJson(k.walls)
+      "walls" -> Json.toJson(k.walls),
+      "widgets" -> Json.toJson(k.widgets)
     ))
   }
 
