@@ -1,4 +1,4 @@
-import { List, OrderedMap, Set } from 'immutable'
+import { List, Map, OrderedMap, Set } from 'immutable'
 
 export const stats = OrderedMap([
     [['speed'], 'Speed'],
@@ -29,6 +29,10 @@ export const stats = OrderedMap([
     [['explosive', 'damage'], 'Explosive damage'],
     [['explosive', 'radius'], 'Explosive radius'],
     [['explosive', 'blast'], 'Explosive blast'],
+]).mapKeys(path => List(path))
+
+export const statsInfo = Map([
+    [['speed'], '+100']
 ]).mapKeys(path => List(path))
 
 export const negativeStats = Set([
