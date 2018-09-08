@@ -7,7 +7,7 @@ import io.github.fiifoo.scarl.core.item.Equipment.Slot
 import io.github.fiifoo.scarl.core.kind.Kinds
 import io.github.fiifoo.scarl.game.area.AreaInfo
 import io.github.fiifoo.scarl.game.event.Event
-import io.github.fiifoo.scarl.game.player.{PlayerFov, PlayerInfo}
+import io.github.fiifoo.scarl.game.player.{PlayerFov, PlayerInfo, Settings}
 import io.github.fiifoo.scarl.game.statistics.Statistics
 
 sealed trait OutMessage
@@ -17,8 +17,11 @@ case class DebugFov(locations: Set[Location]) extends OutMessage with DebugMessa
 case class DebugWaypoint(network: WaypointNetwork) extends OutMessage with DebugMessage
 
 case class GameStart(area: AreaInfo,
+                     equipments: Map[Slot, ItemId],
                      factions: Iterable[Faction],
-                     kinds: Kinds
+                     inventory: Set[Item],
+                     kinds: Kinds,
+                     settings: Settings
                     ) extends OutMessage
 
 case class GameUpdate(fov: PlayerFov,
@@ -29,6 +32,8 @@ case class GameUpdate(fov: PlayerFov,
 case class GameOver(statistics: Statistics) extends OutMessage
 
 case class AreaChange(area: AreaInfo) extends OutMessage
+
+case class PlayerSettings(settings: Settings) extends OutMessage
 
 case class PlayerInventory(inventory: Set[Item],
                            equipments: Map[Slot, ItemId]

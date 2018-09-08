@@ -13,6 +13,12 @@ const directionModifiers = {
 
 export const isDirectionCommand = command => command.match(/^DIRECTION_/) !== null
 
+export const isSetQuickItemCommand = command => command.match(/^SET_QUICK_ITEM_/) !== null
+
+export const isUseQuickItemCommand = command => command.match(/^USE_QUICK_ITEM_/) !== null
+
+export const getQuickItemSlot = command => parseInt(command.replace(/^..._QUICK_ITEM_/, ''))
+
 export const getDirectionLocation = (command, {x, y}) => {
     const modifier = directionModifiers[command]
 

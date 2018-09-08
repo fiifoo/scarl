@@ -11,6 +11,7 @@ import games from './games'
 import inventory from './inventory'
 import kinds from './kinds'
 import player from './player'
+import settings from './settings'
 import statistics from './statistics'
 import ui from './ui'
 
@@ -27,6 +28,7 @@ export default combineReducers({
     inventory,
     kinds,
     player,
+    settings,
     statistics,
     ui,
 })

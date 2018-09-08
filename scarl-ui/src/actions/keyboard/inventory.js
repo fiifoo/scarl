@@ -1,6 +1,7 @@
 import { List } from 'immutable'
 import { compose } from 'redux'
 import * as commands from '../../keyboard/commands'
+import { getQuickItemSlot, isSetQuickItemCommand } from '../../keyboard/utils'
 
 import * as gameActions from '../gameActions'
 import * as inventoryActions from '../inventoryActions'
@@ -89,6 +90,12 @@ const setAction = (dispatch, action) => {
     dispatch(inventoryActions.setInventoryAction(action))
 }
 
+const setQuickItem = (slot, item) => {
+    if (item && item.usable) {
+        gameActions.setQuickItem(slot, item.kind)
+    }
+}
+
 const use = (dispatch, getState) => {
     const action = getState().ui.inventory.action || 0
     const actions = getActions(dispatch, getState)
@@ -140,6 +147,11 @@ const handleNormal = (command, dispatch, getState) => {
                 setAction(dispatch, 0)
             }
             break
+        }
+        default: {
+            if (isSetQuickItemCommand(command)) {
+                setQuickItem(getQuickItemSlot(command), getItem(getState))
+            }
         }
     }
 }

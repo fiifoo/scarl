@@ -3,6 +3,17 @@ export const ARROW_UP = 38
 export const ARROW_RIGHT = 39
 export const ARROW_DOWN = 40
 
+export const NUM_1 = 49
+export const NUM_2 = 50
+export const NUM_3 = 51
+export const NUM_4 = 52
+export const NUM_5 = 53
+export const NUM_6 = 54
+export const NUM_7 = 55
+export const NUM_8 = 56
+export const NUM_9 = 57
+export const NUM_0 = 48
+
 export const NUMPAD_1 = 97
 export const NUMPAD_2 = 98
 export const NUMPAD_3 = 99

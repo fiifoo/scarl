@@ -14,14 +14,9 @@ object LoadGame {
 
   def apply(assets: WorldAssets)(json: JsValue): GameState = {
     val data = GameSave.format.reads(json).get
-    val world = finalize(assets, data.state.world)
 
-    val gameState = GameState(
-      area = data.state.area,
-      player = data.state.player,
-      world = world,
-      maps = data.state.maps,
-      statistics = data.state.statistics
+    val gameState = data.state.copy(
+      world = finalize(assets, data.state.world)
     )
 
     if (data.checkHashCode != gameState.hashCode) {

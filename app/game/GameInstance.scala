@@ -66,6 +66,13 @@ class GameInstance(games: GameRepository, assets: WorldAssets, game: Game, out: 
           inventory = getContainerItems(state.instance)(state.gameState.player) map (_ (state.instance)),
           equipments = state.instance.equipments.getOrElse(state.gameState.player, Map())
         ))
+
+      case set: SetQuickItem =>
+        state = state.copy(gameState = state.gameState.copy(
+          settings = state.gameState.settings.setQuickItem(set.slot, set.item)
+        ))
+
+        send(PlayerSettings(state.gameState.settings))
     }
   }
 

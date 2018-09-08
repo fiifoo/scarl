@@ -15,7 +15,8 @@ object JsonGameState {
   lazy private implicit val worldStateFormat = JsonWorldState.worldStateFormat
   lazy private implicit val mapLocationMapFormat = JsonMapLocation.mapLocationMapFormat
   implicitly(mapFormat[AreaId, Map[Location, MapLocation]])
-  lazy implicit val statisticsFormat = JsonStatistics.statisticsFormat
+  lazy private implicit val playerSettingsFormat = JsonPlayerSettings.playerSettingsFormat
+  lazy private implicit val statisticsFormat = JsonStatistics.statisticsFormat
 
   lazy val gameStateFormat = Json.format[GameState]
 }

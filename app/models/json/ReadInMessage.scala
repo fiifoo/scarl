@@ -10,12 +10,16 @@ object ReadInMessage {
   def apply(json: JsValue): InMessage = inMessageReads.reads(json).get
 
   lazy private implicit val actionReads = JsonAction.actionReads
+  lazy private implicit val itemKindIdFormat = JsonItemKind.itemKindIdFormat
+
   lazy private implicit val gameActionReads = Json.reads[GameAction]
+  lazy private implicit val setQuickItemReads = Json.reads[SetQuickItem]
 
   lazy private val inMessageReads: Reads[InMessage] = polymorphicTypeReads(data => {
     case "DebugFovQuery" => DebugFovQuery
     case "DebugWaypointQuery" => DebugWaypointQuery
     case "GameAction" => data.as[GameAction]
     case "InventoryQuery" => InventoryQuery
+    case "SetQuickItem" => data.as[SetQuickItem]
   })
 }

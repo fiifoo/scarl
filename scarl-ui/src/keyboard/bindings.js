@@ -19,6 +19,32 @@ const directions = Map([
     [keycodes.NUMPAD_9, commands.DIRECTION_NORTH_EAST],
 ])
 
+const setQuickItems = Map([
+    [keycodes.NUM_1, commands.SET_QUICK_ITEM_1],
+    [keycodes.NUM_2, commands.SET_QUICK_ITEM_2],
+    [keycodes.NUM_3, commands.SET_QUICK_ITEM_3],
+    [keycodes.NUM_4, commands.SET_QUICK_ITEM_4],
+    [keycodes.NUM_5, commands.SET_QUICK_ITEM_5],
+    [keycodes.NUM_6, commands.SET_QUICK_ITEM_6],
+    [keycodes.NUM_7, commands.SET_QUICK_ITEM_7],
+    [keycodes.NUM_8, commands.SET_QUICK_ITEM_8],
+    [keycodes.NUM_9, commands.SET_QUICK_ITEM_9],
+    [keycodes.NUM_0, commands.SET_QUICK_ITEM_10],
+])
+
+const useQuickItems = Map([
+    [keycodes.NUM_1, commands.USE_QUICK_ITEM_1],
+    [keycodes.NUM_2, commands.USE_QUICK_ITEM_2],
+    [keycodes.NUM_3, commands.USE_QUICK_ITEM_3],
+    [keycodes.NUM_4, commands.USE_QUICK_ITEM_4],
+    [keycodes.NUM_5, commands.USE_QUICK_ITEM_5],
+    [keycodes.NUM_6, commands.USE_QUICK_ITEM_6],
+    [keycodes.NUM_7, commands.USE_QUICK_ITEM_7],
+    [keycodes.NUM_8, commands.USE_QUICK_ITEM_8],
+    [keycodes.NUM_9, commands.USE_QUICK_ITEM_9],
+    [keycodes.NUM_0, commands.USE_QUICK_ITEM_10],
+])
+
 export default {
     [gameModes.MAIN]: Map([
         [keycodes.COMMA, commands.PICK_ITEM],
@@ -37,7 +63,7 @@ export default {
         [keycodes.T, commands.COMMUNICATE],
         [keycodes.U, commands.USE],
         [keycodes.Z, commands.AIM_MISSILE],
-    ]).merge(directions),
+    ]).merge(directions).merge(useQuickItems),
 
     [gameModes.AIM]: Map([
         [keycodes.ESC, commands.CANCEL_MODE],
@@ -97,7 +123,7 @@ export default {
         [keycodes.NUMPAD_4, commands.INVENTORY_TAB_LEFT],
         [keycodes.NUMPAD_6, commands.INVENTORY_TAB_RIGHT],
         [keycodes.NUMPAD_8, commands.INVENTORY_ROW_UP],
-    ]),
+    ]).merge(setQuickItems),
 
     [gameModes.KEY_BINDINGS]: Map([
         [keycodes.ESC, commands.CANCEL_MODE],

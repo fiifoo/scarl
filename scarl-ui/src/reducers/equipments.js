@@ -6,6 +6,7 @@ export default (state = Map(), action) => {
         case types.CONNECTION_CLOSED: {
             return Map()
         }
+        case types.RECEIVE_GAME_START:
         case types.RECEIVE_PLAYER_INVENTORY: {
             return Map(action.data.equipments)
         }

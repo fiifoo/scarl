@@ -2,7 +2,7 @@ import { List } from 'immutable'
 import { interactions } from '../../game/interaction'
 import { getLocationCreatures, getLocationDoor, isEnemyChecker } from '../../game/utils'
 import * as commands from '../../keyboard/commands'
-import { isDirectionCommand, getDirectionLocation } from '../../keyboard/utils'
+import { getDirectionLocation, getQuickItemSlot, isDirectionCommand, isUseQuickItemCommand } from '../../keyboard/utils'
 import * as gameActions from '../gameActions'
 import * as playerActions from '../playerActions'
 
@@ -75,6 +75,11 @@ export default (command, dispatch, getState) => {
                 interactions.UseItem
             ]))(dispatch, getState)
             break
+        }
+        default: {
+            if (isUseQuickItemCommand(command)) {
+                gameActions.useQuickItem(getQuickItemSlot(command))(dispatch, getState)
+            }
         }
     }
 }

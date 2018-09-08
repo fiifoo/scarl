@@ -1,5 +1,6 @@
 package io.github.fiifoo.scarl.game
 
+import io.github.fiifoo.scarl.core.entity.Selectors.getContainerItems
 import io.github.fiifoo.scarl.game.api._
 import io.github.fiifoo.scarl.game.area.AreaInfo
 import io.github.fiifoo.scarl.game.player.PlayerInfo
@@ -26,8 +27,11 @@ object StartGame {
   private def send(state: RunState): RunState = {
     val message = GameStart(
       area = AreaInfo(state),
+      equipments = state.instance.equipments.getOrElse(state.gameState.player, Map()),
       factions = state.instance.assets.factions.values,
-      kinds = state.instance.assets.kinds
+      inventory = getContainerItems(state.instance)(state.gameState.player) map (_ (state.instance)),
+      kinds = state.instance.assets.kinds,
+      settings = state.gameState.settings
     )
 
     state.copy(

@@ -2,7 +2,8 @@ import * as modes from '../game/modes'
 import { seekInteractions } from '../game/interaction'
 import { calculateTrajectory, getMissileLauncherRange, getRangedAttackRange, seekTargets } from '../game/utils'
 import * as types from './actionTypes'
-import { sendAction, sendInventoryQuery } from './connectionActions'
+import { sendAction, sendInventoryQuery, sendSetQuickItem } from './connectionActions'
+import { useInventoryItem } from './playerActions'
 
 export const addMessage = message => dispatch => dispatch({
     type: types.ADD_MESSAGE,
@@ -128,6 +129,22 @@ export const setCursor = cursor => dispatch => dispatch({
     type: types.SET_CURSOR,
     cursor,
 })
+
+export const setQuickItem = sendSetQuickItem
+
+export const useQuickItem = slot => (dispatch, getState) => {
+    const {settings, inventory} = getState()
+
+    const kind = settings.quickItems.get(slot)
+    if (! kind) {
+        return
+    }
+
+    const item = inventory.find(x => x.kind === kind)
+    if (item) {
+        useInventoryItem(item.id)()
+    }
+}
 
 export const setReticule = (reticule, missile = false) => (dispatch, getState) => {
     const {player, fov} = getState()

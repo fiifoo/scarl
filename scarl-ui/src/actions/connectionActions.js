@@ -35,6 +35,10 @@ const receiveActionMappers = {
         type: types.RECEIVE_PLAYER_INVENTORY,
         data,
     }),
+    PlayerSettings: data => ({
+        type: types.RECEIVE_PLAYER_SETTINGS,
+        data,
+    }),
 
     DebugFov: data => ({
         type: types.RECEIVE_DEBUG_FOV,
@@ -98,6 +102,10 @@ export const sendDebugWaypointQuery = () => {
 
 export const sendInventoryQuery = () => {
     sendMessage('InventoryQuery')
+}
+
+export const sendSetQuickItem = (slot, item) => {
+    sendMessage('SetQuickItem', {slot, item})
 }
 
 export const sendCreateExistingGame = game => {

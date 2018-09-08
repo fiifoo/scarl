@@ -4,15 +4,45 @@ import { getItemActionsFlat, getTabItems, tabs } from '../../game/inventory'
 import Details from './Details.jsx'
 import Equipped from './Equipped.jsx'
 import List from './List.jsx'
+import QuickItems from './QuickItems.jsx'
 
 import './Inventory.css'
 
 const NoItems = () => <i style={{marginLeft: 20}}>No items</i>
 
-const Inventory = ({equipments, inventory, kinds, ui, setAction, setRow, setTab, ...actions}) => {
+const Inventory = ({
+    equipments, inventory, kinds, quickItems, ui,
+    setAction, setQuickItem, setRow, setTab, ...actions,
+}) => {
     const tab = tabs.get(ui.tab)
     const items = getTabItems(inventory, kinds.items)(tab).toList()
     const item = items.get(ui.row)
+
+    const renderSidePanel = () => {
+        switch (tab.key) {
+            case 'Usable': {
+                return (
+                    <QuickItems
+                        item={item}
+                        kinds={kinds.items}
+                        quickItems={quickItems}
+                        setQuickItem={setQuickItem} />
+                )
+            }
+            case 'Other': {
+                return null
+            }
+            default: {
+                return (
+                    <Equipped
+                        equipments={equipments}
+                        inventory={inventory}
+                        kinds={kinds.items}
+                        selected={item ? item.id : null} />
+                )
+            }
+        }
+    }
 
     return (
         <div className="inventory">
@@ -39,11 +69,7 @@ const Inventory = ({equipments, inventory, kinds, ui, setAction, setRow, setTab,
                     ) : '\u00A0'}
                 </div>
                 <div className="scarl-panel">
-                    <Equipped
-                        equipments={equipments}
-                        inventory={inventory}
-                        kinds={kinds.items}
-                        selected={item ? item.id : null} />
+                    {renderSidePanel()}
                 </div>
             </div>
 
