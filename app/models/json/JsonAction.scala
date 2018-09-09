@@ -2,19 +2,22 @@ package models.json
 
 import io.github.fiifoo.scarl.action._
 import io.github.fiifoo.scarl.core.action.Action
-import io.github.fiifoo.scarl.core.entity.CreatureId
+import io.github.fiifoo.scarl.core.entity.{CreatureId, ItemId}
 import io.github.fiifoo.scarl.core.geometry.Location
+import io.github.fiifoo.scarl.core.item.Equipment.Slot
 import play.api.libs.json._
 
 object JsonAction {
 
-  import JsonBase.polymorphicTypeReads
+  import JsonBase.{mapFormat, polymorphicTypeReads}
 
   lazy private implicit val conduitIdFormat = JsonConduit.conduitIdFormat
   lazy private implicit val creatureIdFormat = JsonCreature.creatureIdFormat
   lazy private implicit val itemIdFormat = JsonItem.itemIdFormat
   lazy private implicit val locationReads = Json.reads[Location]
   lazy private implicit val slotFormat = JsonItemEquipment.slotFormat
+
+  implicitly(mapFormat[Slot, ItemId])
 
   lazy private implicit val attackReads = Json.reads[AttackAction]
   lazy private implicit val communicateReads = new Reads[CommunicateAction] {
@@ -28,6 +31,7 @@ object JsonAction {
   lazy private implicit val dropItemReads = Json.reads[DropItemAction]
   lazy private implicit val enterConduitReads = Json.reads[EnterConduitAction]
   lazy private implicit val equipItemReads = Json.reads[EquipItemAction]
+  lazy private implicit val equipWeaponsReads = Json.reads[EquipWeaponsAction]
   lazy private implicit val hackCreatureReads = Json.reads[HackCreatureAction]
   lazy private implicit val hackItemReads = Json.reads[HackItemAction]
   lazy private implicit val moveReads = Json.reads[MoveAction]
@@ -46,6 +50,7 @@ object JsonAction {
     case "DropItem" => data.as[DropItemAction]
     case "EnterConduit" => data.as[EnterConduitAction]
     case "EquipItem" => data.as[EquipItemAction]
+    case "EquipWeapons" => data.as[EquipWeaponsAction]
     case "HackCreature" => data.as[HackCreatureAction]
     case "HackItem" => data.as[HackItemAction]
     case "Move" => data.as[MoveAction]

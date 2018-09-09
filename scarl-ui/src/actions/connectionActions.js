@@ -104,6 +104,10 @@ export const sendInventoryQuery = () => {
     sendMessage('InventoryQuery')
 }
 
+export const sendSetEquipmentSet = set => {
+    sendMessage('SetEquipmentSet', {set})
+}
+
 export const sendSetQuickItem = (slot, item) => {
     sendMessage('SetQuickItem', {slot, item})
 }

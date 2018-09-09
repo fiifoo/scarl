@@ -2,9 +2,11 @@ package game
 
 import akka.actor.ActorRef
 import dal.GameRepository
+import io.github.fiifoo.scarl.action.EquipWeaponsAction
 import io.github.fiifoo.scarl.action.validate.ActionValidator
 import io.github.fiifoo.scarl.core.action.Action
 import io.github.fiifoo.scarl.core.entity.Selectors.getContainerItems
+import io.github.fiifoo.scarl.core.item.Equipment.ArmorSlot
 import io.github.fiifoo.scarl.game.api._
 import io.github.fiifoo.scarl.game.{CalculateBrains, RunGame, RunState}
 import io.github.fiifoo.scarl.world.WorldAssets
@@ -49,6 +51,18 @@ class GameInstance(games: GameRepository, assets: WorldAssets, game: Game, out: 
   def receive(json: JsValue): Unit = {
     val message = ReadInMessage(json)
 
+    receiveMessage(message)
+  }
+
+  def stop(): Unit = {
+    if (state.ended) {
+      end()
+    } else {
+      save()
+    }
+  }
+
+  private def receiveMessage(message: InMessage): Unit = {
     message match {
       case DebugFovQuery =>
         send(DebugFov(state.fov.locations))
@@ -67,20 +81,35 @@ class GameInstance(games: GameRepository, assets: WorldAssets, game: Game, out: 
           equipments = state.instance.equipments.getOrElse(state.gameState.player, Map())
         ))
 
-      case set: SetQuickItem =>
+      case message: SetEquipmentSet =>
+        if (message.set != state.gameState.settings.equipmentSet) {
+          val currentWeapons = state.instance.equipments
+            .getOrElse(state.gameState.player, Map())
+            .filterKeys(!_.isInstanceOf[ArmorSlot])
+
+          val newWeapons = state.gameState.settings.equipmentSets
+            .getOrElse(message.set, Map())
+            .filter(x => {
+              val (_, item) = x
+
+              state.instance.entities.isDefinedAt(item) && item(state.instance).container == state.gameState.player
+            })
+
+          state = state.copy(gameState = state.gameState.copy(
+            settings = state.gameState.settings.changeEquipmentSet(message.set, currentWeapons)
+          ))
+
+          send(PlayerSettings(state.gameState.settings))
+          receiveMessage(GameAction(EquipWeaponsAction(newWeapons)))
+          receiveMessage(InventoryQuery)
+        }
+
+      case message: SetQuickItem =>
         state = state.copy(gameState = state.gameState.copy(
-          settings = state.gameState.settings.setQuickItem(set.slot, set.item)
+          settings = state.gameState.settings.setQuickItem(message.slot, message.item)
         ))
 
         send(PlayerSettings(state.gameState.settings))
-    }
-  }
-
-  def stop(): Unit = {
-    if (state.ended) {
-      end()
-    } else {
-      save()
     }
   }
 

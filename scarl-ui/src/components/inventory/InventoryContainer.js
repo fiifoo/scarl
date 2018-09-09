@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { setQuickItem } from '../../actions/gameActions'
+import { setEquipmentSet, setQuickItem } from '../../actions/gameActions'
 import { setInventoryAction, setInventoryRow, setInventoryTab } from '../../actions/inventoryActions'
 import { dropItem, equipItem, unequipItem, useInventoryItem } from '../../actions/playerActions'
 import { INVENTORY } from '../../game/modes'
@@ -11,6 +11,7 @@ const InventoryContainer = connect(
         component: Inventory,
         visible: state.ui.game.mode === INVENTORY,
 
+        equipmentSet: state.settings.equipmentSet,
         equipments: state.equipments,
         inventory: state.inventory,
         kinds: state.kinds,
@@ -22,6 +23,7 @@ const InventoryContainer = connect(
         unequipItem,
         useItem: useInventoryItem,
         setAction: setInventoryAction,
+        setEquipmentSet,
         setQuickItem,
         setRow: setInventoryRow,
         setTab: setInventoryTab,

@@ -13,6 +13,7 @@ object ReadInMessage {
   lazy private implicit val itemKindIdFormat = JsonItemKind.itemKindIdFormat
 
   lazy private implicit val gameActionReads = Json.reads[GameAction]
+  lazy private implicit val setEquipmentSetReads = Json.reads[SetEquipmentSet]
   lazy private implicit val setQuickItemReads = Json.reads[SetQuickItem]
 
   lazy private val inMessageReads: Reads[InMessage] = polymorphicTypeReads(data => {
@@ -20,6 +21,7 @@ object ReadInMessage {
     case "DebugWaypointQuery" => DebugWaypointQuery
     case "GameAction" => data.as[GameAction]
     case "InventoryQuery" => InventoryQuery
+    case "SetEquipmentSet" => data.as[SetEquipmentSet]
     case "SetQuickItem" => data.as[SetQuickItem]
   })
 }

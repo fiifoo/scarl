@@ -1,7 +1,7 @@
 import { List } from 'immutable'
 import { compose } from 'redux'
 import * as commands from '../../keyboard/commands'
-import { getQuickItemSlot, isSetQuickItemCommand } from '../../keyboard/utils'
+import { getEquipmentSet, getQuickItemSlot, isSetEquipmentSetCommand, isSetQuickItemCommand } from '../../keyboard/utils'
 
 import * as gameActions from '../gameActions'
 import * as inventoryActions from '../inventoryActions'
@@ -92,7 +92,7 @@ const setAction = (dispatch, action) => {
 
 const setQuickItem = (slot, item) => {
     if (item && item.usable) {
-        gameActions.setQuickItem(slot, item.kind)
+        gameActions.setQuickItem(slot, item.kind)()
     }
 }
 
@@ -149,7 +149,9 @@ const handleNormal = (command, dispatch, getState) => {
             break
         }
         default: {
-            if (isSetQuickItemCommand(command)) {
+            if (isSetEquipmentSetCommand(command)) {
+                gameActions.setEquipmentSet(getEquipmentSet(command))()
+            } else if (isSetQuickItemCommand(command)) {
                 setQuickItem(getQuickItemSlot(command), getItem(getState))
             }
         }

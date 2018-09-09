@@ -33,11 +33,14 @@ export const LESS2 = 226
 export const SPACEBAR = 32
 
 export const D = 68
+export const E = 69
 export const I = 73
 export const K = 75
 export const L = 76
 export const M = 77
 export const P = 80
+export const Q = 81
 export const T = 84
 export const U = 85
+export const W = 87
 export const Z = 90

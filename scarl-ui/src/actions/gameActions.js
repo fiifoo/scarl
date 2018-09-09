@@ -2,7 +2,7 @@ import * as modes from '../game/modes'
 import { seekInteractions } from '../game/interaction'
 import { calculateTrajectory, getMissileLauncherRange, getRangedAttackRange, seekTargets } from '../game/utils'
 import * as types from './actionTypes'
-import { sendAction, sendInventoryQuery, sendSetQuickItem } from './connectionActions'
+import { sendAction, sendInventoryQuery, sendSetEquipmentSet, sendSetQuickItem } from './connectionActions'
 import { useInventoryItem } from './playerActions'
 
 export const addMessage = message => dispatch => dispatch({
@@ -130,7 +130,9 @@ export const setCursor = cursor => dispatch => dispatch({
     cursor,
 })
 
-export const setQuickItem = sendSetQuickItem
+export const setEquipmentSet = set => () => sendSetEquipmentSet(set)
+
+export const setQuickItem = (slot, item) => () => sendSetQuickItem(slot, item)
 
 export const useQuickItem = slot => (dispatch, getState) => {
     const {settings, inventory} = getState()

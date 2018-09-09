@@ -1,4 +1,5 @@
 import * as commands from '../../keyboard/commands'
+import { getEquipmentSet, isSetEquipmentSetCommand } from '../../keyboard/utils'
 import * as gameActions from '../gameActions'
 
 export default (command, dispatch) => {
@@ -10,6 +11,11 @@ export default (command, dispatch) => {
         case commands.INVENTORY: {
             gameActions.inventory()(dispatch)
             break
+        }
+        default: {
+            if (isSetEquipmentSetCommand(command)) {
+                gameActions.setEquipmentSet(getEquipmentSet(command))()
+            }
         }
     }
 }

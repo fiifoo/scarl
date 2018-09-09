@@ -11,8 +11,8 @@ import './Inventory.css'
 const NoItems = () => <i style={{marginLeft: 20}}>No items</i>
 
 const Inventory = ({
-    equipments, inventory, kinds, quickItems, ui,
-    setAction, setQuickItem, setRow, setTab, ...actions,
+    equipmentSet, equipments, inventory, kinds, quickItems, ui,
+    setAction, setEquipmentSet, setQuickItem, setRow, setTab, ...actions,
 }) => {
     const tab = tabs.get(ui.tab)
     const items = getTabItems(inventory, kinds.items)(tab).toList()
@@ -35,10 +35,12 @@ const Inventory = ({
             default: {
                 return (
                     <Equipped
+                        equipmentSet={equipmentSet}
                         equipments={equipments}
                         inventory={inventory}
                         kinds={kinds.items}
-                        selected={item ? item.id : null} />
+                        selected={item ? item.id : null}
+                        setEquipmentSet={setEquipmentSet} />
                 )
             }
         }

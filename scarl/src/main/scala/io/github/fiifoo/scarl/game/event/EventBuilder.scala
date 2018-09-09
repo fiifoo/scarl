@@ -47,6 +47,7 @@ class EventBuilder(s: State, player: CreatureId, fov: Set[Location]) {
       case e: DoorUsedEffect => build(e) map GenericEvent
       case e: DropItemEffect => build(e) map GenericEvent
       case e: EquipItemEffect => build(e) map GenericEvent
+      case e: EquipWeaponsEffect => build(e) map GenericEvent
       case e: ExplodeEffect => build(e) map GenericEvent
       case e: ExplosionEffect => build(e) map GenericEvent
       case e: ExplosionHitEffect => build(e)
@@ -225,12 +226,20 @@ class EventBuilder(s: State, player: CreatureId, fov: Set[Location]) {
     val creature = effect.creature
     val item = effect.item
 
-    if (effect.parent.exists(_.isInstanceOf[EquipItemEffect])) {
+    if (effect.parent.exists(p => p.isInstanceOf[EquipItemEffect] || p.isInstanceOf[EquipWeaponsEffect])) {
       None
     } else if (creature == player) {
       Some(s"You equip ${kind(item)}.")
     } else if (fov contains effect.location) {
       Some(s"${kind(creature)} equips ${kind(item)}.")
+    } else {
+      None
+    }
+  }
+
+  private def build(effect: EquipWeaponsEffect): Option[String] = {
+    if (effect.creature == player) {
+      Some(s"You switch weapons.")
     } else {
       None
     }
@@ -563,7 +572,7 @@ class EventBuilder(s: State, player: CreatureId, fov: Set[Location]) {
     val creature = effect.creature
     val item = effect.item
 
-    if (effect.parent.exists(_.isInstanceOf[EquipItemEffect])) {
+    if (effect.parent.exists(p => p.isInstanceOf[EquipItemEffect] || p.isInstanceOf[EquipWeaponsEffect])) {
       None
     } else if (creature == player) {
       Some(s"You unequip ${kind(item)}.")

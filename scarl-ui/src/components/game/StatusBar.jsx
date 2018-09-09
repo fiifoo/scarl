@@ -7,7 +7,7 @@ const sectionStyle = {
 
 const getAlert = (value, max) => value / max < 0.5 ? value / max < 0.25 ? 'text-danger' : 'text-warning' : null
 
-const StatusBar = ({player}) => {
+const StatusBar = ({equipmentSet, player}) => {
     const creature = player.creature
     const creatureStats = creature.stats
     const equipmentStats = player.equipmentStats
@@ -24,15 +24,18 @@ const StatusBar = ({player}) => {
     const energyAlert = getAlert(energy, energyMax)
     const materialsAlert = getAlert(materials, materialsMax)
 
+    const weaponsStyle = equipmentSet == 1 ? null : equipmentSet == 2 ? 'text-primary' : 'text-success'
+
     return (
         <div>
             <div style={sectionStyle} className={healthAlert}>Health <b>{health}/{healthMax}</b></div>
             <div style={sectionStyle} className={energyAlert}>Energy <b>{energy}/{energyMax}</b></div>
             <div style={sectionStyle} className={materialsAlert}>Materials <b>{materials}/{materialsMax}</b></div>
+            <div style={sectionStyle} className={weaponsStyle}>Weapons <b>{equipmentSet}</b></div>
         </div>
     )
 }
 
-const StatusBarIfSet = ({player}) => player ? <StatusBar player={player} /> : <div />
+const StatusBarIfSet = props => props.player ? <StatusBar {...props} /> : <div />
 
 export default StatusBarIfSet

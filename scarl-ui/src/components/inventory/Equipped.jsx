@@ -1,10 +1,49 @@
-import { Map } from 'immutable'
+import { Map, Range } from 'immutable'
 import React from 'react'
 import { slots } from '../../game/equipment'
 
 const Empty = () => <i>Empty</i>
 
-const Equipped = ({equipments, inventory, kinds, selected}) => {
+const equipmentSets = Range(1, 4)
+
+const PureEquipmentSetDropdown = ({selected, visible, toggleVisible, setEquipmentSet}) =>  (
+    <div className="actions-dropdown">
+        <div
+            className="toggle"
+            onClick={toggleVisible}>
+            ▼
+        </div>
+        <div className={! visible ? 'menu closed' : 'menu'}>
+            {equipmentSets.map(set => (
+                <div
+                    key={set}
+                    className={set === selected ? 'active' : null}
+                    onClick={() => {
+                        toggleVisible()
+                        setEquipmentSet(set)
+                    }}>
+                    Switch to weapons {set}
+                </div>
+            ))}
+        </div>
+    </div>
+)
+
+class EquipmentSetDropdown extends React.Component {
+    constructor(props) {
+        super(props)
+
+        this.state = {visible: false}
+
+        this.toggleVisible = () => this.setState({visible: ! this.state.visible})
+    }
+
+    render() {
+        return <PureEquipmentSetDropdown {...this.props} {...this.state} toggleVisible={this.toggleVisible} />
+    }
+}
+
+const Equipped = ({equipmentSet, equipments, inventory, kinds, selected, setEquipmentSet}) => {
     const renderSlot = slot =>  {
         const item = equipments.get(slot.key)
 
@@ -23,7 +62,8 @@ const Equipped = ({equipments, inventory, kinds, selected}) => {
 
     return (
         <div>
-            <h4>Equipment</h4>
+            <h4>Equipment ({equipmentSet})</h4>
+            <EquipmentSetDropdown selected={equipmentSet} setEquipmentSet={setEquipmentSet} />
             <table className="scarl-table">
                 <tbody>
                     {Map(slots).map(renderSlot).toArray()}

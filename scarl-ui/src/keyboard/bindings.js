@@ -19,6 +19,12 @@ const directions = Map([
     [keycodes.NUMPAD_9, commands.DIRECTION_NORTH_EAST],
 ])
 
+const setEquipmentSets = Map([
+    [keycodes.Q, commands.SET_EQUIPMENT_SET_1],
+    [keycodes.W, commands.SET_EQUIPMENT_SET_2],
+    [keycodes.E, commands.SET_EQUIPMENT_SET_3],
+])
+
 const setQuickItems = Map([
     [keycodes.NUM_1, commands.SET_QUICK_ITEM_1],
     [keycodes.NUM_2, commands.SET_QUICK_ITEM_2],
@@ -63,7 +69,7 @@ export default {
         [keycodes.T, commands.COMMUNICATE],
         [keycodes.U, commands.USE],
         [keycodes.Z, commands.AIM_MISSILE],
-    ]).merge(directions).merge(useQuickItems),
+    ]).merge(directions).merge(setEquipmentSets).merge(useQuickItems),
 
     [gameModes.AIM]: Map([
         [keycodes.ESC, commands.CANCEL_MODE],
@@ -123,7 +129,7 @@ export default {
         [keycodes.NUMPAD_4, commands.INVENTORY_TAB_LEFT],
         [keycodes.NUMPAD_6, commands.INVENTORY_TAB_RIGHT],
         [keycodes.NUMPAD_8, commands.INVENTORY_ROW_UP],
-    ]).merge(setQuickItems),
+    ]).merge(setEquipmentSets).merge(setQuickItems),
 
     [gameModes.KEY_BINDINGS]: Map([
         [keycodes.ESC, commands.CANCEL_MODE],
@@ -149,5 +155,5 @@ export default {
         [keycodes.P, commands.CANCEL_MODE],
 
         [keycodes.I, commands.INVENTORY],
-    ]),
+    ]).merge(setEquipmentSets),
 }

@@ -40,7 +40,7 @@ const Player = ({character, stats}) => {
     )
 }
 
-const PlayerInfo = ({equipments, inventory, kinds, player}) => {
+const PlayerInfo = ({equipmentSet, equipments, inventory, kinds, player, setEquipmentSet}) => {
     const stats = fromJS(addStats(player.creature.stats, player.equipmentStats))
 
     return (
@@ -50,9 +50,11 @@ const PlayerInfo = ({equipments, inventory, kinds, player}) => {
             </div>
             <div className="scarl-panel">
                 <Equipped
+                    equipmentSet={equipmentSet}
                     equipments={equipments}
                     inventory={inventory}
-                    kinds={kinds.items} />
+                    kinds={kinds.items}
+                    setEquipmentSet={setEquipmentSet} />
             </div>
         </div>
     )

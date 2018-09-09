@@ -8,7 +8,9 @@ object JsonPlayerSettings {
 
   import JsonBase.mapFormat
 
+  lazy private implicit val itemIdFormat = JsonItem.itemIdFormat
   lazy private implicit val itemKindIdFormat = JsonItemKind.itemKindIdFormat
+  lazy private implicit val slotFormat = JsonItemEquipment.slotFormat
 
   implicitly(mapFormat[Int, ItemKindId])
 

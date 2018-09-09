@@ -13,4 +13,6 @@ case class GameAction(action: Action) extends InMessage
 
 case object InventoryQuery extends InMessage
 
+case class SetEquipmentSet(set: Int) extends InMessage
+
 case class SetQuickItem(slot: Int, item: Option[ItemKindId]) extends InMessage

@@ -17,6 +17,7 @@ object ActionValidator {
       case action: DropItemAction => validate(s, actor, action)
       case action: EnterConduitAction => validate(s, actor, action)
       case action: EquipItemAction => EquipItemValidator(s, actor, action)
+      case action: EquipWeaponsAction => EquipItemValidator(s, actor, action)
       case action: HackCreatureAction => validate(s, actor, action)
       case action: HackItemAction => validate(s, actor, action)
       case action: MoveAction => validate(s, actor, action)
