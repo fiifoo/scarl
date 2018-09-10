@@ -12,7 +12,7 @@ object StartGame {
 
     var state = RunState(
       areaMap = gameState.maps.getOrElse(gameState.area, Map()),
-      gameState = gameState,
+      game = gameState,
       instance = instance,
       playerInfo = PlayerInfo(instance, gameState.player),
       statistics = gameState.statistics
@@ -27,11 +27,11 @@ object StartGame {
   private def send(state: RunState): RunState = {
     val message = GameStart(
       area = AreaInfo(state),
-      equipments = state.instance.equipments.getOrElse(state.gameState.player, Map()),
+      equipments = state.instance.equipments.getOrElse(state.game.player, Map()),
       factions = state.instance.assets.factions.values,
-      inventory = getContainerItems(state.instance)(state.gameState.player) map (_ (state.instance)),
+      inventory = getContainerItems(state.instance)(state.game.player) map (_ (state.instance)),
       kinds = state.instance.assets.kinds,
-      settings = state.gameState.settings
+      settings = state.game.settings
     )
 
     state.copy(

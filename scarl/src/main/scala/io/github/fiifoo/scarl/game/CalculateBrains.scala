@@ -20,11 +20,11 @@ object CalculateBrains {
       }
     })
 
-    Calculation(Future.sequence(calculations), state.gameState.area)
+    Calculation(Future.sequence(calculations), state.game.area)
   }
 
   def commit(state: RunState, calculation: Calculation): RunState = {
-    if (state.gameState.area != calculation.area) {
+    if (state.game.area != calculation.area) {
       state
     } else {
       val result = Await.result(calculation.calculations, Duration.Inf)

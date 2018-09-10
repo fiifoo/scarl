@@ -7,7 +7,7 @@ import io.github.fiifoo.scarl.game.RunState
 object AreaInfo {
   def apply(state: RunState): AreaInfo = {
     AreaInfo(
-      id = state.gameState.area,
+      id = state.game.area,
       width = state.instance.area.width,
       height = state.instance.area.height,
       map = state.areaMap

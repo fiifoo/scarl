@@ -9,10 +9,11 @@ import io.github.fiifoo.scarl.game.player.{PlayerFov, PlayerInfo}
 import io.github.fiifoo.scarl.game.statistics.Statistics
 
 case class RunState(areaMap: Map[Location, MapLocation],
+                    brains: Option[CalculateBrains.Calculation] = None,
                     ended: Boolean = false,
                     events: List[Event] = List(),
                     fov: PlayerFov = PlayerFov(),
-                    gameState: GameState,
+                    game: GameState,
                     instance: State,
                     outMessages: List[OutMessage] = List(),
                     paused: Boolean = false,

@@ -3,11 +3,11 @@ package io.github.fiifoo.scarl.game
 object EndGame {
 
   def apply(state: RunState): GameState = {
-    val maps = state.gameState.maps
-    val world = state.gameState.world
-    val area = state.gameState.area
+    val maps = state.game.maps
+    val world = state.game.world
+    val area = state.game.area
 
-    state.gameState.copy(
+    state.game.copy(
       maps = maps + (area -> state.areaMap),
       statistics = state.statistics,
       world = world.copy(
