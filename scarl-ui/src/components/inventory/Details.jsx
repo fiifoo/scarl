@@ -175,7 +175,7 @@ const EquipmentStats = ({equipments, inventory, item}) => {
             if (compareItemId && !carry.items.contains(compareItemId)) {
                 const compareItem = inventory.get(compareItemId)
                 const compareGroups = Map(equipmentGroups).filter(x => compareItem[x.prop]).filter(x => x.slots(compareItem).contains(slot))
-                const compareStats = compareGroups.map(x => compareItem[x.prop].stats).reduce((carry, stats) => (
+                const compareStats = compareGroups.map(group => group.getSlotStats(compareItem, slot)).reduce((carry, stats) => (
                     carry ? addStats(carry, stats) : stats
                 ), null)
 
@@ -203,14 +203,17 @@ const EquipmentStats = ({equipments, inventory, item}) => {
     }
 
     const renderEquipment = (group, key) => {
-        const equipment = item[group.prop]
         const slots = group.slots(item)
         const fillAll = group.fillAll(item)
 
         const content = fillAll ? (
-            renderStats(group, equipment.stats)(slots)
+            renderStats(group, item[group.prop].stats)(slots)
         ) : (
-            slots.map(x => List([x])).map(renderStats(group, equipment.stats))
+            slots.map((slot, index) => {
+                const stats = group.getSlotStats(item, slot)
+
+                return renderStats(group, stats)(List([slot]), index)
+            })
         )
 
         return (
