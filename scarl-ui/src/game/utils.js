@@ -135,6 +135,29 @@ export const getRangedAttackRange = player => {
     return creature.ranged.range + equipment.ranged.range
 }
 
+export const getShortage = (player, type) => {
+    const stats = addStats(player.creature.stats, player.equipmentStats)
+    const consumption = stats[type].consumption
+
+    let energy = false
+    let materials = false
+
+    if (consumption.energy > player.creature.energy) {
+        energy = true
+    }
+    if (consumption.materials > player.creature.materials) {
+        materials = true
+    }
+    if (energy || materials) {
+        return {
+            energy,
+            materials
+        }
+    } else {
+        return null
+    }
+}
+
 export const isEnemyChecker = (player, factions) => {
     const enemyFactions = factions.get(player.creature.faction).enemies
 

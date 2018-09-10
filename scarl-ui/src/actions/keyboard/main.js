@@ -98,7 +98,7 @@ const directionAction = (command, dispatch, getState) => {
         const enemies = creatures.filter(isEnemy)
         if (enemies.length > 0) {
             const enemy = enemies[0]
-            playerActions.attack(enemy.id)()
+            playerActions.attack(enemy.id)(dispatch, getState)
         } else {
             const friend = creatures[0]
             playerActions.displace(friend.id)()

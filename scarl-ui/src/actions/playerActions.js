@@ -3,8 +3,16 @@ import { sendAction, sendInventoryQuery } from './connectionActions'
 import { addMessage, cancelMode, setTarget } from './gameActions'
 import { focusKeyboard } from './keyboard'
 
-export const attack = target => () => {
-    sendAction('Attack', {target})
+export const attack = target => (dispatch, getState) => {
+    const {player} = getState()
+
+    const shortage = utils.getShortage(player, 'melee')
+
+    if (shortage) {
+        addShortageMessage(shortage)(dispatch)
+    } else {
+        sendAction('Attack', {target})
+    }
 }
 
 export const displace = target => () => {
@@ -43,7 +51,7 @@ export const pass = () => () => {
 }
 
 export const shoot = (location, missile = false) => (dispatch, getState) => {
-    const {fov} = getState()
+    const {fov, player} = getState()
     const targets = utils.getLocationCreatures(location, fov.cumulative)
 
     if (targets.length > 0) {
@@ -51,10 +59,17 @@ export const shoot = (location, missile = false) => (dispatch, getState) => {
         setTarget(target.id)(dispatch)
     }
 
-    const action = missile ? 'ShootMissile' : 'Shoot'
+    const shortage = utils.getShortage(player, missile ? 'launcher' : 'ranged')
 
     cancelMode()(dispatch)
-    sendAction(action, {location})
+
+    if (shortage) {
+        addShortageMessage(shortage)(dispatch)
+    } else {
+        const action = missile ? 'ShootMissile' : 'Shoot'
+
+        sendAction(action, {location})
+    }
 }
 
 export const unequipItem = item => () => {
@@ -69,4 +84,20 @@ export const useDoor = target => () => {
 export const useInventoryItem = target => () => {
     sendAction('UseItem', {target})
     sendInventoryQuery()
+}
+
+const addShortageMessage = shortage => dispatch => {
+    let message
+
+    if (shortage.energy && shortage.materials) {
+        message = 'Not enough energy or materials.'
+    } else if (shortage.energy) {
+        message = 'Not enough energy.'
+    } else if (shortage.materials) {
+        message = 'Not enough materials.'
+    }
+
+    if (message) {
+        addMessage(message)(dispatch)
+    }
 }
