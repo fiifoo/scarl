@@ -5,8 +5,8 @@
     "power" : [ ],
     "conduits" : [ {
       "target" : "iridan/core-approach",
-      "sourceItem" : "generic/conduit-stairs-up",
-      "targetItem" : "generic/conduit-stairs-down"
+      "sourceItem" : "generic/conduit-stairs-down",
+      "targetItem" : "generic/conduit-stairs-up"
     } ],
     "id" : "iridan/nexus",
     "owner" : "iridan"
@@ -28,7 +28,7 @@
     "conduits" : [ {
       "target" : "iridan/nexus",
       "sourceItem" : "generic/conduit-stairs-down",
-      "targetItem" : "generic/conduit-stairs-up",
+      "targetItem" : "iridan/conduit-stairs-up-labs",
       "tag" : null
     } ],
     "id" : "iridan/labs",
@@ -62,7 +62,7 @@
     "conduits" : [ {
       "target" : "iridan/nexus",
       "sourceItem" : "generic/conduit-stairs-down",
-      "targetItem" : "generic/conduit-stairs-up",
+      "targetItem" : "iridan/conduit-stairs-up-coms",
       "tag" : null
     } ],
     "id" : "iridan/coms",
@@ -80,11 +80,11 @@
     "power" : [ ],
     "conduits" : [ {
       "target" : "iridan/core",
-      "sourceItem" : "generic/conduit-stairs-down",
+      "sourceItem" : "iridan/conduit-stairs-down-core",
       "targetItem" : "generic/conduit-stairs-up"
     }, {
       "target" : "iridan/mine-approach",
-      "sourceItem" : "generic/conduit-stairs-down",
+      "sourceItem" : "iridan/conduit-stairs-down-mine",
       "targetItem" : "generic/conduit-stairs-up"
     } ],
     "id" : "iridan/core-approach",
@@ -817,10 +817,10 @@
           }
         },
         "explosive" : {
-          "attack" : 100,
+          "attack" : 120,
           "damage" : 60,
           "radius" : 2,
-          "blast" : 90
+          "blast" : 140
         },
         "speed" : 200,
         "ranged" : {
@@ -980,10 +980,10 @@
           }
         },
         "explosive" : {
-          "attack" : 100,
+          "attack" : 120,
           "damage" : 60,
           "radius" : 2,
-          "blast" : 90
+          "blast" : 140
         },
         "speed" : 200,
         "ranged" : {
@@ -1500,7 +1500,7 @@
         },
         "health" : {
           "max" : 50,
-          "regen" : 0
+          "regen" : 1
         },
         "sight" : {
           "range" : 7,
@@ -2318,6 +2318,20 @@
       "category" : null,
       "armor" : null,
       "key" : null
+    } ], [ "iridan/conduit-stairs-up-labs", {
+      "display" : "<",
+      "color" : "white",
+      "rangedWeapon" : null,
+      "shield" : null,
+      "hidden" : false,
+      "name" : "Stairs up to tech laboratories",
+      "concealment" : 0,
+      "door" : null,
+      "usable" : null,
+      "pickable" : false,
+      "id" : "iridan/conduit-stairs-up-labs",
+      "weapon" : null,
+      "armor" : null
     } ], [ "old/healing-chamber", {
       "display" : "H",
       "color" : "white",
@@ -2447,7 +2461,7 @@
       "color" : "yellow",
       "rangedWeapon" : null,
       "explosive" : {
-        "attack" : 100,
+        "attack" : 120,
         "damage" : 60,
         "radius" : 1,
         "blast" : 160
@@ -2486,7 +2500,7 @@
       "color" : "yellow",
       "rangedWeapon" : null,
       "explosive" : {
-        "attack" : 100,
+        "attack" : 120,
         "damage" : 70,
         "radius" : 7,
         "blast" : 260
@@ -2612,8 +2626,8 @@
             "hacking" : 0
           },
           "melee" : {
-            "attack" : 40,
-            "damage" : 35,
+            "attack" : 50,
+            "damage" : 30,
             "consumption" : {
               "energy" : 0,
               "materials" : 0
@@ -2712,6 +2726,20 @@
       "category" : null,
       "armor" : null,
       "key" : null
+    } ], [ "iridan/conduit-stairs-down-mine", {
+      "display" : ">",
+      "color" : "white",
+      "rangedWeapon" : null,
+      "shield" : null,
+      "hidden" : false,
+      "name" : "Stairs down towards mines",
+      "concealment" : 0,
+      "door" : null,
+      "usable" : null,
+      "pickable" : false,
+      "id" : "iridan/conduit-stairs-down-mine",
+      "weapon" : null,
+      "armor" : null
     } ], [ "nomad/deploy-explosive-timed", {
       "launcher" : null,
       "display" : "\"",
@@ -2886,7 +2914,7 @@
       "color" : "yellow",
       "rangedWeapon" : null,
       "explosive" : {
-        "attack" : 100,
+        "attack" : 120,
         "damage" : 60,
         "radius" : 3,
         "blast" : 140
@@ -3025,7 +3053,7 @@
             "max" : 0,
             "regen" : 0
           },
-          "defence" : 0,
+          "defence" : 5,
           "skill" : {
             "hacking" : 0
           },
@@ -3050,6 +3078,20 @@
         "slot" : "Equipment.FootArmor"
       },
       "key" : null
+    } ], [ "iridan/conduit-stairs-up-coms", {
+      "display" : "<",
+      "color" : "white",
+      "rangedWeapon" : null,
+      "shield" : null,
+      "hidden" : false,
+      "name" : "Stairs up to communications relay",
+      "concealment" : 0,
+      "door" : null,
+      "usable" : null,
+      "pickable" : false,
+      "id" : "iridan/conduit-stairs-up-coms",
+      "weapon" : null,
+      "armor" : null
     } ], [ "nomad/armor-head", {
       "launcher" : null,
       "display" : "]",
@@ -3195,13 +3237,13 @@
             "max" : 0,
             "regen" : 0
           },
-          "defence" : 0,
+          "defence" : 5,
           "skill" : {
             "hacking" : 0
           },
           "melee" : {
             "attack" : 10,
-            "damage" : 5,
+            "damage" : 10,
             "consumption" : {
               "energy" : 0,
               "materials" : 0
@@ -3376,7 +3418,7 @@
             "max" : 0,
             "regen" : 0
           },
-          "defence" : 30,
+          "defence" : 20,
           "skill" : {
             "hacking" : 0
           },
@@ -3468,7 +3510,7 @@
             "hacking" : 0
           },
           "melee" : {
-            "attack" : 40,
+            "attack" : 50,
             "damage" : 50,
             "consumption" : {
               "energy" : 10,
@@ -3549,7 +3591,7 @@
             "max" : 0,
             "regen" : 0
           },
-          "defence" : 50,
+          "defence" : 30,
           "skill" : {
             "hacking" : 0
           },
@@ -3617,6 +3659,20 @@
       "category" : null,
       "armor" : null,
       "key" : null
+    } ], [ "iridan/conduit-stairs-down-core", {
+      "display" : ">",
+      "color" : "white",
+      "rangedWeapon" : null,
+      "shield" : null,
+      "hidden" : false,
+      "name" : "Stairs down to AI core",
+      "concealment" : 0,
+      "door" : null,
+      "usable" : null,
+      "pickable" : false,
+      "id" : "iridan/conduit-stairs-down-core",
+      "weapon" : null,
+      "armor" : null
     } ], [ "old/healing-chamber-inactive", {
       "display" : "H",
       "color" : "lightgrey",
@@ -3639,7 +3695,7 @@
             "range" : 10,
             "consumption" : {
               "energy" : 0,
-              "materials" : 50
+              "materials" : 40
             }
           },
           "explosive" : {
@@ -3761,7 +3817,7 @@
             "max" : 0,
             "regen" : 0
           },
-          "defence" : 0,
+          "defence" : 5,
           "skill" : {
             "hacking" : 0
           },
@@ -3922,7 +3978,7 @@
       "color" : "yellow",
       "rangedWeapon" : null,
       "explosive" : {
-        "attack" : 100,
+        "attack" : 120,
         "damage" : 60,
         "radius" : 2,
         "blast" : 140
@@ -4086,7 +4142,7 @@
             "max" : 0,
             "regen" : 0
           },
-          "defence" : 0,
+          "defence" : 5,
           "skill" : {
             "hacking" : 0
           },
