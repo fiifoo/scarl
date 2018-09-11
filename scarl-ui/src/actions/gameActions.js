@@ -144,7 +144,7 @@ export const useQuickItem = slot => (dispatch, getState) => {
 
     const item = inventory.find(x => x.kind === kind)
     if (item) {
-        useInventoryItem(item.id)()
+        useInventoryItem(item.id)(dispatch, getState)
     }
 }
 

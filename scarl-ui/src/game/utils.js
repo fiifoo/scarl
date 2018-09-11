@@ -49,6 +49,13 @@ export const getAdjacentLocations = l => ([
     {x: l.x, y:  l.y - 1}
 ])
 
+export const getAttackShortage = (player, type) => {
+    const stats = addStats(player.creature.stats, player.equipmentStats)
+    const consumption = stats[type].consumption
+
+    return getShortage(player, consumption)
+}
+
 export const getLocationConduit = (location, fov) => {
     const entities = getLocationEntities(location, fov)
 
@@ -135,10 +142,7 @@ export const getRangedAttackRange = player => {
     return creature.ranged.range + equipment.ranged.range
 }
 
-export const getShortage = (player, type) => {
-    const stats = addStats(player.creature.stats, player.equipmentStats)
-    const consumption = stats[type].consumption
-
+export const getShortage = (player, consumption) => {
     let energy = false
     let materials = false
 

@@ -6,7 +6,7 @@ import { focusKeyboard } from './keyboard'
 export const attack = target => (dispatch, getState) => {
     const {player} = getState()
 
-    const shortage = utils.getShortage(player, 'melee')
+    const shortage = utils.getAttackShortage(player, 'melee')
 
     if (shortage) {
         addShortageMessage(shortage)(dispatch)
@@ -59,7 +59,7 @@ export const shoot = (location, missile = false) => (dispatch, getState) => {
         setTarget(target.id)(dispatch)
     }
 
-    const shortage = utils.getShortage(player, missile ? 'launcher' : 'ranged')
+    const shortage = utils.getAttackShortage(player, missile ? 'launcher' : 'ranged')
 
     cancelMode()(dispatch)
 
@@ -81,9 +81,30 @@ export const useDoor = target => () => {
     sendAction('UseDoor', {target})
 }
 
-export const useInventoryItem = target => () => {
-    sendAction('UseItem', {target})
-    sendInventoryQuery()
+export const useInventoryItem = target => (dispatch, getState) => {
+    const {inventory, player} = getState()
+
+    const item = inventory.get(target)
+    const consumption = getUsableConsumption(item)
+    const shortage = consumption ? utils.getShortage(player, consumption) : null
+
+    if (shortage) {
+        addShortageMessage(shortage)(dispatch)
+    } else {
+        sendAction('UseItem', {target})
+        sendInventoryQuery()
+    }
+}
+
+const getUsableConsumption = item => {
+    if (! item.usable || ! item.usable.data.resources) {
+        return null
+    }
+
+    return {
+        energy: -item.usable.data.resources.energy,
+        materials: -item.usable.data.resources.materials,
+    }
 }
 
 const addShortageMessage = shortage => dispatch => {
