@@ -36,6 +36,10 @@ export const aimMissile = () => (dispatch, getState) => {
     seekTarget(true)(dispatch, getState)
 }
 
+export const autoMove = () => dispatch => {
+    changeMode(modes.AUTO_MOVE)(dispatch)
+}
+
 export const cancelMode = () => dispatch => changeMode(modes.MAIN)(dispatch)
 
 export const gameOverScreen = () => dispatch => {

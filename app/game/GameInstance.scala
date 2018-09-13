@@ -10,6 +10,7 @@ import models.json.{ReadInMessage, WriteOutMessage}
 import models.message.{CreateExistingGame, CreateGameMessage, CreateNewGame}
 import play.api.libs.json._
 
+import scala.annotation.tailrec
 import scala.concurrent.{ExecutionContext, Future}
 
 object GameInstance {
@@ -50,13 +51,7 @@ class GameInstance(games: GameRepository, assets: WorldAssets, game: Game, out: 
 
     val message = ReadInMessage(json)
 
-    state = message.apply(state)
-    state = this.sendMessages(state)
-
-    state.brains foreach (brains => {
-      state = CalculateBrains.commit(state, brains)
-      state = state.copy(brains = None)
-    })
+    this.applyMessage(message)
   }
 
   def stop(): Unit = {
@@ -64,6 +59,23 @@ class GameInstance(games: GameRepository, assets: WorldAssets, game: Game, out: 
       this.end()
     } else {
       this.save()
+    }
+  }
+
+  @tailrec
+  private def applyMessage(message: InMessage): Unit = {
+    val (nextState, nextMessage) = message.apply(state)
+
+    state = nextState
+    state = this.sendMessages(state)
+
+    state.brains foreach (brains => {
+      state = CalculateBrains.commit(state, brains)
+      state = state.copy(brains = None)
+    })
+
+    if (nextMessage.isDefined) {
+      applyMessage(nextMessage.get)
     }
   }
 

@@ -61,6 +61,7 @@ export default {
         [keycodes.LESS2, commands.ENTER_CONDUIT],
         [keycodes.NUMPAD_5, commands.PASS],
         [keycodes.SPACEBAR, commands.AIM],
+        [keycodes.A, commands.AUTO_MOVE],
         [keycodes.I, commands.INVENTORY],
         [keycodes.K, commands.KEY_BINDINGS],
         [keycodes.L, commands.LOOK],
@@ -80,6 +81,11 @@ export default {
         [keycodes.ESC, commands.CANCEL_MODE],
         [keycodes.SPACEBAR, commands.SHOOT],
         [keycodes.Z, commands.SHOOT],
+    ]).merge(directions),
+
+    [gameModes.AUTO_MOVE]: Map([
+        [keycodes.ESC, commands.CANCEL_MODE],
+        [keycodes.A, commands.AUTO_EXPLORE],
     ]).merge(directions),
 
     [gameModes.GAME_OVER]: Map([

@@ -92,6 +92,13 @@ export const sendAction = (type, data = {}) => {
     })
 }
 
+export const sendAutoMove = (direction = undefined, destination = undefined) => {
+    sendMessage('AutoMove', {
+        direction,
+        destination,
+    })
+}
+
 export const sendDebugFovQuery = () => {
     sendMessage('DebugFovQuery')
 }

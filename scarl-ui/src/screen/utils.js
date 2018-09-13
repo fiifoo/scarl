@@ -108,6 +108,11 @@ export const createDraw = context => ({
     },
 })
 
+export const getPixelLocation = (x, y) => ({
+    x: Math.floor(x / TILE_SIZE),
+    y: Math.floor(y / TILE_SIZE),
+})
+
 const getRandomColorChannel = () => Math.round(Math.random() * 255).toString()
 
 export const getRandomColor = alpha => {

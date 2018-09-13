@@ -3,9 +3,10 @@ import createDebug from './layers/debug'
 import createEvent from './layers/event'
 import createHighlight from './layers/highlight'
 import createMain from './layers/main'
+import createMouse from './layers/mouse'
 import createPlayer from './layers/player'
 
-export default (container, kinds) => {
+export default (container, kinds, autoMove) => {
     const layers = {}
 
     const build = area => {
@@ -14,6 +15,7 @@ export default (container, kinds) => {
         layers.event = createEvent(area)
         layers.highlight = createHighlight(area)
         layers.main = createMain(area, kinds)
+        layers.mouse = createMouse(area, autoMove)
         layers.player = createPlayer(area, kinds)
 
         layers.main.updateMap(area.map)
@@ -24,6 +26,7 @@ export default (container, kinds) => {
         container.appendChild(layers.event.canvas)
         container.appendChild(layers.debug.canvas)
         container.appendChild(layers.player.canvas)
+        container.appendChild(layers.mouse.canvas)
     }
 
     const reset = area => {

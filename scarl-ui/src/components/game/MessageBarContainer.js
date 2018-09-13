@@ -1,7 +1,10 @@
+import { List } from 'immutable'
 import { connect } from 'react-redux'
 import * as modes from '../../game/modes.js'
 import { getLocationDescriptions } from '../../game/utils.js'
 import MessageBar from './MessageBar.jsx'
+
+const autoMoveMessage = List(['Move: select direction or explore'])
 
 const locationDescriptions = (state, location) => {
     const fov = state.fov.cumulative
@@ -22,6 +25,9 @@ const getMessages = state => {
         case modes.AIM:
         case modes.AIM_MISSILE: {
             return locationDescriptions(state, state.ui.game.reticule)
+        }
+        case modes.AUTO_MOVE: {
+            return autoMoveMessage
         }
         case modes.LOOK: {
             return locationDescriptions(state, state.ui.game.cursor)

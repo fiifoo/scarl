@@ -11,6 +11,17 @@ const directionModifiers = {
     [commands.DIRECTION_NORTH_EAST]: {x: 1, y: -1},
 }
 
+const directionValues = {
+    [commands.DIRECTION_SOUTH_WEST]: 1,
+    [commands.DIRECTION_SOUTH]: 2,
+    [commands.DIRECTION_SOUTH_EAST]: 3,
+    [commands.DIRECTION_WEST]: 4,
+    [commands.DIRECTION_EAST]: 6,
+    [commands.DIRECTION_NORTH_WEST]: 7,
+    [commands.DIRECTION_NORTH]: 8,
+    [commands.DIRECTION_NORTH_EAST]: 9,
+}
+
 export const isDirectionCommand = command => command.match(/^DIRECTION_/) !== null
 
 export const isSetEquipmentSetCommand = command => command.match(/^SET_EQUIPMENT_SET_/) !== null
@@ -31,3 +42,5 @@ export const getDirectionLocation = (command, {x, y}) => {
         y: y + modifier.y,
     }
 }
+
+export const getDirectionValue = command => directionValues[command]

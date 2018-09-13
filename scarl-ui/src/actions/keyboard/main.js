@@ -22,6 +22,10 @@ export default (command, dispatch, getState) => {
             gameActions.aimMissile()(dispatch, getState)
             break
         }
+        case commands.AUTO_MOVE: {
+            gameActions.autoMove()(dispatch)
+            break
+        }
         case commands.COMMUNICATE: {
             gameActions.interact(interactions.Communicate)(dispatch, getState)
             break

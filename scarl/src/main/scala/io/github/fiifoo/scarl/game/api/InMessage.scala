@@ -5,40 +5,62 @@ import io.github.fiifoo.scarl.action.validate.ActionValidator
 import io.github.fiifoo.scarl.core.action.Action
 import io.github.fiifoo.scarl.core.entity.ItemId
 import io.github.fiifoo.scarl.core.entity.Selectors.getContainerItems
+import io.github.fiifoo.scarl.core.geometry.Location
 import io.github.fiifoo.scarl.core.item.Equipment
 import io.github.fiifoo.scarl.core.item.Equipment.ArmorSlot
 import io.github.fiifoo.scarl.core.kind.ItemKindId
+import io.github.fiifoo.scarl.game.player.PlayerAutomation
 import io.github.fiifoo.scarl.game.{CalculateBrains, RunGame, RunState}
 
 import scala.concurrent.ExecutionContext
 
 sealed trait InMessage {
-  def apply(state: RunState)(implicit ec: ExecutionContext): RunState
+  def apply(state: RunState)(implicit ec: ExecutionContext): (RunState, Option[InMessage])
+}
+
+case class AutoMove(direction: Option[Int] = None, destination: Option[Location] = None) extends InMessage {
+  def apply(state: RunState)(implicit ec: ExecutionContext): (RunState, Option[InMessage]) = {
+    destination.orElse(PlayerAutomation.getDestination(state, direction)) flatMap (destination => {
+      PlayerAutomation.getMoveAction(state, destination) map (action => {
+        val (result, _) = GameAction(action)(state)
+
+        if (!result.ended && PlayerAutomation.shouldContinueMoving(state, result, destination)) {
+          (result, Some(this.copy(destination = Some(destination))))
+        } else {
+          (result, None)
+        }
+      })
+    }) getOrElse {
+      (state, None)
+    }
+  }
 }
 
 case object DebugFovQuery extends InMessage with DebugMessage {
-  def apply(state: RunState)(implicit ec: ExecutionContext): RunState = {
+  def apply(state: RunState)(implicit ec: ExecutionContext): (RunState, Option[InMessage]) = {
     val message = DebugFov(state.fov.locations)
 
-    state.copy(outMessages = message :: state.outMessages)
+    (state.copy(outMessages = message :: state.outMessages), None)
   }
 }
 
 case object DebugWaypointQuery extends InMessage with DebugMessage {
-  def apply(state: RunState)(implicit ec: ExecutionContext): RunState = {
+  def apply(state: RunState)(implicit ec: ExecutionContext): (RunState, Option[InMessage]) = {
     val message = DebugWaypoint(state.instance.cache.waypointNetwork)
 
-    state.copy(outMessages = message :: state.outMessages)
+    (state.copy(outMessages = message :: state.outMessages), None)
   }
 }
 
 case class GameAction(action: Action) extends InMessage {
-  def apply(state: RunState)(implicit ec: ExecutionContext): RunState = {
-    if (ActionValidator(state.instance, state.game.player, this.action)) {
+  def apply(state: RunState)(implicit ec: ExecutionContext): (RunState, Option[InMessage]) = {
+    val nextState = if (ActionValidator(state.instance, state.game.player, this.action)) {
       this.run(state)
     } else {
       state
     }
+
+    (nextState, None)
   }
 
   private def run(initial: RunState)(implicit ec: ExecutionContext): RunState = {
@@ -53,23 +75,25 @@ case class GameAction(action: Action) extends InMessage {
 }
 
 case object InventoryQuery extends InMessage {
-  def apply(state: RunState)(implicit ec: ExecutionContext): RunState = {
+  def apply(state: RunState)(implicit ec: ExecutionContext): (RunState, Option[InMessage]) = {
     val message = PlayerInventory(
       inventory = getContainerItems(state.instance)(state.game.player) map (_ (state.instance)),
       equipments = state.instance.equipments.getOrElse(state.game.player, Map())
     )
 
-    state.copy(outMessages = message :: state.outMessages)
+    (state.copy(outMessages = message :: state.outMessages), None)
   }
 }
 
 case class SetEquipmentSet(set: Int) extends InMessage {
-  def apply(state: RunState)(implicit ec: ExecutionContext): RunState = {
-    if (this.set != state.game.settings.equipmentSet) {
+  def apply(state: RunState)(implicit ec: ExecutionContext): (RunState, Option[InMessage]) = {
+    val nextState = if (this.set != state.game.settings.equipmentSet) {
       this.execute(state)
     } else {
       state
     }
+
+    (nextState, None)
   }
 
   private def execute(initial: RunState)(implicit ec: ExecutionContext): RunState = {
@@ -83,9 +107,11 @@ case class SetEquipmentSet(set: Int) extends InMessage {
       game = state.game.copy(settings = settings),
       outMessages = message :: state.outMessages
     )
-    state = GameAction(action)(state)
+    val (_state, _) = GameAction(action)(state)
+    state = _state
     if (!state.ended) {
-      state = InventoryQuery(state)
+      val (_state, _) = InventoryQuery(state)
+      state = _state
     }
 
     state
@@ -110,13 +136,15 @@ case class SetEquipmentSet(set: Int) extends InMessage {
 }
 
 case class SetQuickItem(slot: Int, item: Option[ItemKindId]) extends InMessage {
-  def apply(state: RunState)(implicit ec: ExecutionContext): RunState = {
+  def apply(state: RunState)(implicit ec: ExecutionContext): (RunState, Option[InMessage]) = {
     val settings = state.game.settings.setQuickItem(this.slot, this.item)
     val message = PlayerSettings(settings)
 
-    state.copy(
+    val nextState = state.copy(
       game = state.game.copy(settings = settings),
       outMessages = message :: state.outMessages
     )
+
+    (nextState, None)
   }
 }

@@ -4,6 +4,7 @@ import * as commands from '../../keyboard/commands'
 import * as types from '../actionTypes'
 import * as gameActions from '../gameActions'
 import aim from './aim'
+import autoMove from './autoMove'
 import gameOver from './gameOver'
 import interact from './interact'
 import inventory from './inventory'
@@ -21,6 +22,7 @@ const handlers = {
     [modes.MAIN]: main,
     [modes.AIM]: aim(),
     [modes.AIM_MISSILE]: aim(true),
+    [modes.AUTO_MOVE]: autoMove,
     [modes.GAME_OVER]: gameOver,
     [modes.GAME_OVER_SCREEN]: gameOver,
     [modes.INTERACT]: interact,

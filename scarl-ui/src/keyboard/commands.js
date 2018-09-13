@@ -1,5 +1,7 @@
 export const AIM = 'AIM'
 export const AIM_MISSILE = 'AIM_MISSILE'
+export const AUTO_EXPLORE = 'AUTO_EXPLORE'
+export const AUTO_MOVE = 'AUTO_MOVE'
 export const CANCEL_MODE = 'CANCEL_MODE'
 export const COMMUNICATE = 'COMMUNICATE'
 export const DIRECTION_EAST = 'DIRECTION_EAST'
