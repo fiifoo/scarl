@@ -6,10 +6,12 @@ import io.github.fiifoo.scarl.core.entity.Power.Resources
 import io.github.fiifoo.scarl.core.entity.Selectors.getEntityLocation
 import io.github.fiifoo.scarl.core.entity._
 import io.github.fiifoo.scarl.core.kind.KindId
+import io.github.fiifoo.scarl.effect.MaybeEffect
 
 case class CreateEntityPower(description: Option[String] = None,
                              resources: Option[Resources] = None,
                              kind: KindId,
+                             probability: Option[Int] = None,
                              createDescription: Option[String] = None,
                             ) extends CreaturePower with ItemPower {
   override def apply(s: State, usable: UsableId, user: Option[CreatureId]): List[Effect] = {
@@ -34,6 +36,10 @@ case class CreateEntityPower(description: Option[String] = None,
       )
     })
 
-    effect map (List(_)) getOrElse Nil
+    effect map (effect => {
+      List(probability map (MaybeEffect(effect, _)) getOrElse effect)
+    }) getOrElse {
+      Nil
+    }
   }
 }
