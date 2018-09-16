@@ -14,7 +14,13 @@ object Tactic {
 trait Tactic {
   val intentions: List[(Intention, Priority.Value)]
 
+  def valid(s: State, actor: CreatureId): Boolean = true
+
   def apply(s: State, actor: CreatureId, random: Random): Option[Result] = {
+    if (!valid(s, actor)) {
+      return None
+    }
+
     mergeIntentions(s, actor) foreach (x => {
       val (intention, _) = x
 
