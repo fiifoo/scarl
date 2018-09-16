@@ -20,6 +20,8 @@ export default (area, autoMove) => {
         render(location)
     })
 
+    canvas.addEventListener('mouseleave', clear)
+
     const render = createDraw(context).fill(HIGHLIGHT_COLOR)
 
     const getMouseLocation = event => {
