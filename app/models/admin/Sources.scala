@@ -194,6 +194,7 @@ object Sources {
       typeOf[CreateEntityMechanism],
       typeOf[RemoveEntityMechanism],
       typeOf[RemoveWallMechanism],
+      typeOf[TransformEntityMechanism],
       typeOf[UseDoorMechanism],
     )),
 
