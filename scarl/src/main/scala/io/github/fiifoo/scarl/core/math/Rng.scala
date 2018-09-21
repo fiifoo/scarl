@@ -49,6 +49,17 @@ object Rng {
     choices.iterator.drop(n).next
   }
 
+  def nextChoices[T](random: Random, choices: Set[T], count: Int): Set[T] = {
+    val (results, _) = ((0 until count) foldLeft(Set[T](), choices)) ((carry, _) => {
+      val (results, choices) = carry
+      val choice = nextChoice(random, choices)
+
+      (results + choice, choices - choice)
+    })
+
+    results
+  }
+
   def nextRange(random: Random, min: Int, max: Int): Range = {
     0 until min + random.nextInt(max - min + 1)
   }

@@ -3,7 +3,7 @@ package models.admin
 import io.github.fiifoo.scarl.ai.strategy._
 import io.github.fiifoo.scarl.ai.tactic._
 import io.github.fiifoo.scarl.area.Area
-import io.github.fiifoo.scarl.area.feature.{BurrowFeature, Feature, HouseFeature, RandomizedContentFeature}
+import io.github.fiifoo.scarl.area.feature._
 import io.github.fiifoo.scarl.area.shape.{Rectangle, Shape}
 import io.github.fiifoo.scarl.area.template.{ContentSelection, FixedTemplate, RandomizedTemplate, Template}
 import io.github.fiifoo.scarl.area.theme.Theme
@@ -168,6 +168,7 @@ object Sources {
       typeOf[BurrowFeature],
       typeOf[HouseFeature],
       typeOf[RandomizedContentFeature],
+      typeOf[TrapRoomFeature],
     )),
 
     SubModelSource(typeOf[ItemKind.Category], List(
