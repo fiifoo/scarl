@@ -160,7 +160,7 @@
         "distribution" : {
           "type" : "Distribution.Binomial",
           "data" : {
-            "p" : 20,
+            "p" : 10,
             "n" : 2
           }
         }
@@ -263,19 +263,19 @@
       "subs" : [ ],
       "items" : [ {
         "value" : "iridan/melee-armored",
-        "weight" : 100
+        "weight" : 200
       }, {
         "value" : "iridan/melee-damager",
-        "weight" : 100
+        "weight" : 200
       }, {
         "value" : "iridan/melee-fast",
-        "weight" : 200
+        "weight" : 300
       }, {
         "value" : "iridan/ranged-armored",
         "weight" : 100
       }, {
         "value" : "iridan/ranged-damager",
-        "weight" : 100
+        "weight" : 150
       }, {
         "value" : "iridan/ranged-evasive",
         "weight" : 100
@@ -340,6 +340,9 @@
       }, {
         "value" : "generic/trap-corridor-ambush",
         "weight" : 100
+      }, {
+        "value" : "generic/trap-room-ambush",
+        "weight" : 0
       }, {
         "value" : "generic/vault",
         "weight" : 100
@@ -667,7 +670,7 @@
         "ranged" : {
           "attack" : 20,
           "damage" : 30,
-          "range" : 7,
+          "range" : 5,
           "consumption" : {
             "energy" : 0,
             "materials" : 0
@@ -1149,7 +1152,7 @@
         "ranged" : {
           "attack" : 30,
           "damage" : 25,
-          "range" : 7,
+          "range" : 5,
           "consumption" : {
             "energy" : 0,
             "materials" : 0
@@ -1472,7 +1475,7 @@
         "ranged" : {
           "attack" : 30,
           "damage" : 30,
-          "range" : 7,
+          "range" : 5,
           "consumption" : {
             "energy" : 0,
             "materials" : 0
@@ -1558,7 +1561,7 @@
         "ranged" : {
           "attack" : 20,
           "damage" : 30,
-          "range" : 7,
+          "range" : 5,
           "consumption" : {
             "energy" : 0,
             "materials" : 0
@@ -1732,11 +1735,11 @@
           "radius" : 0,
           "blast" : 0
         },
-        "speed" : 0,
+        "speed" : -20,
         "ranged" : {
           "attack" : 30,
-          "damage" : 30,
-          "range" : 7,
+          "damage" : 40,
+          "range" : 5,
           "consumption" : {
             "energy" : 0,
             "materials" : 0
@@ -1756,7 +1759,7 @@
         },
         "melee" : {
           "attack" : 30,
-          "damage" : 30,
+          "damage" : 40,
           "consumption" : {
             "energy" : 0,
             "materials" : 0
@@ -1908,7 +1911,7 @@
         "ranged" : {
           "attack" : 20,
           "damage" : 30,
-          "range" : 7,
+          "range" : 5,
           "consumption" : {
             "energy" : 0,
             "materials" : 0
@@ -1983,7 +1986,7 @@
         "ranged" : {
           "attack" : 30,
           "damage" : 40,
-          "range" : 7,
+          "range" : 5,
           "consumption" : {
             "energy" : 0,
             "materials" : 0
@@ -2069,7 +2072,7 @@
         "ranged" : {
           "attack" : 20,
           "damage" : 40,
-          "range" : 7,
+          "range" : 5,
           "consumption" : {
             "energy" : 0,
             "materials" : 0
@@ -2263,7 +2266,7 @@
       "key" : null
     } ], [ "iridan/door-secure-closed", {
       "display" : "+",
-      "color" : "white",
+      "color" : "#ffc107",
       "rangedWeapon" : null,
       "shield" : null,
       "hidden" : false,
@@ -2374,7 +2377,7 @@
         "security" : 30
       },
       "name" : "Laser trap",
-      "concealment" : 30,
+      "concealment" : 150,
       "trap" : {
         "type" : "TrapAttackPower",
         "data" : {
@@ -2861,7 +2864,7 @@
         "security" : 30
       },
       "name" : "Plasma trap",
-      "concealment" : 30,
+      "concealment" : 150,
       "trap" : {
         "type" : "TrapAttackPower",
         "data" : {
@@ -2990,6 +2993,27 @@
       "weapon" : null,
       "category" : "ItemKind.UtilityCategory",
       "armor" : null
+    } ], [ "generic/decoration-measurement-device", {
+      "launcher" : null,
+      "display" : "Ω",
+      "color" : "white",
+      "rangedWeapon" : null,
+      "power" : null,
+      "explosive" : null,
+      "shield" : null,
+      "hidden" : false,
+      "locked" : null,
+      "name" : "Measurement device",
+      "concealment" : 0,
+      "trap" : null,
+      "door" : null,
+      "usable" : null,
+      "pickable" : false,
+      "id" : "generic/decoration-measurement-device",
+      "weapon" : null,
+      "category" : null,
+      "armor" : null,
+      "key" : null
     } ], [ "skyfarer/explosive-timed-antimatter", {
       "display" : "¤",
       "color" : "white",
@@ -4339,7 +4363,7 @@
       "armor" : null
     } ], [ "iridan/door-secure-open", {
       "display" : "/",
-      "color" : "white",
+      "color" : "#ffc107",
       "rangedWeapon" : null,
       "shield" : null,
       "hidden" : false,
@@ -4429,7 +4453,7 @@
       "data" : {
         "item" : "iridan/portal",
         "summon" : "iridan/default",
-        "interval" : 3000,
+        "interval" : 5000,
         "id" : "iridan/portal",
         "summonDescription" : "{target} is constructed.",
         "category" : "WidgetKind.PortalCategory",
@@ -5153,6 +5177,21 @@
           }
         },
         "required" : 1
+      }, {
+        "selection" : {
+          "type" : "ContentSelection.FixedTemplate",
+          "data" : {
+            "template" : "iridan/space-skyfarer-assault"
+          }
+        },
+        "distribution" : {
+          "type" : "Distribution.Uniform",
+          "data" : {
+            "min" : 1,
+            "max" : 1
+          }
+        },
+        "required" : 1
       } ],
       "id" : "iridan/area-core",
       "features" : [ {
@@ -5168,7 +5207,7 @@
           "creatures" : [ ],
           "items" : [ ],
           "widgets" : [ ],
-          "catalogues" : [ "generic/room" ]
+          "catalogues" : [ "generic/room-portal-high", "generic/room-portal-high" ]
         }
       } ],
       "entrances" : {
@@ -5680,7 +5719,7 @@
         "data" : {
           "width" : 7,
           "height" : 7,
-          "variance" : 0.2
+          "variance" : 0.3
         }
       },
       "fill" : null,
@@ -5715,7 +5754,7 @@
               "type" : "ContentSelection.ThemeEquipment",
               "data" : {
                 "category" : [ ],
-                "power" : [ ],
+                "power" : [ "CombatPower.High", "CombatPower.Top" ],
                 "tags" : [ ]
               }
             },
@@ -5766,11 +5805,26 @@
         "distribution" : {
           "type" : "Distribution.Uniform",
           "data" : {
-            "min" : 3,
-            "max" : 4
+            "min" : 2,
+            "max" : 3
           }
         },
-        "required" : 4
+        "required" : 3
+      }, {
+        "selection" : {
+          "type" : "ContentSelection.FixedTemplate",
+          "data" : {
+            "template" : "iridan/room-lab-weapon-test"
+          }
+        },
+        "distribution" : {
+          "type" : "Distribution.Uniform",
+          "data" : {
+            "min" : 2,
+            "max" : 2
+          }
+        },
+        "required" : 2
       } ],
       "id" : "iridan/area-labs",
       "features" : [ {
@@ -8113,9 +8167,9 @@
       "shape" : {
         "type" : "Rectangle",
         "data" : {
-          "width" : 9,
-          "height" : 9,
-          "variance" : 0.35
+          "width" : 7,
+          "height" : 7,
+          "variance" : 0.3
         }
       },
       "fill" : null,
@@ -8201,9 +8255,9 @@
       "shape" : {
         "type" : "Rectangle",
         "data" : {
-          "width" : 9,
-          "height" : 9,
-          "variance" : 0.35
+          "width" : 7,
+          "height" : 7,
+          "variance" : 0.3
         }
       },
       "fill" : null,
@@ -8226,6 +8280,418 @@
         "door" : null
       },
       "category" : "Template.RoomCategory"
+    }
+  } ], [ "iridan/room-lab-weapon-test", {
+    "type" : "FixedTemplate",
+    "data" : {
+      "shape" : {
+        "type" : "Rectangle",
+        "data" : {
+          "width" : 10,
+          "height" : 5,
+          "variance" : 0
+        }
+      },
+      "category" : null,
+      "power" : null,
+      "templates" : [ ],
+      "entrances" : [ [ {
+        "x" : 0,
+        "y" : 2
+      }, "iridan/door-secure-closed" ] ],
+      "features" : [ ],
+      "content" : {
+        "conduitLocations" : [ ],
+        "items" : [ [ {
+          "x" : 8,
+          "y" : 2
+        }, [ {
+          "type" : "ContentSelection.FixedItem",
+          "data" : {
+            "kind" : "generic/decoration-measurement-device",
+            "tags" : [ ]
+          }
+        } ] ], [ {
+          "x" : 3,
+          "y" : 2
+        }, [ {
+          "type" : "ContentSelection.ThemeEquipment",
+          "data" : {
+            "category" : [ "Equipment.RangedWeaponCategory" ],
+            "power" : [ "CombatPower.High", "CombatPower.Top" ],
+            "tags" : [ ]
+          }
+        } ] ] ],
+        "restrictedLocations" : [ ],
+        "walls" : [ [ {
+          "x" : 7,
+          "y" : 0
+        }, {
+          "type" : "ContentSelection.FixedWall",
+          "data" : {
+            "kind" : "wall-reinforced",
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 6,
+          "y" : 0
+        }, {
+          "type" : "ContentSelection.FixedWall",
+          "data" : {
+            "kind" : "wall-reinforced",
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 9,
+          "y" : 0
+        }, {
+          "type" : "ContentSelection.FixedWall",
+          "data" : {
+            "kind" : "wall-reinforced",
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 0,
+          "y" : 1
+        }, {
+          "type" : "ContentSelection.FixedWall",
+          "data" : {
+            "kind" : "wall-reinforced",
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 8,
+          "y" : 0
+        }, {
+          "type" : "ContentSelection.FixedWall",
+          "data" : {
+            "kind" : "wall-reinforced",
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 4,
+          "y" : 4
+        }, {
+          "type" : "ContentSelection.FixedWall",
+          "data" : {
+            "kind" : "wall-reinforced",
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 9,
+          "y" : 3
+        }, {
+          "type" : "ContentSelection.FixedWall",
+          "data" : {
+            "kind" : "wall-reinforced",
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 3,
+          "y" : 0
+        }, {
+          "type" : "ContentSelection.FixedWall",
+          "data" : {
+            "kind" : "wall-reinforced",
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 0,
+          "y" : 0
+        }, {
+          "type" : "ContentSelection.FixedWall",
+          "data" : {
+            "kind" : "wall-reinforced",
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 8,
+          "y" : 4
+        }, {
+          "type" : "ContentSelection.FixedWall",
+          "data" : {
+            "kind" : "wall-reinforced",
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 0,
+          "y" : 3
+        }, {
+          "type" : "ContentSelection.FixedWall",
+          "data" : {
+            "kind" : "wall-reinforced",
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 9,
+          "y" : 1
+        }, {
+          "type" : "ContentSelection.FixedWall",
+          "data" : {
+            "kind" : "wall-reinforced",
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 6,
+          "y" : 4
+        }, {
+          "type" : "ContentSelection.FixedWall",
+          "data" : {
+            "kind" : "wall-reinforced",
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 9,
+          "y" : 4
+        }, {
+          "type" : "ContentSelection.FixedWall",
+          "data" : {
+            "kind" : "wall-reinforced",
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 4,
+          "y" : 0
+        }, {
+          "type" : "ContentSelection.FixedWall",
+          "data" : {
+            "kind" : "wall-reinforced",
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 0,
+          "y" : 4
+        }, {
+          "type" : "ContentSelection.FixedWall",
+          "data" : {
+            "kind" : "wall-reinforced",
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 1,
+          "y" : 4
+        }, {
+          "type" : "ContentSelection.FixedWall",
+          "data" : {
+            "kind" : "wall-reinforced",
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 3,
+          "y" : 4
+        }, {
+          "type" : "ContentSelection.FixedWall",
+          "data" : {
+            "kind" : "wall-reinforced",
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 2,
+          "y" : 0
+        }, {
+          "type" : "ContentSelection.FixedWall",
+          "data" : {
+            "kind" : "wall-reinforced",
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 1,
+          "y" : 0
+        }, {
+          "type" : "ContentSelection.FixedWall",
+          "data" : {
+            "kind" : "wall-reinforced",
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 2,
+          "y" : 4
+        }, {
+          "type" : "ContentSelection.FixedWall",
+          "data" : {
+            "kind" : "wall-reinforced",
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 9,
+          "y" : 2
+        }, {
+          "type" : "ContentSelection.FixedWall",
+          "data" : {
+            "kind" : "wall-reinforced",
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 5,
+          "y" : 4
+        }, {
+          "type" : "ContentSelection.FixedWall",
+          "data" : {
+            "kind" : "wall-reinforced",
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 7,
+          "y" : 4
+        }, {
+          "type" : "ContentSelection.FixedWall",
+          "data" : {
+            "kind" : "wall-reinforced",
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 5,
+          "y" : 0
+        }, {
+          "type" : "ContentSelection.FixedWall",
+          "data" : {
+            "kind" : "wall-reinforced",
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 4,
+          "y" : 3
+        }, {
+          "type" : "ContentSelection.FixedWall",
+          "data" : {
+            "kind" : "wall-reinforced",
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 6,
+          "y" : 1
+        }, {
+          "type" : "ContentSelection.FixedWall",
+          "data" : {
+            "kind" : "wall-reinforced",
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 7,
+          "y" : 3
+        }, {
+          "type" : "ContentSelection.FixedWall",
+          "data" : {
+            "kind" : "wall-reinforced",
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 3,
+          "y" : 3
+        }, {
+          "type" : "ContentSelection.FixedWall",
+          "data" : {
+            "kind" : "wall-reinforced",
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 7,
+          "y" : 1
+        }, {
+          "type" : "ContentSelection.FixedWall",
+          "data" : {
+            "kind" : "wall-reinforced",
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 5,
+          "y" : 3
+        }, {
+          "type" : "ContentSelection.FixedWall",
+          "data" : {
+            "kind" : "wall-reinforced",
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 6,
+          "y" : 3
+        }, {
+          "type" : "ContentSelection.FixedWall",
+          "data" : {
+            "kind" : "wall-reinforced",
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 5,
+          "y" : 1
+        }, {
+          "type" : "ContentSelection.FixedWall",
+          "data" : {
+            "kind" : "wall-reinforced",
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 8,
+          "y" : 1
+        }, {
+          "type" : "ContentSelection.FixedWall",
+          "data" : {
+            "kind" : "wall-reinforced",
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 8,
+          "y" : 3
+        }, {
+          "type" : "ContentSelection.FixedWall",
+          "data" : {
+            "kind" : "wall-reinforced",
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 4,
+          "y" : 1
+        }, {
+          "type" : "ContentSelection.FixedWall",
+          "data" : {
+            "kind" : "wall-reinforced",
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 3,
+          "y" : 1
+        }, {
+          "type" : "ContentSelection.FixedWall",
+          "data" : {
+            "kind" : "wall-reinforced",
+            "tags" : [ ]
+          }
+        } ] ],
+        "machinery" : [ ],
+        "widgets" : [ [ {
+          "x" : 3,
+          "y" : 2
+        }, {
+          "type" : "ContentSelection.ThemeWidget",
+          "data" : {
+            "category" : [ "WidgetKind.TrapCategory" ],
+            "power" : [ ],
+            "tags" : [ ]
+          }
+        } ] ],
+        "creatures" : [ [ {
+          "x" : 2,
+          "y" : 1
+        }, {
+          "type" : "ContentSelection.ThemeCreature",
+          "data" : {
+            "power" : [ "CombatPower.High" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 2,
+          "y" : 3
+        }, {
+          "type" : "ContentSelection.ThemeCreature",
+          "data" : {
+            "power" : [ "CombatPower.High" ],
+            "tags" : [ ]
+          }
+        } ] ],
+        "gatewayLocations" : [ ],
+        "terrains" : [ ]
+      },
+      "id" : "iridan/room-lab-weapon-test"
     }
   } ], [ "generic/trap-corridor-ambush", {
     "type" : "FixedTemplate",
@@ -8748,7 +9214,7 @@
       "shape" : {
         "type" : "Rectangle",
         "data" : {
-          "width" : 20,
+          "width" : 31,
           "height" : 15,
           "variance" : 0
         }
@@ -8759,55 +9225,34 @@
       "entrances" : [ [ {
         "x" : 0,
         "y" : 7
-      }, "generic/door-closed" ] ],
+      }, "iridan/door-secure-closed" ], [ {
+        "x" : 30,
+        "y" : 7
+      }, "iridan/door-secure-closed" ], [ {
+        "x" : 0,
+        "y" : 6
+      }, "iridan/door-secure-closed" ], [ {
+        "x" : 30,
+        "y" : 8
+      }, "iridan/door-secure-closed" ], [ {
+        "x" : 30,
+        "y" : 6
+      }, "iridan/door-secure-closed" ], [ {
+        "x" : 0,
+        "y" : 8
+      }, "iridan/door-secure-closed" ] ],
       "features" : [ ],
       "content" : {
         "conduitLocations" : [ ],
         "items" : [ ],
         "restrictedLocations" : [ ],
         "walls" : [ [ {
-          "x" : 19,
-          "y" : 4
-        }, {
-          "type" : "ContentSelection.FixedWall",
-          "data" : {
-            "kind" : "wall",
-            "tags" : [ ]
-          }
-        } ], [ {
-          "x" : 19,
-          "y" : 8
-        }, {
-          "type" : "ContentSelection.FixedWall",
-          "data" : {
-            "kind" : "wall",
-            "tags" : [ ]
-          }
-        } ], [ {
           "x" : 7,
           "y" : 0
         }, {
           "type" : "ContentSelection.FixedWall",
           "data" : {
-            "kind" : "wall",
-            "tags" : [ ]
-          }
-        } ], [ {
-          "x" : 19,
-          "y" : 6
-        }, {
-          "type" : "ContentSelection.FixedWall",
-          "data" : {
-            "kind" : "wall",
-            "tags" : [ ]
-          }
-        } ], [ {
-          "x" : 0,
-          "y" : 6
-        }, {
-          "type" : "ContentSelection.FixedWall",
-          "data" : {
-            "kind" : "wall",
+            "kind" : "wall-reinforced",
             "tags" : [ ]
           }
         } ], [ {
@@ -8816,7 +9261,7 @@
         }, {
           "type" : "ContentSelection.FixedWall",
           "data" : {
-            "kind" : "wall",
+            "kind" : "wall-reinforced",
             "tags" : [ ]
           }
         } ], [ {
@@ -8825,7 +9270,7 @@
         }, {
           "type" : "ContentSelection.FixedWall",
           "data" : {
-            "kind" : "wall",
+            "kind" : "wall-reinforced",
             "tags" : [ ]
           }
         } ], [ {
@@ -8834,7 +9279,7 @@
         }, {
           "type" : "ContentSelection.FixedWall",
           "data" : {
-            "kind" : "wall",
+            "kind" : "wall-reinforced",
             "tags" : [ ]
           }
         } ], [ {
@@ -8843,16 +9288,7 @@
         }, {
           "type" : "ContentSelection.FixedWall",
           "data" : {
-            "kind" : "wall",
-            "tags" : [ ]
-          }
-        } ], [ {
-          "x" : 0,
-          "y" : 8
-        }, {
-          "type" : "ContentSelection.FixedWall",
-          "data" : {
-            "kind" : "wall",
+            "kind" : "wall-reinforced",
             "tags" : [ ]
           }
         } ], [ {
@@ -8861,7 +9297,7 @@
         }, {
           "type" : "ContentSelection.FixedWall",
           "data" : {
-            "kind" : "wall",
+            "kind" : "wall-reinforced",
             "tags" : [ ]
           }
         } ], [ {
@@ -8870,25 +9306,7 @@
         }, {
           "type" : "ContentSelection.FixedWall",
           "data" : {
-            "kind" : "wall",
-            "tags" : [ ]
-          }
-        } ], [ {
-          "x" : 19,
-          "y" : 3
-        }, {
-          "type" : "ContentSelection.FixedWall",
-          "data" : {
-            "kind" : "wall",
-            "tags" : [ ]
-          }
-        } ], [ {
-          "x" : 19,
-          "y" : 11
-        }, {
-          "type" : "ContentSelection.FixedWall",
-          "data" : {
-            "kind" : "wall",
+            "kind" : "wall-reinforced",
             "tags" : [ ]
           }
         } ], [ {
@@ -8897,16 +9315,7 @@
         }, {
           "type" : "ContentSelection.FixedWall",
           "data" : {
-            "kind" : "wall",
-            "tags" : [ ]
-          }
-        } ], [ {
-          "x" : 19,
-          "y" : 7
-        }, {
-          "type" : "ContentSelection.FixedWall",
-          "data" : {
-            "kind" : "wall",
+            "kind" : "wall-reinforced",
             "tags" : [ ]
           }
         } ], [ {
@@ -8915,7 +9324,7 @@
         }, {
           "type" : "ContentSelection.FixedWall",
           "data" : {
-            "kind" : "wall",
+            "kind" : "wall-reinforced",
             "tags" : [ ]
           }
         } ], [ {
@@ -8924,16 +9333,7 @@
         }, {
           "type" : "ContentSelection.FixedWall",
           "data" : {
-            "kind" : "wall",
-            "tags" : [ ]
-          }
-        } ], [ {
-          "x" : 19,
-          "y" : 12
-        }, {
-          "type" : "ContentSelection.FixedWall",
-          "data" : {
-            "kind" : "wall",
+            "kind" : "wall-reinforced",
             "tags" : [ ]
           }
         } ], [ {
@@ -8942,16 +9342,7 @@
         }, {
           "type" : "ContentSelection.FixedWall",
           "data" : {
-            "kind" : "wall",
-            "tags" : [ ]
-          }
-        } ], [ {
-          "x" : 19,
-          "y" : 2
-        }, {
-          "type" : "ContentSelection.FixedWall",
-          "data" : {
-            "kind" : "wall",
+            "kind" : "wall-reinforced",
             "tags" : [ ]
           }
         } ], [ {
@@ -8960,7 +9351,7 @@
         }, {
           "type" : "ContentSelection.FixedWall",
           "data" : {
-            "kind" : "wall",
+            "kind" : "wall-reinforced",
             "tags" : [ ]
           }
         } ], [ {
@@ -8969,7 +9360,7 @@
         }, {
           "type" : "ContentSelection.FixedWall",
           "data" : {
-            "kind" : "wall",
+            "kind" : "wall-reinforced",
             "tags" : [ ]
           }
         } ], [ {
@@ -8978,7 +9369,7 @@
         }, {
           "type" : "ContentSelection.FixedWall",
           "data" : {
-            "kind" : "wall",
+            "kind" : "wall-reinforced",
             "tags" : [ ]
           }
         } ], [ {
@@ -8987,7 +9378,7 @@
         }, {
           "type" : "ContentSelection.FixedWall",
           "data" : {
-            "kind" : "wall",
+            "kind" : "wall-reinforced",
             "tags" : [ ]
           }
         } ], [ {
@@ -8996,7 +9387,7 @@
         }, {
           "type" : "ContentSelection.FixedWall",
           "data" : {
-            "kind" : "wall",
+            "kind" : "wall-reinforced",
             "tags" : [ ]
           }
         } ], [ {
@@ -9005,7 +9396,7 @@
         }, {
           "type" : "ContentSelection.FixedWall",
           "data" : {
-            "kind" : "wall",
+            "kind" : "wall-reinforced",
             "tags" : [ ]
           }
         } ], [ {
@@ -9014,7 +9405,7 @@
         }, {
           "type" : "ContentSelection.FixedWall",
           "data" : {
-            "kind" : "wall",
+            "kind" : "wall-reinforced",
             "tags" : [ ]
           }
         } ], [ {
@@ -9023,7 +9414,7 @@
         }, {
           "type" : "ContentSelection.FixedWall",
           "data" : {
-            "kind" : "wall",
+            "kind" : "wall-reinforced",
             "tags" : [ ]
           }
         } ], [ {
@@ -9032,16 +9423,7 @@
         }, {
           "type" : "ContentSelection.FixedWall",
           "data" : {
-            "kind" : "wall",
-            "tags" : [ ]
-          }
-        } ], [ {
-          "x" : 19,
-          "y" : 9
-        }, {
-          "type" : "ContentSelection.FixedWall",
-          "data" : {
-            "kind" : "wall",
+            "kind" : "wall-reinforced",
             "tags" : [ ]
           }
         } ], [ {
@@ -9050,7 +9432,16 @@
         }, {
           "type" : "ContentSelection.FixedWall",
           "data" : {
-            "kind" : "wall",
+            "kind" : "wall-reinforced",
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 12,
+          "y" : 0
+        }, {
+          "type" : "ContentSelection.FixedWall",
+          "data" : {
+            "kind" : "wall-reinforced",
             "tags" : [ ]
           }
         } ], [ {
@@ -9059,16 +9450,7 @@
         }, {
           "type" : "ContentSelection.FixedWall",
           "data" : {
-            "kind" : "wall",
-            "tags" : [ ]
-          }
-        } ], [ {
-          "x" : 12,
-          "y" : 0
-        }, {
-          "type" : "ContentSelection.FixedWall",
-          "data" : {
-            "kind" : "wall",
+            "kind" : "wall-reinforced",
             "tags" : [ ]
           }
         } ], [ {
@@ -9077,16 +9459,7 @@
         }, {
           "type" : "ContentSelection.FixedWall",
           "data" : {
-            "kind" : "wall",
-            "tags" : [ ]
-          }
-        } ], [ {
-          "x" : 0,
-          "y" : 4
-        }, {
-          "type" : "ContentSelection.FixedWall",
-          "data" : {
-            "kind" : "wall",
+            "kind" : "wall-reinforced",
             "tags" : [ ]
           }
         } ], [ {
@@ -9095,25 +9468,16 @@
         }, {
           "type" : "ContentSelection.FixedWall",
           "data" : {
-            "kind" : "wall",
+            "kind" : "wall-reinforced",
             "tags" : [ ]
           }
         } ], [ {
-          "x" : 19,
-          "y" : 13
+          "x" : 0,
+          "y" : 4
         }, {
           "type" : "ContentSelection.FixedWall",
           "data" : {
-            "kind" : "wall",
-            "tags" : [ ]
-          }
-        } ], [ {
-          "x" : 19,
-          "y" : 1
-        }, {
-          "type" : "ContentSelection.FixedWall",
-          "data" : {
-            "kind" : "wall",
+            "kind" : "wall-reinforced",
             "tags" : [ ]
           }
         } ], [ {
@@ -9122,7 +9486,7 @@
         }, {
           "type" : "ContentSelection.FixedWall",
           "data" : {
-            "kind" : "wall",
+            "kind" : "wall-reinforced",
             "tags" : [ ]
           }
         } ], [ {
@@ -9131,16 +9495,7 @@
         }, {
           "type" : "ContentSelection.FixedWall",
           "data" : {
-            "kind" : "wall",
-            "tags" : [ ]
-          }
-        } ], [ {
-          "x" : 0,
-          "y" : 14
-        }, {
-          "type" : "ContentSelection.FixedWall",
-          "data" : {
-            "kind" : "wall",
+            "kind" : "wall-reinforced",
             "tags" : [ ]
           }
         } ], [ {
@@ -9149,7 +9504,16 @@
         }, {
           "type" : "ContentSelection.FixedWall",
           "data" : {
-            "kind" : "wall",
+            "kind" : "wall-reinforced",
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 0,
+          "y" : 14
+        }, {
+          "type" : "ContentSelection.FixedWall",
+          "data" : {
+            "kind" : "wall-reinforced",
             "tags" : [ ]
           }
         } ], [ {
@@ -9158,7 +9522,7 @@
         }, {
           "type" : "ContentSelection.FixedWall",
           "data" : {
-            "kind" : "wall",
+            "kind" : "wall-reinforced",
             "tags" : [ ]
           }
         } ], [ {
@@ -9167,7 +9531,7 @@
         }, {
           "type" : "ContentSelection.FixedWall",
           "data" : {
-            "kind" : "wall",
+            "kind" : "wall-reinforced",
             "tags" : [ ]
           }
         } ], [ {
@@ -9176,7 +9540,7 @@
         }, {
           "type" : "ContentSelection.FixedWall",
           "data" : {
-            "kind" : "wall",
+            "kind" : "wall-reinforced",
             "tags" : [ ]
           }
         } ], [ {
@@ -9185,7 +9549,7 @@
         }, {
           "type" : "ContentSelection.FixedWall",
           "data" : {
-            "kind" : "wall",
+            "kind" : "wall-reinforced",
             "tags" : [ ]
           }
         } ], [ {
@@ -9194,7 +9558,7 @@
         }, {
           "type" : "ContentSelection.FixedWall",
           "data" : {
-            "kind" : "wall",
+            "kind" : "wall-reinforced",
             "tags" : [ ]
           }
         } ], [ {
@@ -9203,7 +9567,7 @@
         }, {
           "type" : "ContentSelection.FixedWall",
           "data" : {
-            "kind" : "wall",
+            "kind" : "wall-reinforced",
             "tags" : [ ]
           }
         } ], [ {
@@ -9212,16 +9576,7 @@
         }, {
           "type" : "ContentSelection.FixedWall",
           "data" : {
-            "kind" : "wall",
-            "tags" : [ ]
-          }
-        } ], [ {
-          "x" : 19,
-          "y" : 5
-        }, {
-          "type" : "ContentSelection.FixedWall",
-          "data" : {
-            "kind" : "wall",
+            "kind" : "wall-reinforced",
             "tags" : [ ]
           }
         } ], [ {
@@ -9230,7 +9585,7 @@
         }, {
           "type" : "ContentSelection.FixedWall",
           "data" : {
-            "kind" : "wall",
+            "kind" : "wall-reinforced",
             "tags" : [ ]
           }
         } ], [ {
@@ -9239,7 +9594,7 @@
         }, {
           "type" : "ContentSelection.FixedWall",
           "data" : {
-            "kind" : "wall",
+            "kind" : "wall-reinforced",
             "tags" : [ ]
           }
         } ], [ {
@@ -9248,7 +9603,7 @@
         }, {
           "type" : "ContentSelection.FixedWall",
           "data" : {
-            "kind" : "wall",
+            "kind" : "wall-reinforced",
             "tags" : [ ]
           }
         } ], [ {
@@ -9257,7 +9612,7 @@
         }, {
           "type" : "ContentSelection.FixedWall",
           "data" : {
-            "kind" : "wall",
+            "kind" : "wall-reinforced",
             "tags" : [ ]
           }
         } ], [ {
@@ -9266,16 +9621,7 @@
         }, {
           "type" : "ContentSelection.FixedWall",
           "data" : {
-            "kind" : "wall",
-            "tags" : [ ]
-          }
-        } ], [ {
-          "x" : 19,
-          "y" : 10
-        }, {
-          "type" : "ContentSelection.FixedWall",
-          "data" : {
-            "kind" : "wall",
+            "kind" : "wall-reinforced",
             "tags" : [ ]
           }
         } ], [ {
@@ -9284,7 +9630,7 @@
         }, {
           "type" : "ContentSelection.FixedWall",
           "data" : {
-            "kind" : "wall",
+            "kind" : "wall-reinforced",
             "tags" : [ ]
           }
         } ], [ {
@@ -9293,7 +9639,7 @@
         }, {
           "type" : "ContentSelection.FixedWall",
           "data" : {
-            "kind" : "wall",
+            "kind" : "wall-reinforced",
             "tags" : [ ]
           }
         } ], [ {
@@ -9302,7 +9648,7 @@
         }, {
           "type" : "ContentSelection.FixedWall",
           "data" : {
-            "kind" : "wall",
+            "kind" : "wall-reinforced",
             "tags" : [ ]
           }
         } ], [ {
@@ -9311,7 +9657,7 @@
         }, {
           "type" : "ContentSelection.FixedWall",
           "data" : {
-            "kind" : "wall",
+            "kind" : "wall-reinforced",
             "tags" : [ ]
           }
         } ], [ {
@@ -9320,7 +9666,7 @@
         }, {
           "type" : "ContentSelection.FixedWall",
           "data" : {
-            "kind" : "wall",
+            "kind" : "wall-reinforced",
             "tags" : [ ]
           }
         } ], [ {
@@ -9329,7 +9675,7 @@
         }, {
           "type" : "ContentSelection.FixedWall",
           "data" : {
-            "kind" : "wall",
+            "kind" : "wall-reinforced",
             "tags" : [ ]
           }
         } ], [ {
@@ -9338,7 +9684,7 @@
         }, {
           "type" : "ContentSelection.FixedWall",
           "data" : {
-            "kind" : "wall",
+            "kind" : "wall-reinforced",
             "tags" : [ ]
           }
         } ], [ {
@@ -9347,7 +9693,475 @@
         }, {
           "type" : "ContentSelection.FixedWall",
           "data" : {
-            "kind" : "wall",
+            "kind" : "wall-reinforced",
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 23,
+          "y" : 0
+        }, {
+          "type" : "ContentSelection.FixedWall",
+          "data" : {
+            "kind" : "wall-reinforced",
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 27,
+          "y" : 0
+        }, {
+          "type" : "ContentSelection.FixedWall",
+          "data" : {
+            "kind" : "wall-reinforced",
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 28,
+          "y" : 14
+        }, {
+          "type" : "ContentSelection.FixedWall",
+          "data" : {
+            "kind" : "wall-reinforced",
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 21,
+          "y" : 14
+        }, {
+          "type" : "ContentSelection.FixedWall",
+          "data" : {
+            "kind" : "wall-reinforced",
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 24,
+          "y" : 0
+        }, {
+          "type" : "ContentSelection.FixedWall",
+          "data" : {
+            "kind" : "wall-reinforced",
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 20,
+          "y" : 0
+        }, {
+          "type" : "ContentSelection.FixedWall",
+          "data" : {
+            "kind" : "wall-reinforced",
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 25,
+          "y" : 0
+        }, {
+          "type" : "ContentSelection.FixedWall",
+          "data" : {
+            "kind" : "wall-reinforced",
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 22,
+          "y" : 0
+        }, {
+          "type" : "ContentSelection.FixedWall",
+          "data" : {
+            "kind" : "wall-reinforced",
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 22,
+          "y" : 14
+        }, {
+          "type" : "ContentSelection.FixedWall",
+          "data" : {
+            "kind" : "wall-reinforced",
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 25,
+          "y" : 14
+        }, {
+          "type" : "ContentSelection.FixedWall",
+          "data" : {
+            "kind" : "wall-reinforced",
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 21,
+          "y" : 0
+        }, {
+          "type" : "ContentSelection.FixedWall",
+          "data" : {
+            "kind" : "wall-reinforced",
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 29,
+          "y" : 0
+        }, {
+          "type" : "ContentSelection.FixedWall",
+          "data" : {
+            "kind" : "wall-reinforced",
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 26,
+          "y" : 14
+        }, {
+          "type" : "ContentSelection.FixedWall",
+          "data" : {
+            "kind" : "wall-reinforced",
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 20,
+          "y" : 14
+        }, {
+          "type" : "ContentSelection.FixedWall",
+          "data" : {
+            "kind" : "wall-reinforced",
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 26,
+          "y" : 0
+        }, {
+          "type" : "ContentSelection.FixedWall",
+          "data" : {
+            "kind" : "wall-reinforced",
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 23,
+          "y" : 14
+        }, {
+          "type" : "ContentSelection.FixedWall",
+          "data" : {
+            "kind" : "wall-reinforced",
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 29,
+          "y" : 14
+        }, {
+          "type" : "ContentSelection.FixedWall",
+          "data" : {
+            "kind" : "wall-reinforced",
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 24,
+          "y" : 14
+        }, {
+          "type" : "ContentSelection.FixedWall",
+          "data" : {
+            "kind" : "wall-reinforced",
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 27,
+          "y" : 14
+        }, {
+          "type" : "ContentSelection.FixedWall",
+          "data" : {
+            "kind" : "wall-reinforced",
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 28,
+          "y" : 0
+        }, {
+          "type" : "ContentSelection.FixedWall",
+          "data" : {
+            "kind" : "wall-reinforced",
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 30,
+          "y" : 11
+        }, {
+          "type" : "ContentSelection.FixedWall",
+          "data" : {
+            "kind" : "wall-reinforced",
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 30,
+          "y" : 10
+        }, {
+          "type" : "ContentSelection.FixedWall",
+          "data" : {
+            "kind" : "wall-reinforced",
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 30,
+          "y" : 12
+        }, {
+          "type" : "ContentSelection.FixedWall",
+          "data" : {
+            "kind" : "wall-reinforced",
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 30,
+          "y" : 13
+        }, {
+          "type" : "ContentSelection.FixedWall",
+          "data" : {
+            "kind" : "wall-reinforced",
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 30,
+          "y" : 5
+        }, {
+          "type" : "ContentSelection.FixedWall",
+          "data" : {
+            "kind" : "wall-reinforced",
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 30,
+          "y" : 2
+        }, {
+          "type" : "ContentSelection.FixedWall",
+          "data" : {
+            "kind" : "wall-reinforced",
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 30,
+          "y" : 3
+        }, {
+          "type" : "ContentSelection.FixedWall",
+          "data" : {
+            "kind" : "wall-reinforced",
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 30,
+          "y" : 9
+        }, {
+          "type" : "ContentSelection.FixedWall",
+          "data" : {
+            "kind" : "wall-reinforced",
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 30,
+          "y" : 4
+        }, {
+          "type" : "ContentSelection.FixedWall",
+          "data" : {
+            "kind" : "wall-reinforced",
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 30,
+          "y" : 1
+        }, {
+          "type" : "ContentSelection.FixedWall",
+          "data" : {
+            "kind" : "wall-reinforced",
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 30,
+          "y" : 0
+        }, {
+          "type" : "ContentSelection.FixedWall",
+          "data" : {
+            "kind" : "wall-reinforced",
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 30,
+          "y" : 14
+        }, {
+          "type" : "ContentSelection.FixedWall",
+          "data" : {
+            "kind" : "wall-reinforced",
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 8,
+          "y" : 11
+        }, {
+          "type" : "ContentSelection.FixedWall",
+          "data" : {
+            "kind" : "wall-reinforced",
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 22,
+          "y" : 1
+        }, {
+          "type" : "ContentSelection.FixedWall",
+          "data" : {
+            "kind" : "wall-reinforced",
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 22,
+          "y" : 11
+        }, {
+          "type" : "ContentSelection.FixedWall",
+          "data" : {
+            "kind" : "wall-reinforced",
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 22,
+          "y" : 2
+        }, {
+          "type" : "ContentSelection.FixedWall",
+          "data" : {
+            "kind" : "wall-reinforced",
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 22,
+          "y" : 12
+        }, {
+          "type" : "ContentSelection.FixedWall",
+          "data" : {
+            "kind" : "wall-reinforced",
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 8,
+          "y" : 10
+        }, {
+          "type" : "ContentSelection.FixedWall",
+          "data" : {
+            "kind" : "wall-reinforced",
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 8,
+          "y" : 4
+        }, {
+          "type" : "ContentSelection.FixedWall",
+          "data" : {
+            "kind" : "wall-reinforced",
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 8,
+          "y" : 13
+        }, {
+          "type" : "ContentSelection.FixedWall",
+          "data" : {
+            "kind" : "wall-reinforced",
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 8,
+          "y" : 2
+        }, {
+          "type" : "ContentSelection.FixedWall",
+          "data" : {
+            "kind" : "wall-reinforced",
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 22,
+          "y" : 13
+        }, {
+          "type" : "ContentSelection.FixedWall",
+          "data" : {
+            "kind" : "wall-reinforced",
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 8,
+          "y" : 5
+        }, {
+          "type" : "ContentSelection.FixedWall",
+          "data" : {
+            "kind" : "wall-reinforced",
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 8,
+          "y" : 9
+        }, {
+          "type" : "ContentSelection.FixedWall",
+          "data" : {
+            "kind" : "wall-reinforced",
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 22,
+          "y" : 4
+        }, {
+          "type" : "ContentSelection.FixedWall",
+          "data" : {
+            "kind" : "wall-reinforced",
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 22,
+          "y" : 10
+        }, {
+          "type" : "ContentSelection.FixedWall",
+          "data" : {
+            "kind" : "wall-reinforced",
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 22,
+          "y" : 3
+        }, {
+          "type" : "ContentSelection.FixedWall",
+          "data" : {
+            "kind" : "wall-reinforced",
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 22,
+          "y" : 9
+        }, {
+          "type" : "ContentSelection.FixedWall",
+          "data" : {
+            "kind" : "wall-reinforced",
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 22,
+          "y" : 5
+        }, {
+          "type" : "ContentSelection.FixedWall",
+          "data" : {
+            "kind" : "wall-reinforced",
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 8,
+          "y" : 1
+        }, {
+          "type" : "ContentSelection.FixedWall",
+          "data" : {
+            "kind" : "wall-reinforced",
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 8,
+          "y" : 3
+        }, {
+          "type" : "ContentSelection.FixedWall",
+          "data" : {
+            "kind" : "wall-reinforced",
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 8,
+          "y" : 12
+        }, {
+          "type" : "ContentSelection.FixedWall",
+          "data" : {
+            "kind" : "wall-reinforced",
             "tags" : [ ]
           }
         } ] ],
@@ -9369,13 +10183,19 @@
             "x" : 1,
             "y" : 1
           }, {
-            "x" : 18,
-            "y" : 1
-          }, {
-            "x" : 18,
+            "x" : 1,
             "y" : 13
           }, {
-            "x" : 1,
+            "x" : 15,
+            "y" : 11
+          }, {
+            "x" : 15,
+            "y" : 3
+          }, {
+            "x" : 29,
+            "y" : 1
+          }, {
+            "x" : 29,
             "y" : 13
           } ]
         }, {
@@ -9411,16 +10231,7 @@
             "tags" : [ "removable" ]
           }
         } ], [ {
-          "x" : 18,
-          "y" : 1
-        }, {
-          "type" : "ContentSelection.FixedWidget",
-          "data" : {
-            "kind" : "iridan/portal",
-            "tags" : [ "removable" ]
-          }
-        } ], [ {
-          "x" : 18,
+          "x" : 1,
           "y" : 13
         }, {
           "type" : "ContentSelection.FixedWidget",
@@ -9429,7 +10240,16 @@
             "tags" : [ "removable" ]
           }
         } ], [ {
-          "x" : 1,
+          "x" : 29,
+          "y" : 1
+        }, {
+          "type" : "ContentSelection.FixedWidget",
+          "data" : {
+            "kind" : "iridan/portal",
+            "tags" : [ "removable" ]
+          }
+        } ], [ {
+          "x" : 29,
           "y" : 13
         }, {
           "type" : "ContentSelection.FixedWidget",
@@ -9457,22 +10277,22 @@
             "tags" : [ ]
           }
         } ], [ {
-          "x" : 14,
-          "y" : 5
+          "x" : 15,
+          "y" : 11
         }, {
           "type" : "ContentSelection.FixedCreature",
           "data" : {
             "kind" : "iridan/turret",
-            "tags" : [ ]
+            "tags" : [ "removable" ]
           }
         } ], [ {
-          "x" : 14,
-          "y" : 9
+          "x" : 15,
+          "y" : 3
         }, {
           "type" : "ContentSelection.FixedCreature",
           "data" : {
             "kind" : "iridan/turret",
-            "tags" : [ ]
+            "tags" : [ "removable" ]
           }
         } ] ],
         "gatewayLocations" : [ ],
@@ -9490,9 +10310,9 @@
       "shape" : {
         "type" : "Rectangle",
         "data" : {
-          "width" : 6,
-          "height" : 6,
-          "variance" : 0.2
+          "width" : 5,
+          "height" : 5,
+          "variance" : 0
         }
       },
       "fill" : null,
@@ -9526,9 +10346,9 @@
       "shape" : {
         "type" : "Rectangle",
         "data" : {
-          "width" : 9,
-          "height" : 9,
-          "variance" : 0.35
+          "width" : 7,
+          "height" : 7,
+          "variance" : 0.3
         }
       },
       "fill" : null,
@@ -9645,7 +10465,7 @@
         "selection" : {
           "type" : "ContentSelection.FixedTemplate",
           "data" : {
-            "template" : "iridan/room-mine-assault"
+            "template" : "iridan/space-skyfarer-assault"
           }
         },
         "distribution" : {
@@ -9741,527 +10561,6 @@
       },
       "category" : null
     }
-  } ], [ "iridan/room-mine-assault", {
-    "type" : "FixedTemplate",
-    "data" : {
-      "shape" : {
-        "type" : "Rectangle",
-        "data" : {
-          "width" : 11,
-          "height" : 11,
-          "variance" : 0
-        }
-      },
-      "category" : null,
-      "power" : null,
-      "templates" : [ ],
-      "entrances" : [ [ {
-        "x" : 4,
-        "y" : 0
-      }, "generic/door-invisible" ] ],
-      "features" : [ ],
-      "content" : {
-        "conduitLocations" : [ [ {
-          "x" : 5,
-          "y" : 5
-        }, "primary" ] ],
-        "items" : [ ],
-        "restrictedLocations" : [ ],
-        "walls" : [ [ {
-          "x" : 7,
-          "y" : 0
-        }, {
-          "type" : "ContentSelection.FixedWall",
-          "data" : {
-            "kind" : "wall",
-            "tags" : [ ]
-          }
-        } ], [ {
-          "x" : 6,
-          "y" : 0
-        }, {
-          "type" : "ContentSelection.FixedWall",
-          "data" : {
-            "kind" : "wall",
-            "tags" : [ ]
-          }
-        } ], [ {
-          "x" : 0,
-          "y" : 6
-        }, {
-          "type" : "ContentSelection.FixedWall",
-          "data" : {
-            "kind" : "wall",
-            "tags" : [ ]
-          }
-        } ], [ {
-          "x" : 10,
-          "y" : 6
-        }, {
-          "type" : "ContentSelection.FixedWall",
-          "data" : {
-            "kind" : "wall",
-            "tags" : [ ]
-          }
-        } ], [ {
-          "x" : 3,
-          "y" : 10
-        }, {
-          "type" : "ContentSelection.FixedWall",
-          "data" : {
-            "kind" : "wall",
-            "tags" : [ ]
-          }
-        } ], [ {
-          "x" : 9,
-          "y" : 0
-        }, {
-          "type" : "ContentSelection.FixedWall",
-          "data" : {
-            "kind" : "wall",
-            "tags" : [ ]
-          }
-        } ], [ {
-          "x" : 0,
-          "y" : 1
-        }, {
-          "type" : "ContentSelection.FixedWall",
-          "data" : {
-            "kind" : "wall",
-            "tags" : [ ]
-          }
-        } ], [ {
-          "x" : 6,
-          "y" : 10
-        }, {
-          "type" : "ContentSelection.FixedWall",
-          "data" : {
-            "kind" : "wall",
-            "tags" : [ ]
-          }
-        } ], [ {
-          "x" : 10,
-          "y" : 2
-        }, {
-          "type" : "ContentSelection.FixedWall",
-          "data" : {
-            "kind" : "wall",
-            "tags" : [ ]
-          }
-        } ], [ {
-          "x" : 4,
-          "y" : 10
-        }, {
-          "type" : "ContentSelection.FixedWall",
-          "data" : {
-            "kind" : "wall",
-            "tags" : [ ]
-          }
-        } ], [ {
-          "x" : 8,
-          "y" : 0
-        }, {
-          "type" : "ContentSelection.FixedWall",
-          "data" : {
-            "kind" : "wall",
-            "tags" : [ ]
-          }
-        } ], [ {
-          "x" : 0,
-          "y" : 8
-        }, {
-          "type" : "ContentSelection.FixedWall",
-          "data" : {
-            "kind" : "wall",
-            "tags" : [ ]
-          }
-        } ], [ {
-          "x" : 3,
-          "y" : 0
-        }, {
-          "type" : "ContentSelection.FixedWall",
-          "data" : {
-            "kind" : "wall",
-            "tags" : [ ]
-          }
-        } ], [ {
-          "x" : 10,
-          "y" : 3
-        }, {
-          "type" : "ContentSelection.FixedWall",
-          "data" : {
-            "kind" : "wall",
-            "tags" : [ ]
-          }
-        } ], [ {
-          "x" : 0,
-          "y" : 7
-        }, {
-          "type" : "ContentSelection.FixedWall",
-          "data" : {
-            "kind" : "wall",
-            "tags" : [ ]
-          }
-        } ], [ {
-          "x" : 7,
-          "y" : 10
-        }, {
-          "type" : "ContentSelection.FixedWall",
-          "data" : {
-            "kind" : "wall",
-            "tags" : [ ]
-          }
-        } ], [ {
-          "x" : 0,
-          "y" : 0
-        }, {
-          "type" : "ContentSelection.FixedWall",
-          "data" : {
-            "kind" : "wall",
-            "tags" : [ ]
-          }
-        } ], [ {
-          "x" : 0,
-          "y" : 2
-        }, {
-          "type" : "ContentSelection.FixedWall",
-          "data" : {
-            "kind" : "wall",
-            "tags" : [ ]
-          }
-        } ], [ {
-          "x" : 8,
-          "y" : 10
-        }, {
-          "type" : "ContentSelection.FixedWall",
-          "data" : {
-            "kind" : "wall",
-            "tags" : [ ]
-          }
-        } ], [ {
-          "x" : 0,
-          "y" : 3
-        }, {
-          "type" : "ContentSelection.FixedWall",
-          "data" : {
-            "kind" : "wall",
-            "tags" : [ ]
-          }
-        } ], [ {
-          "x" : 10,
-          "y" : 0
-        }, {
-          "type" : "ContentSelection.FixedWall",
-          "data" : {
-            "kind" : "wall",
-            "tags" : [ ]
-          }
-        } ], [ {
-          "x" : 5,
-          "y" : 10
-        }, {
-          "type" : "ContentSelection.FixedWall",
-          "data" : {
-            "kind" : "wall",
-            "tags" : [ ]
-          }
-        } ], [ {
-          "x" : 1,
-          "y" : 10
-        }, {
-          "type" : "ContentSelection.FixedWall",
-          "data" : {
-            "kind" : "wall",
-            "tags" : [ ]
-          }
-        } ], [ {
-          "x" : 9,
-          "y" : 10
-        }, {
-          "type" : "ContentSelection.FixedWall",
-          "data" : {
-            "kind" : "wall",
-            "tags" : [ ]
-          }
-        } ], [ {
-          "x" : 0,
-          "y" : 4
-        }, {
-          "type" : "ContentSelection.FixedWall",
-          "data" : {
-            "kind" : "wall",
-            "tags" : [ ]
-          }
-        } ], [ {
-          "x" : 10,
-          "y" : 8
-        }, {
-          "type" : "ContentSelection.FixedWall",
-          "data" : {
-            "kind" : "wall",
-            "tags" : [ ]
-          }
-        } ], [ {
-          "x" : 10,
-          "y" : 5
-        }, {
-          "type" : "ContentSelection.FixedWall",
-          "data" : {
-            "kind" : "wall",
-            "tags" : [ ]
-          }
-        } ], [ {
-          "x" : 10,
-          "y" : 10
-        }, {
-          "type" : "ContentSelection.FixedWall",
-          "data" : {
-            "kind" : "wall",
-            "tags" : [ ]
-          }
-        } ], [ {
-          "x" : 10,
-          "y" : 9
-        }, {
-          "type" : "ContentSelection.FixedWall",
-          "data" : {
-            "kind" : "wall",
-            "tags" : [ ]
-          }
-        } ], [ {
-          "x" : 2,
-          "y" : 10
-        }, {
-          "type" : "ContentSelection.FixedWall",
-          "data" : {
-            "kind" : "wall",
-            "tags" : [ ]
-          }
-        } ], [ {
-          "x" : 0,
-          "y" : 5
-        }, {
-          "type" : "ContentSelection.FixedWall",
-          "data" : {
-            "kind" : "wall",
-            "tags" : [ ]
-          }
-        } ], [ {
-          "x" : 2,
-          "y" : 0
-        }, {
-          "type" : "ContentSelection.FixedWall",
-          "data" : {
-            "kind" : "wall",
-            "tags" : [ ]
-          }
-        } ], [ {
-          "x" : 10,
-          "y" : 7
-        }, {
-          "type" : "ContentSelection.FixedWall",
-          "data" : {
-            "kind" : "wall",
-            "tags" : [ ]
-          }
-        } ], [ {
-          "x" : 1,
-          "y" : 0
-        }, {
-          "type" : "ContentSelection.FixedWall",
-          "data" : {
-            "kind" : "wall",
-            "tags" : [ ]
-          }
-        } ], [ {
-          "x" : 10,
-          "y" : 4
-        }, {
-          "type" : "ContentSelection.FixedWall",
-          "data" : {
-            "kind" : "wall",
-            "tags" : [ ]
-          }
-        } ], [ {
-          "x" : 0,
-          "y" : 9
-        }, {
-          "type" : "ContentSelection.FixedWall",
-          "data" : {
-            "kind" : "wall",
-            "tags" : [ ]
-          }
-        } ], [ {
-          "x" : 10,
-          "y" : 1
-        }, {
-          "type" : "ContentSelection.FixedWall",
-          "data" : {
-            "kind" : "wall",
-            "tags" : [ ]
-          }
-        } ], [ {
-          "x" : 5,
-          "y" : 0
-        }, {
-          "type" : "ContentSelection.FixedWall",
-          "data" : {
-            "kind" : "wall",
-            "tags" : [ ]
-          }
-        } ], [ {
-          "x" : 0,
-          "y" : 10
-        }, {
-          "type" : "ContentSelection.FixedWall",
-          "data" : {
-            "kind" : "wall",
-            "tags" : [ ]
-          }
-        } ] ],
-        "machinery" : [ ],
-        "widgets" : [ ],
-        "creatures" : [ [ {
-          "x" : 4,
-          "y" : 5
-        }, {
-          "type" : "ContentSelection.FixedCreature",
-          "data" : {
-            "kind" : "skyfarer/clone",
-            "tags" : [ ]
-          }
-        } ], [ {
-          "x" : 6,
-          "y" : 6
-        }, {
-          "type" : "ContentSelection.FixedCreature",
-          "data" : {
-            "kind" : "skyfarer/clone",
-            "tags" : [ ]
-          }
-        } ], [ {
-          "x" : 4,
-          "y" : 4
-        }, {
-          "type" : "ContentSelection.FixedCreature",
-          "data" : {
-            "kind" : "skyfarer/clone",
-            "tags" : [ ]
-          }
-        } ], [ {
-          "x" : 7,
-          "y" : 5
-        }, {
-          "type" : "ContentSelection.FixedCreature",
-          "data" : {
-            "kind" : "skyfarer/clone",
-            "tags" : [ ]
-          }
-        } ], [ {
-          "x" : 7,
-          "y" : 6
-        }, {
-          "type" : "ContentSelection.FixedCreature",
-          "data" : {
-            "kind" : "skyfarer/clone",
-            "tags" : [ ]
-          }
-        } ], [ {
-          "x" : 5,
-          "y" : 5
-        }, {
-          "type" : "ContentSelection.FixedCreature",
-          "data" : {
-            "kind" : "skyfarer/clone",
-            "tags" : [ ]
-          }
-        } ], [ {
-          "x" : 6,
-          "y" : 4
-        }, {
-          "type" : "ContentSelection.FixedCreature",
-          "data" : {
-            "kind" : "skyfarer/clone",
-            "tags" : [ ]
-          }
-        } ], [ {
-          "x" : 4,
-          "y" : 6
-        }, {
-          "type" : "ContentSelection.FixedCreature",
-          "data" : {
-            "kind" : "skyfarer/clone",
-            "tags" : [ ]
-          }
-        } ], [ {
-          "x" : 3,
-          "y" : 5
-        }, {
-          "type" : "ContentSelection.FixedCreature",
-          "data" : {
-            "kind" : "skyfarer/clone",
-            "tags" : [ ]
-          }
-        } ], [ {
-          "x" : 3,
-          "y" : 6
-        }, {
-          "type" : "ContentSelection.FixedCreature",
-          "data" : {
-            "kind" : "skyfarer/clone",
-            "tags" : [ ]
-          }
-        } ], [ {
-          "x" : 3,
-          "y" : 4
-        }, {
-          "type" : "ContentSelection.FixedCreature",
-          "data" : {
-            "kind" : "skyfarer/clone",
-            "tags" : [ ]
-          }
-        } ], [ {
-          "x" : 6,
-          "y" : 5
-        }, {
-          "type" : "ContentSelection.FixedCreature",
-          "data" : {
-            "kind" : "skyfarer/clone",
-            "tags" : [ ]
-          }
-        } ], [ {
-          "x" : 5,
-          "y" : 4
-        }, {
-          "type" : "ContentSelection.FixedCreature",
-          "data" : {
-            "kind" : "skyfarer/clone",
-            "tags" : [ ]
-          }
-        } ], [ {
-          "x" : 5,
-          "y" : 6
-        }, {
-          "type" : "ContentSelection.FixedCreature",
-          "data" : {
-            "kind" : "skyfarer/clone",
-            "tags" : [ ]
-          }
-        } ], [ {
-          "x" : 7,
-          "y" : 4
-        }, {
-          "type" : "ContentSelection.FixedCreature",
-          "data" : {
-            "kind" : "skyfarer/clone",
-            "tags" : [ ]
-          }
-        } ] ],
-        "gatewayLocations" : [ ],
-        "terrains" : [ ]
-      },
-      "id" : "iridan/room-mine-assault"
-    }
   } ], [ "generic/hall-room", {
     "type" : "RandomizedTemplate",
     "data" : {
@@ -10272,8 +10571,8 @@
       "shape" : {
         "type" : "Rectangle",
         "data" : {
-          "width" : 20,
-          "height" : 20,
+          "width" : 18,
+          "height" : 18,
           "variance" : 0.2
         }
       },
@@ -10314,6 +10613,176 @@
         "door" : "generic/door-invisible"
       },
       "category" : null
+    }
+  } ], [ "iridan/space-skyfarer-assault", {
+    "type" : "FixedTemplate",
+    "data" : {
+      "shape" : {
+        "type" : "Rectangle",
+        "data" : {
+          "width" : 5,
+          "height" : 3,
+          "variance" : 0
+        }
+      },
+      "category" : null,
+      "power" : null,
+      "templates" : [ ],
+      "entrances" : [ [ {
+        "x" : 2,
+        "y" : 0
+      }, "generic/door-invisible" ] ],
+      "features" : [ ],
+      "content" : {
+        "conduitLocations" : [ [ {
+          "x" : 2,
+          "y" : 1
+        }, "primary" ] ],
+        "items" : [ ],
+        "restrictedLocations" : [ ],
+        "walls" : [ ],
+        "machinery" : [ ],
+        "widgets" : [ ],
+        "creatures" : [ [ {
+          "x" : 4,
+          "y" : 2
+        }, {
+          "type" : "ContentSelection.FixedCreature",
+          "data" : {
+            "kind" : "skyfarer/clone",
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 2,
+          "y" : 1
+        }, {
+          "type" : "ContentSelection.FixedCreature",
+          "data" : {
+            "kind" : "skyfarer/clone",
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 0,
+          "y" : 1
+        }, {
+          "type" : "ContentSelection.FixedCreature",
+          "data" : {
+            "kind" : "skyfarer/clone",
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 3,
+          "y" : 0
+        }, {
+          "type" : "ContentSelection.FixedCreature",
+          "data" : {
+            "kind" : "skyfarer/clone",
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 1,
+          "y" : 1
+        }, {
+          "type" : "ContentSelection.FixedCreature",
+          "data" : {
+            "kind" : "skyfarer/clone",
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 0,
+          "y" : 0
+        }, {
+          "type" : "ContentSelection.FixedCreature",
+          "data" : {
+            "kind" : "skyfarer/clone",
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 0,
+          "y" : 2
+        }, {
+          "type" : "ContentSelection.FixedCreature",
+          "data" : {
+            "kind" : "skyfarer/clone",
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 2,
+          "y" : 2
+        }, {
+          "type" : "ContentSelection.FixedCreature",
+          "data" : {
+            "kind" : "skyfarer/clone",
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 4,
+          "y" : 0
+        }, {
+          "type" : "ContentSelection.FixedCreature",
+          "data" : {
+            "kind" : "skyfarer/clone",
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 3,
+          "y" : 2
+        }, {
+          "type" : "ContentSelection.FixedCreature",
+          "data" : {
+            "kind" : "skyfarer/clone",
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 2,
+          "y" : 0
+        }, {
+          "type" : "ContentSelection.FixedCreature",
+          "data" : {
+            "kind" : "skyfarer/clone",
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 1,
+          "y" : 0
+        }, {
+          "type" : "ContentSelection.FixedCreature",
+          "data" : {
+            "kind" : "skyfarer/clone",
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 4,
+          "y" : 1
+        }, {
+          "type" : "ContentSelection.FixedCreature",
+          "data" : {
+            "kind" : "skyfarer/clone",
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 3,
+          "y" : 1
+        }, {
+          "type" : "ContentSelection.FixedCreature",
+          "data" : {
+            "kind" : "skyfarer/clone",
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 1,
+          "y" : 2
+        }, {
+          "type" : "ContentSelection.FixedCreature",
+          "data" : {
+            "kind" : "skyfarer/clone",
+            "tags" : [ ]
+          }
+        } ] ],
+        "gatewayLocations" : [ ],
+        "terrains" : [ ]
+      },
+      "id" : "iridan/space-skyfarer-assault"
     }
   } ], [ "generic/vault", {
     "type" : "FixedTemplate",
@@ -10862,6 +11331,87 @@
         "door" : null
       },
       "category" : null
+    }
+  } ], [ "generic/trap-room-ambush", {
+    "type" : "RandomizedTemplate",
+    "data" : {
+      "conduitLocations" : {
+        "min" : 2,
+        "max" : 2
+      },
+      "shape" : {
+        "type" : "Rectangle",
+        "data" : {
+          "width" : 7,
+          "height" : 7,
+          "variance" : 0.3
+        }
+      },
+      "fill" : null,
+      "border" : "wall",
+      "terrain" : null,
+      "templates" : [ ],
+      "id" : "generic/trap-room-ambush",
+      "features" : [ {
+        "type" : "TrapRoomFeature",
+        "data" : {
+          "bait" : {
+            "type" : "ContentSelection.ThemeEquipment",
+            "data" : {
+              "category" : [ ],
+              "power" : [ "CombatPower.High" ],
+              "tags" : [ ]
+            }
+          },
+          "trigger" : {
+            "type" : "ContentSelection.FixedWidget",
+            "data" : {
+              "kind" : "generic/pressure-plate-hidden",
+              "tags" : [ ]
+            }
+          },
+          "traps" : [ {
+            "selection" : {
+              "type" : "ContentSelection.ThemeWidget",
+              "data" : {
+                "category" : [ "WidgetKind.TrapCategory" ],
+                "power" : [ ],
+                "tags" : [ ]
+              }
+            },
+            "distribution" : {
+              "type" : "Distribution.Uniform",
+              "data" : {
+                "min" : 4,
+                "max" : 6
+              }
+            }
+          }, {
+            "selection" : {
+              "type" : "ContentSelection.ThemeWidget",
+              "data" : {
+                "category" : [ "WidgetKind.PortalCategory" ],
+                "power" : [ ],
+                "tags" : [ ]
+              }
+            },
+            "distribution" : {
+              "type" : "Distribution.Uniform",
+              "data" : {
+                "min" : 1,
+                "max" : 1
+              }
+            }
+          } ],
+          "description" : "You detect power surge in the floor."
+        }
+      } ],
+      "entrances" : {
+        "min" : 1,
+        "max" : 2,
+        "door" : null
+      },
+      "category" : "Template.TrapCategory"
     }
   } ] ],
   "themes" : [ [ "iridan/underground", {
