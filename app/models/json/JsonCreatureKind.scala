@@ -18,6 +18,7 @@ object JsonCreatureKind {
   lazy private implicit val factionIdFormat = JsonFaction.factionIdFormat
   lazy private implicit val itemKindIdFormat = JsonItemKind.itemKindIdFormat
   lazy private implicit val lockSourceFormat = JsonItemLock.lockSourceFormat
+  lazy private implicit val recipeIdFormat = JsonRecipe.recipeIdFormat
   lazy private implicit val slotFormat = JsonItemEquipment.slotFormat
 
   lazy implicit val creatureKindIdFormat: Format[CreatureKindId] = stringIdFormat(_.value, CreatureKindId.apply)

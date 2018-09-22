@@ -26,6 +26,10 @@ case class ConduitExitMutation(traveler: Traveler, location: Location) extends M
       r = CreatureKeysMutation(traveler.creature.id, traveler.keys)(r)
     }
 
+    if (traveler.recipes.nonEmpty) {
+      r = CreatureRecipesMutation(traveler.creature.id, traveler.recipes)(r)
+    }
+
     r
   }
 

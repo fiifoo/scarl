@@ -10,6 +10,7 @@ import io.github.fiifoo.scarl.core.entity._
 import io.github.fiifoo.scarl.core.geometry.{Location, Sector, WaypointNetwork}
 import io.github.fiifoo.scarl.core.item.Equipment.Slot
 import io.github.fiifoo.scarl.core.item.Key
+import io.github.fiifoo.scarl.core.item.Recipe.RecipeId
 import io.github.fiifoo.scarl.core.math.Rng
 import io.github.fiifoo.scarl.core.world.{ConduitId, Traveler}
 
@@ -67,6 +68,7 @@ case class State(area: State.Area = State.Area(),
                  index: State.Index = State.Index(),
                  keys: Map[CreatureId, Set[Key]] = Map(),
                  receivedCommunications: Map[CreatureId, Set[CommunicationId]] = Map(),
+                 recipes: Map[CreatureId, Set[RecipeId]] = Map(),
                  rng: Rng = Rng(1),
                  simulation: State.Simulation = State.Simulation(),
                  tactics: Map[CreatureId, Tactic] = Map(),

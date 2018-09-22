@@ -4,6 +4,8 @@ import io.github.fiifoo.scarl.core.creature.Faction
 import io.github.fiifoo.scarl.core.entity._
 import io.github.fiifoo.scarl.core.geometry.{Location, WaypointNetwork}
 import io.github.fiifoo.scarl.core.item.Equipment.Slot
+import io.github.fiifoo.scarl.core.item.Recipe
+import io.github.fiifoo.scarl.core.item.Recipe.RecipeId
 import io.github.fiifoo.scarl.core.kind.Kinds
 import io.github.fiifoo.scarl.game.area.AreaInfo
 import io.github.fiifoo.scarl.game.event.Event
@@ -21,6 +23,8 @@ case class GameStart(area: AreaInfo,
                      factions: Iterable[Faction],
                      inventory: Set[Item],
                      kinds: Kinds,
+                     playerRecipes: Set[RecipeId],
+                     recipes: Iterable[Recipe],
                      settings: Settings
                     ) extends OutMessage
 
@@ -36,5 +40,6 @@ case class AreaChange(area: AreaInfo) extends OutMessage
 case class PlayerSettings(settings: Settings) extends OutMessage
 
 case class PlayerInventory(inventory: Set[Item],
-                           equipments: Map[Slot, ItemId]
+                           equipments: Map[Slot, ItemId],
+                           playerRecipes: Set[RecipeId]
                           ) extends OutMessage

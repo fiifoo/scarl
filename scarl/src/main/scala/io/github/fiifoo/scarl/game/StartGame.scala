@@ -28,9 +28,11 @@ object StartGame {
     val message = GameStart(
       area = AreaInfo(state),
       equipments = state.instance.equipments.getOrElse(state.game.player, Map()),
-      factions = state.instance.assets.factions.values,
+      factions = state.game.world.assets.factions.values,
       inventory = getContainerItems(state.instance)(state.game.player) map (_ (state.instance)),
-      kinds = state.instance.assets.kinds,
+      kinds = state.game.world.assets.kinds,
+      playerRecipes = state.instance.recipes.getOrElse(state.game.player, Set()),
+      recipes = state.game.world.assets.recipes.values,
       settings = state.game.settings
     )
 

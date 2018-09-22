@@ -9,6 +9,7 @@ object Power {
   case class Resources(health: Int = 0,
                        energy: Int = 0,
                        materials: Int = 0,
+                       components: Int = 0,
                       )
 
 }

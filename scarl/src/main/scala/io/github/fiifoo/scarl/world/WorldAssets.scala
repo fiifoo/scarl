@@ -6,7 +6,8 @@ import io.github.fiifoo.scarl.area.{Area, AreaId}
 import io.github.fiifoo.scarl.core.assets.{Assets, CombatPower}
 import io.github.fiifoo.scarl.core.communication.{Communication, CommunicationId}
 import io.github.fiifoo.scarl.core.creature._
-import io.github.fiifoo.scarl.core.item.{KeyKind, KeyKindId}
+import io.github.fiifoo.scarl.core.item.Recipe.RecipeId
+import io.github.fiifoo.scarl.core.item.{KeyKind, KeyKindId, Recipe}
 import io.github.fiifoo.scarl.core.kind.Kinds
 
 case class WorldAssets(areas: Map[AreaId, Area] = Map(),
@@ -17,6 +18,7 @@ case class WorldAssets(areas: Map[AreaId, Area] = Map(),
                        keys: Map[KeyKindId, KeyKind] = Map(),
                        kinds: Kinds = Kinds(),
                        progressions: Map[ProgressionId, Progression] = Map(),
+                       recipes: Map[RecipeId, Recipe] = Map(),
                        templates: Map[TemplateId, Template] = Map(),
                        themes: Map[ThemeId, Theme] = Map(),
                       ) {
@@ -29,7 +31,8 @@ case class WorldAssets(areas: Map[AreaId, Area] = Map(),
       factions,
       keys,
       kinds,
-      progressions
+      progressions,
+      recipes
     )
   }
 }

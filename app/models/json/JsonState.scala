@@ -9,6 +9,7 @@ import io.github.fiifoo.scarl.core.entity.{CreatureId, IdSeq, ItemId}
 import io.github.fiifoo.scarl.core.geometry.Location
 import io.github.fiifoo.scarl.core.item.Equipment.Slot
 import io.github.fiifoo.scarl.core.item.Key
+import io.github.fiifoo.scarl.core.item.Recipe.RecipeId
 import io.github.fiifoo.scarl.core.math.Rng
 import io.github.fiifoo.scarl.core.world.ConduitId
 import play.api.libs.json._
@@ -36,6 +37,7 @@ object JsonState {
   lazy private implicit val locationFormat = Json.format[Location]
   lazy private implicit val machineryFormat = JsonMachinery.machineryFormat
   lazy private implicit val machineryIdFormat = JsonMachinery.machineryIdFormat
+  lazy private implicit val recipeIdFormat = JsonRecipe.recipeIdFormat
   lazy private implicit val slotFormat = JsonItemEquipment.slotFormat
   lazy private implicit val tacticFormat = JsonTactic.tacticFormat
 
@@ -49,6 +51,7 @@ object JsonState {
   lazy private implicit val idSeqFormat = Json.format[IdSeq]
   implicitly(mapFormat[CreatureId, Set[Key]])
   implicitly(mapFormat[CreatureId, Map[CreatureId, Set[CommunicationId]]])
+  implicitly(mapFormat[CreatureId, Set[RecipeId]])
   lazy private implicit val rngFormat = Json.format[Rng]
   implicitly(mapFormat[CreatureId, Tactic])
 

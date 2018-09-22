@@ -57,6 +57,7 @@ object Sources {
     )),
 
     ModelSource(typeOf[Progression], List("progressions")),
+    ModelSource(typeOf[Recipe], List("recipes")),
 
     ModelSource(typeOf[Template], List("templates"), List(
       typeOf[FixedTemplate],

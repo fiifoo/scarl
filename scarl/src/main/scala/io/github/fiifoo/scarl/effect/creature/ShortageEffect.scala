@@ -5,8 +5,9 @@ import io.github.fiifoo.scarl.core.effect.{Effect, EffectResult}
 import io.github.fiifoo.scarl.core.entity.CreatureId
 
 case class ShortageEffect(target: CreatureId,
-                          energy: Boolean,
-                          materials: Boolean,
+                          energy: Boolean = false,
+                          materials: Boolean = false,
+                          components: Boolean = false,
                           parent: Option[Effect] = None
                          ) extends Effect {
 

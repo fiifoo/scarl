@@ -126,6 +126,7 @@ case class Item(id: ItemId,
                 hidden: Boolean = false,
                 locked: Option[Lock] = None,
                 pickable: Boolean = false,
+                recyclable: Option[Int] = None,
 
                 armor: Option[Armor] = None,
                 door: Option[Door] = None,

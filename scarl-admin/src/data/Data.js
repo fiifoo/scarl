@@ -64,6 +64,7 @@ const Data = Record({
     keys: Map(),
     kinds: Kinds(),
     progressions: Map(),
+    recipes: Map(),
     templates: Map(),
     themes: Map(),
 })
@@ -75,6 +76,7 @@ Data.read = raw => Data({
     keys: readMap(raw.keys),
     kinds: Kinds.read(raw.kinds),
     progressions: readMap(raw.progressions),
+    recipes: readMap(raw.recipes),
     templates: readMap(raw.templates),
     themes: readMap(raw.themes),
 })
@@ -86,6 +88,7 @@ Data.write = data => ({
     keys: writeMap(data.keys),
     kinds: Kinds.write(data.kinds),
     progressions: writeMap(data.progressions),
+    recipes: writeMap(data.recipes),
     templates: writeMap(data.templates),
     themes: writeMap(data.themes),
 })

@@ -12,6 +12,7 @@ case class ChangeResourcesEffect(target: CreatureId,
                                  health: Int,
                                  energy: Int,
                                  materials: Int,
+                                 components: Int,
                                  parent: Option[Effect] = None
                                 ) extends Effect {
 
@@ -21,7 +22,8 @@ case class ChangeResourcesEffect(target: CreatureId,
 
     EffectResult(List(
       energyMutation(creature, stats),
-      materialsMutation(creature, stats)
+      materialsMutation(creature, stats),
+      componentsMutation(creature)
     ).flatten, List(
       healthEffect(s, creature)
     ).flatten)
@@ -48,6 +50,14 @@ case class ChangeResourcesEffect(target: CreatureId,
   private def materialsMutation(creature: Creature, stats: Stats): Option[Mutation] = {
     if (materials != 0) {
       Some(CreatureMaterialsMutation(target, (creature.resources.materials + materials) min stats.materials.max max 0))
+    } else {
+      None
+    }
+  }
+
+  private def componentsMutation(creature: Creature): Option[Mutation] = {
+    if (components != 0) {
+      Some(CreatureComponentsMutation(target, creature.resources.components + components))
     } else {
       None
     }

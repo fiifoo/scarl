@@ -15,6 +15,7 @@ object JsonAction {
   lazy private implicit val creatureIdFormat = JsonCreature.creatureIdFormat
   lazy private implicit val itemIdFormat = JsonItem.itemIdFormat
   lazy private implicit val locationReads = Json.reads[Location]
+  lazy private implicit val recipeIdFormat = JsonRecipe.recipeIdFormat
   lazy private implicit val slotFormat = JsonItemEquipment.slotFormat
 
   implicitly(mapFormat[Slot, ItemId])
@@ -27,6 +28,7 @@ object JsonAction {
       JsSuccess(CommunicateAction(target))
     }
   }
+  lazy private implicit val craftItemReads = Json.reads[CraftItemAction]
   lazy private implicit val displaceReads = Json.reads[DisplaceAction]
   lazy private implicit val dropItemReads = Json.reads[DropItemAction]
   lazy private implicit val enterConduitReads = Json.reads[EnterConduitAction]
@@ -36,6 +38,7 @@ object JsonAction {
   lazy private implicit val hackItemReads = Json.reads[HackItemAction]
   lazy private implicit val moveReads = Json.reads[MoveAction]
   lazy private implicit val pickItemReads = Json.reads[PickItemAction]
+  lazy private implicit val recycleItemReads = Json.reads[RecycleItemAction]
   lazy private implicit val shootReads = Json.reads[ShootAction]
   lazy private implicit val shootMissileReads = Json.reads[ShootMissileAction]
   lazy private implicit val unequipItemReads = Json.reads[UnequipItemAction]
@@ -46,6 +49,7 @@ object JsonAction {
   lazy val actionReads: Reads[Action] = polymorphicTypeReads(data => {
     case "Attack" => data.as[AttackAction]
     case "Communicate" => data.as[CommunicateAction]
+    case "CraftItem" => data.as[CraftItemAction]
     case "Displace" => data.as[DisplaceAction]
     case "DropItem" => data.as[DropItemAction]
     case "EnterConduit" => data.as[EnterConduitAction]
@@ -56,6 +60,7 @@ object JsonAction {
     case "Move" => data.as[MoveAction]
     case "Pass" => PassAction
     case "PickItem" => data.as[PickItemAction]
+    case "RecycleItem" => data.as[RecycleItemAction]
     case "Shoot" => data.as[ShootAction]
     case "ShootMissile" => data.as[ShootMissileAction]
     case "UnequipItem" => data.as[UnequipItemAction]

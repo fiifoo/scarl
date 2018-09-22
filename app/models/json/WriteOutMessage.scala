@@ -24,6 +24,8 @@ object WriteOutMessage {
   lazy private implicit val playerFovWrites = JsonPlayerFov.playerFovWrites
   lazy private implicit val playerInfoWrites = JsonPlayerInfo.playerInfoWrites
   lazy private implicit val playerSettingsFormat = JsonPlayerSettings.playerSettingsFormat
+  lazy private implicit val recipeIdFormat = JsonRecipe.recipeIdFormat
+  lazy private implicit val recipeFormat = JsonRecipe.recipeFormat
   lazy private implicit val slotFormat = JsonItemEquipment.slotFormat
   lazy private implicit val statisticsFormat = JsonStatistics.statisticsFormat
   lazy private implicit val waypointNetworkWrites = Json.writes[WaypointNetwork]

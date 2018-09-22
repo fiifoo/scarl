@@ -29,6 +29,7 @@ class AssetsRepository @Inject()(environment: Environment, simulationsRepository
       data.keys,
       data.kinds,
       data.progressions,
+      data.recipes,
       data.templates,
       data.themes
     )

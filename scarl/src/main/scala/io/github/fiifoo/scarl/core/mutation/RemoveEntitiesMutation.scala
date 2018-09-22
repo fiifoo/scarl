@@ -37,6 +37,7 @@ case class RemoveEntitiesMutation() extends Mutation {
       equipments = s.equipments -- creatures,
       index = mutateIndex(s, removable),
       keys = s.keys -- creatures,
+      recipes = s.recipes -- creatures,
       simulation = simulation,
       tactics = s.tactics -- creatures,
       tmp = s.tmp.copy(removableEntities = Set())

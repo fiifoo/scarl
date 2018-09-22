@@ -6,9 +6,10 @@ import io.github.fiifoo.scarl.core.creature.{Character, Events, FactionId, Missi
 import io.github.fiifoo.scarl.core.entity._
 import io.github.fiifoo.scarl.core.geometry.Location
 import io.github.fiifoo.scarl.core.item.Equipment.Slot
+import io.github.fiifoo.scarl.core.item.Recipe.RecipeId
 import io.github.fiifoo.scarl.core.item.{Equipment, Lock}
 import io.github.fiifoo.scarl.core.kind.Kind.{Options, Result}
-import io.github.fiifoo.scarl.core.mutation.{EquipItemMutation, IdSeqMutation, Mutation, NewEntityMutation}
+import io.github.fiifoo.scarl.core.mutation._
 import io.github.fiifoo.scarl.core.{Color, State}
 
 case class CreatureKind(id: CreatureKindId,
@@ -29,7 +30,8 @@ case class CreatureKind(id: CreatureKindId,
                         usable: Option[CreaturePower] = None,
 
                         equipments: Map[Slot, ItemKindId] = Map(),
-                        inventory: List[ItemKindId] = List(),
+                        inventory: Set[ItemKindId] = Set(),
+                        recipes: Set[RecipeId] = Set(),
 
                         greetings: Map[FactionId, List[CommunicationId]] = Map(),
                         responses: Map[FactionId, List[CommunicationId]] = Map()
@@ -67,11 +69,14 @@ case class CreatureKind(id: CreatureKindId,
 
     val (equipmentMutations, equipmentIdSeq) = processEquipments(s, creatureIdSeq, creatureId)
     val (inventoryMutations, nextIdSeq) = processInventory(s, equipmentIdSeq, creatureId)
+    val recipesMutations = if (recipes.nonEmpty) List(CreatureRecipesMutation(creatureId, recipes)) else List()
 
     Result(
-      mutations = List(IdSeqMutation(nextIdSeq), NewEntityMutation(creature)) :::
-        equipmentMutations :::
-        inventoryMutations,
+      mutations =
+        List(IdSeqMutation(nextIdSeq), NewEntityMutation(creature)) :::
+          equipmentMutations :::
+          inventoryMutations :::
+          recipesMutations,
       idSeq = nextIdSeq,
       entity = creature
     )

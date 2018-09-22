@@ -59,6 +59,7 @@ class EventBuilder(s: State, player: CreatureId, fov: Set[Location]) {
       case e: HitEffect => build(e)
       case e: HackedEffect => build(e) map GenericEvent
       case e: HackFailedEffect => build(e) map GenericEvent
+      case e: ItemCraftedEffect => build(e) map GenericEvent
       case e: LocalizedDescriptionEffect => build(e) map GenericEvent
       case e: LockedUsableEffect => build(e) map GenericEvent
       case e: MachineryActivatedEffect => build(e) map GenericEvent
@@ -67,6 +68,7 @@ class EventBuilder(s: State, player: CreatureId, fov: Set[Location]) {
       case e: PickItemEffect => build(e) map GenericEvent
       case e: PowerUsedEffect => build(e) map GenericEvent
       case e: ReceiveKeyEffect => build(e) map GenericEvent
+      case e: RecycleItemEffect => build(e) map GenericEvent
       case e: RemoveEntityEffect => build(e) map GenericEvent
       case e: ShootMissileEffect => build(e) map GenericEvent
       case e: ShortageEffect => build(e) map GenericEvent
@@ -392,6 +394,14 @@ class EventBuilder(s: State, player: CreatureId, fov: Set[Location]) {
     }
   }
 
+  private def build(effect: ItemCraftedEffect): Option[String] = {
+    if (effect.craftsman == player) {
+      Some(s"You craft ${kind(effect.item)}.")
+    } else {
+      None
+    }
+  }
+
   private def build(effect: LocalizedDescriptionEffect): Option[String] = {
     effect.description flatMap (description => {
       if (fov contains effect.location) {
@@ -483,6 +493,14 @@ class EventBuilder(s: State, player: CreatureId, fov: Set[Location]) {
     }
   }
 
+  private def build(effect: RecycleItemEffect): Option[String] = {
+    if (effect.recycler == player) {
+      Some(s"You recycle ${kind(effect.item)}.")
+    } else {
+      None
+    }
+  }
+
   private def build(effect: RemoveEntityEffect): Option[String] = {
     effect.description flatMap (description => effect.location flatMap (location => {
       if (fov contains location) {
@@ -517,6 +535,8 @@ class EventBuilder(s: State, player: CreatureId, fov: Set[Location]) {
         Some("Not enough energy.")
       } else if (effect.materials) {
         Some("Not enough materials.")
+      } else if (effect.components) {
+        Some("Not enough components.")
       } else {
         None
       }

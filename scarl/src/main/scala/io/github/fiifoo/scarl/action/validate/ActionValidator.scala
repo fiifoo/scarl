@@ -13,6 +13,7 @@ object ActionValidator {
     action match {
       case action: AttackAction => validate(s, actor, action)
       case action: CommunicateAction => validate(s, actor, action)
+      case action: CraftItemAction => validate(s, actor, action)
       case action: DisplaceAction => validate(s, actor, action)
       case action: DropItemAction => validate(s, actor, action)
       case action: EnterConduitAction => validate(s, actor, action)
@@ -23,6 +24,7 @@ object ActionValidator {
       case action: MoveAction => validate(s, actor, action)
       case PassAction => true
       case action: PickItemAction => validate(s, actor, action)
+      case action: RecycleItemAction => validate(s, actor, action)
       case _: ShootAction => true
       case _: ShootMissileAction => true
       case action: UnequipItemAction => validate(s, actor, action)
@@ -41,6 +43,10 @@ object ActionValidator {
   private def validate(s: State, actor: CreatureId, action: CommunicateAction): Boolean = {
     entityExists(s)(action.target) &&
       isAdjacentLocation(s, actor)(action.target(s).location)
+  }
+
+  private def validate(s: State, actor: CreatureId, action: CraftItemAction): Boolean = {
+    s.recipes.get(actor) exists (_.contains(action.recipe))
   }
 
   private def validate(s: State, actor: CreatureId, action: DisplaceAction): Boolean = {
@@ -82,6 +88,12 @@ object ActionValidator {
     entityExists(s)(action.item) &&
       action.item(s).pickable &&
       (getItemLocation(s)(action.item) contains actor(s).location)
+  }
+
+  private def validate(s: State, actor: CreatureId, action: RecycleItemAction): Boolean = {
+    entityExists(s)(action.target) &&
+      action.target(s).recyclable.isDefined &&
+      (action.target(s).container == actor || (getItemLocation(s)(action.target) contains actor(s).location))
   }
 
   private def validate(s: State, actor: CreatureId, action: UnequipItemAction): Boolean = {

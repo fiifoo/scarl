@@ -18,7 +18,14 @@ case class PowerUseEffect(user: CreatureId,
       val effects = power(s, target, Some(user))
 
       power.resources map (resources => {
-        val resourceEffect = ChangeResourcesEffect(user, resources.health, resources.energy, resources.materials, Some(this))
+        val resourceEffect = ChangeResourcesEffect(
+          user,
+          resources.health,
+          resources.energy,
+          resources.materials,
+          resources.components,
+          Some(this)
+        )
 
         EffectResult(usedEffect :: resourceEffect :: effects)
       }) getOrElse {
@@ -36,13 +43,15 @@ case class PowerUseEffect(user: CreatureId,
       val creature = user(s)
 
       if (-resources.energy > creature.resources.energy ||
-        -resources.materials > creature.resources.materials
+        -resources.materials > creature.resources.materials ||
+        -resources.components > creature.resources.components
       ) {
         Some(EffectResult(
           ShortageEffect(
             creature.id,
             -resources.energy > creature.resources.energy,
-            -resources.materials > creature.resources.materials
+            -resources.materials > creature.resources.materials,
+            -resources.components > creature.resources.components
           )
         ))
       } else {
