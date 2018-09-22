@@ -141,6 +141,8 @@ case class Item(id: ItemId,
                ) extends Entity with Usable with Taggable {
 
   def setLocked(locked: Option[Lock]): Item = copy(locked = locked)
+
+  def isLockedDoor: Boolean = this.door.exists(!_.open) && this.locked.isDefined
 }
 
 case class Machinery(id: MachineryId,

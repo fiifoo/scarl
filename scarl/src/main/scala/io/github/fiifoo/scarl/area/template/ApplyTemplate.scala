@@ -24,29 +24,13 @@ object ApplyTemplate {
       height = template.shape.outerHeight,
       width = template.shape.outerWidth
     ))
-    state = addLayout(state, template)
-    state = addWaypoints(state)
     state = addContent(state, template)
+    state = addWaypoints(state)
+    state = addCreatures(state, template) // must be after waypoints
     state = addConduits(state, template, in, out, random)
     state = addGateways(state, template)
 
     state
-  }
-
-  private def addLayout(initial: State,
-                        template: Template.Result,
-                        offset: Location = Location(0, 0)
-                       ): State = {
-    var state = initial
-
-    state = processUniqueEntities(state, template.content.terrains, offset)
-    state = processUniqueEntities(state, template.content.walls, offset)
-
-    template.templates.foldLeft(state)((s, data) => {
-      val (location, sub) = data
-
-      addLayout(s, sub, offset.add(location))
-    })
   }
 
   private def addContent(initial: State,
@@ -55,7 +39,8 @@ object ApplyTemplate {
                         ): State = {
     var state = initial
 
-    state = processUniqueEntities(state, template.content.creatures, offset)
+    state = processUniqueEntities(state, template.content.terrains, offset)
+    state = processUniqueEntities(state, template.content.walls, offset)
     state = processEntities(state, template.content.items, offset)
     state = processUniqueEntities(state, template.content.widgets, offset)
     state = (template.content.machinery foldLeft state) ((s, machinery) => machinery(s, offset))
@@ -64,6 +49,19 @@ object ApplyTemplate {
       val (location, sub) = data
 
       addContent(s, sub, offset.add(location))
+    })
+  }
+
+  private def addCreatures(initial: State,
+                           template: Template.Result,
+                           offset: Location = Location(0, 0)
+                          ): State = {
+    val state = processUniqueEntities(initial, template.content.creatures, offset)
+
+    template.templates.foldLeft(state)((s, data) => {
+      val (location, sub) = data
+
+      addCreatures(s, sub, offset.add(location))
     })
   }
 

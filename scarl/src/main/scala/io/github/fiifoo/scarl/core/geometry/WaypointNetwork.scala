@@ -1,8 +1,6 @@
 package io.github.fiifoo.scarl.core.geometry
 
 import io.github.fiifoo.scarl.core.State
-import io.github.fiifoo.scarl.core.entity.Selectors.getLocationEntities
-import io.github.fiifoo.scarl.core.entity.WallId
 import io.github.fiifoo.scarl.core.geometry.WaypointNetwork.Waypoint
 
 import scala.annotation.tailrec
@@ -30,7 +28,7 @@ object WaypointNetwork {
   }
 
   private def blocked(s: State): Location => Boolean = {
-    location => getLocationEntities(s)(location) exists (_.isInstanceOf[WallId])
+    Obstacle.has(Obstacle.travel(s))
   }
 
   private def calculateSector(s: State,
