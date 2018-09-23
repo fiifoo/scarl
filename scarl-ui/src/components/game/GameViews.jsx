@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import CraftingContainer from './CraftingContainer'
 import InventoryContainer from '../inventory/InventoryContainer'
 import GameOverContainer from './GameOverContainer'
 import KeyBindingsContainer from './KeyBindingsContainer'
@@ -46,6 +47,7 @@ class GameViews extends Component {
                     <React.Fragment>
                         <ScreenContainer size={size} />
 
+                        <CraftingContainer />
                         <GameOverContainer />
                         <InventoryContainer />
                         <KeyBindingsContainer />

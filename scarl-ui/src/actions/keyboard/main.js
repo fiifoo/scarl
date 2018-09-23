@@ -22,6 +22,10 @@ export default (command, dispatch, getState) => {
             gameActions.aimMissile()(dispatch, getState)
             break
         }
+        case commands.CRAFTING: {
+            gameActions.crafting()(dispatch)
+            break
+        }
         case commands.AUTO_MOVE: {
             gameActions.autoMove()(dispatch)
             break
@@ -68,6 +72,10 @@ export default (command, dispatch, getState) => {
         }
         case commands.PLAYER_INFO: {
             gameActions.playerInfo()(dispatch)
+            break
+        }
+        case commands.RECYCLE_ITEM: {
+            gameActions.interact(interactions.RecycleItem)(dispatch, getState)
             break
         }
         case commands.USE: {

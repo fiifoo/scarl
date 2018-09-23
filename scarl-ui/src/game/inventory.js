@@ -59,11 +59,21 @@ export const getItemActions = (actions, equipments, tab) => item => {
         execute: () => actions.dropItem(item.id),
     })
 
+    const recycleAction = item.recyclable ? (
+        Action({
+            label: 'Recycle',
+            execute: () => actions.recycleItem(item.id),
+        })
+    ) : null
+
+    const exists = x => x != null
+
     switch (tab.key) {
         case 'Other': {
             return List([
+                recycleAction,
                 dropAction,
-            ])
+            ]).filter(exists)
         }
         case 'Usable': {
             return List([
@@ -71,8 +81,9 @@ export const getItemActions = (actions, equipments, tab) => item => {
                     label: 'Use',
                     execute: () => actions.useItem(item.id),
                 }),
+                recycleAction,
                 dropAction,
-            ])
+            ]).filter(exists)
         }
         default: {
             const group = equipmentGroups[tab.key]
@@ -103,8 +114,9 @@ export const getItemActions = (actions, equipments, tab) => item => {
 
             return List([
                 equipAction,
+                recycleAction,
                 dropAction,
-            ])
+            ]).filter(exists)
         }
     }
 }

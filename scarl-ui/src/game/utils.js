@@ -94,6 +94,12 @@ export const getLocationPickableItems = (location, fov) => {
     return entities ? entities.items.filter(item => item.pickable) : []
 }
 
+export const getLocationRecyclableItems = (location, fov) => {
+    const entities = getLocationEntities(location, fov)
+
+    return entities ? entities.items.filter(item => item.recyclable) : []
+}
+
 export const getLocationDescriptions = (location, fov, map, kinds) => {
     const content = getLocationKinds(location, fov, map)
 

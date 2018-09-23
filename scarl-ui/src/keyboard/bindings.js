@@ -60,8 +60,10 @@ export default {
         [keycodes.LESS, commands.ENTER_CONDUIT],
         [keycodes.LESS2, commands.ENTER_CONDUIT],
         [keycodes.NUMPAD_5, commands.PASS],
+        [keycodes.PERIOD, commands.RECYCLE_ITEM],
         [keycodes.SPACEBAR, commands.AIM],
         [keycodes.A, commands.AUTO_MOVE],
+        [keycodes.C, commands.CRAFTING],
         [keycodes.I, commands.INVENTORY],
         [keycodes.K, commands.KEY_BINDINGS],
         [keycodes.L, commands.LOOK],
@@ -88,6 +90,23 @@ export default {
         [keycodes.A, commands.AUTO_EXPLORE],
     ]).merge(directions),
 
+    [gameModes.CRAFTING]: Map([
+        [keycodes.ESC, commands.CANCEL_MODE],
+        [keycodes.C, commands.CANCEL_MODE],
+
+        [keycodes.I, commands.INVENTORY],
+        [keycodes.P, commands.PLAYER_INFO],
+
+        [keycodes.ENTER, commands.CRAFTING_CRAFT],
+        [keycodes.SPACEBAR, commands.CRAFTING_CRAFT],
+
+        [keycodes.ARROW_UP, commands.CRAFTING_ROW_UP],
+        [keycodes.ARROW_DOWN, commands.CRAFTING_ROW_DOWN],
+
+        [keycodes.NUMPAD_2, commands.CRAFTING_ROW_DOWN],
+        [keycodes.NUMPAD_8, commands.CRAFTING_ROW_UP],
+    ]),
+
     [gameModes.GAME_OVER]: Map([
         [keycodes.ENTER, commands.SHOW_GAME_OVER_SCREEN],
         [keycodes.ESC, commands.SHOW_GAME_OVER_SCREEN],
@@ -112,6 +131,7 @@ export default {
         [keycodes.COMMA, commands.INTERACT_SELECT],
         [keycodes.LESS, commands.INTERACT_SELECT],
         [keycodes.LESS2, commands.INTERACT_SELECT],
+        [keycodes.PERIOD, commands.INTERACT_SELECT],
         [keycodes.T, commands.INTERACT_SELECT],
         [keycodes.U, commands.INTERACT_SELECT],
     ]),
@@ -120,6 +140,7 @@ export default {
         [keycodes.ESC, commands.CANCEL_MODE],
         [keycodes.I, commands.CANCEL_MODE],
 
+        [keycodes.C, commands.CRAFTING],
         [keycodes.P, commands.PLAYER_INFO],
 
         [keycodes.CONTROL, commands.INVENTORY_INTERACT],
@@ -160,6 +181,7 @@ export default {
         [keycodes.ESC, commands.CANCEL_MODE],
         [keycodes.P, commands.CANCEL_MODE],
 
+        [keycodes.C, commands.CRAFTING],
         [keycodes.I, commands.INVENTORY],
     ]).merge(setEquipmentSets),
 }

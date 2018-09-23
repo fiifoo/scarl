@@ -36,6 +36,6 @@ const StatusBar = ({equipmentSet, player}) => {
     )
 }
 
-const StatusBarIfSet = props => props.player ? <StatusBar {...props} /> : <div />
+const StatusBarIfSet = props => props.player.creature ? <StatusBar {...props} /> : <div />
 
 export default StatusBarIfSet

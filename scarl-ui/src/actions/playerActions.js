@@ -19,6 +19,11 @@ export const displace = target => () => {
     sendAction('Displace', {target})
 }
 
+export const craftItem = recipe => () => {
+    sendAction('CraftItem', {recipe})
+    sendInventoryQuery()
+}
+
 export const dropItem = item => () => {
     sendAction('DropItem', {item})
     sendInventoryQuery()
@@ -48,6 +53,11 @@ export const move = location => () => {
 
 export const pass = () => () => {
     sendAction('Pass')
+}
+
+export const recycleInventoryItem = item => () => {
+    sendAction('RecycleItem', {target: item})
+    sendInventoryQuery()
 }
 
 export const shoot = (location, missile = false) => (dispatch, getState) => {

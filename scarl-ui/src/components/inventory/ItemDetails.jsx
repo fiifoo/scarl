@@ -230,58 +230,25 @@ const EquipmentStats = ({equipments, inventory, item}) => {
     )
 }
 
-const ActionsDropdown = ({selected, actions, setAction}) =>  (
-    <div className="actions-dropdown">
-        <div
-            className="toggle"
-            onClick={() => setAction(selected === null ? 0 : null)}>
-            ▼
-        </div>
-        <div className={selected === null ? 'menu closed' : 'menu'}>
-            {actions.map((action, key) => (
-                <div
-                    key={key}
-                    className={key === selected ? 'active' : null}
-                    onClick={action.execute}>
-                    {action.label}
-                </div>
-            ))}
-        </div>
-    </div>
-)
+const ItemDetails = ({equipments, inventory, item, kinds}) => (
+    <Fragment>
+        <EquipmentStats
+            equipments={equipments}
+            inventory={inventory}
+            item={item} />
 
-const Details = ({action, actions, equipments, inventory, item, kinds, setAction}) => (
-    <div>
-        <h4>{kinds.items.get(item.kind).name}</h4>
-
-        {actions.isEmpty() ? null : (
-            <ActionsDropdown
-                selected={action}
-                actions={actions}
-                setAction={setAction} />
-        )}
-
-        <table className="scarl-table">
-
-            <EquipmentStats
+        {item.launcher && item.launcher.stats.launcher.missile ? (
+            <MissileStats
                 equipments={equipments}
                 inventory={inventory}
-                item={item} />
+                item={item}
+                kinds={kinds} />
+        ) : null}
 
-            {item.launcher && item.launcher.stats.launcher.missile ? (
-                <MissileStats
-                    equipments={equipments}
-                    inventory={inventory}
-                    item={item}
-                    kinds={kinds} />
-            ) : null}
-
-            {item.usable ? (
-                <UsableStats item={item} kinds={kinds} />
-            ) : null}
-
-        </table>
-    </div>
+        {item.usable ? (
+            <UsableStats item={item} kinds={kinds} />
+        ) : null}
+    </Fragment>
 )
 
-export default Details
+export default ItemDetails

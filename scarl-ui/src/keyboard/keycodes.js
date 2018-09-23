@@ -30,9 +30,11 @@ export const ENTER = 13
 export const ESC = 27
 export const LESS = 60
 export const LESS2 = 226
+export const PERIOD = 190
 export const SPACEBAR = 32
 
 export const A = 65
+export const C = 67
 export const D = 68
 export const E = 69
 export const I = 73

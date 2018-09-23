@@ -40,6 +40,11 @@ export const autoMove = () => dispatch => {
     changeMode(modes.AUTO_MOVE)(dispatch)
 }
 
+export const crafting = () => dispatch => {
+    sendInventoryQuery()
+    changeMode(modes.CRAFTING)(dispatch)
+}
+
 export const cancelMode = () => dispatch => changeMode(modes.MAIN)(dispatch)
 
 export const gameOverScreen = () => dispatch => {

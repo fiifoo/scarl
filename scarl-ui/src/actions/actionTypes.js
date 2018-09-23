@@ -36,6 +36,9 @@ export const SET_INVENTORY_TAB = 'SET_INVENTORY_TAB'
 export const SET_INVENTORY_ROW = 'SET_INVENTORY_ROW'
 export const SET_INVENTORY_ACTION = 'SET_INVENTORY_ACTION'
 
+// crafting
+export const SET_CRAFTING_ROW = 'SET_CRAFTING_ROW'
+
 // keyboard
 export const FOCUS_KEYBOARD = 'FOCUS_KEYBOARD'
 export const BLUR_KEYBOARD = 'BLUR_KEYBOARD'

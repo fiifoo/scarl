@@ -37,6 +37,7 @@ const getActions = (dispatch, getState) => {
 const composeActions = dispatch => ({
     dropItem: compose(dispatch, playerActions.dropItem),
     equipItem: compose(dispatch, playerActions.equipItem),
+    recycleItem: compose(dispatch, playerActions.recycleInventoryItem),
     unequipItem: compose(dispatch, playerActions.unequipItem),
     useItem: compose(dispatch, playerActions.useInventoryItem),
 })
@@ -109,6 +110,10 @@ const use = (dispatch, getState) => {
 
 const handleCommon = (command, dispatch, getState) => {
     switch (command) {
+        case commands.CRAFTING: {
+            gameActions.crafting()(dispatch)
+            break
+        }
         case commands.PLAYER_INFO: {
             gameActions.playerInfo()(dispatch)
             break

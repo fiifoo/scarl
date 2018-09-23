@@ -8,6 +8,10 @@ export default (command, dispatch) => {
             gameActions.cancelMode()(dispatch)
             break
         }
+        case commands.CRAFTING: {
+            gameActions.crafting()(dispatch)
+            break
+        }
         case commands.INVENTORY: {
             gameActions.inventory()(dispatch)
             break

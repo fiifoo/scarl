@@ -1,14 +1,55 @@
 import React from 'react'
 import { Nav, NavItem } from 'react-bootstrap'
 import { getItemActionsFlat, getTabItems, tabs } from '../../game/inventory'
-import Details from './Details.jsx'
 import Equipped from './Equipped.jsx'
+import ItemDetails from './ItemDetails.jsx'
 import List from './List.jsx'
 import QuickItems from './QuickItems.jsx'
 
 import './Inventory.css'
 
 const NoItems = () => <i style={{marginLeft: 20}}>No items</i>
+
+const ActionsDropdown = ({selected, actions, setAction}) =>  (
+    <div className="actions-dropdown">
+        <div
+            className="toggle"
+            onClick={() => setAction(selected === null ? 0 : null)}>
+            ▼
+        </div>
+        <div className={selected === null ? 'menu closed' : 'menu'}>
+            {actions.map((action, key) => (
+                <div
+                    key={key}
+                    className={key === selected ? 'active' : null}
+                    onClick={action.execute}>
+                    {action.label}
+                </div>
+            ))}
+        </div>
+    </div>
+)
+
+const Details = ({action, actions, equipments, inventory, item, kinds, setAction}) => (
+    <div>
+        <h4>{kinds.items.get(item.kind).name}</h4>
+
+        {actions.isEmpty() ? null : (
+            <ActionsDropdown
+                selected={action}
+                actions={actions}
+                setAction={setAction} />
+        )}
+
+        <table className="scarl-table">
+            <ItemDetails
+                equipments={equipments}
+                inventory={inventory}
+                item={item}
+                kinds={kinds} />
+        </table>
+    </div>
+)
 
 const Inventory = ({
     equipmentSet, equipments, inventory, kinds, quickItems, ui,

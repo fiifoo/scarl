@@ -14,6 +14,7 @@ const EnterConduit = 'EnterConduit'
 const HackCreature = 'HackCreature'
 const HackItem = 'HackItem'
 const PickItem = 'PickItem'
+const RecycleItem = 'RecycleItem'
 const UseCreature = 'UseCreature'
 const UseDoor = 'UseDoor'
 const UseItem = 'UseItem'
@@ -24,6 +25,7 @@ export const interactions = {
     HackCreature,
     HackItem,
     PickItem,
+    RecycleItem,
     UseCreature,
     UseDoor,
     UseItem,
@@ -48,6 +50,10 @@ const weights = Map({
     ],
     [PickItem]: [
         80,
+        null,
+    ],
+    [RecycleItem]: [
+        79,
         null,
     ],
     [UseCreature]: [
@@ -97,6 +103,12 @@ const extractors = Map({
             kind: item.kind,
         }))
     ),
+    [RecycleItem]: (location, fov) => (
+        List(utils.getLocationRecyclableItems(location, fov)).map(item => ({
+            data: {target: item.id},
+            kind: item.kind,
+        }))
+    ),
     [UseCreature]: (location, fov, keys) => (
         List(utils.getLocationUsableCreatures(location, fov, keys)).map(creature => ({
             data: {target: creature.id},
@@ -125,6 +137,7 @@ const descriptions = Map({
     [HackCreature]: (kinds, interaction) => `Hack ${kinds.creatures.get(interaction.kind).name}`,
     [HackItem]: (kinds, interaction) => `Hack ${kinds.items.get(interaction.kind).name}`,
     [PickItem]: (kinds, interaction) => `Pick up ${kinds.items.get(interaction.kind).name}`,
+    [RecycleItem]: (kinds, interaction) => `Recycle ${kinds.items.get(interaction.kind).name}`,
     [UseCreature]: (kinds, interaction) => `Use ${kinds.creatures.get(interaction.kind).name}`,
     [UseDoor]: () => 'Use door',
     [UseItem]: (kinds, interaction) => `Use ${kinds.items.get(interaction.kind).name}`,
