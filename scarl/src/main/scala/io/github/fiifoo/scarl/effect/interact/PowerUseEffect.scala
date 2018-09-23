@@ -35,9 +35,15 @@ case class PowerUseEffect(user: CreatureId,
     power.resources flatMap (resources => {
       val creature = user(s)
 
-      if (-resources.energy > creature.energy || -resources.materials > creature.materials) {
+      if (-resources.energy > creature.resources.energy ||
+        -resources.materials > creature.resources.materials
+      ) {
         Some(EffectResult(
-          ShortageEffect(creature.id, -resources.energy > creature.energy, -resources.materials > creature.materials)
+          ShortageEffect(
+            creature.id,
+            -resources.energy > creature.resources.energy,
+            -resources.materials > creature.resources.materials
+          )
         ))
       } else {
         None

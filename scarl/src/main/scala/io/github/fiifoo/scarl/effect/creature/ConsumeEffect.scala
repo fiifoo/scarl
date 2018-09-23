@@ -22,7 +22,7 @@ case class ConsumeEffect(target: CreatureId,
 
   private def energyMutation(creature: Creature): Option[Mutation] = {
     if (energy > 0) {
-      Some(CreatureEnergyMutation(target, (creature.energy - energy) max 0))
+      Some(CreatureEnergyMutation(target, (creature.resources.energy - energy) max 0))
     } else {
       None
     }
@@ -30,7 +30,7 @@ case class ConsumeEffect(target: CreatureId,
 
   private def materialsMutation(creature: Creature): Option[Mutation] = {
     if (materials > 0) {
-      Some(CreatureMaterialsMutation(target, (creature.materials - materials) max 0))
+      Some(CreatureMaterialsMutation(target, (creature.resources.materials - materials) max 0))
     } else {
       None
     }

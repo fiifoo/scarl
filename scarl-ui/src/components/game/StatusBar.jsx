@@ -17,8 +17,8 @@ const StatusBar = ({equipmentSet, player}) => {
     const materialsMax = creatureStats.materials.max + equipmentStats.materials.max
 
     const health = healthMax - Math.floor(creature.damage)
-    const energy = Math.floor(creature.energy)
-    const materials = Math.floor(creature.materials)
+    const energy = Math.floor(creature.resources.energy)
+    const materials = Math.floor(creature.resources.materials)
 
     const healthAlert = getAlert(health, healthMax)
     const energyAlert = getAlert(energy, energyMax)

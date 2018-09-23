@@ -3,7 +3,7 @@ package io.github.fiifoo.scarl.core.entity
 import io.github.fiifoo.scarl.core.Time.Tick
 import io.github.fiifoo.scarl.core.ai.Behavior
 import io.github.fiifoo.scarl.core.creature.Stats.Explosive
-import io.github.fiifoo.scarl.core.creature.{Character, Events, FactionId, Missile, Party, Stats}
+import io.github.fiifoo.scarl.core.creature._
 import io.github.fiifoo.scarl.core.effect.Effect
 import io.github.fiifoo.scarl.core.geometry.Location
 import io.github.fiifoo.scarl.core.item._
@@ -87,8 +87,7 @@ case class Creature(id: CreatureId,
                     location: Location,
                     tick: Tick,
                     damage: Double = 0,
-                    energy: Double = 0,
-                    materials: Double = 0,
+                    resources: Resources = Resources(),
                     stats: Stats,
                     dead: Boolean = false,
                     owner: Option[SafeCreatureId] = None,

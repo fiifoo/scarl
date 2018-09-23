@@ -7,8 +7,16 @@ import io.github.fiifoo.scarl.effect.creature.{ConsumeEffect, ShortageEffect}
 
 object Utils {
   def shortage(creature: Creature, consumption: Consumption): Option[Effect] = {
-    if (consumption.nonEmpty && (consumption.energy > creature.energy || consumption.materials > creature.materials)) {
-      Some(ShortageEffect(creature.id, consumption.energy > creature.energy, consumption.materials > creature.materials))
+    if (consumption.nonEmpty &&
+      (consumption.energy > creature.resources.energy ||
+        consumption.materials > creature.resources.materials
+        )
+    ) {
+      Some(ShortageEffect(
+        creature.id,
+        consumption.energy > creature.resources.energy,
+        consumption.materials > creature.resources.materials
+      ))
     } else {
       None
     }

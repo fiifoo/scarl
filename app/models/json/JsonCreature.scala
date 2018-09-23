@@ -1,5 +1,6 @@
 package models.json
 
+import io.github.fiifoo.scarl.core.creature.Resources
 import io.github.fiifoo.scarl.core.entity.{Creature, CreatureId, SafeCreatureId}
 import io.github.fiifoo.scarl.core.geometry.Location
 import play.api.libs.json._
@@ -15,6 +16,7 @@ object JsonCreature {
   lazy private implicit val creatureMissileFormat = JsonCreatureMissile.creatureMissileFormat
   lazy private implicit val creaturePartyFormat = JsonCreatureParty.creaturePartyFormat
   lazy private implicit val creaturePowerFormat = JsonPower.creaturePowerFormat
+  lazy private implicit val resourcesFormat = Json.format[Resources]
   lazy private implicit val creatureStatsFormat = JsonCreatureStats.creatureStatsFormat
   lazy private implicit val factionIdFormat = JsonFaction.factionIdFormat
   lazy private implicit val locationFormat = Json.format[Location]

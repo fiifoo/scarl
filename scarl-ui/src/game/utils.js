@@ -146,10 +146,10 @@ export const getShortage = (player, consumption) => {
     let energy = false
     let materials = false
 
-    if (consumption.energy > player.creature.energy) {
+    if (consumption.energy > player.creature.resources.energy) {
         energy = true
     }
-    if (consumption.materials > player.creature.materials) {
+    if (consumption.materials > player.creature.resources.materials) {
         materials = true
     }
     if (energy || materials) {

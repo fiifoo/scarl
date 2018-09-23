@@ -2,7 +2,7 @@ package io.github.fiifoo.scarl.core.kind
 
 import io.github.fiifoo.scarl.core.ai.Behavior
 import io.github.fiifoo.scarl.core.communication.CommunicationId
-import io.github.fiifoo.scarl.core.creature.{Character, Events, FactionId, Missile, Party, Stats}
+import io.github.fiifoo.scarl.core.creature.{Character, Events, FactionId, Missile, Party, Resources, Stats}
 import io.github.fiifoo.scarl.core.entity._
 import io.github.fiifoo.scarl.core.geometry.Location
 import io.github.fiifoo.scarl.core.item.Equipment.Slot
@@ -48,8 +48,10 @@ case class CreatureKind(id: CreatureKindId,
       behavior = behavior,
       location = location,
       tick = s.tick,
-      energy = stats.energy.max,
-      materials = stats.materials.max,
+      resources = Resources(
+        stats.energy.max,
+        stats.materials.max
+      ),
       stats = stats,
       owner = options.owner map SafeCreatureId.apply,
       tags = options.tags,

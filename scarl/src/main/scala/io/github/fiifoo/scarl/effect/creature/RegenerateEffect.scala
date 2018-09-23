@@ -35,7 +35,7 @@ case class RegenerateEffect(target: CreatureId,
 
   private def energyMutation(creature: Creature, stats: Stats): Option[Mutation] = {
     if (energy > 0) {
-      Some(CreatureEnergyMutation(target, (creature.energy + energy) min stats.energy.max))
+      Some(CreatureEnergyMutation(target, (creature.resources.energy + energy) min stats.energy.max))
     } else {
       None
     }
@@ -43,7 +43,7 @@ case class RegenerateEffect(target: CreatureId,
 
   private def materialsMutation(creature: Creature, stats: Stats): Option[Mutation] = {
     if (materials > 0) {
-      Some(CreatureMaterialsMutation(target, (creature.materials + materials) min stats.materials.max))
+      Some(CreatureMaterialsMutation(target, (creature.resources.materials + materials) min stats.materials.max))
     } else {
       None
     }
