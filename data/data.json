@@ -160,7 +160,7 @@
         "distribution" : {
           "type" : "Distribution.Binomial",
           "data" : {
-            "p" : 10,
+            "p" : 8,
             "n" : 2
           }
         }
@@ -289,13 +289,13 @@
       "subs" : [ ],
       "items" : [ {
         "value" : "skyfarer/drone",
-        "weight" : 100
+        "weight" : 200
       }, {
         "value" : "generic/fence-energy-open",
         "weight" : 100
       }, {
         "value" : "skyfarer/explosive-timed-antimatter",
-        "weight" : 100
+        "weight" : 150
       }, {
         "value" : "skyfarer/explosive-mine",
         "weight" : 100
@@ -312,7 +312,7 @@
         "value" : "iridan/deflector",
         "weight" : 100
       }, {
-        "value" : "nomad/launcher-missile-smart",
+        "value" : "scippe/weapon-shard-blast",
         "weight" : 100
       }, {
         "value" : "skyfarer/armor-body-heavy",
@@ -624,6 +624,7 @@
       "display" : "s",
       "color" : "blue",
       "equipments" : [ ],
+      "recipes" : [ ],
       "missile" : null,
       "immobile" : false,
       "character" : null,
@@ -709,7 +710,8 @@
     } ], [ "player", {
       "display" : "@",
       "color" : "yellow",
-      "equipments" : [ [ "Equipment.LauncherSlot", "nomad/launcher-missile" ], [ "Equipment.MainHand", "nomad/weapon-spear" ], [ "Equipment.RangedSlot", "nomad/weapon-laser-light" ], [ "Equipment.OffHand", "nomad/weapon-blade" ], [ "Equipment.BodyArmor", "nomad/armor-body" ], [ "Equipment.FootArmor", "nomad/armor-leg" ], [ "Equipment.HandArmor", "nomad/armor-hand" ], [ "Equipment.HeadArmor", "nomad/armor-head" ] ],
+      "equipments" : [ [ "Equipment.LauncherSlot", "nomad/launcher-missile" ], [ "Equipment.MainHand", "nomad/weapon-blade" ], [ "Equipment.RangedSlot", "nomad/weapon-laser-light" ], [ "Equipment.OffHand", "nomad/deflector" ], [ "Equipment.BodyArmor", "nomad/armor-body-envoy" ], [ "Equipment.FootArmor", "nomad/armor-leg-envoy" ], [ "Equipment.HandArmor", "nomad/armor-hand-envoy" ], [ "Equipment.HeadArmor", "nomad/armor-head-envoy" ] ],
+      "recipes" : [ "iridan/deflector-merged", "iridan/weapon-boser-merged", "nomad/armor-body-assault", "nomad/armor-body-infiltration", "nomad/armor-hand-assault", "nomad/armor-hand-infiltration", "nomad/armor-head-assault", "nomad/armor-head-infiltration", "nomad/armor-leg-assault", "nomad/armor-leg-infiltration", "nomad/launcher-missile-smart", "nomad/weapon-laser-heavy", "nomad/weapon-spear", "scippe/weapon-shard-blast-merged", "skyfarer/armor-body-heavy-merged", "skyfarer/armor-hand-melee-merged", "skyfarer/armor-head-ranged-merged", "skyfarer/armor-leg-heavy-merged", "skyfarer/weapon-smart-gun-merged", "skyfarer/weapon-whip-plasma-merged" ],
       "missile" : null,
       "immobile" : false,
       "character" : {
@@ -728,7 +730,7 @@
       "usable" : null,
       "greetings" : [ ],
       "id" : "player",
-      "inventory" : [ "nomad/deflector", "nomad/medkit", "nomad/deploy-explosive-mine", "nomad/deploy-explosive-timed" ],
+      "inventory" : [ "nomad/medkit", "nomad/deploy-explosive-mine", "nomad/deploy-explosive-timed", "nomad/weapon-blade" ],
       "faction" : "nomad",
       "stats" : {
         "launcher" : {
@@ -789,6 +791,7 @@
       "display" : "x",
       "color" : "white",
       "equipments" : [ ],
+      "recipes" : [ ],
       "missile" : {
         "guidance" : {
           "type" : "Missile.Smart",
@@ -869,6 +872,7 @@
       "display" : "?",
       "color" : "red",
       "equipments" : [ ],
+      "recipes" : [ ],
       "missile" : null,
       "immobile" : true,
       "character" : null,
@@ -955,6 +959,7 @@
       "display" : "x",
       "color" : "white",
       "equipments" : [ ],
+      "recipes" : [ ],
       "missile" : {
         "guidance" : null
       },
@@ -1032,6 +1037,7 @@
       "display" : "m",
       "color" : "green",
       "equipments" : [ ],
+      "recipes" : [ ],
       "missile" : null,
       "immobile" : false,
       "character" : null,
@@ -1117,6 +1123,7 @@
       "display" : "r",
       "color" : "white",
       "equipments" : [ ],
+      "recipes" : [ ],
       "missile" : null,
       "immobile" : false,
       "character" : null,
@@ -1192,6 +1199,7 @@
       "display" : "f",
       "color" : "white",
       "equipments" : [ ],
+      "recipes" : [ ],
       "missile" : null,
       "immobile" : false,
       "character" : null,
@@ -1268,6 +1276,7 @@
       "display" : "G",
       "color" : "white",
       "equipments" : [ ],
+      "recipes" : [ ],
       "missile" : null,
       "immobile" : false,
       "character" : null,
@@ -1344,6 +1353,7 @@
       "display" : "m",
       "color" : "red",
       "equipments" : [ ],
+      "recipes" : [ ],
       "missile" : null,
       "immobile" : false,
       "character" : null,
@@ -1430,6 +1440,7 @@
       "display" : "d",
       "color" : "yellow",
       "equipments" : [ ],
+      "recipes" : [ ],
       "missile" : null,
       "immobile" : false,
       "character" : null,
@@ -1474,8 +1485,8 @@
         "speed" : 50,
         "ranged" : {
           "attack" : 30,
-          "damage" : 30,
-          "range" : 5,
+          "damage" : 40,
+          "range" : 7,
           "consumption" : {
             "energy" : 0,
             "materials" : 0
@@ -1495,7 +1506,7 @@
         },
         "melee" : {
           "attack" : 30,
-          "damage" : 30,
+          "damage" : 40,
           "consumption" : {
             "energy" : 0,
             "materials" : 0
@@ -1515,6 +1526,7 @@
       "display" : "r",
       "color" : "blue",
       "equipments" : [ ],
+      "recipes" : [ ],
       "missile" : null,
       "immobile" : false,
       "character" : null,
@@ -1601,6 +1613,7 @@
       "display" : "T",
       "color" : "red",
       "equipments" : [ ],
+      "recipes" : [ ],
       "missile" : null,
       "immobile" : true,
       "character" : null,
@@ -1636,7 +1649,7 @@
               "value" : "generic/materials"
             },
             "createDescription" : null,
-            "probability" : 50
+            "probability" : 75
           }
         },
         "hit" : null
@@ -1704,6 +1717,7 @@
       "display" : "r",
       "color" : "purple",
       "equipments" : [ ],
+      "recipes" : [ ],
       "missile" : null,
       "immobile" : false,
       "character" : null,
@@ -1779,6 +1793,7 @@
       "display" : "m",
       "color" : "blue",
       "equipments" : [ ],
+      "recipes" : [ ],
       "missile" : null,
       "immobile" : false,
       "character" : null,
@@ -1865,6 +1880,7 @@
       "display" : "r",
       "color" : "green",
       "equipments" : [ ],
+      "recipes" : [ ],
       "missile" : null,
       "immobile" : false,
       "character" : null,
@@ -1951,6 +1967,7 @@
       "display" : "A",
       "color" : "red",
       "equipments" : [ ],
+      "recipes" : [ ],
       "missile" : null,
       "immobile" : false,
       "character" : null,
@@ -2026,6 +2043,7 @@
       "display" : "r",
       "color" : "red",
       "equipments" : [ ],
+      "recipes" : [ ],
       "missile" : null,
       "immobile" : false,
       "character" : null,
@@ -2176,6 +2194,7 @@
       "hidden" : false,
       "locked" : null,
       "name" : "Iridan boser",
+      "recyclable" : 1,
       "concealment" : 0,
       "trap" : null,
       "door" : null,
@@ -2186,7 +2205,7 @@
       "category" : null,
       "armor" : null,
       "key" : null
-    } ], [ "nomad/armor-leg", {
+    } ], [ "nomad/armor-leg-infiltration", {
       "launcher" : null,
       "display" : "]",
       "color" : "blue",
@@ -2196,13 +2215,14 @@
       "shield" : null,
       "hidden" : false,
       "locked" : null,
-      "name" : "Nomad leg enhancement",
+      "name" : "Nomad infiltration legs",
+      "recyclable" : 1,
       "concealment" : 0,
       "trap" : null,
       "door" : null,
       "usable" : null,
       "pickable" : true,
-      "id" : "nomad/armor-leg",
+      "id" : "nomad/armor-leg-infiltration",
       "weapon" : null,
       "category" : null,
       "armor" : {
@@ -2221,7 +2241,7 @@
             "radius" : 0,
             "blast" : 0
           },
-          "speed" : 20,
+          "speed" : 60,
           "ranged" : {
             "attack" : 0,
             "damage" : 0,
@@ -2232,14 +2252,14 @@
             }
           },
           "energy" : {
-            "max" : 0,
-            "regen" : 0
+            "max" : -20,
+            "regen" : -2
           },
           "materials" : {
             "max" : 0,
             "regen" : 0
           },
-          "defence" : 5,
+          "defence" : 10,
           "skill" : {
             "hacking" : 0
           },
@@ -2262,6 +2282,85 @@
           "armor" : 5
         },
         "slot" : "Equipment.FootArmor"
+      },
+      "key" : null
+    } ], [ "nomad/armor-body-assault", {
+      "launcher" : null,
+      "display" : "]",
+      "color" : "blue",
+      "rangedWeapon" : null,
+      "power" : null,
+      "explosive" : null,
+      "shield" : null,
+      "hidden" : false,
+      "locked" : null,
+      "name" : "Nomad assault armor",
+      "recyclable" : 1,
+      "concealment" : 0,
+      "trap" : null,
+      "door" : null,
+      "usable" : null,
+      "pickable" : true,
+      "id" : "nomad/armor-body-assault",
+      "weapon" : null,
+      "category" : null,
+      "armor" : {
+        "stats" : {
+          "launcher" : {
+            "missile" : null,
+            "range" : 0,
+            "consumption" : {
+              "energy" : 0,
+              "materials" : 0
+            }
+          },
+          "explosive" : {
+            "attack" : 0,
+            "damage" : 0,
+            "radius" : 0,
+            "blast" : 0
+          },
+          "speed" : -10,
+          "ranged" : {
+            "attack" : 0,
+            "damage" : 0,
+            "range" : 0,
+            "consumption" : {
+              "energy" : 0,
+              "materials" : 0
+            }
+          },
+          "energy" : {
+            "max" : 30,
+            "regen" : 3
+          },
+          "materials" : {
+            "max" : 0,
+            "regen" : 0
+          },
+          "defence" : 10,
+          "skill" : {
+            "hacking" : 0
+          },
+          "melee" : {
+            "attack" : 0,
+            "damage" : 0,
+            "consumption" : {
+              "energy" : 0,
+              "materials" : 0
+            }
+          },
+          "health" : {
+            "max" : 0,
+            "regen" : 0
+          },
+          "sight" : {
+            "range" : 0,
+            "sensors" : 0
+          },
+          "armor" : 15
+        },
+        "slot" : "Equipment.BodyArmor"
       },
       "key" : null
     } ], [ "iridan/door-secure-closed", {
@@ -2322,7 +2421,8 @@
           "resources" : {
             "health" : 0,
             "energy" : 0,
-            "materials" : -30
+            "materials" : -30,
+            "components" : 0
           },
           "kind" : {
             "type" : "WidgetKind",
@@ -2352,6 +2452,84 @@
       "id" : "iridan/conduit-stairs-up-labs",
       "weapon" : null,
       "armor" : null
+    } ], [ "skyfarer/weapon-smart-gun-merged", {
+      "launcher" : null,
+      "display" : "!",
+      "color" : "purple",
+      "rangedWeapon" : {
+        "stats" : {
+          "launcher" : {
+            "missile" : null,
+            "range" : 0,
+            "consumption" : {
+              "energy" : 0,
+              "materials" : 0
+            }
+          },
+          "explosive" : {
+            "attack" : 0,
+            "damage" : 0,
+            "radius" : 0,
+            "blast" : 0
+          },
+          "speed" : 0,
+          "ranged" : {
+            "attack" : 60,
+            "damage" : 50,
+            "range" : 7,
+            "consumption" : {
+              "energy" : 0,
+              "materials" : 0.5
+            }
+          },
+          "energy" : {
+            "max" : 0,
+            "regen" : 0
+          },
+          "materials" : {
+            "max" : 0,
+            "regen" : 0
+          },
+          "defence" : 0,
+          "skill" : {
+            "hacking" : 0
+          },
+          "melee" : {
+            "attack" : 0,
+            "damage" : 0,
+            "consumption" : {
+              "energy" : 0,
+              "materials" : 0
+            }
+          },
+          "health" : {
+            "max" : 0,
+            "regen" : 0
+          },
+          "sight" : {
+            "range" : 0,
+            "sensors" : 0
+          },
+          "armor" : 0
+        }
+      },
+      "power" : null,
+      "explosive" : null,
+      "shield" : null,
+      "hidden" : false,
+      "locked" : null,
+      "name" : "Skyfarer smart gun (merged)",
+      "recyclable" : 1,
+      "concealment" : 0,
+      "trap" : null,
+      "door" : null,
+      "usable" : null,
+      "pickable" : true,
+      "id" : "skyfarer/weapon-smart-gun-merged",
+      "weapon" : null,
+      "category" : null,
+      "armor" : null,
+      "key" : null
     } ], [ "old/healing-chamber", {
       "display" : "H",
       "color" : "white",
@@ -2366,6 +2544,85 @@
       "id" : "old/healing-chamber",
       "weapon" : null,
       "armor" : null
+    } ], [ "nomad/armor-hand-infiltration", {
+      "launcher" : null,
+      "display" : "]",
+      "color" : "blue",
+      "rangedWeapon" : null,
+      "power" : null,
+      "explosive" : null,
+      "shield" : null,
+      "hidden" : false,
+      "locked" : null,
+      "name" : "Nomad infiltration arms",
+      "recyclable" : 1,
+      "concealment" : 0,
+      "trap" : null,
+      "door" : null,
+      "usable" : null,
+      "pickable" : true,
+      "id" : "nomad/armor-hand-infiltration",
+      "weapon" : null,
+      "category" : null,
+      "armor" : {
+        "stats" : {
+          "launcher" : {
+            "missile" : null,
+            "range" : 0,
+            "consumption" : {
+              "energy" : 0,
+              "materials" : 0
+            }
+          },
+          "explosive" : {
+            "attack" : 0,
+            "damage" : 0,
+            "radius" : 0,
+            "blast" : 0
+          },
+          "speed" : 0,
+          "ranged" : {
+            "attack" : 10,
+            "damage" : 0,
+            "range" : 0,
+            "consumption" : {
+              "energy" : 0,
+              "materials" : 0
+            }
+          },
+          "energy" : {
+            "max" : 0,
+            "regen" : 0
+          },
+          "materials" : {
+            "max" : 0,
+            "regen" : 0
+          },
+          "defence" : 10,
+          "skill" : {
+            "hacking" : 20
+          },
+          "melee" : {
+            "attack" : 10,
+            "damage" : 0,
+            "consumption" : {
+              "energy" : 0,
+              "materials" : 0
+            }
+          },
+          "health" : {
+            "max" : 0,
+            "regen" : 0
+          },
+          "sight" : {
+            "range" : 0,
+            "sensors" : 0
+          },
+          "armor" : 5
+        },
+        "slot" : "Equipment.HandArmor"
+      },
+      "key" : null
     } ], [ "generic/trap-laser", {
       "display" : "^",
       "color" : "red",
@@ -2466,6 +2723,7 @@
       "hidden" : false,
       "locked" : null,
       "name" : "Nomad light laser",
+      "recyclable" : 1,
       "concealment" : 0,
       "trap" : null,
       "door" : null,
@@ -2475,6 +2733,85 @@
       "weapon" : null,
       "category" : null,
       "armor" : null,
+      "key" : null
+    } ], [ "skyfarer/armor-body-heavy-merged", {
+      "launcher" : null,
+      "display" : "]",
+      "color" : "blue",
+      "rangedWeapon" : null,
+      "power" : null,
+      "explosive" : null,
+      "shield" : null,
+      "hidden" : false,
+      "locked" : null,
+      "name" : "Skyfarer heavy armor (merged)",
+      "recyclable" : 1,
+      "concealment" : 0,
+      "trap" : null,
+      "door" : null,
+      "usable" : null,
+      "pickable" : true,
+      "id" : "skyfarer/armor-body-heavy-merged",
+      "weapon" : null,
+      "category" : null,
+      "armor" : {
+        "stats" : {
+          "launcher" : {
+            "missile" : null,
+            "range" : 0,
+            "consumption" : {
+              "energy" : 0,
+              "materials" : 0
+            }
+          },
+          "explosive" : {
+            "attack" : 0,
+            "damage" : 0,
+            "radius" : 0,
+            "blast" : 0
+          },
+          "speed" : 0,
+          "ranged" : {
+            "attack" : 0,
+            "damage" : 0,
+            "range" : 0,
+            "consumption" : {
+              "energy" : 0,
+              "materials" : 0
+            }
+          },
+          "energy" : {
+            "max" : 0,
+            "regen" : 0
+          },
+          "materials" : {
+            "max" : 0,
+            "regen" : 0
+          },
+          "defence" : 10,
+          "skill" : {
+            "hacking" : 0
+          },
+          "melee" : {
+            "attack" : 0,
+            "damage" : 0,
+            "consumption" : {
+              "energy" : 0,
+              "materials" : 0
+            }
+          },
+          "health" : {
+            "max" : 20,
+            "regen" : 0
+          },
+          "sight" : {
+            "range" : 0,
+            "sensors" : 0
+          },
+          "armor" : 15
+        },
+        "slot" : "Equipment.BodyArmor"
+      },
       "key" : null
     } ], [ "nomad/explosive-timed-active", {
       "display" : "¤",
@@ -2506,7 +2843,8 @@
           "resources" : {
             "health" : 0,
             "energy" : 0,
-            "materials" : 15
+            "materials" : 15,
+            "components" : 0
           },
           "removeDescription" : "Mine deactivates."
         }
@@ -2515,6 +2853,84 @@
       "id" : "nomad/explosive-timed-active",
       "weapon" : null,
       "armor" : null
+    } ], [ "iridan/deflector-merged", {
+      "launcher" : null,
+      "display" : "[",
+      "color" : "green",
+      "rangedWeapon" : null,
+      "power" : null,
+      "explosive" : null,
+      "shield" : {
+        "stats" : {
+          "launcher" : {
+            "missile" : null,
+            "range" : 0,
+            "consumption" : {
+              "energy" : 0,
+              "materials" : 0
+            }
+          },
+          "explosive" : {
+            "attack" : 0,
+            "damage" : 0,
+            "radius" : 0,
+            "blast" : 0
+          },
+          "speed" : 0,
+          "ranged" : {
+            "attack" : 0,
+            "damage" : 0,
+            "range" : 0,
+            "consumption" : {
+              "energy" : 0,
+              "materials" : 0
+            }
+          },
+          "energy" : {
+            "max" : 0,
+            "regen" : 0
+          },
+          "materials" : {
+            "max" : 0,
+            "regen" : 0
+          },
+          "defence" : 30,
+          "skill" : {
+            "hacking" : 0
+          },
+          "melee" : {
+            "attack" : 0,
+            "damage" : 0,
+            "consumption" : {
+              "energy" : 0,
+              "materials" : 0
+            }
+          },
+          "health" : {
+            "max" : 0,
+            "regen" : 0
+          },
+          "sight" : {
+            "range" : 0,
+            "sensors" : 0
+          },
+          "armor" : 0
+        }
+      },
+      "hidden" : false,
+      "locked" : null,
+      "name" : "Iridan deflector (merged)",
+      "recyclable" : 1,
+      "concealment" : 0,
+      "trap" : null,
+      "door" : null,
+      "usable" : null,
+      "pickable" : true,
+      "id" : "iridan/deflector-merged",
+      "weapon" : null,
+      "category" : null,
+      "armor" : null,
+      "key" : null
     } ], [ "skyfarer/explosive-timed-antimatter-active", {
       "display" : "¤",
       "color" : "yellow",
@@ -2563,36 +2979,9 @@
       "id" : "generic/door-invisible",
       "weapon" : null,
       "armor" : null
-    } ], [ "skyfarer/explosive-mine", {
-      "display" : "¤",
-      "color" : "white",
-      "rangedWeapon" : null,
-      "power" : 0,
-      "explosive" : null,
-      "shield" : null,
-      "hidden" : false,
-      "name" : "Skyfarer mine",
-      "concealment" : 0,
-      "door" : null,
-      "usable" : {
-        "type" : "TransformPower",
-        "data" : {
-          "transformTo" : {
-            "type" : "WidgetKind",
-            "data" : null,
-            "value" : "skyfarer/explosive-mine"
-          },
-          "transformDescription" : "Mine activates."
-        }
-      },
-      "pickable" : true,
-      "id" : "skyfarer/explosive-mine",
-      "weapon" : null,
-      "category" : "ItemKind.UtilityCategory",
-      "armor" : null
-    } ], [ "nomad/weapon-blade", {
+    } ], [ "nomad/armor-hand-envoy", {
       "launcher" : null,
-      "display" : "(",
+      "display" : "]",
       "color" : "blue",
       "rangedWeapon" : null,
       "power" : null,
@@ -2600,13 +2989,93 @@
       "shield" : null,
       "hidden" : false,
       "locked" : null,
-      "name" : "Nomad blade",
+      "name" : "Nomad envoy arms",
+      "recyclable" : 1,
       "concealment" : 0,
       "trap" : null,
       "door" : null,
       "usable" : null,
       "pickable" : true,
-      "id" : "nomad/weapon-blade",
+      "id" : "nomad/armor-hand-envoy",
+      "weapon" : null,
+      "category" : null,
+      "armor" : {
+        "stats" : {
+          "launcher" : {
+            "missile" : null,
+            "range" : 0,
+            "consumption" : {
+              "energy" : 0,
+              "materials" : 0
+            }
+          },
+          "explosive" : {
+            "attack" : 0,
+            "damage" : 0,
+            "radius" : 0,
+            "blast" : 0
+          },
+          "speed" : 0,
+          "ranged" : {
+            "attack" : 10,
+            "damage" : 0,
+            "range" : 0,
+            "consumption" : {
+              "energy" : 0,
+              "materials" : 0
+            }
+          },
+          "energy" : {
+            "max" : 0,
+            "regen" : 0
+          },
+          "materials" : {
+            "max" : 0,
+            "regen" : 0
+          },
+          "defence" : 5,
+          "skill" : {
+            "hacking" : 0
+          },
+          "melee" : {
+            "attack" : 10,
+            "damage" : 0,
+            "consumption" : {
+              "energy" : 0,
+              "materials" : 0
+            }
+          },
+          "health" : {
+            "max" : 0,
+            "regen" : 0
+          },
+          "sight" : {
+            "range" : 0,
+            "sensors" : 0
+          },
+          "armor" : 5
+        },
+        "slot" : "Equipment.HandArmor"
+      },
+      "key" : null
+    } ], [ "skyfarer/weapon-whip-plasma-merged", {
+      "launcher" : null,
+      "display" : "(",
+      "color" : "purple",
+      "rangedWeapon" : null,
+      "power" : null,
+      "explosive" : null,
+      "shield" : null,
+      "hidden" : false,
+      "locked" : null,
+      "name" : "Skyfarer plasma whip (merged)",
+      "recyclable" : 1,
+      "concealment" : 0,
+      "trap" : null,
+      "door" : null,
+      "usable" : null,
+      "pickable" : true,
+      "id" : "skyfarer/weapon-whip-plasma-merged",
       "weapon" : {
         "stats" : {
           "launcher" : {
@@ -2646,10 +3115,10 @@
             "hacking" : 0
           },
           "melee" : {
-            "attack" : 60,
-            "damage" : 30,
+            "attack" : 70,
+            "damage" : 50,
             "consumption" : {
-              "energy" : 0,
+              "energy" : 10,
               "materials" : 0
             }
           },
@@ -2668,7 +3137,34 @@
       "category" : null,
       "armor" : null,
       "key" : null
-    } ], [ "nomad/weapon-spear", {
+    } ], [ "skyfarer/explosive-mine", {
+      "display" : "¤",
+      "color" : "white",
+      "rangedWeapon" : null,
+      "power" : 0,
+      "explosive" : null,
+      "shield" : null,
+      "hidden" : false,
+      "name" : "Skyfarer mine",
+      "concealment" : 0,
+      "door" : null,
+      "usable" : {
+        "type" : "TransformPower",
+        "data" : {
+          "transformTo" : {
+            "type" : "WidgetKind",
+            "data" : null,
+            "value" : "skyfarer/explosive-mine"
+          },
+          "transformDescription" : "Mine activates."
+        }
+      },
+      "pickable" : true,
+      "id" : "skyfarer/explosive-mine",
+      "weapon" : null,
+      "category" : "ItemKind.UtilityCategory",
+      "armor" : null
+    } ], [ "nomad/weapon-blade", {
       "launcher" : null,
       "display" : "(",
       "color" : "blue",
@@ -2678,13 +3174,14 @@
       "shield" : null,
       "hidden" : false,
       "locked" : null,
-      "name" : "Nomad spear",
+      "name" : "Nomad blade",
+      "recyclable" : 1,
       "concealment" : 0,
       "trap" : null,
       "door" : null,
       "usable" : null,
       "pickable" : true,
-      "id" : "nomad/weapon-spear",
+      "id" : "nomad/weapon-blade",
       "weapon" : {
         "stats" : {
           "launcher" : {
@@ -2746,6 +3243,85 @@
       "category" : null,
       "armor" : null,
       "key" : null
+    } ], [ "nomad/weapon-spear", {
+      "launcher" : null,
+      "display" : "(",
+      "color" : "blue",
+      "rangedWeapon" : null,
+      "power" : null,
+      "explosive" : null,
+      "shield" : null,
+      "hidden" : false,
+      "locked" : null,
+      "name" : "Nomad spear",
+      "recyclable" : 1,
+      "concealment" : 0,
+      "trap" : null,
+      "door" : null,
+      "usable" : null,
+      "pickable" : true,
+      "id" : "nomad/weapon-spear",
+      "weapon" : {
+        "stats" : {
+          "launcher" : {
+            "missile" : null,
+            "range" : 0,
+            "consumption" : {
+              "energy" : 0,
+              "materials" : 0
+            }
+          },
+          "explosive" : {
+            "attack" : 0,
+            "damage" : 0,
+            "radius" : 0,
+            "blast" : 0
+          },
+          "speed" : 0,
+          "ranged" : {
+            "attack" : 0,
+            "damage" : 0,
+            "range" : 0,
+            "consumption" : {
+              "energy" : 0,
+              "materials" : 0
+            }
+          },
+          "energy" : {
+            "max" : 0,
+            "regen" : 0
+          },
+          "materials" : {
+            "max" : 0,
+            "regen" : 0
+          },
+          "defence" : 0,
+          "skill" : {
+            "hacking" : 0
+          },
+          "melee" : {
+            "attack" : 60,
+            "damage" : 50,
+            "consumption" : {
+              "energy" : 0,
+              "materials" : 0
+            }
+          },
+          "health" : {
+            "max" : 0,
+            "regen" : 0
+          },
+          "sight" : {
+            "range" : 0,
+            "sensors" : 0
+          },
+          "armor" : 0
+        },
+        "twoHanded" : false
+      },
+      "category" : null,
+      "armor" : null,
+      "key" : null
     } ], [ "iridan/conduit-stairs-down-mine", {
       "display" : ">",
       "color" : "white",
@@ -2781,7 +3357,8 @@
           "resources" : {
             "health" : 0,
             "energy" : 0,
-            "materials" : -15
+            "materials" : -15,
+            "components" : 0
           },
           "kind" : {
             "type" : "WidgetKind",
@@ -2796,6 +3373,85 @@
       "weapon" : null,
       "category" : null,
       "armor" : null,
+      "key" : null
+    } ], [ "skyfarer/armor-hand-melee-merged", {
+      "launcher" : null,
+      "display" : "]",
+      "color" : "blue",
+      "rangedWeapon" : null,
+      "power" : null,
+      "explosive" : null,
+      "shield" : null,
+      "hidden" : false,
+      "locked" : null,
+      "name" : "Skyfarer power gloves (merged)",
+      "recyclable" : 1,
+      "concealment" : 0,
+      "trap" : null,
+      "door" : null,
+      "usable" : null,
+      "pickable" : true,
+      "id" : "skyfarer/armor-hand-melee-merged",
+      "weapon" : null,
+      "category" : null,
+      "armor" : {
+        "stats" : {
+          "launcher" : {
+            "missile" : null,
+            "range" : 0,
+            "consumption" : {
+              "energy" : 0,
+              "materials" : 0
+            }
+          },
+          "explosive" : {
+            "attack" : 0,
+            "damage" : 0,
+            "radius" : 0,
+            "blast" : 0
+          },
+          "speed" : 0,
+          "ranged" : {
+            "attack" : 0,
+            "damage" : 0,
+            "range" : 0,
+            "consumption" : {
+              "energy" : 0,
+              "materials" : 0
+            }
+          },
+          "energy" : {
+            "max" : 0,
+            "regen" : 0
+          },
+          "materials" : {
+            "max" : 0,
+            "regen" : 0
+          },
+          "defence" : 5,
+          "skill" : {
+            "hacking" : 0
+          },
+          "melee" : {
+            "attack" : 20,
+            "damage" : 10,
+            "consumption" : {
+              "energy" : 0,
+              "materials" : 0
+            }
+          },
+          "health" : {
+            "max" : 0,
+            "regen" : 0
+          },
+          "sight" : {
+            "range" : 0,
+            "sensors" : 0
+          },
+          "armor" : 5
+        },
+        "slot" : "Equipment.HandArmor"
+      },
       "key" : null
     } ], [ "iridan/portal", {
       "display" : "O",
@@ -2822,6 +3478,85 @@
       "id" : "iridan/portal",
       "weapon" : null,
       "armor" : null
+    } ], [ "nomad/armor-leg-envoy", {
+      "launcher" : null,
+      "display" : "]",
+      "color" : "blue",
+      "rangedWeapon" : null,
+      "power" : null,
+      "explosive" : null,
+      "shield" : null,
+      "hidden" : false,
+      "locked" : null,
+      "name" : "Nomad envoy legs",
+      "recyclable" : 1,
+      "concealment" : 0,
+      "trap" : null,
+      "door" : null,
+      "usable" : null,
+      "pickable" : true,
+      "id" : "nomad/armor-leg-envoy",
+      "weapon" : null,
+      "category" : null,
+      "armor" : {
+        "stats" : {
+          "launcher" : {
+            "missile" : null,
+            "range" : 0,
+            "consumption" : {
+              "energy" : 0,
+              "materials" : 0
+            }
+          },
+          "explosive" : {
+            "attack" : 0,
+            "damage" : 0,
+            "radius" : 0,
+            "blast" : 0
+          },
+          "speed" : 20,
+          "ranged" : {
+            "attack" : 0,
+            "damage" : 0,
+            "range" : 0,
+            "consumption" : {
+              "energy" : 0,
+              "materials" : 0
+            }
+          },
+          "energy" : {
+            "max" : 0,
+            "regen" : 0
+          },
+          "materials" : {
+            "max" : 0,
+            "regen" : 0
+          },
+          "defence" : 5,
+          "skill" : {
+            "hacking" : 0
+          },
+          "melee" : {
+            "attack" : 0,
+            "damage" : 0,
+            "consumption" : {
+              "energy" : 0,
+              "materials" : 0
+            }
+          },
+          "health" : {
+            "max" : 0,
+            "regen" : 0
+          },
+          "sight" : {
+            "range" : 0,
+            "sensors" : 0
+          },
+          "armor" : 5
+        },
+        "slot" : "Equipment.FootArmor"
+      },
+      "key" : null
     } ], [ "nomad/medkit", {
       "launcher" : null,
       "display" : "\"",
@@ -2843,7 +3578,8 @@
           "resources" : {
             "health" : 30,
             "energy" : -30,
-            "materials" : -30
+            "materials" : -30,
+            "components" : 0
           }
         }
       },
@@ -2915,6 +3651,85 @@
       "key" : {
         "kind" : "iridan/access-codes"
       }
+    } ], [ "skyfarer/armor-leg-heavy-merged", {
+      "launcher" : null,
+      "display" : "]",
+      "color" : "blue",
+      "rangedWeapon" : null,
+      "power" : null,
+      "explosive" : null,
+      "shield" : null,
+      "hidden" : false,
+      "locked" : null,
+      "name" : "Skyfarer leg plating (merged)",
+      "recyclable" : 1,
+      "concealment" : 0,
+      "trap" : null,
+      "door" : null,
+      "usable" : null,
+      "pickable" : true,
+      "id" : "skyfarer/armor-leg-heavy-merged",
+      "weapon" : null,
+      "category" : null,
+      "armor" : {
+        "stats" : {
+          "launcher" : {
+            "missile" : null,
+            "range" : 0,
+            "consumption" : {
+              "energy" : 0,
+              "materials" : 0
+            }
+          },
+          "explosive" : {
+            "attack" : 0,
+            "damage" : 0,
+            "radius" : 0,
+            "blast" : 0
+          },
+          "speed" : 20,
+          "ranged" : {
+            "attack" : 0,
+            "damage" : 0,
+            "range" : 0,
+            "consumption" : {
+              "energy" : 0,
+              "materials" : 0
+            }
+          },
+          "energy" : {
+            "max" : -10,
+            "regen" : -1
+          },
+          "materials" : {
+            "max" : 0,
+            "regen" : 0
+          },
+          "defence" : 5,
+          "skill" : {
+            "hacking" : 0
+          },
+          "melee" : {
+            "attack" : 0,
+            "damage" : 0,
+            "consumption" : {
+              "energy" : 0,
+              "materials" : 0
+            }
+          },
+          "health" : {
+            "max" : 0,
+            "regen" : 0
+          },
+          "sight" : {
+            "range" : 0,
+            "sensors" : 0
+          },
+          "armor" : 10
+        },
+        "slot" : "Equipment.FootArmor"
+      },
+      "key" : null
     } ], [ "iridan/conduit-assault-pod-labs", {
       "display" : ">",
       "color" : "white",
@@ -3007,7 +3822,19 @@
       "concealment" : 0,
       "trap" : null,
       "door" : null,
-      "usable" : null,
+      "usable" : {
+        "type" : "RemoveItemPower",
+        "data" : {
+          "description" : "You disassemble device for components",
+          "resources" : {
+            "health" : 0,
+            "energy" : 0,
+            "materials" : 0,
+            "components" : 1
+          },
+          "removeDescription" : null
+        }
+      },
       "pickable" : false,
       "id" : "generic/decoration-measurement-device",
       "weapon" : null,
@@ -3041,6 +3868,85 @@
       "weapon" : null,
       "category" : "ItemKind.UtilityCategory",
       "armor" : null
+    } ], [ "nomad/armor-hand-assault", {
+      "launcher" : null,
+      "display" : "]",
+      "color" : "blue",
+      "rangedWeapon" : null,
+      "power" : null,
+      "explosive" : null,
+      "shield" : null,
+      "hidden" : false,
+      "locked" : null,
+      "name" : "Nomad assault arms",
+      "recyclable" : 1,
+      "concealment" : 0,
+      "trap" : null,
+      "door" : null,
+      "usable" : null,
+      "pickable" : true,
+      "id" : "nomad/armor-hand-assault",
+      "weapon" : null,
+      "category" : null,
+      "armor" : {
+        "stats" : {
+          "launcher" : {
+            "missile" : null,
+            "range" : 0,
+            "consumption" : {
+              "energy" : 0,
+              "materials" : 0
+            }
+          },
+          "explosive" : {
+            "attack" : 0,
+            "damage" : 0,
+            "radius" : 0,
+            "blast" : 0
+          },
+          "speed" : 0,
+          "ranged" : {
+            "attack" : 15,
+            "damage" : 0,
+            "range" : 0,
+            "consumption" : {
+              "energy" : 0,
+              "materials" : 0
+            }
+          },
+          "energy" : {
+            "max" : 0,
+            "regen" : 0
+          },
+          "materials" : {
+            "max" : 0,
+            "regen" : 0
+          },
+          "defence" : 5,
+          "skill" : {
+            "hacking" : 0
+          },
+          "melee" : {
+            "attack" : 15,
+            "damage" : 0,
+            "consumption" : {
+              "energy" : 0,
+              "materials" : 0
+            }
+          },
+          "health" : {
+            "max" : 0,
+            "regen" : 0
+          },
+          "sight" : {
+            "range" : 0,
+            "sensors" : 0
+          },
+          "armor" : 7
+        },
+        "slot" : "Equipment.HandArmor"
+      },
+      "key" : null
     } ], [ "skyfarer/armor-leg-heavy", {
       "launcher" : null,
       "display" : "]",
@@ -3052,6 +3958,7 @@
       "hidden" : false,
       "locked" : null,
       "name" : "Skyfarer leg plating",
+      "recyclable" : 1,
       "concealment" : 0,
       "trap" : null,
       "door" : null,
@@ -3133,7 +4040,7 @@
       "id" : "iridan/conduit-stairs-up-coms",
       "weapon" : null,
       "armor" : null
-    } ], [ "nomad/armor-head", {
+    } ], [ "nomad/armor-leg-assault", {
       "launcher" : null,
       "display" : "]",
       "color" : "blue",
@@ -3143,13 +4050,93 @@
       "shield" : null,
       "hidden" : false,
       "locked" : null,
-      "name" : "Nomad visor",
+      "name" : "Nomad assault legs",
+      "recyclable" : 1,
       "concealment" : 0,
       "trap" : null,
       "door" : null,
       "usable" : null,
       "pickable" : true,
-      "id" : "nomad/armor-head",
+      "id" : "nomad/armor-leg-assault",
+      "weapon" : null,
+      "category" : null,
+      "armor" : {
+        "stats" : {
+          "launcher" : {
+            "missile" : null,
+            "range" : 0,
+            "consumption" : {
+              "energy" : 0,
+              "materials" : 0
+            }
+          },
+          "explosive" : {
+            "attack" : 0,
+            "damage" : 0,
+            "radius" : 0,
+            "blast" : 0
+          },
+          "speed" : 30,
+          "ranged" : {
+            "attack" : 0,
+            "damage" : 0,
+            "range" : 0,
+            "consumption" : {
+              "energy" : 0,
+              "materials" : 0
+            }
+          },
+          "energy" : {
+            "max" : 0,
+            "regen" : 0
+          },
+          "materials" : {
+            "max" : 0,
+            "regen" : 0
+          },
+          "defence" : 5,
+          "skill" : {
+            "hacking" : 0
+          },
+          "melee" : {
+            "attack" : 0,
+            "damage" : 0,
+            "consumption" : {
+              "energy" : 0,
+              "materials" : 0
+            }
+          },
+          "health" : {
+            "max" : 0,
+            "regen" : 0
+          },
+          "sight" : {
+            "range" : 0,
+            "sensors" : 0
+          },
+          "armor" : 7
+        },
+        "slot" : "Equipment.FootArmor"
+      },
+      "key" : null
+    } ], [ "nomad/armor-body-infiltration", {
+      "launcher" : null,
+      "display" : "]",
+      "color" : "blue",
+      "rangedWeapon" : null,
+      "power" : null,
+      "explosive" : null,
+      "shield" : null,
+      "hidden" : false,
+      "locked" : null,
+      "name" : "Nomad infiltration armor",
+      "recyclable" : 1,
+      "concealment" : 0,
+      "trap" : null,
+      "door" : null,
+      "usable" : null,
+      "pickable" : true,
+      "id" : "nomad/armor-body-infiltration",
       "weapon" : null,
       "category" : null,
       "armor" : {
@@ -3179,14 +4166,14 @@
             }
           },
           "energy" : {
-            "max" : 0,
-            "regen" : 0
+            "max" : 50,
+            "regen" : 5
           },
           "materials" : {
             "max" : 0,
             "regen" : 0
           },
-          "defence" : 10,
+          "defence" : 15,
           "skill" : {
             "hacking" : 0
           },
@@ -3206,9 +4193,9 @@
             "range" : 0,
             "sensors" : 0
           },
-          "armor" : 10
+          "armor" : 8
         },
-        "slot" : "Equipment.HeadArmor"
+        "slot" : "Equipment.BodyArmor"
       },
       "key" : null
     } ], [ "old/healing-chamber-active", {
@@ -3236,6 +4223,7 @@
       "hidden" : false,
       "locked" : null,
       "name" : "Skyfarer power gloves",
+      "recyclable" : 1,
       "concealment" : 0,
       "trap" : null,
       "door" : null,
@@ -3301,84 +4289,6 @@
           "armor" : 5
         },
         "slot" : "Equipment.HandArmor"
-      },
-      "key" : null
-    } ], [ "nomad/armor-body", {
-      "launcher" : null,
-      "display" : "]",
-      "color" : "blue",
-      "rangedWeapon" : null,
-      "power" : null,
-      "explosive" : null,
-      "shield" : null,
-      "hidden" : false,
-      "locked" : null,
-      "name" : "Nomad body armor",
-      "concealment" : 0,
-      "trap" : null,
-      "door" : null,
-      "usable" : null,
-      "pickable" : true,
-      "id" : "nomad/armor-body",
-      "weapon" : null,
-      "category" : null,
-      "armor" : {
-        "stats" : {
-          "launcher" : {
-            "missile" : null,
-            "range" : 0,
-            "consumption" : {
-              "energy" : 0,
-              "materials" : 0
-            }
-          },
-          "explosive" : {
-            "attack" : 0,
-            "damage" : 0,
-            "radius" : 0,
-            "blast" : 0
-          },
-          "speed" : 0,
-          "ranged" : {
-            "attack" : 0,
-            "damage" : 0,
-            "range" : 0,
-            "consumption" : {
-              "energy" : 0,
-              "materials" : 0
-            }
-          },
-          "energy" : {
-            "max" : 0,
-            "regen" : 0
-          },
-          "materials" : {
-            "max" : 0,
-            "regen" : 0
-          },
-          "defence" : 10,
-          "skill" : {
-            "hacking" : 0
-          },
-          "melee" : {
-            "attack" : 0,
-            "damage" : 0,
-            "consumption" : {
-              "energy" : 0,
-              "materials" : 0
-            }
-          },
-          "health" : {
-            "max" : 0,
-            "regen" : 0
-          },
-          "sight" : {
-            "range" : 0,
-            "sensors" : 0
-          },
-          "armor" : 10
-        },
-        "slot" : "Equipment.BodyArmor"
       },
       "key" : null
     } ], [ "generic/pressure-plate-hidden", {
@@ -3485,6 +4395,7 @@
       "hidden" : false,
       "locked" : null,
       "name" : "Nomad deflector",
+      "recyclable" : 1,
       "concealment" : 0,
       "trap" : null,
       "door" : null,
@@ -3494,6 +4405,85 @@
       "weapon" : null,
       "category" : null,
       "armor" : null,
+      "key" : null
+    } ], [ "nomad/armor-head-infiltration", {
+      "launcher" : null,
+      "display" : "]",
+      "color" : "blue",
+      "rangedWeapon" : null,
+      "power" : null,
+      "explosive" : null,
+      "shield" : null,
+      "hidden" : false,
+      "locked" : null,
+      "name" : "Nomad infiltration visor",
+      "recyclable" : 1,
+      "concealment" : 0,
+      "trap" : null,
+      "door" : null,
+      "usable" : null,
+      "pickable" : true,
+      "id" : "nomad/armor-head-infiltration",
+      "weapon" : null,
+      "category" : null,
+      "armor" : {
+        "stats" : {
+          "launcher" : {
+            "missile" : null,
+            "range" : 0,
+            "consumption" : {
+              "energy" : 0,
+              "materials" : 0
+            }
+          },
+          "explosive" : {
+            "attack" : 0,
+            "damage" : 20,
+            "radius" : 0,
+            "blast" : 0
+          },
+          "speed" : 0,
+          "ranged" : {
+            "attack" : 0,
+            "damage" : 0,
+            "range" : 0,
+            "consumption" : {
+              "energy" : 0,
+              "materials" : 0
+            }
+          },
+          "energy" : {
+            "max" : 0,
+            "regen" : 0
+          },
+          "materials" : {
+            "max" : 0,
+            "regen" : 0
+          },
+          "defence" : 15,
+          "skill" : {
+            "hacking" : 0
+          },
+          "melee" : {
+            "attack" : 0,
+            "damage" : 0,
+            "consumption" : {
+              "energy" : 0,
+              "materials" : 0
+            }
+          },
+          "health" : {
+            "max" : 0,
+            "regen" : 0
+          },
+          "sight" : {
+            "range" : 0,
+            "sensors" : 20
+          },
+          "armor" : 8
+        },
+        "slot" : "Equipment.HeadArmor"
+      },
       "key" : null
     } ], [ "skyfarer/weapon-whip-plasma", {
       "launcher" : null,
@@ -3506,6 +4496,7 @@
       "hidden" : false,
       "locked" : null,
       "name" : "Skyfarer plasma whip",
+      "recyclable" : 1,
       "concealment" : 0,
       "trap" : null,
       "door" : null,
@@ -3591,6 +4582,39 @@
       "id" : "generic/door-closed",
       "weapon" : null,
       "armor" : null
+    } ], [ "test/components", {
+      "launcher" : null,
+      "display" : "=",
+      "color" : "purple",
+      "rangedWeapon" : null,
+      "power" : null,
+      "explosive" : null,
+      "shield" : null,
+      "hidden" : false,
+      "locked" : null,
+      "name" : "Piles of components (TEST)",
+      "recyclable" : null,
+      "concealment" : 0,
+      "trap" : null,
+      "door" : null,
+      "usable" : {
+        "type" : "VoidPower",
+        "data" : {
+          "description" : "You pick up a pile of components.",
+          "resources" : {
+            "health" : 0,
+            "energy" : 0,
+            "materials" : 0,
+            "components" : 10
+          }
+        }
+      },
+      "pickable" : false,
+      "id" : "test/components",
+      "weapon" : null,
+      "category" : null,
+      "armor" : null,
+      "key" : null
     } ], [ "iridan/deflector", {
       "launcher" : null,
       "display" : "[",
@@ -3658,6 +4682,7 @@
       "hidden" : false,
       "locked" : null,
       "name" : "Iridan deflector",
+      "recyclable" : 1,
       "concealment" : 0,
       "trap" : null,
       "door" : null,
@@ -3689,7 +4714,8 @@
           "resources" : {
             "health" : 0,
             "energy" : 0,
-            "materials" : 50
+            "materials" : 50,
+            "components" : 0
           },
           "removeDescription" : null
         }
@@ -3714,6 +4740,84 @@
       "id" : "iridan/conduit-stairs-down-core",
       "weapon" : null,
       "armor" : null
+    } ], [ "nomad/weapon-laser-heavy", {
+      "launcher" : null,
+      "display" : "!",
+      "color" : "blue",
+      "rangedWeapon" : {
+        "stats" : {
+          "launcher" : {
+            "missile" : null,
+            "range" : 0,
+            "consumption" : {
+              "energy" : 0,
+              "materials" : 0
+            }
+          },
+          "explosive" : {
+            "attack" : 0,
+            "damage" : 0,
+            "radius" : 0,
+            "blast" : 0
+          },
+          "speed" : -10,
+          "ranged" : {
+            "attack" : 60,
+            "damage" : 60,
+            "range" : 7,
+            "consumption" : {
+              "energy" : 30,
+              "materials" : 0
+            }
+          },
+          "energy" : {
+            "max" : 0,
+            "regen" : 0
+          },
+          "materials" : {
+            "max" : 0,
+            "regen" : 0
+          },
+          "defence" : 0,
+          "skill" : {
+            "hacking" : 0
+          },
+          "melee" : {
+            "attack" : 0,
+            "damage" : 0,
+            "consumption" : {
+              "energy" : 0,
+              "materials" : 0
+            }
+          },
+          "health" : {
+            "max" : 0,
+            "regen" : 0
+          },
+          "sight" : {
+            "range" : 0,
+            "sensors" : 0
+          },
+          "armor" : 0
+        }
+      },
+      "power" : null,
+      "explosive" : null,
+      "shield" : null,
+      "hidden" : false,
+      "locked" : null,
+      "name" : "Nomad heavy laser",
+      "recyclable" : 1,
+      "concealment" : 0,
+      "trap" : null,
+      "door" : null,
+      "usable" : null,
+      "pickable" : true,
+      "id" : "nomad/weapon-laser-heavy",
+      "weapon" : null,
+      "category" : null,
+      "armor" : null,
+      "key" : null
     } ], [ "old/healing-chamber-inactive", {
       "display" : "H",
       "color" : "lightgrey",
@@ -3736,7 +4840,7 @@
             "range" : 10,
             "consumption" : {
               "energy" : 0,
-              "materials" : 40
+              "materials" : 35
             }
           },
           "explosive" : {
@@ -3795,6 +4899,7 @@
       "hidden" : false,
       "locked" : null,
       "name" : "Nomad smart missile launcher",
+      "recyclable" : 1,
       "concealment" : 0,
       "trap" : null,
       "door" : null,
@@ -3816,6 +4921,7 @@
       "hidden" : false,
       "locked" : null,
       "name" : "Skyfarer heavy armor",
+      "recyclable" : 1,
       "concealment" : 0,
       "trap" : null,
       "door" : null,
@@ -4004,6 +5110,7 @@
       "hidden" : false,
       "locked" : null,
       "name" : "Skyfarer smart gun",
+      "recyclable" : 1,
       "concealment" : 0,
       "trap" : null,
       "door" : null,
@@ -4013,6 +5120,85 @@
       "weapon" : null,
       "category" : null,
       "armor" : null,
+      "key" : null
+    } ], [ "nomad/armor-head-envoy", {
+      "launcher" : null,
+      "display" : "]",
+      "color" : "blue",
+      "rangedWeapon" : null,
+      "power" : null,
+      "explosive" : null,
+      "shield" : null,
+      "hidden" : false,
+      "locked" : null,
+      "name" : "Nomad envoy visor",
+      "recyclable" : 1,
+      "concealment" : 0,
+      "trap" : null,
+      "door" : null,
+      "usable" : null,
+      "pickable" : true,
+      "id" : "nomad/armor-head-envoy",
+      "weapon" : null,
+      "category" : null,
+      "armor" : {
+        "stats" : {
+          "launcher" : {
+            "missile" : null,
+            "range" : 0,
+            "consumption" : {
+              "energy" : 0,
+              "materials" : 0
+            }
+          },
+          "explosive" : {
+            "attack" : 0,
+            "damage" : 0,
+            "radius" : 0,
+            "blast" : 0
+          },
+          "speed" : 0,
+          "ranged" : {
+            "attack" : 0,
+            "damage" : 0,
+            "range" : 0,
+            "consumption" : {
+              "energy" : 0,
+              "materials" : 0
+            }
+          },
+          "energy" : {
+            "max" : 0,
+            "regen" : 0
+          },
+          "materials" : {
+            "max" : 0,
+            "regen" : 0
+          },
+          "defence" : 10,
+          "skill" : {
+            "hacking" : 0
+          },
+          "melee" : {
+            "attack" : 0,
+            "damage" : 0,
+            "consumption" : {
+              "energy" : 0,
+              "materials" : 0
+            }
+          },
+          "health" : {
+            "max" : 0,
+            "regen" : 0
+          },
+          "sight" : {
+            "range" : 0,
+            "sensors" : 0
+          },
+          "armor" : 10
+        },
+        "slot" : "Equipment.HeadArmor"
+      },
       "key" : null
     } ], [ "nomad/explosive-mine-active", {
       "display" : "¤",
@@ -4044,7 +5230,8 @@
           "resources" : {
             "health" : 0,
             "energy" : 0,
-            "materials" : 30
+            "materials" : 30,
+            "components" : 0
           },
           "removeDescription" : "Mine deactivates."
         }
@@ -4053,6 +5240,84 @@
       "id" : "nomad/explosive-mine-active",
       "weapon" : null,
       "armor" : null
+    } ], [ "iridan/weapon-boser-merged", {
+      "launcher" : null,
+      "display" : "!",
+      "color" : "red",
+      "rangedWeapon" : {
+        "stats" : {
+          "launcher" : {
+            "missile" : null,
+            "range" : 0,
+            "consumption" : {
+              "energy" : 0,
+              "materials" : 0
+            }
+          },
+          "explosive" : {
+            "attack" : 0,
+            "damage" : 0,
+            "radius" : 0,
+            "blast" : 0
+          },
+          "speed" : 0,
+          "ranged" : {
+            "attack" : 70,
+            "damage" : 50,
+            "range" : 7,
+            "consumption" : {
+              "energy" : 30,
+              "materials" : 0
+            }
+          },
+          "energy" : {
+            "max" : 0,
+            "regen" : 0
+          },
+          "materials" : {
+            "max" : 0,
+            "regen" : 0
+          },
+          "defence" : 0,
+          "skill" : {
+            "hacking" : 0
+          },
+          "melee" : {
+            "attack" : 0,
+            "damage" : 0,
+            "consumption" : {
+              "energy" : 0,
+              "materials" : 0
+            }
+          },
+          "health" : {
+            "max" : 0,
+            "regen" : 0
+          },
+          "sight" : {
+            "range" : 0,
+            "sensors" : 0
+          },
+          "armor" : 0
+        }
+      },
+      "power" : null,
+      "explosive" : null,
+      "shield" : null,
+      "hidden" : false,
+      "locked" : null,
+      "name" : "Iridan boser (merged)",
+      "recyclable" : 1,
+      "concealment" : 0,
+      "trap" : null,
+      "door" : null,
+      "usable" : null,
+      "pickable" : true,
+      "id" : "iridan/weapon-boser-merged",
+      "weapon" : null,
+      "category" : null,
+      "armor" : null,
+      "key" : null
     } ], [ "nomad/launcher-missile", {
       "launcher" : {
         "stats" : {
@@ -4120,6 +5385,7 @@
       "hidden" : false,
       "locked" : null,
       "name" : "Nomad missile launcher",
+      "recyclable" : 1,
       "concealment" : 0,
       "trap" : null,
       "door" : null,
@@ -4141,6 +5407,7 @@
       "hidden" : false,
       "locked" : null,
       "name" : "Skyfarer visor",
+      "recyclable" : 1,
       "concealment" : 0,
       "trap" : null,
       "door" : null,
@@ -4208,6 +5475,164 @@
         "slot" : "Equipment.HeadArmor"
       },
       "key" : null
+    } ], [ "nomad/armor-body-envoy", {
+      "launcher" : null,
+      "display" : "]",
+      "color" : "blue",
+      "rangedWeapon" : null,
+      "power" : null,
+      "explosive" : null,
+      "shield" : null,
+      "hidden" : false,
+      "locked" : null,
+      "name" : "Nomad envoy armor",
+      "recyclable" : 1,
+      "concealment" : 0,
+      "trap" : null,
+      "door" : null,
+      "usable" : null,
+      "pickable" : true,
+      "id" : "nomad/armor-body-envoy",
+      "weapon" : null,
+      "category" : null,
+      "armor" : {
+        "stats" : {
+          "launcher" : {
+            "missile" : null,
+            "range" : 0,
+            "consumption" : {
+              "energy" : 0,
+              "materials" : 0
+            }
+          },
+          "explosive" : {
+            "attack" : 0,
+            "damage" : 0,
+            "radius" : 0,
+            "blast" : 0
+          },
+          "speed" : 0,
+          "ranged" : {
+            "attack" : 0,
+            "damage" : 0,
+            "range" : 0,
+            "consumption" : {
+              "energy" : 0,
+              "materials" : 0
+            }
+          },
+          "energy" : {
+            "max" : 0,
+            "regen" : 0
+          },
+          "materials" : {
+            "max" : 0,
+            "regen" : 0
+          },
+          "defence" : 10,
+          "skill" : {
+            "hacking" : 0
+          },
+          "melee" : {
+            "attack" : 0,
+            "damage" : 0,
+            "consumption" : {
+              "energy" : 0,
+              "materials" : 0
+            }
+          },
+          "health" : {
+            "max" : 0,
+            "regen" : 0
+          },
+          "sight" : {
+            "range" : 0,
+            "sensors" : 0
+          },
+          "armor" : 10
+        },
+        "slot" : "Equipment.BodyArmor"
+      },
+      "key" : null
+    } ], [ "scippe/weapon-shard-blast", {
+      "launcher" : null,
+      "display" : "(",
+      "color" : "red",
+      "rangedWeapon" : null,
+      "power" : null,
+      "explosive" : null,
+      "shield" : null,
+      "hidden" : false,
+      "locked" : null,
+      "name" : "Scippe shard blast",
+      "recyclable" : 1,
+      "concealment" : 0,
+      "trap" : null,
+      "door" : null,
+      "usable" : null,
+      "pickable" : true,
+      "id" : "scippe/weapon-shard-blast",
+      "weapon" : {
+        "stats" : {
+          "launcher" : {
+            "missile" : null,
+            "range" : 0,
+            "consumption" : {
+              "energy" : 0,
+              "materials" : 0
+            }
+          },
+          "explosive" : {
+            "attack" : 0,
+            "damage" : 0,
+            "radius" : 0,
+            "blast" : 0
+          },
+          "speed" : 0,
+          "ranged" : {
+            "attack" : 0,
+            "damage" : 0,
+            "range" : 0,
+            "consumption" : {
+              "energy" : 0,
+              "materials" : 0
+            }
+          },
+          "energy" : {
+            "max" : 0,
+            "regen" : 0
+          },
+          "materials" : {
+            "max" : 0,
+            "regen" : 0
+          },
+          "defence" : 0,
+          "skill" : {
+            "hacking" : 0
+          },
+          "melee" : {
+            "attack" : 60,
+            "damage" : 60,
+            "consumption" : {
+              "energy" : 0,
+              "materials" : 0.5
+            }
+          },
+          "health" : {
+            "max" : 0,
+            "regen" : 0
+          },
+          "sight" : {
+            "range" : 0,
+            "sensors" : 0
+          },
+          "armor" : 0
+        },
+        "twoHanded" : false
+      },
+      "category" : null,
+      "armor" : null,
+      "key" : null
     } ], [ "generic/fence-energy-open", {
       "display" : "/",
       "color" : "blue",
@@ -4230,84 +5655,6 @@
       "weapon" : null,
       "category" : "ItemKind.UtilityCategory",
       "armor" : null,
-      "key" : null
-    } ], [ "nomad/armor-hand", {
-      "launcher" : null,
-      "display" : "]",
-      "color" : "blue",
-      "rangedWeapon" : null,
-      "power" : null,
-      "explosive" : null,
-      "shield" : null,
-      "hidden" : false,
-      "locked" : null,
-      "name" : "Nomad hand enhancement",
-      "concealment" : 0,
-      "trap" : null,
-      "door" : null,
-      "usable" : null,
-      "pickable" : true,
-      "id" : "nomad/armor-hand",
-      "weapon" : null,
-      "category" : null,
-      "armor" : {
-        "stats" : {
-          "launcher" : {
-            "missile" : null,
-            "range" : 0,
-            "consumption" : {
-              "energy" : 0,
-              "materials" : 0
-            }
-          },
-          "explosive" : {
-            "attack" : 0,
-            "damage" : 0,
-            "radius" : 0,
-            "blast" : 0
-          },
-          "speed" : 0,
-          "ranged" : {
-            "attack" : 10,
-            "damage" : 0,
-            "range" : 0,
-            "consumption" : {
-              "energy" : 0,
-              "materials" : 0
-            }
-          },
-          "energy" : {
-            "max" : 0,
-            "regen" : 0
-          },
-          "materials" : {
-            "max" : 0,
-            "regen" : 0
-          },
-          "defence" : 5,
-          "skill" : {
-            "hacking" : 0
-          },
-          "melee" : {
-            "attack" : 10,
-            "damage" : 0,
-            "consumption" : {
-              "energy" : 0,
-              "materials" : 0
-            }
-          },
-          "health" : {
-            "max" : 0,
-            "regen" : 0
-          },
-          "sight" : {
-            "range" : 0,
-            "sensors" : 0
-          },
-          "armor" : 5
-        },
-        "slot" : "Equipment.HandArmor"
-      },
       "key" : null
     } ], [ "generic/fence-energy-closed", {
       "display" : "+",
@@ -4347,6 +5694,85 @@
       "id" : "generic/conduit-stairs-down",
       "weapon" : null,
       "armor" : null
+    } ], [ "scippe/weapon-shard-blast-merged", {
+      "launcher" : null,
+      "display" : "(",
+      "color" : "red",
+      "rangedWeapon" : null,
+      "power" : null,
+      "explosive" : null,
+      "shield" : null,
+      "hidden" : false,
+      "locked" : null,
+      "name" : "Scippe shard blast (merged)",
+      "recyclable" : 1,
+      "concealment" : 0,
+      "trap" : null,
+      "door" : null,
+      "usable" : null,
+      "pickable" : true,
+      "id" : "scippe/weapon-shard-blast-merged",
+      "weapon" : {
+        "stats" : {
+          "launcher" : {
+            "missile" : null,
+            "range" : 0,
+            "consumption" : {
+              "energy" : 0,
+              "materials" : 0
+            }
+          },
+          "explosive" : {
+            "attack" : 0,
+            "damage" : 0,
+            "radius" : 0,
+            "blast" : 0
+          },
+          "speed" : 0,
+          "ranged" : {
+            "attack" : 0,
+            "damage" : 0,
+            "range" : 0,
+            "consumption" : {
+              "energy" : 0,
+              "materials" : 0
+            }
+          },
+          "energy" : {
+            "max" : 0,
+            "regen" : 0
+          },
+          "materials" : {
+            "max" : 0,
+            "regen" : 0
+          },
+          "defence" : 0,
+          "skill" : {
+            "hacking" : 0
+          },
+          "melee" : {
+            "attack" : 60,
+            "damage" : 70,
+            "consumption" : {
+              "energy" : 0,
+              "materials" : 0.5
+            }
+          },
+          "health" : {
+            "max" : 0,
+            "regen" : 0
+          },
+          "sight" : {
+            "range" : 0,
+            "sensors" : 0
+          },
+          "armor" : 0
+        },
+        "twoHanded" : false
+      },
+      "category" : null,
+      "armor" : null,
+      "key" : null
     } ], [ "generic/conduit-fissure", {
       "display" : ">",
       "color" : "white",
@@ -4361,6 +5787,164 @@
       "id" : "generic/conduit-fissure",
       "weapon" : null,
       "armor" : null
+    } ], [ "nomad/armor-head-assault", {
+      "launcher" : null,
+      "display" : "]",
+      "color" : "blue",
+      "rangedWeapon" : null,
+      "power" : null,
+      "explosive" : null,
+      "shield" : null,
+      "hidden" : false,
+      "locked" : null,
+      "name" : "Nomad assault visor",
+      "recyclable" : 1,
+      "concealment" : 0,
+      "trap" : null,
+      "door" : null,
+      "usable" : null,
+      "pickable" : true,
+      "id" : "nomad/armor-head-assault",
+      "weapon" : null,
+      "category" : null,
+      "armor" : {
+        "stats" : {
+          "launcher" : {
+            "missile" : null,
+            "range" : 0,
+            "consumption" : {
+              "energy" : 0,
+              "materials" : 0
+            }
+          },
+          "explosive" : {
+            "attack" : 0,
+            "damage" : 0,
+            "radius" : 0,
+            "blast" : 0
+          },
+          "speed" : 0,
+          "ranged" : {
+            "attack" : 0,
+            "damage" : 0,
+            "range" : 0,
+            "consumption" : {
+              "energy" : 0,
+              "materials" : 0
+            }
+          },
+          "energy" : {
+            "max" : 0,
+            "regen" : 0
+          },
+          "materials" : {
+            "max" : 0,
+            "regen" : 0
+          },
+          "defence" : 10,
+          "skill" : {
+            "hacking" : 0
+          },
+          "melee" : {
+            "attack" : 0,
+            "damage" : 0,
+            "consumption" : {
+              "energy" : 0,
+              "materials" : 0
+            }
+          },
+          "health" : {
+            "max" : 0,
+            "regen" : 0
+          },
+          "sight" : {
+            "range" : 0,
+            "sensors" : 0
+          },
+          "armor" : 15
+        },
+        "slot" : "Equipment.HeadArmor"
+      },
+      "key" : null
+    } ], [ "skyfarer/armor-head-ranged-merged", {
+      "launcher" : null,
+      "display" : "]",
+      "color" : "blue",
+      "rangedWeapon" : null,
+      "power" : null,
+      "explosive" : null,
+      "shield" : null,
+      "hidden" : false,
+      "locked" : null,
+      "name" : "Skyfarer visor (merged)",
+      "recyclable" : 1,
+      "concealment" : 0,
+      "trap" : null,
+      "door" : null,
+      "usable" : null,
+      "pickable" : true,
+      "id" : "skyfarer/armor-head-ranged-merged",
+      "weapon" : null,
+      "category" : null,
+      "armor" : {
+        "stats" : {
+          "launcher" : {
+            "missile" : null,
+            "range" : 0,
+            "consumption" : {
+              "energy" : 0,
+              "materials" : 0
+            }
+          },
+          "explosive" : {
+            "attack" : 0,
+            "damage" : 0,
+            "radius" : 0,
+            "blast" : 0
+          },
+          "speed" : 0,
+          "ranged" : {
+            "attack" : 15,
+            "damage" : 0,
+            "range" : 0,
+            "consumption" : {
+              "energy" : 0,
+              "materials" : 0
+            }
+          },
+          "energy" : {
+            "max" : 0,
+            "regen" : 0
+          },
+          "materials" : {
+            "max" : 0,
+            "regen" : 0
+          },
+          "defence" : 10,
+          "skill" : {
+            "hacking" : 0
+          },
+          "melee" : {
+            "attack" : 0,
+            "damage" : 0,
+            "consumption" : {
+              "energy" : 0,
+              "materials" : 0
+            }
+          },
+          "health" : {
+            "max" : 0,
+            "regen" : 0
+          },
+          "sight" : {
+            "range" : 0,
+            "sensors" : 0
+          },
+          "armor" : 10
+        },
+        "slot" : "Equipment.HeadArmor"
+      },
+      "key" : null
     } ], [ "iridan/door-secure-open", {
       "display" : "/",
       "color" : "#ffc107",
@@ -4587,6 +6171,147 @@
       }
     } ],
     "id" : "player"
+  } ] ],
+  "recipes" : [ [ "nomad/armor-leg-infiltration", {
+    "cost" : {
+      "components" : 3,
+      "items" : [ ]
+    },
+    "item" : "nomad/armor-leg-infiltration",
+    "id" : "nomad/armor-leg-infiltration"
+  } ], [ "nomad/armor-body-assault", {
+    "cost" : {
+      "components" : 3,
+      "items" : [ ]
+    },
+    "item" : "nomad/armor-body-assault",
+    "id" : "nomad/armor-body-assault"
+  } ], [ "skyfarer/weapon-smart-gun-merged", {
+    "cost" : {
+      "components" : 1,
+      "items" : [ "skyfarer/weapon-smart-gun" ]
+    },
+    "item" : "skyfarer/weapon-smart-gun-merged",
+    "id" : "skyfarer/weapon-smart-gun-merged"
+  } ], [ "nomad/armor-hand-infiltration", {
+    "cost" : {
+      "components" : 3,
+      "items" : [ ]
+    },
+    "item" : "nomad/armor-hand-infiltration",
+    "id" : "nomad/armor-hand-infiltration"
+  } ], [ "skyfarer/armor-body-heavy-merged", {
+    "cost" : {
+      "components" : 1,
+      "items" : [ "skyfarer/armor-body-heavy" ]
+    },
+    "item" : "skyfarer/armor-body-heavy-merged",
+    "id" : "skyfarer/armor-body-heavy-merged"
+  } ], [ "iridan/deflector-merged", {
+    "cost" : {
+      "components" : 1,
+      "items" : [ "iridan/deflector" ]
+    },
+    "item" : "iridan/deflector-merged",
+    "id" : "iridan/deflector-merged"
+  } ], [ "skyfarer/weapon-whip-plasma-merged", {
+    "cost" : {
+      "components" : 1,
+      "items" : [ "skyfarer/weapon-whip-plasma" ]
+    },
+    "item" : "skyfarer/weapon-whip-plasma-merged",
+    "id" : "skyfarer/weapon-whip-plasma-merged"
+  } ], [ "nomad/weapon-spear", {
+    "cost" : {
+      "components" : 3,
+      "items" : [ ]
+    },
+    "item" : "nomad/weapon-spear",
+    "id" : "nomad/weapon-spear"
+  } ], [ "skyfarer/armor-hand-melee-merged", {
+    "cost" : {
+      "components" : 1,
+      "items" : [ "skyfarer/armor-hand-melee" ]
+    },
+    "item" : "skyfarer/armor-hand-melee-merged",
+    "id" : "skyfarer/armor-hand-melee-merged"
+  } ], [ "skyfarer/armor-leg-heavy-merged", {
+    "cost" : {
+      "components" : 1,
+      "items" : [ "skyfarer/armor-leg-heavy" ]
+    },
+    "item" : "skyfarer/armor-leg-heavy-merged",
+    "id" : "skyfarer/armor-leg-heavy-merged"
+  } ], [ "nomad/armor-hand-assault", {
+    "cost" : {
+      "components" : 3,
+      "items" : [ ]
+    },
+    "item" : "nomad/armor-hand-assault",
+    "id" : "nomad/armor-hand-assault"
+  } ], [ "nomad/armor-leg-assault", {
+    "cost" : {
+      "components" : 3,
+      "items" : [ ]
+    },
+    "item" : "nomad/armor-leg-assault",
+    "id" : "nomad/armor-leg-assault"
+  } ], [ "nomad/armor-body-infiltration", {
+    "cost" : {
+      "components" : 3,
+      "items" : [ ]
+    },
+    "item" : "nomad/armor-body-infiltration",
+    "id" : "nomad/armor-body-infiltration"
+  } ], [ "nomad/armor-head-infiltration", {
+    "cost" : {
+      "components" : 3,
+      "items" : [ ]
+    },
+    "item" : "nomad/armor-head-infiltration",
+    "id" : "nomad/armor-head-infiltration"
+  } ], [ "nomad/weapon-laser-heavy", {
+    "cost" : {
+      "components" : 3,
+      "items" : [ ]
+    },
+    "item" : "nomad/weapon-laser-heavy",
+    "id" : "nomad/weapon-laser-heavy"
+  } ], [ "nomad/launcher-missile-smart", {
+    "cost" : {
+      "components" : 3,
+      "items" : [ ]
+    },
+    "item" : "nomad/launcher-missile-smart",
+    "id" : "nomad/launcher-missile-smart"
+  } ], [ "iridan/weapon-boser-merged", {
+    "cost" : {
+      "components" : 1,
+      "items" : [ "iridan/weapon-boser" ]
+    },
+    "item" : "iridan/weapon-boser-merged",
+    "id" : "iridan/weapon-boser-merged"
+  } ], [ "scippe/weapon-shard-blast-merged", {
+    "cost" : {
+      "components" : 1,
+      "items" : [ "scippe/weapon-shard-blast" ]
+    },
+    "item" : "scippe/weapon-shard-blast-merged",
+    "id" : "scippe/weapon-shard-blast-merged"
+  } ], [ "nomad/armor-head-assault", {
+    "cost" : {
+      "components" : 3,
+      "items" : [ ]
+    },
+    "item" : "nomad/armor-head-assault",
+    "id" : "nomad/armor-head-assault"
+  } ], [ "skyfarer/armor-head-ranged-merged", {
+    "cost" : {
+      "components" : 1,
+      "items" : [ "skyfarer/armor-head-ranged" ]
+    },
+    "item" : "skyfarer/armor-head-ranged-merged",
+    "id" : "skyfarer/armor-head-ranged-merged"
   } ] ],
   "templates" : [ [ "iridan/area-start", {
     "type" : "FixedTemplate",
@@ -5761,8 +7486,8 @@
             "distribution" : {
               "type" : "Distribution.Uniform",
               "data" : {
-                "min" : 2,
-                "max" : 3
+                "min" : 1,
+                "max" : 2
               }
             }
           } ],
@@ -5820,7 +7545,7 @@
         "distribution" : {
           "type" : "Distribution.Uniform",
           "data" : {
-            "min" : 2,
+            "min" : 1,
             "max" : 2
           }
         },
@@ -5833,7 +7558,7 @@
           "creatures" : [ ],
           "items" : [ ],
           "widgets" : [ ],
-          "catalogues" : [ "generic/room" ]
+          "catalogues" : [ "generic/room-portal-high" ]
         }
       } ],
       "entrances" : {
