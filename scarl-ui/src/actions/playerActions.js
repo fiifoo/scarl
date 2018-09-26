@@ -15,6 +15,11 @@ export const attack = target => (dispatch, getState) => {
     }
 }
 
+export const cancelRecycleItem = item => () => {
+    sendAction('CancelRecycleItem', {item})
+    sendInventoryQuery()
+}
+
 export const displace = target => () => {
     sendAction('Displace', {target})
 }

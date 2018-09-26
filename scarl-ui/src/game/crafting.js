@@ -1,3 +1,6 @@
+export const COLUMN_RECIPES = 'COLUMN_RECIPES'
+export const COLUMN_RECYCLES = 'COLUMN_RECYCLES'
+
 export const hasCraftingResources = (player, inventory) => recipe => {
     const cost = recipe.cost
 

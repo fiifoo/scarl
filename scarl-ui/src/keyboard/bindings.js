@@ -97,14 +97,18 @@ export default {
         [keycodes.I, commands.INVENTORY],
         [keycodes.P, commands.PLAYER_INFO],
 
-        [keycodes.ENTER, commands.CRAFTING_CRAFT],
-        [keycodes.SPACEBAR, commands.CRAFTING_CRAFT],
+        [keycodes.ENTER, commands.CRAFTING_ACTION],
+        [keycodes.SPACEBAR, commands.CRAFTING_ACTION],
 
-        [keycodes.ARROW_UP, commands.CRAFTING_ROW_UP],
-        [keycodes.ARROW_DOWN, commands.CRAFTING_ROW_DOWN],
+        [keycodes.ARROW_DOWN, commands.CRAFTING_SELECTION_DOWN],
+        [keycodes.ARROW_LEFT, commands.CRAFTING_SELECTION_LEFT],
+        [keycodes.ARROW_RIGHT, commands.CRAFTING_SELECTION_RIGHT],
+        [keycodes.ARROW_UP, commands.CRAFTING_SELECTION_UP],
 
-        [keycodes.NUMPAD_2, commands.CRAFTING_ROW_DOWN],
-        [keycodes.NUMPAD_8, commands.CRAFTING_ROW_UP],
+        [keycodes.NUMPAD_2, commands.CRAFTING_SELECTION_DOWN],
+        [keycodes.NUMPAD_4, commands.CRAFTING_SELECTION_LEFT],
+        [keycodes.NUMPAD_6, commands.CRAFTING_SELECTION_RIGHT],
+        [keycodes.NUMPAD_8, commands.CRAFTING_SELECTION_UP],
     ]),
 
     [gameModes.GAME_OVER]: Map([

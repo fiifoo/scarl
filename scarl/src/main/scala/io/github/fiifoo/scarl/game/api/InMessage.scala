@@ -79,7 +79,8 @@ case object InventoryQuery extends InMessage {
     val message = PlayerInventory(
       inventory = getContainerItems(state.instance)(state.game.player) map (_ (state.instance)),
       equipments = state.instance.equipments.getOrElse(state.game.player, Map()),
-      playerRecipes = state.instance.recipes.getOrElse(state.game.player, Set())
+      playerRecipes = state.instance.recipes.getOrElse(state.game.player, Set()),
+      recycledItems = state.instance.creature.recycledItems.getOrElse(state.game.player, List())
     )
 
     (state.copy(outMessages = message :: state.outMessages), None)

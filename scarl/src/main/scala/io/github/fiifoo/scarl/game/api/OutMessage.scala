@@ -6,7 +6,7 @@ import io.github.fiifoo.scarl.core.geometry.{Location, WaypointNetwork}
 import io.github.fiifoo.scarl.core.item.Equipment.Slot
 import io.github.fiifoo.scarl.core.item.Recipe
 import io.github.fiifoo.scarl.core.item.Recipe.RecipeId
-import io.github.fiifoo.scarl.core.kind.Kinds
+import io.github.fiifoo.scarl.core.kind.{ItemKindId, Kinds}
 import io.github.fiifoo.scarl.game.area.AreaInfo
 import io.github.fiifoo.scarl.game.event.Event
 import io.github.fiifoo.scarl.game.player.{PlayerFov, PlayerInfo, Settings}
@@ -19,13 +19,15 @@ case class DebugFov(locations: Set[Location]) extends OutMessage with DebugMessa
 case class DebugWaypoint(network: WaypointNetwork) extends OutMessage with DebugMessage
 
 case class GameStart(area: AreaInfo,
-                     equipments: Map[Slot, ItemId],
                      factions: Iterable[Faction],
-                     inventory: Set[Item],
                      kinds: Kinds,
-                     playerRecipes: Set[RecipeId],
                      recipes: Iterable[Recipe],
-                     settings: Settings
+                     settings: Settings,
+
+                     equipments: Map[Slot, ItemId],
+                     inventory: Set[Item],
+                     playerRecipes: Set[RecipeId],
+                     recycledItems: List[ItemKindId],
                     ) extends OutMessage
 
 case class GameUpdate(fov: PlayerFov,
@@ -39,7 +41,8 @@ case class AreaChange(area: AreaInfo) extends OutMessage
 
 case class PlayerSettings(settings: Settings) extends OutMessage
 
-case class PlayerInventory(inventory: Set[Item],
-                           equipments: Map[Slot, ItemId],
-                           playerRecipes: Set[RecipeId]
+case class PlayerInventory(equipments: Map[Slot, ItemId],
+                           inventory: Set[Item],
+                           playerRecipes: Set[RecipeId],
+                           recycledItems: List[ItemKindId],
                           ) extends OutMessage

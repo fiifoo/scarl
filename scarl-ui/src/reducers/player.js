@@ -1,4 +1,4 @@
-import { Record, Set } from 'immutable'
+import { List, Record, Set } from 'immutable'
 import * as types from '../actions/actionTypes'
 
 // todo: move inventory & equipments here
@@ -7,6 +7,7 @@ const Player = Record({
     equipmentStats: undefined,
     keys: [], // will be update constanly and won't do immutable Set conversion
     recipes: Set(),
+    recycledItems: List(),
 })
 
 export default (state = Player(), action) => {
@@ -16,7 +17,13 @@ export default (state = Player(), action) => {
         }
         case types.RECEIVE_GAME_START:
         case types.RECEIVE_PLAYER_INVENTORY: {
-            return state.set('recipes', Set(action.data.playerRecipes))
+            state = state.set('recipes', Set(action.data.playerRecipes))
+            state = state.set('recycledItems', List(action.data.recycledItems))
+
+            return state
+        }
+        case types.RECEIVE_AREA_CHANGE: {
+            return state.set('recycledItems', List())
         }
         case types.RECEIVE_GAME_UPDATE: {
             const data = action.data.player

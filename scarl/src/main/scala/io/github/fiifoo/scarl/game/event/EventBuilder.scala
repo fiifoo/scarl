@@ -37,6 +37,7 @@ class EventBuilder(s: State, player: CreatureId, fov: Set[Location]) {
     effect match {
       case e: BadShotEffect => build(e) map GenericEvent
       case e: BlockedDoorEffect => build(e) map GenericEvent
+      case e: CancelRecycleItemEffect => build(e) map GenericEvent
       case e: CaptureEffect => build(e) map GenericEvent
       case e: CollideEffect => build(e) map GenericEvent
       case e: CommunicateEffect => build(e) map GenericEvent
@@ -97,6 +98,14 @@ class EventBuilder(s: State, player: CreatureId, fov: Set[Location]) {
   private def build(effect: BlockedDoorEffect): Option[String] = {
     if (effect.user contains player) {
       Some(s"${kind(effect.obstacle)} is in way.")
+    } else {
+      None
+    }
+  }
+
+  private def build(effect: CancelRecycleItemEffect): Option[String] = {
+    if (effect.recycler == player) {
+      Some(s"You cancel recycling of ${kind(effect.item)}.")
     } else {
       None
     }

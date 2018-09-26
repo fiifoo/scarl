@@ -1,9 +1,13 @@
 import { Button } from 'react-bootstrap'
 import React from 'react'
-import { hasCraftingResources } from '../../game/crafting'
+import { COLUMN_RECIPES, COLUMN_RECYCLES, hasCraftingResources } from '../../game/crafting'
 import ItemDetails from '../inventory/ItemDetails.jsx'
 
 const getRecipe = (player, recipes, ui) => {
+    if (ui.column !== COLUMN_RECIPES) {
+        return undefined
+    }
+
     const row = ui.row
     const id = player.recipes.toArray()[row]
 
@@ -14,12 +18,12 @@ const getRecipe = (player, recipes, ui) => {
     }
 }
 
-const Recipes = ({inventory, kinds, player, recipes, ui, craftItem, setRow}) => {
+const Recipes = ({inventory, kinds, player, recipes, ui, craftItem, setSelection}) => {
     const hasResources = hasCraftingResources(player, inventory)
 
     const renderRecipe = (recipe, index) => {
-        const selected = index === ui.row
-        const select = () => setRow(index)
+        const selected = ui.column === COLUMN_RECIPES && index === ui.row
+        const select = () => setSelection(COLUMN_RECIPES, index)
 
         const kind = kinds.items.get(recipe.item)
 
@@ -54,7 +58,7 @@ const Recipe = ({equipments, inventory, kinds, player, recipes, ui, craftItem}) 
     const recipe = getRecipe(player, recipes, ui)
 
     if (! recipe) {
-        return undefined
+        return <div>&nbsp;</div>
     }
 
     const item = kinds.items.get(recipe.item)
@@ -110,6 +114,40 @@ const Recipe = ({equipments, inventory, kinds, player, recipes, ui, craftItem}) 
     )
 }
 
+const RecycledItems = ({kinds, player, ui, cancelRecycleItem}) => {
+    const hasResources = kind => kind.recyclable && kind.recyclable <= player.creature.resources.components
+
+    const renderItem = (item, index) => {
+        const selected = ui.column === COLUMN_RECYCLES && index === ui.row
+
+        const kind = kinds.items.get(item)
+
+        return (
+            <tr
+                key={index}
+                className={selected ? 'active' : null}>
+                <td>
+                    <Button
+                        bsSize="xsmall"
+                        onClick={() => cancelRecycleItem(item)}
+                        disabled={! hasResources(kind)}>
+                        Cancel
+                    </Button>
+                </td>
+                <td className="full-width">{kind.name}</td>
+            </tr>
+        )
+    }
+
+    return (
+        <table className="scarl-table">
+            <tbody>
+                {player.recycledItems.map(renderItem)}
+            </tbody>
+        </table>
+    )
+}
+
 const Crafting = props => {
     return (
         <div>
@@ -120,6 +158,10 @@ const Crafting = props => {
             </div>
             <div className="scarl-panel">
                 <Recipe {...props} />
+            </div>
+            <div className="scarl-panel">
+                <h4>Recycled items</h4>
+                <RecycledItems {...props} />
             </div>
         </div>
     )

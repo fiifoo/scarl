@@ -1,8 +1,8 @@
 import * as commands from '../../keyboard/commands'
-import { hasCraftingResources } from '../../game/crafting'
-import { setCraftingRow } from '../craftingActions'
+import { COLUMN_RECIPES, COLUMN_RECYCLES, hasCraftingResources } from '../../game/crafting'
+import { setCraftingSelection } from '../craftingActions'
 import * as gameActions from '../gameActions'
-import { craftItem } from '../playerActions'
+import { cancelRecycleItem, craftItem } from '../playerActions'
 
 const getRecipe = getState => {
     const { recipes, ui } = getState()
@@ -17,9 +17,16 @@ const getRecipe = getState => {
     }
 }
 
+const getRecycledItem = getState => {
+    const row = getState().ui.crafting.row
+
+    return getState().player.recycledItems.toArray()[row]
+}
+
 const changeRow = (dispatch, getState, up) => {
+    const column = getState().ui.crafting.column
     const current = getState().ui.crafting.row
-    const count = getState().player.recipes.size
+    const count = column === COLUMN_RECIPES ? getState().player.recipes.size : getState().player.recycledItems.size
 
     if (count === 0) {
         return
@@ -31,7 +38,14 @@ const changeRow = (dispatch, getState, up) => {
         current + 1 >= count ? 0 : current + 1
     )
 
-    dispatch(setCraftingRow(next))
+    dispatch(setCraftingSelection(column, next))
+}
+
+const changeColumn = (dispatch, getState) => {
+    const current = getState().ui.crafting.column
+    const next = current === COLUMN_RECIPES ? COLUMN_RECYCLES : COLUMN_RECIPES
+
+    dispatch(setCraftingSelection(next, 0))
 }
 
 const craft = (dispatch, getState) => {
@@ -40,6 +54,19 @@ const craft = (dispatch, getState) => {
 
     if (recipe && hasCraftingResources(player, inventory)(recipe)) {
         craftItem(recipe.id)()
+    }
+}
+
+const cancelRecycle = (dispatch, getState) => {
+    const { kinds, player } = getState()
+    const item = getRecycledItem(getState)
+
+    if (item) {
+        const kind = kinds.items.get(item)
+
+        if (kind.recyclable && kind.recyclable <= player.creature.resources.components) {
+            cancelRecycleItem(item)()
+        }
     }
 }
 
@@ -57,16 +84,27 @@ export default (command, dispatch, getState) => {
             gameActions.playerInfo()(dispatch)
             break
         }
-        case commands.CRAFTING_CRAFT: {
-            craft(dispatch, getState)
+        case commands.CRAFTING_ACTION: {
+            const column = getState().ui.crafting.column
+
+            if (column === COLUMN_RECIPES) {
+                craft(dispatch, getState)
+            } else {
+                cancelRecycle(dispatch, getState)
+            }
             break
         }
-        case commands.CRAFTING_ROW_UP: {
+        case commands.CRAFTING_SELECTION_UP: {
             changeRow(dispatch, getState, true)
             break
         }
-        case commands.CRAFTING_ROW_DOWN: {
+        case commands.CRAFTING_SELECTION_DOWN: {
             changeRow(dispatch, getState, false)
+            break
+        }
+        case commands.CRAFTING_SELECTION_LEFT:
+        case commands.CRAFTING_SELECTION_RIGHT: {
+            changeColumn(dispatch, getState)
             break
         }
     }

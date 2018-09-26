@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
-import { craftItem } from '../../actions/playerActions'
-import { setCraftingRow } from '../../actions/craftingActions'
+import { cancelRecycleItem, craftItem } from '../../actions/playerActions'
+import { setCraftingSelection } from '../../actions/craftingActions'
 import { CRAFTING } from '../../game/modes'
 import Crafting from './Crafting.jsx'
 import GameView from './GameView.jsx'
@@ -17,8 +17,9 @@ const CraftingContainer = connect(
         recipes: state.recipes,
         ui: state.ui.crafting,
     }), {
+        cancelRecycleItem,
         craftItem,
-        setRow: setCraftingRow,
+        setSelection: setCraftingSelection,
     }
 )(GameView)
 
