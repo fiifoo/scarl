@@ -24,8 +24,8 @@ export const displace = target => () => {
     sendAction('Displace', {target})
 }
 
-export const craftItem = recipe => () => {
-    sendAction('CraftItem', {recipe})
+export const craftItem = (recipe, equip = false) => () => {
+    sendAction('CraftItem', {recipe, equip})
     sendInventoryQuery()
 }
 

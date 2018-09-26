@@ -1,6 +1,7 @@
 import { connect } from 'react-redux'
-import { cancelRecycleItem, craftItem } from '../../actions/playerActions'
-import { setCraftingSelection } from '../../actions/craftingActions'
+import { setEquipmentSet } from '../../actions/gameActions'
+import { cancelRecycleItem, craftItem, recycleInventoryItem } from '../../actions/playerActions'
+import { setCraftingRow, setCraftingTab } from '../../actions/craftingActions'
 import { CRAFTING } from '../../game/modes'
 import Crafting from './Crafting.jsx'
 import GameView from './GameView.jsx'
@@ -10,6 +11,7 @@ const CraftingContainer = connect(
         component: Crafting,
         visible: state.ui.game.mode === CRAFTING,
 
+        equipmentSet: state.settings.equipmentSet,
         equipments: state.equipments,
         inventory: state.inventory,
         kinds: state.kinds,
@@ -19,7 +21,10 @@ const CraftingContainer = connect(
     }), {
         cancelRecycleItem,
         craftItem,
-        setSelection: setCraftingSelection,
+        recycleItem: recycleInventoryItem,
+        setEquipmentSet,
+        setRow: setCraftingRow,
+        setTab: setCraftingTab,
     }
 )(GameView)
 

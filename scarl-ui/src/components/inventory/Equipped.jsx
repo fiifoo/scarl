@@ -1,5 +1,6 @@
 import { Map, Range } from 'immutable'
 import React from 'react'
+import { Button } from 'react-bootstrap'
 import { slots } from '../../game/equipment'
 
 const Empty = () => <i>Empty</i>
@@ -43,18 +44,28 @@ class EquipmentSetDropdown extends React.Component {
     }
 }
 
-const Equipped = ({equipmentSet, equipments, inventory, kinds, selected, setEquipmentSet}) => {
+const Equipped = ({equipmentSet, equipments, inventory, kinds, selected, recycleItem = undefined, setEquipmentSet}) => {
     const renderSlot = slot =>  {
         const item = equipments.get(slot.key)
 
         return (
             <tr key={slot.key} className={item && item === selected ? 'active' : null}>
                 <th className="text-right">{slot.label}</th>
-                <td>
+                <td className="full-width">
                     {item
                         ? kinds.get(inventory.get(item).kind).name
                         : (<Empty />)
                     }
+                </td>
+                <td>
+                    {item && recycleItem && (
+                        <Button
+                            bsSize="xsmall"
+                            onClick={() => recycleItem(item)}>
+                            Recycle
+                        </Button>
+
+                    )}
                 </td>
             </tr>
         )

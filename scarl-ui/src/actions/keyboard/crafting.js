@@ -1,32 +1,37 @@
 import * as commands from '../../keyboard/commands'
-import { COLUMN_RECIPES, COLUMN_RECYCLES, hasCraftingResources } from '../../game/crafting'
-import { setCraftingSelection } from '../craftingActions'
+import { getTabRecipes, hasCraftingResources, tabs } from '../../game/crafting'
+import { getEquipmentSet, isSetEquipmentSetCommand } from '../../keyboard/utils'
+import { setCraftingRow, setCraftingTab } from '../craftingActions'
 import * as gameActions from '../gameActions'
-import { cancelRecycleItem, craftItem } from '../playerActions'
+import { craftItem } from '../playerActions'
 
 const getRecipe = getState => {
-    const { recipes, ui } = getState()
-    const row = ui.crafting.row
-
-    const id = getState().player.recipes.toArray()[row]
-
-    if (id) {
-        return recipes.get(id)
-    } else {
-        return undefined
-    }
-}
-
-const getRecycledItem = getState => {
     const row = getState().ui.crafting.row
 
-    return getState().player.recycledItems.toArray()[row]
+    return getRecipes(getState).get(row)
+}
+
+const getRecipes = getState => {
+    const { kinds, player, recipes, ui } = getState()
+    const tab = tabs.get(ui.crafting.tab)
+
+    return getTabRecipes(player, recipes, kinds)(tab)
+}
+
+const changeTab = (dispatch, getState, left) => {
+    const current = getState().ui.crafting.tab
+    const next = left ? (
+        current === 0 ? tabs.size - 1 : current - 1
+    ) : (
+        current + 1 === tabs.size ? 0 : current + 1
+    )
+
+    dispatch(setCraftingTab(next))
 }
 
 const changeRow = (dispatch, getState, up) => {
-    const column = getState().ui.crafting.column
     const current = getState().ui.crafting.row
-    const count = column === COLUMN_RECIPES ? getState().player.recipes.size : getState().player.recycledItems.size
+    const count = getRecipes(getState).size
 
     if (count === 0) {
         return
@@ -38,14 +43,7 @@ const changeRow = (dispatch, getState, up) => {
         current + 1 >= count ? 0 : current + 1
     )
 
-    dispatch(setCraftingSelection(column, next))
-}
-
-const changeColumn = (dispatch, getState) => {
-    const current = getState().ui.crafting.column
-    const next = current === COLUMN_RECIPES ? COLUMN_RECYCLES : COLUMN_RECIPES
-
-    dispatch(setCraftingSelection(next, 0))
+    dispatch(setCraftingRow(next))
 }
 
 const craft = (dispatch, getState) => {
@@ -54,19 +52,6 @@ const craft = (dispatch, getState) => {
 
     if (recipe && hasCraftingResources(player, inventory)(recipe)) {
         craftItem(recipe.id)()
-    }
-}
-
-const cancelRecycle = (dispatch, getState) => {
-    const { kinds, player } = getState()
-    const item = getRecycledItem(getState)
-
-    if (item) {
-        const kind = kinds.items.get(item)
-
-        if (kind.recyclable && kind.recyclable <= player.creature.resources.components) {
-            cancelRecycleItem(item)()
-        }
     }
 }
 
@@ -84,28 +69,30 @@ export default (command, dispatch, getState) => {
             gameActions.playerInfo()(dispatch)
             break
         }
-        case commands.CRAFTING_ACTION: {
-            const column = getState().ui.crafting.column
-
-            if (column === COLUMN_RECIPES) {
-                craft(dispatch, getState)
-            } else {
-                cancelRecycle(dispatch, getState)
-            }
+        case commands.CRAFT: {
+            craft(dispatch, getState)
             break
         }
-        case commands.CRAFTING_SELECTION_UP: {
+        case commands.TAB_LEFT: {
+            changeTab(dispatch, getState, true)
+            break
+        }
+        case commands.TAB_RIGHT: {
+            changeTab(dispatch, getState, false)
+            break
+        }
+        case commands.ROW_UP: {
             changeRow(dispatch, getState, true)
             break
         }
-        case commands.CRAFTING_SELECTION_DOWN: {
+        case commands.ROW_DOWN: {
             changeRow(dispatch, getState, false)
             break
         }
-        case commands.CRAFTING_SELECTION_LEFT:
-        case commands.CRAFTING_SELECTION_RIGHT: {
-            changeColumn(dispatch, getState)
-            break
+        default: {
+            if (isSetEquipmentSetCommand(command)) {
+                gameActions.setEquipmentSet(getEquipmentSet(command))()
+            }
         }
     }
 }

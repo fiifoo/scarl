@@ -2,8 +2,8 @@ package io.github.fiifoo.scarl.effect.interact
 
 import io.github.fiifoo.scarl.core.State
 import io.github.fiifoo.scarl.core.effect.{Effect, EffectResult, RemoveEntityEffect}
-import io.github.fiifoo.scarl.core.entity.CreatureId
 import io.github.fiifoo.scarl.core.entity.Selectors.getContainerItems
+import io.github.fiifoo.scarl.core.entity.{CreatureId, Item}
 import io.github.fiifoo.scarl.core.item.Recipe.{Cost, RecipeId}
 import io.github.fiifoo.scarl.core.kind.Kind.Options
 import io.github.fiifoo.scarl.core.mutation.{CreatureComponentsMutation, Mutation}
@@ -11,6 +11,7 @@ import io.github.fiifoo.scarl.effect.creature.ShortageEffect
 
 case class CraftItemEffect(craftsman: CreatureId,
                            recipe: RecipeId,
+                           equip: Boolean = false,
                            parent: Option[Effect] = None
                           ) extends Effect {
 
@@ -22,10 +23,35 @@ case class CraftItemEffect(craftsman: CreatureId,
     } else {
       val (costEffects, costMutations) = this.getCostResults(s, recipe.cost)
       val craftedEffect = ItemCraftedEffect(this.craftsman, recipe.item, Some(this))
-      val itemMutations = recipe.item(s).apply(s, s.idSeq, this.craftsman, Options()).mutations
+      val itemResult = recipe.item(s).apply(s, s.idSeq, this.craftsman, Options())
+      val equipEffect = this.getEquipEffect(s, itemResult.entity)
 
-      EffectResult(costMutations ::: itemMutations, costEffects ::: List(craftedEffect))
+      val mutations = costMutations ::: itemResult.mutations
+      val effects = costEffects ::: List(Some(craftedEffect), equipEffect).flatten
+
+      EffectResult(mutations, effects)
     }
+  }
+
+  private def getEquipEffect(s: State, item: Item): Option[Effect] = {
+    if (!this.equip) {
+      return None
+    }
+
+    val equipment = List(
+      item.weapon,
+      item.rangedWeapon,
+      item.launcher,
+      item.shield,
+      item.armor
+    ).flatten.headOption
+
+    equipment map (equipment => {
+      val slot = equipment.slots.head
+      val location = this.craftsman(s).location
+
+      EquipItemEffect(this.craftsman, item.id, slot, location, Some(this))
+    })
   }
 
   private def hasResources(s: State, cost: Cost): Boolean = {

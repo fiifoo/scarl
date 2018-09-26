@@ -1,4 +1,4 @@
-import { List, Map, Record } from 'immutable'
+import { List, Record } from 'immutable'
 import { groups as equipmentGroups, slots as equipmentSlots } from './equipment'
 
 const Action = Record({
@@ -11,32 +11,39 @@ const Action = Record({
 const Tab = Record({
     key: undefined,
     label: undefined,
+    prop: undefined,
 })
 
 export const tabs = List([
     Tab({
         key: 'Weapon',
         label: 'Melee weapons',
+        prop: 'weapon',
     }),
     Tab({
         key: 'RangedWeapon',
         label: 'Ranged weapons',
+        prop: 'rangedWeapon',
     }),
     Tab({
         key: 'Launcher',
         label: 'Launchers',
+        prop: 'launcher',
     }),
     Tab({
         key: 'Shield',
         label: 'Shields',
+        prop: 'shield',
     }),
     Tab({
         key: 'Armor',
         label: 'Wearables',
+        prop: 'armor',
     }),
     Tab({
         key: 'Usable',
         label: 'Usables',
+        prop: 'usable',
     }),
     Tab({
         key: 'Other',
@@ -44,14 +51,7 @@ export const tabs = List([
     }),
 ])
 
-const props = Map({
-    Weapon: 'weapon',
-    RangedWeapon: 'rangedWeapon',
-    Launcher: 'launcher',
-    Shield: 'shield',
-    Armor: 'armor',
-    Usable: 'usable',
-})
+const props = tabs.map(x => x.prop).filter(x => x)
 
 export const getItemActions = (actions, equipments, tab) => item => {
     const dropAction = Action({
@@ -63,17 +63,23 @@ export const getItemActions = (actions, equipments, tab) => item => {
         Action({
             label: 'Recycle',
             execute: () => actions.recycleItem(item.id),
+            subs: List([
+                Action({
+                    label: 'Recycle',
+                    execute: () => actions.recycleItem(item.id),
+                }),
+                dropAction,
+            ]),
         })
     ) : null
 
-    const exists = x => x != null
+    const recycleOrDrop = recycleAction || dropAction
 
     switch (tab.key) {
         case 'Other': {
             return List([
-                recycleAction,
-                dropAction,
-            ]).filter(exists)
+                recycleOrDrop,
+            ])
         }
         case 'Usable': {
             return List([
@@ -81,9 +87,8 @@ export const getItemActions = (actions, equipments, tab) => item => {
                     label: 'Use',
                     execute: () => actions.useItem(item.id),
                 }),
-                recycleAction,
-                dropAction,
-            ]).filter(exists)
+                recycleOrDrop,
+            ])
         }
         default: {
             const group = equipmentGroups[tab.key]
@@ -105,7 +110,7 @@ export const getItemActions = (actions, equipments, tab) => item => {
                     execute: () => actions.equipItem(item.id, defaultSlot),
                     subs: !fillAll && slots.size > 1 ? (
                         slots.map(slot => Action({
-                            label: equipmentSlots[slot].label,
+                            label: `Equip (${equipmentSlots[slot].label})`,
                             execute: () => actions.equipItem(item.id, slot),
                         }))
                     ) : List(),
@@ -114,9 +119,8 @@ export const getItemActions = (actions, equipments, tab) => item => {
 
             return List([
                 equipAction,
-                recycleAction,
-                dropAction,
-            ]).filter(exists)
+                recycleOrDrop,
+            ])
         }
     }
 }
@@ -125,14 +129,12 @@ export const getItemActionsFlat = (actions, equipments, tab) => {
     const get = getItemActions(actions, equipments, tab)
 
     return item => get(item).flatMap(action => (
-        action.subs.isEmpty() ? List([action]) : action.subs.map(sub => (
-            sub.set('label', `${action.label} (${sub.label})`)
-        ))
+        action.subs.isEmpty() ? List([action]) : action.subs
     ))
 }
 
 export const getTabItems = (inventory, kinds) => tab => {
-    const prop = props.get(tab.key)
+    const prop = tab.prop
 
     const items = prop ? (
         inventory.filter(createFilter(prop))

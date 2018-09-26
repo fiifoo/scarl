@@ -1,42 +1,43 @@
-import { Button } from 'react-bootstrap'
 import React from 'react'
-import { COLUMN_RECIPES, COLUMN_RECYCLES, hasCraftingResources } from '../../game/crafting'
+import { Button } from 'react-bootstrap'
+import { Nav, NavItem } from 'react-bootstrap'
+import { getTabRecipes, hasCraftingResources, tabs } from '../../game/crafting'
+import Equipped from '../inventory/Equipped.jsx'
 import ItemDetails from '../inventory/ItemDetails.jsx'
 
-const getRecipe = (player, recipes, ui) => {
-    if (ui.column !== COLUMN_RECIPES) {
-        return undefined
-    }
+const NoRecipes = () => <i style={{marginLeft: 20}}>No recipes</i>
 
-    const row = ui.row
-    const id = player.recipes.toArray()[row]
+const getRecipe = (player, recipes, kinds, ui) => {
+    const tab = tabs.get(ui.tab)
 
-    if (id) {
-        return recipes.get(id)
-    } else {
-        return undefined
-    }
+    return getTabRecipes(player, recipes, kinds)(tab).get(ui.row)
 }
 
-const Recipes = ({inventory, kinds, player, recipes, ui, craftItem, setSelection}) => {
+const Recipes = ({inventory, kinds, player, recipes, ui, craftItem, setRow}) => {
+    const tab = tabs.get(ui.tab)
     const hasResources = hasCraftingResources(player, inventory)
 
     const renderRecipe = (recipe, index) => {
-        const selected = ui.column === COLUMN_RECIPES && index === ui.row
-        const select = () => setSelection(COLUMN_RECIPES, index)
+        const selected = index === ui.row
+        const select = () => setRow(index)
 
         const kind = kinds.items.get(recipe.item)
+        const disabled = ! hasResources(recipe)
+        const className = [
+            selected ? 'active' : null,
+            disabled ? 'text-muted' : null,
+        ].filter(x => !!x).join(' ')
 
         return (
             <tr
                 key={recipe.id}
-                className={selected ? 'active' : null}
+                className={className}
                 onClick={select}>
                 <td>
                     <Button
                         bsSize="xsmall"
                         onClick={() => craftItem(recipe.id)}
-                        disabled={! hasResources(recipe)}>
+                        disabled={disabled}>
                         Craft
                     </Button>
                 </td>
@@ -45,17 +46,19 @@ const Recipes = ({inventory, kinds, player, recipes, ui, craftItem, setSelection
         )
     }
 
+    const tabRecipes = getTabRecipes(player, recipes, kinds)(tab)
+
     return (
         <table className="scarl-table">
             <tbody>
-                {player.recipes.toArray().map(x => recipes.get(x)).map(renderRecipe)}
+                {tabRecipes.isEmpty() ? <NoRecipes /> : tabRecipes.map(renderRecipe)}
             </tbody>
         </table>
     )
 }
 
 const Recipe = ({equipments, inventory, kinds, player, recipes, ui, craftItem}) => {
-    const recipe = getRecipe(player, recipes, ui)
+    const recipe = getRecipe(player, recipes, kinds, ui)
 
     if (! recipe) {
         return <div>&nbsp;</div>
@@ -64,6 +67,7 @@ const Recipe = ({equipments, inventory, kinds, player, recipes, ui, craftItem}) 
     const item = kinds.items.get(recipe.item)
     const hasComponents = recipe.cost.components <= player.creature.resources.components
     const owned = inventory.filter(item => item.kind === recipe.id).size
+    const disabled = ! hasCraftingResources(player, inventory)(recipe)
 
     const renderRequiredItem = (id, index) => {
         const kind = kinds.items.get(id)
@@ -71,7 +75,7 @@ const Recipe = ({equipments, inventory, kinds, player, recipes, ui, craftItem}) 
 
         return (
             <tr key={index} className={hasItem ? undefined : 'text-muted'}>
-                <th>Required item</th>
+                <th className="text-right">Required item</th>
                 <td colSpan="2">{kind.name}</td>
             </tr>
         )
@@ -83,14 +87,17 @@ const Recipe = ({equipments, inventory, kinds, player, recipes, ui, craftItem}) 
             <table className="scarl-table">
                 <tbody>
                     <tr>
-                        <th>In inventory</th>
+                        <th className="text-right">In inventory</th>
                         <td colSpan="2">{owned}</td>
                     </tr>
                     <tr className={hasComponents ? undefined : 'text-muted'}>
-                        <th>Required components</th>
+                        <th className="text-right">Required components</th>
                         <td colSpan="2">{recipe.cost.components}</td>
                     </tr>
                     {recipe.cost.items.map(renderRequiredItem)}
+                    <tr>
+                        <td colSpan="3">&nbsp;</td>
+                    </tr>
                 </tbody>
                 <ItemDetails
                     equipments={equipments}
@@ -99,12 +106,27 @@ const Recipe = ({equipments, inventory, kinds, player, recipes, ui, craftItem}) 
                     kinds={kinds} />
                 <tbody>
                     <tr>
+                        <td colSpan="3">&nbsp;</td>
+                    </tr>
+                    <tr>
                         <th></th>
                         <td colSpan="2">
                             <Button
                                 onClick={() => craftItem(recipe.id)}
-                                disabled={! hasCraftingResources(player, inventory)(recipe)}>
+                                disabled={disabled}
+                                style={{width: '100%'}}>
                                 Craft
+                            </Button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th></th>
+                        <td colSpan="2">
+                            <Button
+                                onClick={() => craftItem(recipe.id, true)}
+                                disabled={disabled}
+                                style={{width: '100%'}}>
+                                Craft and equip
                             </Button>
                         </td>
                     </tr>
@@ -114,18 +136,15 @@ const Recipe = ({equipments, inventory, kinds, player, recipes, ui, craftItem}) 
     )
 }
 
-const RecycledItems = ({kinds, player, ui, cancelRecycleItem}) => {
+const RecycledItems = ({kinds, player, cancelRecycleItem}) => {
     const hasResources = kind => kind.recyclable && kind.recyclable <= player.creature.resources.components
 
     const renderItem = (item, index) => {
-        const selected = ui.column === COLUMN_RECYCLES && index === ui.row
-
         const kind = kinds.items.get(item)
 
         return (
-            <tr
-                key={index}
-                className={selected ? 'active' : null}>
+            <tr key={index}>
+                <td className="full-width">{kind.name}</td>
                 <td>
                     <Button
                         bsSize="xsmall"
@@ -134,7 +153,6 @@ const RecycledItems = ({kinds, player, ui, cancelRecycleItem}) => {
                         Cancel
                     </Button>
                 </td>
-                <td className="full-width">{kind.name}</td>
             </tr>
         )
     }
@@ -149,9 +167,25 @@ const RecycledItems = ({kinds, player, ui, cancelRecycleItem}) => {
 }
 
 const Crafting = props => {
+    const { equipmentSet, equipments, inventory, kinds, ui, recycleItem, setEquipmentSet, setTab } = props
+
     return (
         <div>
-            <h4>Crafting components: {props.player.creature.resources.components}</h4>
+            <div className="clearfix">
+                <div className="pull-left">
+                    <Nav bsStyle="pills" activeKey={ui.tab} onSelect={setTab}>
+                        {tabs.map((tab, index) => (
+                            <NavItem key={index} eventKey={index}>
+                                {tab.label}
+                            </NavItem>
+                        ))}
+                    </Nav>
+                </div>
+                <h4 className="pull-left" style={{marginLeft: 12, textDecoration: 'underline'}}>
+                    Crafting components: {props.player.creature.resources.components}
+                </h4>
+            </div>
+
             <div className="scarl-panel">
                 <h4>Recipes</h4>
                 <Recipes {...props} />
@@ -160,6 +194,14 @@ const Crafting = props => {
                 <Recipe {...props} />
             </div>
             <div className="scarl-panel">
+                <Equipped
+                    equipmentSet={equipmentSet}
+                    equipments={equipments}
+                    inventory={inventory}
+                    kinds={kinds.items}
+                    recycleItem={recycleItem}
+                    setEquipmentSet={setEquipmentSet} />
+                <br />
                 <h4>Recycled items</h4>
                 <RecycledItems {...props} />
             </div>

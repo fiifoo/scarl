@@ -1,7 +1,11 @@
 import * as types from './actionTypes'
 
-export const setCraftingSelection = (column, row) => ({
-    type: types.SET_CRAFTING_SELECTION,
-    column,
+export const setCraftingTab = tab => ({
+    type: types.SET_CRAFTING_TAB,
+    tab,
+})
+
+export const setCraftingRow = row => ({
+    type: types.SET_CRAFTING_ROW,
     row,
 })

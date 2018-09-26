@@ -118,11 +118,11 @@ const handleCommon = (command, dispatch, getState) => {
             gameActions.playerInfo()(dispatch)
             break
         }
-        case commands.INVENTORY_TAB_LEFT: {
+        case commands.TAB_LEFT: {
             changeTab(dispatch, getState, true)
             break
         }
-        case commands.INVENTORY_TAB_RIGHT: {
+        case commands.TAB_RIGHT: {
             changeTab(dispatch, getState, false)
             break
         }
@@ -139,11 +139,11 @@ const handleNormal = (command, dispatch, getState) => {
             gameActions.cancelMode()(dispatch)
             break
         }
-        case commands.INVENTORY_ROW_UP: {
+        case commands.ROW_UP: {
             changeRow(dispatch, getState, true)
             break
         }
-        case commands.INVENTORY_ROW_DOWN: {
+        case commands.ROW_DOWN: {
             changeRow(dispatch, getState, false)
             break
         }
@@ -169,11 +169,11 @@ const handleInteract = (command, dispatch, getState) => {
             setAction(dispatch, null)
             break
         }
-        case commands.INVENTORY_ROW_UP: {
+        case commands.ROW_UP: {
             changeAction(dispatch, getState, true)
             break
         }
-        case commands.INVENTORY_ROW_DOWN: {
+        case commands.ROW_DOWN: {
             changeAction(dispatch, getState, false)
             break
         }
