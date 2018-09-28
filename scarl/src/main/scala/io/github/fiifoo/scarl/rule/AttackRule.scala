@@ -14,7 +14,8 @@ object AttackRule {
 
   case class Result(hit: Boolean, bypass: Option[Int], damage: Option[Int])
 
-  val DamageVariance = 0.5
+  val damageVariance = 0.5
+  val minBypass = 30
 
   def melee(s: State, random: Random)(attacker: CreatureId, defender: CreatureId): Result = {
     val attackerStats = getCreatureStats(s)(attacker)
@@ -73,7 +74,7 @@ object AttackRule {
       case x if x > 0 => true
       case x if x < 0 => false
     }) {
-      Some(random.nextInt(100) + 1)
+      Some(minBypass + random.nextInt(100 - minBypass + 1))
     } else {
       None
     }
@@ -83,7 +84,7 @@ object AttackRule {
     val damage = math.max(attacker.damage, 1)
     val armor = math.max(defender.armor, 0)
 
-    val variance = math.round(damage * DamageVariance).toInt
+    val variance = math.round(damage * damageVariance).toInt
     val dealt = damage + random.nextInt(variance * 2 + 1) - variance
     val blocked = armor * (100 - (bypass getOrElse 0)) / 100
 
