@@ -352,16 +352,20 @@ class EventBuilder(s: State, player: CreatureId, fov: Set[Location]) {
       } else {
         s"You hit ${kind(effect.target)}."
       })
-    } else if (effect.target == player || (fov contains effect.location)) {
-      val target = if (effect.target == player) "you" else kind(effect.target)
-
+    } else if (effect.target == player) {
       Some(if (damage.isEmpty) {
-        s"${kind(effect.attacker)} hits $target with no effect."
+        s"${kind(effect.attacker)} hits you with no effect."
       } else if (bypass.isDefined) {
-        s"${kind(effect.attacker)} hits $target bypassing some of it's armor."
+        s"${kind(effect.attacker)} hits you bypassing some of your armor."
       } else {
-        s"${kind(effect.attacker)} hits $target."
+        s"${kind(effect.attacker)} hits you."
       })
+    } else if (fov contains effect.location) {
+      if (damage.isEmpty) {
+        None
+      } else {
+        Some(s"${kind(effect.attacker)} hits ${kind(effect.target)}.")
+      }
     } else {
       None
     }
