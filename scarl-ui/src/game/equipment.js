@@ -111,8 +111,8 @@ const getOffHandWeaponStats = stats => {
             attack: Math.floor(melee.attack / OFF_HAND_DIVISOR),
             damage: Math.floor(melee.damage / OFF_HAND_DIVISOR),
             consumption: {
-                energy: Math.floor(consumption.energy / OFF_HAND_DIVISOR),
-                materials: Math.floor(consumption.materials / OFF_HAND_DIVISOR),
+                energy: consumption.energy / OFF_HAND_DIVISOR,
+                materials: consumption.materials / OFF_HAND_DIVISOR,
             },
         },
     }
