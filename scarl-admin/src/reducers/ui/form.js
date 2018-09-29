@@ -33,10 +33,10 @@ export default tabbedReducer(initial, (state, action) => {
             return state.set('model', action.model).set('item', null).set('itemRename', ItemRename())
         }
         case types.SELECT_ITEM: {
-            return state.set('item', action.item).set('itemRename', ItemRename())
+            return state.set('item', action.item).set('itemRename', ItemRename()).set('sideForm', null)
         }
         case types.ADD_ITEM: {
-            return state.set('item', action.id).set('itemAdd', ItemAdd()).set('itemRename', ItemRename())
+            return state.set('item', action.id).set('itemAdd', ItemAdd()).set('itemRename', ItemRename()).set('sideForm', null)
         }
         case types.DELETE_ITEM: {
             return state.set('item', null).set('itemRename', ItemRename())
