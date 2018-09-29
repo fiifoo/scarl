@@ -35,7 +35,7 @@ object JsonTactic {
       case "FollowTactic" => data.as[FollowTactic]
       case "MissileTactic" => data.as[MissileTactic]
       case "PursueTactic" => data.as[PursueTactic]
-      case "ScoutTactic" => data.as[ScoutTactic]
+      case "ScoutTactic" => if (data == JsObject.empty) ScoutTactic() else data.as[ScoutTactic]
       case "TravelTactic" => data.as[TravelTactic]
     }, {
       case GreetTactic => JsNull

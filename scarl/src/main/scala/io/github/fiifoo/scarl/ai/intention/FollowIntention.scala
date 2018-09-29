@@ -7,9 +7,9 @@ import io.github.fiifoo.scarl.core.entity.{CreatureId, SafeCreatureId}
 
 import scala.util.Random
 
-case class FollowIntention(target: SafeCreatureId) extends Intention {
+case class FollowIntention(target: SafeCreatureId, waiting: Boolean = false) extends Intention {
 
   def apply(s: State, actor: CreatureId, random: Random): Option[Result] = {
-    target(s) flatMap Utils.follow(s, actor)
+    target(s) flatMap Utils.follow(s, actor, !waiting)
   }
 }

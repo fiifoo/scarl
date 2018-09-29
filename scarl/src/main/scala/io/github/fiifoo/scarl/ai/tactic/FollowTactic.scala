@@ -4,13 +4,13 @@ import io.github.fiifoo.scarl.ai.intention.{CheckAttackIntention, FollowIntentio
 import io.github.fiifoo.scarl.core.ai.{Intention, Priority, Tactic}
 import io.github.fiifoo.scarl.core.entity.SafeCreatureId
 
-case class FollowTactic(target: SafeCreatureId) extends Tactic {
+case class FollowTactic(target: SafeCreatureId, waiting: Boolean = false) extends Tactic {
 
   val intentions: List[(Intention, Priority.Value)] = List((
     CheckAttackIntention(),
     Priority.high
   ), (
-    FollowIntention(target),
+    FollowIntention(target, waiting),
     Priority.high
   ))
 }

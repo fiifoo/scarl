@@ -9,11 +9,13 @@ import io.github.fiifoo.scarl.core.geometry.Location
 
 import scala.util.Random
 
-case class EscapeIntention(source: Location, destination: Location) extends Intention {
+case class EscapeIntention(source: Location, destination: Location, waiting: Boolean = false) extends Intention {
 
   def apply(s: State, actor: CreatureId, random: Random): Option[Result] = {
     if (actor(s).location != destination) {
-      Utils.travel(s, actor, destination, displace = true) map ((EscapeTactic(source, destination), _))
+      Utils.travel(s, actor, destination, displace = true, wait = !waiting) map (action => {
+        (EscapeTactic(source, destination, Utils.waited(action)), action)
+      })
     } else {
       None
     }

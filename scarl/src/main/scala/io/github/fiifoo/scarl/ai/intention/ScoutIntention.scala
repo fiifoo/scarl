@@ -10,12 +10,14 @@ import io.github.fiifoo.scarl.core.math.Rng
 
 import scala.util.Random
 
-case class ScoutIntention(destination: Option[Location] = None) extends Intention {
+case class ScoutIntention(destination: Option[Location] = None, waiting: Boolean = false) extends Intention {
 
   def apply(s: State, actor: CreatureId, random: Random): Option[Result] = {
     destination orElse selectDestination(s: State, actor: CreatureId, random: Random) flatMap (destination => {
       if (actor(s).location != destination) {
-        Utils.travel(s, actor, destination, displace = true) map ((ScoutTactic(Some(destination)), _))
+        Utils.travel(s, actor, destination, displace = true, !waiting) map (action => {
+          (ScoutTactic(Some(destination), Utils.waited(action)), action)
+        })
       } else {
         None
       }

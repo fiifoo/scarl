@@ -1,6 +1,5 @@
 package io.github.fiifoo.scarl.ai.intention
 
-import io.github.fiifoo.scarl.action.PassAction
 import io.github.fiifoo.scarl.ai.tactic.TravelTactic
 import io.github.fiifoo.scarl.core.State
 import io.github.fiifoo.scarl.core.ai.Intention
@@ -15,12 +14,7 @@ case class TravelIntention(destination: Location, waiting: Boolean = false) exte
   def apply(s: State, actor: CreatureId, random: Random): Option[Result] = {
     if (actor(s).location != destination) {
       Utils.travel(s, actor, destination, wait = !waiting) map (action => {
-        val waited = action match {
-          case PassAction => true
-          case _ => false
-        }
-
-        (TravelTactic(destination, waited), action)
+        (TravelTactic(destination, Utils.waited(action)), action)
       })
     } else {
       None

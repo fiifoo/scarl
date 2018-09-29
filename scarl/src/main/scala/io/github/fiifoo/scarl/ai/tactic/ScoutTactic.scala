@@ -9,7 +9,7 @@ import io.github.fiifoo.scarl.core.geometry.Location
 
 import scala.util.Random
 
-case class ScoutTactic(destination: Option[Location] = None) extends Behavior {
+case class ScoutTactic(destination: Option[Location] = None, waiting: Boolean = false) extends Behavior {
 
   val intentions: List[(Intention, Priority.Value)] = List((
     CheckEscapeIntention,
@@ -18,7 +18,7 @@ case class ScoutTactic(destination: Option[Location] = None) extends Behavior {
     CheckAttackIntention(),
     Priority.high
   ), (
-    ScoutIntention(destination),
+    ScoutIntention(destination, waiting),
     Priority.medium
   ))
 
