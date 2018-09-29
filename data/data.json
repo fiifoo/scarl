@@ -3825,7 +3825,7 @@
       "usable" : {
         "type" : "RemoveItemPower",
         "data" : {
-          "description" : "You disassemble device for components",
+          "description" : "You disassemble device for components.",
           "resources" : {
             "health" : 0,
             "energy" : 0,
@@ -6037,7 +6037,7 @@
       "data" : {
         "item" : "iridan/portal",
         "summon" : "iridan/default",
-        "interval" : 5000,
+        "interval" : 4000,
         "id" : "iridan/portal",
         "summonDescription" : "{target} is constructed.",
         "category" : "WidgetKind.PortalCategory",
