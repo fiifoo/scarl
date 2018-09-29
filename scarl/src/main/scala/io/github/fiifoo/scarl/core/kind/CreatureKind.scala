@@ -30,7 +30,7 @@ case class CreatureKind(id: CreatureKindId,
                         usable: Option[CreaturePower] = None,
 
                         equipments: Map[Slot, ItemKindId] = Map(),
-                        inventory: Set[ItemKindId] = Set(),
+                        inventory: List[ItemKindId] = List(),
                         recipes: Set[RecipeId] = Set(),
 
                         greetings: Map[FactionId, List[CommunicationId]] = Map(),
