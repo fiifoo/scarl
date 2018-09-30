@@ -386,7 +386,8 @@ object HouseFeature {
 
     private def selectDoors(walls: Iterable[Location], doorFactor: Int, random: Random): Set[Location] = {
       def select(walls: Iterable[Location], result: Set[Location]): Set[Location] = {
-        val (choices, rest) = walls.splitAt(doorFactor)
+        val validWalls = if (walls.size > 1) walls.init else walls
+        val (choices, rest) = validWalls.splitAt(doorFactor)
         val door = Rng.nextChoice(random, choices)
 
         if (rest.isEmpty) {
@@ -416,7 +417,7 @@ object HouseFeature {
     private def constrictTo(roomSize: Int, foundation: Foundation, to: Line): (X, X) = {
       val floors = foundation.floors
         .filter(floor => floor.y < to.y && floor.intersect(to).isDefined)
-        .dropRight(1)
+        .drop(1)
 
       if (floors.isEmpty) {
         return (to.left + 1, to.right - 1)
