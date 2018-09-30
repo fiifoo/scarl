@@ -2846,7 +2846,7 @@
             "materials" : 15,
             "components" : 0
           },
-          "removeDescription" : "Mine deactivates."
+          "removeDescription" : "Explosive deactivates."
         }
       },
       "pickable" : false,
@@ -2965,6 +2965,39 @@
       "id" : "skyfarer/explosive-timed-antimatter-active",
       "weapon" : null,
       "armor" : null
+    } ], [ "generic/components-measurement-device", {
+      "launcher" : null,
+      "display" : "Ω",
+      "color" : "white",
+      "rangedWeapon" : null,
+      "power" : null,
+      "explosive" : null,
+      "shield" : null,
+      "hidden" : false,
+      "locked" : null,
+      "name" : "Measurement device",
+      "concealment" : 0,
+      "trap" : null,
+      "door" : null,
+      "usable" : {
+        "type" : "RemoveItemPower",
+        "data" : {
+          "description" : "You disassemble device for components.",
+          "resources" : {
+            "health" : 0,
+            "energy" : 0,
+            "materials" : 0,
+            "components" : 1
+          },
+          "removeDescription" : null
+        }
+      },
+      "pickable" : false,
+      "id" : "generic/components-measurement-device",
+      "weapon" : null,
+      "category" : null,
+      "armor" : null,
+      "key" : null
     } ], [ "generic/door-invisible", {
       "display" : "/",
       "color" : "brown",
@@ -3808,39 +3841,6 @@
       "weapon" : null,
       "category" : "ItemKind.UtilityCategory",
       "armor" : null
-    } ], [ "generic/decoration-measurement-device", {
-      "launcher" : null,
-      "display" : "Ω",
-      "color" : "white",
-      "rangedWeapon" : null,
-      "power" : null,
-      "explosive" : null,
-      "shield" : null,
-      "hidden" : false,
-      "locked" : null,
-      "name" : "Measurement device",
-      "concealment" : 0,
-      "trap" : null,
-      "door" : null,
-      "usable" : {
-        "type" : "RemoveItemPower",
-        "data" : {
-          "description" : "You disassemble device for components.",
-          "resources" : {
-            "health" : 0,
-            "energy" : 0,
-            "materials" : 0,
-            "components" : 1
-          },
-          "removeDescription" : null
-        }
-      },
-      "pickable" : false,
-      "id" : "generic/decoration-measurement-device",
-      "weapon" : null,
-      "category" : null,
-      "armor" : null,
-      "key" : null
     } ], [ "skyfarer/explosive-timed-antimatter", {
       "display" : "¤",
       "color" : "white",
@@ -4484,6 +4484,39 @@
         },
         "slot" : "Equipment.HeadArmor"
       },
+      "key" : null
+    } ], [ "generic/components-coms-equipment", {
+      "launcher" : null,
+      "display" : "Σ",
+      "color" : "white",
+      "rangedWeapon" : null,
+      "power" : null,
+      "explosive" : null,
+      "shield" : null,
+      "hidden" : false,
+      "locked" : null,
+      "name" : "Communications equipment",
+      "concealment" : 0,
+      "trap" : null,
+      "door" : null,
+      "usable" : {
+        "type" : "RemoveItemPower",
+        "data" : {
+          "description" : "You disassemble equipment for components.",
+          "resources" : {
+            "health" : 0,
+            "energy" : 0,
+            "materials" : 0,
+            "components" : 1
+          },
+          "removeDescription" : null
+        }
+      },
+      "pickable" : false,
+      "id" : "generic/components-coms-equipment",
+      "weapon" : null,
+      "category" : null,
+      "armor" : null,
       "key" : null
     } ], [ "skyfarer/weapon-whip-plasma", {
       "launcher" : null,
@@ -7558,7 +7591,7 @@
           "creatures" : [ ],
           "items" : [ ],
           "widgets" : [ ],
-          "catalogues" : [ "generic/room-portal-high" ]
+          "catalogues" : [ "generic/room-portal-high", "generic/room-portal-high" ]
         }
       } ],
       "entrances" : {
@@ -10033,7 +10066,7 @@
         }, [ {
           "type" : "ContentSelection.FixedItem",
           "data" : {
-            "kind" : "generic/decoration-measurement-device",
+            "kind" : "generic/components-measurement-device",
             "tags" : [ ]
           }
         } ] ], [ {
@@ -12132,6 +12165,21 @@
           }
         },
         "required" : 1
+      }, {
+        "selection" : {
+          "type" : "ContentSelection.FixedTemplate",
+          "data" : {
+            "template" : "idiran/space-coms-equipment"
+          }
+        },
+        "distribution" : {
+          "type" : "Distribution.Uniform",
+          "data" : {
+            "min" : 2,
+            "max" : 3
+          }
+        },
+        "required" : 3
       } ],
       "id" : "iridan/area-coms",
       "features" : [ {
@@ -12338,6 +12386,72 @@
         "door" : "generic/door-invisible"
       },
       "category" : null
+    }
+  } ], [ "idiran/space-coms-equipment", {
+    "type" : "RandomizedTemplate",
+    "data" : {
+      "conduitLocations" : {
+        "min" : 0,
+        "max" : 0
+      },
+      "shape" : {
+        "type" : "Rectangle",
+        "data" : {
+          "width" : 5,
+          "height" : 5,
+          "variance" : 0
+        }
+      },
+      "fill" : null,
+      "border" : null,
+      "terrain" : null,
+      "templates" : [ ],
+      "id" : "idiran/space-coms-equipment",
+      "features" : [ {
+        "type" : "RandomizedContentFeature",
+        "data" : {
+          "creatures" : [ {
+            "selection" : {
+              "type" : "ContentSelection.FixedCreature",
+              "data" : {
+                "kind" : "iridan/turret",
+                "tags" : [ ]
+              }
+            },
+            "distribution" : {
+              "type" : "Distribution.Uniform",
+              "data" : {
+                "min" : 1,
+                "max" : 1
+              }
+            }
+          } ],
+          "items" : [ {
+            "selection" : {
+              "type" : "ContentSelection.FixedItem",
+              "data" : {
+                "kind" : "generic/components-coms-equipment",
+                "tags" : [ ]
+              }
+            },
+            "distribution" : {
+              "type" : "Distribution.Uniform",
+              "data" : {
+                "min" : 1,
+                "max" : 1
+              }
+            }
+          } ],
+          "widgets" : [ ],
+          "catalogues" : [ "generic/room-portal-low" ]
+        }
+      } ],
+      "entrances" : {
+        "min" : 1,
+        "max" : 2,
+        "door" : "generic/door-invisible"
+      },
+      "category" : "Template.SpaceCategory"
     }
   } ], [ "iridan/space-skyfarer-assault", {
     "type" : "FixedTemplate",
