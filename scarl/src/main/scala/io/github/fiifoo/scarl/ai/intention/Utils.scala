@@ -60,9 +60,16 @@ object Utils {
   }
 
   def follow(s: State, actor: CreatureId, wait: Boolean = false)(target: Creature): Option[Result] = {
-    travel(s, actor, target.location, displace = true, wait) map (action => {
-      (FollowTactic(SafeCreatureId(target.id), waited(action)), action)
-    })
+    val from = actor(s).location
+    val to = target.location
+
+    if (distance(from, to) <= 2) {
+      None
+    } else {
+      travel(s, actor, to, displace = true, wait) map (action => {
+        (FollowTactic(SafeCreatureId(target.id), waited(action)), action)
+      })
+    }
   }
 
   def isEnemy(s: State, creature: CreatureId): CreatureId => Boolean = {
