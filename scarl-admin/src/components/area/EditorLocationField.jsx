@@ -6,6 +6,7 @@ import SelectRow from '../form/SelectRow.jsx'
 
 const selectionModels = {
     creature: 'ContentSelection.CreatureSelection',
+    entrance: 'ContentSelection.DoorSelection',
     items: 'ContentSelection.ItemSelection',
     terrain: 'ContentSelection.TerrainSelection',
     wall: 'ContentSelection.WallSelection',
@@ -95,6 +96,7 @@ const components = {
     machineryControls: MachineryField('Machinery controls'),
     machineryTargets: MachineryField('Machinery targets'),
     creature: SelectionField('Creature'),
+    entrance: SelectionField('Entrance'),
     items: SelectionField('Items', true),
     terrain: SelectionField('Terrain'),
     wall: SelectionField('Wall'),

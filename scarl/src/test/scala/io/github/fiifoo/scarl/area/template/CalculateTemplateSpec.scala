@@ -3,11 +3,12 @@ package io.github.fiifoo.scarl.area.template
 import io.github.fiifoo.scarl.area.shape.Rectangle
 import io.github.fiifoo.scarl.area.theme.{Theme, ThemeId}
 import io.github.fiifoo.scarl.area.{Area, AreaId}
-import io.github.fiifoo.scarl.core.assets.{CreatureCatalogueId, ItemCatalogueId, WidgetCatalogueId}
+import io.github.fiifoo.scarl.core.assets._
 import io.github.fiifoo.scarl.core.geometry.Location
-import io.github.fiifoo.scarl.core.kind.{ItemKindId, TerrainKindId, WallKindId}
+import io.github.fiifoo.scarl.core.kind.{TerrainKind, TerrainKindId}
 import io.github.fiifoo.scarl.core.math.Distribution
-import io.github.fiifoo.scarl.world.{TemplateCatalogueId, WorldAssets}
+import io.github.fiifoo.scarl.core.math.Rng.WeightedChoice
+import io.github.fiifoo.scarl.world.{TemplateCatalogueId, WorldAssets, WorldCatalogues}
 import org.scalatest._
 
 import scala.util.Random
@@ -16,14 +17,17 @@ class CalculateTemplateSpec extends FlatSpec with Matchers {
 
   private val theme = Theme(
     ThemeId(""),
-    ItemKindId(""),
-    TerrainKindId(""),
-    WallKindId(""),
-    TemplateCatalogueId(""),
     CreatureCatalogueId(""),
     ItemCatalogueId(""),
+    TemplateCatalogueId(""),
+    TerrainCatalogueId(""),
+    WallCatalogueId(""),
     WidgetCatalogueId(""),
   )
+
+  private val terrainCatalogue = TerrainCatalogue(TerrainCatalogueId(""), content = Map(
+    TerrainKind.DefaultCategory -> List(WeightedChoice(TerrainKindId(""), 1))
+  ))
 
   "CalculateTemplate" should "calculate template tree" in {
     val t1 = RandomizedTemplate(
@@ -58,6 +62,7 @@ class CalculateTemplateSpec extends FlatSpec with Matchers {
     )
 
     val assets = WorldAssets(
+      catalogues = WorldCatalogues(terrains = Map(terrainCatalogue.id -> terrainCatalogue)),
       templates = Map(t1.id -> t1, t2.id -> t2, t3.id -> t3, t4.id -> t4),
       themes = Map(theme.id -> theme)
     )

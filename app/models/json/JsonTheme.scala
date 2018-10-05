@@ -14,6 +14,8 @@ object JsonTheme {
   lazy private implicit val creatureCatalogueIdFormat = JsonCatalogues.creatureCatalogueIdFormat
   lazy private implicit val itemCatalogueIdFormat = JsonCatalogues.itemCatalogueIdFormat
   lazy private implicit val templateCatalogueIdFormat = JsonWorldCatalogues.templateCatalogueIdFormat
+  lazy private implicit val terrainCatalogueIdFormat = JsonCatalogues.terrainCatalogueIdFormat
+  lazy private implicit val wallCatalogueIdFormat = JsonCatalogues.wallCatalogueIdFormat
   lazy private implicit val widgetCatalogueIdFormat = JsonCatalogues.widgetCatalogueIdFormat
 
   lazy implicit val themeIdFormat: Format[ThemeId] = stringIdFormat(_.value, ThemeId.apply)

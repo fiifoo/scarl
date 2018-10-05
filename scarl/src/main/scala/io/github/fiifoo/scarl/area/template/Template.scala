@@ -3,7 +3,7 @@ package io.github.fiifoo.scarl.area.template
 import io.github.fiifoo.scarl.area.Area
 import io.github.fiifoo.scarl.area.shape.Shape
 import io.github.fiifoo.scarl.area.template.FixedContent.MachinerySource
-import io.github.fiifoo.scarl.area.template.Template.{Category, Result}
+import io.github.fiifoo.scarl.area.template.Template.Result
 import io.github.fiifoo.scarl.core.Tag
 import io.github.fiifoo.scarl.core.geometry.{Location, Rotation}
 import io.github.fiifoo.scarl.core.kind._
@@ -14,7 +14,6 @@ import scala.util.Random
 trait Template {
   val id: TemplateId
   val shape: Shape
-  val category: Option[Category]
   val power: Option[Int]
 
   def apply(assets: WorldAssets,
@@ -44,14 +43,14 @@ object Template {
 
   case class Result(shape: Shape.Result,
                     templates: Map[Location, Result] = Map(),
-                    entrances: Map[Location, ItemKindId] = Map(),
+                    entrances: Set[Location] = Set(),
                     content: ResultContent = ResultContent()
                    ) {
 
     def rotate(rotation: Rotation): Result = Result(
       shape = this.shape.rotate(rotation),
       templates = this.rotateTemplates(rotation),
-      entrances = rotation.mapKey(this.entrances),
+      entrances = this.entrances map rotation.apply,
       content = this.content.rotate(rotation)
     )
 

@@ -10,6 +10,7 @@ object JsonWorldCatalogues {
   import models.json.JsonBase.stringIdFormat
 
   lazy private implicit val templateIdFormat = JsonTemplate.templateIdFormat
+  lazy private implicit val templateCategoryFormat = JsonTemplate.templateCategoryFormat
 
   lazy implicit val contentSourceCatalogueIdFormat: Format[ContentSourceCatalogueId] = stringIdFormat(_.value, ContentSourceCatalogueId.apply)
   lazy implicit val templateCatalogueIdFormat: Format[TemplateCatalogueId] = stringIdFormat(_.value, TemplateCatalogueId.apply)

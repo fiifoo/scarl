@@ -1,7 +1,8 @@
 package models.json
 
 import io.github.fiifoo.scarl.core.creature.Stats.Explosive
-import io.github.fiifoo.scarl.core.kind.ItemKind.{Category, UtilityCategory}
+import io.github.fiifoo.scarl.core.item.Equipment
+import io.github.fiifoo.scarl.core.kind.ItemKind.{Category, DoorCategory}
 import io.github.fiifoo.scarl.core.kind.{ItemKind, ItemKindId}
 import play.api.libs.json._
 
@@ -25,9 +26,26 @@ object JsonItemKind {
 
   lazy implicit val itemKindFormat: Format[ItemKind] = Json.format
 
-  lazy implicit val categoryFormat: Format[Category] = polymorphicObjectFormat({
-    case "ItemKind.UtilityCategory" => UtilityCategory
+  lazy val itemKindMapReads: Reads[Map[ItemKindId, ItemKind]] = mapReads
+
+  lazy val itemCategoryFormat: Format[Category] = polymorphicObjectFormat({
+    case "ItemKind.UtilityCategory" => ItemKind.UtilityCategory
+
+    case "ItemKind.DefaultDoorCategory" => ItemKind.DefaultDoorCategory
+    case "ItemKind.SecureDoorCategory" => ItemKind.SecureDoorCategory
+
+    case "Equipment.HeadArmorCategory" => Equipment.HeadArmorCategory
+    case "Equipment.BodyArmorCategory" => Equipment.BodyArmorCategory
+    case "Equipment.HandArmorCategory" => Equipment.HandArmorCategory
+    case "Equipment.FootArmorCategory" => Equipment.FootArmorCategory
+    case "Equipment.LauncherCategory" => Equipment.LauncherCategory
+    case "Equipment.RangedWeaponCategory" => Equipment.RangedWeaponCategory
+    case "Equipment.ShieldCategory" => Equipment.ShieldCategory
+    case "Equipment.WeaponCategory" => Equipment.WeaponCategory
   })
 
-  lazy val itemKindMapReads: Reads[Map[ItemKindId, ItemKind]] = mapReads
+  lazy val doorCategoryFormat: Format[DoorCategory] = polymorphicObjectFormat({
+    case "ItemKind.DefaultDoorCategory" => ItemKind.DefaultDoorCategory
+    case "ItemKind.SecureDoorCategory" => ItemKind.SecureDoorCategory
+  })
 }

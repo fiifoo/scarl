@@ -21,6 +21,8 @@ case object ContentSelection {
 
   type CreatureSelection = ContentSelection[CreatureKindId]
 
+  type DoorSelection = ContentSelection[ItemKindId]
+
   type ItemSelection = ContentSelection[ItemKindId]
 
   type TemplateSelection = ContentSelection[TemplateId]
@@ -33,6 +35,10 @@ case object ContentSelection {
 
   case class FixedCreature(kind: CreatureKindId, tags: Set[Tag] = Set()) extends CreatureSelection {
     def apply(assets: WorldAssets, area: Area, random: Random): Option[CreatureKindId] = Some(this.kind)
+  }
+
+  case class FixedDoor(kind: ItemKindId, tags: Set[Tag] = Set()) extends DoorSelection {
+    def apply(assets: WorldAssets, area: Area, random: Random): Option[ItemKindId] = Some(this.kind)
   }
 
   case class FixedItem(kind: ItemKindId, tags: Set[Tag] = Set()) extends ItemSelection {
@@ -57,20 +63,35 @@ case object ContentSelection {
     def apply(assets: WorldAssets, area: Area, random: Random): Option[WidgetKindId] = Some(this.kind)
   }
 
-  case class ThemeCreature(power: Set[CombatPower.Category] = Set(),
+  case class ThemeCreature(category: Set[CreatureKind.Category] = Set(),
+                           power: Set[CombatPower.Category] = Set(),
                            tags: Set[Tag] = Set()
                           ) extends CreatureSelection {
     def apply(assets: WorldAssets, area: Area, random: Random): Option[CreatureKindId] = {
       val choices = assets.catalogues.creatures(assets.themes(area.theme).creatures)
         .apply(assets.catalogues.creatures)
-
+      val categories: Set[CreatureKind.Category] = if (this.category.isEmpty) Set(CreatureKind.DefaultCategory) else this.category
       val constraints = if (this.power.isEmpty) CombatPower.categories else this.power
 
-      def getPower(choice: CreatureKindId): Option[Int] = {
+      def getPower(category: CreatureKind.Category, choice: CreatureKindId): Option[Int] = {
         assets.combatPower.average.get(choice)
       }
 
-      selectContent(area, choices, constraints, random, getPower)
+      selectCategoryContentByPower(area, choices, categories, constraints, random, getPower)
+    }
+  }
+
+  case class ThemeDoor(category: Set[ItemKind.DoorCategory] = Set(),
+                       tags: Set[Tag] = Set()
+                      ) extends DoorSelection {
+    def apply(assets: WorldAssets, area: Area, random: Random): Option[ItemKindId] = {
+      val choices = assets.catalogues.items(assets.themes(area.theme).items)
+        .apply(assets.catalogues.items)
+        .filterKeys(_.isInstanceOf[ItemKind.DoorCategory])
+        .map(x => x._1.asInstanceOf[ItemKind.DoorCategory] -> x._2)
+      val categories: Set[ItemKind.DoorCategory] = if (this.category.isEmpty) Set(ItemKind.DefaultDoorCategory) else this.category
+
+      selectCategoryContent(area, choices, categories, random)
     }
   }
 
@@ -81,18 +102,14 @@ case object ContentSelection {
     def apply(assets: WorldAssets, area: Area, random: Random): Option[ItemKindId] = {
       val choices = assets.catalogues.items(assets.themes(area.theme).items)
         .apply(assets.catalogues.items)
-      val categories = if (this.category.isEmpty) ItemKind.categories else this.category
+      val categories: Set[ItemKind.Category] = if (this.category.isEmpty) Set(ItemKind.UtilityCategory) else this.category
       val constraints = if (this.power.isEmpty) CombatPower.categories else this.power
 
-      def hasCategory(category: ItemKind.Category, choice: ItemKindId): Boolean = {
-        assets.kinds.items(choice).category.contains(category)
-      }
-
       def getPower(category: ItemKind.Category, choice: ItemKindId): Option[Int] = {
-        assets.combatPower.item.get(category) flatMap (_.get(choice))
+        assets.kinds.items(choice).power
       }
 
-      selectCategoryContent(area, choices, categories, constraints, random, hasCategory, getPower)
+      selectCategoryContentByPower(area, choices, categories, constraints, random, getPower)
     }
   }
 
@@ -103,18 +120,17 @@ case object ContentSelection {
     def apply(assets: WorldAssets, area: Area, random: Random): Option[ItemKindId] = {
       val choices = assets.catalogues.items(assets.themes(area.theme).items)
         .apply(assets.catalogues.items)
+        .filterKeys(_.isInstanceOf[Equipment.Category])
+        .map(x => x._1.asInstanceOf[Equipment.Category] -> x._2)
+
       val categories = if (this.category.isEmpty) Equipment.categories else this.category
       val constraints = if (this.power.isEmpty) CombatPower.categories else this.power
-
-      def hasCategory(category: Equipment.Category, choice: ItemKindId): Boolean = {
-        getPower(category, choice).isDefined
-      }
 
       def getPower(category: Equipment.Category, choice: ItemKindId): Option[Int] = {
         assets.combatPower.equipment.get(category) flatMap (_.get(choice))
       }
 
-      selectCategoryContent(area, choices, categories, constraints, random, hasCategory, getPower)
+      selectCategoryContentByPower(area, choices, categories, constraints, random, getPower)
     }
   }
 
@@ -128,15 +144,35 @@ case object ContentSelection {
       val categories = if (this.category.isEmpty) Template.categories else this.category
       val constraints = if (this.power.isEmpty) CombatPower.categories else this.power
 
-      def hasCategory(category: Template.Category, choice: TemplateId): Boolean = {
-        assets.templates(choice).category.contains(category)
-      }
-
       def getPower(category: Template.Category, choice: TemplateId): Option[Int] = {
-        assets.combatPower.template.get(category) flatMap (_.get(choice))
+        assets.templates(choice).power
       }
 
-      selectCategoryContent(area, choices, categories, constraints, random, hasCategory, getPower)
+      selectCategoryContentByPower(area, choices, categories, constraints, random, getPower)
+    }
+  }
+
+  case class ThemeTerrain(category: Set[TerrainKind.Category] = Set(),
+                          tags: Set[Tag] = Set()
+                         ) extends TerrainSelection {
+    def apply(assets: WorldAssets, area: Area, random: Random): Option[TerrainKindId] = {
+      val choices = assets.catalogues.terrains(assets.themes(area.theme).terrains)
+        .apply(assets.catalogues.terrains)
+      val categories: Set[TerrainKind.Category] = if (this.category.isEmpty) Set(TerrainKind.DefaultCategory) else this.category
+
+      selectCategoryContent(area, choices, categories, random)
+    }
+  }
+
+  case class ThemeWall(category: Set[WallKind.Category] = Set(),
+                       tags: Set[Tag] = Set()
+                      ) extends WallSelection {
+    def apply(assets: WorldAssets, area: Area, random: Random): Option[WallKindId] = {
+      val choices = assets.catalogues.walls(assets.themes(area.theme).walls)
+        .apply(assets.catalogues.walls)
+      val categories: Set[WallKind.Category] = if (this.category.isEmpty) Set(WallKind.DefaultCategory) else this.category
+
+      selectCategoryContent(area, choices, categories, random)
     }
   }
 
@@ -150,33 +186,51 @@ case object ContentSelection {
       val categories = if (this.category.isEmpty) WidgetKind.categories else this.category
       val constraints = if (this.power.isEmpty) CombatPower.categories else this.power
 
-      def hasCategory(category: WidgetKind.Category, choice: WidgetKindId): Boolean = {
-        assets.kinds.widgets(choice).category.contains(category)
-      }
-
       def getPower(category: WidgetKind.Category, choice: WidgetKindId): Option[Int] = {
-        assets.combatPower.widget.get(category) flatMap (_.get(choice))
+        assets.kinds.widgets(choice).power
       }
 
-      selectCategoryContent(area, choices, categories, constraints, random, hasCategory, getPower)
+      selectCategoryContentByPower(area, choices, categories, constraints, random, getPower)
     }
   }
 
   private def selectCategoryContent[T, U](area: Area,
-                                          choices: Iterable[WeightedChoice[T]],
+                                          choices: Map[U, Iterable[WeightedChoice[T]]],
                                           categories: Set[U],
-                                          constraints: Set[CombatPower.Category],
-                                          random: Random,
-                                          hasCategory: (U, T) => Boolean,
-                                          getPower: (U, T) => Option[Int]
+                                          random: Random
                                          ): Option[T] = {
     def select(categories: Set[U]): Option[T] = {
       if (categories.isEmpty) {
         None
       } else {
         val category = Rng.nextChoice(random, categories)
-        val categoryChoices = choices.filter(choice => hasCategory(category, choice.value))
-        val result = selectContent(area, categoryChoices, constraints, random, (choice: T) => getPower(category, choice))
+        val categoryChoices = choices.getOrElse(category, List())
+
+        if (categoryChoices.isEmpty) {
+          select(categories - category)
+        } else {
+          Some(Rng.nextChoice(random, WeightedChoices(categoryChoices)))
+        }
+      }
+    }
+
+    select(categories)
+  }
+
+  private def selectCategoryContentByPower[T, U](area: Area,
+                                                 choices: Map[U, Iterable[WeightedChoice[T]]],
+                                                 categories: Set[U],
+                                                 constraints: Set[CombatPower.Category],
+                                                 random: Random,
+                                                 getPower: (U, T) => Option[Int]
+                                                ): Option[T] = {
+    def select(categories: Set[U]): Option[T] = {
+      if (categories.isEmpty) {
+        None
+      } else {
+        val category = Rng.nextChoice(random, categories)
+        val categoryChoices = choices.getOrElse(category, List())
+        val result = selectContentByPower(area, categoryChoices, constraints, random, (choice: T) => getPower(category, choice))
 
         result orElse select(categories - category)
       }
@@ -185,12 +239,12 @@ case object ContentSelection {
     select(categories)
   }
 
-  private def selectContent[T](area: Area,
-                               choices: Iterable[WeightedChoice[T]],
-                               constraints: Set[CombatPower.Category],
-                               random: Random,
-                               getPower: T => Option[Int]
-                              ): Option[T] = {
+  private def selectContentByPower[T](area: Area,
+                                      choices: Iterable[WeightedChoice[T]],
+                                      constraints: Set[CombatPower.Category],
+                                      random: Random,
+                                      getPower: T => Option[Int]
+                                     ): Option[T] = {
     def select(constraints: Set[CombatPower.Category]): Option[T] = {
       if (constraints.isEmpty) {
         None

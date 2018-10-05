@@ -9,10 +9,15 @@ object JsonCatalogues {
   import JsonBase.{mapReads, stringIdFormat, weightedChoiceFormat}
 
   lazy private implicit val creatureKindIdFormat = JsonCreatureKind.creatureKindIdFormat
+  lazy private implicit val creatureCategoryFormat = JsonCreatureKind.creatureCategoryFormat
   lazy private implicit val itemKindIdFormat = JsonItemKind.itemKindIdFormat
+  lazy private implicit val itemCategoryFormat = JsonItemKind.itemCategoryFormat
   lazy private implicit val terrainKindIdFormat = JsonTerrainKind.terrainKindIdFormat
+  lazy private implicit val terrainCategoryFormat = JsonTerrainKind.terrainCategoryFormat
   lazy private implicit val wallKindIdFormat = JsonWallKind.wallKindIdFormat
+  lazy private implicit val wallCategoryFormat = JsonWallKind.wallCategoryFormat
   lazy private implicit val widgetKindIdFormat = JsonWidgetKind.widgetKindIdFormat
+  lazy private implicit val widgetCategoryFormat = JsonWidgetKind.widgetCategoryFormat
 
   lazy implicit val creatureCatalogueIdFormat: Format[CreatureCatalogueId] = stringIdFormat(_.value, CreatureCatalogueId.apply)
   lazy implicit val itemCatalogueIdFormat: Format[ItemCatalogueId] = stringIdFormat(_.value, ItemCatalogueId.apply)

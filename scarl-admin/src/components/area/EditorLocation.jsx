@@ -12,11 +12,11 @@ const EditorLocation = ({common, machinery, content, setContent}) => {
 
     return (
         <div>
-            <SelectRow
-                label="Entrance"
-                choices={Models.choices(models, data, 'ItemKind')}
+            <EditorLocationField
+                property="entrance"
                 value={content.entrance}
-                onChange={setValue('entrance')} />
+                setValue={setValue('entrance')}
+                common={common} />
             <BooleanSelectRow
                 label="Conduit"
                 value={content.conduit !== undefined}

@@ -1,6 +1,8 @@
 package models.json
 
+import io.github.fiifoo.scarl.core.kind.CreatureKind.Category
 import io.github.fiifoo.scarl.core.kind.{CreatureKind, CreatureKindId}
+import models.json.JsonBase.polymorphicObjectFormat
 import play.api.libs.json._
 
 object JsonCreatureKind {
@@ -26,4 +28,9 @@ object JsonCreatureKind {
   lazy implicit val creatureKindFormat: Format[CreatureKind] = Json.format
 
   lazy val creatureKindMapReads: Reads[Map[CreatureKindId, CreatureKind]] = mapReads
+
+  lazy val creatureCategoryFormat: Format[Category] = polymorphicObjectFormat({
+    case "CreatureKind.DefaultCategory" => CreatureKind.DefaultCategory
+    case "CreatureKind.TurretCategory" => CreatureKind.TurretCategory
+  })
 }

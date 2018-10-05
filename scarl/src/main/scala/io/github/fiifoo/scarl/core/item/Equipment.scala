@@ -7,7 +7,7 @@ import io.github.fiifoo.scarl.core.kind.ItemKind
 
 object Equipment {
 
-  sealed trait Category {
+  sealed trait Category extends ItemKind.Category {
     def extractEquipment(item: ItemKind): Option[Equipment]
   }
 

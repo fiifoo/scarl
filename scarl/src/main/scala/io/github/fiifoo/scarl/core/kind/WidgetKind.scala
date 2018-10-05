@@ -10,7 +10,7 @@ import io.github.fiifoo.scarl.core.mutation.{IdSeqMutation, NewEntityMutation}
 
 object WidgetKind {
 
-  trait Category
+  sealed trait Category
 
   case object HealCategory extends Category
 
@@ -28,7 +28,6 @@ object WidgetKind {
 trait WidgetKind extends Kind {
   val id: WidgetKindId
   val item: ItemKindId
-  val category: Option[Category]
   val power: Option[Int]
 
   def apply(s: State, idSeq: IdSeq, location: Location, options: Options = Options()): Result[Container] = {

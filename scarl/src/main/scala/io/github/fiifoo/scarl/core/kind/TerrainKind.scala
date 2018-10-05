@@ -6,6 +6,18 @@ import io.github.fiifoo.scarl.core.kind.Kind.{Options, Result}
 import io.github.fiifoo.scarl.core.mutation.{IdSeqMutation, NewEntityMutation}
 import io.github.fiifoo.scarl.core.{Color, State}
 
+object TerrainKind {
+
+  sealed trait Category
+
+  case object DefaultCategory extends Category
+
+  case object ConstructedCategory extends Category
+
+  case object NaturalCategory extends Category
+
+}
+
 case class TerrainKind(id: TerrainKindId,
                        name: String,
                        display: Char,

@@ -1,6 +1,6 @@
 package models.json
 
-import io.github.fiifoo.scarl.core.kind.WidgetKind.{Category, HealCategory, PortalCategory, TrapCategory}
+import io.github.fiifoo.scarl.core.kind.WidgetKind.Category
 import io.github.fiifoo.scarl.core.kind.{WidgetKind, WidgetKindId}
 import io.github.fiifoo.scarl.widget._
 import play.api.libs.json._
@@ -11,6 +11,7 @@ object JsonWidgetKind {
 
   lazy private implicit val creatureCatalogueIdFormat = JsonCatalogues.creatureCatalogueIdFormat
   lazy private implicit val creatureKindIdFormat = JsonCreatureKind.creatureKindIdFormat
+  lazy private implicit val creatureCategoryFormat = JsonCreatureKind.creatureCategoryFormat
   lazy private implicit val itemKindIdFormat = JsonItemKind.itemKindIdFormat
 
   lazy private implicit val discoverFormat = JsonItemDiscover.discoverFormat
@@ -42,11 +43,11 @@ object JsonWidgetKind {
     }
   )
 
-  lazy implicit val categoryFormat: Format[Category] = polymorphicObjectFormat({
-    case "WidgetKind.HealCategory" => HealCategory
-    case "WidgetKind.PortalCategory" => PortalCategory
-    case "WidgetKind.TrapCategory" => TrapCategory
-  })
-
   lazy val widgetKindMapReads: Reads[Map[WidgetKindId, WidgetKind]] = mapReads
+
+  lazy val widgetCategoryFormat: Format[Category] = polymorphicObjectFormat({
+    case "WidgetKind.HealCategory" => WidgetKind.HealCategory
+    case "WidgetKind.PortalCategory" => WidgetKind.PortalCategory
+    case "WidgetKind.TrapCategory" => WidgetKind.TrapCategory
+  })
 }

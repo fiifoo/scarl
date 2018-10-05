@@ -10,7 +10,7 @@ const machineryControlColor = 'red'
 const machineryTargetColor = 'blue'
 const templateLocationColor = 'white'
 const restrictedColor = '#555'
-const nonFixedSelectionColor = 'white'
+const nonFixedSelectionColor = 'darkgrey'
 
 const EditorViewLocation = ({common, contents, editor, location, setEditorLocation}) => {
     const {data} = common
@@ -57,15 +57,15 @@ const renderContent = (data, content) => {
     if (content.creature) {
         return renderSelection(data, content.creature, 'creatures')
     } else if (content.entrance) {
-        return renderKind(data, content.entrance, 'items')
+        return renderSelection(data, content.entrance, 'items', '/')
     } else if (content.widget) {
         return renderWidget(data, content.widget)
     } else if (content.items.size > 0) {
         return renderSelection(data, content.items.last(), 'items')
     } else if (content.wall) {
-        return renderSelection(data, content.wall, 'walls')
+        return renderSelection(data, content.wall, 'walls', '#')
     } else if (content.terrain) {
-        return renderSelection(data, content.terrain, 'terrains')
+        return renderSelection(data, content.terrain, 'terrains', '.')
     } else {
         return '\u00A0'
     }
@@ -82,11 +82,11 @@ const renderWidget = (data, selection) => {
     }
 }
 
-const renderSelection = (data, selection, branch) => {
+const renderSelection = (data, selection, branch, displayChar = undefined) => {
     if (isFixed(selection)) {
         return renderKind(data, selection.getIn(['data', 'kind']), branch)
     } else {
-        return <div style={{color: nonFixedSelectionColor}}>{branch.charAt(0)}</div>
+        return <div style={{color: nonFixedSelectionColor}}>{displayChar || branch.charAt(0)}</div>
     }
 }
 

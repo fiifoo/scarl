@@ -4,7 +4,6 @@ import io.github.fiifoo.scarl.core.creature.Stats.Explosive
 import io.github.fiifoo.scarl.core.entity._
 import io.github.fiifoo.scarl.core.geometry.Location
 import io.github.fiifoo.scarl.core.item._
-import io.github.fiifoo.scarl.core.kind.ItemKind.Category
 import io.github.fiifoo.scarl.core.kind.Kind.{Options, Result}
 import io.github.fiifoo.scarl.core.mutation.{IdSeqMutation, ItemFoundMutation, Mutation, NewEntityMutation}
 import io.github.fiifoo.scarl.core.{Color, State}
@@ -13,18 +12,20 @@ object ItemKind {
 
   trait Category
 
+  sealed trait DoorCategory extends Category
+
+  case object DefaultDoorCategory extends DoorCategory
+
+  case object SecureDoorCategory extends DoorCategory
+
   case object UtilityCategory extends Category
 
-  val categories: Set[Category] = Set(
-    UtilityCategory,
-  )
 }
 
 case class ItemKind(id: ItemKindId,
                     name: String,
                     display: Char,
                     color: Color,
-                    category: Option[Category] = None,
                     power: Option[Int] = None,
 
                     concealment: Int = 0,

@@ -3,12 +3,11 @@ package io.github.fiifoo.scarl.area.template
 import io.github.fiifoo.scarl.area.Area
 import io.github.fiifoo.scarl.area.feature.Feature
 import io.github.fiifoo.scarl.area.shape.Shape
-import io.github.fiifoo.scarl.area.template.ContentSelection.{FixedItem, FixedTerrain}
+import io.github.fiifoo.scarl.area.template.ContentSelection._
 import io.github.fiifoo.scarl.area.template.RandomizedTemplate.ConduitLocations
 import io.github.fiifoo.scarl.area.template.Template.ResultContent
 import io.github.fiifoo.scarl.core.Tag
 import io.github.fiifoo.scarl.core.geometry.Location
-import io.github.fiifoo.scarl.core.kind.{ItemKindId, TerrainKindId}
 import io.github.fiifoo.scarl.world.WorldAssets
 
 import scala.util.Random
@@ -20,17 +19,16 @@ object CalculateContent {
             shape: Shape.Result,
             target: FixedContent,
             locations: Set[Location],
-            entrances: Map[Location, ItemKindId],
+            entrances: Map[Location, DoorSelection],
             subEntrances: Set[Location],
             conduits: ConduitLocations = ConduitLocations(),
             features: List[Feature],
-            terrain: Option[TerrainKindId],
+            terrain: Option[TerrainSelection],
             random: Random
            ): ResultContent = {
 
     val entranceItems = entrances map (entrance => {
-      val (location, item) = entrance
-      val selection = FixedItem(item)
+      val (location, selection) = entrance
 
       if (target.items.isDefinedAt(location)) {
         (location, selection :: target.items(location))
@@ -55,9 +53,9 @@ object CalculateContent {
       feature(assets, area, shape, content, locations, entrances.keySet, subEntrances, random)
     })
 
-    val defaultTerrain = terrain getOrElse assets.themes(area.theme).terrain
+    val defaultTerrain = terrain getOrElse ThemeTerrain()
     val defaultTerrains = ((shape.border ++ locations) filterNot fixed.terrains.isDefinedAt map (location => {
-      (location, FixedTerrain(defaultTerrain))
+      (location, defaultTerrain)
     })).toMap
 
     fixed = fixed.copy(

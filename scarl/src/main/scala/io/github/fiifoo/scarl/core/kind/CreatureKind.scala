@@ -12,6 +12,16 @@ import io.github.fiifoo.scarl.core.kind.Kind.{Options, Result}
 import io.github.fiifoo.scarl.core.mutation._
 import io.github.fiifoo.scarl.core.{Color, State}
 
+object CreatureKind {
+
+  sealed trait Category
+
+  case object DefaultCategory extends Category
+
+  case object TurretCategory extends Category
+
+}
+
 case class CreatureKind(id: CreatureKindId,
                         name: String,
                         display: Char,

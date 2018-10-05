@@ -3,19 +3,19 @@ package io.github.fiifoo.scarl.area.template
 import io.github.fiifoo.scarl.area.Area
 import io.github.fiifoo.scarl.area.feature.Feature
 import io.github.fiifoo.scarl.area.shape.Shape
-import io.github.fiifoo.scarl.area.template.Template.{Category, Result}
+import io.github.fiifoo.scarl.area.template.ContentSelection.{DoorSelection, TerrainSelection}
+import io.github.fiifoo.scarl.area.template.Template.Result
 import io.github.fiifoo.scarl.core.geometry.Location
-import io.github.fiifoo.scarl.core.kind._
 import io.github.fiifoo.scarl.world.WorldAssets
 
 import scala.util.Random
 
 case class FixedTemplate(id: TemplateId,
                          shape: Shape,
-                         category: Option[Category] = None,
                          power: Option[Int] = None,
+                         terrain: Option[TerrainSelection] = None,
                          templates: Map[Location, TemplateId] = Map(),
-                         entrances: Map[Location, ItemKindId] = Map(),
+                         entrances: Map[Location, DoorSelection] = Map(),
                          features: List[Feature] = List(),
                          content: FixedContent = FixedContent(),
                         ) extends Template {
@@ -26,7 +26,7 @@ case class FixedTemplate(id: TemplateId,
     val subEntrances = (subResults map (x => {
       val (location, subResult) = x
 
-      subResult.entrances.keys map location.add
+      subResult.entrances map location.add
     })).toSet.flatten
 
     val contained = CalculateUtils.templateContainedLocations(shapeResult, subResults)
@@ -39,14 +39,14 @@ case class FixedTemplate(id: TemplateId,
       entrances = entrances,
       subEntrances = subEntrances,
       features = features,
-      terrain = None,
+      terrain = terrain,
       random = random
     )
 
     Result(
       shape = shapeResult,
       templates = subResults,
-      entrances = entrances,
+      entrances = entrances.keys.toSet,
       content = contentResult
     )
   }

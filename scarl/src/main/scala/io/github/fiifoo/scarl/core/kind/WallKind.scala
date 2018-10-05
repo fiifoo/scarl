@@ -6,6 +6,22 @@ import io.github.fiifoo.scarl.core.kind.Kind.{Options, Result}
 import io.github.fiifoo.scarl.core.mutation.{IdSeqMutation, NewEntityMutation}
 import io.github.fiifoo.scarl.core.{Color, State}
 
+object WallKind {
+
+  sealed trait Category
+
+  case object DefaultCategory extends Category
+
+  case object ConstructedCategory extends Category
+
+  case object NaturalCategory extends Category
+
+  case object SecureCategory extends Category
+
+  case object AreaBorderCategory extends Category
+
+}
+
 case class WallKind(id: WallKindId,
                     name: String,
                     display: Char,

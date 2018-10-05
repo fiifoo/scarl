@@ -92,6 +92,11 @@ object Sources {
       typeOf[ContentSelection.FixedCreature],
     )),
 
+    SubModelSource(typeOf[ContentSelection.DoorSelection], List(
+      typeOf[ContentSelection.ThemeDoor],
+      typeOf[ContentSelection.FixedDoor],
+    )),
+
     SubModelSource(typeOf[ContentSelection.ItemSelection], List(
       typeOf[ContentSelection.ThemeItem],
       typeOf[ContentSelection.ThemeEquipment],
@@ -105,16 +110,23 @@ object Sources {
 
     SubModelSource(typeOf[ContentSelection.TerrainSelection], List(
       typeOf[ContentSelection.FixedTerrain],
+      typeOf[ContentSelection.ThemeTerrain],
     )),
 
     SubModelSource(typeOf[ContentSelection.WallSelection], List(
       typeOf[ContentSelection.FixedWall],
+      typeOf[ContentSelection.ThemeWall],
     )),
 
     SubModelSource(typeOf[ContentSelection.WidgetSelection], List(
       typeOf[ContentSelection.ThemeWidget],
       typeOf[ContentSelection.FixedWidget],
     )),
+
+    SubModelSource(typeOf[CreatureKind.Category], List(
+      typeOf[CreatureKind.DefaultCategory.type],
+      typeOf[CreatureKind.TurretCategory.type],
+    ), objectPolymorphism = true),
 
     SubModelSource(typeOf[CreaturePower], List(
       typeOf[ActivateMachineryPower],
@@ -174,6 +186,23 @@ object Sources {
 
     SubModelSource(typeOf[ItemKind.Category], List(
       typeOf[ItemKind.UtilityCategory.type],
+
+      typeOf[ItemKind.DefaultDoorCategory.type],
+      typeOf[ItemKind.SecureDoorCategory.type],
+
+      typeOf[Equipment.HeadArmorCategory.type],
+      typeOf[Equipment.BodyArmorCategory.type],
+      typeOf[Equipment.HandArmorCategory.type],
+      typeOf[Equipment.FootArmorCategory.type],
+      typeOf[Equipment.LauncherCategory.type],
+      typeOf[Equipment.RangedWeaponCategory.type],
+      typeOf[Equipment.ShieldCategory.type],
+      typeOf[Equipment.WeaponCategory.type],
+    ), objectPolymorphism = true),
+
+    SubModelSource(typeOf[ItemKind.DoorCategory], List(
+      typeOf[ItemKind.DefaultDoorCategory.type],
+      typeOf[ItemKind.SecureDoorCategory.type],
     ), objectPolymorphism = true),
 
     SubModelSource(typeOf[ItemPower], List(
@@ -214,6 +243,20 @@ object Sources {
       typeOf[Template.RoomCategory.type],
       typeOf[Template.SpaceCategory.type],
       typeOf[Template.TrapCategory.type],
+    ), objectPolymorphism = true),
+
+    SubModelSource(typeOf[TerrainKind.Category], List(
+      typeOf[TerrainKind.DefaultCategory.type],
+      typeOf[TerrainKind.ConstructedCategory.type],
+      typeOf[TerrainKind.NaturalCategory.type],
+    ), objectPolymorphism = true),
+
+    SubModelSource(typeOf[WallKind.Category], List(
+      typeOf[WallKind.DefaultCategory.type],
+      typeOf[WallKind.AreaBorderCategory.type],
+      typeOf[WallKind.ConstructedCategory.type],
+      typeOf[WallKind.NaturalCategory.type],
+      typeOf[WallKind.SecureCategory.type],
     ), objectPolymorphism = true),
 
     SubModelSource(typeOf[WidgetKind.Category], List(

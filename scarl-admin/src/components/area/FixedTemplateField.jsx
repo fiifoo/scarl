@@ -4,7 +4,7 @@ import FilteredFormField from '../field/FilteredFormField.jsx'
 import FormRow from '../form/FormRow.jsx'
 import AreaEditorContainer from '../../containers/AreaEditorContainer'
 
-const formProperties = ['shape', 'category', 'power', 'features', 'content']
+const formProperties = ['shape', 'power', 'terrain', 'features', 'content']
 
 const TAB_FORM = 1
 const TAB_EDITOR = 2

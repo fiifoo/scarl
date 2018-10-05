@@ -22,37 +22,51 @@ trait ListCatalogue[Id <: ListCatalogueId, T] {
   }
 }
 
-case class CreatureCatalogueId(value: String) extends ListCatalogueId
+trait CategorizedListCatalogueId
+
+trait CategorizedListCatalogue[Id <: CategorizedListCatalogueId, Category, T] {
+  val id: Id
+  val subs: List[Id]
+  val content: Map[Category, List[T]]
+
+  def apply(catalogues: Map[Id, CategorizedListCatalogue[Id, Category, T]]): Map[Category, List[T]] = {
+    val contents = this.content :: (subs flatMap catalogues.get map (_.apply(catalogues)))
+
+    contents.flatten groupBy (_._1) mapValues (_ flatMap (_._2))
+  }
+}
+
+case class CreatureCatalogueId(value: String) extends CategorizedListCatalogueId
 
 case class CreatureCatalogue(id: CreatureCatalogueId,
                              subs: List[CreatureCatalogueId] = List(),
-                             items: List[WeightedChoice[CreatureKindId]] = List()
-                            ) extends ListCatalogue[CreatureCatalogueId, WeightedChoice[CreatureKindId]]
+                             content: Map[CreatureKind.Category, List[WeightedChoice[CreatureKindId]]] = Map()
+                            ) extends CategorizedListCatalogue[CreatureCatalogueId, CreatureKind.Category, WeightedChoice[CreatureKindId]]
 
-case class ItemCatalogueId(value: String) extends ListCatalogueId
+case class ItemCatalogueId(value: String) extends CategorizedListCatalogueId
 
 case class ItemCatalogue(id: ItemCatalogueId,
                          subs: List[ItemCatalogueId] = List(),
-                         items: List[WeightedChoice[ItemKindId]] = List()
-                        ) extends ListCatalogue[ItemCatalogueId, WeightedChoice[ItemKindId]]
+                         content: Map[ItemKind.Category, List[WeightedChoice[ItemKindId]]] = Map()
+                        ) extends CategorizedListCatalogue[ItemCatalogueId, ItemKind.Category, WeightedChoice[ItemKindId]]
 
-case class TerrainCatalogueId(value: String) extends ListCatalogueId
+case class TerrainCatalogueId(value: String) extends CategorizedListCatalogueId
 
 case class TerrainCatalogue(id: TerrainCatalogueId,
                             subs: List[TerrainCatalogueId] = List(),
-                            items: List[WeightedChoice[TerrainKindId]] = List()
-                           ) extends ListCatalogue[TerrainCatalogueId, WeightedChoice[TerrainKindId]]
+                            content: Map[TerrainKind.Category, List[WeightedChoice[TerrainKindId]]] = Map()
+                           ) extends CategorizedListCatalogue[TerrainCatalogueId, TerrainKind.Category, WeightedChoice[TerrainKindId]]
 
-case class WallCatalogueId(value: String) extends ListCatalogueId
+case class WallCatalogueId(value: String) extends CategorizedListCatalogueId
 
 case class WallCatalogue(id: WallCatalogueId,
                          subs: List[WallCatalogueId] = List(),
-                         items: List[WeightedChoice[WallKindId]] = List()
-                        ) extends ListCatalogue[WallCatalogueId, WeightedChoice[WallKindId]]
+                         content: Map[WallKind.Category, List[WeightedChoice[WallKindId]]] = Map()
+                        ) extends CategorizedListCatalogue[WallCatalogueId, WallKind.Category, WeightedChoice[WallKindId]]
 
-case class WidgetCatalogueId(value: String) extends ListCatalogueId
+case class WidgetCatalogueId(value: String) extends CategorizedListCatalogueId
 
 case class WidgetCatalogue(id: WidgetCatalogueId,
                            subs: List[WidgetCatalogueId] = List(),
-                           items: List[WeightedChoice[WidgetKindId]] = List()
-                          ) extends ListCatalogue[WidgetCatalogueId, WeightedChoice[WidgetKindId]]
+                           content: Map[WidgetKind.Category, List[WeightedChoice[WidgetKindId]]] = Map()
+                          ) extends CategorizedListCatalogue[WidgetCatalogueId, WidgetKind.Category, WeightedChoice[WidgetKindId]]

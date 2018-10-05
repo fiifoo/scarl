@@ -3,10 +3,9 @@ package io.github.fiifoo.scarl.area.feature
 import io.github.fiifoo.scarl.area.Area
 import io.github.fiifoo.scarl.area.feature.HouseFeature.{Build, Scan}
 import io.github.fiifoo.scarl.area.shape.Shape
-import io.github.fiifoo.scarl.area.template.ContentSelection.{FixedItem, FixedWall}
+import io.github.fiifoo.scarl.area.template.ContentSelection._
 import io.github.fiifoo.scarl.area.template.FixedContent
 import io.github.fiifoo.scarl.core.geometry.{Location, Rotation}
-import io.github.fiifoo.scarl.core.kind.{ItemKindId, WallKindId}
 import io.github.fiifoo.scarl.core.math.Rng
 import io.github.fiifoo.scarl.world.WorldAssets
 
@@ -15,8 +14,8 @@ import scala.util.Random
 case class HouseFeature(iterations: Int,
                         roomSize: Int,
                         doorFactor: Int,
-                        wall: Option[WallKindId] = None,
-                        door: Option[ItemKindId] = None
+                        wall: Option[WallSelection] = None,
+                        door: Option[DoorSelection] = None
                        ) extends Feature {
 
   def apply(assets: WorldAssets,
@@ -39,8 +38,8 @@ case class HouseFeature(iterations: Int,
       content.items.keys ++
       content.widgets.keys
 
-    val wall = this.wall getOrElse assets.themes(area.theme).wall
-    val door = this.door getOrElse assets.themes(area.theme).door
+    val wall = this.wall getOrElse ThemeWall()
+    val door = this.door getOrElse ThemeDoor()
 
     val (result, _) = ((0 until this.iterations) foldLeft(content, rotation)) ((carry, _) => {
       val (content, rotation) = carry
@@ -69,14 +68,14 @@ case class HouseFeature(iterations: Int,
   private def write(content: FixedContent,
                     rotation: Rotation,
                     result: Build.Result,
-                    wall: WallKindId,
-                    door: ItemKindId
+                    wall: WallSelection,
+                    door: DoorSelection
                    ): FixedContent = {
-    val walls = (result.walls map rotation.apply map (_ -> FixedWall(wall))).toMap
+    val walls = (result.walls map rotation.apply map (_ -> wall)).toMap
     val items = (result.doors map rotation.apply map (location => {
       val items = content.items.getOrElse(location, List())
 
-      location -> (FixedItem(door) :: items)
+      location -> (door :: items)
     })).toMap
 
     content.copy(

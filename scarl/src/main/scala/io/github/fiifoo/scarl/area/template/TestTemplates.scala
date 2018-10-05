@@ -21,7 +21,7 @@ object TestTemplates {
       case _: RandomizedTemplate =>
         assets.catalogues.templates(assets.themes(area.theme).templates)
           .apply(assets.catalogues.templates)
-          .map(_.value)
+          .flatMap(_._2 map (_.value))
           .map(assets.templates)
     }
 

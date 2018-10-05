@@ -2,12 +2,12 @@ package models.json
 
 import io.github.fiifoo.scarl.area.feature._
 import io.github.fiifoo.scarl.area.shape.{Rectangle, Shape}
+import io.github.fiifoo.scarl.area.template.ContentSelection.ItemSelection
 import io.github.fiifoo.scarl.area.template.FixedContent.MachinerySource
 import io.github.fiifoo.scarl.area.template.RandomizedTemplate.{ConduitLocations, Entrances}
 import io.github.fiifoo.scarl.area.template.Template._
 import io.github.fiifoo.scarl.area.template._
 import io.github.fiifoo.scarl.core.geometry.Location
-import io.github.fiifoo.scarl.core.kind.ItemKindId
 import play.api.libs.json._
 
 object JsonTemplate {
@@ -15,7 +15,6 @@ object JsonTemplate {
   import JsonBase.{mapReads, optionReads, polymorphicObjectFormat, polymorphicTypeReads, stringIdFormat}
 
   lazy private implicit val contentSourceCatalogueIdFormat = JsonWorldCatalogues.contentSourceCatalogueIdFormat
-  lazy private implicit val itemKindIdFormat = JsonItemKind.itemKindIdFormat
   lazy private implicit val locationReads = Json.reads[Location]
   lazy private implicit val mechanismFormat = JsonMechanism.mechanismFormat
   lazy private implicit val machinerySourceReads = Json.reads[MachinerySource]
@@ -23,21 +22,21 @@ object JsonTemplate {
   lazy private implicit val terrainKindIdFormat = JsonTerrainKind.terrainKindIdFormat
   lazy private implicit val wallKindIdFormat = JsonWallKind.wallKindIdFormat
 
-  implicitly(optionReads[ItemKindId])
-  lazy private implicit val entrancesFormat = Json.format[Entrances]
-  lazy private implicit val conduitLocationsFormat = Json.format[ConduitLocations]
-
-  lazy private implicit val rectangleReads = Json.reads[Rectangle]
-  lazy private implicit val shapeReads: Reads[Shape] = polymorphicTypeReads(data => {
-    case "Rectangle" => data.as[Rectangle]
-  })
-
   lazy private implicit val creatureSelectionReads = JsonContentSelection.creatureSelectionReads
   lazy private implicit val itemSelectionReads = JsonContentSelection.itemSelectionReads
   lazy private implicit val terrainSelectionReads = JsonContentSelection.terrainSelectionReads
   lazy private implicit val templateSelectionReads = JsonContentSelection.templateSelectionReads
   lazy private implicit val wallSelectionReads = JsonContentSelection.wallSelectionReads
   lazy private implicit val widgetSelectionReads = JsonContentSelection.widgetSelectionReads
+
+  implicitly(optionReads[ItemSelection])
+  lazy private implicit val entrancesReads = Json.reads[Entrances]
+  lazy private implicit val conduitLocationsFormat = Json.format[ConduitLocations]
+
+  lazy private implicit val rectangleReads = Json.reads[Rectangle]
+  lazy private implicit val shapeReads: Reads[Shape] = polymorphicTypeReads(data => {
+    case "Rectangle" => data.as[Rectangle]
+  })
 
   lazy private implicit val creatureSourceReads = JsonContentSource.creatureSourceReads
   lazy private implicit val itemSourceReads = JsonContentSource.itemSourceReads
@@ -66,12 +65,12 @@ object JsonTemplate {
     case "RandomizedTemplate" => data.as[RandomizedTemplate]
   })
 
-  lazy implicit val categoryFormat: Format[Category] = polymorphicObjectFormat({
+  lazy val templateMapReads: Reads[Map[TemplateId, Template]] = mapReads
+
+  lazy val templateCategoryFormat: Format[Category] = polymorphicObjectFormat({
     case "Template.ChallengeCategory" => ChallengeCategory
     case "Template.RoomCategory" => RoomCategory
     case "Template.SpaceCategory" => SpaceCategory
     case "Template.TrapCategory" => TrapCategory
   })
-
-  lazy val templateMapReads: Reads[Map[TemplateId, Template]] = mapReads
 }
