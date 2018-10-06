@@ -7,6 +7,7 @@ export default (state = Map(), action) => {
             return Map()
         }
         case types.RECEIVE_GAME_START:
+        case types.RECEIVE_AREA_CHANGE:
         case types.RECEIVE_PLAYER_INVENTORY: {
             return Map(action.data.inventory.map(x => [x.id, x]))
         }

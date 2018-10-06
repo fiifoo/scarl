@@ -128,31 +128,20 @@ object RunGame {
   }
 
   private def sendGameUpdate(state: RunState): RunState = {
-    val events = state.events
     val nextState = updateFov(state)
-      .copy(events = Nil)
+    val message = GameUpdate(nextState)
 
-    val message = GameUpdate(
-      fov = nextState.fov,
-      events = events,
-      player = state.playerInfo
-    )
-
-    sendMessage(nextState, message)
+    sendMessage(nextState.copy(events = Nil), message)
   }
 
   private def sendGameOver(state: RunState): RunState = {
-    val message = GameOver(
-      statistics = state.statistics
-    )
+    val message = GameOver(state)
 
     sendMessage(state, message)
   }
 
   private def sendAreaChange(state: RunState): RunState = {
-    val message = AreaChange(
-      area = AreaInfo(state)
-    )
+    val message = AreaChange(state)
 
     sendMessage(state, message)
   }

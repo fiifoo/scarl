@@ -16,14 +16,12 @@ export default (state = Player(), action) => {
             return Player()
         }
         case types.RECEIVE_GAME_START:
+        case types.RECEIVE_AREA_CHANGE:
         case types.RECEIVE_PLAYER_INVENTORY: {
             state = state.set('recipes', List(action.data.playerRecipes))
             state = state.set('recycledItems', List(action.data.recycledItems))
 
             return state
-        }
-        case types.RECEIVE_AREA_CHANGE: {
-            return state.set('recycledItems', List())
         }
         case types.RECEIVE_GAME_UPDATE: {
             const data = action.data.player

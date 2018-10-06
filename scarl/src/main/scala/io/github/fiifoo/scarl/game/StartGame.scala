@@ -25,18 +25,7 @@ object StartGame {
   }
 
   private def send(state: RunState): RunState = {
-    val message = GameStart(
-      area = AreaInfo(state),
-      factions = state.game.world.assets.factions.values,
-      kinds = state.game.world.assets.kinds,
-      recipes = state.game.world.assets.recipes.values,
-      settings = state.game.settings,
-
-      equipments = state.instance.equipments.getOrElse(state.game.player, Map()),
-      inventory = getContainerItems(state.instance)(state.game.player) map (_ (state.instance)),
-      playerRecipes = state.instance.recipes.getOrElse(state.game.player, Set()),
-      recycledItems = state.instance.creature.recycledItems.getOrElse(state.game.player, List())
-    )
+    val message = GameStart(state)
 
     state.copy(
       outMessages = message :: state.outMessages

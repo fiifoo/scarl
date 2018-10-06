@@ -38,7 +38,7 @@ case class AutoMove(direction: Option[Int] = None, destination: Option[Location]
 
 case object DebugFovQuery extends InMessage with DebugMessage {
   def apply(state: RunState)(implicit ec: ExecutionContext): (RunState, Option[InMessage]) = {
-    val message = DebugFov(state.fov.locations)
+    val message = DebugFov(state)
 
     (state.copy(outMessages = message :: state.outMessages), None)
   }
@@ -46,7 +46,7 @@ case object DebugFovQuery extends InMessage with DebugMessage {
 
 case object DebugWaypointQuery extends InMessage with DebugMessage {
   def apply(state: RunState)(implicit ec: ExecutionContext): (RunState, Option[InMessage]) = {
-    val message = DebugWaypoint(state.instance.cache.waypointNetwork)
+    val message = DebugWaypoint(state)
 
     (state.copy(outMessages = message :: state.outMessages), None)
   }
@@ -76,12 +76,7 @@ case class GameAction(action: Action) extends InMessage {
 
 case object InventoryQuery extends InMessage {
   def apply(state: RunState)(implicit ec: ExecutionContext): (RunState, Option[InMessage]) = {
-    val message = PlayerInventory(
-      inventory = getContainerItems(state.instance)(state.game.player) map (_ (state.instance)),
-      equipments = state.instance.equipments.getOrElse(state.game.player, Map()),
-      playerRecipes = state.instance.recipes.getOrElse(state.game.player, Set()),
-      recycledItems = state.instance.creature.recycledItems.getOrElse(state.game.player, List())
-    )
+    val message = PlayerInventory(state)
 
     (state.copy(outMessages = message :: state.outMessages), None)
   }
