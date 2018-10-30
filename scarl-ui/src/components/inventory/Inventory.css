@@ -18,11 +18,11 @@
 
 .inventory-list td > .btn,
 .inventory-list td > .btn-group {
-    min-width: 80px;
+    min-width: 90px;
 }
 
 .inventory-list td > .btn-group > .btn:first-child {
-    min-width: 55px;
+    min-width: 65px;
 }
 
 .actions-dropdown {

@@ -28,7 +28,13 @@ class Screen extends Component {
     }
 
     componentDidMount() {
-        this.screen = createScreen(this.ref.current, this.props.kinds, this.props.autoMove)
+        this.screen = createScreen(
+            this.ref.current,
+            this.props.kinds,
+            this.props.autoMove,
+            this.props.look,
+            this.props.focusKeyboard
+        )
 
         position(this.ref.current, this.props.offset)
         this.screen.build(this.props.area)

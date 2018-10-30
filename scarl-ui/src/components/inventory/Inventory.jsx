@@ -15,7 +15,7 @@ const ActionsDropdown = ({selected, actions, setAction}) =>  (
         <div
             className="toggle"
             onClick={() => setAction(selected === null ? 0 : null)}>
-            ▼
+            {selected !== null ? '▲' : '▼'}
         </div>
         <div className={selected === null ? 'menu closed' : 'menu'}>
             {actions.map((action, key) => (
@@ -30,26 +30,30 @@ const ActionsDropdown = ({selected, actions, setAction}) =>  (
     </div>
 )
 
-const Details = ({action, actions, equipments, inventory, item, kinds, setAction}) => (
-    <div>
-        <h4>{kinds.items.get(item.kind).name}</h4>
+const Details = ({action, actions, equipments, inventory, item, kinds, setAction}) => {
+    const kind = kinds.items.get(item.kind)
 
-        {actions.isEmpty() ? null : (
-            <ActionsDropdown
-                selected={action}
-                actions={actions}
-                setAction={setAction} />
-        )}
+    return (
+        <div>
+            <h4>{kind.name}</h4>
 
-        <table className="scarl-table">
-            <ItemDetails
-                equipments={equipments}
-                inventory={inventory}
-                item={item}
-                kinds={kinds} />
-        </table>
-    </div>
-)
+            {actions.isEmpty() ? null : (
+                <ActionsDropdown
+                    selected={action}
+                    actions={actions}
+                    setAction={setAction} />
+            )}
+
+            <table className="scarl-table">
+                <ItemDetails
+                    equipments={equipments}
+                    inventory={inventory}
+                    item={kind}
+                    kinds={kinds} />
+            </table>
+        </div>
+    )
+}
 
 const Inventory = ({
     equipmentSet, equipments, inventory, kinds, quickItems, ui,

@@ -22,6 +22,7 @@ case class TerrainKind(id: TerrainKindId,
                        name: String,
                        display: Char,
                        color: Color,
+                       description: Option[String] = None,
                       ) extends Kind {
 
   def apply(s: State, idSeq: IdSeq, location: Location, options: Options = Options()): Result[Terrain] = {

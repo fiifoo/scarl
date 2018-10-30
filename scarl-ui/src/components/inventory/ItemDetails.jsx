@@ -230,8 +230,21 @@ const EquipmentStats = ({equipments, inventory, item}) => {
     )
 }
 
+const Description = ({item}) => {
+    return ! item.description ? null : (
+        <tbody>
+            <tr>
+                <td></td>
+                <td colSpan="2" className="description text-muted">{item.description}</td>
+            </tr>
+        </tbody>
+    )
+}
+
 const ItemDetails = ({equipments, inventory, item, kinds}) => (
     <Fragment>
+        <Description item={item} />
+
         <EquipmentStats
             equipments={equipments}
             inventory={inventory}

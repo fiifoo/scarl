@@ -1,7 +1,9 @@
 import { Set } from 'immutable'
 import { connect } from 'react-redux'
+import { compose } from 'redux'
 import { sendAutoMove } from '../../actions/connectionActions'
-import { cancelMode } from '../../actions/gameActions'
+import { cancelMode, look } from '../../actions/gameActions'
+import { focusKeyboard } from '../../actions/keyboard'
 import * as modes from '../../game/modes'
 import Screen from './Screen.jsx'
 import GameView from './GameView.jsx'
@@ -33,7 +35,9 @@ const ScreenContainer = connect(
         reticule: state.ui.game.reticule,
         trajectory: state.ui.game.trajectory,
     }), dispatch => ({
-        autoMove: autoMove(dispatch)
+        autoMove: autoMove(dispatch),
+        look: compose(dispatch, look),
+        focusKeyboard: compose(dispatch, focusKeyboard),
     })
 )(GameView)
 

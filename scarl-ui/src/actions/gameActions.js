@@ -81,11 +81,11 @@ export const interact = (actions = undefined) => (dispatch, getState) => {
 
 export const keyBindings = () => dispatch => changeMode(modes.KEY_BINDINGS)(dispatch)
 
-export const look = () => (dispatch, getState) => {
+export const look = (location = undefined) => (dispatch, getState) => {
     const {player} = getState()
 
     changeMode(modes.LOOK)(dispatch)
-    setCursor(player.creature.location)(dispatch)
+    setCursor(location || player.creature.location)(dispatch)
 }
 
 export const messageLog = () => dispatch => changeMode(modes.MESSAGE_LOG)(dispatch)

@@ -29,9 +29,10 @@ export const craftItem = (recipe, equip = false) => () => {
     sendInventoryQuery()
 }
 
-export const dropItem = item => () => {
+export const dropItem = item => dispatch => {
     sendAction('DropItem', {item})
     sendInventoryQuery()
+    recaptureFocus(dispatch)
 }
 
 export const enterConduit = () => (dispatch, getState) => {
@@ -49,7 +50,7 @@ export const enterConduit = () => (dispatch, getState) => {
 export const equipItem = (item, slot) => dispatch => {
     sendAction('EquipItem', {item, slot})
     sendInventoryQuery()
-    setTimeout(() => dispatch(focusKeyboard()), 0) // SplitButton captures focus...
+    recaptureFocus(dispatch)
 }
 
 export const move = location => () => {
@@ -60,9 +61,10 @@ export const pass = () => () => {
     sendAction('Pass')
 }
 
-export const recycleInventoryItem = item => () => {
+export const recycleInventoryItem = item => dispatch => {
     sendAction('RecycleItem', {target: item})
     sendInventoryQuery()
+    recaptureFocus(dispatch)
 }
 
 export const shoot = (location, missile = false) => (dispatch, getState) => {
@@ -136,4 +138,8 @@ const addShortageMessage = shortage => dispatch => {
     if (message) {
         addMessage(message)(dispatch)
     }
+}
+
+const recaptureFocus = dispatch => {
+    setTimeout(() => dispatch(focusKeyboard()), 0) // SplitButton captures focus...
 }

@@ -17,6 +17,26 @@
     position: absolute;
 }
 
+.screen-dropdown {
+    position: absolute;
+    z-index: 99;
+    border-right: 1px solid #777;
+    border-bottom: 1px solid #777;
+    background-color: #000;
+}
+
+.screen-dropdown > div {
+    padding-bottom: 2px;
+    padding-right: 5px;
+    padding-left: 5px;
+}
+
+.screen-dropdown > div.active {
+    background-color: #024;
+    color: #fff;
+}
+
+
 .form-inline > .form-group > * {
     margin-right: 10px;
 }
@@ -79,6 +99,10 @@ html, body {
 .scarl-menu-item > .btn-link:hover {
     color: #5594c9;
     text-decoration: underline;
+}
+
+.scarl-table td.description {
+    white-space: normal;
 }
 
 .scarl-table td,

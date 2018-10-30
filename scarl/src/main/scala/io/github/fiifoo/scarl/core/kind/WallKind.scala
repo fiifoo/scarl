@@ -26,6 +26,7 @@ case class WallKind(id: WallKindId,
                     name: String,
                     display: Char,
                     color: Color,
+                    description: Option[String] = None,
                     hardness: Option[Int] = None,
                    ) extends Kind {
 

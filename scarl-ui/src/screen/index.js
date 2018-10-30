@@ -6,7 +6,7 @@ import createMain from './layers/main'
 import createMouse from './layers/mouse'
 import createPlayer from './layers/player'
 
-export default (container, kinds, autoMove) => {
+export default (container, kinds, autoMove, look, focusKeyboard) => {
     const layers = {}
 
     const build = area => {
@@ -15,7 +15,7 @@ export default (container, kinds, autoMove) => {
         layers.event = createEvent(area)
         layers.highlight = createHighlight(area)
         layers.main = createMain(area, kinds)
-        layers.mouse = createMouse(area, autoMove)
+        layers.mouse = createMouse(area, autoMove, look, focusKeyboard)
         layers.player = createPlayer(area, kinds)
 
         layers.main.updateMap(area.map)

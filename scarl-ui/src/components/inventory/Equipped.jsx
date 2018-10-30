@@ -12,7 +12,7 @@ const PureEquipmentSetDropdown = ({selected, visible, toggleVisible, setEquipmen
         <div
             className="toggle"
             onClick={toggleVisible}>
-            ▼
+            {visible ? '▲' : '▼'}
         </div>
         <div className={! visible ? 'menu closed' : 'menu'}>
             {equipmentSets.map(set => (

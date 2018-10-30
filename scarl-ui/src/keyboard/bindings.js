@@ -170,6 +170,9 @@ export default {
     [gameModes.LOOK]: Map([
         [keycodes.ESC, commands.CANCEL_MODE],
         [keycodes.L, commands.CANCEL_MODE],
+        [keycodes.CONTROL, commands.TOGGLE_LOOK_DETAILED],
+        [keycodes.ENTER, commands.TOGGLE_LOOK_DETAILED],
+        [keycodes.SPACEBAR, commands.TOGGLE_LOOK_DETAILED],
     ]).merge(directions),
 
     [gameModes.MESSAGE_LOG]: Map([

@@ -1,4 +1,4 @@
-import { fromJS, List } from 'immutable'
+import { fromJS } from 'immutable'
 import { stats } from './creature'
 import { distance, line } from './geometry'
 
@@ -56,6 +56,22 @@ export const getAttackShortage = (player, type) => {
     return getShortage(player, consumption)
 }
 
+export const getCreatureInfo = (creature, player, factions) => {
+    const health = creature.stats.health.max // equipments not supported
+    const damage = creature.damage
+
+    const info = [
+        getCreatureFactionInfo(creature, player, factions),
+        getCreatureWoundedInfo(damage / health),
+    ].filter(x => !!x)
+
+    if (info.length === 0) {
+        return undefined
+    } else {
+        return info.join(', ')
+    }
+}
+
 export const getLocationConduit = (location, fov) => {
     const entities = getLocationEntities(location, fov)
 
@@ -72,6 +88,21 @@ export const getLocationDoor = (location, fov) => {
     const entities = getLocationEntities(location, fov)
 
     return entities ? entities.items.find(item => !!item.door) : undefined
+}
+
+export const getLocationKinds = (l, fov, map) => {
+    const entities = getLocationEntities(l, fov)
+
+    if (entities) {
+        return {
+            creatures: entities.creatures.map(creature => creature.kind),
+            items: entities.items.map(item => item.kind),
+            terrain: entities.terrain ? entities.terrain.kind : undefined,
+            wall: entities.wall ? entities.wall.kind : undefined,
+        }
+    } else {
+        return map[l.x] ? map[l.x][l.y] : undefined
+    }
 }
 
 // keys: Set
@@ -100,20 +131,18 @@ export const getLocationRecyclableItems = (location, fov) => {
     return entities ? entities.items.filter(item => item.recyclable) : []
 }
 
-export const getLocationDescriptions = (location, fov, map, kinds) => {
+export const getLocationSummary = (factions, fov, map, kinds, player) => location => {
     const content = getLocationKinds(location, fov, map)
 
     if (content === undefined) {
-        return List()
+        return undefined
     }
 
-    const creatures = content.creatures ? content.creatures.map(creature => kinds.creatures.get(creature).name) : []
-    const walls = content.wall ? [kinds.walls.get(content.wall).name] : []
+    const creatures = getLocationCreatures(location, fov).filter(x => x.id !== player.creature.id).map(getCreatureDescription(player, factions, kinds))
     const items = content.items.map(item => kinds.items.get(item).name)
+    const walls = content.wall ? [kinds.walls.get(content.wall).name] : []
 
-    const descriptions = creatures.concat(walls).concat(items)
-
-    return List(descriptions.map (d => d + '.'))
+    return creatures.concat(items).concat(walls).map(x => x + '.').join(' ') || undefined
 }
 
 export const getLocationUsableCreatures = (location, fov, keys) => {
@@ -202,17 +231,33 @@ export const seekTargets = (player, factions, fov, missile = false) => {
 
 const getLocationEntities = (l, fov) => fov[l.x] ? fov[l.x][l.y] : undefined
 
-const getLocationKinds = (l, fov, map) => {
-    const entities = getLocationEntities(l, fov)
+const getCreatureDescription = (player, factions, kinds) => creature => {
+    const kind = kinds.creatures.get(creature.kind)
+    const info = getCreatureInfo(creature, player, factions)
 
-    if (entities) {
-        return {
-            creatures: entities.creatures.map(creature => creature.kind),
-            items: entities.items.map(item => item.kind),
-            terrain: entities.terrain ? entities.terrain.kind : undefined,
-            wall: entities.wall ? entities.wall.kind : undefined,
-        }
+    if (info) {
+        return `${kind.name} (${info})`
     } else {
-        return map[l.x] ? map[l.x][l.y] : undefined
+        return kind.name
+    }
+}
+
+const getCreatureFactionInfo = (creature, player, factions) => {
+    if (isEnemyChecker(player, factions)(creature)) {
+        return undefined
+    } else {
+        return 'friendly'
+    }
+}
+
+const getCreatureWoundedInfo = damagePercentage => {
+    if (damagePercentage === 0) {
+        return undefined
+    } else if (damagePercentage < 0.25) {
+        return 'slightly wounded'
+    } else if (damagePercentage < 0.75) {
+        return 'wounded'
+    } else {
+        return 'badly wounded'
     }
 }

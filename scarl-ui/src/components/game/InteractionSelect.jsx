@@ -1,8 +1,6 @@
 import React from 'react'
 import { getInteractionDescription } from '../../game/interaction.js'
 
-import './InteractionSelect.css'
-
 const InteractionSelect = ({selected, interactions, kinds, selectInteraction}) => {
 
     const getDescription = interaction => (
@@ -19,7 +17,7 @@ const InteractionSelect = ({selected, interactions, kinds, selectInteraction}) =
     )
 
     return (
-        <div className="interaction-select">
+        <div className="screen-dropdown">
             {interactions.map(renderInteraction)}
         </div>
     )

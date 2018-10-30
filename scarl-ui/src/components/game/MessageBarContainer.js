@@ -1,20 +1,28 @@
 import { List } from 'immutable'
 import { connect } from 'react-redux'
 import * as modes from '../../game/modes.js'
-import { getLocationDescriptions } from '../../game/utils.js'
+import { getLocationSummary } from '../../game/utils.js'
 import MessageBar from './MessageBar.jsx'
 
 const autoMoveMessage = List(['Move: select direction or explore'])
 
-const locationDescriptions = (state, location) => {
+const getReticuleMessages = (state, location) => {
+    const factions = state.factions
     const fov = state.fov.cumulative
     const map = state.area.map
     const kinds = state.kinds
+    const player = state.player
 
-    return getLocationDescriptions(location, fov, map, kinds)
+    const summary = getLocationSummary(factions, fov, map, kinds, player)(location)
+
+    if (summary) {
+        return List([summary])
+    } else {
+        return List()
+    }
 }
 
-const eventMessages = state => (
+const getEventMessages = state => (
     state.events.latest.filter(e => e.data.message !== undefined).map(e => e.data.message)
 )
 
@@ -24,16 +32,13 @@ const getMessages = state => {
     switch (mode) {
         case modes.AIM:
         case modes.AIM_MISSILE: {
-            return locationDescriptions(state, state.ui.game.reticule)
+            return getReticuleMessages(state, state.ui.game.reticule)
         }
         case modes.AUTO_MOVE: {
             return autoMoveMessage
         }
-        case modes.LOOK: {
-            return locationDescriptions(state, state.ui.game.cursor)
-        }
         default: {
-            return eventMessages(state)
+            return getEventMessages(state)
         }
 
     }

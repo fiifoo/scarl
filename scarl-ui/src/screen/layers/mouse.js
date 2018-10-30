@@ -1,7 +1,7 @@
 import { HIGHLIGHT_COLOR } from '../const'
 import { clearContext, createCanvas, createDraw, getPixelLocation } from '../utils'
 
-export default (area, autoMove) => {
+export default (area, autoMove, look, focusKeyboard) => {
     const canvas = createCanvas(area)
     const context = canvas.getContext('2d')
 
@@ -11,6 +11,16 @@ export default (area, autoMove) => {
         const location = getMouseLocation(event)
 
         autoMove(location)
+    })
+
+    canvas.addEventListener('contextmenu', event => {
+        const location = getMouseLocation(event)
+
+        look(location)
+
+        focusKeyboard()
+        event.preventDefault()
+        return false
     })
 
     canvas.addEventListener('mousemove', event => {
