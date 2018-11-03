@@ -1,7 +1,7 @@
 {
   "areas" : [ [ "iridan/nexus", {
     "template" : "generic/area-cave",
-    "theme" : "iridan/underground",
+    "theme" : "iridan/natural-underground",
     "power" : [ ],
     "conduits" : [ {
       "target" : "iridan/core-approach",
@@ -12,7 +12,7 @@
     "owner" : "iridan"
   } ], [ "iridan/labs-surface", {
     "template" : "iridan/area-surface-assault",
-    "theme" : "iridan/surface",
+    "theme" : "iridan/natural-surface",
     "power" : [ ],
     "conduits" : [ {
       "target" : "iridan/labs",
@@ -23,7 +23,7 @@
     "owner" : "iridan"
   } ], [ "iridan/labs", {
     "template" : "iridan/area-labs",
-    "theme" : "iridan/underground",
+    "theme" : "iridan/constructed-underground",
     "power" : [ ],
     "conduits" : [ {
       "target" : "iridan/nexus",
@@ -35,7 +35,7 @@
     "owner" : "iridan"
   } ], [ "iridan/mine-approach", {
     "template" : "generic/area-tunnels",
-    "theme" : "iridan/underground",
+    "theme" : "iridan/natural-underground",
     "power" : [ ],
     "conduits" : [ {
       "target" : "iridan/mine",
@@ -46,7 +46,7 @@
     "owner" : "iridan"
   } ], [ "iridan/coms-surface", {
     "template" : "iridan/area-surface-assault",
-    "theme" : "iridan/surface",
+    "theme" : "iridan/natural-surface",
     "power" : [ ],
     "conduits" : [ {
       "target" : "iridan/coms",
@@ -57,7 +57,7 @@
     "owner" : "iridan"
   } ], [ "iridan/coms", {
     "template" : "iridan/area-coms",
-    "theme" : "iridan/underground",
+    "theme" : "iridan/natural-underground",
     "power" : [ ],
     "conduits" : [ {
       "target" : "iridan/nexus",
@@ -69,14 +69,14 @@
     "owner" : "iridan"
   } ], [ "iridan/mine", {
     "template" : "iridan/area-mine",
-    "theme" : "iridan/underground",
+    "theme" : "iridan/natural-underground",
     "power" : [ ],
     "conduits" : [ ],
     "id" : "iridan/mine",
     "owner" : "iridan"
   } ], [ "iridan/core-approach", {
     "template" : "generic/area-rooms",
-    "theme" : "iridan/underground",
+    "theme" : "iridan/constructed-underground",
     "power" : [ ],
     "conduits" : [ {
       "target" : "iridan/core",
@@ -91,7 +91,7 @@
     "owner" : "iridan"
   } ], [ "start-level", {
     "template" : "iridan/area-start",
-    "theme" : "iridan/underground",
+    "theme" : "iridan/constructed-underground",
     "conduits" : [ {
       "target" : "iridan/labs-surface",
       "sourceItem" : "iridan/conduit-assault-pod-labs",
@@ -108,7 +108,7 @@
     "owner" : "nomad"
   } ], [ "iridan/core", {
     "template" : "iridan/area-core",
-    "theme" : "iridan/underground",
+    "theme" : "iridan/natural-underground",
     "power" : [ ],
     "conduits" : [ ],
     "id" : "iridan/core",
@@ -524,7 +524,7 @@
       } ],
       "id" : "generic/area-tunnels"
     } ] ],
-    "terrains" : [ [ "generic/surface", {
+    "terrains" : [ [ "generic/natural-surface", {
       "subs" : [ ],
       "content" : [ [ "TerrainKind.DefaultCategory", [ {
         "value" : "ground",
@@ -536,8 +536,8 @@
         "value" : "ground",
         "weight" : 100
       } ] ] ],
-      "id" : "generic/surface"
-    } ], [ "generic/underground", {
+      "id" : "generic/natural-surface"
+    } ], [ "generic/constructed-underground", {
       "subs" : [ ],
       "content" : [ [ "TerrainKind.DefaultCategory", [ {
         "value" : "floor",
@@ -546,12 +546,44 @@
         "value" : "floor",
         "weight" : 100
       } ] ], [ "TerrainKind.NaturalCategory", [ {
-        "value" : "floor",
+        "value" : "floor-cave",
         "weight" : 100
       } ] ] ],
-      "id" : "generic/underground"
+      "id" : "generic/constructed-underground"
+    } ], [ "generic/natural-underground", {
+      "subs" : [ ],
+      "content" : [ [ "TerrainKind.DefaultCategory", [ {
+        "value" : "floor-cave",
+        "weight" : 100
+      } ] ], [ "TerrainKind.ConstructedCategory", [ {
+        "value" : "floor",
+        "weight" : 100
+      } ] ], [ "TerrainKind.NaturalCategory", [ {
+        "value" : "floor-cave",
+        "weight" : 100
+      } ] ] ],
+      "id" : "generic/natural-underground"
     } ] ],
-    "walls" : [ [ "generic/default", {
+    "walls" : [ [ "generic/natural-surface", {
+      "subs" : [ ],
+      "content" : [ [ "WallKind.DefaultCategory", [ {
+        "value" : "wall-cliff",
+        "weight" : 100
+      } ] ], [ "WallKind.ConstructedCategory", [ {
+        "value" : "wall",
+        "weight" : 100
+      } ] ], [ "WallKind.NaturalCategory", [ {
+        "value" : "wall-cliff",
+        "weight" : 100
+      } ] ], [ "WallKind.SecureCategory", [ {
+        "value" : "wall-reinforced",
+        "weight" : 100
+      } ] ], [ "WallKind.AreaBorderCategory", [ {
+        "value" : "wall-cliff-indestructible",
+        "weight" : 100
+      } ] ] ],
+      "id" : "generic/natural-surface"
+    } ], [ "generic/constructed-underground", {
       "subs" : [ ],
       "content" : [ [ "WallKind.DefaultCategory", [ {
         "value" : "wall",
@@ -560,7 +592,7 @@
         "value" : "wall",
         "weight" : 100
       } ] ], [ "WallKind.NaturalCategory", [ {
-        "value" : "wall",
+        "value" : "wall-cave",
         "weight" : 100
       } ] ], [ "WallKind.SecureCategory", [ {
         "value" : "wall-reinforced",
@@ -569,7 +601,26 @@
         "value" : "wall-indestructible",
         "weight" : 100
       } ] ] ],
-      "id" : "generic/default"
+      "id" : "generic/constructed-underground"
+    } ], [ "generic/natural-underground", {
+      "subs" : [ ],
+      "content" : [ [ "WallKind.DefaultCategory", [ {
+        "value" : "wall-cave",
+        "weight" : 100
+      } ] ], [ "WallKind.ConstructedCategory", [ {
+        "value" : "wall",
+        "weight" : 100
+      } ] ], [ "WallKind.NaturalCategory", [ {
+        "value" : "wall-cave",
+        "weight" : 100
+      } ] ], [ "WallKind.SecureCategory", [ {
+        "value" : "wall-reinforced",
+        "weight" : 100
+      } ] ], [ "WallKind.AreaBorderCategory", [ {
+        "value" : "wall-cave-indestructible",
+        "weight" : 100
+      } ] ] ],
+      "id" : "generic/natural-underground"
     } ] ],
     "widgets" : [ [ "iridan/default", {
       "subs" : [ ],
@@ -712,6 +763,7 @@
       "id" : "iridan/scout",
       "inventory" : [ ],
       "faction" : "iridan",
+      "description" : "Elusive machine with ranged attacks.",
       "stats" : {
         "launcher" : {
           "missile" : null,
@@ -792,6 +844,7 @@
       "id" : "player",
       "inventory" : [ "nomad/medkit", "nomad/deploy-explosive-mine", "nomad/deploy-explosive-timed", "nomad/weapon-blade" ],
       "faction" : "nomad",
+      "description" : "It's you.",
       "stats" : {
         "launcher" : {
           "missile" : null,
@@ -873,6 +926,7 @@
       "id" : "nomad/missile-smart",
       "inventory" : [ ],
       "faction" : "none",
+      "description" : "Explosive missile capable of path finding.",
       "stats" : {
         "launcher" : {
           "missile" : null,
@@ -960,6 +1014,7 @@
       "id" : "iridan/ai-core",
       "inventory" : [ ],
       "faction" : "iridan",
+      "description" : "Central AI substrate.",
       "stats" : {
         "launcher" : {
           "missile" : null,
@@ -1038,6 +1093,7 @@
       "id" : "nomad/missile",
       "inventory" : [ ],
       "faction" : "none",
+      "description" : "Explosive missile.",
       "stats" : {
         "launcher" : {
           "missile" : null,
@@ -1105,7 +1161,7 @@
         "key" : null,
         "security" : 30
       },
-      "name" : "Iridan melee armored",
+      "name" : "Iridan tortoise",
       "solitary" : false,
       "flying" : false,
       "responses" : [ ],
@@ -1124,6 +1180,7 @@
       "id" : "iridan/melee-armored",
       "inventory" : [ ],
       "faction" : "iridan",
+      "description" : "Heavily armored machine with melee attacks.",
       "stats" : {
         "launcher" : {
           "missile" : null,
@@ -1200,6 +1257,7 @@
       "id" : "scippe/shooter",
       "inventory" : [ ],
       "faction" : "scippe",
+      "description" : "Untrained soldier with bad equipment.",
       "stats" : {
         "launcher" : {
           "missile" : null,
@@ -1277,6 +1335,7 @@
       "id" : "scippe/liaison",
       "inventory" : [ ],
       "faction" : "scippe",
+      "description" : "Contact personnel of Scippe Irregulars.",
       "stats" : {
         "launcher" : {
           "missile" : null,
@@ -1354,6 +1413,7 @@
       "id" : "nomad/apparition",
       "inventory" : [ ],
       "faction" : "nomad",
+      "description" : "???",
       "stats" : {
         "launcher" : {
           "missile" : null,
@@ -1422,7 +1482,7 @@
         "security" : 30,
         "sub" : null
       },
-      "name" : "Iridan melee damager",
+      "name" : "Iridan tiger",
       "solitary" : false,
       "flying" : false,
       "responses" : [ ],
@@ -1441,6 +1501,7 @@
       "id" : "iridan/melee-damager",
       "inventory" : [ ],
       "faction" : "iridan",
+      "description" : "Machine with strong melee attacks.",
       "stats" : {
         "launcher" : {
           "missile" : null,
@@ -1527,6 +1588,7 @@
       "id" : "skyfarer/drone",
       "inventory" : [ ],
       "faction" : "skyfarer",
+      "description" : "Effective combat drone.",
       "stats" : {
         "launcher" : {
           "missile" : null,
@@ -1595,7 +1657,7 @@
         "security" : 30,
         "sub" : null
       },
-      "name" : "Iridan ranged evasive",
+      "name" : "Iridan sparrow",
       "solitary" : false,
       "flying" : false,
       "responses" : [ ],
@@ -1614,6 +1676,7 @@
       "id" : "iridan/ranged-evasive",
       "inventory" : [ ],
       "faction" : "iridan",
+      "description" : "Evasive machine with ranged attacks.",
       "stats" : {
         "launcher" : {
           "missile" : null,
@@ -1718,6 +1781,7 @@
       "id" : "iridan/turret",
       "inventory" : [ ],
       "faction" : "iridan",
+      "description" : "Stationary weapons platform.",
       "stats" : {
         "launcher" : {
           "missile" : null,
@@ -1794,6 +1858,7 @@
       "id" : "skyfarer/clone",
       "inventory" : [ ],
       "faction" : "skyfarer",
+      "description" : "Single-minded thing bred for a task.",
       "stats" : {
         "launcher" : {
           "missile" : null,
@@ -1862,7 +1927,7 @@
         "security" : 30,
         "sub" : null
       },
-      "name" : "Iridan melee fast",
+      "name" : "Iridan wolf",
       "solitary" : false,
       "flying" : false,
       "responses" : [ ],
@@ -1881,6 +1946,7 @@
       "id" : "iridan/melee-fast",
       "inventory" : [ ],
       "faction" : "iridan",
+      "description" : "Fast machine with melee attacks.",
       "stats" : {
         "launcher" : {
           "missile" : null,
@@ -1949,7 +2015,7 @@
         "security" : 30,
         "sub" : null
       },
-      "name" : "Iridan ranged armored",
+      "name" : "Iridan owl",
       "solitary" : false,
       "flying" : false,
       "responses" : [ ],
@@ -1968,6 +2034,7 @@
       "id" : "iridan/ranged-armored",
       "inventory" : [ ],
       "faction" : "iridan",
+      "description" : "Heavily armored machine with ranged attacks.",
       "stats" : {
         "launcher" : {
           "missile" : null,
@@ -2044,6 +2111,7 @@
       "id" : "iridan/avatar",
       "inventory" : [ ],
       "faction" : "iridan",
+      "description" : "Avatar of central AI substrate.",
       "stats" : {
         "launcher" : {
           "missile" : null,
@@ -2112,7 +2180,7 @@
         "security" : 30,
         "sub" : null
       },
-      "name" : "Iridan ranged damager",
+      "name" : "Iridan raven",
       "solitary" : false,
       "flying" : false,
       "responses" : [ ],
@@ -2131,6 +2199,7 @@
       "id" : "iridan/ranged-damager",
       "inventory" : [ ],
       "faction" : "iridan",
+      "description" : "Machine with strong ranged attacks.",
       "stats" : {
         "launcher" : {
           "missile" : null,
@@ -2262,6 +2331,7 @@
       "pickable" : true,
       "id" : "iridan/weapon-boser",
       "weapon" : null,
+      "description" : "Fires a beam of concentrated bosons.",
       "armor" : null,
       "key" : null
     } ], [ "nomad/armor-leg-infiltration", {
@@ -2283,6 +2353,7 @@
       "pickable" : true,
       "id" : "nomad/armor-leg-infiltration",
       "weapon" : null,
+      "description" : "Agile leg armor with superb speed.",
       "armor" : {
         "stats" : {
           "launcher" : {
@@ -2361,6 +2432,7 @@
       "pickable" : true,
       "id" : "nomad/armor-body-assault",
       "weapon" : null,
+      "description" : "Heavy duty body armor with decent power source.",
       "armor" : {
         "stats" : {
           "launcher" : {
@@ -2456,6 +2528,7 @@
       "pickable" : false,
       "id" : "iridan/door-secure-closed",
       "weapon" : null,
+      "description" : "Could be accessed with right security codes.",
       "armor" : null
     } ], [ "nomad/deploy-explosive-mine", {
       "launcher" : null,
@@ -2492,6 +2565,7 @@
       "pickable" : true,
       "id" : "nomad/deploy-explosive-mine",
       "weapon" : null,
+      "description" : "Deploys smart mines.",
       "armor" : null,
       "key" : null
     } ], [ "iridan/conduit-stairs-up-labs", {
@@ -2507,6 +2581,7 @@
       "pickable" : false,
       "id" : "iridan/conduit-stairs-up-labs",
       "weapon" : null,
+      "description" : "Constructed passageway.",
       "armor" : null
     } ], [ "skyfarer/weapon-smart-gun-merged", {
       "launcher" : null,
@@ -2583,6 +2658,7 @@
       "pickable" : true,
       "id" : "skyfarer/weapon-smart-gun-merged",
       "weapon" : null,
+      "description" : "Fires rounds of piercing bullets with effective targeting system.",
       "armor" : null,
       "key" : null
     } ], [ "old/healing-chamber", {
@@ -2618,6 +2694,7 @@
       "pickable" : true,
       "id" : "nomad/armor-hand-infiltration",
       "weapon" : null,
+      "description" : "Agile hand armor with decent hand coordination and hacking spikes.",
       "armor" : {
         "stats" : {
           "launcher" : {
@@ -2709,6 +2786,7 @@
       "pickable" : false,
       "id" : "generic/trap-laser",
       "weapon" : null,
+      "description" : "Trap hidden in ceiling.",
       "armor" : null
     } ], [ "nomad/weapon-laser-light", {
       "launcher" : null,
@@ -2785,6 +2863,7 @@
       "pickable" : true,
       "id" : "nomad/weapon-laser-light",
       "weapon" : null,
+      "description" : "Fires a beam of concentrated photons.",
       "armor" : null,
       "key" : null
     } ], [ "skyfarer/armor-body-heavy-merged", {
@@ -2806,6 +2885,7 @@
       "pickable" : true,
       "id" : "skyfarer/armor-body-heavy-merged",
       "weapon" : null,
+      "description" : "Heavy duty body armor.",
       "armor" : {
         "stats" : {
           "launcher" : {
@@ -2904,6 +2984,7 @@
       "pickable" : false,
       "id" : "nomad/explosive-timed-active",
       "weapon" : null,
+      "description" : "Timed explosive about to explode.",
       "armor" : null
     } ], [ "iridan/deflector-merged", {
       "launcher" : null,
@@ -2928,7 +3009,7 @@
             "radius" : 0,
             "blast" : 0
           },
-          "speed" : 0,
+          "speed" : -5,
           "ranged" : {
             "attack" : 0,
             "damage" : 0,
@@ -2980,6 +3061,7 @@
       "pickable" : true,
       "id" : "iridan/deflector-merged",
       "weapon" : null,
+      "description" : "Somewhat cumbersome high quality deflector.",
       "armor" : null,
       "key" : null
     } ], [ "skyfarer/explosive-timed-antimatter-active", {
@@ -3015,6 +3097,7 @@
       "pickable" : false,
       "id" : "skyfarer/explosive-timed-antimatter-active",
       "weapon" : null,
+      "description" : "Timed explosive about to explode.",
       "armor" : null
     } ], [ "generic/components-measurement-device", {
       "launcher" : null,
@@ -3046,6 +3129,7 @@
       "pickable" : false,
       "id" : "generic/components-measurement-device",
       "weapon" : null,
+      "description" : "Contains usefull components.",
       "armor" : null,
       "key" : null
     } ], [ "generic/door-invisible", {
@@ -3081,6 +3165,7 @@
       "pickable" : true,
       "id" : "nomad/armor-hand-envoy",
       "weapon" : null,
+      "description" : "Standard nomad first contact apparel.",
       "armor" : {
         "stats" : {
           "launcher" : {
@@ -3216,6 +3301,7 @@
         },
         "twoHanded" : false
       },
+      "description" : "Weird technology forcing plasma to concentrate as a whip.",
       "armor" : null,
       "key" : null
     } ], [ "skyfarer/explosive-mine", {
@@ -3243,6 +3329,7 @@
       "pickable" : true,
       "id" : "skyfarer/explosive-mine",
       "weapon" : null,
+      "description" : "Smart mine.",
       "armor" : null
     } ], [ "nomad/weapon-blade", {
       "launcher" : null,
@@ -3320,6 +3407,7 @@
         },
         "twoHanded" : false
       },
+      "description" : "Blade with a nanotech edge.",
       "armor" : null,
       "key" : null
     } ], [ "nomad/weapon-spear", {
@@ -3398,6 +3486,7 @@
         },
         "twoHanded" : false
       },
+      "description" : "Spear with a nanotech tip.",
       "armor" : null,
       "key" : null
     } ], [ "iridan/conduit-stairs-down-mine", {
@@ -3413,6 +3502,7 @@
       "pickable" : false,
       "id" : "iridan/conduit-stairs-down-mine",
       "weapon" : null,
+      "description" : "Constructed passageway.",
       "armor" : null
     } ], [ "nomad/deploy-explosive-timed", {
       "launcher" : null,
@@ -3449,6 +3539,7 @@
       "pickable" : true,
       "id" : "nomad/deploy-explosive-timed",
       "weapon" : null,
+      "description" : "Deploys timed explosives.",
       "armor" : null,
       "key" : null
     } ], [ "skyfarer/armor-hand-melee-merged", {
@@ -3470,6 +3561,7 @@
       "pickable" : true,
       "id" : "skyfarer/armor-hand-melee-merged",
       "weapon" : null,
+      "description" : "Hand armor with excellent melee hand coordination and strike power.",
       "armor" : {
         "stats" : {
           "launcher" : {
@@ -3510,7 +3602,7 @@
           },
           "melee" : {
             "attack" : 20,
-            "damage" : 10,
+            "damage" : 15,
             "consumption" : {
               "energy" : 0,
               "materials" : 0
@@ -3553,6 +3645,7 @@
       "pickable" : false,
       "id" : "iridan/portal",
       "weapon" : null,
+      "description" : "Could be deactivated with right security access codes.",
       "armor" : null
     } ], [ "nomad/armor-leg-envoy", {
       "launcher" : null,
@@ -3573,6 +3666,7 @@
       "pickable" : true,
       "id" : "nomad/armor-leg-envoy",
       "weapon" : null,
+      "description" : "Standard nomad first contact apparel.",
       "armor" : {
         "stats" : {
           "launcher" : {
@@ -3661,6 +3755,7 @@
       "pickable" : true,
       "id" : "nomad/medkit",
       "weapon" : null,
+      "description" : "Very effective healing kit.",
       "armor" : null,
       "key" : null
     } ], [ "generic/trap-plasma", {
@@ -3695,6 +3790,7 @@
       "pickable" : false,
       "id" : "generic/trap-plasma",
       "weapon" : null,
+      "description" : "Trap hidden in ceiling.",
       "armor" : null
     } ], [ "iridan/interface-coms-node", {
       "launcher" : null,
@@ -3719,6 +3815,7 @@
       "pickable" : false,
       "id" : "iridan/interface-coms-node",
       "weapon" : null,
+      "description" : "Interface with access to area data streams.",
       "armor" : null,
       "key" : {
         "kind" : "iridan/access-codes"
@@ -3742,6 +3839,7 @@
       "pickable" : true,
       "id" : "skyfarer/armor-leg-heavy-merged",
       "weapon" : null,
+      "description" : "Heavy duty leg armor.",
       "armor" : {
         "stats" : {
           "launcher" : {
@@ -3814,6 +3912,7 @@
       "pickable" : false,
       "id" : "iridan/conduit-assault-pod-labs",
       "weapon" : null,
+      "description" : "Assault pod capable of landing from orbit.",
       "armor" : null
     } ], [ "skyfarer/explosive-mine-active", {
       "display" : "¤",
@@ -3852,6 +3951,7 @@
       "pickable" : false,
       "id" : "skyfarer/explosive-mine-active",
       "weapon" : null,
+      "description" : "Active smart mine.",
       "armor" : null
     } ], [ "skyfarer/drone", {
       "display" : "d",
@@ -3877,6 +3977,7 @@
       "pickable" : true,
       "id" : "skyfarer/drone",
       "weapon" : null,
+      "description" : "Effective combat drone.",
       "armor" : null
     } ], [ "skyfarer/explosive-timed-antimatter", {
       "display" : "¤",
@@ -3903,6 +4004,7 @@
       "pickable" : true,
       "id" : "skyfarer/explosive-timed-antimatter",
       "weapon" : null,
+      "description" : "Timed explosive.",
       "armor" : null
     } ], [ "nomad/armor-hand-assault", {
       "launcher" : null,
@@ -3923,6 +4025,7 @@
       "pickable" : true,
       "id" : "nomad/armor-hand-assault",
       "weapon" : null,
+      "description" : "Heady duty hand armor with excellent hand coordination.",
       "armor" : {
         "stats" : {
           "launcher" : {
@@ -4001,6 +4104,7 @@
       "pickable" : true,
       "id" : "skyfarer/armor-leg-heavy",
       "weapon" : null,
+      "description" : "Heavy duty leg armor.",
       "armor" : {
         "stats" : {
           "launcher" : {
@@ -4073,6 +4177,7 @@
       "pickable" : false,
       "id" : "iridan/conduit-stairs-up-coms",
       "weapon" : null,
+      "description" : "Constructed passageway.",
       "armor" : null
     } ], [ "nomad/armor-leg-assault", {
       "launcher" : null,
@@ -4093,6 +4198,7 @@
       "pickable" : true,
       "id" : "nomad/armor-leg-assault",
       "weapon" : null,
+      "description" : "Heavy duty leg armor with decent speed.",
       "armor" : {
         "stats" : {
           "launcher" : {
@@ -4171,6 +4277,7 @@
       "pickable" : true,
       "id" : "nomad/armor-body-infiltration",
       "weapon" : null,
+      "description" : "Agile body armor with excellect power source.",
       "armor" : {
         "stats" : {
           "launcher" : {
@@ -4263,6 +4370,7 @@
       "pickable" : true,
       "id" : "skyfarer/armor-hand-melee",
       "weapon" : null,
+      "description" : "Hand armor with excellent melee hand coordination and strike power.",
       "armor" : {
         "stats" : {
           "launcher" : {
@@ -4302,7 +4410,7 @@
             "hacking" : 0
           },
           "melee" : {
-            "attack" : 10,
+            "attack" : 15,
             "damage" : 10,
             "consumption" : {
               "energy" : 0,
@@ -4358,6 +4466,7 @@
       "pickable" : false,
       "id" : "generic/door-open",
       "weapon" : null,
+      "description" : "Ordinary door.",
       "armor" : null
     } ], [ "nomad/deflector", {
       "launcher" : null,
@@ -4434,6 +4543,7 @@
       "pickable" : true,
       "id" : "nomad/deflector",
       "weapon" : null,
+      "description" : "Light deflector.",
       "armor" : null,
       "key" : null
     } ], [ "nomad/armor-head-infiltration", {
@@ -4455,6 +4565,7 @@
       "pickable" : true,
       "id" : "nomad/armor-head-infiltration",
       "weapon" : null,
+      "description" : "Agile visor with advanced sensors.",
       "armor" : {
         "stats" : {
           "launcher" : {
@@ -4544,6 +4655,7 @@
       "pickable" : false,
       "id" : "generic/components-coms-equipment",
       "weapon" : null,
+      "description" : "Contains usefull components.",
       "armor" : null,
       "key" : null
     } ], [ "skyfarer/weapon-whip-plasma", {
@@ -4622,6 +4734,7 @@
         },
         "twoHanded" : false
       },
+      "description" : "Weird technology forcing plasma to concentrate as a whip.",
       "armor" : null,
       "key" : null
     } ], [ "generic/door-closed", {
@@ -4641,6 +4754,7 @@
       "pickable" : false,
       "id" : "generic/door-closed",
       "weapon" : null,
+      "description" : "Ordinary door.",
       "armor" : null
     } ], [ "test/components", {
       "launcher" : null,
@@ -4749,6 +4863,7 @@
       "pickable" : true,
       "id" : "iridan/deflector",
       "weapon" : null,
+      "description" : "Somewhat cumbersome high quality deflector.",
       "armor" : null,
       "key" : null
     } ], [ "generic/materials", {
@@ -4781,6 +4896,7 @@
       "pickable" : false,
       "id" : "generic/materials",
       "weapon" : null,
+      "description" : "Miscellaneous rare materials.",
       "armor" : null,
       "key" : null
     } ], [ "iridan/conduit-stairs-down-core", {
@@ -4796,6 +4912,7 @@
       "pickable" : false,
       "id" : "iridan/conduit-stairs-down-core",
       "weapon" : null,
+      "description" : "Constructed passageway.",
       "armor" : null
     } ], [ "nomad/weapon-laser-heavy", {
       "launcher" : null,
@@ -4872,6 +4989,7 @@
       "pickable" : true,
       "id" : "nomad/weapon-laser-heavy",
       "weapon" : null,
+      "description" : "Fires a beam of concentrated photons.",
       "armor" : null,
       "key" : null
     } ], [ "old/healing-chamber-inactive", {
@@ -4963,6 +5081,7 @@
       "pickable" : true,
       "id" : "nomad/launcher-missile-smart",
       "weapon" : null,
+      "description" : "Launches explosive missiles capable of path finding.",
       "armor" : null,
       "key" : null
     } ], [ "skyfarer/armor-body-heavy", {
@@ -4984,6 +5103,7 @@
       "pickable" : true,
       "id" : "skyfarer/armor-body-heavy",
       "weapon" : null,
+      "description" : "Heavy duty body armor.",
       "armor" : {
         "stats" : {
           "launcher" : {
@@ -5066,6 +5186,7 @@
       "pickable" : false,
       "id" : "generic/interface-hidden",
       "weapon" : null,
+      "description" : "Operable interface hidden from plain sight.",
       "armor" : null,
       "key" : null
     } ], [ "generic/conduit-stairs-up", {
@@ -5081,6 +5202,7 @@
       "pickable" : false,
       "id" : "generic/conduit-stairs-up",
       "weapon" : null,
+      "description" : "Constructed passageway.",
       "armor" : null
     } ], [ "iridan/conduit-assault-pod-coms", {
       "display" : ">",
@@ -5095,6 +5217,7 @@
       "pickable" : false,
       "id" : "iridan/conduit-assault-pod-coms",
       "weapon" : null,
+      "description" : "Assault pod capable of landing from orbit.",
       "armor" : null
     } ], [ "skyfarer/weapon-smart-gun", {
       "launcher" : null,
@@ -5171,6 +5294,7 @@
       "pickable" : true,
       "id" : "skyfarer/weapon-smart-gun",
       "weapon" : null,
+      "description" : "Fires rounds of piercing bullets with effective targeting system.",
       "armor" : null,
       "key" : null
     } ], [ "nomad/armor-head-envoy", {
@@ -5192,6 +5316,7 @@
       "pickable" : true,
       "id" : "nomad/armor-head-envoy",
       "weapon" : null,
+      "description" : "Standard nomad first contact apparel.",
       "armor" : {
         "stats" : {
           "launcher" : {
@@ -5290,6 +5415,7 @@
       "pickable" : false,
       "id" : "nomad/explosive-mine-active",
       "weapon" : null,
+      "description" : "Active smart mine.",
       "armor" : null
     } ], [ "iridan/weapon-boser-merged", {
       "launcher" : null,
@@ -5366,6 +5492,7 @@
       "pickable" : true,
       "id" : "iridan/weapon-boser-merged",
       "weapon" : null,
+      "description" : "Fires a beam of concentrated bosons.",
       "armor" : null,
       "key" : null
     } ], [ "nomad/launcher-missile", {
@@ -5443,6 +5570,7 @@
       "pickable" : true,
       "id" : "nomad/launcher-missile",
       "weapon" : null,
+      "description" : "Launches explosive missiles.",
       "armor" : null,
       "key" : null
     } ], [ "skyfarer/armor-head-ranged", {
@@ -5464,6 +5592,7 @@
       "pickable" : true,
       "id" : "skyfarer/armor-head-ranged",
       "weapon" : null,
+      "description" : "Visor with advanced targeting. ",
       "armor" : {
         "stats" : {
           "launcher" : {
@@ -5542,6 +5671,7 @@
       "pickable" : true,
       "id" : "nomad/armor-body-envoy",
       "weapon" : null,
+      "description" : "Standard nomad first contact apparel.",
       "armor" : {
         "stats" : {
           "launcher" : {
@@ -5677,6 +5807,7 @@
         },
         "twoHanded" : false
       },
+      "description" : "Improvised weapon. More of a directed explosion than a gun.",
       "armor" : null,
       "key" : null
     } ], [ "generic/fence-energy-open", {
@@ -5699,6 +5830,7 @@
       "pickable" : true,
       "id" : "generic/fence-energy-open",
       "weapon" : null,
+      "description" : "Impassable wall of energy.",
       "armor" : null,
       "key" : null
     } ], [ "generic/fence-energy-closed", {
@@ -5723,6 +5855,7 @@
       "pickable" : false,
       "id" : "generic/fence-energy-closed",
       "weapon" : null,
+      "description" : "Impassable wall of energy.",
       "armor" : null,
       "key" : null
     } ], [ "generic/conduit-stairs-down", {
@@ -5738,6 +5871,7 @@
       "pickable" : false,
       "id" : "generic/conduit-stairs-down",
       "weapon" : null,
+      "description" : "Constructed passageway.",
       "armor" : null
     } ], [ "scippe/weapon-shard-blast-merged", {
       "launcher" : null,
@@ -5815,6 +5949,7 @@
         },
         "twoHanded" : false
       },
+      "description" : "Improvised weapon. More of a directed explosion than a gun.",
       "armor" : null,
       "key" : null
     } ], [ "generic/conduit-fissure", {
@@ -5830,6 +5965,7 @@
       "pickable" : false,
       "id" : "generic/conduit-fissure",
       "weapon" : null,
+      "description" : "Leads somewhere underground.",
       "armor" : null
     } ], [ "nomad/armor-head-assault", {
       "launcher" : null,
@@ -5850,6 +5986,7 @@
       "pickable" : true,
       "id" : "nomad/armor-head-assault",
       "weapon" : null,
+      "description" : "Heavy duty visor.",
       "armor" : {
         "stats" : {
           "launcher" : {
@@ -5928,6 +6065,7 @@
       "pickable" : true,
       "id" : "skyfarer/armor-head-ranged-merged",
       "weapon" : null,
+      "description" : "Visor with advanced targeting. ",
       "armor" : {
         "stats" : {
           "launcher" : {
@@ -6003,43 +6141,84 @@
       "pickable" : false,
       "id" : "iridan/door-secure-open",
       "weapon" : null,
+      "description" : "Could be accessed with right security codes.",
       "armor" : null
     } ] ],
     "terrains" : [ [ "floor", {
       "name" : "Floor",
       "display" : ".",
       "color" : "lightgray",
-      "id" : "floor"
+      "id" : "floor",
+      "description" : "Solid constructed floor."
     } ], [ "ground", {
       "name" : "Ground",
       "display" : ".",
       "color" : "brown",
-      "id" : "ground"
+      "id" : "ground",
+      "description" : "Natural ground with solid footing."
+    } ], [ "floor-cave", {
+      "name" : "Cave floor",
+      "display" : ".",
+      "color" : "#795548",
+      "id" : "floor-cave",
+      "description" : "Easily traversable cave floor."
     } ] ],
-    "walls" : [ [ "wall", {
-      "name" : "Wall",
+    "walls" : [ [ "wall-assault-pod", {
+      "name" : "Assault pod",
       "display" : "#",
-      "color" : "darkgrey",
-      "id" : "wall",
-      "hardness" : 100
+      "color" : "red",
+      "id" : "wall-assault-pod",
+      "hardness" : 200,
+      "description" : "Wall of an assault pod."
     } ], [ "wall-reinforced", {
       "name" : "Reinforced wall",
       "display" : "#",
       "color" : "white",
       "id" : "wall-reinforced",
-      "hardness" : 200
+      "hardness" : 200,
+      "description" : "Wall designed to withstand attacks."
     } ], [ "wall-indestructible", {
       "name" : "Wall",
       "display" : "#",
       "color" : "darkgrey",
       "hardness" : null,
-      "id" : "wall-indestructible"
-    } ], [ "wall-assault-pod", {
-      "name" : "Assault pod",
+      "id" : "wall-indestructible",
+      "description" : "Very solid."
+    } ], [ "wall", {
+      "name" : "Wall",
       "display" : "#",
-      "color" : "red",
-      "id" : "wall-assault-pod",
-      "hardness" : 200
+      "color" : "darkgrey",
+      "id" : "wall",
+      "hardness" : 100,
+      "description" : "Ordinary constructed wall."
+    } ], [ "wall-cave", {
+      "name" : "Cave wall",
+      "display" : "#",
+      "color" : "#795548",
+      "id" : "wall-cave",
+      "hardness" : 100,
+      "description" : "Excavated or natural cave wall."
+    } ], [ "wall-cliff", {
+      "name" : "Cliff",
+      "display" : "#",
+      "color" : "#795548",
+      "id" : "wall-cliff",
+      "hardness" : 100,
+      "description" : "Unclimbable rock cliff."
+    } ], [ "wall-cave-indestructible", {
+      "name" : "Cave wall",
+      "display" : "#",
+      "color" : "#795548",
+      "hardness" : null,
+      "id" : "wall-cave-indestructible",
+      "description" : "Very solid."
+    } ], [ "wall-cliff-indestructible", {
+      "name" : "Cliff",
+      "display" : "#",
+      "color" : "#795548",
+      "hardness" : null,
+      "id" : "wall-cliff-indestructible",
+      "description" : "Very solid."
     } ] ],
     "widgets" : [ [ "generic/trap-laser", {
       "type" : "TriggeredTrapWidget",
@@ -6929,7 +7108,13 @@
         }
       },
       "templateCatalogue" : null,
-      "terrain" : null,
+      "terrain" : {
+        "type" : "ContentSelection.ThemeTerrain",
+        "data" : {
+          "category" : [ "TerrainKind.ConstructedCategory" ],
+          "tags" : [ ]
+        }
+      },
       "templates" : [ ],
       "id" : "generic/room-storage",
       "features" : [ {
@@ -7373,11 +7558,17 @@
       "border" : {
         "type" : "ContentSelection.ThemeWall",
         "data" : {
-          "category" : [ ],
+          "category" : [ "WallKind.ConstructedCategory" ],
           "tags" : [ ]
         }
       },
-      "terrain" : null,
+      "terrain" : {
+        "type" : "ContentSelection.ThemeTerrain",
+        "data" : {
+          "category" : [ "TerrainKind.ConstructedCategory" ],
+          "tags" : [ ]
+        }
+      },
       "templates" : [ {
         "selection" : {
           "type" : "ContentSelection.ThemeTemplate",
@@ -7420,7 +7611,13 @@
           "iterations" : 4,
           "roomSize" : 4,
           "doorFactor" : 10,
-          "wall" : null,
+          "wall" : {
+            "type" : "ContentSelection.ThemeWall",
+            "data" : {
+              "category" : [ "WallKind.ConstructedCategory" ],
+              "tags" : [ ]
+            }
+          },
           "door" : null
         }
       }, {
@@ -8369,38 +8566,56 @@
         "restrictedLocations" : [ ],
         "walls" : [ [ {
           "x" : 8,
-          "y" : 5
+          "y" : 11
         }, {
           "type" : "ContentSelection.ThemeWall",
           "data" : {
-            "category" : [ ],
+            "category" : [ "WallKind.ConstructedCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 17,
+          "y" : 10
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.ConstructedCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 1,
+          "y" : 3
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.ConstructedCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 6,
+          "y" : 1
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.ConstructedCategory" ],
             "tags" : [ ]
           }
         } ], [ {
           "x" : 10,
+          "y" : 11
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.ConstructedCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 1,
           "y" : 5
         }, {
           "type" : "ContentSelection.ThemeWall",
           "data" : {
-            "category" : [ ],
-            "tags" : [ ]
-          }
-        } ], [ {
-          "x" : 10,
-          "y" : 7
-        }, {
-          "type" : "ContentSelection.ThemeWall",
-          "data" : {
-            "category" : [ ],
-            "tags" : [ ]
-          }
-        } ], [ {
-          "x" : 8,
-          "y" : 7
-        }, {
-          "type" : "ContentSelection.ThemeWall",
-          "data" : {
-            "category" : [ ],
+            "category" : [ "WallKind.ConstructedCategory" ],
             "tags" : [ ]
           }
         } ], [ {
@@ -8409,7 +8624,16 @@
         }, {
           "type" : "ContentSelection.ThemeWall",
           "data" : {
-            "category" : [ ],
+            "category" : [ "WallKind.ConstructedCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 15,
+          "y" : 1
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.ConstructedCategory" ],
             "tags" : [ ]
           }
         } ], [ {
@@ -8418,7 +8642,34 @@
         }, {
           "type" : "ContentSelection.ThemeWall",
           "data" : {
-            "category" : [ ],
+            "category" : [ "WallKind.ConstructedCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 2,
+          "y" : 1
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.ConstructedCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 1,
+          "y" : 8
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.ConstructedCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 11,
+          "y" : 1
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.ConstructedCategory" ],
             "tags" : [ ]
           }
         } ], [ {
@@ -8427,7 +8678,16 @@
         }, {
           "type" : "ContentSelection.ThemeWall",
           "data" : {
-            "category" : [ ],
+            "category" : [ "WallKind.ConstructedCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 2,
+          "y" : 11
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.ConstructedCategory" ],
             "tags" : [ ]
           }
         } ], [ {
@@ -8436,7 +8696,61 @@
         }, {
           "type" : "ContentSelection.ThemeWall",
           "data" : {
-            "category" : [ ],
+            "category" : [ "WallKind.ConstructedCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 9,
+          "y" : 11
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.ConstructedCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 5,
+          "y" : 11
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.ConstructedCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 1,
+          "y" : 6
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.ConstructedCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 17,
+          "y" : 9
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.ConstructedCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 13,
+          "y" : 11
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.ConstructedCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 1,
+          "y" : 1
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.ConstructedCategory" ],
             "tags" : [ ]
           }
         } ], [ {
@@ -8445,7 +8759,43 @@
         }, {
           "type" : "ContentSelection.ThemeWall",
           "data" : {
-            "category" : [ ],
+            "category" : [ "WallKind.ConstructedCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 6,
+          "y" : 11
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.ConstructedCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 17,
+          "y" : 3
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.ConstructedCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 16,
+          "y" : 1
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.ConstructedCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 1,
+          "y" : 11
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.ConstructedCategory" ],
             "tags" : [ ]
           }
         } ], [ {
@@ -8454,7 +8804,115 @@
         }, {
           "type" : "ContentSelection.ThemeWall",
           "data" : {
-            "category" : [ ],
+            "category" : [ "WallKind.ConstructedCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 17,
+          "y" : 7
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.ConstructedCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 9,
+          "y" : 1
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.ConstructedCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 1,
+          "y" : 9
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.ConstructedCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 14,
+          "y" : 1
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.ConstructedCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 17,
+          "y" : 11
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.ConstructedCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 17,
+          "y" : 8
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.ConstructedCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 8,
+          "y" : 5
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.ConstructedCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 4,
+          "y" : 11
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.ConstructedCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 3,
+          "y" : 11
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.ConstructedCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 11,
+          "y" : 11
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.ConstructedCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 1,
+          "y" : 10
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.ConstructedCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 17,
+          "y" : 2
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.ConstructedCategory" ],
             "tags" : [ ]
           }
         } ], [ {
@@ -8463,7 +8921,7 @@
         }, {
           "type" : "ContentSelection.ThemeWall",
           "data" : {
-            "category" : [ ],
+            "category" : [ "WallKind.ConstructedCategory" ],
             "tags" : [ ]
           }
         } ], [ {
@@ -8472,7 +8930,7 @@
         }, {
           "type" : "ContentSelection.ThemeWall",
           "data" : {
-            "category" : [ ],
+            "category" : [ "WallKind.ConstructedCategory" ],
             "tags" : [ ]
           }
         } ], [ {
@@ -8481,7 +8939,52 @@
         }, {
           "type" : "ContentSelection.ThemeWall",
           "data" : {
-            "category" : [ ],
+            "category" : [ "WallKind.ConstructedCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 16,
+          "y" : 11
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.ConstructedCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 8,
+          "y" : 7
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.ConstructedCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 10,
+          "y" : 5
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.ConstructedCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 7,
+          "y" : 11
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.ConstructedCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 7,
+          "y" : 1
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.ConstructedCategory" ],
             "tags" : [ ]
           }
         } ], [ {
@@ -8490,7 +8993,7 @@
         }, {
           "type" : "ContentSelection.ThemeWall",
           "data" : {
-            "category" : [ ],
+            "category" : [ "WallKind.ConstructedCategory" ],
             "tags" : [ ]
           }
         } ], [ {
@@ -8499,7 +9002,88 @@
         }, {
           "type" : "ContentSelection.ThemeWall",
           "data" : {
-            "category" : [ ],
+            "category" : [ "WallKind.ConstructedCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 13,
+          "y" : 1
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.ConstructedCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 17,
+          "y" : 4
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.ConstructedCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 1,
+          "y" : 4
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.ConstructedCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 12,
+          "y" : 1
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.ConstructedCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 14,
+          "y" : 11
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.ConstructedCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 17,
+          "y" : 5
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.ConstructedCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 10,
+          "y" : 7
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.ConstructedCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 1,
+          "y" : 7
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.ConstructedCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 17,
+          "y" : 6
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.ConstructedCategory" ],
             "tags" : [ ]
           }
         } ], [ {
@@ -8508,7 +9092,16 @@
         }, {
           "type" : "ContentSelection.ThemeWall",
           "data" : {
-            "category" : [ ],
+            "category" : [ "WallKind.ConstructedCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 12,
+          "y" : 11
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.ConstructedCategory" ],
             "tags" : [ ]
           }
         } ], [ {
@@ -8517,7 +9110,43 @@
         }, {
           "type" : "ContentSelection.ThemeWall",
           "data" : {
-            "category" : [ ],
+            "category" : [ "WallKind.ConstructedCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 8,
+          "y" : 1
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.ConstructedCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 15,
+          "y" : 11
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.ConstructedCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 17,
+          "y" : 1
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.ConstructedCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 10,
+          "y" : 1
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.ConstructedCategory" ],
             "tags" : [ ]
           }
         } ], [ {
@@ -8526,7 +9155,25 @@
         }, {
           "type" : "ContentSelection.ThemeWall",
           "data" : {
-            "category" : [ ],
+            "category" : [ "WallKind.ConstructedCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 4,
+          "y" : 1
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.ConstructedCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 3,
+          "y" : 1
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.ConstructedCategory" ],
             "tags" : [ ]
           }
         } ], [ {
@@ -8535,7 +9182,16 @@
         }, {
           "type" : "ContentSelection.ThemeWall",
           "data" : {
-            "category" : [ ],
+            "category" : [ "WallKind.ConstructedCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 1,
+          "y" : 2
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.ConstructedCategory" ],
             "tags" : [ ]
           }
         } ], [ {
@@ -8544,7 +9200,7 @@
         }, {
           "type" : "ContentSelection.ThemeWall",
           "data" : {
-            "category" : [ ],
+            "category" : [ "WallKind.ConstructedCategory" ],
             "tags" : [ ]
           }
         } ], [ {
@@ -8584,8 +9240,8 @@
             "tags" : [ ]
           }
         } ], [ {
-          "x" : 6,
-          "y" : 0
+          "x" : 0,
+          "y" : 6
         }, {
           "type" : "ContentSelection.ThemeWall",
           "data" : {
@@ -8593,8 +9249,8 @@
             "tags" : [ ]
           }
         } ], [ {
-          "x" : 0,
-          "y" : 6
+          "x" : 6,
+          "y" : 0
         }, {
           "type" : "ContentSelection.ThemeWall",
           "data" : {
@@ -8629,8 +9285,8 @@
             "tags" : [ ]
           }
         } ], [ {
-          "x" : 8,
-          "y" : 0
+          "x" : 0,
+          "y" : 8
         }, {
           "type" : "ContentSelection.ThemeWall",
           "data" : {
@@ -8638,8 +9294,8 @@
             "tags" : [ ]
           }
         } ], [ {
-          "x" : 0,
-          "y" : 8
+          "x" : 8,
+          "y" : 0
         }, {
           "type" : "ContentSelection.ThemeWall",
           "data" : {
@@ -8809,8 +9465,8 @@
             "tags" : [ ]
           }
         } ], [ {
-          "x" : 12,
-          "y" : 0
+          "x" : 0,
+          "y" : 12
         }, {
           "type" : "ContentSelection.ThemeWall",
           "data" : {
@@ -8818,8 +9474,8 @@
             "tags" : [ ]
           }
         } ], [ {
-          "x" : 0,
-          "y" : 12
+          "x" : 12,
+          "y" : 0
         }, {
           "type" : "ContentSelection.ThemeWall",
           "data" : {
@@ -8881,8 +9537,8 @@
             "tags" : [ ]
           }
         } ], [ {
-          "x" : 14,
-          "y" : 0
+          "x" : 2,
+          "y" : 12
         }, {
           "type" : "ContentSelection.ThemeWall",
           "data" : {
@@ -8890,8 +9546,8 @@
             "tags" : [ ]
           }
         } ], [ {
-          "x" : 2,
-          "y" : 12
+          "x" : 14,
+          "y" : 0
         }, {
           "type" : "ContentSelection.ThemeWall",
           "data" : {
@@ -9072,465 +9728,6 @@
         } ], [ {
           "x" : 16,
           "y" : 0
-        }, {
-          "type" : "ContentSelection.ThemeWall",
-          "data" : {
-            "category" : [ ],
-            "tags" : [ ]
-          }
-        } ], [ {
-          "x" : 8,
-          "y" : 11
-        }, {
-          "type" : "ContentSelection.ThemeWall",
-          "data" : {
-            "category" : [ ],
-            "tags" : [ ]
-          }
-        } ], [ {
-          "x" : 17,
-          "y" : 10
-        }, {
-          "type" : "ContentSelection.ThemeWall",
-          "data" : {
-            "category" : [ ],
-            "tags" : [ ]
-          }
-        } ], [ {
-          "x" : 1,
-          "y" : 3
-        }, {
-          "type" : "ContentSelection.ThemeWall",
-          "data" : {
-            "category" : [ ],
-            "tags" : [ ]
-          }
-        } ], [ {
-          "x" : 6,
-          "y" : 1
-        }, {
-          "type" : "ContentSelection.ThemeWall",
-          "data" : {
-            "category" : [ ],
-            "tags" : [ ]
-          }
-        } ], [ {
-          "x" : 10,
-          "y" : 11
-        }, {
-          "type" : "ContentSelection.ThemeWall",
-          "data" : {
-            "category" : [ ],
-            "tags" : [ ]
-          }
-        } ], [ {
-          "x" : 1,
-          "y" : 5
-        }, {
-          "type" : "ContentSelection.ThemeWall",
-          "data" : {
-            "category" : [ ],
-            "tags" : [ ]
-          }
-        } ], [ {
-          "x" : 15,
-          "y" : 1
-        }, {
-          "type" : "ContentSelection.ThemeWall",
-          "data" : {
-            "category" : [ ],
-            "tags" : [ ]
-          }
-        } ], [ {
-          "x" : 2,
-          "y" : 1
-        }, {
-          "type" : "ContentSelection.ThemeWall",
-          "data" : {
-            "category" : [ ],
-            "tags" : [ ]
-          }
-        } ], [ {
-          "x" : 1,
-          "y" : 8
-        }, {
-          "type" : "ContentSelection.ThemeWall",
-          "data" : {
-            "category" : [ ],
-            "tags" : [ ]
-          }
-        } ], [ {
-          "x" : 11,
-          "y" : 1
-        }, {
-          "type" : "ContentSelection.ThemeWall",
-          "data" : {
-            "category" : [ ],
-            "tags" : [ ]
-          }
-        } ], [ {
-          "x" : 2,
-          "y" : 11
-        }, {
-          "type" : "ContentSelection.ThemeWall",
-          "data" : {
-            "category" : [ ],
-            "tags" : [ ]
-          }
-        } ], [ {
-          "x" : 9,
-          "y" : 11
-        }, {
-          "type" : "ContentSelection.ThemeWall",
-          "data" : {
-            "category" : [ ],
-            "tags" : [ ]
-          }
-        } ], [ {
-          "x" : 5,
-          "y" : 11
-        }, {
-          "type" : "ContentSelection.ThemeWall",
-          "data" : {
-            "category" : [ ],
-            "tags" : [ ]
-          }
-        } ], [ {
-          "x" : 1,
-          "y" : 6
-        }, {
-          "type" : "ContentSelection.ThemeWall",
-          "data" : {
-            "category" : [ ],
-            "tags" : [ ]
-          }
-        } ], [ {
-          "x" : 17,
-          "y" : 9
-        }, {
-          "type" : "ContentSelection.ThemeWall",
-          "data" : {
-            "category" : [ ],
-            "tags" : [ ]
-          }
-        } ], [ {
-          "x" : 13,
-          "y" : 11
-        }, {
-          "type" : "ContentSelection.ThemeWall",
-          "data" : {
-            "category" : [ ],
-            "tags" : [ ]
-          }
-        } ], [ {
-          "x" : 1,
-          "y" : 1
-        }, {
-          "type" : "ContentSelection.ThemeWall",
-          "data" : {
-            "category" : [ ],
-            "tags" : [ ]
-          }
-        } ], [ {
-          "x" : 6,
-          "y" : 11
-        }, {
-          "type" : "ContentSelection.ThemeWall",
-          "data" : {
-            "category" : [ ],
-            "tags" : [ ]
-          }
-        } ], [ {
-          "x" : 17,
-          "y" : 3
-        }, {
-          "type" : "ContentSelection.ThemeWall",
-          "data" : {
-            "category" : [ ],
-            "tags" : [ ]
-          }
-        } ], [ {
-          "x" : 16,
-          "y" : 1
-        }, {
-          "type" : "ContentSelection.ThemeWall",
-          "data" : {
-            "category" : [ ],
-            "tags" : [ ]
-          }
-        } ], [ {
-          "x" : 1,
-          "y" : 11
-        }, {
-          "type" : "ContentSelection.ThemeWall",
-          "data" : {
-            "category" : [ ],
-            "tags" : [ ]
-          }
-        } ], [ {
-          "x" : 17,
-          "y" : 7
-        }, {
-          "type" : "ContentSelection.ThemeWall",
-          "data" : {
-            "category" : [ ],
-            "tags" : [ ]
-          }
-        } ], [ {
-          "x" : 9,
-          "y" : 1
-        }, {
-          "type" : "ContentSelection.ThemeWall",
-          "data" : {
-            "category" : [ ],
-            "tags" : [ ]
-          }
-        } ], [ {
-          "x" : 1,
-          "y" : 9
-        }, {
-          "type" : "ContentSelection.ThemeWall",
-          "data" : {
-            "category" : [ ],
-            "tags" : [ ]
-          }
-        } ], [ {
-          "x" : 14,
-          "y" : 1
-        }, {
-          "type" : "ContentSelection.ThemeWall",
-          "data" : {
-            "category" : [ ],
-            "tags" : [ ]
-          }
-        } ], [ {
-          "x" : 17,
-          "y" : 11
-        }, {
-          "type" : "ContentSelection.ThemeWall",
-          "data" : {
-            "category" : [ ],
-            "tags" : [ ]
-          }
-        } ], [ {
-          "x" : 17,
-          "y" : 8
-        }, {
-          "type" : "ContentSelection.ThemeWall",
-          "data" : {
-            "category" : [ ],
-            "tags" : [ ]
-          }
-        } ], [ {
-          "x" : 4,
-          "y" : 11
-        }, {
-          "type" : "ContentSelection.ThemeWall",
-          "data" : {
-            "category" : [ ],
-            "tags" : [ ]
-          }
-        } ], [ {
-          "x" : 3,
-          "y" : 11
-        }, {
-          "type" : "ContentSelection.ThemeWall",
-          "data" : {
-            "category" : [ ],
-            "tags" : [ ]
-          }
-        } ], [ {
-          "x" : 11,
-          "y" : 11
-        }, {
-          "type" : "ContentSelection.ThemeWall",
-          "data" : {
-            "category" : [ ],
-            "tags" : [ ]
-          }
-        } ], [ {
-          "x" : 1,
-          "y" : 10
-        }, {
-          "type" : "ContentSelection.ThemeWall",
-          "data" : {
-            "category" : [ ],
-            "tags" : [ ]
-          }
-        } ], [ {
-          "x" : 17,
-          "y" : 2
-        }, {
-          "type" : "ContentSelection.ThemeWall",
-          "data" : {
-            "category" : [ ],
-            "tags" : [ ]
-          }
-        } ], [ {
-          "x" : 16,
-          "y" : 11
-        }, {
-          "type" : "ContentSelection.ThemeWall",
-          "data" : {
-            "category" : [ ],
-            "tags" : [ ]
-          }
-        } ], [ {
-          "x" : 7,
-          "y" : 11
-        }, {
-          "type" : "ContentSelection.ThemeWall",
-          "data" : {
-            "category" : [ ],
-            "tags" : [ ]
-          }
-        } ], [ {
-          "x" : 7,
-          "y" : 1
-        }, {
-          "type" : "ContentSelection.ThemeWall",
-          "data" : {
-            "category" : [ ],
-            "tags" : [ ]
-          }
-        } ], [ {
-          "x" : 13,
-          "y" : 1
-        }, {
-          "type" : "ContentSelection.ThemeWall",
-          "data" : {
-            "category" : [ ],
-            "tags" : [ ]
-          }
-        } ], [ {
-          "x" : 17,
-          "y" : 4
-        }, {
-          "type" : "ContentSelection.ThemeWall",
-          "data" : {
-            "category" : [ ],
-            "tags" : [ ]
-          }
-        } ], [ {
-          "x" : 1,
-          "y" : 4
-        }, {
-          "type" : "ContentSelection.ThemeWall",
-          "data" : {
-            "category" : [ ],
-            "tags" : [ ]
-          }
-        } ], [ {
-          "x" : 12,
-          "y" : 1
-        }, {
-          "type" : "ContentSelection.ThemeWall",
-          "data" : {
-            "category" : [ ],
-            "tags" : [ ]
-          }
-        } ], [ {
-          "x" : 14,
-          "y" : 11
-        }, {
-          "type" : "ContentSelection.ThemeWall",
-          "data" : {
-            "category" : [ ],
-            "tags" : [ ]
-          }
-        } ], [ {
-          "x" : 17,
-          "y" : 5
-        }, {
-          "type" : "ContentSelection.ThemeWall",
-          "data" : {
-            "category" : [ ],
-            "tags" : [ ]
-          }
-        } ], [ {
-          "x" : 1,
-          "y" : 7
-        }, {
-          "type" : "ContentSelection.ThemeWall",
-          "data" : {
-            "category" : [ ],
-            "tags" : [ ]
-          }
-        } ], [ {
-          "x" : 17,
-          "y" : 6
-        }, {
-          "type" : "ContentSelection.ThemeWall",
-          "data" : {
-            "category" : [ ],
-            "tags" : [ ]
-          }
-        } ], [ {
-          "x" : 12,
-          "y" : 11
-        }, {
-          "type" : "ContentSelection.ThemeWall",
-          "data" : {
-            "category" : [ ],
-            "tags" : [ ]
-          }
-        } ], [ {
-          "x" : 8,
-          "y" : 1
-        }, {
-          "type" : "ContentSelection.ThemeWall",
-          "data" : {
-            "category" : [ ],
-            "tags" : [ ]
-          }
-        } ], [ {
-          "x" : 15,
-          "y" : 11
-        }, {
-          "type" : "ContentSelection.ThemeWall",
-          "data" : {
-            "category" : [ ],
-            "tags" : [ ]
-          }
-        } ], [ {
-          "x" : 17,
-          "y" : 1
-        }, {
-          "type" : "ContentSelection.ThemeWall",
-          "data" : {
-            "category" : [ ],
-            "tags" : [ ]
-          }
-        } ], [ {
-          "x" : 10,
-          "y" : 1
-        }, {
-          "type" : "ContentSelection.ThemeWall",
-          "data" : {
-            "category" : [ ],
-            "tags" : [ ]
-          }
-        } ], [ {
-          "x" : 4,
-          "y" : 1
-        }, {
-          "type" : "ContentSelection.ThemeWall",
-          "data" : {
-            "category" : [ ],
-            "tags" : [ ]
-          }
-        } ], [ {
-          "x" : 3,
-          "y" : 1
-        }, {
-          "type" : "ContentSelection.ThemeWall",
-          "data" : {
-            "category" : [ ],
-            "tags" : [ ]
-          }
-        } ], [ {
-          "x" : 1,
-          "y" : 2
         }, {
           "type" : "ContentSelection.ThemeWall",
           "data" : {
@@ -9683,7 +9880,14 @@
         "gatewayLocations" : [ ],
         "terrains" : [ ]
       },
-      "id" : "iridan/room-coms-node"
+      "id" : "iridan/room-coms-node",
+      "terrain" : {
+        "type" : "ContentSelection.ThemeTerrain",
+        "data" : {
+          "category" : [ "TerrainKind.ConstructedCategory" ],
+          "tags" : [ ]
+        }
+      }
     }
   } ], [ "generic/room-portal-high", {
     "type" : "RandomizedTemplate",
@@ -9704,11 +9908,17 @@
       "border" : {
         "type" : "ContentSelection.ThemeWall",
         "data" : {
-          "category" : [ ],
+          "category" : [ "WallKind.ConstructedCategory" ],
           "tags" : [ ]
         }
       },
-      "terrain" : null,
+      "terrain" : {
+        "type" : "ContentSelection.ThemeTerrain",
+        "data" : {
+          "category" : [ "TerrainKind.ConstructedCategory" ],
+          "tags" : [ ]
+        }
+      },
       "templates" : [ ],
       "id" : "generic/room-portal-high",
       "features" : [ {
@@ -9745,11 +9955,17 @@
       "border" : {
         "type" : "ContentSelection.ThemeWall",
         "data" : {
-          "category" : [ ],
+          "category" : [ "WallKind.ConstructedCategory" ],
           "tags" : [ ]
         }
       },
-      "terrain" : null,
+      "terrain" : {
+        "type" : "ContentSelection.ThemeTerrain",
+        "data" : {
+          "category" : [ "TerrainKind.ConstructedCategory" ],
+          "tags" : [ ]
+        }
+      },
       "templates" : [ ],
       "id" : "generic/house-ruin",
       "features" : [ {
@@ -9758,7 +9974,13 @@
           "iterations" : 4,
           "roomSize" : 4,
           "doorFactor" : 10,
-          "wall" : null,
+          "wall" : {
+            "type" : "ContentSelection.ThemeWall",
+            "data" : {
+              "category" : [ "WallKind.ConstructedCategory" ],
+              "tags" : [ ]
+            }
+          },
           "door" : {
             "type" : "ContentSelection.FixedDoor",
             "data" : {
@@ -9814,11 +10036,17 @@
       "border" : {
         "type" : "ContentSelection.ThemeWall",
         "data" : {
-          "category" : [ ],
+          "category" : [ "WallKind.ConstructedCategory" ],
           "tags" : [ ]
         }
       },
-      "terrain" : null,
+      "terrain" : {
+        "type" : "ContentSelection.ThemeTerrain",
+        "data" : {
+          "category" : [ "TerrainKind.ConstructedCategory" ],
+          "tags" : [ ]
+        }
+      },
       "templates" : [ ],
       "id" : "generic/room-portal-low",
       "features" : [ {
@@ -10253,7 +10481,14 @@
         "gatewayLocations" : [ ],
         "terrains" : [ ]
       },
-      "id" : "iridan/room-lab-weapon-test"
+      "id" : "iridan/room-lab-weapon-test",
+      "terrain" : {
+        "type" : "ContentSelection.ThemeTerrain",
+        "data" : {
+          "category" : [ "TerrainKind.ConstructedCategory" ],
+          "tags" : [ ]
+        }
+      }
     }
   } ], [ "generic/trap-corridor-ambush", {
     "type" : "FixedTemplate",
@@ -10309,84 +10544,12 @@
           "y" : 3
         } ],
         "walls" : [ [ {
-          "x" : 0,
-          "y" : 0
+          "x" : 5,
+          "y" : 2
         }, {
           "type" : "ContentSelection.ThemeWall",
           "data" : {
-            "category" : [ ],
-            "tags" : [ ]
-          }
-        } ], [ {
-          "x" : 1,
-          "y" : 0
-        }, {
-          "type" : "ContentSelection.ThemeWall",
-          "data" : {
-            "category" : [ ],
-            "tags" : [ ]
-          }
-        } ], [ {
-          "x" : 2,
-          "y" : 0
-        }, {
-          "type" : "ContentSelection.ThemeWall",
-          "data" : {
-            "category" : [ ],
-            "tags" : [ ]
-          }
-        } ], [ {
-          "x" : 3,
-          "y" : 0
-        }, {
-          "type" : "ContentSelection.ThemeWall",
-          "data" : {
-            "category" : [ ],
-            "tags" : [ ]
-          }
-        } ], [ {
-          "x" : 4,
-          "y" : 0
-        }, {
-          "type" : "ContentSelection.ThemeWall",
-          "data" : {
-            "category" : [ ],
-            "tags" : [ ]
-          }
-        } ], [ {
-          "x" : 4,
-          "y" : 1
-        }, {
-          "type" : "ContentSelection.ThemeWall",
-          "data" : {
-            "category" : [ ],
-            "tags" : [ ]
-          }
-        } ], [ {
-          "x" : 4,
-          "y" : 4
-        }, {
-          "type" : "ContentSelection.ThemeWall",
-          "data" : {
-            "category" : [ ],
-            "tags" : [ ]
-          }
-        } ], [ {
-          "x" : 0,
-          "y" : 4
-        }, {
-          "type" : "ContentSelection.ThemeWall",
-          "data" : {
-            "category" : [ ],
-            "tags" : [ ]
-          }
-        } ], [ {
-          "x" : 0,
-          "y" : 1
-        }, {
-          "type" : "ContentSelection.ThemeWall",
-          "data" : {
-            "category" : [ ],
+            "category" : [ "WallKind.ConstructedCategory" ],
             "tags" : [ ]
           }
         } ], [ {
@@ -10395,34 +10558,7 @@
         }, {
           "type" : "ContentSelection.ThemeWall",
           "data" : {
-            "category" : [ ],
-            "tags" : [ ]
-          }
-        } ], [ {
-          "x" : 0,
-          "y" : 2
-        }, {
-          "type" : "ContentSelection.ThemeWall",
-          "data" : {
-            "category" : [ ],
-            "tags" : [ ]
-          }
-        } ], [ {
-          "x" : 4,
-          "y" : 5
-        }, {
-          "type" : "ContentSelection.ThemeWall",
-          "data" : {
-            "category" : [ ],
-            "tags" : [ ]
-          }
-        } ], [ {
-          "x" : 4,
-          "y" : 6
-        }, {
-          "type" : "ContentSelection.ThemeWall",
-          "data" : {
-            "category" : [ ],
+            "category" : [ "WallKind.ConstructedCategory" ],
             "tags" : [ ]
           }
         } ], [ {
@@ -10431,70 +10567,16 @@
         }, {
           "type" : "ContentSelection.ThemeWall",
           "data" : {
-            "category" : [ ],
+            "category" : [ "WallKind.ConstructedCategory" ],
             "tags" : [ ]
           }
         } ], [ {
-          "x" : 0,
+          "x" : 1,
           "y" : 5
         }, {
           "type" : "ContentSelection.ThemeWall",
           "data" : {
-            "category" : [ ],
-            "tags" : [ ]
-          }
-        } ], [ {
-          "x" : 1,
-          "y" : 2
-        }, {
-          "type" : "ContentSelection.ThemeWall",
-          "data" : {
-            "category" : [ ],
-            "tags" : [ ]
-          }
-        } ], [ {
-          "x" : 2,
-          "y" : 2
-        }, {
-          "type" : "ContentSelection.ThemeWall",
-          "data" : {
-            "category" : [ ],
-            "tags" : [ ]
-          }
-        } ], [ {
-          "x" : 3,
-          "y" : 2
-        }, {
-          "type" : "ContentSelection.ThemeWall",
-          "data" : {
-            "category" : [ ],
-            "tags" : [ ]
-          }
-        } ], [ {
-          "x" : 3,
-          "y" : 4
-        }, {
-          "type" : "ContentSelection.ThemeWall",
-          "data" : {
-            "category" : [ ],
-            "tags" : [ ]
-          }
-        } ], [ {
-          "x" : 2,
-          "y" : 4
-        }, {
-          "type" : "ContentSelection.ThemeWall",
-          "data" : {
-            "category" : [ ],
-            "tags" : [ ]
-          }
-        } ], [ {
-          "x" : 1,
-          "y" : 4
-        }, {
-          "type" : "ContentSelection.ThemeWall",
-          "data" : {
-            "category" : [ ],
+            "category" : [ "WallKind.ConstructedCategory" ],
             "tags" : [ ]
           }
         } ], [ {
@@ -10503,88 +10585,214 @@
         }, {
           "type" : "ContentSelection.ThemeWall",
           "data" : {
-            "category" : [ ],
-            "tags" : [ ]
-          }
-        } ], [ {
-          "x" : 5,
-          "y" : 7
-        }, {
-          "type" : "ContentSelection.ThemeWall",
-          "data" : {
-            "category" : [ ],
-            "tags" : [ ]
-          }
-        } ], [ {
-          "x" : 0,
-          "y" : 7
-        }, {
-          "type" : "ContentSelection.ThemeWall",
-          "data" : {
-            "category" : [ ],
-            "tags" : [ ]
-          }
-        } ], [ {
-          "x" : 5,
-          "y" : 5
-        }, {
-          "type" : "ContentSelection.ThemeWall",
-          "data" : {
-            "category" : [ ],
-            "tags" : [ ]
-          }
-        } ], [ {
-          "x" : 2,
-          "y" : 7
-        }, {
-          "type" : "ContentSelection.ThemeWall",
-          "data" : {
-            "category" : [ ],
-            "tags" : [ ]
-          }
-        } ], [ {
-          "x" : 1,
-          "y" : 7
-        }, {
-          "type" : "ContentSelection.ThemeWall",
-          "data" : {
-            "category" : [ ],
+            "category" : [ "WallKind.ConstructedCategory" ],
             "tags" : [ ]
           }
         } ], [ {
           "x" : 4,
-          "y" : 7
+          "y" : 5
         }, {
           "type" : "ContentSelection.ThemeWall",
           "data" : {
-            "category" : [ ],
+            "category" : [ "WallKind.ConstructedCategory" ],
             "tags" : [ ]
           }
         } ], [ {
-          "x" : 5,
+          "x" : 0,
+          "y" : 1
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.ConstructedCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 4,
           "y" : 4
         }, {
           "type" : "ContentSelection.ThemeWall",
           "data" : {
-            "category" : [ ],
+            "category" : [ "WallKind.ConstructedCategory" ],
             "tags" : [ ]
           }
         } ], [ {
           "x" : 5,
-          "y" : 6
+          "y" : 7
         }, {
           "type" : "ContentSelection.ThemeWall",
           "data" : {
-            "category" : [ ],
+            "category" : [ "WallKind.ConstructedCategory" ],
             "tags" : [ ]
           }
         } ], [ {
-          "x" : 5,
+          "x" : 3,
+          "y" : 0
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.ConstructedCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 0,
+          "y" : 7
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.ConstructedCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 0,
+          "y" : 0
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.ConstructedCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 0,
           "y" : 2
         }, {
           "type" : "ContentSelection.ThemeWall",
           "data" : {
-            "category" : [ ],
+            "category" : [ "WallKind.ConstructedCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 5,
+          "y" : 5
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.ConstructedCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 2,
+          "y" : 2
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.ConstructedCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 4,
+          "y" : 6
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.ConstructedCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 4,
+          "y" : 0
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.ConstructedCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 0,
+          "y" : 4
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.ConstructedCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 3,
+          "y" : 5
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.ConstructedCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 3,
+          "y" : 2
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.ConstructedCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 0,
+          "y" : 5
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.ConstructedCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 1,
+          "y" : 4
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.ConstructedCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 2,
+          "y" : 7
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.ConstructedCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 2,
+          "y" : 5
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.ConstructedCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 3,
+          "y" : 4
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.ConstructedCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 2,
+          "y" : 0
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.ConstructedCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 1,
+          "y" : 7
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.ConstructedCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 1,
+          "y" : 0
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.ConstructedCategory" ],
             "tags" : [ ]
           }
         } ], [ {
@@ -10593,7 +10801,52 @@
         }, {
           "type" : "ContentSelection.ThemeWall",
           "data" : {
-            "category" : [ ],
+            "category" : [ "WallKind.ConstructedCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 2,
+          "y" : 4
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.ConstructedCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 4,
+          "y" : 7
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.ConstructedCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 5,
+          "y" : 4
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.ConstructedCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 5,
+          "y" : 6
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.ConstructedCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 4,
+          "y" : 1
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.ConstructedCategory" ],
             "tags" : [ ]
           }
         } ], [ {
@@ -10602,34 +10855,16 @@
         }, {
           "type" : "ContentSelection.ThemeWall",
           "data" : {
-            "category" : [ ],
+            "category" : [ "WallKind.ConstructedCategory" ],
             "tags" : [ ]
           }
         } ], [ {
           "x" : 1,
-          "y" : 5
+          "y" : 2
         }, {
           "type" : "ContentSelection.ThemeWall",
           "data" : {
-            "category" : [ ],
-            "tags" : [ ]
-          }
-        } ], [ {
-          "x" : 2,
-          "y" : 5
-        }, {
-          "type" : "ContentSelection.ThemeWall",
-          "data" : {
-            "category" : [ ],
-            "tags" : [ ]
-          }
-        } ], [ {
-          "x" : 3,
-          "y" : 5
-        }, {
-          "type" : "ContentSelection.ThemeWall",
-          "data" : {
-            "category" : [ ],
+            "category" : [ "WallKind.ConstructedCategory" ],
             "tags" : [ ]
           }
         } ] ],
@@ -10647,13 +10882,22 @@
           } ],
           "targets" : [ {
             "x" : 1,
-            "y" : 2
+            "y" : 5
           }, {
             "x" : 2,
             "y" : 2
           }, {
             "x" : 3,
+            "y" : 5
+          }, {
+            "x" : 3,
             "y" : 2
+          }, {
+            "x" : 1,
+            "y" : 4
+          }, {
+            "x" : 2,
+            "y" : 5
           }, {
             "x" : 3,
             "y" : 4
@@ -10662,16 +10906,7 @@
             "y" : 4
           }, {
             "x" : 1,
-            "y" : 4
-          }, {
-            "x" : 1,
-            "y" : 5
-          }, {
-            "x" : 2,
-            "y" : 5
-          }, {
-            "x" : 3,
-            "y" : 5
+            "y" : 2
           } ]
         } ],
         "widgets" : [ [ {
@@ -10749,7 +10984,14 @@
         "terrains" : [ ]
       },
       "id" : "generic/trap-corridor-ambush",
-      "power" : null
+      "power" : null,
+      "terrain" : {
+        "type" : "ContentSelection.ThemeTerrain",
+        "data" : {
+          "category" : [ "TerrainKind.ConstructedCategory" ],
+          "tags" : [ ]
+        }
+      }
     }
   } ], [ "generic/area-rooms", {
     "type" : "RandomizedTemplate",
@@ -11928,7 +12170,14 @@
         "gatewayLocations" : [ ],
         "terrains" : [ ]
       },
-      "id" : "iridan/room-ai-core"
+      "id" : "iridan/room-ai-core",
+      "terrain" : {
+        "type" : "ContentSelection.ThemeTerrain",
+        "data" : {
+          "category" : [ "TerrainKind.ConstructedCategory" ],
+          "tags" : [ ]
+        }
+      }
     }
   } ], [ "generic/space-portal-low", {
     "type" : "RandomizedTemplate",
@@ -11990,11 +12239,17 @@
       "border" : {
         "type" : "ContentSelection.ThemeWall",
         "data" : {
-          "category" : [ ],
+          "category" : [ "WallKind.ConstructedCategory" ],
           "tags" : [ ]
         }
       },
-      "terrain" : null,
+      "terrain" : {
+        "type" : "ContentSelection.ThemeTerrain",
+        "data" : {
+          "category" : [ "TerrainKind.ConstructedCategory" ],
+          "tags" : [ ]
+        }
+      },
       "templates" : [ ],
       "id" : "generic/room",
       "features" : [ {
@@ -12089,7 +12344,13 @@
           "iterations" : 2,
           "roomSize" : 10,
           "doorFactor" : 10,
-          "wall" : null,
+          "wall" : {
+            "type" : "ContentSelection.ThemeWall",
+            "data" : {
+              "category" : [ "WallKind.ConstructedCategory" ],
+              "tags" : [ ]
+            }
+          },
           "door" : null
         }
       }, {
@@ -12268,11 +12529,17 @@
       "border" : {
         "type" : "ContentSelection.ThemeWall",
         "data" : {
-          "category" : [ ],
+          "category" : [ "WallKind.ConstructedCategory" ],
           "tags" : [ ]
         }
       },
-      "terrain" : null,
+      "terrain" : {
+        "type" : "ContentSelection.ThemeTerrain",
+        "data" : {
+          "category" : [ "TerrainKind.ConstructedCategory" ],
+          "tags" : [ ]
+        }
+      },
       "templates" : [ {
         "selection" : {
           "type" : "ContentSelection.ThemeTemplate",
@@ -13059,7 +13326,14 @@
         "terrains" : [ ]
       },
       "id" : "generic/vault",
-      "power" : 0
+      "power" : 0,
+      "terrain" : {
+        "type" : "ContentSelection.ThemeTerrain",
+        "data" : {
+          "category" : [ "TerrainKind.ConstructedCategory" ],
+          "tags" : [ ]
+        }
+      }
     }
   } ], [ "iridan/area-surface-assault", {
     "type" : "RandomizedTemplate",
@@ -13151,11 +13425,17 @@
       "border" : {
         "type" : "ContentSelection.ThemeWall",
         "data" : {
-          "category" : [ ],
+          "category" : [ "WallKind.ConstructedCategory" ],
           "tags" : [ ]
         }
       },
-      "terrain" : null,
+      "terrain" : {
+        "type" : "ContentSelection.ThemeTerrain",
+        "data" : {
+          "category" : [ "TerrainKind.ConstructedCategory" ],
+          "tags" : [ ]
+        }
+      },
       "templates" : [ ],
       "id" : "generic/trap-room-ambush",
       "features" : [ {
@@ -13219,21 +13499,29 @@
       }
     }
   } ] ],
-  "themes" : [ [ "iridan/underground", {
+  "themes" : [ [ "iridan/natural-surface", {
     "items" : "iridan/default",
-    "walls" : "generic/default",
+    "walls" : "generic/natural-surface",
     "widgets" : "iridan/default",
     "creatures" : "iridan/default",
     "templates" : "iridan/default",
-    "id" : "iridan/underground",
-    "terrains" : "generic/underground"
-  } ], [ "iridan/surface", {
+    "id" : "iridan/natural-surface",
+    "terrains" : "generic/natural-surface"
+  } ], [ "iridan/constructed-underground", {
     "items" : "iridan/default",
-    "walls" : "generic/default",
+    "walls" : "generic/constructed-underground",
     "widgets" : "iridan/default",
     "creatures" : "iridan/default",
     "templates" : "iridan/default",
-    "id" : "iridan/surface",
-    "terrains" : "generic/surface"
+    "id" : "iridan/constructed-underground",
+    "terrains" : "generic/constructed-underground"
+  } ], [ "iridan/natural-underground", {
+    "items" : "iridan/default",
+    "walls" : "generic/natural-underground",
+    "widgets" : "iridan/default",
+    "creatures" : "iridan/default",
+    "templates" : "iridan/default",
+    "id" : "iridan/natural-underground",
+    "terrains" : "generic/natural-underground"
   } ] ]
 }
