@@ -1,6 +1,6 @@
 import { Record } from 'immutable'
 import * as types from '../../actions/actionTypes'
-import TEMPLATES from '../../const/summaryTabs'
+import { TEMPLATES } from '../../const/summaryTabs'
 
 const initial = Record({
     tab: TEMPLATES,
