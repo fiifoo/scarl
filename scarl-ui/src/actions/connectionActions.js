@@ -39,6 +39,10 @@ const receiveActionMappers = {
         type: types.RECEIVE_PLAYER_SETTINGS,
         data,
     }),
+    SignalMap: data => ({
+        type: types.RECEIVE_SIGNAL_MAP,
+        data,
+    }),
 
     DebugFov: data => ({
         type: types.RECEIVE_DEBUG_FOV,
@@ -109,6 +113,10 @@ export const sendDebugWaypointQuery = () => {
 
 export const sendInventoryQuery = () => {
     sendMessage('InventoryQuery')
+}
+
+export const sendSignalMapQuery = () => {
+    sendMessage('SignalMapQuery')
 }
 
 export const sendSetEquipmentSet = set => {

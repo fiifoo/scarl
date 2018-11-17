@@ -2,7 +2,7 @@ import * as modes from '../game/modes'
 import { seekInteractions } from '../game/interaction'
 import { calculateTrajectory, getMissileLauncherRange, getRangedAttackRange, seekTargets } from '../game/utils'
 import * as types from './actionTypes'
-import { sendAction, sendInventoryQuery, sendSetEquipmentSet, sendSetQuickItem } from './connectionActions'
+import { sendAction, sendInventoryQuery, sendSignalMapQuery, sendSetEquipmentSet, sendSetQuickItem } from './connectionActions'
 import { useInventoryItem } from './playerActions'
 
 export const addMessage = message => dispatch => dispatch({
@@ -118,6 +118,14 @@ export const previousInteraction = () => (dispatch, getState) => {
         type: types.SET_INTERACTION,
         interaction: previous,
     })
+}
+
+export const signalMap = () => (dispatch, getState) => {
+    if (getState().player.signals === null) {
+        sendSignalMapQuery()
+    }
+
+    changeMode(modes.SIGNAL_MAP)(dispatch)
 }
 
 export const selectCurrentInteraction = () => (dispatch, getState) => {

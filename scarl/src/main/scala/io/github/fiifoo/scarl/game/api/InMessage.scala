@@ -4,7 +4,6 @@ import io.github.fiifoo.scarl.action.EquipWeaponsAction
 import io.github.fiifoo.scarl.action.validate.ActionValidator
 import io.github.fiifoo.scarl.core.action.Action
 import io.github.fiifoo.scarl.core.entity.ItemId
-import io.github.fiifoo.scarl.core.entity.Selectors.getContainerItems
 import io.github.fiifoo.scarl.core.geometry.Location
 import io.github.fiifoo.scarl.core.item.Equipment
 import io.github.fiifoo.scarl.core.item.Equipment.ArmorSlot
@@ -77,6 +76,14 @@ case class GameAction(action: Action) extends InMessage {
 case object InventoryQuery extends InMessage {
   def apply(state: RunState)(implicit ec: ExecutionContext): (RunState, Option[InMessage]) = {
     val message = PlayerInventory(state)
+
+    (state.copy(outMessages = message :: state.outMessages), None)
+  }
+}
+
+case object SignalMapQuery extends InMessage {
+  def apply(state: RunState)(implicit ec: ExecutionContext): (RunState, Option[InMessage]) = {
+    val message = SignalMap(state)
 
     (state.copy(outMessages = message :: state.outMessages), None)
   }

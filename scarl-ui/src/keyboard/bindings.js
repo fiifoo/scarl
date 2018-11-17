@@ -61,6 +61,7 @@ export default {
         [keycodes.LESS2, commands.ENTER_CONDUIT],
         [keycodes.NUMPAD_5, commands.PASS],
         [keycodes.PERIOD, commands.RECYCLE_ITEM],
+        [keycodes.SHIFT, commands.SIGNAL_MAP],
         [keycodes.SPACEBAR, commands.AIM],
         [keycodes.A, commands.AUTO_MOVE],
         [keycodes.C, commands.CRAFTING],
@@ -191,4 +192,9 @@ export default {
         [keycodes.C, commands.CRAFTING],
         [keycodes.I, commands.INVENTORY],
     ]).merge(setEquipmentSets),
+
+    [gameModes.SIGNAL_MAP]: Map([
+        [keycodes.ESC, commands.CANCEL_MODE],
+        [keycodes.SHIFT, commands.CANCEL_MODE],
+    ]),
 }

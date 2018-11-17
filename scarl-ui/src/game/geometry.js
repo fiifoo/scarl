@@ -1,3 +1,22 @@
+import { Range } from 'immutable'
+
+export const circle = (location, radius) => {
+    const dimension = Range(0, radius * 2 + 1)
+    const result = []
+
+    dimension.forEach(x => {
+        dimension.forEach(y => {
+            result.push({
+                x: x - radius + location.x,
+                y: y - radius + location.y,
+            })
+        })
+    })
+
+    return result
+}
+
+
 export const distance = (from, to) => (
     Math.max(Math.abs(from.x - to.x), Math.abs(from.y - to.y))
 )

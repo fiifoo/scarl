@@ -8,7 +8,17 @@ import * as modes from '../../game/modes'
 import Screen from './Screen.jsx'
 import GameView from './GameView.jsx'
 
-const validModes = Set([modes.MAIN, modes.AIM, modes.AIM_MISSILE, modes.AUTO_MOVE, modes.GAME_OVER, modes.INTERACT, modes.LOOK, modes.MENU])
+const validModes = Set([
+    modes.MAIN,
+    modes.AIM,
+    modes.AIM_MISSILE,
+    modes.AUTO_MOVE,
+    modes.GAME_OVER,
+    modes.INTERACT,
+    modes.LOOK,
+    modes.MENU,
+    modes.SIGNAL_MAP,
+])
 
 const autoMove = dispatch => location => {
     sendAutoMove(undefined, location)
@@ -33,6 +43,7 @@ const ScreenContainer = connect(
         offset: state.ui.game.screenOffset,
         player: state.player,
         reticule: state.ui.game.reticule,
+        signals: state.ui.game.mode === modes.SIGNAL_MAP ? state.player.signals || [] : null,
         trajectory: state.ui.game.trajectory,
     }), dispatch => ({
         autoMove: autoMove(dispatch),

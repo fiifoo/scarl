@@ -78,6 +78,10 @@ export default (command, dispatch, getState) => {
             gameActions.interact(interactions.RecycleItem)(dispatch, getState)
             break
         }
+        case commands.SIGNAL_MAP: {
+            gameActions.signalMap()(dispatch, getState)
+            break
+        }
         case commands.USE: {
             gameActions.interact(List([
                 interactions.HackCreature,

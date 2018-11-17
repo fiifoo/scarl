@@ -40,6 +40,7 @@ object JsonState {
   lazy private implicit val machineryFormat = JsonMachinery.machineryFormat
   lazy private implicit val machineryIdFormat = JsonMachinery.machineryIdFormat
   lazy private implicit val recipeIdFormat = JsonRecipe.recipeIdFormat
+  lazy private implicit val signalFormat = JsonSignal.signalFormat
   lazy private implicit val slotFormat = JsonItemEquipment.slotFormat
   lazy private implicit val tacticFormat = JsonTactic.tacticFormat
 

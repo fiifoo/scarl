@@ -1,8 +1,6 @@
 package io.github.fiifoo.scarl.game
 
-import io.github.fiifoo.scarl.core.entity.Selectors.getContainerItems
 import io.github.fiifoo.scarl.game.api._
-import io.github.fiifoo.scarl.game.area.AreaInfo
 import io.github.fiifoo.scarl.game.player.PlayerInfo
 
 object StartGame {

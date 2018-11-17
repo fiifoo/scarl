@@ -13,6 +13,7 @@ import io.github.fiifoo.scarl.game.area.AreaInfo
 import io.github.fiifoo.scarl.game.event.Event
 import io.github.fiifoo.scarl.game.player.{PlayerFov, PlayerInfo, Settings}
 import io.github.fiifoo.scarl.game.statistics.Statistics
+import io.github.fiifoo.scarl.rule.SignalRule
 
 sealed trait OutMessage
 
@@ -89,6 +90,12 @@ object PlayerInventory {
   }
 }
 
+object SignalMap {
+  def apply(state: RunState): SignalMap = {
+    SignalMap(SignalRule.signalMap(state.instance)(state.game.player))
+  }
+}
+
 case class DebugFov(locations: Set[Location]) extends OutMessage with DebugMessage
 
 case class DebugWaypoint(network: WaypointNetwork) extends OutMessage with DebugMessage
@@ -127,3 +134,5 @@ case class PlayerInventory(equipments: Map[Slot, ItemId],
                            playerRecipes: Set[RecipeId],
                            recycledItems: List[ItemKindId],
                           ) extends OutMessage
+
+case class SignalMap(signals: List[Signal]) extends OutMessage

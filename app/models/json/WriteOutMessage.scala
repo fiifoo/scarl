@@ -26,6 +26,7 @@ object WriteOutMessage {
   lazy private implicit val playerSettingsFormat = JsonPlayerSettings.playerSettingsFormat
   lazy private implicit val recipeIdFormat = JsonRecipe.recipeIdFormat
   lazy private implicit val recipeFormat = JsonRecipe.recipeFormat
+  lazy private implicit val signalFormat = JsonSignal.signalFormat
   lazy private implicit val slotFormat = JsonItemEquipment.slotFormat
   lazy private implicit val statisticsFormat = JsonStatistics.statisticsFormat
   lazy private implicit val waypointNetworkWrites = Json.writes[WaypointNetwork]
@@ -61,6 +62,7 @@ object WriteOutMessage {
   lazy private val areaChangeWrites = Json.writes[AreaChange]
   lazy private val playerInventoryWrites = Json.writes[PlayerInventory]
   lazy private val playerSettingsWrites = Json.writes[PlayerSettings]
+  lazy private val signalMapWrites = Json.writes[SignalMap]
 
   lazy private val outMessageWrites: Writes[OutMessage] = polymorphicTypeWrites({
     case message: DebugFov => debugFovWrites.writes(message)
@@ -71,5 +73,6 @@ object WriteOutMessage {
     case message: AreaChange => areaChangeWrites.writes(message)
     case message: PlayerInventory => playerInventoryWrites.writes(message)
     case message: PlayerSettings => playerSettingsWrites.writes(message)
+    case message: SignalMap => signalMapWrites.writes(message)
   })
 }

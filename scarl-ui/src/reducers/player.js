@@ -8,6 +8,7 @@ const Player = Record({
     keys: [], // will be update constanly and won't do immutable Set conversion
     recipes: List(),
     recycledItems: List(),
+    signals: null,
 })
 
 export default (state = Player(), action) => {
@@ -26,9 +27,15 @@ export default (state = Player(), action) => {
         case types.RECEIVE_GAME_UPDATE: {
             const data = action.data.player
 
-            return state.withMutations(state => (
-                state.set('creature', data.creature).set('equipmentStats', data.equipmentStats).set('keys', data.keys)
-            ))
+            return state.withMutations(state => {
+                state.set('creature', data.creature)
+                state.set('equipmentStats', data.equipmentStats)
+                state.set('keys', data.keys)
+                state.set('signals', null)
+            })
+        }
+        case types.RECEIVE_SIGNAL_MAP: {
+            return state.set('signals', List(action.data.signals))
         }
         default: {
             return state

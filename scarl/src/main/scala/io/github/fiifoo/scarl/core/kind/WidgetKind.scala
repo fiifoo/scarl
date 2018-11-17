@@ -4,7 +4,6 @@ import io.github.fiifoo.scarl.core.State
 import io.github.fiifoo.scarl.core.entity._
 import io.github.fiifoo.scarl.core.geometry.Location
 import io.github.fiifoo.scarl.core.kind.Kind.{Options, Result}
-import io.github.fiifoo.scarl.core.kind.WidgetKind.Category
 import io.github.fiifoo.scarl.core.mutation.{IdSeqMutation, NewEntityMutation}
 
 

@@ -5,6 +5,7 @@ import createHighlight from './layers/highlight'
 import createMain from './layers/main'
 import createMouse from './layers/mouse'
 import createPlayer from './layers/player'
+import createSignal from './layers/signal'
 
 export default (container, kinds, autoMove, look, focusKeyboard) => {
     const layers = {}
@@ -17,6 +18,7 @@ export default (container, kinds, autoMove, look, focusKeyboard) => {
         layers.main = createMain(area, kinds)
         layers.mouse = createMouse(area, autoMove, look, focusKeyboard)
         layers.player = createPlayer(area, kinds)
+        layers.signal = createSignal(area)
 
         layers.main.updateMap(area.map)
 
@@ -24,6 +26,7 @@ export default (container, kinds, autoMove, look, focusKeyboard) => {
         container.appendChild(layers.main.canvas)
         container.appendChild(layers.cursor.canvas)
         container.appendChild(layers.event.canvas)
+        container.appendChild(layers.signal.canvas)
         container.appendChild(layers.debug.canvas)
         container.appendChild(layers.player.canvas)
         container.appendChild(layers.mouse.canvas)
@@ -52,6 +55,8 @@ export default (container, kinds, autoMove, look, focusKeyboard) => {
         layers.highlight.update(trajectory)
     }
 
+    const updateSignals = signals => layers.signal.update(signals)
+
     return {
         build,
         reset,
@@ -59,5 +64,6 @@ export default (container, kinds, autoMove, look, focusKeyboard) => {
         updateCursor,
         updateDebug,
         updateReticule,
+        updateSignals,
     }
 }

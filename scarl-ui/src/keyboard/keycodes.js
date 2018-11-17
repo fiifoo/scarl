@@ -31,6 +31,7 @@ export const ESC = 27
 export const LESS = 60
 export const LESS2 = 226
 export const PERIOD = 190
+export const SHIFT = 16
 export const SPACEBAR = 32
 
 export const A = 65
