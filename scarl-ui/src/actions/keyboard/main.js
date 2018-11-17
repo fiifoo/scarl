@@ -63,7 +63,7 @@ export default (command, dispatch, getState) => {
             break
         }
         case commands.PASS: {
-            playerActions.pass()(dispatch)
+            playerActions.pass()(dispatch, getState)
             break
         }
         case commands.PICK_ITEM: {
@@ -117,11 +117,11 @@ const directionAction = (command, dispatch, getState) => {
             playerActions.attack(enemy.id)(dispatch, getState)
         } else {
             const friend = creatures[0]
-            playerActions.displace(friend.id)()
+            playerActions.displace(friend.id)(dispatch, getState)
         }
     } else if (door && !door.door.open) {
         playerActions.useDoor(door.id)(dispatch, getState)
     } else {
-        playerActions.move(to)(dispatch)
+        playerActions.move(to)(dispatch, getState)
     }
 }

@@ -22,6 +22,7 @@ const receiveActionMappers = {
         type: types.RECEIVE_GAME_UPDATE,
         data,
         area: state.area,
+        mode: state.ui.game.mode,
     }),
     GameOver: data => ({
         type: types.RECEIVE_GAME_OVER,

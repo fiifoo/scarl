@@ -1,7 +1,7 @@
 package io.github.fiifoo.scarl.game.api
 
-import io.github.fiifoo.scarl.action.EquipWeaponsAction
 import io.github.fiifoo.scarl.action.validate.ActionValidator
+import io.github.fiifoo.scarl.action.{EquipWeaponsAction, UseItemAction}
 import io.github.fiifoo.scarl.core.action.Action
 import io.github.fiifoo.scarl.core.entity.ItemId
 import io.github.fiifoo.scarl.core.geometry.Location
@@ -10,6 +10,7 @@ import io.github.fiifoo.scarl.core.item.Equipment.ArmorSlot
 import io.github.fiifoo.scarl.core.kind.ItemKindId
 import io.github.fiifoo.scarl.game.player.PlayerAutomation
 import io.github.fiifoo.scarl.game.{CalculateBrains, RunGame, RunState}
+import io.github.fiifoo.scarl.power.ScanPower
 
 import scala.concurrent.ExecutionContext
 
@@ -53,13 +54,20 @@ case object DebugWaypointQuery extends InMessage with DebugMessage {
 
 case class GameAction(action: Action) extends InMessage {
   def apply(state: RunState)(implicit ec: ExecutionContext): (RunState, Option[InMessage]) = {
-    val nextState = if (ActionValidator(state.instance, state.game.player, this.action)) {
-      this.run(state)
-    } else {
-      state
-    }
+    if (ActionValidator(state.instance, state.game.player, this.action)) {
+      val nextState = this.run(state)
 
-    (nextState, None)
+      val nextMessage: Option[InMessage] = action match {
+        case action: UseItemAction => action.target(state.instance).usable collect {
+          case _: ScanPower => SignalMapQuery
+        }
+        case _ => None
+      }
+
+      (nextState, nextMessage)
+    } else {
+      (state, None)
+    }
   }
 
   private def run(initial: RunState)(implicit ec: ExecutionContext): RunState = {

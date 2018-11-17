@@ -20,8 +20,8 @@ object SignalRule {
 
     signals flatMap (signal => {
       val distance = Distance(from, signal.location)
-      val strength = strengthByDistance(signal.strength, distance, sensors)
-      val radius = radiusByStrength(signal.radius, strength)
+      val strength = strengthByDistance(signal.strength, sensors)(distance)
+      val radius = radiusByStrength(signal.radius)(strength)
 
       if (strength <= 0) {
         None
@@ -35,17 +35,17 @@ object SignalRule {
     })
   }
 
-  private def strengthByDistance(strength: Int, distance: Int, sensors: Int): Int = {
+  def strengthByDistance(initial: Int, sensors: Int)(distance: Int): Int = {
     val divider = 1 + sensors.toDouble / 100
 
-    strength - math.pow(distance / divider, 1.3).toInt
+    initial - math.pow(distance / divider, 1.3).toInt
   }
 
-  private def radiusByStrength(radius: Int, strength: Int): Int = {
+  private def radiusByStrength(initial: Int)(strength: Int): Int = {
     val max = 5
     val divider = Signal.Strong / max
 
-    radius + math.max(max - (strength / divider), 0)
+    initial + math.max(max - (strength / divider), 0)
   }
 
   private def randomLocation(center: Location, radius: Int, seed: Int): Location = {

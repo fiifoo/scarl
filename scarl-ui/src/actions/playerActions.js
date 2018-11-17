@@ -1,6 +1,6 @@
 import * as utils from '../game/utils'
-import { sendAction, sendInventoryQuery } from './connectionActions'
-import { addMessage, cancelMode, setTarget } from './gameActions'
+import { sendInventoryQuery } from './connectionActions'
+import { addMessage, cancelMode, doAction, setTarget } from './gameActions'
 import { focusKeyboard } from './keyboard'
 
 export const attack = target => (dispatch, getState) => {
@@ -11,26 +11,26 @@ export const attack = target => (dispatch, getState) => {
     if (shortage) {
         addShortageMessage(shortage)(dispatch)
     } else {
-        sendAction('Attack', {target})
+        doAction('Attack', {target})(dispatch, getState)
     }
 }
 
-export const cancelRecycleItem = item => () => {
-    sendAction('CancelRecycleItem', {item})
+export const cancelRecycleItem = item => (dispatch, getState) => {
+    doAction('CancelRecycleItem', {item})(dispatch, getState)
     sendInventoryQuery()
 }
 
-export const displace = target => () => {
-    sendAction('Displace', {target})
+export const displace = target => (dispatch, getState) => {
+    doAction('Displace', {target})(dispatch, getState)
 }
 
-export const craftItem = (recipe, equip = false) => () => {
-    sendAction('CraftItem', {recipe, equip})
+export const craftItem = (recipe, equip = false) => (dispatch, getState) => {
+    doAction('CraftItem', {recipe, equip})(dispatch, getState)
     sendInventoryQuery()
 }
 
-export const dropItem = item => dispatch => {
-    sendAction('DropItem', {item})
+export const dropItem = item => (dispatch, getState) => {
+    doAction('DropItem', {item})(dispatch, getState)
     sendInventoryQuery()
     recaptureFocus(dispatch)
 }
@@ -41,28 +41,28 @@ export const enterConduit = () => (dispatch, getState) => {
     const conduit = utils.getLocationConduit(location, fov.cumulative)
 
     if (conduit) {
-        sendAction('EnterConduit', {conduit})
+        doAction('EnterConduit', {conduit})(dispatch, getState)
     } else {
         addMessage('No stairs here.')(dispatch)
     }
 }
 
-export const equipItem = (item, slot) => dispatch => {
-    sendAction('EquipItem', {item, slot})
+export const equipItem = (item, slot) => (dispatch, getState) => {
+    doAction('EquipItem', {item, slot})(dispatch, getState)
     sendInventoryQuery()
     recaptureFocus(dispatch)
 }
 
-export const move = location => () => {
-    sendAction('Move', {location})
+export const move = location => (dispatch, getState) => {
+    doAction('Move', {location})(dispatch, getState)
 }
 
-export const pass = () => () => {
-    sendAction('Pass')
+export const pass = () => (dispatch, getState) => {
+    doAction('Pass')(dispatch, getState)
 }
 
-export const recycleInventoryItem = item => dispatch => {
-    sendAction('RecycleItem', {target: item})
+export const recycleInventoryItem = item => (dispatch, getState) => {
+    doAction('RecycleItem', {target: item})(dispatch, getState)
     sendInventoryQuery()
     recaptureFocus(dispatch)
 }
@@ -85,17 +85,17 @@ export const shoot = (location, missile = false) => (dispatch, getState) => {
     } else {
         const action = missile ? 'ShootMissile' : 'Shoot'
 
-        sendAction(action, {location})
+        doAction(action, {location})(dispatch, getState)
     }
 }
 
-export const unequipItem = item => () => {
-    sendAction('UnequipItem', {item})
+export const unequipItem = item => (dispatch, getState) => {
+    doAction('UnequipItem', {item})(dispatch, getState)
     sendInventoryQuery()
 }
 
-export const useDoor = target => () => {
-    sendAction('UseDoor', {target})
+export const useDoor = target => (dispatch, getState) => {
+    doAction('UseDoor', {target})(dispatch, getState)
 }
 
 export const useInventoryItem = target => (dispatch, getState) => {
@@ -108,7 +108,7 @@ export const useInventoryItem = target => (dispatch, getState) => {
     if (shortage) {
         addShortageMessage(shortage)(dispatch)
     } else {
-        sendAction('UseItem', {target})
+        doAction('UseItem', {target})(dispatch, getState)
         sendInventoryQuery()
     }
 }

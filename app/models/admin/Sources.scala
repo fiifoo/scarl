@@ -211,6 +211,7 @@ object Sources {
       typeOf[ExplodePower],
       typeOf[ReceiveKeyPower],
       typeOf[RemoveItemPower],
+      typeOf[ScanPower],
       typeOf[TransformPower],
       typeOf[TrapAttackPower],
       typeOf[VoidPower],

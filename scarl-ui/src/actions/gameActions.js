@@ -47,6 +47,14 @@ export const crafting = () => dispatch => {
 
 export const cancelMode = () => dispatch => changeMode(modes.MAIN)(dispatch)
 
+export const doAction = (type, data = {}) => (dispatch, getState) => {
+    sendAction(type, data)
+
+    if (isUseScannerAction(getState, type, data)) {
+        changeMode(modes.SIGNAL_MAP)(dispatch)
+    }
+}
+
 export const gameOverScreen = () => dispatch => {
     changeMode(modes.GAME_OVER_SCREEN)(dispatch)
 }
@@ -66,7 +74,7 @@ export const interact = (actions = undefined) => (dispatch, getState) => {
     } else if (actions && interactions.size === 1) {
         const interaction = interactions.first()
 
-        sendAction(interaction.action, interaction.data)
+        doAction(interaction.action, interaction.data)(dispatch, getState)
     } else {
         dispatch({
             type: types.SET_INTERACTIONS,
@@ -139,7 +147,7 @@ export const selectInteraction = key => (dispatch, getState) => {
     const values = interactions.get(key)
 
     cancelMode()(dispatch)
-    sendAction(values.action, values.data)
+    doAction(values.action, values.data)(dispatch, getState)
 }
 
 export const setCursor = cursor => dispatch => dispatch({
@@ -215,3 +223,13 @@ const changeMode = mode => dispatch => dispatch({
     type: types.CHANGE_GAME_MODE,
     mode,
 })
+
+const isUseScannerAction = (getState, type, data) => {
+    if (type === 'UseItem') {
+        const item = getState().inventory.get(data.target)
+
+        return item && item.usable && item.usable.type === 'ScanPower'
+    } else {
+        return false
+    }
+}

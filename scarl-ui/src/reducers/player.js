@@ -1,5 +1,6 @@
 import { List, Record } from 'immutable'
 import * as types from '../actions/actionTypes'
+import { SIGNAL_MAP } from '../game/modes'
 
 // todo: move inventory & equipments here
 const Player = Record({
@@ -31,7 +32,9 @@ export default (state = Player(), action) => {
                 state.set('creature', data.creature)
                 state.set('equipmentStats', data.equipmentStats)
                 state.set('keys', data.keys)
-                state.set('signals', null)
+                if (action.mode !== SIGNAL_MAP) {
+                    state.set('signals', null)
+                }
             })
         }
         case types.RECEIVE_SIGNAL_MAP: {

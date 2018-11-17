@@ -51,7 +51,7 @@ const craft = (dispatch, getState) => {
     const recipe = getRecipe(getState)
 
     if (recipe && hasCraftingResources(player, inventory)(recipe)) {
-        craftItem(recipe.id)()
+        craftItem(recipe.id)(dispatch, getState)
     }
 }
 

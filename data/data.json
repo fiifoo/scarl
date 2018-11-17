@@ -842,7 +842,7 @@
       "usable" : null,
       "greetings" : [ ],
       "id" : "player",
-      "inventory" : [ "nomad/medkit", "nomad/deploy-explosive-mine", "nomad/deploy-explosive-timed", "nomad/weapon-blade" ],
+      "inventory" : [ "nomad/scanner", "nomad/medkit", "nomad/deploy-explosive-mine", "nomad/deploy-explosive-timed", "nomad/weapon-blade" ],
       "faction" : "nomad",
       "description" : "It's you.",
       "stats" : {
@@ -2551,7 +2551,7 @@
           "resources" : {
             "health" : 0,
             "energy" : 0,
-            "materials" : -30,
+            "materials" : -15,
             "components" : 0
           },
           "kind" : {
@@ -2975,7 +2975,7 @@
           "resources" : {
             "health" : 0,
             "energy" : 0,
-            "materials" : 15,
+            "materials" : 10,
             "components" : 0
           },
           "removeDescription" : "Explosive deactivates."
@@ -3525,7 +3525,7 @@
           "resources" : {
             "health" : 0,
             "energy" : 0,
-            "materials" : -15,
+            "materials" : -10,
             "components" : 0
           },
           "kind" : {
@@ -5406,7 +5406,7 @@
           "resources" : {
             "health" : 0,
             "energy" : 0,
-            "materials" : 30,
+            "materials" : 15,
             "components" : 0
           },
           "removeDescription" : "Mine deactivates."
@@ -6045,6 +6045,40 @@
         },
         "slot" : "Equipment.HeadArmor"
       },
+      "key" : null
+    } ], [ "nomad/scanner", {
+      "launcher" : null,
+      "display" : "\"",
+      "color" : "green",
+      "rangedWeapon" : null,
+      "power" : null,
+      "explosive" : null,
+      "shield" : null,
+      "hidden" : false,
+      "locked" : null,
+      "name" : "Nomad scanner",
+      "recyclable" : null,
+      "concealment" : 0,
+      "trap" : null,
+      "door" : null,
+      "usable" : {
+        "type" : "ScanPower",
+        "data" : {
+          "description" : null,
+          "resources" : {
+            "health" : 0,
+            "energy" : -30,
+            "materials" : -1,
+            "components" : 0
+          },
+          "noise" : 50
+        }
+      },
+      "pickable" : true,
+      "id" : "nomad/scanner",
+      "weapon" : null,
+      "description" : "Scans area efficiently.",
+      "armor" : null,
       "key" : null
     } ], [ "skyfarer/armor-head-ranged-merged", {
       "launcher" : null,

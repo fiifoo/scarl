@@ -17,6 +17,7 @@ object JsonPower {
   lazy private implicit val explodeFormat = Json.format[ExplodePower]
   lazy private implicit val receiveKeyFormat = Json.format[ReceiveKeyPower]
   lazy private implicit val removeItemFormat = Json.format[RemoveItemPower]
+  lazy private implicit val scanFormat = Json.format[ScanPower]
   lazy private implicit val transformFormat = Json.format[TransformPower]
   lazy private implicit val trapAttackFormat = Json.format[TrapAttackPower]
   lazy private implicit val voidFormat = Json.format[VoidPower]
@@ -46,6 +47,7 @@ object JsonPower {
       case "ExplodePower" => data.as[ExplodePower]
       case "ReceiveKeyPower" => data.as[ReceiveKeyPower]
       case "RemoveItemPower" => data.as[RemoveItemPower]
+      case "ScanPower" => data.as[ScanPower]
       case "TransformPower" => data.as[TransformPower]
       case "TrapAttackPower" => data.as[TrapAttackPower]
       case "VoidPower" => data.as[VoidPower]
@@ -55,6 +57,7 @@ object JsonPower {
       case power: ExplodePower => explodeFormat.writes(power)
       case power: ReceiveKeyPower => receiveKeyFormat.writes(power)
       case power: RemoveItemPower => removeItemFormat.writes(power)
+      case power: ScanPower => scanFormat.writes(power)
       case power: TransformPower => transformFormat.writes(power)
       case power: TrapAttackPower => trapAttackFormat.writes(power)
       case power: VoidPower => voidFormat.writes(power)
