@@ -26,4 +26,5 @@ case class Signal(kind: Signal.Kind,
                   radius: Int = 0,
                   owner: Option[FactionId] = None,
                   seed: Int,
+                  tick: Int
                  )

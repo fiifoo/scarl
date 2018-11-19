@@ -18,11 +18,11 @@ case class SignalEffect(kind: Signal.Kind,
   def apply(s: State): EffectResult = {
     val (random, rng) = s.rng()
     val seed = random.nextInt()
-    val signal = Signal(kind, location, strength, radius, owner, seed)
+    val signal = Signal(kind, location, strength, radius, owner, seed, s.tick)
 
     EffectResult(List(
       RngMutation(rng),
-      NewSignalMutation(signal),
+      NewSignalMutation(signal)
     ))
   }
 }

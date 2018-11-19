@@ -1,13 +1,15 @@
 package io.github.fiifoo.scarl.rule
 
-import io.github.fiifoo.scarl.core.State
 import io.github.fiifoo.scarl.core.entity.Selectors.getCreatureStats
 import io.github.fiifoo.scarl.core.entity.{CreatureId, Signal}
 import io.github.fiifoo.scarl.core.geometry.{Distance, Location}
+import io.github.fiifoo.scarl.core.{State, Time}
 
 import scala.util.Random
 
 object SignalRule {
+
+  val SignalDuration = Time.turn * 3
 
   def signalMap(s: State)(creature: CreatureId): List[Signal] = {
     val from = creature(s).location

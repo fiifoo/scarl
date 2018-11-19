@@ -9,6 +9,7 @@ object JsonEntity {
 
   lazy private implicit val containerFormat = JsonContainer.containerFormat
   lazy private implicit val creatureFormat = JsonCreature.creatureFormat
+  lazy private implicit val globalActorFormat = JsonGlobalActor.globalActorFormat
   lazy private implicit val itemFormat = JsonItem.itemFormat
   lazy private implicit val machineryFormat = JsonMachinery.machineryFormat
   lazy private implicit val statusFormat = JsonStatus.statusFormat
@@ -20,6 +21,7 @@ object JsonEntity {
       case "ActiveStatusId" => ActiveStatusId(value)
       case "ContainerId" => ContainerId(value)
       case "CreatureId" => CreatureId(value)
+      case "GlobalActorId" => GlobalActorId(value)
       case "ItemId" => ItemId(value)
       case "MachineryId" => MachineryId(value)
       case "PassiveStatusId" => PassiveStatusId(value)
@@ -35,6 +37,7 @@ object JsonEntity {
     def writes(entities: Map[EntityId, Entity]) = JsObject(Map(
       "containers" -> Json.toJson(entities.values collect { case container: Container => container }),
       "creatures" -> Json.toJson(entities.values collect { case creature: Creature => creature }),
+      "globals" -> Json.toJson(entities.values collect { case global: GlobalActor => global }),
       "items" -> Json.toJson(entities.values collect { case item: Item => item }),
       "machinery" -> Json.toJson(entities.values collect { case machinery: Machinery => machinery }),
       "statuses" -> Json.toJson(entities.values collect { case status: Status => status }),
@@ -48,6 +51,7 @@ object JsonEntity {
       val list =
         obj("containers").as[List[Container]] :::
           obj("creatures").as[List[Creature]] :::
+          obj("globals").as[List[GlobalActor]] :::
           obj("items").as[List[Item]] :::
           obj("machinery").as[List[Machinery]] :::
           obj("statuses").as[List[Status]] :::

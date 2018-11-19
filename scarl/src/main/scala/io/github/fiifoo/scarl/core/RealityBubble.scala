@@ -25,6 +25,10 @@ object RealityBubble {
           val effects = status(s)(s)
 
           resolve(s, actor, None, effects)
+        case global: GlobalActorId =>
+          val effects = GlobalEffects(s, global)
+
+          resolve(s, actor, None, effects)
         case _ => throw new Exception("Unknown actor type")
       }
     })

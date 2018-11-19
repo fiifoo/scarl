@@ -40,6 +40,10 @@ case class CreatureId(value: Int) extends EntityId with ActorId with LocatableId
   override def apply(s: State): Creature = s.entities(this).asInstanceOf[Creature]
 }
 
+case class GlobalActorId(value: Int) extends EntityId with ActorId {
+  override def apply(s: State): GlobalActor = s.entities(this).asInstanceOf[GlobalActor]
+}
+
 case class ItemId(value: Int) extends EntityId with UsableId {
   override def apply(s: State): Item = s.entities(this).asInstanceOf[Item]
 }

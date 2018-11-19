@@ -117,6 +117,10 @@ case class Creature(id: CreatureId,
   }
 }
 
+case class GlobalActor(id: GlobalActorId, tick: Tick) extends Entity with Actor {
+  def setTick(tick: Tick): GlobalActor = copy(tick = tick)
+}
+
 case class Item(id: ItemId,
                 kind: ItemKindId,
                 container: EntityId,
