@@ -17,7 +17,7 @@ case class AttackStrategy(assault: Set[Waypoint] = Set(),
                          ) extends Strategy {
 
   def apply(s: State, brain: Brain, random: Random): Brain = {
-    val members = s.index.factionMembers.getOrElse(brain.faction, Set())
+    val members = getMembers(s, brain.faction)
     val waypoints = members flatMap getCreatureWaypoint(s)
 
     val assaultWaypoints = this.assault -- waypoints ++ getEnemyWaypoints(s, members)
@@ -29,7 +29,10 @@ case class AttackStrategy(assault: Set[Waypoint] = Set(),
     } else {
       brain.copy(
         strategy = AttackStrategy(assaultWaypoints, scoutedWaypoints),
-        intentions = calculateIntentions(s, assaultWaypoints, scoutWaypoints, members)
+        intentions = mergeIntentions(List(
+          calculateInvestigateSignals(s, brain.faction, members),
+          calculateIntentions(s, assaultWaypoints, scoutWaypoints, members)
+        ))
       )
     }
   }

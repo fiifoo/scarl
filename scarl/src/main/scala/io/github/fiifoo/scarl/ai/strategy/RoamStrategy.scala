@@ -14,13 +14,16 @@ import scala.util.Random
 case object RoamStrategy extends Strategy {
 
   def apply(s: State, brain: Brain, random: Random): Brain = {
-    val intentions = calculateEscaping(s, brain)
+    val members = getMembers(s, brain.faction)
 
-    brain.copy(intentions = intentions)
+    brain.copy(intentions = mergeIntentions(List(
+      calculateInvestigateSignals(s, brain.faction, members),
+      calculateEscaping(s, members)
+    )))
   }
 
-  private def calculateEscaping(s: State, brain: Brain): Intentions = {
-    val escaping = getMembers(s, brain) filter (s.tactics.get(_) exists (_.isInstanceOf[EscapeTactic]))
+  private def calculateEscaping(s: State, members: Set[CreatureId]): Intentions = {
+    val escaping = members filter (s.tactics.get(_) exists (_.isInstanceOf[EscapeTactic]))
 
     val destinations = (escaping.toList flatMap (creature => {
       val allies = getCreatureWaypoint(s)(creature) flatMap getWaypointAllies(s, creature)
@@ -48,9 +51,4 @@ case object RoamStrategy extends Strategy {
       None
     }
   }
-
-  private def getMembers(s: State, brain: Brain): Set[CreatureId] = {
-    s.index.factionMembers.getOrElse(brain.faction, Set())
-  }
-
 }
