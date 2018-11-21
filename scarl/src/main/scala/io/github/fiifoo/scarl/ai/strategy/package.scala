@@ -10,6 +10,8 @@ import io.github.fiifoo.scarl.core.entity.Signal.{CreatureSignal, NoiseSignal}
 import io.github.fiifoo.scarl.core.geometry.{Distance, Sector}
 import io.github.fiifoo.scarl.rule.SignalRule
 
+import scala.util.Random
+
 package object strategy {
 
   def getMembers(s: State, faction: FactionId): Set[CreatureId] = {
@@ -24,7 +26,10 @@ package object strategy {
     })
   }
 
-  def calculateInvestigateSignals(s: State, faction: FactionId, members: Set[CreatureId]): Intentions = {
+  def calculateInvestigateSignals(s: State, faction: FactionId,
+                                  members: Set[CreatureId],
+                                  random: Random
+                                 ): Intentions = {
     val signals = s.signals filter (signal => {
       (signal.owner forall (_ == faction)) && (signal.kind match {
         case CreatureSignal => true
@@ -40,6 +45,7 @@ package object strategy {
       strengths + (sector -> strength)
     })
 
+    // returns one intention per random detected signal
     strengths flatMap (x => {
       val (sector, strength) = x
       val destination = sector.center(s)
@@ -47,8 +53,11 @@ package object strategy {
       val investigators = members filter (member => {
         val creature = member(s)
         val sensors = creature.stats.sight.sensors // equipment not used
+        val distance = Distance(destination, creature.location)
 
-        SignalRule.strengthByDistance(strength, sensors)(Distance(destination, creature.location)) > 0
+        SignalRule.rollDetection(random)(
+          SignalRule.calculateStrength(strength, sensors)(distance)
+        )
       })
 
       (investigators map (_ -> List(

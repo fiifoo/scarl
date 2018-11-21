@@ -16,7 +16,7 @@ case class ExplosionEffect(source: LocatableId,
 
   def apply(s: State): EffectResult = {
     val locations = ExplosionRule(s, location, stats)
-    val signal = SignalEffect(Signal.NoiseSignal, location, Signal.Strong)
+    val signal = SignalEffect(Signal.NoiseSignal, location, Signal.Medium)
 
     EffectResult(
       signal :: (locations map (ExplosionLocationEffect(source, _, stats, Some(this)))).toList

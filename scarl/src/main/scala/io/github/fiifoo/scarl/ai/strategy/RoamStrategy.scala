@@ -17,7 +17,7 @@ case object RoamStrategy extends Strategy {
     val members = getMembers(s, brain.faction)
 
     brain.copy(intentions = mergeIntentions(List(
-      calculateInvestigateSignals(s, brain.faction, members),
+      calculateInvestigateSignals(s, brain.faction, members, random),
       calculateEscaping(s, members)
     )))
   }

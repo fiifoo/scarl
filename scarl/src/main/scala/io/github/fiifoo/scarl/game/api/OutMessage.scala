@@ -92,7 +92,7 @@ object PlayerInventory {
 
 object SignalMap {
   def apply(state: RunState): SignalMap = {
-    SignalMap(SignalRule.signalMap(state.instance)(state.game.player))
+    SignalMap(SignalRule.calculateMap(state.instance)(state.game.player))
   }
 }
 

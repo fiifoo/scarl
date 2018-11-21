@@ -13,9 +13,9 @@ object Signal {
 
   case object NoiseSignal extends Kind
 
-  val Weak = 25
-  val Strong = 50
-  val VeryStrong = 75
+  val Weak = 20
+  val Medium = 40
+  val Strong = 60
 
   val FuzzyRadius = 5
 }

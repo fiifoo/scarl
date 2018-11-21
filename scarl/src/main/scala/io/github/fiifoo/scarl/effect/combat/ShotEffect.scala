@@ -2,9 +2,10 @@ package io.github.fiifoo.scarl.effect.combat
 
 import io.github.fiifoo.scarl.core.State
 import io.github.fiifoo.scarl.core.effect.{Effect, EffectResult}
-import io.github.fiifoo.scarl.core.entity.{CreatureId, EntityId}
+import io.github.fiifoo.scarl.core.entity.{CreatureId, EntityId, Signal}
 import io.github.fiifoo.scarl.core.geometry.Location
 import io.github.fiifoo.scarl.core.mutation.RngMutation
+import io.github.fiifoo.scarl.effect.area.SignalEffect
 import io.github.fiifoo.scarl.rule.AttackRule
 
 case class ShotEffect(attacker: CreatureId,
@@ -35,11 +36,19 @@ case class ShotEffect(attacker: CreatureId,
 
     EffectResult(
       RngMutation(rng),
-      effect
+      List(
+        effect,
+        signalEffect
+      )
     )
   }
 
   private def badShotResult(obstacle: Option[EntityId] = None): EffectResult = {
-    EffectResult(BadShotEffect(attacker, obstacle, Some(this)))
+    EffectResult(List(
+      BadShotEffect(attacker, obstacle, Some(this)),
+      signalEffect
+    ))
   }
+
+  private def signalEffect = SignalEffect(Signal.NoiseSignal, this.from, Signal.Weak)
 }

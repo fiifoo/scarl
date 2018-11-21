@@ -815,7 +815,7 @@
         },
         "sight" : {
           "range" : 8,
-          "sensors" : 40
+          "sensors" : 30
         },
         "armor" : 30
       }
@@ -1232,7 +1232,7 @@
         },
         "sight" : {
           "range" : 7,
-          "sensors" : 30
+          "sensors" : 10
         },
         "armor" : 40
       }
@@ -1309,7 +1309,7 @@
         },
         "sight" : {
           "range" : 7,
-          "sensors" : 30
+          "sensors" : 10
         },
         "armor" : 30
       }
@@ -1553,7 +1553,7 @@
         },
         "sight" : {
           "range" : 7,
-          "sensors" : 30
+          "sensors" : 10
         },
         "armor" : 30
       }
@@ -1640,7 +1640,7 @@
         },
         "sight" : {
           "range" : 7,
-          "sensors" : 40
+          "sensors" : 30
         },
         "armor" : 30
       }
@@ -1728,7 +1728,7 @@
         },
         "sight" : {
           "range" : 7,
-          "sensors" : 30
+          "sensors" : 10
         },
         "armor" : 30
       }
@@ -1833,7 +1833,7 @@
         },
         "sight" : {
           "range" : 7,
-          "sensors" : 30
+          "sensors" : 10
         },
         "armor" : 40
       }
@@ -1910,7 +1910,7 @@
         },
         "sight" : {
           "range" : 7,
-          "sensors" : 30
+          "sensors" : 10
         },
         "armor" : 30
       }
@@ -1998,7 +1998,7 @@
         },
         "sight" : {
           "range" : 7,
-          "sensors" : 30
+          "sensors" : 10
         },
         "armor" : 30
       }
@@ -2086,7 +2086,7 @@
         },
         "sight" : {
           "range" : 7,
-          "sensors" : 30
+          "sensors" : 10
         },
         "armor" : 40
       }
@@ -2163,7 +2163,7 @@
         },
         "sight" : {
           "range" : 7,
-          "sensors" : 40
+          "sensors" : 30
         },
         "armor" : 40
       }
@@ -2251,7 +2251,7 @@
         },
         "sight" : {
           "range" : 7,
-          "sensors" : 30
+          "sensors" : 10
         },
         "armor" : 30
       }

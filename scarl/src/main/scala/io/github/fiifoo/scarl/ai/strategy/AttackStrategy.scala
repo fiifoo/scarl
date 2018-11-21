@@ -30,7 +30,7 @@ case class AttackStrategy(assault: Set[Waypoint] = Set(),
       brain.copy(
         strategy = AttackStrategy(assaultWaypoints, scoutedWaypoints),
         intentions = mergeIntentions(List(
-          calculateInvestigateSignals(s, brain.faction, members),
+          calculateInvestigateSignals(s, brain.faction, members, random),
           calculateIntentions(s, assaultWaypoints, scoutWaypoints, members)
         ))
       )

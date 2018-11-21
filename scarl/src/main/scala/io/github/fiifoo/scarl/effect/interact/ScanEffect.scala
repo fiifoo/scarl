@@ -16,7 +16,7 @@ case class ScanEffect(scanner: CreatureId,
 
   def apply(s: State): EffectResult = {
     val creature = scanner(s)
-    val noiseSignal = SignalEffect(Signal.NoiseSignal, location, Signal.Strong)
+    val noiseSignal = SignalEffect(Signal.NoiseSignal, location, Signal.Weak)
 
     EffectResult(
       noiseSignal :: getCreatureSignals(s, creature) ::: getConduitSignals(s, creature)
@@ -26,11 +26,12 @@ case class ScanEffect(scanner: CreatureId,
   private def getCreatureSignals(s: State, scanner: Creature): List[Effect] = {
     val from = scanner.location
     val sensors = getCreatureStats(s)(scanner.id).sight.sensors
+    val calculateFilterStrength = SignalRule.calculateStrength(Signal.Medium, sensors) _
 
     val creatures = (s.index.sectorCreatures filterKeys (sector => {
       val distance = Distance(from, sector.center(s))
 
-      SignalRule.strengthByDistance(Signal.Strong, sensors)(distance) > 0
+      calculateFilterStrength(distance) > 0
     })).values.flatten.toSet
 
     (creatures - scanner.id).toList map (creature => {
@@ -48,7 +49,7 @@ case class ScanEffect(scanner: CreatureId,
       SignalEffect(
         Signal.ConduitSignal,
         location,
-        Signal.VeryStrong,
+        Signal.Strong,
         Signal.FuzzyRadius,
         owner = Some(scanner.faction)
       )
