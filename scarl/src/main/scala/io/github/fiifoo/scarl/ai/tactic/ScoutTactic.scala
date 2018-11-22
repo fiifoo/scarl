@@ -19,7 +19,7 @@ case class ScoutTactic(destination: Option[Location] = None, waiting: Boolean = 
     Priority.high
   ), (
     ScoutIntention(destination, waiting),
-    Priority.medium
+    Priority.low
   ))
 
   def behavior(s: State, actor: CreatureId, random: Random): Result = {

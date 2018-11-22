@@ -15,7 +15,12 @@ object WaypointPath {
     find(s)(from, _ == to)
   }
 
-  def find(s: State)(from: Waypoint, to: Waypoint => Boolean, exclude: Set[Waypoint] = Set()): Option[Vector[Waypoint]] = {
+  def find(s: State
+          )(from: Waypoint,
+            to: Waypoint => Boolean,
+            exclude: Set[Waypoint] = Set(),
+            maxDistance: Option[Int] = None
+          ): Option[Vector[Waypoint]] = {
     val network = s.cache.waypointNetwork
 
     @tailrec
@@ -26,7 +31,11 @@ object WaypointPath {
       if (to(waypoint)) {
         Some(path)
       } else {
-        val adjacent = network.adjacentWaypoints.getOrElse(waypoint, Set()) -- exclude
+        val adjacent = if (maxDistance.forall(_ > path.size - 1)) {
+          network.adjacentWaypoints.getOrElse(waypoint, Set()) -- exclude
+        } else {
+          Set()
+        }
         val enqueued = dequeued enqueue (adjacent map (path :+ _))
 
         if (enqueued.isEmpty) {

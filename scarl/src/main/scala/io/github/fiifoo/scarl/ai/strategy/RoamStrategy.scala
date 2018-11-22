@@ -11,18 +11,31 @@ import io.github.fiifoo.scarl.core.geometry.WaypointNetwork.Waypoint
 
 import scala.util.Random
 
-case object RoamStrategy extends Strategy {
+case class RoamStrategy(investigate: Set[Waypoint] = Set()) extends Strategy {
 
   def apply(s: State, brain: Brain, random: Random): Brain = {
     val members = getMembers(s, brain.faction)
+    val waypoints = members flatMap getCreatureWaypoint(s)
 
-    brain.copy(intentions = mergeIntentions(List(
-      calculateInvestigateSignals(s, brain.faction, members, random),
-      calculateEscaping(s, members)
-    )))
+    val investigate = validWaypoints(s, this.investigate) -- waypoints ++ calculateInvestigateSignals(
+      s,
+      brain.faction,
+      members,
+      s.cache.waypointNetwork.waypoints -- waypoints,
+      random
+    )
+
+    val mobile = members filterNot (_ (s).immobile)
+
+    brain.copy(
+      strategy = RoamStrategy(investigate),
+      intentions = mergeIntentions(List(
+        calculateTravelIntentions(s, mobile, investigate, TravelIntention(_), Priority.low, maxDistance = Some(1)),
+        calculateEscapingIntentions(s, members)
+      )))
   }
 
-  private def calculateEscaping(s: State, members: Set[CreatureId]): Intentions = {
+  private def calculateEscapingIntentions(s: State, members: Set[CreatureId]): Intentions = {
     val escaping = members filter (s.tactics.get(_) exists (_.isInstanceOf[EscapeTactic]))
 
     val destinations = (escaping.toList flatMap (creature => {
@@ -37,7 +50,7 @@ case object RoamStrategy extends Strategy {
     })).toMap
 
     destinations mapValues (destination => {
-      List((TravelIntention(destination), Priority.medium))
+      List((TravelIntention(destination), Priority.low))
     })
   }
 
