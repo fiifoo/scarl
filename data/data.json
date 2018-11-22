@@ -75,7 +75,7 @@
     "id" : "iridan/mine",
     "owner" : "iridan"
   } ], [ "iridan/core-approach", {
-    "template" : "generic/area-rooms",
+    "template" : "iridan/area-core-approach",
     "theme" : "iridan/constructed-underground",
     "power" : [ ],
     "conduits" : [ {
@@ -706,13 +706,13 @@
     "enemies" : [ "nomad", "skyfarer", "scippe" ],
     "id" : "iridan"
   } ], [ "nomad", {
-    "enemies" : [ "iridan", "skyfarer" ],
+    "enemies" : [ "iridan", "iridan/hunters", "skyfarer" ],
     "id" : "nomad"
   } ], [ "none", {
     "enemies" : [ ],
     "id" : "none"
   } ], [ "skyfarer", {
-    "enemies" : [ "iridan", "nomad" ],
+    "enemies" : [ "iridan", "iridan/hunters", "nomad" ],
     "id" : "skyfarer",
     "strategy" : {
       "type" : "AttackStrategy",
@@ -723,8 +723,15 @@
       "type" : "AttackStrategy",
       "data" : { }
     },
-    "enemies" : [ "iridan" ],
+    "enemies" : [ "iridan", "iridan/hunters" ],
     "id" : "scippe"
+  } ], [ "iridan/hunters", {
+    "strategy" : {
+      "type" : "AttackStrategy",
+      "data" : { }
+    },
+    "enemies" : [ "nomad", "skyfarer", "scippe" ],
+    "id" : "iridan/hunters"
   } ] ],
   "keys" : [ [ "iridan/access-codes", {
     "name" : "Iridan access codes",
@@ -745,7 +752,7 @@
         "sub" : null
       },
       "name" : "Iridan scout",
-      "solitary" : false,
+      "solitary" : true,
       "flying" : false,
       "responses" : [ ],
       "behavior" : {
@@ -818,6 +825,94 @@
           "sensors" : 30
         },
         "armor" : 30
+      }
+    } ], [ "iridan/ranged-damager-2", {
+      "display" : "R",
+      "color" : "red",
+      "equipments" : [ ],
+      "recipes" : [ ],
+      "missile" : null,
+      "immobile" : false,
+      "character" : null,
+      "locked" : {
+        "key" : null,
+        "security" : 60,
+        "sub" : null
+      },
+      "name" : "Iridan eagle",
+      "solitary" : false,
+      "flying" : false,
+      "responses" : [ ],
+      "behavior" : {
+        "type" : "RoamTactic",
+        "data" : { }
+      },
+      "usable" : {
+        "type" : "CapturePower",
+        "data" : {
+          "description" : null,
+          "resources" : null
+        }
+      },
+      "greetings" : [ ],
+      "id" : "iridan/ranged-damager-2",
+      "inventory" : [ ],
+      "faction" : "iridan/hunters",
+      "description" : "Deadly machine with strong ranged attacks.",
+      "stats" : {
+        "launcher" : {
+          "missile" : null,
+          "range" : 0,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          }
+        },
+        "explosive" : {
+          "attack" : 0,
+          "damage" : 0,
+          "radius" : 0,
+          "blast" : 0
+        },
+        "speed" : 0,
+        "ranged" : {
+          "attack" : 35,
+          "damage" : 45,
+          "range" : 5,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          }
+        },
+        "energy" : {
+          "max" : 0,
+          "regen" : 0
+        },
+        "materials" : {
+          "max" : 0,
+          "regen" : 0
+        },
+        "defence" : 40,
+        "skill" : {
+          "hacking" : 0
+        },
+        "melee" : {
+          "attack" : 35,
+          "damage" : 45,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          }
+        },
+        "health" : {
+          "max" : 40,
+          "regen" : 0
+        },
+        "sight" : {
+          "range" : 7,
+          "sensors" : 10
+        },
+        "armor" : 40
       }
     } ], [ "player", {
       "display" : "@",
@@ -981,6 +1076,94 @@
           "sensors" : 0
         },
         "armor" : 10
+      }
+    } ], [ "iridan/scout-2", {
+      "display" : "S",
+      "color" : "blue",
+      "equipments" : [ ],
+      "recipes" : [ ],
+      "missile" : null,
+      "immobile" : false,
+      "character" : null,
+      "locked" : {
+        "key" : null,
+        "security" : 60,
+        "sub" : null
+      },
+      "name" : "Iridan hunter",
+      "solitary" : true,
+      "flying" : false,
+      "responses" : [ ],
+      "behavior" : {
+        "type" : "ScoutTactic",
+        "data" : { }
+      },
+      "usable" : {
+        "type" : "CapturePower",
+        "data" : {
+          "description" : null,
+          "resources" : null
+        }
+      },
+      "greetings" : [ ],
+      "id" : "iridan/scout-2",
+      "inventory" : [ ],
+      "faction" : "iridan/hunters",
+      "description" : "Deadly hunter machine with ranged attacks.",
+      "stats" : {
+        "launcher" : {
+          "missile" : null,
+          "range" : 0,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          }
+        },
+        "explosive" : {
+          "attack" : 0,
+          "damage" : 0,
+          "radius" : 0,
+          "blast" : 0
+        },
+        "speed" : 30,
+        "ranged" : {
+          "attack" : 30,
+          "damage" : 40,
+          "range" : 5,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          }
+        },
+        "energy" : {
+          "max" : 0,
+          "regen" : 0
+        },
+        "materials" : {
+          "max" : 0,
+          "regen" : 0
+        },
+        "defence" : 50,
+        "skill" : {
+          "hacking" : 0
+        },
+        "melee" : {
+          "attack" : 30,
+          "damage" : 40,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          }
+        },
+        "health" : {
+          "max" : 40,
+          "regen" : 0
+        },
+        "sight" : {
+          "range" : 8,
+          "sensors" : 30
+        },
+        "armor" : 40
       }
     } ], [ "iridan/ai-core", {
       "display" : "?",
@@ -1914,6 +2097,94 @@
         },
         "armor" : 30
       }
+    } ], [ "iridan/melee-damager-2", {
+      "display" : "M",
+      "color" : "red",
+      "equipments" : [ ],
+      "recipes" : [ ],
+      "missile" : null,
+      "immobile" : false,
+      "character" : null,
+      "locked" : {
+        "key" : null,
+        "security" : 60,
+        "sub" : null
+      },
+      "name" : "Iridan bear",
+      "solitary" : false,
+      "flying" : false,
+      "responses" : [ ],
+      "behavior" : {
+        "type" : "RoamTactic",
+        "data" : { }
+      },
+      "usable" : {
+        "type" : "CapturePower",
+        "data" : {
+          "description" : null,
+          "resources" : null
+        }
+      },
+      "greetings" : [ ],
+      "id" : "iridan/melee-damager-2",
+      "inventory" : [ ],
+      "faction" : "iridan/hunters",
+      "description" : "Deadly machine with strong melee attacks.",
+      "stats" : {
+        "launcher" : {
+          "missile" : null,
+          "range" : 0,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          }
+        },
+        "explosive" : {
+          "attack" : 0,
+          "damage" : 0,
+          "radius" : 0,
+          "blast" : 0
+        },
+        "speed" : 10,
+        "ranged" : {
+          "attack" : 0,
+          "damage" : 0,
+          "range" : 0,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          }
+        },
+        "energy" : {
+          "max" : 0,
+          "regen" : 0
+        },
+        "materials" : {
+          "max" : 0,
+          "regen" : 0
+        },
+        "defence" : 50,
+        "skill" : {
+          "hacking" : 0
+        },
+        "melee" : {
+          "attack" : 40,
+          "damage" : 50,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          }
+        },
+        "health" : {
+          "max" : 40,
+          "regen" : 0
+        },
+        "sight" : {
+          "range" : 7,
+          "sensors" : 10
+        },
+        "armor" : 40
+      }
     } ], [ "iridan/melee-fast", {
       "display" : "m",
       "color" : "blue",
@@ -2129,7 +2400,7 @@
         },
         "speed" : 10,
         "ranged" : {
-          "attack" : 30,
+          "attack" : 40,
           "damage" : 40,
           "range" : 5,
           "consumption" : {
@@ -2145,7 +2416,7 @@
           "max" : 0,
           "regen" : 0
         },
-        "defence" : 30,
+        "defence" : 40,
         "skill" : {
           "hacking" : 0
         },
@@ -9970,6 +10241,199 @@
         "door" : null
       }
     }
+  } ], [ "iridan/room-iridan-hunters", {
+    "type" : "FixedTemplate",
+    "data" : {
+      "shape" : {
+        "type" : "Rectangle",
+        "data" : {
+          "width" : 5,
+          "height" : 4,
+          "variance" : 0
+        }
+      },
+      "power" : null,
+      "templates" : [ ],
+      "entrances" : [ [ {
+        "x" : 2,
+        "y" : 0
+      }, {
+        "type" : "ContentSelection.FixedDoor",
+        "data" : {
+          "kind" : "generic/door-invisible",
+          "tags" : [ ]
+        }
+      } ] ],
+      "features" : [ ],
+      "content" : {
+        "conduitLocations" : [ [ {
+          "x" : 2,
+          "y" : 1
+        }, "primary" ] ],
+        "items" : [ ],
+        "restrictedLocations" : [ ],
+        "walls" : [ [ {
+          "x" : 1,
+          "y" : 3
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.ConstructedCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 4,
+          "y" : 3
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.ConstructedCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 4,
+          "y" : 2
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.ConstructedCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 0,
+          "y" : 1
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.ConstructedCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 3,
+          "y" : 0
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.ConstructedCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 0,
+          "y" : 0
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.ConstructedCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 0,
+          "y" : 2
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.ConstructedCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 0,
+          "y" : 3
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.ConstructedCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 3,
+          "y" : 3
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.ConstructedCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 4,
+          "y" : 0
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.ConstructedCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 1,
+          "y" : 0
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.ConstructedCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 2,
+          "y" : 3
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.ConstructedCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 4,
+          "y" : 1
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.ConstructedCategory" ],
+            "tags" : [ ]
+          }
+        } ] ],
+        "machinery" : [ ],
+        "widgets" : [ ],
+        "creatures" : [ [ {
+          "x" : 2,
+          "y" : 1
+        }, {
+          "type" : "ContentSelection.FixedCreature",
+          "data" : {
+            "kind" : "iridan/scout-2",
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 2,
+          "y" : 2
+        }, {
+          "type" : "ContentSelection.FixedCreature",
+          "data" : {
+            "kind" : "iridan/ranged-damager-2",
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 1,
+          "y" : 1
+        }, {
+          "type" : "ContentSelection.FixedCreature",
+          "data" : {
+            "kind" : "iridan/melee-damager-2",
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 3,
+          "y" : 1
+        }, {
+          "type" : "ContentSelection.FixedCreature",
+          "data" : {
+            "kind" : "iridan/melee-damager-2",
+            "tags" : [ ]
+          }
+        } ] ],
+        "gatewayLocations" : [ ],
+        "terrains" : [ ]
+      },
+      "id" : "iridan/room-iridan-hunters"
+    }
   } ], [ "generic/house-ruin", {
     "type" : "RandomizedTemplate",
     "data" : {
@@ -12298,6 +12762,69 @@
       "entrances" : {
         "min" : 1,
         "max" : 2,
+        "door" : null
+      }
+    }
+  } ], [ "iridan/area-core-approach", {
+    "type" : "RandomizedTemplate",
+    "data" : {
+      "conduitLocations" : {
+        "min" : 0,
+        "max" : 0
+      },
+      "shape" : {
+        "type" : "Rectangle",
+        "data" : {
+          "width" : 80,
+          "height" : 50,
+          "variance" : 0
+        }
+      },
+      "fill" : {
+        "type" : "ContentSelection.ThemeWall",
+        "data" : {
+          "category" : [ ],
+          "tags" : [ ]
+        }
+      },
+      "border" : {
+        "type" : "ContentSelection.ThemeWall",
+        "data" : {
+          "category" : [ "WallKind.AreaBorderCategory" ],
+          "tags" : [ ]
+        }
+      },
+      "templateCatalogue" : "generic/area-rooms",
+      "terrain" : null,
+      "templates" : [ {
+        "selection" : {
+          "type" : "ContentSelection.FixedTemplate",
+          "data" : {
+            "template" : "iridan/room-iridan-hunters"
+          }
+        },
+        "distribution" : {
+          "type" : "Distribution.Uniform",
+          "data" : {
+            "min" : 1,
+            "max" : 1
+          }
+        },
+        "required" : 1
+      } ],
+      "id" : "iridan/area-core-approach",
+      "features" : [ {
+        "type" : "RandomizedContentFeature",
+        "data" : {
+          "creatures" : [ ],
+          "items" : [ ],
+          "widgets" : [ ],
+          "catalogues" : [ "generic/room" ]
+        }
+      } ],
+      "entrances" : {
+        "min" : 0,
+        "max" : 0,
         "door" : null
       }
     }
