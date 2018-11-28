@@ -3234,10 +3234,7 @@
       },
       "name" : "Nomad explosive",
       "concealment" : 30,
-      "trap" : {
-        "type" : "ExplodePower",
-        "data" : { }
-      },
+      "trap" : null,
       "door" : null,
       "usable" : {
         "type" : "RemoveItemPower",
@@ -4205,7 +4202,9 @@
       "concealment" : 30,
       "trap" : {
         "type" : "ExplodePower",
-        "data" : { }
+        "data" : {
+          "directed" : true
+        }
       },
       "door" : null,
       "usable" : {
@@ -5667,7 +5666,9 @@
       "concealment" : 30,
       "trap" : {
         "type" : "ExplodePower",
-        "data" : { }
+        "data" : {
+          "directed" : true
+        }
       },
       "door" : null,
       "usable" : {

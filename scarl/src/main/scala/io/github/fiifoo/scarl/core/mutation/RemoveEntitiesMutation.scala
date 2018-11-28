@@ -32,7 +32,8 @@ case class RemoveEntitiesMutation() extends Mutation {
       brains = mutateBrains(s.brains, creatures),
       cache = mutateCache(s, removable),
       creature = s.creature.copy(
-        recycledItems = s.creature.recycledItems -- creatures
+        recycledItems = s.creature.recycledItems -- creatures,
+        trails = s.creature.trails -- creatures
       ),
       foundItems = mutateFoundItems(s, removable),
       receivedCommunications = s.receivedCommunications -- creatures,

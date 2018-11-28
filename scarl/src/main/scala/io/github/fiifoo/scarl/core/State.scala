@@ -32,7 +32,9 @@ object State {
                      )
 
   // todo: move foundItems, equipments, keys, receivedCommunications, recipes and tactics here
-  case class Creature(recycledItems: Map[CreatureId, List[ItemKindId]] = Map())
+  case class Creature(recycledItems: Map[CreatureId, List[ItemKindId]] = Map(),
+                      trails: Map[CreatureId, List[Location]] = Map()
+                     )
 
   case class Index(containerItems: Map[EntityId, Set[ItemId]] = Map(),
                    factionMembers: Map[FactionId, Set[CreatureId]] = Map(),

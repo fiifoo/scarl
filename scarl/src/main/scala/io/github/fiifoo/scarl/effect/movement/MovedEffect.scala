@@ -5,7 +5,7 @@ import io.github.fiifoo.scarl.core.effect.{Effect, EffectResult}
 import io.github.fiifoo.scarl.core.entity.CreatureId
 import io.github.fiifoo.scarl.core.entity.Selectors.getLocationTriggers
 import io.github.fiifoo.scarl.core.geometry.Location
-import io.github.fiifoo.scarl.core.mutation.LocatableLocationMutation
+import io.github.fiifoo.scarl.core.mutation.{CreatureTrailMutation, LocatableLocationMutation}
 
 case class MovedEffect(target: CreatureId,
                        from: Location,
@@ -14,8 +14,10 @@ case class MovedEffect(target: CreatureId,
                       ) extends Effect {
 
   def apply(s: State): EffectResult = {
-    EffectResult(
+    EffectResult(List(
       LocatableLocationMutation(target, to),
+      CreatureTrailMutation(target, from)
+    ),
       getTriggerEffects(s)
     )
   }

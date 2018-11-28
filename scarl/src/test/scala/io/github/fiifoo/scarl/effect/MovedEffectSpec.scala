@@ -4,7 +4,7 @@ import io.github.fiifoo.scarl.core.State
 import io.github.fiifoo.scarl.core.effect.EffectResult
 import io.github.fiifoo.scarl.core.entity._
 import io.github.fiifoo.scarl.core.geometry.Location
-import io.github.fiifoo.scarl.core.mutation.{LocatableLocationMutation, NewEntityMutation}
+import io.github.fiifoo.scarl.core.mutation.{CreatureTrailMutation, LocatableLocationMutation, NewEntityMutation}
 import io.github.fiifoo.scarl.core.test_assets.{TestCreatureFactory, TestDamageEffect, TestTriggerStatus}
 import io.github.fiifoo.scarl.effect.movement.MovedEffect
 import org.scalatest._
@@ -16,8 +16,10 @@ class MovedEffectSpec extends FlatSpec with Matchers {
     val creature = CreatureId(1)
     val location = Location(1, 0)
 
-    MovedEffect(creature, creature(s).location, location)(s) should ===(EffectResult(
-      LocatableLocationMutation(creature, location)))
+    MovedEffect(creature, creature(s).location, location)(s) should ===(EffectResult(List(
+      LocatableLocationMutation(creature, location),
+      CreatureTrailMutation(creature, creature(s).location)
+    )))
   }
 
   it should "return trigger effects from triggers in target location" in {
@@ -36,9 +38,12 @@ class MovedEffectSpec extends FlatSpec with Matchers {
     val creature = CreatureId(7)
     val damageEffect = TestDamageEffect(creature, s1.damage)
 
-    MovedEffect(creature, creature(s).location, location)(s) should ===(EffectResult(
+    MovedEffect(creature, creature(s).location, location)(s) should ===(EffectResult(List(
       LocatableLocationMutation(creature, location),
-      List(damageEffect, damageEffect)
-    ))
+      CreatureTrailMutation(creature, creature(s).location)
+    ), List(
+      damageEffect,
+      damageEffect
+    )))
   }
 }

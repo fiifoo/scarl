@@ -5,29 +5,31 @@ import io.github.fiifoo.scarl.core.creature.Stats.Explosive
 import io.github.fiifoo.scarl.core.effect.Effect
 import io.github.fiifoo.scarl.core.entity.Power.Resources
 import io.github.fiifoo.scarl.core.entity._
+import io.github.fiifoo.scarl.core.geometry.Location
 import io.github.fiifoo.scarl.effect.combat.ExplodeEffect
 
 case class ExplodePower(description: Option[String] = None,
                         resources: Option[Resources] = None,
+                        directed: Boolean = false,
                        ) extends CreaturePower with ItemPower {
 
   override def apply(s: State, usable: UsableId, user: Option[CreatureId]): List[Effect] = {
-    explode(s, usable)
+    explode(s, usable, user)
   }
 
   def apply(s: State, creature: CreatureId, user: Option[CreatureId]): List[Effect] = {
-    explode(s, creature)
+    explode(s, creature, user)
   }
 
   def apply(s: State, item: ItemId, user: Option[CreatureId]): List[Effect] = {
-    explode(s, item)
+    explode(s, item, user)
   }
 
-  private def explode(s: State, usable: UsableId): List[Effect] = {
+  private def explode(s: State, usable: UsableId, user: Option[CreatureId]): List[Effect] = {
     val effect = getTarget(s, usable) map ((explosive: LocatableId, stats: Explosive) => {
       ExplodeEffect(
         explosive,
-        explosive(s).location,
+        getLocation(s, explosive, user),
         stats
       )
     }).tupled
@@ -51,6 +53,26 @@ case class ExplodePower(description: Option[String] = None,
         })
       case creature: CreatureId =>
         Some(creature, Selectors.getCreatureStats(s)(creature).explosive)
+    }
+  }
+
+  private def getLocation(s: State, explosive: LocatableId, user: Option[CreatureId]): Location = {
+    val location = explosive(s).location
+
+    if (this.directed) {
+      user flatMap (user => {
+        val candidate = if (user(s).location == location) {
+          s.creature.trails.get(user) map (_.head)
+        } else {
+          Some(user(s).location)
+        }
+
+        candidate filter (_.adjacent.contains(location))
+      }) getOrElse {
+        location
+      }
+    } else {
+      location
     }
   }
 }
