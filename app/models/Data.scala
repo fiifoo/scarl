@@ -8,7 +8,7 @@ import io.github.fiifoo.scarl.core.creature.{Faction, FactionId, Progression, Pr
 import io.github.fiifoo.scarl.core.item.Recipe.RecipeId
 import io.github.fiifoo.scarl.core.item.{KeyKind, KeyKindId, Recipe}
 import io.github.fiifoo.scarl.core.kind._
-import io.github.fiifoo.scarl.world.WorldCatalogues
+import io.github.fiifoo.scarl.world._
 import models.json._
 import play.api.libs.json._
 
@@ -20,8 +20,10 @@ case class Data(areas: Map[AreaId, Area],
                 kinds: Kinds,
                 progressions: Map[ProgressionId, Progression],
                 recipes: Map[RecipeId, Recipe] = Map(),
+                regions: Map[RegionId, Region] = Map(),
                 templates: Map[TemplateId, Template],
                 themes: Map[ThemeId, Theme],
+                worlds: Map[WorldId, World],
                )
 
 object Data {
@@ -33,8 +35,10 @@ object Data {
   lazy private implicit val kindsReads = JsonKind.kindsReads
   lazy private implicit val progressionMapReads = JsonProgression.progressionMapReads
   lazy private implicit val recipeMapReads = JsonRecipe.recipeMapReads
+  lazy private implicit val regionMapReads = JsonRegion.regionMapReads
   lazy private implicit val templateMapReads = JsonTemplate.templateMapReads
   lazy private implicit val themeMapReads = JsonTheme.themeMapReads
+  lazy private implicit val worldMapReads = JsonWorld.worldMapReads
 
   lazy val dataReads: Reads[Data] = Json.reads[Data]
 }

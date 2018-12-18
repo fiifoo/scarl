@@ -2,7 +2,6 @@ import dal.{AssetsRepository, SimulationsRepository}
 import game.LoadGame
 import io.github.fiifoo.scarl.area.AreaId
 import io.github.fiifoo.scarl.core.State
-import io.github.fiifoo.scarl.core.kind.CreatureKindId
 import io.github.fiifoo.scarl.world.{CreateWorld, WorldState}
 import models.json.JsonWorldState
 import org.scalatestplus.play._
@@ -27,11 +26,14 @@ class JsonWorldStateSpec extends PlaySpec {
   private def createWorld(): WorldState = {
     val area = AreaId("start-level")
 
-    val (world, _) = CreateWorld(assets, area, CreatureKindId("player"))
-    val state = world.states(area)
+    val world = assets.worlds.values.head
+    val character = world.characters.head
 
-    world.copy(
-      states = world.states + (area -> state.copy(
+    val (worldState, _) = CreateWorld(assets, world, character)
+    val instanceState = worldState.states(area)
+
+    worldState.copy(
+      states = worldState.states + (area -> instanceState.copy(
         tmp = State.Temporary()
       ))
     )

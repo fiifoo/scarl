@@ -4,7 +4,7 @@ import io.github.fiifoo.scarl.area.Utils.TemplateMock
 import io.github.fiifoo.scarl.area.template.TemplateId
 import io.github.fiifoo.scarl.area.theme.ThemeId
 import io.github.fiifoo.scarl.area.{Area, AreaId}
-import io.github.fiifoo.scarl.world.WorldAssets
+import io.github.fiifoo.scarl.world.{RegionId, WorldAssets}
 import org.scalatest._
 
 import scala.util.Random
@@ -14,6 +14,7 @@ class BurrowFeatureSpec extends FlatSpec with Matchers {
   private val assets = WorldAssets()
   private val area = Area(
     AreaId(""),
+    RegionId(""),
     TemplateId(""),
     ThemeId("")
   )

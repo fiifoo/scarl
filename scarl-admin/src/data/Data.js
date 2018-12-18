@@ -65,8 +65,10 @@ const Data = Record({
     kinds: Kinds(),
     progressions: Map(),
     recipes: Map(),
+    regions: Map(),
     templates: Map(),
     themes: Map(),
+    worlds: Map(),
 })
 Data.read = raw => Data({
     areas: readMap(raw.areas),
@@ -77,8 +79,10 @@ Data.read = raw => Data({
     kinds: Kinds.read(raw.kinds),
     progressions: readMap(raw.progressions),
     recipes: readMap(raw.recipes),
+    regions: readMap(raw.regions),
     templates: readMap(raw.templates),
     themes: readMap(raw.themes),
+    worlds: readMap(raw.worlds),
 })
 Data.write = data => ({
     areas: writeMap(data.areas),
@@ -89,8 +93,10 @@ Data.write = data => ({
     kinds: Kinds.write(data.kinds),
     progressions: writeMap(data.progressions),
     recipes: writeMap(data.recipes),
+    regions: writeMap(data.regions),
     templates: writeMap(data.templates),
     themes: writeMap(data.themes),
+    worlds: writeMap(data.worlds),
 })
 
 export default Data

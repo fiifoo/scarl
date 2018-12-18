@@ -1,7 +1,5 @@
 package game
 
-import io.github.fiifoo.scarl.area.AreaId
-import io.github.fiifoo.scarl.core.kind.CreatureKindId
 import io.github.fiifoo.scarl.core.math.Rng
 import io.github.fiifoo.scarl.game.GameState
 import io.github.fiifoo.scarl.world.{CreateWorld, WorldAssets}
@@ -12,9 +10,11 @@ object GenerateGame {
 
   def apply(assets: WorldAssets): GameState = {
     val rng = Rng(Random.nextInt())
-    val area = AreaId("start-level")
-    val (world, player) = CreateWorld(assets, area, CreatureKindId("player"), rng)
+    val world = assets.worlds.values.head
+    val character = world.characters.head
 
-    GameState(area, player, world)
+    val (worldState, player) = CreateWorld(assets, world, character, rng)
+
+    GameState(world.start, player, worldState)
   }
 }

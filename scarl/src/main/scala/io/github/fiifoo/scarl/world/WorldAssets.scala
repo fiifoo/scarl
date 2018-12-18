@@ -19,8 +19,10 @@ case class WorldAssets(areas: Map[AreaId, Area] = Map(),
                        kinds: Kinds = Kinds(),
                        progressions: Map[ProgressionId, Progression] = Map(),
                        recipes: Map[RecipeId, Recipe] = Map(),
+                       regions: Map[RegionId, Region] = Map(),
                        templates: Map[TemplateId, Template] = Map(),
                        themes: Map[ThemeId, Theme] = Map(),
+                       worlds: Map[WorldId, World] = Map(),
                       ) {
 
   def instance(): Assets = {

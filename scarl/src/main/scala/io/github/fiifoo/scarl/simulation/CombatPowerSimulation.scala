@@ -13,7 +13,7 @@ import io.github.fiifoo.scarl.core.kind._
 import io.github.fiifoo.scarl.core.math.Rng
 import io.github.fiifoo.scarl.core.math.Rng.WeightedChoice
 import io.github.fiifoo.scarl.core.mutation.ActorTickMutation
-import io.github.fiifoo.scarl.world.{TemplateCatalogueId, WorldAssets, WorldCatalogues}
+import io.github.fiifoo.scarl.world._
 
 case class CombatPowerSimulation(matches: Int = 25,
                                  turns: Int = 50,
@@ -160,7 +160,8 @@ case class CombatPowerSimulation(matches: Int = 25,
     )
 
     val area = Area(
-      AreaId("area"),
+      AreaId(""),
+      RegionId(""),
       template.id,
       theme.id
     )

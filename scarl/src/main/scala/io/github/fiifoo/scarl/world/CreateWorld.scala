@@ -1,6 +1,6 @@
 package io.github.fiifoo.scarl.world
 
-import io.github.fiifoo.scarl.area.{Area, AreaId}
+import io.github.fiifoo.scarl.area.AreaId
 import io.github.fiifoo.scarl.core.entity._
 import io.github.fiifoo.scarl.core.kind.CreatureKindId
 import io.github.fiifoo.scarl.core.math.Rng
@@ -9,38 +9,28 @@ import io.github.fiifoo.scarl.core.world.ConduitId
 object CreateWorld {
 
   def apply(assets: WorldAssets,
-            firstArea: AreaId,
+            world: World,
             player: CreatureKindId,
             rng: Rng = Rng(1)
            ): (WorldState, CreatureId) = {
-    val initial = createConduits(WorldState(assets))
-    val world = GenerateArea(initial, firstArea, rng)
+    val initial = createConduits(world, WorldState(assets))
+    val state = GenerateArea(initial, world.start, rng)
 
-    addPlayer(world, firstArea, player)
+    addPlayer(state, world.start, player)
   }
 
-  private def createConduits(world: WorldState): WorldState = {
-    val (conduits, nextId) = (world.assets.areas.values foldLeft(List[Conduit](), world.nextConduitId)) ((carry, area) => {
+  private def createConduits(world: World, state: WorldState): WorldState = {
+    val (conduits, nextId) = (world.conduits foldLeft(List[Conduit](), state.nextConduitId)) ((carry, x) => {
       val (conduits, nextId) = carry
-      val (added, newId) = createAreaConduits(area, nextId)
+      val conduit = Conduit(ConduitId(nextId), x.source, x.target, x.sourceItem, x.targetItem, x.tag)
 
-      (conduits ::: added, newId)
+      (conduit :: conduits, nextId + 1)
     })
 
-    world.copy(
+    state.copy(
       conduits = (conduits map (x => (x.id, x))).toMap,
       nextConduitId = nextId
     )
-  }
-
-  private def createAreaConduits(area: Area, nextId: Int): (List[Conduit], Int) = {
-    (area.conduits foldLeft(List[Conduit](), nextId)) ((carry, x) => {
-      val (result, nextId) = carry
-
-      val conduit = Conduit(ConduitId(nextId), area.id, x.target, x.sourceItem, x.targetItem, x.tag)
-
-      (conduit :: result, nextId + 1)
-    })
   }
 
   private def addPlayer(world: WorldState,

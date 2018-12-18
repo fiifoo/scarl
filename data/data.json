@@ -3,116 +3,72 @@
     "template" : "generic/area-cave",
     "theme" : "iridan/natural-underground",
     "power" : [ ],
-    "conduits" : [ {
-      "target" : "iridan/core-approach",
-      "sourceItem" : "generic/conduit-stairs-down",
-      "targetItem" : "generic/conduit-stairs-up"
-    } ],
     "id" : "iridan/nexus",
-    "owner" : "iridan"
+    "owner" : "iridan",
+    "region" : "iridan/underground"
   } ], [ "iridan/labs-surface", {
     "template" : "iridan/area-surface-assault",
     "theme" : "iridan/natural-surface",
     "power" : [ ],
-    "conduits" : [ {
-      "target" : "iridan/labs",
-      "sourceItem" : "generic/conduit-fissure",
-      "targetItem" : null
-    } ],
     "id" : "iridan/labs-surface",
-    "owner" : "iridan"
+    "owner" : "iridan",
+    "region" : "iridan/underground"
   } ], [ "iridan/labs", {
     "template" : "iridan/area-labs",
     "theme" : "iridan/constructed-underground",
     "power" : [ ],
-    "conduits" : [ {
-      "target" : "iridan/nexus",
-      "sourceItem" : "generic/conduit-stairs-down",
-      "targetItem" : "iridan/conduit-stairs-up-labs",
-      "tag" : null
-    } ],
     "id" : "iridan/labs",
-    "owner" : "iridan"
+    "owner" : "iridan",
+    "region" : "iridan/underground"
   } ], [ "iridan/mine-approach", {
     "template" : "generic/area-tunnels",
     "theme" : "iridan/natural-underground",
     "power" : [ ],
-    "conduits" : [ {
-      "target" : "iridan/mine",
-      "sourceItem" : "generic/conduit-stairs-down",
-      "targetItem" : "generic/conduit-stairs-up"
-    } ],
     "id" : "iridan/mine-approach",
-    "owner" : "iridan"
+    "owner" : "iridan",
+    "region" : "iridan/underground"
   } ], [ "iridan/coms-surface", {
     "template" : "iridan/area-surface-assault",
     "theme" : "iridan/natural-surface",
     "power" : [ ],
-    "conduits" : [ {
-      "target" : "iridan/coms",
-      "sourceItem" : "generic/conduit-fissure",
-      "targetItem" : null
-    } ],
     "id" : "iridan/coms-surface",
-    "owner" : "iridan"
+    "owner" : "iridan",
+    "region" : "iridan/underground"
   } ], [ "iridan/coms", {
     "template" : "iridan/area-coms",
     "theme" : "iridan/natural-underground",
     "power" : [ ],
-    "conduits" : [ {
-      "target" : "iridan/nexus",
-      "sourceItem" : "generic/conduit-stairs-down",
-      "targetItem" : "iridan/conduit-stairs-up-coms",
-      "tag" : null
-    } ],
     "id" : "iridan/coms",
-    "owner" : "iridan"
+    "owner" : "iridan",
+    "region" : "iridan/underground"
   } ], [ "iridan/mine", {
     "template" : "iridan/area-mine",
     "theme" : "iridan/natural-underground",
     "power" : [ ],
-    "conduits" : [ ],
     "id" : "iridan/mine",
-    "owner" : "iridan"
+    "owner" : "iridan",
+    "region" : "iridan/underground"
   } ], [ "iridan/core-approach", {
     "template" : "iridan/area-core-approach",
     "theme" : "iridan/constructed-underground",
     "power" : [ ],
-    "conduits" : [ {
-      "target" : "iridan/core",
-      "sourceItem" : "iridan/conduit-stairs-down-core",
-      "targetItem" : "generic/conduit-stairs-up"
-    }, {
-      "target" : "iridan/mine-approach",
-      "sourceItem" : "iridan/conduit-stairs-down-mine",
-      "targetItem" : "generic/conduit-stairs-up"
-    } ],
     "id" : "iridan/core-approach",
-    "owner" : "iridan"
+    "owner" : "iridan",
+    "region" : "iridan/underground"
   } ], [ "start-level", {
     "template" : "iridan/area-start",
     "theme" : "iridan/constructed-underground",
-    "conduits" : [ {
-      "target" : "iridan/labs-surface",
-      "sourceItem" : "iridan/conduit-assault-pod-labs",
-      "targetItem" : null,
-      "tag" : "primary"
-    }, {
-      "target" : "iridan/coms-surface",
-      "sourceItem" : "iridan/conduit-assault-pod-coms",
-      "targetItem" : null,
-      "tag" : "primary"
-    } ],
     "id" : "start-level",
     "power" : [ ],
-    "owner" : "nomad"
+    "owner" : "nomad",
+    "region" : "iridan/underground"
   } ], [ "iridan/core", {
     "template" : "iridan/area-core",
     "theme" : "iridan/natural-underground",
     "power" : [ ],
-    "conduits" : [ ],
     "id" : "iridan/core",
-    "owner" : "iridan"
+    "owner" : "iridan",
+    "region" : "iridan/underground"
   } ] ],
   "catalogues" : {
     "contentSources" : [ [ "generic/room", {
@@ -6834,6 +6790,10 @@
     },
     "item" : "skyfarer/armor-head-ranged-merged",
     "id" : "skyfarer/armor-head-ranged-merged"
+  } ] ],
+  "regions" : [ [ "iridan/underground", {
+    "world" : "main",
+    "id" : "iridan/underground"
   } ] ],
   "templates" : [ [ "iridan/area-start", {
     "type" : "FixedTemplate",
@@ -14085,5 +14045,65 @@
     "templates" : "iridan/default",
     "id" : "iridan/natural-underground",
     "terrains" : "generic/natural-underground"
+  } ] ],
+  "worlds" : [ [ "main", {
+    "start" : "start-level",
+    "characters" : [ "player" ],
+    "conduits" : [ {
+      "source" : "iridan/labs",
+      "target" : "iridan/nexus",
+      "sourceItem" : "generic/conduit-stairs-down",
+      "targetItem" : "iridan/conduit-stairs-up-labs",
+      "tag" : null
+    }, {
+      "source" : "iridan/nexus",
+      "target" : "iridan/core-approach",
+      "sourceItem" : "generic/conduit-stairs-down",
+      "targetItem" : "generic/conduit-stairs-up"
+    }, {
+      "source" : "iridan/labs-surface",
+      "target" : "iridan/labs",
+      "sourceItem" : "generic/conduit-fissure",
+      "targetItem" : null
+    }, {
+      "source" : "iridan/mine-approach",
+      "target" : "iridan/mine",
+      "sourceItem" : "generic/conduit-stairs-down",
+      "targetItem" : "generic/conduit-stairs-up"
+    }, {
+      "source" : "iridan/coms-surface",
+      "target" : "iridan/coms",
+      "sourceItem" : "generic/conduit-fissure",
+      "targetItem" : null
+    }, {
+      "source" : "iridan/coms",
+      "target" : "iridan/nexus",
+      "sourceItem" : "generic/conduit-stairs-down",
+      "targetItem" : "iridan/conduit-stairs-up-coms",
+      "tag" : null
+    }, {
+      "source" : "iridan/core-approach",
+      "target" : "iridan/core",
+      "sourceItem" : "iridan/conduit-stairs-down-core",
+      "targetItem" : "generic/conduit-stairs-up"
+    }, {
+      "source" : "iridan/core-approach",
+      "target" : "iridan/mine-approach",
+      "sourceItem" : "iridan/conduit-stairs-down-mine",
+      "targetItem" : "generic/conduit-stairs-up"
+    }, {
+      "source" : "start-level",
+      "target" : "iridan/labs-surface",
+      "sourceItem" : "iridan/conduit-assault-pod-labs",
+      "targetItem" : null,
+      "tag" : "primary"
+    }, {
+      "source" : "start-level",
+      "target" : "iridan/coms-surface",
+      "sourceItem" : "iridan/conduit-assault-pod-coms",
+      "targetItem" : null,
+      "tag" : "primary"
+    } ],
+    "id" : "main"
   } ] ]
 }
