@@ -8,7 +8,7 @@ import io.github.fiifoo.scarl.core.geometry.Location
 import io.github.fiifoo.scarl.core.kind.{TerrainKind, TerrainKindId}
 import io.github.fiifoo.scarl.core.math.Distribution
 import io.github.fiifoo.scarl.core.math.Rng.WeightedChoice
-import io.github.fiifoo.scarl.world.{RegionId, TemplateCatalogueId, WorldAssets, WorldCatalogues}
+import io.github.fiifoo.scarl.world.{TemplateCatalogueId, WorldAssets, WorldCatalogues}
 import org.scalatest._
 
 import scala.util.Random
@@ -69,7 +69,6 @@ class CalculateTemplateSpec extends FlatSpec with Matchers {
 
     val area = Area(
       AreaId(""),
-      RegionId(""),
       t1.id,
       theme.id
     )

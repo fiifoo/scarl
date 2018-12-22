@@ -31,6 +31,7 @@ class AssetsRepository @Inject()(environment: Environment, simulationsRepository
       data.progressions,
       data.recipes,
       data.regions,
+      data.sites,
       data.templates,
       data.themes,
       data.worlds

@@ -8,6 +8,7 @@ object JsonRegion {
   import JsonBase.{mapReads, stringIdFormat}
 
   lazy private implicit val worldIdFormat = JsonWorld.worldIdFormat
+  lazy private implicit val variantMapReads = JsonVariant.variantMapReads
 
   lazy implicit val regionIdFormat: Format[RegionId] = stringIdFormat(_.value, RegionId.apply)
   lazy implicit val regionReads: Reads[Region] = Json.reads

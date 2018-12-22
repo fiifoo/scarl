@@ -10,7 +10,6 @@ object JsonArea {
 
   lazy private implicit val combatPowerCategoryFormat = JsonCombatPower.categoryFormat
   lazy private implicit val factionIdFormat = JsonFaction.factionIdFormat
-  lazy private implicit val regionIdFormat = JsonRegion.regionIdFormat
   lazy private implicit val templateIdFormat = JsonTemplate.templateIdFormat
   lazy private implicit val themeIdFormat = JsonTheme.themeIdFormat
 

@@ -21,6 +21,7 @@ case class Data(areas: Map[AreaId, Area],
                 progressions: Map[ProgressionId, Progression],
                 recipes: Map[RecipeId, Recipe] = Map(),
                 regions: Map[RegionId, Region] = Map(),
+                sites: Map[SiteId, Site],
                 templates: Map[TemplateId, Template],
                 themes: Map[ThemeId, Theme],
                 worlds: Map[WorldId, World],
@@ -36,6 +37,7 @@ object Data {
   lazy private implicit val progressionMapReads = JsonProgression.progressionMapReads
   lazy private implicit val recipeMapReads = JsonRecipe.recipeMapReads
   lazy private implicit val regionMapReads = JsonRegion.regionMapReads
+  lazy private implicit val sitesMapReads = JsonSite.siteMapReads
   lazy private implicit val templateMapReads = JsonTemplate.templateMapReads
   lazy private implicit val themeMapReads = JsonTheme.themeMapReads
   lazy private implicit val worldMapReads = JsonWorld.worldMapReads

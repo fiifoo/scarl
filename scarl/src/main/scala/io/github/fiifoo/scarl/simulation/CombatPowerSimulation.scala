@@ -161,7 +161,6 @@ case class CombatPowerSimulation(matches: Int = 25,
 
     val area = Area(
       AreaId(""),
-      RegionId(""),
       template.id,
       theme.id
     )

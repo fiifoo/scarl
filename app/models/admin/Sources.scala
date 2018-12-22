@@ -27,6 +27,7 @@ object Sources {
   lazy val main: Map[Model.RelationId, ModelSource] = List(
     ModelSource(typeOf[Area], List("areas")),
     ModelSource(typeOf[Region], List("regions")),
+    ModelSource(typeOf[Site], List("sites")),
     ModelSource(typeOf[World], List("worlds")),
 
     ModelSource(typeOf[ContentSourceCatalogue], List("catalogues", "contentSources")),
