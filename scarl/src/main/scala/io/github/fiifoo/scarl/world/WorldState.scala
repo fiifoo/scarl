@@ -6,5 +6,6 @@ import io.github.fiifoo.scarl.core.world.ConduitId
 case class WorldState(assets: WorldAssets = WorldAssets(),
                       conduits: Map[ConduitId, Conduit] = Map(),
                       nextConduitId: Int = 1,
-                      states: Map[SiteId, State] = Map()
+                      states: Map[SiteId, State] = Map(),
+                      variants: Map[RegionId, Option[VariantKey]] = Map(),
                      )

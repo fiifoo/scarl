@@ -54,6 +54,19 @@ object JsonBase {
     case json: JsValue => valueReads.reads(json) map Some.apply
   }
 
+  implicit def optionFormat[T](implicit valueReads: Reads[T], valueWrites: Writes[T]): Format[Option[T]] = {
+    new Format[Option[T]] {
+      def writes(option: Option[T]): JsValue = option match {
+        case None => JsNull
+        case Some(x) => valueWrites.writes(x)
+      }
+      def reads(json: JsValue): JsResult[Option[T]] = json match {
+        case JsNull => JsSuccess(None)
+        case json: JsValue => valueReads.reads(json) map Some.apply
+      }
+    }
+  }
+
   def stringIdFormat[T](getValue: T => String, getId: String => T): Format[T] = {
     new Format[T] {
       def writes(id: T): JsValue = JsString(getValue(id))

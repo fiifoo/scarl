@@ -1,5 +1,7 @@
 package io.github.fiifoo.scarl.world
 
+
+import io.github.fiifoo.scarl.area.AreaId
 import io.github.fiifoo.scarl.area.template.{ApplyTemplate, CalculateTemplate}
 import io.github.fiifoo.scarl.core._
 import io.github.fiifoo.scarl.core.ai.Brain
@@ -17,7 +19,7 @@ object GenerateArea {
            ): WorldState = {
 
     val assets = world.assets
-    val area = assets.sites(site).area // todo: select area
+    val (variant, area) = selectArea(world, assets.sites(site))
 
     var state = State(
       area = State.Area(owner = assets.areas(area).owner),
@@ -38,8 +40,23 @@ object GenerateArea {
     state = createGlobalActor(state)
 
     world.copy(
-      states = world.states + (site -> state)
+      states = world.states + (site -> state),
+      variants = world.variants + (assets.sites(site).region -> variant)
     )
+  }
+
+  private def selectArea(world: WorldState, site: Site): (Option[VariantKey], AreaId) = {
+    val variant = world.variants.getOrElse(
+      site.region,
+      selectVariant(world, world.assets.regions(site.region))
+    )
+    val area = variant flatMap site.variants.get getOrElse site.area
+
+    (variant, area)
+  }
+
+  private def selectVariant(world: WorldState, region: Region): Option[VariantKey] = {
+    None // todo: really select
   }
 
   private def createBrains(assets: WorldAssets): Map[FactionId, Brain] = {
