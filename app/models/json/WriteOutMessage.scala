@@ -15,7 +15,6 @@ object WriteOutMessage {
   }
 
   lazy private implicit val locationWrites = Json.writes[Location]
-  lazy private implicit val areaIdFormat = JsonArea.areaIdFormat
   lazy private implicit val factionFormat = JsonFaction.factionFormat
   lazy private implicit val eventWrites = JsonEvent.eventWrites
   lazy private implicit val itemFormat = JsonItem.itemFormat
@@ -27,6 +26,7 @@ object WriteOutMessage {
   lazy private implicit val recipeIdFormat = JsonRecipe.recipeIdFormat
   lazy private implicit val recipeFormat = JsonRecipe.recipeFormat
   lazy private implicit val signalFormat = JsonSignal.signalFormat
+  lazy private implicit val siteIdFormat = JsonSite.siteIdFormat
   lazy private implicit val slotFormat = JsonItemEquipment.slotFormat
   lazy private implicit val statisticsFormat = JsonStatistics.statisticsFormat
   lazy private implicit val waypointNetworkWrites = Json.writes[WaypointNetwork]

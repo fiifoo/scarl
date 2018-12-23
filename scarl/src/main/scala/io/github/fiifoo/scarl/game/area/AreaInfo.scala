@@ -1,8 +1,8 @@
 package io.github.fiifoo.scarl.game.area
 
-import io.github.fiifoo.scarl.area.AreaId
 import io.github.fiifoo.scarl.core.geometry.Location
 import io.github.fiifoo.scarl.game.RunState
+import io.github.fiifoo.scarl.world.SiteId
 
 object AreaInfo {
   def apply(state: RunState): AreaInfo = {
@@ -15,4 +15,4 @@ object AreaInfo {
   }
 }
 
-case class AreaInfo(id: AreaId, width: Int, height: Int, map: Map[Location, MapLocation])
+case class AreaInfo(id: SiteId, width: Int, height: Int, map: Map[Location, MapLocation])

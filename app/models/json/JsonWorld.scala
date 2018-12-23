@@ -7,9 +7,9 @@ object JsonWorld {
 
   import JsonBase.{mapReads, stringIdFormat}
 
-  lazy private implicit val areaIdFormat = JsonArea.areaIdFormat
   lazy private implicit val creatureKindIdFormat = JsonCreatureKind.creatureKindIdFormat
   lazy private implicit val itemKindIdFormat = JsonItemKind.itemKindIdFormat
+  lazy private implicit val siteIdFormat = JsonSite.siteIdFormat
 
   lazy implicit val worldIdFormat: Format[WorldId] = stringIdFormat(_.value, WorldId.apply)
 

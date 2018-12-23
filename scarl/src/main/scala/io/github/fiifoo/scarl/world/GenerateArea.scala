@@ -1,6 +1,5 @@
 package io.github.fiifoo.scarl.world
 
-import io.github.fiifoo.scarl.area.AreaId
 import io.github.fiifoo.scarl.area.template.{ApplyTemplate, CalculateTemplate}
 import io.github.fiifoo.scarl.core._
 import io.github.fiifoo.scarl.core.ai.Brain
@@ -12,12 +11,13 @@ import io.github.fiifoo.scarl.core.mutation.{IdSeqMutation, NewEntityMutation}
 object GenerateArea {
 
   def apply(world: WorldState,
-            area: AreaId,
+            site: SiteId,
             rng: Rng,
             idSeq: IdSeq = IdSeq(1),
            ): WorldState = {
 
     val assets = world.assets
+    val area = assets.sites(site).area // todo: select area
 
     var state = State(
       area = State.Area(owner = assets.areas(area).owner),
@@ -31,14 +31,14 @@ object GenerateArea {
     val template = assets.templates(assets.areas(area).template)
     val templateResult = CalculateTemplate(assets, assets.areas(area), random)(template)
 
-    val in = (world.conduits.values filter (_.target == area)).toList
-    val out = (world.conduits.values filter (_.source == area)).toList
+    val in = (world.conduits.values filter (_.target == site)).toList
+    val out = (world.conduits.values filter (_.source == site)).toList
 
     state = ApplyTemplate(state, templateResult, in, out, random)
     state = createGlobalActor(state)
 
     world.copy(
-      states = world.states + (area -> state)
+      states = world.states + (site -> state)
     )
   }
 

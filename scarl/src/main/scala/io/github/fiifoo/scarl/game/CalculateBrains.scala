@@ -1,15 +1,15 @@
 package io.github.fiifoo.scarl.game
 
-import io.github.fiifoo.scarl.area.AreaId
 import io.github.fiifoo.scarl.core.ai.Brain
 import io.github.fiifoo.scarl.core.mutation.BrainsMutation
+import io.github.fiifoo.scarl.world.SiteId
 
 import scala.concurrent.duration.Duration
 import scala.concurrent.{Await, ExecutionContext, Future}
 
 object CalculateBrains {
 
-  case class Calculation(calculations: Future[Iterable[Brain]], area: AreaId)
+  case class Calculation(calculations: Future[Iterable[Brain]], area: SiteId)
 
   def apply(state: RunState)(implicit ec: ExecutionContext): Calculation = {
     val calculations = state.instance.brains.values map (brain => {

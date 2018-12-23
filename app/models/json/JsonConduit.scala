@@ -8,8 +8,8 @@ object JsonConduit {
 
   import JsonBase.integerIdFormat
 
-  lazy private implicit val areaIdFormat = JsonArea.areaIdFormat
   lazy private implicit val itemKindIdFormat = JsonItemKind.itemKindIdFormat
+  lazy private implicit val siteIdFormat = JsonSite.siteIdFormat
 
   lazy implicit val conduitIdFormat: Format[ConduitId] = integerIdFormat(_.value, ConduitId.apply)
 

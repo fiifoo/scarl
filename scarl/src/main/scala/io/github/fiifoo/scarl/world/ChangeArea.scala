@@ -1,6 +1,5 @@
 package io.github.fiifoo.scarl.world
 
-import io.github.fiifoo.scarl.area.AreaId
 import io.github.fiifoo.scarl.core._
 import io.github.fiifoo.scarl.core.entity.IdSeq
 import io.github.fiifoo.scarl.core.mutation.ConduitExitMutation
@@ -9,11 +8,11 @@ import io.github.fiifoo.scarl.core.world.{ConduitId, Traveler}
 object ChangeArea {
 
   def apply(world: WorldState,
-            currentArea: AreaId,
+            currentArea: SiteId,
             currentState: State,
             conduit: ConduitId,
             traveler: Traveler
-           ): (WorldState, AreaId) = {
+           ): (WorldState, SiteId) = {
 
     val currentWorld = world.copy(states = world.states + (currentArea -> currentState))
     val nextArea = getConduitExit(world.conduits(conduit), currentArea)
@@ -27,7 +26,7 @@ object ChangeArea {
     (finalWorld, nextArea)
   }
 
-  private def reloadArea(world: WorldState, area: AreaId, idSeq: IdSeq): WorldState = {
+  private def reloadArea(world: WorldState, area: SiteId, idSeq: IdSeq): WorldState = {
     val state = world.states(area).copy(idSeq = idSeq)
 
     world.copy(
@@ -35,7 +34,7 @@ object ChangeArea {
     )
   }
 
-  private def getConduitExit(conduit: Conduit, entry: AreaId): AreaId = {
+  private def getConduitExit(conduit: Conduit, entry: SiteId): SiteId = {
     if (conduit.source == entry) {
       conduit.target
     } else {
@@ -44,7 +43,7 @@ object ChangeArea {
   }
 
   private def applyConduitExit(world: WorldState,
-                               area: AreaId,
+                               area: SiteId,
                                conduit: ConduitId,
                                traveler: Traveler
                               ): WorldState = {
