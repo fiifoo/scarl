@@ -12,7 +12,7 @@ import io.github.fiifoo.scarl.core.item.Key
 import io.github.fiifoo.scarl.core.item.Recipe.RecipeId
 import io.github.fiifoo.scarl.core.kind.ItemKindId
 import io.github.fiifoo.scarl.core.math.Rng
-import io.github.fiifoo.scarl.core.world.{ConduitId, Traveler}
+import io.github.fiifoo.scarl.core.world.{ConduitId, GoalId, Traveler}
 
 object State {
 
@@ -32,7 +32,8 @@ object State {
                      )
 
   // todo: move foundItems, equipments, keys, receivedCommunications, recipes and tactics here
-  case class Creature(recycledItems: Map[CreatureId, List[ItemKindId]] = Map(),
+  case class Creature(goals: Set[GoalId] = Set(),
+                      recycledItems: Map[CreatureId, List[ItemKindId]] = Map(),
                       trails: Map[CreatureId, List[Location]] = Map()
                      )
 

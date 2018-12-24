@@ -2,7 +2,7 @@ package io.github.fiifoo.scarl.world
 
 import io.github.fiifoo.scarl.core._
 import io.github.fiifoo.scarl.core.entity.IdSeq
-import io.github.fiifoo.scarl.core.mutation.ConduitExitMutation
+import io.github.fiifoo.scarl.core.mutation.{ConduitExitMutation, ResetGoalsMutation}
 import io.github.fiifoo.scarl.core.world.{ConduitId, Traveler}
 
 object ChangeArea {
@@ -13,8 +13,10 @@ object ChangeArea {
             conduit: ConduitId,
             traveler: Traveler
            ): (WorldState, SiteId) = {
-
-    val currentWorld = world.copy(states = world.states + (currentArea -> currentState))
+    val currentWorld = world.copy(
+      goals = world.goals ++ currentState.creature.goals,
+      states = world.states + (currentArea -> ResetGoalsMutation()(currentState))
+    )
     val nextArea = getConduitExit(world.conduits(conduit), currentArea)
     val nextWorld = if (world.states.get(nextArea).isDefined) {
       reloadArea(currentWorld, nextArea, currentState.idSeq)

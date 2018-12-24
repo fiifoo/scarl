@@ -679,6 +679,7 @@
     "enemies" : [ "nomad", "skyfarer", "scippe" ],
     "id" : "iridan/hunters"
   } ] ],
+  "goals" : [ ],
   "keys" : [ [ "iridan/access-codes", {
     "name" : "Iridan access codes",
     "id" : "iridan/access-codes"

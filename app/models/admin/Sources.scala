@@ -133,6 +133,7 @@ object Sources {
     ), objectPolymorphism = true),
 
     SubModelSource(typeOf[CreaturePower], List(
+      typeOf[AchieveGoalPower],
       typeOf[ActivateMachineryPower],
       typeOf[CapturePower],
       typeOf[CreateEntityPower],
@@ -210,6 +211,7 @@ object Sources {
     ), objectPolymorphism = true),
 
     SubModelSource(typeOf[ItemPower], List(
+      typeOf[AchieveGoalPower],
       typeOf[ActivateMachineryPower],
       typeOf[CreateEntityPower],
       typeOf[ExplodePower],

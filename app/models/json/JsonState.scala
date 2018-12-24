@@ -33,6 +33,7 @@ object JsonState {
   lazy private implicit val conduitIdFormat = JsonConduit.conduitIdFormat
   lazy private implicit val creatureIdFormat = JsonCreature.creatureIdFormat
   lazy private implicit val factionIdFormat = JsonFaction.factionIdFormat
+  lazy private implicit val goalIdFormat = JsonGoal.goalIdFormat
   lazy private implicit val itemKindIdFormat = JsonItemKind.itemKindIdFormat
   lazy private implicit val itemIdFormat = JsonItem.itemIdFormat
   lazy private implicit val keyFormat = JsonItemKey.keyFormat

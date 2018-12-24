@@ -8,9 +8,11 @@ object JsonPower {
 
   import JsonBase.polymorphicTypeFormat
 
+  lazy private implicit val goalIdFormat = JsonGoal.goalIdFormat
   lazy private implicit val kindIdFormat = JsonKind.kindIdFormat
   lazy private implicit val resourcesFormat = Json.format[Power.Resources]
 
+  lazy private implicit val achieveGoalFormat = Json.format[AchieveGoalPower]
   lazy private implicit val activateMachineryFormat = Json.format[ActivateMachineryPower]
   lazy private implicit val captureFormat = Json.format[CapturePower]
   lazy private implicit val createEntityFormat = Json.format[CreateEntityPower]
@@ -24,6 +26,7 @@ object JsonPower {
 
   lazy implicit val creaturePowerFormat: Format[CreaturePower] = polymorphicTypeFormat(
     data => {
+      case "AchieveGoalPower" => data.as[AchieveGoalPower]
       case "ActivateMachineryPower" => data.as[ActivateMachineryPower]
       case "CapturePower" => data.as[CapturePower]
       case "CreateEntityPower" => data.as[CreateEntityPower]
@@ -31,6 +34,7 @@ object JsonPower {
       case "TransformPower" => data.as[TransformPower]
       case "VoidPower" => data.as[VoidPower]
     }, {
+      case power: AchieveGoalPower => achieveGoalFormat.writes(power)
       case power: ActivateMachineryPower => activateMachineryFormat.writes(power)
       case power: CapturePower => captureFormat.writes(power)
       case power: CreateEntityPower => createEntityFormat.writes(power)
@@ -42,6 +46,7 @@ object JsonPower {
 
   lazy implicit val itemPowerFormat: Format[ItemPower] = polymorphicTypeFormat(
     data => {
+      case "AchieveGoalPower" => data.as[AchieveGoalPower]
       case "ActivateMachineryPower" => data.as[ActivateMachineryPower]
       case "CreateEntityPower" => data.as[CreateEntityPower]
       case "ExplodePower" => data.as[ExplodePower]
@@ -52,6 +57,7 @@ object JsonPower {
       case "TrapAttackPower" => data.as[TrapAttackPower]
       case "VoidPower" => data.as[VoidPower]
     }, {
+      case power: AchieveGoalPower => achieveGoalFormat.writes(power)
       case power: ActivateMachineryPower => activateMachineryFormat.writes(power)
       case power: CreateEntityPower => createEntityFormat.writes(power)
       case power: ExplodePower => explodeFormat.writes(power)
