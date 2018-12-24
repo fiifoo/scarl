@@ -29,6 +29,7 @@ object Sources {
     ModelSource(typeOf[Region], List("regions")),
     ModelSource(typeOf[Site], List("sites")),
     ModelSource(typeOf[World], List("worlds")),
+    ModelSource(typeOf[Goal], List("goals")),
 
     ModelSource(typeOf[ContentSourceCatalogue], List("catalogues", "contentSources")),
     ModelSource(typeOf[CreatureCatalogue], List("catalogues", "creatures")),

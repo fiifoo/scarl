@@ -14,6 +14,7 @@ object JsonWorldState {
 
   lazy private implicit val conduitFormat = JsonConduit.conduitFormat
   lazy private implicit val conduitIdFormat = JsonConduit.conduitIdFormat
+  lazy private implicit val goalIdFormat = JsonGoal.goalIdFormat
   lazy private implicit val regionIdFormat = JsonRegion.regionIdFormat
   lazy private implicit val siteIdFormat = JsonSite.siteIdFormat
   lazy private implicit val stateFormat = JsonState.stateFormat

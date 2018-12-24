@@ -9,12 +9,14 @@ import io.github.fiifoo.scarl.core.creature._
 import io.github.fiifoo.scarl.core.item.Recipe.RecipeId
 import io.github.fiifoo.scarl.core.item.{KeyKind, KeyKindId, Recipe}
 import io.github.fiifoo.scarl.core.kind.Kinds
+import io.github.fiifoo.scarl.core.world.GoalId
 
 case class WorldAssets(areas: Map[AreaId, Area] = Map(),
                        catalogues: WorldCatalogues = WorldCatalogues(),
                        combatPower: CombatPower = CombatPower(),
                        communications: Map[CommunicationId, Communication] = Map(),
                        factions: Map[FactionId, Faction] = Map(),
+                       goals: Map[GoalId, Goal] = Map(),
                        keys: Map[KeyKindId, KeyKind] = Map(),
                        kinds: Kinds = Kinds(),
                        progressions: Map[ProgressionId, Progression] = Map(),
