@@ -56,7 +56,7 @@ object GenerateArea {
   }
 
   private def selectVariant(world: WorldState, region: Region): Option[VariantKey] = {
-    None // todo: really select
+    region.variants find (_.requirements.apply(world)) map (_.key)
   }
 
   private def createBrains(assets: WorldAssets): Map[FactionId, Brain] = {
