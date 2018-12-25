@@ -3,6 +3,7 @@ import FixedContentField from '../area/FixedContentField.jsx'
 import FixedTemplateField from '../area/FixedTemplateField.jsx'
 import MachinerySourceField from '../area/MachinerySourceField.jsx'
 import RegionField from '../world/RegionField.jsx'
+import RegionVariantKeyField from '../world/RegionVariantKeyField.jsx'
 import WorldField from '../world/WorldField.jsx'
 import BooleanField from './BooleanField.jsx'
 import CharField from './CharField.jsx'
@@ -45,6 +46,7 @@ const modelFieldComponents = {
 
     Region: RegionField,
     World: WorldField,
+    'Site.RegionVariantKey': RegionVariantKeyField,
 
     Stats: SideFormField,
 }
