@@ -2,14 +2,18 @@ import { Set } from 'immutable'
 import React from 'react'
 import FormField from './FormField.jsx'
 
-const getFilteredModel = (properties, model) => ({
+const getFilteredModel = (properties, model, exclude) => ({
     ...model,
-    properties: model.properties.filter(property => Set(properties).contains(property.name))
+    properties: model.properties.filter(property => {
+        const contains = Set(properties).contains(property.name)
+
+        return exclude ? ! contains : contains
+    })
 })
 
-const FilteredFormField = ({properties, model, ...props}) => (
+const FilteredFormField = ({properties, model, exclude = false, ...props}) => (
     <FormField
-        model={getFilteredModel(properties, model)}
+        model={getFilteredModel(properties, model, exclude)}
         {...props} />
 )
 

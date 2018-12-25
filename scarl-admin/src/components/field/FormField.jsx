@@ -3,7 +3,8 @@ import { getNewValue } from '../../data/utils'
 import FormRow from '../form/FormRow.jsx'
 import { getFieldComponent, getFieldModel } from './utils'
 
-const FormField = ({label, required, model, fieldType, path, value, common}) => {
+const FormField = props => {
+    const {Extras, label, required, model, fieldType, path, value, common} = props
     const {horizontal, models, setValue} = common
 
     if (! value) {
@@ -51,6 +52,7 @@ const FormField = ({label, required, model, fieldType, path, value, common}) => 
                 </button>
             )}
             {model.properties.map(renderSubField)}
+            {Extras && <Extras {...props} />}
         </FormRow>
     )
 }

@@ -2,6 +2,8 @@ import { isPolymorphic } from '../../data/utils.js'
 import FixedContentField from '../area/FixedContentField.jsx'
 import FixedTemplateField from '../area/FixedTemplateField.jsx'
 import MachinerySourceField from '../area/MachinerySourceField.jsx'
+import RegionField from '../world/RegionField.jsx'
+import WorldField from '../world/WorldField.jsx'
 import BooleanField from './BooleanField.jsx'
 import CharField from './CharField.jsx'
 import ColorField from './ColorField.jsx'
@@ -40,6 +42,10 @@ const modelFieldComponents = {
     FixedContent: FixedContentField,
     FixedTemplate: FixedTemplateField,
     'FixedContent.MachinerySource': MachinerySourceField,
+
+    Region: RegionField,
+    World: WorldField,
+
     Stats: SideFormField,
 }
 

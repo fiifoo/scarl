@@ -7,7 +7,7 @@ import PolymorphicObjectField from './PolymorphicObjectField.jsx'
 import { getFieldComponent, getFieldModel } from './utils'
 
 const ListField = ({value, ...props}) => {
-    const {fieldType, path, common} = props
+    const {fieldType, path, common, filterValue = undefined} = props
     const {models, setValue} = common
 
     if (! value) {
@@ -33,6 +33,7 @@ const ListField = ({value, ...props}) => {
     return (
         <ListComponent
             value={value}
+            filterValue={filterValue}
             onSortEnd={onSortEnd}
             useDragHandle={true}
             useWindowAsScrollContainer={true}
@@ -59,7 +60,7 @@ const SelectComponent = ({Component, label, fieldType, path, value, common}) => 
     )
 }
 
-const ListComponent = SortableContainer(({label, fieldType, path, value, common}) => {
+const ListComponent = SortableContainer(({label, fieldType, path, value, common, filterValue}) => {
     const {horizontal, models, setValue} = common
 
     const valueFieldType = fieldType.data.value
@@ -69,17 +70,19 @@ const ListComponent = SortableContainer(({label, fieldType, path, value, common}
     const add = () => setValue(path, value.push(getNewValue(valueFieldType, models)))
 
     const renderValueField = (subValue, index) => (
-        <Item
-            key={index}
-            index={index}
-            valueIndex={index}
-            subValue={subValue}
-            valueFieldType={valueFieldType}
-            valueModel={valueModel}
-            ValueComponent={ValueComponent}
-            path={path}
-            value={value}
-            common={common} />
+        filterValue !== undefined && ! filterValue(subValue) ? null : (
+            <Item
+                key={index}
+                index={index}
+                valueIndex={index}
+                subValue={subValue}
+                valueFieldType={valueFieldType}
+                valueModel={valueModel}
+                ValueComponent={ValueComponent}
+                path={path}
+                value={value}
+                common={common} />
+        )
     )
 
     return (
