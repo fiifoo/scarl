@@ -14,4 +14,6 @@ object JsonConduit {
   lazy implicit val conduitIdFormat: Format[ConduitId] = integerIdFormat(_.value, ConduitId.apply)
 
   lazy val conduitFormat: Format[Conduit] = Json.format[Conduit]
+
+  lazy val conduitSourceFormat: Format[Conduit.Source] = Json.format[Conduit.Source]
 }

@@ -11,3 +11,14 @@ case class Conduit(id: ConduitId,
                    targetItem: Option[ItemKindId],
                    tag: Option[Tag]
                   )
+
+object Conduit {
+
+  case class Source(source: SiteId,
+                    target: SiteId,
+                    sourceItem: ItemKindId,
+                    targetItem: Option[ItemKindId],
+                    tag: Option[Tag]
+                   )
+
+}
