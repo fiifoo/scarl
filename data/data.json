@@ -6785,7 +6785,8 @@
   "regions" : [ [ "iridan/underground", {
     "world" : "main",
     "id" : "iridan/underground",
-    "variants" : [ ]
+    "variants" : [ ],
+    "access" : [ ]
   } ] ],
   "sites" : [ [ "iridan/nexus", {
     "id" : "iridan/nexus",
@@ -14089,6 +14090,7 @@
     "id" : "iridan/natural-underground",
     "terrains" : "generic/natural-underground"
   } ] ],
+  "transports" : [ ],
   "worlds" : [ [ "main", {
     "start" : "start-level",
     "characters" : [ "player" ],
@@ -14147,6 +14149,7 @@
       "targetItem" : null,
       "tag" : "primary"
     } ],
-    "id" : "main"
+    "id" : "main",
+    "transports" : [ ]
   } ] ]
 }

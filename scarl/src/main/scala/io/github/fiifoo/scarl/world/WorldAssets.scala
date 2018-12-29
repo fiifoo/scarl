@@ -25,6 +25,7 @@ case class WorldAssets(areas: Map[AreaId, Area] = Map(),
                        sites: Map[SiteId, Site] = Map(),
                        templates: Map[TemplateId, Template] = Map(),
                        themes: Map[ThemeId, Theme] = Map(),
+                       transports: Map[TransportId, Transport] = Map(),
                        worlds: Map[WorldId, World] = Map(),
                       ) {
 

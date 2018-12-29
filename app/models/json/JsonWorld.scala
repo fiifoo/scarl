@@ -1,6 +1,7 @@
 package models.json
 
-import io.github.fiifoo.scarl.world.{World, WorldId}
+import io.github.fiifoo.scarl.world.{RegionId, TransportId, World, WorldId}
+import models.json.JsonBase.mapFormat
 import play.api.libs.json._
 
 object JsonWorld {
@@ -9,7 +10,11 @@ object JsonWorld {
 
   lazy private implicit val conduitSourceFormat = JsonConduit.conduitSourceFormat
   lazy private implicit val creatureKindIdFormat = JsonCreatureKind.creatureKindIdFormat
+  lazy private implicit val regionIdFormat = JsonRegion.regionIdFormat
   lazy private implicit val siteIdFormat = JsonSite.siteIdFormat
+  lazy private implicit val transportIdFormat = JsonTransport.transportIdFormat
+
+  implicitly(mapFormat[TransportId, RegionId])
 
   lazy implicit val worldIdFormat: Format[WorldId] = stringIdFormat(_.value, WorldId.apply)
 

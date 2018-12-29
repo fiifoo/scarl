@@ -30,6 +30,7 @@ object Sources {
     ModelSource(typeOf[Site], List("sites")),
     ModelSource(typeOf[World], List("worlds")),
     ModelSource(typeOf[Goal], List("goals")),
+    ModelSource(typeOf[Transport], List("transports")),
 
     ModelSource(typeOf[ContentSourceCatalogue], List("catalogues", "contentSources")),
     ModelSource(typeOf[CreatureCatalogue], List("catalogues", "creatures")),
@@ -256,6 +257,10 @@ object Sources {
       typeOf[TerrainKind.DefaultCategory.type],
       typeOf[TerrainKind.ConstructedCategory.type],
       typeOf[TerrainKind.NaturalCategory.type],
+    ), objectPolymorphism = true),
+
+    SubModelSource(typeOf[TransportCategory], List(
+      typeOf[TransportCategory.Ship.type],
     ), objectPolymorphism = true),
 
     SubModelSource(typeOf[WallKind.Category], List(

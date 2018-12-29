@@ -18,11 +18,13 @@ object JsonWorldState {
   lazy private implicit val regionIdFormat = JsonRegion.regionIdFormat
   lazy private implicit val siteIdFormat = JsonSite.siteIdFormat
   lazy private implicit val stateFormat = JsonState.stateFormat
-  lazy private implicit val varianKeyFormat = JsonRegionVariant.variantKeyFormat
+  lazy private implicit val transportIdFormat = JsonTransport.transportIdFormat
+  lazy private implicit val variantKeyFormat = JsonRegionVariant.variantKeyFormat
 
   implicitly(mapFormat[ConduitId, Conduit])
   implicitly(mapFormat[SiteId, State])
   implicitly(optionFormat[RegionVariantKey])
+  implicitly(mapFormat[TransportId, RegionId])
   implicitly(mapFormat[RegionId, Option[RegionVariantKey]])
 
   lazy val worldStateFormat = Json.format[WorldState]

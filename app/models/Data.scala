@@ -26,6 +26,7 @@ case class Data(areas: Map[AreaId, Area],
                 sites: Map[SiteId, Site],
                 templates: Map[TemplateId, Template],
                 themes: Map[ThemeId, Theme],
+                transports: Map[TransportId, Transport],
                 worlds: Map[WorldId, World],
                )
 
@@ -43,6 +44,7 @@ object Data {
   lazy private implicit val sitesMapReads = JsonSite.siteMapReads
   lazy private implicit val templateMapReads = JsonTemplate.templateMapReads
   lazy private implicit val themeMapReads = JsonTheme.themeMapReads
+  lazy private implicit val transportMapReads = JsonTransport.transportMapReads
   lazy private implicit val worldMapReads = JsonWorld.worldMapReads
 
   lazy val dataReads: Reads[Data] = Json.reads[Data]

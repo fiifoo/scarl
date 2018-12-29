@@ -12,7 +12,7 @@ object CreateWorld {
             player: CreatureKindId,
             rng: Rng = Rng(1)
            ): (WorldState, CreatureId) = {
-    val initial = createConduits(world, WorldState(assets))
+    val initial = createConduits(world, WorldState(assets, transports = world.transports))
     val state = GenerateArea(initial, world.start, rng)
 
     addPlayer(state, world.start, player)

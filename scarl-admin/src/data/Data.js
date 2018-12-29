@@ -70,6 +70,7 @@ const Data = Record({
     sites: Map(),
     templates: Map(),
     themes: Map(),
+    transports: Map(),
     worlds: Map(),
 })
 Data.read = raw => Data({
@@ -86,6 +87,7 @@ Data.read = raw => Data({
     sites: readMap(raw.sites),
     templates: readMap(raw.templates),
     themes: readMap(raw.themes),
+    transports: readMap(raw.transports),
     worlds: readMap(raw.worlds),
 })
 Data.write = data => ({
@@ -102,6 +104,7 @@ Data.write = data => ({
     sites: writeMap(data.sites),
     templates: writeMap(data.templates),
     themes: writeMap(data.themes),
+    transports: writeMap(data.transports),
     worlds: writeMap(data.worlds),
 })
 
