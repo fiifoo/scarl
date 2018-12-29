@@ -15,7 +15,7 @@ case class TravelTactic(destination: Location,
   ), (
     CheckPartyCombatIntention,
     Priority.medium
-  ),(
+  ), (
     TravelIntention(destination, priority, waiting),
     priority
   ))

@@ -8,5 +8,5 @@ case class WorldState(assets: WorldAssets = WorldAssets(),
                       goals: Set[GoalId] = Set(),
                       nextConduitId: Int = 1,
                       states: Map[SiteId, State] = Map(),
-                      variants: Map[RegionId, Option[VariantKey]] = Map(),
+                      variants: Map[RegionId, Option[RegionVariantKey]] = Map(),
                      )

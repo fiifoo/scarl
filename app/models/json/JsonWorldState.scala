@@ -2,7 +2,7 @@ package models.json
 
 import io.github.fiifoo.scarl.core.State
 import io.github.fiifoo.scarl.core.world.ConduitId
-import io.github.fiifoo.scarl.world.{Conduit, RegionId, SiteId, VariantKey, WorldAssets, WorldState}
+import io.github.fiifoo.scarl.world._
 import play.api.libs.json._
 
 object JsonWorldState {
@@ -18,12 +18,12 @@ object JsonWorldState {
   lazy private implicit val regionIdFormat = JsonRegion.regionIdFormat
   lazy private implicit val siteIdFormat = JsonSite.siteIdFormat
   lazy private implicit val stateFormat = JsonState.stateFormat
-  lazy private implicit val varianKeyFormat = JsonVariant.variantKeyFormat
+  lazy private implicit val varianKeyFormat = JsonRegionVariant.variantKeyFormat
 
   implicitly(mapFormat[ConduitId, Conduit])
   implicitly(mapFormat[SiteId, State])
-  implicitly(optionFormat[VariantKey])
-  implicitly(mapFormat[RegionId, Option[VariantKey]])
+  implicitly(optionFormat[RegionVariantKey])
+  implicitly(mapFormat[RegionId, Option[RegionVariantKey]])
 
   lazy val worldStateFormat = Json.format[WorldState]
 }

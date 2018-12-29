@@ -7,7 +7,7 @@ import play.api.libs.json._
 
 object JsonCombatPower {
 
-  import JsonBase.{mapFormat, mapReads, polymorphicObjectFormat}
+  import JsonBase.{mapReads, polymorphicObjectFormat}
 
   lazy private implicit val creatureKindIdFormat = JsonCreatureKind.creatureKindIdFormat
   lazy private implicit val equipmentCategoryFormat = JsonItemEquipment.categoryFormat

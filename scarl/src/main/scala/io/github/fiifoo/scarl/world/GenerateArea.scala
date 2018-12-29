@@ -45,7 +45,7 @@ object GenerateArea {
     )
   }
 
-  private def selectArea(world: WorldState, site: Site): (Option[VariantKey], AreaId) = {
+  private def selectArea(world: WorldState, site: Site): (Option[RegionVariantKey], AreaId) = {
     val variant = world.variants.getOrElse(
       site.region,
       selectVariant(world, world.assets.regions(site.region))
@@ -55,7 +55,7 @@ object GenerateArea {
     (variant, area)
   }
 
-  private def selectVariant(world: WorldState, region: Region): Option[VariantKey] = {
+  private def selectVariant(world: WorldState, region: Region): Option[RegionVariantKey] = {
     region.variants find (_.requirements.apply(world)) map (_.key)
   }
 

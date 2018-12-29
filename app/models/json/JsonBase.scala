@@ -60,6 +60,7 @@ object JsonBase {
         case None => JsNull
         case Some(x) => valueWrites.writes(x)
       }
+
       def reads(json: JsValue): JsResult[Option[T]] = json match {
         case JsNull => JsSuccess(None)
         case json: JsValue => valueReads.reads(json) map Some.apply
