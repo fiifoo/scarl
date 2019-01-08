@@ -1,24 +1,29 @@
-package io.github.fiifoo.scarl.world
+package io.github.fiifoo.scarl.game
 
 import io.github.fiifoo.scarl.core.entity._
 import io.github.fiifoo.scarl.core.kind.CreatureKindId
 import io.github.fiifoo.scarl.core.math.Rng
 import io.github.fiifoo.scarl.core.world.ConduitId
+import io.github.fiifoo.scarl.world._
 
-object CreateWorld {
+object GenerateGame {
 
   def apply(assets: WorldAssets,
             world: World,
-            player: CreatureKindId,
+            character: CreatureKindId,
             rng: Rng = Rng(1)
-           ): (WorldState, CreatureId) = {
-    val initial = createConduits(world, WorldState(assets, transports = world.transports))
-    val state = GenerateArea(initial, world.start, rng)
+           ): GameState = {
+    val create =
+      createConduits(world) _ andThen
+        GenerateArea(world.start, rng) andThen
+        addPlayer(world.start, character)
 
-    addPlayer(state, world.start, player)
+    val (worldState, player) = create(WorldState(assets, transports = world.transports))
+
+    GameState(world.start, player, worldState)
   }
 
-  private def createConduits(world: World, state: WorldState): WorldState = {
+  private def createConduits(world: World)(state: WorldState): WorldState = {
     val (conduits, nextId) = (world.conduits foldLeft(List[Conduit](), state.nextConduitId)) ((carry, x) => {
       val (conduits, nextId) = carry
       val conduit = Conduit(ConduitId(nextId), x.source, x.target, x.sourceItem, x.targetItem, x.tag)
@@ -32,18 +37,14 @@ object CreateWorld {
     )
   }
 
-  private def addPlayer(world: WorldState,
-                        area: SiteId,
-                        player: CreatureKindId
-                       ): (WorldState, CreatureId) = {
-
+  private def addPlayer(area: SiteId, character: CreatureKindId)(world: WorldState): (WorldState, CreatureId) = {
     val state = world.states(area)
     if (state.gateways.isEmpty) {
       throw new Exception("First area does not contain any gateways. Cannot add player.")
     }
 
     val (location, _) = state.rng.nextChoice(state.gateways)
-    val result = player(state).apply(state, state.idSeq, location)
+    val result = character(state).apply(state, state.idSeq, location)
 
     val nextState = result.write(state)
     val nextWorld = world.copy(

@@ -1,8 +1,8 @@
 package game
 
 import io.github.fiifoo.scarl.core.math.Rng
-import io.github.fiifoo.scarl.game.GameState
-import io.github.fiifoo.scarl.world.{CreateWorld, WorldAssets}
+import io.github.fiifoo.scarl.game.{GameState, GenerateGame => Generate}
+import io.github.fiifoo.scarl.world.WorldAssets
 
 import scala.util.Random
 
@@ -13,8 +13,6 @@ object GenerateGame {
     val world = assets.worlds.values.head
     val character = world.characters.head
 
-    val (worldState, player) = CreateWorld(assets, world, character, rng)
-
-    GameState(world.start, player, worldState)
+    Generate(assets, world, character, rng)
   }
 }

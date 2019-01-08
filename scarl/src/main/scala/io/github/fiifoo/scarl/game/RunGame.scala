@@ -9,7 +9,6 @@ import io.github.fiifoo.scarl.game.area.MapBuilder
 import io.github.fiifoo.scarl.game.event.EventBuilder
 import io.github.fiifoo.scarl.game.player.{PlayerFov, PlayerInfo}
 import io.github.fiifoo.scarl.game.statistics.StatisticsBuilder
-import io.github.fiifoo.scarl.world.ChangeArea
 
 import scala.annotation.tailrec
 

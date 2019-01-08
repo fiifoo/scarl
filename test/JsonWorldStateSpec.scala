@@ -1,7 +1,8 @@
 import dal.{AssetsRepository, SimulationsRepository}
-import game.LoadGame
 import io.github.fiifoo.scarl.core.State
-import io.github.fiifoo.scarl.world.{CreateWorld, SiteId, WorldState}
+import io.github.fiifoo.scarl.core.entity.CreatureId
+import io.github.fiifoo.scarl.game.{GameState, GenerateGame, LoadGame}
+import io.github.fiifoo.scarl.world.{SiteId, WorldState}
 import models.json.JsonWorldState
 import org.scalatestplus.play._
 import play.api.inject.guice.GuiceApplicationBuilder
@@ -16,7 +17,13 @@ class JsonWorldStateSpec extends PlaySpec {
     "read and write WorldState" in {
       val json = JsonWorldState.worldStateFormat.writes(world)
       val loaded = JsonWorldState.worldStateFormat.reads(json).get
-      val result = LoadGame.finalize(assets, loaded)
+      val result = LoadGame(GameState(
+        area = SiteId(""),
+        player = CreatureId(0),
+        world = loaded.copy(
+          assets = assets
+        )
+      )).world
 
       world.hashCode mustBe result.hashCode
     }
@@ -28,7 +35,7 @@ class JsonWorldStateSpec extends PlaySpec {
     val world = assets.worlds.values.head
     val character = world.characters.head
 
-    val (worldState, _) = CreateWorld(assets, world, character)
+    val worldState = GenerateGame(assets, world, character).world
     val instanceState = worldState.states(area)
 
     worldState.copy(

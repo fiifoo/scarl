@@ -1,9 +1,10 @@
-package io.github.fiifoo.scarl.world
+package io.github.fiifoo.scarl.game
 
 import io.github.fiifoo.scarl.core._
 import io.github.fiifoo.scarl.core.entity.IdSeq
 import io.github.fiifoo.scarl.core.mutation.{ConduitExitMutation, ResetGoalsMutation}
 import io.github.fiifoo.scarl.core.world.{ConduitId, Traveler}
+import io.github.fiifoo.scarl.world.{Conduit, GenerateArea, SiteId, WorldState}
 
 object ChangeArea {
 
@@ -21,7 +22,7 @@ object ChangeArea {
     val nextWorld = if (world.states.get(nextArea).isDefined) {
       reloadArea(currentWorld, nextArea, currentState.idSeq)
     } else {
-      GenerateArea(currentWorld, nextArea, currentState.rng, currentState.idSeq)
+      GenerateArea(nextArea, currentState.rng, currentState.idSeq)(currentWorld)
     }
     val finalWorld = applyConduitExit(nextWorld, nextArea, conduit, traveler)
 

@@ -1,6 +1,5 @@
 package io.github.fiifoo.scarl.world
 
-
 import io.github.fiifoo.scarl.area.AreaId
 import io.github.fiifoo.scarl.area.template.{ApplyTemplate, CalculateTemplate}
 import io.github.fiifoo.scarl.core._
@@ -12,12 +11,7 @@ import io.github.fiifoo.scarl.core.mutation.{IdSeqMutation, NewEntityMutation}
 
 object GenerateArea {
 
-  def apply(world: WorldState,
-            site: SiteId,
-            rng: Rng,
-            idSeq: IdSeq = IdSeq(1),
-           ): WorldState = {
-
+  def apply(site: SiteId, rng: Rng, idSeq: IdSeq = IdSeq(1))(world: WorldState): WorldState = {
     val assets = world.assets
     val (variant, area) = selectArea(world, assets.sites(site))
 
