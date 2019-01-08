@@ -2,12 +2,13 @@ package io.github.fiifoo.scarl.game
 
 import io.github.fiifoo.scarl.core.RealityBubble
 import io.github.fiifoo.scarl.core.action.Action
+import io.github.fiifoo.scarl.core.entity.CreatureId
 import io.github.fiifoo.scarl.core.mutation.{FinalizeTickMutation, ResetConduitEntryMutation}
-import io.github.fiifoo.scarl.core.world.{ConduitId, Traveler}
+import io.github.fiifoo.scarl.core.world.ConduitId
 import io.github.fiifoo.scarl.game.api._
 import io.github.fiifoo.scarl.game.area.MapBuilder
 import io.github.fiifoo.scarl.game.event.EventBuilder
-import io.github.fiifoo.scarl.game.player.{PlayerFov, PlayerInfo}
+import io.github.fiifoo.scarl.game.player.PlayerInfo
 import io.github.fiifoo.scarl.game.statistics.StatisticsBuilder
 
 import scala.annotation.tailrec
@@ -46,7 +47,7 @@ object RunGame {
       (nextState, action)
     }
 
-    nextState = getConduitEntry(nextState) map handleConduitEntry(nextState) getOrElse nextState
+    nextState = getConduitEntry(nextState) map applyConduitEntry(nextState) getOrElse nextState
 
     run(nextState, nextAction)
   }
@@ -81,49 +82,37 @@ object RunGame {
     state.instance.cache.actorQueue.headOption.contains(state.game.player)
   }
 
-  private def getConduitEntry(state: RunState): Option[(ConduitId, Traveler)] = {
+  private def getConduitEntry(state: RunState): Option[List[(CreatureId, ConduitId)]] = {
     state.instance.tmp.conduitEntry
   }
 
-  private def handleConduitEntry(state: RunState)(entry: (ConduitId, Traveler)): RunState = {
-    val (conduit, traveler) = entry
-
-    val nextState = state.copy(
+  private def applyConduitEntry(state: RunState)(entries: List[(CreatureId, ConduitId)]): RunState = {
+    val initial = state.copy(
       instance = ResetConduitEntryMutation()(state.instance)
     )
 
-    if (traveler.creature.id == state.game.player) {
-      changeArea(nextState, conduit, traveler)
-    } else {
-      nextState
-    }
+    (entries foldLeft initial) ((state, entry) => {
+      val (creature, conduit) = entry
+
+      // npc travelers not supported for now
+      if (state.instance.entities.isDefinedAt(creature) && creature == state.game.player) {
+        sendAreaChange(changeArea(state, conduit))
+      } else {
+        state
+      }
+    })
   }
 
-  private def changeArea(state: RunState, conduit: ConduitId, traveler: Traveler): RunState = {
-    val (nextWorld, nextArea) = ChangeArea(
-      state.game.world,
-      state.game.area,
-      state.instance,
-      conduit,
-      traveler
-    )
-    val nextMaps = state.game.maps + (state.game.area -> state.areaMap)
-    val nextGameState = state.game.copy(
-      area = nextArea,
-      maps = nextMaps,
-      world = nextWorld
-    )
-    val nextInstance = nextWorld.states(nextArea)
+  private def changeArea(state: RunState, conduitId: ConduitId): RunState = {
+    val conduit = state.game.world.conduits(conduitId)
 
-    val nextState = state.copy(
-      areaMap = state.game.maps.getOrElse(nextArea, Map()),
-      fov = PlayerFov(),
-      game = nextGameState,
-      instance = nextInstance,
-      playerInfo = PlayerInfo(nextInstance, nextGameState.player)
-    )
+    val area = if (conduit.source == state.game.area) {
+      conduit.target
+    } else {
+      conduit.source
+    }
 
-    sendAreaChange(nextState)
+    ChangeArea(area, Some(conduit.id))(state)
   }
 
   private def sendGameUpdate(state: RunState): RunState = {

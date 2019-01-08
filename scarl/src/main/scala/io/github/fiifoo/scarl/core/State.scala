@@ -12,7 +12,7 @@ import io.github.fiifoo.scarl.core.item.Key
 import io.github.fiifoo.scarl.core.item.Recipe.RecipeId
 import io.github.fiifoo.scarl.core.kind.ItemKindId
 import io.github.fiifoo.scarl.core.math.Rng
-import io.github.fiifoo.scarl.core.world.{ConduitId, GoalId, Traveler}
+import io.github.fiifoo.scarl.core.world.{ConduitId, GoalId}
 
 object State {
 
@@ -28,7 +28,7 @@ object State {
                   )
 
   case class Conduits(entrances: Map[ConduitId, Location] = Map(),
-                      exits: Map[ConduitId, Location] = Map()
+                      exits: Map[ConduitId, Location] = Map(),
                      )
 
   // todo: move foundItems, equipments, keys, receivedCommunications, recipes and tactics here
@@ -54,7 +54,7 @@ object State {
                         entities: Set[EntityId] = Set()
                        )
 
-  case class Temporary(conduitEntry: Option[(ConduitId, Traveler)] = None,
+  case class Temporary(conduitEntry: Option[List[(CreatureId, ConduitId)]] = None,
                        removableEntities: Set[EntityId] = Set(),
                        waypointNetworkChanged: Set[Location] = Set(),
                       )

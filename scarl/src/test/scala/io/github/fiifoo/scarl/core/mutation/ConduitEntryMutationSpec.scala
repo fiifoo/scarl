@@ -4,7 +4,7 @@ import io.github.fiifoo.scarl.core.State
 import io.github.fiifoo.scarl.core.entity._
 import io.github.fiifoo.scarl.core.geometry.Location
 import io.github.fiifoo.scarl.core.test_assets.{TestActiveStatus, TestCreatureFactory, TestItemFactory, TestStatus}
-import io.github.fiifoo.scarl.core.world.ConduitId
+import io.github.fiifoo.scarl.core.world.{ConduitId, Traveler}
 import org.scalatest._
 
 class ConduitEntryMutationSpec extends FlatSpec with Matchers {
@@ -15,7 +15,7 @@ class ConduitEntryMutationSpec extends FlatSpec with Matchers {
     val initial = createInitial()
 
     var state = ConduitEntryMutation(creature, ConduitId(1))(initial)
-    val traveler = state.tmp.conduitEntry.get._2
+    val traveler = Traveler(state, state.tmp.conduitEntry.get.head._1)
 
     state = RemovableEntityMutation(creature)(state)
     state = RemoveEntitiesMutation()(state)
