@@ -9,7 +9,7 @@ import io.github.fiifoo.scarl.core.item.Equipment
 import io.github.fiifoo.scarl.core.item.Equipment.ArmorSlot
 import io.github.fiifoo.scarl.core.kind.ItemKindId
 import io.github.fiifoo.scarl.game.player.PlayerAutomation
-import io.github.fiifoo.scarl.game.{CalculateBrains, RunGame, RunState}
+import io.github.fiifoo.scarl.game.{CalculateBrains, RunGame, RunState, WorldAction => WorldActionInstance}
 import io.github.fiifoo.scarl.power.ScanPower
 
 import scala.concurrent.ExecutionContext
@@ -156,6 +156,18 @@ case class SetQuickItem(slot: Int, item: Option[ItemKindId]) extends InMessage {
       game = state.game.copy(settings = settings),
       outMessages = message :: state.outMessages
     )
+
+    (nextState, None)
+  }
+}
+
+case class WorldAction(action: WorldActionInstance) extends InMessage {
+  def apply(state: RunState)(implicit ec: ExecutionContext): (RunState, Option[InMessage]) = {
+    val nextState = action.apply(state) map (state => {
+      state.copy(
+        outMessages = WorldInfo(state) :: state.outMessages
+      )
+    }) getOrElse state
 
     (nextState, None)
   }

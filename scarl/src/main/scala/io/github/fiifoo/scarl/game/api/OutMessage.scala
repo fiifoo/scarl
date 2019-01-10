@@ -14,6 +14,7 @@ import io.github.fiifoo.scarl.game.event.Event
 import io.github.fiifoo.scarl.game.player.{PlayerFov, PlayerInfo, Settings}
 import io.github.fiifoo.scarl.game.statistics.Statistics
 import io.github.fiifoo.scarl.rule.SignalRule
+import io.github.fiifoo.scarl.world._
 
 sealed trait OutMessage
 
@@ -32,6 +33,7 @@ object DebugWaypoint {
 object GameStart {
   def apply(state: RunState): GameStart = {
     val inventory = PlayerInventory(state)
+    val world = WorldInfo(state)
 
     GameStart(
       area = AreaInfo(state),
@@ -39,6 +41,13 @@ object GameStart {
       kinds = state.game.world.assets.kinds,
       recipes = state.game.world.assets.recipes.values,
       settings = state.game.settings,
+      // world
+      site = world.site,
+      regions = world.regions,
+      siteRegions = world.siteRegions,
+      transportRegions = world.transportRegions,
+      transports = world.transports,
+      // inventory
       equipments = inventory.equipments,
       inventory = inventory.inventory,
       playerRecipes = inventory.playerRecipes,
@@ -68,9 +77,17 @@ object GameOver {
 object AreaChange {
   def apply(state: RunState): AreaChange = {
     val inventory = PlayerInventory(state)
+    val world = WorldInfo(state)
 
     AreaChange(
       area = AreaInfo(state),
+      // world
+      site = world.site,
+      regions = world.regions,
+      siteRegions = world.siteRegions,
+      transportRegions = world.transportRegions,
+      transports = world.transports,
+      // inventory
       equipments = inventory.equipments,
       inventory = inventory.inventory,
       playerRecipes = inventory.playerRecipes,
@@ -96,6 +113,18 @@ object SignalMap {
   }
 }
 
+object WorldInfo {
+  def apply(state: RunState): WorldInfo = {
+    WorldInfo(
+      site = state.game.area,
+      regions = state.game.world.assets.regions,
+      siteRegions = state.game.world.assets.sites mapValues (_.region),
+      transportRegions = state.game.world.transports,
+      transports = state.game.world.assets.transports
+    )
+  }
+}
+
 case class DebugFov(locations: Set[Location]) extends OutMessage with DebugMessage
 
 case class DebugWaypoint(network: WaypointNetwork) extends OutMessage with DebugMessage
@@ -107,6 +136,12 @@ case class GameStart(area: AreaInfo,
                      kinds: Kinds,
                      recipes: Iterable[Recipe],
                      settings: Settings,
+                     // world
+                     site: SiteId,
+                     regions: Map[RegionId, Region],
+                     siteRegions: Map[SiteId, RegionId],
+                     transportRegions: Map[TransportId, RegionId],
+                     transports: Map[TransportId, Transport],
                      // inventory
                      equipments: Map[Slot, ItemId],
                      inventory: Set[Item],
@@ -122,6 +157,12 @@ case class GameUpdate(fov: PlayerFov,
 case class GameOver(statistics: Statistics) extends OutMessage
 
 case class AreaChange(area: AreaInfo,
+                      //world
+                      site: SiteId,
+                      regions: Map[RegionId, Region],
+                      siteRegions: Map[SiteId, RegionId],
+                      transportRegions: Map[TransportId, RegionId],
+                      transports: Map[TransportId, Transport],
                       // inventory
                       equipments: Map[Slot, ItemId],
                       inventory: Set[Item],
@@ -136,3 +177,10 @@ case class PlayerInventory(equipments: Map[Slot, ItemId],
                           ) extends OutMessage
 
 case class SignalMap(signals: List[Signal]) extends OutMessage
+
+case class WorldInfo(site: SiteId,
+                     regions: Map[RegionId, Region],
+                     siteRegions: Map[SiteId, RegionId],
+                     transportRegions: Map[TransportId, RegionId],
+                     transports: Map[TransportId, Transport],
+                    ) extends OutMessage

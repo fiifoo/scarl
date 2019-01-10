@@ -6786,7 +6786,8 @@
     "world" : "main",
     "id" : "iridan/underground",
     "variants" : [ ],
-    "access" : [ ]
+    "entrances" : [ ],
+    "exits" : [ ]
   } ] ],
   "sites" : [ [ "iridan/nexus", {
     "id" : "iridan/nexus",

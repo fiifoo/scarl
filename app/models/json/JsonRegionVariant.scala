@@ -6,8 +6,8 @@ import play.api.libs.json._
 object JsonRegionVariant {
   lazy private implicit val goalIdFormat = JsonGoal.goalIdFormat
 
-  lazy private implicit val variantRequirementsReads = Json.reads[RegionRequirements]
+  lazy private implicit val variantRequirementsFormat = Json.format[RegionRequirements]
 
   lazy implicit val variantKeyFormat: Format[RegionVariantKey] = Json.format[RegionVariantKey]
-  lazy val variantReads: Reads[RegionVariant] = Json.reads
+  lazy val variantFormat: Format[RegionVariant] = Json.format
 }
