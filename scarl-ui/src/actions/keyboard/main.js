@@ -92,6 +92,10 @@ export default (command, dispatch, getState) => {
             ]))(dispatch, getState)
             break
         }
+        case commands.WORLD: {
+            gameActions.world()(dispatch)
+            break
+        }
         default: {
             if (isSetEquipmentSetCommand(command)) {
                 gameActions.setEquipmentSet(getEquipmentSet(command))()

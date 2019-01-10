@@ -12,6 +12,7 @@ import inventory from './inventory'
 import main from './main'
 import look from './look'
 import playerInfo from './playerInfo'
+import world from './world'
 
 const onlyCancelMode = (command, dispatch) => {
     if (command === commands.CANCEL_MODE) {
@@ -35,6 +36,7 @@ const handlers = {
     [modes.MENU]: onlyCancelMode,
     [modes.PLAYER_INFO]: playerInfo,
     [modes.SIGNAL_MAP]: onlyCancelMode,
+    [modes.WORLD]: world,
 }
 
 export const focusKeyboard = () => ({

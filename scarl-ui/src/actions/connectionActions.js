@@ -44,6 +44,10 @@ const receiveActionMappers = {
         type: types.RECEIVE_SIGNAL_MAP,
         data,
     }),
+    WorldInfo: data => ({
+        type: types.RECEIVE_WORLD_INFO,
+        data,
+    }),
 
     DebugFov: data => ({
         type: types.RECEIVE_DEBUG_FOV,
@@ -90,6 +94,15 @@ export const closeConnection = () => dispatch => {
 
 export const sendAction = (type, data = {}) => {
     sendMessage('GameAction', {
+        action: {
+            type,
+            data
+        }
+    })
+}
+
+export const sendWorldAction = (type, data = {}) => {
+    sendMessage('WorldAction', {
         action: {
             type,
             data

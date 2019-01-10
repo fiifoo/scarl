@@ -34,6 +34,7 @@ export const LESS3 = 226
 export const PERIOD = 190
 export const SHIFT = 16
 export const SPACEBAR = 32
+export const TAB = 9
 
 export const A = 65
 export const C = 67

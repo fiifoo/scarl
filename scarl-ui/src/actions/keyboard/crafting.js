@@ -69,6 +69,10 @@ export default (command, dispatch, getState) => {
             gameActions.playerInfo()(dispatch)
             break
         }
+        case commands.WORLD: {
+            gameActions.world()(dispatch)
+            break
+        }
         case commands.CRAFT: {
             craft(dispatch, getState)
             break

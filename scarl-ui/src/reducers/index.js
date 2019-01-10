@@ -15,6 +15,7 @@ import recipes from './recipes'
 import settings from './settings'
 import statistics from './statistics'
 import ui from './ui'
+import world from './world'
 
 export default combineReducers({
     area,
@@ -33,4 +34,5 @@ export default combineReducers({
     settings,
     statistics,
     ui,
+    world,
 })

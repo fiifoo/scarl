@@ -200,6 +200,8 @@ export const storeGameViewSize = size => (dispatch, getState) => {
     })
 }
 
+export const world = () => dispatch => changeMode(modes.WORLD)(dispatch)
+
 const seekTarget = (missile = false) => (dispatch, getState) => {
     const {factions, fov, player, ui} = getState()
     const prev = ui.game.target

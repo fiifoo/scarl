@@ -74,6 +74,7 @@ export default {
         [keycodes.T, commands.COMMUNICATE],
         [keycodes.U, commands.USE],
         [keycodes.Z, commands.AIM_MISSILE],
+        [keycodes.TAB, commands.WORLD],
     ]).merge(directions).merge(setEquipmentSets).merge(useQuickItems),
 
     [gameModes.AIM]: Map([
@@ -98,6 +99,7 @@ export default {
 
         [keycodes.I, commands.INVENTORY],
         [keycodes.P, commands.PLAYER_INFO],
+        [keycodes.TAB, commands.WORLD],
 
         [keycodes.ENTER, commands.CRAFT],
         [keycodes.SPACEBAR, commands.CRAFT],
@@ -149,6 +151,7 @@ export default {
 
         [keycodes.C, commands.CRAFTING],
         [keycodes.P, commands.PLAYER_INFO],
+        [keycodes.TAB, commands.WORLD],
 
         [keycodes.CONTROL, commands.INVENTORY_INTERACT],
         [keycodes.ENTER, commands.INVENTORY_USE],
@@ -193,10 +196,20 @@ export default {
 
         [keycodes.C, commands.CRAFTING],
         [keycodes.I, commands.INVENTORY],
+        [keycodes.TAB, commands.WORLD],
     ]).merge(setEquipmentSets),
 
     [gameModes.SIGNAL_MAP]: Map([
         [keycodes.ESC, commands.CANCEL_MODE],
         [keycodes.SHIFT, commands.CANCEL_MODE],
+    ]),
+
+    [gameModes.WORLD]: Map([
+        [keycodes.ESC, commands.CANCEL_MODE],
+        [keycodes.TAB, commands.CANCEL_MODE],
+
+        [keycodes.C, commands.CRAFTING],
+        [keycodes.I, commands.INVENTORY],
+        [keycodes.P, commands.PLAYER_INFO],
     ]),
 }

@@ -118,6 +118,10 @@ const handleCommon = (command, dispatch, getState) => {
             gameActions.playerInfo()(dispatch)
             break
         }
+        case commands.WORLD: {
+            gameActions.world()(dispatch)
+            break
+        }
         case commands.TAB_LEFT: {
             changeTab(dispatch, getState, true)
             break
