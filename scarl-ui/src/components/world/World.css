@@ -1,0 +1,25 @@
+.region {
+    padding: 10px;
+    border: 1px solid #5594c9;
+    border-radius: 5px;
+    width: 500px;
+    margin-bottom: 20px;
+}
+
+.region.active {
+    border: 3px solid #5594c9;
+}
+
+.region .title {
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.region .region-header .title {
+    font-size: 20px;
+    color: #5594c9;
+}
+
+.region .actions .btn {
+    min-width: 100px;
+}
