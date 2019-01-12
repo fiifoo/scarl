@@ -15,6 +15,7 @@ object SolarSystem {
 
 case class SolarSystem(bodies: Map[StellarBody.Id, StellarBody] = Map(),
                        ships: Map[Spaceship.Id, Spaceship] = Map(),
+                       time: Int = 0,
                       ) {
   def tick(tick: Int = SolarSystem.Tick): SolarSystem = {
     val bodies = this.bodies map { case (id, body) =>
@@ -26,8 +27,30 @@ case class SolarSystem(bodies: Map[StellarBody.Id, StellarBody] = Map(),
 
     this.copy(
       bodies = bodies,
-      ships = ships
+      ships = ships,
+      time = this.time + tick
     )
+  }
+
+  def travel(ship: Spaceship.Id, destination: StellarBody.Id, tick: Int = SolarSystem.Tick): Option[SolarSystem] = {
+    this.calculateTravel(ship, destination, tick) map (travel => {
+      val initial = this.copy(
+        ships = ships + (ship -> this.ships(ship).copy(
+          travel = Some(travel)
+        ))
+      )
+
+      @tailrec
+      def step(system: SolarSystem): SolarSystem = {
+        if (system.ships(ship).travel.isDefined) {
+          step(system.tick(tick))
+        } else {
+          system
+        }
+      }
+
+      step(initial)
+    })
   }
 
   def calculateTravel(ship: Spaceship.Id, destination: StellarBody.Id, tick: Int = SolarSystem.Tick): Option[Travel] = {

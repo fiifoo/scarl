@@ -13,6 +13,7 @@ object JsonWorld {
   lazy private implicit val regionIdFormat = JsonRegion.regionIdFormat
   lazy private implicit val siteIdFormat = JsonSite.siteIdFormat
   lazy private implicit val transportIdFormat = JsonTransport.transportIdFormat
+  lazy private implicit val solarSystemSourceFormat = JsonSolarSystemSource.solarSystemSourceFormat
 
   implicitly(mapFormat[TransportId, RegionId])
 

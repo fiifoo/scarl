@@ -17,6 +17,7 @@ const WorldInfo = Record({
     siteRegions: Map(),
     transportRegions: Map(),
     transports: Map(),
+    system: null,
     hasActions: false, // cache
 })
 WorldInfo.read = data => {
@@ -26,6 +27,7 @@ WorldInfo.read = data => {
         siteRegions: Map(data.siteRegions),
         transportRegions: Map(data.transportRegions),
         transports: Map(data.transports),
+        system: SolarSystem.read(data.system),
     })
 
     return world.set('hasActions', hasActions(world))
@@ -40,6 +42,17 @@ Region.read = data => Region({
     id: data.id,
     entrances: Map(data.entrances).map(x => List(x)),
     exits: Map(data.exits).map(x => List(x)),
+})
+
+const SolarSystem = Record({
+    bodies: Map(),
+    ships: Map(),
+    time: null,
+})
+SolarSystem.read = data => SolarSystem({
+    bodies: Map(data.bodies),
+    ships: Map(data.ships),
+    time: data.time,
 })
 
 export default (state = WorldInfo(), action) => {

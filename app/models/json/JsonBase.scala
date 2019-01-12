@@ -28,9 +28,11 @@ object JsonBase {
 
   implicit def mapFormat[K, V](implicit keyReads: Reads[K],
                                valueReads: Reads[V],
-                               _writes: Writes[Map[K, V]],
+                               keyWrites: Writes[K],
+                               valueWrites: Writes[V],
                               ): Format[Map[K, V]] = {
     val _reads = mapReads[K, V]
+    val _writes = mapWrites[K, V]
 
     new Format[Map[K, V]] {
       def writes(o: Map[K, V]): JsValue = _writes.writes(o)
@@ -40,13 +42,11 @@ object JsonBase {
   }
 
   implicit def mapReads[K, V](implicit keyReads: Reads[K], valueReads: Reads[V]): Reads[Map[K, V]] = {
-    json => {
-      try {
-        JsSuccess(json.as[JsArray].as[List[(K, V)]].toMap)
-      } catch {
-        case e: JsResultException => JsError(e.errors)
-      }
-    }
+    json => JsSuccess(json.as[JsArray].as[List[(K, V)]].toMap)
+  }
+
+  implicit def mapWrites[K, V](implicit keyWrites: Writes[K], valueWrites: Writes[V]): Writes[Map[K, V]] = {
+    value => Json.toJson(value.toList)
   }
 
   implicit def optionReads[T](implicit valueReads: Reads[T]): Reads[Option[T]] = {

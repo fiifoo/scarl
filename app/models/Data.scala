@@ -10,6 +10,7 @@ import io.github.fiifoo.scarl.core.item.{KeyKind, KeyKindId, Recipe}
 import io.github.fiifoo.scarl.core.kind._
 import io.github.fiifoo.scarl.core.world.GoalId
 import io.github.fiifoo.scarl.world._
+import io.github.fiifoo.scarl.world.system.source.{SpaceshipSource, SpaceshipSourceId, StellarBodySource, StellarBodySourceId}
 import models.json._
 import play.api.libs.json._
 
@@ -24,6 +25,8 @@ case class Data(areas: Map[AreaId, Area],
                 recipes: Map[RecipeId, Recipe] = Map(),
                 regions: Map[RegionId, Region] = Map(),
                 sites: Map[SiteId, Site],
+                spaceships: Map[SpaceshipSourceId, SpaceshipSource] = Map(),
+                stellarBodies: Map[StellarBodySourceId, StellarBodySource] = Map(),
                 templates: Map[TemplateId, Template],
                 themes: Map[ThemeId, Theme],
                 transports: Map[TransportId, Transport],
@@ -42,6 +45,8 @@ object Data {
   lazy private implicit val recipeMapReads = JsonRecipe.recipeMapReads
   lazy private implicit val regionMapReads = JsonRegion.regionMapReads
   lazy private implicit val sitesMapReads = JsonSite.siteMapReads
+  lazy private implicit val spaceshipMapReads = JsonSpaceshipSource.spaceshipMapReads
+  lazy private implicit val stellarBodyMapReads = JsonStellarBodySource.stellarBodyMapReads
   lazy private implicit val templateMapReads = JsonTemplate.templateMapReads
   lazy private implicit val themeMapReads = JsonTheme.themeMapReads
   lazy private implicit val transportMapReads = JsonTransport.transportMapReads

@@ -10,6 +10,7 @@ import io.github.fiifoo.scarl.core.item.Recipe.RecipeId
 import io.github.fiifoo.scarl.core.item.{KeyKind, KeyKindId, Recipe}
 import io.github.fiifoo.scarl.core.kind.Kinds
 import io.github.fiifoo.scarl.core.world.GoalId
+import io.github.fiifoo.scarl.world.system.source.{SpaceshipSource, SpaceshipSourceId, StellarBodySource, StellarBodySourceId}
 
 case class WorldAssets(areas: Map[AreaId, Area] = Map(),
                        catalogues: WorldCatalogues = WorldCatalogues(),
@@ -23,6 +24,8 @@ case class WorldAssets(areas: Map[AreaId, Area] = Map(),
                        recipes: Map[RecipeId, Recipe] = Map(),
                        regions: Map[RegionId, Region] = Map(),
                        sites: Map[SiteId, Site] = Map(),
+                       spaceships: Map[SpaceshipSourceId, SpaceshipSource] = Map(),
+                       stellarBodies: Map[StellarBodySourceId, StellarBodySource] = Map(),
                        templates: Map[TemplateId, Template] = Map(),
                        themes: Map[ThemeId, Theme] = Map(),
                        transports: Map[TransportId, Transport] = Map(),

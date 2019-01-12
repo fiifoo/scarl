@@ -19,6 +19,7 @@ import io.github.fiifoo.scarl.mechanism._
 import io.github.fiifoo.scarl.power._
 import io.github.fiifoo.scarl.widget._
 import io.github.fiifoo.scarl.world._
+import io.github.fiifoo.scarl.world.system.source.{SpaceshipSource, StellarBodySource}
 
 import scala.reflect.runtime.universe.typeOf
 
@@ -26,11 +27,13 @@ object Sources {
 
   lazy val main: Map[Model.RelationId, ModelSource] = List(
     ModelSource(typeOf[Area], List("areas")),
+    ModelSource(typeOf[Goal], List("goals")),
     ModelSource(typeOf[Region], List("regions")),
     ModelSource(typeOf[Site], List("sites")),
-    ModelSource(typeOf[World], List("worlds")),
-    ModelSource(typeOf[Goal], List("goals")),
+    ModelSource(typeOf[SpaceshipSource], List("spaceships")),
+    ModelSource(typeOf[StellarBodySource], List("stellarBodies")),
     ModelSource(typeOf[Transport], List("transports")),
+    ModelSource(typeOf[World], List("worlds")),
 
     ModelSource(typeOf[ContentSourceCatalogue], List("catalogues", "contentSources")),
     ModelSource(typeOf[CreatureCatalogue], List("catalogues", "creatures")),
@@ -240,6 +243,11 @@ object Sources {
     SubModelSource(typeOf[Shape], List(
       typeOf[Rectangle],
     )),
+
+    SubModelSource(typeOf[StellarBodySource.Category], List(
+      typeOf[StellarBodySource.PlanetCategory.type],
+      typeOf[StellarBodySource.SunCategory.type],
+    ), objectPolymorphism = true),
 
     SubModelSource(typeOf[Strategy], List(
       typeOf[AttackStrategy.type],

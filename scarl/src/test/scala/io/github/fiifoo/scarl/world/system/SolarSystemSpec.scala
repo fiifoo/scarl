@@ -69,29 +69,15 @@ class SolarSystemSpec extends FlatSpec with Matchers {
   }
 
   it should "move ship to destination port" in {
-    var system = SolarSystem(bodies, ships)
-    val ticks = 0 until month / SolarSystem.Tick
+    val system = SolarSystem(bodies, ships)
 
-    system = system.calculateTravel(ship.id, earth.id) map (travel => {
-      system.copy(
-        ships = ships + (ship.id -> ship.copy(
-          travel = Some(travel)
-        ))
-      )
-    }) getOrElse system
-
+    system.time should ===(0)
     system.ships(ship.id).port should ===(Some(mars.id))
-    system = system.tick()
-    system.ships(ship.id).port should ===(None)
 
-    system = (ticks foldLeft system) ((system, _) => {
-      system.ships(ship.id).travel map (_ => {
-        system.tick()
-      }) getOrElse {
-        system
-      }
-    })
+    val result = system.travel(ship.id, earth.id)
 
-    system.ships(ship.id).port should ===(Some(earth.id))
+    result.isDefined should ===(true)
+    result.get.time should be > 0
+    result.get.ships(ship.id).port should ===(Some(earth.id))
   }
 }

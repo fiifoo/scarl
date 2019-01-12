@@ -33,6 +33,8 @@ class AssetsRepository @Inject()(environment: Environment, simulationsRepository
       data.recipes,
       data.regions,
       data.sites,
+      data.spaceships,
+      data.stellarBodies,
       data.templates,
       data.themes,
       data.transports,

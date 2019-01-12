@@ -15,6 +15,7 @@ import io.github.fiifoo.scarl.game.player.{PlayerFov, PlayerInfo, Settings}
 import io.github.fiifoo.scarl.game.statistics.Statistics
 import io.github.fiifoo.scarl.rule.SignalRule
 import io.github.fiifoo.scarl.world._
+import io.github.fiifoo.scarl.world.system.SolarSystem
 
 sealed trait OutMessage
 
@@ -47,6 +48,7 @@ object GameStart {
       siteRegions = world.siteRegions,
       transportRegions = world.transportRegions,
       transports = world.transports,
+      system = world.system,
       // inventory
       equipments = inventory.equipments,
       inventory = inventory.inventory,
@@ -87,6 +89,7 @@ object AreaChange {
       siteRegions = world.siteRegions,
       transportRegions = world.transportRegions,
       transports = world.transports,
+      system = world.system,
       // inventory
       equipments = inventory.equipments,
       inventory = inventory.inventory,
@@ -120,7 +123,8 @@ object WorldInfo {
       regions = state.game.world.assets.regions,
       siteRegions = state.game.world.assets.sites mapValues (_.region),
       transportRegions = state.game.world.transports,
-      transports = state.game.world.assets.transports
+      transports = state.game.world.assets.transports,
+      system = state.game.world.system
     )
   }
 }
@@ -142,6 +146,7 @@ case class GameStart(area: AreaInfo,
                      siteRegions: Map[SiteId, RegionId],
                      transportRegions: Map[TransportId, RegionId],
                      transports: Map[TransportId, Transport],
+                     system: SolarSystem,
                      // inventory
                      equipments: Map[Slot, ItemId],
                      inventory: Set[Item],
@@ -163,6 +168,7 @@ case class AreaChange(area: AreaInfo,
                       siteRegions: Map[SiteId, RegionId],
                       transportRegions: Map[TransportId, RegionId],
                       transports: Map[TransportId, Transport],
+                      system: SolarSystem,
                       // inventory
                       equipments: Map[Slot, ItemId],
                       inventory: Set[Item],
@@ -183,4 +189,5 @@ case class WorldInfo(site: SiteId,
                      siteRegions: Map[SiteId, RegionId],
                      transportRegions: Map[TransportId, RegionId],
                      transports: Map[TransportId, Transport],
+                     system: SolarSystem,
                     ) extends OutMessage

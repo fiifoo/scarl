@@ -47,14 +47,40 @@ object WorldAction {
 
     def apply(state: RunState): Option[RunState] = {
       state.game.world.assets.regions.get(this.to) flatMap (to => {
-        Utils.getActorTransport(state) map (travel(state, to) _).tupled
+        Utils.getActorTransport(state) flatMap (travel(state, to) _).tupled
       })
     }
 
-    private def travel(state: RunState, to: Region)(transport: Transport, from: Region): RunState = {
-      state.copy(game = state.game.copy(world = state.game.world.copy(
-        transports = state.game.world.transports + (transport.id -> to.id)
-      )))
+    private def travel(state: RunState, to: Region)(transport: Transport, from: Region): Option[RunState] = {
+      val calculateSystem = (state: RunState) => {
+        to.stellarBody map (body => {
+          val system = state.game.world.system
+
+          val next = if (from.stellarBody.contains(body)) {
+            Some(system.tick())
+          } else {
+            transport.spaceship flatMap (ship => {
+              system.travel(ship.value, body.value)
+            })
+          }
+
+          next map (system => {
+            state.copy(game = state.game.copy(world = state.game.world.copy(
+              system = system
+            )))
+          })
+        }) getOrElse {
+          Some(state)
+        }
+      }
+
+      val calculateTransport = (state: RunState) => {
+        state.copy(game = state.game.copy(world = state.game.world.copy(
+          transports = state.game.world.transports + (transport.id -> to.id)
+        )))
+      }
+
+      calculateSystem(state) map calculateTransport
     }
   }
 
