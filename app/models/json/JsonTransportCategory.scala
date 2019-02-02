@@ -8,6 +8,6 @@ object JsonTransportCategory {
   import JsonBase.polymorphicObjectFormat
 
   lazy val transportCategoryFormat: Format[TransportCategory] = polymorphicObjectFormat({
-    case "TransportCategory.Ship" => TransportCategory.Ship
+    case "TransportCategory.Spaceship" => TransportCategory.Spaceship
   })
 }

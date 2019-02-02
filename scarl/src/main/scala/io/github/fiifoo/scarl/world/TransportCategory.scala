@@ -4,6 +4,6 @@ sealed trait TransportCategory
 
 object TransportCategory {
 
-  case object Ship extends TransportCategory
+  case object Spaceship extends TransportCategory
 
 }

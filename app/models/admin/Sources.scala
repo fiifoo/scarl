@@ -260,7 +260,7 @@ object Sources {
     ), objectPolymorphism = true),
 
     SubModelSource(typeOf[TransportCategory], List(
-      typeOf[TransportCategory.Ship.type],
+      typeOf[TransportCategory.Spaceship.type],
     ), objectPolymorphism = true),
 
     SubModelSource(typeOf[WallKind.Category], List(
