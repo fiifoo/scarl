@@ -1,5 +1,6 @@
 import { List, Map, Record } from 'immutable'
 import * as types from '../actions/actionTypes'
+import SolarSystem from '../system/SolarSystem'
 
 const hasControlledTransport = world => world.transports.find(x => x.hub === world.site) !== undefined
 const canEmbark = world => world.transportRegions.find((regionId, transportId) => {
@@ -20,14 +21,14 @@ const WorldInfo = Record({
     system: null,
     hasActions: false, // cache
 })
-WorldInfo.read = data => {
+WorldInfo.read = ({regions, siteRegions, transportRegions, transports, system, ...data}) => {
     const world = WorldInfo({
-        site: data.site,
-        regions: Map(data.regions).map(Region.read),
-        siteRegions: Map(data.siteRegions),
-        transportRegions: Map(data.transportRegions),
-        transports: Map(data.transports),
-        system: SolarSystem.read(data.system),
+        ...data,
+        regions: Map(regions).map(Region.read),
+        siteRegions: Map(siteRegions),
+        transportRegions: Map(transportRegions),
+        transports: Map(transports),
+        system: SolarSystem.read(system),
     })
 
     return world.set('hasActions', hasActions(world))
@@ -42,17 +43,6 @@ Region.read = data => Region({
     id: data.id,
     entrances: Map(data.entrances).map(x => List(x)),
     exits: Map(data.exits).map(x => List(x)),
-})
-
-const SolarSystem = Record({
-    bodies: Map(),
-    ships: Map(),
-    time: null,
-})
-SolarSystem.read = data => SolarSystem({
-    bodies: Map(data.bodies),
-    ships: Map(data.ships),
-    time: data.time,
 })
 
 export default (state = WorldInfo(), action) => {

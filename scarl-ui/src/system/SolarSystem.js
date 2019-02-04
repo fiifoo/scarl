@@ -8,9 +8,14 @@ const TICK = 3600
 const MAX_TRAVEL_TIME = 86400 * 100
 
 const SolarSystem = Record({
-    ships: Map(),
     bodies: Map(),
+    ships: Map(),
     time: undefined,
+})
+SolarSystem.read = data => SolarSystem({
+    bodies: Map(data.bodies).map(StellarBody.read),
+    ships: Map(data.ships).map(Spaceship.read),
+    time: data.time,
 })
 SolarSystem.tick = (tick = TICK) => system => {
     const bodies = system.bodies.map(StellarBody.tick(tick, system.bodies))

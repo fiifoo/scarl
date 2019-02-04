@@ -13,7 +13,9 @@ import kinds from './kinds'
 import player from './player'
 import recipes from './recipes'
 import settings from './settings'
+import spaceships from './spaceships'
 import statistics from './statistics'
+import stellarBodies from './stellarBodies'
 import ui from './ui'
 import world from './world'
 
@@ -32,7 +34,9 @@ export default combineReducers({
     player,
     recipes,
     settings,
+    spaceships,
     statistics,
+    stellarBodies,
     ui,
     world,
 })

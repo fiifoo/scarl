@@ -31,6 +31,8 @@ object WriteOutMessage {
   lazy private implicit val siteIdFormat = JsonSite.siteIdFormat
   lazy private implicit val slotFormat = JsonItemEquipment.slotFormat
   lazy private implicit val solarSystemFormat = JsonSolarSystem.solarSystemFormat
+  lazy private implicit val spaceshipSourceFormat = JsonSpaceshipSource.spaceshipSourceFormat
+  lazy private implicit val stellarBodySourceFormat = JsonStellarBodySource.stellarBodySourceFormat
   lazy private implicit val statisticsFormat = JsonStatistics.statisticsFormat
   lazy private implicit val transportFormat = JsonTransport.transportFormat
   lazy private implicit val transportIdFormat = JsonTransport.transportIdFormat

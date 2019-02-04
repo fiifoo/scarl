@@ -4,6 +4,7 @@ const Vector = Record({
     x: undefined,
     y: undefined,
 })
+Vector.read = Vector
 Vector.add = (a, b) => Vector({
     x: a.x + b.x,
     y: a.y + b.y,

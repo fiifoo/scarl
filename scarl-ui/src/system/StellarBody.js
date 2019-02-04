@@ -5,10 +5,15 @@ import Vector from './Vector'
 
 const StellarBody = Record({
     id: undefined,
-    color: undefined,
+    source: undefined,
     mass: undefined,
     position: Position(),
     speed: Vector(),
+})
+StellarBody.read = ({position, speed, ...data}) => StellarBody({
+    ...data,
+    position: Position.read(position),
+    speed: Vector.read(speed),
 })
 StellarBody.tick = (tick, bodies) => body => {
     const acceleration = gravity(bodies, body)

@@ -1,5 +1,6 @@
 import { List } from 'immutable'
 import React from 'react'
+import SystemContainer from './SystemContainer'
 
 import './World.css'
 
@@ -73,9 +74,14 @@ const Region = ({world, region, actions}) => {
 
 const World = ({world, ...actions}) =>  (
     <div>
-        {world.regions.filter(x => ! x.entrances.isEmpty()).map(region => (
-            <Region key={region.id} world={world} region={region} actions={actions} />
-        )).toArray()}
+        <div style={{display: 'table-cell', verticalAlign: 'top'}}>
+            {world.regions.filter(x => ! x.entrances.isEmpty()).map(region => (
+                <Region key={region.id} world={world} region={region} actions={actions} />
+            )).toArray()}
+        </div>
+        <div style={{display: 'table-cell', verticalAlign: 'top'}}>
+            <SystemContainer />
+        </div>
     </div>
 )
 

@@ -16,6 +16,7 @@ import io.github.fiifoo.scarl.game.statistics.Statistics
 import io.github.fiifoo.scarl.rule.SignalRule
 import io.github.fiifoo.scarl.world._
 import io.github.fiifoo.scarl.world.system.SolarSystem
+import io.github.fiifoo.scarl.world.system.source.{SpaceshipSource, SpaceshipSourceId, StellarBodySource, StellarBodySourceId}
 
 sealed trait OutMessage
 
@@ -42,6 +43,8 @@ object GameStart {
       kinds = state.game.world.assets.kinds,
       recipes = state.game.world.assets.recipes.values,
       settings = state.game.settings,
+      spaceships = state.game.world.assets.spaceships.values,
+      stellarBodies = state.game.world.assets.stellarBodies.values,
       // world
       site = world.site,
       regions = world.regions,
@@ -140,6 +143,8 @@ case class GameStart(area: AreaInfo,
                      kinds: Kinds,
                      recipes: Iterable[Recipe],
                      settings: Settings,
+                     spaceships: Iterable[SpaceshipSource],
+                     stellarBodies: Iterable[StellarBodySource],
                      // world
                      site: SiteId,
                      regions: Map[RegionId, Region],

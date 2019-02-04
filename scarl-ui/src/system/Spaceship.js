@@ -11,6 +11,13 @@ const Travel = Record({
     position: Position(),
     speed: Vector({x: 0, y: 0}),
 })
+Travel.read = ({from, to, position, speed, ...data}) => Spaceship({
+    ...data,
+    from: Position.read(from),
+    to: Position.read(to),
+    position: Position.read(position),
+    speed: Vector.read(speed),
+})
 Travel.distance = travel => hypotenuse(travel.to.x - travel.from.x, travel.to.y - travel.from.y)
 Travel.finished = travel => {
     const quarter = coords.quarter(travel.from, travel.to)
@@ -26,10 +33,14 @@ Travel.finished = travel => {
 
 const Spaceship = Record({
     id: undefined,
-    color: undefined,
+    source: undefined,
     acceleration: undefined,
     travel: null,
     port: null,
+})
+Spaceship.read = ({travel, ...data}) => Spaceship({
+    ...data,
+    travel: travel ? Travel.read(travel) : null,
 })
 Spaceship.tick = tick => ship => {
     if (! ship.travel) {
