@@ -14,6 +14,10 @@
     font-size: 16px;
 }
 
+.region .title.active {
+    color: #5594c9;
+}
+
 .region .region-header .title {
     font-size: 20px;
     color: #5594c9;

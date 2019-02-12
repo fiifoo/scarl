@@ -8,6 +8,8 @@ object Site {
 }
 
 case class Site(id: SiteId,
+                name: String,
+                description: Option[String] = None,
                 region: RegionId,
                 area: AreaId,
                 variants: Map[Site.RegionVariantKey, AreaId] = Map(),

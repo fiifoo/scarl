@@ -7,7 +7,7 @@ const sectionStyle = {
 
 const getAlert = (value, max) => value / max < 0.5 ? value / max < 0.25 ? 'text-danger' : 'text-warning' : null
 
-const StatusBar = ({equipmentSet, hasWorldActions, player, openWorld}) => {
+const StatusBar = ({equipmentSet, hasWorldActions, player, site, openWorld}) => {
     const creature = player.creature
     const creatureStats = creature.stats
     const equipmentStats = player.equipmentStats
@@ -32,8 +32,9 @@ const StatusBar = ({equipmentSet, hasWorldActions, player, openWorld}) => {
             <div style={sectionStyle} className={energyAlert}>Energy <b>{energy}/{energyMax}</b></div>
             <div style={sectionStyle} className={materialsAlert}>Materials <b>{materials}/{materialsMax}</b></div>
             <div style={sectionStyle} className={weaponsStyle}>Weapons <b>{equipmentSet}</b></div>
+            <div style={sectionStyle}><i><b>{site.name}</b></i></div>
             {hasWorldActions && (
-                <div style={sectionStyle}><a onClick={() => openWorld()}><b>World access</b></a></div>
+                <div style={sectionStyle}><a onClick={() => openWorld()}><i><b>World access</b></i></a></div>
             )}
         </div>
     )

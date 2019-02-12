@@ -38,7 +38,7 @@ const Region = ({ui, world, region, actions}) => {
         return region.exits.get(category, List()).contains(world.site)
     })
 
-    const active = isControlledTransportRegion || world.siteRegions.get(world.site) === region.id
+    const active = isControlledTransportRegion || world.sites.get(world.site).region === region.id
 
     return (
         <div className={active ? 'region active' : 'region'}>
@@ -72,11 +72,15 @@ const Region = ({ui, world, region, actions}) => {
                     </div>
                 )}
 
-                <div className="title">{region.id}</div>
+                <div className="title">{region.name}</div>
             </div>
 
+            {active && (
+                <div className="title active">{world.sites.get(world.site).name}</div>
+            )}
+
             {transports.map((transport) => (
-                <div key={transport} className="region-transport">
+                <div key={transport}>
 
                     {! traveling && (
                         <div className="actions pull-right">
@@ -91,12 +95,12 @@ const Region = ({ui, world, region, actions}) => {
                         </div>
                     )}
 
-                    <div className="title">{transport}</div>
+                    <div className="title">{world.transports.get(transport).name}</div>
                 </div>
             ))}
 
             {canDisembark.map(to => (
-                <div key={to} className="region-site">
+                <div key={to}>
 
                     {! traveling && (
                         <div className="actions pull-right">
@@ -109,7 +113,7 @@ const Region = ({ui, world, region, actions}) => {
                         </div>
                     )}
 
-                    <div className="title">{to}</div>
+                    <div className="title">{world.sites.get(to).name || to}</div>
                 </div>
             ))}
         </div>

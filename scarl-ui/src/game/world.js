@@ -3,7 +3,7 @@ export const getControlledTransport = world => (
 )
 
 export const getCurrentRegion = world => (
-    world.regions.get(world.siteRegions.get(world.site))
+    world.regions.get(world.sites.get(world.site).region)
 )
 
 export const getCurrentSpaceship = world => {
@@ -27,5 +27,5 @@ export const getCurrentStellarBody = world => {
 export const getCurrentTransport = world => {
     const region = getCurrentRegion(world)
 
-    return world.transports.find(transport => world.siteRegions.get(transport.hub) === region.id)
+    return world.transports.find(transport => world.sites.get(transport.hub).region === region.id)
 }

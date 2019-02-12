@@ -16,7 +16,7 @@ import io.github.fiifoo.scarl.game.statistics.Statistics
 import io.github.fiifoo.scarl.rule.SignalRule
 import io.github.fiifoo.scarl.world._
 import io.github.fiifoo.scarl.world.system.SolarSystem
-import io.github.fiifoo.scarl.world.system.source.{SpaceshipSource, SpaceshipSourceId, StellarBodySource, StellarBodySourceId}
+import io.github.fiifoo.scarl.world.system.source.{SpaceshipSource, StellarBodySource}
 
 sealed trait OutMessage
 
@@ -48,7 +48,7 @@ object GameStart {
       // world
       site = world.site,
       regions = world.regions,
-      siteRegions = world.siteRegions,
+      sites = world.sites,
       transportRegions = world.transportRegions,
       transports = world.transports,
       system = world.system,
@@ -89,7 +89,7 @@ object AreaChange {
       // world
       site = world.site,
       regions = world.regions,
-      siteRegions = world.siteRegions,
+      sites = world.sites,
       transportRegions = world.transportRegions,
       transports = world.transports,
       system = world.system,
@@ -124,7 +124,7 @@ object WorldInfo {
     WorldInfo(
       site = state.game.area,
       regions = state.game.world.assets.regions,
-      siteRegions = state.game.world.assets.sites mapValues (_.region),
+      sites = state.game.world.assets.sites,
       transportRegions = state.game.world.transports,
       transports = state.game.world.assets.transports,
       system = state.game.world.system
@@ -148,7 +148,7 @@ case class GameStart(area: AreaInfo,
                      // world
                      site: SiteId,
                      regions: Map[RegionId, Region],
-                     siteRegions: Map[SiteId, RegionId],
+                     sites: Map[SiteId, Site],
                      transportRegions: Map[TransportId, RegionId],
                      transports: Map[TransportId, Transport],
                      system: SolarSystem,
@@ -170,7 +170,7 @@ case class AreaChange(area: AreaInfo,
                       //world
                       site: SiteId,
                       regions: Map[RegionId, Region],
-                      siteRegions: Map[SiteId, RegionId],
+                      sites: Map[SiteId, Site],
                       transportRegions: Map[TransportId, RegionId],
                       transports: Map[TransportId, Transport],
                       system: SolarSystem,
@@ -191,7 +191,7 @@ case class SignalMap(signals: List[Signal]) extends OutMessage
 
 case class WorldInfo(site: SiteId,
                      regions: Map[RegionId, Region],
-                     siteRegions: Map[SiteId, RegionId],
+                     sites: Map[SiteId, Site],
                      transportRegions: Map[TransportId, RegionId],
                      transports: Map[TransportId, Transport],
                      system: SolarSystem,

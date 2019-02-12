@@ -28,6 +28,7 @@ object WriteOutMessage {
   lazy private implicit val regionFormat = JsonRegion.regionFormat
   lazy private implicit val regionIdFormat = JsonRegion.regionIdFormat
   lazy private implicit val signalFormat = JsonSignal.signalFormat
+  lazy private implicit val siteFormat = JsonSite.siteFormat
   lazy private implicit val siteIdFormat = JsonSite.siteIdFormat
   lazy private implicit val slotFormat = JsonItemEquipment.slotFormat
   lazy private implicit val solarSystemFormat = JsonSolarSystem.solarSystemFormat

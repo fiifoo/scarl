@@ -15,17 +15,17 @@ const hasActions = world => hasControlledTransport(world) || canEmbark(world)
 const WorldInfo = Record({
     site: null,
     regions: Map(),
-    siteRegions: Map(),
+    sites: Map(),
     transportRegions: Map(),
     transports: Map(),
     system: null,
     hasActions: false, // cache
 })
-WorldInfo.read = ({regions, siteRegions, transportRegions, transports, system, ...data}) => {
+WorldInfo.read = ({regions, sites, transportRegions, transports, system, ...data}) => {
     const world = WorldInfo({
         ...data,
         regions: Map(regions).map(Region.read),
-        siteRegions: Map(siteRegions),
+        sites: Map(sites),
         transportRegions: Map(transportRegions),
         transports: Map(transports),
         system: SolarSystem.read(system),
@@ -36,6 +36,8 @@ WorldInfo.read = ({regions, siteRegions, transportRegions, transports, system, .
 
 const Region = Record({
     id: undefined,
+    name: undefined,
+    description: null,
     stellarBody: null,
     entrances: Map(),
     exits: Map(),

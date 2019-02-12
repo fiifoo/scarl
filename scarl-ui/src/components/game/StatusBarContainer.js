@@ -8,6 +8,7 @@ const StatusBarContainer = connect(
         equipmentSet: state.settings.equipmentSet,
         hasWorldActions: state.world.hasActions,
         player: state.player,
+        site: state.world.sites.get(state.world.site),
     }), {
         openWorld,
     }
