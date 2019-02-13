@@ -23,14 +23,23 @@ class System extends Component {
             this.ref.current,
             this.props.spaceships,
             this.props.stellarBodies,
+            this.props.clearTravelSimulation,
         )
 
         this.screen.build()
-        this.screen.update(this.props.world.system)
+        this.screen.update(this.props.world.system, this.props.ui)
     }
 
     UNSAFE_componentWillReceiveProps(nextProps) {
-        this.screen.update(nextProps.world.system)
+        if (nextProps.ui.travelSimulation) {
+            if (nextProps.ui.travelSimulation !== this.props.ui.travelSimulation) {
+                this.screen.simulateTravel(nextProps.world.system, nextProps.ui)
+            }
+        } else {
+            if (nextProps.world.system !== this.props.world.system || nextProps.ui.travelSimulation !== this.props.ui.travelSimulation) {
+                this.screen.update(nextProps.world.system, nextProps.ui)
+            }
+        }
     }
 }
 

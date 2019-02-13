@@ -36,13 +36,14 @@ WorldInfo.read = ({regions, siteRegions, transportRegions, transports, system, .
 
 const Region = Record({
     id: undefined,
+    stellarBody: null,
     entrances: Map(),
     exits: Map(),
 })
-Region.read = data => Region({
-    id: data.id,
-    entrances: Map(data.entrances).map(x => List(x)),
-    exits: Map(data.exits).map(x => List(x)),
+Region.read = ({entrances, exits, ...data}) => Region({
+    ...data,
+    entrances: Map(entrances).map(x => List(x)),
+    exits: Map(exits).map(x => List(x)),
 })
 
 export default (state = WorldInfo(), action) => {

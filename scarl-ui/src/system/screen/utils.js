@@ -16,7 +16,7 @@ export const clearContext = context => {
 }
 
 export const createDraw = context => ({
-    dot: (color, radius = 3) => {
+    dot: (color, radius = 1) => {
         context.fillStyle = color
 
         return (x, y) => {

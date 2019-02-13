@@ -6,6 +6,7 @@ import game from './game'
 import inventory from './inventory'
 import look from './look'
 import main from './main'
+import world from './world'
 
 export default combineReducers({
     crafting,
@@ -15,4 +16,5 @@ export default combineReducers({
     inventory,
     look,
     main,
+    world,
 })
