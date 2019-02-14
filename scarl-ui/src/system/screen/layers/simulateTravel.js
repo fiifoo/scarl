@@ -3,7 +3,7 @@ import { clearContext, createCanvas, createDraw } from '../utils'
 
 const INTERVAL = 20
 
-export default (spaceships, stellarBodies, clearTravelSimulation) => {
+export default (spaceships, stellarBodies, clearTravel) => {
     const {canvas, context} = createCanvas()
 
     const draw = createDraw(context)
@@ -23,16 +23,16 @@ export default (spaceships, stellarBodies, clearTravelSimulation) => {
     const clear = () => clearContext(context)
 
     const update = (system, ui) => {
-        const {shipId, destinationId} = ui.travelSimulation
-        const travel = SolarSystem.calculateTravel(shipId, destinationId)(system)
+        const ship = ui.travel.ship
+        const travel = ui.travel.travel
 
         if (! travel) {
-            clearTravelSimulation()
+            clearTravel()
 
             return
         }
 
-        const path = ['ships', shipId, 'travel']
+        const path = ['ships', ship, 'travel']
         system = system.setIn(path, travel)
 
         const tick = () => {
@@ -45,7 +45,7 @@ export default (spaceships, stellarBodies, clearTravelSimulation) => {
             if (! system.getIn(path)) {
                 clear()
                 clearInterval(interval)
-                clearTravelSimulation()
+                clearTravel()
             }
         }
 

@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { clearTravelSimulation } from '../../actions/worldActions'
+import { clearTravel } from '../../actions/worldActions'
 import System from './System.jsx'
 
 const SystemContainer = connect(
@@ -9,7 +9,7 @@ const SystemContainer = connect(
         ui: state.ui.world,
         world: state.world,
     }), {
-        clearTravelSimulation,
+        clearTravel,
     }
 )(System)
 

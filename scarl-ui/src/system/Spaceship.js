@@ -10,6 +10,7 @@ const Travel = Record({
     to: Position(),
     position: Position(),
     speed: Vector({x: 0, y: 0}),
+    eta: undefined,
 })
 Travel.read = ({from, to, position, speed, ...data}) => Spaceship({
     ...data,

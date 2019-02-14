@@ -4,7 +4,7 @@ import { hypotenuse, travelTime } from './physics'
 import Spaceship, { Travel } from './Spaceship'
 import StellarBody from './StellarBody'
 
-const TICK = 3600
+export const TICK = 3600
 const MAX_TRAVEL_TIME = 86400 * 100
 
 const SolarSystem = Record({
@@ -27,21 +27,22 @@ SolarSystem.calculateTravel = (shipId, destinationId, tick = TICK) => system => 
     const ship = system.ships.get(shipId)
     const port = system.bodies.get(ship.port)
 
-    const to = calculateTravelTo(tick, system.bodies, ship, port.position, destinationId)
+    const travel = seekTravel(tick, system.bodies, ship, port.position, destinationId)
 
-    return to ? (
+    return travel ? (
         Travel({
             destination: destinationId,
             from: port.position,
-            to,
+            to: travel.to,
             position: port.position,
+            eta: travel.eta,
         })
     ) : (
         null
     )
 }
 
-const calculateTravelTo = (tick, bodies, ship, from, destinationId) => {
+const seekTravel = (tick, bodies, ship, from, destinationId) => {
     const check = checkTravelTo(ship, from)
 
     let destination = bodies.get(destinationId)
@@ -53,7 +54,10 @@ const calculateTravelTo = (tick, bodies, ship, from, destinationId) => {
         }
 
         if (check(destination.position, time)) {
-            return destination.position
+            return {
+                to: destination.position,
+                eta: time,
+            }
         }
 
         bodies = bodies.map(StellarBody.tick(tick, bodies))

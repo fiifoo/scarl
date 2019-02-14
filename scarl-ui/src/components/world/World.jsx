@@ -1,8 +1,20 @@
 import { List } from 'immutable'
+import moment from 'moment'
 import React from 'react'
 import SystemContainer from './SystemContainer'
+import { TICK } from '../../system/SolarSystem'
 
 import './World.css'
+
+const TravelInfo = ({travel}) => {
+    if (! travel.possible) {
+        return <b className="text-danger">Unreachable</b>
+    }
+
+    const eta = travel.travel && travel.travel.eta || TICK
+
+    return <b>ETA: {moment.duration(eta, 'seconds').humanize()}</b>
+}
 
 const Region = ({ui, world, region, actions}) => {
     const transports = world.transportRegions.filter(x => x === region.id).map((_, x) => x).toSet()
@@ -10,7 +22,7 @@ const Region = ({ui, world, region, actions}) => {
     const controlledTransport = world.transports.find(x => x.hub === world.site)
     const isControlledTransportRegion = controlledTransport && transports.contains(controlledTransport.id)
 
-    const traveling = !!ui.travelSimulation
+    const traveling = ui.travel && ui.travel.simulate
 
     const canTravel = controlledTransport && ! isControlledTransportRegion
     const canDisembark = isControlledTransportRegion ? region.entrances.get(controlledTransport.category, List()) : List()
@@ -24,17 +36,32 @@ const Region = ({ui, world, region, actions}) => {
 
     return (
         <div className={active ? 'region active' : 'region'}>
-            <div className="region-header">
+            <div className="region-header clearfix">
 
                 {! traveling && (
                     <div className="actions pull-right btn-toolbar">
                         {canTravel && (
-                            <button
-                                type="button"
-                                className="btn btn-sm btn-default"
-                                onClick={() => actions.travel(region.id)}>
-                                Travel
-                            </button>
+                            ui.travel && ui.travel.to === region.id ? (
+                                <div>
+                                    <button
+                                        type="button"
+                                        className="btn btn-sm btn-primary"
+                                        onClick={() => actions.travel()}
+                                        disabled={!ui.travel.possible}>
+                                        Travel
+                                    </button>
+                                    <div className="text-center">
+                                        <TravelInfo travel={ui.travel} />
+                                    </div>
+                                </div>
+                            ) : (
+                                <button
+                                    type="button"
+                                    className="btn btn-sm btn-default"
+                                    onClick={() => actions.calculateTravel(region.id)}>
+                                    Travel
+                                </button>
+                            )
                         )}
                     </div>
                 )}
@@ -50,7 +77,7 @@ const Region = ({ui, world, region, actions}) => {
                             {canEmbark.contains(transport) && (
                                 <button
                                     type="button"
-                                    className="btn btn-sm btn-default"
+                                    className="btn btn-sm btn-primary"
                                     onClick={() => actions.embark(transport)}>
                                     Embark
                                 </button>
@@ -69,7 +96,7 @@ const Region = ({ui, world, region, actions}) => {
                         <div className="actions pull-right btn-toolbar">
                             <button
                                 type="button"
-                                className="btn btn-sm btn-default"
+                                className="btn btn-sm btn-primary"
                                 onClick={() => actions.disembark(to)}>
                                 Disembark
                             </button>
