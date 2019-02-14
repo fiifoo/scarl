@@ -66,45 +66,39 @@ export const clearContext = (area, context) => {
 
 export const createDraw = context => ({
 
-    dot: color => {
+    dot: color => location => {
         context.fillStyle = color
 
-        return location => {
-            const x = location.x * TILE_SIZE + TILE_MIDDLE + 0.5
-            const y = location.y * TILE_SIZE + TILE_MIDDLE + 0.5
+        const x = location.x * TILE_SIZE + TILE_MIDDLE + 0.5
+        const y = location.y * TILE_SIZE + TILE_MIDDLE + 0.5
 
-            context.beginPath()
-            context.moveTo(x, y)
-            context.arc(x, y, 3, 0, Math.PI * 2)
-            context.fill()
-        }
+        context.beginPath()
+        context.moveTo(x, y)
+        context.arc(x, y, 3, 0, Math.PI * 2)
+        context.fill()
     },
 
-    fill: color => {
+    fill: color =>  location => {
         context.fillStyle = color
 
-        return location => {
-            const x = location.x * TILE_SIZE
-            const y = location.y * TILE_SIZE
+        const x = location.x * TILE_SIZE
+        const y = location.y * TILE_SIZE
 
-            context.fillRect(x, y, TILE_SIZE, TILE_SIZE)
-        }
+        context.fillRect(x, y, TILE_SIZE, TILE_SIZE)
     },
 
-    line: color => {
+    line: color => from => to => {
         context.strokeStyle = color
 
-        return from => to => {
-            const from_x = from.x * TILE_SIZE + TILE_MIDDLE + 0.5
-            const from_y = from.y * TILE_SIZE + TILE_MIDDLE + 0.5
-            const to_x = to.x * TILE_SIZE + TILE_MIDDLE + 0.5
-            const to_y = to.y * TILE_SIZE + TILE_MIDDLE + 0.5
+        const from_x = from.x * TILE_SIZE + TILE_MIDDLE + 0.5
+        const from_y = from.y * TILE_SIZE + TILE_MIDDLE + 0.5
+        const to_x = to.x * TILE_SIZE + TILE_MIDDLE + 0.5
+        const to_y = to.y * TILE_SIZE + TILE_MIDDLE + 0.5
 
-            context.beginPath()
-            context.moveTo(from_x, from_y)
-            context.lineTo(to_x, to_y)
-            context.stroke()
-        }
+        context.beginPath()
+        context.moveTo(from_x, from_y)
+        context.lineTo(to_x, to_y)
+        context.stroke()
     },
 })
 

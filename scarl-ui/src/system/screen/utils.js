@@ -16,26 +16,22 @@ export const clearContext = context => {
 }
 
 export const createDraw = context => ({
-    dot: (color, radius = 1) => {
+    dot: radius => color => (x, y) => {
         context.fillStyle = color
 
-        return (x, y) => {
-            context.beginPath()
-            context.moveTo(x / PIXEL_SIZE, y / PIXEL_SIZE)
-            context.arc(x / PIXEL_SIZE, y / PIXEL_SIZE, radius, 0, Math.PI * 2)
-            context.fill()
-        }
+        context.beginPath()
+        context.moveTo(x / PIXEL_SIZE, y / PIXEL_SIZE)
+        context.arc(x / PIXEL_SIZE, y / PIXEL_SIZE, radius, 0, Math.PI * 2)
+        context.fill()
     },
 
-    line: color => {
+    line: color => (from_x, from_y) => (to_x, to_y) => {
         context.strokeStyle = color
 
-        return (from_x, from_y) => (to_x, to_y) => {
-            context.beginPath()
-            context.moveTo(from_x / PIXEL_SIZE, from_y / PIXEL_SIZE)
-            context.lineTo(to_x / PIXEL_SIZE, to_y / PIXEL_SIZE)
-            context.stroke()
-        }
+        context.beginPath()
+        context.moveTo(from_x / PIXEL_SIZE, from_y / PIXEL_SIZE)
+        context.lineTo(to_x / PIXEL_SIZE, to_y / PIXEL_SIZE)
+        context.stroke()
     },
 })
 

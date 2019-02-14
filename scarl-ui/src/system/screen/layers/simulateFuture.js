@@ -10,16 +10,19 @@ export default (spaceships, stellarBodies) => {
     context.globalAlpha = 0.2
     const draw = createDraw(context)
 
+    const drawBody = draw.dot(2)
+    const drawShip = draw.dot(1)
+
     const renderBody = body => {
         const source = stellarBodies.get(body.source)
 
-        draw.dot(source.color, 2)(body.position.x, body.position.y)
+        drawBody(source.color)(body.position.x, body.position.y)
     }
 
     const renderShip = ship => {
         const source = spaceships.get(ship.source)
 
-        draw.dot(source.color, 1)(ship.travel.position.x, ship.travel.position.y)
+        drawShip(source.color)(ship.travel.position.x, ship.travel.position.y)
     }
 
     const clear = () => clearContext(context)
