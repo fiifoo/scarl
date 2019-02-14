@@ -23,9 +23,14 @@ export default (spaceships, stellarBodies, clearTravel) => {
         drawShip(source.color)(ship.travel.position.x, ship.travel.position.y)
     }
 
+    const renderDestinationBodyIndicator = color => body => {
+        draw.circle(9)(color)(body.position.x, body.position.y)
+        draw.circle(10)(color)(body.position.x, body.position.y)
+    }
+
     const clear = () => clearContext(context)
 
-    const update = (system, ui) => {
+    const update = (world, ui) => {
         const ship = ui.travel.ship
         const travel = ui.travel.travel
 
@@ -36,14 +41,19 @@ export default (spaceships, stellarBodies, clearTravel) => {
         }
 
         const path = ['ships', ship, 'travel']
-        system = system.setIn(path, travel)
+        let system = world.system.setIn(path, travel)
+
+        const renderDestination = renderDestinationBodyIndicator(spaceships.get(system.ships.get(ship).source).color)
 
         const tick = () => {
             system = SolarSystem.tick()(system)
 
+            const destination = system.bodies.get(ui.travel.travel.destination)
+
             clear()
             system.bodies.forEach(renderBody)
             system.ships.filter(x => !! x.travel).forEach(renderShip)
+            renderDestination(destination)
 
             if (! system.getIn(path)) {
                 clear()

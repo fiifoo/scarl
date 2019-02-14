@@ -27,9 +27,10 @@ export default (spaceships, stellarBodies) => {
 
     const clear = () => clearContext(context)
 
-    const update = system => {
+    const update = world => {
         clear()
 
+        let system = world.system
         const start = system.time
 
         while (system.time < start + LIMIT) {

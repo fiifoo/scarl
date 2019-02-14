@@ -27,17 +27,17 @@ class System extends Component {
         )
 
         this.screen.build()
-        this.screen.update(this.props.world.system, this.props.ui)
+        this.screen.update(this.props.world, this.props.ui)
     }
 
     UNSAFE_componentWillReceiveProps(nextProps) {
         if (nextProps.ui.travel && nextProps.ui.travel.simulate) {
             if (nextProps.ui.travel !== this.props.ui.travel) {
-                this.screen.simulateTravel(nextProps.world.system, nextProps.ui)
+                this.screen.simulateTravel(nextProps.world, nextProps.ui)
             }
         } else {
-            if (nextProps.world.system !== this.props.world.system || nextProps.ui !== this.props.ui) {
-                this.screen.update(nextProps.world.system, nextProps.ui)
+            if (nextProps.world !== this.props.world || nextProps.ui !== this.props.ui) {
+                this.screen.update(nextProps.world, nextProps.ui)
             }
         }
     }

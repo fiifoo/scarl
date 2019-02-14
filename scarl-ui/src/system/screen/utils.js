@@ -19,10 +19,19 @@ export const createDraw = context => ({
     dot: radius => color => (x, y) => {
         context.fillStyle = color
 
-        context.beginPath()
         context.moveTo(x / PIXEL_SIZE, y / PIXEL_SIZE)
+        context.beginPath()
         context.arc(x / PIXEL_SIZE, y / PIXEL_SIZE, radius, 0, Math.PI * 2)
         context.fill()
+    },
+
+    circle: radius => color => (x, y) => {
+        context.strokeStyle = color
+
+        context.moveTo(x / PIXEL_SIZE, y / PIXEL_SIZE)
+        context.beginPath()
+        context.arc(x / PIXEL_SIZE, y / PIXEL_SIZE, radius, 0, Math.PI * 2)
+        context.stroke()
     },
 
     line: color => (from_x, from_y) => (to_x, to_y) => {

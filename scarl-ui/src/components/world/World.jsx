@@ -2,6 +2,7 @@ import { List } from 'immutable'
 import moment from 'moment'
 import React from 'react'
 import SystemContainer from './SystemContainer'
+import { getControlledTransport } from '../../game/world'
 import { TICK } from '../../system/SolarSystem'
 
 import './World.css'
@@ -19,7 +20,7 @@ const TravelInfo = ({travel}) => {
 const Region = ({ui, world, region, actions}) => {
     const transports = world.transportRegions.filter(x => x === region.id).map((_, x) => x).toSet()
 
-    const controlledTransport = world.transports.find(x => x.hub === world.site)
+    const controlledTransport = getControlledTransport(world)
     const isControlledTransportRegion = controlledTransport && transports.contains(controlledTransport.id)
 
     const traveling = ui.travel && ui.travel.simulate

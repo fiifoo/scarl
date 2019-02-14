@@ -1,4 +1,6 @@
+import { CURRENT_BODY_COLOR } from '../const'
 import { clearContext, createCanvas, createDraw } from '../utils'
+import { getCurrentStellarBody } from '../../../game/world'
 
 export default (spaceships, stellarBodies) => {
     const {canvas, context} = createCanvas()
@@ -20,13 +22,21 @@ export default (spaceships, stellarBodies) => {
         drawShip(source.color)(ship.travel.position.x, ship.travel.position.y)
     }
 
+    const renderCurrentBodyIndicator = body => {
+        draw.circle(9)(CURRENT_BODY_COLOR)(body.position.x, body.position.y)
+        draw.circle(10)(CURRENT_BODY_COLOR)(body.position.x, body.position.y)
+    }
+
     const clear = () => clearContext(context)
 
-    const update = system => {
+    const update = world => {
         clear()
 
-        system.bodies.forEach(renderBody)
-        system.ships.filter(x => !! x.travel).forEach(renderShip)
+        const currentBody = getCurrentStellarBody(world)
+
+        world.system.bodies.forEach(renderBody)
+        world.system.ships.filter(x => !! x.travel).forEach(renderShip)
+        currentBody && renderCurrentBodyIndicator(currentBody)
     }
 
     return {

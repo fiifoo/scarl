@@ -72,8 +72,8 @@ export const createDraw = context => ({
         const x = location.x * TILE_SIZE + TILE_MIDDLE + 0.5
         const y = location.y * TILE_SIZE + TILE_MIDDLE + 0.5
 
-        context.beginPath()
         context.moveTo(x, y)
+        context.beginPath()
         context.arc(x, y, 3, 0, Math.PI * 2)
         context.fill()
     },

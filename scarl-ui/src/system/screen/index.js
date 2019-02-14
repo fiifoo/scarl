@@ -18,16 +18,17 @@ export default (container, spaceships, stellarBodies, clearTravel) => {
         container.appendChild(layers.simulateTravel.canvas)
     }
 
-    const update = (system, ui) => {
-        layers.main.update(system)
-        layers.simulateFuture.update(system)
-        layers.travelRoute.update(system, ui)
+    const update = (world, ui) => {
+        layers.main.update(world, ui)
+        layers.simulateFuture.update(world, ui)
+        layers.travelRoute.update(world, ui)
         layers.simulateTravel.clear()
     }
 
-    const simulateTravel = (system, ui) => {
+    const simulateTravel = (world, ui) => {
         layers.main.clear()
-        layers.simulateTravel.update(system, ui)
+        layers.travelRoute.update(world, ui)
+        layers.simulateTravel.update(world, ui)
     }
 
     return {
