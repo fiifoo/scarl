@@ -23,13 +23,8 @@ Travel.distance = travel => hypotenuse(travel.to.x - travel.from.x, travel.to.y 
 Travel.finished = travel => {
     const quarter = coords.quarter(travel.from, travel.to)
 
-    const p1 = coords.normalize(quarter, travel.position)
-    const p2 = coords.normalize(quarter, travel.to)
-
-    const dx = p2.x - p1.x
-
-    // destination reached or speed in reverse
-    return dx <= 0 || coords.normalize(quarter, travel.speed).x < 0
+    // speed stopped or in reverse
+    return coords.normalize(quarter, travel.speed).x <= 0
 }
 
 const Spaceship = Record({

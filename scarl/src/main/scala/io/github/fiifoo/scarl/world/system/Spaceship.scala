@@ -17,13 +17,8 @@ object Spaceship {
     def finished: Boolean = {
       val quarter = Coordinates.Quarter(this.from, this.to)
 
-      val p1 = quarter.normalize(this.position)
-      val p2 = quarter.normalize(this.to)
-
-      val dx = p2.x - p1.x
-
-      // destination reached or speed in reverse
-      dx <= 0 || quarter.normalize(this.speed).x < 0
+      // speed stopped or in reverse
+      quarter.normalize(this.speed).x <= 0
     }
   }
 
