@@ -27,7 +27,14 @@ export default (spaceships, stellarBodies) => {
 
     const clear = () => clearContext(context)
 
+    let lastUpdate = null // dangerous state
+
     const update = world => {
+        if (lastUpdate !== null && world.system.time === lastUpdate) {
+            return
+        }
+        lastUpdate = world.system.time
+
         clear()
 
         let system = world.system

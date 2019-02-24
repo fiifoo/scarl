@@ -1,7 +1,7 @@
 import { List } from 'immutable'
 import moment from 'moment'
 import React from 'react'
-import SystemContainer from './SystemContainer'
+import System from './System.jsx'
 import { getControlledTransport } from '../../game/world'
 import { TICK } from '../../system/SolarSystem'
 
@@ -111,7 +111,7 @@ const Region = ({ui, world, region, actions}) => {
     )
 }
 
-const World = ({ui, world, ...actions}) =>  (
+const World = ({spaceships, stellarBodies, ui, world, ...actions}) =>  (
     <div>
         <div style={{display: 'table-cell', verticalAlign: 'top'}}>
             {world.regions.filter(x => ! x.entrances.isEmpty()).map(region => (
@@ -119,7 +119,12 @@ const World = ({ui, world, ...actions}) =>  (
             )).toArray()}
         </div>
         <div style={{display: 'table-cell', verticalAlign: 'top'}}>
-            <SystemContainer />
+            <System
+                spaceships={spaceships}
+                stellarBodies={stellarBodies}
+                ui={ui}
+                world={world}
+                clearTravel={actions.clearTravel} />
         </div>
     </div>
 )

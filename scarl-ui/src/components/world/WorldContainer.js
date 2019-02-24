@@ -9,6 +9,8 @@ const WorldContainer = connect(
         component: World,
         visible: state.ui.game.mode === WORLD,
 
+        spaceships: state.spaceships,
+        stellarBodies: state.stellarBodies,
         ui: state.ui.world,
         world: state.world,
     }), {
