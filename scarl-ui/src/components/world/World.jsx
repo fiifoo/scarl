@@ -1,11 +1,27 @@
 import { List } from 'immutable'
-import moment from 'moment'
 import React from 'react'
 import System from './System.jsx'
 import { getControlledTransport } from '../../game/world'
 import { TICK } from '../../system/SolarSystem'
 
 import './World.css'
+
+const humanizeDuration = (seconds, asText = true) => {
+    const totalHours = Math.floor(seconds / 3600)
+    const hours = totalHours % 24
+    const days = Math.floor(totalHours / 24)
+
+    const duration = {
+        days: days === 0 ? null : (
+            days === 1 ? '1 day' : days + ' days'
+        ),
+        hours: hours === 1 ? '1 hour' : hours + ' hours'
+    }
+
+    return ! asText ? duration : (
+        duration.days ? duration.days + ' ' + duration.hours : duration.hours
+    )
+}
 
 const TravelInfo = ({travel}) => {
     if (! travel.possible) {
@@ -14,7 +30,15 @@ const TravelInfo = ({travel}) => {
 
     const eta = travel.travel && travel.travel.eta || TICK
 
-    return <b>ETA: {moment.duration(eta, 'seconds').humanize()}</b>
+    const duration = humanizeDuration(eta, false)
+
+    return (
+        <div>
+            <div><b>ETA: </b></div>
+            {duration.days && <div><b>{duration.days}</b></div>}
+            <div><b>{duration.hours}</b></div>
+        </div>
+    )
 }
 
 const Region = ({ui, world, region, actions}) => {
@@ -40,10 +64,10 @@ const Region = ({ui, world, region, actions}) => {
             <div className="region-header clearfix">
 
                 {! traveling && (
-                    <div className="actions pull-right btn-toolbar">
+                    <div className="actions pull-right">
                         {canTravel && (
                             ui.travel && ui.travel.to === region.id ? (
-                                <div>
+                                <div className="text-right">
                                     <button
                                         type="button"
                                         className="btn btn-sm btn-primary"
@@ -74,7 +98,7 @@ const Region = ({ui, world, region, actions}) => {
                 <div key={transport} className="region-transport">
 
                     {! traveling && (
-                        <div className="actions pull-right btn-toolbar">
+                        <div className="actions pull-right">
                             {canEmbark.contains(transport) && (
                                 <button
                                     type="button"
@@ -94,7 +118,7 @@ const Region = ({ui, world, region, actions}) => {
                 <div key={to} className="region-site">
 
                     {! traveling && (
-                        <div className="actions pull-right btn-toolbar">
+                        <div className="actions pull-right">
                             <button
                                 type="button"
                                 className="btn btn-sm btn-primary"
@@ -114,6 +138,10 @@ const Region = ({ui, world, region, actions}) => {
 const World = ({spaceships, stellarBodies, ui, world, ...actions}) =>  (
     <div>
         <div style={{display: 'table-cell', verticalAlign: 'top'}}>
+            <h4 className="text-right">
+                Time passed: {humanizeDuration(world.system.time)}
+            </h4>
+
             {world.regions.filter(x => ! x.entrances.isEmpty()).map(region => (
                 <Region key={region.id} ui={ui} world={world} region={region} actions={actions} />
             )).toArray()}
