@@ -7,7 +7,10 @@ object JsonStellarBodySource {
 
   import JsonBase.{mapReads, polymorphicObjectFormat, stringIdFormat}
 
+  lazy private implicit val solarSystemSourceOrbiterFormat = JsonSolarSystemSource.solarSystemSourceOrbiterFormat
+
   lazy private implicit val stellarBodySourceCategoryFormat: Format[StellarBodySource.Category] = polymorphicObjectFormat({
+    case "StellarBodySource.BlackHoleCategory" => StellarBodySource.BlackHoleCategory
     case "StellarBodySource.PlanetCategory" => StellarBodySource.PlanetCategory
     case "StellarBodySource.SunCategory" => StellarBodySource.SunCategory
   })

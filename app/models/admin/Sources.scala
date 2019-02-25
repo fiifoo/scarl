@@ -245,6 +245,7 @@ object Sources {
     )),
 
     SubModelSource(typeOf[StellarBodySource.Category], List(
+      typeOf[StellarBodySource.BlackHoleCategory.type],
       typeOf[StellarBodySource.PlanetCategory.type],
       typeOf[StellarBodySource.SunCategory.type],
     ), objectPolymorphism = true),

@@ -11,6 +11,8 @@ object Physics {
   val EarthMass: Double = 5.97237 * math.pow(10, 24)
   val SolarMass: Double = 1.98847 * math.pow(10, 30)
 
+  val LightSpeed: Double = 299792458
+
   def hypotenuse(a: Double, b: Double): Double = math.sqrt(math.pow(a, 2) + math.pow(b, 2))
 
   def vector(slope: Double, length: Double): Vector = {
@@ -24,6 +26,18 @@ object Physics {
 
   def gravity(bodies: Iterable[StellarBody], body: StellarBody): Vector = {
     bodies filter (_.id != body.id) map calculateGravity(body) reduceLeft (_ add _)
+  }
+
+  def orbitalSpeed(centralMass: Double, radius: Double): Double = math.sqrt(G * centralMass / radius)
+
+  def binarySystem(m1: Double, m2: Double, distance: Double): ((Double, Double), (Double, Double)) = {
+    val r1 = m2 * distance / (m1 + m2)
+    val r2 = m1 * distance / (m1 + m2)
+
+    val v1 = orbitalSpeed(math.pow(m2, 2) / (m1 + m2), distance)
+    val v2 = orbitalSpeed(math.pow(m1, 2) / (m1 + m2), distance)
+
+    ((r1, v1), (r2, v2))
   }
 
   private def calculateGravity(body1: StellarBody)(body2: StellarBody): Vector = {

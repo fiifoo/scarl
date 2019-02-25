@@ -42,6 +42,13 @@ object Coordinates {
         case 3 => Vector(v.x, -v.y)
       }
     }
+
+    def rotate(x: Vector): Vector = {
+      this.value match {
+        case 0 | 2 => this.normalize(x).flip
+        case 1 | 3 => this.normalize(x)
+      }
+    }
   }
 
 }

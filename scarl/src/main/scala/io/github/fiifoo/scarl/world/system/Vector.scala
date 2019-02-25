@@ -9,4 +9,8 @@ case class Vector(x: Double, y: Double) {
   def multiply(m: Double): Vector = {
     Vector(this.x * m, this.y * m)
   }
+
+  def flip: Vector = {
+    Vector(-this.x, -this.y)
+  }
 }

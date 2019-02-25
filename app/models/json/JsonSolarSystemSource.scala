@@ -11,5 +11,8 @@ object JsonSolarSystemSource {
   lazy private implicit val stellarBodySourceIdFormat = JsonStellarBodySource.stellarBodySourceIdFormat
   implicitly(mapFormat[SpaceshipSourceId, StellarBodySourceId])
 
+  lazy implicit val solarSystemSourceOrbiterFormat: Format[SolarSystemSource.Orbiter] = Json.format
+  lazy implicit val solarSystemSourceVisitorFormat: Format[SolarSystemSource.Visitor] = Json.format
+
   lazy implicit val solarSystemSourceFormat: Format[SolarSystemSource] = Json.format
 }

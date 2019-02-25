@@ -10,12 +10,16 @@ object StellarBodySource {
     def mass(mass: Double): Double
   }
 
-  case object SunCategory extends Category {
+  case object BlackHoleCategory extends Category {
     def mass(mass: Double): Double = mass * Physics.SolarMass
   }
 
   case object PlanetCategory extends Category {
     def mass(mass: Double): Double = mass * Physics.EarthMass
+  }
+
+  case object SunCategory extends Category {
+    def mass(mass: Double): Double = mass * Physics.SolarMass
   }
 
 }
@@ -26,7 +30,5 @@ case class StellarBodySource(id: StellarBodySourceId,
                              description: Option[String],
                              color: Color,
                              mass: Double,
-                             position: Double,
-                             speed: Double,
-                             orbiters: List[StellarBodySourceId] = List(),
+                             orbiters: List[SolarSystemSource.Orbiter] = List(),
                             )

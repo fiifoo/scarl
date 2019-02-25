@@ -18,7 +18,8 @@ object GenerateGame {
         GenerateArea(world.start, rng) andThen
         addPlayer(world.start, character)
 
-    val system = world.system.apply(assets.stellarBodies, assets.spaceships)
+    val (random, _) = rng()
+    val system = world.system.apply(assets.stellarBodies, assets.spaceships, random)
 
     val (worldState, player) = create(WorldState(assets, system = system, transports = world.transports))
 
