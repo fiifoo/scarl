@@ -46,6 +46,8 @@ Region.read = ({entrances, exits, ...data}) => Region({
     exits: Map(exits).map(x => List(x)),
 })
 
+export { WorldInfo }
+
 export default (state = WorldInfo(), action) => {
     switch (action.type) {
         case types.CONNECTION_CLOSED: {

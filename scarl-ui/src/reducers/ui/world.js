@@ -1,5 +1,7 @@
 import { Record } from 'immutable'
 import * as types from '../../actions/actionTypes'
+import { getCurrentStellarBody } from '../../game/world'
+import { WorldInfo } from '../world'
 
 import Position from '../../system/Position'
 
@@ -25,6 +27,11 @@ export default (state = initial, action) => {
     switch (action.type) {
         case types.CONNECTION_CLOSED: {
             return initial
+        }
+        case types.RECEIVE_GAME_START: {
+            const body = getCurrentStellarBody(WorldInfo.read(action.data))
+
+            return body ? state.setIn(['systemView', 'center'], body.position) : state
         }
         case types.SET_TRAVEL: {
             return state.set('travel', TravelInfo({
