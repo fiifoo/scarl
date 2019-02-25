@@ -10,8 +10,8 @@ export default (spaceships, stellarBodies) => {
     context.globalAlpha = 0.2
     const draw = createDraw(context)
 
-    const drawBody = draw.dot(2)
-    const drawShip = draw.dot(1)
+    const drawBody = draw.dot(3)
+    const drawShip = draw.dot(2)
 
     const renderBody = body => {
         const source = stellarBodies.get(body.source)
@@ -27,14 +27,7 @@ export default (spaceships, stellarBodies) => {
 
     const clear = () => clearContext(context)
 
-    let lastUpdate = null // dangerous state
-
     const update = world => {
-        if (lastUpdate !== null && world.system.time === lastUpdate) {
-            return
-        }
-        lastUpdate = world.system.time
-
         clear()
 
         let system = world.system
@@ -49,7 +42,7 @@ export default (spaceships, stellarBodies) => {
 
     return {
         canvas,
-        clear,
+        context,
         update,
     }
 }

@@ -7,8 +7,9 @@ export default (spaceships, stellarBodies) => {
 
     const draw = createDraw(context)
 
-    const drawBody = draw.dot(3)
-    const drawShip = draw.dot(2)
+    const drawBody = draw.dot(5)
+    const drawShip = draw.dot(3)
+    const drawBodyIndicator = draw.circle(12)
 
     const renderBody = body => {
         const source = stellarBodies.get(body.source)
@@ -23,8 +24,7 @@ export default (spaceships, stellarBodies) => {
     }
 
     const renderCurrentBodyIndicator = body => {
-        draw.circle(9)(CURRENT_BODY_COLOR)(body.position.x, body.position.y)
-        draw.circle(10)(CURRENT_BODY_COLOR)(body.position.x, body.position.y)
+        drawBodyIndicator(CURRENT_BODY_COLOR)(body.position.x, body.position.y)
     }
 
     const clear = () => clearContext(context)
@@ -41,7 +41,7 @@ export default (spaceships, stellarBodies) => {
 
     return {
         canvas,
-        clear,
+        context,
         update,
     }
 }

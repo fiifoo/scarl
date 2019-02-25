@@ -1,3 +1,4 @@
+import Position from '../Position'
 import { PIXEL_SIZE, SCREEN_SIZE } from './const'
 
 export const createCanvas = () => {
@@ -6,13 +7,28 @@ export const createCanvas = () => {
     canvas.height = SCREEN_SIZE
 
     const context = canvas.getContext('2d')
-    context.translate(SCREEN_SIZE / 2, SCREEN_SIZE / 2)
+    context.lineWidth = 3
 
     return {canvas, context}
 }
 
 export const clearContext = context => {
-    context.clearRect(- SCREEN_SIZE / 2, - SCREEN_SIZE / 2, SCREEN_SIZE, SCREEN_SIZE)
+    context.save()
+    context.resetTransform()
+
+    context.clearRect(0, 0, SCREEN_SIZE, SCREEN_SIZE)
+
+    context.restore()
+}
+
+export const transformContext = ({center, scale}, {width, height}) => context => {
+    context.resetTransform()
+
+    context.translate(
+        width / 2 - center.x / PIXEL_SIZE * scale,
+        height / 2 - center.y / PIXEL_SIZE * scale
+    )
+    context.scale(scale, scale)
 }
 
 export const createDraw = context => ({
@@ -44,7 +60,14 @@ export const createDraw = context => ({
     },
 })
 
-export const getPixelPosition = (x, y) => ({
-    x: Math.floor(x * PIXEL_SIZE),
-    y: Math.floor(y * PIXEL_SIZE),
-})
+export const getPixelPosition = ({center, scale}, {width, height}) => (x, y) => {
+    const offset = {
+        x: width / 2 - center.x / PIXEL_SIZE * scale,
+        y: height / 2 - center.y / PIXEL_SIZE * scale,
+    }
+
+    return Position({
+        x: (x - offset.x) * PIXEL_SIZE / scale,
+        y: (y - offset.y) * PIXEL_SIZE / scale,
+    })
+}

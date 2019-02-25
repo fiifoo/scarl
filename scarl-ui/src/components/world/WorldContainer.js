@@ -12,6 +12,7 @@ const WorldContainer = connect(
         spaceships: state.spaceships,
         stellarBodies: state.stellarBodies,
         ui: state.ui.world,
+        viewSize: state.ui.game.viewSize,
         world: state.world,
     }), {
         ...worldActions,

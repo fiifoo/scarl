@@ -6,6 +6,8 @@ export default (spaceships) => {
     context.globalAlpha = 0.5
     const draw = createDraw(context)
 
+    const drawBodyIndicator = draw.circle(12)
+
     const clear = () => clearContext(context)
 
     const renderRoute = color => (from ,to) => {
@@ -13,8 +15,7 @@ export default (spaceships) => {
     }
 
     const renderDestinationBodyIndicator = color => body => {
-        draw.circle(9)(color)(body.position.x, body.position.y)
-        draw.circle(10)(color)(body.position.x, body.position.y)
+        drawBodyIndicator(color)(body.position.x, body.position.y)
     }
 
     const update = (world, ui) => {
@@ -38,7 +39,7 @@ export default (spaceships) => {
 
     return {
         canvas,
-        clear,
+        context,
         update,
     }
 }

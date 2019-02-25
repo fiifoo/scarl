@@ -1,9 +1,12 @@
 import { Record } from 'immutable'
 import * as types from '../../actions/actionTypes'
 
-const initial = Record({
-    travel: null,
-})()
+import Position from '../../system/Position'
+
+const SystemView = Record({
+    center: Position({x: 0, y: 0}),
+    scale: 1,
+})
 
 export const TravelInfo = Record({
     to: undefined,
@@ -12,6 +15,11 @@ export const TravelInfo = Record({
     travel: undefined,
     simulate: false,
 })
+
+const initial = Record({
+    systemView: SystemView(),
+    travel: null,
+})()
 
 export default (state = initial, action) => {
     switch (action.type) {
@@ -31,6 +39,12 @@ export default (state = initial, action) => {
         }
         case types.CLEAR_TRAVEL: {
             return state.set('travel', null)
+        }
+        case types.SET_SYSTEM_VIEW_CENTER: {
+            return state.setIn(['systemView', 'center'], action.center)
+        }
+        case types.SET_SYSTEM_VIEW_SCALE: {
+            return state.setIn(['systemView', 'scale'], action.scale)
         }
         default: {
             return state

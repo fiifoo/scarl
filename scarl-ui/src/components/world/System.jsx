@@ -23,11 +23,11 @@ class System extends Component {
             this.ref.current,
             this.props.spaceships,
             this.props.stellarBodies,
-            this.props.clearTravel,
+            this.props.actions,
         )
 
         this.screen.build()
-        this.screen.update(this.props.world, this.props.ui)
+        this.screen.update(this.props.world, this.props.ui, this.props.viewSize)
     }
 
     UNSAFE_componentWillReceiveProps(nextProps) {
@@ -37,7 +37,7 @@ class System extends Component {
             }
         } else {
             if (nextProps.world !== this.props.world || nextProps.ui !== this.props.ui) {
-                this.screen.update(nextProps.world, nextProps.ui)
+                this.screen.update(nextProps.world, nextProps.ui, this.props.viewSize)
             }
         }
     }

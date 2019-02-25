@@ -68,3 +68,13 @@ export const travel = () => (dispatch, getState) => {
 export const clearTravel = () => ({
     type: types.CLEAR_TRAVEL,
 })
+
+export const setSystemViewCenter = center => ({
+    type: types.SET_SYSTEM_VIEW_CENTER,
+    center,
+})
+
+export const setSystemViewScale = scale => ({
+    type: types.SET_SYSTEM_VIEW_SCALE,
+    scale,
+})
