@@ -1,12 +1,11 @@
-import { clearContext, createCanvas, createDraw } from '../utils'
+import { clearContext, createCanvas } from '../utils'
 
 export default (spaceships) => {
-    const {canvas, context} = createCanvas()
+    const {canvas, context, draw} = createCanvas()
 
     context.globalAlpha = 0.5
-    const draw = createDraw(context)
 
-    const drawBodyIndicator = draw.circle(12)
+    const drawBodyIndicator = draw.circle(10)
 
     const clear = () => clearContext(context)
 
@@ -40,6 +39,7 @@ export default (spaceships) => {
     return {
         canvas,
         context,
+        draw,
         update,
     }
 }

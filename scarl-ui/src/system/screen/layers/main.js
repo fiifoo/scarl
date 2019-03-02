@@ -1,15 +1,13 @@
 import { CURRENT_BODY_COLOR } from '../const'
-import { clearContext, createCanvas, createDraw } from '../utils'
+import { clearContext, createCanvas } from '../utils'
 import { getCurrentStellarBody } from '../../../game/world'
 
 export default (spaceships, stellarBodies) => {
-    const {canvas, context} = createCanvas()
-
-    const draw = createDraw(context)
+    const {canvas, context, draw} = createCanvas()
 
     const drawBody = draw.dot(5)
     const drawShip = draw.dot(3)
-    const drawBodyIndicator = draw.circle(12)
+    const drawBodyIndicator = draw.circle(10)
 
     const renderBody = body => {
         const source = stellarBodies.get(body.source)
@@ -42,6 +40,7 @@ export default (spaceships, stellarBodies) => {
     return {
         canvas,
         context,
+        draw,
         update,
     }
 }

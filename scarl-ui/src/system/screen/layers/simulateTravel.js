@@ -1,16 +1,14 @@
 import SolarSystem from '../../SolarSystem'
-import { clearContext, createCanvas, createDraw } from '../utils'
+import { clearContext, createCanvas } from '../utils'
 
 const INTERVAL = 10
 
 export default (spaceships, stellarBodies, clearTravel) => {
-    const {canvas, context} = createCanvas()
-
-    const draw = createDraw(context)
+    const {canvas, context, draw} = createCanvas()
 
     const drawBody = draw.dot(5)
     const drawShip = draw.dot(3)
-    const drawBodyIndicator = draw.circle(12)
+    const drawBodyIndicator = draw.circle(10)
 
     const renderBody = body => {
         const source = stellarBodies.get(body.source)
@@ -68,6 +66,7 @@ export default (spaceships, stellarBodies, clearTravel) => {
     return {
         canvas,
         context,
+        draw,
         update,
     }
 }

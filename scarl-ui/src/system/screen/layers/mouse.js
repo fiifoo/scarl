@@ -8,7 +8,7 @@ const State = Record({
 })
 
 export default (setSystemViewCenter, setSystemViewScale) => {
-    const {canvas, context} = createCanvas()
+    const {canvas, context, draw} = createCanvas()
 
     context.strokeStyle = CENTER_RETICULE_COLOR
     context.globalAlpha = 0.5
@@ -23,7 +23,7 @@ export default (setSystemViewCenter, setSystemViewScale) => {
     })
 
     canvas.addEventListener('wheel', event => {
-        const modifier = event.deltaY > 0 ? 0.8 : 1.2
+        const modifier = event.deltaY > 0 ? 1 / 1.5 : 1.5
 
         const scale = state.systemView.scale * modifier
 
@@ -68,6 +68,7 @@ export default (setSystemViewCenter, setSystemViewScale) => {
     return {
         canvas,
         context,
+        draw,
         update,
     }
 }

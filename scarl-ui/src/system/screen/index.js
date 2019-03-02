@@ -5,7 +5,7 @@ import createMouse from './layers/mouse'
 import createSimulateFuture from './layers/simulateFuture'
 import createSimulateTravel from './layers/simulateTravel'
 import createTravelRoute from './layers/travelRoute'
-import { clearContext, transformContext } from './utils'
+import { clearContext, transformLayer } from './utils'
 
 export default (container, spaceships, stellarBodies, actions) => {
     let layers = Map()
@@ -23,7 +23,7 @@ export default (container, spaceships, stellarBodies, actions) => {
     }
 
     const update = (world, ui, viewSize) => {
-        layers.map(x => x.context).forEach(transformContext(ui.systemView, viewSize))
+        layers.forEach(transformLayer(ui.systemView, viewSize))
 
         layers.get('main').update(world, ui)
         layers.get('simulateFuture').update(world, ui)
