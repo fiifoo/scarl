@@ -5,6 +5,12 @@
     "power" : [ ],
     "id" : "iridan/nexus",
     "owner" : "iridan"
+  } ], [ "iridan/start", {
+    "template" : "iridan/area-start",
+    "theme" : "iridan/constructed-underground",
+    "id" : "iridan/start",
+    "power" : [ ],
+    "owner" : "nomad"
   } ], [ "iridan/labs-surface", {
     "template" : "iridan/area-surface-assault",
     "theme" : "iridan/natural-surface",
@@ -23,6 +29,12 @@
     "power" : [ ],
     "id" : "iridan/mine-approach",
     "owner" : "iridan"
+  } ], [ "nomad/spaceship-hub", {
+    "template" : "nomad/spaceship-hub",
+    "theme" : "iridan/constructed-underground",
+    "owner" : "nomad",
+    "power" : [ ],
+    "id" : "nomad/spaceship-hub"
   } ], [ "iridan/coms-surface", {
     "template" : "iridan/area-surface-assault",
     "theme" : "iridan/natural-surface",
@@ -41,18 +53,18 @@
     "power" : [ ],
     "id" : "iridan/mine",
     "owner" : "iridan"
+  } ], [ "placeholder", {
+    "template" : "placeholder",
+    "theme" : "iridan/constructed-underground",
+    "owner" : "nomad",
+    "power" : [ ],
+    "id" : "placeholder"
   } ], [ "iridan/core-approach", {
     "template" : "iridan/area-core-approach",
     "theme" : "iridan/constructed-underground",
     "power" : [ ],
     "id" : "iridan/core-approach",
     "owner" : "iridan"
-  } ], [ "start-level", {
-    "template" : "iridan/area-start",
-    "theme" : "iridan/constructed-underground",
-    "id" : "start-level",
-    "power" : [ ],
-    "owner" : "nomad"
   } ], [ "iridan/core", {
     "template" : "iridan/area-core",
     "theme" : "iridan/natural-underground",
@@ -612,6 +624,12 @@
     "data" : {
       "value" : "Good luck.",
       "id" : "scippe/liason-bye"
+    }
+  } ], [ "placeholder", {
+    "type" : "Message",
+    "data" : {
+      "value" : "Just holding space here.",
+      "id" : "placeholder"
     }
   } ], [ "scippe/liason-1", {
     "type" : "Message",
@@ -2217,6 +2235,84 @@
         "sight" : {
           "range" : 7,
           "sensors" : 10
+        },
+        "armor" : 30
+      }
+    } ], [ "test/placeholder", {
+      "display" : "p",
+      "color" : "white",
+      "equipments" : [ ],
+      "recipes" : [ ],
+      "missile" : null,
+      "immobile" : false,
+      "character" : null,
+      "locked" : null,
+      "name" : "Placeholder",
+      "solitary" : true,
+      "flying" : false,
+      "responses" : [ [ "nomad", [ "placeholder" ] ] ],
+      "behavior" : {
+        "type" : "GreetTactic",
+        "data" : { }
+      },
+      "usable" : null,
+      "greetings" : [ [ "nomad", [ "placeholder" ] ] ],
+      "id" : "test/placeholder",
+      "inventory" : [ ],
+      "faction" : "nomad",
+      "description" : "Holds place.",
+      "stats" : {
+        "launcher" : {
+          "missile" : null,
+          "range" : 0,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          }
+        },
+        "explosive" : {
+          "attack" : 0,
+          "damage" : 0,
+          "radius" : 0,
+          "blast" : 0
+        },
+        "speed" : 0,
+        "ranged" : {
+          "attack" : 0,
+          "damage" : 0,
+          "range" : 0,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          }
+        },
+        "energy" : {
+          "max" : 0,
+          "regen" : 0
+        },
+        "materials" : {
+          "max" : 0,
+          "regen" : 0
+        },
+        "defence" : 30,
+        "skill" : {
+          "hacking" : 0
+        },
+        "melee" : {
+          "attack" : 0,
+          "damage" : 0,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          }
+        },
+        "health" : {
+          "max" : 100,
+          "regen" : 0
+        },
+        "sight" : {
+          "range" : 0,
+          "sensors" : 0
         },
         "armor" : 30
       }
@@ -6786,59 +6882,170 @@
     "world" : "main",
     "id" : "iridan/underground",
     "variants" : [ ],
+    "entrances" : [ [ "TransportCategory.Spaceship", [ "iridan/start" ] ] ],
+    "exits" : [ [ "TransportCategory.Spaceship", [ "iridan/start" ] ] ],
+    "stellarBody" : "planet/scippe",
+    "name" : "Iridan underground facility"
+  } ], [ "test/some", {
+    "world" : "main",
+    "entrances" : [ [ "TransportCategory.Spaceship", [ "test/some-placeholder" ] ] ],
+    "exits" : [ [ "TransportCategory.Spaceship", [ "test/some-placeholder" ] ] ],
+    "variants" : [ ],
+    "id" : "test/some",
+    "stellarBody" : "planet/test-some",
+    "name" : "Some test region"
+  } ], [ "test/other", {
+    "world" : "main",
+    "entrances" : [ [ "TransportCategory.Spaceship", [ "test/other-placeholder" ] ] ],
+    "exits" : [ [ "TransportCategory.Spaceship", [ "test/other-placeholder" ] ] ],
+    "variants" : [ ],
+    "id" : "test/other",
+    "stellarBody" : "planet/test-other",
+    "name" : "Other test region"
+  } ], [ "nomad/spaceship", {
+    "world" : "main",
     "entrances" : [ ],
-    "exits" : [ ]
+    "exits" : [ ],
+    "variants" : [ ],
+    "id" : "nomad/spaceship",
+    "stellarBody" : null,
+    "name" : "Nomad spaceship"
   } ] ],
   "sites" : [ [ "iridan/nexus", {
     "id" : "iridan/nexus",
     "area" : "iridan/nexus",
     "region" : "iridan/underground",
-    "variants" : [ ]
+    "variants" : [ ],
+    "name" : "Iridan central cavern"
+  } ], [ "iridan/start", {
+    "id" : "iridan/start",
+    "area" : "iridan/start",
+    "region" : "iridan/underground",
+    "variants" : [ ],
+    "name" : "Scippe orbit"
   } ], [ "iridan/labs-surface", {
     "id" : "iridan/labs-surface",
     "area" : "iridan/labs-surface",
     "region" : "iridan/underground",
-    "variants" : [ ]
+    "variants" : [ ],
+    "name" : "Iridan tech laboratories surface"
   } ], [ "iridan/labs", {
     "id" : "iridan/labs",
     "area" : "iridan/labs",
     "region" : "iridan/underground",
-    "variants" : [ ]
+    "variants" : [ ],
+    "name" : "Iridan tech laboratories"
   } ], [ "iridan/mine-approach", {
     "id" : "iridan/mine-approach",
     "area" : "iridan/mine-approach",
     "region" : "iridan/underground",
-    "variants" : [ ]
+    "variants" : [ ],
+    "name" : "Iridan mine approach"
+  } ], [ "nomad/spaceship-hub", {
+    "region" : "nomad/spaceship",
+    "area" : "nomad/spaceship-hub",
+    "variants" : [ ],
+    "id" : "nomad/spaceship-hub",
+    "name" : "Nomad spaceship hub"
   } ], [ "iridan/coms-surface", {
     "id" : "iridan/coms-surface",
     "area" : "iridan/coms-surface",
     "region" : "iridan/underground",
-    "variants" : [ ]
+    "variants" : [ ],
+    "name" : "Iridan communications relay surface"
   } ], [ "iridan/coms", {
     "id" : "iridan/coms",
     "area" : "iridan/coms",
     "region" : "iridan/underground",
-    "variants" : [ ]
+    "variants" : [ ],
+    "name" : "Iridan communications relay"
   } ], [ "iridan/mine", {
     "id" : "iridan/mine",
     "area" : "iridan/mine",
     "region" : "iridan/underground",
-    "variants" : [ ]
+    "variants" : [ ],
+    "name" : "Iridan mine"
+  } ], [ "test/some-placeholder", {
+    "region" : "test/some",
+    "area" : "placeholder",
+    "variants" : [ ],
+    "id" : "test/some-placeholder",
+    "name" : "Placeholder site"
   } ], [ "iridan/core-approach", {
     "id" : "iridan/core-approach",
     "area" : "iridan/core-approach",
     "region" : "iridan/underground",
-    "variants" : [ ]
-  } ], [ "start-level", {
-    "id" : "start-level",
-    "area" : "start-level",
-    "region" : "iridan/underground",
-    "variants" : [ ]
+    "variants" : [ ],
+    "name" : "Iridan AI core approach"
+  } ], [ "test/other-placeholder", {
+    "region" : "test/other",
+    "area" : "placeholder",
+    "variants" : [ ],
+    "id" : "test/other-placeholder",
+    "name" : "Placeholder site"
   } ], [ "iridan/core", {
     "id" : "iridan/core",
     "area" : "iridan/core",
     "region" : "iridan/underground",
-    "variants" : [ ]
+    "variants" : [ ],
+    "name" : "Iridan AI core"
+  } ] ],
+  "spaceships" : [ [ "nomad", {
+    "name" : "Nomad ship",
+    "description" : null,
+    "color" : "#8bc34a",
+    "acceleration" : 0.05,
+    "id" : "nomad"
+  } ] ],
+  "stellarBodies" : [ [ "sun/companion", {
+    "color" : "#ff9800",
+    "name" : "Beta Thales B",
+    "mass" : 1,
+    "id" : "sun/companion",
+    "orbiters" : [ {
+      "body" : "planet/scippe",
+      "distance" : 1
+    }, {
+      "body" : "planet/test-other",
+      "distance" : 2
+    } ],
+    "description" : null,
+    "category" : "StellarBodySource.SunCategory"
+  } ], [ "planet/test-other", {
+    "category" : "StellarBodySource.PlanetCategory",
+    "name" : "Other test",
+    "description" : null,
+    "color" : "#795548",
+    "mass" : 5,
+    "orbiters" : [ ],
+    "id" : "planet/test-other"
+  } ], [ "planet/scippe", {
+    "color" : "#2196f3",
+    "name" : "Scippe",
+    "mass" : 1,
+    "id" : "planet/scippe",
+    "orbiters" : [ ],
+    "description" : null,
+    "category" : "StellarBodySource.PlanetCategory"
+  } ], [ "sun/primary", {
+    "color" : "#ff9800",
+    "name" : "Beta Thales A",
+    "mass" : 3,
+    "id" : "sun/primary",
+    "orbiters" : [ {
+      "body" : "planet/test-some",
+      "distance" : 1.52366231
+    } ],
+    "description" : null,
+    "category" : "StellarBodySource.SunCategory"
+  } ], [ "planet/test-some", {
+    "color" : "#f44336",
+    "name" : "Some test",
+    "mass" : 0.108,
+    "id" : "planet/test-some",
+    "orbiters" : [ ],
+    "description" : null,
+    "category" : "StellarBodySource.PlanetCategory"
   } ] ],
   "templates" : [ [ "iridan/area-start", {
     "type" : "FixedTemplate",
@@ -10247,6 +10454,452 @@
         "door" : null
       }
     }
+  } ], [ "nomad/spaceship-hub", {
+    "type" : "FixedTemplate",
+    "data" : {
+      "shape" : {
+        "type" : "Rectangle",
+        "data" : {
+          "width" : 15,
+          "height" : 10,
+          "variance" : 0
+        }
+      },
+      "power" : null,
+      "terrain" : null,
+      "templates" : [ ],
+      "entrances" : [ ],
+      "features" : [ ],
+      "content" : {
+        "conduitLocations" : [ ],
+        "items" : [ ],
+        "restrictedLocations" : [ ],
+        "walls" : [ [ {
+          "x" : 7,
+          "y" : 0
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.AreaBorderCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 6,
+          "y" : 0
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.AreaBorderCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 0,
+          "y" : 6
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.AreaBorderCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 9,
+          "y" : 0
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.AreaBorderCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 0,
+          "y" : 1
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.AreaBorderCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 7,
+          "y" : 9
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.AreaBorderCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 5,
+          "y" : 9
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.AreaBorderCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 0,
+          "y" : 8
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.AreaBorderCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 8,
+          "y" : 0
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.AreaBorderCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 4,
+          "y" : 9
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.AreaBorderCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 14,
+          "y" : 7
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.AreaBorderCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 3,
+          "y" : 0
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.AreaBorderCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 0,
+          "y" : 7
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.AreaBorderCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 14,
+          "y" : 3
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.AreaBorderCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 14,
+          "y" : 5
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.AreaBorderCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 0,
+          "y" : 0
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.AreaBorderCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 0,
+          "y" : 2
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.AreaBorderCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 9,
+          "y" : 9
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.AreaBorderCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 3,
+          "y" : 9
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.AreaBorderCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 0,
+          "y" : 3
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.AreaBorderCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 1,
+          "y" : 9
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.AreaBorderCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 14,
+          "y" : 1
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.AreaBorderCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 14,
+          "y" : 6
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.AreaBorderCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 14,
+          "y" : 4
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.AreaBorderCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 10,
+          "y" : 0
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.AreaBorderCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 12,
+          "y" : 0
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.AreaBorderCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 8,
+          "y" : 9
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.AreaBorderCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 4,
+          "y" : 0
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.AreaBorderCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 0,
+          "y" : 4
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.AreaBorderCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 11,
+          "y" : 9
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.AreaBorderCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 10,
+          "y" : 9
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.AreaBorderCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 14,
+          "y" : 0
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.AreaBorderCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 0,
+          "y" : 5
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.AreaBorderCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 12,
+          "y" : 9
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.AreaBorderCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 2,
+          "y" : 9
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.AreaBorderCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 13,
+          "y" : 0
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.AreaBorderCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 14,
+          "y" : 8
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.AreaBorderCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 13,
+          "y" : 9
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.AreaBorderCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 6,
+          "y" : 9
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.AreaBorderCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 2,
+          "y" : 0
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.AreaBorderCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 1,
+          "y" : 0
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.AreaBorderCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 11,
+          "y" : 0
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.AreaBorderCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 14,
+          "y" : 9
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.AreaBorderCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 0,
+          "y" : 9
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.AreaBorderCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 5,
+          "y" : 0
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.AreaBorderCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 14,
+          "y" : 2
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.AreaBorderCategory" ],
+            "tags" : [ ]
+          }
+        } ] ],
+        "machinery" : [ ],
+        "widgets" : [ ],
+        "creatures" : [ ],
+        "gatewayLocations" : [ {
+          "x" : 7,
+          "y" : 6
+        } ],
+        "terrains" : [ ]
+      },
+      "id" : "nomad/spaceship-hub"
+    }
   } ], [ "iridan/room-iridan-hunters", {
     "type" : "FixedTemplate",
     "data" : {
@@ -12724,6 +13377,320 @@
         }
       }
     }
+  } ], [ "placeholder", {
+    "type" : "FixedTemplate",
+    "data" : {
+      "shape" : {
+        "type" : "Rectangle",
+        "data" : {
+          "width" : 9,
+          "height" : 8,
+          "variance" : 0
+        }
+      },
+      "power" : null,
+      "terrain" : null,
+      "templates" : [ ],
+      "entrances" : [ ],
+      "features" : [ ],
+      "content" : {
+        "conduitLocations" : [ [ {
+          "x" : 4,
+          "y" : 1
+        }, null ] ],
+        "items" : [ ],
+        "restrictedLocations" : [ ],
+        "walls" : [ [ {
+          "x" : 7,
+          "y" : 0
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.AreaBorderCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 6,
+          "y" : 0
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.AreaBorderCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 0,
+          "y" : 6
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.AreaBorderCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 7,
+          "y" : 7
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.AreaBorderCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 3,
+          "y" : 7
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.AreaBorderCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 0,
+          "y" : 1
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.AreaBorderCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 8,
+          "y" : 0
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.AreaBorderCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 5,
+          "y" : 7
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.AreaBorderCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 3,
+          "y" : 0
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.AreaBorderCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 0,
+          "y" : 7
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.AreaBorderCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 0,
+          "y" : 0
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.AreaBorderCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 0,
+          "y" : 2
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.AreaBorderCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 8,
+          "y" : 4
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.AreaBorderCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 0,
+          "y" : 3
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.AreaBorderCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 8,
+          "y" : 2
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.AreaBorderCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 8,
+          "y" : 5
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.AreaBorderCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 6,
+          "y" : 7
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.AreaBorderCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 4,
+          "y" : 0
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.AreaBorderCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 0,
+          "y" : 4
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.AreaBorderCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 8,
+          "y" : 7
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.AreaBorderCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 0,
+          "y" : 5
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.AreaBorderCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 2,
+          "y" : 7
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.AreaBorderCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 2,
+          "y" : 0
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.AreaBorderCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 1,
+          "y" : 7
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.AreaBorderCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 1,
+          "y" : 0
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.AreaBorderCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 4,
+          "y" : 7
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.AreaBorderCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 8,
+          "y" : 6
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.AreaBorderCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 8,
+          "y" : 1
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.AreaBorderCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 8,
+          "y" : 3
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.AreaBorderCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 5,
+          "y" : 0
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.AreaBorderCategory" ],
+            "tags" : [ ]
+          }
+        } ] ],
+        "machinery" : [ ],
+        "widgets" : [ ],
+        "creatures" : [ [ {
+          "x" : 4,
+          "y" : 3
+        }, {
+          "type" : "ContentSelection.FixedCreature",
+          "data" : {
+            "kind" : "test/placeholder",
+            "tags" : [ ]
+          }
+        } ] ],
+        "gatewayLocations" : [ {
+          "x" : 4,
+          "y" : 5
+        } ],
+        "terrains" : [ ]
+      },
+      "id" : "placeholder"
+    }
   } ], [ "generic/room", {
     "type" : "RandomizedTemplate",
     "data" : {
@@ -14091,9 +15058,15 @@
     "id" : "iridan/natural-underground",
     "terrains" : "generic/natural-underground"
   } ] ],
-  "transports" : [ ],
+  "transports" : [ [ "nomad/spaceship", {
+    "category" : "TransportCategory.Spaceship",
+    "hub" : "nomad/spaceship-hub",
+    "id" : "nomad/spaceship",
+    "spaceship" : "nomad",
+    "name" : "Nomad spaceship"
+  } ] ],
   "worlds" : [ [ "main", {
-    "start" : "start-level",
+    "start" : "iridan/start",
     "characters" : [ "player" ],
     "conduits" : [ {
       "source" : "iridan/labs",
@@ -14138,19 +15111,28 @@
       "sourceItem" : "iridan/conduit-stairs-down-mine",
       "targetItem" : "generic/conduit-stairs-up"
     }, {
-      "source" : "start-level",
+      "source" : "iridan/start",
       "target" : "iridan/labs-surface",
       "sourceItem" : "iridan/conduit-assault-pod-labs",
       "targetItem" : null,
       "tag" : "primary"
     }, {
-      "source" : "start-level",
+      "source" : "iridan/start",
       "target" : "iridan/coms-surface",
       "sourceItem" : "iridan/conduit-assault-pod-coms",
       "targetItem" : null,
       "tag" : "primary"
     } ],
     "id" : "main",
-    "transports" : [ ]
+    "transports" : [ [ "nomad/spaceship", "iridan/underground" ] ],
+    "system" : {
+      "sun" : "sun/primary",
+      "ships" : [ [ "nomad", "planet/scippe" ] ],
+      "companion" : {
+        "body" : "sun/companion",
+        "distance" : 10
+      },
+      "visitors" : [ ]
+    }
   } ] ]
 }

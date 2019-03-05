@@ -30,9 +30,8 @@ class JsonWorldStateSpec extends PlaySpec {
   }
 
   private def createWorld(): WorldState = {
-    val area = SiteId("start-level")
-
     val world = assets.worlds.values.head
+    val area = world.start
     val character = world.characters.head
 
     val worldState = GenerateGame(assets, world, character).world
