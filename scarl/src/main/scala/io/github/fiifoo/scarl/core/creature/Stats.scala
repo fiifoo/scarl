@@ -23,27 +23,44 @@ object Stats {
     }
   }
 
-  case class Melee(attack: Int = 0, damage: Int = 0, consumption: Consumption = Consumption()) {
+  case class Melee(attack: Int = 0,
+                   damage: Int = 0,
+                   consumption: Consumption = Consumption(),
+                   conditions: List[Condition] = List(),
+                  ) {
     def add(x: Melee): Melee = {
-      copy(attack + x.attack, damage + x.damage, consumption add x.consumption)
+      copy(attack + x.attack, damage + x.damage, consumption add x.consumption, conditions ::: x.conditions)
     }
   }
 
-  case class Ranged(attack: Int = 0, damage: Int = 0, range: Int = 0, consumption: Consumption = Consumption()) {
+  case class Ranged(attack: Int = 0,
+                    damage: Int = 0,
+                    range: Int = 0,
+                    consumption: Consumption = Consumption(),
+                    conditions: List[Condition] = List(),
+                   ) {
     def add(x: Ranged): Ranged = {
-      copy(attack + x.attack, damage + x.damage, range + x.range, consumption add x.consumption)
+      copy(attack + x.attack, damage + x.damage, range + x.range, consumption add x.consumption, conditions ::: x.conditions)
     }
   }
 
-  case class Launcher(missile: Option[CreatureKindId] = None, range: Int = 0, consumption: Consumption = Consumption()) {
+  case class Launcher(missile: Option[CreatureKindId] = None,
+                      range: Int = 0,
+                      consumption: Consumption = Consumption()
+                     ) {
     def add(x: Launcher): Launcher = {
       copy(x.missile.orElse(missile), range + x.range, consumption add x.consumption)
     }
   }
 
-  case class Explosive(attack: Int = 0, damage: Int = 0, radius: Int = 0, blast: Int = 0) {
+  case class Explosive(attack: Int = 0,
+                       damage: Int = 0,
+                       radius: Int = 0,
+                       blast: Int = 0,
+                       conditions: List[Condition] = List(),
+                      ) {
     def add(x: Explosive): Explosive = {
-      copy(attack + x.attack, damage + x.damage, radius + x.radius, blast + x.blast)
+      copy(attack + x.attack, damage + x.damage, radius + x.radius, blast + x.blast, conditions ::: x.conditions)
     }
   }
 

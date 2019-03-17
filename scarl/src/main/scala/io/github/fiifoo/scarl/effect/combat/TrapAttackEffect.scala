@@ -1,6 +1,7 @@
 package io.github.fiifoo.scarl.effect.combat
 
 import io.github.fiifoo.scarl.core.State
+import io.github.fiifoo.scarl.core.creature.Condition
 import io.github.fiifoo.scarl.core.effect.{Effect, EffectResult}
 import io.github.fiifoo.scarl.core.entity.Selectors.getCreatureStats
 import io.github.fiifoo.scarl.core.entity.{ContainerId, CreatureId}
@@ -12,6 +13,7 @@ case class TrapAttackEffect(trap: ContainerId,
                             target: CreatureId,
                             attack: Int,
                             damage: Int,
+                            conditions: List[Condition],
                             evade: Boolean,
                             hitDescription: Option[String] = None,
                             deflectDescription: Option[String] = None,
@@ -30,7 +32,7 @@ case class TrapAttackEffect(trap: ContainerId,
     )
 
     val effect = if (result.hit) {
-      TrapHitEffect(trap, target, result, target(s).location, hitDescription, deflectDescription, Some(this))
+      TrapHitEffect(trap, target, result, conditions, target(s).location, hitDescription, deflectDescription, Some(this))
     } else {
       TrapMissEffect(trap, target, target(s).location, missDescription, Some(this))
     }

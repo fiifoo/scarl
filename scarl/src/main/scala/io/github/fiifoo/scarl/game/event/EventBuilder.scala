@@ -2,6 +2,7 @@ package io.github.fiifoo.scarl.game.event
 
 import io.github.fiifoo.scarl.core.State
 import io.github.fiifoo.scarl.core.communication.Message
+import io.github.fiifoo.scarl.core.creature.Condition
 import io.github.fiifoo.scarl.core.effect.{CreateEntityEffect, Effect, LocalizedDescriptionEffect, RemoveEntityEffect}
 import io.github.fiifoo.scarl.core.entity.Selectors.{getContainerItems, getLocationVisibleItems}
 import io.github.fiifoo.scarl.core.entity._
@@ -11,9 +12,11 @@ import io.github.fiifoo.scarl.core.kind._
 import io.github.fiifoo.scarl.effect.area.{ExplosiveTimerEffect, TransformBlockedEffect}
 import io.github.fiifoo.scarl.effect.combat._
 import io.github.fiifoo.scarl.effect.creature._
+import io.github.fiifoo.scarl.effect.creature.condition._
 import io.github.fiifoo.scarl.effect.interact._
 import io.github.fiifoo.scarl.effect.movement.{CollideEffect, DisplaceEffect, MovedEffect}
 import io.github.fiifoo.scarl.rule.HackRule
+import io.github.fiifoo.scarl.status.Conditions
 
 object EventBuilder {
 
@@ -55,6 +58,7 @@ class EventBuilder(s: State, player: CreatureId, fov: Set[Location]) {
       case e: ExplosionLocationEffect => build(e)
       case e: ExplosionMissEffect => build(e) map GenericEvent
       case e: ExplosiveTimerEffect => build(e) map GenericEvent
+      case e: GainConditionEffect => build(e) map GenericEvent
       case e: GainLevelEffect => build(e) map GenericEvent
       case e: HealEffect => build(e) map GenericEvent
       case e: HitEffect => build(e)
@@ -63,6 +67,7 @@ class EventBuilder(s: State, player: CreatureId, fov: Set[Location]) {
       case e: ItemCraftedEffect => build(e) map GenericEvent
       case e: LocalizedDescriptionEffect => build(e) map GenericEvent
       case e: LockedUsableEffect => build(e) map GenericEvent
+      case e: LoseConditionEffect => build(e) map GenericEvent
       case e: MachineryActivatedEffect => build(e) map GenericEvent
       case e: MissEffect => build(e) map GenericEvent
       case e: MovedEffect => build(e)
@@ -71,6 +76,7 @@ class EventBuilder(s: State, player: CreatureId, fov: Set[Location]) {
       case e: ReceiveKeyEffect => build(e) map GenericEvent
       case e: RecycleItemEffect => build(e) map GenericEvent
       case e: RemoveEntityEffect => build(e) map GenericEvent
+      case e: ResistConditionEffect => build(e) map GenericEvent
       case e: ShootMissileEffect => build(e) map GenericEvent
       case e: ShortageEffect => build(e) map GenericEvent
       case e: ShotEffect => build(e)
@@ -316,6 +322,16 @@ class EventBuilder(s: State, player: CreatureId, fov: Set[Location]) {
     }
   }
 
+  private def build(effect: GainConditionEffect): Option[String] = {
+    if (effect.target == player) {
+      Some(s"You are ${condition(effect.condition)}.")
+    } else if (fov contains effect.location) {
+      Some(s"${kind(effect.target)} is ${condition(effect.condition)}.")
+    } else {
+      None
+    }
+  }
+
   private def build(effect: GainLevelEffect): Option[String] = {
     val target = effect.target
 
@@ -433,6 +449,16 @@ class EventBuilder(s: State, player: CreatureId, fov: Set[Location]) {
     }
   }
 
+  private def build(effect: LoseConditionEffect): Option[String] = {
+    if (effect.target == player) {
+      Some(s"You are no longer ${condition(effect.source.condition)}.")
+    } else if (fov contains effect.location) {
+      Some(s"${kind(effect.target)} is no longer ${condition(effect.source.condition)}.")
+    } else {
+      None
+    }
+  }
+
   private def build(effect: MachineryActivatedEffect): Option[String] = {
     if (effect.activator == player || (fov contains effect.location)) {
       effect.description
@@ -525,6 +551,14 @@ class EventBuilder(s: State, player: CreatureId, fov: Set[Location]) {
         None
       }
     }))
+  }
+
+  private def build(effect: ResistConditionEffect): Option[String] = {
+    if (effect.target == player) {
+      Some(s"You resist being ${condition(effect.condition)}.")
+    } else {
+      None
+    }
   }
 
   private def build(effect: ShootMissileEffect): Option[String] = {
@@ -623,6 +657,12 @@ class EventBuilder(s: State, player: CreatureId, fov: Set[Location]) {
       Some(s"${kind(effect.user)} uses ${kind(effect.target)}.")
     } else {
       None
+    }
+  }
+
+  private def condition(condition: Condition): String = {
+    condition match {
+      case _: Conditions.Disoriented => "disoriented"
     }
   }
 

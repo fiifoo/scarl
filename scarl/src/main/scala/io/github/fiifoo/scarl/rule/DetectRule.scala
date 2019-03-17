@@ -12,11 +12,7 @@ object DetectRule {
     if (distance > maxDistance || effective <= 0 || concealment <= 0) {
       false
     } else {
-      random.nextInt(effective) - random.nextInt(concealment) match {
-        case 0 => random.nextBoolean()
-        case x if x > 0 => true
-        case x if x < 0 => false
-      }
+      rollOpposedCheck(random)(effective, concealment)
     }
   }
 }

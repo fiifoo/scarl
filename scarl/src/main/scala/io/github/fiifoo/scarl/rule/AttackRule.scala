@@ -54,11 +54,7 @@ object AttackRule {
     val attack = math.max(attacker.attack, 1)
     val defence = math.max(defender.defence, 1)
 
-    random.nextInt(attack) - random.nextInt(defence) match {
-      case 0 => random.nextBoolean()
-      case x if x > 0 => true
-      case x if x < 0 => false
-    }
+    rollOpposedCheck(random)(attack, defence)
   }
 
   private def rollBypass(random: Random, attacker: Attacker, defender: Defender): Option[Int] = {
@@ -69,11 +65,7 @@ object AttackRule {
       return None
     }
 
-    if (random.nextInt(attack) - random.nextInt(defence) match {
-      case 0 => random.nextBoolean()
-      case x if x > 0 => true
-      case x if x < 0 => false
-    }) {
+    if (rollOpposedCheck(random)(attack, defence)) {
       Some(minBypass + random.nextInt(100 - minBypass + 1))
     } else {
       None

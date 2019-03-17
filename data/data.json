@@ -749,7 +749,8 @@
           "attack" : 0,
           "damage" : 0,
           "radius" : 0,
-          "blast" : 0
+          "blast" : 0,
+          "conditions" : [ ]
         },
         "speed" : 30,
         "ranged" : {
@@ -759,7 +760,8 @@
           "consumption" : {
             "energy" : 0,
             "materials" : 0
-          }
+          },
+          "conditions" : [ ]
         },
         "energy" : {
           "max" : 0,
@@ -779,7 +781,8 @@
           "consumption" : {
             "energy" : 0,
             "materials" : 0
-          }
+          },
+          "conditions" : [ ]
         },
         "health" : {
           "max" : 30,
@@ -837,7 +840,8 @@
           "attack" : 0,
           "damage" : 0,
           "radius" : 0,
-          "blast" : 0
+          "blast" : 0,
+          "conditions" : [ ]
         },
         "speed" : 0,
         "ranged" : {
@@ -847,7 +851,8 @@
           "consumption" : {
             "energy" : 0,
             "materials" : 0
-          }
+          },
+          "conditions" : [ ]
         },
         "energy" : {
           "max" : 0,
@@ -867,7 +872,8 @@
           "consumption" : {
             "energy" : 0,
             "materials" : 0
-          }
+          },
+          "conditions" : [ ]
         },
         "health" : {
           "max" : 40,
@@ -918,7 +924,8 @@
           "attack" : 0,
           "damage" : 0,
           "radius" : 0,
-          "blast" : 0
+          "blast" : 0,
+          "conditions" : [ ]
         },
         "speed" : 0,
         "ranged" : {
@@ -928,7 +935,8 @@
           "consumption" : {
             "energy" : 0,
             "materials" : 0
-          }
+          },
+          "conditions" : [ ]
         },
         "energy" : {
           "max" : 100,
@@ -948,7 +956,8 @@
           "consumption" : {
             "energy" : 0,
             "materials" : 0
-          }
+          },
+          "conditions" : [ ]
         },
         "health" : {
           "max" : 100,
@@ -1000,7 +1009,8 @@
           "attack" : 120,
           "damage" : 70,
           "radius" : 2,
-          "blast" : 140
+          "blast" : 140,
+          "conditions" : [ ]
         },
         "speed" : 200,
         "ranged" : {
@@ -1010,7 +1020,8 @@
           "consumption" : {
             "energy" : 0,
             "materials" : 0
-          }
+          },
+          "conditions" : [ ]
         },
         "energy" : {
           "max" : 0,
@@ -1030,7 +1041,8 @@
           "consumption" : {
             "energy" : 0,
             "materials" : 0
-          }
+          },
+          "conditions" : [ ]
         },
         "health" : {
           "max" : 10,
@@ -1088,7 +1100,8 @@
           "attack" : 0,
           "damage" : 0,
           "radius" : 0,
-          "blast" : 0
+          "blast" : 0,
+          "conditions" : [ ]
         },
         "speed" : 30,
         "ranged" : {
@@ -1098,7 +1111,8 @@
           "consumption" : {
             "energy" : 0,
             "materials" : 0
-          }
+          },
+          "conditions" : [ ]
         },
         "energy" : {
           "max" : 0,
@@ -1118,7 +1132,8 @@
           "consumption" : {
             "energy" : 0,
             "materials" : 0
-          }
+          },
+          "conditions" : [ ]
         },
         "health" : {
           "max" : 40,
@@ -1176,7 +1191,8 @@
           "attack" : 0,
           "damage" : 0,
           "radius" : 0,
-          "blast" : 0
+          "blast" : 0,
+          "conditions" : [ ]
         },
         "speed" : 0,
         "ranged" : {
@@ -1186,7 +1202,8 @@
           "consumption" : {
             "energy" : 0,
             "materials" : 0
-          }
+          },
+          "conditions" : [ ]
         },
         "energy" : {
           "max" : 0,
@@ -1206,7 +1223,8 @@
           "consumption" : {
             "energy" : 0,
             "materials" : 0
-          }
+          },
+          "conditions" : [ ]
         },
         "health" : {
           "max" : 200,
@@ -1255,7 +1273,8 @@
           "attack" : 120,
           "damage" : 70,
           "radius" : 2,
-          "blast" : 140
+          "blast" : 140,
+          "conditions" : [ ]
         },
         "speed" : 200,
         "ranged" : {
@@ -1265,7 +1284,8 @@
           "consumption" : {
             "energy" : 0,
             "materials" : 0
-          }
+          },
+          "conditions" : [ ]
         },
         "energy" : {
           "max" : 0,
@@ -1285,7 +1305,8 @@
           "consumption" : {
             "energy" : 0,
             "materials" : 0
-          }
+          },
+          "conditions" : [ ]
         },
         "health" : {
           "max" : 10,
@@ -1342,7 +1363,8 @@
           "attack" : 0,
           "damage" : 0,
           "radius" : 0,
-          "blast" : 0
+          "blast" : 0,
+          "conditions" : [ ]
         },
         "speed" : 10,
         "ranged" : {
@@ -1352,7 +1374,8 @@
           "consumption" : {
             "energy" : 0,
             "materials" : 0
-          }
+          },
+          "conditions" : [ ]
         },
         "energy" : {
           "max" : 0,
@@ -1372,7 +1395,8 @@
           "consumption" : {
             "energy" : 0,
             "materials" : 0
-          }
+          },
+          "conditions" : [ ]
         },
         "health" : {
           "max" : 30,
@@ -1419,7 +1443,8 @@
           "attack" : 0,
           "damage" : 0,
           "radius" : 0,
-          "blast" : 0
+          "blast" : 0,
+          "conditions" : [ ]
         },
         "speed" : 0,
         "ranged" : {
@@ -1429,7 +1454,8 @@
           "consumption" : {
             "energy" : 0,
             "materials" : 0
-          }
+          },
+          "conditions" : [ ]
         },
         "energy" : {
           "max" : 0,
@@ -1449,7 +1475,8 @@
           "consumption" : {
             "energy" : 0,
             "materials" : 0
-          }
+          },
+          "conditions" : [ ]
         },
         "health" : {
           "max" : 30,
@@ -1497,7 +1524,8 @@
           "attack" : 0,
           "damage" : 0,
           "radius" : 0,
-          "blast" : 0
+          "blast" : 0,
+          "conditions" : [ ]
         },
         "speed" : 0,
         "ranged" : {
@@ -1507,7 +1535,8 @@
           "consumption" : {
             "energy" : 0,
             "materials" : 0
-          }
+          },
+          "conditions" : [ ]
         },
         "energy" : {
           "max" : 0,
@@ -1527,7 +1556,8 @@
           "consumption" : {
             "energy" : 0,
             "materials" : 0
-          }
+          },
+          "conditions" : [ ]
         },
         "health" : {
           "max" : 100,
@@ -1575,7 +1605,8 @@
           "attack" : 0,
           "damage" : 0,
           "radius" : 0,
-          "blast" : 0
+          "blast" : 0,
+          "conditions" : [ ]
         },
         "speed" : 0,
         "ranged" : {
@@ -1585,7 +1616,8 @@
           "consumption" : {
             "energy" : 0,
             "materials" : 0
-          }
+          },
+          "conditions" : [ ]
         },
         "energy" : {
           "max" : 0,
@@ -1605,7 +1637,8 @@
           "consumption" : {
             "energy" : 0,
             "materials" : 0
-          }
+          },
+          "conditions" : [ ]
         },
         "health" : {
           "max" : 1000,
@@ -1663,7 +1696,8 @@
           "attack" : 0,
           "damage" : 0,
           "radius" : 0,
-          "blast" : 0
+          "blast" : 0,
+          "conditions" : [ ]
         },
         "speed" : 10,
         "ranged" : {
@@ -1673,7 +1707,8 @@
           "consumption" : {
             "energy" : 0,
             "materials" : 0
-          }
+          },
+          "conditions" : [ ]
         },
         "energy" : {
           "max" : 0,
@@ -1693,7 +1728,8 @@
           "consumption" : {
             "energy" : 0,
             "materials" : 0
-          }
+          },
+          "conditions" : [ ]
         },
         "health" : {
           "max" : 30,
@@ -1750,7 +1786,8 @@
           "attack" : 0,
           "damage" : 0,
           "radius" : 0,
-          "blast" : 0
+          "blast" : 0,
+          "conditions" : [ ]
         },
         "speed" : 50,
         "ranged" : {
@@ -1760,7 +1797,8 @@
           "consumption" : {
             "energy" : 0,
             "materials" : 0
-          }
+          },
+          "conditions" : [ ]
         },
         "energy" : {
           "max" : 0,
@@ -1780,7 +1818,8 @@
           "consumption" : {
             "energy" : 0,
             "materials" : 0
-          }
+          },
+          "conditions" : [ ]
         },
         "health" : {
           "max" : 50,
@@ -1838,7 +1877,8 @@
           "attack" : 0,
           "damage" : 0,
           "radius" : 0,
-          "blast" : 0
+          "blast" : 0,
+          "conditions" : [ ]
         },
         "speed" : 0,
         "ranged" : {
@@ -1848,7 +1888,8 @@
           "consumption" : {
             "energy" : 0,
             "materials" : 0
-          }
+          },
+          "conditions" : [ ]
         },
         "energy" : {
           "max" : 0,
@@ -1868,7 +1909,8 @@
           "consumption" : {
             "energy" : 0,
             "materials" : 0
-          }
+          },
+          "conditions" : [ ]
         },
         "health" : {
           "max" : 30,
@@ -1943,7 +1985,8 @@
           "attack" : 0,
           "damage" : 0,
           "radius" : 0,
-          "blast" : 0
+          "blast" : 0,
+          "conditions" : [ ]
         },
         "speed" : 0,
         "ranged" : {
@@ -1953,7 +1996,8 @@
           "consumption" : {
             "energy" : 0,
             "materials" : 0
-          }
+          },
+          "conditions" : [ ]
         },
         "energy" : {
           "max" : 0,
@@ -1973,7 +2017,8 @@
           "consumption" : {
             "energy" : 0,
             "materials" : 0
-          }
+          },
+          "conditions" : [ ]
         },
         "health" : {
           "max" : 40,
@@ -2020,7 +2065,8 @@
           "attack" : 0,
           "damage" : 0,
           "radius" : 0,
-          "blast" : 0
+          "blast" : 0,
+          "conditions" : [ ]
         },
         "speed" : -20,
         "ranged" : {
@@ -2030,7 +2076,8 @@
           "consumption" : {
             "energy" : 0,
             "materials" : 0
-          }
+          },
+          "conditions" : [ ]
         },
         "energy" : {
           "max" : 0,
@@ -2050,7 +2097,8 @@
           "consumption" : {
             "energy" : 0,
             "materials" : 0
-          }
+          },
+          "conditions" : [ ]
         },
         "health" : {
           "max" : 30,
@@ -2108,7 +2156,8 @@
           "attack" : 0,
           "damage" : 0,
           "radius" : 0,
-          "blast" : 0
+          "blast" : 0,
+          "conditions" : [ ]
         },
         "speed" : 10,
         "ranged" : {
@@ -2118,7 +2167,8 @@
           "consumption" : {
             "energy" : 0,
             "materials" : 0
-          }
+          },
+          "conditions" : [ ]
         },
         "energy" : {
           "max" : 0,
@@ -2138,7 +2188,8 @@
           "consumption" : {
             "energy" : 0,
             "materials" : 0
-          }
+          },
+          "conditions" : [ ]
         },
         "health" : {
           "max" : 40,
@@ -2196,7 +2247,8 @@
           "attack" : 0,
           "damage" : 0,
           "radius" : 0,
-          "blast" : 0
+          "blast" : 0,
+          "conditions" : [ ]
         },
         "speed" : 30,
         "ranged" : {
@@ -2206,7 +2258,8 @@
           "consumption" : {
             "energy" : 0,
             "materials" : 0
-          }
+          },
+          "conditions" : [ ]
         },
         "energy" : {
           "max" : 0,
@@ -2226,7 +2279,8 @@
           "consumption" : {
             "energy" : 0,
             "materials" : 0
-          }
+          },
+          "conditions" : [ ]
         },
         "health" : {
           "max" : 30,
@@ -2274,7 +2328,8 @@
           "attack" : 0,
           "damage" : 0,
           "radius" : 0,
-          "blast" : 0
+          "blast" : 0,
+          "conditions" : [ ]
         },
         "speed" : 0,
         "ranged" : {
@@ -2284,7 +2339,8 @@
           "consumption" : {
             "energy" : 0,
             "materials" : 0
-          }
+          },
+          "conditions" : [ ]
         },
         "energy" : {
           "max" : 0,
@@ -2304,7 +2360,8 @@
           "consumption" : {
             "energy" : 0,
             "materials" : 0
-          }
+          },
+          "conditions" : [ ]
         },
         "health" : {
           "max" : 100,
@@ -2362,7 +2419,8 @@
           "attack" : 0,
           "damage" : 0,
           "radius" : 0,
-          "blast" : 0
+          "blast" : 0,
+          "conditions" : [ ]
         },
         "speed" : 0,
         "ranged" : {
@@ -2372,7 +2430,8 @@
           "consumption" : {
             "energy" : 0,
             "materials" : 0
-          }
+          },
+          "conditions" : [ ]
         },
         "energy" : {
           "max" : 0,
@@ -2392,7 +2451,8 @@
           "consumption" : {
             "energy" : 0,
             "materials" : 0
-          }
+          },
+          "conditions" : [ ]
         },
         "health" : {
           "max" : 30,
@@ -2439,7 +2499,8 @@
           "attack" : 0,
           "damage" : 0,
           "radius" : 0,
-          "blast" : 0
+          "blast" : 0,
+          "conditions" : [ ]
         },
         "speed" : 10,
         "ranged" : {
@@ -2449,7 +2510,8 @@
           "consumption" : {
             "energy" : 0,
             "materials" : 0
-          }
+          },
+          "conditions" : [ ]
         },
         "energy" : {
           "max" : 0,
@@ -2469,7 +2531,8 @@
           "consumption" : {
             "energy" : 0,
             "materials" : 0
-          }
+          },
+          "conditions" : [ ]
         },
         "health" : {
           "max" : 40,
@@ -2527,7 +2590,8 @@
           "attack" : 0,
           "damage" : 0,
           "radius" : 0,
-          "blast" : 0
+          "blast" : 0,
+          "conditions" : [ ]
         },
         "speed" : 0,
         "ranged" : {
@@ -2537,7 +2601,8 @@
           "consumption" : {
             "energy" : 0,
             "materials" : 0
-          }
+          },
+          "conditions" : [ ]
         },
         "energy" : {
           "max" : 0,
@@ -2557,7 +2622,8 @@
           "consumption" : {
             "energy" : 0,
             "materials" : 0
-          }
+          },
+          "conditions" : [ ]
         },
         "health" : {
           "max" : 30,
@@ -2588,7 +2654,8 @@
             "attack" : 0,
             "damage" : 0,
             "radius" : 0,
-            "blast" : 0
+            "blast" : 0,
+            "conditions" : [ ]
           },
           "speed" : 0,
           "ranged" : {
@@ -2598,7 +2665,8 @@
             "consumption" : {
               "energy" : 25,
               "materials" : 0
-            }
+            },
+            "conditions" : [ ]
           },
           "energy" : {
             "max" : 0,
@@ -2618,7 +2686,8 @@
             "consumption" : {
               "energy" : 0,
               "materials" : 0
-            }
+            },
+            "conditions" : [ ]
           },
           "health" : {
             "max" : 0,
@@ -2682,7 +2751,8 @@
             "attack" : 0,
             "damage" : 0,
             "radius" : 0,
-            "blast" : 0
+            "blast" : 0,
+            "conditions" : [ ]
           },
           "speed" : 60,
           "ranged" : {
@@ -2692,7 +2762,8 @@
             "consumption" : {
               "energy" : 0,
               "materials" : 0
-            }
+            },
+            "conditions" : [ ]
           },
           "energy" : {
             "max" : -20,
@@ -2712,7 +2783,8 @@
             "consumption" : {
               "energy" : 0,
               "materials" : 0
-            }
+            },
+            "conditions" : [ ]
           },
           "health" : {
             "max" : 0,
@@ -2761,7 +2833,8 @@
             "attack" : 0,
             "damage" : 0,
             "radius" : 0,
-            "blast" : 0
+            "blast" : 0,
+            "conditions" : [ ]
           },
           "speed" : -10,
           "ranged" : {
@@ -2771,7 +2844,8 @@
             "consumption" : {
               "energy" : 0,
               "materials" : 0
-            }
+            },
+            "conditions" : [ ]
           },
           "energy" : {
             "max" : 30,
@@ -2791,7 +2865,8 @@
             "consumption" : {
               "energy" : 0,
               "materials" : 0
-            }
+            },
+            "conditions" : [ ]
           },
           "health" : {
             "max" : 0,
@@ -2830,7 +2905,8 @@
           "damage" : 50,
           "hitDescription" : "Electrical surge emanates from lock and hits {target}.",
           "deflectDescription" : "Electrical surge emanates from lock and hits {target} with no effect.",
-          "missDescription" : "Electrical surge emanates from lock narrowly missing {target}."
+          "missDescription" : "Electrical surge emanates from lock narrowly missing {target}.",
+          "conditions" : [ ]
         }
       },
       "door" : {
@@ -2915,7 +2991,8 @@
             "attack" : 0,
             "damage" : 0,
             "radius" : 0,
-            "blast" : 0
+            "blast" : 0,
+            "conditions" : [ ]
           },
           "speed" : 0,
           "ranged" : {
@@ -2925,7 +3002,8 @@
             "consumption" : {
               "energy" : 0,
               "materials" : 0.5
-            }
+            },
+            "conditions" : [ ]
           },
           "energy" : {
             "max" : 0,
@@ -2945,7 +3023,8 @@
             "consumption" : {
               "energy" : 0,
               "materials" : 0
-            }
+            },
+            "conditions" : [ ]
           },
           "health" : {
             "max" : 0,
@@ -3023,7 +3102,8 @@
             "attack" : 0,
             "damage" : 0,
             "radius" : 0,
-            "blast" : 0
+            "blast" : 0,
+            "conditions" : [ ]
           },
           "speed" : 0,
           "ranged" : {
@@ -3033,7 +3113,8 @@
             "consumption" : {
               "energy" : 0,
               "materials" : 0
-            }
+            },
+            "conditions" : [ ]
           },
           "energy" : {
             "max" : 0,
@@ -3053,7 +3134,8 @@
             "consumption" : {
               "energy" : 0,
               "materials" : 0
-            }
+            },
+            "conditions" : [ ]
           },
           "health" : {
             "max" : 0,
@@ -3087,7 +3169,8 @@
           "damage" : 40,
           "hitDescription" : "Laser beam shoots from ceiling and hits {target}.",
           "deflectDescription" : "Laser beam shoots from ceiling and hits {target} with no effect.",
-          "missDescription" : "Laser beam shoots from ceiling narrowly missing {target}."
+          "missDescription" : "Laser beam shoots from ceiling narrowly missing {target}.",
+          "conditions" : [ ]
         }
       },
       "door" : null,
@@ -3120,7 +3203,8 @@
             "attack" : 0,
             "damage" : 0,
             "radius" : 0,
-            "blast" : 0
+            "blast" : 0,
+            "conditions" : [ ]
           },
           "speed" : 0,
           "ranged" : {
@@ -3130,7 +3214,8 @@
             "consumption" : {
               "energy" : 20,
               "materials" : 0
-            }
+            },
+            "conditions" : [ ]
           },
           "energy" : {
             "max" : 0,
@@ -3150,7 +3235,8 @@
             "consumption" : {
               "energy" : 0,
               "materials" : 0
-            }
+            },
+            "conditions" : [ ]
           },
           "health" : {
             "max" : 0,
@@ -3214,7 +3300,8 @@
             "attack" : 0,
             "damage" : 0,
             "radius" : 0,
-            "blast" : 0
+            "blast" : 0,
+            "conditions" : [ ]
           },
           "speed" : 0,
           "ranged" : {
@@ -3224,7 +3311,8 @@
             "consumption" : {
               "energy" : 0,
               "materials" : 0
-            }
+            },
+            "conditions" : [ ]
           },
           "energy" : {
             "max" : 0,
@@ -3244,7 +3332,8 @@
             "consumption" : {
               "energy" : 0,
               "materials" : 0
-            }
+            },
+            "conditions" : [ ]
           },
           "health" : {
             "max" : 20,
@@ -3267,7 +3356,8 @@
         "attack" : 120,
         "damage" : 70,
         "radius" : 1,
-        "blast" : 160
+        "blast" : 160,
+        "conditions" : [ ]
       },
       "shield" : null,
       "hidden" : true,
@@ -3318,7 +3408,8 @@
             "attack" : 0,
             "damage" : 0,
             "radius" : 0,
-            "blast" : 0
+            "blast" : 0,
+            "conditions" : [ ]
           },
           "speed" : -5,
           "ranged" : {
@@ -3328,7 +3419,8 @@
             "consumption" : {
               "energy" : 0,
               "materials" : 0
-            }
+            },
+            "conditions" : [ ]
           },
           "energy" : {
             "max" : 0,
@@ -3348,7 +3440,8 @@
             "consumption" : {
               "energy" : 0,
               "materials" : 0
-            }
+            },
+            "conditions" : [ ]
           },
           "health" : {
             "max" : 0,
@@ -3383,7 +3476,8 @@
         "attack" : 120,
         "damage" : 70,
         "radius" : 6,
-        "blast" : 260
+        "blast" : 260,
+        "conditions" : [ ]
       },
       "shield" : null,
       "hidden" : true,
@@ -3491,7 +3585,8 @@
             "attack" : 0,
             "damage" : 0,
             "radius" : 0,
-            "blast" : 0
+            "blast" : 0,
+            "conditions" : [ ]
           },
           "speed" : 0,
           "ranged" : {
@@ -3501,7 +3596,8 @@
             "consumption" : {
               "energy" : 0,
               "materials" : 0
-            }
+            },
+            "conditions" : [ ]
           },
           "energy" : {
             "max" : 0,
@@ -3521,7 +3617,8 @@
             "consumption" : {
               "energy" : 0,
               "materials" : 0
-            }
+            },
+            "conditions" : [ ]
           },
           "health" : {
             "max" : 0,
@@ -3568,7 +3665,8 @@
             "attack" : 0,
             "damage" : 0,
             "radius" : 0,
-            "blast" : 0
+            "blast" : 0,
+            "conditions" : [ ]
           },
           "speed" : 0,
           "ranged" : {
@@ -3578,7 +3676,8 @@
             "consumption" : {
               "energy" : 0,
               "materials" : 0
-            }
+            },
+            "conditions" : [ ]
           },
           "energy" : {
             "max" : 0,
@@ -3598,7 +3697,8 @@
             "consumption" : {
               "energy" : 10,
               "materials" : 0
-            }
+            },
+            "conditions" : [ ]
           },
           "health" : {
             "max" : 0,
@@ -3674,7 +3774,8 @@
             "attack" : 0,
             "damage" : 0,
             "radius" : 0,
-            "blast" : 0
+            "blast" : 0,
+            "conditions" : [ ]
           },
           "speed" : 0,
           "ranged" : {
@@ -3684,7 +3785,8 @@
             "consumption" : {
               "energy" : 0,
               "materials" : 0
-            }
+            },
+            "conditions" : [ ]
           },
           "energy" : {
             "max" : 0,
@@ -3704,7 +3806,8 @@
             "consumption" : {
               "energy" : 0,
               "materials" : 0
-            }
+            },
+            "conditions" : [ ]
           },
           "health" : {
             "max" : 0,
@@ -3753,7 +3856,8 @@
             "attack" : 0,
             "damage" : 0,
             "radius" : 0,
-            "blast" : 0
+            "blast" : 0,
+            "conditions" : [ ]
           },
           "speed" : 0,
           "ranged" : {
@@ -3763,7 +3867,8 @@
             "consumption" : {
               "energy" : 0,
               "materials" : 0
-            }
+            },
+            "conditions" : [ ]
           },
           "energy" : {
             "max" : 0,
@@ -3783,7 +3888,8 @@
             "consumption" : {
               "energy" : 0,
               "materials" : 0
-            }
+            },
+            "conditions" : [ ]
           },
           "health" : {
             "max" : 0,
@@ -3887,7 +3993,8 @@
             "attack" : 0,
             "damage" : 0,
             "radius" : 0,
-            "blast" : 0
+            "blast" : 0,
+            "conditions" : [ ]
           },
           "speed" : 0,
           "ranged" : {
@@ -3897,7 +4004,8 @@
             "consumption" : {
               "energy" : 0,
               "materials" : 0
-            }
+            },
+            "conditions" : [ ]
           },
           "energy" : {
             "max" : 0,
@@ -3917,7 +4025,8 @@
             "consumption" : {
               "energy" : 0,
               "materials" : 0
-            }
+            },
+            "conditions" : [ ]
           },
           "health" : {
             "max" : 0,
@@ -3992,7 +4101,8 @@
             "attack" : 0,
             "damage" : 0,
             "radius" : 0,
-            "blast" : 0
+            "blast" : 0,
+            "conditions" : [ ]
           },
           "speed" : 20,
           "ranged" : {
@@ -4002,7 +4112,8 @@
             "consumption" : {
               "energy" : 0,
               "materials" : 0
-            }
+            },
+            "conditions" : [ ]
           },
           "energy" : {
             "max" : 0,
@@ -4022,7 +4133,8 @@
             "consumption" : {
               "energy" : 0,
               "materials" : 0
-            }
+            },
+            "conditions" : [ ]
           },
           "health" : {
             "max" : 0,
@@ -4088,7 +4200,8 @@
           "damage" : 50,
           "hitDescription" : "Pulse of plasma shoots from ceiling and hits {target}.",
           "deflectDescription" : "Pulse of plasma shoots from ceiling and hits {target} with no effect.",
-          "missDescription" : "Pulse of plasma shoots from ceiling narrowly missing {target}."
+          "missDescription" : "Pulse of plasma shoots from ceiling narrowly missing {target}.",
+          "conditions" : [ ]
         }
       },
       "door" : null,
@@ -4165,7 +4278,8 @@
             "attack" : 0,
             "damage" : 0,
             "radius" : 0,
-            "blast" : 0
+            "blast" : 0,
+            "conditions" : [ ]
           },
           "speed" : 20,
           "ranged" : {
@@ -4175,7 +4289,8 @@
             "consumption" : {
               "energy" : 0,
               "materials" : 0
-            }
+            },
+            "conditions" : [ ]
           },
           "energy" : {
             "max" : -10,
@@ -4195,7 +4310,8 @@
             "consumption" : {
               "energy" : 0,
               "materials" : 0
-            }
+            },
+            "conditions" : [ ]
           },
           "health" : {
             "max" : 0,
@@ -4233,7 +4349,8 @@
         "attack" : 120,
         "damage" : 70,
         "radius" : 3,
-        "blast" : 140
+        "blast" : 140,
+        "conditions" : [ ]
       },
       "shield" : null,
       "hidden" : true,
@@ -4353,7 +4470,8 @@
             "attack" : 0,
             "damage" : 0,
             "radius" : 0,
-            "blast" : 0
+            "blast" : 0,
+            "conditions" : [ ]
           },
           "speed" : 0,
           "ranged" : {
@@ -4363,7 +4481,8 @@
             "consumption" : {
               "energy" : 0,
               "materials" : 0
-            }
+            },
+            "conditions" : [ ]
           },
           "energy" : {
             "max" : 0,
@@ -4383,7 +4502,8 @@
             "consumption" : {
               "energy" : 0,
               "materials" : 0
-            }
+            },
+            "conditions" : [ ]
           },
           "health" : {
             "max" : 0,
@@ -4432,7 +4552,8 @@
             "attack" : 0,
             "damage" : 0,
             "radius" : 0,
-            "blast" : 0
+            "blast" : 0,
+            "conditions" : [ ]
           },
           "speed" : 0,
           "ranged" : {
@@ -4442,7 +4563,8 @@
             "consumption" : {
               "energy" : 0,
               "materials" : 0
-            }
+            },
+            "conditions" : [ ]
           },
           "energy" : {
             "max" : 0,
@@ -4462,7 +4584,8 @@
             "consumption" : {
               "energy" : 0,
               "materials" : 0
-            }
+            },
+            "conditions" : [ ]
           },
           "health" : {
             "max" : 0,
@@ -4526,7 +4649,8 @@
             "attack" : 0,
             "damage" : 0,
             "radius" : 0,
-            "blast" : 0
+            "blast" : 0,
+            "conditions" : [ ]
           },
           "speed" : 30,
           "ranged" : {
@@ -4536,7 +4660,8 @@
             "consumption" : {
               "energy" : 0,
               "materials" : 0
-            }
+            },
+            "conditions" : [ ]
           },
           "energy" : {
             "max" : 0,
@@ -4556,7 +4681,8 @@
             "consumption" : {
               "energy" : 0,
               "materials" : 0
-            }
+            },
+            "conditions" : [ ]
           },
           "health" : {
             "max" : 0,
@@ -4605,7 +4731,8 @@
             "attack" : 0,
             "damage" : 0,
             "radius" : 0,
-            "blast" : 0
+            "blast" : 0,
+            "conditions" : [ ]
           },
           "speed" : 0,
           "ranged" : {
@@ -4615,7 +4742,8 @@
             "consumption" : {
               "energy" : 0,
               "materials" : 0
-            }
+            },
+            "conditions" : [ ]
           },
           "energy" : {
             "max" : 50,
@@ -4635,7 +4763,8 @@
             "consumption" : {
               "energy" : 0,
               "materials" : 0
-            }
+            },
+            "conditions" : [ ]
           },
           "health" : {
             "max" : 0,
@@ -4698,7 +4827,8 @@
             "attack" : 0,
             "damage" : 0,
             "radius" : 0,
-            "blast" : 0
+            "blast" : 0,
+            "conditions" : [ ]
           },
           "speed" : 0,
           "ranged" : {
@@ -4708,7 +4838,8 @@
             "consumption" : {
               "energy" : 0,
               "materials" : 0
-            }
+            },
+            "conditions" : [ ]
           },
           "energy" : {
             "max" : 0,
@@ -4728,7 +4859,8 @@
             "consumption" : {
               "energy" : 0,
               "materials" : 0
-            }
+            },
+            "conditions" : [ ]
           },
           "health" : {
             "max" : 0,
@@ -4802,7 +4934,8 @@
             "attack" : 0,
             "damage" : 0,
             "radius" : 0,
-            "blast" : 0
+            "blast" : 0,
+            "conditions" : [ ]
           },
           "speed" : 0,
           "ranged" : {
@@ -4812,7 +4945,8 @@
             "consumption" : {
               "energy" : 0,
               "materials" : 0
-            }
+            },
+            "conditions" : [ ]
           },
           "energy" : {
             "max" : 0,
@@ -4832,7 +4966,8 @@
             "consumption" : {
               "energy" : 0,
               "materials" : 0
-            }
+            },
+            "conditions" : [ ]
           },
           "health" : {
             "max" : 0,
@@ -4893,7 +5028,8 @@
             "attack" : 0,
             "damage" : 20,
             "radius" : 0,
-            "blast" : 0
+            "blast" : 0,
+            "conditions" : [ ]
           },
           "speed" : 0,
           "ranged" : {
@@ -4903,7 +5039,8 @@
             "consumption" : {
               "energy" : 0,
               "materials" : 0
-            }
+            },
+            "conditions" : [ ]
           },
           "energy" : {
             "max" : 0,
@@ -4923,7 +5060,8 @@
             "consumption" : {
               "energy" : 0,
               "materials" : 0
-            }
+            },
+            "conditions" : [ ]
           },
           "health" : {
             "max" : 0,
@@ -5003,7 +5141,8 @@
             "attack" : 0,
             "damage" : 0,
             "radius" : 0,
-            "blast" : 0
+            "blast" : 0,
+            "conditions" : [ ]
           },
           "speed" : 0,
           "ranged" : {
@@ -5013,7 +5152,8 @@
             "consumption" : {
               "energy" : 0,
               "materials" : 0
-            }
+            },
+            "conditions" : [ ]
           },
           "energy" : {
             "max" : 0,
@@ -5033,7 +5173,8 @@
             "consumption" : {
               "energy" : 10,
               "materials" : 0
-            }
+            },
+            "conditions" : [ ]
           },
           "health" : {
             "max" : 0,
@@ -5122,7 +5263,8 @@
             "attack" : 0,
             "damage" : 0,
             "radius" : 0,
-            "blast" : 0
+            "blast" : 0,
+            "conditions" : [ ]
           },
           "speed" : -10,
           "ranged" : {
@@ -5132,7 +5274,8 @@
             "consumption" : {
               "energy" : 0,
               "materials" : 0
-            }
+            },
+            "conditions" : [ ]
           },
           "energy" : {
             "max" : 0,
@@ -5152,7 +5295,8 @@
             "consumption" : {
               "energy" : 0,
               "materials" : 0
-            }
+            },
+            "conditions" : [ ]
           },
           "health" : {
             "max" : 0,
@@ -5245,7 +5389,8 @@
             "attack" : 0,
             "damage" : 0,
             "radius" : 0,
-            "blast" : 0
+            "blast" : 0,
+            "conditions" : [ ]
           },
           "speed" : -10,
           "ranged" : {
@@ -5255,7 +5400,8 @@
             "consumption" : {
               "energy" : 30,
               "materials" : 0
-            }
+            },
+            "conditions" : [ ]
           },
           "energy" : {
             "max" : 0,
@@ -5275,7 +5421,8 @@
             "consumption" : {
               "energy" : 0,
               "materials" : 0
-            }
+            },
+            "conditions" : [ ]
           },
           "health" : {
             "max" : 0,
@@ -5334,7 +5481,8 @@
             "attack" : 0,
             "damage" : 0,
             "radius" : 0,
-            "blast" : 0
+            "blast" : 0,
+            "conditions" : [ ]
           },
           "speed" : 0,
           "ranged" : {
@@ -5344,7 +5492,8 @@
             "consumption" : {
               "energy" : 0,
               "materials" : 0
-            }
+            },
+            "conditions" : [ ]
           },
           "energy" : {
             "max" : 0,
@@ -5364,7 +5513,8 @@
             "consumption" : {
               "energy" : 0,
               "materials" : 0
-            }
+            },
+            "conditions" : [ ]
           },
           "health" : {
             "max" : 0,
@@ -5431,7 +5581,8 @@
             "attack" : 0,
             "damage" : 0,
             "radius" : 0,
-            "blast" : 0
+            "blast" : 0,
+            "conditions" : [ ]
           },
           "speed" : 0,
           "ranged" : {
@@ -5441,7 +5592,8 @@
             "consumption" : {
               "energy" : 0,
               "materials" : 0
-            }
+            },
+            "conditions" : [ ]
           },
           "energy" : {
             "max" : 0,
@@ -5461,7 +5613,8 @@
             "consumption" : {
               "energy" : 0,
               "materials" : 0
-            }
+            },
+            "conditions" : [ ]
           },
           "health" : {
             "max" : 0,
@@ -5550,7 +5703,8 @@
             "attack" : 0,
             "damage" : 0,
             "radius" : 0,
-            "blast" : 0
+            "blast" : 0,
+            "conditions" : [ ]
           },
           "speed" : 0,
           "ranged" : {
@@ -5560,7 +5714,8 @@
             "consumption" : {
               "energy" : 0,
               "materials" : 1
-            }
+            },
+            "conditions" : [ ]
           },
           "energy" : {
             "max" : 0,
@@ -5580,7 +5735,8 @@
             "consumption" : {
               "energy" : 0,
               "materials" : 0
-            }
+            },
+            "conditions" : [ ]
           },
           "health" : {
             "max" : 0,
@@ -5644,7 +5800,8 @@
             "attack" : 0,
             "damage" : 0,
             "radius" : 0,
-            "blast" : 0
+            "blast" : 0,
+            "conditions" : [ ]
           },
           "speed" : 0,
           "ranged" : {
@@ -5654,7 +5811,8 @@
             "consumption" : {
               "energy" : 0,
               "materials" : 0
-            }
+            },
+            "conditions" : [ ]
           },
           "energy" : {
             "max" : 0,
@@ -5674,7 +5832,8 @@
             "consumption" : {
               "energy" : 0,
               "materials" : 0
-            }
+            },
+            "conditions" : [ ]
           },
           "health" : {
             "max" : 0,
@@ -5697,7 +5856,8 @@
         "attack" : 120,
         "damage" : 70,
         "radius" : 2,
-        "blast" : 140
+        "blast" : 140,
+        "conditions" : [ ]
       },
       "shield" : null,
       "hidden" : true,
@@ -5750,7 +5910,8 @@
             "attack" : 0,
             "damage" : 0,
             "radius" : 0,
-            "blast" : 0
+            "blast" : 0,
+            "conditions" : [ ]
           },
           "speed" : 0,
           "ranged" : {
@@ -5760,7 +5921,8 @@
             "consumption" : {
               "energy" : 30,
               "materials" : 0
-            }
+            },
+            "conditions" : [ ]
           },
           "energy" : {
             "max" : 0,
@@ -5780,7 +5942,8 @@
             "consumption" : {
               "energy" : 0,
               "materials" : 0
-            }
+            },
+            "conditions" : [ ]
           },
           "health" : {
             "max" : 0,
@@ -5825,7 +5988,8 @@
             "attack" : 0,
             "damage" : 0,
             "radius" : 0,
-            "blast" : 0
+            "blast" : 0,
+            "conditions" : [ ]
           },
           "speed" : 0,
           "ranged" : {
@@ -5835,7 +5999,8 @@
             "consumption" : {
               "energy" : 0,
               "materials" : 0
-            }
+            },
+            "conditions" : [ ]
           },
           "energy" : {
             "max" : 0,
@@ -5855,7 +6020,8 @@
             "consumption" : {
               "energy" : 0,
               "materials" : 0
-            }
+            },
+            "conditions" : [ ]
           },
           "health" : {
             "max" : 0,
@@ -5922,7 +6088,8 @@
             "attack" : 0,
             "damage" : 0,
             "radius" : 0,
-            "blast" : 0
+            "blast" : 0,
+            "conditions" : [ ]
           },
           "speed" : 0,
           "ranged" : {
@@ -5932,7 +6099,8 @@
             "consumption" : {
               "energy" : 0,
               "materials" : 0
-            }
+            },
+            "conditions" : [ ]
           },
           "energy" : {
             "max" : 0,
@@ -5952,7 +6120,8 @@
             "consumption" : {
               "energy" : 0,
               "materials" : 0
-            }
+            },
+            "conditions" : [ ]
           },
           "health" : {
             "max" : 0,
@@ -6001,7 +6170,8 @@
             "attack" : 0,
             "damage" : 0,
             "radius" : 0,
-            "blast" : 0
+            "blast" : 0,
+            "conditions" : [ ]
           },
           "speed" : 0,
           "ranged" : {
@@ -6011,7 +6181,8 @@
             "consumption" : {
               "energy" : 0,
               "materials" : 0
-            }
+            },
+            "conditions" : [ ]
           },
           "energy" : {
             "max" : 0,
@@ -6031,7 +6202,8 @@
             "consumption" : {
               "energy" : 0,
               "materials" : 0
-            }
+            },
+            "conditions" : [ ]
           },
           "health" : {
             "max" : 0,
@@ -6078,7 +6250,8 @@
             "attack" : 0,
             "damage" : 0,
             "radius" : 0,
-            "blast" : 0
+            "blast" : 0,
+            "conditions" : [ ]
           },
           "speed" : 0,
           "ranged" : {
@@ -6088,7 +6261,8 @@
             "consumption" : {
               "energy" : 0,
               "materials" : 0
-            }
+            },
+            "conditions" : [ ]
           },
           "energy" : {
             "max" : 0,
@@ -6108,7 +6282,8 @@
             "consumption" : {
               "energy" : 0,
               "materials" : 0.5
-            }
+            },
+            "conditions" : [ ]
           },
           "health" : {
             "max" : 0,
@@ -6220,7 +6395,8 @@
             "attack" : 0,
             "damage" : 0,
             "radius" : 0,
-            "blast" : 0
+            "blast" : 0,
+            "conditions" : [ ]
           },
           "speed" : 0,
           "ranged" : {
@@ -6230,7 +6406,8 @@
             "consumption" : {
               "energy" : 0,
               "materials" : 0
-            }
+            },
+            "conditions" : [ ]
           },
           "energy" : {
             "max" : 0,
@@ -6250,7 +6427,8 @@
             "consumption" : {
               "energy" : 0,
               "materials" : 0.5
-            }
+            },
+            "conditions" : [ ]
           },
           "health" : {
             "max" : 0,
@@ -6316,7 +6494,8 @@
             "attack" : 0,
             "damage" : 0,
             "radius" : 0,
-            "blast" : 0
+            "blast" : 0,
+            "conditions" : [ ]
           },
           "speed" : 0,
           "ranged" : {
@@ -6326,7 +6505,8 @@
             "consumption" : {
               "energy" : 0,
               "materials" : 0
-            }
+            },
+            "conditions" : [ ]
           },
           "energy" : {
             "max" : 0,
@@ -6346,7 +6526,8 @@
             "consumption" : {
               "energy" : 0,
               "materials" : 0
-            }
+            },
+            "conditions" : [ ]
           },
           "health" : {
             "max" : 0,
@@ -6429,7 +6610,8 @@
             "attack" : 0,
             "damage" : 0,
             "radius" : 0,
-            "blast" : 0
+            "blast" : 0,
+            "conditions" : [ ]
           },
           "speed" : 0,
           "ranged" : {
@@ -6439,7 +6621,8 @@
             "consumption" : {
               "energy" : 0,
               "materials" : 0
-            }
+            },
+            "conditions" : [ ]
           },
           "energy" : {
             "max" : 0,
@@ -6459,7 +6642,8 @@
             "consumption" : {
               "energy" : 0,
               "materials" : 0
-            }
+            },
+            "conditions" : [ ]
           },
           "health" : {
             "max" : 0,
@@ -6692,7 +6876,8 @@
           "attack" : 0,
           "damage" : 0,
           "radius" : 0,
-          "blast" : 0
+          "blast" : 0,
+          "conditions" : [ ]
         },
         "speed" : 0,
         "ranged" : {
@@ -6702,7 +6887,8 @@
           "consumption" : {
             "energy" : 0,
             "materials" : 0
-          }
+          },
+          "conditions" : [ ]
         },
         "energy" : {
           "max" : 0,
@@ -6722,7 +6908,8 @@
           "consumption" : {
             "energy" : 0,
             "materials" : 0
-          }
+          },
+          "conditions" : [ ]
         },
         "health" : {
           "max" : 0,

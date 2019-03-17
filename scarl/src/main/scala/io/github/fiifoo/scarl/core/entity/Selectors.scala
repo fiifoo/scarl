@@ -12,6 +12,12 @@ object Selectors {
     s.index.containerItems.getOrElse(container, Set())
   }
 
+  def getCreatureConditionStatuses(s: State)(creature: CreatureId): Set[ConditionStatus] = {
+    getTargetStatuses(s)(creature) map (_.apply(s)) collect {
+      case status: ConditionStatus => status
+    }
+  }
+
   def getCreatureComrades(s: State)(creature: CreatureId): Set[CreatureId] = {
     getCreaturePartyMembers(s)(creature) - creature
   }
@@ -29,7 +35,11 @@ object Selectors {
   }
 
   def getCreatureStats(s: State)(creature: CreatureId): Stats = {
-    creature(s).stats add getEquipmentStats(s)(creature)
+    val stats = creature(s).stats add getEquipmentStats(s)(creature)
+
+    (getCreatureConditionStatuses(s)(creature) foldLeft stats) ((stats, status) => {
+      status.condition.modifyStats(stats, status.strength)
+    })
   }
 
   def getCreatureWaypoint(s: State)(creature: CreatureId): Option[Waypoint] = {

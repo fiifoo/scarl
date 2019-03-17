@@ -1,6 +1,7 @@
 package io.github.fiifoo.scarl.power
 
 import io.github.fiifoo.scarl.core.State
+import io.github.fiifoo.scarl.core.creature.Condition
 import io.github.fiifoo.scarl.core.effect.Effect
 import io.github.fiifoo.scarl.core.entity.Power.Resources
 import io.github.fiifoo.scarl.core.entity.Selectors.isVisibleItem
@@ -11,6 +12,7 @@ case class TrapAttackPower(description: Option[String] = None,
                            resources: Option[Resources] = None,
                            attack: Int,
                            damage: Int,
+                           conditions: List[Condition],
                            hitDescription: Option[String] = None,
                            deflectDescription: Option[String] = None,
                            missDescription: Option[String] = None,
@@ -31,6 +33,7 @@ case class TrapAttackPower(description: Option[String] = None,
           user,
           attack,
           damage,
+          conditions,
           evade,
           hitDescription,
           deflectDescription,

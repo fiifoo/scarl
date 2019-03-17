@@ -2,6 +2,7 @@ package io.github.fiifoo.scarl.effect.combat
 
 import io.github.fiifoo.scarl.core.State
 import io.github.fiifoo.scarl.core.effect.{Effect, EffectResult}
+import io.github.fiifoo.scarl.core.entity.Selectors.getCreatureStats
 import io.github.fiifoo.scarl.core.entity.{CreatureId, EntityId, Signal}
 import io.github.fiifoo.scarl.core.geometry.Location
 import io.github.fiifoo.scarl.core.mutation.RngMutation
@@ -29,7 +30,9 @@ case class ShotEffect(attacker: CreatureId,
     val result = AttackRule.ranged(s, random)(attacker, target)
 
     val effect = if (result.hit) {
-      HitEffect(attacker, target, result, target(s).location, Some(this))
+      val conditions = getCreatureStats(s)(this.attacker).ranged.conditions
+
+      HitEffect(attacker, target, result, conditions, target(s).location, Some(this))
     } else {
       MissEffect(attacker, target, target(s).location, Some(this))
     }

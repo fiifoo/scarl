@@ -49,6 +49,13 @@ trait Status extends Entity {
   val target: EntityId
 }
 
+trait ConditionStatus extends Entity with Status {
+  val condition: Condition
+  val strength: Int
+
+  def setStrength(strength: Int): ConditionStatus
+}
+
 trait ActiveStatus extends Entity with Status with Actor {
   val id: ActiveStatusId
 

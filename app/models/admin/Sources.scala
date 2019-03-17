@@ -10,13 +10,14 @@ import io.github.fiifoo.scarl.area.theme.Theme
 import io.github.fiifoo.scarl.core.ai.{Behavior, Strategy}
 import io.github.fiifoo.scarl.core.assets._
 import io.github.fiifoo.scarl.core.communication.{Communication, Message}
-import io.github.fiifoo.scarl.core.creature.{Faction, Missile, Progression}
+import io.github.fiifoo.scarl.core.creature.{Condition, Faction, Missile, Progression}
 import io.github.fiifoo.scarl.core.entity.{CreaturePower, ItemPower}
 import io.github.fiifoo.scarl.core.item._
 import io.github.fiifoo.scarl.core.kind._
 import io.github.fiifoo.scarl.core.math.Distribution
 import io.github.fiifoo.scarl.mechanism._
 import io.github.fiifoo.scarl.power._
+import io.github.fiifoo.scarl.status.Conditions
 import io.github.fiifoo.scarl.widget._
 import io.github.fiifoo.scarl.world._
 import io.github.fiifoo.scarl.world.system.source.{SpaceshipSource, StellarBodySource}
@@ -94,6 +95,10 @@ object Sources {
       typeOf[CombatPower.Medium.type],
       typeOf[CombatPower.Low.type],
     ), objectPolymorphism = true),
+
+    SubModelSource(typeOf[Condition], List(
+      typeOf[Conditions.Disoriented],
+    )),
 
     SubModelSource(typeOf[ContentSelection.CreatureSelection], List(
       typeOf[ContentSelection.ThemeCreature],

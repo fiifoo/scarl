@@ -15,6 +15,7 @@ object JsonPower {
   lazy private implicit val achieveGoalFormat = Json.format[AchieveGoalPower]
   lazy private implicit val activateMachineryFormat = Json.format[ActivateMachineryPower]
   lazy private implicit val captureFormat = Json.format[CapturePower]
+  lazy private implicit val conditionFormat = JsonCondition.conditionFormat
   lazy private implicit val createEntityFormat = Json.format[CreateEntityPower]
   lazy private implicit val explodeFormat = Json.format[ExplodePower]
   lazy private implicit val receiveKeyFormat = Json.format[ReceiveKeyPower]

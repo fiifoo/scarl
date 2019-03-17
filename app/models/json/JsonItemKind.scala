@@ -12,6 +12,7 @@ object JsonItemKind {
 
   lazy private implicit val armorFormat = JsonItemEquipment.armorFormat
   lazy private implicit val charFormat = JsonBase.charFormat
+  lazy private implicit val conditionFormat = JsonCondition.conditionFormat
   lazy private implicit val doorFormat = JsonItemDoor.doorFormat
   lazy private implicit val explosiveFormat = Json.format[Explosive]
   lazy private implicit val itemPowerFormat = JsonPower.itemPowerFormat

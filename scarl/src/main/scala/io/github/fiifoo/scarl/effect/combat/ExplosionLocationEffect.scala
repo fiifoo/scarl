@@ -44,7 +44,9 @@ case class ExplosionLocationEffect(source: LocatableId,
     )
 
     if (result.hit) {
-      ExplosionHitEffect(source, target, result, location, Some(this))
+      val conditions = this.stats.conditions
+
+      ExplosionHitEffect(source, target, result, conditions, location, Some(this))
     } else {
       ExplosionMissEffect(source, target, location, Some(this))
     }
