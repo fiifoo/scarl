@@ -31,9 +31,7 @@ export const stats = OrderedMap([
     [['explosive', 'blast'], 'Explosive blast'],
 ]).mapKeys(path => List(path))
 
-export const statsInfo = Map([
-    [['speed'], '+100']
-]).mapKeys(path => List(path))
+export const statsInfo = Map().mapKeys(path => List(path))
 
 export const negativeStats = Set([
     ['melee', 'consumption', 'energy'],

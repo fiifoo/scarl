@@ -752,7 +752,7 @@
           "blast" : 0,
           "conditions" : [ ]
         },
-        "speed" : 30,
+        "speed" : 130,
         "ranged" : {
           "attack" : 20,
           "damage" : 30,
@@ -843,7 +843,7 @@
           "blast" : 0,
           "conditions" : [ ]
         },
-        "speed" : 0,
+        "speed" : 100,
         "ranged" : {
           "attack" : 35,
           "damage" : 45,
@@ -927,7 +927,7 @@
           "blast" : 0,
           "conditions" : [ ]
         },
-        "speed" : 0,
+        "speed" : 100,
         "ranged" : {
           "attack" : 0,
           "damage" : 0,
@@ -1012,7 +1012,7 @@
           "blast" : 140,
           "conditions" : [ ]
         },
-        "speed" : 200,
+        "speed" : 300,
         "ranged" : {
           "attack" : 0,
           "damage" : 0,
@@ -1103,7 +1103,7 @@
           "blast" : 0,
           "conditions" : [ ]
         },
-        "speed" : 30,
+        "speed" : 130,
         "ranged" : {
           "attack" : 30,
           "damage" : 40,
@@ -1194,7 +1194,7 @@
           "blast" : 0,
           "conditions" : [ ]
         },
-        "speed" : 0,
+        "speed" : 100,
         "ranged" : {
           "attack" : 0,
           "damage" : 0,
@@ -1276,7 +1276,7 @@
           "blast" : 140,
           "conditions" : [ ]
         },
-        "speed" : 200,
+        "speed" : 300,
         "ranged" : {
           "attack" : 0,
           "damage" : 0,
@@ -1366,7 +1366,7 @@
           "blast" : 0,
           "conditions" : [ ]
         },
-        "speed" : 10,
+        "speed" : 110,
         "ranged" : {
           "attack" : 0,
           "damage" : 0,
@@ -1446,7 +1446,7 @@
           "blast" : 0,
           "conditions" : [ ]
         },
-        "speed" : 0,
+        "speed" : 100,
         "ranged" : {
           "attack" : 30,
           "damage" : 25,
@@ -1527,7 +1527,7 @@
           "blast" : 0,
           "conditions" : [ ]
         },
-        "speed" : 0,
+        "speed" : 100,
         "ranged" : {
           "attack" : 0,
           "damage" : 0,
@@ -1608,7 +1608,7 @@
           "blast" : 0,
           "conditions" : [ ]
         },
-        "speed" : 0,
+        "speed" : 100,
         "ranged" : {
           "attack" : 0,
           "damage" : 0,
@@ -1699,7 +1699,7 @@
           "blast" : 0,
           "conditions" : [ ]
         },
-        "speed" : 10,
+        "speed" : 110,
         "ranged" : {
           "attack" : 0,
           "damage" : 0,
@@ -1789,7 +1789,7 @@
           "blast" : 0,
           "conditions" : [ ]
         },
-        "speed" : 50,
+        "speed" : 150,
         "ranged" : {
           "attack" : 30,
           "damage" : 40,
@@ -1880,7 +1880,7 @@
           "blast" : 0,
           "conditions" : [ ]
         },
-        "speed" : 0,
+        "speed" : 100,
         "ranged" : {
           "attack" : 20,
           "damage" : 30,
@@ -1988,7 +1988,7 @@
           "blast" : 0,
           "conditions" : [ ]
         },
-        "speed" : 0,
+        "speed" : 100,
         "ranged" : {
           "attack" : 40,
           "damage" : 30,
@@ -2068,7 +2068,7 @@
           "blast" : 0,
           "conditions" : [ ]
         },
-        "speed" : -20,
+        "speed" : 80,
         "ranged" : {
           "attack" : 30,
           "damage" : 40,
@@ -2159,7 +2159,7 @@
           "blast" : 0,
           "conditions" : [ ]
         },
-        "speed" : 10,
+        "speed" : 110,
         "ranged" : {
           "attack" : 0,
           "damage" : 0,
@@ -2250,7 +2250,7 @@
           "blast" : 0,
           "conditions" : [ ]
         },
-        "speed" : 30,
+        "speed" : 130,
         "ranged" : {
           "attack" : 0,
           "damage" : 0,
@@ -2331,7 +2331,7 @@
           "blast" : 0,
           "conditions" : [ ]
         },
-        "speed" : 0,
+        "speed" : 100,
         "ranged" : {
           "attack" : 0,
           "damage" : 0,
@@ -2422,7 +2422,7 @@
           "blast" : 0,
           "conditions" : [ ]
         },
-        "speed" : 0,
+        "speed" : 100,
         "ranged" : {
           "attack" : 20,
           "damage" : 30,
@@ -2502,7 +2502,7 @@
           "blast" : 0,
           "conditions" : [ ]
         },
-        "speed" : 10,
+        "speed" : 110,
         "ranged" : {
           "attack" : 40,
           "damage" : 40,
@@ -2593,7 +2593,7 @@
           "blast" : 0,
           "conditions" : [ ]
         },
-        "speed" : 0,
+        "speed" : 100,
         "ranged" : {
           "attack" : 20,
           "damage" : 40,

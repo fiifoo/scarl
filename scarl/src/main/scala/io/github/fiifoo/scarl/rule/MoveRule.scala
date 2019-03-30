@@ -8,7 +8,7 @@ object MoveRule {
   val minSpeed = 10
 
   def cost(s: State, creature: CreatureId): Int = {
-    val speed = math.max(minSpeed, baseSpeed + Selectors.getCreatureStats(s)(creature).speed)
+    val speed = math.max(minSpeed, Selectors.getCreatureStats(s)(creature).speed)
 
     (Time.turn.toDouble * baseSpeed / speed).round.toInt
   }
