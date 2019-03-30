@@ -173,12 +173,25 @@ class EventBuilder(s: State, player: CreatureId, fov: Set[Location]) {
   private def build(effect: DeathEffect): Option[String] = {
     val target = effect.target
 
-    if (target == player) {
-      Some("You die...")
-    } else if (fov contains effect.location) {
-      Some(s"${kind(target)} is killed.")
+    if (hasParentEffect(effect, {
+      case effect: BurnEffect => true
+      case _ => false
+    })) {
+      if (target == player) {
+        Some("You burn to death...")
+      } else if (fov contains effect.location) {
+        Some(s"${kind(target)} is burned to death.")
+      } else {
+        None
+      }
     } else {
-      None
+      if (target == player) {
+        Some("You die...")
+      } else if (fov contains effect.location) {
+        Some(s"${kind(target)} is killed.")
+      } else {
+        None
+      }
     }
   }
 
@@ -664,6 +677,18 @@ class EventBuilder(s: State, player: CreatureId, fov: Set[Location]) {
     condition match {
       case x => x.key
     }
+  }
+
+  private def hasParentEffect(effect: Effect, matches: Effect => Boolean): Boolean = {
+    def check(effect: Effect): Boolean = {
+      if (matches(effect)) {
+        true
+      } else {
+        effect.parent.map(check) getOrElse false
+      }
+    }
+
+    check(effect)
   }
 
   private def kind(mixed: KindId): Option[String] = {

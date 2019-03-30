@@ -97,6 +97,7 @@ object Sources {
     ), objectPolymorphism = true),
 
     SubModelSource(typeOf[Condition], List(
+      typeOf[Conditions.Burning],
       typeOf[Conditions.Disoriented],
     )),
 
