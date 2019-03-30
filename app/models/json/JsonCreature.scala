@@ -3,6 +3,7 @@ package models.json
 import io.github.fiifoo.scarl.core.creature.Resources
 import io.github.fiifoo.scarl.core.entity.{Creature, CreatureId, SafeCreatureId}
 import io.github.fiifoo.scarl.core.geometry.Location
+import io.github.fiifoo.scarl.game.area.CreatureInfo
 import play.api.libs.json._
 
 object JsonCreature {
@@ -31,4 +32,7 @@ object JsonCreature {
   }
 
   lazy val creatureFormat: Format[Creature] = Json.format[Creature]
+
+  lazy private implicit val conditionInfoFormat = Json.format[CreatureInfo.ConditionInfo]
+  lazy val creatureInfoFormat: Format[CreatureInfo] = Json.format[CreatureInfo]
 }

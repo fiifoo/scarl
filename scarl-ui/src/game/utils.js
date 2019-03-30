@@ -56,6 +56,8 @@ export const getAttackShortage = (player, type) => {
     return getShortage(player, consumption)
 }
 
+export const getCreatureConditionsInfo = creature => creature.conditions.map(getCreatureConditionInfo)
+
 export const getCreatureInfo = (creature, player, factions) => {
     const health = creature.stats.health.max // equipments not supported
     const damage = creature.damage
@@ -63,7 +65,7 @@ export const getCreatureInfo = (creature, player, factions) => {
     const info = [
         getCreatureFactionInfo(creature, player, factions),
         getCreatureWoundedInfo(damage / health),
-    ].filter(x => !!x)
+    ].filter(x => !!x).concat(getCreatureConditionsInfo(creature))
 
     if (info.length === 0) {
         return undefined
@@ -230,6 +232,14 @@ export const seekTargets = (player, factions, fov, missile = false) => {
 }
 
 const getLocationEntities = (l, fov) => fov[l.x] ? fov[l.x][l.y] : undefined
+
+const getCreatureConditionInfo = condition => {
+    switch (condition.key) {
+        default: {
+            return condition.key
+        }
+    }
+}
 
 const getCreatureDescription = (player, factions, kinds) => creature => {
     const kind = kinds.creatures.get(creature.kind)

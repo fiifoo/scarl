@@ -1,4 +1,7 @@
 import React from 'react'
+import { getCreatureConditionsInfo } from '../../game/utils'
+
+const ucFirst = x => x.charAt(0).toUpperCase() + x.slice(1)
 
 const sectionStyle = {
     display: 'table-cell',
@@ -32,6 +35,9 @@ const StatusBar = ({equipmentSet, hasWorldActions, player, site, openWorld}) => 
             <div style={sectionStyle} className={energyAlert}>Energy <b>{energy}/{energyMax}</b></div>
             <div style={sectionStyle} className={materialsAlert}>Materials <b>{materials}/{materialsMax}</b></div>
             <div style={sectionStyle} className={weaponsStyle}>Weapons <b>{equipmentSet}</b></div>
+            {getCreatureConditionsInfo(player.creature).map(ucFirst).map((condition, i) => (
+                <div style={sectionStyle} className="text-danger" key={i}><b>{condition}</b></div>
+            ))}
             <div style={sectionStyle}><i><b>{site.name}</b></i></div>
             {hasWorldActions && (
                 <div style={sectionStyle}><a onClick={() => openWorld()}><i><b>World access</b></i></a></div>

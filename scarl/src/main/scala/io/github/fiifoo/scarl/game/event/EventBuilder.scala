@@ -662,7 +662,7 @@ class EventBuilder(s: State, player: CreatureId, fov: Set[Location]) {
 
   private def condition(condition: Condition): String = {
     condition match {
-      case _: Conditions.Disoriented => "disoriented"
+      case x => x.key
     }
   }
 
