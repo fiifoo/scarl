@@ -7,6 +7,7 @@ export const stats = OrderedMap([
     [['skill', 'hacking'], 'Hacking'],
     [['defence'], 'Defence'],
     [['armor'], 'Armor'],
+    [['resistance'], 'Resistance'],
     [['health', 'max'], 'Health'],
     [['health', 'regen'], 'Health regeneration'],
     [['energy', 'max'], 'Energy'],

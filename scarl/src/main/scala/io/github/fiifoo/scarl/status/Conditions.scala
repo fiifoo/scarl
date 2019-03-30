@@ -18,7 +18,7 @@ object Conditions {
     }
 
     def resistance(stats: Stats): Int = {
-      stats.sight.sensors
+      (stats.resistance + stats.armor) / 2
     }
 
     def effects(s: State, creature: CreatureId, strength: Int): List[Effect] = {
@@ -45,7 +45,7 @@ object Conditions {
     }
 
     def resistance(stats: Stats): Int = {
-      stats.sight.sensors
+      (stats.resistance + stats.sight.sensors) / 2
     }
 
     def effects(s: State, creature: CreatureId, strength: Int): List[Effect] = {

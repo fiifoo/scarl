@@ -784,6 +784,7 @@
           },
           "conditions" : [ ]
         },
+        "resistance" : 30,
         "health" : {
           "max" : 30,
           "regen" : 0
@@ -875,6 +876,7 @@
           },
           "conditions" : [ ]
         },
+        "resistance" : 20,
         "health" : {
           "max" : 40,
           "regen" : 0
@@ -959,6 +961,7 @@
           },
           "conditions" : [ ]
         },
+        "resistance" : 0,
         "health" : {
           "max" : 100,
           "regen" : 0
@@ -1044,6 +1047,7 @@
           },
           "conditions" : [ ]
         },
+        "resistance" : 100,
         "health" : {
           "max" : 10,
           "regen" : 0
@@ -1135,6 +1139,7 @@
           },
           "conditions" : [ ]
         },
+        "resistance" : 30,
         "health" : {
           "max" : 40,
           "regen" : 0
@@ -1226,6 +1231,7 @@
           },
           "conditions" : [ ]
         },
+        "resistance" : 30,
         "health" : {
           "max" : 200,
           "regen" : 0
@@ -1308,6 +1314,7 @@
           },
           "conditions" : [ ]
         },
+        "resistance" : 100,
         "health" : {
           "max" : 10,
           "regen" : 0
@@ -1398,6 +1405,7 @@
           },
           "conditions" : [ ]
         },
+        "resistance" : 30,
         "health" : {
           "max" : 30,
           "regen" : 0
@@ -1478,6 +1486,7 @@
           },
           "conditions" : [ ]
         },
+        "resistance" : 20,
         "health" : {
           "max" : 30,
           "regen" : 0
@@ -1559,6 +1568,7 @@
           },
           "conditions" : [ ]
         },
+        "resistance" : 20,
         "health" : {
           "max" : 100,
           "regen" : 0
@@ -1640,6 +1650,7 @@
           },
           "conditions" : [ ]
         },
+        "resistance" : 0,
         "health" : {
           "max" : 1000,
           "regen" : 0
@@ -1731,6 +1742,7 @@
           },
           "conditions" : [ ]
         },
+        "resistance" : 30,
         "health" : {
           "max" : 30,
           "regen" : 0
@@ -1821,6 +1833,7 @@
           },
           "conditions" : [ ]
         },
+        "resistance" : 50,
         "health" : {
           "max" : 50,
           "regen" : 1
@@ -1912,6 +1925,7 @@
           },
           "conditions" : [ ]
         },
+        "resistance" : 20,
         "health" : {
           "max" : 30,
           "regen" : 0
@@ -2020,6 +2034,7 @@
           },
           "conditions" : [ ]
         },
+        "resistance" : 20,
         "health" : {
           "max" : 40,
           "regen" : 0
@@ -2100,6 +2115,7 @@
           },
           "conditions" : [ ]
         },
+        "resistance" : 20,
         "health" : {
           "max" : 30,
           "regen" : 0
@@ -2191,6 +2207,7 @@
           },
           "conditions" : [ ]
         },
+        "resistance" : 30,
         "health" : {
           "max" : 40,
           "regen" : 0
@@ -2282,6 +2299,7 @@
           },
           "conditions" : [ ]
         },
+        "resistance" : 30,
         "health" : {
           "max" : 30,
           "regen" : 0
@@ -2363,6 +2381,7 @@
           },
           "conditions" : [ ]
         },
+        "resistance" : 0,
         "health" : {
           "max" : 100,
           "regen" : 0
@@ -2454,6 +2473,7 @@
           },
           "conditions" : [ ]
         },
+        "resistance" : 20,
         "health" : {
           "max" : 30,
           "regen" : 0
@@ -2534,6 +2554,7 @@
           },
           "conditions" : [ ]
         },
+        "resistance" : 30,
         "health" : {
           "max" : 40,
           "regen" : 0
@@ -2625,6 +2646,7 @@
           },
           "conditions" : [ ]
         },
+        "resistance" : 20,
         "health" : {
           "max" : 30,
           "regen" : 0
@@ -2689,6 +2711,7 @@
             },
             "conditions" : [ ]
           },
+          "resistance" : 0,
           "health" : {
             "max" : 0,
             "regen" : 0
@@ -2786,6 +2809,7 @@
             },
             "conditions" : [ ]
           },
+          "resistance" : 5,
           "health" : {
             "max" : 0,
             "regen" : 0
@@ -2868,6 +2892,7 @@
             },
             "conditions" : [ ]
           },
+          "resistance" : 10,
           "health" : {
             "max" : 0,
             "regen" : 0
@@ -3026,6 +3051,7 @@
             },
             "conditions" : [ ]
           },
+          "resistance" : 0,
           "health" : {
             "max" : 0,
             "regen" : 0
@@ -3137,6 +3163,7 @@
             },
             "conditions" : [ ]
           },
+          "resistance" : 5,
           "health" : {
             "max" : 0,
             "regen" : 0
@@ -3238,6 +3265,7 @@
             },
             "conditions" : [ ]
           },
+          "resistance" : 0,
           "health" : {
             "max" : 0,
             "regen" : 0
@@ -3335,6 +3363,7 @@
             },
             "conditions" : [ ]
           },
+          "resistance" : 10,
           "health" : {
             "max" : 20,
             "regen" : 0
@@ -3443,6 +3472,7 @@
             },
             "conditions" : [ ]
           },
+          "resistance" : 0,
           "health" : {
             "max" : 0,
             "regen" : 0
@@ -3620,6 +3650,7 @@
             },
             "conditions" : [ ]
           },
+          "resistance" : 5,
           "health" : {
             "max" : 0,
             "regen" : 0
@@ -3700,6 +3731,7 @@
             },
             "conditions" : [ ]
           },
+          "resistance" : 0,
           "health" : {
             "max" : 0,
             "regen" : 0
@@ -3809,6 +3841,7 @@
             },
             "conditions" : [ ]
           },
+          "resistance" : 0,
           "health" : {
             "max" : 0,
             "regen" : 0
@@ -3891,6 +3924,7 @@
             },
             "conditions" : [ ]
           },
+          "resistance" : 0,
           "health" : {
             "max" : 0,
             "regen" : 0
@@ -4028,6 +4062,7 @@
             },
             "conditions" : [ ]
           },
+          "resistance" : 5,
           "health" : {
             "max" : 0,
             "regen" : 0
@@ -4136,6 +4171,7 @@
             },
             "conditions" : [ ]
           },
+          "resistance" : 5,
           "health" : {
             "max" : 0,
             "regen" : 0
@@ -4313,6 +4349,7 @@
             },
             "conditions" : [ ]
           },
+          "resistance" : 5,
           "health" : {
             "max" : 0,
             "regen" : 0
@@ -4505,6 +4542,7 @@
             },
             "conditions" : [ ]
           },
+          "resistance" : 5,
           "health" : {
             "max" : 0,
             "regen" : 0
@@ -4587,6 +4625,7 @@
             },
             "conditions" : [ ]
           },
+          "resistance" : 5,
           "health" : {
             "max" : 0,
             "regen" : 0
@@ -4684,6 +4723,7 @@
             },
             "conditions" : [ ]
           },
+          "resistance" : 5,
           "health" : {
             "max" : 0,
             "regen" : 0
@@ -4766,6 +4806,7 @@
             },
             "conditions" : [ ]
           },
+          "resistance" : 10,
           "health" : {
             "max" : 0,
             "regen" : 0
@@ -4862,6 +4903,7 @@
             },
             "conditions" : [ ]
           },
+          "resistance" : 5,
           "health" : {
             "max" : 0,
             "regen" : 0
@@ -4969,6 +5011,7 @@
             },
             "conditions" : [ ]
           },
+          "resistance" : 0,
           "health" : {
             "max" : 0,
             "regen" : 0
@@ -5063,6 +5106,7 @@
             },
             "conditions" : [ ]
           },
+          "resistance" : 10,
           "health" : {
             "max" : 0,
             "regen" : 0
@@ -5176,6 +5220,7 @@
             },
             "conditions" : [ ]
           },
+          "resistance" : 0,
           "health" : {
             "max" : 0,
             "regen" : 0
@@ -5298,6 +5343,7 @@
             },
             "conditions" : [ ]
           },
+          "resistance" : 0,
           "health" : {
             "max" : 0,
             "regen" : 0
@@ -5424,6 +5470,7 @@
             },
             "conditions" : [ ]
           },
+          "resistance" : 0,
           "health" : {
             "max" : 0,
             "regen" : 0
@@ -5516,6 +5563,7 @@
             },
             "conditions" : [ ]
           },
+          "resistance" : 0,
           "health" : {
             "max" : 0,
             "regen" : 0
@@ -5616,6 +5664,7 @@
             },
             "conditions" : [ ]
           },
+          "resistance" : 10,
           "health" : {
             "max" : 0,
             "regen" : 0
@@ -5738,6 +5787,7 @@
             },
             "conditions" : [ ]
           },
+          "resistance" : 0,
           "health" : {
             "max" : 0,
             "regen" : 0
@@ -5835,6 +5885,7 @@
             },
             "conditions" : [ ]
           },
+          "resistance" : 10,
           "health" : {
             "max" : 0,
             "regen" : 0
@@ -5945,6 +5996,7 @@
             },
             "conditions" : [ ]
           },
+          "resistance" : 0,
           "health" : {
             "max" : 0,
             "regen" : 0
@@ -6023,6 +6075,7 @@
             },
             "conditions" : [ ]
           },
+          "resistance" : 0,
           "health" : {
             "max" : 0,
             "regen" : 0
@@ -6123,6 +6176,7 @@
             },
             "conditions" : [ ]
           },
+          "resistance" : 10,
           "health" : {
             "max" : 0,
             "regen" : 0
@@ -6205,6 +6259,7 @@
             },
             "conditions" : [ ]
           },
+          "resistance" : 10,
           "health" : {
             "max" : 0,
             "regen" : 0
@@ -6285,6 +6340,7 @@
             },
             "conditions" : [ ]
           },
+          "resistance" : 0,
           "health" : {
             "max" : 0,
             "regen" : 0
@@ -6430,6 +6486,7 @@
             },
             "conditions" : [ ]
           },
+          "resistance" : 0,
           "health" : {
             "max" : 0,
             "regen" : 0
@@ -6529,6 +6586,7 @@
             },
             "conditions" : [ ]
           },
+          "resistance" : 10,
           "health" : {
             "max" : 0,
             "regen" : 0
@@ -6645,6 +6703,7 @@
             },
             "conditions" : [ ]
           },
+          "resistance" : 10,
           "health" : {
             "max" : 0,
             "regen" : 0
@@ -6911,6 +6970,7 @@
           },
           "conditions" : [ ]
         },
+        "resistance" : 0,
         "health" : {
           "max" : 0,
           "regen" : 0
