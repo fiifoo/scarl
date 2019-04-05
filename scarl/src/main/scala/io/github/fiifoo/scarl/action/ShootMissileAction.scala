@@ -30,6 +30,6 @@ case class ShootMissileAction(location: Location) extends Action {
   }
 
   private def getMissile(s: State, actor: CreatureId): Option[CreatureKindId] = {
-    Selectors.getCreatureStats(s)(actor).launcher.missile
+    Selectors.getCreatureStats(s)(actor).launcher.missiles.headOption
   }
 }

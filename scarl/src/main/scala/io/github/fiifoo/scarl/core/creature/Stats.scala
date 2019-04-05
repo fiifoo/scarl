@@ -44,12 +44,12 @@ object Stats {
     }
   }
 
-  case class Launcher(missile: Option[CreatureKindId] = None,
+  case class Launcher(missiles: Set[CreatureKindId] = Set(),
                       range: Int = 0,
                       consumption: Consumption = Consumption()
                      ) {
     def add(x: Launcher): Launcher = {
-      copy(x.missile.orElse(missile), range + x.range, consumption add x.consumption)
+      copy(missiles ++ x.missiles, range + x.range, consumption add x.consumption)
     }
   }
 

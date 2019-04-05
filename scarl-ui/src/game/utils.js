@@ -167,7 +167,7 @@ export const getMissileLauncherRange = player => {
     const creature = player.creature.stats
     const equipment = player.equipmentStats
 
-    return creature.launcher.missile || equipment.launcher.missile ? (
+    return creature.launcher.missiles.length > 0 || equipment.launcher.missiles.length > 0 ? (
         creature.launcher.range + equipment.launcher.range
     ) : 0
 }

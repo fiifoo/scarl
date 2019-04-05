@@ -738,12 +738,12 @@
       "description" : "Elusive machine with ranged attacks.",
       "stats" : {
         "launcher" : {
-          "missile" : null,
           "range" : 0,
           "consumption" : {
             "energy" : 0,
             "materials" : 0
-          }
+          },
+          "missiles" : [ ]
         },
         "explosive" : {
           "attack" : 0,
@@ -830,12 +830,12 @@
       "description" : "Deadly machine with strong ranged attacks.",
       "stats" : {
         "launcher" : {
-          "missile" : null,
           "range" : 0,
           "consumption" : {
             "energy" : 0,
             "materials" : 0
-          }
+          },
+          "missiles" : [ ]
         },
         "explosive" : {
           "attack" : 0,
@@ -915,12 +915,12 @@
       "description" : "It's you.",
       "stats" : {
         "launcher" : {
-          "missile" : null,
           "range" : 0,
           "consumption" : {
             "energy" : 0,
             "materials" : 0
-          }
+          },
+          "missiles" : [ ]
         },
         "explosive" : {
           "attack" : 0,
@@ -1001,12 +1001,12 @@
       "description" : "Explosive missile capable of path finding.",
       "stats" : {
         "launcher" : {
-          "missile" : null,
           "range" : 0,
           "consumption" : {
             "energy" : 0,
             "materials" : 0
-          }
+          },
+          "missiles" : [ ]
         },
         "explosive" : {
           "attack" : 120,
@@ -1093,12 +1093,12 @@
       "description" : "Deadly hunter machine with ranged attacks.",
       "stats" : {
         "launcher" : {
-          "missile" : null,
           "range" : 0,
           "consumption" : {
             "energy" : 0,
             "materials" : 0
-          }
+          },
+          "missiles" : [ ]
         },
         "explosive" : {
           "attack" : 0,
@@ -1185,12 +1185,12 @@
       "description" : "Central AI substrate.",
       "stats" : {
         "launcher" : {
-          "missile" : null,
           "range" : 0,
           "consumption" : {
             "energy" : 0,
             "materials" : 0
-          }
+          },
+          "missiles" : [ ]
         },
         "explosive" : {
           "attack" : 0,
@@ -1268,12 +1268,12 @@
       "description" : "Explosive missile.",
       "stats" : {
         "launcher" : {
-          "missile" : null,
           "range" : 0,
           "consumption" : {
             "energy" : 0,
             "materials" : 0
-          }
+          },
+          "missiles" : [ ]
         },
         "explosive" : {
           "attack" : 120,
@@ -1359,12 +1359,12 @@
       "description" : "Heavily armored machine with melee attacks.",
       "stats" : {
         "launcher" : {
-          "missile" : null,
           "range" : 0,
           "consumption" : {
             "energy" : 0,
             "materials" : 0
-          }
+          },
+          "missiles" : [ ]
         },
         "explosive" : {
           "attack" : 0,
@@ -1440,12 +1440,12 @@
       "description" : "Untrained soldier with bad equipment.",
       "stats" : {
         "launcher" : {
-          "missile" : null,
           "range" : 0,
           "consumption" : {
             "energy" : 0,
             "materials" : 0
-          }
+          },
+          "missiles" : [ ]
         },
         "explosive" : {
           "attack" : 0,
@@ -1522,12 +1522,12 @@
       "description" : "Contact personnel of Scippe Irregulars.",
       "stats" : {
         "launcher" : {
-          "missile" : null,
           "range" : 0,
           "consumption" : {
             "energy" : 0,
             "materials" : 0
-          }
+          },
+          "missiles" : [ ]
         },
         "explosive" : {
           "attack" : 0,
@@ -1604,12 +1604,12 @@
       "description" : "???",
       "stats" : {
         "launcher" : {
-          "missile" : null,
           "range" : 0,
           "consumption" : {
             "energy" : 0,
             "materials" : 0
-          }
+          },
+          "missiles" : [ ]
         },
         "explosive" : {
           "attack" : 0,
@@ -1696,12 +1696,12 @@
       "description" : "Machine with strong melee attacks.",
       "stats" : {
         "launcher" : {
-          "missile" : null,
           "range" : 0,
           "consumption" : {
             "energy" : 0,
             "materials" : 0
-          }
+          },
+          "missiles" : [ ]
         },
         "explosive" : {
           "attack" : 0,
@@ -1787,12 +1787,12 @@
       "description" : "Effective combat drone.",
       "stats" : {
         "launcher" : {
-          "missile" : null,
           "range" : 0,
           "consumption" : {
             "energy" : 0,
             "materials" : 0
-          }
+          },
+          "missiles" : [ ]
         },
         "explosive" : {
           "attack" : 0,
@@ -1879,12 +1879,12 @@
       "description" : "Evasive machine with ranged attacks.",
       "stats" : {
         "launcher" : {
-          "missile" : null,
           "range" : 0,
           "consumption" : {
             "energy" : 0,
             "materials" : 0
-          }
+          },
+          "missiles" : [ ]
         },
         "explosive" : {
           "attack" : 0,
@@ -1988,12 +1988,12 @@
       "description" : "Stationary weapons platform.",
       "stats" : {
         "launcher" : {
-          "missile" : null,
           "range" : 0,
           "consumption" : {
             "energy" : 0,
             "materials" : 0
-          }
+          },
+          "missiles" : [ ]
         },
         "explosive" : {
           "attack" : 0,
@@ -2069,12 +2069,12 @@
       "description" : "Single-minded thing bred for a task.",
       "stats" : {
         "launcher" : {
-          "missile" : null,
           "range" : 0,
           "consumption" : {
             "energy" : 0,
             "materials" : 0
-          }
+          },
+          "missiles" : [ ]
         },
         "explosive" : {
           "attack" : 0,
@@ -2161,12 +2161,12 @@
       "description" : "Deadly machine with strong melee attacks.",
       "stats" : {
         "launcher" : {
-          "missile" : null,
           "range" : 0,
           "consumption" : {
             "energy" : 0,
             "materials" : 0
-          }
+          },
+          "missiles" : [ ]
         },
         "explosive" : {
           "attack" : 0,
@@ -2253,12 +2253,12 @@
       "description" : "Fast machine with melee attacks.",
       "stats" : {
         "launcher" : {
-          "missile" : null,
           "range" : 0,
           "consumption" : {
             "energy" : 0,
             "materials" : 0
-          }
+          },
+          "missiles" : [ ]
         },
         "explosive" : {
           "attack" : 0,
@@ -2335,12 +2335,12 @@
       "description" : "Holds place.",
       "stats" : {
         "launcher" : {
-          "missile" : null,
           "range" : 0,
           "consumption" : {
             "energy" : 0,
             "materials" : 0
-          }
+          },
+          "missiles" : [ ]
         },
         "explosive" : {
           "attack" : 0,
@@ -2427,12 +2427,12 @@
       "description" : "Heavily armored machine with ranged attacks.",
       "stats" : {
         "launcher" : {
-          "missile" : null,
           "range" : 0,
           "consumption" : {
             "energy" : 0,
             "materials" : 0
-          }
+          },
+          "missiles" : [ ]
         },
         "explosive" : {
           "attack" : 0,
@@ -2508,12 +2508,12 @@
       "description" : "Avatar of central AI substrate.",
       "stats" : {
         "launcher" : {
-          "missile" : null,
           "range" : 0,
           "consumption" : {
             "energy" : 0,
             "materials" : 0
-          }
+          },
+          "missiles" : [ ]
         },
         "explosive" : {
           "attack" : 0,
@@ -2600,12 +2600,12 @@
       "description" : "Machine with strong ranged attacks.",
       "stats" : {
         "launcher" : {
-          "missile" : null,
           "range" : 0,
           "consumption" : {
             "energy" : 0,
             "materials" : 0
-          }
+          },
+          "missiles" : [ ]
         },
         "explosive" : {
           "attack" : 0,
@@ -2665,12 +2665,12 @@
       "rangedWeapon" : {
         "stats" : {
           "launcher" : {
-            "missile" : null,
             "range" : 0,
             "consumption" : {
               "energy" : 0,
               "materials" : 0
-            }
+            },
+            "missiles" : [ ]
           },
           "explosive" : {
             "attack" : 0,
@@ -2763,12 +2763,12 @@
       "armor" : {
         "stats" : {
           "launcher" : {
-            "missile" : null,
             "range" : 0,
             "consumption" : {
               "energy" : 0,
               "materials" : 0
-            }
+            },
+            "missiles" : [ ]
           },
           "explosive" : {
             "attack" : 0,
@@ -2846,12 +2846,12 @@
       "armor" : {
         "stats" : {
           "launcher" : {
-            "missile" : null,
             "range" : 0,
             "consumption" : {
               "energy" : 0,
               "materials" : 0
-            }
+            },
+            "missiles" : [ ]
           },
           "explosive" : {
             "attack" : 0,
@@ -3005,12 +3005,12 @@
       "rangedWeapon" : {
         "stats" : {
           "launcher" : {
-            "missile" : null,
             "range" : 0,
             "consumption" : {
               "energy" : 0,
               "materials" : 0
-            }
+            },
+            "missiles" : [ ]
           },
           "explosive" : {
             "attack" : 0,
@@ -3117,12 +3117,12 @@
       "armor" : {
         "stats" : {
           "launcher" : {
-            "missile" : null,
             "range" : 0,
             "consumption" : {
               "energy" : 0,
               "materials" : 0
-            }
+            },
+            "missiles" : [ ]
           },
           "explosive" : {
             "attack" : 0,
@@ -3219,12 +3219,12 @@
       "rangedWeapon" : {
         "stats" : {
           "launcher" : {
-            "missile" : null,
             "range" : 0,
             "consumption" : {
               "energy" : 0,
               "materials" : 0
-            }
+            },
+            "missiles" : [ ]
           },
           "explosive" : {
             "attack" : 0,
@@ -3317,12 +3317,12 @@
       "armor" : {
         "stats" : {
           "launcher" : {
-            "missile" : null,
             "range" : 0,
             "consumption" : {
               "energy" : 0,
               "materials" : 0
-            }
+            },
+            "missiles" : [ ]
           },
           "explosive" : {
             "attack" : 0,
@@ -3426,12 +3426,12 @@
       "shield" : {
         "stats" : {
           "launcher" : {
-            "missile" : null,
             "range" : 0,
             "consumption" : {
               "energy" : 0,
               "materials" : 0
-            }
+            },
+            "missiles" : [ ]
           },
           "explosive" : {
             "attack" : 0,
@@ -3604,12 +3604,12 @@
       "armor" : {
         "stats" : {
           "launcher" : {
-            "missile" : null,
             "range" : 0,
             "consumption" : {
               "energy" : 0,
               "materials" : 0
-            }
+            },
+            "missiles" : [ ]
           },
           "explosive" : {
             "attack" : 0,
@@ -3685,12 +3685,12 @@
       "weapon" : {
         "stats" : {
           "launcher" : {
-            "missile" : null,
             "range" : 0,
             "consumption" : {
               "energy" : 0,
               "materials" : 0
-            }
+            },
+            "missiles" : [ ]
           },
           "explosive" : {
             "attack" : 0,
@@ -3795,12 +3795,12 @@
       "weapon" : {
         "stats" : {
           "launcher" : {
-            "missile" : null,
             "range" : 0,
             "consumption" : {
               "energy" : 0,
               "materials" : 0
-            }
+            },
+            "missiles" : [ ]
           },
           "explosive" : {
             "attack" : 0,
@@ -3878,12 +3878,12 @@
       "weapon" : {
         "stats" : {
           "launcher" : {
-            "missile" : null,
             "range" : 0,
             "consumption" : {
               "energy" : 0,
               "materials" : 0
-            }
+            },
+            "missiles" : [ ]
           },
           "explosive" : {
             "attack" : 0,
@@ -4016,12 +4016,12 @@
       "armor" : {
         "stats" : {
           "launcher" : {
-            "missile" : null,
             "range" : 0,
             "consumption" : {
               "energy" : 0,
               "materials" : 0
-            }
+            },
+            "missiles" : [ ]
           },
           "explosive" : {
             "attack" : 0,
@@ -4125,12 +4125,12 @@
       "armor" : {
         "stats" : {
           "launcher" : {
-            "missile" : null,
             "range" : 0,
             "consumption" : {
               "energy" : 0,
               "materials" : 0
-            }
+            },
+            "missiles" : [ ]
           },
           "explosive" : {
             "attack" : 0,
@@ -4303,12 +4303,12 @@
       "armor" : {
         "stats" : {
           "launcher" : {
-            "missile" : null,
             "range" : 0,
             "consumption" : {
               "energy" : 0,
               "materials" : 0
-            }
+            },
+            "missiles" : [ ]
           },
           "explosive" : {
             "attack" : 0,
@@ -4496,12 +4496,12 @@
       "armor" : {
         "stats" : {
           "launcher" : {
-            "missile" : null,
             "range" : 0,
             "consumption" : {
               "energy" : 0,
               "materials" : 0
-            }
+            },
+            "missiles" : [ ]
           },
           "explosive" : {
             "attack" : 0,
@@ -4579,12 +4579,12 @@
       "armor" : {
         "stats" : {
           "launcher" : {
-            "missile" : null,
             "range" : 0,
             "consumption" : {
               "energy" : 0,
               "materials" : 0
-            }
+            },
+            "missiles" : [ ]
           },
           "explosive" : {
             "attack" : 0,
@@ -4677,12 +4677,12 @@
       "armor" : {
         "stats" : {
           "launcher" : {
-            "missile" : null,
             "range" : 0,
             "consumption" : {
               "energy" : 0,
               "materials" : 0
-            }
+            },
+            "missiles" : [ ]
           },
           "explosive" : {
             "attack" : 0,
@@ -4760,12 +4760,12 @@
       "armor" : {
         "stats" : {
           "launcher" : {
-            "missile" : null,
             "range" : 0,
             "consumption" : {
               "energy" : 0,
               "materials" : 0
-            }
+            },
+            "missiles" : [ ]
           },
           "explosive" : {
             "attack" : 0,
@@ -4857,12 +4857,12 @@
       "armor" : {
         "stats" : {
           "launcher" : {
-            "missile" : null,
             "range" : 0,
             "consumption" : {
               "energy" : 0,
               "materials" : 0
-            }
+            },
+            "missiles" : [ ]
           },
           "explosive" : {
             "attack" : 0,
@@ -4965,12 +4965,12 @@
       "shield" : {
         "stats" : {
           "launcher" : {
-            "missile" : null,
             "range" : 0,
             "consumption" : {
               "energy" : 0,
               "materials" : 0
-            }
+            },
+            "missiles" : [ ]
           },
           "explosive" : {
             "attack" : 0,
@@ -5060,12 +5060,12 @@
       "armor" : {
         "stats" : {
           "launcher" : {
-            "missile" : null,
             "range" : 0,
             "consumption" : {
               "energy" : 0,
               "materials" : 0
-            }
+            },
+            "missiles" : [ ]
           },
           "explosive" : {
             "attack" : 0,
@@ -5174,12 +5174,12 @@
       "weapon" : {
         "stats" : {
           "launcher" : {
-            "missile" : null,
             "range" : 0,
             "consumption" : {
               "energy" : 0,
               "materials" : 0
-            }
+            },
+            "missiles" : [ ]
           },
           "explosive" : {
             "attack" : 0,
@@ -5297,12 +5297,12 @@
       "shield" : {
         "stats" : {
           "launcher" : {
-            "missile" : null,
             "range" : 0,
             "consumption" : {
               "energy" : 0,
               "materials" : 0
-            }
+            },
+            "missiles" : [ ]
           },
           "explosive" : {
             "attack" : 0,
@@ -5424,12 +5424,12 @@
       "rangedWeapon" : {
         "stats" : {
           "launcher" : {
-            "missile" : null,
             "range" : 0,
             "consumption" : {
               "energy" : 0,
               "materials" : 0
-            }
+            },
+            "missiles" : [ ]
           },
           "explosive" : {
             "attack" : 0,
@@ -5517,12 +5517,12 @@
       "launcher" : {
         "stats" : {
           "launcher" : {
-            "missile" : "nomad/missile-smart",
             "range" : 10,
             "consumption" : {
               "energy" : 0,
               "materials" : 35
-            }
+            },
+            "missiles" : [ "nomad/missile-smart" ]
           },
           "explosive" : {
             "attack" : 0,
@@ -5618,12 +5618,12 @@
       "armor" : {
         "stats" : {
           "launcher" : {
-            "missile" : null,
             "range" : 0,
             "consumption" : {
               "energy" : 0,
               "materials" : 0
-            }
+            },
+            "missiles" : [ ]
           },
           "explosive" : {
             "attack" : 0,
@@ -5741,12 +5741,12 @@
       "rangedWeapon" : {
         "stats" : {
           "launcher" : {
-            "missile" : null,
             "range" : 0,
             "consumption" : {
               "energy" : 0,
               "materials" : 0
-            }
+            },
+            "missiles" : [ ]
           },
           "explosive" : {
             "attack" : 0,
@@ -5839,12 +5839,12 @@
       "armor" : {
         "stats" : {
           "launcher" : {
-            "missile" : null,
             "range" : 0,
             "consumption" : {
               "energy" : 0,
               "materials" : 0
-            }
+            },
+            "missiles" : [ ]
           },
           "explosive" : {
             "attack" : 0,
@@ -5950,12 +5950,12 @@
       "rangedWeapon" : {
         "stats" : {
           "launcher" : {
-            "missile" : null,
             "range" : 0,
             "consumption" : {
               "energy" : 0,
               "materials" : 0
-            }
+            },
+            "missiles" : [ ]
           },
           "explosive" : {
             "attack" : 0,
@@ -6029,12 +6029,12 @@
       "launcher" : {
         "stats" : {
           "launcher" : {
-            "missile" : "nomad/missile",
             "range" : 10,
             "consumption" : {
               "energy" : 0,
               "materials" : 30
-            }
+            },
+            "missiles" : [ "nomad/missile" ]
           },
           "explosive" : {
             "attack" : 0,
@@ -6130,12 +6130,12 @@
       "armor" : {
         "stats" : {
           "launcher" : {
-            "missile" : null,
             "range" : 0,
             "consumption" : {
               "energy" : 0,
               "materials" : 0
-            }
+            },
+            "missiles" : [ ]
           },
           "explosive" : {
             "attack" : 0,
@@ -6213,12 +6213,12 @@
       "armor" : {
         "stats" : {
           "launcher" : {
-            "missile" : null,
             "range" : 0,
             "consumption" : {
               "energy" : 0,
               "materials" : 0
-            }
+            },
+            "missiles" : [ ]
           },
           "explosive" : {
             "attack" : 0,
@@ -6294,12 +6294,12 @@
       "weapon" : {
         "stats" : {
           "launcher" : {
-            "missile" : null,
             "range" : 0,
             "consumption" : {
               "energy" : 0,
               "materials" : 0
-            }
+            },
+            "missiles" : [ ]
           },
           "explosive" : {
             "attack" : 0,
@@ -6440,12 +6440,12 @@
       "weapon" : {
         "stats" : {
           "launcher" : {
-            "missile" : null,
             "range" : 0,
             "consumption" : {
               "energy" : 0,
               "materials" : 0
-            }
+            },
+            "missiles" : [ ]
           },
           "explosive" : {
             "attack" : 0,
@@ -6540,12 +6540,12 @@
       "armor" : {
         "stats" : {
           "launcher" : {
-            "missile" : null,
             "range" : 0,
             "consumption" : {
               "energy" : 0,
               "materials" : 0
-            }
+            },
+            "missiles" : [ ]
           },
           "explosive" : {
             "attack" : 0,
@@ -6657,12 +6657,12 @@
       "armor" : {
         "stats" : {
           "launcher" : {
-            "missile" : null,
             "range" : 0,
             "consumption" : {
               "energy" : 0,
               "materials" : 0
-            }
+            },
+            "missiles" : [ ]
           },
           "explosive" : {
             "attack" : 0,
@@ -6924,12 +6924,12 @@
       },
       "stats" : {
         "launcher" : {
-          "missile" : null,
           "range" : 0,
           "consumption" : {
             "energy" : 0,
             "materials" : 0
-          }
+          },
+          "missiles" : [ ]
         },
         "explosive" : {
           "attack" : 0,

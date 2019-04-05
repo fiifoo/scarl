@@ -87,13 +87,17 @@ const Stats = ({label, compare, stats}) => {
 }
 
 const MissileStats = ({equipments, inventory, item, kinds}) => {
-    const stats = kinds.creatures.get(item.launcher.stats.launcher.missile).stats
-
     const compareItemId = equipments.get(LauncherSlot)
     const compareItem = compareItemId ? inventory.get(compareItemId) : null
-    const compare = compareItem ? kinds.creatures.get(compareItem.launcher.stats.launcher.missile).stats : null
 
-    return <Stats label="Missile" stats={stats} compare={compare} />
+    return item.launcher.stats.launcher.missiles.map((missile, index) => {
+        const kind = kinds.creatures.get(missile)
+        const stats = kind.stats
+        const compareMissile = compareItem && compareItem.launcher.stats.launcher.missiles[index]
+        const compare = compareMissile ? kinds.creatures.get(compareMissile).stats : null
+
+        return <Stats key={index} label={kind.name} stats={stats} compare={compare} />
+    })
 }
 
 const ExplosiveStats = ({explosive}) => {
@@ -250,7 +254,7 @@ const ItemDetails = ({equipments, inventory, item, kinds}) => (
             inventory={inventory}
             item={item} />
 
-        {item.launcher && item.launcher.stats.launcher.missile ? (
+        {item.launcher && item.launcher.stats.launcher.missiles.length > 0 ? (
             <MissileStats
                 equipments={equipments}
                 inventory={inventory}
