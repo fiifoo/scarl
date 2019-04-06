@@ -1,6 +1,5 @@
 import { Record } from 'immutable'
 import * as types from '../../actions/actionTypes'
-import * as modes from '../../game/modes'
 
 const initial = Record({
     detailed: true,

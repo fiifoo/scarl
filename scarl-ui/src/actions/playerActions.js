@@ -67,7 +67,7 @@ export const recycleInventoryItem = item => (dispatch, getState) => {
     recaptureFocus(dispatch)
 }
 
-export const shoot = (location, missile = false) => (dispatch, getState) => {
+export const shoot = (location, missile = null) => (dispatch, getState) => {
     const {fov, player} = getState()
     const targets = utils.getLocationCreatures(location, fov.cumulative)
 
@@ -83,9 +83,11 @@ export const shoot = (location, missile = false) => (dispatch, getState) => {
     if (shortage) {
         addShortageMessage(shortage)(dispatch)
     } else {
-        const action = missile ? 'ShootMissile' : 'Shoot'
-
-        doAction(action, {location})(dispatch, getState)
+        if (missile) {
+            doAction('ShootMissile', {location, missile})(dispatch, getState)
+        } else {
+            doAction('Shoot', {location})(dispatch, getState)
+        }
     }
 }
 

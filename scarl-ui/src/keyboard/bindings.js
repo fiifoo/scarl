@@ -84,6 +84,7 @@ export default {
 
     [gameModes.AIM_MISSILE]: Map([
         [keycodes.ESC, commands.CANCEL_MODE],
+        [keycodes.CONTROL, commands.NEXT_MISSILE],
         [keycodes.SPACEBAR, commands.SHOOT],
         [keycodes.Z, commands.SHOOT],
     ]).merge(directions),

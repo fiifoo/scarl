@@ -163,6 +163,25 @@ export const getLocationUsableItems = (location, fov, keys) => {
     return entities ? entities.items.filter(item => item.usable).filter(isNotLocked) : []
 }
 
+export const getMissile = state => {
+    const missiles = getMissiles(state.player)
+
+    if (missiles.length === 0) {
+        return null
+    }
+
+    const selected = state.ui.game.missile
+
+    return selected && missiles.indexOf(selected) !== -1 ? selected : missiles[0]
+}
+
+export const getMissiles = player => {
+    const stats = player.creature.stats
+    const equipmentStats = player.equipmentStats
+
+    return stats.launcher.missiles.concat(equipmentStats.launcher.missiles)
+}
+
 export const getMissileLauncherRange = player => {
     const creature = player.creature.stats
     const equipment = player.equipmentStats

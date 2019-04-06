@@ -22,8 +22,8 @@ const onlyCancelMode = (command, dispatch) => {
 
 const handlers = {
     [modes.MAIN]: main,
-    [modes.AIM]: aim(),
-    [modes.AIM_MISSILE]: aim(true),
+    [modes.AIM]: aim,
+    [modes.AIM_MISSILE]: aim,
     [modes.AUTO_MOVE]: autoMove,
     [modes.CRAFTING]: crafting,
     [modes.GAME_OVER]: gameOver,

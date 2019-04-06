@@ -7,6 +7,7 @@ const initial = Record({
     cursor: null,
     interaction: null,
     interactions: List(),
+    missile: null,
     mode: modes.MAIN,
     reticule: null,
     screenOffset: ScreenOffset(),
@@ -42,6 +43,9 @@ export default (state = initial, action) => {
         }
         case types.SET_INTERACTIONS: {
             return state.set('interactions', action.interactions).set('interaction', 0)
+        }
+        case types.SET_MISSILE: {
+            return state.set('missile', action.missile)
         }
         case types.SET_RETICULE: {
             return state.set('reticule', action.reticule).set('trajectory', action.trajectory)

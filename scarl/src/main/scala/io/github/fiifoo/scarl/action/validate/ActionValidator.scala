@@ -5,7 +5,7 @@ import io.github.fiifoo.scarl.action.validate.ValidatorUtils._
 import io.github.fiifoo.scarl.core.State
 import io.github.fiifoo.scarl.core.action.Action
 import io.github.fiifoo.scarl.core.entity.CreatureId
-import io.github.fiifoo.scarl.core.entity.Selectors.getItemLocation
+import io.github.fiifoo.scarl.core.entity.Selectors.{getCreatureStats, getItemLocation}
 
 object ActionValidator {
 
@@ -27,7 +27,7 @@ object ActionValidator {
       case action: PickItemAction => validate(s, actor, action)
       case action: RecycleItemAction => validate(s, actor, action)
       case _: ShootAction => true
-      case _: ShootMissileAction => true
+      case action: ShootMissileAction => validate(s, actor, action)
       case action: UnequipItemAction => validate(s, actor, action)
       case action: UseCreatureAction => validate(s, actor, action)
       case action: UseDoorAction => validate(s, actor, action)
@@ -99,6 +99,10 @@ object ActionValidator {
     entityExists(s)(action.target) &&
       action.target(s).recyclable.isDefined &&
       (action.target(s).container == actor || (getItemLocation(s)(action.target) contains actor(s).location))
+  }
+
+  private def validate(s: State, actor: CreatureId, action: ShootMissileAction): Boolean = {
+    getCreatureStats(s)(actor).launcher.missiles contains action.missile
   }
 
   private def validate(s: State, actor: CreatureId, action: UnequipItemAction): Boolean = {

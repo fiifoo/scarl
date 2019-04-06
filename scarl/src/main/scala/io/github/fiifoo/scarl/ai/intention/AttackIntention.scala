@@ -3,6 +3,7 @@ package io.github.fiifoo.scarl.ai.intention
 import io.github.fiifoo.scarl.action._
 import io.github.fiifoo.scarl.ai.tactic.AttackTactic
 import io.github.fiifoo.scarl.core.State
+import io.github.fiifoo.scarl.core.action.Action
 import io.github.fiifoo.scarl.core.ai.Intention
 import io.github.fiifoo.scarl.core.ai.Tactic.Result
 import io.github.fiifoo.scarl.core.entity.Selectors.getCreatureStats
@@ -28,15 +29,10 @@ case class AttackIntention(target: SafeCreatureId, enableMove: Boolean = true) e
   }
 
   private def attack(s: State, actor: CreatureId, target: Creature, line: Vector[Location]): Option[Result] = {
-    val action = if (isAdjacent(line)) {
-      Some(AttackAction(target.id))
-    } else if (shouldShootMissile(s, actor, line)) {
-      Some(ShootMissileAction(target.location))
-    } else if (shouldShoot(s, actor, line)) {
-      Some(ShootAction(target.location))
-    } else {
-      None
-    }
+    val action =
+      attackAction(s, actor, target, line) orElse
+        shootMissileAction(s, actor, target, line) orElse
+        shootAction(s, actor, target, line)
 
     action map (action => {
       val tactic = AttackTactic(SafeCreatureId(target.id), target.location, enableMove)
@@ -45,18 +41,36 @@ case class AttackIntention(target: SafeCreatureId, enableMove: Boolean = true) e
     })
   }
 
-  private def shouldShootMissile(s: State, actor: CreatureId, line: Vector[Location]): Boolean = {
-    val stats = getCreatureStats(s)(actor)
-
-    if (s.simulation.running || stats.launcher.missiles.isEmpty || !couldShoot(s, line, stats.launcher.range)) {
-      false
+  private def attackAction(s: State, actor: CreatureId, target: Creature, line: Vector[Location]): Option[Action] = {
+    if (isAdjacent(line)) {
+      Some(AttackAction(target.id))
     } else {
-      ShootMissileOutcomeSimulation(s, actor, line.last) == Outcome.Good
+      None
     }
   }
 
-  private def shouldShoot(s: State, actor: CreatureId, line: Vector[Location]): Boolean = {
-    couldShoot(s, line, getCreatureStats(s)(actor).ranged.range)
+  private def shootMissileAction(s: State, actor: CreatureId, target: Creature, line: Vector[Location]): Option[Action] = {
+    val stats = getCreatureStats(s)(actor)
+
+    if (s.simulation.running || stats.launcher.missiles.isEmpty || !couldShoot(s, line, stats.launcher.range)) {
+      None
+    } else {
+      val missile = stats.launcher.missiles.head
+
+      if (ShootMissileOutcomeSimulation(s, actor, line.last, missile) == Outcome.Good) {
+        Some(ShootMissileAction(target.location, missile))
+      } else {
+        None
+      }
+    }
+  }
+
+  private def shootAction(s: State, actor: CreatureId, target: Creature, line: Vector[Location]): Option[Action] = {
+    if (couldShoot(s, line, getCreatureStats(s)(actor).ranged.range)) {
+      Some(ShootAction(target.location))
+    } else {
+      None
+    }
   }
 
   private def couldShoot(s: State, line: Vector[Location], range: Int): Boolean = {

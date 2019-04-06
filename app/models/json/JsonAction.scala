@@ -13,6 +13,7 @@ object JsonAction {
 
   lazy private implicit val conduitIdFormat = JsonConduit.conduitIdFormat
   lazy private implicit val creatureIdFormat = JsonCreature.creatureIdFormat
+  lazy private implicit val creatureKindIdFormat = JsonCreatureKind.creatureKindIdFormat
   lazy private implicit val itemKindIdFormat = JsonItemKind.itemKindIdFormat
   lazy private implicit val itemIdFormat = JsonItem.itemIdFormat
   lazy private implicit val locationReads = Json.reads[Location]

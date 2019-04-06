@@ -157,6 +157,11 @@ export const setCursor = cursor => dispatch => dispatch({
 
 export const setEquipmentSet = set => () => sendSetEquipmentSet(set)
 
+export const setMissile = missile => dispatch => dispatch({
+    type: types.SET_MISSILE,
+    missile,
+})
+
 export const setQuickItem = (slot, item) => () => sendSetQuickItem(slot, item)
 
 export const useQuickItem = slot => (dispatch, getState) => {
