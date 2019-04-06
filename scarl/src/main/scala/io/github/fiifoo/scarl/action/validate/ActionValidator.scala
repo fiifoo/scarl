@@ -59,7 +59,8 @@ object ActionValidator {
       isAdjacentLocation(s, actor)(action.target(s).location) &&
       !isEnemy(s, actor, action.target) &&
       !actor(s).immobile &&
-      !action.target(s).immobile
+      !action.target(s).immobile &&
+      getCreatureStats(s)(actor).speed > 0
   }
 
   private def validate(s: State, actor: CreatureId, action: DropItemAction): Boolean = {
@@ -86,7 +87,8 @@ object ActionValidator {
 
   private def validate(s: State, actor: CreatureId, action: MoveAction): Boolean = {
     isAdjacentLocation(s, actor)(action.location) &&
-      !actor(s).immobile
+      !actor(s).immobile &&
+      getCreatureStats(s)(actor).speed > 0
   }
 
   private def validate(s: State, actor: CreatureId, action: PickItemAction): Boolean = {

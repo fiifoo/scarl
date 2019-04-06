@@ -7,7 +7,7 @@ import io.github.fiifoo.scarl.core.action.Action
 import io.github.fiifoo.scarl.core.ai.Tactic
 import io.github.fiifoo.scarl.core.ai.Tactic.Result
 import io.github.fiifoo.scarl.core.creature.FactionId
-import io.github.fiifoo.scarl.core.entity.Selectors.{getCreatureComrades, getCreatureKeys, getLocationEntities, getLocationWaypoint}
+import io.github.fiifoo.scarl.core.entity.Selectors._
 import io.github.fiifoo.scarl.core.entity.{Creature, CreatureId, SafeCreatureId}
 import io.github.fiifoo.scarl.core.geometry.Obstacle.getClosedDoor
 import io.github.fiifoo.scarl.core.geometry.WaypointNetwork.Waypoint
@@ -84,6 +84,10 @@ object Utils {
            displace: Boolean = false,
            wait: Boolean = false
           ): Option[Action] = {
+    if (getCreatureStats(s)(actor).speed <= 0) {
+      return None
+    }
+
     val from = actor(s).location
 
     Path(s)(from, to) map (path => {

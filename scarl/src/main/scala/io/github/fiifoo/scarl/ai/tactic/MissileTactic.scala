@@ -6,6 +6,7 @@ import io.github.fiifoo.scarl.core.ai.Tactic.Result
 import io.github.fiifoo.scarl.core.ai.{Behavior, Intention, Priority}
 import io.github.fiifoo.scarl.core.creature.Missile
 import io.github.fiifoo.scarl.core.creature.Missile.Smart
+import io.github.fiifoo.scarl.core.entity.Selectors.getCreatureStats
 import io.github.fiifoo.scarl.core.entity._
 import io.github.fiifoo.scarl.core.geometry.{Line, Location, Obstacle, Path}
 
@@ -33,8 +34,10 @@ case class MissileTactic(destination: Location, target: Option[SafeCreatureId]) 
           val to = path.head
           if (Obstacle.movement(s)(to).isDefined) {
             explode
-          } else {
+          } else if (getCreatureStats(s)(actor).speed > 0) {
             move(to, nextDestination)
+          } else {
+            pass(nextDestination)
           }
         })
       }
@@ -48,6 +51,13 @@ case class MissileTactic(destination: Location, target: Option[SafeCreatureId]) 
   private def move(to: Location, nextDestination: Location): Result = {
     val tactic = this.copy(destination = nextDestination)
     val action = MoveAction(to)
+
+    (tactic, action)
+  }
+
+  private def pass(nextDestination: Location): Result = {
+    val tactic = this.copy(destination = nextDestination)
+    val action = PassAction
 
     (tactic, action)
   }

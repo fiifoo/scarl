@@ -2,7 +2,7 @@ package io.github.fiifoo.scarl.game.player
 
 import io.github.fiifoo.scarl.action.MoveAction
 import io.github.fiifoo.scarl.core.action.Action
-import io.github.fiifoo.scarl.core.entity.Selectors.{getCreatureKeys, getLocationEntities, getLocationItems}
+import io.github.fiifoo.scarl.core.entity.Selectors.{getCreatureKeys, getCreatureStats, getLocationEntities, getLocationItems}
 import io.github.fiifoo.scarl.core.entity.{CreatureId, ItemId}
 import io.github.fiifoo.scarl.core.geometry.{Location, Obstacle, Path}
 import io.github.fiifoo.scarl.game.RunState
@@ -22,7 +22,7 @@ object PlayerAutomation {
   }
 
   def getMoveAction(state: RunState, destination: Location): Option[Action] = {
-    if (isTravelBlocked(state)(destination)) {
+    if (isTravelBlocked(state)(destination) || getCreatureStats(state.instance)(state.game.player).speed <= 0) {
       return None
     }
 
