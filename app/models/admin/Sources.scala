@@ -99,6 +99,7 @@ object Sources {
     SubModelSource(typeOf[Condition], List(
       typeOf[Conditions.Burning],
       typeOf[Conditions.Disoriented],
+      typeOf[Conditions.Immobilized],
     )),
 
     SubModelSource(typeOf[ContentSelection.CreatureSelection], List(

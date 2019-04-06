@@ -53,4 +53,23 @@ object Conditions {
     }
   }
 
+  case class Immobilized(strength: Int) extends Condition {
+    val key = "immobilized"
+
+    def modifyStats(stats: Stats, strength: Int): Stats = {
+      stats.copy(
+        speed = 0,
+        defence = stats.defence / 2
+      )
+    }
+
+    def resistance(stats: Stats): Int = {
+      stats.resistance
+    }
+
+    def effects(s: State, creature: CreatureId, strength: Int): List[Effect] = {
+      List()
+    }
+  }
+
 }
