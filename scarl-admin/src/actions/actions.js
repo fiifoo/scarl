@@ -79,6 +79,7 @@ export const save = () => (dispatch, getState) => {
     const data = getState().data
     api.save(Data.write(data)).then(() => dispatch({
         type: types.SAVED,
+        hashCode: data.hashCode(),
     }))
 
     dispatch({

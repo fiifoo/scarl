@@ -17,6 +17,7 @@ const MainContainer = connect(
         simulating: state.ui.main.simulating,
         tab: state.ui.main.tab,
         tabs: state.ui.main.tabs,
+        unsaved: state.hashCode !== state.data.hashCode()
     }), {
         addTab, changeTab, deleteTab,
         save,

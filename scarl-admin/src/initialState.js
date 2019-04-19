@@ -10,6 +10,7 @@ const tags = getTags(data, models)
 
 export default {
     data,
+    hashCode: data.hashCode(),
     models,
     readonly: raw.readonly,
     tags,

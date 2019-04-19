@@ -9,12 +9,12 @@ import FormRow from './form/FormRow.jsx'
 
 const ADD = 'ADD'
 
-const SaveButton = ({readonly, save, saving}) => (
+const SaveButton = ({readonly, save, saving, unsaved}) => (
     <button
         type="button"
-        className="btn btn-primary"
+        className={unsaved ? 'btn btn-primary' : 'btn btn-default'}
         onClick={save}
-        disabled={saving || readonly}>
+        disabled={saving || readonly || ! unsaved}>
         Save
     </button>
 )
