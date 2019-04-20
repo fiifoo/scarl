@@ -67,6 +67,10 @@ case class TransformEffect(from: EntityId,
         case container: ContainerId => container
         case _ => from
       }
+      case status: StatusId => status(s).target match {
+        case container: ContainerId => container
+        case _ => from
+      }
       case _ => from
     }
 

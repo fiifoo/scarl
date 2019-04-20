@@ -14,7 +14,8 @@ case class SummonCreatureWidget(id: WidgetKindId,
                                 summon: CreatureCatalogueId,
                                 summonCategory: CreatureKind.Category = CreatureKind.DefaultCategory,
                                 summonDescription: Option[String] = None,
-                                interval: Tick
+                                interval: Tick,
+                                charge: Option[Charge] = None
                                ) extends WidgetKind {
 
   def createStatus(s: State, id: Int, target: ContainerId): Status = {
@@ -27,7 +28,8 @@ case class SummonCreatureWidget(id: WidgetKindId,
       target = target,
       summon = choices,
       summonDescription = summonDescription,
-      interval = interval
+      interval = interval,
+      charge = charge
     )
   }
 }

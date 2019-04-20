@@ -9,6 +9,7 @@ object JsonWidgetKind {
 
   import JsonBase.{mapReads, polymorphicObjectFormat, polymorphicTypeFormat, stringIdFormat}
 
+  lazy private implicit val chargeFormat = JsonCharge.chargeFormat
   lazy private implicit val creatureCatalogueIdFormat = JsonCatalogues.creatureCatalogueIdFormat
   lazy private implicit val creatureKindIdFormat = JsonCreatureKind.creatureKindIdFormat
   lazy private implicit val creatureCategoryFormat = JsonCreatureKind.creatureCategoryFormat

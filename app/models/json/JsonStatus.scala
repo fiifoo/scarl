@@ -13,6 +13,7 @@ object JsonStatus {
   lazy private implicit val passiveStatusIdFormat = integerIdFormat[PassiveStatusId](_.value, PassiveStatusId.apply)
   lazy private implicit val triggerStatusIdFormat = integerIdFormat[TriggerStatusId](_.value, TriggerStatusId.apply)
 
+  lazy private implicit val chargeFormat = JsonCharge.chargeFormat
   lazy private implicit val conduitIdFormat = JsonConduit.conduitIdFormat
   lazy private implicit val conditionFormat = JsonCondition.conditionFormat
   lazy private implicit val containerIdFormat = JsonContainer.containerIdFormat

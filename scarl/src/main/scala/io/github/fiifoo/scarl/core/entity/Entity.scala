@@ -21,6 +21,12 @@ sealed trait Actor extends Entity {
   def setTick(tick: Tick): Actor
 }
 
+sealed trait Chargeable extends Entity {
+  val charge: Option[Charge]
+
+  def setCharge(charge: Option[Charge]): Chargeable
+}
+
 sealed trait Locatable extends Entity {
   val id: LocatableId
   val location: Location
@@ -47,6 +53,10 @@ sealed trait Taggable extends Entity {
 trait Status extends Entity {
   val id: StatusId
   val target: EntityId
+}
+
+trait ChargeableStatus extends Entity with Status with Chargeable {
+  def setCharge(charge: Option[Charge]): ChargeableStatus
 }
 
 trait ConditionStatus extends Entity with Status {
