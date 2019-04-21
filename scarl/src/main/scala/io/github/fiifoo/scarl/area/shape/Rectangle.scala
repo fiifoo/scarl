@@ -5,12 +5,20 @@ import io.github.fiifoo.scarl.core.geometry.Location
 
 import scala.util.Random
 
-case class Rectangle(width: Int, height: Int, variance: Double) extends Shape {
+case class Rectangle(width: Int, height: Int, variance: Double = 0) extends Shape {
+
+  def apply(): Result = {
+    this.calculate(this.width, this.height)
+  }
 
   def apply(random: Random): Result = {
-    val realWidth = calculateDimension(width, random)
-    val realHeight = calculateDimension(height, random)
+    val realWidth = this.calculateDimension(width, random)
+    val realHeight = this.calculateDimension(height, random)
 
+    this.calculate(realWidth, realHeight)
+  }
+
+  private def calculate(realWidth: Int, realHeight: Int): Result = {
     val border = calculateBorder(realWidth, realHeight)
     val contained = calculateContained(realWidth, realHeight)
     val entranceCandidates = border -- calculateCorners(realWidth, realHeight)

@@ -3,6 +3,8 @@ package io.github.fiifoo.scarl.core.geometry
 case class Location(x: Int, y: Int) {
   def add(location: Location): Location = Location(x + location.x, y + location.y)
 
+  def sub(location: Location): Location = Location(x - location.x, y - location.y)
+
   def adjacent: Set[Location] = {
     Set(
       Location(x, y + 1),

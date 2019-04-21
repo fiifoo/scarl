@@ -13,7 +13,6 @@ import scala.util.Random
 
 trait Template {
   val id: TemplateId
-  val shape: Shape
   val power: Option[Int]
 
   def apply(assets: WorldAssets,

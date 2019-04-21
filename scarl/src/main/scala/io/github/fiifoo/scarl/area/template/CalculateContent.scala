@@ -4,7 +4,7 @@ import io.github.fiifoo.scarl.area.Area
 import io.github.fiifoo.scarl.area.feature.Feature
 import io.github.fiifoo.scarl.area.shape.Shape
 import io.github.fiifoo.scarl.area.template.ContentSelection._
-import io.github.fiifoo.scarl.area.template.RandomizedTemplate.ConduitLocations
+import io.github.fiifoo.scarl.area.template.RandomizedContentSource.ConduitLocations
 import io.github.fiifoo.scarl.area.template.Template.ResultContent
 import io.github.fiifoo.scarl.core.Tag
 import io.github.fiifoo.scarl.core.geometry.Location

@@ -18,7 +18,7 @@ object TestTemplates {
     val fromArea = extractTemplates(assets)(template)
     val fromTheme = template match {
       case _: FixedTemplate => Set()
-      case _: RandomizedTemplate =>
+      case _: RandomizedTemplate | _: SequenceTemplate =>
         assets.catalogues.templates(assets.themes(area.theme).templates)
           .apply(assets.catalogues.templates)
           .flatMap(_._2 map (_.value))
@@ -51,6 +51,9 @@ object TestTemplates {
         case selection: ContentSelection.FixedTemplate => Some(selection.template)
         case _ => None
       })
+      case template: SequenceTemplate => template.templates collect {
+        case selection: ContentSelection.FixedTemplate => selection.template
+      }
     }).toSet
 
     (subs map assets.templates flatMap extractTemplates(assets)) + template

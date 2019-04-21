@@ -4,7 +4,7 @@ import io.github.fiifoo.scarl.area.feature._
 import io.github.fiifoo.scarl.area.shape.{Rectangle, Shape}
 import io.github.fiifoo.scarl.area.template.ContentSelection.ItemSelection
 import io.github.fiifoo.scarl.area.template.FixedContent.MachinerySource
-import io.github.fiifoo.scarl.area.template.RandomizedTemplate.{ConduitLocations, Entrances}
+import io.github.fiifoo.scarl.area.template.RandomizedContentSource.{ConduitLocations, Entrances}
 import io.github.fiifoo.scarl.area.template.Template._
 import io.github.fiifoo.scarl.area.template._
 import io.github.fiifoo.scarl.core.geometry.Location
@@ -57,12 +57,14 @@ object JsonTemplate {
   lazy private implicit val fixedContentReads = Json.reads[FixedContent]
   lazy private implicit val fixedTemplateReads = Json.reads[FixedTemplate]
   lazy private implicit val randomizedTemplateReads = Json.reads[RandomizedTemplate]
+  lazy private implicit val sequenceTemplateReads = Json.reads[SequenceTemplate]
 
   lazy implicit val templateIdFormat: Format[TemplateId] = stringIdFormat(_.value, TemplateId.apply)
 
   lazy implicit val templateReads: Reads[Template] = polymorphicTypeReads(data => {
     case "FixedTemplate" => data.as[FixedTemplate]
     case "RandomizedTemplate" => data.as[RandomizedTemplate]
+    case "SequenceTemplate" => data.as[SequenceTemplate]
   })
 
   lazy val templateMapReads: Reads[Map[TemplateId, Template]] = mapReads

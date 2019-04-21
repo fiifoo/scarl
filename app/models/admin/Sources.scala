@@ -5,7 +5,7 @@ import io.github.fiifoo.scarl.ai.tactic._
 import io.github.fiifoo.scarl.area.Area
 import io.github.fiifoo.scarl.area.feature._
 import io.github.fiifoo.scarl.area.shape.{Rectangle, Shape}
-import io.github.fiifoo.scarl.area.template.{ContentSelection, FixedTemplate, RandomizedTemplate, Template}
+import io.github.fiifoo.scarl.area.template._
 import io.github.fiifoo.scarl.area.theme.Theme
 import io.github.fiifoo.scarl.core.ai.{Behavior, Strategy}
 import io.github.fiifoo.scarl.core.assets._
@@ -69,6 +69,7 @@ object Sources {
     ModelSource(typeOf[Template], List("templates"), List(
       typeOf[FixedTemplate],
       typeOf[RandomizedTemplate],
+      typeOf[SequenceTemplate],
     )),
 
     ModelSource(typeOf[Theme], List("themes")),
