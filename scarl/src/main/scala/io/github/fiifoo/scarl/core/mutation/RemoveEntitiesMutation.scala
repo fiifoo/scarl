@@ -36,7 +36,6 @@ case class RemoveEntitiesMutation() extends Mutation {
         trails = s.creature.trails -- creatures
       ),
       foundItems = mutateFoundItems(s, removable),
-      receivedCommunications = s.receivedCommunications -- creatures,
       entities = s.entities -- removable,
       equipments = s.equipments -- creatures,
       index = mutateIndex(s, removable),

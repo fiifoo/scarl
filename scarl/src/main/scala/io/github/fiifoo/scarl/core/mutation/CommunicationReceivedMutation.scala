@@ -2,19 +2,19 @@ package io.github.fiifoo.scarl.core.mutation
 
 import io.github.fiifoo.scarl.core.State
 import io.github.fiifoo.scarl.core.communication.CommunicationId
-import io.github.fiifoo.scarl.core.entity.CreatureId
+import io.github.fiifoo.scarl.core.creature.FactionId
 
-case class CommunicationReceivedMutation(creature: CreatureId, communication: CommunicationId) extends Mutation {
+case class CommunicationReceivedMutation(faction: FactionId, communication: CommunicationId) extends Mutation {
 
   def apply(s: State): State = {
-    val received = s.receivedCommunications.get(creature) map (received => {
+    val received = s.creature.receivedCommunications.get(faction) map (received => {
       received + communication
     }) getOrElse {
       Set(communication)
     }
 
-    s.copy(
-      receivedCommunications = s.receivedCommunications + (creature -> received)
-    )
+    s.copy(creature = s.creature.copy(
+      receivedCommunications = s.creature.receivedCommunications + (faction -> received)
+    ))
   }
 }

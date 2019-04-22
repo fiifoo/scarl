@@ -31,7 +31,7 @@ case object CheckGreetIntention extends Intention {
   }
 
   private def nextGreeting(s: State, target: CreatureId, greetings: List[CommunicationId]): Option[CommunicationId] = {
-    val received = s.receivedCommunications.getOrElse(target, Set())
+    val received = s.creature.receivedCommunications.getOrElse(target(s).faction, Set())
 
     (greetings filterNot received.contains).headOption
   }

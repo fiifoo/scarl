@@ -13,7 +13,7 @@ case class CommunicateEffect(source: CreatureId,
                             ) extends Effect {
 
   def apply(s: State): EffectResult = {
-    val receivedMutation = communication map (CommunicationReceivedMutation(target, _))
+    val receivedMutation = communication map (CommunicationReceivedMutation(target(s).faction, _))
     val responseEffect = if (parent.forall(!_.isInstanceOf[CommunicateEffect])) {
       val response = nextResponse(s)
       val effect = CommunicateEffect(target, source, response, Some(this))
@@ -34,7 +34,7 @@ case class CommunicateEffect(source: CreatureId,
     val responses = s.assets.kinds.creatures(target(s).kind).responses.get(faction)
 
     responses map (responses => {
-      val received = s.receivedCommunications.getOrElse(source, Set())
+      val received = s.creature.receivedCommunications.getOrElse(faction, Set())
       val nextResponses = responses filterNot received.contains
 
       if (nextResponses.isEmpty) {

@@ -33,6 +33,7 @@ object State {
 
   // todo: move foundItems, equipments, keys, receivedCommunications, recipes and tactics here
   case class Creature(goals: Set[GoalId] = Set(),
+                      receivedCommunications: Map[FactionId, Set[CommunicationId]] = Map(),
                       recycledItems: Map[CreatureId, List[ItemKindId]] = Map(),
                       trails: Map[CreatureId, List[Location]] = Map()
                      )
@@ -74,7 +75,6 @@ case class State(area: State.Area = State.Area(),
                  idSeq: IdSeq = IdSeq(1),
                  index: State.Index = State.Index(),
                  keys: Map[CreatureId, Set[Key]] = Map(),
-                 receivedCommunications: Map[CreatureId, Set[CommunicationId]] = Map(),
                  recipes: Map[CreatureId, Set[RecipeId]] = Map(),
                  rng: Rng = Rng(1),
                  signals: List[Signal] = List(),
