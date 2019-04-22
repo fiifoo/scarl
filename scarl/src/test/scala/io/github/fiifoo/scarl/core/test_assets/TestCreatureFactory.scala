@@ -11,7 +11,7 @@ import io.github.fiifoo.scarl.core.mutation.{IdSeqMutation, NewEntityMutation}
 
 object TestCreatureFactory {
 
-  val defaultStats = Stats(melee = Melee(attack = 1000, damage = 10), defence = 10, sight = Sight(5))
+  val defaultStats = Stats(speed = 100, melee = Melee(attack = 1000, damage = 10), defence = 10, sight = Sight(5))
   val defaultKind = CreatureKind(
     id = CreatureKindId("creature"),
     name = "Creature",
