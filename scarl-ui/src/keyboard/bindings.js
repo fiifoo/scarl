@@ -94,6 +94,13 @@ export default {
         [keycodes.A, commands.AUTO_EXPLORE],
     ]).merge(directions),
 
+    [gameModes.COMMUNICATE]: Map([
+        [keycodes.CONTROL, commands.END_COMMUNICATION],
+        [keycodes.ESC, commands.END_COMMUNICATION],
+        [keycodes.ENTER, commands.END_COMMUNICATION],
+        [keycodes.SPACEBAR, commands.END_COMMUNICATION],
+    ]).merge(directions),
+
     [gameModes.CRAFTING]: Map([
         [keycodes.ESC, commands.CANCEL_MODE],
         [keycodes.C, commands.CANCEL_MODE],

@@ -5,6 +5,7 @@ import * as types from '../actionTypes'
 import * as gameActions from '../gameActions'
 import aim from './aim'
 import autoMove from './autoMove'
+import communicate from './communicate'
 import crafting from './crafting'
 import gameOver from './gameOver'
 import interact from './interact'
@@ -25,6 +26,7 @@ const handlers = {
     [modes.AIM]: aim,
     [modes.AIM_MISSILE]: aim,
     [modes.AUTO_MOVE]: autoMove,
+    [modes.COMMUNICATE]: communicate,
     [modes.CRAFTING]: crafting,
     [modes.GAME_OVER]: gameOver,
     [modes.GAME_OVER_SCREEN]: gameOver,

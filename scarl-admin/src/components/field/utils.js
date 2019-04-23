@@ -20,6 +20,7 @@ import RelationField from './RelationField.jsx'
 import SideFormField from './SideFormField.jsx'
 import StringField from './StringField.jsx'
 import TagField from './TagField.jsx'
+import TextField from './TextField.jsx'
 
 const fieldComponents = {
     BooleanField,
@@ -37,6 +38,7 @@ const fieldComponents = {
 const aliasFieldComponents = {
     Color: ColorField,
     Tag: TagField,
+    Text: TextField,
 }
 
 const modelFieldComponents = {

@@ -33,6 +33,15 @@ object JsonEntity {
     }
   )
 
+  lazy val usableIdFormat: Format[UsableId] = polymorphicIdFormat[UsableId, Int](
+    value => {
+      case "CreatureId" => CreatureId(value)
+      case "ItemId" => ItemId(value)
+    }, {
+      id => JsNumber(id.value)
+    }
+  )
+
   lazy implicit val entityMapFormat = new Format[Map[EntityId, Entity]] {
     def writes(entities: Map[EntityId, Entity]) = JsObject(Map(
       "containers" -> Json.toJson(entities.values collect { case container: Container => container }),

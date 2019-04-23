@@ -1,3 +1,4 @@
+import { isCommunicationEvent } from '../game/utils'
 import WebSocket from '../utils/WebSocket'
 import * as types from './actionTypes'
 import { debugReceiveMessage } from './debugActions'
@@ -23,6 +24,7 @@ const receiveActionMappers = {
         data,
         area: state.area,
         mode: state.ui.game.mode,
+        communicationEvents: data.events.filter(isCommunicationEvent)
     }),
     GameOver: data => ({
         type: types.RECEIVE_GAME_OVER,

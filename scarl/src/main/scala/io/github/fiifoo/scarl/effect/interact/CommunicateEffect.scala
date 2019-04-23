@@ -33,14 +33,11 @@ case class CommunicateEffect(source: CreatureId,
     val faction = source(s).faction
     val responses = s.assets.kinds.creatures(target(s).kind).responses.get(faction)
 
-    responses map (responses => {
+    responses flatMap (responses => {
       val received = s.creature.receivedCommunications.getOrElse(faction, Set())
-      val nextResponses = responses filterNot received.contains
 
-      if (nextResponses.isEmpty) {
-        responses.last
-      } else {
-        nextResponses.head
+      responses find (!received.contains(_)) orElse {
+        responses find (_.apply(s).repeatable)
       }
     })
   }

@@ -2,6 +2,8 @@ import { fromJS } from 'immutable'
 import { stats } from './creature'
 import { distance, line } from './geometry'
 
+const SHORT_MESSAGE_LIMIT = 100
+
 export const addStats = (a, b) => {
     a = fromJS(a)
     b = fromJS(b)
@@ -72,6 +74,23 @@ export const getCreatureInfo = (creature, player, factions) => {
     } else {
         return info.join(', ')
     }
+}
+
+export const getEventMessages = (events, short = false) => {
+    return events.filter(e => e.data.message !== undefined).map(event => {
+        switch (event.type) {
+            case 'CommunicationEvent': {
+                if (! short || isShortCommunicationEvent(event)) {
+                    return event.data.message
+                } else {
+                    return null
+                }
+            }
+            default: {
+                return event.data.message
+            }
+        }
+    }).filter(x => !!x)
 }
 
 export const getLocationConduit = (location, fov) => {
@@ -218,6 +237,10 @@ export const getShortage = (player, consumption) => {
     }
 }
 
+export const isCommunicationEvent = event => (
+    event.type === 'CommunicationEvent' && ! isShortCommunicationEvent(event)
+)
+
 export const isEnemyChecker = (player, factions) => {
     const enemyFactions = factions.get(player.creature.faction).enemies
 
@@ -289,4 +312,10 @@ const getCreatureWoundedInfo = damagePercentage => {
     } else {
         return 'badly wounded'
     }
+}
+
+const isShortCommunicationEvent = event => {
+    const message = event.data.message
+
+    return message.length < SHORT_MESSAGE_LIMIT && ! message.match(/\r\n|\r|\n/)
 }

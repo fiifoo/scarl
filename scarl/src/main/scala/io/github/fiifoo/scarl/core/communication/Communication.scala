@@ -1,5 +1,8 @@
 package io.github.fiifoo.scarl.core.communication
 
-trait Communication {
-  val id: CommunicationId
-}
+import io.github.fiifoo.scarl.core.Text
+
+case class Communication(id: CommunicationId,
+                         message: Text,
+                         repeatable: Boolean = false
+                        )

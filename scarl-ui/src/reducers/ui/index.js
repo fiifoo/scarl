@@ -1,4 +1,5 @@
 import { combineReducers } from 'redux'
+import communication from './communication'
 import crafting from './crafting'
 import create from './create'
 import debug from './debug'
@@ -9,6 +10,7 @@ import main from './main'
 import world from './world'
 
 export default combineReducers({
+    communication,
     crafting,
     create,
     debug,

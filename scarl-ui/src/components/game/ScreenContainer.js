@@ -13,6 +13,7 @@ const validModes = Set([
     modes.AIM,
     modes.AIM_MISSILE,
     modes.AUTO_MOVE,
+    modes.COMMUNICATE,
     modes.GAME_OVER,
     modes.INTERACT,
     modes.LOOK,

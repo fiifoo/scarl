@@ -1,11 +1,13 @@
 package io.github.fiifoo.scarl.game.event
 
-import io.github.fiifoo.scarl.core.entity.CreatureId
+import io.github.fiifoo.scarl.core.entity.{CreatureId, UsableId}
 import io.github.fiifoo.scarl.core.geometry.Location
 
 sealed trait Event
 
 case class GenericEvent(message: String) extends Event
+
+case class CommunicationEvent(source: UsableId, message: String) extends Event
 
 case class ExplosionEvent(location: Location) extends Event
 

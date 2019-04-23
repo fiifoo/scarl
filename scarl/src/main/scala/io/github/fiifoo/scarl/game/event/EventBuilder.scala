@@ -1,7 +1,6 @@
 package io.github.fiifoo.scarl.game.event
 
 import io.github.fiifoo.scarl.core.State
-import io.github.fiifoo.scarl.core.communication.Message
 import io.github.fiifoo.scarl.core.creature.Condition
 import io.github.fiifoo.scarl.core.effect.{CreateEntityEffect, Effect, LocalizedDescriptionEffect, RemoveEntityEffect}
 import io.github.fiifoo.scarl.core.entity.Selectors.{getContainerItems, getLocationVisibleItems}
@@ -16,7 +15,6 @@ import io.github.fiifoo.scarl.effect.creature.condition._
 import io.github.fiifoo.scarl.effect.interact._
 import io.github.fiifoo.scarl.effect.movement.{CollideEffect, DisplaceEffect, MovedEffect}
 import io.github.fiifoo.scarl.rule.HackRule
-import io.github.fiifoo.scarl.status.Conditions
 
 object EventBuilder {
 
@@ -43,7 +41,7 @@ class EventBuilder(s: State, player: CreatureId, fov: Set[Location]) {
       case e: CancelRecycleItemEffect => build(e) map GenericEvent
       case e: CaptureEffect => build(e) map GenericEvent
       case e: CollideEffect => build(e) map GenericEvent
-      case e: CommunicateEffect => build(e) map GenericEvent
+      case e: CommunicateEffect => build(e)
       case e: CreateEntityEffect => build(e) map GenericEvent
       case e: DeathEffect => build(e) map GenericEvent
       case e: DetectEffect => build(e) map GenericEvent
@@ -140,18 +138,20 @@ class EventBuilder(s: State, player: CreatureId, fov: Set[Location]) {
     }
   }
 
-  private def build(effect: CommunicateEffect): Option[String] = {
+  private def build(effect: CommunicateEffect): Option[Event] = {
     val source = effect.source
     val target = effect.target
 
     if (target == player) {
-      val message = effect.communication map (_ (s)) collect {
-        case message: Message => s"""${kind(source)} talks to you: "${message.value}""""
-      } getOrElse {
-        s"${kind(source)} does not respond."
+      val event = effect.communication map (_ (s)) map (communication => {
+        val message = s"""${kind(source)} talks to you: "${communication.message}""""
+
+        CommunicationEvent(effect.source, message)
+      }) getOrElse {
+        GenericEvent(s"${kind(source)} does not respond.")
       }
 
-      Some(message)
+      Some(event)
     } else {
       None
     }

@@ -1,8 +1,9 @@
 import React from 'react'
+import { getEventMessages } from '../../game/utils'
 
-const getEventMessages = events => (
-    events.filter(e => e.data.message !== undefined).map(e => e.data.message)
-)
+const messageStyle = {
+    whiteSpace: 'pre-wrap',
+}
 
 const MessageLog = ({events}) => {
     const messages = getEventMessages(events)
@@ -12,7 +13,7 @@ const MessageLog = ({events}) => {
             <h4>Latest messages:</h4>
             {messages.size === 0
                 ? 'No messages'
-                : messages.reverse().map((message, key) => <div key={key}>{message}</div>)
+                : messages.reverse().map((message, key) => <div key={key} style={messageStyle}>{message}</div>)
             }
         </div>
     )

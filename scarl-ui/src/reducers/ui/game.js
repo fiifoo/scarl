@@ -22,6 +22,10 @@ export default (state = initial, action) => {
             return initial
         }
         case types.RECEIVE_GAME_UPDATE: {
+            if (action.communicationEvents.length > 0) {
+                state = changeMode(state, modes.COMMUNICATE)
+            }
+
             return state.set('screenOffset', calculateScreenOffset(
                 action.area,
                 state.viewSize,

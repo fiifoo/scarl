@@ -9,7 +9,7 @@ import io.github.fiifoo.scarl.area.template.{ContentSelection, FixedTemplate, Ra
 import io.github.fiifoo.scarl.area.theme.Theme
 import io.github.fiifoo.scarl.core.ai.{Behavior, Strategy}
 import io.github.fiifoo.scarl.core.assets._
-import io.github.fiifoo.scarl.core.communication.{Communication, Message}
+import io.github.fiifoo.scarl.core.communication.Communication
 import io.github.fiifoo.scarl.core.creature.{Condition, Faction, Missile, Progression}
 import io.github.fiifoo.scarl.core.entity.{CreaturePower, ItemPower}
 import io.github.fiifoo.scarl.core.item._
@@ -45,9 +45,7 @@ object Sources {
     ModelSource(typeOf[WallCatalogue], List("catalogues", "walls")),
     ModelSource(typeOf[WidgetCatalogue], List("catalogues", "widgets")),
 
-    ModelSource(typeOf[Communication], List("communications"), List(
-      typeOf[Message],
-    )),
+    ModelSource(typeOf[Communication], List("communications")),
 
     ModelSource(typeOf[Faction], List("factions")),
     ModelSource(typeOf[KeyKind], List("keys")),
