@@ -41,7 +41,7 @@ class EventBuilder(s: State, player: CreatureId, fov: Set[Location]) {
       case e: CancelRecycleItemEffect => build(e) map GenericEvent
       case e: CaptureEffect => build(e) map GenericEvent
       case e: CollideEffect => build(e) map GenericEvent
-      case e: CommunicateEffect => build(e)
+      case e: CommunicateEffect => build(e) map GenericEvent
       case e: CreateEntityEffect => build(e) map GenericEvent
       case e: DeathEffect => build(e) map GenericEvent
       case e: DetectEffect => build(e) map GenericEvent
@@ -69,8 +69,10 @@ class EventBuilder(s: State, player: CreatureId, fov: Set[Location]) {
       case e: MachineryActivatedEffect => build(e) map GenericEvent
       case e: MissEffect => build(e) map GenericEvent
       case e: MovedEffect => build(e)
+      case e: NoResponseEffect => build(e) map GenericEvent
       case e: PickItemEffect => build(e) map GenericEvent
       case e: PowerUsedEffect => build(e) map GenericEvent
+      case e: ReceiveCommunicationEffect => build(e)
       case e: ReceiveKeyEffect => build(e) map GenericEvent
       case e: RecycleItemEffect => build(e) map GenericEvent
       case e: RemoveEntityEffect => build(e) map GenericEvent
@@ -138,20 +140,9 @@ class EventBuilder(s: State, player: CreatureId, fov: Set[Location]) {
     }
   }
 
-  private def build(effect: CommunicateEffect): Option[Event] = {
-    val source = effect.source
-    val target = effect.target
-
-    if (target == player) {
-      val event = effect.communication map (_ (s)) map (communication => {
-        val message = s"""${kind(source)} talks to you: "${communication.message}""""
-
-        CommunicationEvent(effect.source, message)
-      }) getOrElse {
-        GenericEvent(s"${kind(source)} does not respond.")
-      }
-
-      Some(event)
+  private def build(effect: CommunicateEffect): Option[String] = {
+    if (effect.source == player) {
+      Some(s"You talk to ${kind(effect.target)}.")
     } else {
       None
     }
@@ -513,6 +504,17 @@ class EventBuilder(s: State, player: CreatureId, fov: Set[Location]) {
     }
   }
 
+  private def build(effect: NoResponseEffect): Option[String] = {
+    val source = effect.source
+    val target = effect.target
+
+    if (target == player) {
+      Some(s"${kind(source)} does not respond.")
+    } else {
+      None
+    }
+  }
+
   private def build(effect: PowerUsedEffect): Option[String] = {
     if (effect.user == player) {
       effect.description
@@ -529,6 +531,25 @@ class EventBuilder(s: State, player: CreatureId, fov: Set[Location]) {
       Some(s"You pick up ${kind(item)}.")
     } else if (fov contains effect.location) {
       Some(s"${kind(creature)} picks up ${kind(item)}.")
+    } else {
+      None
+    }
+  }
+
+  private def build(effect: ReceiveCommunicationEffect): Option[Event] = {
+    val source = effect.source
+    val target = effect.target
+
+
+    if (target == player) {
+      val message = s"""${kind(source)}: "${effect.communication(s).message}""""
+
+      Some(CommunicationEvent(effect.source, message))
+    } else if (fov contains effect.location) {
+      source match {
+        case creature: CreatureId => Some(GenericEvent(s"""${kind(creature)} talks to ${kind(target)}.""""))
+        case _ => None
+      }
     } else {
       None
     }

@@ -4,34 +4,25 @@ import io.github.fiifoo.scarl.core.State
 import io.github.fiifoo.scarl.core.communication.CommunicationId
 import io.github.fiifoo.scarl.core.effect.{Effect, EffectResult}
 import io.github.fiifoo.scarl.core.entity.CreatureId
-import io.github.fiifoo.scarl.core.mutation.CommunicationReceivedMutation
 
 case class CommunicateEffect(source: CreatureId,
                              target: CreatureId,
-                             communication: Option[CommunicationId],
                              parent: Option[Effect] = None
                             ) extends Effect {
 
   def apply(s: State): EffectResult = {
-    val receivedMutation = communication map (CommunicationReceivedMutation(target(s).faction, _))
-    val responseEffect = if (parent.forall(!_.isInstanceOf[CommunicateEffect])) {
-      val response = nextResponse(s)
-      val effect = CommunicateEffect(target, source, response, Some(this))
-
-      Some(effect)
-    } else {
-      None
+    val effect = this.getNextResponse(s) map (response => {
+      ReceiveCommunicationEffect(this.target, this.source, response, this.source(s).location, Some(this))
+    }) getOrElse {
+      NoResponseEffect(this.target, this.source, Some(this))
     }
 
-    EffectResult(
-      List(receivedMutation).flatten,
-      List(responseEffect).flatten
-    )
+    EffectResult(effect)
   }
 
-  private def nextResponse(s: State): Option[CommunicationId] = {
-    val faction = source(s).faction
-    val responses = s.assets.kinds.creatures(target(s).kind).responses.get(faction)
+  private def getNextResponse(s: State): Option[CommunicationId] = {
+    val faction = this.source(s).faction
+    val responses = s.assets.kinds.creatures(this.target(s).kind).responses.get(faction)
 
     responses flatMap (responses => {
       val received = s.creature.receivedCommunications.getOrElse(faction, Set())
