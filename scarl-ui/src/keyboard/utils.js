@@ -24,15 +24,13 @@ const directionValues = {
 
 export const isDirectionCommand = command => command.match(/^DIRECTION_/) !== null
 
+export const isSelectCommand = command => command.match(/^SELECT_/) !== null
+
 export const isSetEquipmentSetCommand = command => command.match(/^SET_EQUIPMENT_SET_/) !== null
 
 export const isSetQuickItemCommand = command => command.match(/^SET_QUICK_ITEM_/) !== null
 
 export const isUseQuickItemCommand = command => command.match(/^USE_QUICK_ITEM_/) !== null
-
-export const getEquipmentSet = command => parseInt(command.replace(/^SET_EQUIPMENT_SET_/, ''))
-
-export const getQuickItemSlot = command => parseInt(command.replace(/^..._QUICK_ITEM_/, ''))
 
 export const getDirectionLocation = (command, {x, y}) => {
     const modifier = directionModifiers[command]
@@ -44,3 +42,9 @@ export const getDirectionLocation = (command, {x, y}) => {
 }
 
 export const getDirectionValue = command => directionValues[command]
+
+export const getEquipmentSet = command => parseInt(command.replace(/^SET_EQUIPMENT_SET_/, ''))
+
+export const getQuickItemSlot = command => parseInt(command.replace(/^..._QUICK_ITEM_/, ''))
+
+export const getSelectValue = command => parseInt(command.replace(/^SELECT_/, ''))

@@ -19,6 +19,19 @@ const directions = Map([
     [keycodes.NUMPAD_9, commands.DIRECTION_NORTH_EAST],
 ])
 
+const select = Map([
+    [keycodes.NUM_1, commands.SELECT_1],
+    [keycodes.NUM_2, commands.SELECT_2],
+    [keycodes.NUM_3, commands.SELECT_3],
+    [keycodes.NUM_4, commands.SELECT_4],
+    [keycodes.NUM_5, commands.SELECT_5],
+    [keycodes.NUM_6, commands.SELECT_6],
+    [keycodes.NUM_7, commands.SELECT_7],
+    [keycodes.NUM_8, commands.SELECT_8],
+    [keycodes.NUM_9, commands.SELECT_9],
+    [keycodes.NUM_0, commands.SELECT_10],
+])
+
 const setEquipmentSets = Map([
     [keycodes.Q, commands.SET_EQUIPMENT_SET_1],
     [keycodes.W, commands.SET_EQUIPMENT_SET_2],
@@ -95,11 +108,9 @@ export default {
     ]).merge(directions),
 
     [gameModes.COMMUNICATE]: Map([
-        [keycodes.CONTROL, commands.END_COMMUNICATION],
         [keycodes.ESC, commands.END_COMMUNICATION],
         [keycodes.ENTER, commands.END_COMMUNICATION],
-        [keycodes.SPACEBAR, commands.END_COMMUNICATION],
-    ]).merge(directions),
+    ]).merge(select),
 
     [gameModes.CRAFTING]: Map([
         [keycodes.ESC, commands.CANCEL_MODE],

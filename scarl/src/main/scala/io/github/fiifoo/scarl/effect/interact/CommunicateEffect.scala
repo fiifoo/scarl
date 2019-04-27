@@ -1,7 +1,7 @@
 package io.github.fiifoo.scarl.effect.interact
 
 import io.github.fiifoo.scarl.core.State
-import io.github.fiifoo.scarl.core.communication.CommunicationId
+import io.github.fiifoo.scarl.core.communication.{Communication, CommunicationId}
 import io.github.fiifoo.scarl.core.effect.{Effect, EffectResult}
 import io.github.fiifoo.scarl.core.entity.CreatureId
 
@@ -24,12 +24,6 @@ case class CommunicateEffect(source: CreatureId,
     val faction = this.source(s).faction
     val responses = s.assets.kinds.creatures(this.target(s).kind).responses.get(faction)
 
-    responses flatMap (responses => {
-      val received = s.creature.receivedCommunications.getOrElse(faction, Set())
-
-      responses find (!received.contains(_)) orElse {
-        responses find (_.apply(s).repeatable)
-      }
-    })
+    responses flatMap (Communication.select(_, this.source)(s))
   }
 }

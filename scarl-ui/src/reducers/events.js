@@ -32,6 +32,7 @@ export default (state = initial, action) => {
                 all: state.all,
             }
         }
+        case types.RECEIVE_GAME_START:
         case types.RECEIVE_GAME_UPDATE: {
             const events = List(action.data.events)
 

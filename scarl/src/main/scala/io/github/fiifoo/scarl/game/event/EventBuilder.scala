@@ -540,11 +540,11 @@ class EventBuilder(s: State, player: CreatureId, fov: Set[Location]) {
     val source = effect.source
     val target = effect.target
 
-
     if (target == player) {
-      val message = s"""${kind(source)}: "${effect.communication(s).message}""""
+      val communication = effect.communication(s)
+      val message = s"""${kind(source)}: "${communication.message}""""
 
-      Some(CommunicationEvent(effect.source, message))
+      Some(CommunicationEvent(effect.source, message, communication.validChoices(player)(s)))
     } else if (fov contains effect.location) {
       source match {
         case creature: CreatureId => Some(GenericEvent(s"""${kind(creature)} talks to ${kind(target)}.""""))
@@ -705,7 +705,7 @@ class EventBuilder(s: State, player: CreatureId, fov: Set[Location]) {
       if (matches(effect)) {
         true
       } else {
-        effect.parent.map(check) getOrElse false
+        effect.parent exists check
       }
     }
 

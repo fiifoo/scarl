@@ -21,6 +21,13 @@ export default (state = initial, action) => {
         case types.CONNECTION_CLOSED: {
             return initial
         }
+        case types.RECEIVE_GAME_START: {
+            if (action.communicationEvents.length > 0) {
+                return changeMode(state, modes.COMMUNICATE)
+            } else {
+                return state
+            }
+        }
         case types.RECEIVE_GAME_UPDATE: {
             if (action.communicationEvents.length > 0) {
                 state = changeMode(state, modes.COMMUNICATE)

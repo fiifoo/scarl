@@ -8,8 +8,9 @@ object JsonEvent {
 
   import JsonBase.polymorphicTypeWrites
 
-  lazy private implicit val locationWrites = Json.writes[Location]
+  lazy private implicit val communicationChoiceFormat = JsonCommunication.communicationChoiceFormat
   lazy private implicit val creatureIdFormat = JsonCreature.creatureIdFormat
+  lazy private implicit val locationWrites = Json.writes[Location]
 
   lazy private val communicationEventWrites = {
     implicit val usableIdFormat = JsonEntity.usableIdFormat

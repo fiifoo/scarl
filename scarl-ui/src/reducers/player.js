@@ -4,6 +4,7 @@ import { SIGNAL_MAP } from '../game/modes'
 
 // todo: move inventory & equipments here
 const Player = Record({
+    conversation: undefined,
     creature: undefined,
     equipmentStats: undefined,
     keys: [], // will be update constanly and won't do immutable Set conversion
@@ -29,6 +30,7 @@ export default (state = Player(), action) => {
             const data = action.data.player
 
             return state.withMutations(state => {
+                state.set('conversation', data.conversation)
                 state.set('creature', data.creature)
                 state.set('equipmentStats', data.equipmentStats)
                 state.set('keys', data.keys)

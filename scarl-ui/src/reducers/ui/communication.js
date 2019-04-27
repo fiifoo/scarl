@@ -10,6 +10,7 @@ export default (state = initial, action) => {
         case types.CONNECTION_CLOSED: {
             return initial
         }
+        case types.RECEIVE_GAME_START:
         case types.RECEIVE_GAME_UPDATE: {
             if (action.communicationEvents.length > 0) {
                 return state.set('events', state.events.concat(action.communicationEvents))

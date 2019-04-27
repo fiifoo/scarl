@@ -315,7 +315,8 @@ const getCreatureWoundedInfo = damagePercentage => {
 }
 
 const isShortCommunicationEvent = event => {
+    const choices = event.data.choices
     const message = event.data.message
 
-    return message.length < SHORT_MESSAGE_LIMIT && ! message.match(/\r\n|\r|\n/)
+    return choices.length === 0 && message.length < SHORT_MESSAGE_LIMIT && ! message.match(/\r\n|\r|\n/)
 }

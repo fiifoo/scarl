@@ -15,18 +15,32 @@ case class ReceiveCommunicationEffect(source: UsableId,
                                      ) extends Effect {
 
   def apply(s: State): EffectResult = {
-    val mutation = CommunicationReceivedMutation(this.target(s).faction, this.communication)
+    val communication = this.communication(s)
+    val faction = this.target(s).faction
+    val received = s.creature.receivedCommunications.getOrElse(faction, Set())
 
-    val effects = (this.source match {
-      case creature: CreatureId => this.communication(s).creaturePower map (_.apply(s, creature, Some(this.target)))
-      case item: ItemId => this.communication(s).itemPower map (_.apply(s, item, Some(this.target)))
-    }) getOrElse {
-      List()
+    val mutation = CommunicationReceivedMutation(faction, this.communication)
+
+    val power = if (received.contains(this.communication)) None else this.source match {
+      case _: CreatureId => communication.creaturePower
+      case _: ItemId => communication.itemPower
     }
+    val effects = power map (_.apply(s, this.source, Some(this.target))) getOrElse List()
+
+    val conversationEffect = if (communication.validChoices(this.target)(s).isEmpty) {
+      if (s.creature.conversations.isDefinedAt(this.target)) {
+        Some(EndConversationEffect(this.target))
+      } else {
+        None
+      }
+    } else {
+      Some(StartConversationEffect(this.source, this.target, this.communication))
+    }
+
 
     EffectResult(
       mutation,
-      effects
+      conversationEffect map (_ :: effects) getOrElse effects
     )
   }
 }

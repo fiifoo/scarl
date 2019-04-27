@@ -31,11 +31,12 @@ object State {
                       exits: Map[ConduitId, Location] = Map(),
                      )
 
-  // todo: move foundItems, equipments, keys, receivedCommunications, recipes and tactics here
+  // todo: move foundItems, equipments, keys, recipes and tactics here
   case class Creature(goals: Set[GoalId] = Set(),
                       receivedCommunications: Map[FactionId, Set[CommunicationId]] = Map(),
                       recycledItems: Map[CreatureId, List[ItemKindId]] = Map(),
-                      trails: Map[CreatureId, List[Location]] = Map()
+                      trails: Map[CreatureId, List[Location]] = Map(),
+                      conversations: Map[CreatureId, (UsableId, CommunicationId)] = Map(),
                      )
 
   case class Index(containerItems: Map[EntityId, Set[ItemId]] = Map(),

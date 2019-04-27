@@ -5,7 +5,7 @@ import io.github.fiifoo.scarl.core.ai.{Brain, Tactic}
 import io.github.fiifoo.scarl.core.assets.Assets
 import io.github.fiifoo.scarl.core.communication.CommunicationId
 import io.github.fiifoo.scarl.core.creature.FactionId
-import io.github.fiifoo.scarl.core.entity.{CreatureId, IdSeq, ItemId}
+import io.github.fiifoo.scarl.core.entity.{CreatureId, IdSeq, ItemId, UsableId}
 import io.github.fiifoo.scarl.core.geometry.Location
 import io.github.fiifoo.scarl.core.item.Equipment.Slot
 import io.github.fiifoo.scarl.core.item.Key
@@ -17,7 +17,7 @@ import play.api.libs.json._
 
 object JsonState {
 
-  import JsonBase.{emptyFormat, mapFormat}
+  import JsonBase.{emptyFormat, mapFormat, tuple2Format}
 
   // reset from game data
   lazy private implicit val assetsFormat = emptyFormat(Assets())
@@ -47,8 +47,19 @@ object JsonState {
 
   lazy private implicit val areaFormat = Json.format[State.Area]
   lazy private implicit val conduitsFormat = Json.format[State.Conduits]
+
+  implicitly(mapFormat[FactionId, Set[CommunicationId]])
+  implicitly(mapFormat[CreatureId, List[ItemKindId]])
   implicitly(mapFormat[CreatureId, Map[CreatureId, List[ItemKindId]]])
+  implicitly(mapFormat[CreatureId, List[Location]])
+  lazy private implicit val conversationTarget = {
+    implicit val usableId = JsonEntity.usableIdFormat
+
+    implicitly(tuple2Format[UsableId, CommunicationId])
+  }
+  implicitly(mapFormat[CreatureId, (UsableId, CommunicationId)])
   lazy private implicit val stateCreatureFormat = Json.format[State.Creature]
+
   implicitly(mapFormat[FactionId, Brain])
   implicitly(mapFormat[ConduitId, Location])
   lazy private implicit val entityMapFormat = JsonEntity.entityMapFormat

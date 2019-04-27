@@ -18,13 +18,14 @@ const receiveActionMappers = {
     GameStart: data => ({
         type: types.RECEIVE_GAME_START,
         data,
+        communicationEvents: data.events.filter(isCommunicationEvent),
     }),
     GameUpdate: (data, state) => ({
         type: types.RECEIVE_GAME_UPDATE,
         data,
         area: state.area,
         mode: state.ui.game.mode,
-        communicationEvents: data.events.filter(isCommunicationEvent)
+        communicationEvents: data.events.filter(isCommunicationEvent),
     }),
     GameOver: data => ({
         type: types.RECEIVE_GAME_OVER,

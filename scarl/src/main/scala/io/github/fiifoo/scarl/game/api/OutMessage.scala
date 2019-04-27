@@ -8,9 +8,10 @@ import io.github.fiifoo.scarl.core.item.Equipment.Slot
 import io.github.fiifoo.scarl.core.item.Recipe
 import io.github.fiifoo.scarl.core.item.Recipe.RecipeId
 import io.github.fiifoo.scarl.core.kind.{ItemKindId, Kinds}
+import io.github.fiifoo.scarl.effect.interact.ReceiveCommunicationEffect
 import io.github.fiifoo.scarl.game.RunState
 import io.github.fiifoo.scarl.game.area.AreaInfo
-import io.github.fiifoo.scarl.game.event.Event
+import io.github.fiifoo.scarl.game.event.{Event, EventBuilder}
 import io.github.fiifoo.scarl.game.player.{PlayerFov, PlayerInfo, Settings}
 import io.github.fiifoo.scarl.game.statistics.Statistics
 import io.github.fiifoo.scarl.rule.SignalRule
@@ -37,8 +38,19 @@ object GameStart {
     val inventory = PlayerInventory(state)
     val world = WorldInfo(state)
 
+    val events = state.instance.creature.conversations.get(state.game.player) map (x => {
+      val (source, communication) = x
+
+      EventBuilder(state.instance, state.game.player, Set(), List(
+        ReceiveCommunicationEffect(source, state.game.player, communication, state.game.player(state.instance).location)
+      ))
+    }) getOrElse {
+      List()
+    }
+
     GameStart(
       area = AreaInfo(state),
+      events = events,
       factions = state.game.world.assets.factions.values,
       kinds = state.game.world.assets.kinds,
       recipes = state.game.world.assets.recipes.values,
@@ -139,6 +151,7 @@ case class DebugWaypoint(network: WaypointNetwork) extends OutMessage with Debug
 case class PlayerSettings(settings: Settings) extends OutMessage
 
 case class GameStart(area: AreaInfo,
+                     events: List[Event],
                      factions: Iterable[Faction],
                      kinds: Kinds,
                      recipes: Iterable[Recipe],

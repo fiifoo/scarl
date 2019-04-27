@@ -11,6 +11,7 @@ object JsonCommunication {
   lazy private implicit val itemPowerFormat = JsonPower.itemPowerFormat
 
   lazy implicit val communicationIdFormat: Format[CommunicationId] = stringIdFormat(_.value, CommunicationId.apply)
+  lazy implicit val communicationChoiceFormat = Json.format[Communication.Choice]
 
   lazy implicit val communicationReads: Reads[Communication] = Json.reads
 

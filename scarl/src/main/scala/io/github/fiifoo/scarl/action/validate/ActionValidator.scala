@@ -10,29 +10,37 @@ import io.github.fiifoo.scarl.core.entity.Selectors.{getCreatureStats, getItemLo
 object ActionValidator {
 
   def apply(s: State, actor: CreatureId, action: Action): Boolean = {
-    action match {
-      case action: AttackAction => validate(s, actor, action)
-      case action: CancelRecycleItemAction => validate(s, actor, action)
-      case action: CommunicateAction => validate(s, actor, action)
-      case action: CraftItemAction => validate(s, actor, action)
-      case action: DisplaceAction => validate(s, actor, action)
-      case action: DropItemAction => validate(s, actor, action)
-      case action: EnterConduitAction => validate(s, actor, action)
-      case action: EquipItemAction => EquipItemValidator(s, actor, action)
-      case action: EquipWeaponsAction => EquipItemValidator(s, actor, action)
-      case action: HackCreatureAction => validate(s, actor, action)
-      case action: HackItemAction => validate(s, actor, action)
-      case action: MoveAction => validate(s, actor, action)
-      case PassAction => true
-      case action: PickItemAction => validate(s, actor, action)
-      case action: RecycleItemAction => validate(s, actor, action)
-      case _: ShootAction => true
-      case action: ShootMissileAction => validate(s, actor, action)
-      case action: UnequipItemAction => validate(s, actor, action)
-      case action: UseCreatureAction => validate(s, actor, action)
-      case action: UseDoorAction => validate(s, actor, action)
-      case action: UseItemAction => validate(s, actor, action)
-      case _ => false
+    if (s.creature.conversations.isDefinedAt(actor)) {
+      action match {
+        case action: ConverseAction => validate(s, actor, action)
+        case EndConversationAction => true
+        case _ => false
+      }
+    } else {
+      action match {
+        case action: AttackAction => validate(s, actor, action)
+        case action: CancelRecycleItemAction => validate(s, actor, action)
+        case action: CommunicateAction => validate(s, actor, action)
+        case action: CraftItemAction => validate(s, actor, action)
+        case action: DisplaceAction => validate(s, actor, action)
+        case action: DropItemAction => validate(s, actor, action)
+        case action: EnterConduitAction => validate(s, actor, action)
+        case action: EquipItemAction => EquipItemValidator(s, actor, action)
+        case action: EquipWeaponsAction => EquipItemValidator(s, actor, action)
+        case action: HackCreatureAction => validate(s, actor, action)
+        case action: HackItemAction => validate(s, actor, action)
+        case action: MoveAction => validate(s, actor, action)
+        case PassAction => true
+        case action: PickItemAction => validate(s, actor, action)
+        case action: RecycleItemAction => validate(s, actor, action)
+        case _: ShootAction => true
+        case action: ShootMissileAction => validate(s, actor, action)
+        case action: UnequipItemAction => validate(s, actor, action)
+        case action: UseCreatureAction => validate(s, actor, action)
+        case action: UseDoorAction => validate(s, actor, action)
+        case action: UseItemAction => validate(s, actor, action)
+        case _ => false
+      }
     }
   }
 
@@ -48,6 +56,15 @@ object ActionValidator {
   private def validate(s: State, actor: CreatureId, action: CommunicateAction): Boolean = {
     entityExists(s)(action.target) &&
       isAdjacentLocation(s, actor)(action.target(s).location)
+  }
+
+  private def validate(s: State, actor: CreatureId, action: ConverseAction): Boolean = {
+    entityExists(s)(action.target) &&
+      s.creature.conversations.get(actor).exists(x => {
+        val (source, communication) = x
+
+        source == action.target && communication(s).validChoices(actor)(s).exists(_.communication == action.subject)
+      })
   }
 
   private def validate(s: State, actor: CreatureId, action: CraftItemAction): Boolean = {

@@ -2,7 +2,7 @@ package models.json
 
 import io.github.fiifoo.scarl.action._
 import io.github.fiifoo.scarl.core.action.Action
-import io.github.fiifoo.scarl.core.entity.{CreatureId, ItemId}
+import io.github.fiifoo.scarl.core.entity.ItemId
 import io.github.fiifoo.scarl.core.geometry.Location
 import io.github.fiifoo.scarl.core.item.Equipment.Slot
 import play.api.libs.json._
@@ -11,6 +11,7 @@ object JsonAction {
 
   import JsonBase.{mapFormat, polymorphicTypeReads}
 
+  lazy private implicit val communicationIdFormat = JsonCommunication.communicationIdFormat
   lazy private implicit val conduitIdFormat = JsonConduit.conduitIdFormat
   lazy private implicit val creatureIdFormat = JsonCreature.creatureIdFormat
   lazy private implicit val creatureKindIdFormat = JsonCreatureKind.creatureKindIdFormat
@@ -24,13 +25,12 @@ object JsonAction {
 
   lazy private implicit val attackReads = Json.reads[AttackAction]
   lazy private implicit val cancelRecycleItemReads = Json.reads[CancelRecycleItemAction]
-  lazy private implicit val communicateReads = new Reads[CommunicateAction] {
-    def reads(json: JsValue): JsResult[CommunicateAction] = {
-      val target = json.as[JsObject].value("target").as[CreatureId]
+  lazy private implicit val converseReads = {
+    implicit val usableIdFormat = JsonEntity.usableIdFormat
 
-      JsSuccess(CommunicateAction(target))
-    }
+    Json.reads[ConverseAction]
   }
+  lazy private implicit val communicateReads = Json.reads[CommunicateAction]
   lazy private implicit val craftItemReads = Json.reads[CraftItemAction]
   lazy private implicit val displaceReads = Json.reads[DisplaceAction]
   lazy private implicit val dropItemReads = Json.reads[DropItemAction]
@@ -53,9 +53,11 @@ object JsonAction {
     case "Attack" => data.as[AttackAction]
     case "CancelRecycleItem" => data.as[CancelRecycleItemAction]
     case "Communicate" => data.as[CommunicateAction]
+    case "Converse" => data.as[ConverseAction]
     case "CraftItem" => data.as[CraftItemAction]
     case "Displace" => data.as[DisplaceAction]
     case "DropItem" => data.as[DropItemAction]
+    case "EndConversation" => EndConversationAction
     case "EnterConduit" => data.as[EnterConduitAction]
     case "EquipItem" => data.as[EquipItemAction]
     case "EquipWeapons" => data.as[EquipWeaponsAction]
