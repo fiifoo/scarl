@@ -8,6 +8,7 @@ object JsonPower {
 
   import JsonBase.polymorphicTypeFormat
 
+  lazy private implicit val communicationIdFormat = JsonCommunication.communicationIdFormat
   lazy private implicit val goalIdFormat = JsonGoal.goalIdFormat
   lazy private implicit val kindIdFormat = JsonKind.kindIdFormat
   lazy private implicit val resourcesFormat = Json.format[Power.Resources]
@@ -18,6 +19,7 @@ object JsonPower {
   lazy private implicit val conditionFormat = JsonCondition.conditionFormat
   lazy private implicit val createEntityFormat = Json.format[CreateEntityPower]
   lazy private implicit val explodeFormat = Json.format[ExplodePower]
+  lazy private implicit val receiveCommunicationFormat = Json.format[ReceiveCommunicationPower]
   lazy private implicit val receiveKeyFormat = Json.format[ReceiveKeyPower]
   lazy private implicit val removeItemFormat = Json.format[RemoveItemPower]
   lazy private implicit val scanFormat = Json.format[ScanPower]
@@ -51,6 +53,7 @@ object JsonPower {
       case "ActivateMachineryPower" => data.as[ActivateMachineryPower]
       case "CreateEntityPower" => data.as[CreateEntityPower]
       case "ExplodePower" => data.as[ExplodePower]
+      case "ReceiveCommunicationPower" => data.as[ReceiveCommunicationPower]
       case "ReceiveKeyPower" => data.as[ReceiveKeyPower]
       case "RemoveItemPower" => data.as[RemoveItemPower]
       case "ScanPower" => data.as[ScanPower]
@@ -62,6 +65,7 @@ object JsonPower {
       case power: ActivateMachineryPower => activateMachineryFormat.writes(power)
       case power: CreateEntityPower => createEntityFormat.writes(power)
       case power: ExplodePower => explodeFormat.writes(power)
+      case power: ReceiveCommunicationPower => receiveCommunicationFormat.writes(power)
       case power: ReceiveKeyPower => receiveKeyFormat.writes(power)
       case power: RemoveItemPower => removeItemFormat.writes(power)
       case power: ScanPower => scanFormat.writes(power)

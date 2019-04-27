@@ -224,6 +224,7 @@ object Sources {
       typeOf[ActivateMachineryPower],
       typeOf[CreateEntityPower],
       typeOf[ExplodePower],
+      typeOf[ReceiveCommunicationPower],
       typeOf[ReceiveKeyPower],
       typeOf[RemoveItemPower],
       typeOf[ScanPower],

@@ -15,8 +15,18 @@ case class ReceiveCommunicationEffect(source: UsableId,
                                      ) extends Effect {
 
   def apply(s: State): EffectResult = {
+    val mutation = CommunicationReceivedMutation(this.target(s).faction, this.communication)
+
+    val effects = (this.source match {
+      case creature: CreatureId => this.communication(s).creaturePower map (_.apply(s, creature, Some(this.target)))
+      case item: ItemId => this.communication(s).itemPower map (_.apply(s, item, Some(this.target)))
+    }) getOrElse {
+      List()
+    }
+
     EffectResult(
-      CommunicationReceivedMutation(this.target(s).faction, this.communication)
+      mutation,
+      effects
     )
   }
 }
