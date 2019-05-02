@@ -5,7 +5,7 @@ import io.github.fiifoo.scarl.core.effect.{Effect, EffectResult}
 import io.github.fiifoo.scarl.core.entity.{CreatureId, Power, UsableId}
 import io.github.fiifoo.scarl.effect.creature.{ChangeResourcesEffect, ShortageEffect}
 
-case class PowerUseEffect(user: CreatureId,
+case class PowerUseEffect(user: Option[CreatureId],
                           target: UsableId,
                           power: Power,
                           requireResources: Boolean,
@@ -13,33 +13,37 @@ case class PowerUseEffect(user: CreatureId,
                          ) extends Effect {
 
   def apply(s: State): EffectResult = {
-    shortage(s) getOrElse {
-      val usedEffect = PowerUsedEffect(user, power.description, Some(this))
-      val effects = power(s, target, Some(user))
+    user map (user => {
+      shortage(s, user) getOrElse {
+        val usedEffect = PowerUsedEffect(user, this.power.description, Some(this))
+        val effects = this.power(s, target, Some(user))
 
-      power.resources map (resources => {
-        val resourceEffect = ChangeResourcesEffect(
-          user,
-          resources.health,
-          resources.energy,
-          resources.materials,
-          resources.components,
-          Some(this)
-        )
+        this.power.resources map (resources => {
+          val resourceEffect = ChangeResourcesEffect(
+            user,
+            resources.health,
+            resources.energy,
+            resources.materials,
+            resources.components,
+            Some(this)
+          )
 
-        EffectResult(usedEffect :: resourceEffect :: effects)
-      }) getOrElse {
-        EffectResult(usedEffect :: effects)
+          EffectResult(usedEffect :: resourceEffect :: effects)
+        }) getOrElse {
+          EffectResult(usedEffect :: effects)
+        }
       }
+    }) getOrElse {
+      EffectResult(this.power(s, this.target, None))
     }
   }
 
-  private def shortage(s: State): Option[EffectResult] = {
-    if (!requireResources) {
+  private def shortage(s: State, user: CreatureId): Option[EffectResult] = {
+    if (!this.requireResources) {
       return None
     }
 
-    power.resources flatMap (resources => {
+    this.power.resources flatMap (resources => {
       val creature = user(s)
 
       if (-resources.energy > creature.resources.energy ||

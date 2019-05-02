@@ -23,7 +23,7 @@ case class TriggeredTrapStatus(id: TriggerStatusId,
 
     val trapEffect = Selectors.getWidgetItem(s)(target) flatMap (item => {
       item(s).trap map (trap => {
-        PowerUseEffect(triggerer, item, trap, requireResources = false)
+        PowerUseEffect(Some(triggerer), item, trap, requireResources = false)
       })
     })
 

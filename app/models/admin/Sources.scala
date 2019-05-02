@@ -144,8 +144,10 @@ object Sources {
     SubModelSource(typeOf[CreaturePower], List(
       typeOf[AchieveGoalPower],
       typeOf[ActivateMachineryPower],
+      typeOf[CompositeCreaturePower],
       typeOf[CapturePower],
       typeOf[CreateEntityPower],
+      typeOf[MaybeCreaturePower],
       typeOf[ExplodePower],
       typeOf[TransformPower],
       typeOf[VoidPower],
@@ -222,8 +224,10 @@ object Sources {
     SubModelSource(typeOf[ItemPower], List(
       typeOf[AchieveGoalPower],
       typeOf[ActivateMachineryPower],
+      typeOf[CompositeItemPower],
       typeOf[CreateEntityPower],
       typeOf[ExplodePower],
+      typeOf[MaybeItemPower],
       typeOf[ReceiveCommunicationPower],
       typeOf[ReceiveKeyPower],
       typeOf[RemoveItemPower],

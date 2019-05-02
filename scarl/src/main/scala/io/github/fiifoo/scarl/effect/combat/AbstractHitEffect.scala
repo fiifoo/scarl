@@ -23,7 +23,7 @@ trait AbstractHitEffect extends Effect {
     })
 
     val eventEffect = target(s).events flatMap (_.hit) map (power => {
-      PowerUseEffect(target, target, power, requireResources = false, Some(this))
+      PowerUseEffect(Some(target), target, power, requireResources = false, Some(this))
     })
 
     val conditionsEffect = if (this.conditions.nonEmpty) {

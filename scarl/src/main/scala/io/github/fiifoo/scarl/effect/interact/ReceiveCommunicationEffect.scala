@@ -17,15 +17,6 @@ case class ReceiveCommunicationEffect(source: UsableId,
   def apply(s: State): EffectResult = {
     val communication = this.communication(s)
     val faction = this.target(s).faction
-    val received = s.creature.receivedCommunications.getOrElse(faction, Set())
-
-    val mutation = CommunicationReceivedMutation(faction, this.communication)
-
-    val power = if (received.contains(this.communication)) None else this.source match {
-      case _: CreatureId => communication.creaturePower
-      case _: ItemId => communication.itemPower
-    }
-    val effects = power map (_.apply(s, this.source, Some(this.target))) getOrElse List()
 
     val conversationEffect = if (communication.validChoices(this.target)(s).isEmpty) {
       if (s.creature.conversations.isDefinedAt(this.target)) {
@@ -37,10 +28,19 @@ case class ReceiveCommunicationEffect(source: UsableId,
       Some(StartConversationEffect(this.source, this.target, this.communication))
     }
 
+    val received = s.creature.receivedCommunications.getOrElse(faction, Set())
+    val power = if (received.contains(this.communication)) None else this.source match {
+      case _: CreatureId => communication.creaturePower
+      case _: ItemId => communication.itemPower
+    }
+    val powerEffect = power map (PowerUseEffect(Some(this.target), this.source, _, requireResources = false))
 
     EffectResult(
-      mutation,
-      conversationEffect map (_ :: effects) getOrElse effects
+      CommunicationReceivedMutation(faction, this.communication),
+      List(
+        conversationEffect,
+        powerEffect
+      ).flatten
     )
   }
 }

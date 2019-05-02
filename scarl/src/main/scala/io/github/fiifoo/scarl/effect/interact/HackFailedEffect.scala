@@ -52,7 +52,7 @@ case class HackFailedEffect(hacker: CreatureId,
     item(s).trap flatMap (trap => {
       if (HackRule.shouldTriggerTrap(failure)) {
         Some(List(
-          PowerUseEffect(hacker, item, trap, requireResources = false)
+          PowerUseEffect(Some(hacker), item, trap, requireResources = false)
         ))
       } else {
         None

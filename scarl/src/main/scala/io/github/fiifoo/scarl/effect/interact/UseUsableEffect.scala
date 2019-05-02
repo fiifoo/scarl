@@ -26,7 +26,7 @@ case class UseUsableEffect(user: CreatureId,
         }
       }) getOrElse {
         EffectResult(
-          PowerUseEffect(user, target, power, requireResources = true, Some(this))
+          PowerUseEffect(Some(user), target, power, requireResources = true, Some(this))
         )
       }
     }) getOrElse EffectResult()

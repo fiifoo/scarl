@@ -26,7 +26,7 @@ case class DeathEffect(target: CreatureId,
     ) ::: leaderDeath(s)
 
     val eventEffect = target(s).events flatMap (_.death) map (power => {
-      PowerUseEffect(target, target, power, requireResources = false, Some(this))
+      PowerUseEffect(Some(target), target, power, requireResources = false, Some(this))
     })
 
     val experienceEffect = GainExperienceRule(s, this) map (x => {
