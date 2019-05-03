@@ -29,6 +29,9 @@ const initial = Record({
 
 export default tabbedReducer(initial, (state, action) => {
     switch (action.type) {
+        case types.ADD_TAB: {
+            return state.set('model', action.previous.model)
+        }
         case types.SELECT_MODEL: {
             return state.set('model', action.model).set('item', null).set('itemRename', ItemRename())
         }

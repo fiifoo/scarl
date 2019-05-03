@@ -15,7 +15,10 @@ export const tabbedReducer = (initial, reducer) => {
                 return state.set('tab', action.tab)
             }
             case types.ADD_TAB: {
-                const tabs = state.get('tabs').set(action.tab, initial)
+                const tabs = state.get('tabs').set(action.tab, reducer(initial, {
+                    ...action,
+                    previous: state.tabs.get(state.tab)
+                }))
 
                 return state.set('tabs', tabs).set('tab', action.tab)
             }
