@@ -4,7 +4,7 @@ import io.github.fiifoo.scarl.action.MoveAction
 import io.github.fiifoo.scarl.core.action.Action
 import io.github.fiifoo.scarl.core.entity.Selectors.{getCreatureKeys, getCreatureStats, getLocationEntities, getLocationItems}
 import io.github.fiifoo.scarl.core.entity.{CreatureId, ItemId}
-import io.github.fiifoo.scarl.core.geometry.{Location, Obstacle, Path}
+import io.github.fiifoo.scarl.core.geometry.{Distance, Location, Obstacle, Path}
 import io.github.fiifoo.scarl.game.RunState
 import io.github.fiifoo.scarl.game.api.GameUpdate
 
@@ -13,32 +13,23 @@ import scala.collection.immutable.Queue
 
 object PlayerAutomation {
 
-  def getDestination(state: RunState, direction: Option[Int]): Option[Location] = {
-    if (direction.isDefined) {
-      getDirectionDestination(state, direction.get)
-    } else {
-      getExplorationDestination(state)
-    }
-  }
+  private val ExplorationDistance = 10
 
-  def getMoveAction(state: RunState, destination: Location): Option[Action] = {
-    if (isTravelBlocked(state)(destination) || getCreatureStats(state.instance)(state.game.player).speed <= 0) {
-      return None
-    }
-
+  def apply(state: RunState,
+            direction: Option[Int] = None,
+            destination: Option[Location] = None,
+            explore: Option[Location] = None
+           ): Option[(Location, Location, Action)] = {
     val from = state.game.player(state.instance).location
-    val path = Path.calc(isTravelBlocked(state))(from, destination)
 
-    path map (_.head) flatMap (to => {
-      if (hasCreature(state)(to) || hasClosedDoor(state)(to)) {
-        None
-      } else {
-        Some(MoveAction(to))
-      }
+    destination filter (_ != from) orElse getDestination(state, direction, explore) flatMap (destination => {
+      getMoveAction(state, destination) map (action => {
+        (destination, explore getOrElse destination, action)
+      })
     })
   }
 
-  def shouldContinueMoving(initial: RunState, result: RunState, destination: Location): Boolean = {
+  def stop(initial: RunState, result: RunState): Boolean = {
     val events = (result.outMessages collect {
       case message: GameUpdate => message.events
     }).flatten
@@ -47,13 +38,24 @@ object PlayerAutomation {
     val from = player(initial.instance).location
     val to = player(result.instance).location
 
-    events.isEmpty && from != to && to != destination && !hasNewVisibleEnemies(initial, result)
+    events.nonEmpty || from == to || hasNewVisibleEnemies(initial, result)
+  }
+
+  private def getDestination(state: RunState, direction: Option[Int], explore: Option[Location]): Option[Location] = {
+    val candidate = if (direction.isDefined) {
+      getDirectionDestination(state, direction.get)
+    } else {
+      getExplorationDestination(state)
+    }
+
+    candidate filter (candidate => explore forall (explore => {
+      Distance(candidate, explore) <= ExplorationDistance
+    }))
   }
 
   private def getExplorationDestination(state: RunState): Option[Location] = {
     val from = state.game.player(state.instance).location
-    val keys = getCreatureKeys(state.instance)(state.game.player)
-    val blocked = Obstacle.has(Obstacle.travel(state.instance, keys)) _
+    val blocked = isTravelBlocked(state)
 
     @tailrec
     def step(queue: Queue[Location], visited: Set[Location]): Option[Location] = {
@@ -99,6 +101,27 @@ object PlayerAutomation {
     }
   }
 
+  private def getMoveAction(state: RunState, destination: Location): Option[Action] = {
+    if (isTravelBlocked(state)(destination) || getCreatureStats(state.instance)(state.game.player).speed <= 0) {
+      return None
+    }
+
+    val from = state.game.player(state.instance).location
+    val path = Path.calc(isTravelBlocked(state))(from, destination)
+
+    val to = path map (_.head) flatMap (to => {
+      if (hasCreature(state)(to)) {
+        Path.calc(isMovementBlocked(state))(from, destination) map (_.head)
+      } else if (hasClosedDoor(state)(to)) {
+        None
+      } else {
+        Some(to)
+      }
+    })
+
+    to map MoveAction
+  }
+
   private def hasNewVisibleEnemies(initial: RunState, result: RunState): Boolean = {
     val old = initial.fov.locations flatMap getEnemy(initial)
     val current = result.fov.locations flatMap getEnemy(initial)
@@ -135,6 +158,15 @@ object PlayerAutomation {
   private def isTravelBlocked(state: RunState): Location => Boolean = {
     val keys = getCreatureKeys(state.instance)(state.game.player)
     val blocked = Obstacle.has(Obstacle.travel(state.instance, keys)) _
+
+    (location: Location) =>
+      !state.areaMap.isDefinedAt(location) ||
+        blocked(location) ||
+        getCreature(state)(location).exists(_.apply(state.instance).immobile)
+  }
+
+  private def isMovementBlocked(state: RunState): Location => Boolean = {
+    val blocked = Obstacle.has(Obstacle.movement(state.instance)) _
 
     (location: Location) => !state.areaMap.isDefinedAt(location) || blocked(location)
   }

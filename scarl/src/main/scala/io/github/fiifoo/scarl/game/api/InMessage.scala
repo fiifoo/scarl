@@ -18,18 +18,20 @@ sealed trait InMessage {
   def apply(state: RunState)(implicit ec: ExecutionContext): (RunState, Option[InMessage])
 }
 
-case class AutoMove(direction: Option[Int] = None, destination: Option[Location] = None) extends InMessage {
+case class AutoMove(direction: Option[Int] = None,
+                    destination: Option[Location] = None,
+                    explore: Option[Location] = None
+                   ) extends InMessage {
   def apply(state: RunState)(implicit ec: ExecutionContext): (RunState, Option[InMessage]) = {
-    destination.orElse(PlayerAutomation.getDestination(state, direction)) flatMap (destination => {
-      PlayerAutomation.getMoveAction(state, destination) map (action => {
-        val (result, _) = GameAction(action)(state)
+    PlayerAutomation.apply(state, this.direction, this.destination, this.explore) map (x => {
+      val (destination, explore, action) = x
+      val (result, _) = GameAction(action)(state)
 
-        if (!result.ended && PlayerAutomation.shouldContinueMoving(state, result, destination)) {
-          (result, Some(this.copy(destination = Some(destination))))
-        } else {
-          (result, None)
-        }
-      })
+      if (result.ended || PlayerAutomation.stop(state, result)) {
+        (result, None)
+      } else {
+        (result, Some(this.copy(destination = Some(destination), explore = Some(explore))))
+      }
     }) getOrElse {
       (state, None)
     }
