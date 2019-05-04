@@ -20,23 +20,25 @@ object SignalRule {
       signal.owner.forall(_ == faction)
     })
 
-    signals flatMap (signal => {
-      val distance = Distance(from, signal.location)
-      val strength = calculateStrength(signal.strength, sensors)(distance)
-      val radius = calculateRadius(signal.radius)(strength)
+    signals flatMap calculateSignal(from, sensors)
+  }
 
-      val random = new Random(signal.seed)
+  def calculateSignal(from: Location, sensors: Int)(signal: Signal): Option[Signal] = {
+    val distance = Distance(from, signal.location)
+    val strength = calculateStrength(signal.strength, sensors)(distance)
+    val radius = calculateRadius(signal.radius)(strength)
 
-      if (rollDetection(random)(strength)) {
-        Some(signal.copy(
-          location = getRandomLocation(signal.location, radius, random),
-          strength = strength,
-          radius = radius
-        ))
-      } else {
-        None
-      }
-    })
+    val random = new Random(signal.seed)
+
+    if (rollDetection(random)(strength)) {
+      Some(signal.copy(
+        location = getRandomLocation(signal.location, radius, random),
+        strength = strength,
+        radius = radius
+      ))
+    } else {
+      None
+    }
   }
 
   def rollDetection(random: Random)(strength: Int): Boolean = {

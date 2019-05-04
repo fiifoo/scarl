@@ -1,5 +1,6 @@
 import { EVENT_DURATION, EXPLOSION_COLOR, HIGHLIGHT_COLOR, SHOT_COLOR } from '../const'
 import { clearContext, createCanvas, createDraw } from '../utils'
+import { renderSignal } from './signal.js'
 
 const filterEvents = e => e.type !== 'GenericEvent'
 
@@ -32,6 +33,10 @@ export default area => {
             }
             case 'ShotEvent': {
                 renderShot(event.data)
+                break
+            }
+            case 'SignalEvent': {
+                renderSignal(draw)(event.data.signal)
                 break
             }
         }

@@ -1,10 +1,21 @@
 import { Range } from 'immutable'
-import { circle } from '../../game/geometry'
+import { circle, distance } from '../../game/geometry'
 import { GRID_COLOR, SIGNAL_COLORS, TILE_SIZE } from '../const'
 import { clearContext, createCanvas, createDraw } from '../utils'
 
 const FALLBACK_COLOR = '#000'
 const MAX_STRENGTH = 50
+
+export const renderSignal = draw => signal => {
+    const color = SIGNAL_COLORS[signal.kind] || FALLBACK_COLOR
+
+    circle(signal.location, signal.radius).forEach(location => {
+        const multiplier = 1 - distance(signal.location, location) / signal.radius
+        const alpha = signal.strength / MAX_STRENGTH * multiplier
+
+        draw.fill(color, Math.max(0.1, Math.min(alpha, 0.5)))(location)
+    })
+}
 
 export default area => {
     const canvas = createCanvas(area)
@@ -18,7 +29,7 @@ export default area => {
 
         if (signals) {
             renderGrid()
-            signals.forEach(renderSignal)
+            signals.forEach(renderSignal(draw))
         }
     }
 
@@ -37,15 +48,6 @@ export default area => {
             context.lineTo(x * TILE_SIZE + 0.5, area.height * TILE_SIZE + 0.5)
             context.stroke()
         })
-    }
-
-    const renderSignal = signal => {
-        const color = SIGNAL_COLORS[signal.kind] || FALLBACK_COLOR
-        const alpha = signal.strength / MAX_STRENGTH / 2
-
-        context.globalAlpha = Math.min(alpha + 0.1, 0.5)
-
-        circle(signal.location, signal.radius).forEach(draw.fill(color))
     }
 
     return {

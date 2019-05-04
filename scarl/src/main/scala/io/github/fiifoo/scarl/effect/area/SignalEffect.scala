@@ -5,7 +5,7 @@ import io.github.fiifoo.scarl.core.creature.FactionId
 import io.github.fiifoo.scarl.core.effect.{Effect, EffectResult}
 import io.github.fiifoo.scarl.core.entity.Signal
 import io.github.fiifoo.scarl.core.geometry.Location
-import io.github.fiifoo.scarl.core.mutation.{NewSignalMutation, RngMutation}
+import io.github.fiifoo.scarl.core.mutation.RngMutation
 
 case class SignalEffect(kind: Signal.Kind,
                         location: Location,
@@ -20,9 +20,9 @@ case class SignalEffect(kind: Signal.Kind,
     val seed = random.nextInt()
     val signal = Signal(kind, location, strength, radius, owner, seed, s.tick)
 
-    EffectResult(List(
+    EffectResult(
       RngMutation(rng),
-      NewSignalMutation(signal)
-    ))
+      SignaledEffect(signal)
+    )
   }
 }

@@ -78,13 +78,22 @@ export const createDraw = context => ({
         context.fill()
     },
 
-    fill: color =>  location => {
+    fill: (color, alpha = null) =>  location => {
         context.fillStyle = color
+
+        if (alpha) {
+            context.save()
+            context.globalAlpha = alpha
+        }
 
         const x = location.x * TILE_SIZE
         const y = location.y * TILE_SIZE
 
         context.fillRect(x, y, TILE_SIZE, TILE_SIZE)
+
+        if (alpha) {
+            context.restore()
+        }
     },
 
     line: color => from => to => {

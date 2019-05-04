@@ -3,18 +3,18 @@ package io.github.fiifoo.scarl.game.event
 import io.github.fiifoo.scarl.core.State
 import io.github.fiifoo.scarl.core.creature.Condition
 import io.github.fiifoo.scarl.core.effect.{CreateEntityEffect, Effect, LocalizedDescriptionEffect, RemoveEntityEffect}
-import io.github.fiifoo.scarl.core.entity.Selectors.{getContainerItems, getLocationVisibleItems}
+import io.github.fiifoo.scarl.core.entity.Selectors.{getContainerItems, getCreatureStats, getLocationVisibleItems}
 import io.github.fiifoo.scarl.core.entity._
 import io.github.fiifoo.scarl.core.geometry.Location
 import io.github.fiifoo.scarl.core.item.{KeyKindId, SharedKey}
 import io.github.fiifoo.scarl.core.kind._
-import io.github.fiifoo.scarl.effect.area.{ExplosiveTimerEffect, TransformBlockedEffect}
+import io.github.fiifoo.scarl.effect.area.{ExplosiveTimerEffect, SignaledEffect, TransformBlockedEffect}
 import io.github.fiifoo.scarl.effect.combat._
 import io.github.fiifoo.scarl.effect.creature._
 import io.github.fiifoo.scarl.effect.creature.condition._
 import io.github.fiifoo.scarl.effect.interact._
 import io.github.fiifoo.scarl.effect.movement.{CollideEffect, DisplaceEffect, MovedEffect}
-import io.github.fiifoo.scarl.rule.HackRule
+import io.github.fiifoo.scarl.rule.{HackRule, SignalRule}
 
 object EventBuilder {
 
@@ -34,6 +34,13 @@ object EventBuilder {
 
 class EventBuilder(s: State, player: CreatureId, fov: Set[Location]) {
 
+  lazy private val calculateSignal = {
+    val from = player(s).location
+    val sensors = getCreatureStats(s)(player).sight.sensors
+
+    SignalRule.calculateSignal(from, sensors) _
+  }
+
   def apply(effect: Effect): Option[Event] = {
     effect match {
       case e: BadShotEffect => build(e) map GenericEvent
@@ -51,7 +58,6 @@ class EventBuilder(s: State, player: CreatureId, fov: Set[Location]) {
       case e: EquipItemEffect => build(e) map GenericEvent
       case e: EquipWeaponsEffect => build(e) map GenericEvent
       case e: ExplodeEffect => build(e) map GenericEvent
-      case e: ExplosionEffect => build(e) map GenericEvent
       case e: ExplosionHitEffect => build(e)
       case e: ExplosionLocationEffect => build(e)
       case e: ExplosionMissEffect => build(e) map GenericEvent
@@ -77,6 +83,7 @@ class EventBuilder(s: State, player: CreatureId, fov: Set[Location]) {
       case e: RecycleItemEffect => build(e) map GenericEvent
       case e: RemoveEntityEffect => build(e) map GenericEvent
       case e: ResistConditionEffect => build(e) map GenericEvent
+      case e: SignaledEffect => build(e)
       case e: ShootMissileEffect => build(e) map GenericEvent
       case e: ShortageEffect => build(e) map GenericEvent
       case e: ShotEffect => build(e)
@@ -269,14 +276,6 @@ class EventBuilder(s: State, player: CreatureId, fov: Set[Location]) {
   private def build(effect: ExplodeEffect): Option[String] = {
     if (fov contains effect.location) {
       kind(effect.explosive) map (explosive => s"$explosive explodes.")
-    } else {
-      None
-    }
-  }
-
-  private def build(effect: ExplosionEffect): Option[String] = {
-    if (!(fov contains effect.location)) {
-      Some("You hear sound of explosion.")
     } else {
       None
     }
@@ -590,6 +589,16 @@ class EventBuilder(s: State, player: CreatureId, fov: Set[Location]) {
   private def build(effect: ResistConditionEffect): Option[String] = {
     if (effect.target == player) {
       Some(s"You resist being ${condition(effect.condition)}.")
+    } else {
+      None
+    }
+  }
+
+  private def build(effect: SignaledEffect): Option[Event] = {
+    val signal = effect.signal
+
+    if (!fov.contains(signal.location) && signal.owner.forall(_ == player(s).faction)) {
+      calculateSignal(signal) map SignalEvent
     } else {
       None
     }

@@ -11,6 +11,7 @@ object JsonEvent {
   lazy private implicit val communicationChoiceFormat = JsonCommunication.communicationChoiceFormat
   lazy private implicit val creatureIdFormat = JsonCreature.creatureIdFormat
   lazy private implicit val locationWrites = Json.writes[Location]
+  lazy private implicit val signalFormat = JsonSignal.signalFormat
 
   lazy private val communicationEventWrites = {
     implicit val usableIdFormat = JsonEntity.usableIdFormat
@@ -23,6 +24,7 @@ object JsonEvent {
   lazy private val hitEventWrites = Json.writes[HitEvent]
   lazy private val moveMissileEventWrites = Json.writes[MoveMissileEvent]
   lazy private val shotEventWrites = Json.writes[ShotEvent]
+  lazy private val signalEventWrites = Json.writes[SignalEvent]
 
   lazy implicit val eventWrites: Writes[Event] = polymorphicTypeWrites({
     case event: CommunicationEvent => communicationEventWrites.writes(event)
@@ -31,5 +33,6 @@ object JsonEvent {
     case event: HitEvent => hitEventWrites.writes(event)
     case event: MoveMissileEvent => moveMissileEventWrites.writes(event)
     case event: ShotEvent => shotEventWrites.writes(event)
+    case event: SignalEvent => signalEventWrites.writes(event)
   })
 }
