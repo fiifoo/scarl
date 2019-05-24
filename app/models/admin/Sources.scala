@@ -152,6 +152,7 @@ object Sources {
       typeOf[FactionStrategyPower],
       typeOf[MaybeCreaturePower],
       typeOf[ExplodePower],
+      typeOf[ReceiveKeyPower],
       typeOf[TransformPower],
       typeOf[VoidPower],
     )),
@@ -278,6 +279,7 @@ object Sources {
       typeOf[Template.ChallengeCategory.type],
       typeOf[Template.RoomCategory.type],
       typeOf[Template.SpaceCategory.type],
+      typeOf[Template.StorageCategory.type],
       typeOf[Template.TrapCategory.type],
     ), objectPolymorphism = true),
 

@@ -285,13 +285,13 @@ class EventBuilder(s: State, player: CreatureId, fov: Set[Location]) {
   private def build(effect: ExplosionHitEffect): Option[Event] = {
     val message = if (effect.target == player) {
       Some(if (effect.result.damage.isEmpty) {
-        "You are hit with no effect by explosion."
+        "You are hit by explosion without any damage."
       } else {
         "You are hit by explosion."
       })
     } else if (fov contains effect.location) {
       Some(if (effect.result.damage.isEmpty) {
-        s"${kind(effect.target)} is hit with no effect by explosion."
+        s"${kind(effect.target)} is hit by explosion without any damage."
       } else {
         s"${kind(effect.target)} is hit by explosion."
       })
@@ -366,7 +366,7 @@ class EventBuilder(s: State, player: CreatureId, fov: Set[Location]) {
 
     val message = if (effect.attacker == player) {
       Some(if (damage.isEmpty) {
-        s"You hit ${kind(effect.target)} with no effect."
+        s"You hit ${kind(effect.target)} without any damage."
       } else if (bypass.isDefined) {
         s"You hit ${kind(effect.target)} bypassing some of it's armor."
       } else {
@@ -374,7 +374,7 @@ class EventBuilder(s: State, player: CreatureId, fov: Set[Location]) {
       })
     } else if (effect.target == player) {
       Some(if (damage.isEmpty) {
-        s"${kind(effect.attacker)} hits you with no effect."
+        s"${kind(effect.attacker)} hits you without any damage."
       } else if (bypass.isDefined) {
         s"${kind(effect.attacker)} hits you bypassing some of your armor."
       } else {

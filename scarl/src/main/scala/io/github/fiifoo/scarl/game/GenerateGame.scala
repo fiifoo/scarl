@@ -42,11 +42,18 @@ object GenerateGame {
 
   private def addPlayer(area: SiteId, character: CreatureKindId)(world: WorldState): (WorldState, CreatureId) = {
     val state = world.states(area)
-    if (state.gateways.isEmpty) {
+
+    val locations = if (state.gateways.isEmpty) {
+      state.conduits.exits.values.toSet // fallback to conduit exists to help testing
+    } else {
+      state.gateways
+    }
+
+    if (locations.isEmpty) {
       throw new Exception("First area does not contain any gateways. Cannot add player.")
     }
 
-    val (location, _) = state.rng.nextChoice(state.gateways)
+    val (location, _) = state.rng.nextChoice(locations)
     val result = character(state).apply(state, state.idSeq, location)
 
     val nextState = result.write(state)

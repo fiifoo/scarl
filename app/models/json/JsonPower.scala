@@ -12,6 +12,7 @@ object JsonPower {
   lazy private implicit val conditionFormat = JsonCondition.conditionFormat
   lazy private implicit val dispositionFormat = JsonFaction.dispositionFormat
   lazy private implicit val goalIdFormat = JsonGoal.goalIdFormat
+  lazy private implicit val sharedKeyFormat = JsonItemKey.sharedKeyFormat
   lazy private implicit val kindIdFormat = JsonKind.kindIdFormat
   lazy private implicit val resourcesFormat = Json.format[Power.Resources]
   lazy private implicit val strategyFormat = JsonStrategy.strategyFormat
@@ -46,6 +47,7 @@ object JsonPower {
       case "FactionDispositionPower" => data.as[FactionDispositionPower]
       case "FactionStrategyPower" => data.as[FactionStrategyPower]
       case "MaybeCreaturePower" => data.as[MaybeCreaturePower]
+      case "ReceiveKeyPower" => data.as[ReceiveKeyPower]
       case "TransformPower" => data.as[TransformPower]
       case "VoidPower" => data.as[VoidPower]
     }, {
@@ -58,6 +60,7 @@ object JsonPower {
       case power: FactionDispositionPower => factionDispositionFormat.writes(power)
       case power: FactionStrategyPower => factionStrategyFormat.writes(power)
       case power: MaybeCreaturePower => maybeCreatureFormat.writes(power)
+      case power: ReceiveKeyPower => receiveKeyFormat.writes(power)
       case power: TransformPower => transformFormat.writes(power)
       case power: VoidPower => voidFormat.writes(power)
     }

@@ -74,6 +74,7 @@ object JsonTemplate {
     case "Template.ChallengeCategory" => ChallengeCategory
     case "Template.RoomCategory" => RoomCategory
     case "Template.SpaceCategory" => SpaceCategory
+    case "Template.StorageCategory" => StorageCategory
     case "Template.TrapCategory" => TrapCategory
   })
 }
