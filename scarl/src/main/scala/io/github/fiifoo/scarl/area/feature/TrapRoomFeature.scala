@@ -64,12 +64,10 @@ case class TrapRoomFeature(bait: ItemSelection,
 
     val targets = Rng.nextChoices(random, locations, count)
     val mechanism = CreateEntityMechanism(
-      description = if (index == 0) this.description else None,
-      disposable = true,
       kind = widget.get,
       createDescription = None
     )
 
-    MachinerySource(mechanism, Set(control), targets)
+    MachinerySource(mechanism, Set(control), targets, description, disposable = true)
   }
 }

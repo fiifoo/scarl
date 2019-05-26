@@ -248,7 +248,7 @@ object Sources {
       typeOf[RemoveEntityMechanism],
       typeOf[RemoveWallMechanism],
       typeOf[TransformEntityMechanism],
-      typeOf[UseDoorMechanism],
+      typeOf[UseDoorMechanism.type],
     )),
 
     SubModelSource(typeOf[Shape], List(

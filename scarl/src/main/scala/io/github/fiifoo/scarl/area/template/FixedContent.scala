@@ -21,16 +21,25 @@ case class FixedContent(conduitLocations: Map[Location, Option[Tag]] = Map(),
 
 object FixedContent {
 
-  case class MachinerySource(mechanism: Mechanism, controls: Set[Location], targets: Set[Location]) {
+  case class MachinerySource(mechanism: Mechanism,
+                             controls: Set[Location] = Set(),
+                             targets: Set[Location] = Set(),
+                             tag: Option[Tag] = None,
+                             description: Option[String] = None,
+                             disposable: Boolean = false
+                            ) {
     def apply(s: State, offset: Location): State = {
       val (nextId, nextIdSeq) = s.idSeq()
       val id = MachineryId(nextId)
 
       val machinery = Machinery(
         id,
-        mechanism,
-        controls map offset.add,
-        targets map offset.add,
+        this.mechanism,
+        this.controls map offset.add,
+        this.targets map offset.add,
+        this.tag,
+        this.description,
+        this.disposable
       )
 
       NewEntityMutation(machinery)(IdSeqMutation(nextIdSeq)(s))

@@ -12,9 +12,9 @@ case class ActivateMachineryEffect(activator: CreatureId,
                                   ) extends Effect {
 
   def apply(s: State): EffectResult = {
-    val mechanism = machinery(s).mechanism
-    val usedEffect = MachineryActivatedEffect(activator, location, mechanism.description, Some(this))
-    val effects = machinery(s).interact(s, location)
+    val machinery = this.machinery(s)
+    val usedEffect = MachineryActivatedEffect(this.activator, this.location, machinery.description, Some(this))
+    val effects = machinery.interact(s, this.location)
 
     EffectResult(usedEffect :: effects)
   }

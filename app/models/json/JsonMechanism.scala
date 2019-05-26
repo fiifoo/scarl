@@ -13,7 +13,6 @@ object JsonMechanism {
   lazy private implicit val removeEntityFormat = Json.format[RemoveEntityMechanism]
   lazy private implicit val removeWallFormat = Json.format[RemoveWallMechanism]
   lazy private implicit val transformEntityFormat = Json.format[TransformEntityMechanism]
-  lazy private implicit val useDoorFormat = Json.format[UseDoorMechanism]
 
   lazy implicit val mechanismFormat: Format[Mechanism] = polymorphicTypeFormat(
     data => {
@@ -21,13 +20,13 @@ object JsonMechanism {
       case "RemoveEntityMechanism" => data.as[RemoveEntityMechanism]
       case "RemoveWallMechanism" => data.as[RemoveWallMechanism]
       case "TransformEntityMechanism" => data.as[TransformEntityMechanism]
-      case "UseDoorMechanism" => data.as[UseDoorMechanism]
+      case "UseDoorMechanism" => UseDoorMechanism
     }, {
       case mechanism: CreateEntityMechanism => createEntityFormat.writes(mechanism)
       case mechanism: RemoveEntityMechanism => removeEntityFormat.writes(mechanism)
       case mechanism: RemoveWallMechanism => removeWallFormat.writes(mechanism)
       case mechanism: TransformEntityMechanism => transformEntityFormat.writes(mechanism)
-      case mechanism: UseDoorMechanism => useDoorFormat.writes(mechanism)
+      case UseDoorMechanism => JsNull
     }
   )
 }

@@ -5,6 +5,7 @@ import io.github.fiifoo.scarl.core.ai.Behavior
 import io.github.fiifoo.scarl.core.creature.Stats.Explosive
 import io.github.fiifoo.scarl.core.creature._
 import io.github.fiifoo.scarl.core.effect.Effect
+import io.github.fiifoo.scarl.core.entity.Selectors.getLocationEntities
 import io.github.fiifoo.scarl.core.geometry.Location
 import io.github.fiifoo.scarl.core.item._
 import io.github.fiifoo.scarl.core.kind.{CreatureKindId, ItemKindId, TerrainKindId, WallKindId}
@@ -168,11 +169,30 @@ case class Item(id: ItemId,
 
 case class Machinery(id: MachineryId,
                      mechanism: Mechanism,
-                     controls: Set[Location],
-                     targets: Set[Location]
+                     controls: Set[Location] = Set(),
+                     targets: Set[Location] = Set(),
+                     tag: Option[Tag] = None,
+                     description: Option[String] = None,
+                     disposable: Boolean = false
                     ) extends Entity {
 
   def interact(s: State, control: Location): List[Effect] = mechanism.interact(s, this, control)
+
+  def getTargetEntities(s: State): Set[Locatable] = {
+    if (this.targets.isEmpty) {
+      this.tag map this.collectTagEntities(s.entities.values) getOrElse Set()
+    } else {
+      val entities: Set[Locatable] = this.targets flatMap getLocationEntities(s) map (_.apply(s))
+
+      this.tag map this.collectTagEntities(entities) getOrElse entities
+    }
+  }
+
+  private def collectTagEntities(entities: Iterable[Entity])(tag: Tag): Set[Locatable] = {
+    (entities collect {
+      case entity: Locatable with Taggable if entity.tags.contains(tag) => entity
+    }).toSet
+  }
 }
 
 case class Terrain(id: TerrainId,
