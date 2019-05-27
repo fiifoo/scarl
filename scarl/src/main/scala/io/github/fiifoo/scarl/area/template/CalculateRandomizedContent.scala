@@ -5,7 +5,7 @@ import io.github.fiifoo.scarl.area.feature.Utils
 import io.github.fiifoo.scarl.area.shape.Shape
 import io.github.fiifoo.scarl.area.template.ContentSelection._
 import io.github.fiifoo.scarl.area.template.ContentSource.ItemSource
-import io.github.fiifoo.scarl.area.template.RandomizedContentSource.Entrances
+import io.github.fiifoo.scarl.area.template.RandomizedContentSource.{Entrances, Routing}
 import io.github.fiifoo.scarl.area.template.Template.Result
 import io.github.fiifoo.scarl.core.geometry.Location
 import io.github.fiifoo.scarl.core.math.Distribution.Uniform
@@ -23,26 +23,27 @@ object CalculateRandomizedContent {
              area: Area,
              random: Random
            ): Result = {
-    val subEntrances = (subResults map (x => {
+    val subEntrances = subResults map (x => {
       val (location, subResult) = x
 
       subResult.entrances map location.add
-    })).toSet.flatten
+    })
 
     val contained = CalculateUtils.templateContainedLocations(shapeResult, subResults)
     val entranceResults = calculateEntrances(source.entrances)(assets, area, shapeResult.entranceCandidates, random)
-    val routeResults = calculateRoutes(source.fill)(entranceResults, subEntrances, contained)
+    val routeResults = calculateRoutes(source.routing, source.fill)(entranceResults, subEntrances, contained)
     val wallResults = calculateBorderWalls(source.border)(shapeResult.border, entranceResults) ++
       calculateFilledWalls(source.fill)(contained, routeResults)
+    val terrainResults = calculateTerrain(source.routing)(routeResults)
 
     val contentResult = CalculateContent(
       assets = assets,
       area = area,
       shape = shapeResult,
-      target = FixedContent(walls = wallResults),
+      target = FixedContent(walls = wallResults, terrains = terrainResults),
       locations = contained,
       entrances = entranceResults,
-      subEntrances = subEntrances,
+      subEntrances = subEntrances.flatten.toSet,
       conduits = source.conduitLocations,
       features = source.features,
       terrain = source.terrain,
@@ -69,18 +70,27 @@ object CalculateRandomizedContent {
     Utils.randomUniqueSelectionLocations(locations, List(source), Map(), random)
   }
 
-  def calculateRoutes(fill: Option[WallSelection])
-                     (entranceResults: Map[Location, _],
-                      subEntrances: Set[Location],
-                      contained: Set[Location],
+  def calculateRoutes(routing: Option[Routing],
+                      fill: Option[WallSelection]
+                     )(entranceResults: Map[Location, _],
+                       subEntrances: Iterable[Set[Location]],
+                       contained: Set[Location],
                      ): Set[Location] = {
-    if (fill.isEmpty) {
+    if (routing.isEmpty && fill.isEmpty) {
       return Set()
     }
 
-    val shouldConnect = entranceResults.keys.toSet ++ subEntrances
+    val params = routing.getOrElse(Routing())
 
-    CalculateRoutes(shouldConnect, contained)
+    if (params.strict) {
+      val shouldConnect = (entranceResults.keys map (Set(_))) ++ subEntrances
+
+      CalculateStrictRoutes(shouldConnect, contained)
+    } else {
+      val shouldConnect = entranceResults.keys.toSet ++ subEntrances.flatten.toSet
+
+      CalculateRoutes(shouldConnect, contained)
+    }
   }
 
   def calculateBorderWalls(border: Option[WallSelection])
@@ -103,5 +113,13 @@ object CalculateRandomizedContent {
       .map((_, fill))
       .toMap
       ) getOrElse Map()
+  }
+
+  def calculateTerrain(routing: Option[Routing])(routeResults: Set[Location]): Map[Location, TerrainSelection] = {
+    routing flatMap (_.terrain) map (terrain => {
+      (routeResults map (_ -> terrain)).toMap
+    }) getOrElse {
+      Map()
+    }
   }
 }

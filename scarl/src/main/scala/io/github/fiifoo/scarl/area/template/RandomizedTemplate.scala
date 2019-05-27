@@ -5,7 +5,7 @@ import io.github.fiifoo.scarl.area.feature.Feature
 import io.github.fiifoo.scarl.area.shape.Shape
 import io.github.fiifoo.scarl.area.template.ContentSelection._
 import io.github.fiifoo.scarl.area.template.ContentSource.TemplateSource
-import io.github.fiifoo.scarl.area.template.RandomizedContentSource.{ConduitLocations, Entrances}
+import io.github.fiifoo.scarl.area.template.RandomizedContentSource.{ConduitLocations, Entrances, Routing}
 import io.github.fiifoo.scarl.area.template.Template.Result
 import io.github.fiifoo.scarl.core.geometry.{Location, Rotation}
 import io.github.fiifoo.scarl.core.math.Rng
@@ -19,6 +19,7 @@ case class RandomizedTemplate(id: TemplateId,
                               border: Option[WallSelection] = None,
                               fill: Option[WallSelection] = None,
                               terrain: Option[TerrainSelection] = None,
+                              routing: Option[Routing] = None,
                               templateCatalogue: Option[TemplateSourceCatalogueId] = None,
                               templates: List[TemplateSource] = List(),
                               entrances: Entrances = Entrances(),

@@ -2,7 +2,7 @@ package io.github.fiifoo.scarl.area.template
 
 import io.github.fiifoo.scarl.area.feature.Feature
 import io.github.fiifoo.scarl.area.template.ContentSelection._
-import io.github.fiifoo.scarl.area.template.RandomizedContentSource.{ConduitLocations, Entrances}
+import io.github.fiifoo.scarl.area.template.RandomizedContentSource.{ConduitLocations, Entrances, Routing}
 import io.github.fiifoo.scarl.core.Tag
 
 object RandomizedContentSource {
@@ -17,12 +17,15 @@ object RandomizedContentSource {
                               tag: Option[Tag] = None
                              )
 
+  case class Routing(strict: Boolean = false, terrain: Option[TerrainSelection] = None)
+
 }
 
 trait RandomizedContentSource {
   val border: Option[WallSelection]
   val fill: Option[WallSelection]
   val terrain: Option[TerrainSelection]
+  val routing: Option[Routing]
   val entrances: Entrances
   val conduitLocations: ConduitLocations
   val features: List[Feature]

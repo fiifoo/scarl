@@ -4,7 +4,7 @@ import io.github.fiifoo.scarl.area.feature._
 import io.github.fiifoo.scarl.area.shape.{Rectangle, Shape}
 import io.github.fiifoo.scarl.area.template.ContentSelection.ItemSelection
 import io.github.fiifoo.scarl.area.template.FixedContent.MachinerySource
-import io.github.fiifoo.scarl.area.template.RandomizedContentSource.{ConduitLocations, Entrances}
+import io.github.fiifoo.scarl.area.template.RandomizedContentSource.{ConduitLocations, Entrances, Routing}
 import io.github.fiifoo.scarl.area.template.Template._
 import io.github.fiifoo.scarl.area.template._
 import io.github.fiifoo.scarl.core.geometry.Location
@@ -32,6 +32,7 @@ object JsonTemplate {
   implicitly(optionReads[ItemSelection])
   lazy private implicit val entrancesReads = Json.reads[Entrances]
   lazy private implicit val conduitLocationsFormat = Json.format[ConduitLocations]
+  lazy private implicit val routingReads = Json.reads[Routing]
 
   lazy private implicit val rectangleReads = Json.reads[Rectangle]
   lazy private implicit val shapeReads: Reads[Shape] = polymorphicTypeReads(data => {
