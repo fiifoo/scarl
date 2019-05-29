@@ -13,7 +13,7 @@ import io.github.fiifoo.scarl.effect.combat._
 import io.github.fiifoo.scarl.effect.creature._
 import io.github.fiifoo.scarl.effect.creature.condition._
 import io.github.fiifoo.scarl.effect.interact._
-import io.github.fiifoo.scarl.effect.movement.{CollideEffect, DisplaceEffect, MovedEffect}
+import io.github.fiifoo.scarl.effect.movement.{CollideEffect, DisplacedEffect, MovedEffect}
 import io.github.fiifoo.scarl.rule.{HackRule, SignalRule}
 
 object EventBuilder {
@@ -52,7 +52,7 @@ class EventBuilder(s: State, player: CreatureId, fov: Set[Location]) {
       case e: CreateEntityEffect => build(e) map GenericEvent
       case e: DeathEffect => build(e) map GenericEvent
       case e: DetectEffect => build(e) map GenericEvent
-      case e: DisplaceEffect => build(e) map GenericEvent
+      case e: DisplacedEffect => build(e) map GenericEvent
       case e: DoorUsedEffect => build(e) map GenericEvent
       case e: DropItemEffect => build(e) map GenericEvent
       case e: EquipItemEffect => build(e) map GenericEvent
@@ -201,7 +201,7 @@ class EventBuilder(s: State, player: CreatureId, fov: Set[Location]) {
     }
   }
 
-  private def build(effect: DisplaceEffect): Option[String] = {
+  private def build(effect: DisplacedEffect): Option[String] = {
     if (effect.displacer == player) {
       Some(s"You displace ${kind(effect.displaced)}.")
     } else if (effect.displaced == player) {

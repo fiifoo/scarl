@@ -76,7 +76,6 @@ object ActionValidator {
       isAdjacentLocation(s, actor)(action.target(s).location) &&
       !isEnemy(s, actor, action.target) &&
       !actor(s).immobile &&
-      !action.target(s).immobile &&
       getCreatureStats(s)(actor).speed > 0
   }
 
