@@ -289,6 +289,7 @@ object Sources {
       typeOf[WallKind.ConstructedCategory.type],
       typeOf[WallKind.NaturalCategory.type],
       typeOf[WallKind.SecureCategory.type],
+      typeOf[WallKind.TransparentCategory.type],
     ), objectPolymorphism = true),
 
     SubModelSource(typeOf[WidgetKind.Category], List(

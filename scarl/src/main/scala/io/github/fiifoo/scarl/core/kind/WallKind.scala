@@ -12,13 +12,15 @@ object WallKind {
 
   case object DefaultCategory extends Category
 
+  case object AreaBorderCategory extends Category
+
   case object ConstructedCategory extends Category
 
   case object NaturalCategory extends Category
 
   case object SecureCategory extends Category
 
-  case object AreaBorderCategory extends Category
+  case object TransparentCategory extends Category
 
 }
 
@@ -28,6 +30,7 @@ case class WallKind(id: WallKindId,
                     color: Color,
                     description: Option[String] = None,
                     hardness: Option[Int] = None,
+                    transparent: Boolean = false,
                    ) extends Kind {
 
   def apply(s: State, idSeq: IdSeq, location: Location, options: Options = Options()): Result[Wall] = {
@@ -38,7 +41,8 @@ case class WallKind(id: WallKindId,
       kind = id,
       location = location,
       tags = options.tags,
-      hardness = hardness
+      hardness = hardness,
+      transparent = transparent
     )
 
     Result(

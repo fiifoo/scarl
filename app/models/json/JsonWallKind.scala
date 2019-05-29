@@ -23,5 +23,6 @@ object JsonWallKind {
     case "WallKind.ConstructedCategory" => WallKind.ConstructedCategory
     case "WallKind.NaturalCategory" => WallKind.NaturalCategory
     case "WallKind.SecureCategory" => WallKind.SecureCategory
+    case "WallKind.TransparentCategory" => WallKind.TransparentCategory
   })
 }

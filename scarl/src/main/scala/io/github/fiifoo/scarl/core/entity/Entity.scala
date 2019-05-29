@@ -209,6 +209,7 @@ case class Wall(id: WallId,
                 location: Location,
                 tags: Set[Tag] = Set(),
                 hardness: Option[Int] = None,
+                transparent: Boolean = false,
                ) extends Entity with Locatable with Taggable {
 
   def setLocation(location: Location): Wall = copy(location = location)

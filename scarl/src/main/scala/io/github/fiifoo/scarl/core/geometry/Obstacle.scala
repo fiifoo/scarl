@@ -11,7 +11,13 @@ object Obstacle {
     obstacle(location).isDefined
   }
 
-  def explosion(s: State)(location: Location): Option[EntityId] = sight(s)(location)
+  def explosion(s: State)(location: Location): Option[EntityId] = {
+    (getLocationEntities(s)(location) collectFirst {
+      case wall: WallId => wall
+    }) orElse {
+      getClosedDoor(s)(location)
+    }
+  }
 
   def movement(s: State)(location: Location): Option[EntityId] = {
     (getLocationEntities(s)(location) collectFirst {
@@ -26,7 +32,7 @@ object Obstacle {
 
   def sight(s: State)(location: Location): Option[EntityId] = {
     (getLocationEntities(s)(location) collectFirst {
-      case wall: WallId => wall
+      case wall: WallId if !wall(s).transparent => wall
     }) orElse {
       getClosedDoor(s)(location)
     }
