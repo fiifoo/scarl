@@ -276,6 +276,7 @@ object Sources {
     SubModelSource(typeOf[TerrainKind.Category], List(
       typeOf[TerrainKind.DefaultCategory.type],
       typeOf[TerrainKind.ConstructedCategory.type],
+      typeOf[TerrainKind.ImpassableCategory.type],
       typeOf[TerrainKind.NaturalCategory.type],
     ), objectPolymorphism = true),
 

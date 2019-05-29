@@ -16,7 +16,7 @@ case class MoveEffect(target: CreatureId,
       return EffectResult()
     }
 
-    Obstacle.movement(s)(to) map (obstacle => {
+    Obstacle.movement(s, this.target(s).flying)(to) map (obstacle => {
       EffectResult(
         CollideEffect(target, obstacle, Some(this))
       )

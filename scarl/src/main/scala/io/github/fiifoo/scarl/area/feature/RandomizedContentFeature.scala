@@ -25,7 +25,7 @@ case class RandomizedContentFeature(catalogues: List[ContentSourceCatalogueId] =
             subEntrances: Set[Location],
             random: Random
            ): FixedContent = {
-    val free = freeLocations(content, locations)
+    val free = freeLocations(assets, content, locations)
     val (creatureSources, itemSources, widgetSources) = getSources(assets)
 
     val creatures = randomUniqueSelectionLocations(

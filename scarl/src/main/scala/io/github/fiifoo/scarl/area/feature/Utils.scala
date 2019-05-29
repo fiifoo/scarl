@@ -1,19 +1,28 @@
 package io.github.fiifoo.scarl.area.feature
 
+import io.github.fiifoo.scarl.area.template.ContentSelection.{FixedTerrain, ThemeTerrain}
 import io.github.fiifoo.scarl.area.template.{CalculateFailedException, ContentSelection, ContentSource, FixedContent}
 import io.github.fiifoo.scarl.core.geometry.Location
+import io.github.fiifoo.scarl.core.kind.{TerrainKind, TerrainKindId}
 import io.github.fiifoo.scarl.core.math.Rng
+import io.github.fiifoo.scarl.world.WorldAssets
 
 import scala.util.Random
 
 object Utils {
 
-  def freeLocations(content: FixedContent, locations: Set[Location]): Set[Location] = {
+  def freeLocations(assets: WorldAssets, content: FixedContent, locations: Set[Location]): Set[Location] = {
     locations --
       content.restrictedLocations --
       content.gatewayLocations --
       content.conduitLocations.keys --
-      content.walls.keys
+      content.walls.keys --
+      (content.terrains collect {
+        case (
+          location: Location,
+          selection: ContentSelection.TerrainSelection
+          ) if isImpassableTerrainSelection(assets)(selection) => location
+      })
   }
 
   def randomUniqueSelectionLocations[T](locations: Set[Location],
@@ -65,5 +74,16 @@ object Utils {
 
       range map (_ => source.selection)
     })
+  }
+
+  private def isImpassableTerrainSelection(assets: WorldAssets)
+                                          (selection: ContentSelection.TerrainSelection): Boolean = {
+    def isImpassableTerrain(terrain: TerrainKindId): Boolean = assets.kinds.terrains(terrain).impassable
+
+    selection match {
+      case selection: FixedTerrain if isImpassableTerrain(selection.kind) => true
+      case selection: ThemeTerrain if selection.category.contains(TerrainKind.ImpassableCategory) => true
+      case _ => false
+    }
   }
 }

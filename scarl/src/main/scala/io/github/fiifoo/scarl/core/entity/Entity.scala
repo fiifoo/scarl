@@ -199,6 +199,7 @@ case class Terrain(id: TerrainId,
                    kind: TerrainKindId,
                    location: Location,
                    tags: Set[Tag] = Set(),
+                   impassable: Boolean = false,
                   ) extends Entity with Locatable with Taggable {
 
   def setLocation(location: Location): Terrain = copy(location = location)

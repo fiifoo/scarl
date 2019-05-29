@@ -20,6 +20,7 @@ object JsonTerrainKind {
   lazy val terrainCategoryFormat: Format[Category] = polymorphicObjectFormat({
     case "TerrainKind.DefaultCategory" => TerrainKind.DefaultCategory
     case "TerrainKind.ConstructedCategory" => TerrainKind.ConstructedCategory
+    case "TerrainKind.ImpassableCategory" => TerrainKind.ImpassableCategory
     case "TerrainKind.NaturalCategory" => TerrainKind.NaturalCategory
   })
 }

@@ -23,16 +23,17 @@ case class MissileTactic(destination: Location, target: Option[SafeCreatureId]) 
   override def apply(s: State, actor: CreatureId, random: Random): Option[Result] = {
     actor(s).missile flatMap (missile => {
       val from = actor(s).location
+      val flight = actor(s).flying
 
       if (from == destination) {
         Some(explode)
       } else {
         val nextDestination = getNextDestination(s, missile)
-        val path = getPath(s, missile, from, nextDestination)
+        val path = getPath(s, flight, missile, from, nextDestination)
 
         path map (path => {
           val to = path.head
-          if (Obstacle.movement(s)(to).isDefined) {
+          if (Obstacle.movement(s, flight)(to).isDefined) {
             explode
           } else if (getCreatureStats(s)(actor).speed > 0) {
             move(to, nextDestination)
@@ -70,9 +71,9 @@ case class MissileTactic(destination: Location, target: Option[SafeCreatureId]) 
     }
   }
 
-  private def getPath(s: State, missile: Missile, from: Location, to: Location): Option[Vector[Location]] = {
+  private def getPath(s: State, flight: Boolean, missile: Missile, from: Location, to: Location): Option[Vector[Location]] = {
     missile.guidance collect {
-      case Smart => Path(s)(from, to)
+      case Smart => Path(s, flight)(from, to)
     } getOrElse {
       Some(Line(from, to).tail)
     }

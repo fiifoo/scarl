@@ -14,6 +14,8 @@ object TerrainKind {
 
   case object ConstructedCategory extends Category
 
+  case object ImpassableCategory extends Category
+
   case object NaturalCategory extends Category
 
 }
@@ -23,6 +25,7 @@ case class TerrainKind(id: TerrainKindId,
                        display: Char,
                        color: Color,
                        description: Option[String] = None,
+                       impassable: Boolean = false,
                       ) extends Kind {
 
   def apply(s: State, idSeq: IdSeq, location: Location, options: Options = Options()): Result[Terrain] = {
@@ -32,13 +35,14 @@ case class TerrainKind(id: TerrainKindId,
       id = TerrainId(nextId),
       kind = id,
       location = location,
-      tags = options.tags
+      tags = options.tags,
+      impassable = impassable
     )
 
     Result(
       mutations = List(IdSeqMutation(nextIdSeq), NewEntityMutation(terrain)),
       nextIdSeq,
-      terrain,
+      terrain
     )
   }
 }

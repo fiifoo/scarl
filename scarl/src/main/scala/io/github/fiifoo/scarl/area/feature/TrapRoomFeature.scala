@@ -29,7 +29,7 @@ case class TrapRoomFeature(bait: ItemSelection,
             subEntrances: Set[Location],
             random: Random
            ): FixedContent = {
-    val free = freeLocations(content, locations) -- content.widgets.keys
+    val free = freeLocations(assets, content, locations) -- content.widgets.keys
     if (free.isEmpty) {
       throw new CalculateFailedException
     }

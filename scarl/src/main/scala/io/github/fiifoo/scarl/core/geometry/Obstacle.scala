@@ -2,7 +2,7 @@ package io.github.fiifoo.scarl.core.geometry
 
 import io.github.fiifoo.scarl.core.State
 import io.github.fiifoo.scarl.core.entity.Selectors.{getLocationEntities, getLocationItems}
-import io.github.fiifoo.scarl.core.entity.{CreatureId, EntityId, ItemId, WallId}
+import io.github.fiifoo.scarl.core.entity._
 import io.github.fiifoo.scarl.core.item.{Key, Lock}
 
 object Obstacle {
@@ -19,16 +19,17 @@ object Obstacle {
     }
   }
 
-  def movement(s: State)(location: Location): Option[EntityId] = {
+  def movement(s: State, flight: Boolean = false)(location: Location): Option[EntityId] = {
     (getLocationEntities(s)(location) collectFirst {
       case creature: CreatureId => creature
       case wall: WallId => wall
+      case terrain: TerrainId if !flight && terrain(s).impassable => terrain
     }) orElse {
       getClosedDoor(s)(location)
     }
   }
 
-  def shot(s: State)(location: Location): Option[EntityId] = movement(s)(location)
+  def shot(s: State)(location: Location): Option[EntityId] = movement(s, flight = true)(location)
 
   def sight(s: State)(location: Location): Option[EntityId] = {
     (getLocationEntities(s)(location) collectFirst {
@@ -38,9 +39,10 @@ object Obstacle {
     }
   }
 
-  def travel(s: State, keys: Set[Key] = Set())(location: Location): Option[EntityId] = {
+  def travel(s: State, keys: Set[Key] = Set(), flight: Boolean = false)(location: Location): Option[EntityId] = {
     (getLocationEntities(s)(location) collectFirst {
       case wall: WallId => wall
+      case terrain: TerrainId if !flight && terrain(s).impassable => terrain
     }) orElse {
       getLockedDoor(s, keys)(location)
     }

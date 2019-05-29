@@ -89,13 +89,14 @@ object Utils {
     }
 
     val from = actor(s).location
+    val flight = actor(s).flying
 
-    Path(s)(from, to) map (path => {
+    Path(s, flight)(from, to) map (path => {
       MoveAction(path.head)
     }) orElse {
       val keys = getCreatureKeys(s)(actor)
 
-      Path.calc(Obstacle.has(Obstacle.travel(s, keys)))(from, to) flatMap (path => {
+      Path.calc(Obstacle.has(Obstacle.travel(s, keys, flight)))(from, to) flatMap (path => {
         val location = path.head
 
         (getLocationEntities(s)(location) collectFirst {

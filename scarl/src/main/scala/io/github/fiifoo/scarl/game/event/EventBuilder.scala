@@ -140,6 +140,7 @@ class EventBuilder(s: State, player: CreatureId, fov: Set[Location]) {
         case _: ItemId => Some("Ouch. You run straight into door.")
         case _: WallId => Some("Ouch. You run straight into wall.")
         case c: CreatureId => Some(s"${kind(c)} blocks your way.")
+        case t: TerrainId => Some(s"${kind(t)} is impassable.")
         case _ => None
       }
     } else {
@@ -172,7 +173,7 @@ class EventBuilder(s: State, player: CreatureId, fov: Set[Location]) {
     val target = effect.target
 
     if (hasParentEffect(effect, {
-      case effect: BurnEffect => true
+      case _: BurnEffect => true
       case _ => false
     })) {
       if (target == player) {
@@ -769,6 +770,10 @@ class EventBuilder(s: State, player: CreatureId, fov: Set[Location]) {
 
   private def kind(item: ItemKindId): String = {
     s.assets.kinds.items(item).name
+  }
+
+  private def kind(terrain: TerrainId): String = {
+    s.assets.kinds.terrains(terrain(s).kind).name
   }
 
   private def kind(wall: WallId): String = {

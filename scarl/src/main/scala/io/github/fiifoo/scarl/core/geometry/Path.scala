@@ -17,8 +17,8 @@ import scala.collection.mutable
   */
 object Path {
 
-  def apply(s: State)(from: Location, to: Location): Option[Vector[Location]] = {
-    calc(Obstacle.has(Obstacle.movement(s)))(from, to)
+  def apply(s: State, flight: Boolean = false)(from: Location, to: Location): Option[Vector[Location]] = {
+    calc(Obstacle.has(Obstacle.movement(s, flight)))(from, to)
   }
 
   def calc(blocked: Location => Boolean)(from: Location, to: Location): Option[Vector[Location]] = {
