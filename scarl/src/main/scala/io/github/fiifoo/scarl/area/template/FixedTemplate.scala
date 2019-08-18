@@ -22,7 +22,7 @@ case class FixedTemplate(id: TemplateId,
 
   def apply(assets: WorldAssets, area: Area, random: Random): Result = {
     val shapeResult = shape(random)
-    val subResults = templates mapValues (_ (assets.templates)(assets, area, random))
+    val subResults = templates transform ((_, template) => template(assets.templates)(assets, area, random))
     val subEntrances = (subResults map (x => {
       val (location, subResult) = x
 

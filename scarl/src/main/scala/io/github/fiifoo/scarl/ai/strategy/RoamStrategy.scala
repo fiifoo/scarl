@@ -49,7 +49,7 @@ case class RoamStrategy(investigate: Set[Waypoint] = Set()) extends Strategy {
       }) getOrElse Map()
     })).toMap
 
-    destinations mapValues (destination => {
+    destinations transform ((_, destination) => {
       List((TravelIntention(destination), Priority.low))
     })
   }

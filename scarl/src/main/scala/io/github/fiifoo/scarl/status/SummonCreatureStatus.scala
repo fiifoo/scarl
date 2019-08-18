@@ -16,7 +16,7 @@ case class SummonCreatureStatus(id: ActiveStatusId,
                                 summonDescription: Option[String] = None,
                                 interval: Tick,
                                 charge: Option[Charge] = None
-                              ) extends ActiveStatus with ChargeableStatus {
+                               ) extends ActiveStatus with ChargeableStatus {
   def setTick(tick: Tick): SummonCreatureStatus = copy(tick = tick)
 
   def setCharge(charge: Option[Charge]): SummonCreatureStatus = {

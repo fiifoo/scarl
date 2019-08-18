@@ -42,7 +42,7 @@ case class EquipItemEffect(creature: CreatureId,
     val equipments = s.equipments.getOrElse(creature, Map())
 
     val unequip = if (equipment.fillAll) {
-      (equipments filterKeys equipment.slots.contains).values.toSet
+      (equipments.view filterKeys equipment.slots.contains).values.toSet
     } else {
       equipments.get(slot) map (Set(_)) getOrElse Set()
     }

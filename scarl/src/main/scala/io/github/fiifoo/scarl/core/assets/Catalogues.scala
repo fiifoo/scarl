@@ -32,7 +32,7 @@ trait CategorizedListCatalogue[Id <: CategorizedListCatalogueId, Category, T] {
   def apply(catalogues: Map[Id, CategorizedListCatalogue[Id, Category, T]]): Map[Category, List[T]] = {
     val contents = this.content :: (subs flatMap catalogues.get map (_.apply(catalogues)))
 
-    contents.flatten groupBy (_._1) mapValues (_ flatMap (_._2))
+    contents.flatten groupBy (_._1) transform ((_, x) => x flatMap (_._2))
   }
 }
 

@@ -15,7 +15,7 @@ object ActorQueue {
   def apply(s: State): ActorQueue = {
     val queue = (s.entities.values collect {
       case actor: Actor => (actor.id, actor.tick)
-    }).to[SortedSet]
+    }).to(SortedSet)
 
     ActorQueue(queue)
   }
@@ -24,20 +24,20 @@ object ActorQueue {
 case class ActorQueue(queue: SortedSet[Member] = SortedSet[Member]()) {
 
   def enqueue(actor: Actor): ActorQueue = {
-    this.copy(queue + (actor.id -> actor.tick))
+    this.copy(queue.union(Set(actor.id -> actor.tick)))
   }
 
   def dequeue: Option[(ActorId, ActorQueue)] = {
     queue.headOption map (member => {
       val actor = member._1
-      val next = queue - member
+      val next = queue.tail
 
       (actor, this.copy(next))
     })
   }
 
   def remove(actor: Actor): ActorQueue = {
-    this.copy(queue - (actor.id -> actor.tick))
+    this.copy(queue.diff(Set(actor.id -> actor.tick)))
   }
 
   def isEmpty: Boolean = queue.isEmpty

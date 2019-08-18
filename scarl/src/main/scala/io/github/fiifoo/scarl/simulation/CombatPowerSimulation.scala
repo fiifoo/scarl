@@ -52,7 +52,7 @@ case class CombatPowerSimulation(matches: Int = 25,
     val instance = createInstance(combatants, rng)
 
     val opposed = runAll(instance, combatants)
-    val average = opposed mapValues (creatureResults => {
+    val average = opposed transform ((_, creatureResults) => {
       creatureResults.values.sum / creatureResults.values.size
     })
 

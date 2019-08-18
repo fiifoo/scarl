@@ -87,7 +87,7 @@ case object ContentSelection {
     def apply(assets: WorldAssets, area: Area, random: Random): Option[ItemKindId] = {
       val choices = assets.catalogues.items(assets.themes(area.theme).items)
         .apply(assets.catalogues.items)
-        .filterKeys(_.isInstanceOf[ItemKind.DoorCategory])
+        .filter(_._1.isInstanceOf[ItemKind.DoorCategory])
         .map(x => x._1.asInstanceOf[ItemKind.DoorCategory] -> x._2)
       val categories: Set[ItemKind.DoorCategory] = if (this.category.isEmpty) Set(ItemKind.DefaultDoorCategory) else this.category
 
@@ -120,7 +120,7 @@ case object ContentSelection {
     def apply(assets: WorldAssets, area: Area, random: Random): Option[ItemKindId] = {
       val choices = assets.catalogues.items(assets.themes(area.theme).items)
         .apply(assets.catalogues.items)
-        .filterKeys(_.isInstanceOf[Equipment.Category])
+        .filter(_._1.isInstanceOf[Equipment.Category])
         .map(x => x._1.asInstanceOf[Equipment.Category] -> x._2)
 
       val categories = if (this.category.isEmpty) Equipment.categories else this.category

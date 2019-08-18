@@ -9,6 +9,8 @@ import io.github.fiifoo.scarl.core.test_assets.TestCreatureFactory
 import io.github.fiifoo.scarl.core.{RealityBubble, State}
 import org.scalatest._
 
+import scala.Ordering.Double.TotalOrdering
+
 class TacticsSpec extends FlatSpec with Matchers {
 
   val faction = Faction(FactionId("people"), None, Set(FactionId("people")))

@@ -65,7 +65,7 @@ case class RemoveEntitiesMutation() extends Mutation {
     if (creatures.isEmpty) {
       brains
     } else {
-      brains mapValues (brain => brain.copy(
+      brains transform ((_, brain) => brain.copy(
         intentions = brain.intentions -- creatures
       ))
     }

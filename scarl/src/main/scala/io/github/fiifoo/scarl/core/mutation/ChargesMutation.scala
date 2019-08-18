@@ -9,7 +9,7 @@ case class ChargesMutation(entity: EntityId, charges: Int) extends Mutation {
     s.entities.get(entity) collect {
       case chargeable: Chargeable => chargeable
     } map (chargeable => {
-      val charge = chargeable.charge map(_.copy(charges = charges))
+      val charge = chargeable.charge map (_.copy(charges = charges))
 
       s.copy(entities = s.entities + (chargeable.id -> chargeable.setCharge(charge)))
     }) getOrElse {

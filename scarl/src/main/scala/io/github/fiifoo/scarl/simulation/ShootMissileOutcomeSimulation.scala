@@ -34,7 +34,7 @@ object ShootMissileOutcomeSimulation {
 
     val waypoints = Set(shooter(s).location, location) flatMap getLocationWaypoint(s)
     val actors = (waypoints flatMap Selectors.getWaypointCreatures(s)) + shooter
-    val queue = (actors map (actor => (actor: ActorId, actor(s).tick))).to[SortedSet]
+    val queue = (actors map (actor => (actor: ActorId, actor(s).tick))).to(SortedSet)
 
     s.copy(cache = s.cache.copy(
       actorQueue = ActorQueue(queue)

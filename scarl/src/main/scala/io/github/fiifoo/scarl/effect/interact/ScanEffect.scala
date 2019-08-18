@@ -28,7 +28,7 @@ case class ScanEffect(scanner: CreatureId,
     val sensors = getCreatureStats(s)(scanner.id).sight.sensors
     val calculateFilterStrength = SignalRule.calculateStrength(Signal.Medium, sensors) _
 
-    val creatures = (s.index.sectorCreatures filterKeys (sector => {
+    val creatures = (s.index.sectorCreatures.view filterKeys (sector => {
       val distance = Distance(from, sector.center(s))
 
       calculateFilterStrength(distance) > 0

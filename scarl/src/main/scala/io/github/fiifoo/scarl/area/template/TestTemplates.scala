@@ -10,10 +10,10 @@ object TestTemplates {
   val iterations = 10
 
   def apply(assets: WorldAssets, random: Random = new Random(1)): Map[AreaId, Map[TemplateId, Int]] = {
-    assets.areas mapValues testArea(assets, random)
+    assets.areas transform testArea(assets, random)
   }
 
-  private def testArea(assets: WorldAssets, random: Random)(area: Area): Map[TemplateId, Int] = {
+  private def testArea[K](assets: WorldAssets, random: Random)(k: K, area: Area): Map[TemplateId, Int] = {
     val template = assets.templates(area.template)
     val fromArea = extractTemplates(assets)(template)
     val fromTheme = template match {
@@ -27,10 +27,10 @@ object TestTemplates {
 
     val templates = ((fromArea ++ fromTheme) map (t => t.id -> t)).toMap
 
-    templates mapValues testTemplate(assets, area, random)
+    templates transform testTemplate(assets, area, random)
   }
 
-  private def testTemplate(assets: WorldAssets, area: Area, random: Random)(template: Template): Int = {
+  private def testTemplate[K](assets: WorldAssets, area: Area, random: Random)(k: K, template: Template): Int = {
     val passed = (0 until iterations).count(_ => {
       try {
         template(assets, area, random)

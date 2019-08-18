@@ -180,7 +180,7 @@ object HouseFeature {
       def flush(foundations: Foundations): Foundations = {
         val intersecting = foundations.current
           .filter(_._2.from.intersect(this.line).nonEmpty)
-          .mapValues(f => f.copy(floors = this.line :: f.floors))
+          .transform((_, f) => f.copy(floors = this.line :: f.floors))
 
         foundations.copy(current = foundations.current ++ intersecting)
       }
@@ -203,7 +203,7 @@ object HouseFeature {
     }
 
     private def flushTerminalBuffer(line: Line, foundations: Foundations, writeTo: Boolean): Foundations = {
-      def intersect(foundation: Foundation): Foundation = {
+      def intersect[K](k: K, foundation: Foundation): Foundation = {
         val to = foundation.remaining flatMap line.intersect
 
         if (to.isEmpty) {
@@ -218,7 +218,7 @@ object HouseFeature {
         )
       }
 
-      val intersecting = foundations.current mapValues intersect
+      val intersecting = foundations.current transform intersect
       val (complete, current) = intersecting partition (_._2.remaining.isEmpty)
 
       foundations.copy(

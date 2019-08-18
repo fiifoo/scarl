@@ -61,7 +61,7 @@ object BurrowFeature {
       })
       val visited = processed ++ queue
 
-      step(resistances, visited, Queue().enqueue(queue), noise, random)
+      step(resistances, visited, Queue().enqueueAll(queue), noise, random)
     }
 
     @tailrec
@@ -82,7 +82,7 @@ object BurrowFeature {
       step(
         resistances + (location -> resistance),
         visited + location ++ adjacent,
-        dequeued.enqueue(adjacent diff visited),
+        dequeued.enqueueAll(adjacent diff visited),
         noise,
         random
       )
@@ -126,7 +126,7 @@ object BurrowFeature {
             resistances.get(adjacent) map (adjacent -> _)
           })
 
-          step(walls - location, targets - target ++ adjacent)
+          step(walls - location, targets.diff(Set(target)) ++ adjacent)
         }
       }
 
@@ -148,7 +148,7 @@ object BurrowFeature {
         walls filter (wall => getAdjacentLocations(wall) exists floors.contains)
       }
 
-      SortedSet() ++ (resistances filterKeys targets.contains)
+      SortedSet() ++ (resistances.view filterKeys targets.contains)
     }
   }
 

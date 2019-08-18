@@ -62,6 +62,10 @@ object CalculateContent {
       terrains = fixed.terrains ++ defaultTerrains
     )
 
+    def applyKeyedSelection[K, T](k: K, selection: ContentSelection[T]): (T, Set[Tag]) = {
+      applySelection(selection)
+    }
+
     def applySelection[T](selection: ContentSelection[T]): (T, Set[Tag]) = {
       val result = selection.apply(assets, area, random)
 
@@ -74,14 +78,14 @@ object CalculateContent {
 
     ResultContent(
       conduitLocations = fixed.conduitLocations,
-      creatures = fixed.creatures mapValues applySelection,
+      creatures = fixed.creatures transform applyKeyedSelection,
       gatewayLocations = fixed.gatewayLocations,
-      items = fixed.items mapValues (_ map applySelection),
+      items = fixed.items transform ((_, items) => items map applySelection),
       machinery = fixed.machinery,
       restrictedLocations = fixed.restrictedLocations,
-      terrains = fixed.terrains mapValues applySelection,
-      walls = fixed.walls mapValues applySelection,
-      widgets = fixed.widgets mapValues applySelection
+      terrains = fixed.terrains transform applyKeyedSelection,
+      walls = fixed.walls transform applyKeyedSelection,
+      widgets = fixed.widgets transform applyKeyedSelection
     )
   }
 }

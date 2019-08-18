@@ -31,7 +31,7 @@ case class Combatant(id: CreatureKindId,
       faction = faction,
       behavior = behavior,
       stats = stats,
-      equipments = equipments mapValues (_.id)
+      equipments = equipments transform ((_, item) => item.id)
     )
   }
 

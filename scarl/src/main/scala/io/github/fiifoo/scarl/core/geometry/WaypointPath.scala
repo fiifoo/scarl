@@ -36,7 +36,7 @@ object WaypointPath {
         } else {
           Set()
         }
-        val enqueued = dequeued enqueue (adjacent map (path :+ _))
+        val enqueued = dequeued enqueueAll (adjacent map (path :+ _))
 
         if (enqueued.isEmpty) {
           None

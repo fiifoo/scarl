@@ -34,9 +34,9 @@ class BurrowFeatureSpec extends FlatSpec with Matchers {
     result.sketch.trim should ===(
       """
         |###############
-        |######........#
-        |#####......##.#
-        |#####...#.#####
+        |######...#.####
+        |##...#.....####
+        |####.......####
         |###############
       """.stripMargin.trim)
   }

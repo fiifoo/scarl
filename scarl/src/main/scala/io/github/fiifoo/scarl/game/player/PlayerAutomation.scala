@@ -70,7 +70,7 @@ object PlayerAutomation {
       if (adjacent exists (!state.areaMap.isDefinedAt(_))) {
         Some(location)
       } else {
-        step(dequeued.enqueue(allowed), visited ++ adjacent)
+        step(dequeued.enqueueAll(allowed), visited ++ adjacent)
       }
     }
 

@@ -49,6 +49,6 @@ class DistributionSpec extends FlatSpec with Matchers {
       results + (value -> count)
     })
 
-    results mapValues (count => Math.round(count.toFloat * 100 / iterations))
+    results transform ((_, count) => Math.round(count.toFloat * 100 / iterations))
   }
 }

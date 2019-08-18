@@ -1,11 +1,14 @@
 package io.github.fiifoo.scarl.action
 
+
 import io.github.fiifoo.scarl.action.test_assets.TestAttackTactic
 import io.github.fiifoo.scarl.core.entity.CreatureId
 import io.github.fiifoo.scarl.core.mutation.RemoveEntitiesMutation
 import io.github.fiifoo.scarl.core.test_assets.TestCreatureFactory
 import io.github.fiifoo.scarl.core.{RealityBubble, State}
 import org.scalatest._
+
+import scala.Ordering.Double.TotalOrdering
 
 class AttackActionSpec extends FlatSpec with Matchers {
 

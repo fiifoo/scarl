@@ -49,9 +49,9 @@ case class EquipmentCombatPowerSimulation(matches: Int = 25,
     val diff = max - min
 
     if (diff == 0) {
-      results mapValues (_ => 100)
+      results transform ((_, _) => 100)
     } else {
-      results mapValues (power => (power - min) * 100 / diff)
+      results transform ((_, power) => (power - min) * 100 / diff)
     }
   }
 

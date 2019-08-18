@@ -3,6 +3,8 @@ package io.github.fiifoo.scarl.world.system
 import io.github.fiifoo.scarl.world.system.source.{SpaceshipSourceId, StellarBodySourceId}
 import org.scalatest._
 
+import scala.Ordering.Double.TotalOrdering
+
 class SolarSystemSpec extends FlatSpec with Matchers {
 
   val month = 3600 * 24 * 30

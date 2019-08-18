@@ -13,7 +13,7 @@ object Utils {
     private val item = ItemKindId("")
 
     def apply(sketch: String): TemplateMock = {
-      val lines = sketch.lines.toList
+      val lines = sketch.linesIterator.toList
 
       val template = TemplateMock(
         width = lines.head.toCharArray.length,
