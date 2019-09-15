@@ -160,6 +160,12 @@ object Sources {
       typeOf[Discover.Triggerer.type],
     ), objectPolymorphism = true),
 
+    SubModelSource(typeOf[Faction.Disposition], List(
+      typeOf[Faction.Friendly.type],
+      typeOf[Faction.Neutral.type],
+      typeOf[Faction.Hostile.type],
+    ), objectPolymorphism = true),
+
     SubModelSource(typeOf[Distribution], List(
       typeOf[Distribution.Binomial],
       typeOf[Distribution.Uniform],

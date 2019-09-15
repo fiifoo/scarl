@@ -1,14 +1,14 @@
-import { Map, Record, Set } from 'immutable'
+import { Map, Record } from 'immutable'
 import * as types from '../actions/actionTypes'
 
 const Faction = Record({
     id: undefined,
-    enemies: Set(),
+    dispositions: Map(),
 })
 
-const buildFaction = ({id, enemies}) => Faction({
+const buildFaction = ({id, dispositions}) => Faction({
     id,
-    enemies: Set(enemies),
+    dispositions: Map(dispositions),
 })
 
 export default (state = Map(), action) => {

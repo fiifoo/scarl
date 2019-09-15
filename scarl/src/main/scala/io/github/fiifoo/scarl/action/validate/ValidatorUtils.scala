@@ -1,6 +1,7 @@
 package io.github.fiifoo.scarl.action.validate
 
 import io.github.fiifoo.scarl.core.State
+import io.github.fiifoo.scarl.core.entity.Selectors.getCreatureHostileFactions
 import io.github.fiifoo.scarl.core.entity.{CreatureId, EntityId}
 import io.github.fiifoo.scarl.core.geometry.Location
 
@@ -18,7 +19,9 @@ object ValidatorUtils {
   }
 
   def isEnemy(s: State, actor: CreatureId, creature: CreatureId): Boolean = {
-    actor(s).faction(s).enemies.contains(creature(s).faction)
+    val enemies = getCreatureHostileFactions(s)(actor)
+
+    enemies.contains(creature(s).faction)
   }
 
   def entityExists(s: State)(entity: EntityId): Boolean = {

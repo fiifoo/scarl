@@ -2,7 +2,7 @@ package io.github.fiifoo.scarl.game.player
 
 import io.github.fiifoo.scarl.action.MoveAction
 import io.github.fiifoo.scarl.core.action.Action
-import io.github.fiifoo.scarl.core.entity.Selectors.{getCreatureKeys, getCreatureStats, getLocationEntities, getLocationItems}
+import io.github.fiifoo.scarl.core.entity.Selectors._
 import io.github.fiifoo.scarl.core.entity.{CreatureId, ItemId}
 import io.github.fiifoo.scarl.core.geometry.{Distance, Location, Obstacle, Path}
 import io.github.fiifoo.scarl.game.RunState
@@ -130,7 +130,7 @@ object PlayerAutomation {
   }
 
   private def getEnemy(state: RunState)(location: Location): Option[CreatureId] = {
-    val enemies = state.game.player(state.instance).faction(state.instance).enemies
+    val enemies = getCreatureHostileFactions(state.instance)(state.game.player)
 
     getCreature(state)(location) filter (x => {
       val faction = x(state.instance).faction
@@ -159,7 +159,7 @@ object PlayerAutomation {
     val keys = getCreatureKeys(state.instance)(state.game.player)
     val blocked = Obstacle.has(Obstacle.travel(state.instance, keys)) _
 
-    (location: Location) =>
+    location: Location =>
       !state.areaMap.isDefinedAt(location) ||
         blocked(location) ||
         getCreature(state)(location).exists(_.apply(state.instance).immobile)
@@ -168,7 +168,7 @@ object PlayerAutomation {
   private def isMovementBlocked(state: RunState): Location => Boolean = {
     val blocked = Obstacle.has(Obstacle.movement(state.instance)) _
 
-    (location: Location) => !state.areaMap.isDefinedAt(location) || blocked(location)
+    location: Location => !state.areaMap.isDefinedAt(location) || blocked(location)
   }
 
   private def getDirectionLocation(location: Location, direction: Int): Location = {

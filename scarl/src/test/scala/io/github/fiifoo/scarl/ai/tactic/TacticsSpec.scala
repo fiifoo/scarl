@@ -13,7 +13,7 @@ import scala.Ordering.Double.TotalOrdering
 
 class TacticsSpec extends FlatSpec with Matchers {
 
-  val faction = Faction(FactionId("people"), None, Set(FactionId("people")))
+  val faction = Faction(FactionId("people"), None, Map(FactionId("people") -> Faction.Hostile))
   val assets = Assets(factions = Map(faction.id -> faction))
 
   val initial =

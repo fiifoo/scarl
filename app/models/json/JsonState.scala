@@ -4,6 +4,7 @@ import io.github.fiifoo.scarl.core._
 import io.github.fiifoo.scarl.core.ai.{Brain, Tactic}
 import io.github.fiifoo.scarl.core.assets.Assets
 import io.github.fiifoo.scarl.core.communication.CommunicationId
+import io.github.fiifoo.scarl.core.creature.Faction.Disposition
 import io.github.fiifoo.scarl.core.creature.FactionId
 import io.github.fiifoo.scarl.core.entity.{CreatureId, IdSeq, ItemId, UsableId}
 import io.github.fiifoo.scarl.core.geometry.Location
@@ -32,6 +33,7 @@ object JsonState {
   lazy private implicit val communicationIdFormat = JsonCommunication.communicationIdFormat
   lazy private implicit val conduitIdFormat = JsonConduit.conduitIdFormat
   lazy private implicit val creatureIdFormat = JsonCreature.creatureIdFormat
+  lazy private implicit val dispositionFormat = JsonFaction.dispositionFormat
   lazy private implicit val factionIdFormat = JsonFaction.factionIdFormat
   lazy private implicit val goalIdFormat = JsonGoal.goalIdFormat
   lazy private implicit val itemKindIdFormat = JsonItemKind.itemKindIdFormat
@@ -59,6 +61,10 @@ object JsonState {
   }
   implicitly(mapFormat[CreatureId, (UsableId, CommunicationId)])
   lazy private implicit val stateCreatureFormat = Json.format[State.Creature]
+
+  implicitly(mapFormat[FactionId, Disposition])
+  implicitly(mapFormat[FactionId, Map[FactionId, Disposition]])
+  lazy private implicit val stateFactionsFormat = Json.format[State.Factions]
 
   implicitly(mapFormat[FactionId, Brain])
   implicitly(mapFormat[ConduitId, Location])

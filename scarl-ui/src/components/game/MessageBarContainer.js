@@ -12,6 +12,7 @@ const getAimMessages = state => {
     const mode = state.ui.game.mode
     const location = state.ui.game.reticule
 
+    const area = state.area
     const factions = state.factions
     const fov = state.fov.cumulative
     const map = state.area.map
@@ -21,7 +22,7 @@ const getAimMessages = state => {
     const missile = mode === modes.AIM_MISSILE && getMissile(state)
 
     const action = missile ? `Aim missile (${kinds.creatures.get(missile).name})` : 'Aim'
-    const summary = getLocationSummary(factions, fov, map, kinds, player)(location)
+    const summary = getLocationSummary(factions, area, fov, map, kinds, player)(location)
 
     if (summary) {
         return List([`${action}:`, summary])

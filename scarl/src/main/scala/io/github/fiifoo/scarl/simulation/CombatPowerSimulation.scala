@@ -146,17 +146,17 @@ case class CombatPowerSimulation(matches: Int = 25,
     val factions = List(
       Faction(
         id = homeFaction,
-        enemies = Set(visitorFaction)
+        dispositions = Map(visitorFaction -> Faction.Hostile)
       ),
       Faction(
         id = visitorFaction,
-        enemies = Set(homeFaction)
+        dispositions = Map(homeFaction -> Faction.Hostile)
       )
     )
 
     val template = FixedTemplate(
       TemplateId("arena"),
-      shape = Rectangle(teamDistance, teamSize, 0)
+      shape = Rectangle(teamDistance, teamSize)
     )
 
     val area = Area(

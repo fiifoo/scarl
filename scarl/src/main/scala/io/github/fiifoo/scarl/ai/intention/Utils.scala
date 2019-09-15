@@ -48,7 +48,7 @@ object Utils {
     val creature = actor(s)
     val los = Los(s) _
 
-    val factions = creature.faction(s).enemies
+    val factions = getCreatureHostileFactions(s)(creature.id)
     val range = creature.stats.sight.range
     val enemies = findTargets(s, creature.id, factions, range)
 
@@ -73,7 +73,7 @@ object Utils {
   }
 
   def isEnemy(s: State, creature: CreatureId): CreatureId => Boolean = {
-    val factions = creature(s).faction(s).enemies
+    val factions = getCreatureHostileFactions(s)(creature)
 
     enemy => factions contains enemy(s).faction
   }

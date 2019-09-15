@@ -16,6 +16,7 @@ object WriteOutMessage {
 
   lazy private implicit val locationWrites = Json.writes[Location]
   lazy private implicit val factionFormat = JsonFaction.factionFormat
+  lazy private implicit val factionInfoWrites = JsonFactionInfo.factionInfoWrites
   lazy private implicit val eventWrites = JsonEvent.eventWrites
   lazy private implicit val itemFormat = JsonItem.itemFormat
   lazy private implicit val itemIdFormat = JsonItem.itemIdFormat

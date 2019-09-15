@@ -34,11 +34,11 @@ const Dropdown = ({children, detailed, setLookDetailed}) => {
 
 const LookDescription = ({
     location, detailed, setLookDetailed,
-    factions, fov, map, kinds, player,
+    area, factions, fov, map, kinds, player,
 }) => {
 
     if (! detailed) {
-        const summary = getLocationSummary(factions, fov, map, kinds, player)(location)
+        const summary = getLocationSummary(factions, area, fov, map, kinds, player)(location)
 
         return (
             <Dropdown detailed={detailed} setLookDetailed={setLookDetailed}>
@@ -53,7 +53,7 @@ const LookDescription = ({
 
     const renderCreature = (creature, key) => {
         const kind = kinds.creatures.get(creature.kind)
-        const info = getCreatureInfo(creature, player, factions)
+        const info = getCreatureInfo(creature, player, factions, area)
 
         return (
             <div key={key}>

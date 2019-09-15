@@ -1,6 +1,7 @@
 package io.github.fiifoo.scarl.status
 
 import io.github.fiifoo.scarl.core.State
+import io.github.fiifoo.scarl.core.entity.Selectors.getFactionHostileFactions
 import io.github.fiifoo.scarl.core.entity.{ContainerId, CreatureId}
 
 object Utils {
@@ -14,7 +15,7 @@ object Utils {
     }
 
     faction map (faction => {
-      val enemies = s.assets.factions(faction).enemies
+      val enemies = getFactionHostileFactions(s)(faction)
 
       enemies.contains(target(s).faction)
     }) getOrElse {

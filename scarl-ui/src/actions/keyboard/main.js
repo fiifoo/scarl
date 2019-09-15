@@ -107,14 +107,14 @@ export default (command, dispatch, getState) => {
 }
 
 const directionAction = (command, dispatch, getState) => {
-    const {factions, fov, player} = getState()
+    const {area, factions, fov, player} = getState()
 
     const to = getDirectionLocation(command, player.creature.location)
     const creatures = getLocationCreatures(to, fov.cumulative)
     const door = getLocationDoor(to, fov.cumulative)
 
     if (creatures.length > 0) {
-        const isEnemy = isEnemyChecker(player, factions)
+        const isEnemy = isEnemyChecker(player, factions, area)
         const enemies = creatures.filter(isEnemy)
         if (enemies.length > 0) {
             const enemy = enemies[0]

@@ -208,10 +208,10 @@ export const storeGameViewSize = size => (dispatch, getState) => {
 export const world = () => dispatch => changeMode(modes.WORLD)(dispatch)
 
 const seekTarget = (missile = false) => (dispatch, getState) => {
-    const {factions, fov, player, ui} = getState()
+    const {area, factions, fov, player, ui} = getState()
     const prev = ui.game.target
 
-    const targets = seekTargets(player, factions, fov.cumulative, missile)
+    const targets = seekTargets(player, factions, area, fov.cumulative, missile)
 
     if (targets.length > 0) {
         const prevTarget = prev ? targets.find(target => target.id === prev) : undefined

@@ -1,8 +1,14 @@
-import { fromJS } from 'immutable'
+import { fromJS, Map } from 'immutable'
 import { stats } from './creature'
 import { distance, line } from './geometry'
 
 const SHORT_MESSAGE_LIMIT = 100
+
+const Faction = {
+    Friendly: 'Faction.Friendly',
+    Neutral: 'Faction.Neutral',
+    Hostile: 'Faction.Hostile',
+}
 
 export const addStats = (a, b) => {
     a = fromJS(a)
@@ -60,12 +66,12 @@ export const getAttackShortage = (player, type) => {
 
 export const getCreatureConditionsInfo = creature => creature.conditions.map(getCreatureConditionInfo)
 
-export const getCreatureInfo = (creature, player, factions) => {
+export const getCreatureInfo = (creature, player, factions, area) => {
     const health = creature.stats.health.max // equipments not supported
     const damage = creature.damage
 
     const info = [
-        getCreatureFactionInfo(creature, player, factions),
+        getCreatureFactionInfo(creature, player, factions, area),
         getCreatureWoundedInfo(damage / health),
     ].filter(x => !!x).concat(getCreatureConditionsInfo(creature))
 
@@ -152,14 +158,14 @@ export const getLocationRecyclableItems = (location, fov) => {
     return entities ? entities.items.filter(item => item.recyclable) : []
 }
 
-export const getLocationSummary = (factions, fov, map, kinds, player) => location => {
+export const getLocationSummary = (factions, area, fov, map, kinds, player) => location => {
     const content = getLocationKinds(location, fov, map)
 
     if (content === undefined) {
         return undefined
     }
 
-    const creatures = getLocationCreatures(location, fov).filter(x => x.id !== player.creature.id).map(getCreatureDescription(player, factions, kinds))
+    const creatures = getLocationCreatures(location, fov).filter(x => x.id !== player.creature.id).map(getCreatureDescription(player, factions, area, kinds))
     const items = content.items.map(item => kinds.items.get(item).name)
     const walls = content.wall ? [kinds.walls.get(content.wall).name] : []
 
@@ -241,8 +247,11 @@ export const isCommunicationEvent = event => (
     event.type === 'CommunicationEvent' && ! isShortCommunicationEvent(event)
 )
 
-export const isEnemyChecker = (player, factions) => {
-    const enemyFactions = factions.get(player.creature.faction).enemies
+export const isEnemyChecker = (player, factions, area) => {
+    const dispositions = factions.get(player.creature.faction).dispositions.merge(
+        area.factions.dispositions.get(player.creature.faction, Map())
+    )
+    const enemyFactions = dispositions.filter(x => x === Faction.Hostile).keySeq().toSet()
 
     return creature => enemyFactions.contains(creature.faction)
 }
@@ -256,10 +265,10 @@ export const isLocked = keys => lockable => {
     return lockable.locked && check(lockable.locked)
 }
 
-export const seekTargets = (player, factions, fov, missile = false) => {
+export const seekTargets = (player, factions, area, fov, missile = false) => {
     const location = player.creature.location
     const range = missile ? getMissileLauncherRange(player) : getRangedAttackRange(player)
-    const isEnemy = isEnemyChecker(player, factions)
+    const isEnemy = isEnemyChecker(player, factions, area)
 
     let targets = []
     for (let x = location.x - range; x <= location.x + range; x++) {
@@ -283,9 +292,9 @@ const getCreatureConditionInfo = condition => {
     }
 }
 
-const getCreatureDescription = (player, factions, kinds) => creature => {
+const getCreatureDescription = (player, factions, area, kinds) => creature => {
     const kind = kinds.creatures.get(creature.kind)
-    const info = getCreatureInfo(creature, player, factions)
+    const info = getCreatureInfo(creature, player, factions, area)
 
     if (info) {
         return `${kind.name} (${info})`
@@ -294,8 +303,8 @@ const getCreatureDescription = (player, factions, kinds) => creature => {
     }
 }
 
-const getCreatureFactionInfo = (creature, player, factions) => {
-    if (isEnemyChecker(player, factions)(creature)) {
+const getCreatureFactionInfo = (creature, player, factions, area) => {
+    if (isEnemyChecker(player, factions, area)(creature)) {
         return undefined
     } else {
         return 'friendly'

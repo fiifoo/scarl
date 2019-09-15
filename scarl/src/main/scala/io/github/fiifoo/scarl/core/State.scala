@@ -4,6 +4,7 @@ import io.github.fiifoo.scarl.core.Time.Tick
 import io.github.fiifoo.scarl.core.ai.{Brain, Tactic}
 import io.github.fiifoo.scarl.core.assets.Assets
 import io.github.fiifoo.scarl.core.communication.CommunicationId
+import io.github.fiifoo.scarl.core.creature.Faction.Disposition
 import io.github.fiifoo.scarl.core.creature._
 import io.github.fiifoo.scarl.core.entity._
 import io.github.fiifoo.scarl.core.geometry.{Location, Sector, WaypointNetwork}
@@ -39,6 +40,9 @@ object State {
                       conversations: Map[CreatureId, (UsableId, CommunicationId)] = Map(),
                      )
 
+  // todo: move brains here
+  case class Factions(dispositions: Map[FactionId, Map[FactionId, Disposition]] = Map())
+
   case class Index(containerItems: Map[EntityId, Set[ItemId]] = Map(),
                    factionMembers: Map[FactionId, Set[CreatureId]] = Map(),
                    itemFinders: Map[ItemId, Set[CreatureId]] = Map(),
@@ -69,6 +73,7 @@ case class State(area: State.Area = State.Area(),
                  cache: State.Cache = State.Cache(),
                  conduits: State.Conduits = State.Conduits(),
                  creature: State.Creature = State.Creature(),
+                 factions: State.Factions = State.Factions(),
                  foundItems: Map[CreatureId, Set[ItemId]] = Map(),
                  entities: Map[EntityId, Entity] = Map(),
                  equipments: Map[CreatureId, Map[Slot, ItemId]] = Map(),

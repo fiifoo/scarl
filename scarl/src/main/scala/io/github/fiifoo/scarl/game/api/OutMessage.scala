@@ -10,7 +10,7 @@ import io.github.fiifoo.scarl.core.item.Recipe.RecipeId
 import io.github.fiifoo.scarl.core.kind.{ItemKindId, Kinds}
 import io.github.fiifoo.scarl.effect.interact.ReceiveCommunicationEffect
 import io.github.fiifoo.scarl.game.RunState
-import io.github.fiifoo.scarl.game.area.AreaInfo
+import io.github.fiifoo.scarl.game.area.{AreaInfo, FactionInfo}
 import io.github.fiifoo.scarl.game.event.{Event, EventBuilder}
 import io.github.fiifoo.scarl.game.player.{PlayerFov, PlayerInfo, Settings}
 import io.github.fiifoo.scarl.game.statistics.Statistics
@@ -79,6 +79,7 @@ object GameUpdate {
       fov = state.fov,
       events = state.events,
       player = state.playerInfo,
+      factionInfo = FactionInfo(state)
     )
   }
 }
@@ -174,7 +175,8 @@ case class GameStart(area: AreaInfo,
 
 case class GameUpdate(fov: PlayerFov,
                       events: List[Event],
-                      player: PlayerInfo
+                      player: PlayerInfo,
+                      factionInfo: FactionInfo,
                      ) extends OutMessage
 
 case class GameOver(statistics: Statistics) extends OutMessage

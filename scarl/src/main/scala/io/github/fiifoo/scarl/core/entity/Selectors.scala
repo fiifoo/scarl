@@ -1,7 +1,7 @@
 package io.github.fiifoo.scarl.core.entity
 
 import io.github.fiifoo.scarl.core.State
-import io.github.fiifoo.scarl.core.creature.Stats
+import io.github.fiifoo.scarl.core.creature.{Faction, FactionId, Stats}
 import io.github.fiifoo.scarl.core.geometry.WaypointNetwork.Waypoint
 import io.github.fiifoo.scarl.core.geometry.{Location, Sector}
 import io.github.fiifoo.scarl.core.item.{Key, Lock, PrivateKey}
@@ -20,6 +20,12 @@ object Selectors {
 
   def getCreatureComrades(s: State)(creature: CreatureId): Set[CreatureId] = {
     getCreaturePartyMembers(s)(creature) - creature
+  }
+
+  def getCreatureHostileFactions(s: State)(creature: CreatureId): Set[FactionId] = {
+    val faction = creature(s).faction
+
+    getFactionHostileFactions(s)(faction)
   }
 
   def getCreatureKeys(s: State)(creature: CreatureId): Set[Key] = {
@@ -57,6 +63,13 @@ object Selectors {
 
   def getEquipmentStats(s: State)(creature: CreatureId): Stats = {
     s.cache.equipmentStats.getOrElse(creature, Stats())
+  }
+
+  def getFactionHostileFactions(s: State)(faction: FactionId): Set[FactionId] = {
+    val dispositions = s.assets.factions(faction).dispositions ++
+      s.factions.dispositions.getOrElse(faction, Map())
+
+    dispositions.filter(_._2 == Faction.Hostile).keySet
   }
 
   def getItemLocation(s: State)(item: ItemId, deep: Boolean = false): Option[Location] = {

@@ -16,6 +16,7 @@ const LookDescriptionContainer = connect(
         location: state.ui.game.cursor,
         detailed: state.ui.look.detailed,
 
+        area: state.area,
         factions: state.factions,
         fov: state.fov.cumulative,
         map: state.area.map,

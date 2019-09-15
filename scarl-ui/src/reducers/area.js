@@ -1,11 +1,16 @@
-import { Record } from 'immutable'
+import { Map, Record } from 'immutable'
 import * as types from '../actions/actionTypes'
+
+const FactionInfo = Record({
+    dispositions: Map(),
+})
 
 const AreaInfo = Record({
     id: null,
     width: null,
     height: null,
     map: [],
+    factions: FactionInfo(),
 })
 
 const buildMap = data => {
@@ -38,6 +43,12 @@ export default (state = AreaInfo(), action) => {
                 map: buildMap(area.map)
             })
         }
+        case types.RECEIVE_GAME_UPDATE: {
+            return state.set('factions', FactionInfo({
+                dispositions: Map(action.data.factionInfo.dispositions),
+            }))
+        }
+
         default: {
             return state
         }
