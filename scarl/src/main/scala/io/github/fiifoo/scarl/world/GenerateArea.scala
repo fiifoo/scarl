@@ -13,19 +13,23 @@ object GenerateArea {
 
   def apply(site: SiteId, rng: Rng, idSeq: IdSeq = IdSeq(1))(world: WorldState): WorldState = {
     val assets = world.assets
-    val (variant, area) = selectArea(world, assets.sites(site))
+    val (variant, areaId) = selectArea(world, assets.sites(site))
+    val area = assets.areas(areaId)
 
     var state = State(
-      area = State.Area(owner = assets.areas(area).owner),
+      area = State.Area(owner = area.owner),
       assets = assets.instance(),
       brains = createBrains(assets),
+      factions = State.Factions(
+        dispositions = area.dispositions,
+      ),
       idSeq = idSeq,
       rng = rng
     )
 
     val (random, _) = state.rng()
-    val template = assets.templates(assets.areas(area).template)
-    val templateResult = CalculateTemplate(assets, assets.areas(area), random)(template)
+    val template = assets.templates(area.template)
+    val templateResult = CalculateTemplate(assets, area, random)(template)
 
     val in = (world.conduits.values filter (_.target == site)).toList
     val out = (world.conduits.values filter (_.source == site)).toList
