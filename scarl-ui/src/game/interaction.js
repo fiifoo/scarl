@@ -1,4 +1,4 @@
-import { fromJS, List, Map, Record, Set } from 'immutable'
+import { List, Map, Record } from 'immutable'
 import * as utils from './utils'
 
 export const Interaction = Record({
@@ -165,7 +165,7 @@ export const seekInteractions = (player, fov, actions = undefined) => {
 
     const location = player.creature.location
     const filteredWeights = actions ? weights.filter((_, action) => actions.includes(action)) : weights
-    const keys = Set(player.keys.map(key => fromJS(key)))
+    const keys = player.keys
 
     const here = seek(filteredWeights, fov, keys, 0)(location)
 

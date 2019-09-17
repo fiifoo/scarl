@@ -1,4 +1,4 @@
-import { List, Record } from 'immutable'
+import { fromJS, List, Record, Set } from 'immutable'
 import * as types from '../actions/actionTypes'
 import { SIGNAL_MAP } from '../game/modes'
 
@@ -7,7 +7,7 @@ const Player = Record({
     conversation: undefined,
     creature: undefined,
     equipmentStats: undefined,
-    keys: [], // will be update constanly and won't do immutable Set conversion
+    keys: Set(),
     recipes: List(),
     recycledItems: List(),
     signals: null,
@@ -32,8 +32,12 @@ export default (state = Player(), action) => {
             return state.withMutations(state => {
                 state.set('conversation', data.conversation)
                 state.set('creature', data.creature)
-                state.set('equipmentStats', data.equipmentStats)
-                state.set('keys', data.keys)
+                if (data.equipmentStats) {
+                    state.set('equipmentStats', data.equipmentStats)
+                }
+                if (data.keys) {
+                    state.set('keys', Set(data.keys.map(key => fromJS(key))))
+                }
                 if (action.mode !== SIGNAL_MAP) {
                     state.set('signals', null)
                 }

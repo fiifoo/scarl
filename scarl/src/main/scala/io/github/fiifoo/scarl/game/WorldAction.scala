@@ -107,7 +107,7 @@ object WorldAction {
     def changeArea(destination: SiteId)(state: RunState): RunState = {
       val change =
         ChangeArea(destination) _ andThen
-          (state => state.copy(outMessages = AreaChange(state) :: state.outMessages)) andThen
+          (state => state.addMessage(AreaChange(state))) andThen
           (state => RunGame(state))
 
       change(state)

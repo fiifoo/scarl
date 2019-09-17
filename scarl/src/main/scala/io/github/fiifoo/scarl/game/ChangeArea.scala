@@ -3,7 +3,7 @@ package io.github.fiifoo.scarl.game
 import io.github.fiifoo.scarl.core.math.Rng
 import io.github.fiifoo.scarl.core.mutation.{ConduitExitMutation, RemovableEntityMutation, RemoveEntitiesMutation, ResetGoalsMutation}
 import io.github.fiifoo.scarl.core.world.{ConduitId, Traveler}
-import io.github.fiifoo.scarl.game.player.{PlayerFov, PlayerInfo}
+import io.github.fiifoo.scarl.game.player.PlayerFov
 import io.github.fiifoo.scarl.world.{GenerateArea, SiteId, WorldState}
 
 object ChangeArea {
@@ -89,7 +89,6 @@ object ChangeArea {
       areaMap = state.game.maps.getOrElse(destination, Map()),
       fov = PlayerFov(),
       instance = instance,
-      playerInfo = PlayerInfo(instance, state.game.player)
     )
   }
 }

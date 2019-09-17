@@ -1,4 +1,4 @@
-package io.github.fiifoo.scarl.game.area
+package io.github.fiifoo.scarl.game.api
 
 import io.github.fiifoo.scarl.core.State
 import io.github.fiifoo.scarl.core.creature._

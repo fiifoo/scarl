@@ -44,9 +44,13 @@ export default (state = AreaInfo(), action) => {
             })
         }
         case types.RECEIVE_GAME_UPDATE: {
-            return state.set('factions', FactionInfo({
-                dispositions: Map(action.data.factionInfo.dispositions),
-            }))
+            return action.data.factionInfo ? (
+                state.set('factions', FactionInfo({
+                    dispositions: Map(action.data.factionInfo.dispositions),
+                }))
+            ) : (
+                state
+            )
         }
 
         default: {

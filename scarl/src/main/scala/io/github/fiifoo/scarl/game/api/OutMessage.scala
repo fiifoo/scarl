@@ -10,9 +10,8 @@ import io.github.fiifoo.scarl.core.item.Recipe.RecipeId
 import io.github.fiifoo.scarl.core.kind.{ItemKindId, Kinds}
 import io.github.fiifoo.scarl.effect.interact.ReceiveCommunicationEffect
 import io.github.fiifoo.scarl.game.RunState
-import io.github.fiifoo.scarl.game.area.{AreaInfo, FactionInfo}
 import io.github.fiifoo.scarl.game.event.{Event, EventBuilder}
-import io.github.fiifoo.scarl.game.player.{PlayerFov, PlayerInfo, Settings}
+import io.github.fiifoo.scarl.game.player.{PlayerFov, Settings}
 import io.github.fiifoo.scarl.game.statistics.Statistics
 import io.github.fiifoo.scarl.rule.SignalRule
 import io.github.fiifoo.scarl.world._
@@ -75,11 +74,14 @@ object GameStart {
 
 object GameUpdate {
   def apply(state: RunState): GameUpdate = {
+    val factionInfo = FactionInfo(state)
+    val playerInfo = PlayerInfo(state)
+
     GameUpdate(
       fov = state.fov,
       events = state.events,
-      player = state.playerInfo,
-      factionInfo = FactionInfo(state)
+      player = playerInfo,
+      factionInfo = if (state.previous.exists(FactionInfo(_) == factionInfo)) None else Some(factionInfo)
     )
   }
 }
@@ -176,7 +178,7 @@ case class GameStart(area: AreaInfo,
 case class GameUpdate(fov: PlayerFov,
                       events: List[Event],
                       player: PlayerInfo,
-                      factionInfo: FactionInfo,
+                      factionInfo: Option[FactionInfo],
                      ) extends OutMessage
 
 case class GameOver(statistics: Statistics) extends OutMessage

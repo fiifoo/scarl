@@ -1,7 +1,8 @@
-package io.github.fiifoo.scarl.game.area
+package io.github.fiifoo.scarl.game.api
 
 import io.github.fiifoo.scarl.core.geometry.Location
 import io.github.fiifoo.scarl.game.RunState
+import io.github.fiifoo.scarl.game.area.MapLocation
 import io.github.fiifoo.scarl.world.SiteId
 
 object AreaInfo {

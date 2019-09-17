@@ -8,7 +8,7 @@ import io.github.fiifoo.scarl.core.world.ConduitId
 import io.github.fiifoo.scarl.game.api._
 import io.github.fiifoo.scarl.game.area.MapBuilder
 import io.github.fiifoo.scarl.game.event.EventBuilder
-import io.github.fiifoo.scarl.game.player.PlayerInfo
+import io.github.fiifoo.scarl.game.player.PlayerFov
 import io.github.fiifoo.scarl.game.statistics.StatisticsBuilder
 
 import scala.annotation.tailrec
@@ -26,11 +26,11 @@ object RunGame {
   @tailrec
   private def run(state: RunState, action: Option[Action] = None): RunState = {
     if (state.ended) {
-      return sendGameOver(sendGameUpdate(state))
+      return sendGameOver(sendGameUpdate(updateFov(state)))
     } else if (state.stopped) {
-      return sendGameUpdate(state)
+      return sendGameUpdate(updateFov(state))
     } else if (state.paused) {
-      return state
+      return updateFov(state)
     }
 
     var (nextState, nextAction) = if (playerTurn(state)) {
@@ -70,9 +70,7 @@ object RunGame {
       state.copy(
         ended = ended,
         events = events,
-        fov = if (ended) state.fov.next(instance, state.game.player) else state.fov,
-        instance = FinalizeTickMutation()(instance),
-        playerInfo = PlayerInfo(instance, state.game.player),
+        instance = if (ended) instance else FinalizeTickMutation()(instance),
         statistics = statistics
       )
     }) getOrElse state
@@ -115,38 +113,31 @@ object RunGame {
     ChangeArea(area, Some(conduit.id))(state)
   }
 
-  private def sendGameUpdate(state: RunState): RunState = {
-    val nextState = updateFov(state)
-    val message = GameUpdate(nextState)
-
-    sendMessage(nextState.copy(events = Nil), message)
-  }
-
-  private def sendGameOver(state: RunState): RunState = {
-    val message = GameOver(state)
-
-    sendMessage(state, message)
-  }
-
-  private def sendAreaChange(state: RunState): RunState = {
-    val message = AreaChange(state)
-
-    sendMessage(state, message)
-  }
-
-  private def sendMessage(state: RunState, message: OutMessage): RunState = {
-    state.copy(
-      outMessages = message :: state.outMessages
-    )
-  }
-
   private def updateFov(state: RunState): RunState = {
-    val fov = if (state.ended) state.fov else state.fov.next(state.instance, state.game.player)
+    val fov = PlayerFov(state.instance, state.game.player, state.previous map (_.fov))
     val areaMap = state.areaMap ++ MapBuilder(fov)
 
     state.copy(
       fov = fov,
       areaMap = areaMap
     )
+  }
+
+  private def sendGameUpdate(state: RunState): RunState = {
+    val message = GameUpdate(state)
+
+    state.addMessage(message)
+  }
+
+  private def sendGameOver(state: RunState): RunState = {
+    val message = GameOver(state)
+
+    state.addMessage(message)
+  }
+
+  private def sendAreaChange(state: RunState): RunState = {
+    val message = AreaChange(state)
+
+    state.addMessage(message)
   }
 }

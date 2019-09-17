@@ -2,8 +2,7 @@ package models.json
 
 import io.github.fiifoo.scarl.core.geometry.{Location, WaypointNetwork}
 import io.github.fiifoo.scarl.core.kind.Kinds
-import io.github.fiifoo.scarl.game.api._
-import io.github.fiifoo.scarl.game.area.AreaInfo
+import io.github.fiifoo.scarl.game.api.{AreaInfo, _}
 import play.api.libs.json._
 
 object WriteOutMessage {

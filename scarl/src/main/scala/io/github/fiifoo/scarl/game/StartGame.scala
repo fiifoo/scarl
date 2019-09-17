@@ -1,7 +1,6 @@
 package io.github.fiifoo.scarl.game
 
 import io.github.fiifoo.scarl.game.api._
-import io.github.fiifoo.scarl.game.player.PlayerInfo
 
 object StartGame {
 
@@ -12,7 +11,6 @@ object StartGame {
       areaMap = gameState.maps.getOrElse(gameState.area, Map()),
       game = gameState,
       instance = instance,
-      playerInfo = PlayerInfo(instance, gameState.player),
       statistics = gameState.statistics
     )
 
@@ -25,8 +23,6 @@ object StartGame {
   private def send(state: RunState): RunState = {
     val message = GameStart(state)
 
-    state.copy(
-      outMessages = message :: state.outMessages
-    )
+    state.addMessage(message)
   }
 }

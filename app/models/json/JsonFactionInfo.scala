@@ -2,7 +2,7 @@ package models.json
 
 import io.github.fiifoo.scarl.core.creature.Faction.Disposition
 import io.github.fiifoo.scarl.core.creature.FactionId
-import io.github.fiifoo.scarl.game.area.FactionInfo
+import io.github.fiifoo.scarl.game.api.FactionInfo
 import play.api.libs.json._
 
 object JsonFactionInfo {

@@ -3,7 +3,7 @@ package models.json
 import io.github.fiifoo.scarl.core.creature.Resources
 import io.github.fiifoo.scarl.core.entity.{Creature, CreatureId, SafeCreatureId}
 import io.github.fiifoo.scarl.core.geometry.Location
-import io.github.fiifoo.scarl.game.area.CreatureInfo
+import io.github.fiifoo.scarl.game.api.CreatureInfo
 import play.api.libs.json._
 
 object JsonCreature {

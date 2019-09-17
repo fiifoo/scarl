@@ -1,4 +1,4 @@
-package io.github.fiifoo.scarl.game.area
+package io.github.fiifoo.scarl.game.api
 
 import io.github.fiifoo.scarl.core.creature.Faction.Disposition
 import io.github.fiifoo.scarl.core.creature.FactionId

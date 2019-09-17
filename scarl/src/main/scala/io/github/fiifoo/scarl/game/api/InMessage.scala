@@ -42,7 +42,7 @@ case object DebugFovQuery extends InMessage with DebugMessage {
   def apply(state: RunState)(implicit ec: ExecutionContext): (RunState, Option[InMessage]) = {
     val message = DebugFov(state)
 
-    (state.copy(outMessages = message :: state.outMessages), None)
+    (state.addMessage(message), None)
   }
 }
 
@@ -50,7 +50,7 @@ case object DebugWaypointQuery extends InMessage with DebugMessage {
   def apply(state: RunState)(implicit ec: ExecutionContext): (RunState, Option[InMessage]) = {
     val message = DebugWaypoint(state)
 
-    (state.copy(outMessages = message :: state.outMessages), None)
+    (state.addMessage(message), None)
   }
 }
 
@@ -87,7 +87,7 @@ case object InventoryQuery extends InMessage {
   def apply(state: RunState)(implicit ec: ExecutionContext): (RunState, Option[InMessage]) = {
     val message = PlayerInventory(state)
 
-    (state.copy(outMessages = message :: state.outMessages), None)
+    (state.addMessage(message), None)
   }
 }
 
@@ -95,7 +95,7 @@ case object SignalMapQuery extends InMessage {
   def apply(state: RunState)(implicit ec: ExecutionContext): (RunState, Option[InMessage]) = {
     val message = SignalMap(state)
 
-    (state.copy(outMessages = message :: state.outMessages), None)
+    (state.addMessage(message), None)
   }
 }
 
@@ -117,9 +117,8 @@ case class SetEquipmentSet(set: Int) extends InMessage {
     val message = PlayerSettings(settings)
     val action = EquipWeaponsAction(this.getNewWeapons(state))
 
-    state = state.copy(
+    state = state.addMessage(message).copy(
       game = state.game.copy(settings = settings),
-      outMessages = message :: state.outMessages
     )
     val (_state, _) = GameAction(action)(state)
     state = _state
@@ -154,9 +153,8 @@ case class SetQuickItem(slot: Int, item: Option[ItemKindId]) extends InMessage {
     val settings = state.game.settings.setQuickItem(this.slot, this.item)
     val message = PlayerSettings(settings)
 
-    val nextState = state.copy(
+    val nextState = state.addMessage(message).copy(
       game = state.game.copy(settings = settings),
-      outMessages = message :: state.outMessages
     )
 
     (nextState, None)
@@ -166,9 +164,7 @@ case class SetQuickItem(slot: Int, item: Option[ItemKindId]) extends InMessage {
 case class WorldAction(action: WorldActionInstance) extends InMessage {
   def apply(state: RunState)(implicit ec: ExecutionContext): (RunState, Option[InMessage]) = {
     val nextState = action.apply(state) map (state => {
-      state.copy(
-        outMessages = WorldInfo(state) :: state.outMessages
-      )
+      state.addMessage(WorldInfo(state))
     }) getOrElse state
 
     (nextState, None)

@@ -4,6 +4,7 @@ import io.github.fiifoo.scarl.core.State
 import io.github.fiifoo.scarl.core.entity._
 import io.github.fiifoo.scarl.core.geometry.Location
 import io.github.fiifoo.scarl.core.world.ConduitId
+import io.github.fiifoo.scarl.game.api.CreatureInfo
 
 object LocationEntities {
   def apply(s: State, player: CreatureId, location: Location): LocationEntities = {
