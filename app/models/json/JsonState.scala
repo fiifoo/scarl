@@ -1,7 +1,7 @@
 package models.json
 
 import io.github.fiifoo.scarl.core._
-import io.github.fiifoo.scarl.core.ai.{Brain, Tactic}
+import io.github.fiifoo.scarl.core.ai.{Brain, Strategy, Tactic}
 import io.github.fiifoo.scarl.core.assets.Assets
 import io.github.fiifoo.scarl.core.communication.CommunicationId
 import io.github.fiifoo.scarl.core.creature.Faction.Disposition
@@ -45,6 +45,7 @@ object JsonState {
   lazy private implicit val recipeIdFormat = JsonRecipe.recipeIdFormat
   lazy private implicit val signalFormat = JsonSignal.signalFormat
   lazy private implicit val slotFormat = JsonItemEquipment.slotFormat
+  lazy private implicit val strategyFormat = JsonStrategy.strategyFormat
   lazy private implicit val tacticFormat = JsonTactic.tacticFormat
 
   lazy private implicit val areaFormat = Json.format[State.Area]
@@ -64,6 +65,7 @@ object JsonState {
 
   implicitly(mapFormat[FactionId, Disposition])
   implicitly(mapFormat[FactionId, Map[FactionId, Disposition]])
+  implicitly(mapFormat[FactionId, Strategy])
   lazy private implicit val stateFactionsFormat = Json.format[State.Factions]
 
   implicitly(mapFormat[FactionId, Brain])

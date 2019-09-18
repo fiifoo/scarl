@@ -1,7 +1,7 @@
 package io.github.fiifoo.scarl.core
 
 import io.github.fiifoo.scarl.core.Time.Tick
-import io.github.fiifoo.scarl.core.ai.{Brain, Tactic}
+import io.github.fiifoo.scarl.core.ai.{Brain, Strategy, Tactic}
 import io.github.fiifoo.scarl.core.assets.Assets
 import io.github.fiifoo.scarl.core.communication.CommunicationId
 import io.github.fiifoo.scarl.core.creature.Faction.Disposition
@@ -41,7 +41,9 @@ object State {
                      )
 
   // todo: move brains here
-  case class Factions(dispositions: Map[FactionId, Map[FactionId, Disposition]] = Map())
+  case class Factions(dispositions: Map[FactionId, Map[FactionId, Disposition]] = Map(),
+                      strategies: Map[FactionId, Strategy] = Map(),
+                     )
 
   case class Index(containerItems: Map[EntityId, Set[ItemId]] = Map(),
                    factionMembers: Map[FactionId, Set[CreatureId]] = Map(),

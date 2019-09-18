@@ -3,7 +3,7 @@ package io.github.fiifoo.scarl.world
 import io.github.fiifoo.scarl.area.AreaId
 import io.github.fiifoo.scarl.area.template.{ApplyTemplate, CalculateTemplate}
 import io.github.fiifoo.scarl.core._
-import io.github.fiifoo.scarl.core.ai.Brain
+import io.github.fiifoo.scarl.core.ai.{Brain, Strategy}
 import io.github.fiifoo.scarl.core.creature.FactionId
 import io.github.fiifoo.scarl.core.entity.{GlobalActor, GlobalActorId, IdSeq}
 import io.github.fiifoo.scarl.core.math.Rng
@@ -19,9 +19,10 @@ object GenerateArea {
     var state = State(
       area = State.Area(owner = area.owner),
       assets = assets.instance(),
-      brains = createBrains(assets),
+      brains = createBrains(assets, area.strategies),
       factions = State.Factions(
         dispositions = area.dispositions,
+        strategies = area.strategies,
       ),
       idSeq = idSeq,
       rng = rng
@@ -57,9 +58,11 @@ object GenerateArea {
     region.variants find (_.requirements.apply(world)) map (_.key)
   }
 
-  private def createBrains(assets: WorldAssets): Map[FactionId, Brain] = {
+  private def createBrains(assets: WorldAssets, strategies: Map[FactionId, Strategy]): Map[FactionId, Brain] = {
     (assets.factions.values flatMap (faction => {
-      faction.strategy map (strategy => {
+      val strategy = strategies.get(faction.id).orElse(faction.strategy)
+
+      strategy map (strategy => {
         (faction.id, Brain(faction.id, strategy))
       })
     })).toMap

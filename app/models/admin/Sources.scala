@@ -149,6 +149,7 @@ object Sources {
       typeOf[CapturePower],
       typeOf[CreateEntityPower],
       typeOf[FactionDispositionPower],
+      typeOf[FactionStrategyPower],
       typeOf[MaybeCreaturePower],
       typeOf[ExplodePower],
       typeOf[TransformPower],

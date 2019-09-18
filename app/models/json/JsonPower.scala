@@ -14,6 +14,7 @@ object JsonPower {
   lazy private implicit val goalIdFormat = JsonGoal.goalIdFormat
   lazy private implicit val kindIdFormat = JsonKind.kindIdFormat
   lazy private implicit val resourcesFormat = Json.format[Power.Resources]
+  lazy private implicit val strategyFormat = JsonStrategy.strategyFormat
 
   lazy private implicit val achieveGoalFormat = Json.format[AchieveGoalPower]
   lazy private implicit val activateMachineryFormat = Json.format[ActivateMachineryPower]
@@ -23,6 +24,7 @@ object JsonPower {
   lazy private implicit val createEntityFormat = Json.format[CreateEntityPower]
   lazy private implicit val explodeFormat = Json.format[ExplodePower]
   lazy private implicit val factionDispositionFormat = Json.format[FactionDispositionPower]
+  lazy private implicit val factionStrategyFormat = Json.format[FactionStrategyPower]
   lazy private implicit val maybeCreatureFormat = Json.format[MaybeCreaturePower]
   lazy private implicit val maybeItemFormat = Json.format[MaybeItemPower]
   lazy private implicit val receiveCommunicationFormat = Json.format[ReceiveCommunicationPower]
@@ -42,6 +44,7 @@ object JsonPower {
       case "CreateEntityPower" => data.as[CreateEntityPower]
       case "ExplodePower" => data.as[ExplodePower]
       case "FactionDispositionPower" => data.as[FactionDispositionPower]
+      case "FactionStrategyPower" => data.as[FactionStrategyPower]
       case "MaybeCreaturePower" => data.as[MaybeCreaturePower]
       case "TransformPower" => data.as[TransformPower]
       case "VoidPower" => data.as[VoidPower]
@@ -53,6 +56,7 @@ object JsonPower {
       case power: CreateEntityPower => createEntityFormat.writes(power)
       case power: ExplodePower => explodeFormat.writes(power)
       case power: FactionDispositionPower => factionDispositionFormat.writes(power)
+      case power: FactionStrategyPower => factionStrategyFormat.writes(power)
       case power: MaybeCreaturePower => maybeCreatureFormat.writes(power)
       case power: TransformPower => transformFormat.writes(power)
       case power: VoidPower => voidFormat.writes(power)
