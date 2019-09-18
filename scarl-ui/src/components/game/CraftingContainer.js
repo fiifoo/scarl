@@ -12,8 +12,8 @@ const CraftingContainer = connect(
         visible: state.ui.game.mode === CRAFTING,
 
         equipmentSet: state.settings.equipmentSet,
-        equipments: state.equipments,
-        inventory: state.inventory,
+        equipments: state.player.equipments,
+        inventory: state.player.inventory,
         kinds: state.kinds,
         player: state.player,
         recipes: state.recipes,

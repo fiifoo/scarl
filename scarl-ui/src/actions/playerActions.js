@@ -1,5 +1,4 @@
 import * as utils from '../game/utils'
-import { sendInventoryQuery } from './connectionActions'
 import { addMessage, cancelMode, doAction, setTarget } from './gameActions'
 import { focusKeyboard } from './keyboard'
 
@@ -17,7 +16,6 @@ export const attack = target => (dispatch, getState) => {
 
 export const cancelRecycleItem = item => (dispatch, getState) => {
     doAction('CancelRecycleItem', {item})(dispatch, getState)
-    sendInventoryQuery()
 }
 
 export const displace = target => (dispatch, getState) => {
@@ -26,12 +24,10 @@ export const displace = target => (dispatch, getState) => {
 
 export const craftItem = (recipe, equip = false) => (dispatch, getState) => {
     doAction('CraftItem', {recipe, equip})(dispatch, getState)
-    sendInventoryQuery()
 }
 
 export const dropItem = item => (dispatch, getState) => {
     doAction('DropItem', {item})(dispatch, getState)
-    sendInventoryQuery()
     recaptureFocus(dispatch)
 }
 
@@ -49,7 +45,6 @@ export const enterConduit = () => (dispatch, getState) => {
 
 export const equipItem = (item, slot) => (dispatch, getState) => {
     doAction('EquipItem', {item, slot})(dispatch, getState)
-    sendInventoryQuery()
     recaptureFocus(dispatch)
 }
 
@@ -63,7 +58,6 @@ export const pass = () => (dispatch, getState) => {
 
 export const recycleInventoryItem = item => (dispatch, getState) => {
     doAction('RecycleItem', {target: item})(dispatch, getState)
-    sendInventoryQuery()
     recaptureFocus(dispatch)
 }
 
@@ -93,7 +87,6 @@ export const shoot = (location, missile = null) => (dispatch, getState) => {
 
 export const unequipItem = item => (dispatch, getState) => {
     doAction('UnequipItem', {item})(dispatch, getState)
-    sendInventoryQuery()
 }
 
 export const useDoor = target => (dispatch, getState) => {
@@ -101,7 +94,8 @@ export const useDoor = target => (dispatch, getState) => {
 }
 
 export const useInventoryItem = target => (dispatch, getState) => {
-    const {inventory, player} = getState()
+    const {player} = getState()
+    const inventory = player.inventory
 
     const item = inventory.get(target)
     const consumption = getUsableConsumption(item)
@@ -111,7 +105,6 @@ export const useInventoryItem = target => (dispatch, getState) => {
         addShortageMessage(shortage)(dispatch)
     } else {
         doAction('UseItem', {target})(dispatch, getState)
-        sendInventoryQuery()
     }
 }
 

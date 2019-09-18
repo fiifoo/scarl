@@ -1,13 +1,10 @@
 package io.github.fiifoo.scarl.game.api
 
 import io.github.fiifoo.scarl.core.creature.Faction
-import io.github.fiifoo.scarl.core.entity.Selectors.getContainerItems
 import io.github.fiifoo.scarl.core.entity._
 import io.github.fiifoo.scarl.core.geometry.{Location, WaypointNetwork}
-import io.github.fiifoo.scarl.core.item.Equipment.Slot
 import io.github.fiifoo.scarl.core.item.Recipe
-import io.github.fiifoo.scarl.core.item.Recipe.RecipeId
-import io.github.fiifoo.scarl.core.kind.{ItemKindId, Kinds}
+import io.github.fiifoo.scarl.core.kind.Kinds
 import io.github.fiifoo.scarl.effect.interact.ReceiveCommunicationEffect
 import io.github.fiifoo.scarl.game.RunState
 import io.github.fiifoo.scarl.game.event.{Event, EventBuilder}
@@ -34,7 +31,6 @@ object DebugWaypoint {
 
 object GameStart {
   def apply(state: RunState): GameStart = {
-    val inventory = PlayerInventory(state)
     val world = WorldInfo(state)
 
     val events = state.instance.creature.conversations.get(state.game.player) map (x => {
@@ -63,11 +59,6 @@ object GameStart {
       transportRegions = world.transportRegions,
       transports = world.transports,
       system = world.system,
-      // inventory
-      equipments = inventory.equipments,
-      inventory = inventory.inventory,
-      playerRecipes = inventory.playerRecipes,
-      recycledItems = inventory.recycledItems
     )
   }
 }
@@ -96,7 +87,6 @@ object GameOver {
 
 object AreaChange {
   def apply(state: RunState): AreaChange = {
-    val inventory = PlayerInventory(state)
     val world = WorldInfo(state)
 
     AreaChange(
@@ -108,22 +98,6 @@ object AreaChange {
       transportRegions = world.transportRegions,
       transports = world.transports,
       system = world.system,
-      // inventory
-      equipments = inventory.equipments,
-      inventory = inventory.inventory,
-      playerRecipes = inventory.playerRecipes,
-      recycledItems = inventory.recycledItems
-    )
-  }
-}
-
-object PlayerInventory {
-  def apply(state: RunState): PlayerInventory = {
-    PlayerInventory(
-      inventory = getContainerItems(state.instance)(state.game.player) map (_ (state.instance)),
-      equipments = state.instance.equipments.getOrElse(state.game.player, Map()),
-      playerRecipes = state.instance.recipes.getOrElse(state.game.player, Set()),
-      recycledItems = state.instance.creature.recycledItems.getOrElse(state.game.player, List())
     )
   }
 }
@@ -168,11 +142,6 @@ case class GameStart(area: AreaInfo,
                      transportRegions: Map[TransportId, RegionId],
                      transports: Map[TransportId, Transport],
                      system: SolarSystem,
-                     // inventory
-                     equipments: Map[Slot, ItemId],
-                     inventory: Set[Item],
-                     playerRecipes: Set[RecipeId],
-                     recycledItems: List[ItemKindId],
                     ) extends OutMessage
 
 case class GameUpdate(fov: PlayerFov,
@@ -191,18 +160,7 @@ case class AreaChange(area: AreaInfo,
                       transportRegions: Map[TransportId, RegionId],
                       transports: Map[TransportId, Transport],
                       system: SolarSystem,
-                      // inventory
-                      equipments: Map[Slot, ItemId],
-                      inventory: Set[Item],
-                      playerRecipes: Set[RecipeId],
-                      recycledItems: List[ItemKindId],
                      ) extends OutMessage
-
-case class PlayerInventory(equipments: Map[Slot, ItemId],
-                           inventory: Set[Item],
-                           playerRecipes: Set[RecipeId],
-                           recycledItems: List[ItemKindId],
-                          ) extends OutMessage
 
 case class SignalMap(signals: List[Signal]) extends OutMessage
 

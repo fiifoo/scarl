@@ -16,7 +16,7 @@ export default (state = initial, action) => {
         case types.CHANGE_GAME_MODE: {
             return action.mode !== modes.INVENTORY ? state : initial.set('tab', state.tab)
         }
-        case types.RECEIVE_PLAYER_INVENTORY: {
+        case types.RECEIVE_GAME_UPDATE: {
             return state.set('action', null)
         }
         case types.SET_INVENTORY_TAB: {

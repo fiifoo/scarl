@@ -12,8 +12,8 @@ const InventoryContainer = connect(
         visible: state.ui.game.mode === INVENTORY,
 
         equipmentSet: state.settings.equipmentSet,
-        equipments: state.equipments,
-        inventory: state.inventory,
+        equipments: state.player.equipments,
+        inventory: state.player.inventory,
         kinds: state.kinds,
         quickItems: state.settings.quickItems,
         ui: state.ui.inventory,

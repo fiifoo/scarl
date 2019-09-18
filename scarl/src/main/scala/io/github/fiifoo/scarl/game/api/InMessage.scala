@@ -83,14 +83,6 @@ case class GameAction(action: Action) extends InMessage {
   }
 }
 
-case object InventoryQuery extends InMessage {
-  def apply(state: RunState)(implicit ec: ExecutionContext): (RunState, Option[InMessage]) = {
-    val message = PlayerInventory(state)
-
-    (state.addMessage(message), None)
-  }
-}
-
 case object SignalMapQuery extends InMessage {
   def apply(state: RunState)(implicit ec: ExecutionContext): (RunState, Option[InMessage]) = {
     val message = SignalMap(state)
@@ -101,16 +93,14 @@ case object SignalMapQuery extends InMessage {
 
 case class SetEquipmentSet(set: Int) extends InMessage {
   def apply(state: RunState)(implicit ec: ExecutionContext): (RunState, Option[InMessage]) = {
-    val nextState = if (this.set != state.game.settings.equipmentSet) {
+    if (this.set != state.game.settings.equipmentSet) {
       this.execute(state)
     } else {
-      state
+      (state, None)
     }
-
-    (nextState, None)
   }
 
-  private def execute(initial: RunState)(implicit ec: ExecutionContext): RunState = {
+  private def execute(initial: RunState)(implicit ec: ExecutionContext): (RunState, Option[InMessage]) = {
     var state = initial
 
     val settings = state.game.settings.changeEquipmentSet(this.set, this.getCurrentWeapons(state))
@@ -120,14 +110,8 @@ case class SetEquipmentSet(set: Int) extends InMessage {
     state = state.addMessage(message).copy(
       game = state.game.copy(settings = settings),
     )
-    val (_state, _) = GameAction(action)(state)
-    state = _state
-    if (!state.ended) {
-      val (_state, _) = InventoryQuery(state)
-      state = _state
-    }
 
-    state
+    GameAction(action)(state)
   }
 
   private def getCurrentWeapons(state: RunState): Map[Equipment.Slot, ItemId] = {

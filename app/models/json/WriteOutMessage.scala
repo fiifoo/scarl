@@ -17,20 +17,16 @@ object WriteOutMessage {
   lazy private implicit val factionFormat = JsonFaction.factionFormat
   lazy private implicit val factionInfoWrites = JsonFactionInfo.factionInfoWrites
   lazy private implicit val eventWrites = JsonEvent.eventWrites
-  lazy private implicit val itemFormat = JsonItem.itemFormat
-  lazy private implicit val itemIdFormat = JsonItem.itemIdFormat
   lazy private implicit val mapLocationMapFormat = JsonMapLocation.mapLocationMapFormat
   lazy private implicit val playerFovWrites = JsonPlayerFov.playerFovWrites
   lazy private implicit val playerInfoWrites = JsonPlayerInfo.playerInfoWrites
   lazy private implicit val playerSettingsFormat = JsonPlayerSettings.playerSettingsFormat
-  lazy private implicit val recipeIdFormat = JsonRecipe.recipeIdFormat
   lazy private implicit val recipeFormat = JsonRecipe.recipeFormat
   lazy private implicit val regionFormat = JsonRegion.regionFormat
   lazy private implicit val regionIdFormat = JsonRegion.regionIdFormat
   lazy private implicit val signalFormat = JsonSignal.signalFormat
   lazy private implicit val siteFormat = JsonSite.siteFormat
   lazy private implicit val siteIdFormat = JsonSite.siteIdFormat
-  lazy private implicit val slotFormat = JsonItemEquipment.slotFormat
   lazy private implicit val solarSystemFormat = JsonSolarSystem.solarSystemFormat
   lazy private implicit val spaceshipSourceFormat = JsonSpaceshipSource.spaceshipSourceFormat
   lazy private implicit val stellarBodySourceFormat = JsonStellarBodySource.stellarBodySourceFormat
@@ -68,7 +64,6 @@ object WriteOutMessage {
   lazy private val gameUpdateWrites = Json.writes[GameUpdate]
   lazy private val gameOverWrites = Json.writes[GameOver]
   lazy private val areaChangeWrites = Json.writes[AreaChange]
-  lazy private val playerInventoryWrites = Json.writes[PlayerInventory]
   lazy private val playerSettingsWrites = Json.writes[PlayerSettings]
   lazy private val signalMapWrites = Json.writes[SignalMap]
   lazy private val worldInfoWrites = Json.writes[WorldInfo]
@@ -80,7 +75,6 @@ object WriteOutMessage {
     case message: GameUpdate => gameUpdateWrites.writes(message)
     case message: GameOver => gameOverWrites.writes(message)
     case message: AreaChange => areaChangeWrites.writes(message)
-    case message: PlayerInventory => playerInventoryWrites.writes(message)
     case message: PlayerSettings => playerSettingsWrites.writes(message)
     case message: SignalMap => signalMapWrites.writes(message)
     case message: WorldInfo => worldInfoWrites.writes(message)

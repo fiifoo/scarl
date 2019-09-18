@@ -10,8 +10,8 @@ const PlayerInfoContainer = connect(
         visible: state.ui.game.mode === PLAYER_INFO,
 
         equipmentSet: state.settings.equipmentSet,
-        equipments: state.equipments,
-        inventory: state.inventory,
+        equipments: state.player.equipments,
+        inventory: state.player.inventory,
         kinds: state.kinds,
         player: state.player,
     }), {

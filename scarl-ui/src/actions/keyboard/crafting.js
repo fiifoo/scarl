@@ -47,7 +47,8 @@ const changeRow = (dispatch, getState, up) => {
 }
 
 const craft = (dispatch, getState) => {
-    const { player, inventory } = getState()
+    const { player } = getState()
+    const inventory = player.inventory
     const recipe = getRecipe(getState)
 
     if (recipe && hasCraftingResources(player, inventory)(recipe)) {

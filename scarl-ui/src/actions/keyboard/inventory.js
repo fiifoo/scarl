@@ -15,7 +15,8 @@ const getItem = getState => {
 }
 
 const getItems = getState => {
-    const {inventory, kinds, ui} = getState()
+    const {player, kinds, ui} = getState()
+    const inventory = player.inventory
     const tab = tabs.get(ui.inventory.tab)
 
     return getTabItems(inventory, kinds.items)(tab)
@@ -28,7 +29,8 @@ const getActions = (dispatch, getState) => {
         return List()
     }
 
-    const {equipments, ui} = getState()
+    const {player, ui} = getState()
+    const equipments = player.equipments
     const tab = tabs.get(ui.inventory.tab)
 
     return getItemActionsFlat(composeActions(dispatch), equipments, tab)(item)

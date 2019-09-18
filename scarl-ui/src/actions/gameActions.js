@@ -2,7 +2,7 @@ import * as modes from '../game/modes'
 import { seekInteractions } from '../game/interaction'
 import { calculateTrajectory, getMissileLauncherRange, getRangedAttackRange, seekTargets } from '../game/utils'
 import * as types from './actionTypes'
-import { sendAction, sendInventoryQuery, sendSignalMapQuery, sendSetEquipmentSet, sendSetQuickItem } from './connectionActions'
+import { sendAction, sendSignalMapQuery, sendSetEquipmentSet, sendSetQuickItem } from './connectionActions'
 import { useInventoryItem } from './playerActions'
 
 export const addMessage = message => dispatch => dispatch({
@@ -41,7 +41,6 @@ export const autoMove = () => dispatch => {
 }
 
 export const crafting = () => dispatch => {
-    sendInventoryQuery()
     changeMode(modes.CRAFTING)(dispatch)
 }
 
@@ -60,7 +59,6 @@ export const gameOverScreen = () => dispatch => {
 }
 
 export const inventory = () => dispatch => {
-    sendInventoryQuery()
     changeMode(modes.INVENTORY)(dispatch)
 }
 
@@ -165,7 +163,8 @@ export const setMissile = missile => dispatch => dispatch({
 export const setQuickItem = (slot, item) => () => sendSetQuickItem(slot, item)
 
 export const useQuickItem = slot => (dispatch, getState) => {
-    const {settings, inventory} = getState()
+    const {settings, player} = getState()
+    const inventory = player.inventory
 
     const kind = settings.quickItems.get(slot)
     if (! kind) {
@@ -233,7 +232,7 @@ const changeMode = mode => dispatch => dispatch({
 
 const isUseScannerAction = (getState, type, data) => {
     if (type === 'UseItem') {
-        const item = getState().inventory.get(data.target)
+        const item = getState().player.inventory.get(data.target)
 
         return item && item.usable && item.usable.type === 'ScanPower'
     } else {

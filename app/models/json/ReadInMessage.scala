@@ -26,7 +26,6 @@ object ReadInMessage {
     case "DebugFovQuery" => DebugFovQuery
     case "DebugWaypointQuery" => DebugWaypointQuery
     case "GameAction" => data.as[GameAction]
-    case "InventoryQuery" => InventoryQuery
     case "SignalMapQuery" => SignalMapQuery
     case "SetEquipmentSet" => data.as[SetEquipmentSet]
     case "SetQuickItem" => data.as[SetQuickItem]

@@ -35,10 +35,6 @@ const receiveActionMappers = {
         type: types.RECEIVE_AREA_CHANGE,
         data,
     }),
-    PlayerInventory: data => ({
-        type: types.RECEIVE_PLAYER_INVENTORY,
-        data,
-    }),
     PlayerSettings: data => ({
         type: types.RECEIVE_PLAYER_SETTINGS,
         data,
@@ -126,10 +122,6 @@ export const sendDebugFovQuery = () => {
 
 export const sendDebugWaypointQuery = () => {
     sendMessage('DebugWaypointQuery')
-}
-
-export const sendInventoryQuery = () => {
-    sendMessage('InventoryQuery')
 }
 
 export const sendSignalMapQuery = () => {
