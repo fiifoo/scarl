@@ -18,11 +18,11 @@ object PlayerInfo {
   }
 
   private def create(s: State, creature: CreatureId, previous: Option[PlayerInfo]): PlayerInfo = {
-    val equipments = s.equipments.getOrElse(creature, Map())
+    val equipments = s.creature.equipments.getOrElse(creature, Map())
     val equipmentStats = Selectors.getEquipmentStats(s)(creature)
     val inventory = Selectors.getContainerItems(s)(creature) map (_ (s))
     val keys = Selectors.getCreatureKeys(s)(creature)
-    val playerRecipes = s.recipes.getOrElse(creature, Set())
+    val playerRecipes = s.creature.recipes.getOrElse(creature, Set())
     val recycledItems = s.creature.recycledItems.getOrElse(creature, List())
 
     def changed[T](value: T, extract: PlayerInfo => Option[T]): Option[T] = {

@@ -54,7 +54,7 @@ case class AttackStrategy(assault: Set[Waypoint] = Set(),
   }
 
   private def getEnemyWaypoints(s: State, members: Set[CreatureId]): Set[Waypoint] = {
-    val locations = members flatMap s.tactics.get collect {
+    val locations = members flatMap s.creature.tactics.get collect {
       case tactic: AttackTactic => tactic.destination
       case tactic: PursueTactic => tactic.destination
     }

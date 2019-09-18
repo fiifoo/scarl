@@ -9,7 +9,7 @@ import io.github.fiifoo.scarl.effect.interact.{RecycleItemEffect, UnequipItemEff
 
 case class RecycleItemAction(target: ItemId) extends Action {
   def apply(s: State, actor: CreatureId): List[Effect] = {
-    val equipped = s.equipments.get(actor) exists (_.values exists (_ == this.target))
+    val equipped = s.creature.equipments.get(actor) exists (_.values exists (_ == this.target))
 
     if (equipped) {
       List(

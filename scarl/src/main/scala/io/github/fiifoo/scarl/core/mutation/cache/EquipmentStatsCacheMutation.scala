@@ -9,7 +9,7 @@ case class EquipmentStatsCacheMutation(creature: CreatureId) {
   type Cache = Map[CreatureId, Stats]
 
   def apply(s: State, cache: Cache): Cache = {
-    val equipments = s.equipments.getOrElse(creature, Map())
+    val equipments = s.creature.equipments.getOrElse(creature, Map())
     val stats = EquipmentStatsRule(s, equipments)
 
     cache + (creature -> stats)

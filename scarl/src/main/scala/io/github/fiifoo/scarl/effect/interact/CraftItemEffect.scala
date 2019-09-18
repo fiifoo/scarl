@@ -76,7 +76,7 @@ case class CraftItemEffect(craftsman: CreatureId,
 
     val disassembleEffects = if (cost.items.nonEmpty) {
       val location = this.craftsman(s).location
-      val equipped = s.equipments.getOrElse(this.craftsman, Map()).values.toSet
+      val equipped = s.creature.equipments.getOrElse(this.craftsman, Map()).values.toSet
       val inventory = getContainerItems(s)(this.craftsman) map (_.apply(s))
 
       val (effects, _) = (cost.items foldLeft(List[Effect](), inventory)) ((carry, kind) => {

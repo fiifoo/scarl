@@ -33,7 +33,7 @@ trait Tactic {
   }
 
   def mergeIntentions(s: State, actor: CreatureId): List[(Intention, Priority.Value)] = {
-    val brains = s.brains.get(actor(s).faction) flatMap (_.intentions.get(actor))
+    val brains = s.factions.brains.get(actor(s).faction) flatMap (_.intentions.get(actor))
 
     brains map (brains => {
       (brains ::: intentions) sortWith ((a, b) => a._2 > b._2)

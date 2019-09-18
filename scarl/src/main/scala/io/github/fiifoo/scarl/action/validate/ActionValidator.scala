@@ -68,7 +68,7 @@ object ActionValidator {
   }
 
   private def validate(s: State, actor: CreatureId, action: CraftItemAction): Boolean = {
-    s.recipes.get(actor) exists (_.contains(action.recipe))
+    s.creature.recipes.get(actor) exists (_.contains(action.recipe))
   }
 
   private def validate(s: State, actor: CreatureId, action: DisplaceAction): Boolean = {
@@ -126,7 +126,7 @@ object ActionValidator {
   private def validate(s: State, actor: CreatureId, action: UnequipItemAction): Boolean = {
     entityExists(s)(action.item) &&
       action.item(s).container == actor &&
-      (s.equipments.get(actor) exists (_.values exists (_ == action.item)))
+      (s.creature.equipments.get(actor) exists (_.values exists (_ == action.item)))
   }
 
   private def validate(s: State, actor: CreatureId, action: UseCreatureAction): Boolean = {

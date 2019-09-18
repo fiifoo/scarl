@@ -31,21 +31,23 @@ case class RemoveEntitiesMutation() extends Mutation {
     val items = collectItems(removable)
 
     s.copy(
-      brains = mutateBrains(s.brains, creatures),
       cache = mutateCache(s, removable, creatures),
       creature = s.creature.copy(
+        conversations = mutateConversations(s, creatures, items),
+        equipments = s.creature.equipments -- creatures,
+        foundItems = mutateFoundItems(s, creatures, items),
+        keys = s.creature.keys -- creatures,
+        recipes = s.creature.recipes -- creatures,
         recycledItems = s.creature.recycledItems -- creatures,
+        tactics = s.creature.tactics -- creatures,
         trails = s.creature.trails -- creatures,
-        conversations = mutateConversations(s, creatures, items)
       ),
-      foundItems = mutateFoundItems(s, creatures, items),
+      factions = s.factions.copy(
+        brains = mutateBrains(s.factions.brains, creatures),
+      ),
       entities = s.entities -- removable,
-      equipments = s.equipments -- creatures,
       index = mutateIndex(s, removable),
-      keys = s.keys -- creatures,
-      recipes = s.recipes -- creatures,
       simulation = simulation,
-      tactics = s.tactics -- creatures,
       tmp = s.tmp.copy(removableEntities = Set())
     )
   }
@@ -72,7 +74,7 @@ case class RemoveEntitiesMutation() extends Mutation {
   }
 
   private def mutateFoundItems(s: State, creatures: Set[CreatureId], items: Set[ItemId]): Map[CreatureId, Set[ItemId]] = {
-    (items foldLeft s.foundItems) ((found, item) => {
+    (items foldLeft s.creature.foundItems) ((found, item) => {
       (s.index.itemFinders.get(item) map (finders => {
         (finders foldLeft found) ((found, finder) => {
           val next = found(finder) - item
@@ -123,7 +125,7 @@ case class RemoveEntitiesMutation() extends Mutation {
         case _ => index.factionMembers
       },
       itemFinders = entity match {
-        case creature: Creature => s.foundItems.get(creature.id) map (items => {
+        case creature: Creature => s.creature.foundItems.get(creature.id) map (items => {
           ItemFinderIndexRemoveMutation(creature.id, items)(index.itemFinders)
         }) getOrElse index.itemFinders
         case item: Item => index.itemFinders - item.id

@@ -8,11 +8,13 @@ case class CreatureTacticMutation(actor: CreatureId, tactic: Option[Tactic]) ext
 
   def apply(s: State): State = {
     val next = tactic map (tactic => {
-      s.tactics + (actor -> tactic)
+      s.creature.tactics + (actor -> tactic)
     }) getOrElse {
-      s.tactics - actor
+      s.creature.tactics - actor
     }
 
-    s.copy(tactics = next)
+    s.copy(creature = s.creature.copy(
+      tactics = next
+    ))
   }
 }

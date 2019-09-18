@@ -36,13 +36,13 @@ case class RoamStrategy(investigate: Set[Waypoint] = Set()) extends Strategy {
   }
 
   private def calculateEscapingIntentions(s: State, members: Set[CreatureId]): Intentions = {
-    val escaping = members filter (s.tactics.get(_) exists (_.isInstanceOf[EscapeTactic]))
+    val escaping = members filter (s.creature.tactics.get(_) exists (_.isInstanceOf[EscapeTactic]))
 
     val destinations = (escaping.toList flatMap (creature => {
       val allies = getCreatureWaypoint(s)(creature) flatMap getWaypointAllies(s, creature)
 
       allies map (allies => {
-        val location = s.tactics(creature).asInstanceOf[EscapeTactic].source
+        val location = s.creature.tactics(creature).asInstanceOf[EscapeTactic].source
         val creatures = allies + creature
 
         (creatures map (_ -> location)).toMap

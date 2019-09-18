@@ -10,11 +10,13 @@ case class EquipItemMutation(creature: CreatureId,
                              slots: Set[Slot]) extends Mutation {
 
   def apply(s: State): State = {
-    val prev = s.equipments.getOrElse(creature, Map())
+    val prev = s.creature.equipments.getOrElse(creature, Map())
     val add = (slots map ((_, item))).toMap
     val next = prev ++ add
 
-    val s1 = s.copy(equipments = s.equipments + (creature -> next))
+    val s1 = s.copy(creature = s.creature.copy(
+      equipments = s.creature.equipments + (creature -> next)
+    ))
 
     s1.copy(cache = s1.cache.copy(
       equipmentStats = EquipmentStatsCacheMutation(creature)(s1, s1.cache.equipmentStats)

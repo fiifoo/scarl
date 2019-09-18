@@ -34,7 +34,7 @@ class TacticsSpec extends FlatSpec with Matchers {
     CreatureId(1)(s).location should ===(Location(0, 0))
     s = RealityBubble(s).get.state
     CreatureId(1)(s).location should ===(Location(-1, 1))
-    s.tactics(CreatureId(1)) should ===(RoamTactic)
+    s.creature.tactics(CreatureId(1)) should ===(RoamTactic)
 
     s = RealityBubble(s).get.state // other creature
   }
@@ -45,7 +45,7 @@ class TacticsSpec extends FlatSpec with Matchers {
 
     s = RealityBubble(s).get.state
     CreatureId(1)(s).location should ===(Location(1, 0))
-    s.tactics(CreatureId(1)) should ===(AttackTactic(SafeCreatureId(CreatureId(2)), Location(2, 0)))
+    s.creature.tactics(CreatureId(1)) should ===(AttackTactic(SafeCreatureId(CreatureId(2)), Location(2, 0)))
 
     s = RealityBubble(s).get.state // other creature
   }
@@ -67,7 +67,7 @@ class TacticsSpec extends FlatSpec with Matchers {
   it should "switch tactic to pursue when enemy leaves field of vision" in {
     s = LocatableLocationMutation(CreatureId(2), Location(1000, 0))(s) // begone
     s = RealityBubble(s).get.state
-    s.tactics(CreatureId(1)) should ===(PursueTactic(SafeCreatureId(CreatureId(2)), Location(2, 0)))
+    s.creature.tactics(CreatureId(1)) should ===(PursueTactic(SafeCreatureId(CreatureId(2)), Location(2, 0)))
 
     s = RealityBubble(s).get.state // other creature
   }
@@ -79,7 +79,7 @@ class TacticsSpec extends FlatSpec with Matchers {
 
   it should "switch tactic back to roaming if enemy is not found" in {
     s = RealityBubble(s).get.state
-    s.tactics(CreatureId(1)) should ===(RoamTactic)
+    s.creature.tactics(CreatureId(1)) should ===(RoamTactic)
 
     s = RealityBubble(s).get.state // other creature
   }

@@ -29,7 +29,7 @@ object Selectors {
   }
 
   def getCreatureKeys(s: State)(creature: CreatureId): Set[Key] = {
-    val keys = s.keys.getOrElse(creature, Set())
+    val keys = s.creature.keys.getOrElse(creature, Set())
 
     keys + PrivateKey(creature)
   }
@@ -146,6 +146,6 @@ object Selectors {
   }
 
   def isVisibleItem(s: State, creature: CreatureId)(item: ItemId) = {
-    !item(s).hidden || (s.foundItems.get(creature) exists (_ contains item))
+    !item(s).hidden || (s.creature.foundItems.get(creature) exists (_ contains item))
   }
 }

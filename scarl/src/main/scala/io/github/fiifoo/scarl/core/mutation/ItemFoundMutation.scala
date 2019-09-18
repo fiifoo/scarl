@@ -7,11 +7,13 @@ import io.github.fiifoo.scarl.core.mutation.index.ItemFinderIndexAddMutation
 case class ItemFoundMutation(item: ItemId, finder: CreatureId) extends Mutation {
 
   def apply(s: State): State = {
-    val previous = s.foundItems.get(finder)
+    val previous = s.creature.foundItems.get(finder)
     val next = previous map (previous => previous + item) getOrElse Set(item)
 
     s.copy(
-      foundItems = s.foundItems + (finder -> next),
+      creature = s.creature.copy(
+        foundItems = s.creature.foundItems + (finder -> next),
+      ),
       index = s.index.copy(
         itemFinders = ItemFinderIndexAddMutation(finder, item)(s.index.itemFinders)
       )

@@ -32,16 +32,20 @@ object State {
                       exits: Map[ConduitId, Location] = Map(),
                      )
 
-  // todo: move foundItems, equipments, keys, recipes and tactics here
-  case class Creature(goals: Set[GoalId] = Set(),
+  case class Creature(conversations: Map[CreatureId, (UsableId, CommunicationId)] = Map(),
+                      equipments: Map[CreatureId, Map[Slot, ItemId]] = Map(),
+                      foundItems: Map[CreatureId, Set[ItemId]] = Map(),
+                      goals: Set[GoalId] = Set(),
+                      keys: Map[CreatureId, Set[Key]] = Map(),
                       receivedCommunications: Map[FactionId, Set[CommunicationId]] = Map(),
+                      recipes: Map[CreatureId, Set[RecipeId]] = Map(),
                       recycledItems: Map[CreatureId, List[ItemKindId]] = Map(),
+                      tactics: Map[CreatureId, Tactic] = Map(),
                       trails: Map[CreatureId, List[Location]] = Map(),
-                      conversations: Map[CreatureId, (UsableId, CommunicationId)] = Map(),
                      )
 
-  // todo: move brains here
-  case class Factions(dispositions: Map[FactionId, Map[FactionId, Disposition]] = Map(),
+  case class Factions(brains: Map[FactionId, Brain] = Map(),
+                      dispositions: Map[FactionId, Map[FactionId, Disposition]] = Map(),
                       strategies: Map[FactionId, Strategy] = Map(),
                      )
 
@@ -71,23 +75,17 @@ object State {
 
 case class State(area: State.Area = State.Area(),
                  assets: Assets = Assets(),
-                 brains: Map[FactionId, Brain] = Map(),
                  cache: State.Cache = State.Cache(),
                  conduits: State.Conduits = State.Conduits(),
                  creature: State.Creature = State.Creature(),
                  factions: State.Factions = State.Factions(),
-                 foundItems: Map[CreatureId, Set[ItemId]] = Map(),
                  entities: Map[EntityId, Entity] = Map(),
-                 equipments: Map[CreatureId, Map[Slot, ItemId]] = Map(),
                  gateways: Set[Location] = Set(),
                  idSeq: IdSeq = IdSeq(1),
                  index: State.Index = State.Index(),
-                 keys: Map[CreatureId, Set[Key]] = Map(),
-                 recipes: Map[CreatureId, Set[RecipeId]] = Map(),
                  rng: Rng = Rng(1),
                  signals: List[Signal] = List(),
                  simulation: State.Simulation = State.Simulation(),
-                 tactics: Map[CreatureId, Tactic] = Map(),
                  tick: Tick = 1,
                  tmp: State.Temporary = State.Temporary(),
                 )

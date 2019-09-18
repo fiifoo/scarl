@@ -18,11 +18,11 @@ object Utils {
   private val distance = Distance.chebyshev _
 
   def getTactic(s: State, actor: CreatureId): Tactic = {
-    s.tactics.getOrElse(actor, actor(s).behavior)
+    s.creature.tactics.getOrElse(actor, actor(s).behavior)
   }
 
   def findPartyEnemy(s: State, creature: CreatureId): Option[Creature] = {
-    getCreatureComrades(s)(creature) flatMap s.tactics.get collectFirst {
+    getCreatureComrades(s)(creature) flatMap s.creature.tactics.get collectFirst {
       case tactic: AttackTactic if tactic.target(s).isDefined => tactic.target(s).get
     }
   }

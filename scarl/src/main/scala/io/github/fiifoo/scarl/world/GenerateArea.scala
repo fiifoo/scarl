@@ -19,8 +19,8 @@ object GenerateArea {
     var state = State(
       area = State.Area(owner = area.owner),
       assets = assets.instance(),
-      brains = createBrains(assets, area.strategies),
       factions = State.Factions(
+        brains = createBrains(assets, area.strategies),
         dispositions = area.dispositions,
         strategies = area.strategies,
       ),

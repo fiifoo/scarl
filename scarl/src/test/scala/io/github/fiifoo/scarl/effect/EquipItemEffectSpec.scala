@@ -23,7 +23,7 @@ class EquipItemEffectSpec extends FlatSpec with Matchers {
     val effect = EquipItemEffect(creature, items("sword").id, MainHand, location)
 
     s = resolve(s, List(effect))
-    s.equipments should ===(Map(
+    s.creature.equipments should ===(Map(
       creature -> Map(MainHand -> items("sword").id)
     ))
   }
@@ -35,11 +35,11 @@ class EquipItemEffectSpec extends FlatSpec with Matchers {
     val e3 = EquipItemEffect(creature, items("otherSword").id, MainHand, location)
 
     s = resolve(s, List(e1, e2))
-    s.equipments should ===(Map(
+    s.creature.equipments should ===(Map(
       creature -> Map(MainHand -> items("sword").id, OffHand -> items("shield").id)
     ))
     s = resolve(s, List(e3))
-    s.equipments should ===(Map(
+    s.creature.equipments should ===(Map(
       creature -> Map(MainHand -> items("otherSword").id, OffHand -> items("shield").id)
     ))
   }
@@ -50,7 +50,7 @@ class EquipItemEffectSpec extends FlatSpec with Matchers {
     val e2 = EquipItemEffect(creature, items("sword").id, OffHand, location)
 
     s = resolve(s, List(e1, e2))
-    s.equipments should ===(Map(
+    s.creature.equipments should ===(Map(
       creature -> Map(OffHand -> items("sword").id)
     ))
   }
@@ -62,11 +62,11 @@ class EquipItemEffectSpec extends FlatSpec with Matchers {
     val e3 = EquipItemEffect(creature, items("bigSword").id, MainHand, location)
 
     s = resolve(s, List(e1, e2, e3))
-    s.equipments should ===(Map(
+    s.creature.equipments should ===(Map(
       creature -> Map(MainHand -> items("bigSword").id, OffHand -> items("bigSword").id)
     ))
     s = resolve(s, List(e3))
-    s.equipments should ===(Map(
+    s.creature.equipments should ===(Map(
       creature -> Map(MainHand -> items("bigSword").id, OffHand -> items("bigSword").id)
     ))
   }
@@ -76,7 +76,7 @@ class EquipItemEffectSpec extends FlatSpec with Matchers {
     val effect = EquipItemEffect(creature, items("shield").id, MainHand, location)
 
     s = resolve(s, List(effect))
-    s.equipments should ===(Map())
+    s.creature.equipments should ===(Map())
   }
 
   it should "equip item with multiple equipments correctly" in {
@@ -84,7 +84,7 @@ class EquipItemEffectSpec extends FlatSpec with Matchers {
     val effect = EquipItemEffect(creature, items("armorOrSword").id, HeadArmor, location)
 
     s = resolve(s, List(effect))
-    s.equipments should ===(Map(
+    s.creature.equipments should ===(Map(
       creature -> Map(HeadArmor -> items("armorOrSword").id)
     ))
   }

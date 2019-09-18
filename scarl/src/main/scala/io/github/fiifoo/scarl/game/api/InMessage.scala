@@ -115,7 +115,7 @@ case class SetEquipmentSet(set: Int) extends InMessage {
   }
 
   private def getCurrentWeapons(state: RunState): Map[Equipment.Slot, ItemId] = {
-    val equipments = state.instance.equipments.getOrElse(state.game.player, Map())
+    val equipments = state.instance.creature.equipments.getOrElse(state.game.player, Map())
 
     equipments filter (!_._1.isInstanceOf[ArmorSlot])
   }

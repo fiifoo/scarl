@@ -12,7 +12,7 @@ object CalculateBrains {
   case class Calculation(calculations: Future[Iterable[Brain]], area: SiteId)
 
   def apply(state: RunState)(implicit ec: ExecutionContext): Calculation = {
-    val calculations = state.instance.brains.values map (brain => {
+    val calculations = state.instance.factions.brains.values map (brain => {
       val (random, _) = state.instance.rng() // All brains will have same seed and state rng is not updated. Might be problem.
 
       Future {

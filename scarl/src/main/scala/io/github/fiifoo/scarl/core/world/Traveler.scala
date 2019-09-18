@@ -27,9 +27,9 @@ object Traveler {
       creature = creature(s),
       items = items map (_ (s)),
       statuses = statuses map (_ (s)),
-      equipments = s.equipments getOrElse(creature, Map()),
-      keys = s.keys.getOrElse(creature, Set()),
-      recipes = s.recipes.getOrElse(creature, Set())
+      equipments = s.creature.equipments getOrElse(creature, Map()),
+      keys = s.creature.keys.getOrElse(creature, Set()),
+      recipes = s.creature.recipes.getOrElse(creature, Set())
     )
   }
 

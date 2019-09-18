@@ -7,6 +7,8 @@ import io.github.fiifoo.scarl.core.item.Key
 case class CreatureKeysMutation(creature: CreatureId, keys: Set[Key]) extends Mutation {
 
   def apply(s: State): State = {
-    s.copy(keys = s.keys + (creature -> keys))
+    s.copy(creature = s.creature.copy(
+      keys = s.creature.keys + (creature -> keys)
+    ))
   }
 }

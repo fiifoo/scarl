@@ -7,6 +7,8 @@ import io.github.fiifoo.scarl.core.creature.FactionId
 case class BrainsMutation(brains: Map[FactionId, Brain]) extends Mutation {
 
   def apply(s: State): State = {
-    s.copy(brains = brains)
+    s.copy(factions = s.factions.copy(
+      brains = brains
+    ))
   }
 }

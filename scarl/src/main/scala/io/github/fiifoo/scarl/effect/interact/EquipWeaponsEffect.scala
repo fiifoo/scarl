@@ -19,7 +19,7 @@ case class EquipWeaponsEffect(creature: CreatureId,
 
   def apply(s: State): EffectResult = {
     val location = this.creature(s).location
-    val equipments = s.equipments.getOrElse(this.creature, Map())
+    val equipments = s.creature.equipments.getOrElse(this.creature, Map())
 
     val unequips = (this.slots flatMap equipments.get).distinct map (item => {
       UnequipItemEffect(this.creature, item, location, Some(this))

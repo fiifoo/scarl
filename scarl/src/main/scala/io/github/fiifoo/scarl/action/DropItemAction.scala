@@ -9,7 +9,7 @@ import io.github.fiifoo.scarl.effect.interact.{DropItemEffect, UnequipItemEffect
 
 case class DropItemAction(item: ItemId) extends Action {
   def apply(s: State, actor: CreatureId): List[Effect] = {
-    val equipped = s.equipments.get(actor) exists (_.values exists (_ == item))
+    val equipped = s.creature.equipments.get(actor) exists (_.values exists (_ == item))
     val location = actor(s).location
 
     if (equipped) {

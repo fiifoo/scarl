@@ -9,13 +9,13 @@ case class FactionStrategyMutation(faction: FactionId, strategy: Option[Strategy
     strategy orElse s.assets.factions(faction).strategy map (strategy => {
       val brain = Brain(faction, strategy)
 
-      s.copy(
-        brains = s.brains + (faction -> brain)
-      )
+      s.copy(factions = s.factions.copy(
+        brains = s.factions.brains + (faction -> brain)
+      ))
     }) getOrElse {
-      s.copy(
-        brains = s.brains - faction
-      )
+      s.copy(factions = s.factions.copy(
+        brains = s.factions.brains - faction
+      ))
     }
   }
 }

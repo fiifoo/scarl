@@ -57,7 +57,7 @@ object RealityBubble {
       (s, action, effects)
     }) getOrElse {
       val (random, nextRng) = s.rng()
-      val (tactic, action) = s.tactics.get(actor) flatMap (_ (s, actor, random)) getOrElse
+      val (tactic, action) = s.creature.tactics.get(actor) flatMap (_ (s, actor, random)) getOrElse
         actor(s).behavior.behavior(s, actor, random)
 
       val ns = CreatureTacticMutation(actor, Some(tactic))(RngMutation(nextRng)(s))
