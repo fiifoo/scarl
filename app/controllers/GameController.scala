@@ -1,11 +1,10 @@
 package controllers
 
-import javax.inject.Inject
-
 import akka.actor._
 import akka.stream.Materializer
 import dal.{AssetsRepository, GameRepository}
 import game.GameInstance
+import javax.inject.Inject
 import models.Game
 import models.message._
 import play.Environment
@@ -62,19 +61,23 @@ class GameController @Inject()(gameAssets: AssetsRepository,
         }
     }
 
-    override def postStop() = {
+    override def postStop(): Unit = {
       instance foreach (_.stop())
     }
 
-    private def sendGames(games: Seq[Game]) = {
-      out ! OutMessage.writes.writes(Games(games))
+    private def sendGames(games: Seq[Game]): Unit = {
+      this.sendMessage(Games(games))
     }
 
-    private def sendCreateGameFailed(games: Seq[Game]) = {
-      out ! OutMessage.writes.writes(CreateGameFailed(games))
+    private def sendCreateGameFailed(games: Seq[Game]): Unit = {
+      this.sendMessage(CreateGameFailed(games))
     }
 
-    private def createInstance(json: JsValue) = {
+    private def sendMessage(message: OutMessage): Unit = {
+      out ! OutMessage.write(List(message))
+    }
+
+    private def createInstance(json: JsValue): Unit = {
       val assets = gameAssets.build()
 
       CreateGameMessage.reads.reads(json) foreach (message => {

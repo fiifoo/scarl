@@ -89,12 +89,12 @@ class GameInstance(games: GameRepository, assets: WorldAssets, game: Game, out: 
   }
 
   private def sendMessages(state: RunState): RunState = {
-    state.outMessages.reverse.foreach(this.send)
+    if (state.outMessages.nonEmpty) {
+      this.out ! WriteOutMessage(state.outMessages.reverse)
 
-    state.copy(outMessages = Nil)
-  }
-
-  private def send(data: OutMessage): Unit = {
-    this.out ! WriteOutMessage(data)
+      state.copy(outMessages = Nil)
+    } else {
+      state
+    }
   }
 }

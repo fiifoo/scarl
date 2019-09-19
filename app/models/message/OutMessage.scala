@@ -11,6 +11,16 @@ case class CreateGameFailed(games: Seq[Game]) extends OutMessage
 
 object OutMessage {
 
+  def write(messages: List[OutMessage]): JsValue = {
+    implicit val writes = this.writes
+
+    Json.toJson(messages)
+  }
+
+  def write(message: OutMessage): JsValue = {
+    this.writes.writes(message)
+  }
+
   import models.json.JsonBase.polymorphicTypeWrites
 
   lazy private implicit val gameWrites = Game.writesWithoutSave

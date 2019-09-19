@@ -152,21 +152,24 @@ const sendMessage = (type, data = {}) => {
     })
 }
 
-const createMessageReceiver = (dispatch, getState) => ({type, data}) => {
-    if (! receiveActionMappers[type]) {
-        throw new Error(`Unknown message type ${type}.`)
-    }
-
+const createMessageReceiver = (dispatch, getState) => messages => {
     log('Received')
-    const state = getState()
 
-    const debugging = state.ui.debug.mode !== null
-    if (debugging) {
-        debugReceiveMessage(type, data)(dispatch, getState)
-    }
+    messages.forEach(({type, data}) => {
+        if (! receiveActionMappers[type]) {
+            throw new Error(`Unknown message type ${type}.`)
+        }
 
-    const mapper = receiveActionMappers[type]
-    dispatch(mapper(data, state))
+        const state = getState()
+
+        const debugging = state.ui.debug.mode !== null
+        if (debugging) {
+            debugReceiveMessage(type, data)(dispatch, getState)
+        }
+
+        const mapper = receiveActionMappers[type]
+        dispatch(mapper(data, state))
+    })
 
     log('Done')
 }

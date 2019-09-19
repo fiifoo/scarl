@@ -9,8 +9,14 @@ object WriteOutMessage {
 
   import JsonBase.polymorphicTypeWrites
 
+  def apply(messages: List[OutMessage]): JsValue = {
+    implicit val writes = this.outMessageWrites
+
+    Json.toJson(messages)
+  }
+
   def apply(message: OutMessage): JsValue = {
-    outMessageWrites.writes(message)
+    this.outMessageWrites.writes(message)
   }
 
   lazy private implicit val locationWrites = Json.writes[Location]
