@@ -1,6 +1,5 @@
 import { Set } from 'immutable'
 import { connect } from 'react-redux'
-import { compose } from 'redux'
 import { sendAutoMove } from '../../actions/connectionActions'
 import { cancelMode, look } from '../../actions/gameActions'
 import { focusKeyboard } from '../../actions/keyboard'
@@ -21,9 +20,29 @@ const validModes = Set([
     modes.SIGNAL_MAP,
 ])
 
-const autoMove = dispatch => location => {
-    sendAutoMove(undefined, location)
-    cancelMode()(dispatch)
+const preventMouseModes = Set([
+    modes.COMMUNICATE,
+])
+
+const _autoMove = location => (dispatch, getState) => {
+    const mode = getState().ui.game.mode
+
+    if (! preventMouseModes.contains(mode)) {
+        sendAutoMove(undefined, location)
+        cancelMode()(dispatch)
+    }
+}
+
+const _look = location => (dispatch, getState) => {
+    const mode = getState().ui.game.mode
+
+    if (! preventMouseModes.contains(mode)) {
+        look(location)(dispatch, getState)
+    }
+}
+
+const _focusKeyboard = () => dispatch => {
+    dispatch(focusKeyboard())
 }
 
 const ScreenContainer = connect(
@@ -46,10 +65,10 @@ const ScreenContainer = connect(
         reticule: state.ui.game.reticule,
         signals: state.ui.game.mode === modes.SIGNAL_MAP ? state.player.signals || [] : null,
         trajectory: state.ui.game.trajectory,
-    }), dispatch => ({
-        autoMove: autoMove(dispatch),
-        look: compose(dispatch, look),
-        focusKeyboard: compose(dispatch, focusKeyboard),
+    }), ({
+        autoMove: _autoMove,
+        look: _look,
+        focusKeyboard: _focusKeyboard,
     })
 )(GameView)
 
