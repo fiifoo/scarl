@@ -28,6 +28,9 @@ export default (state = initial, action) => {
                 return state
             }
         }
+        case types.RECEIVE_AREA_CHANGE: {
+            return changeMode(state, modes.MAIN)
+        }
         case types.RECEIVE_GAME_UPDATE: {
             if (action.communicationEvents.length > 0) {
                 state = changeMode(state, modes.COMMUNICATE)

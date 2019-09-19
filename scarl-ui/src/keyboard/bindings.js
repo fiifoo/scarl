@@ -75,7 +75,6 @@ export default {
         [keycodes.LESS3, commands.ENTER_CONDUIT],
         [keycodes.NUMPAD_5, commands.PASS],
         [keycodes.PERIOD, commands.RECYCLE_ITEM],
-        [keycodes.SHIFT, commands.SIGNAL_MAP],
         [keycodes.SPACEBAR, commands.AIM],
         [keycodes.A, commands.AUTO_MOVE],
         [keycodes.C, commands.CRAFTING],
@@ -84,6 +83,7 @@ export default {
         [keycodes.L, commands.LOOK],
         [keycodes.M, commands.MESSAGE_LOG],
         [keycodes.P, commands.PLAYER_INFO],
+        [keycodes.S, commands.SIGNAL_MAP],
         [keycodes.T, commands.COMMUNICATE],
         [keycodes.U, commands.USE],
         [keycodes.Z, commands.AIM_MISSILE],
@@ -109,7 +109,8 @@ export default {
 
     [gameModes.COMMUNICATE]: Map([
         [keycodes.ESC, commands.END_COMMUNICATION],
-        [keycodes.ENTER, commands.END_COMMUNICATION],
+        [keycodes.ENTER, commands.SELECT_DEFAULT_OR_END_COMMUNICATION],
+        [keycodes.SPACEBAR, commands.SELECT_DEFAULT_OR_END_COMMUNICATION],
     ]).merge(select),
 
     [gameModes.CRAFTING]: Map([
@@ -220,7 +221,7 @@ export default {
 
     [gameModes.SIGNAL_MAP]: Map([
         [keycodes.ESC, commands.CANCEL_MODE],
-        [keycodes.SHIFT, commands.CANCEL_MODE],
+        [keycodes.S, commands.CANCEL_MODE],
     ]),
 
     [gameModes.WORLD]: Map([

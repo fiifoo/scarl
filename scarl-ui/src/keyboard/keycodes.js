@@ -46,6 +46,7 @@ export const L = 76
 export const M = 77
 export const P = 80
 export const Q = 81
+export const S = 83
 export const T = 84
 export const U = 85
 export const W = 87
