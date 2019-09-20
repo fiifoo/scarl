@@ -2,6 +2,7 @@ import { isPolymorphic } from '../../data/utils.js'
 import FixedContentField from '../area/FixedContentField.jsx'
 import FixedTemplateField from '../area/FixedTemplateField.jsx'
 import MachinerySourceField from '../area/MachinerySourceField.jsx'
+import FactionField from '../faction/FactionField.jsx'
 import RegionField from '../world/RegionField.jsx'
 import RegionVariantKeyField from '../world/RegionVariantKeyField.jsx'
 import WorldField from '../world/WorldField.jsx'
@@ -42,6 +43,7 @@ const aliasFieldComponents = {
 }
 
 const modelFieldComponents = {
+    Faction: FactionField,
     FixedContent: FixedContentField,
     FixedTemplate: FixedTemplateField,
     'FixedContent.MachinerySource': MachinerySourceField,
