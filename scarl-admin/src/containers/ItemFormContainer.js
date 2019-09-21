@@ -1,6 +1,10 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { renameItem, deleteItem, setItemRenameId, setItemValue, addTag, showItem, showItemReferences, showSideForm, hideSideForm } from '../actions/actions'
+import { deleteItem, renameItem, setItemRenameId } from '../actions/actions'
+import { addTag, setItemValue  } from '../actions/actions'
+import { hideSideForm, showItem, showItemReferences, showSideForm } from '../actions/actions'
+import { addAdjacentTab } from '../actions/actions'
+
 import ItemForm from '../components/ItemForm.jsx'
 import { tabState } from '../reducers/ui/utils'
 
@@ -26,12 +30,16 @@ const ItemFormContainer = connect(
         deleteItem,
         renameItem,
         setItemRenameId,
-        setItemValue,
+
         addTag,
+        setItemValue,
+
+        hideSideForm,
         showItem,
         showItemReferences,
         showSideForm,
-        hideSideForm,
+
+        addTab: addAdjacentTab
     }
 )(ItemFormIf)
 

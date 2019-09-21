@@ -3,6 +3,7 @@ import Data from '../data/Data'
 import * as api from '../api'
 import { SUMMARY } from '../const/pages.js'
 import { copyItem, createItem, getItemReferences, isNewItemId } from '../data/utils.js'
+import TabSet from '../data/ui/TabSet'
 import * as types from './actionTypes'
 
 export const changePage = page => (dispatch, getState) => {
@@ -34,19 +35,48 @@ export const changeTab = tab => (dispatch, getState) => {
     }
 }
 
-export const addTab = () => (dispatch, getState) => {
+export const addTab = tabSetId => (dispatch, getState) => {
     const tabs = getState().ui.main.tabs
-    const tab = tabs.last() + 1
+    const tab = tabs.reduce((max, tab) => tab > max ? tab : max) + 1
 
     dispatch({
         type: types.ADD_TAB,
         tab,
+        tabSetId,
+    })
+}
+
+export const addAdjacentTab = () => (dispatch, getState) => {
+    const ui = getState().ui.main
+
+    const tab = ui.tabs.reduce((max, tab) => tab > max ? tab : max) + 1
+    const tabSetId = ui.tabSets.find(x => x.tabs.contains(ui.tab)).id
+    const index = ui.tabs.indexOf(ui.tab) + 1
+
+    dispatch({
+        type: types.ADD_TAB,
+        tab,
+        tabSetId,
+        index,
     })
 }
 
 export const deleteTab = tab => (dispatch, getState) => {
     const ui = getState().ui.main
-    const nextTab = ui.tab === tab ? ui.tabs.find(t => t !== tab) : ui.tab
+
+    let nextTab
+
+    if (ui.tab !== tab) {
+        nextTab = ui.tab
+    } else {
+        const index = ui.tabs.indexOf(ui.tab) + 1
+
+        nextTab = ui.tabs.has(index) ? (
+            ui.tabs.get(index)
+        ) : (
+            ui.tabs.find(t => t !== tab)
+        )
+    }
 
     dispatch({
         type: types.DELETE_TAB,
@@ -55,8 +85,65 @@ export const deleteTab = tab => (dispatch, getState) => {
     })
 }
 
+export const sortTabs = ({oldIndex, newIndex}) => (dispatch, getState) => {
+    const tabs = getState().ui.main.tabs
+    const tab = tabs.get(oldIndex)
+    const sorted = tabs.delete(oldIndex).insert(newIndex, tab)
+
+    dispatch({
+        type: types.SORT_TABS,
+        sorted,
+    })
+}
+
+export const addTabSet = () => (dispatch, getState) => {
+    const tabSets = getState().ui.main.tabSets
+    const tabSet = TabSet({
+        id: tabSets.reduce((max, tabSet) => tabSet.id > max ? tabSet.id : max, 0) + 1,
+    })
+
+    dispatch({
+        type: types.ADD_TAB_SET,
+        tabSet,
+    })
+}
+
+export const deleteTabSet = tabSet => (dispatch, getState) => {
+    const ui = getState().ui.main
+
+    const nextTab = tabSet.tabs.contains(ui.tab) ? ui.tabs.find(x => ! tabSet.tabs.contains(x)) : ui.tab
+
+    dispatch({
+        type: types.DELETE_TAB_SET,
+        tabSet,
+        nextTab,
+    })
+}
+
+export const renameTabSet = (tabSet, name) => ({
+    type: types.RENAME_TAB_SET,
+    tabSet,
+    name,
+})
+
+export const toggleTabSet = tabSet => ({
+    type: types.TOGGLE_TAB_SET,
+    tabSet,
+})
+
+export const sortTabSets = ({oldIndex, newIndex}) => (dispatch, getState) => {
+    const tabSets = getState().ui.main.tabSets
+    const tabSet = tabSets.get(oldIndex)
+    const sorted = tabSets.delete(oldIndex).insert(newIndex, tabSet)
+
+    dispatch({
+        type: types.SORT_TAB_SETS,
+        sorted,
+    })
+}
+
 export const showItem = (model, item) => (dispatch, getState) => {
-    addTab()(dispatch, getState)
+    addAdjacentTab()(dispatch, getState)
     dispatch(selectModel(model))
     dispatch(selectItem(item))
 }

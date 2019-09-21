@@ -8,7 +8,29 @@ import SummaryContainer from '../containers/SummaryContainer'
 import 'react-select/dist/react-select.css'
 import './App.css'
 
-const Navigation = ({page, changePage, fetchingSummary}) => (
+const SaveButton = ({readonly, save, saving, unsaved}) => (
+    <button
+        type="button"
+        className={unsaved ? 'btn btn-primary navbar-btn' : 'btn btn-default navbar-btn'}
+        onClick={save}
+        disabled={saving || readonly}>
+        Save
+    </button>
+)
+
+const SimulateButton = ({readonly, simulate, simulating}) => (
+    <button
+        type="button"
+        className="btn btn-default navbar-btn"
+        onClick={simulate}
+        disabled={simulating || readonly}>
+        <span>Run simulations</span>
+        {simulating && <div className="loader" />}
+    </button>
+)
+
+
+const Navigation = ({page, changePage, fetchingSummary, ...props}) => (
     <Navbar fluid={true}>
         <Navbar.Header>
             <Navbar.Brand>
@@ -23,6 +45,10 @@ const Navigation = ({page, changePage, fetchingSummary}) => (
                 {fetchingSummary && <div className="loader" />}
             </NavItem>
         </Nav>
+        <div className="btn-toolbar pull-right">
+            <SimulateButton {...props} />
+            <SaveButton {...props} />
+        </div>
     </Navbar>
 )
 
@@ -41,13 +67,17 @@ const Page = ({page}) => {
     }
 }
 
-const App = ({page, changePage, fetchingSummary}) => (
-    <div>
-        <Navigation page={page} changePage={changePage} fetchingSummary={fetchingSummary} />
-        <div className="container-fluid">
-            <Page page={page} />
+const App = props => {
+    const {page} = props
+
+    return (
+        <div>
+            <Navigation {...props} />
+            <div className="container-fluid">
+                <Page page={page} />
+            </div>
         </div>
-    </div>
-)
+    )
+}
 
 export default App

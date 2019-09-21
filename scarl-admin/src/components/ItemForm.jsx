@@ -1,12 +1,16 @@
 import React from 'react'
 import { readItemId } from '../data/utils'
 import { createFormFieldType, getFieldComponent } from './field/utils'
+import FormRow from './form/FormRow.jsx'
 import TextInputRow from './form/TextInputRow.jsx'
 import SideForm from './SideForm.jsx'
 
 const ItemForm = ({
     item, itemRename, model, sideForm, data, models, tags,
-    deleteItem, renameItem, setItemRenameId, setItemValue, addTag, showItem, showItemReferences, showSideForm, hideSideForm
+    deleteItem, renameItem, setItemRenameId,
+    addTag, setItemValue,
+    hideSideForm, showItem, showItemReferences, showSideForm,
+    addTab
 }) => {
     const id = readItemId(model, item)
     const path = model.dataPath.concat([id])
@@ -24,7 +28,18 @@ const ItemForm = ({
     }
     const Component = getFieldComponent(fieldType, model)
 
-    const buttons = (
+    const leftButtons = (
+        <div className="btn-toolbar">
+            <button
+                type="button"
+                onClick={addTab}
+                className="btn btn-default">
+                New tab
+            </button>
+        </div>
+    )
+
+    const rightButtons = (
         <div className="btn-toolbar">
             <button
                 type="button"
@@ -53,11 +68,16 @@ const ItemForm = ({
             <SideForm
                 sideForm={sideForm}
                 common={common} />
-            <div className="clearfix" style={{marginBottom: '1em'}}>
-                <div className="pull-right">
-                    {buttons}
+            <FormRow label={null}>
+                <div style={{marginBottom: '1em'}}>
+                    <div className="pull-right">
+                        {rightButtons}
+                    </div>
+                    <div>
+                        {leftButtons}
+                    </div>
                 </div>
-            </div>
+            </FormRow>
 
             <TextInputRow
                 label="id"

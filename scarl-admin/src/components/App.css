@@ -6,12 +6,54 @@ body {
     max-width: 1000px;
 }
 
+.main-tab.main-tabset {
+    background-color: #fcf8e3;
+    margin-top: 10px;
+    border-top: 1px solid #ccc;
+}
+
+.main-tab.main-tabset.add {
+    margin-top: 0px;
+}
+
+.main-tab {
+    background-color: #f8f8f8;
+    border-bottom: 1px solid #ccc;
+    user-select: none;
+    min-height: 30px;
+}
+.main-tab.active {
+    background-color: #d9edf7;
+}
+
+.main-tab > div  {
+    text-align: center;
+    padding: 3px;
+}
+
+.main-tab-close {
+    width: 30px;
+    float: left;
+}
+
+.main-tab-label  {
+    margin-left: 30px;
+    cursor: pointer;
+}
+
+.main-tab-label > input {
+    background-color: transparent;
+    width: 240px;
+    text-align: center;
+    border: 1px solid #ccc;
+}
+
 .item-form {
-    padding-right: 120px;
+    padding-right: 130px;
 }
 
 .item-form-header {
-    padding-right: 120px;
+    padding-right: 130px;
 }
 
 .item-form .delete-field {
@@ -121,15 +163,15 @@ body {
         black 40%, black 60%,
         white 60%, white 80%,
         black 80%, black 100%
-    );
-}
+        );
+    }
 
-.Select-menu-outer {
-    z-index: 9;
-    max-height: 402px;
-}
+    .Select-menu-outer {
+        z-index: 9;
+        max-height: 402px;
+    }
 
-.Select-menu {
-    max-height: 400px;
-    overflow-y: auto;
-}
+    .Select-menu {
+        max-height: 400px;
+        overflow-y: auto;
+    }
