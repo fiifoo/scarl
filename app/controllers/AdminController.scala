@@ -21,7 +21,7 @@ class AdminController @Inject()(
   val saveMaxSize = 1024 * 1000 * 10 // 10MB
 
   val assets = if (environment.isDev) {
-    "http://localhost:81"
+    "http://localhost:8081"
   } else {
     routes.Assets.versioned("").toString
   }

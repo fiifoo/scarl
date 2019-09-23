@@ -25,7 +25,7 @@ class GameController @Inject()(gameAssets: AssetsRepository,
                               ) extends AbstractController(cc) {
 
   val assets = if (environment.isDev) {
-    "http://localhost:80"
+    "http://localhost:8080"
   } else {
     routes.Assets.versioned("").toString
   }
