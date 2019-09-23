@@ -4,6 +4,7 @@ import * as api from '../api'
 import { SUMMARY } from '../const/pages.js'
 import { copyItem, createItem, getItemReferences, isNewItemId } from '../data/utils.js'
 import TabSet from '../data/ui/TabSet'
+import { readUi, writeUi } from '../data/ui/utils'
 import * as types from './actionTypes'
 
 export const changePage = page => (dispatch, getState) => {
@@ -139,6 +140,19 @@ export const sortTabSets = ({oldIndex, newIndex}) => (dispatch, getState) => {
     dispatch({
         type: types.SORT_TAB_SETS,
         sorted,
+    })
+}
+
+export const saveUi = () => (dispatch, getState) => {
+    const ui = getState().ui
+
+    const data = writeUi(ui)
+
+    api.saveUi(data).then(() => {
+        dispatch({
+            type: types.RECEIVE_SAVE_UI,
+            initialUi: readUi(data),
+        })
     })
 }
 

@@ -32,3 +32,9 @@ export const simulate = () => window.fetch('admin/simulate', {
     headers,
     method: 'PUT',
 }).then(processResponse('Simulate failed'))
+
+export const saveUi = data => window.fetch('admin/ui', {
+    headers,
+    method: 'PUT',
+    body: JSON.stringify(data),
+}).then(processResponse('Saving data failed'))

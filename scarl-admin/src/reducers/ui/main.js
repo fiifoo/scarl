@@ -1,22 +1,7 @@
-import {  List, Record, Set } from 'immutable'
 import * as types from '../../actions/actionTypes'
-import * as pages from '../../const/pages'
-import TabSet from '../../data/ui/TabSet'
+import Main from '../../data/ui/Main'
 
-const initial = Record({
-    fetchingSummary: false,
-    page: pages.MAIN,
-    saving: false,
-    simulating: false,
-    tab: 1,
-    tabs: List([1]),
-    tabSets: List([TabSet({
-        id: 1,
-        tabs: Set([1])
-    })]),
-})()
-
-export default (state = initial, action) => {
+export default (state = Main(), action) => {
     switch (action.type) {
         case types.CHANGE_PAGE: {
             return state.set('page', action.page)

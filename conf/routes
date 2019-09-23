@@ -10,6 +10,7 @@ GET     /admin                      controllers.AdminController.index
 PUT     /admin                      controllers.AdminController.save
 PUT     /admin/simulate             controllers.AdminController.simulate
 GET     /admin/summary              controllers.AdminController.summary
+PUT     /admin/ui                   controllers.AdminController.saveUi
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)

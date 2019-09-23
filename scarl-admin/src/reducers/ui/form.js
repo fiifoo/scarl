@@ -1,33 +1,8 @@
-import { List, Record } from 'immutable'
 import * as types from '../../actions/actionTypes'
+import Form, {ItemAdd, ItemReferences, ItemRename} from '../../data/ui/Form'
 import { tabbedReducer } from './utils'
 
-const ItemReferences = Record({
-    references: List(),
-    model: null,
-    id: null,
-})
-
-const ItemAdd = Record({
-    id: null,
-    invalid: false,
-})
-
-const ItemRename = Record({
-    id: null,
-    invalid: false,
-})
-
-const initial = Record({
-    item: null,
-    itemAdd: ItemAdd(),
-    itemReferences: null,
-    itemRename: ItemRename(),
-    model: null,
-    sideForm: null,
-})()
-
-export default tabbedReducer(initial, (state, action) => {
+export default tabbedReducer(Form(), (state, action) => {
     switch (action.type) {
         case types.ADD_TAB: {
             return state.set('model', action.previous.model)

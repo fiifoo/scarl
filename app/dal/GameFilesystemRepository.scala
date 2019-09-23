@@ -11,7 +11,7 @@ import play.api.libs.json.Json
 import scala.concurrent.{ExecutionContext, Future}
 
 class GameFilesystemRepository @Inject()(implicit ec: ExecutionContext) extends GameRepository {
-  private val directory = "user"
+  private val directory = "user/saves"
   private val root = Paths.get(directory)
 
   def list(): Future[Seq[Game]] = {

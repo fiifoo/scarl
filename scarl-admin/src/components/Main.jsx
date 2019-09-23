@@ -117,16 +117,24 @@ const TabSet = SortableElement(({tabSet, sortTabs, remove, rename, toggle, ...pr
     )
 })
 
-const AddTabSet = ({addTabSet}) => (
+const AddTabSet = ({addTabSet, readonly, shouldSaveUi, saveUi}) => (
     <div className="main-tab main-tabset add">
-        <div className="main-tab-close" />
+        <div className="main-tab-close">
+            <button
+                type="button"
+                className={shouldSaveUi && ! readonly ? 'btn btn-xs btn-primary' : 'btn btn-xs btn-default'}
+                disabled={readonly}
+                onClick={saveUi}>
+                &#128427; Save
+            </button>
+        </div>
         <div className="main-tab-label" onClick={addTabSet}>
             &#10133;
         </div>
     </div>
 )
 
-const TabSets = SortableContainer(({tabSets, addTabSet, deleteTabSet, renameTabSet, toggleTabSet, ...props}) => {
+const TabSets = SortableContainer(({tabSets, addTabSet, readonly, shouldSaveUi, deleteTabSet, renameTabSet, saveUi, toggleTabSet, ...props}) => {
     const renderTabSet = (tabSet, index) => {
         const remove = tabSets.find(x => x !== tabSet && x.tabs.size > 0) !== undefined ? () => deleteTabSet(tabSet) : null
         const rename = name => renameTabSet(tabSet, name)
@@ -146,7 +154,7 @@ const TabSets = SortableContainer(({tabSets, addTabSet, deleteTabSet, renameTabS
 
     return (
         <div>
-            <AddTabSet addTabSet={addTabSet} />
+            <AddTabSet addTabSet={addTabSet} readonly={readonly} shouldSaveUi={shouldSaveUi} saveUi={saveUi} />
             {tabSets.map(renderTabSet)}
         </div>
     )

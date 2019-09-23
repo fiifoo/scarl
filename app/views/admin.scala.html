@@ -1,4 +1,4 @@
-@(assets: String, data: String, models: String, readonly: Boolean)
+@(assets: String, data: String, models: String, readonly: Boolean, ui: Option[String])
 
 <!DOCTYPE html>
 <html lang="en">
@@ -12,7 +12,8 @@
         window.STATE_FROM_SERVER = {
             "data": @Html(data),
             "models": @Html(models),
-            "readonly": @readonly
+            "readonly": @readonly,
+            "ui": @if(ui.isEmpty) {null} else {@Html(ui)}
         };
     </script>
     <script src="@assets/admin.js"></script>

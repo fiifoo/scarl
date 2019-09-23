@@ -1,6 +1,6 @@
 package controllers
 
-import dal.{AssetsRepository, SimulationsRepository}
+import dal.{AdminUiRepository, AssetsRepository, SimulationsRepository}
 import javax.inject.Inject
 import models.Simulations
 import models.admin.{Models, Summary}
@@ -9,10 +9,10 @@ import play.api.mvc._
 
 import scala.concurrent.{ExecutionContext, Future}
 
-class AdminController @Inject()(
-                                 gameAssets: AssetsRepository,
-                                 gameSimulations: SimulationsRepository,
-                                 cc: ControllerComponents
+class AdminController @Inject()(adminUiRepository: AdminUiRepository,
+                                gameAssets: AssetsRepository,
+                                gameSimulations: SimulationsRepository,
+                                cc: ControllerComponents
                                )(
                                  implicit ec: ExecutionContext,
                                  environment: Environment
@@ -30,6 +30,7 @@ class AdminController @Inject()(
 
   def index = Action {
     val data = gameAssets.read()
+    val ui = adminUiRepository.read()
 
     val models = Models()
 
@@ -37,7 +38,8 @@ class AdminController @Inject()(
       assets = assets,
       data = data.toString,
       models = Models.writes.writes(models).toString,
-      readonly = readonly
+      readonly = readonly,
+      ui = ui map (_.toString())
     ))
   }
 
@@ -47,6 +49,18 @@ class AdminController @Inject()(
     }
 
     gameAssets.write(request.body)
+
+    Future {
+      NoContent
+    }
+  }
+
+  def saveUi = Action.async(parse.json) { request =>
+    if (readonly) {
+      throw new Exception("Dev environment only.")
+    }
+
+    adminUiRepository.write(request.body)
 
     Future {
       NoContent
