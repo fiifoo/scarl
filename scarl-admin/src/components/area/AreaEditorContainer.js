@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
-import { setAreaEditorBrush, setAreaEditorLocation } from '../actions/actions'
-import Editor from '../components/area/Editor.jsx'
-import { tabState } from '../reducers/ui/utils'
+import { setAreaEditorBrush, setAreaEditorLocation } from '../../actions/actions'
+import { tabState } from '../../reducers/ui/utils'
+import Editor from './Editor.jsx'
 
 const AreaEditorContainer = connect(
     state => ({

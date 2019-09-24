@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { changeSummaryTab, selectSummaryCreature } from '../actions/actions'
-import Summary from '../components/summary/Summary.jsx'
+import { changeSummaryTab, selectSummaryCreature } from '../../actions/actions'
+import Summary from './Summary.jsx'
 
 const SummaryIf = props => props.summary ? (
     <Summary {...props} />

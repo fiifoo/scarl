@@ -2,7 +2,7 @@ import React from 'react'
 import { Nav, NavItem } from 'react-bootstrap'
 import FilteredFormField from '../field/FilteredFormField.jsx'
 import FormRow from '../form/FormRow.jsx'
-import AreaEditorContainer from '../../containers/AreaEditorContainer'
+import AreaEditorContainer from './AreaEditorContainer'
 
 const formProperties = ['shape', 'power', 'terrain', 'features', 'content']
 

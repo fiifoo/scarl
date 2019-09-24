@@ -5,9 +5,9 @@ import { Provider } from 'react-redux'
 import { createStore, applyMiddleware } from 'redux'
 import { composeWithDevTools } from 'redux-devtools-extension'
 import thunk from 'redux-thunk'
-import AppContainer from './containers/AppContainer'
-import reducer from './reducers/index'
 import initialState from './initialState'
+import AppContainer from './components/AppContainer'
+import reducer from './reducers/index'
 
 const store = createStore(
     reducer,

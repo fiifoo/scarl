@@ -1,9 +1,9 @@
 import React from 'react'
 import { Nav, Navbar, NavItem } from 'react-bootstrap'
 import * as pages from '../const/pages'
-import ColumnEditorContainer from '../containers/ColumnEditorContainer'
-import MainContainer from '../containers/MainContainer'
-import SummaryContainer from '../containers/SummaryContainer'
+import MainContainer from './MainContainer'
+import ColumnEditorContainer from './columnEditor/ColumnEditorContainer'
+import SummaryContainer from './summary/SummaryContainer'
 
 import 'react-select/dist/react-select.css'
 import './App.css'

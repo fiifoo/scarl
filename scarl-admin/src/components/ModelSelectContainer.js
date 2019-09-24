@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 import { selectModel } from '../actions/actions'
-import ModelSelect from '../components/ModelSelect.jsx'
 import { tabState } from '../reducers/ui/utils'
+import ModelSelect from './ModelSelect.jsx'
 
 const ModelSelectContainer = connect(
     state => ({

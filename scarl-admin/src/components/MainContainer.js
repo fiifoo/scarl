@@ -1,9 +1,9 @@
 import { connect } from 'react-redux'
 import { addTabSet, deleteTabSet, renameTabSet, saveUi, sortTabSets, toggleTabSet } from '../actions/actions'
 import { addTab, changeTab, deleteTab, sortTabs } from '../actions/actions'
-import Main from '../components/Main.jsx'
 import { shouldSaveUi } from '../data/ui/utils'
 import { tabState } from '../reducers/ui/utils'
+import Main from './Main.jsx'
 
 const MainContainer = connect(
     state => ({

@@ -1,11 +1,11 @@
 import React from 'react'
 import { Col, Row } from 'react-bootstrap'
 import {SortableContainer, SortableElement} from 'react-sortable-hoc'
-import ItemAddContainer from '../containers/ItemAddContainer'
-import ItemFormContainer from '../containers/ItemFormContainer'
-import ItemReferencesContainer from '../containers/ItemReferencesContainer'
-import ItemSelectContainer from '../containers/ItemSelectContainer'
-import ModelSelectContainer from '../containers/ModelSelectContainer'
+import ItemAddContainer from './ItemAddContainer'
+import ItemFormContainer from './ItemFormContainer'
+import ItemReferencesContainer from './ItemReferencesContainer'
+import ItemSelectContainer from './ItemSelectContainer'
+import ModelSelectContainer from './ModelSelectContainer'
 import FormRow from './form/FormRow.jsx'
 
 const AddTab = ({tabSet, addTab}) => (

@@ -1,8 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { selectItem } from '../actions/actions'
-import ItemSelect from '../components/ItemSelect.jsx'
 import { tabState } from '../reducers/ui/utils'
+import ItemSelect from './ItemSelect.jsx'
 
 const ItemSelectIf = ({model, ...props}) => model ? <ItemSelect {...props} /> : <div />
 

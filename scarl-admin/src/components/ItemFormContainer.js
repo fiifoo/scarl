@@ -4,9 +4,8 @@ import { deleteItem, renameItem, setItemRenameId } from '../actions/actions'
 import { addTag, setItemValue  } from '../actions/actions'
 import { hideSideForm, showItem, showItemReferences, showSideForm } from '../actions/actions'
 import { addAdjacentTab } from '../actions/actions'
-
-import ItemForm from '../components/ItemForm.jsx'
 import { tabState } from '../reducers/ui/utils'
+import ItemForm from './ItemForm.jsx'
 
 const ItemFormIf = props => props.item ? <ItemForm {...props} /> : <div />
 

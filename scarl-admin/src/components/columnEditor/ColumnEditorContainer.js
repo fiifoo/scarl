@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
-import { setColumnEditorItems, setColumnEditorModel, setColumnEditorProperties, setItemValue, addTag } from '../actions/actions'
-import ColumnEditor from '../components/columnEditor/ColumnEditor.jsx'
+import { setColumnEditorItems, setColumnEditorModel, setColumnEditorProperties, setItemValue, addTag } from '../../actions/actions'
+import ColumnEditor from './ColumnEditor.jsx'
 
 const ColumnEditorContainer = connect(
     state => ({

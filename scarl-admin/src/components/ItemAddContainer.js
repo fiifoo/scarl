@@ -1,8 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { addItem, setItemAddId } from '../actions/actions'
-import ItemAdd from '../components/ItemAdd.jsx'
 import { tabState } from '../reducers/ui/utils'
+import ItemAdd from './ItemAdd.jsx'
 
 const ItemAddIf = props => props.model ? <ItemAdd {...props} /> : <div />
 

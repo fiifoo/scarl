@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import { changePage, save, simulate } from '../actions/actions'
-import App from '../components/App.jsx'
+import App from './App.jsx'
 
 const AppContainer = connect(
     state => ({
