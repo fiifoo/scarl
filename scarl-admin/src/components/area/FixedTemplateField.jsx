@@ -9,62 +9,45 @@ const formProperties = ['shape', 'power', 'terrain', 'features', 'content']
 const TAB_FORM = 1
 const TAB_EDITOR = 2
 
-const PureFixedTemplateField = ({
-    tab, changeTab,
+const FixedTemplateField = ({
+    areaEditorVisible, setAreaEditorVisible,
     model, fieldType, path, value, common,
-}) =>  (
-    <div>
-        <FormRow label={null}>
-            <Nav bsStyle="pills" activeKey={tab} onSelect={changeTab} style={{marginTop: '1em', marginBottom: '1em'}}>
-                <NavItem eventKey={TAB_FORM}>
-                    Values
-                </NavItem>
-                <NavItem eventKey={TAB_EDITOR}>
-                    Editor
-                </NavItem>
-            </Nav>
-        </FormRow>
+}) => {
+    const tab = areaEditorVisible ? TAB_EDITOR : TAB_FORM
+    const changeTab = tab => setAreaEditorVisible(tab === TAB_EDITOR)
 
-        {tab === TAB_FORM && (
-            <FilteredFormField
-                properties={formProperties}
-                required={true}
-                model={model}
-                fieldType={fieldType}
-                path={path}
-                value={value}
-                common={common} />
-        )}
+    return (
+        <div>
+            <FormRow label={null}>
+                <Nav bsStyle="pills" activeKey={tab} onSelect={changeTab} style={{marginTop: '1em', marginBottom: '1em'}}>
+                    <NavItem eventKey={TAB_FORM}>
+                        Values
+                    </NavItem>
+                    <NavItem eventKey={TAB_EDITOR}>
+                        Editor
+                    </NavItem>
+                </Nav>
+            </FormRow>
 
-        {tab === TAB_EDITOR && (
-            <AreaEditorContainer
-                path={path}
-                value={value}
-                common={common} />
-        )}
-    </div>
-)
+            {tab === TAB_FORM && (
+                <FilteredFormField
+                    properties={formProperties}
+                    required={true}
+                    model={model}
+                    fieldType={fieldType}
+                    path={path}
+                    value={value}
+                    common={common} />
+            )}
 
-class FixedTemplateField extends React.Component {
-
-    constructor(props) {
-        super(props)
-
-        this.state = {tab: TAB_FORM}
-
-        this.changeTab = tab => {
-            this.setState({tab})
-        }
-    }
-
-    render() {
-        return (
-            <PureFixedTemplateField
-                changeTab={this.changeTab}
-                {...this.props}
-                {...this.state} />
-        )
-    }
+            {tab === TAB_EDITOR && (
+                <AreaEditorContainer
+                    path={path}
+                    value={value}
+                    common={common} />
+            )}
+        </div>
+    )
 }
 
 export default FixedTemplateField

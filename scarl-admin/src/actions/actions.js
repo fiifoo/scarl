@@ -315,6 +315,11 @@ export const hideSideForm = () => ({
     type: types.HIDE_SIDE_FORM,
 })
 
+export const setAreaEditorVisible = visible => ({
+    type: types.SET_AREA_EDITOR_VISIBLE,
+    visible,
+})
+
 export const setAreaEditorBrush = brush => ({
     type: types.SET_AREA_EDITOR_BRUSH,
     brush,

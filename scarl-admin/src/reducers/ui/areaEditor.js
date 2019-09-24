@@ -1,24 +1,17 @@
-import { Record, Set } from 'immutable'
 import * as types from '../../actions/actionTypes'
-import Location from '../../data/area/Location'
+import AreaEditor from '../../data/ui/AreaEditor'
 import { tabbedReducer } from './utils'
 
-const defaultLocation = Location({x: 0, y: 0})
-
-const initial = Record({
-    location: defaultLocation,
-    locations: Set([defaultLocation]),
-    brush: Record({
-        property: null,
-        value: null,
-    })(),
-})()
+const initial = AreaEditor()
 
 export default tabbedReducer(initial, (state, action) => {
     switch (action.type) {
         case types.SELECT_MODEL:
         case types.SELECT_ITEM: {
             return initial
+        }
+        case types.SET_AREA_EDITOR_VISIBLE: {
+            return state.set('visible', action.visible)
         }
         case types.SET_AREA_EDITOR_BRUSH: {
             return state.set('brush', action.brush)
