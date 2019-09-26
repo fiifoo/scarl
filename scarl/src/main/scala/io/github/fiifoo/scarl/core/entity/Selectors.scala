@@ -40,12 +40,26 @@ object Selectors {
     s.index.partyMembers(party)
   }
 
-  def getCreatureStats(s: State)(creature: CreatureId): Stats = {
-    val stats = creature(s).stats add getEquipmentStats(s)(creature)
+  def getCreatureStanceStatuses(s: State)(creature: CreatureId): Set[StanceStatus] = {
+    getTargetStatuses(s)(creature) map (_.apply(s)) collect {
+      case status: StanceStatus => status
+    }
+  }
 
-    (getCreatureConditionStatuses(s)(creature) foldLeft stats) ((stats, status) => {
-      status.condition.modifyStats(stats, status.strength)
-    })
+  def getCreatureStats(s: State)(creature: CreatureId): Stats = {
+    val calculate = getEquipmentStats(s)(creature).add _ andThen
+      (stats => {
+        (getCreatureConditionStatuses(s)(creature) foldLeft stats) ((stats, status) => {
+          status.condition.modifyStats(stats, status.strength)
+        })
+      }) andThen
+      (stats => {
+        (getCreatureStanceStatuses(s)(creature) foldLeft stats) ((stats, status) => {
+          status.stance.modifyStats(stats)
+        })
+      })
+
+    calculate(creature(s).stats)
   }
 
   def getCreatureWaypoint(s: State)(creature: CreatureId): Option[Waypoint] = {

@@ -8,13 +8,19 @@ import io.github.fiifoo.scarl.core.item.Equipment.Slot
 import io.github.fiifoo.scarl.core.item.Key
 import io.github.fiifoo.scarl.core.item.Recipe.RecipeId
 import io.github.fiifoo.scarl.core.kind.ItemKindId
+import io.github.fiifoo.scarl.core.mutation.InitializeTickMutation
 import io.github.fiifoo.scarl.game.RunState
 
 object PlayerInfo {
   def apply(state: RunState): PlayerInfo = {
     val previous = state.previous map (PlayerInfo(_))
+    val instance = if (state.game.player(state.instance).dead) {
+      state.instance
+    } else {
+      InitializeTickMutation(state.game.player)(state.instance)
+    }
 
-    create(state.instance, state.game.player, previous)
+    create(instance, state.game.player, previous)
   }
 
   private def create(s: State, creature: CreatureId, previous: Option[PlayerInfo]): PlayerInfo = {

@@ -34,5 +34,6 @@ object JsonCreature {
   lazy val creatureFormat: Format[Creature] = Json.format[Creature]
 
   lazy private implicit val conditionInfoFormat = Json.format[CreatureInfo.ConditionInfo]
+  lazy private implicit val stanceInfoFormat = Json.format[CreatureInfo.StanceInfo]
   lazy val creatureInfoFormat: Format[CreatureInfo] = Json.format[CreatureInfo]
 }

@@ -10,14 +10,14 @@ import io.github.fiifoo.scarl.area.theme.Theme
 import io.github.fiifoo.scarl.core.ai.{Behavior, Strategy}
 import io.github.fiifoo.scarl.core.assets._
 import io.github.fiifoo.scarl.core.communication.Communication
-import io.github.fiifoo.scarl.core.creature.{Condition, Faction, Missile, Progression}
+import io.github.fiifoo.scarl.core.creature._
 import io.github.fiifoo.scarl.core.entity.{CreaturePower, ItemPower}
 import io.github.fiifoo.scarl.core.item._
 import io.github.fiifoo.scarl.core.kind._
 import io.github.fiifoo.scarl.core.math.Distribution
 import io.github.fiifoo.scarl.mechanism._
 import io.github.fiifoo.scarl.power._
-import io.github.fiifoo.scarl.status.Conditions
+import io.github.fiifoo.scarl.status.{Conditions, Stances}
 import io.github.fiifoo.scarl.widget._
 import io.github.fiifoo.scarl.world._
 import io.github.fiifoo.scarl.world.system.source.{SpaceshipSource, StellarBodySource}
@@ -263,6 +263,10 @@ object Sources {
     SubModelSource(typeOf[Shape], List(
       typeOf[Rectangle],
     )),
+
+    SubModelSource(typeOf[Stance], List(
+      typeOf[Stances.Aim.type],
+    ), objectPolymorphism = true),
 
     SubModelSource(typeOf[StellarBodySource.Category], List(
       typeOf[StellarBodySource.BlackHoleCategory.type],

@@ -2,7 +2,7 @@ package io.github.fiifoo.scarl.game.api
 
 import io.github.fiifoo.scarl.core.State
 import io.github.fiifoo.scarl.core.creature._
-import io.github.fiifoo.scarl.core.entity.Selectors.getCreatureConditionStatuses
+import io.github.fiifoo.scarl.core.entity.Selectors.{getCreatureConditionStatuses, getCreatureStanceStatuses}
 import io.github.fiifoo.scarl.core.entity.{CreatureId, CreaturePower}
 import io.github.fiifoo.scarl.core.geometry.Location
 import io.github.fiifoo.scarl.core.item.Lock
@@ -13,6 +13,9 @@ object CreatureInfo {
     val values = creature(s)
     val conditions = getCreatureConditionStatuses(s)(creature) map (x => {
       ConditionInfo(x.condition.key, x.strength)
+    })
+    val stances = getCreatureStanceStatuses(s)(creature) map (x => {
+      StanceInfo(x.stance.key)
     })
 
     CreatureInfo(
@@ -29,11 +32,14 @@ object CreatureInfo {
       values.missile,
       values.usable,
 
-      conditions
+      conditions,
+      stances,
     )
   }
 
   case class ConditionInfo(key: String, strength: Int)
+
+  case class StanceInfo(key: String)
 
 }
 
@@ -51,4 +57,5 @@ case class CreatureInfo(id: CreatureId,
                         usable: Option[CreaturePower],
 
                         conditions: Set[CreatureInfo.ConditionInfo],
+                        stances: Set[CreatureInfo.StanceInfo],
                        )

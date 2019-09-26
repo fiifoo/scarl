@@ -5,6 +5,11 @@ import io.github.fiifoo.scarl.core.kind.CreatureKindId
 
 object Stats {
 
+  sealed trait AttackStats {
+    val consumption: Consumption
+    val stance: Option[Stance]
+  }
+
   case class Health(max: Int = 0, regen: Double = 0) {
     def add(x: Health): Health = {
       copy(max + x.max, regen + x.regen)
@@ -26,10 +31,17 @@ object Stats {
   case class Melee(attack: Int = 0,
                    damage: Int = 0,
                    consumption: Consumption = Consumption(),
+                   stance: Option[Stance] = None,
                    conditions: List[Condition] = List(),
-                  ) {
+                  ) extends AttackStats {
     def add(x: Melee): Melee = {
-      copy(attack + x.attack, damage + x.damage, consumption add x.consumption, conditions ::: x.conditions)
+      copy(
+        attack + x.attack,
+        damage + x.damage,
+        consumption add x.consumption,
+        stance = stance orElse x.stance,
+        conditions ::: x.conditions
+      )
     }
   }
 
@@ -37,19 +49,33 @@ object Stats {
                     damage: Int = 0,
                     range: Int = 0,
                     consumption: Consumption = Consumption(),
+                    stance: Option[Stance] = None,
                     conditions: List[Condition] = List(),
-                   ) {
+                   ) extends AttackStats {
     def add(x: Ranged): Ranged = {
-      copy(attack + x.attack, damage + x.damage, range + x.range, consumption add x.consumption, conditions ::: x.conditions)
+      copy(
+        attack + x.attack,
+        damage + x.damage,
+        range + x.range,
+        consumption add x.consumption,
+        stance = stance orElse x.stance,
+        conditions ::: x.conditions
+      )
     }
   }
 
   case class Launcher(missiles: Set[CreatureKindId] = Set(),
                       range: Int = 0,
+                      stance: Option[Stance] = None,
                       consumption: Consumption = Consumption()
-                     ) {
+                     ) extends AttackStats {
     def add(x: Launcher): Launcher = {
-      copy(missiles ++ x.missiles, range + x.range, consumption add x.consumption)
+      copy(
+        missiles ++ x.missiles,
+        range + x.range,
+        stance = stance orElse x.stance,
+        consumption add x.consumption
+      )
     }
   }
 

@@ -7,6 +7,7 @@ object JsonCreatureStats {
   lazy private implicit val creatureKindIdFormat = JsonCreatureKind.creatureKindIdFormat
   lazy private implicit val conditionFormat = JsonCondition.conditionFormat
   lazy private implicit val consumptionFormat = Json.format[Stats.Consumption]
+  lazy private implicit val stanceFormat = JsonStance.stanceFormat
 
   lazy private implicit val healthFormat = Json.format[Stats.Health]
   lazy private implicit val energyFormat = Json.format[Stats.Energy]

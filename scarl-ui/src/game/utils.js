@@ -66,6 +66,8 @@ export const getAttackShortage = (player, type) => {
 
 export const getCreatureConditionsInfo = creature => creature.conditions.map(getCreatureConditionInfo)
 
+export const getCreatureStancesInfo = creature => creature.stances.map(getCreatureStanceInfo)
+
 export const getCreatureInfo = (creature, player, factions, area) => {
     const health = creature.stats.health.max // equipments not supported
     const damage = creature.damage
@@ -308,6 +310,14 @@ const getCreatureFactionInfo = (creature, player, factions, area) => {
         return undefined
     } else {
         return 'friendly'
+    }
+}
+
+const getCreatureStanceInfo = stance => {
+    switch (stance.key) {
+        default: {
+            return stance.key
+        }
     }
 }
 

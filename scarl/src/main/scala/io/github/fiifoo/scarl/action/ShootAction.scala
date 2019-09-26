@@ -1,27 +1,18 @@
 package io.github.fiifoo.scarl.action
 
-import io.github.fiifoo.scarl.action.Utils._
 import io.github.fiifoo.scarl.core.State
 import io.github.fiifoo.scarl.core.action.Action
 import io.github.fiifoo.scarl.core.effect.Effect
 import io.github.fiifoo.scarl.core.entity.CreatureId
 import io.github.fiifoo.scarl.core.entity.Selectors.getCreatureStats
 import io.github.fiifoo.scarl.core.geometry.Location
-import io.github.fiifoo.scarl.effect.TickEffect
 import io.github.fiifoo.scarl.effect.combat.ShootEffect
 
 case class ShootAction(location: Location) extends Action {
   def apply(s: State, actor: CreatureId): List[Effect] = {
-    val creature = actor(s)
-    val consumption = getCreatureStats(s)(actor).ranged.consumption
-    val tick = TickEffect(actor)
+    val stats = getCreatureStats(s)(actor).ranged
+    val attackEffect = ShootEffect(actor, location)
 
-    shortage(creature, consumption) map (List(tick, _)) getOrElse {
-      List(
-        Some(tick),
-        Some(ShootEffect(actor, location)),
-        consume(creature, consumption)
-      ).flatten
-    }
+    Utils.Attack(s, actor, stats, attackEffect)
   }
 }

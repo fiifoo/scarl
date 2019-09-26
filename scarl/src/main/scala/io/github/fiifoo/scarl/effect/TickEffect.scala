@@ -3,11 +3,11 @@ package io.github.fiifoo.scarl.effect
 import io.github.fiifoo.scarl.core.Time.Tick
 import io.github.fiifoo.scarl.core.creature.Stats
 import io.github.fiifoo.scarl.core.effect.{Effect, EffectResult}
-import io.github.fiifoo.scarl.core.entity.Selectors.getCreatureStats
+import io.github.fiifoo.scarl.core.entity.Selectors.{getCreatureStanceStatuses, getCreatureStats}
 import io.github.fiifoo.scarl.core.entity.{ActorId, Creature, CreatureId}
 import io.github.fiifoo.scarl.core.mutation.ActorTickMutation
 import io.github.fiifoo.scarl.core.{State, Time}
-import io.github.fiifoo.scarl.effect.creature.{RegenerateEffect, ScanEffect}
+import io.github.fiifoo.scarl.effect.creature.{RegenerateEffect, RelaxStanceEffect, ScanEffect}
 
 case class TickEffect(target: ActorId,
                       amount: Tick = Time.turn,
@@ -27,10 +27,22 @@ case class TickEffect(target: ActorId,
   private def creatureEffects(s: State, creature: Creature): List[Effect] = {
     val stats = getCreatureStats(s)(creature.id)
 
-    List(
+    stance(s, creature.id) ::: List(
       scan(s, creature, stats),
       regenerate(s, creature, stats)
     ).flatten
+  }
+
+  private def stance(s: State, creature: CreatureId): List[Effect] = {
+    getCreatureStanceStatuses(s)(creature).toList flatMap (status => {
+      val effects = status.stance.effects(s, creature)
+
+      if (status.duration.isDefined) {
+        effects ::: List(RelaxStanceEffect(status.id))
+      } else {
+        effects
+      }
+    })
   }
 
   private def scan(s: State, creature: Creature, stats: Stats): Option[Effect] = {

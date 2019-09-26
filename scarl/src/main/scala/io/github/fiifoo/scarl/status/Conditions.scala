@@ -13,7 +13,7 @@ object Conditions {
 
     def modifyStats(stats: Stats, strength: Int): Stats = {
       stats.copy(
-        speed = stats.speed * (2 / 3),
+        speed = (stats.speed * 0.7).toInt,
       )
     }
 

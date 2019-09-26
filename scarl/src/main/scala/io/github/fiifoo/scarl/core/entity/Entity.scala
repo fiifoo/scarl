@@ -67,6 +67,14 @@ trait ConditionStatus extends Entity with Status {
   def setStrength(strength: Int): ConditionStatus
 }
 
+trait StanceStatus extends Entity with Status {
+  val stance: Stance
+  val continuous: Boolean
+  val duration: Option[Int]
+
+  def setDuration(duration: Option[Int]): StanceStatus
+}
+
 trait ActiveStatus extends Entity with Status with Actor {
   val id: ActiveStatusId
 

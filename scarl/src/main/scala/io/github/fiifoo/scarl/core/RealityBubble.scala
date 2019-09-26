@@ -13,7 +13,11 @@ object RealityBubble {
                     effects: List[Effect])
 
   def apply(state: State, fixedAction: Option[Action] = None): Option[Result] = {
-    dequeue(state).map(x => {
+    dequeue(state) map (x => {
+      val (actor, s) = x
+
+      (actor, InitializeTickMutation(actor)(s))
+    }) map (x => {
       val (actor, s) = x
 
       actor match {

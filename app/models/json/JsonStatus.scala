@@ -19,12 +19,14 @@ object JsonStatus {
   lazy private implicit val containerIdFormat = JsonContainer.containerIdFormat
   lazy private implicit val creatureIdFormat = JsonCreature.creatureIdFormat
   lazy private implicit val creatureKindIdFormat = JsonCreatureKind.creatureKindIdFormat
+  lazy private implicit val stanceFormat = JsonStance.stanceFormat
   lazy private implicit val widgetKindIdFormat = JsonWidgetKind.widgetKindIdFormat
 
   implicitly(weightedChoicesFormat[CreatureKindId])
   lazy private implicit val discoverFormat = JsonItemDiscover.discoverFormat
 
   lazy private implicit val creatureConditionFormat = Json.format[CreatureConditionStatus]
+  lazy private implicit val creatureStanceFormat = Json.format[CreatureStanceStatus]
   lazy private implicit val delayedTransformingWidgetFormat = Json.format[DelayedTransformingWidgetStatus]
   lazy private implicit val healLocationFormat = Json.format[HealLocationStatus]
   lazy private implicit val summonCreatureFormat = Json.format[SummonCreatureStatus]
@@ -36,6 +38,7 @@ object JsonStatus {
   lazy val statusFormat: Format[Status] = polymorphicTypeFormat(
     data => {
       case "CreatureConditionStatus" => data.as[CreatureConditionStatus]
+      case "CreatureStanceStatus" => data.as[CreatureStanceStatus]
       case "DelayedTransformingWidgetStatus" => data.as[DelayedTransformingWidgetStatus]
       case "HealLocationStatus" => data.as[HealLocationStatus]
       case "SummonCreatureStatus" => data.as[SummonCreatureStatus]
@@ -45,6 +48,7 @@ object JsonStatus {
       case "TriggeredTrapStatus" => data.as[TriggeredTrapStatus]
     }, {
       case status: CreatureConditionStatus => creatureConditionFormat.writes(status)
+      case status: CreatureStanceStatus => creatureStanceFormat.writes(status)
       case status: DelayedTransformingWidgetStatus => delayedTransformingWidgetFormat.writes(status)
       case status: HealLocationStatus => healLocationFormat.writes(status)
       case status: SummonCreatureStatus => summonCreatureFormat.writes(status)
