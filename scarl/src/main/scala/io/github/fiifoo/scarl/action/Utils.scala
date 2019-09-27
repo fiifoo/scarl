@@ -58,7 +58,7 @@ object Utils {
         if (getCreatureStanceStatuses(s)(creature) exists (_.stance.key == stance.key)) {
           None
         } else {
-          Some(ChangeStanceEffect(creature, stance))
+          Some(ChangeStanceEffect(creature, Some(stance)))
         }
       })
     }

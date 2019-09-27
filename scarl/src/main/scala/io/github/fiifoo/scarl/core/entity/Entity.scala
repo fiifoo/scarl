@@ -71,8 +71,11 @@ trait StanceStatus extends Entity with Status {
   val stance: Stance
   val continuous: Boolean
   val duration: Option[Int]
+  val active: Boolean
 
   def setDuration(duration: Option[Int]): StanceStatus
+
+  def setActive(active: Boolean): StanceStatus
 }
 
 trait ActiveStatus extends Entity with Status with Actor {

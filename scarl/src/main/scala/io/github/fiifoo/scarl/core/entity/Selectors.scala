@@ -40,9 +40,9 @@ object Selectors {
     s.index.partyMembers(party)
   }
 
-  def getCreatureStanceStatuses(s: State)(creature: CreatureId): Set[StanceStatus] = {
+  def getCreatureStanceStatuses(s: State, active: Boolean = true)(creature: CreatureId): Set[StanceStatus] = {
     getTargetStatuses(s)(creature) map (_.apply(s)) collect {
-      case status: StanceStatus => status
+      case status: StanceStatus if (active && status.active) || (!active && !status.active) => status
     }
   }
 

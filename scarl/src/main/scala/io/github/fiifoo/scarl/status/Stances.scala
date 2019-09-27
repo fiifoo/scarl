@@ -8,7 +8,7 @@ import io.github.fiifoo.scarl.core.entity.CreatureId
 object Stances {
 
   case object Aim extends Stance {
-    val key = "aim"
+    val key = "Stances.Aim"
     val duration = 2
 
     def modifyStats(stats: Stats): Stats = {
@@ -18,6 +18,25 @@ object Stances {
         ),
         speed = stats.speed / 2,
         defence = (stats.defence * 0.8).toInt,
+      )
+    }
+
+    def effects(s: State, creature: CreatureId): List[Effect] = List()
+  }
+
+  case object Evasive extends Stance {
+    val key = "Stances.Evasive"
+    val duration = 1
+
+    def modifyStats(stats: Stats): Stats = {
+      stats.copy(
+        melee = stats.melee.copy(
+          attack = (stats.melee.attack * 0.8).toInt,
+        ),
+        ranged = stats.ranged.copy(
+          attack = (stats.ranged.attack * 0.8).toInt,
+        ),
+        defence = (stats.defence * 1.2).toInt,
       )
     }
 

@@ -32,6 +32,19 @@ const select = Map([
     [keycodes.NUM_0, commands.SELECT_10],
 ])
 
+const selectPad = Map([
+    [keycodes.NUMPAD_1, commands.SELECT_1],
+    [keycodes.NUMPAD_2, commands.SELECT_2],
+    [keycodes.NUMPAD_3, commands.SELECT_3],
+    [keycodes.NUMPAD_4, commands.SELECT_4],
+    [keycodes.NUMPAD_5, commands.SELECT_5],
+    [keycodes.NUMPAD_6, commands.SELECT_6],
+    [keycodes.NUMPAD_7, commands.SELECT_7],
+    [keycodes.NUMPAD_8, commands.SELECT_8],
+    [keycodes.NUMPAD_9, commands.SELECT_9],
+    [keycodes.NUMPAD_0, commands.SELECT_10],
+])
+
 const setEquipmentSets = Map([
     [keycodes.Q, commands.SET_EQUIPMENT_SET_1],
     [keycodes.W, commands.SET_EQUIPMENT_SET_2],
@@ -75,6 +88,7 @@ export default {
         [keycodes.LESS3, commands.ENTER_CONDUIT],
         [keycodes.NUMPAD_5, commands.PASS],
         [keycodes.PERIOD, commands.RECYCLE_ITEM],
+        [keycodes.SHIFT, commands.STANCE],
         [keycodes.SPACEBAR, commands.AIM],
         [keycodes.A, commands.AUTO_MOVE],
         [keycodes.C, commands.CRAFTING],
@@ -223,6 +237,11 @@ export default {
         [keycodes.ESC, commands.CANCEL_MODE],
         [keycodes.S, commands.CANCEL_MODE],
     ]),
+
+    [gameModes.STANCE]: Map([
+        [keycodes.ESC, commands.CANCEL_MODE],
+        [keycodes.SHIFT, commands.CANCEL_MODE],
+    ]).merge(select).merge(selectPad),
 
     [gameModes.WORLD]: Map([
         [keycodes.ESC, commands.CANCEL_MODE],

@@ -20,6 +20,7 @@ object ActionValidator {
       action match {
         case action: AttackAction => validate(s, actor, action)
         case action: CancelRecycleItemAction => validate(s, actor, action)
+        case action: ChangeStanceAction => validate(s, actor, action)
         case action: CommunicateAction => validate(s, actor, action)
         case action: CraftItemAction => validate(s, actor, action)
         case action: DisplaceAction => validate(s, actor, action)
@@ -33,7 +34,7 @@ object ActionValidator {
         case PassAction => true
         case action: PickItemAction => validate(s, actor, action)
         case action: RecycleItemAction => validate(s, actor, action)
-        case _: ShootAction => true
+        case action: ShootAction => validate(s, actor, action)
         case action: ShootMissileAction => validate(s, actor, action)
         case action: UnequipItemAction => validate(s, actor, action)
         case action: UseCreatureAction => validate(s, actor, action)
@@ -46,11 +47,16 @@ object ActionValidator {
 
   private def validate(s: State, actor: CreatureId, action: AttackAction): Boolean = {
     entityExists(s)(action.target) &&
-      isAdjacentLocation(s, actor)(action.target(s).location)
+      isAdjacentLocation(s, actor)(action.target(s).location) &&
+      (getCreatureStats(s)(actor).melee.stance forall isValidStanceAttack(s, actor))
   }
 
   private def validate(s: State, actor: CreatureId, action: CancelRecycleItemAction): Boolean = {
     s.creature.recycledItems.get(actor) exists (_.contains(action.item))
+  }
+
+  private def validate(s: State, actor: CreatureId, action: ChangeStanceAction): Boolean = {
+    isValidStanceChange(s, actor)(action.stance)
   }
 
   private def validate(s: State, actor: CreatureId, action: CommunicateAction): Boolean = {
@@ -119,8 +125,15 @@ object ActionValidator {
       (action.target(s).container == actor || (getItemLocation(s)(action.target) contains actor(s).location))
   }
 
+  private def validate(s: State, actor: CreatureId, action: ShootAction): Boolean = {
+    getCreatureStats(s)(actor).ranged.stance forall isValidStanceAttack(s, actor)
+  }
+
   private def validate(s: State, actor: CreatureId, action: ShootMissileAction): Boolean = {
-    getCreatureStats(s)(actor).launcher.missiles contains action.missile
+    val stats = getCreatureStats(s)(actor)
+
+    (stats.launcher.missiles contains action.missile) &&
+      (stats.launcher.stance forall isValidStanceAttack(s, actor))
   }
 
   private def validate(s: State, actor: CreatureId, action: UnequipItemAction): Boolean = {

@@ -3,6 +3,20 @@
     height: 100%;
 }
 
+.game-view.hidden,
+.game-view.hidden.layer {
+    display: none;
+}
+
+.game-view.layer {
+    z-index: 49;
+    position: fixed;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
 .game-view.scrollable {
     overflow: visible;
     overflow-y: auto;

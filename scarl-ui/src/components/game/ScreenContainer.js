@@ -18,6 +18,7 @@ const validModes = Set([
     modes.LOOK,
     modes.MENU,
     modes.SIGNAL_MAP,
+    modes.STANCE,
 ])
 
 const preventMouseModes = Set([

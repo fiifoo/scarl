@@ -23,6 +23,7 @@ export const NUMPAD_6 = 102
 export const NUMPAD_7 = 103
 export const NUMPAD_8 = 104
 export const NUMPAD_9 = 105
+export const NUMPAD_0 = 96
 
 export const COMMA = 188
 export const CONTROL = 17

@@ -15,7 +15,7 @@ object CreatureInfo {
       ConditionInfo(x.condition.key, x.strength)
     })
     val stances = getCreatureStanceStatuses(s)(creature) map (x => {
-      StanceInfo(x.stance.key)
+      StanceInfo(x.stance.key, x.duration, x.stance.duration)
     })
 
     CreatureInfo(
@@ -39,7 +39,7 @@ object CreatureInfo {
 
   case class ConditionInfo(key: String, strength: Int)
 
-  case class StanceInfo(key: String)
+  case class StanceInfo(key: String, duration: Option[Int], initialDuration: Int)
 
 }
 

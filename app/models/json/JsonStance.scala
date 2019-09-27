@@ -10,5 +10,6 @@ object JsonStance {
 
   lazy implicit val stanceFormat: Format[Stance] = polymorphicObjectFormat({
     case "Stances.Aim" => Stances.Aim
+    case "Stances.Evasive" => Stances.Evasive
   })
 }

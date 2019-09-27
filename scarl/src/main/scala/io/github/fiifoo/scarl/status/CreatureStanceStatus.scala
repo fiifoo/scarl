@@ -8,9 +8,14 @@ case class CreatureStanceStatus(id: PassiveStatusId,
                                 stance: Stance,
                                 continuous: Boolean,
                                 duration: Option[Int],
+                                active: Boolean = true,
                                ) extends PassiveStatus with StanceStatus {
 
   def setDuration(duration: Option[Int]): CreatureStanceStatus = {
     this.copy(duration = duration)
+  }
+
+  def setActive(active: Boolean): CreatureStanceStatus = {
+    this.copy(active = active)
   }
 }

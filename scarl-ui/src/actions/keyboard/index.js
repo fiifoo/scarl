@@ -13,6 +13,7 @@ import inventory from './inventory'
 import main from './main'
 import look from './look'
 import playerInfo from './playerInfo'
+import stance from './stance'
 import world from './world'
 
 const onlyCancelMode = (command, dispatch) => {
@@ -38,6 +39,7 @@ const handlers = {
     [modes.MENU]: onlyCancelMode,
     [modes.PLAYER_INFO]: playerInfo,
     [modes.SIGNAL_MAP]: onlyCancelMode,
+    [modes.STANCE]: stance,
     [modes.WORLD]: world,
 }
 

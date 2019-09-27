@@ -126,14 +126,6 @@ export const previousInteraction = () => (dispatch, getState) => {
     })
 }
 
-export const signalMap = () => (dispatch, getState) => {
-    if (getState().player.signals === null) {
-        sendSignalMapQuery()
-    }
-
-    changeMode(modes.SIGNAL_MAP)(dispatch)
-}
-
 export const selectCurrentInteraction = () => (dispatch, getState) => {
     const {interaction} = getState().ui.game
 
@@ -161,6 +153,14 @@ export const setMissile = missile => dispatch => dispatch({
 })
 
 export const setQuickItem = (slot, item) => () => sendSetQuickItem(slot, item)
+
+export const signalMap = () => (dispatch, getState) => {
+    if (getState().player.signals === null) {
+        sendSignalMapQuery()
+    }
+
+    changeMode(modes.SIGNAL_MAP)(dispatch)
+}
 
 export const useQuickItem = slot => (dispatch, getState) => {
     const {settings, player} = getState()
@@ -192,6 +192,10 @@ export const setTarget = target => dispatch => dispatch({
     type: types.SET_TARGET,
     target,
 })
+
+export const stance = () => (dispatch) => {
+    changeMode(modes.STANCE)(dispatch)
+}
 
 export const storeGameViewSize = size => (dispatch, getState) => {
     const {area, player} = getState()

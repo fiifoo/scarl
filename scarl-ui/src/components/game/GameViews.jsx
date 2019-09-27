@@ -8,6 +8,7 @@ import KeyBindingsContainer from './KeyBindingsContainer'
 import MessageLogContainer from './MessageLogContainer'
 import PlayerInfoContainer from './PlayerInfoContainer'
 import ScreenContainer from './ScreenContainer'
+import StanceContainer from './StanceContainer'
 
 class GameViews extends Component {
 
@@ -48,6 +49,7 @@ class GameViews extends Component {
                 ) : (
                     <React.Fragment>
                         <CommunicationContainer />
+                        <StanceContainer />
                         <ScreenContainer size={size} />
 
                         <CraftingContainer />

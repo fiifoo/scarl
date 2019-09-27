@@ -124,7 +124,8 @@ case class Stats(speed: Int = 0,
                  launcher: Launcher = Launcher(),
                  explosive: Explosive = Explosive(),
                  sight: Sight = Sight(),
-                 skill: Skill = Skill()
+                 skill: Skill = Skill(),
+                 stances: Set[Stance] = Set(),
                 ) {
 
   def add(x: Stats): Stats = {
@@ -141,7 +142,8 @@ case class Stats(speed: Int = 0,
       launcher add x.launcher,
       explosive add x.explosive,
       sight add x.sight,
-      skill add x.skill
+      skill add x.skill,
+      stances ++ x.stances,
     )
   }
 }

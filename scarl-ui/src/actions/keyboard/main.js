@@ -82,6 +82,10 @@ export default (command, dispatch, getState) => {
             gameActions.signalMap()(dispatch, getState)
             break
         }
+        case commands.STANCE: {
+            gameActions.stance()(dispatch, getState)
+            break
+        }
         case commands.USE: {
             gameActions.interact(List([
                 interactions.HackCreature,

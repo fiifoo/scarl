@@ -1,6 +1,7 @@
 import { fromJS, Map } from 'immutable'
-import { stats } from './creature'
+import { addStats } from './creature'
 import { distance, line } from './geometry'
+import { getStanceLabel, isChangeStanceAllowed } from './stance'
 
 const SHORT_MESSAGE_LIMIT = 100
 
@@ -10,14 +11,7 @@ const Faction = {
     Hostile: 'Faction.Hostile',
 }
 
-export const addStats = (a, b) => {
-    a = fromJS(a)
-    b = fromJS(b)
-
-    return stats.reduce((a, _, stat) => (
-        a.setIn(stat, a.getIn(stat) + b.getIn(stat))
-    ), a).toJS()
-}
+export {addStats}
 
 export const calculateTrajectory = (player, location, fov, missile = false) => {
     const from = player.creature.location
@@ -58,15 +52,20 @@ export const getAdjacentLocations = l => ([
 ])
 
 export const getAttackShortage = (player, type) => {
-    const stats = addStats(player.creature.stats, player.equipmentStats)
+    const stats = getPlayerStats(player)
     const consumption = stats[type].consumption
 
     return getShortage(player, consumption)
 }
 
-export const getCreatureConditionsInfo = creature => creature.conditions.map(getCreatureConditionInfo)
+export const getAttackStanceAllowed = (player, type) => {
+    const stats = getPlayerStats(player)
+    const stance = stats[type].stance
 
-export const getCreatureStancesInfo = creature => creature.stances.map(getCreatureStanceInfo)
+    return ! stance || isChangeStanceAllowed(player.creature, stance)
+}
+
+export const getCreatureConditionsInfo = creature => creature.conditions.map(getCreatureConditionInfo)
 
 export const getCreatureInfo = (creature, player, factions, area) => {
     const health = creature.stats.health.max // equipments not supported
@@ -83,6 +82,8 @@ export const getCreatureInfo = (creature, player, factions, area) => {
         return info.join(', ')
     }
 }
+
+export const getCreatureStancesInfo = creature => creature.stances.map(x => getStanceLabel(x.key))
 
 export const getEventMessages = (events, short = false) => {
     return events.filter(e => e.data.message !== undefined).map(event => {
@@ -218,6 +219,10 @@ export const getMissileLauncherRange = player => {
     ) : 0
 }
 
+export const getPlayerStats = player => (
+    addStats(player.creature.stats, player.equipmentStats)
+)
+
 export const getRangedAttackRange = player => {
     const creature = player.creature.stats
     const equipment = player.equipmentStats
@@ -310,14 +315,6 @@ const getCreatureFactionInfo = (creature, player, factions, area) => {
         return undefined
     } else {
         return 'friendly'
-    }
-}
-
-const getCreatureStanceInfo = stance => {
-    switch (stance.key) {
-        default: {
-            return stance.key
-        }
     }
 }
 

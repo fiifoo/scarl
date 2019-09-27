@@ -1106,6 +1106,7 @@
           },
           "missiles" : [ ]
         },
+        "stances" : [ ],
         "explosive" : {
           "attack" : 0,
           "damage" : 0,
@@ -1198,6 +1199,7 @@
           },
           "missiles" : [ ]
         },
+        "stances" : [ ],
         "explosive" : {
           "attack" : 0,
           "damage" : 0,
@@ -1279,6 +1281,7 @@
           },
           "missiles" : [ ]
         },
+        "stances" : [ ],
         "explosive" : {
           "attack" : 0,
           "damage" : 0,
@@ -1374,6 +1377,7 @@
           },
           "missiles" : [ ]
         },
+        "stances" : [ "Stances.Aim", "Stances.Evasive" ],
         "explosive" : {
           "attack" : 0,
           "damage" : 0,
@@ -1460,6 +1464,7 @@
           },
           "missiles" : [ ]
         },
+        "stances" : [ ],
         "explosive" : {
           "attack" : 120,
           "damage" : 70,
@@ -1541,6 +1546,7 @@
           },
           "missiles" : [ ]
         },
+        "stances" : [ ],
         "explosive" : {
           "attack" : 0,
           "damage" : 0,
@@ -1643,6 +1649,7 @@
           },
           "missiles" : [ ]
         },
+        "stances" : [ ],
         "explosive" : {
           "attack" : 0,
           "damage" : 0,
@@ -1724,6 +1731,7 @@
           },
           "missiles" : [ ]
         },
+        "stances" : [ ],
         "explosive" : {
           "attack" : 0,
           "damage" : 0,
@@ -1816,6 +1824,7 @@
           },
           "missiles" : [ ]
         },
+        "stances" : [ ],
         "explosive" : {
           "attack" : 0,
           "damage" : 0,
@@ -1899,6 +1908,7 @@
           },
           "missiles" : [ ]
         },
+        "stances" : [ ],
         "explosive" : {
           "attack" : 120,
           "damage" : 70,
@@ -1990,6 +2000,7 @@
           },
           "missiles" : [ ]
         },
+        "stances" : [ ],
         "explosive" : {
           "attack" : 0,
           "damage" : 0,
@@ -2071,6 +2082,7 @@
           },
           "missiles" : [ ]
         },
+        "stances" : [ ],
         "explosive" : {
           "attack" : 0,
           "damage" : 0,
@@ -2152,6 +2164,7 @@
           },
           "missiles" : [ ]
         },
+        "stances" : [ ],
         "explosive" : {
           "attack" : 0,
           "damage" : 0,
@@ -2234,6 +2247,7 @@
           },
           "missiles" : [ ]
         },
+        "stances" : [ ],
         "explosive" : {
           "attack" : 0,
           "damage" : 0,
@@ -2315,6 +2329,7 @@
           },
           "missiles" : [ ]
         },
+        "stances" : [ ],
         "explosive" : {
           "attack" : 0,
           "damage" : 0,
@@ -2407,6 +2422,7 @@
           },
           "missiles" : [ ]
         },
+        "stances" : [ ],
         "explosive" : {
           "attack" : 0,
           "damage" : 0,
@@ -2499,6 +2515,7 @@
           },
           "missiles" : [ ]
         },
+        "stances" : [ ],
         "explosive" : {
           "attack" : 0,
           "damage" : 0,
@@ -2590,6 +2607,7 @@
           },
           "missiles" : [ ]
         },
+        "stances" : [ ],
         "explosive" : {
           "attack" : 0,
           "damage" : 0,
@@ -2671,6 +2689,7 @@
           },
           "missiles" : [ ]
         },
+        "stances" : [ ],
         "explosive" : {
           "attack" : 0,
           "damage" : 0,
@@ -2783,6 +2802,7 @@
           },
           "missiles" : [ ]
         },
+        "stances" : [ ],
         "explosive" : {
           "attack" : 0,
           "damage" : 0,
@@ -2899,6 +2919,7 @@
           },
           "missiles" : [ ]
         },
+        "stances" : [ ],
         "explosive" : {
           "attack" : 0,
           "damage" : 0,
@@ -2995,6 +3016,7 @@
           },
           "missiles" : [ "nomad/missile-smart" ]
         },
+        "stances" : [ ],
         "explosive" : {
           "attack" : 0,
           "damage" : 0,
@@ -3076,6 +3098,7 @@
           },
           "missiles" : [ ]
         },
+        "stances" : [ ],
         "explosive" : {
           "attack" : 0,
           "damage" : 0,
@@ -3168,6 +3191,7 @@
           },
           "missiles" : [ ]
         },
+        "stances" : [ ],
         "explosive" : {
           "attack" : 0,
           "damage" : 0,
@@ -3284,6 +3308,7 @@
           },
           "missiles" : [ ]
         },
+        "stances" : [ ],
         "explosive" : {
           "attack" : 0,
           "damage" : 0,
@@ -3386,6 +3411,7 @@
           },
           "missiles" : [ ]
         },
+        "stances" : [ ],
         "explosive" : {
           "attack" : 0,
           "damage" : 0,
@@ -3478,6 +3504,7 @@
           },
           "missiles" : [ ]
         },
+        "stances" : [ ],
         "explosive" : {
           "attack" : 0,
           "damage" : 0,
@@ -3560,6 +3587,7 @@
           },
           "missiles" : [ ]
         },
+        "stances" : [ ],
         "explosive" : {
           "attack" : 0,
           "damage" : 0,
@@ -3652,6 +3680,7 @@
           },
           "missiles" : [ ]
         },
+        "stances" : [ ],
         "explosive" : {
           "attack" : 0,
           "damage" : 0,
@@ -3733,6 +3762,7 @@
           },
           "missiles" : [ ]
         },
+        "stances" : [ ],
         "explosive" : {
           "attack" : 0,
           "damage" : 0,
@@ -3849,6 +3879,7 @@
           },
           "missiles" : [ ]
         },
+        "stances" : [ ],
         "explosive" : {
           "attack" : 0,
           "damage" : 0,
@@ -3941,6 +3972,7 @@
           },
           "missiles" : [ ]
         },
+        "stances" : [ ],
         "explosive" : {
           "attack" : 0,
           "damage" : 0,
@@ -4006,6 +4038,7 @@
             },
             "missiles" : [ ]
           },
+          "stances" : [ ],
           "explosive" : {
             "attack" : 0,
             "damage" : 0,
@@ -4104,6 +4137,7 @@
             },
             "missiles" : [ ]
           },
+          "stances" : [ ],
           "explosive" : {
             "attack" : 0,
             "damage" : 0,
@@ -4202,6 +4236,7 @@
             },
             "missiles" : [ ]
           },
+          "stances" : [ ],
           "explosive" : {
             "attack" : 0,
             "damage" : 0,
@@ -4376,6 +4411,7 @@
             },
             "missiles" : [ ]
           },
+          "stances" : [ ],
           "explosive" : {
             "attack" : 0,
             "damage" : 0,
@@ -4488,6 +4524,7 @@
             },
             "missiles" : [ ]
           },
+          "stances" : [ ],
           "explosive" : {
             "attack" : 0,
             "damage" : 0,
@@ -4590,6 +4627,7 @@
             },
             "missiles" : [ ]
           },
+          "stances" : [ ],
           "explosive" : {
             "attack" : 0,
             "damage" : 0,
@@ -4688,6 +4726,7 @@
             },
             "missiles" : [ ]
           },
+          "stances" : [ ],
           "explosive" : {
             "attack" : 0,
             "damage" : 0,
@@ -4797,6 +4836,7 @@
             },
             "missiles" : [ ]
           },
+          "stances" : [ ],
           "explosive" : {
             "attack" : 0,
             "damage" : 0,
@@ -4994,6 +5034,7 @@
             },
             "missiles" : [ ]
           },
+          "stances" : [ ],
           "explosive" : {
             "attack" : 0,
             "damage" : 0,
@@ -5113,6 +5154,7 @@
             },
             "missiles" : [ ]
           },
+          "stances" : [ ],
           "explosive" : {
             "attack" : 0,
             "damage" : 0,
@@ -5223,6 +5265,7 @@
             },
             "missiles" : [ ]
           },
+          "stances" : [ ],
           "explosive" : {
             "attack" : 0,
             "damage" : 0,
@@ -5345,6 +5388,7 @@
             },
             "missiles" : [ ]
           },
+          "stances" : [ ],
           "explosive" : {
             "attack" : 0,
             "damage" : 0,
@@ -5483,6 +5527,7 @@
             },
             "missiles" : [ ]
           },
+          "stances" : [ ],
           "explosive" : {
             "attack" : 0,
             "damage" : 0,
@@ -5608,6 +5653,7 @@
             },
             "missiles" : [ ]
           },
+          "stances" : [ ],
           "explosive" : {
             "attack" : 0,
             "damage" : 0,
@@ -5823,6 +5869,7 @@
             },
             "missiles" : [ ]
           },
+          "stances" : [ ],
           "explosive" : {
             "attack" : 0,
             "damage" : 0,
@@ -6031,6 +6078,7 @@
             },
             "missiles" : [ ]
           },
+          "stances" : [ ],
           "explosive" : {
             "attack" : 0,
             "damage" : 0,
@@ -6114,6 +6162,7 @@
             },
             "missiles" : [ ]
           },
+          "stances" : [ ],
           "explosive" : {
             "attack" : 0,
             "damage" : 0,
@@ -6244,6 +6293,7 @@
             },
             "missiles" : [ ]
           },
+          "stances" : [ ],
           "explosive" : {
             "attack" : 0,
             "damage" : 0,
@@ -6327,6 +6377,7 @@
             },
             "missiles" : [ ]
           },
+          "stances" : [ ],
           "explosive" : {
             "attack" : 0,
             "damage" : 0,
@@ -6442,6 +6493,7 @@
             },
             "missiles" : [ ]
           },
+          "stances" : [ ],
           "explosive" : {
             "attack" : 0,
             "damage" : 0,
@@ -6589,6 +6641,7 @@
             },
             "missiles" : [ ]
           },
+          "stances" : [ ],
           "explosive" : {
             "attack" : 0,
             "damage" : 0,
@@ -6684,6 +6737,7 @@
             },
             "missiles" : [ ]
           },
+          "stances" : [ ],
           "explosive" : {
             "attack" : 0,
             "damage" : 20,
@@ -6798,6 +6852,7 @@
             },
             "missiles" : [ ]
           },
+          "stances" : [ ],
           "explosive" : {
             "attack" : 0,
             "damage" : 0,
@@ -6968,6 +7023,7 @@
             },
             "missiles" : [ ]
           },
+          "stances" : [ ],
           "explosive" : {
             "attack" : 0,
             "damage" : 0,
@@ -7095,6 +7151,7 @@
             },
             "missiles" : [ ]
           },
+          "stances" : [ ],
           "explosive" : {
             "attack" : 0,
             "damage" : 0,
@@ -7210,6 +7267,7 @@
             },
             "missiles" : [ "nomad/missile-smart" ]
           },
+          "stances" : [ ],
           "explosive" : {
             "attack" : 0,
             "damage" : 0,
@@ -7311,6 +7369,7 @@
             },
             "missiles" : [ ]
           },
+          "stances" : [ ],
           "explosive" : {
             "attack" : 0,
             "damage" : 0,
@@ -7502,6 +7561,7 @@
             },
             "missiles" : [ ]
           },
+          "stances" : [ ],
           "explosive" : {
             "attack" : 0,
             "damage" : 0,
@@ -7600,6 +7660,7 @@
             },
             "missiles" : [ ]
           },
+          "stances" : [ ],
           "explosive" : {
             "attack" : 0,
             "damage" : 0,
@@ -7729,6 +7790,7 @@
             },
             "missiles" : [ ]
           },
+          "stances" : [ ],
           "explosive" : {
             "attack" : 0,
             "damage" : 0,
@@ -7808,6 +7870,7 @@
             },
             "missiles" : [ "nomad/missile" ]
           },
+          "stances" : [ ],
           "explosive" : {
             "attack" : 0,
             "damage" : 0,
@@ -7939,6 +8002,7 @@
             },
             "missiles" : [ ]
           },
+          "stances" : [ ],
           "explosive" : {
             "attack" : 0,
             "damage" : 0,
@@ -8022,6 +8086,7 @@
             },
             "missiles" : [ ]
           },
+          "stances" : [ ],
           "explosive" : {
             "attack" : 0,
             "damage" : 0,
@@ -8103,6 +8168,7 @@
             },
             "missiles" : [ ]
           },
+          "stances" : [ ],
           "explosive" : {
             "attack" : 0,
             "damage" : 0,
@@ -8301,6 +8367,7 @@
             },
             "missiles" : [ ]
           },
+          "stances" : [ ],
           "explosive" : {
             "attack" : 0,
             "damage" : 0,
@@ -8401,6 +8468,7 @@
             },
             "missiles" : [ ]
           },
+          "stances" : [ ],
           "explosive" : {
             "attack" : 0,
             "damage" : 0,
@@ -8518,6 +8586,7 @@
             },
             "missiles" : [ ]
           },
+          "stances" : [ ],
           "explosive" : {
             "attack" : 0,
             "damage" : 0,
@@ -8911,6 +8980,7 @@
           },
           "missiles" : [ ]
         },
+        "stances" : [ ],
         "explosive" : {
           "attack" : 0,
           "damage" : 0,

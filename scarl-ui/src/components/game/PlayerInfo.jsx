@@ -1,7 +1,7 @@
 import React from 'react'
 import { fromJS } from 'immutable'
 import { stats as creatureStats, statsInfo } from '../../game/creature'
-import { addStats } from '../../game/utils'
+import { getPlayerStats } from '../../game/utils'
 import Equipped from '../inventory/Equipped.jsx'
 
 const Player = ({character, stats}) => {
@@ -41,7 +41,7 @@ const Player = ({character, stats}) => {
 }
 
 const PlayerInfo = ({equipmentSet, equipments, inventory, kinds, player, setEquipmentSet}) => {
-    const stats = fromJS(addStats(player.creature.stats, player.equipmentStats))
+    const stats = fromJS(getPlayerStats(player))
 
     return (
         <div>

@@ -20,10 +20,27 @@ case class InitializeTickMutation(actor: ActorId) extends Mutation {
   }
 
   private def applyCreature(s: State, creature: CreatureId): State = {
-    val mutations = getCreatureStanceStatuses(s)(creature) filter (_.duration exists (_ < 1)) map (status => {
-      RemovableEntityMutation(status.id)
-    })
+    val mutations = endStances(s, creature)
 
     (mutations foldLeft s) ((s, mutation) => mutation(s))
+  }
+
+  private def endStances(s: State, creature: CreatureId): List[Mutation] = {
+    val end = getCreatureStanceStatuses(s)(creature) filter (_.duration exists (_ < 1))
+
+    if (end.isEmpty) {
+      List()
+    } else {
+      val activate = getCreatureStanceStatuses(s, active = false)(creature)
+
+      val activateMutations = activate.toList map (status => {
+        StanceActiveMutation(status, active = true)
+      })
+      val endMutations = end.toList map (status => {
+        RemovableEntityMutation(status.id)
+      })
+
+      activateMutations ::: endMutations
+    }
   }
 }

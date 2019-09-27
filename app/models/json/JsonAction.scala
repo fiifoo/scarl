@@ -20,11 +20,13 @@ object JsonAction {
   lazy private implicit val locationReads = Json.reads[Location]
   lazy private implicit val recipeIdFormat = JsonRecipe.recipeIdFormat
   lazy private implicit val slotFormat = JsonItemEquipment.slotFormat
+  lazy private implicit val stanceFormat = JsonStance.stanceFormat
 
   implicitly(mapFormat[Slot, ItemId])
 
   lazy private implicit val attackReads = Json.reads[AttackAction]
   lazy private implicit val cancelRecycleItemReads = Json.reads[CancelRecycleItemAction]
+  lazy private implicit val changeStanceReads = Json.reads[ChangeStanceAction]
   lazy private implicit val converseReads = {
     implicit val usableIdFormat = JsonEntity.usableIdFormat
 
@@ -52,6 +54,7 @@ object JsonAction {
   lazy val actionReads: Reads[Action] = polymorphicTypeReads(data => {
     case "Attack" => data.as[AttackAction]
     case "CancelRecycleItem" => data.as[CancelRecycleItemAction]
+    case "ChangeStance" => data.as[ChangeStanceAction]
     case "Communicate" => data.as[CommunicateAction]
     case "Converse" => data.as[ConverseAction]
     case "CraftItem" => data.as[CraftItemAction]

@@ -2,13 +2,22 @@ import * as utils from '../game/utils'
 import { addMessage, cancelMode, doAction, setTarget } from './gameActions'
 import { focusKeyboard } from './keyboard'
 
+const attackModes = {
+    ATTACK: 'ATTACK',
+    SHOOT: 'SHOOT',
+    SHOOT_MISSILE: 'SHOOT_MISSILE',
+}
+
 export const attack = target => (dispatch, getState) => {
     const {player} = getState()
 
     const shortage = utils.getAttackShortage(player, 'melee')
+    const stanceAllowed = utils.getAttackStanceAllowed(player, 'melee')
 
     if (shortage) {
         addShortageMessage(shortage)(dispatch)
+    } else if (! stanceAllowed) {
+        addStanceNotAllowedMessage(attackModes.ATTACK)(dispatch)
     } else {
         doAction('Attack', {target})(dispatch, getState)
     }
@@ -16,6 +25,11 @@ export const attack = target => (dispatch, getState) => {
 
 export const cancelRecycleItem = item => (dispatch, getState) => {
     doAction('CancelRecycleItem', {item})(dispatch, getState)
+}
+
+export const changeStance = stance => (dispatch, getState) => {
+    doAction('ChangeStance', {stance})(dispatch, getState)
+    cancelMode()(dispatch)
 }
 
 export const displace = target => (dispatch, getState) => {
@@ -71,11 +85,14 @@ export const shoot = (location, missile = null) => (dispatch, getState) => {
     }
 
     const shortage = utils.getAttackShortage(player, missile ? 'launcher' : 'ranged')
+    const stanceAllowed = utils.getAttackStanceAllowed(player, missile ? 'launcher' : 'ranged')
 
     cancelMode()(dispatch)
 
     if (shortage) {
         addShortageMessage(shortage)(dispatch)
+    } else if (! stanceAllowed) {
+        addStanceNotAllowedMessage(missile ? attackModes.SHOOT_MISSILE : attackModes.SHOOT)(dispatch)
     } else {
         if (missile) {
             doAction('ShootMissile', {location, missile})(dispatch, getState)
@@ -133,6 +150,30 @@ const addShortageMessage = shortage => dispatch => {
     if (message) {
         addMessage(message)(dispatch)
     }
+}
+
+const addStanceNotAllowedMessage = attackMode => dispatch => {
+    let attackText
+
+    switch (attackMode) {
+        case attackModes.SHOOT_MISSILE: {
+            attackText = 'fire missile'
+            break
+        }
+        case attackModes.SHOOT: {
+            attackText = 'shoot'
+            break
+        }
+        case attackModes.ATTACK:
+        default: {
+            attackText = 'attack'
+            break
+        }
+    }
+
+    const message = `Cannot ${attackText} in current stance.`
+
+    addMessage(message)(dispatch)
 }
 
 const recaptureFocus = dispatch => {
