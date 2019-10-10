@@ -1,7 +1,8 @@
 import { fromJS, Map } from 'immutable'
-import { addStats } from './creature'
+import { getConditionLabel } from './condition'
 import { distance, line } from './geometry'
 import { getStanceLabel, isChangeStanceAllowed } from './stance'
+import Stats from './Stats'
 
 const SHORT_MESSAGE_LIMIT = 100
 
@@ -10,8 +11,6 @@ const Faction = {
     Neutral: 'Faction.Neutral',
     Hostile: 'Faction.Hostile',
 }
-
-export {addStats}
 
 export const calculateTrajectory = (player, location, fov, missile = false) => {
     const from = player.creature.location
@@ -65,7 +64,7 @@ export const getAttackStanceAllowed = (player, type) => {
     return ! stance || isChangeStanceAllowed(player.creature, stance)
 }
 
-export const getCreatureConditionsInfo = creature => creature.conditions.map(getCreatureConditionInfo)
+export const getCreatureConditionsInfo = creature => creature.conditions.map(x => getConditionLabel(x.key))
 
 export const getCreatureInfo = (creature, player, factions, area) => {
     const health = creature.stats.health.max // equipments not supported
@@ -220,7 +219,7 @@ export const getMissileLauncherRange = player => {
 }
 
 export const getPlayerStats = player => (
-    addStats(player.creature.stats, player.equipmentStats)
+    Stats.add(player.creature.stats, player.equipmentStats)
 )
 
 export const getRangedAttackRange = player => {
@@ -290,14 +289,6 @@ export const seekTargets = (player, factions, area, fov, missile = false) => {
 }
 
 const getLocationEntities = (l, fov) => fov[l.x] ? fov[l.x][l.y] : undefined
-
-const getCreatureConditionInfo = condition => {
-    switch (condition.key) {
-        default: {
-            return condition.key
-        }
-    }
-}
 
 const getCreatureDescription = (player, factions, area, kinds) => creature => {
     const kind = kinds.creatures.get(creature.kind)

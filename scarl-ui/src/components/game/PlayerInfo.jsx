@@ -1,6 +1,6 @@
 import React from 'react'
 import { fromJS } from 'immutable'
-import { stats as creatureStats, statsInfo } from '../../game/creature'
+import Stats from '../../game/Stats'
 import { getPlayerStats } from '../../game/utils'
 import Equipped from '../inventory/Equipped.jsx'
 
@@ -10,10 +10,9 @@ const Player = ({character, stats}) => {
         const value = stats.getIn(path)
 
         return (
-            <tr key={path.join('.')} className={value === 0 ? 'text-muted' : null}>
+            <tr key={path.join('.')} className={Stats.isEmpty(path)(value) ? 'text-muted' : null}>
                 <th className="text-right">{label}</th>
-                <td>{value}</td>
-                <td className="text-muted">{statsInfo.get(path)}</td>
+                <td className="description">{Stats.getDisplayValue(path)(value)}</td>
             </tr>
         )
     }
@@ -26,14 +25,12 @@ const Player = ({character, stats}) => {
                     <tr>
                         <th className="text-right">Level</th>
                         <td>{character.level}</td>
-                        <td></td>
                     </tr>
                     <tr>
                         <th className="text-right">Experience</th>
                         <td>{character.experience}</td>
-                        <td></td>
                     </tr>
-                    {creatureStats.map(renderStat).toArray()}
+                    {Stats.stats.map(renderStat).toArray()}
                 </tbody>
             </table>
         </div>

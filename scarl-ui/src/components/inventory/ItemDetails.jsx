@@ -1,22 +1,21 @@
 import { fromJS, List, Map, Set } from 'immutable'
 import React, { Fragment } from 'react'
 import { LauncherSlot } from '../../game/equipment'
-import { stats as creatureStats, negativeStats } from '../../game/creature'
 import { groups as equipmentGroups, slots as equipmentSlots } from '../../game/equipment'
 import { resourceStats } from '../../game/power'
-import { addStats } from '../../game/utils'
+import Stats from '../../game/Stats'
 
-const isPositive = (path, amount) => {
-    const positiveStat = ! negativeStats.contains(path)
+const Diff = ({diff}) => {
+    const renderSingle = (diff, key) => (
+        <span key={key} className={diff.positive ? 'text-success' : 'text-danger'}>
+            {diff.displayValue}
+        </span>
+    )
 
-    return amount >= 0 ? positiveStat : ! positiveStat
+    return (
+        <span className="text-muted">({diff.map(renderSingle)})</span>
+    )
 }
-
-const Diff = ({path, amount}) => (
-    <span className="text-muted">(<span className={isPositive(path, amount) ? 'text-success' : 'text-danger'}>
-        {amount > 0 ? '+' : null}{amount}
-    </span>)</span>
-)
 
 const SimpleStats = ({label, values, properties}) => {
     values = fromJS(values)
@@ -27,13 +26,13 @@ const SimpleStats = ({label, values, properties}) => {
         return (
             <tr key={path.join('.')}>
                 <th className="text-right">{label}</th>
-                <td>{value}</td>
+                <td className="description">{Stats.getDisplayValue(path)(value)}</td>
                 <td></td>
             </tr>
         )
     }
 
-    const filterStat = (_, path) => values.getIn(path) !== 0
+    const filterStat = (_, stat) => ! Stats.isEmpty(stat)(values.getIn(stat))
 
     return (
         <tbody>
@@ -48,26 +47,28 @@ const SimpleStats = ({label, values, properties}) => {
     )
 }
 
-const Stats = ({label, compare, stats}) => {
+const ItemStats = ({label, compare, stats}) => {
     compare = compare ? fromJS(compare) : null
     stats = fromJS(stats)
 
     const renderStat = (label, path) => {
         const value = stats.getIn(path)
-        const compareValue = compare ? compare.getIn(path) : 0
-        const diff = value - compareValue
+        const compareValue = compare ? compare.getIn(path) : null
+        const empty = Stats.isEmpty(path)(value)
+        const diff = Stats.diff(path)(value, compareValue)
+        const verbose = Stats.isVerbose(path)
 
         return (
-            <tr key={path.join('.')} className={value === 0 ? 'text-muted' : null}>
+            <tr key={path.join('.')} className={empty ? 'text-muted' : null}>
                 <th className="text-right">{label}</th>
-                <td>{value}</td>
-                <td>{diff !== 0 ? <Diff path={path} amount={diff} /> : null}</td>
+                <td className="description">{Stats.getDisplayValue(path)(value)}</td>
+                <td>{verbose || diff.isEmpty() ? null : <Diff diff={diff} />}</td>
             </tr>
         )
     }
 
-    const filterStat = (_, path) => stats.getIn(path) !== 0
-    const filterCompareStat = (_, path) => stats.getIn(path) === 0 && compare.getIn(path) !== 0
+    const filterStat = (_, stat) => ! Stats.isEmpty(stat)(stats.getIn(stat))
+    const filterCompareStat = (_, stat) => Stats.isEmpty(stat)(stats.getIn(stat)) && ! Stats.isEmpty(stat)(compare.getIn(stat))
 
     return (
         <tbody>
@@ -77,9 +78,9 @@ const Stats = ({label, compare, stats}) => {
                     <th colSpan="2">{label}</th>
                 </tr>
             )}
-            {creatureStats.filter(filterStat).map(renderStat).toArray()}
+            {Stats.stats.filter(filterStat).map(renderStat).toArray()}
             {compare
-                ? creatureStats.filter(filterCompareStat).map(renderStat).toArray()
+                ? Stats.stats.filter(filterCompareStat).map(renderStat).toArray()
                 : null
             }
         </tbody>
@@ -96,12 +97,12 @@ const MissileStats = ({equipments, inventory, item, kinds}) => {
         const compareMissile = compareItem && compareItem.launcher.stats.launcher.missiles[index]
         const compare = compareMissile ? kinds.creatures.get(compareMissile).stats : null
 
-        return <Stats key={index} label={kind.name} stats={stats} compare={compare} />
+        return <ItemStats key={index} label={kind.name} stats={stats} compare={compare} />
     })
 }
 
 const ExplosiveStats = ({explosive}) => {
-    const properties = creatureStats.filter((_, path) => path.first() === 'explosive')
+    const properties = Stats.stats.filter((_, path) => path.first() === 'explosive')
 
     return <SimpleStats values={{explosive}} properties={properties} />
 }
@@ -111,7 +112,7 @@ const KindStats = ({id, kinds}) => {
         case 'CreatureKindId': {
             const creature = kinds.creatures.get(id.get('value'))
 
-            return <SimpleStats values={creature.stats} properties={creatureStats} />
+            return <SimpleStats values={creature.stats} properties={Stats.stats} />
         }
         case 'WidgetKindId': {
             const itemId = kinds.widgets.get(id.get('value')).data.item
@@ -180,11 +181,11 @@ const EquipmentStats = ({equipments, inventory, item}) => {
                 const compareItem = inventory.get(compareItemId)
                 const compareGroups = Map(equipmentGroups).filter(x => compareItem[x.prop]).filter(x => x.slots(compareItem).contains(slot))
                 const compareStats = compareGroups.map(group => group.getSlotStats(compareItem, slot)).reduce((carry, stats) => (
-                    carry ? addStats(carry, stats) : stats
+                    carry ? Stats.add(carry, stats) : stats
                 ), null)
 
                 return {
-                    compare: carry.compare ? addStats(carry.compare, compareStats) : compareStats,
+                    compare: carry.compare ? Stats.add(carry.compare, compareStats) : compareStats,
                     items: carry.items.add(compareItemId)
                 }
             } else {
@@ -198,7 +199,7 @@ const EquipmentStats = ({equipments, inventory, item}) => {
         const label = slots.map(x => equipmentSlots[x].label).join(', ')
 
         return (
-            <Stats
+            <ItemStats
                 key={index}
                 compare={compare}
                 label={label}
