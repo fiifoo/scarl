@@ -165,13 +165,3 @@ body {
         black 80%, black 100%
         );
     }
-
-    .Select-menu-outer {
-        z-index: 9;
-        max-height: 402px;
-    }
-
-    .Select-menu {
-        max-height: 400px;
-        overflow-y: auto;
-    }

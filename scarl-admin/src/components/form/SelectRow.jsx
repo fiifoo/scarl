@@ -1,32 +1,50 @@
 import React from 'react'
 import Select from 'react-select'
-import CreatableSelect from 'react-select/lib/Creatable'
+import CreatableSelect from 'react-select/Creatable'
 import FormRow from './FormRow.jsx'
+import { reactSelect } from './utils'
 
 const sort = (a, b) => a.label < b.label ? -1 : 1
 
+const getSingleValue = selection => (
+    selection.value
+)
+
 const getValue = (multi, selection) => multi ? (
-    selection.map(selection => selection.value)
+    selection == null ? [] : selection.map(getSingleValue)
 ) : (
-    selection ? selection.value : null
+    selection == null ? null : getSingleValue(selection)
+)
+
+const getSingleSelection = value => ({
+    value,
+    label: value,
+})
+
+const getSelection = (multi, value) => multi ? (
+    value == null ? [] : value.map(getSingleSelection)
+) : (
+    value == null ? null : getSingleSelection(value)
 )
 
 const SelectRow = ({
     button, choices, value, onChange,
     multi = false, disabled = false, required = false, creatable = false,
-    inputStyle, placeholder = undefined, input = {}, ...props,
+    placeholder = undefined, input = {}, ...props
 }) => {
     const Component = creatable ? CreatableSelect : Select
 
     const component = <Component
-        style={inputStyle}
-        value={value}
-        multi={multi}
-        clearable={! required}
+        value={getSelection(multi, value)}
+        isMulti={multi}
+        isClearable={! required}
         onChange={selection => onChange(getValue(multi, selection))}
         options={choices.sort(sort)}
-        disabled={disabled}
+        isDisabled={disabled}
         placeholder={placeholder}
+
+        filterOption={reactSelect.filterOption}
+        styles={reactSelect.styles}
         {...input} />
 
     return (

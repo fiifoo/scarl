@@ -5,7 +5,6 @@ import MainContainer from './MainContainer'
 import ColumnEditorContainer from './columnEditor/ColumnEditorContainer'
 import SummaryContainer from './summary/SummaryContainer'
 
-import 'react-select/dist/react-select.css'
 import './App.css'
 
 const SaveButton = ({readonly, save, saving, unsaved}) => (

@@ -31,7 +31,7 @@ export const getNewValue = (fieldType, models) => {
             const model = models.sub.get(fieldType.data.model, models.main.get(fieldType.data.model))
 
             if (isPolymorphic(model)) {
-                return Map()
+                return model.objectPolymorphism ? null : Map()
             } else {
                 return getNewModelValue(model, models)
             }
