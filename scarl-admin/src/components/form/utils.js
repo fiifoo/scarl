@@ -15,7 +15,7 @@ export const reactSelect = {
         const tokens = input.trim().toLowerCase().split(' ')
 
         return tokens.filter(token => (
-            ! candidate.label.match(token)
+            ! candidate.label.toLowerCase().match(token)
         )).length === 0
     }
 }
