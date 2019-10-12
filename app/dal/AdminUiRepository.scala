@@ -10,7 +10,7 @@ import play.api.libs.json.{JsValue, Json}
 @Singleton
 class AdminUiRepository @Inject()(environment: Environment, simulationsRepository: SimulationsRepository) {
 
-  lazy private val dataFile = environment.getFile("user/admin-ui.json").toPath
+  lazy private val dataFile = environment.getFile("user/admin/ui.json").toPath
 
   def read(): Option[JsValue] = {
     if (Files.exists(dataFile)) {
