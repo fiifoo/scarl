@@ -589,7 +589,7 @@ class EventBuilder(s: State, player: CreatureId, fov: Set[Location]) {
 
   private def build(effect: ResistConditionEffect): Option[String] = {
     if (effect.target == player) {
-      Some(s"You resist being ${condition(effect.condition)}.")
+      Some(s"You resist ${condition(effect.condition)}.")
     } else {
       None
     }
@@ -704,9 +704,17 @@ class EventBuilder(s: State, player: CreatureId, fov: Set[Location]) {
     }
   }
 
-  private def condition(condition: Condition): String = {
-    condition match {
-      case x => x.key
+  private def condition(condition: Condition, noun: Boolean = false): String = {
+    if (noun) {
+      condition.key match {
+        case "Conditions.Disoriented" => "disorientation"
+        case "Conditions.Immobilized" => "immobilization"
+        case key => key.split('.')(1).toLowerCase()
+      }
+    } else {
+      condition.key match {
+        case key => key.split('.')(1).toLowerCase()
+      }
     }
   }
 

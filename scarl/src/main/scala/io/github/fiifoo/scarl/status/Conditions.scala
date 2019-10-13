@@ -9,7 +9,7 @@ import io.github.fiifoo.scarl.effect.creature.condition.BurnEffect
 object Conditions {
 
   case class Burning(strength: Int) extends Condition {
-    val key = "burning"
+    val key = "Conditions.Burning"
 
     def modifyStats(stats: Stats, strength: Int): Stats = {
       stats.copy(
@@ -29,7 +29,7 @@ object Conditions {
   }
 
   case class Disoriented(strength: Int) extends Condition {
-    val key = "disoriented"
+    val key = "Conditions.Disoriented"
 
     def modifyStats(stats: Stats, strength: Int): Stats = {
       stats.copy(
@@ -54,7 +54,7 @@ object Conditions {
   }
 
   case class Immobilized(strength: Int) extends Condition {
-    val key = "immobilized"
+    val key = "Conditions.Immobilized"
 
     def modifyStats(stats: Stats, strength: Int): Stats = {
       stats.copy(
