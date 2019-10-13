@@ -45,6 +45,6 @@ object Simulations {
   }
 
   private def getCombatants(data: Data): Iterable[CreatureKind] = {
-    data.kinds.creatures.values filter (_.stats.melee.damage > 0)
+    data.kinds.creatures.values filter (x => x.stats.melee.damage > 0 || x.stats.ranged.damage > 0)
   }
 }

@@ -290,6 +290,57 @@
         }
       } ],
       "id" : "generic/room-portal-high"
+    } ], [ "skyfarer/party/control-freak", {
+      "subs" : [ ],
+      "creatures" : [ {
+        "selection" : {
+          "type" : "ContentSelection.FixedCreature",
+          "data" : {
+            "kind" : "skyfarer/control-freak",
+            "tags" : [ ]
+          }
+        },
+        "distribution" : {
+          "type" : "Distribution.Uniform",
+          "data" : {
+            "min" : 1,
+            "max" : 1
+          }
+        }
+      }, {
+        "selection" : {
+          "type" : "ContentSelection.FixedCreature",
+          "data" : {
+            "kind" : "skyfarer/biojack-burn",
+            "tags" : [ ]
+          }
+        },
+        "distribution" : {
+          "type" : "Distribution.Uniform",
+          "data" : {
+            "min" : 2,
+            "max" : 3
+          }
+        }
+      }, {
+        "selection" : {
+          "type" : "ContentSelection.FixedCreature",
+          "data" : {
+            "kind" : "skyfarer/biojack-stun",
+            "tags" : [ ]
+          }
+        },
+        "distribution" : {
+          "type" : "Distribution.Uniform",
+          "data" : {
+            "min" : 2,
+            "max" : 3
+          }
+        }
+      } ],
+      "items" : [ ],
+      "widgets" : [ ],
+      "id" : "skyfarer/party/control-freak"
     } ] ],
     "creatures" : [ [ "iridan/default", {
       "subs" : [ ],
@@ -476,7 +527,7 @@
       "subs" : [ ],
       "id" : "scipoi/scippe-civilians",
       "content" : [ [ "Template.ChallengeCategory", [ {
-        "value" : "generic/vault",
+        "value" : "skyfarer/hall/control-freak",
         "weight" : 100
       } ] ], [ "Template.RoomCategory", [ {
         "value" : "generic/room",
@@ -657,6 +708,61 @@
         "required" : 2
       } ],
       "id" : "generic/area-tunnels"
+    } ], [ "generic/area-rooms-challenges", {
+      "subs" : [ ],
+      "items" : [ {
+        "selection" : {
+          "type" : "ContentSelection.ThemeTemplate",
+          "data" : {
+            "category" : [ "Template.ChallengeCategory" ],
+            "power" : [ ],
+            "tags" : [ ]
+          }
+        },
+        "distribution" : {
+          "type" : "Distribution.Uniform",
+          "data" : {
+            "min" : 1,
+            "max" : 2
+          }
+        },
+        "required" : 1
+      }, {
+        "selection" : {
+          "type" : "ContentSelection.ThemeTemplate",
+          "data" : {
+            "category" : [ "Template.TrapCategory" ],
+            "power" : [ ],
+            "tags" : [ ]
+          }
+        },
+        "distribution" : {
+          "type" : "Distribution.Binomial",
+          "data" : {
+            "p" : 50,
+            "n" : 1
+          }
+        },
+        "required" : 0
+      }, {
+        "selection" : {
+          "type" : "ContentSelection.ThemeTemplate",
+          "data" : {
+            "category" : [ "Template.RoomCategory" ],
+            "power" : [ ],
+            "tags" : [ ]
+          }
+        },
+        "distribution" : {
+          "type" : "Distribution.Uniform",
+          "data" : {
+            "min" : 4,
+            "max" : 6
+          }
+        },
+        "required" : 2
+      } ],
+      "id" : "generic/area-rooms-challenges"
     } ] ],
     "terrains" : [ [ "generic/natural-surface", {
       "subs" : [ ],
@@ -1067,10 +1173,16 @@
     "creatures" : [ [ "iridan/scout", {
       "display" : "s",
       "color" : "blue",
+      "traits" : {
+        "events" : null,
+        "flying" : false,
+        "immobile" : false,
+        "missile" : null,
+        "solitary" : true,
+        "leader" : false
+      },
       "equipments" : [ ],
       "recipes" : [ ],
-      "missile" : null,
-      "immobile" : false,
       "character" : null,
       "locked" : {
         "key" : null,
@@ -1078,8 +1190,6 @@
         "sub" : null
       },
       "name" : "Iridan scout",
-      "solitary" : true,
-      "flying" : false,
       "responses" : [ ],
       "behavior" : {
         "type" : "ScoutTactic",
@@ -1160,10 +1270,16 @@
     } ], [ "iridan/ranged-damager-2", {
       "display" : "R",
       "color" : "red",
+      "traits" : {
+        "events" : null,
+        "flying" : false,
+        "immobile" : false,
+        "missile" : null,
+        "solitary" : false,
+        "leader" : false
+      },
       "equipments" : [ ],
       "recipes" : [ ],
-      "missile" : null,
-      "immobile" : false,
       "character" : null,
       "locked" : {
         "key" : null,
@@ -1171,8 +1287,6 @@
         "sub" : null
       },
       "name" : "Iridan eagle",
-      "solitary" : false,
-      "flying" : false,
       "responses" : [ ],
       "behavior" : {
         "type" : "RoamTactic",
@@ -1250,17 +1364,123 @@
         },
         "armor" : 40
       }
+    } ], [ "skyfarer/biojack-burn", {
+      "display" : "b",
+      "color" : "#9c27b0",
+      "traits" : {
+        "events" : null,
+        "flying" : false,
+        "immobile" : false,
+        "missile" : null,
+        "solitary" : false,
+        "leader" : false
+      },
+      "equipments" : [ ],
+      "recipes" : [ ],
+      "character" : null,
+      "locked" : {
+        "key" : null,
+        "security" : 30,
+        "sub" : null
+      },
+      "name" : "Skyfarer biojack",
+      "responses" : [ ],
+      "behavior" : {
+        "type" : "RoamTactic",
+        "data" : { }
+      },
+      "usable" : {
+        "type" : "CapturePower",
+        "data" : {
+          "description" : null,
+          "resources" : null
+        }
+      },
+      "greetings" : [ ],
+      "id" : "skyfarer/biojack-burn",
+      "inventory" : [ ],
+      "faction" : "skyfarer",
+      "description" : "Neurally slaved via network. Armed with chemical flamethrower.",
+      "stats" : {
+        "launcher" : {
+          "range" : 0,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          },
+          "missiles" : [ ]
+        },
+        "stances" : [ ],
+        "explosive" : {
+          "attack" : 0,
+          "damage" : 0,
+          "radius" : 0,
+          "blast" : 0,
+          "conditions" : [ ]
+        },
+        "speed" : 80,
+        "ranged" : {
+          "attack" : 30,
+          "damage" : 30,
+          "range" : 5,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          },
+          "conditions" : [ {
+            "type" : "Conditions.Burning",
+            "data" : {
+              "strength" : 20
+            }
+          } ]
+        },
+        "energy" : {
+          "max" : 0,
+          "regen" : 0
+        },
+        "materials" : {
+          "max" : 0,
+          "regen" : 0
+        },
+        "defence" : 30,
+        "skill" : {
+          "hacking" : 0
+        },
+        "melee" : {
+          "attack" : 0,
+          "damage" : 0,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          },
+          "conditions" : [ ]
+        },
+        "resistance" : 20,
+        "health" : {
+          "max" : 30,
+          "regen" : 0
+        },
+        "sight" : {
+          "range" : 7,
+          "sensors" : 10
+        },
+        "armor" : 30
+      }
     } ], [ "scippe/dice/gate-officer/overrun", {
       "display" : "G",
       "color" : "white",
+      "traits" : {
+        "events" : null,
+        "flying" : false,
+        "immobile" : true,
+        "missile" : null,
+        "solitary" : true,
+        "leader" : false
+      },
       "equipments" : [ ],
       "recipes" : [ ],
-      "missile" : null,
-      "immobile" : true,
       "character" : null,
       "name" : "Gate security officer",
-      "solitary" : true,
-      "flying" : false,
       "responses" : [ [ "nomad", [ "scippe/dice/gate-officer/overrun", "scippe/dice/gate-officer/main" ] ] ],
       "behavior" : {
         "type" : "TurretTactic",
@@ -1345,18 +1565,22 @@
     } ], [ "player", {
       "display" : "@",
       "color" : "yellow",
+      "traits" : {
+        "events" : null,
+        "flying" : false,
+        "immobile" : false,
+        "missile" : null,
+        "solitary" : true,
+        "leader" : false
+      },
       "equipments" : [ [ "Equipment.LauncherSlot", "nomad/launcher-missile" ], [ "Equipment.MainHand", "nomad/weapon-blade" ], [ "Equipment.RangedSlot", "nomad/weapon-laser-light" ], [ "Equipment.OffHand", "nomad/deflector" ], [ "Equipment.BodyArmor", "nomad/armor-body-envoy" ], [ "Equipment.FootArmor", "nomad/armor-leg-envoy" ], [ "Equipment.HandArmor", "nomad/armor-hand-envoy" ], [ "Equipment.HeadArmor", "nomad/armor-head-envoy" ] ],
       "recipes" : [ "iridan/deflector-merged", "iridan/weapon-boser-merged", "nomad/armor-body-assault", "nomad/armor-body-infiltration", "nomad/armor-hand-assault", "nomad/armor-hand-infiltration", "nomad/armor-head-assault", "nomad/armor-head-infiltration", "nomad/armor-leg-assault", "nomad/armor-leg-infiltration", "nomad/launcher-missile-smart", "nomad/weapon-laser-heavy", "nomad/weapon-spear", "scippe/weapon-shard-blast-merged", "skyfarer/armor-body-heavy-merged", "skyfarer/armor-hand-melee-merged", "skyfarer/armor-head-ranged-merged", "skyfarer/armor-leg-heavy-merged", "skyfarer/weapon-smart-gun-merged", "skyfarer/weapon-whip-plasma-merged" ],
-      "missile" : null,
-      "immobile" : false,
       "character" : {
         "progression" : "player",
         "experience" : 0,
         "level" : 0
       },
       "name" : "Player",
-      "solitary" : true,
-      "flying" : false,
       "responses" : [ ],
       "behavior" : {
         "type" : "RoamTactic",
@@ -1431,19 +1655,23 @@
     } ], [ "nomad/missile-smart", {
       "display" : "x",
       "color" : "white",
+      "traits" : {
+        "events" : null,
+        "flying" : true,
+        "immobile" : false,
+        "missile" : {
+          "guidance" : {
+            "type" : "Missile.Smart",
+            "data" : { }
+          }
+        },
+        "solitary" : true,
+        "leader" : false
+      },
       "equipments" : [ ],
       "recipes" : [ ],
-      "missile" : {
-        "guidance" : {
-          "type" : "Missile.Smart",
-          "data" : { }
-        }
-      },
-      "immobile" : false,
       "character" : null,
       "name" : "Missile",
-      "solitary" : true,
-      "flying" : true,
       "responses" : [ ],
       "behavior" : {
         "type" : "PassTactic",
@@ -1518,14 +1746,18 @@
     } ], [ "scippe/civilians/security", {
       "display" : "s",
       "color" : "white",
+      "traits" : {
+        "events" : null,
+        "flying" : false,
+        "immobile" : false,
+        "missile" : null,
+        "solitary" : false,
+        "leader" : false
+      },
       "equipments" : [ ],
       "recipes" : [ ],
-      "missile" : null,
-      "immobile" : false,
       "character" : null,
       "name" : "Scippe security",
-      "solitary" : false,
-      "flying" : false,
       "responses" : [ ],
       "behavior" : {
         "type" : "RoamTactic",
@@ -1610,10 +1842,16 @@
     } ], [ "iridan/scout-2", {
       "display" : "S",
       "color" : "blue",
+      "traits" : {
+        "events" : null,
+        "flying" : false,
+        "immobile" : false,
+        "missile" : null,
+        "solitary" : true,
+        "leader" : false
+      },
       "equipments" : [ ],
       "recipes" : [ ],
-      "missile" : null,
-      "immobile" : false,
       "character" : null,
       "locked" : {
         "key" : null,
@@ -1621,8 +1859,6 @@
         "sub" : null
       },
       "name" : "Iridan hunter",
-      "solitary" : true,
-      "flying" : false,
       "responses" : [ ],
       "behavior" : {
         "type" : "ScoutTactic",
@@ -1703,14 +1939,18 @@
     } ], [ "scippe/civilians/civilian", {
       "display" : "c",
       "color" : "white",
+      "traits" : {
+        "events" : null,
+        "flying" : false,
+        "immobile" : false,
+        "missile" : null,
+        "solitary" : false,
+        "leader" : false
+      },
       "equipments" : [ ],
       "recipes" : [ ],
-      "missile" : null,
-      "immobile" : false,
       "character" : null,
       "name" : "Scippe civilian",
-      "solitary" : false,
-      "flying" : false,
       "responses" : [ ],
       "behavior" : {
         "type" : "RoamTactic",
@@ -1785,31 +2025,34 @@
     } ], [ "iridan/ai-core", {
       "display" : "?",
       "color" : "red",
+      "traits" : {
+        "events" : {
+          "death" : {
+            "type" : "ActivateMachineryPower",
+            "data" : {
+              "description" : null,
+              "resources" : null
+            }
+          },
+          "hit" : null
+        },
+        "flying" : false,
+        "immobile" : true,
+        "missile" : null,
+        "solitary" : true,
+        "leader" : false
+      },
       "equipments" : [ ],
       "recipes" : [ ],
-      "missile" : null,
-      "immobile" : true,
       "character" : null,
       "locked" : null,
       "name" : "Iridan AI core",
-      "solitary" : true,
-      "flying" : false,
       "responses" : [ ],
       "behavior" : {
         "type" : "PassTactic",
         "data" : { }
       },
       "usable" : null,
-      "events" : {
-        "death" : {
-          "type" : "ActivateMachineryPower",
-          "data" : {
-            "description" : null,
-            "resources" : null
-          }
-        },
-        "hit" : null
-      },
       "greetings" : [ ],
       "id" : "iridan/ai-core",
       "inventory" : [ ],
@@ -1878,16 +2121,20 @@
     } ], [ "nomad/missile", {
       "display" : "x",
       "color" : "white",
+      "traits" : {
+        "events" : null,
+        "flying" : true,
+        "immobile" : false,
+        "missile" : {
+          "guidance" : null
+        },
+        "solitary" : true,
+        "leader" : false
+      },
       "equipments" : [ ],
       "recipes" : [ ],
-      "missile" : {
-        "guidance" : null
-      },
-      "immobile" : false,
       "character" : null,
       "name" : "Missile",
-      "solitary" : true,
-      "flying" : true,
       "responses" : [ ],
       "behavior" : {
         "type" : "PassTactic",
@@ -1962,18 +2209,22 @@
     } ], [ "iridan/melee-armored", {
       "display" : "m",
       "color" : "green",
+      "traits" : {
+        "events" : null,
+        "flying" : false,
+        "immobile" : false,
+        "missile" : null,
+        "solitary" : false,
+        "leader" : false
+      },
       "equipments" : [ ],
       "recipes" : [ ],
-      "missile" : null,
-      "immobile" : false,
       "character" : null,
       "locked" : {
         "key" : null,
         "security" : 30
       },
       "name" : "Iridan tortoise",
-      "solitary" : false,
-      "flying" : false,
       "responses" : [ ],
       "behavior" : {
         "type" : "RoamTactic",
@@ -2054,14 +2305,18 @@
     } ], [ "iridan/unfinished-mine/prospector", {
       "display" : "X",
       "color" : "green",
+      "traits" : {
+        "events" : null,
+        "flying" : false,
+        "immobile" : false,
+        "missile" : null,
+        "solitary" : false,
+        "leader" : false
+      },
       "equipments" : [ ],
       "recipes" : [ ],
-      "missile" : null,
-      "immobile" : false,
       "character" : null,
       "name" : "Iridan prospector",
-      "solitary" : false,
-      "flying" : false,
       "responses" : [ [ "nomad", [ "iridan/unfinished-mine/prospector/main", "iridan/unfinished-mine/prospector/bye" ] ] ],
       "behavior" : {
         "type" : "GreetTactic",
@@ -2133,17 +2388,108 @@
         },
         "armor" : 40
       }
+    } ], [ "skyfarer/control-freak", {
+      "display" : "B",
+      "color" : "#9c27b0",
+      "traits" : {
+        "events" : null,
+        "flying" : false,
+        "immobile" : false,
+        "missile" : null,
+        "solitary" : false,
+        "leader" : true
+      },
+      "equipments" : [ ],
+      "recipes" : [ ],
+      "character" : null,
+      "locked" : null,
+      "name" : "Skyfarer control freak",
+      "responses" : [ ],
+      "behavior" : {
+        "type" : "RoamTactic",
+        "data" : { }
+      },
+      "usable" : null,
+      "greetings" : [ ],
+      "id" : "skyfarer/control-freak",
+      "inventory" : [ ],
+      "faction" : "skyfarer",
+      "description" : "Usually accompanied by biojacks whom he controls rather freakily.",
+      "stats" : {
+        "launcher" : {
+          "range" : 0,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          },
+          "missiles" : [ ]
+        },
+        "stances" : [ ],
+        "explosive" : {
+          "attack" : 0,
+          "damage" : 0,
+          "radius" : 0,
+          "blast" : 0,
+          "conditions" : [ ]
+        },
+        "speed" : 100,
+        "ranged" : {
+          "attack" : 30,
+          "damage" : 40,
+          "range" : 5,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          },
+          "conditions" : [ ]
+        },
+        "energy" : {
+          "max" : 0,
+          "regen" : 0
+        },
+        "materials" : {
+          "max" : 0,
+          "regen" : 0
+        },
+        "defence" : 30,
+        "skill" : {
+          "hacking" : 0
+        },
+        "melee" : {
+          "attack" : 0,
+          "damage" : 0,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          },
+          "conditions" : [ ]
+        },
+        "resistance" : 20,
+        "health" : {
+          "max" : 30,
+          "regen" : 0
+        },
+        "sight" : {
+          "range" : 7,
+          "sensors" : 10
+        },
+        "armor" : 40
+      }
     } ], [ "scippe/shooter", {
       "display" : "r",
       "color" : "white",
+      "traits" : {
+        "events" : null,
+        "flying" : false,
+        "immobile" : false,
+        "missile" : null,
+        "solitary" : false,
+        "leader" : false
+      },
       "equipments" : [ ],
       "recipes" : [ ],
-      "missile" : null,
-      "immobile" : false,
       "character" : null,
       "name" : "Scippe shooter",
-      "solitary" : false,
-      "flying" : false,
       "responses" : [ ],
       "behavior" : {
         "type" : "RoamTactic",
@@ -2218,15 +2564,19 @@
     } ], [ "scippe/liaison", {
       "display" : "f",
       "color" : "white",
+      "traits" : {
+        "events" : null,
+        "flying" : false,
+        "immobile" : false,
+        "missile" : null,
+        "solitary" : true,
+        "leader" : false
+      },
       "equipments" : [ ],
       "recipes" : [ ],
-      "missile" : null,
-      "immobile" : false,
       "character" : null,
       "locked" : null,
       "name" : "Scippe Irregulars liaison",
-      "solitary" : true,
-      "flying" : false,
       "responses" : [ [ "nomad", [ "scippe/liason" ] ] ],
       "behavior" : {
         "type" : "GreetTactic",
@@ -2301,14 +2651,18 @@
     } ], [ "scippe/dice/gate-officer/default", {
       "display" : "G",
       "color" : "white",
+      "traits" : {
+        "events" : null,
+        "flying" : false,
+        "immobile" : true,
+        "missile" : null,
+        "solitary" : true,
+        "leader" : false
+      },
       "equipments" : [ ],
       "recipes" : [ ],
-      "missile" : null,
-      "immobile" : true,
       "character" : null,
       "name" : "Gate security officer",
-      "solitary" : true,
-      "flying" : false,
       "responses" : [ [ "nomad", [ "scippe/dice/gate-officer/default", "scippe/dice/gate-officer/main" ] ] ],
       "behavior" : {
         "type" : "TurretTactic",
@@ -2393,15 +2747,19 @@
     } ], [ "nomad/apparition", {
       "display" : "G",
       "color" : "white",
+      "traits" : {
+        "events" : null,
+        "flying" : false,
+        "immobile" : false,
+        "missile" : null,
+        "solitary" : true,
+        "leader" : false
+      },
       "equipments" : [ ],
       "recipes" : [ ],
-      "missile" : null,
-      "immobile" : false,
       "character" : null,
       "locked" : null,
       "name" : "Ghostly apparition",
-      "solitary" : true,
-      "flying" : false,
       "responses" : [ [ "nomad", [ "nomad/apparition" ] ] ],
       "behavior" : {
         "type" : "GreetTactic",
@@ -2476,10 +2834,16 @@
     } ], [ "iridan/melee-damager", {
       "display" : "m",
       "color" : "red",
+      "traits" : {
+        "events" : null,
+        "flying" : false,
+        "immobile" : false,
+        "missile" : null,
+        "solitary" : false,
+        "leader" : false
+      },
       "equipments" : [ ],
       "recipes" : [ ],
-      "missile" : null,
-      "immobile" : false,
       "character" : null,
       "locked" : {
         "key" : null,
@@ -2487,8 +2851,6 @@
         "sub" : null
       },
       "name" : "Iridan tiger",
-      "solitary" : false,
-      "flying" : false,
       "responses" : [ ],
       "behavior" : {
         "type" : "RoamTactic",
@@ -2566,17 +2928,128 @@
         },
         "armor" : 30
       }
+    } ], [ "skyfarer/biojack-stun", {
+      "display" : "b",
+      "color" : "#9c27b0",
+      "traits" : {
+        "events" : null,
+        "flying" : false,
+        "immobile" : false,
+        "missile" : null,
+        "solitary" : false,
+        "leader" : false
+      },
+      "equipments" : [ ],
+      "recipes" : [ ],
+      "character" : null,
+      "locked" : {
+        "key" : null,
+        "security" : 30,
+        "sub" : null
+      },
+      "name" : "Skyfarer biojack",
+      "responses" : [ ],
+      "behavior" : {
+        "type" : "RoamTactic",
+        "data" : { }
+      },
+      "usable" : {
+        "type" : "CapturePower",
+        "data" : {
+          "description" : null,
+          "resources" : null
+        }
+      },
+      "greetings" : [ ],
+      "id" : "skyfarer/biojack-stun",
+      "inventory" : [ ],
+      "faction" : "skyfarer",
+      "description" : "Neurally slaved via network. Armed with lethal stun rifle.",
+      "stats" : {
+        "launcher" : {
+          "range" : 0,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          },
+          "missiles" : [ ]
+        },
+        "stances" : [ ],
+        "explosive" : {
+          "attack" : 0,
+          "damage" : 0,
+          "radius" : 0,
+          "blast" : 0,
+          "conditions" : [ ]
+        },
+        "speed" : 80,
+        "ranged" : {
+          "attack" : 30,
+          "damage" : 40,
+          "range" : 5,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          },
+          "conditions" : [ {
+            "type" : "Conditions.Disoriented",
+            "data" : {
+              "strength" : 25
+            }
+          }, {
+            "type" : "Conditions.Immobilized",
+            "data" : {
+              "strength" : 20
+            }
+          } ]
+        },
+        "energy" : {
+          "max" : 0,
+          "regen" : 0
+        },
+        "materials" : {
+          "max" : 0,
+          "regen" : 0
+        },
+        "defence" : 30,
+        "skill" : {
+          "hacking" : 0
+        },
+        "melee" : {
+          "attack" : 0,
+          "damage" : 0,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          },
+          "conditions" : [ ]
+        },
+        "resistance" : 20,
+        "health" : {
+          "max" : 30,
+          "regen" : 0
+        },
+        "sight" : {
+          "range" : 7,
+          "sensors" : 10
+        },
+        "armor" : 30
+      }
     } ], [ "skyfarer/drone", {
       "display" : "d",
       "color" : "yellow",
+      "traits" : {
+        "events" : null,
+        "flying" : true,
+        "immobile" : false,
+        "missile" : null,
+        "solitary" : false,
+        "leader" : false
+      },
       "equipments" : [ ],
       "recipes" : [ ],
-      "missile" : null,
-      "immobile" : false,
       "character" : null,
       "name" : "Skyfarer drone",
-      "solitary" : false,
-      "flying" : true,
       "responses" : [ ],
       "behavior" : {
         "type" : "FollowOwnerTactic",
@@ -2661,14 +3134,18 @@
     } ], [ "scippe/civilians/security-drone", {
       "display" : "d",
       "color" : "white",
+      "traits" : {
+        "events" : null,
+        "flying" : true,
+        "immobile" : false,
+        "missile" : null,
+        "solitary" : false,
+        "leader" : false
+      },
       "equipments" : [ ],
       "recipes" : [ ],
-      "missile" : null,
-      "immobile" : false,
       "character" : null,
       "name" : "Scippe security drone",
-      "solitary" : false,
-      "flying" : true,
       "responses" : [ ],
       "behavior" : {
         "type" : "RoamTactic",
@@ -2763,10 +3240,16 @@
     } ], [ "iridan/ranged-evasive", {
       "display" : "r",
       "color" : "blue",
+      "traits" : {
+        "events" : null,
+        "flying" : false,
+        "immobile" : false,
+        "missile" : null,
+        "solitary" : false,
+        "leader" : false
+      },
       "equipments" : [ ],
       "recipes" : [ ],
-      "missile" : null,
-      "immobile" : false,
       "character" : null,
       "locked" : {
         "key" : null,
@@ -2774,8 +3257,6 @@
         "sub" : null
       },
       "name" : "Iridan sparrow",
-      "solitary" : false,
-      "flying" : false,
       "responses" : [ ],
       "behavior" : {
         "type" : "RoamTactic",
@@ -2856,10 +3337,39 @@
     } ], [ "iridan/turret", {
       "display" : "T",
       "color" : "red",
+      "traits" : {
+        "events" : {
+          "death" : {
+            "type" : "MaybeCreaturePower",
+            "data" : {
+              "description" : null,
+              "resources" : null,
+              "power" : {
+                "type" : "CreateEntityPower",
+                "data" : {
+                  "description" : null,
+                  "resources" : null,
+                  "kind" : {
+                    "type" : "ItemKind",
+                    "data" : null,
+                    "value" : "generic/materials"
+                  },
+                  "createDescription" : null
+                }
+              },
+              "probability" : 75
+            }
+          },
+          "hit" : null
+        },
+        "flying" : false,
+        "immobile" : true,
+        "missile" : null,
+        "solitary" : true,
+        "leader" : false
+      },
       "equipments" : [ ],
       "recipes" : [ ],
-      "missile" : null,
-      "immobile" : true,
       "character" : null,
       "locked" : {
         "key" : null,
@@ -2867,8 +3377,6 @@
         "sub" : null
       },
       "name" : "Iridan turret",
-      "solitary" : true,
-      "flying" : false,
       "responses" : [ ],
       "behavior" : {
         "type" : "TurretTactic",
@@ -2880,30 +3388,6 @@
           "description" : null,
           "resources" : null
         }
-      },
-      "events" : {
-        "death" : {
-          "type" : "MaybeCreaturePower",
-          "data" : {
-            "description" : null,
-            "resources" : null,
-            "power" : {
-              "type" : "CreateEntityPower",
-              "data" : {
-                "description" : null,
-                "resources" : null,
-                "kind" : {
-                  "type" : "ItemKind",
-                  "data" : null,
-                  "value" : "generic/materials"
-                },
-                "createDescription" : null
-              }
-            },
-            "probability" : 75
-          }
-        },
-        "hit" : null
       },
       "greetings" : [ ],
       "id" : "iridan/turret",
@@ -2973,10 +3457,16 @@
     } ], [ "nomad/turret", {
       "display" : "T",
       "color" : "#fff",
+      "traits" : {
+        "events" : null,
+        "flying" : false,
+        "immobile" : true,
+        "missile" : null,
+        "solitary" : true,
+        "leader" : false
+      },
       "equipments" : [ ],
       "recipes" : [ ],
-      "missile" : null,
-      "immobile" : true,
       "character" : null,
       "locked" : {
         "key" : null,
@@ -2984,8 +3474,6 @@
         "sub" : null
       },
       "name" : "Nomad turret",
-      "solitary" : true,
-      "flying" : false,
       "responses" : [ ],
       "behavior" : {
         "type" : "TurretTactic",
@@ -2997,10 +3485,6 @@
           "description" : null,
           "resources" : null
         }
-      },
-      "events" : {
-        "death" : null,
-        "hit" : null
       },
       "greetings" : [ ],
       "id" : "nomad/turret",
@@ -3070,14 +3554,18 @@
     } ], [ "skyfarer/clone", {
       "display" : "r",
       "color" : "purple",
+      "traits" : {
+        "events" : null,
+        "flying" : false,
+        "immobile" : false,
+        "missile" : null,
+        "solitary" : false,
+        "leader" : false
+      },
       "equipments" : [ ],
       "recipes" : [ ],
-      "missile" : null,
-      "immobile" : false,
       "character" : null,
       "name" : "Skyfarer clone",
-      "solitary" : false,
-      "flying" : false,
       "responses" : [ ],
       "behavior" : {
         "type" : "RoamTactic",
@@ -3152,10 +3640,16 @@
     } ], [ "iridan/melee-damager-2", {
       "display" : "M",
       "color" : "red",
+      "traits" : {
+        "events" : null,
+        "flying" : false,
+        "immobile" : false,
+        "missile" : null,
+        "solitary" : false,
+        "leader" : false
+      },
       "equipments" : [ ],
       "recipes" : [ ],
-      "missile" : null,
-      "immobile" : false,
       "character" : null,
       "locked" : {
         "key" : null,
@@ -3163,8 +3657,6 @@
         "sub" : null
       },
       "name" : "Iridan bear",
-      "solitary" : false,
-      "flying" : false,
       "responses" : [ ],
       "behavior" : {
         "type" : "RoamTactic",
@@ -3245,10 +3737,39 @@
     } ], [ "scippe/civilians/turret", {
       "display" : "T",
       "color" : "white",
+      "traits" : {
+        "events" : {
+          "death" : {
+            "type" : "MaybeCreaturePower",
+            "data" : {
+              "description" : null,
+              "resources" : null,
+              "power" : {
+                "type" : "CreateEntityPower",
+                "data" : {
+                  "description" : null,
+                  "resources" : null,
+                  "kind" : {
+                    "type" : "ItemKind",
+                    "data" : null,
+                    "value" : "generic/materials"
+                  },
+                  "createDescription" : null
+                }
+              },
+              "probability" : 75
+            }
+          },
+          "hit" : null
+        },
+        "flying" : false,
+        "immobile" : true,
+        "missile" : null,
+        "solitary" : true,
+        "leader" : false
+      },
       "equipments" : [ ],
       "recipes" : [ ],
-      "missile" : null,
-      "immobile" : true,
       "character" : null,
       "locked" : {
         "key" : null,
@@ -3256,8 +3777,6 @@
         "sub" : null
       },
       "name" : "Scippe security turret",
-      "solitary" : true,
-      "flying" : false,
       "responses" : [ ],
       "behavior" : {
         "type" : "TurretTactic",
@@ -3269,30 +3788,6 @@
           "description" : null,
           "resources" : null
         }
-      },
-      "events" : {
-        "death" : {
-          "type" : "MaybeCreaturePower",
-          "data" : {
-            "description" : null,
-            "resources" : null,
-            "power" : {
-              "type" : "CreateEntityPower",
-              "data" : {
-                "description" : null,
-                "resources" : null,
-                "kind" : {
-                  "type" : "ItemKind",
-                  "data" : null,
-                  "value" : "generic/materials"
-                },
-                "createDescription" : null
-              }
-            },
-            "probability" : 75
-          }
-        },
-        "hit" : null
       },
       "greetings" : [ ],
       "id" : "scippe/civilians/turret",
@@ -3382,15 +3877,19 @@
     } ], [ "scipoi/melee-fast", {
       "display" : "m",
       "color" : "blue",
+      "traits" : {
+        "events" : null,
+        "flying" : false,
+        "immobile" : false,
+        "missile" : null,
+        "solitary" : false,
+        "leader" : false
+      },
       "equipments" : [ ],
       "recipes" : [ ],
-      "missile" : null,
-      "immobile" : false,
       "character" : null,
       "locked" : null,
       "name" : "Scipoi youngling",
-      "solitary" : false,
-      "flying" : false,
       "responses" : [ ],
       "behavior" : {
         "type" : "RoamTactic",
@@ -3465,10 +3964,16 @@
     } ], [ "iridan/melee-fast", {
       "display" : "m",
       "color" : "blue",
+      "traits" : {
+        "events" : null,
+        "flying" : false,
+        "immobile" : false,
+        "missile" : null,
+        "solitary" : false,
+        "leader" : false
+      },
       "equipments" : [ ],
       "recipes" : [ ],
-      "missile" : null,
-      "immobile" : false,
       "character" : null,
       "locked" : {
         "key" : null,
@@ -3476,8 +3981,6 @@
         "sub" : null
       },
       "name" : "Iridan wolf",
-      "solitary" : false,
-      "flying" : false,
       "responses" : [ ],
       "behavior" : {
         "type" : "RoamTactic",
@@ -3558,15 +4061,19 @@
     } ], [ "test/placeholder", {
       "display" : "p",
       "color" : "white",
+      "traits" : {
+        "events" : null,
+        "flying" : false,
+        "immobile" : false,
+        "missile" : null,
+        "solitary" : true,
+        "leader" : false
+      },
       "equipments" : [ ],
       "recipes" : [ ],
-      "missile" : null,
-      "immobile" : false,
       "character" : null,
       "locked" : null,
       "name" : "Placeholder",
-      "solitary" : true,
-      "flying" : false,
       "responses" : [ [ "nomad", [ "placeholder" ] ] ],
       "behavior" : {
         "type" : "GreetTactic",
@@ -3641,10 +4148,16 @@
     } ], [ "iridan/ranged-armored", {
       "display" : "r",
       "color" : "green",
+      "traits" : {
+        "events" : null,
+        "flying" : false,
+        "immobile" : false,
+        "missile" : null,
+        "solitary" : false,
+        "leader" : false
+      },
       "equipments" : [ ],
       "recipes" : [ ],
-      "missile" : null,
-      "immobile" : false,
       "character" : null,
       "locked" : {
         "key" : null,
@@ -3652,8 +4165,6 @@
         "sub" : null
       },
       "name" : "Iridan owl",
-      "solitary" : false,
-      "flying" : false,
       "responses" : [ ],
       "behavior" : {
         "type" : "RoamTactic",
@@ -3734,14 +4245,18 @@
     } ], [ "iridan/avatar", {
       "display" : "A",
       "color" : "red",
+      "traits" : {
+        "events" : null,
+        "flying" : false,
+        "immobile" : false,
+        "missile" : null,
+        "solitary" : false,
+        "leader" : false
+      },
       "equipments" : [ ],
       "recipes" : [ ],
-      "missile" : null,
-      "immobile" : false,
       "character" : null,
       "name" : "Iridan avatar",
-      "solitary" : false,
-      "flying" : false,
       "responses" : [ ],
       "behavior" : {
         "type" : "RoamTactic",
@@ -3816,10 +4331,39 @@
     } ], [ "iridan/swarm", {
       "display" : "m",
       "color" : "#ffc107",
+      "traits" : {
+        "events" : {
+          "death" : {
+            "type" : "MaybeCreaturePower",
+            "data" : {
+              "description" : null,
+              "resources" : null,
+              "power" : {
+                "type" : "CreateEntityPower",
+                "data" : {
+                  "description" : null,
+                  "resources" : null,
+                  "kind" : {
+                    "type" : "CreatureKind",
+                    "data" : null,
+                    "value" : "iridan/swarm"
+                  },
+                  "createDescription" : "Swarm replicates on death."
+                }
+              },
+              "probability" : 20
+            }
+          },
+          "hit" : null
+        },
+        "flying" : false,
+        "immobile" : false,
+        "missile" : null,
+        "solitary" : false,
+        "leader" : false
+      },
       "equipments" : [ ],
       "recipes" : [ ],
-      "missile" : null,
-      "immobile" : false,
       "character" : null,
       "locked" : {
         "key" : null,
@@ -3827,8 +4371,6 @@
         "sub" : null
       },
       "name" : "Iridan swarm",
-      "solitary" : false,
-      "flying" : false,
       "responses" : [ ],
       "behavior" : {
         "type" : "RoamTactic",
@@ -3840,30 +4382,6 @@
           "description" : null,
           "resources" : null
         }
-      },
-      "events" : {
-        "death" : {
-          "type" : "MaybeCreaturePower",
-          "data" : {
-            "description" : null,
-            "resources" : null,
-            "power" : {
-              "type" : "CreateEntityPower",
-              "data" : {
-                "description" : null,
-                "resources" : null,
-                "kind" : {
-                  "type" : "CreatureKind",
-                  "data" : null,
-                  "value" : "iridan/swarm"
-                },
-                "createDescription" : "Swarm replicates on death."
-              }
-            },
-            "probability" : 20
-          }
-        },
-        "hit" : null
       },
       "greetings" : [ ],
       "id" : "iridan/swarm",
@@ -3933,10 +4451,16 @@
     } ], [ "iridan/ranged-damager", {
       "display" : "r",
       "color" : "red",
+      "traits" : {
+        "events" : null,
+        "flying" : false,
+        "immobile" : false,
+        "missile" : null,
+        "solitary" : false,
+        "leader" : false
+      },
       "equipments" : [ ],
       "recipes" : [ ],
-      "missile" : null,
-      "immobile" : false,
       "character" : null,
       "locked" : {
         "key" : null,
@@ -3944,8 +4468,6 @@
         "sub" : null
       },
       "name" : "Iridan raven",
-      "solitary" : false,
-      "flying" : false,
       "responses" : [ ],
       "behavior" : {
         "type" : "RoamTactic",
@@ -9350,7 +9872,7 @@
   } ], [ "scippe/dice/negotiations", {
     "name" : "DiCe negotiations",
     "description" : null,
-    "region" : "scippe/dice",
+    "region" : "scippe/dice/entrance",
     "area" : "placeholder",
     "variants" : [ ],
     "id" : "scippe/dice/negotiations"
@@ -17110,6 +17632,57 @@
       },
       "id" : "nomad/spaceship/hub"
     }
+  } ], [ "skyfarer/hall/control-freak", {
+    "type" : "RandomizedTemplate",
+    "data" : {
+      "conduitLocations" : {
+        "min" : 0,
+        "max" : 0,
+        "tag" : null
+      },
+      "shape" : {
+        "type" : "Rectangle",
+        "data" : {
+          "width" : 14,
+          "height" : 10,
+          "variance" : 0
+        }
+      },
+      "fill" : null,
+      "power" : null,
+      "routing" : null,
+      "border" : {
+        "type" : "ContentSelection.ThemeWall",
+        "data" : {
+          "category" : [ "WallKind.SecureCategory" ],
+          "tags" : [ ]
+        }
+      },
+      "templateCatalogue" : null,
+      "terrain" : null,
+      "templates" : [ ],
+      "id" : "skyfarer/hall/control-freak",
+      "features" : [ {
+        "type" : "RandomizedContentFeature",
+        "data" : {
+          "catalogues" : [ "skyfarer/party/control-freak" ],
+          "creatures" : [ ],
+          "items" : [ ],
+          "widgets" : [ ]
+        }
+      } ],
+      "entrances" : {
+        "min" : 1,
+        "max" : 2,
+        "door" : {
+          "type" : "ContentSelection.ThemeDoor",
+          "data" : {
+            "category" : [ "ItemKind.SecureDoorCategory" ],
+            "tags" : [ ]
+          }
+        }
+      }
+    }
   } ], [ "iridan/area/labs", {
     "type" : "RandomizedTemplate",
     "data" : {
@@ -20422,7 +20995,7 @@
           "tags" : [ ]
         }
       },
-      "templateCatalogue" : "generic/area-rooms",
+      "templateCatalogue" : "generic/area-rooms-challenges",
       "terrain" : null,
       "templates" : [ {
         "selection" : {
@@ -26608,7 +27181,7 @@
     "name" : "Nomad spaceship"
   } ] ],
   "worlds" : [ [ "main", {
-    "start" : "iridan/start",
+    "start" : "scippe/dice/1",
     "characters" : [ "player" ],
     "conduits" : [ {
       "source" : "iridan/labs",
