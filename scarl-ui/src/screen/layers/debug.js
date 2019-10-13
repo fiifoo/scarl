@@ -19,6 +19,12 @@ export default area => {
                 }
                 break
             }
+            case modes.PARTY: {
+                if (debug.party) {
+                    renderParties(debug.party)
+                }
+                break
+            }
             case modes.WAYPOINT: {
                 if (debug.waypoint) {
                     renderWaypoint(debug.waypoint)
@@ -30,6 +36,20 @@ export default area => {
 
     const renderFov = ({locations}) => {
         locations.forEach(draw.fill(HIGHLIGHT_COLOR))
+    }
+
+    const renderParties = parties => {
+        parties.map(party => {
+            const color = getRandomColor(1)
+            const fill = draw.fill(color, 0.5)
+            const dot = draw.dot(color)
+
+            if (party.leaderLocation) {
+                dot(party.leaderLocation)
+                fill(party.leaderLocation)
+            }
+            party.memberLocations.forEach(fill)
+        })
     }
 
     const renderWaypoint = ({network}) => {

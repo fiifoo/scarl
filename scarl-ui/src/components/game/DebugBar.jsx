@@ -9,6 +9,13 @@ const FovButton = ({mode, cancelMode, debugFov}) => {
     return <MenuItem onClick={onClick} label="Debug FOV" />
 }
 
+const PartyButton = ({mode, cancelMode, debugParty}) => {
+    const active = mode === modes.PARTY
+    const onClick = active ? cancelMode : debugParty
+
+    return <MenuItem onClick={onClick} label="Debug parties" />
+}
+
 const WaypointButton = ({mode, cancelMode, debugWaypoint}) => {
     const active = mode === modes.WAYPOINT
     const onClick = active ? cancelMode : debugWaypoint
@@ -18,7 +25,7 @@ const WaypointButton = ({mode, cancelMode, debugWaypoint}) => {
 
 const DebugBar = props =>  {
     const {mode, cancelMode} = props
-    const {debugFov, debugWaypoint} = props
+    const {debugFov, debugParty, debugWaypoint} = props
 
     return (
         <div>
@@ -26,6 +33,10 @@ const DebugBar = props =>  {
                 mode={mode}
                 cancelMode={cancelMode}
                 debugFov={debugFov} />
+            <PartyButton
+                mode={mode}
+                cancelMode={cancelMode}
+                debugParty={debugParty} />
             <WaypointButton
                 mode={mode}
                 cancelMode={cancelMode}

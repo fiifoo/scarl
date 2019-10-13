@@ -56,7 +56,17 @@ object ApplyTemplate {
                            template: Template.Result,
                            offset: Location = Location(0, 0)
                           ): State = {
-    val state = processUniqueEntities(initial, template.content.creatures, offset)
+    val (leaders, rest) = template.content.creatures partition (x => {
+      val kind = x._2._1
+
+      kind(initial).traits.leader
+    })
+
+    val process =
+      ((state: State) => processUniqueEntities(state, leaders, offset)) andThen
+        ((state: State) => processUniqueEntities(state, rest, offset))
+
+    val state = process(initial)
 
     template.templates.foldLeft(state)((s, data) => {
       val (location, sub) = data

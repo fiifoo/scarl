@@ -22,15 +22,17 @@ object CreatureInfo {
       values.id,
       values.kind,
       values.faction,
-      values.location,
-      values.damage,
-      values.resources,
       values.stats,
 
       values.character,
       values.locked,
       values.traits.missile,
       values.usable,
+
+      values.damage,
+      values.location,
+      values.party,
+      values.resources,
 
       conditions,
       stances,
@@ -46,15 +48,17 @@ object CreatureInfo {
 case class CreatureInfo(id: CreatureId,
                         kind: CreatureKindId,
                         faction: FactionId,
-                        location: Location,
-                        damage: Double,
-                        resources: Resources,
                         stats: Stats,
 
                         character: Option[Character],
                         locked: Option[Lock],
                         missile: Option[Missile],
                         usable: Option[CreaturePower],
+
+                        damage: Double,
+                        location: Location,
+                        party: Party,
+                        resources: Resources,
 
                         conditions: Set[CreatureInfo.ConditionInfo],
                         stances: Set[CreatureInfo.StanceInfo],

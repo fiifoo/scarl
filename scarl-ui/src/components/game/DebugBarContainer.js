@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { cancelMode, debugFov, debugWaypoint } from '../../actions/debugActions'
+import { cancelMode, debugFov, debugParty, debugWaypoint } from '../../actions/debugActions'
 import DebugBar from './DebugBar.jsx'
 
 const DebugBarContainer = connect(
@@ -8,6 +8,7 @@ const DebugBarContainer = connect(
     }), {
         cancelMode,
         debugFov,
+        debugParty,
         debugWaypoint,
     }
 )(DebugBar)

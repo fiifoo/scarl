@@ -87,7 +87,7 @@ case class CreatureKind(id: CreatureKindId,
   }
 
   private def getParty(s: State, location: Location, self: CreatureId): Party = {
-    if (traits.solitary) {
+    if (traits.leader || traits.solitary) {
       Party(self)
     } else {
       Party.find(s, this, location) getOrElse Party(self)

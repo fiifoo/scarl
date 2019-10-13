@@ -9,15 +9,25 @@ import io.github.fiifoo.scarl.core.kind.CreatureKind
 object Party {
 
   def find(s: State, kind: CreatureKind, location: Location): Option[Party] = {
-    val comrade = getLocationWaypoint(s)(location) flatMap (waypoint => {
+    val waypoint = getLocationWaypoint(s)(location)
+    val waypoints = waypoint map (waypoint => {
+      s.cache.waypointNetwork.adjacentWaypoints.getOrElse(waypoint, Set()) + waypoint
+    }) getOrElse {
+      Set()
+    }
+
+    val leaders = waypoints flatMap (waypoint => {
       getWaypointCreatures(s)(waypoint) map (_ (s)) find (nearby => {
-        !nearby.traits.solitary &&
+        nearby.id == nearby.party.leader &&
+          !nearby.traits.solitary &&
           nearby.faction == kind.faction &&
-          nearby.behavior == kind.behavior
+          (nearby.traits.leader || nearby.behavior == kind.behavior)
       })
     })
 
-    comrade map (_.party)
+    leaders collectFirst {
+      case x => x.party
+    }
   }
 }
 

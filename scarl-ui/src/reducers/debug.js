@@ -3,6 +3,7 @@ import * as types from '../actions/actionTypes'
 
 const Debug = Record({
     fov: null,
+    party: null,
     waypoint: null,
 })
 
@@ -20,6 +21,9 @@ export default (state = Debug(), action) => {
         }
         case types.RECEIVE_DEBUG_FOV: {
             return state.set('fov', action.data)
+        }
+        case types.RECEIVE_DEBUG_PARTY: {
+            return state.set('party', action.data)
         }
         case types.RECEIVE_DEBUG_WAYPOINT: {
             return state.set('waypoint', {
