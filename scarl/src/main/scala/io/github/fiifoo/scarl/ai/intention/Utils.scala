@@ -31,7 +31,7 @@ object Utils {
     val location = creature(s).location
 
     val filter = (target: Creature) =>
-      target.id != creature && inRange(location, target, range) && target.missile.isEmpty
+      target.id != creature && inRange(location, target, range) && target.traits.missile.isEmpty
 
     val targets = (factions foldLeft Set[Creature]()) ((targets, faction) => {
       val filtered = s.index.factionMembers getOrElse(faction, Set()) map (_ (s)) filter filter
@@ -89,7 +89,7 @@ object Utils {
     }
 
     val from = actor(s).location
-    val flight = actor(s).flying
+    val flight = actor(s).traits.flying
 
     Path(s, flight)(from, to) map (path => {
       MoveAction(path.head)
@@ -102,7 +102,7 @@ object Utils {
         (getLocationEntities(s)(location) collectFirst {
           case creature: CreatureId => if (wait) {
             Some(PassAction)
-          } else if (displace && !isEnemy(s, actor)(creature) && !creature(s).immobile) {
+          } else if (displace && !isEnemy(s, actor)(creature) && !creature(s).traits.immobile) {
             Some(DisplaceAction(creature))
           } else {
             None

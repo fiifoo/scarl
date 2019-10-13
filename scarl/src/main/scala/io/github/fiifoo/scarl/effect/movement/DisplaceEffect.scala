@@ -10,7 +10,7 @@ case class DisplaceEffect(displacer: CreatureId,
                          ) extends Effect {
 
   def apply(s: State): EffectResult = {
-    if (this.displaced(s).immobile) {
+    if (this.displaced(s).traits.immobile) {
       EffectResult(
         CollideEffect(this.displacer, this.displaced, Some(this))
       )

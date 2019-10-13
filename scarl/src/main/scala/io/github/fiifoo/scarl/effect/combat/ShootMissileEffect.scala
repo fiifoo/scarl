@@ -24,7 +24,7 @@ case class ShootMissileEffect(attacker: CreatureId,
     val destination = (Line(from, targetLocation) take range + 1).last
     val behavior = MissileTactic(
       destination = destination,
-      target = kind(s).missile flatMap (missile => if (missile.guidance.isEmpty) None else getLocationEntities(s)(destination) collectFirst {
+      target = kind(s).traits.missile flatMap (missile => if (missile.guidance.isEmpty) None else getLocationEntities(s)(destination) collectFirst {
         case c: CreatureId => SafeCreatureId(c)
       })
     )
@@ -35,7 +35,7 @@ case class ShootMissileEffect(attacker: CreatureId,
         stats = getMissileStats(s, attackerStats)
       ).apply(s, s.idSeq, from, Options(Some(attacker)))
 
-    result.entity.missile map (_ => EffectResult(result.mutations)) getOrElse EffectResult()
+    result.entity.traits.missile map (_ => EffectResult(result.mutations)) getOrElse EffectResult()
   }
 
   private def getMissileStats(s: State, attackerStats: Stats): Stats = {

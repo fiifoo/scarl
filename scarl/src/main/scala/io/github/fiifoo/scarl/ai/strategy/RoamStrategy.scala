@@ -25,7 +25,7 @@ case class RoamStrategy(investigate: Set[Waypoint] = Set()) extends Strategy {
       random
     )
 
-    val mobile = members filterNot (_ (s).immobile)
+    val mobile = members filterNot (_ (s).traits.immobile)
 
     brain.copy(
       strategy = RoamStrategy(investigate),

@@ -29,7 +29,7 @@ object CreatureInfo {
 
       values.character,
       values.locked,
-      values.missile,
+      values.traits.missile,
       values.usable,
 
       conditions,

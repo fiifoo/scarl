@@ -44,7 +44,7 @@ package object strategy {
         WaypointPath.find(s)(from, waypoints.contains, maxDistance = maxDistance) map (_.last) map (waypoint => {
           val intention = getIntention(waypoint)
           val party = if (partyMovement) {
-            getCreaturePartyMembers(s)(creature) filterNot (_ (s).immobile)
+            getCreaturePartyMembers(s)(creature) filterNot (_ (s).traits.immobile)
           } else {
             Set(creature)
           }

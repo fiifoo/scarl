@@ -25,7 +25,7 @@ case class DeathEffect(target: CreatureId,
       RemovableEntityMutation(target)
     ) ::: leaderDeath(s)
 
-    val eventEffect = target(s).events flatMap (_.death) map (power => {
+    val eventEffect = target(s).traits.events flatMap (_.death) map (power => {
       PowerUseEffect(Some(target), target, power, requireResources = false, Some(this))
     })
 

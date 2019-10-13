@@ -23,7 +23,7 @@ case class MovedEffect(target: CreatureId,
   }
 
   private def getTriggerEffects(s: State): List[Effect] = {
-    if (target(s).flying) {
+    if (target(s).traits.flying) {
       List()
     } else {
       getLocationTriggers(s)(to).toList flatMap (_ (s)(s, target))

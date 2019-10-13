@@ -2,7 +2,7 @@ package io.github.fiifoo.scarl.core.kind
 
 import io.github.fiifoo.scarl.core.ai.Behavior
 import io.github.fiifoo.scarl.core.communication.CommunicationId
-import io.github.fiifoo.scarl.core.creature.{Character, Events, FactionId, Missile, Party, Resources, Stats}
+import io.github.fiifoo.scarl.core.creature.{Character, FactionId, Party, Resources, Stats, Traits}
 import io.github.fiifoo.scarl.core.entity._
 import io.github.fiifoo.scarl.core.geometry.Location
 import io.github.fiifoo.scarl.core.item.Equipment.Slot
@@ -28,17 +28,13 @@ case class CreatureKind(id: CreatureKindId,
                         color: Color,
                         description: Option[String] = None,
                         faction: FactionId,
-                        solitary: Boolean = false,
                         behavior: Behavior,
                         stats: Stats,
 
                         character: Option[Character] = None,
-                        events: Option[Events] = None,
-                        flying: Boolean = false,
-                        immobile: Boolean = false,
                         locked: Option[Lock.Source] = None,
-                        missile: Option[Missile] = None,
                         usable: Option[CreaturePower] = None,
+                        traits: Traits = Traits(),
 
                         equipments: Map[Slot, ItemKindId] = Map(),
                         inventory: List[ItemKindId] = List(),
@@ -56,26 +52,23 @@ case class CreatureKind(id: CreatureKindId,
       id = creatureId,
       kind = id,
       faction = options.owner map (_ (s).faction) getOrElse faction,
-      solitary = solitary,
-      party = getParty(s, location, creatureId),
       behavior = behavior,
+      stats = stats,
+
+      character = character,
+      locked = locked map (Lock(_, Some(creatureId))),
+      usable = usable,
+      traits = traits,
+
       location = location,
-      tick = s.tick,
+      owner = options.owner map SafeCreatureId.apply,
+      party = getParty(s, location, creatureId),
       resources = Resources(
         stats.energy.max,
         stats.materials.max
       ),
-      stats = stats,
-      owner = options.owner map SafeCreatureId.apply,
       tags = options.tags,
-
-      character = character,
-      events = events,
-      flying = flying,
-      immobile = immobile,
-      locked = locked map (Lock(_, Some(creatureId))),
-      missile = missile,
-      usable = usable
+      tick = s.tick,
     )
 
     val (equipmentMutations, equipmentIdSeq) = processEquipments(s, creatureIdSeq, creatureId)
@@ -94,7 +87,7 @@ case class CreatureKind(id: CreatureKindId,
   }
 
   private def getParty(s: State, location: Location, self: CreatureId): Party = {
-    if (solitary) {
+    if (traits.solitary) {
       Party(self)
     } else {
       Party.find(s, this, location) getOrElse Party(self)

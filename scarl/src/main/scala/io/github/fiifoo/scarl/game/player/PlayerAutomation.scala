@@ -162,7 +162,7 @@ object PlayerAutomation {
     location: Location =>
       !state.areaMap.isDefinedAt(location) ||
         blocked(location) ||
-        getCreature(state)(location).exists(_.apply(state.instance).immobile)
+        getCreature(state)(location).exists(_.apply(state.instance).traits.immobile)
   }
 
   private def isMovementBlocked(state: RunState): Location => Boolean = {

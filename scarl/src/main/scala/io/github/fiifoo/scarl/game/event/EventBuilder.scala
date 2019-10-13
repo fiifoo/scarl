@@ -493,7 +493,7 @@ class EventBuilder(s: State, player: CreatureId, fov: Set[Location]) {
       } else {
         None
       }
-    } else if (target(s).missile.isDefined) {
+    } else if (target(s).traits.missile.isDefined) {
       if ((fov contains effect.from) || (fov contains effect.to)) {
         Some(MoveMissileEvent(effect.from, effect.to))
       } else {

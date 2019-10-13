@@ -22,7 +22,7 @@ trait AbstractHitEffect extends Effect {
       DamageEffect(target, damage, Some(this))
     })
 
-    val eventEffect = target(s).events flatMap (_.hit) map (power => {
+    val eventEffect = target(s).traits.events flatMap (_.hit) map (power => {
       PowerUseEffect(Some(target), target, power, requireResources = false, Some(this))
     })
 

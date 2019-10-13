@@ -81,7 +81,7 @@ object ActionValidator {
     entityExists(s)(action.target) &&
       isAdjacentLocation(s, actor)(action.target(s).location) &&
       !isEnemy(s, actor, action.target) &&
-      !actor(s).immobile &&
+      !actor(s).traits.immobile &&
       getCreatureStats(s)(actor).speed > 0
   }
 
@@ -109,7 +109,7 @@ object ActionValidator {
 
   private def validate(s: State, actor: CreatureId, action: MoveAction): Boolean = {
     isAdjacentLocation(s, actor)(action.location) &&
-      !actor(s).immobile &&
+      !actor(s).traits.immobile &&
       getCreatureStats(s)(actor).speed > 0
   }
 

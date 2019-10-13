@@ -21,9 +21,9 @@ case class MissileTactic(destination: Location, target: Option[SafeCreatureId]) 
   }
 
   override def apply(s: State, actor: CreatureId, random: Random): Option[Result] = {
-    actor(s).missile flatMap (missile => {
+    actor(s).traits.missile flatMap (missile => {
       val from = actor(s).location
-      val flight = actor(s).flying
+      val flight = actor(s).traits.flying
 
       if (from == destination) {
         Some(explode)

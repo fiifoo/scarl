@@ -11,7 +11,7 @@ object Party {
   def find(s: State, kind: CreatureKind, location: Location): Option[Party] = {
     val comrade = getLocationWaypoint(s)(location) flatMap (waypoint => {
       getWaypointCreatures(s)(waypoint) map (_ (s)) find (nearby => {
-        !nearby.solitary &&
+        !nearby.traits.solitary &&
           nearby.faction == kind.faction &&
           nearby.behavior == kind.behavior
       })

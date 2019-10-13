@@ -15,6 +15,6 @@ object Simulate {
   }
 
   private def combatants(creatures: Iterable[CreatureKind]): Iterable[CreatureKind] = {
-    creatures filterNot (_.missile.isDefined)
+    creatures filterNot (_.traits.missile.isDefined)
   }
 }

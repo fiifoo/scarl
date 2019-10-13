@@ -3,7 +3,7 @@ package io.github.fiifoo.scarl.core.test_assets
 import io.github.fiifoo.scarl.core.State
 import io.github.fiifoo.scarl.core.ai.Behavior
 import io.github.fiifoo.scarl.core.creature.Stats.{Health, Melee, Sight}
-import io.github.fiifoo.scarl.core.creature.{Character, FactionId, Party, Stats}
+import io.github.fiifoo.scarl.core.creature.{Character, FactionId, Party, Stats, Traits}
 import io.github.fiifoo.scarl.core.entity.{Creature, CreatureId}
 import io.github.fiifoo.scarl.core.geometry.Location
 import io.github.fiifoo.scarl.core.kind.{CreatureKind, CreatureKindId}
@@ -38,7 +38,7 @@ object TestCreatureFactory {
       id = id,
       kind = kind,
       faction = faction,
-      solitary = true,
+      traits = Traits(solitary = true),
       party = Party(id),
       behavior = behavior,
       location = location,

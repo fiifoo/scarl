@@ -30,7 +30,7 @@ case class AttackStrategy(assault: Set[Waypoint] = Set(),
       random
     )
 
-    val mobile = members filterNot (_ (s).immobile)
+    val mobile = members filterNot (_ (s).traits.immobile)
     val (scouts, leaders) = mobile filter (x => x(s).party.leader == x) partition (_ (s).behavior.isInstanceOf[ScoutTactic])
 
     if (assault.isEmpty && scout.isEmpty) {
