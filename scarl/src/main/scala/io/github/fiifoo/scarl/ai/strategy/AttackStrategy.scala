@@ -4,7 +4,7 @@ import io.github.fiifoo.scarl.ai.intention.{ScoutIntention, TravelIntention}
 import io.github.fiifoo.scarl.ai.tactic.{AttackTactic, PursueTactic, ScoutTactic}
 import io.github.fiifoo.scarl.core.State
 import io.github.fiifoo.scarl.core.ai.{Brain, Priority, Strategy}
-import io.github.fiifoo.scarl.core.entity.CreatureId
+import io.github.fiifoo.scarl.core.entity.{CreatureId, SafeCreatureId}
 import io.github.fiifoo.scarl.core.entity.Selectors.{getCreatureWaypoint, getLocationWaypoint}
 import io.github.fiifoo.scarl.core.geometry.WaypointNetwork.Waypoint
 
@@ -31,7 +31,7 @@ case class AttackStrategy(assault: Set[Waypoint] = Set(),
     )
 
     val mobile = members filterNot (_ (s).traits.immobile)
-    val (scouts, leaders) = mobile filter (x => x(s).party.leader == x) partition (_ (s).behavior.isInstanceOf[ScoutTactic])
+    val (scouts, leaders) = mobile filter (x => x(s).party.leader == SafeCreatureId(x)) partition (_ (s).behavior.isInstanceOf[ScoutTactic])
 
     if (assault.isEmpty && scout.isEmpty) {
       brain.copy(strategy = RoamStrategy(investigate))

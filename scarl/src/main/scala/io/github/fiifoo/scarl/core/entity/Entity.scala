@@ -134,8 +134,8 @@ case class Creature(id: CreatureId,
 
   def setTick(tick: Tick): Creature = copy(tick = tick)
 
-  def leader: Option[CreatureId] = {
-    if (party.leader == id) {
+  def leader: Option[SafeCreatureId] = {
+    if (party.leader == SafeCreatureId(id)) {
       None
     } else {
       Some(party.leader)

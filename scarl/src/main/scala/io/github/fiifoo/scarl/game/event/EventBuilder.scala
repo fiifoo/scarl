@@ -589,7 +589,7 @@ class EventBuilder(s: State, player: CreatureId, fov: Set[Location]) {
 
   private def build(effect: ResistConditionEffect): Option[String] = {
     if (effect.target == player) {
-      Some(s"You resist ${condition(effect.condition)}.")
+      Some(s"You resist ${condition(effect.condition, noun = true)}.")
     } else {
       None
     }

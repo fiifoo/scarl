@@ -28,9 +28,12 @@ object JsonPower {
   lazy private implicit val factionStrategyFormat = Json.format[FactionStrategyPower]
   lazy private implicit val maybeCreatureFormat = Json.format[MaybeCreaturePower]
   lazy private implicit val maybeItemFormat = Json.format[MaybeItemPower]
+  lazy private implicit val partyFormat = Json.format[PartyPower]
   lazy private implicit val receiveCommunicationFormat = Json.format[ReceiveCommunicationPower]
   lazy private implicit val receiveKeyFormat = Json.format[ReceiveKeyPower]
   lazy private implicit val removeItemFormat = Json.format[RemoveItemPower]
+  lazy private implicit val rollCreatureConditionFormat = Json.format[RollCreatureConditionPower]
+  lazy private implicit val rollUserConditionFormat = Json.format[RollUserConditionPower]
   lazy private implicit val scanFormat = Json.format[ScanPower]
   lazy private implicit val transformFormat = Json.format[TransformPower]
   lazy private implicit val trapAttackFormat = Json.format[TrapAttackPower]
@@ -47,7 +50,10 @@ object JsonPower {
       case "FactionDispositionPower" => data.as[FactionDispositionPower]
       case "FactionStrategyPower" => data.as[FactionStrategyPower]
       case "MaybeCreaturePower" => data.as[MaybeCreaturePower]
+      case "PartyPower" => data.as[PartyPower]
       case "ReceiveKeyPower" => data.as[ReceiveKeyPower]
+      case "RollCreatureConditionPower" => data.as[RollCreatureConditionPower]
+      case "RollUserConditionPower" => data.as[RollUserConditionPower]
       case "TransformPower" => data.as[TransformPower]
       case "VoidPower" => data.as[VoidPower]
     }, {
@@ -60,7 +66,10 @@ object JsonPower {
       case power: FactionDispositionPower => factionDispositionFormat.writes(power)
       case power: FactionStrategyPower => factionStrategyFormat.writes(power)
       case power: MaybeCreaturePower => maybeCreatureFormat.writes(power)
+      case power: PartyPower => partyFormat.writes(power)
       case power: ReceiveKeyPower => receiveKeyFormat.writes(power)
+      case power: RollCreatureConditionPower => rollCreatureConditionFormat.writes(power)
+      case power: RollUserConditionPower => rollUserConditionFormat.writes(power)
       case power: TransformPower => transformFormat.writes(power)
       case power: VoidPower => voidFormat.writes(power)
     }
@@ -77,6 +86,7 @@ object JsonPower {
       case "ReceiveCommunicationPower" => data.as[ReceiveCommunicationPower]
       case "ReceiveKeyPower" => data.as[ReceiveKeyPower]
       case "RemoveItemPower" => data.as[RemoveItemPower]
+      case "RollUserConditionPower" => data.as[RollUserConditionPower]
       case "ScanPower" => data.as[ScanPower]
       case "TransformPower" => data.as[TransformPower]
       case "TrapAttackPower" => data.as[TrapAttackPower]
@@ -91,6 +101,7 @@ object JsonPower {
       case power: ReceiveCommunicationPower => receiveCommunicationFormat.writes(power)
       case power: ReceiveKeyPower => receiveKeyFormat.writes(power)
       case power: RemoveItemPower => removeItemFormat.writes(power)
+      case power: RollUserConditionPower => rollUserConditionFormat.writes(power)
       case power: ScanPower => scanFormat.writes(power)
       case power: TransformPower => transformFormat.writes(power)
       case power: TrapAttackPower => trapAttackFormat.writes(power)

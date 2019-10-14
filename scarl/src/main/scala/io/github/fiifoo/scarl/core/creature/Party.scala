@@ -1,12 +1,16 @@
 package io.github.fiifoo.scarl.core.creature
 
 import io.github.fiifoo.scarl.core.State
-import io.github.fiifoo.scarl.core.entity.CreatureId
 import io.github.fiifoo.scarl.core.entity.Selectors.{getLocationWaypoint, getWaypointCreatures}
+import io.github.fiifoo.scarl.core.entity.{CreatureId, SafeCreatureId}
 import io.github.fiifoo.scarl.core.geometry.Location
 import io.github.fiifoo.scarl.core.kind.CreatureKind
 
 object Party {
+
+  def apply(leader: CreatureId): Party = {
+    Party(SafeCreatureId(leader))
+  }
 
   def find(s: State, kind: CreatureKind, location: Location): Option[Party] = {
     val waypoint = getLocationWaypoint(s)(location)
@@ -18,7 +22,7 @@ object Party {
 
     val leaders = waypoints flatMap (waypoint => {
       getWaypointCreatures(s)(waypoint) map (_ (s)) find (nearby => {
-        nearby.id == nearby.party.leader &&
+        SafeCreatureId(nearby.id) == nearby.party.leader &&
           !nearby.traits.solitary &&
           nearby.faction == kind.faction &&
           (nearby.traits.leader || nearby.behavior == kind.behavior)
@@ -31,4 +35,4 @@ object Party {
   }
 }
 
-case class Party(leader: CreatureId)
+case class Party(leader: SafeCreatureId)

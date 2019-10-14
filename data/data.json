@@ -2392,7 +2392,29 @@
       "display" : "B",
       "color" : "#9c27b0",
       "traits" : {
-        "events" : null,
+        "events" : {
+          "death" : {
+            "type" : "PartyPower",
+            "data" : {
+              "description" : null,
+              "resources" : null,
+              "power" : {
+                "type" : "RollCreatureConditionPower",
+                "data" : {
+                  "description" : null,
+                  "resources" : null,
+                  "condition" : {
+                    "type" : "Conditions.Disoriented",
+                    "data" : {
+                      "strength" : 30
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "hit" : null
+        },
         "flying" : false,
         "immobile" : false,
         "missile" : null,
