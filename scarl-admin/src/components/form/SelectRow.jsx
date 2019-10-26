@@ -1,6 +1,6 @@
 import React from 'react'
 import Select from 'react-select'
-import CreatableSelect from 'react-select/Creatable'
+import CreatableSelect from 'react-select/creatable'
 import FormRow from './FormRow.jsx'
 import { reactSelect } from './utils'
 
