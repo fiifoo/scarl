@@ -73,7 +73,7 @@ export const getCreatureInfo = (creature, player, factions, area) => {
     const info = [
         getCreatureFactionInfo(creature, player, factions, area),
         getCreatureWoundedInfo(damage / health),
-    ].filter(x => !!x).concat(getCreatureConditionsInfo(creature))
+    ].filter(x => !!x).concat(getCreatureConditionsInfo(creature)).concat(getCreatureStancesInfo(creature))
 
     if (info.length === 0) {
         return undefined

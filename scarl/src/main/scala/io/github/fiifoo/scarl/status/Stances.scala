@@ -43,4 +43,16 @@ object Stances {
     def effects(s: State, creature: CreatureId): List[Effect] = List()
   }
 
+  case object Vulnerable extends Stance {
+    val key = "Stances.Vulnerable"
+    val duration = 1
+
+    def modifyStats(stats: Stats): Stats = {
+      stats.copy(
+        armor = (stats.armor * 0.5).toInt,
+      )
+    }
+
+    def effects(s: State, creature: CreatureId): List[Effect] = List()
+  }
 }

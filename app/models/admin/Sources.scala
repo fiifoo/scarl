@@ -271,6 +271,7 @@ object Sources {
     SubModelSource(typeOf[Stance], List(
       typeOf[Stances.Aim.type],
       typeOf[Stances.Evasive.type],
+      typeOf[Stances.Vulnerable.type],
     ), objectPolymorphism = true),
 
     SubModelSource(typeOf[StellarBodySource.Category], List(

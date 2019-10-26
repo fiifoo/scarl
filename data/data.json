@@ -341,6 +341,57 @@
       "items" : [ ],
       "widgets" : [ ],
       "id" : "skyfarer/party/control-freak"
+    } ], [ "scipoi/party/builder", {
+      "subs" : [ ],
+      "creatures" : [ {
+        "selection" : {
+          "type" : "ContentSelection.FixedCreature",
+          "data" : {
+            "kind" : "scipoi/builder",
+            "tags" : [ ]
+          }
+        },
+        "distribution" : {
+          "type" : "Distribution.Uniform",
+          "data" : {
+            "min" : 1,
+            "max" : 1
+          }
+        }
+      }, {
+        "selection" : {
+          "type" : "ContentSelection.FixedCreature",
+          "data" : {
+            "kind" : "scipoi/worker",
+            "tags" : [ ]
+          }
+        },
+        "distribution" : {
+          "type" : "Distribution.Uniform",
+          "data" : {
+            "min" : 3,
+            "max" : 4
+          }
+        }
+      }, {
+        "selection" : {
+          "type" : "ContentSelection.FixedCreature",
+          "data" : {
+            "kind" : "scipoi/youngling",
+            "tags" : [ ]
+          }
+        },
+        "distribution" : {
+          "type" : "Distribution.Uniform",
+          "data" : {
+            "min" : 1,
+            "max" : 2
+          }
+        }
+      } ],
+      "items" : [ ],
+      "widgets" : [ ],
+      "id" : "scipoi/party/builder"
     } ] ],
     "creatures" : [ [ "iridan/default", {
       "subs" : [ ],
@@ -399,8 +450,14 @@
     } ], [ "scipoi/scippe-civilians", {
       "subs" : [ ],
       "content" : [ [ "CreatureKind.DefaultCategory", [ {
-        "value" : "scipoi/melee-fast",
+        "value" : "scipoi/youngling",
         "weight" : 100
+      }, {
+        "value" : "scipoi/crawler",
+        "weight" : 50
+      }, {
+        "value" : "scipoi/worker",
+        "weight" : 10
       } ] ], [ "CreatureKind.TurretCategory", [ {
         "value" : "scippe/civilians/turret",
         "weight" : 100
@@ -528,6 +585,9 @@
       "id" : "scipoi/scippe-civilians",
       "content" : [ [ "Template.ChallengeCategory", [ {
         "value" : "skyfarer/hall/control-freak",
+        "weight" : 100
+      }, {
+        "value" : "scipoi/hall/builder-chasm",
         "weight" : 100
       } ] ], [ "Template.RoomCategory", [ {
         "value" : "generic/room",
@@ -1630,7 +1690,7 @@
         },
         "defence" : 0,
         "skill" : {
-          "hacking" : 30
+          "hacking" : 300
         },
         "melee" : {
           "attack" : 0,
@@ -2496,6 +2556,109 @@
           "sensors" : 10
         },
         "armor" : 40
+      }
+    } ], [ "scipoi/missile", {
+      "display" : "x",
+      "color" : "#673ab7",
+      "traits" : {
+        "events" : {
+          "death" : {
+            "type" : "ExplodePower",
+            "data" : {
+              "description" : null,
+              "resources" : null,
+              "directed" : false
+            }
+          },
+          "hit" : null
+        },
+        "flying" : true,
+        "immobile" : false,
+        "missile" : {
+          "guidance" : null
+        },
+        "solitary" : true,
+        "leader" : false
+      },
+      "equipments" : [ ],
+      "recipes" : [ ],
+      "character" : null,
+      "name" : "Unstable chemicals",
+      "responses" : [ ],
+      "behavior" : {
+        "type" : "PassTactic",
+        "data" : { }
+      },
+      "usable" : null,
+      "greetings" : [ ],
+      "id" : "scipoi/missile",
+      "inventory" : [ ],
+      "faction" : "none",
+      "description" : "Explosive missile.",
+      "stats" : {
+        "launcher" : {
+          "range" : 0,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          },
+          "missiles" : [ ]
+        },
+        "stances" : [ ],
+        "explosive" : {
+          "attack" : 70,
+          "damage" : 30,
+          "radius" : 1,
+          "blast" : 40,
+          "conditions" : [ {
+            "type" : "Conditions.Burning",
+            "data" : {
+              "strength" : 20
+            }
+          } ]
+        },
+        "speed" : 300,
+        "ranged" : {
+          "attack" : 0,
+          "damage" : 0,
+          "range" : 0,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          },
+          "conditions" : [ ]
+        },
+        "energy" : {
+          "max" : 0,
+          "regen" : 0
+        },
+        "materials" : {
+          "max" : 0,
+          "regen" : 0
+        },
+        "defence" : 150,
+        "skill" : {
+          "hacking" : 0
+        },
+        "melee" : {
+          "attack" : 0,
+          "damage" : 0,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          },
+          "conditions" : [ ]
+        },
+        "resistance" : 100,
+        "health" : {
+          "max" : 10,
+          "regen" : 0
+        },
+        "sight" : {
+          "range" : 0,
+          "sensors" : 0
+        },
+        "armor" : 0
       }
     } ], [ "scippe/shooter", {
       "display" : "r",
@@ -3476,6 +3639,93 @@
         },
         "armor" : 40
       }
+    } ], [ "scipoi/youngling", {
+      "display" : "y",
+      "color" : "#673ab7",
+      "traits" : {
+        "events" : null,
+        "flying" : false,
+        "immobile" : false,
+        "missile" : null,
+        "solitary" : false,
+        "leader" : false
+      },
+      "equipments" : [ ],
+      "recipes" : [ ],
+      "character" : null,
+      "locked" : null,
+      "name" : "Scipoi youngling",
+      "responses" : [ ],
+      "behavior" : {
+        "type" : "RoamTactic",
+        "data" : { }
+      },
+      "usable" : null,
+      "greetings" : [ ],
+      "id" : "scipoi/youngling",
+      "inventory" : [ ],
+      "faction" : "scipoi",
+      "description" : "Fast animal with melee attacks.",
+      "stats" : {
+        "launcher" : {
+          "range" : 0,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          },
+          "missiles" : [ ]
+        },
+        "stances" : [ ],
+        "explosive" : {
+          "attack" : 0,
+          "damage" : 0,
+          "radius" : 0,
+          "blast" : 0,
+          "conditions" : [ ]
+        },
+        "speed" : 130,
+        "ranged" : {
+          "attack" : 0,
+          "damage" : 0,
+          "range" : 0,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          },
+          "conditions" : [ ]
+        },
+        "energy" : {
+          "max" : 0,
+          "regen" : 0
+        },
+        "materials" : {
+          "max" : 0,
+          "regen" : 0
+        },
+        "defence" : 40,
+        "skill" : {
+          "hacking" : 0
+        },
+        "melee" : {
+          "attack" : 30,
+          "damage" : 35,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          },
+          "conditions" : [ ]
+        },
+        "resistance" : 60,
+        "health" : {
+          "max" : 30,
+          "regen" : 0
+        },
+        "sight" : {
+          "range" : 7,
+          "sensors" : 10
+        },
+        "armor" : 20
+      }
     } ], [ "nomad/turret", {
       "display" : "T",
       "color" : "#fff",
@@ -3896,93 +4146,6 @@
         },
         "armor" : 40
       }
-    } ], [ "scipoi/melee-fast", {
-      "display" : "m",
-      "color" : "blue",
-      "traits" : {
-        "events" : null,
-        "flying" : false,
-        "immobile" : false,
-        "missile" : null,
-        "solitary" : false,
-        "leader" : false
-      },
-      "equipments" : [ ],
-      "recipes" : [ ],
-      "character" : null,
-      "locked" : null,
-      "name" : "Scipoi youngling",
-      "responses" : [ ],
-      "behavior" : {
-        "type" : "RoamTactic",
-        "data" : { }
-      },
-      "usable" : null,
-      "greetings" : [ ],
-      "id" : "scipoi/melee-fast",
-      "inventory" : [ ],
-      "faction" : "scipoi",
-      "description" : "Fast animal with melee attacks.",
-      "stats" : {
-        "launcher" : {
-          "range" : 0,
-          "consumption" : {
-            "energy" : 0,
-            "materials" : 0
-          },
-          "missiles" : [ ]
-        },
-        "stances" : [ ],
-        "explosive" : {
-          "attack" : 0,
-          "damage" : 0,
-          "radius" : 0,
-          "blast" : 0,
-          "conditions" : [ ]
-        },
-        "speed" : 130,
-        "ranged" : {
-          "attack" : 0,
-          "damage" : 0,
-          "range" : 0,
-          "consumption" : {
-            "energy" : 0,
-            "materials" : 0
-          },
-          "conditions" : [ ]
-        },
-        "energy" : {
-          "max" : 0,
-          "regen" : 0
-        },
-        "materials" : {
-          "max" : 0,
-          "regen" : 0
-        },
-        "defence" : 40,
-        "skill" : {
-          "hacking" : 0
-        },
-        "melee" : {
-          "attack" : 30,
-          "damage" : 35,
-          "consumption" : {
-            "energy" : 0,
-            "materials" : 0
-          },
-          "conditions" : [ ]
-        },
-        "resistance" : 30,
-        "health" : {
-          "max" : 30,
-          "regen" : 0
-        },
-        "sight" : {
-          "range" : 7,
-          "sensors" : 10
-        },
-        "armor" : 20
-      }
     } ], [ "iridan/melee-fast", {
       "display" : "m",
       "color" : "blue",
@@ -4079,6 +4242,94 @@
           "sensors" : 10
         },
         "armor" : 30
+      }
+    } ], [ "scipoi/crawler", {
+      "display" : "c",
+      "color" : "#673ab7",
+      "traits" : {
+        "events" : null,
+        "flying" : false,
+        "immobile" : false,
+        "missile" : null,
+        "solitary" : false,
+        "leader" : false
+      },
+      "equipments" : [ ],
+      "recipes" : [ ],
+      "character" : null,
+      "locked" : null,
+      "name" : "Scipoi crawler",
+      "responses" : [ ],
+      "behavior" : {
+        "type" : "RoamTactic",
+        "data" : { }
+      },
+      "usable" : null,
+      "greetings" : [ ],
+      "id" : "scipoi/crawler",
+      "inventory" : [ ],
+      "faction" : "scipoi",
+      "description" : "Crawls in floor protected by its armor until it attacks.",
+      "stats" : {
+        "launcher" : {
+          "range" : 0,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          },
+          "missiles" : [ ]
+        },
+        "stances" : [ ],
+        "explosive" : {
+          "attack" : 0,
+          "damage" : 0,
+          "radius" : 0,
+          "blast" : 0,
+          "conditions" : [ ]
+        },
+        "speed" : 100,
+        "ranged" : {
+          "attack" : 0,
+          "damage" : 0,
+          "range" : 0,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          },
+          "conditions" : [ ]
+        },
+        "energy" : {
+          "max" : 0,
+          "regen" : 0
+        },
+        "materials" : {
+          "max" : 0,
+          "regen" : 0
+        },
+        "defence" : 40,
+        "skill" : {
+          "hacking" : 0
+        },
+        "melee" : {
+          "attack" : 30,
+          "damage" : 35,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          },
+          "conditions" : [ ],
+          "stance" : "Stances.Vulnerable"
+        },
+        "resistance" : 60,
+        "health" : {
+          "max" : 30,
+          "regen" : 0
+        },
+        "sight" : {
+          "range" : 7,
+          "sensors" : 10
+        },
+        "armor" : 40
       }
     } ], [ "test/placeholder", {
       "display" : "p",
@@ -4566,6 +4817,205 @@
           "sensors" : 10
         },
         "armor" : 30
+      }
+    } ], [ "scipoi/worker", {
+      "display" : "w",
+      "color" : "#673ab7",
+      "traits" : {
+        "events" : {
+          "death" : {
+            "type" : "ExplodePower",
+            "data" : {
+              "description" : null,
+              "resources" : null,
+              "directed" : false
+            }
+          },
+          "hit" : null
+        },
+        "flying" : false,
+        "immobile" : false,
+        "missile" : null,
+        "solitary" : false,
+        "leader" : false
+      },
+      "equipments" : [ ],
+      "recipes" : [ ],
+      "character" : null,
+      "locked" : null,
+      "name" : "Scipoi worker",
+      "responses" : [ ],
+      "behavior" : {
+        "type" : "RoamTactic",
+        "data" : { }
+      },
+      "usable" : null,
+      "greetings" : [ ],
+      "id" : "scipoi/worker",
+      "inventory" : [ ],
+      "faction" : "scipoi",
+      "description" : "Weird looking animal with very unstable chemical processes.",
+      "stats" : {
+        "launcher" : {
+          "range" : 0,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          },
+          "missiles" : [ ]
+        },
+        "stances" : [ ],
+        "explosive" : {
+          "attack" : 70,
+          "damage" : 30,
+          "radius" : 1,
+          "blast" : 40,
+          "conditions" : [ {
+            "type" : "Conditions.Burning",
+            "data" : {
+              "strength" : 20
+            }
+          } ]
+        },
+        "speed" : 90,
+        "ranged" : {
+          "attack" : 0,
+          "damage" : 0,
+          "range" : 0,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          },
+          "conditions" : [ ]
+        },
+        "energy" : {
+          "max" : 0,
+          "regen" : 0
+        },
+        "materials" : {
+          "max" : 0,
+          "regen" : 0
+        },
+        "defence" : 40,
+        "skill" : {
+          "hacking" : 0
+        },
+        "melee" : {
+          "attack" : 30,
+          "damage" : 30,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          },
+          "conditions" : [ {
+            "type" : "Conditions.Burning",
+            "data" : {
+              "strength" : 15
+            }
+          } ]
+        },
+        "resistance" : 60,
+        "health" : {
+          "max" : 30,
+          "regen" : 0
+        },
+        "sight" : {
+          "range" : 7,
+          "sensors" : 10
+        },
+        "armor" : 20
+      }
+    } ], [ "scipoi/builder", {
+      "display" : "W",
+      "color" : "#673ab7",
+      "traits" : {
+        "events" : null,
+        "flying" : false,
+        "immobile" : false,
+        "missile" : null,
+        "solitary" : false,
+        "leader" : true
+      },
+      "equipments" : [ ],
+      "recipes" : [ ],
+      "character" : null,
+      "locked" : null,
+      "name" : "Scipoi builder",
+      "responses" : [ ],
+      "behavior" : {
+        "type" : "RoamTactic",
+        "data" : { }
+      },
+      "usable" : null,
+      "greetings" : [ ],
+      "id" : "scipoi/builder",
+      "inventory" : [ ],
+      "faction" : "scipoi",
+      "description" : "Weird looking animal with very unstable chemical processes.",
+      "stats" : {
+        "launcher" : {
+          "range" : 7,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          },
+          "missiles" : [ "scipoi/missile" ]
+        },
+        "stances" : [ ],
+        "explosive" : {
+          "attack" : 0,
+          "damage" : 0,
+          "radius" : 0,
+          "blast" : 0,
+          "conditions" : [ ]
+        },
+        "speed" : 90,
+        "ranged" : {
+          "attack" : 0,
+          "damage" : 0,
+          "range" : 0,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          },
+          "conditions" : [ ]
+        },
+        "energy" : {
+          "max" : 0,
+          "regen" : 0
+        },
+        "materials" : {
+          "max" : 0,
+          "regen" : 0
+        },
+        "defence" : 40,
+        "skill" : {
+          "hacking" : 0
+        },
+        "melee" : {
+          "attack" : 30,
+          "damage" : 30,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          },
+          "conditions" : [ {
+            "type" : "Conditions.Burning",
+            "data" : {
+              "strength" : 15
+            }
+          } ]
+        },
+        "resistance" : 60,
+        "health" : {
+          "max" : 60,
+          "regen" : 0
+        },
+        "sight" : {
+          "range" : 7,
+          "sensors" : 10
+        },
+        "armor" : 20
       }
     } ] ],
     "items" : [ [ "iridan/weapon-boser", {
@@ -10406,7 +10856,7 @@
             "selection" : {
               "type" : "ContentSelection.FixedCreature",
               "data" : {
-                "kind" : "scipoi/melee-fast",
+                "kind" : "scipoi/youngling",
                 "tags" : [ ]
               }
             },
@@ -17785,6 +18235,72 @@
         "door" : null
       }
     }
+  } ], [ "scipoi/hall/builder-chasm", {
+    "type" : "RandomizedTemplate",
+    "data" : {
+      "conduitLocations" : {
+        "min" : 0,
+        "max" : 0,
+        "tag" : null
+      },
+      "shape" : {
+        "type" : "Rectangle",
+        "data" : {
+          "width" : 14,
+          "height" : 10,
+          "variance" : 0
+        }
+      },
+      "fill" : null,
+      "power" : null,
+      "routing" : null,
+      "border" : {
+        "type" : "ContentSelection.ThemeWall",
+        "data" : {
+          "category" : [ ],
+          "tags" : [ ]
+        }
+      },
+      "templateCatalogue" : null,
+      "terrain" : null,
+      "templates" : [ {
+        "selection" : {
+          "type" : "ContentSelection.FixedTemplate",
+          "data" : {
+            "template" : "generic/space/chasm"
+          }
+        },
+        "distribution" : {
+          "type" : "Distribution.Uniform",
+          "data" : {
+            "min" : 1,
+            "max" : 1
+          }
+        },
+        "required" : 1
+      } ],
+      "id" : "scipoi/hall/builder-chasm",
+      "features" : [ {
+        "type" : "RandomizedContentFeature",
+        "data" : {
+          "catalogues" : [ "scipoi/party/builder" ],
+          "creatures" : [ ],
+          "items" : [ ],
+          "widgets" : [ ]
+        }
+      } ],
+      "entrances" : {
+        "min" : 1,
+        "max" : 2,
+        "door" : {
+          "type" : "ContentSelection.ThemeDoor",
+          "data" : {
+            "category" : [ ],
+            "tags" : [ ]
+          }
+        }
+      }
+    }
   } ], [ "iridan/room/lab-weapon-test", {
     "type" : "FixedTemplate",
     "data" : {
@@ -21928,6 +22444,251 @@
         } ] ]
       },
       "id" : "nomad/shuttle/exterior"
+    }
+  } ], [ "generic/space/chasm", {
+    "type" : "FixedTemplate",
+    "data" : {
+      "shape" : {
+        "type" : "Rectangle",
+        "data" : {
+          "width" : 6,
+          "height" : 6,
+          "variance" : 0
+        }
+      },
+      "power" : null,
+      "terrain" : null,
+      "templates" : [ ],
+      "entrances" : [ ],
+      "features" : [ ],
+      "content" : {
+        "conduitLocations" : [ ],
+        "items" : [ ],
+        "restrictedLocations" : [ ],
+        "walls" : [ ],
+        "machinery" : [ ],
+        "widgets" : [ ],
+        "creatures" : [ ],
+        "gatewayLocations" : [ ],
+        "terrains" : [ [ {
+          "x" : 1,
+          "y" : 3
+        }, {
+          "type" : "ContentSelection.FixedTerrain",
+          "data" : {
+            "kind" : "generic/chasm",
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 4,
+          "y" : 3
+        }, {
+          "type" : "ContentSelection.FixedTerrain",
+          "data" : {
+            "kind" : "generic/chasm",
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 5,
+          "y" : 2
+        }, {
+          "type" : "ContentSelection.FixedTerrain",
+          "data" : {
+            "kind" : "generic/chasm",
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 4,
+          "y" : 2
+        }, {
+          "type" : "ContentSelection.FixedTerrain",
+          "data" : {
+            "kind" : "generic/chasm",
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 2,
+          "y" : 1
+        }, {
+          "type" : "ContentSelection.FixedTerrain",
+          "data" : {
+            "kind" : "generic/chasm",
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 4,
+          "y" : 4
+        }, {
+          "type" : "ContentSelection.FixedTerrain",
+          "data" : {
+            "kind" : "generic/chasm",
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 3,
+          "y" : 0
+        }, {
+          "type" : "ContentSelection.FixedTerrain",
+          "data" : {
+            "kind" : "generic/chasm",
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 1,
+          "y" : 1
+        }, {
+          "type" : "ContentSelection.FixedTerrain",
+          "data" : {
+            "kind" : "generic/chasm",
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 0,
+          "y" : 2
+        }, {
+          "type" : "ContentSelection.FixedTerrain",
+          "data" : {
+            "kind" : "generic/chasm",
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 0,
+          "y" : 3
+        }, {
+          "type" : "ContentSelection.FixedTerrain",
+          "data" : {
+            "kind" : "generic/chasm",
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 2,
+          "y" : 2
+        }, {
+          "type" : "ContentSelection.FixedTerrain",
+          "data" : {
+            "kind" : "generic/chasm",
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 3,
+          "y" : 3
+        }, {
+          "type" : "ContentSelection.FixedTerrain",
+          "data" : {
+            "kind" : "generic/chasm",
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 5,
+          "y" : 3
+        }, {
+          "type" : "ContentSelection.FixedTerrain",
+          "data" : {
+            "kind" : "generic/chasm",
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 3,
+          "y" : 5
+        }, {
+          "type" : "ContentSelection.FixedTerrain",
+          "data" : {
+            "kind" : "generic/chasm",
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 3,
+          "y" : 2
+        }, {
+          "type" : "ContentSelection.FixedTerrain",
+          "data" : {
+            "kind" : "generic/chasm",
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 1,
+          "y" : 4
+        }, {
+          "type" : "ContentSelection.FixedTerrain",
+          "data" : {
+            "kind" : "generic/chasm",
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 3,
+          "y" : 4
+        }, {
+          "type" : "ContentSelection.FixedTerrain",
+          "data" : {
+            "kind" : "generic/chasm",
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 2,
+          "y" : 5
+        }, {
+          "type" : "ContentSelection.FixedTerrain",
+          "data" : {
+            "kind" : "generic/chasm",
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 2,
+          "y" : 0
+        }, {
+          "type" : "ContentSelection.FixedTerrain",
+          "data" : {
+            "kind" : "generic/chasm",
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 2,
+          "y" : 4
+        }, {
+          "type" : "ContentSelection.FixedTerrain",
+          "data" : {
+            "kind" : "generic/chasm",
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 2,
+          "y" : 3
+        }, {
+          "type" : "ContentSelection.FixedTerrain",
+          "data" : {
+            "kind" : "generic/chasm",
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 4,
+          "y" : 1
+        }, {
+          "type" : "ContentSelection.FixedTerrain",
+          "data" : {
+            "kind" : "generic/chasm",
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 3,
+          "y" : 1
+        }, {
+          "type" : "ContentSelection.FixedTerrain",
+          "data" : {
+            "kind" : "generic/chasm",
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 1,
+          "y" : 2
+        }, {
+          "type" : "ContentSelection.FixedTerrain",
+          "data" : {
+            "kind" : "generic/chasm",
+            "tags" : [ ]
+          }
+        } ] ]
+      },
+      "id" : "generic/space/chasm"
     }
   } ], [ "nomad/shuttle/valley", {
     "type" : "RandomizedTemplate",
