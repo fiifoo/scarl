@@ -6,12 +6,14 @@ import io.github.fiifoo.scarl.area.shape.Shape
 import io.github.fiifoo.scarl.area.template.ContentSelection._
 import io.github.fiifoo.scarl.area.template.RandomizedContentSource.{ConduitLocations, Entrances, Routing}
 import io.github.fiifoo.scarl.area.template.Template.Result
+import io.github.fiifoo.scarl.core.creature.FactionId
 import io.github.fiifoo.scarl.core.geometry.{Location, Rotation}
 import io.github.fiifoo.scarl.world.WorldAssets
 
 import scala.util.Random
 
 case class SequenceTemplate(id: TemplateId,
+                            owner: Option[FactionId] = None,
                             power: Option[Int] = None,
                             border: Option[WallSelection] = None,
                             fill: Option[WallSelection] = None,

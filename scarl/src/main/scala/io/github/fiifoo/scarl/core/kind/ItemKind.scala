@@ -53,6 +53,7 @@ case class ItemKind(id: ItemKindId,
     val container = Container(
       id = ContainerId(containerId),
       location = location,
+      faction = options.owner map (_ (s).faction) orElse options.faction,
       owner = options.owner map SafeCreatureId.apply,
       tags = options.tags
     )

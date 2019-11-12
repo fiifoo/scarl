@@ -7,6 +7,7 @@ import io.github.fiifoo.scarl.area.template.ContentSelection._
 import io.github.fiifoo.scarl.area.template.ContentSource.TemplateSource
 import io.github.fiifoo.scarl.area.template.RandomizedContentSource.{ConduitLocations, Entrances, Routing}
 import io.github.fiifoo.scarl.area.template.Template.Result
+import io.github.fiifoo.scarl.core.creature.FactionId
 import io.github.fiifoo.scarl.core.geometry.{Location, Rotation}
 import io.github.fiifoo.scarl.core.math.Rng
 import io.github.fiifoo.scarl.world.{TemplateSourceCatalogueId, WorldAssets}
@@ -15,6 +16,7 @@ import scala.util.Random
 
 case class RandomizedTemplate(id: TemplateId,
                               shape: Shape,
+                              owner: Option[FactionId] = None,
                               power: Option[Int] = None,
                               border: Option[WallSelection] = None,
                               fill: Option[WallSelection] = None,

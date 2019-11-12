@@ -4,6 +4,7 @@ import io.github.fiifoo.scarl.area.feature.Feature
 import io.github.fiifoo.scarl.area.template.ContentSelection._
 import io.github.fiifoo.scarl.area.template.RandomizedContentSource.{ConduitLocations, Entrances, Routing}
 import io.github.fiifoo.scarl.core.Tag
+import io.github.fiifoo.scarl.core.creature.FactionId
 
 object RandomizedContentSource {
 
@@ -22,6 +23,7 @@ object RandomizedContentSource {
 }
 
 trait RandomizedContentSource {
+  val owner: Option[FactionId]
   val border: Option[WallSelection]
   val fill: Option[WallSelection]
   val terrain: Option[TerrainSelection]

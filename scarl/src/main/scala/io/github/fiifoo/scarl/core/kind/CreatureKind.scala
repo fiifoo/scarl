@@ -51,7 +51,7 @@ case class CreatureKind(id: CreatureKindId,
     val creature = Creature(
       id = creatureId,
       kind = id,
-      faction = options.owner map (_ (s).faction) getOrElse faction,
+      faction = options.owner map (_ (s).faction) orElse options.faction getOrElse faction,
       behavior = behavior,
       stats = stats,
 

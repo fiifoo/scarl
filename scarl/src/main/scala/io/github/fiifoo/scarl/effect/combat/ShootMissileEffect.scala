@@ -33,7 +33,7 @@ case class ShootMissileEffect(attacker: CreatureId,
       .copy(
         behavior = behavior,
         stats = getMissileStats(s, attackerStats)
-      ).apply(s, s.idSeq, from, Options(Some(attacker)))
+      ).apply(s, s.idSeq, from, Options(owner = Some(attacker)))
 
     result.entity.traits.missile map (_ => EffectResult(result.mutations)) getOrElse EffectResult()
   }

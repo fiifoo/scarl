@@ -41,8 +41,8 @@ object ApplyTemplate {
 
     state = processUniqueEntities(state, template.content.terrains, offset)
     state = processUniqueEntities(state, template.content.walls, offset)
-    state = processEntities(state, template.content.items, offset)
-    state = processUniqueEntities(state, template.content.widgets, offset)
+    state = processEntities(state, template.content.items, offset, Options(faction = template.owner))
+    state = processUniqueEntities(state, template.content.widgets, offset, Options(faction = template.owner))
     state = (template.content.machinery foldLeft state) ((s, machinery) => machinery(s, offset))
 
     template.templates.foldLeft(state)((s, data) => {
@@ -78,6 +78,7 @@ object ApplyTemplate {
   private def processEntities(s: State,
                               elements: Map[Location, List[(KindId, Set[Tag])]],
                               offset: Location,
+                              options: Options = Options()
                              ): State = {
 
     elements.foldLeft(s)((s, x) => {
@@ -87,7 +88,7 @@ object ApplyTemplate {
         val (element, tags) = x
 
         element(s)
-          .apply(s, s.idSeq, location.add(offset), Options(tags = tags))
+          .apply(s, s.idSeq, location.add(offset), options.copy(tags = tags))
           .write(s)
       })
     })
@@ -96,13 +97,14 @@ object ApplyTemplate {
   private def processUniqueEntities(s: State,
                                     elements: Map[Location, (KindId, Set[Tag])],
                                     offset: Location,
+                                    options: Options = Options()
                                    ): State = {
 
     elements.foldLeft(s)((s, x) => {
       val (location, (element, tags)) = x
 
       element(s)
-        .apply(s, s.idSeq, location.add(offset), Options(tags = tags))
+        .apply(s, s.idSeq, location.add(offset), options.copy(tags = tags))
         .write(s)
     })
   }

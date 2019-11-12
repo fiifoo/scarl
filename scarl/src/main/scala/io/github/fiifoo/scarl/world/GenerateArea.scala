@@ -17,7 +17,6 @@ object GenerateArea {
     val area = assets.areas(areaId)
 
     var state = State(
-      area = State.Area(owner = area.owner),
       assets = assets.instance(),
       factions = State.Factions(
         brains = createBrains(assets, area.strategies),

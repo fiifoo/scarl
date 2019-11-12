@@ -5,6 +5,7 @@ import io.github.fiifoo.scarl.area.feature.Feature
 import io.github.fiifoo.scarl.area.shape.Shape
 import io.github.fiifoo.scarl.area.template.ContentSelection.{DoorSelection, TerrainSelection}
 import io.github.fiifoo.scarl.area.template.Template.Result
+import io.github.fiifoo.scarl.core.creature.FactionId
 import io.github.fiifoo.scarl.core.geometry.Location
 import io.github.fiifoo.scarl.world.WorldAssets
 
@@ -12,6 +13,7 @@ import scala.util.Random
 
 case class FixedTemplate(id: TemplateId,
                          shape: Shape,
+                         owner: Option[FactionId] = None,
                          power: Option[Int] = None,
                          terrain: Option[TerrainSelection] = None,
                          templates: Map[Location, TemplateId] = Map(),
@@ -44,6 +46,7 @@ case class FixedTemplate(id: TemplateId,
     )
 
     Result(
+      owner = this.owner orElse area.owner,
       shape = shapeResult,
       templates = subResults,
       entrances = entrances.keys.toSet,

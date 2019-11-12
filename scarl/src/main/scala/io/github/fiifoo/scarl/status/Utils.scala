@@ -7,11 +7,12 @@ import io.github.fiifoo.scarl.core.entity.{ContainerId, CreatureId}
 object Utils {
 
   def isSmartWidgetEnemy(s: State, widget: ContainerId)(target: CreatureId): Boolean = {
-    val faction = widget(s).owner map (owner => {
-      // If widget owner dies, it will target everyone. Not logical or optimal but maybe good enough.
+    val widgetValues = widget(s)
+
+    val faction = widgetValues.owner map (owner => {
       owner(s) map (_.faction)
     }) getOrElse {
-      s.area.owner
+      widgetValues.faction
     }
 
     faction map (faction => {

@@ -50,7 +50,7 @@ case class TransformEffect(from: EntityId,
       case _ => Set[Tag]()
     }
 
-    val result = to(s).apply(s, s.idSeq, location, Options(owner, tags))
+    val result = to(s).apply(s, s.idSeq, location, Options(owner = owner, tags = tags))
 
     getSuccessResult(s, location, result)
   }

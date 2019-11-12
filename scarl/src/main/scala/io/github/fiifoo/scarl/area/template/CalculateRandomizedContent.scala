@@ -51,6 +51,7 @@ object CalculateRandomizedContent {
     )
 
     Result(
+      owner = source.owner orElse area.owner,
       shape = shapeResult,
       templates = subResults,
       entrances = entranceResults.keys.toSet,

@@ -99,6 +99,7 @@ trait TriggerStatus extends Entity with Status {
 
 case class Container(id: ContainerId,
                      location: Location,
+                     faction: Option[FactionId] = None,
                      owner: Option[SafeCreatureId] = None,
                      tags: Set[Tag] = Set(),
                      widget: Boolean = false,

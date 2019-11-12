@@ -15,6 +15,7 @@ object JsonTemplate {
   import JsonBase.{mapReads, optionReads, polymorphicObjectFormat, polymorphicTypeReads, stringIdFormat}
 
   lazy private implicit val contentSourceCatalogueIdFormat = JsonWorldCatalogues.contentSourceCatalogueIdFormat
+  lazy private implicit val factionIdFormat = JsonFaction.factionIdFormat
   lazy private implicit val locationReads = Json.reads[Location]
   lazy private implicit val mechanismFormat = JsonMechanism.mechanismFormat
   lazy private implicit val machinerySourceReads = Json.reads[MachinerySource]

@@ -14,7 +14,7 @@ case class CreateEntityEffect(kind: KindId,
                              ) extends Effect {
 
   def apply(s: State): EffectResult = {
-    val mutations = kind(s).apply(s, s.idSeq, location, Options(owner)).mutations
+    val mutations = kind(s).apply(s, s.idSeq, location, Options(owner = owner)).mutations
 
     EffectResult(mutations)
   }

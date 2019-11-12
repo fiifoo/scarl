@@ -20,7 +20,6 @@ object State {
   case class Area(width: Int = 10,
                   height: Int = 10,
                   sectorSize: Int = 10,
-                  owner: Option[FactionId] = None,
                  )
 
   case class Cache(actorQueue: ActorQueue = ActorQueue(),

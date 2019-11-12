@@ -8,6 +8,7 @@ object JsonContainer {
 
   import JsonBase.integerIdFormat
 
+  lazy private implicit val factionIdFormat = JsonFaction.factionIdFormat
   lazy private implicit val locationFormat = Json.format[Location]
   lazy private implicit val safeCreatureIdFormat = JsonCreature.safeCreatureIdFormat
 
