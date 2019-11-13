@@ -1,4 +1,5 @@
-import { List, Map, Set } from 'immutable'
+import { is, List, Map, Set } from 'immutable'
+import { createFormFieldType } from '../components/field/utils'
 
 export const isPolymorphic = model => model.polymorphic.length > 0
 
@@ -65,6 +66,38 @@ export const sanitize = (data, models) => {
             getNewValue(fieldType, models)
         )
 
+        if (fieldType.type === 'FormField' && value) {
+            let model = models.sub.get(fieldType.data.model, models.main.get(fieldType.data.model))
+
+            if (! model.objectPolymorphism) {
+                let values
+
+                const polymorphic = isPolymorphic(model)
+
+                if (polymorphic) {
+                    const type = value.get('type')
+                    model = type ? models.sub.get(type) : null
+                    values = value.get('data')
+                } else {
+                    values = value
+                }
+
+                if (model && values) {
+                    const validProperties = Set(model.properties.map(x => x.name).concat(['id']))
+
+                    const sanitized = values.filter((_, property) => validProperties.contains(property))
+
+                    if (! is(values, sanitized)) {
+                        if (polymorphic) {
+                            data = data.setIn(path.concat(['data']), sanitized)
+                        } else {
+                            data = data.setIn(path, sanitized)
+                        }
+                    }
+                }
+            }
+        }
+
         return {data}
     }
 
@@ -128,20 +161,25 @@ const reduceModels = (models, reducer, initial) => {
     const reduceItem = model => (carry, item) => {
         const path = model.dataPath.concat([readItemId(model, item)])
 
-        return reduceModel(path)(carry, model)
+        return reduceModel(path, true)(carry, model)
     }
 
-    const reduceModel = path => (carry, model) => {
+    const reduceModel = (path, main = false) => (carry, model) => {
         if (isPolymorphic(model)) {
             const type = carry.data.getIn(path.concat(['type']))
 
-            if (type) {
-                return models.sub.get(type).properties.reduce(reduceProperty(path.concat(['data'])), carry)
-            } else {
-                return carry
+            model = type ? models.sub.get(type) : null
+            path = path.concat(['data'])
+        }
+
+        if (model) {
+            if (main) {
+                carry = reducer(carry, {path, fieldType: createFormFieldType(model)})
             }
-        } else {
+
             return model.properties.reduce(reduceProperty(path), carry)
+        } else {
+            return carry
         }
     }
 
