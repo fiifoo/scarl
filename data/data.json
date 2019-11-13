@@ -2,7 +2,6 @@
   "areas" : [ [ "iridan/nexus", {
     "template" : "generic/area/cave",
     "theme" : "iridan/natural-underground",
-    "power" : [ ],
     "id" : "iridan/nexus",
     "owner" : "iridan",
     "dispositions" : [ ],
@@ -11,14 +10,12 @@
     "template" : "iridan/area/start",
     "theme" : "iridan/constructed-underground",
     "id" : "iridan/start",
-    "power" : [ ],
     "owner" : "nomad",
     "dispositions" : [ ],
     "strategies" : [ ]
   } ], [ "iridan/labs", {
     "template" : "iridan/area/labs",
     "theme" : "iridan/constructed-underground",
-    "power" : [ ],
     "id" : "iridan/labs",
     "owner" : "iridan",
     "dispositions" : [ ],
@@ -26,7 +23,6 @@
   } ], [ "iridan/mine-approach", {
     "template" : "generic/area/tunnels",
     "theme" : "iridan/natural-underground",
-    "power" : [ ],
     "id" : "iridan/mine-approach",
     "owner" : "iridan",
     "dispositions" : [ ],
@@ -35,14 +31,12 @@
     "template" : "nomad/spaceship/hub",
     "theme" : "iridan/constructed-underground",
     "owner" : "nomad",
-    "power" : [ ],
     "id" : "nomad/spaceship-hub",
     "dispositions" : [ ],
     "strategies" : [ ]
   } ], [ "scipoi/unfinished-mine/mine", {
     "template" : "generic/area/mine-lift",
     "theme" : "scipoi/scippe-civilians/natural-underground",
-    "power" : [ ],
     "id" : "scipoi/unfinished-mine/mine",
     "owner" : "scipoi",
     "dispositions" : [ ],
@@ -51,14 +45,12 @@
     "template" : "scippe/dice/area/1",
     "theme" : "scipoi/scippe-civilians/constructed-underground",
     "owner" : "scippe/civilians",
-    "power" : [ ],
     "id" : "scippe/dice/1",
     "dispositions" : [ ],
     "strategies" : [ ]
   } ], [ "iridan/surface", {
     "template" : "iridan/area/surface-assault",
     "theme" : "iridan/natural-surface",
-    "power" : [ ],
     "id" : "iridan/surface",
     "owner" : "iridan",
     "dispositions" : [ ],
@@ -66,7 +58,6 @@
   } ], [ "iridan/coms", {
     "template" : "iridan/area/coms",
     "theme" : "iridan/natural-underground",
-    "power" : [ ],
     "id" : "iridan/coms",
     "owner" : "iridan",
     "dispositions" : [ ],
@@ -74,16 +65,17 @@
   } ], [ "iridan/mine", {
     "template" : "iridan/area/mine",
     "theme" : "iridan/natural-underground",
-    "power" : [ ],
     "id" : "iridan/mine",
     "owner" : "iridan",
     "dispositions" : [ ],
-    "strategies" : [ ]
+    "strategies" : [ [ "skyfarer", {
+      "type" : "AttackStrategy",
+      "data" : { }
+    } ] ]
   } ], [ "scippe/dice/surface-overrun", {
     "template" : "scippe/dice/area/surface/overrun",
     "theme" : "scipoi/scippe-civilians/constructed-surface",
     "owner" : "scippe/civilians",
-    "power" : [ ],
     "id" : "scippe/dice/surface-overrun",
     "dispositions" : [ ],
     "strategies" : [ ]
@@ -91,14 +83,12 @@
     "template" : "placeholder",
     "theme" : "iridan/constructed-underground",
     "owner" : "nomad",
-    "power" : [ ],
     "id" : "placeholder",
     "dispositions" : [ ],
     "strategies" : [ ]
   } ], [ "scipoi/unfinished-mine/mine-final", {
     "template" : "scipoi/unfinished-mine/area/mine-final",
     "theme" : "scipoi/scippe-civilians/natural-underground",
-    "power" : [ ],
     "id" : "scipoi/unfinished-mine/mine-final",
     "owner" : "scipoi",
     "dispositions" : [ ],
@@ -106,7 +96,6 @@
   } ], [ "scipoi/unfinished-mine/surface", {
     "template" : "generic/area/surface-mine-lift-shuttle",
     "theme" : "scipoi/scippe-civilians/natural-surface",
-    "power" : [ ],
     "id" : "scipoi/unfinished-mine/surface",
     "owner" : "scipoi",
     "dispositions" : [ ],
@@ -114,7 +103,6 @@
   } ], [ "iridan/core-approach", {
     "template" : "iridan/area/core-approach",
     "theme" : "iridan/constructed-underground",
-    "power" : [ ],
     "id" : "iridan/core-approach",
     "owner" : "iridan",
     "dispositions" : [ ],
@@ -123,7 +111,6 @@
     "template" : "nomad/shuttle/interior",
     "theme" : "iridan/constructed-underground",
     "owner" : "nomad",
-    "power" : [ ],
     "id" : "nomad/shuttle",
     "dispositions" : [ ],
     "strategies" : [ ]
@@ -131,18 +118,19 @@
     "template" : "scippe/dice/area/surface/default",
     "theme" : "scippe/civilians/constructed-surface",
     "owner" : "scippe/civilians",
-    "power" : [ ],
     "id" : "scippe/dice/surface-default",
     "dispositions" : [ ],
     "strategies" : [ ]
   } ], [ "iridan/core", {
     "template" : "iridan/area/core",
     "theme" : "iridan/natural-underground",
-    "power" : [ ],
     "id" : "iridan/core",
     "owner" : "iridan",
     "dispositions" : [ ],
-    "strategies" : [ ]
+    "strategies" : [ [ "skyfarer", {
+      "type" : "AttackStrategy",
+      "data" : { }
+    } ] ]
   } ] ],
   "catalogues" : {
     "contentSources" : [ [ "generic/room", {
@@ -151,7 +139,6 @@
         "selection" : {
           "type" : "ContentSelection.ThemeCreature",
           "data" : {
-            "power" : [ "CombatPower.Low", "CombatPower.Medium" ],
             "tags" : [ ],
             "category" : [ ]
           }
@@ -167,7 +154,6 @@
         "selection" : {
           "type" : "ContentSelection.ThemeCreature",
           "data" : {
-            "power" : [ "CombatPower.High" ],
             "tags" : [ ],
             "category" : [ ]
           }
@@ -184,7 +170,6 @@
         "selection" : {
           "type" : "ContentSelection.ThemeEquipment",
           "data" : {
-            "power" : [ "CombatPower.Medium", "CombatPower.High" ],
             "category" : [ ],
             "tags" : [ ]
           }
@@ -201,7 +186,6 @@
           "type" : "ContentSelection.ThemeItem",
           "data" : {
             "category" : [ "ItemKind.UtilityCategory" ],
-            "power" : [ "CombatPower.Low", "CombatPower.Medium" ],
             "tags" : [ ]
           }
         },
@@ -233,7 +217,6 @@
           "type" : "ContentSelection.ThemeWidget",
           "data" : {
             "category" : [ "WidgetKind.TrapCategory" ],
-            "power" : [ ],
             "tags" : [ ]
           }
         },
@@ -255,7 +238,6 @@
           "type" : "ContentSelection.ThemeWidget",
           "data" : {
             "category" : [ "WidgetKind.PortalCategory" ],
-            "power" : [ ],
             "tags" : [ ]
           }
         },
@@ -277,7 +259,6 @@
           "type" : "ContentSelection.ThemeWidget",
           "data" : {
             "category" : [ "WidgetKind.PortalCategory" ],
-            "power" : [ ],
             "tags" : [ ]
           }
         },
@@ -338,7 +319,37 @@
           }
         }
       } ],
-      "items" : [ ],
+      "items" : [ {
+        "selection" : {
+          "type" : "ContentSelection.FixedItem",
+          "data" : {
+            "kind" : "skyfarer/components-machinery",
+            "tags" : [ ]
+          }
+        },
+        "distribution" : {
+          "type" : "Distribution.Uniform",
+          "data" : {
+            "min" : 1,
+            "max" : 2
+          }
+        }
+      }, {
+        "selection" : {
+          "type" : "ContentSelection.FixedItem",
+          "data" : {
+            "kind" : "skyfarer/materials-equipment",
+            "tags" : [ ]
+          }
+        },
+        "distribution" : {
+          "type" : "Distribution.Uniform",
+          "data" : {
+            "min" : 1,
+            "max" : 2
+          }
+        }
+      } ],
       "widgets" : [ ],
       "id" : "skyfarer/party/control-freak"
     } ], [ "scipoi/party/builder", {
@@ -389,9 +400,96 @@
           }
         }
       } ],
-      "items" : [ ],
+      "items" : [ {
+        "selection" : {
+          "type" : "ContentSelection.FixedItem",
+          "data" : {
+            "kind" : "generic/materials",
+            "tags" : [ ]
+          }
+        },
+        "distribution" : {
+          "type" : "Distribution.Uniform",
+          "data" : {
+            "min" : 1,
+            "max" : 2
+          }
+        }
+      } ],
       "widgets" : [ ],
       "id" : "scipoi/party/builder"
+    } ], [ "exodus/room/carapace", {
+      "subs" : [ ],
+      "creatures" : [ {
+        "selection" : {
+          "type" : "ContentSelection.FixedCreature",
+          "data" : {
+            "kind" : "exodus/carapace",
+            "tags" : [ ]
+          }
+        },
+        "distribution" : {
+          "type" : "Distribution.Uniform",
+          "data" : {
+            "min" : 1,
+            "max" : 1
+          }
+        }
+      } ],
+      "items" : [ {
+        "selection" : {
+          "type" : "ContentSelection.FixedItem",
+          "data" : {
+            "kind" : "exodus/components-machinery",
+            "tags" : [ ]
+          }
+        },
+        "distribution" : {
+          "type" : "Distribution.Uniform",
+          "data" : {
+            "min" : 2,
+            "max" : 3
+          }
+        }
+      } ],
+      "widgets" : [ ],
+      "id" : "exodus/room/carapace"
+    } ], [ "exodus/room/invertebrate", {
+      "subs" : [ ],
+      "creatures" : [ {
+        "selection" : {
+          "type" : "ContentSelection.FixedCreature",
+          "data" : {
+            "kind" : "exodus/invertebrate",
+            "tags" : [ ]
+          }
+        },
+        "distribution" : {
+          "type" : "Distribution.Uniform",
+          "data" : {
+            "min" : 1,
+            "max" : 1
+          }
+        }
+      } ],
+      "items" : [ {
+        "selection" : {
+          "type" : "ContentSelection.FixedItem",
+          "data" : {
+            "kind" : "exodus/components-machinery",
+            "tags" : [ ]
+          }
+        },
+        "distribution" : {
+          "type" : "Distribution.Uniform",
+          "data" : {
+            "min" : 2,
+            "max" : 3
+          }
+        }
+      } ],
+      "widgets" : [ ],
+      "id" : "exodus/room/invertebrate"
     } ] ],
     "creatures" : [ [ "iridan/default", {
       "subs" : [ ],
@@ -589,6 +687,12 @@
       }, {
         "value" : "scipoi/hall/builder-chasm",
         "weight" : 100
+      }, {
+        "value" : "exodus/room/carapace",
+        "weight" : 100
+      }, {
+        "value" : "exodus/room/invertebrate",
+        "weight" : 100
       } ] ], [ "Template.RoomCategory", [ {
         "value" : "generic/room",
         "weight" : 100
@@ -631,7 +735,6 @@
           "type" : "ContentSelection.ThemeTemplate",
           "data" : {
             "category" : [ "Template.ChallengeCategory" ],
-            "power" : [ ],
             "tags" : [ ]
           }
         },
@@ -648,7 +751,6 @@
           "type" : "ContentSelection.ThemeTemplate",
           "data" : {
             "category" : [ "Template.TrapCategory" ],
-            "power" : [ ],
             "tags" : [ ]
           }
         },
@@ -665,7 +767,6 @@
           "type" : "ContentSelection.ThemeTemplate",
           "data" : {
             "category" : [ "Template.RoomCategory" ],
-            "power" : [ ],
             "tags" : [ ]
           }
         },
@@ -701,7 +802,6 @@
           "type" : "ContentSelection.ThemeTemplate",
           "data" : {
             "category" : [ "Template.SpaceCategory" ],
-            "power" : [ ],
             "tags" : [ ]
           }
         },
@@ -722,7 +822,6 @@
           "type" : "ContentSelection.ThemeTemplate",
           "data" : {
             "category" : [ "Template.TrapCategory" ],
-            "power" : [ ],
             "tags" : [ ]
           }
         },
@@ -739,7 +838,6 @@
           "type" : "ContentSelection.ThemeTemplate",
           "data" : {
             "category" : [ "Template.SpaceCategory" ],
-            "power" : [ ],
             "tags" : [ ]
           }
         },
@@ -775,7 +873,6 @@
           "type" : "ContentSelection.ThemeTemplate",
           "data" : {
             "category" : [ "Template.ChallengeCategory" ],
-            "power" : [ ],
             "tags" : [ ]
           }
         },
@@ -792,7 +889,6 @@
           "type" : "ContentSelection.ThemeTemplate",
           "data" : {
             "category" : [ "Template.TrapCategory" ],
-            "power" : [ ],
             "tags" : [ ]
           }
         },
@@ -809,7 +905,6 @@
           "type" : "ContentSelection.ThemeTemplate",
           "data" : {
             "category" : [ "Template.RoomCategory" ],
-            "power" : [ ],
             "tags" : [ ]
           }
         },
@@ -1166,8 +1261,15 @@
     "id" : "scippe/dice/gate-officer/bye"
   } ] ],
   "factions" : [ [ "skyfarer", {
-    "dispositions" : [ [ "iridan", "Faction.Hostile" ], [ "iridan/command", "Faction.Hostile" ], [ "iridan/hunters", "Faction.Hostile" ], [ "nomad", "Faction.Hostile" ], [ "scipoi", "Faction.Hostile" ] ],
+    "dispositions" : [ [ "iridan", "Faction.Hostile" ], [ "iridan/command", "Faction.Hostile" ], [ "iridan/hunters", "Faction.Hostile" ], [ "nomad", "Faction.Hostile" ], [ "scipoi", "Faction.Hostile" ], [ "exodus", "Faction.Hostile" ], [ "siux", "Faction.Hostile" ] ],
     "id" : "skyfarer",
+    "strategy" : {
+      "type" : "RoamStrategy",
+      "data" : { }
+    }
+  } ], [ "exodus", {
+    "dispositions" : [ [ "iridan", "Faction.Hostile" ], [ "iridan/command", "Faction.Hostile" ], [ "iridan/hunters", "Faction.Hostile" ], [ "nomad", "Faction.Hostile" ], [ "scipoi", "Faction.Hostile" ], [ "scippe", "Faction.Hostile" ], [ "scippe/civilians", "Faction.Hostile" ], [ "skyfarer", "Faction.Hostile" ], [ "siux", "Faction.Hostile" ] ],
+    "id" : "exodus",
     "strategy" : {
       "type" : "AttackStrategy",
       "data" : { }
@@ -1177,21 +1279,21 @@
       "type" : "AttackStrategy",
       "data" : { }
     },
-    "dispositions" : [ [ "iridan", "Faction.Hostile" ], [ "iridan/hunters", "Faction.Hostile" ], [ "iridan/command", "Faction.Hostile" ], [ "scipoi", "Faction.Hostile" ] ],
+    "dispositions" : [ [ "iridan", "Faction.Hostile" ], [ "iridan/hunters", "Faction.Hostile" ], [ "iridan/command", "Faction.Hostile" ], [ "scipoi", "Faction.Hostile" ], [ "exodus", "Faction.Hostile" ] ],
     "id" : "scippe"
   } ], [ "iridan/command", {
     "strategy" : {
       "type" : "RoamStrategy",
       "data" : { }
     },
-    "dispositions" : [ [ "skyfarer", "Faction.Hostile" ], [ "scippe", "Faction.Hostile" ], [ "scippe/civilians", "Faction.Hostile" ], [ "scipoi", "Faction.Hostile" ] ],
+    "dispositions" : [ [ "skyfarer", "Faction.Hostile" ], [ "scippe", "Faction.Hostile" ], [ "scippe/civilians", "Faction.Hostile" ], [ "scipoi", "Faction.Hostile" ], [ "exodus", "Faction.Hostile" ], [ "siux", "Faction.Hostile" ] ],
     "id" : "iridan/command"
   } ], [ "scippe/civilians", {
     "strategy" : null,
-    "dispositions" : [ [ "iridan", "Faction.Hostile" ], [ "iridan/hunters", "Faction.Hostile" ], [ "iridan/command", "Faction.Hostile" ], [ "scipoi", "Faction.Hostile" ] ],
+    "dispositions" : [ [ "iridan", "Faction.Hostile" ], [ "iridan/hunters", "Faction.Hostile" ], [ "iridan/command", "Faction.Hostile" ], [ "scipoi", "Faction.Hostile" ], [ "exodus", "Faction.Hostile" ] ],
     "id" : "scippe/civilians"
   } ], [ "nomad", {
-    "dispositions" : [ [ "iridan", "Faction.Hostile" ], [ "iridan/hunters", "Faction.Hostile" ], [ "skyfarer", "Faction.Hostile" ], [ "scipoi", "Faction.Hostile" ] ],
+    "dispositions" : [ [ "iridan", "Faction.Hostile" ], [ "iridan/hunters", "Faction.Hostile" ], [ "skyfarer", "Faction.Hostile" ], [ "scipoi", "Faction.Hostile" ], [ "exodus", "Faction.Hostile" ], [ "siux", "Faction.Hostile" ] ],
     "id" : "nomad",
     "strategy" : null
   } ], [ "iridan", {
@@ -1199,25 +1301,29 @@
       "type" : "RoamStrategy",
       "data" : { }
     },
-    "dispositions" : [ [ "nomad", "Faction.Hostile" ], [ "skyfarer", "Faction.Hostile" ], [ "scippe", "Faction.Hostile" ], [ "scippe/civilians", "Faction.Hostile" ], [ "scipoi", "Faction.Hostile" ] ],
+    "dispositions" : [ [ "nomad", "Faction.Hostile" ], [ "skyfarer", "Faction.Hostile" ], [ "scippe", "Faction.Hostile" ], [ "scippe/civilians", "Faction.Hostile" ], [ "scipoi", "Faction.Hostile" ], [ "exodus", "Faction.Hostile" ], [ "siux", "Faction.Hostile" ] ],
     "id" : "iridan"
   } ], [ "scipoi", {
     "strategy" : {
       "type" : "RoamStrategy",
       "data" : { }
     },
-    "dispositions" : [ [ "iridan", "Faction.Hostile" ], [ "iridan/command", "Faction.Hostile" ], [ "iridan/hunters", "Faction.Hostile" ], [ "nomad", "Faction.Hostile" ], [ "scippe", "Faction.Hostile" ], [ "scippe/civilians", "Faction.Hostile" ], [ "skyfarer", "Faction.Hostile" ] ],
+    "dispositions" : [ [ "iridan", "Faction.Hostile" ], [ "iridan/command", "Faction.Hostile" ], [ "iridan/hunters", "Faction.Hostile" ], [ "nomad", "Faction.Hostile" ], [ "scippe", "Faction.Hostile" ], [ "scippe/civilians", "Faction.Hostile" ], [ "skyfarer", "Faction.Hostile" ], [ "exodus", "Faction.Hostile" ], [ "siux", "Faction.Hostile" ] ],
     "id" : "scipoi"
   } ], [ "iridan/hunters", {
     "strategy" : {
       "type" : "AttackStrategy",
       "data" : { }
     },
-    "dispositions" : [ [ "nomad", "Faction.Hostile" ], [ "skyfarer", "Faction.Hostile" ], [ "scippe", "Faction.Hostile" ], [ "scippe/civilians", "Faction.Hostile" ], [ "scipoi", "Faction.Hostile" ] ],
+    "dispositions" : [ [ "nomad", "Faction.Hostile" ], [ "skyfarer", "Faction.Hostile" ], [ "scippe", "Faction.Hostile" ], [ "scippe/civilians", "Faction.Hostile" ], [ "scipoi", "Faction.Hostile" ], [ "exodus", "Faction.Hostile" ], [ "siux", "Faction.Hostile" ] ],
     "id" : "iridan/hunters"
   } ], [ "none", {
     "dispositions" : [ ],
     "id" : "none"
+  } ], [ "siux", {
+    "strategy" : null,
+    "dispositions" : [ [ "exodus", "Faction.Hostile" ], [ "iridan", "Faction.Hostile" ], [ "iridan/command", "Faction.Hostile" ], [ "iridan/hunters", "Faction.Hostile" ], [ "nomad", "Faction.Hostile" ], [ "scipoi", "Faction.Hostile" ], [ "skyfarer", "Faction.Hostile" ] ],
+    "id" : "siux"
   } ] ],
   "goals" : [ [ "gain-ship-materials", {
     "id" : "gain-ship-materials"
@@ -1690,7 +1796,7 @@
         },
         "defence" : 0,
         "skill" : {
-          "hacking" : 300
+          "hacking" : 30
         },
         "melee" : {
           "attack" : 0,
@@ -2081,6 +2187,126 @@
           "sensors" : 10
         },
         "armor" : 5
+      }
+    } ], [ "siux/turret", {
+      "display" : "T",
+      "color" : "#ffc107",
+      "traits" : {
+        "events" : {
+          "death" : {
+            "type" : "MaybeCreaturePower",
+            "data" : {
+              "description" : null,
+              "resources" : null,
+              "power" : {
+                "type" : "CreateEntityPower",
+                "data" : {
+                  "description" : null,
+                  "resources" : null,
+                  "kind" : {
+                    "type" : "ItemKind",
+                    "data" : null,
+                    "value" : "generic/materials"
+                  },
+                  "createDescription" : null
+                }
+              },
+              "probability" : 75
+            }
+          },
+          "hit" : null
+        },
+        "flying" : false,
+        "immobile" : true,
+        "missile" : null,
+        "solitary" : true,
+        "leader" : false
+      },
+      "equipments" : [ ],
+      "recipes" : [ ],
+      "character" : null,
+      "locked" : {
+        "key" : null,
+        "security" : 30,
+        "sub" : null
+      },
+      "name" : "Siux turret",
+      "responses" : [ ],
+      "behavior" : {
+        "type" : "TurretTactic",
+        "data" : { }
+      },
+      "usable" : {
+        "type" : "CapturePower",
+        "data" : {
+          "description" : null,
+          "resources" : null
+        }
+      },
+      "greetings" : [ ],
+      "id" : "siux/turret",
+      "inventory" : [ ],
+      "faction" : "siux",
+      "description" : "Stationary weapons platform.",
+      "stats" : {
+        "launcher" : {
+          "range" : 0,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          },
+          "missiles" : [ ]
+        },
+        "stances" : [ ],
+        "explosive" : {
+          "attack" : 0,
+          "damage" : 0,
+          "radius" : 0,
+          "blast" : 0,
+          "conditions" : [ ]
+        },
+        "speed" : 100,
+        "ranged" : {
+          "attack" : 40,
+          "damage" : 30,
+          "range" : 7,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          },
+          "conditions" : [ ]
+        },
+        "energy" : {
+          "max" : 0,
+          "regen" : 0
+        },
+        "materials" : {
+          "max" : 0,
+          "regen" : 0
+        },
+        "defence" : 30,
+        "skill" : {
+          "hacking" : 0
+        },
+        "melee" : {
+          "attack" : 0,
+          "damage" : 0,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          },
+          "conditions" : [ ]
+        },
+        "resistance" : 20,
+        "health" : {
+          "max" : 40,
+          "regen" : 0
+        },
+        "sight" : {
+          "range" : 7,
+          "sensors" : 10
+        },
+        "armor" : 40
       }
     } ], [ "iridan/ai-core", {
       "display" : "?",
@@ -2659,6 +2885,187 @@
           "sensors" : 0
         },
         "armor" : 0
+      }
+    } ], [ "siux/diplomat", {
+      "display" : "D",
+      "color" : "#ffc107",
+      "traits" : {
+        "events" : null,
+        "flying" : false,
+        "leader" : false,
+        "immobile" : true,
+        "missile" : null,
+        "solitary" : true
+      },
+      "equipments" : [ ],
+      "recipes" : [ ],
+      "character" : null,
+      "locked" : null,
+      "name" : "Siux diplomat",
+      "responses" : [ ],
+      "behavior" : {
+        "type" : "GreetTactic",
+        "data" : { }
+      },
+      "usable" : null,
+      "greetings" : [ ],
+      "id" : "siux/diplomat",
+      "inventory" : [ ],
+      "faction" : "siux",
+      "description" : null,
+      "stats" : {
+        "launcher" : {
+          "missiles" : [ ],
+          "range" : 0,
+          "stance" : null,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          }
+        },
+        "stances" : [ ],
+        "explosive" : {
+          "attack" : 0,
+          "damage" : 0,
+          "radius" : 0,
+          "blast" : 0,
+          "conditions" : [ ]
+        },
+        "speed" : 0,
+        "ranged" : {
+          "attack" : 0,
+          "damage" : 0,
+          "range" : 0,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          },
+          "stance" : null,
+          "conditions" : [ ]
+        },
+        "energy" : {
+          "max" : 0,
+          "regen" : 0
+        },
+        "materials" : {
+          "max" : 0,
+          "regen" : 0
+        },
+        "defence" : 0,
+        "skill" : {
+          "hacking" : 0
+        },
+        "melee" : {
+          "attack" : 0,
+          "damage" : 0,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          },
+          "stance" : null,
+          "conditions" : [ ]
+        },
+        "resistance" : 0,
+        "health" : {
+          "max" : 100,
+          "regen" : 0
+        },
+        "sight" : {
+          "range" : 5,
+          "sensors" : 30
+        },
+        "armor" : 0
+      }
+    } ], [ "exodus/carapace", {
+      "display" : "E",
+      "color" : "green",
+      "traits" : {
+        "events" : null,
+        "flying" : false,
+        "immobile" : false,
+        "missile" : null,
+        "solitary" : true,
+        "leader" : false
+      },
+      "equipments" : [ ],
+      "recipes" : [ ],
+      "character" : {
+        "progression" : "exodus/carapace",
+        "experience" : 0,
+        "level" : 0
+      },
+      "locked" : null,
+      "name" : "Exodus carapace",
+      "responses" : [ ],
+      "behavior" : {
+        "type" : "RoamTactic",
+        "data" : { }
+      },
+      "usable" : null,
+      "greetings" : [ ],
+      "id" : "exodus/carapace",
+      "inventory" : [ ],
+      "faction" : "exodus",
+      "description" : "Integrates defeated enemy technology to self. Heavily armored.",
+      "stats" : {
+        "launcher" : {
+          "range" : 0,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          },
+          "missiles" : [ ]
+        },
+        "stances" : [ ],
+        "explosive" : {
+          "attack" : 0,
+          "damage" : 0,
+          "radius" : 0,
+          "blast" : 0,
+          "conditions" : [ ]
+        },
+        "speed" : 100,
+        "ranged" : {
+          "attack" : 40,
+          "damage" : 30,
+          "range" : 5,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          },
+          "conditions" : [ ]
+        },
+        "energy" : {
+          "max" : 0,
+          "regen" : 0
+        },
+        "materials" : {
+          "max" : 0,
+          "regen" : 0
+        },
+        "defence" : 30,
+        "skill" : {
+          "hacking" : 0
+        },
+        "melee" : {
+          "attack" : 0,
+          "damage" : 0,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          },
+          "conditions" : [ ]
+        },
+        "resistance" : 30,
+        "health" : {
+          "max" : 30,
+          "regen" : 0
+        },
+        "sight" : {
+          "range" : 7,
+          "sensors" : 10
+        },
+        "armor" : 50
       }
     } ], [ "scippe/shooter", {
       "display" : "r",
@@ -4818,6 +5225,97 @@
         },
         "armor" : 30
       }
+    } ], [ "exodus/invertebrate", {
+      "display" : "E",
+      "color" : "#2196f3",
+      "traits" : {
+        "events" : null,
+        "flying" : false,
+        "immobile" : false,
+        "missile" : null,
+        "solitary" : true,
+        "leader" : false
+      },
+      "equipments" : [ ],
+      "recipes" : [ ],
+      "character" : {
+        "progression" : "exodus/invertebrate",
+        "experience" : 0,
+        "level" : 0
+      },
+      "locked" : null,
+      "name" : "Exodus invertebrate",
+      "responses" : [ ],
+      "behavior" : {
+        "type" : "RoamTactic",
+        "data" : { }
+      },
+      "usable" : null,
+      "greetings" : [ ],
+      "id" : "exodus/invertebrate",
+      "inventory" : [ ],
+      "faction" : "exodus",
+      "description" : "Integrates defeated enemy technology to self. Highly morphic regenerating body.",
+      "stats" : {
+        "launcher" : {
+          "range" : 0,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          },
+          "missiles" : [ ]
+        },
+        "stances" : [ ],
+        "explosive" : {
+          "attack" : 0,
+          "damage" : 0,
+          "radius" : 0,
+          "blast" : 0,
+          "conditions" : [ ]
+        },
+        "speed" : 100,
+        "ranged" : {
+          "attack" : 40,
+          "damage" : 30,
+          "range" : 5,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          },
+          "conditions" : [ ]
+        },
+        "energy" : {
+          "max" : 0,
+          "regen" : 0
+        },
+        "materials" : {
+          "max" : 0,
+          "regen" : 0
+        },
+        "defence" : 30,
+        "skill" : {
+          "hacking" : 0
+        },
+        "melee" : {
+          "attack" : 0,
+          "damage" : 0,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          },
+          "conditions" : [ ]
+        },
+        "resistance" : 30,
+        "health" : {
+          "max" : 50,
+          "regen" : 10
+        },
+        "sight" : {
+          "range" : 7,
+          "sensors" : 10
+        },
+        "armor" : 30
+      }
     } ], [ "scipoi/worker", {
       "display" : "w",
       "color" : "#673ab7",
@@ -5084,7 +5582,6 @@
           "armor" : 0
         }
       },
-      "power" : null,
       "explosive" : null,
       "shield" : null,
       "hidden" : false,
@@ -5106,7 +5603,6 @@
       "display" : "]",
       "color" : "blue",
       "rangedWeapon" : null,
-      "power" : null,
       "explosive" : null,
       "shield" : null,
       "hidden" : false,
@@ -5205,7 +5701,6 @@
       "display" : "]",
       "color" : "blue",
       "rangedWeapon" : null,
-      "power" : null,
       "explosive" : null,
       "shield" : null,
       "hidden" : false,
@@ -5284,6 +5779,38 @@
         "slot" : "Equipment.BodyArmor"
       },
       "key" : null
+    } ], [ "exodus/components-machinery", {
+      "launcher" : null,
+      "display" : "Ω",
+      "color" : "#2196f3",
+      "rangedWeapon" : null,
+      "explosive" : null,
+      "shield" : null,
+      "hidden" : false,
+      "locked" : null,
+      "name" : "Exodus machinery",
+      "concealment" : 0,
+      "trap" : null,
+      "door" : null,
+      "usable" : {
+        "type" : "RemoveItemPower",
+        "data" : {
+          "description" : "You disassemble device for components.",
+          "resources" : {
+            "health" : 0,
+            "energy" : 0,
+            "materials" : 0,
+            "components" : 1
+          },
+          "removeDescription" : null
+        }
+      },
+      "pickable" : false,
+      "id" : "exodus/components-machinery",
+      "weapon" : null,
+      "description" : "Contains usefull components.",
+      "armor" : null,
+      "key" : null
     } ], [ "iridan/door-secure-closed", {
       "display" : "+",
       "color" : "#ffc107",
@@ -5328,7 +5855,6 @@
       "display" : "\"",
       "color" : "blue",
       "rangedWeapon" : null,
-      "power" : null,
       "explosive" : null,
       "shield" : null,
       "hidden" : false,
@@ -5359,6 +5885,38 @@
       "id" : "nomad/deploy-explosive-mine",
       "weapon" : null,
       "description" : "Deploys smart mines.",
+      "armor" : null,
+      "key" : null
+    } ], [ "skyfarer/materials-equipment", {
+      "launcher" : null,
+      "display" : "=",
+      "color" : "#673ab7",
+      "rangedWeapon" : null,
+      "explosive" : null,
+      "shield" : null,
+      "hidden" : false,
+      "locked" : null,
+      "name" : "Skyfarer equipment",
+      "concealment" : 0,
+      "trap" : null,
+      "door" : null,
+      "usable" : {
+        "type" : "RemoveItemPower",
+        "data" : {
+          "description" : "You disassemble device for components.",
+          "resources" : {
+            "health" : 0,
+            "energy" : 0,
+            "materials" : 0,
+            "components" : 1
+          },
+          "removeDescription" : null
+        }
+      },
+      "pickable" : false,
+      "id" : "skyfarer/materials-equipment",
+      "weapon" : null,
+      "description" : "Could be recycled for materials.",
       "armor" : null,
       "key" : null
     } ], [ "nomad/conduit-shuttle-exit", {
@@ -5457,7 +6015,6 @@
           "armor" : 0
         }
       },
-      "power" : null,
       "explosive" : null,
       "shield" : null,
       "hidden" : false,
@@ -5493,7 +6050,6 @@
       "display" : "]",
       "color" : "blue",
       "rangedWeapon" : null,
-      "power" : null,
       "explosive" : null,
       "shield" : null,
       "hidden" : false,
@@ -5673,7 +6229,6 @@
           "armor" : 0
         }
       },
-      "power" : null,
       "explosive" : null,
       "shield" : null,
       "hidden" : false,
@@ -5695,7 +6250,6 @@
       "display" : "]",
       "color" : "blue",
       "rangedWeapon" : null,
-      "power" : null,
       "explosive" : null,
       "shield" : null,
       "hidden" : false,
@@ -5774,6 +6328,38 @@
         "slot" : "Equipment.BodyArmor"
       },
       "key" : null
+    } ], [ "skyfarer/components-machinery", {
+      "launcher" : null,
+      "display" : "Ω",
+      "color" : "#673ab7",
+      "rangedWeapon" : null,
+      "explosive" : null,
+      "shield" : null,
+      "hidden" : false,
+      "locked" : null,
+      "name" : "Skyfarer machinery",
+      "concealment" : 0,
+      "trap" : null,
+      "door" : null,
+      "usable" : {
+        "type" : "RemoveItemPower",
+        "data" : {
+          "description" : "You disassemble device for components.",
+          "resources" : {
+            "health" : 0,
+            "energy" : 0,
+            "materials" : 0,
+            "components" : 1
+          },
+          "removeDescription" : null
+        }
+      },
+      "pickable" : false,
+      "id" : "skyfarer/components-machinery",
+      "weapon" : null,
+      "description" : "Contains usefull components.",
+      "armor" : null,
+      "key" : null
     } ], [ "nomad/explosive-timed-active", {
       "display" : "¤",
       "color" : "yellow",
@@ -5818,7 +6404,6 @@
       "display" : "[",
       "color" : "green",
       "rangedWeapon" : null,
-      "power" : null,
       "explosive" : null,
       "shield" : {
         "stats" : {
@@ -5970,7 +6555,6 @@
       "display" : "Ω",
       "color" : "white",
       "rangedWeapon" : null,
-      "power" : null,
       "explosive" : null,
       "shield" : null,
       "hidden" : false,
@@ -6003,7 +6587,6 @@
       "display" : "]",
       "color" : "blue",
       "rangedWeapon" : null,
-      "power" : null,
       "explosive" : null,
       "shield" : null,
       "hidden" : false,
@@ -6125,7 +6708,6 @@
       "display" : "(",
       "color" : "purple",
       "rangedWeapon" : null,
-      "power" : null,
       "explosive" : null,
       "shield" : null,
       "hidden" : false,
@@ -6208,7 +6790,6 @@
       "display" : "¤",
       "color" : "white",
       "rangedWeapon" : null,
-      "power" : 0,
       "explosive" : null,
       "shield" : null,
       "hidden" : false,
@@ -6236,7 +6817,6 @@
       "display" : "(",
       "color" : "blue",
       "rangedWeapon" : null,
-      "power" : null,
       "explosive" : null,
       "shield" : null,
       "hidden" : false,
@@ -6359,7 +6939,6 @@
       "display" : "(",
       "color" : "blue",
       "rangedWeapon" : null,
-      "power" : null,
       "explosive" : null,
       "shield" : null,
       "hidden" : false,
@@ -6458,7 +7037,6 @@
       "display" : "\"",
       "color" : "blue",
       "rangedWeapon" : null,
-      "power" : null,
       "explosive" : null,
       "shield" : null,
       "hidden" : false,
@@ -6496,7 +7074,6 @@
       "display" : "]",
       "color" : "blue",
       "rangedWeapon" : null,
-      "power" : null,
       "explosive" : null,
       "shield" : null,
       "hidden" : false,
@@ -6622,7 +7199,6 @@
       "display" : "]",
       "color" : "blue",
       "rangedWeapon" : null,
-      "power" : null,
       "explosive" : null,
       "shield" : null,
       "hidden" : false,
@@ -6722,7 +7298,6 @@
       "display" : "Ω",
       "color" : "#00bcd4",
       "rangedWeapon" : null,
-      "power" : null,
       "explosive" : null,
       "shield" : null,
       "hidden" : false,
@@ -6743,7 +7318,6 @@
       "display" : "\"",
       "color" : "blue",
       "rangedWeapon" : null,
-      "power" : null,
       "explosive" : null,
       "shield" : null,
       "hidden" : false,
@@ -6810,7 +7384,6 @@
       "display" : "?",
       "color" : "yellow",
       "rangedWeapon" : null,
-      "power" : null,
       "explosive" : null,
       "shield" : null,
       "hidden" : false,
@@ -6838,7 +7411,6 @@
       "display" : "]",
       "color" : "blue",
       "rangedWeapon" : null,
-      "power" : null,
       "explosive" : null,
       "shield" : null,
       "hidden" : false,
@@ -6993,7 +7565,6 @@
       "display" : "d",
       "color" : "white",
       "rangedWeapon" : null,
-      "power" : 0,
       "shield" : null,
       "hidden" : false,
       "name" : "Skyfarer drone",
@@ -7019,7 +7590,6 @@
       "display" : "¤",
       "color" : "white",
       "rangedWeapon" : null,
-      "power" : 0,
       "explosive" : null,
       "shield" : null,
       "hidden" : false,
@@ -7047,7 +7617,6 @@
       "display" : "]",
       "color" : "blue",
       "rangedWeapon" : null,
-      "power" : null,
       "explosive" : null,
       "shield" : null,
       "hidden" : false,
@@ -7131,7 +7700,6 @@
       "display" : "]",
       "color" : "blue",
       "rangedWeapon" : null,
-      "power" : null,
       "explosive" : null,
       "shield" : null,
       "hidden" : false,
@@ -7262,7 +7830,6 @@
       "display" : "]",
       "color" : "blue",
       "rangedWeapon" : null,
-      "power" : null,
       "explosive" : null,
       "shield" : null,
       "hidden" : false,
@@ -7346,7 +7913,6 @@
       "display" : "]",
       "color" : "blue",
       "rangedWeapon" : null,
-      "power" : null,
       "explosive" : null,
       "shield" : null,
       "hidden" : false,
@@ -7462,7 +8028,6 @@
       "display" : "]",
       "color" : "blue",
       "rangedWeapon" : null,
-      "power" : null,
       "explosive" : null,
       "shield" : null,
       "hidden" : false,
@@ -7623,7 +8188,6 @@
       "display" : "[",
       "color" : "blue",
       "rangedWeapon" : null,
-      "power" : null,
       "explosive" : null,
       "shield" : {
         "stats" : {
@@ -7706,7 +8270,6 @@
       "display" : "]",
       "color" : "blue",
       "rangedWeapon" : null,
-      "power" : null,
       "explosive" : null,
       "shield" : null,
       "hidden" : false,
@@ -7790,7 +8353,6 @@
       "display" : "Σ",
       "color" : "white",
       "rangedWeapon" : null,
-      "power" : null,
       "explosive" : null,
       "shield" : null,
       "hidden" : false,
@@ -7823,7 +8385,6 @@
       "display" : "(",
       "color" : "purple",
       "rangedWeapon" : null,
-      "power" : null,
       "explosive" : null,
       "shield" : null,
       "hidden" : false,
@@ -7926,7 +8487,6 @@
       "display" : "=",
       "color" : "purple",
       "rangedWeapon" : null,
-      "power" : null,
       "explosive" : null,
       "shield" : null,
       "hidden" : false,
@@ -7958,7 +8518,6 @@
       "display" : "=",
       "color" : "#ff5722",
       "rangedWeapon" : null,
-      "power" : null,
       "explosive" : null,
       "shield" : null,
       "hidden" : false,
@@ -8005,7 +8564,6 @@
       "display" : "[",
       "color" : "green",
       "rangedWeapon" : null,
-      "power" : null,
       "explosive" : null,
       "shield" : {
         "stats" : {
@@ -8088,7 +8646,6 @@
       "display" : "=",
       "color" : "yellow",
       "rangedWeapon" : null,
-      "power" : null,
       "explosive" : null,
       "shield" : null,
       "hidden" : false,
@@ -8197,7 +8754,6 @@
           "armor" : 0
         }
       },
-      "power" : null,
       "explosive" : null,
       "shield" : null,
       "hidden" : false,
@@ -8219,7 +8775,6 @@
       "display" : "/",
       "color" : "#2196f3",
       "rangedWeapon" : null,
-      "power" : null,
       "explosive" : null,
       "shield" : null,
       "hidden" : false,
@@ -8316,7 +8871,6 @@
       "display" : "!",
       "color" : "red",
       "rangedWeapon" : null,
-      "power" : null,
       "explosive" : null,
       "shield" : null,
       "hidden" : false,
@@ -8338,7 +8892,6 @@
       "display" : "]",
       "color" : "blue",
       "rangedWeapon" : null,
-      "power" : null,
       "explosive" : null,
       "shield" : null,
       "hidden" : false,
@@ -8422,7 +8975,6 @@
       "display" : "?",
       "color" : "green",
       "rangedWeapon" : null,
-      "power" : null,
       "explosive" : null,
       "shield" : null,
       "hidden" : true,
@@ -8463,7 +9015,6 @@
       "display" : "Ͻ",
       "color" : "white",
       "rangedWeapon" : null,
-      "power" : null,
       "explosive" : null,
       "shield" : null,
       "hidden" : false,
@@ -8499,7 +9050,6 @@
       "display" : "=",
       "color" : "darkgrey",
       "rangedWeapon" : null,
-      "power" : null,
       "explosive" : null,
       "shield" : null,
       "hidden" : false,
@@ -8607,7 +9157,6 @@
           "armor" : 0
         }
       },
-      "power" : null,
       "explosive" : null,
       "shield" : null,
       "hidden" : false,
@@ -8629,7 +9178,6 @@
       "display" : "]",
       "color" : "blue",
       "rangedWeapon" : null,
-      "power" : null,
       "explosive" : null,
       "shield" : null,
       "hidden" : false,
@@ -8836,7 +9384,6 @@
           "armor" : 0
         }
       },
-      "power" : null,
       "explosive" : null,
       "shield" : null,
       "hidden" : false,
@@ -8919,7 +9466,6 @@
       "display" : "!",
       "color" : "red",
       "rangedWeapon" : null,
-      "power" : null,
       "explosive" : null,
       "shield" : null,
       "hidden" : false,
@@ -8971,7 +9517,6 @@
       "display" : "]",
       "color" : "blue",
       "rangedWeapon" : null,
-      "power" : null,
       "explosive" : null,
       "shield" : null,
       "hidden" : false,
@@ -9055,7 +9600,6 @@
       "display" : "]",
       "color" : "blue",
       "rangedWeapon" : null,
-      "power" : null,
       "explosive" : null,
       "shield" : null,
       "hidden" : false,
@@ -9134,12 +9678,52 @@
         "slot" : "Equipment.BodyArmor"
       },
       "key" : null
+    } ], [ "generic/trap-immobilizing", {
+      "display" : "^",
+      "color" : "#607d8b",
+      "rangedWeapon" : null,
+      "shield" : null,
+      "hidden" : true,
+      "locked" : {
+        "key" : null,
+        "security" : 30
+      },
+      "name" : "Immobilizing trap",
+      "concealment" : 150,
+      "trap" : {
+        "type" : "TrapAttackPower",
+        "data" : {
+          "attack" : 100,
+          "damage" : 0,
+          "hitDescription" : "Threads spring from floor to grapple {target}.",
+          "deflectDescription" : "Threads spring from floor to grapple {target}.",
+          "missDescription" : "Threads spring from floor to grapple {target} but miss.",
+          "conditions" : [ {
+            "type" : "Conditions.Immobilized",
+            "data" : {
+              "strength" : 30
+            }
+          } ],
+          "description" : null
+        }
+      },
+      "door" : null,
+      "usable" : {
+        "type" : "RemoveItemPower",
+        "data" : {
+          "removeDescription" : "Trap is disabled."
+        }
+      },
+      "pickable" : false,
+      "id" : "generic/trap-immobilizing",
+      "weapon" : null,
+      "description" : "Trap hidden in floor.",
+      "armor" : null
     } ], [ "scippe/weapon-shard-blast", {
       "launcher" : null,
       "display" : "(",
       "color" : "red",
       "rangedWeapon" : null,
-      "power" : null,
       "explosive" : null,
       "shield" : null,
       "hidden" : false,
@@ -9222,7 +9806,6 @@
       "display" : "/",
       "color" : "blue",
       "rangedWeapon" : null,
-      "power" : 0,
       "explosive" : null,
       "shield" : null,
       "hidden" : false,
@@ -9338,7 +9921,6 @@
       "display" : "(",
       "color" : "red",
       "rangedWeapon" : null,
-      "power" : null,
       "explosive" : null,
       "shield" : null,
       "hidden" : false,
@@ -9437,7 +10019,6 @@
       "display" : "]",
       "color" : "blue",
       "rangedWeapon" : null,
-      "power" : null,
       "explosive" : null,
       "shield" : null,
       "hidden" : false,
@@ -9521,7 +10102,6 @@
       "display" : "\"",
       "color" : "green",
       "rangedWeapon" : null,
-      "power" : null,
       "explosive" : null,
       "shield" : null,
       "hidden" : false,
@@ -9555,7 +10135,6 @@
       "display" : "]",
       "color" : "blue",
       "rangedWeapon" : null,
-      "power" : null,
       "explosive" : null,
       "shield" : null,
       "hidden" : false,
@@ -9819,7 +10398,6 @@
       "type" : "TriggeredTrapWidget",
       "data" : {
         "item" : "generic/trap-laser",
-        "power" : 0,
         "discover" : "Discover.Triggerer",
         "triggerDescription" : "Click.",
         "id" : "generic/trap-laser",
@@ -9840,7 +10418,6 @@
       "type" : "TriggeredTrapWidget",
       "data" : {
         "item" : "skyfarer/explosive-mine-active",
-        "power" : null,
         "discover" : "Discover.Triggerer",
         "triggerDescription" : "Click.",
         "id" : "skyfarer/explosive-mine",
@@ -9854,7 +10431,6 @@
         "interval" : 500,
         "id" : "scipoi/portal",
         "summonDescription" : "{target} appears from hollow.",
-        "power" : 0,
         "summonCategory" : "CreatureKind.DefaultCategory",
         "charge" : {
           "charges" : 3,
@@ -9874,7 +10450,6 @@
         "interval" : 4000,
         "id" : "iridan/portal",
         "summonDescription" : "{target} is constructed.",
-        "power" : 0,
         "summonCategory" : "CreatureKind.DefaultCategory"
       }
     } ], [ "old/healing-chamber-widget-inactive", {
@@ -9890,7 +10465,6 @@
       "type" : "TriggeredTrapWidget",
       "data" : {
         "item" : "generic/trap-plasma",
-        "power" : 50,
         "discover" : "Discover.Triggerer",
         "triggerDescription" : "Click.",
         "id" : "generic/trap-plasma",
@@ -9919,7 +10493,6 @@
         "interval" : 500,
         "id" : "scippe/civilians/portal",
         "summonDescription" : "{target} appears from storage.",
-        "power" : 0,
         "summonCategory" : "CreatureKind.DefaultCategory",
         "charge" : {
           "charges" : 3,
@@ -9943,7 +10516,6 @@
       "data" : {
         "item" : "generic/pressure-plate-hidden",
         "smart" : true,
-        "power" : null,
         "discover" : "Discover.Nobody",
         "triggerDescription" : "Click.",
         "id" : "generic/pressure-plate-hidden"
@@ -9952,7 +10524,6 @@
       "type" : "TriggeredTrapWidget",
       "data" : {
         "item" : "nomad/explosive-mine-active",
-        "power" : null,
         "discover" : "Discover.Triggerer",
         "triggerDescription" : "Click.",
         "id" : "nomad/explosive-mine",
@@ -10027,6 +10598,816 @@
       }
     } ],
     "id" : "player"
+  } ], [ "exodus/carapace", {
+    "steps" : [ {
+      "requirements" : {
+        "experience" : 1
+      },
+      "stats" : {
+        "launcher" : {
+          "missiles" : [ ],
+          "range" : 0,
+          "stance" : null,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          }
+        },
+        "stances" : [ ],
+        "explosive" : {
+          "attack" : 0,
+          "damage" : 0,
+          "radius" : 0,
+          "blast" : 0,
+          "conditions" : [ ]
+        },
+        "speed" : 0,
+        "ranged" : {
+          "attack" : 2,
+          "damage" : 0,
+          "range" : 0,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          },
+          "stance" : null,
+          "conditions" : [ ]
+        },
+        "energy" : {
+          "max" : 0,
+          "regen" : 0
+        },
+        "materials" : {
+          "max" : 0,
+          "regen" : 0
+        },
+        "defence" : 0,
+        "skill" : {
+          "hacking" : 0
+        },
+        "melee" : {
+          "attack" : 0,
+          "damage" : 0,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          },
+          "stance" : null,
+          "conditions" : [ ]
+        },
+        "resistance" : 0,
+        "health" : {
+          "max" : 0,
+          "regen" : 0
+        },
+        "sight" : {
+          "range" : 0,
+          "sensors" : 0
+        },
+        "armor" : 2
+      }
+    }, {
+      "requirements" : {
+        "experience" : 5
+      },
+      "stats" : {
+        "launcher" : {
+          "missiles" : [ ],
+          "range" : 0,
+          "stance" : null,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          }
+        },
+        "stances" : [ ],
+        "explosive" : {
+          "attack" : 0,
+          "damage" : 0,
+          "radius" : 0,
+          "blast" : 0,
+          "conditions" : [ ]
+        },
+        "speed" : 0,
+        "ranged" : {
+          "attack" : 2,
+          "damage" : 0,
+          "range" : 0,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          },
+          "stance" : null,
+          "conditions" : [ ]
+        },
+        "energy" : {
+          "max" : 0,
+          "regen" : 0
+        },
+        "materials" : {
+          "max" : 0,
+          "regen" : 0
+        },
+        "defence" : 0,
+        "skill" : {
+          "hacking" : 0
+        },
+        "melee" : {
+          "attack" : 0,
+          "damage" : 0,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          },
+          "stance" : null,
+          "conditions" : [ ]
+        },
+        "resistance" : 0,
+        "health" : {
+          "max" : 0,
+          "regen" : 0
+        },
+        "sight" : {
+          "range" : 0,
+          "sensors" : 0
+        },
+        "armor" : 2
+      }
+    }, {
+      "requirements" : {
+        "experience" : 10
+      },
+      "stats" : {
+        "launcher" : {
+          "missiles" : [ ],
+          "range" : 0,
+          "stance" : null,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          }
+        },
+        "stances" : [ ],
+        "explosive" : {
+          "attack" : 0,
+          "damage" : 0,
+          "radius" : 0,
+          "blast" : 0,
+          "conditions" : [ ]
+        },
+        "speed" : 0,
+        "ranged" : {
+          "attack" : 2,
+          "damage" : 0,
+          "range" : 0,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          },
+          "stance" : null,
+          "conditions" : [ ]
+        },
+        "energy" : {
+          "max" : 0,
+          "regen" : 0
+        },
+        "materials" : {
+          "max" : 0,
+          "regen" : 0
+        },
+        "defence" : 0,
+        "skill" : {
+          "hacking" : 0
+        },
+        "melee" : {
+          "attack" : 0,
+          "damage" : 0,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          },
+          "stance" : null,
+          "conditions" : [ ]
+        },
+        "resistance" : 0,
+        "health" : {
+          "max" : 0,
+          "regen" : 0
+        },
+        "sight" : {
+          "range" : 0,
+          "sensors" : 0
+        },
+        "armor" : 2
+      }
+    }, {
+      "requirements" : {
+        "experience" : 15
+      },
+      "stats" : {
+        "launcher" : {
+          "missiles" : [ ],
+          "range" : 0,
+          "stance" : null,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          }
+        },
+        "stances" : [ ],
+        "explosive" : {
+          "attack" : 0,
+          "damage" : 0,
+          "radius" : 0,
+          "blast" : 0,
+          "conditions" : [ ]
+        },
+        "speed" : 0,
+        "ranged" : {
+          "attack" : 2,
+          "damage" : 0,
+          "range" : 0,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          },
+          "stance" : null,
+          "conditions" : [ ]
+        },
+        "energy" : {
+          "max" : 0,
+          "regen" : 0
+        },
+        "materials" : {
+          "max" : 0,
+          "regen" : 0
+        },
+        "defence" : 0,
+        "skill" : {
+          "hacking" : 0
+        },
+        "melee" : {
+          "attack" : 0,
+          "damage" : 0,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          },
+          "stance" : null,
+          "conditions" : [ ]
+        },
+        "resistance" : 0,
+        "health" : {
+          "max" : 0,
+          "regen" : 0
+        },
+        "sight" : {
+          "range" : 0,
+          "sensors" : 0
+        },
+        "armor" : 2
+      }
+    }, {
+      "requirements" : {
+        "experience" : 20
+      },
+      "stats" : {
+        "launcher" : {
+          "missiles" : [ ],
+          "range" : 0,
+          "stance" : null,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          }
+        },
+        "stances" : [ ],
+        "explosive" : {
+          "attack" : 0,
+          "damage" : 0,
+          "radius" : 0,
+          "blast" : 0,
+          "conditions" : [ ]
+        },
+        "speed" : 0,
+        "ranged" : {
+          "attack" : 2,
+          "damage" : 0,
+          "range" : 0,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          },
+          "stance" : null,
+          "conditions" : [ ]
+        },
+        "energy" : {
+          "max" : 0,
+          "regen" : 0
+        },
+        "materials" : {
+          "max" : 0,
+          "regen" : 0
+        },
+        "defence" : 0,
+        "skill" : {
+          "hacking" : 0
+        },
+        "melee" : {
+          "attack" : 0,
+          "damage" : 0,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          },
+          "stance" : null,
+          "conditions" : [ ]
+        },
+        "resistance" : 0,
+        "health" : {
+          "max" : 0,
+          "regen" : 0
+        },
+        "sight" : {
+          "range" : 0,
+          "sensors" : 0
+        },
+        "armor" : 2
+      }
+    }, {
+      "requirements" : {
+        "experience" : 30
+      },
+      "stats" : {
+        "launcher" : {
+          "missiles" : [ ],
+          "range" : 0,
+          "stance" : null,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          }
+        },
+        "stances" : [ ],
+        "explosive" : {
+          "attack" : 0,
+          "damage" : 0,
+          "radius" : 0,
+          "blast" : 0,
+          "conditions" : [ ]
+        },
+        "speed" : 0,
+        "ranged" : {
+          "attack" : 2,
+          "damage" : 0,
+          "range" : 0,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          },
+          "stance" : null,
+          "conditions" : [ ]
+        },
+        "energy" : {
+          "max" : 0,
+          "regen" : 0
+        },
+        "materials" : {
+          "max" : 0,
+          "regen" : 0
+        },
+        "defence" : 0,
+        "skill" : {
+          "hacking" : 0
+        },
+        "melee" : {
+          "attack" : 0,
+          "damage" : 0,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          },
+          "stance" : null,
+          "conditions" : [ ]
+        },
+        "resistance" : 0,
+        "health" : {
+          "max" : 0,
+          "regen" : 0
+        },
+        "sight" : {
+          "range" : 0,
+          "sensors" : 0
+        },
+        "armor" : 2
+      }
+    } ],
+    "id" : "exodus/carapace"
+  } ], [ "exodus/invertebrate", {
+    "steps" : [ {
+      "requirements" : {
+        "experience" : 1
+      },
+      "stats" : {
+        "launcher" : {
+          "missiles" : [ ],
+          "range" : 0,
+          "stance" : null,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          }
+        },
+        "stances" : [ ],
+        "explosive" : {
+          "attack" : 0,
+          "damage" : 0,
+          "radius" : 0,
+          "blast" : 0,
+          "conditions" : [ ]
+        },
+        "speed" : 0,
+        "ranged" : {
+          "attack" : 2,
+          "damage" : 0,
+          "range" : 0,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          },
+          "stance" : null,
+          "conditions" : [ ]
+        },
+        "energy" : {
+          "max" : 0,
+          "regen" : 0
+        },
+        "materials" : {
+          "max" : 0,
+          "regen" : 0
+        },
+        "defence" : 0,
+        "skill" : {
+          "hacking" : 0
+        },
+        "melee" : {
+          "attack" : 0,
+          "damage" : 0,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          },
+          "stance" : null,
+          "conditions" : [ ]
+        },
+        "resistance" : 0,
+        "health" : {
+          "max" : 5,
+          "regen" : 1
+        },
+        "sight" : {
+          "range" : 0,
+          "sensors" : 0
+        },
+        "armor" : 0
+      }
+    }, {
+      "requirements" : {
+        "experience" : 5
+      },
+      "stats" : {
+        "launcher" : {
+          "missiles" : [ ],
+          "range" : 0,
+          "stance" : null,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          }
+        },
+        "stances" : [ ],
+        "explosive" : {
+          "attack" : 0,
+          "damage" : 0,
+          "radius" : 0,
+          "blast" : 0,
+          "conditions" : [ ]
+        },
+        "speed" : 0,
+        "ranged" : {
+          "attack" : 2,
+          "damage" : 0,
+          "range" : 0,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          },
+          "stance" : null,
+          "conditions" : [ ]
+        },
+        "energy" : {
+          "max" : 0,
+          "regen" : 0
+        },
+        "materials" : {
+          "max" : 0,
+          "regen" : 0
+        },
+        "defence" : 0,
+        "skill" : {
+          "hacking" : 0
+        },
+        "melee" : {
+          "attack" : 0,
+          "damage" : 0,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          },
+          "stance" : null,
+          "conditions" : [ ]
+        },
+        "resistance" : 0,
+        "health" : {
+          "max" : 5,
+          "regen" : 1
+        },
+        "sight" : {
+          "range" : 0,
+          "sensors" : 0
+        },
+        "armor" : 0
+      }
+    }, {
+      "requirements" : {
+        "experience" : 10
+      },
+      "stats" : {
+        "launcher" : {
+          "missiles" : [ ],
+          "range" : 0,
+          "stance" : null,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          }
+        },
+        "stances" : [ ],
+        "explosive" : {
+          "attack" : 0,
+          "damage" : 0,
+          "radius" : 0,
+          "blast" : 0,
+          "conditions" : [ ]
+        },
+        "speed" : 0,
+        "ranged" : {
+          "attack" : 2,
+          "damage" : 0,
+          "range" : 0,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          },
+          "stance" : null,
+          "conditions" : [ ]
+        },
+        "energy" : {
+          "max" : 0,
+          "regen" : 0
+        },
+        "materials" : {
+          "max" : 0,
+          "regen" : 0
+        },
+        "defence" : 0,
+        "skill" : {
+          "hacking" : 0
+        },
+        "melee" : {
+          "attack" : 0,
+          "damage" : 0,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          },
+          "stance" : null,
+          "conditions" : [ ]
+        },
+        "resistance" : 0,
+        "health" : {
+          "max" : 5,
+          "regen" : 1
+        },
+        "sight" : {
+          "range" : 0,
+          "sensors" : 0
+        },
+        "armor" : 0
+      }
+    }, {
+      "requirements" : {
+        "experience" : 15
+      },
+      "stats" : {
+        "launcher" : {
+          "missiles" : [ ],
+          "range" : 0,
+          "stance" : null,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          }
+        },
+        "stances" : [ ],
+        "explosive" : {
+          "attack" : 0,
+          "damage" : 0,
+          "radius" : 0,
+          "blast" : 0,
+          "conditions" : [ ]
+        },
+        "speed" : 0,
+        "ranged" : {
+          "attack" : 2,
+          "damage" : 0,
+          "range" : 0,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          },
+          "stance" : null,
+          "conditions" : [ ]
+        },
+        "energy" : {
+          "max" : 0,
+          "regen" : 0
+        },
+        "materials" : {
+          "max" : 0,
+          "regen" : 0
+        },
+        "defence" : 0,
+        "skill" : {
+          "hacking" : 0
+        },
+        "melee" : {
+          "attack" : 0,
+          "damage" : 0,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          },
+          "stance" : null,
+          "conditions" : [ ]
+        },
+        "resistance" : 0,
+        "health" : {
+          "max" : 5,
+          "regen" : 1
+        },
+        "sight" : {
+          "range" : 0,
+          "sensors" : 0
+        },
+        "armor" : 0
+      }
+    }, {
+      "requirements" : {
+        "experience" : 20
+      },
+      "stats" : {
+        "launcher" : {
+          "missiles" : [ ],
+          "range" : 0,
+          "stance" : null,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          }
+        },
+        "stances" : [ ],
+        "explosive" : {
+          "attack" : 0,
+          "damage" : 0,
+          "radius" : 0,
+          "blast" : 0,
+          "conditions" : [ ]
+        },
+        "speed" : 0,
+        "ranged" : {
+          "attack" : 2,
+          "damage" : 0,
+          "range" : 0,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          },
+          "stance" : null,
+          "conditions" : [ ]
+        },
+        "energy" : {
+          "max" : 0,
+          "regen" : 0
+        },
+        "materials" : {
+          "max" : 0,
+          "regen" : 0
+        },
+        "defence" : 0,
+        "skill" : {
+          "hacking" : 0
+        },
+        "melee" : {
+          "attack" : 0,
+          "damage" : 0,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          },
+          "stance" : null,
+          "conditions" : [ ]
+        },
+        "resistance" : 0,
+        "health" : {
+          "max" : 5,
+          "regen" : 1
+        },
+        "sight" : {
+          "range" : 0,
+          "sensors" : 0
+        },
+        "armor" : 0
+      }
+    }, {
+      "requirements" : {
+        "experience" : 30
+      },
+      "stats" : {
+        "launcher" : {
+          "missiles" : [ ],
+          "range" : 0,
+          "stance" : null,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          }
+        },
+        "stances" : [ ],
+        "explosive" : {
+          "attack" : 0,
+          "damage" : 0,
+          "radius" : 0,
+          "blast" : 0,
+          "conditions" : [ ]
+        },
+        "speed" : 0,
+        "ranged" : {
+          "attack" : 2,
+          "damage" : 0,
+          "range" : 0,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          },
+          "stance" : null,
+          "conditions" : [ ]
+        },
+        "energy" : {
+          "max" : 0,
+          "regen" : 0
+        },
+        "materials" : {
+          "max" : 0,
+          "regen" : 0
+        },
+        "defence" : 0,
+        "skill" : {
+          "hacking" : 0
+        },
+        "melee" : {
+          "attack" : 0,
+          "damage" : 0,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          },
+          "stance" : null,
+          "conditions" : [ ]
+        },
+        "resistance" : 0,
+        "health" : {
+          "max" : 5,
+          "regen" : 1
+        },
+        "sight" : {
+          "range" : 0,
+          "sensors" : 0
+        },
+        "armor" : 0
+      }
+    } ],
+    "id" : "exodus/invertebrate"
   } ] ],
   "recipes" : [ [ "nomad/armor-leg-infiltration", {
     "cost" : {
@@ -10441,7 +11822,6 @@
         }
       },
       "fill" : null,
-      "power" : null,
       "border" : {
         "type" : "ContentSelection.ThemeWall",
         "data" : {
@@ -10468,7 +11848,6 @@
               "type" : "ContentSelection.ThemeCreature",
               "data" : {
                 "category" : [ "CreatureKind.TurretCategory" ],
-                "power" : [ "CombatPower.Medium", "CombatPower.High" ],
                 "tags" : [ ]
               }
             },
@@ -10485,7 +11864,6 @@
               "type" : "ContentSelection.ThemeEquipment",
               "data" : {
                 "category" : [ ],
-                "power" : [ "CombatPower.High", "CombatPower.Top" ],
                 "tags" : [ ]
               }
             },
@@ -10534,7 +11912,6 @@
           "tags" : [ ]
         }
       },
-      "power" : null,
       "border" : {
         "type" : "ContentSelection.ThemeWall",
         "data" : {
@@ -10583,7 +11960,6 @@
           "tags" : [ ]
         }
       },
-      "power" : null,
       "routing" : {
         "strict" : true
       },
@@ -10728,7 +12104,6 @@
           "type" : "ContentSelection.ThemeWidget",
           "data" : {
             "category" : [ "WidgetKind.HealCategory" ],
-            "power" : [ ],
             "tags" : [ ]
           }
         } ] ],
@@ -10760,7 +12135,6 @@
           "tags" : [ ]
         }
       },
-      "power" : null,
       "border" : {
         "type" : "ContentSelection.ThemeWall",
         "data" : {
@@ -10835,7 +12209,6 @@
           "variance" : 0
         }
       },
-      "power" : null,
       "terrain" : null,
       "templates" : [ ],
       "entrances" : [ [ {
@@ -12911,7 +14284,6 @@
           "type" : "ContentSelection.ThemeCreature",
           "data" : {
             "category" : [ "CreatureKind.TurretCategory" ],
-            "power" : [ ],
             "tags" : [ ]
           }
         } ], [ {
@@ -12921,7 +14293,6 @@
           "type" : "ContentSelection.ThemeCreature",
           "data" : {
             "category" : [ "CreatureKind.TurretCategory" ],
-            "power" : [ ],
             "tags" : [ ]
           }
         } ] ],
@@ -15542,7 +16913,6 @@
           "variance" : 0
         }
       },
-      "power" : null,
       "terrain" : null,
       "templates" : [ ],
       "entrances" : [ [ {
@@ -15798,7 +17168,6 @@
           "variance" : 0
         }
       },
-      "power" : null,
       "terrain" : {
         "type" : "ContentSelection.FixedTerrain",
         "data" : {
@@ -16381,7 +17750,6 @@
           "tags" : [ ]
         }
       },
-      "power" : null,
       "border" : {
         "type" : "ContentSelection.ThemeWall",
         "data" : {
@@ -16411,7 +17779,6 @@
           "type" : "ContentSelection.ThemeTemplate",
           "data" : {
             "category" : [ "Template.SpaceCategory" ],
-            "power" : [ ],
             "tags" : [ ]
           }
         },
@@ -16473,7 +17840,6 @@
           "variance" : 0
         }
       },
-      "power" : null,
       "templates" : [ ],
       "entrances" : [ [ {
         "x" : 4,
@@ -17344,7 +18710,6 @@
           "tags" : [ ]
         }
       },
-      "power" : null,
       "border" : {
         "type" : "ContentSelection.ThemeWall",
         "data" : {
@@ -17440,7 +18805,6 @@
           "variance" : 0
         }
       },
-      "power" : null,
       "templates" : [ ],
       "entrances" : [ [ {
         "x" : 0,
@@ -17531,7 +18895,6 @@
           "tags" : [ ]
         }
       },
-      "power" : null,
       "routing" : {
         "strict" : true
       },
@@ -17597,7 +18960,6 @@
           "type" : "ContentSelection.ThemeTemplate",
           "data" : {
             "category" : [ "Template.TrapCategory" ],
-            "power" : [ ],
             "tags" : [ ]
           }
         },
@@ -17614,7 +18976,6 @@
           "type" : "ContentSelection.ThemeTemplate",
           "data" : {
             "category" : [ "Template.RoomCategory" ],
-            "power" : [ ],
             "tags" : [ ]
           }
         },
@@ -17669,7 +19030,6 @@
           "variance" : 0
         }
       },
-      "power" : null,
       "terrain" : null,
       "templates" : [ ],
       "entrances" : [ ],
@@ -18115,13 +19475,12 @@
       "shape" : {
         "type" : "Rectangle",
         "data" : {
-          "width" : 14,
+          "width" : 12,
           "height" : 10,
           "variance" : 0
         }
       },
       "fill" : null,
-      "power" : null,
       "routing" : null,
       "border" : {
         "type" : "ContentSelection.ThemeWall",
@@ -18191,7 +19550,6 @@
           "type" : "ContentSelection.ThemeTemplate",
           "data" : {
             "category" : [ "Template.StorageCategory" ],
-            "power" : [ ],
             "tags" : [ ]
           }
         },
@@ -18235,6 +19593,56 @@
         "door" : null
       }
     }
+  } ], [ "exodus/room/carapace", {
+    "type" : "RandomizedTemplate",
+    "data" : {
+      "conduitLocations" : {
+        "min" : 0,
+        "max" : 0,
+        "tag" : null
+      },
+      "shape" : {
+        "type" : "Rectangle",
+        "data" : {
+          "width" : 5,
+          "height" : 5,
+          "variance" : 0.2
+        }
+      },
+      "fill" : null,
+      "routing" : null,
+      "border" : {
+        "type" : "ContentSelection.ThemeWall",
+        "data" : {
+          "category" : [ "WallKind.SecureCategory" ],
+          "tags" : [ ]
+        }
+      },
+      "templateCatalogue" : null,
+      "terrain" : null,
+      "templates" : [ ],
+      "id" : "exodus/room/carapace",
+      "features" : [ {
+        "type" : "RandomizedContentFeature",
+        "data" : {
+          "catalogues" : [ "exodus/room/carapace" ],
+          "creatures" : [ ],
+          "items" : [ ],
+          "widgets" : [ ]
+        }
+      } ],
+      "entrances" : {
+        "min" : 1,
+        "max" : 1,
+        "door" : {
+          "type" : "ContentSelection.ThemeDoor",
+          "data" : {
+            "category" : [ ],
+            "tags" : [ ]
+          }
+        }
+      }
+    }
   } ], [ "scipoi/hall/builder-chasm", {
     "type" : "RandomizedTemplate",
     "data" : {
@@ -18252,7 +19660,6 @@
         }
       },
       "fill" : null,
-      "power" : null,
       "routing" : null,
       "border" : {
         "type" : "ContentSelection.ThemeWall",
@@ -18312,7 +19719,6 @@
           "variance" : 0
         }
       },
-      "power" : null,
       "templates" : [ ],
       "entrances" : [ [ {
         "x" : 0,
@@ -18343,7 +19749,6 @@
           "type" : "ContentSelection.ThemeEquipment",
           "data" : {
             "category" : [ "Equipment.RangedWeaponCategory" ],
-            "power" : [ "CombatPower.High", "CombatPower.Top" ],
             "tags" : [ ]
           }
         } ] ] ],
@@ -18690,7 +20095,6 @@
           "type" : "ContentSelection.ThemeWidget",
           "data" : {
             "category" : [ "WidgetKind.TrapCategory" ],
-            "power" : [ ],
             "tags" : [ ]
           }
         } ] ],
@@ -18700,7 +20104,6 @@
         }, {
           "type" : "ContentSelection.ThemeCreature",
           "data" : {
-            "power" : [ "CombatPower.High" ],
             "tags" : [ ],
             "category" : [ ]
           }
@@ -18710,7 +20113,6 @@
         }, {
           "type" : "ContentSelection.ThemeCreature",
           "data" : {
-            "power" : [ "CombatPower.High" ],
             "tags" : [ ],
             "category" : [ ]
           }
@@ -18738,7 +20140,6 @@
           "variance" : 0
         }
       },
-      "power" : null,
       "templates" : [ ],
       "entrances" : [ [ {
         "x" : 2,
@@ -19354,7 +20755,6 @@
         }, {
           "type" : "ContentSelection.ThemeCreature",
           "data" : {
-            "power" : [ "CombatPower.Low" ],
             "tags" : [ ],
             "category" : [ ]
           }
@@ -19364,7 +20764,6 @@
         }, {
           "type" : "ContentSelection.ThemeCreature",
           "data" : {
-            "power" : [ "CombatPower.Low" ],
             "tags" : [ ],
             "category" : [ ]
           }
@@ -19374,7 +20773,6 @@
         }, {
           "type" : "ContentSelection.ThemeCreature",
           "data" : {
-            "power" : [ "CombatPower.Low" ],
             "tags" : [ ],
             "category" : [ ]
           }
@@ -19384,7 +20782,6 @@
         }, {
           "type" : "ContentSelection.ThemeCreature",
           "data" : {
-            "power" : [ "CombatPower.Low" ],
             "tags" : [ ],
             "category" : [ ]
           }
@@ -19394,7 +20791,6 @@
         }, {
           "type" : "ContentSelection.ThemeCreature",
           "data" : {
-            "power" : [ "CombatPower.Medium" ],
             "tags" : [ ],
             "category" : [ ]
           }
@@ -19404,7 +20800,6 @@
         }, {
           "type" : "ContentSelection.ThemeCreature",
           "data" : {
-            "power" : [ "CombatPower.Low" ],
             "tags" : [ ],
             "category" : [ ]
           }
@@ -19413,7 +20808,6 @@
         "terrains" : [ ]
       },
       "id" : "generic/trap/corridor-ambush",
-      "power" : null,
       "terrain" : {
         "type" : "ContentSelection.ThemeTerrain",
         "data" : {
@@ -19650,7 +21044,6 @@
           "variance" : 0
         }
       },
-      "power" : null,
       "templates" : [ ],
       "entrances" : [ [ {
         "x" : 5,
@@ -19669,7 +21062,6 @@
             "selection" : {
               "type" : "ContentSelection.ThemeCreature",
               "data" : {
-                "power" : [ ],
                 "tags" : [ ],
                 "category" : [ ]
               }
@@ -21107,7 +22499,6 @@
           "variance" : 0
         }
       },
-      "power" : null,
       "terrain" : null,
       "templates" : [ ],
       "entrances" : [ ],
@@ -21578,7 +22969,6 @@
           "variance" : 0
         }
       },
-      "power" : null,
       "terrain" : null,
       "templates" : [ ],
       "entrances" : [ [ {
@@ -22456,7 +23846,6 @@
           "variance" : 0
         }
       },
-      "power" : null,
       "terrain" : null,
       "templates" : [ ],
       "entrances" : [ ],
@@ -22713,7 +24102,6 @@
           "tags" : [ ]
         }
       },
-      "power" : null,
       "border" : {
         "type" : "ContentSelection.ThemeWall",
         "data" : {
@@ -22785,7 +24173,6 @@
         }
       },
       "fill" : null,
-      "power" : null,
       "border" : {
         "type" : "ContentSelection.ThemeWall",
         "data" : {
@@ -22812,7 +24199,6 @@
               "type" : "ContentSelection.ThemeCreature",
               "data" : {
                 "category" : [ "CreatureKind.TurretCategory" ],
-                "power" : [ "CombatPower.Medium", "CombatPower.Low" ],
                 "tags" : [ ]
               }
             },
@@ -22829,7 +24215,6 @@
               "type" : "ContentSelection.ThemeEquipment",
               "data" : {
                 "category" : [ ],
-                "power" : [ "CombatPower.Low", "CombatPower.Medium" ],
                 "tags" : [ ]
               }
             },
@@ -22845,7 +24230,6 @@
               "type" : "ContentSelection.ThemeItem",
               "data" : {
                 "category" : [ "ItemKind.UtilityCategory" ],
-                "power" : [ ],
                 "tags" : [ ]
               }
             },
@@ -22894,7 +24278,6 @@
           "tags" : [ ]
         }
       },
-      "power" : null,
       "border" : {
         "type" : "ContentSelection.ThemeWall",
         "data" : {
@@ -22995,7 +24378,6 @@
           "tags" : [ ]
         }
       },
-      "power" : null,
       "border" : {
         "type" : "ContentSelection.ThemeWall",
         "data" : {
@@ -23051,7 +24433,6 @@
           "tags" : [ ]
         }
       },
-      "power" : null,
       "border" : {
         "type" : "ContentSelection.ThemeWall",
         "data" : {
@@ -23126,7 +24507,6 @@
           "variance" : 0
         }
       },
-      "power" : null,
       "templates" : [ ],
       "entrances" : [ [ {
         "x" : 0,
@@ -23157,7 +24537,6 @@
           "type" : "ContentSelection.ThemeItem",
           "data" : {
             "category" : [ "ItemKind.SecureDoorCategory" ],
-            "power" : [ ],
             "tags" : [ ]
           }
         } ] ], [ {
@@ -23167,7 +24546,6 @@
           "type" : "ContentSelection.ThemeItem",
           "data" : {
             "category" : [ "ItemKind.SecureDoorCategory" ],
-            "power" : [ ],
             "tags" : [ ]
           }
         } ] ], [ {
@@ -23177,7 +24555,6 @@
           "type" : "ContentSelection.ThemeItem",
           "data" : {
             "category" : [ "ItemKind.SecureDoorCategory" ],
-            "power" : [ ],
             "tags" : [ ]
           }
         } ] ], [ {
@@ -23187,7 +24564,6 @@
           "type" : "ContentSelection.ThemeItem",
           "data" : {
             "category" : [ "ItemKind.SecureDoorCategory" ],
-            "power" : [ ],
             "tags" : [ ]
           }
         } ] ] ],
@@ -24268,7 +25644,6 @@
           "tags" : [ ]
         }
       },
-      "power" : null,
       "routing" : {
         "strict" : true
       },
@@ -24331,7 +25706,6 @@
           "variance" : 0
         }
       },
-      "power" : null,
       "terrain" : null,
       "templates" : [ ],
       "entrances" : [ [ {
@@ -24639,7 +26013,6 @@
           "variance" : 0
         }
       },
-      "power" : null,
       "terrain" : {
         "type" : "ContentSelection.FixedTerrain",
         "data" : {
@@ -24814,7 +26187,6 @@
           "tags" : [ ]
         }
       },
-      "power" : null,
       "border" : {
         "type" : "ContentSelection.ThemeWall",
         "data" : {
@@ -24898,7 +26270,6 @@
           "type" : "ContentSelection.ThemeTemplate",
           "data" : {
             "category" : [ "Template.RoomCategory" ],
-            "power" : [ ],
             "tags" : [ ]
           }
         },
@@ -24944,7 +26315,8 @@
           "variance" : 0
         }
       },
-      "power" : null,
+      "theme" : null,
+      "owner" : null,
       "terrain" : {
         "type" : "ContentSelection.FixedTerrain",
         "data" : {
@@ -24952,18 +26324,6 @@
           "tags" : [ ]
         }
       },
-      "templates" : [ ],
-      "entrances" : [ [ {
-        "x" : 2,
-        "y" : 0
-      }, {
-        "type" : "ContentSelection.FixedDoor",
-        "data" : {
-          "kind" : "scippe/dice/door-secure-closed",
-          "tags" : [ ]
-        }
-      } ] ],
-      "features" : [ ],
       "content" : {
         "conduitLocations" : [ [ {
           "x" : 2,
@@ -24982,24 +26342,6 @@
           }
         } ], [ {
           "x" : 0,
-          "y" : 1
-        }, {
-          "type" : "ContentSelection.FixedWall",
-          "data" : {
-            "kind" : "generic/wall-lift",
-            "tags" : [ ]
-          }
-        } ], [ {
-          "x" : 0,
-          "y" : 0
-        }, {
-          "type" : "ContentSelection.FixedWall",
-          "data" : {
-            "kind" : "generic/wall-lift",
-            "tags" : [ ]
-          }
-        } ], [ {
-          "x" : 0,
           "y" : 2
         }, {
           "type" : "ContentSelection.FixedWall",
@@ -25088,6 +26430,24 @@
             "kind" : "generic/wall-lift",
             "tags" : [ ]
           }
+        } ], [ {
+          "x" : 0,
+          "y" : 1
+        }, {
+          "type" : "ContentSelection.FixedWall",
+          "data" : {
+            "kind" : "generic/wall-lift",
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 0,
+          "y" : 0
+        }, {
+          "type" : "ContentSelection.FixedWall",
+          "data" : {
+            "kind" : "generic/wall-lift",
+            "tags" : [ ]
+          }
         } ] ],
         "machinery" : [ ],
         "widgets" : [ ],
@@ -25095,7 +26455,19 @@
         "gatewayLocations" : [ ],
         "terrains" : [ ]
       },
-      "id" : "scippe/dice/room/lift"
+      "templates" : [ ],
+      "id" : "scippe/dice/room/lift",
+      "features" : [ ],
+      "entrances" : [ [ {
+        "x" : 2,
+        "y" : 0
+      }, {
+        "type" : "ContentSelection.FixedDoor",
+        "data" : {
+          "kind" : "scippe/dice/door-secure-closed",
+          "tags" : [ ]
+        }
+      } ] ]
     }
   } ], [ "idiran/space/coms-equipment", {
     "type" : "RandomizedTemplate",
@@ -25191,7 +26563,6 @@
           "tags" : [ ]
         }
       },
-      "power" : null,
       "border" : {
         "type" : "ContentSelection.ThemeWall",
         "data" : {
@@ -25248,7 +26619,6 @@
           "variance" : 0
         }
       },
-      "power" : null,
       "templates" : [ ],
       "entrances" : [ [ {
         "x" : 0,
@@ -25285,7 +26655,6 @@
           "variance" : 0
         }
       },
-      "power" : null,
       "templates" : [ ],
       "entrances" : [ [ {
         "x" : 2,
@@ -25487,7 +26856,6 @@
             "selection" : {
               "type" : "ContentSelection.ThemeCreature",
               "data" : {
-                "power" : [ "CombatPower.Medium", "CombatPower.High" ],
                 "tags" : [ ],
                 "category" : [ ]
               }
@@ -25504,7 +26872,6 @@
             "selection" : {
               "type" : "ContentSelection.ThemeEquipment",
               "data" : {
-                "power" : [ "CombatPower.Medium", "CombatPower.High" ],
                 "category" : [ ],
                 "tags" : [ ]
               }
@@ -25530,7 +26897,6 @@
           "type" : "ContentSelection.ThemeItem",
           "data" : {
             "category" : [ "ItemKind.SecureDoorCategory" ],
-            "power" : [ ],
             "tags" : [ ]
           }
         } ] ], [ {
@@ -25540,7 +26906,6 @@
           "type" : "ContentSelection.ThemeItem",
           "data" : {
             "category" : [ "ItemKind.SecureDoorCategory" ],
-            "power" : [ ],
             "tags" : [ ]
           }
         } ] ] ],
@@ -25949,7 +27314,6 @@
         "terrains" : [ ]
       },
       "id" : "generic/vault",
-      "power" : 0,
       "terrain" : {
         "type" : "ContentSelection.ThemeTerrain",
         "data" : {
@@ -25980,7 +27344,6 @@
           "tags" : [ ]
         }
       },
-      "power" : null,
       "border" : {
         "type" : "ContentSelection.ThemeWall",
         "data" : {
@@ -26010,7 +27373,6 @@
           "type" : "ContentSelection.ThemeTemplate",
           "data" : {
             "category" : [ "Template.SpaceCategory" ],
-            "power" : [ ],
             "tags" : [ ]
           }
         },
@@ -26057,7 +27419,6 @@
           "variance" : 0
         }
       },
-      "power" : null,
       "terrain" : null,
       "templates" : [ ],
       "entrances" : [ [ {
@@ -26347,7 +27708,6 @@
           "variance" : 0
         }
       },
-      "power" : null,
       "terrain" : null,
       "templates" : [ ],
       "entrances" : [ [ {
@@ -26911,7 +28271,6 @@
           "type" : "ContentSelection.ThemeCreature",
           "data" : {
             "category" : [ "CreatureKind.TurretCategory" ],
-            "power" : [ ],
             "tags" : [ ]
           }
         } ], [ {
@@ -26921,7 +28280,6 @@
           "type" : "ContentSelection.ThemeCreature",
           "data" : {
             "category" : [ "CreatureKind.TurretCategory" ],
-            "power" : [ ],
             "tags" : [ ]
           }
         } ], [ {
@@ -26931,7 +28289,6 @@
           "type" : "ContentSelection.ThemeCreature",
           "data" : {
             "category" : [ "CreatureKind.TurretCategory" ],
-            "power" : [ ],
             "tags" : [ ]
           }
         } ], [ {
@@ -26941,7 +28298,6 @@
           "type" : "ContentSelection.ThemeCreature",
           "data" : {
             "category" : [ "CreatureKind.TurretCategory" ],
-            "power" : [ ],
             "tags" : [ ]
           }
         } ] ],
@@ -27141,7 +28497,6 @@
           "variance" : 0
         }
       },
-      "power" : null,
       "templates" : [ ],
       "features" : [ ],
       "content" : {
@@ -27683,6 +29038,56 @@
       "id" : "iridan/area/start",
       "entrances" : [ ]
     }
+  } ], [ "exodus/room/invertebrate", {
+    "type" : "RandomizedTemplate",
+    "data" : {
+      "conduitLocations" : {
+        "min" : 0,
+        "max" : 0,
+        "tag" : null
+      },
+      "shape" : {
+        "type" : "Rectangle",
+        "data" : {
+          "width" : 5,
+          "height" : 5,
+          "variance" : 0.2
+        }
+      },
+      "fill" : null,
+      "routing" : null,
+      "border" : {
+        "type" : "ContentSelection.ThemeWall",
+        "data" : {
+          "category" : [ "WallKind.SecureCategory" ],
+          "tags" : [ ]
+        }
+      },
+      "templateCatalogue" : null,
+      "terrain" : null,
+      "templates" : [ ],
+      "id" : "exodus/room/invertebrate",
+      "features" : [ {
+        "type" : "RandomizedContentFeature",
+        "data" : {
+          "catalogues" : [ "exodus/room/invertebrate" ],
+          "creatures" : [ ],
+          "items" : [ ],
+          "widgets" : [ ]
+        }
+      } ],
+      "entrances" : {
+        "min" : 1,
+        "max" : 1,
+        "door" : {
+          "type" : "ContentSelection.ThemeDoor",
+          "data" : {
+            "category" : [ ],
+            "tags" : [ ]
+          }
+        }
+      }
+    }
   } ], [ "generic/trap-room-ambush", {
     "type" : "RandomizedTemplate",
     "data" : {
@@ -27722,7 +29127,6 @@
             "type" : "ContentSelection.ThemeEquipment",
             "data" : {
               "category" : [ ],
-              "power" : [ "CombatPower.High" ],
               "tags" : [ ]
             }
           },
@@ -27738,7 +29142,6 @@
               "type" : "ContentSelection.ThemeWidget",
               "data" : {
                 "category" : [ "WidgetKind.TrapCategory" ],
-                "power" : [ ],
                 "tags" : [ ]
               }
             },
@@ -27754,7 +29157,6 @@
               "type" : "ContentSelection.ThemeWidget",
               "data" : {
                 "category" : [ "WidgetKind.PortalCategory" ],
-                "power" : [ ],
                 "tags" : [ ]
               }
             },
@@ -27792,7 +29194,6 @@
         }
       },
       "fill" : null,
-      "power" : null,
       "routing" : {
         "strict" : false,
         "terrain" : {
@@ -27838,7 +29239,6 @@
           "type" : "ContentSelection.ThemeTemplate",
           "data" : {
             "category" : [ "Template.RoomCategory" ],
-            "power" : [ ],
             "tags" : [ ]
           }
         },
@@ -27855,7 +29255,6 @@
           "type" : "ContentSelection.ThemeTemplate",
           "data" : {
             "category" : [ "Template.StorageCategory" ],
-            "power" : [ ],
             "tags" : [ ]
           }
         },
@@ -27964,7 +29363,7 @@
     "name" : "Nomad spaceship"
   } ] ],
   "worlds" : [ [ "main", {
-    "start" : "scippe/dice/1",
+    "start" : "iridan/start",
     "characters" : [ "player" ],
     "conduits" : [ {
       "source" : "iridan/labs",
@@ -28058,7 +29457,7 @@
       "tag" : "lift"
     } ],
     "id" : "main",
-    "transports" : [ [ "nomad/spaceship", "scippe/dice/entrance" ] ],
+    "transports" : [ [ "nomad/spaceship", "iridan/underground" ] ],
     "system" : {
       "sun" : "sun/primary",
       "ships" : [ [ "nomad", "planet/scippe" ] ],
