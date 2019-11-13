@@ -6,6 +6,7 @@ import io.github.fiifoo.scarl.area.shape.Shape
 import io.github.fiifoo.scarl.area.template.ContentSelection._
 import io.github.fiifoo.scarl.area.template.RandomizedContentSource.{ConduitLocations, Entrances, Routing}
 import io.github.fiifoo.scarl.area.template.Template.Result
+import io.github.fiifoo.scarl.area.theme.ThemeId
 import io.github.fiifoo.scarl.core.creature.FactionId
 import io.github.fiifoo.scarl.core.geometry.{Location, Rotation}
 import io.github.fiifoo.scarl.world.WorldAssets
@@ -13,6 +14,7 @@ import io.github.fiifoo.scarl.world.WorldAssets
 import scala.util.Random
 
 case class SequenceTemplate(id: TemplateId,
+                            theme: Option[ThemeId] = None,
                             owner: Option[FactionId] = None,
                             border: Option[WallSelection] = None,
                             fill: Option[WallSelection] = None,
@@ -27,7 +29,7 @@ case class SequenceTemplate(id: TemplateId,
   def apply(assets: WorldAssets, area: Area, random: Random): Result = {
     val (subResults, shapeResult) = this.calculateSequence(assets, area, random)
 
-    CalculateRandomizedContent(this, shapeResult, subResults)(assets, area, random)
+    CalculateRandomizedContent(this, shapeResult, subResults)(assets, area, this.theme, random)
   }
 
   private def calculateSequence(assets: WorldAssets,
@@ -35,7 +37,7 @@ case class SequenceTemplate(id: TemplateId,
                                 random: Random
                                ): (Map[Location, Result], Shape.Result) = {
     val templates = this.templates map (selection => {
-      selection.apply(assets, area, random) map (template => {
+      selection.apply(assets, this.theme getOrElse area.theme, random) map (template => {
         val result = template.apply(assets.templates)(assets, area, random)
         val rotation = Rotation(random, result.shape.outerWidth, result.shape.outerHeight).reverse
 

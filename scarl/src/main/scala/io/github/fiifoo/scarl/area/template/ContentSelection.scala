@@ -1,6 +1,5 @@
 package io.github.fiifoo.scarl.area.template
 
-import io.github.fiifoo.scarl.area.Area
 import io.github.fiifoo.scarl.area.theme.ThemeId
 import io.github.fiifoo.scarl.core.Tag
 import io.github.fiifoo.scarl.core.assets._
@@ -13,7 +12,7 @@ import io.github.fiifoo.scarl.world.{TemplateCatalogueId, WorldAssets}
 import scala.util.Random
 
 sealed trait ContentSelection[T] {
-  def apply(assets: WorldAssets, area: Area, random: Random): Option[T]
+  def apply(assets: WorldAssets, theme: ThemeId, random: Random): Option[T]
 
   val tags: Set[Tag]
 }
@@ -38,14 +37,14 @@ case object ContentSelection {
                                category: Set[CreatureKind.Category] = Set(),
                                tags: Set[Tag] = Set()
                               ) extends CreatureSelection {
-    def apply(assets: WorldAssets, area: Area, random: Random): Option[CreatureKindId] = {
+    def apply(assets: WorldAssets, theme: ThemeId, random: Random): Option[CreatureKindId] = {
       val choices = assets.catalogues.creatures(this.catalogue)
         .apply(assets.catalogues.creatures)
       val categories: Set[CreatureKind.Category] =
         if (this.category.isEmpty) Set(CreatureKind.DefaultCategory)
         else this.category
 
-      selectCategoryContent(area, choices, categories, random)
+      selectCategoryContent(choices, categories, random)
     }
   }
 
@@ -53,7 +52,7 @@ case object ContentSelection {
                            category: Set[ItemKind.DoorCategory] = Set(),
                            tags: Set[Tag] = Set()
                           ) extends DoorSelection {
-    def apply(assets: WorldAssets, area: Area, random: Random): Option[ItemKindId] = {
+    def apply(assets: WorldAssets, theme: ThemeId, random: Random): Option[ItemKindId] = {
       val choices = assets.catalogues.items(this.catalogue)
         .apply(assets.catalogues.items)
         .filter(_._1.isInstanceOf[ItemKind.DoorCategory])
@@ -62,7 +61,7 @@ case object ContentSelection {
         if (this.category.isEmpty) Set(ItemKind.DefaultDoorCategory)
         else this.category
 
-      selectCategoryContent(area, choices, categories, random)
+      selectCategoryContent(choices, categories, random)
     }
   }
 
@@ -70,7 +69,7 @@ case object ContentSelection {
                                 category: Set[Equipment.Category] = Set(),
                                 tags: Set[Tag] = Set()
                                ) extends ItemSelection {
-    def apply(assets: WorldAssets, area: Area, random: Random): Option[ItemKindId] = {
+    def apply(assets: WorldAssets, theme: ThemeId, random: Random): Option[ItemKindId] = {
       val choices = assets.catalogues.items(this.catalogue)
         .apply(assets.catalogues.items)
         .filter(_._1.isInstanceOf[Equipment.Category])
@@ -79,7 +78,7 @@ case object ContentSelection {
         if (this.category.isEmpty) Equipment.categories
         else this.category
 
-      selectCategoryContent(area, choices, categories, random)
+      selectCategoryContent(choices, categories, random)
     }
   }
 
@@ -87,14 +86,14 @@ case object ContentSelection {
                            category: Set[ItemKind.Category] = Set(),
                            tags: Set[Tag] = Set()
                           ) extends ItemSelection {
-    def apply(assets: WorldAssets, area: Area, random: Random): Option[ItemKindId] = {
+    def apply(assets: WorldAssets, theme: ThemeId, random: Random): Option[ItemKindId] = {
       val choices = assets.catalogues.items(this.catalogue)
         .apply(assets.catalogues.items)
       val categories: Set[ItemKind.Category] =
         if (this.category.isEmpty) Set(ItemKind.UtilityCategory)
         else this.category
 
-      selectCategoryContent(area, choices, categories, random)
+      selectCategoryContent(choices, categories, random)
     }
   }
 
@@ -102,14 +101,14 @@ case object ContentSelection {
                                category: Set[Template.Category] = Set(),
                                tags: Set[Tag] = Set()
                               ) extends TemplateSelection {
-    def apply(assets: WorldAssets, area: Area, random: Random): Option[TemplateId] = {
+    def apply(assets: WorldAssets, theme: ThemeId, random: Random): Option[TemplateId] = {
       val choices = assets.catalogues.templates(this.catalogue)
         .apply(assets.catalogues.templates)
       val categories =
         if (this.category.isEmpty) Template.categories
         else this.category
 
-      selectCategoryContent(area, choices, categories, random)
+      selectCategoryContent(choices, categories, random)
     }
   }
 
@@ -117,14 +116,14 @@ case object ContentSelection {
                               category: Set[TerrainKind.Category] = Set(),
                               tags: Set[Tag] = Set()
                              ) extends TerrainSelection {
-    def apply(assets: WorldAssets, area: Area, random: Random): Option[TerrainKindId] = {
+    def apply(assets: WorldAssets, theme: ThemeId, random: Random): Option[TerrainKindId] = {
       val choices = assets.catalogues.terrains(this.catalogue)
         .apply(assets.catalogues.terrains)
       val categories: Set[TerrainKind.Category] =
         if (this.category.isEmpty) Set(TerrainKind.DefaultCategory)
         else this.category
 
-      selectCategoryContent(area, choices, categories, random)
+      selectCategoryContent(choices, categories, random)
     }
   }
 
@@ -132,14 +131,14 @@ case object ContentSelection {
                            category: Set[WallKind.Category] = Set(),
                            tags: Set[Tag] = Set()
                           ) extends WallSelection {
-    def apply(assets: WorldAssets, area: Area, random: Random): Option[WallKindId] = {
+    def apply(assets: WorldAssets, theme: ThemeId, random: Random): Option[WallKindId] = {
       val choices = assets.catalogues.walls(this.catalogue)
         .apply(assets.catalogues.walls)
       val categories: Set[WallKind.Category] =
         if (this.category.isEmpty) Set(WallKind.DefaultCategory)
         else this.category
 
-      selectCategoryContent(area, choices, categories, random)
+      selectCategoryContent(choices, categories, random)
     }
   }
 
@@ -147,56 +146,55 @@ case object ContentSelection {
                              category: Set[WidgetKind.Category] = Set(),
                              tags: Set[Tag] = Set()
                             ) extends WidgetSelection {
-    def apply(assets: WorldAssets, area: Area, random: Random): Option[WidgetKindId] = {
+    def apply(assets: WorldAssets, theme: ThemeId, random: Random): Option[WidgetKindId] = {
       val choices = assets.catalogues.widgets(this.catalogue)
         .apply(assets.catalogues.widgets)
       val categories =
         if (this.category.isEmpty) WidgetKind.categories
         else this.category
 
-      selectCategoryContent(area, choices, categories, random)
+      selectCategoryContent(choices, categories, random)
     }
   }
 
   case class FixedCreature(kind: CreatureKindId, tags: Set[Tag] = Set()) extends CreatureSelection {
-    def apply(assets: WorldAssets, area: Area, random: Random): Option[CreatureKindId] = Some(this.kind)
+    def apply(assets: WorldAssets, theme: ThemeId, random: Random): Option[CreatureKindId] = Some(this.kind)
   }
 
   case class FixedDoor(kind: ItemKindId, tags: Set[Tag] = Set()) extends DoorSelection {
-    def apply(assets: WorldAssets, area: Area, random: Random): Option[ItemKindId] = Some(this.kind)
+    def apply(assets: WorldAssets, theme: ThemeId, random: Random): Option[ItemKindId] = Some(this.kind)
   }
 
   case class FixedItem(kind: ItemKindId, tags: Set[Tag] = Set()) extends ItemSelection {
-    def apply(assets: WorldAssets, area: Area, random: Random): Option[ItemKindId] = Some(this.kind)
+    def apply(assets: WorldAssets, theme: ThemeId, random: Random): Option[ItemKindId] = Some(this.kind)
   }
 
   case class FixedTemplate(template: TemplateId) extends TemplateSelection {
     val tags: Set[Tag] = Set()
 
-    def apply(assets: WorldAssets, area: Area, random: Random): Option[TemplateId] = Some(this.template)
+    def apply(assets: WorldAssets, theme: ThemeId, random: Random): Option[TemplateId] = Some(this.template)
   }
 
   case class FixedTerrain(kind: TerrainKindId, tags: Set[Tag] = Set()) extends TerrainSelection {
-    def apply(assets: WorldAssets, area: Area, random: Random): Option[TerrainKindId] = Some(this.kind)
+    def apply(assets: WorldAssets, theme: ThemeId, random: Random): Option[TerrainKindId] = Some(this.kind)
   }
 
   case class FixedWall(kind: WallKindId, tags: Set[Tag] = Set()) extends WallSelection {
-    def apply(assets: WorldAssets, area: Area, random: Random): Option[WallKindId] = Some(this.kind)
+    def apply(assets: WorldAssets, theme: ThemeId, random: Random): Option[WallKindId] = Some(this.kind)
   }
 
   case class FixedWidget(kind: WidgetKindId, tags: Set[Tag] = Set()) extends WidgetSelection {
-    def apply(assets: WorldAssets, area: Area, random: Random): Option[WidgetKindId] = Some(this.kind)
+    def apply(assets: WorldAssets, theme: ThemeId, random: Random): Option[WidgetKindId] = Some(this.kind)
   }
 
   case class ThemeCreature(theme: Option[ThemeId] = None,
                            category: Set[CreatureKind.Category] = Set(),
                            tags: Set[Tag] = Set()
                           ) extends CreatureSelection {
-    def apply(assets: WorldAssets, area: Area, random: Random): Option[CreatureKindId] = {
-      val theme = this.theme getOrElse area.theme
-      val catalogue = assets.themes(theme).creatures
+    def apply(assets: WorldAssets, theme: ThemeId, random: Random): Option[CreatureKindId] = {
+      val catalogue = assets.themes(this.theme getOrElse theme).creatures
 
-      CatalogueCreature(catalogue, this.category, this.tags).apply(assets, area, random)
+      CatalogueCreature(catalogue, this.category, this.tags).apply(assets, theme, random)
     }
   }
 
@@ -204,11 +202,10 @@ case object ContentSelection {
                        category: Set[ItemKind.DoorCategory] = Set(),
                        tags: Set[Tag] = Set()
                       ) extends DoorSelection {
-    def apply(assets: WorldAssets, area: Area, random: Random): Option[ItemKindId] = {
-      val theme = this.theme getOrElse area.theme
-      val catalogue = assets.themes(theme).items
+    def apply(assets: WorldAssets, theme: ThemeId, random: Random): Option[ItemKindId] = {
+      val catalogue = assets.themes(this.theme getOrElse theme).items
 
-      CatalogueDoor(catalogue, this.category, this.tags).apply(assets, area, random)
+      CatalogueDoor(catalogue, this.category, this.tags).apply(assets, theme, random)
     }
   }
 
@@ -216,11 +213,10 @@ case object ContentSelection {
                             category: Set[Equipment.Category] = Set(),
                             tags: Set[Tag] = Set()
                            ) extends ItemSelection {
-    def apply(assets: WorldAssets, area: Area, random: Random): Option[ItemKindId] = {
-      val theme = this.theme getOrElse area.theme
-      val catalogue = assets.themes(theme).items
+    def apply(assets: WorldAssets, theme: ThemeId, random: Random): Option[ItemKindId] = {
+      val catalogue = assets.themes(this.theme getOrElse theme).items
 
-      CatalogueEquipment(catalogue, this.category, this.tags).apply(assets, area, random)
+      CatalogueEquipment(catalogue, this.category, this.tags).apply(assets, theme, random)
     }
   }
 
@@ -228,11 +224,10 @@ case object ContentSelection {
                        category: Set[ItemKind.Category] = Set(),
                        tags: Set[Tag] = Set()
                       ) extends ItemSelection {
-    def apply(assets: WorldAssets, area: Area, random: Random): Option[ItemKindId] = {
-      val theme = this.theme getOrElse area.theme
-      val catalogue = assets.themes(theme).items
+    def apply(assets: WorldAssets, theme: ThemeId, random: Random): Option[ItemKindId] = {
+      val catalogue = assets.themes(this.theme getOrElse theme).items
 
-      CatalogueItem(catalogue, this.category, this.tags).apply(assets, area, random)
+      CatalogueItem(catalogue, this.category, this.tags).apply(assets, theme, random)
     }
   }
 
@@ -240,11 +235,10 @@ case object ContentSelection {
                            category: Set[Template.Category] = Set(),
                            tags: Set[Tag] = Set()
                           ) extends TemplateSelection {
-    def apply(assets: WorldAssets, area: Area, random: Random): Option[TemplateId] = {
-      val theme = this.theme getOrElse area.theme
-      val catalogue = assets.themes(theme).templates
+    def apply(assets: WorldAssets, theme: ThemeId, random: Random): Option[TemplateId] = {
+      val catalogue = assets.themes(this.theme getOrElse theme).templates
 
-      CatalogueTemplate(catalogue, this.category, this.tags).apply(assets, area, random)
+      CatalogueTemplate(catalogue, this.category, this.tags).apply(assets, theme, random)
     }
   }
 
@@ -252,11 +246,10 @@ case object ContentSelection {
                           category: Set[TerrainKind.Category] = Set(),
                           tags: Set[Tag] = Set()
                          ) extends TerrainSelection {
-    def apply(assets: WorldAssets, area: Area, random: Random): Option[TerrainKindId] = {
-      val theme = this.theme getOrElse area.theme
-      val catalogue = assets.themes(theme).terrains
+    def apply(assets: WorldAssets, theme: ThemeId, random: Random): Option[TerrainKindId] = {
+      val catalogue = assets.themes(this.theme getOrElse theme).terrains
 
-      CatalogueTerrain(catalogue, this.category, this.tags).apply(assets, area, random)
+      CatalogueTerrain(catalogue, this.category, this.tags).apply(assets, theme, random)
     }
   }
 
@@ -264,11 +257,10 @@ case object ContentSelection {
                        category: Set[WallKind.Category] = Set(),
                        tags: Set[Tag] = Set()
                       ) extends WallSelection {
-    def apply(assets: WorldAssets, area: Area, random: Random): Option[WallKindId] = {
-      val theme = this.theme getOrElse area.theme
-      val catalogue = assets.themes(theme).walls
+    def apply(assets: WorldAssets, theme: ThemeId, random: Random): Option[WallKindId] = {
+      val catalogue = assets.themes(this.theme getOrElse theme).walls
 
-      CatalogueWall(catalogue, this.category, this.tags).apply(assets, area, random)
+      CatalogueWall(catalogue, this.category, this.tags).apply(assets, theme, random)
     }
   }
 
@@ -276,16 +268,14 @@ case object ContentSelection {
                          category: Set[WidgetKind.Category] = Set(),
                          tags: Set[Tag] = Set()
                         ) extends WidgetSelection {
-    def apply(assets: WorldAssets, area: Area, random: Random): Option[WidgetKindId] = {
-      val theme = this.theme getOrElse area.theme
-      val catalogue = assets.themes(theme).widgets
+    def apply(assets: WorldAssets, theme: ThemeId, random: Random): Option[WidgetKindId] = {
+      val catalogue = assets.themes(this.theme getOrElse theme).widgets
 
-      CatalogueWidget(catalogue, this.category, this.tags).apply(assets, area, random)
+      CatalogueWidget(catalogue, this.category, this.tags).apply(assets, theme, random)
     }
   }
 
-  private def selectCategoryContent[T, U](area: Area,
-                                          choices: Map[U, Iterable[WeightedChoice[T]]],
+  private def selectCategoryContent[T, U](choices: Map[U, Iterable[WeightedChoice[T]]],
                                           categories: Set[U],
                                           random: Random
                                          ): Option[T] = {

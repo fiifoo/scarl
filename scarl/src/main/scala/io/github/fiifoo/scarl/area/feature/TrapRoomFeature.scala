@@ -1,12 +1,12 @@
 package io.github.fiifoo.scarl.area.feature
 
-import io.github.fiifoo.scarl.area.Area
 import io.github.fiifoo.scarl.area.feature.Utils._
 import io.github.fiifoo.scarl.area.shape.Shape
 import io.github.fiifoo.scarl.area.template.ContentSelection.{ItemSelection, WidgetSelection}
 import io.github.fiifoo.scarl.area.template.ContentSource.WidgetSource
 import io.github.fiifoo.scarl.area.template.FixedContent.MachinerySource
 import io.github.fiifoo.scarl.area.template.{CalculateFailedException, FixedContent}
+import io.github.fiifoo.scarl.area.theme.ThemeId
 import io.github.fiifoo.scarl.core.geometry.Location
 import io.github.fiifoo.scarl.core.math.Rng
 import io.github.fiifoo.scarl.mechanism.CreateEntityMechanism
@@ -21,7 +21,7 @@ case class TrapRoomFeature(bait: ItemSelection,
                           ) extends Feature {
 
   def apply(assets: WorldAssets,
-            area: Area,
+            theme: ThemeId,
             shape: Shape.Result,
             content: FixedContent,
             locations: Set[Location],
@@ -34,7 +34,7 @@ case class TrapRoomFeature(bait: ItemSelection,
       throw new CalculateFailedException
     }
     val location = Rng.nextChoice(random, free)
-    val getTrapsMachinery = (this.getTrapsMachinery(assets, area, free - location, location, random) _).tupled
+    val getTrapsMachinery = (this.getTrapsMachinery(assets, theme, free - location, location, random) _).tupled
 
     val items = content.items + (location -> (this.bait :: content.items.getOrElse(location, Nil)))
     val machinery = content.machinery ++ (this.traps.zipWithIndex map getTrapsMachinery).toSet
@@ -48,7 +48,7 @@ case class TrapRoomFeature(bait: ItemSelection,
   }
 
   private def getTrapsMachinery(assets: WorldAssets,
-                                area: Area,
+                                theme: ThemeId,
                                 locations: Set[Location],
                                 control: Location,
                                 random: Random,
@@ -57,7 +57,7 @@ case class TrapRoomFeature(bait: ItemSelection,
                                 index: Int
                                ): MachinerySource = {
     val count = traps.distribution.value(random)
-    val widget = traps.selection.apply(assets, area, random)
+    val widget = traps.selection.apply(assets, theme, random)
     if (widget.isEmpty || count > locations.size) {
       throw new CalculateFailedException
     }

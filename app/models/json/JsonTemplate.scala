@@ -21,6 +21,7 @@ object JsonTemplate {
   lazy private implicit val machinerySourceReads = Json.reads[MachinerySource]
   lazy private implicit val templateSourceCatalogueIdFormat = JsonWorldCatalogues.templateSourceCatalogueIdFormat
   lazy private implicit val terrainKindIdFormat = JsonTerrainKind.terrainKindIdFormat
+  lazy private implicit val themeIdFormat = JsonTheme.themeIdFormat
   lazy private implicit val wallKindIdFormat = JsonWallKind.wallKindIdFormat
 
   lazy private implicit val creatureSelectionReads = JsonContentSelection.creatureSelectionReads

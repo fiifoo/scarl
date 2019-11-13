@@ -4,6 +4,7 @@ import io.github.fiifoo.scarl.area.Area
 import io.github.fiifoo.scarl.area.shape.Shape
 import io.github.fiifoo.scarl.area.template.FixedContent.MachinerySource
 import io.github.fiifoo.scarl.area.template.Template.Result
+import io.github.fiifoo.scarl.area.theme.ThemeId
 import io.github.fiifoo.scarl.core.Tag
 import io.github.fiifoo.scarl.core.creature.FactionId
 import io.github.fiifoo.scarl.core.geometry.{Location, Rotation}
@@ -14,6 +15,7 @@ import scala.util.Random
 
 trait Template {
   val id: TemplateId
+  val theme: Option[ThemeId]
   val owner: Option[FactionId]
 
   def apply(assets: WorldAssets,

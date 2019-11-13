@@ -7,6 +7,7 @@ import io.github.fiifoo.scarl.area.template.ContentSelection._
 import io.github.fiifoo.scarl.area.template.ContentSource.ItemSource
 import io.github.fiifoo.scarl.area.template.RandomizedContentSource.{Entrances, Routing}
 import io.github.fiifoo.scarl.area.template.Template.Result
+import io.github.fiifoo.scarl.area.theme.ThemeId
 import io.github.fiifoo.scarl.core.geometry.Location
 import io.github.fiifoo.scarl.core.math.Distribution.Uniform
 import io.github.fiifoo.scarl.world.WorldAssets
@@ -21,6 +22,7 @@ object CalculateRandomizedContent {
             subResults: Map[Location, Result]
            )(assets: WorldAssets,
              area: Area,
+             theme: Option[ThemeId],
              random: Random
            ): Result = {
     val subEntrances = subResults map (x => {
@@ -38,7 +40,7 @@ object CalculateRandomizedContent {
 
     val contentResult = CalculateContent(
       assets = assets,
-      area = area,
+      theme = theme getOrElse area.theme,
       shape = shapeResult,
       target = FixedContent(walls = wallResults, terrains = terrainResults),
       locations = contained,

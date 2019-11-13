@@ -7,6 +7,7 @@ import io.github.fiifoo.scarl.area.template.ContentSelection._
 import io.github.fiifoo.scarl.area.template.ContentSource.TemplateSource
 import io.github.fiifoo.scarl.area.template.RandomizedContentSource.{ConduitLocations, Entrances, Routing}
 import io.github.fiifoo.scarl.area.template.Template.Result
+import io.github.fiifoo.scarl.area.theme.ThemeId
 import io.github.fiifoo.scarl.core.creature.FactionId
 import io.github.fiifoo.scarl.core.geometry.{Location, Rotation}
 import io.github.fiifoo.scarl.core.math.Rng
@@ -16,6 +17,7 @@ import scala.util.Random
 
 case class RandomizedTemplate(id: TemplateId,
                               shape: Shape,
+                              theme: Option[ThemeId] = None,
                               owner: Option[FactionId] = None,
                               border: Option[WallSelection] = None,
                               fill: Option[WallSelection] = None,
@@ -32,7 +34,7 @@ case class RandomizedTemplate(id: TemplateId,
     val shapeResult = shape(random)
     val subResults = calculateSubTemplates(assets, area, shapeResult, random)
 
-    CalculateRandomizedContent(this, shapeResult, subResults)(assets, area, random)
+    CalculateRandomizedContent(this, shapeResult, subResults)(assets, area, this.theme, random)
   }
 
   private def calculateSubTemplates(assets: WorldAssets,
@@ -41,7 +43,7 @@ case class RandomizedTemplate(id: TemplateId,
                                     random: Random
                                    ): Map[Location, Result] = {
     def calculate(source: TemplateSource): Iterable[(Result, Boolean)] = {
-      val result = source.selection.apply(assets, area, random) map (sub => {
+      val result = source.selection.apply(assets, this.theme getOrElse area.theme, random) map (sub => {
         val range = Rng.nextRange(random, source.distribution)
 
         range map (i => {

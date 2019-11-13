@@ -2,9 +2,7 @@ package io.github.fiifoo.scarl.area.feature
 
 import io.github.fiifoo.scarl.area.Utils.TemplateMock
 import io.github.fiifoo.scarl.area.template.ContentSelection.{FixedDoor, FixedWall}
-import io.github.fiifoo.scarl.area.template.TemplateId
 import io.github.fiifoo.scarl.area.theme.ThemeId
-import io.github.fiifoo.scarl.area.{Area, AreaId}
 import io.github.fiifoo.scarl.core.kind.{ItemKindId, WallKindId}
 import io.github.fiifoo.scarl.world.WorldAssets
 import org.scalatest._
@@ -14,11 +12,7 @@ import scala.util.Random
 class HouseFeatureSpec extends FlatSpec with Matchers {
 
   private val assets = WorldAssets()
-  private val area = Area(
-    AreaId(""),
-    TemplateId(""),
-    ThemeId("")
-  )
+  private val theme = ThemeId("")
   private val wall = FixedWall(WallKindId(""))
   private val door = FixedDoor(ItemKindId(""))
 
@@ -56,7 +50,7 @@ class HouseFeatureSpec extends FlatSpec with Matchers {
   private def build(template: TemplateMock, iterations: Int, roomSize: Int, doorFactor: Int): TemplateMock = {
     val result = HouseFeature(iterations, roomSize, doorFactor, Some(wall), Some(door))(
       assets,
-      area,
+      theme,
       template.shape,
       template.content,
       template.locations,

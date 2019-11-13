@@ -5,6 +5,7 @@ import io.github.fiifoo.scarl.area.feature.Feature
 import io.github.fiifoo.scarl.area.shape.Shape
 import io.github.fiifoo.scarl.area.template.ContentSelection.{DoorSelection, TerrainSelection}
 import io.github.fiifoo.scarl.area.template.Template.Result
+import io.github.fiifoo.scarl.area.theme.ThemeId
 import io.github.fiifoo.scarl.core.creature.FactionId
 import io.github.fiifoo.scarl.core.geometry.Location
 import io.github.fiifoo.scarl.world.WorldAssets
@@ -13,6 +14,7 @@ import scala.util.Random
 
 case class FixedTemplate(id: TemplateId,
                          shape: Shape,
+                         theme: Option[ThemeId] = None,
                          owner: Option[FactionId] = None,
                          terrain: Option[TerrainSelection] = None,
                          templates: Map[Location, TemplateId] = Map(),
@@ -33,7 +35,7 @@ case class FixedTemplate(id: TemplateId,
     val contained = CalculateUtils.templateContainedLocations(shapeResult, subResults)
     val contentResult = CalculateContent(
       assets = assets,
-      area = area,
+      theme = this.theme getOrElse area.theme,
       shape = shapeResult,
       target = content,
       locations = contained,

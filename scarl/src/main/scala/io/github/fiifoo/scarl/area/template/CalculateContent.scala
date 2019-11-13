@@ -1,11 +1,11 @@
 package io.github.fiifoo.scarl.area.template
 
-import io.github.fiifoo.scarl.area.Area
 import io.github.fiifoo.scarl.area.feature.Feature
 import io.github.fiifoo.scarl.area.shape.Shape
 import io.github.fiifoo.scarl.area.template.ContentSelection._
 import io.github.fiifoo.scarl.area.template.RandomizedContentSource.ConduitLocations
 import io.github.fiifoo.scarl.area.template.Template.ResultContent
+import io.github.fiifoo.scarl.area.theme.ThemeId
 import io.github.fiifoo.scarl.core.Tag
 import io.github.fiifoo.scarl.core.geometry.Location
 import io.github.fiifoo.scarl.world.WorldAssets
@@ -15,7 +15,7 @@ import scala.util.Random
 object CalculateContent {
 
   def apply(assets: WorldAssets,
-            area: Area,
+            theme: ThemeId,
             shape: Shape.Result,
             target: FixedContent,
             locations: Set[Location],
@@ -50,7 +50,7 @@ object CalculateContent {
     )
 
     fixed = (features foldLeft fixed) ((content, feature) => {
-      feature(assets, area, shape, content, locations, entrances.keySet, subEntrances, random)
+      feature(assets, theme, shape, content, locations, entrances.keySet, subEntrances, random)
     })
 
     val defaultTerrain = terrain getOrElse ThemeTerrain()
@@ -67,7 +67,7 @@ object CalculateContent {
     }
 
     def applySelection[T](selection: ContentSelection[T]): (T, Set[Tag]) = {
-      val result = selection.apply(assets, area, random)
+      val result = selection.apply(assets, theme, random)
 
       if (result.isEmpty) {
         throw new CalculateFailedException
