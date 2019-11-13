@@ -8,7 +8,6 @@ import io.github.fiifoo.scarl.status.HealLocationStatus
 
 case class HealLocationWidget(id: WidgetKindId,
                               item: ItemKindId,
-                              power: Option[Int] = None,
                               amount: Int,
                               interval: Tick,
                               duration: Option[Tick],

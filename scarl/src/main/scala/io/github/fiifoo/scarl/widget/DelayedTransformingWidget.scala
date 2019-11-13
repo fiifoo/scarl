@@ -8,7 +8,6 @@ import io.github.fiifoo.scarl.status.DelayedTransformingWidgetStatus
 
 case class DelayedTransformingWidget(id: WidgetKindId,
                                      item: ItemKindId,
-                                     power: Option[Int] = None,
                                      transformTo: WidgetKindId,
                                      transformDescription: Option[String] = None,
                                      delay: Tick

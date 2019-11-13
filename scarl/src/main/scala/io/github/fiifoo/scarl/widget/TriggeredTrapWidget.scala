@@ -9,7 +9,6 @@ import io.github.fiifoo.scarl.status.TriggeredTrapStatus
 case class TriggeredTrapWidget(id: WidgetKindId,
                                item: ItemKindId,
                                smart: Boolean = false,
-                               power: Option[Int] = None,
                                discover: Option[Discover] = None,
                                triggerDescription: Option[String] = None,
                               ) extends WidgetKind {

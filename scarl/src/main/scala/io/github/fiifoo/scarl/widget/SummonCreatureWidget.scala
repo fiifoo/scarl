@@ -10,7 +10,6 @@ import io.github.fiifoo.scarl.status.SummonCreatureStatus
 
 case class SummonCreatureWidget(id: WidgetKindId,
                                 item: ItemKindId,
-                                power: Option[Int] = None,
                                 summon: CreatureCatalogueId,
                                 summonCategory: CreatureKind.Category = CreatureKind.DefaultCategory,
                                 summonDescription: Option[String] = None,

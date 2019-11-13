@@ -8,7 +8,6 @@ import io.github.fiifoo.scarl.status.TimedExplosiveStatus
 
 case class TimedExplosiveWidget(id: WidgetKindId,
                                 item: ItemKindId,
-                                power: Option[Int] = None,
                                 timer: Tick
                                ) extends WidgetKind {
 

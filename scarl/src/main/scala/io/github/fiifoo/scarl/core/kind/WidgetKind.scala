@@ -27,7 +27,6 @@ object WidgetKind {
 trait WidgetKind extends Kind {
   val id: WidgetKindId
   val item: ItemKindId
-  val power: Option[Int]
 
   def apply(s: State, idSeq: IdSeq, location: Location, options: Options = Options()): Result[Container] = {
     val (containerId, containerIdSeq) = idSeq()

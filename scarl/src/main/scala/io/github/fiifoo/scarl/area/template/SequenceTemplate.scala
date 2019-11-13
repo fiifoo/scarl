@@ -14,7 +14,6 @@ import scala.util.Random
 
 case class SequenceTemplate(id: TemplateId,
                             owner: Option[FactionId] = None,
-                            power: Option[Int] = None,
                             border: Option[WallSelection] = None,
                             fill: Option[WallSelection] = None,
                             terrain: Option[TerrainSelection] = None,

@@ -15,7 +15,6 @@ import scala.util.Random
 trait Template {
   val id: TemplateId
   val owner: Option[FactionId]
-  val power: Option[Int]
 
   def apply(assets: WorldAssets,
             area: Area,

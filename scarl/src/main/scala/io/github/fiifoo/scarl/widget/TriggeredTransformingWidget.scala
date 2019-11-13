@@ -7,7 +7,6 @@ import io.github.fiifoo.scarl.status.TriggeredTransformingWidgetStatus
 
 case class TriggeredTransformingWidget(id: WidgetKindId,
                                        item: ItemKindId,
-                                       power: Option[Int] = None,
                                        transformTo: WidgetKindId,
                                        transformDescription: Option[String] = None
                                       ) extends WidgetKind {

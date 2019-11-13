@@ -13,5 +13,4 @@ case class Area(id: AreaId,
                 owner: Option[FactionId] = None,
                 dispositions: Map[FactionId, Map[FactionId, Disposition]] = Map(),
                 strategies: Map[FactionId, Strategy] = Map(),
-                power: Map[CombatPower.Category, (Int, Int)] = Map(),
                )

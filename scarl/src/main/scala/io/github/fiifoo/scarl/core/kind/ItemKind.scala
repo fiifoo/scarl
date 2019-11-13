@@ -27,7 +27,6 @@ case class ItemKind(id: ItemKindId,
                     display: Char,
                     color: Color,
                     description: Option[String] = None,
-                    power: Option[Int] = None,
 
                     concealment: Int = 0,
                     hidden: Boolean = false,

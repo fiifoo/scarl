@@ -14,7 +14,6 @@ import scala.util.Random
 case class FixedTemplate(id: TemplateId,
                          shape: Shape,
                          owner: Option[FactionId] = None,
-                         power: Option[Int] = None,
                          terrain: Option[TerrainSelection] = None,
                          templates: Map[Location, TemplateId] = Map(),
                          entrances: Map[Location, DoorSelection] = Map(),

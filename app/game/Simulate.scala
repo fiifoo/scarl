@@ -11,7 +11,7 @@ object Simulate {
   }
 
   def equipmentCombatPower(items: Iterable[ItemKind], creatures: Iterable[CreatureKind]): CombatPower.Equipment = {
-    EquipmentCombatPowerSimulation()(items filter (_.power.isEmpty), combatants(creatures))
+    EquipmentCombatPowerSimulation()(items, combatants(creatures))
   }
 
   private def combatants(creatures: Iterable[CreatureKind]): Iterable[CreatureKind] = {
