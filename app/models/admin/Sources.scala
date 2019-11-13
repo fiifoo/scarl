@@ -102,39 +102,47 @@ object Sources {
     )),
 
     SubModelSource(typeOf[ContentSelection.CreatureSelection], List(
-      typeOf[ContentSelection.ThemeCreature],
+      typeOf[ContentSelection.CatalogueCreature],
       typeOf[ContentSelection.FixedCreature],
+      typeOf[ContentSelection.ThemeCreature],
     )),
 
     SubModelSource(typeOf[ContentSelection.DoorSelection], List(
       typeOf[ContentSelection.ThemeDoor],
       typeOf[ContentSelection.FixedDoor],
+      typeOf[ContentSelection.ThemeDoor],
     )),
 
     SubModelSource(typeOf[ContentSelection.ItemSelection], List(
-      typeOf[ContentSelection.ThemeItem],
-      typeOf[ContentSelection.ThemeEquipment],
+      typeOf[ContentSelection.CatalogueEquipment],
+      typeOf[ContentSelection.CatalogueItem],
       typeOf[ContentSelection.FixedItem],
+      typeOf[ContentSelection.ThemeEquipment],
+      typeOf[ContentSelection.ThemeItem],
     )),
 
     SubModelSource(typeOf[ContentSelection.TemplateSelection], List(
-      typeOf[ContentSelection.ThemeTemplate],
+      typeOf[ContentSelection.CatalogueTemplate],
       typeOf[ContentSelection.FixedTemplate],
+      typeOf[ContentSelection.ThemeTemplate],
     )),
 
     SubModelSource(typeOf[ContentSelection.TerrainSelection], List(
+      typeOf[ContentSelection.CatalogueTerrain],
       typeOf[ContentSelection.FixedTerrain],
       typeOf[ContentSelection.ThemeTerrain],
     )),
 
     SubModelSource(typeOf[ContentSelection.WallSelection], List(
+      typeOf[ContentSelection.CatalogueWall],
       typeOf[ContentSelection.FixedWall],
       typeOf[ContentSelection.ThemeWall],
     )),
 
     SubModelSource(typeOf[ContentSelection.WidgetSelection], List(
-      typeOf[ContentSelection.ThemeWidget],
+      typeOf[ContentSelection.CatalogueWidget],
       typeOf[ContentSelection.FixedWidget],
+      typeOf[ContentSelection.ThemeWidget],
     )),
 
     SubModelSource(typeOf[CreatureKind.Category], List(
