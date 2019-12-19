@@ -1,13 +1,11 @@
 package io.github.fiifoo.scarl.area.template
 
-import io.github.fiifoo.scarl.area.Area
 import io.github.fiifoo.scarl.area.feature.Utils
 import io.github.fiifoo.scarl.area.shape.Shape
 import io.github.fiifoo.scarl.area.template.ContentSelection._
 import io.github.fiifoo.scarl.area.template.ContentSource.ItemSource
 import io.github.fiifoo.scarl.area.template.RandomizedContentSource.{Entrances, Routing}
-import io.github.fiifoo.scarl.area.template.Template.Result
-import io.github.fiifoo.scarl.area.theme.ThemeId
+import io.github.fiifoo.scarl.area.template.Template.{Context, Result}
 import io.github.fiifoo.scarl.core.geometry.Location
 import io.github.fiifoo.scarl.core.math.Distribution.Uniform
 import io.github.fiifoo.scarl.world.WorldAssets
@@ -21,8 +19,7 @@ object CalculateRandomizedContent {
             shapeResult: Shape.Result,
             subResults: Map[Location, Result]
            )(assets: WorldAssets,
-             area: Area,
-             theme: Option[ThemeId],
+             context: Context,
              random: Random
            ): Result = {
     val subEntrances = subResults map (x => {
@@ -32,7 +29,7 @@ object CalculateRandomizedContent {
     })
 
     val contained = CalculateUtils.templateContainedLocations(shapeResult, subResults)
-    val entranceResults = calculateEntrances(source.entrances)(assets, area, shapeResult.entranceCandidates, random)
+    val entranceResults = calculateEntrances(source.entrances)(assets, shapeResult.entranceCandidates, random)
     val routeResults = calculateRoutes(source.routing, source.fill)(entranceResults, subEntrances, contained)
     val wallResults = calculateBorderWalls(source.border)(shapeResult.border, entranceResults) ++
       calculateFilledWalls(source.fill)(contained, routeResults)
@@ -40,7 +37,7 @@ object CalculateRandomizedContent {
 
     val contentResult = CalculateContent(
       assets = assets,
-      theme = theme getOrElse area.theme,
+      context = context,
       shape = shapeResult,
       target = FixedContent(walls = wallResults, terrains = terrainResults),
       locations = contained,
@@ -53,7 +50,7 @@ object CalculateRandomizedContent {
     )
 
     Result(
-      owner = source.owner orElse area.owner,
+      owner = context.owner,
       shape = shapeResult,
       templates = subResults,
       entrances = entranceResults.keys.toSet,
@@ -63,7 +60,7 @@ object CalculateRandomizedContent {
 
   def calculateEntrances(entrances: Entrances)
                         (assets: WorldAssets,
-                         area: Area, locations: Set[Location],
+                         locations: Set[Location],
                          random: Random
                         ): Map[Location, DoorSelection] = {
     val selection = entrances.door.getOrElse(ThemeDoor())

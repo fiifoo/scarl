@@ -4,7 +4,7 @@ import io.github.fiifoo.scarl.area.feature.Utils._
 import io.github.fiifoo.scarl.area.shape.Shape
 import io.github.fiifoo.scarl.area.template.ContentSource._
 import io.github.fiifoo.scarl.area.template.FixedContent
-import io.github.fiifoo.scarl.area.theme.ThemeId
+import io.github.fiifoo.scarl.area.template.Template.Context
 import io.github.fiifoo.scarl.core.geometry.Location
 import io.github.fiifoo.scarl.world.{ContentSourceCatalogue, ContentSourceCatalogueId, WorldAssets}
 
@@ -17,7 +17,7 @@ case class RandomizedContentFeature(catalogues: List[ContentSourceCatalogueId] =
                                    ) extends Feature {
 
   def apply(assets: WorldAssets,
-            theme: ThemeId,
+            context: Context,
             shape: Shape.Result,
             content: FixedContent,
             locations: Set[Location],

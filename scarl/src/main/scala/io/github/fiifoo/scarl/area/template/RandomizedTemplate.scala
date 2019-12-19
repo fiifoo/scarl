@@ -1,12 +1,11 @@
 package io.github.fiifoo.scarl.area.template
 
-import io.github.fiifoo.scarl.area.Area
 import io.github.fiifoo.scarl.area.feature.Feature
 import io.github.fiifoo.scarl.area.shape.Shape
 import io.github.fiifoo.scarl.area.template.ContentSelection._
 import io.github.fiifoo.scarl.area.template.ContentSource.TemplateSource
 import io.github.fiifoo.scarl.area.template.RandomizedContentSource.{ConduitLocations, Entrances, Routing}
-import io.github.fiifoo.scarl.area.template.Template.Result
+import io.github.fiifoo.scarl.area.template.Template.{Context, Result}
 import io.github.fiifoo.scarl.area.theme.ThemeId
 import io.github.fiifoo.scarl.core.creature.FactionId
 import io.github.fiifoo.scarl.core.geometry.{Location, Rotation}
@@ -30,25 +29,25 @@ case class RandomizedTemplate(id: TemplateId,
                               features: List[Feature] = List(),
                              ) extends Template with RandomizedContentSource {
 
-  def apply(assets: WorldAssets, area: Area, random: Random): Result = {
+  def apply(assets: WorldAssets, context: Context, random: Random): Result = {
     val shapeResult = shape(random)
-    val subResults = calculateSubTemplates(assets, area, shapeResult, random)
+    val subResults = calculateSubTemplates(assets, context, shapeResult, random)
 
-    CalculateRandomizedContent(this, shapeResult, subResults)(assets, area, this.theme, random)
+    CalculateRandomizedContent(this, shapeResult, subResults)(assets, context(this), random)
   }
 
   private def calculateSubTemplates(assets: WorldAssets,
-                                    area: Area,
+                                    context: Context,
                                     shape: Shape.Result,
                                     random: Random
                                    ): Map[Location, Result] = {
     def calculate(source: TemplateSource): Iterable[(Result, Boolean)] = {
-      val result = source.selection.apply(assets, this.theme getOrElse area.theme, random) map (sub => {
+      val result = source.selection.apply(assets, context(this), random) map (sub => {
         val range = Rng.nextRange(random, source.distribution)
 
         range map (i => {
           val required = i < source.required
-          val result = sub(assets.templates)(assets, area, random)
+          val result = sub(assets.templates)(assets, context(this), random)
           val rotation = Rotation(random, result.shape.outerWidth, result.shape.outerHeight).reverse
 
           (result.rotate(rotation), required)

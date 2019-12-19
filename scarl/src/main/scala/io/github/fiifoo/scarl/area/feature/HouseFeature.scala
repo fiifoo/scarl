@@ -4,7 +4,7 @@ import io.github.fiifoo.scarl.area.feature.HouseFeature.{Build, Scan}
 import io.github.fiifoo.scarl.area.shape.Shape
 import io.github.fiifoo.scarl.area.template.ContentSelection._
 import io.github.fiifoo.scarl.area.template.FixedContent
-import io.github.fiifoo.scarl.area.theme.ThemeId
+import io.github.fiifoo.scarl.area.template.Template.Context
 import io.github.fiifoo.scarl.core.geometry.{Location, Rotation}
 import io.github.fiifoo.scarl.core.math.Rng
 import io.github.fiifoo.scarl.world.WorldAssets
@@ -19,7 +19,7 @@ case class HouseFeature(iterations: Int,
                        ) extends Feature {
 
   def apply(assets: WorldAssets,
-            theme: ThemeId,
+            context: Context,
             shape: Shape.Result,
             content: FixedContent,
             locations: Set[Location],
