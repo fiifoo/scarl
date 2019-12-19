@@ -712,7 +712,7 @@
         "weight" : 100
       }, {
         "value" : "siux/house/diplomat",
-        "weight" : 10000
+        "weight" : 100
       } ] ], [ "Template.RoomCategory", [ {
         "value" : "generic/room",
         "weight" : 100
@@ -1194,7 +1194,41 @@
       } ] ] ]
     } ] ]
   },
-  "communications" : [ [ "iridan/unfinished-mine/prospector/greet", {
+  "communications" : [ [ "siux/diplomat/main", {
+    "message" : "Interfacing... A Nomad, I have erred.\n\nSituation here became chaotic and I had to defend myself blindly. Please accept my apology and spare me. My defences will no longer bother you, if any remain.",
+    "repeatable" : false,
+    "creaturePower" : {
+      "type" : "CompositeCreaturePower",
+      "data" : {
+        "description" : null,
+        "resources" : null,
+        "powers" : [ {
+          "type" : "FactionDispositionPower",
+          "data" : {
+            "description" : null,
+            "resources" : null,
+            "disposition" : "Faction.Neutral"
+          }
+        }, {
+          "type" : "AchieveGoalPower",
+          "data" : {
+            "description" : null,
+            "resources" : null,
+            "goal" : "siux/truce"
+          }
+        } ]
+      }
+    },
+    "itemPower" : null,
+    "choices" : [ {
+      "communication" : "generic/farewell-repeatable",
+      "description" : "Accept apology"
+    }, {
+      "communication" : "generic/death-pain",
+      "description" : "Kill diplomat"
+    } ],
+    "id" : "siux/diplomat/main"
+  } ], [ "iridan/unfinished-mine/prospector/greet", {
     "message" : "Please do not attack.",
     "repeatable" : true,
     "creaturePower" : null,
@@ -1251,6 +1285,19 @@
     "itemPower" : null,
     "choices" : [ ],
     "id" : "iridan/unfinished-mine/prospector/bye"
+  } ], [ "generic/death-pain", {
+    "message" : "Cries in pain",
+    "repeatable" : false,
+    "creaturePower" : {
+      "type" : "DeathPower",
+      "data" : {
+        "description" : null,
+        "resources" : null
+      }
+    },
+    "itemPower" : null,
+    "choices" : [ ],
+    "id" : "generic/death-pain"
   } ], [ "scippe/dice/gate-security/door/overrun", {
     "message" : "Finally! ... \n\nBTG? No. Who the hell are you? Never mind. Just come in since you made it this far and we are fucked anyway.",
     "repeatable" : false,
@@ -1292,6 +1339,13 @@
     "id" : "scippe/liason-greet",
     "creaturePower" : null,
     "choices" : [ ]
+  } ], [ "generic/farewell-repeatable", {
+    "message" : "Farewell.",
+    "repeatable" : true,
+    "creaturePower" : null,
+    "itemPower" : null,
+    "choices" : [ ],
+    "id" : "generic/farewell-repeatable"
   } ], [ "scippe/dice/gate-officer/main", {
     "message" : "Orbital and surface solar collectors are gone and so is our main power network. Everything still operational runs on emergency power.\n\nLift down to main DiCe levels is operational and I can give you security access. I expect things down there to be quite chaotic. Because of Scipoi of course but also not all visitors there are, well, very diplomatic and might have seized the opportunity.\n\nGate to DiCe Negotiations was hit by orbital debris and I lack both resources and machinery to repair it.",
     "repeatable" : true,
@@ -1405,8 +1459,10 @@
     "dispositions" : [ [ "exodus", "Faction.Hostile" ], [ "iridan", "Faction.Hostile" ], [ "iridan/command", "Faction.Hostile" ], [ "iridan/hunters", "Faction.Hostile" ], [ "nomad", "Faction.Hostile" ], [ "scipoi", "Faction.Hostile" ], [ "skyfarer", "Faction.Hostile" ] ],
     "id" : "siux"
   } ] ],
-  "goals" : [ [ "gain-ship-materials", {
-    "id" : "gain-ship-materials"
+  "goals" : [ [ "generic/gain-ship-materials", {
+    "id" : "generic/gain-ship-materials"
+  } ], [ "siux/truce", {
+    "id" : "siux/truce"
   } ] ],
   "keys" : [ [ "iridan/access-codes", {
     "name" : "Iridan access codes",
@@ -1876,7 +1932,7 @@
         },
         "defence" : 0,
         "skill" : {
-          "hacking" : 300
+          "hacking" : 30
         },
         "melee" : {
           "attack" : 0,
@@ -3068,7 +3124,7 @@
       "character" : null,
       "locked" : null,
       "name" : "Siux diplomat",
-      "responses" : [ ],
+      "responses" : [ [ "nomad", [ "siux/diplomat/main", "generic/farewell-repeatable" ] ] ],
       "behavior" : {
         "type" : "GreetTactic",
         "data" : { }
@@ -4395,6 +4451,96 @@
           "sensors" : 30
         },
         "armor" : 40
+      }
+    } ], [ "player-god", {
+      "display" : "@",
+      "color" : "yellow",
+      "traits" : {
+        "events" : null,
+        "flying" : false,
+        "immobile" : false,
+        "missile" : null,
+        "solitary" : true,
+        "leader" : false
+      },
+      "equipments" : [ [ "Equipment.LauncherSlot", "nomad/launcher-missile" ], [ "Equipment.MainHand", "nomad/weapon-blade" ], [ "Equipment.RangedSlot", "nomad/weapon-laser-light" ], [ "Equipment.OffHand", "nomad/deflector" ], [ "Equipment.BodyArmor", "nomad/armor-body-envoy" ], [ "Equipment.FootArmor", "nomad/armor-leg-envoy" ], [ "Equipment.HandArmor", "nomad/armor-hand-envoy" ], [ "Equipment.HeadArmor", "nomad/armor-head-envoy" ] ],
+      "recipes" : [ "iridan/deflector-merged", "iridan/weapon-boser-merged", "nomad/armor-body-assault", "nomad/armor-body-infiltration", "nomad/armor-hand-assault", "nomad/armor-hand-infiltration", "nomad/armor-head-assault", "nomad/armor-head-infiltration", "nomad/armor-leg-assault", "nomad/armor-leg-infiltration", "nomad/launcher-missile-smart", "nomad/weapon-laser-heavy", "nomad/weapon-spear", "scippe/weapon-shard-blast-merged", "skyfarer/armor-body-heavy-merged", "skyfarer/armor-hand-melee-merged", "skyfarer/armor-head-ranged-merged", "skyfarer/armor-leg-heavy-merged", "skyfarer/weapon-smart-gun-merged", "skyfarer/weapon-whip-plasma-merged" ],
+      "character" : {
+        "progression" : "player",
+        "experience" : 0,
+        "level" : 0
+      },
+      "name" : "Player",
+      "responses" : [ ],
+      "behavior" : {
+        "type" : "RoamTactic",
+        "data" : { }
+      },
+      "usable" : null,
+      "greetings" : [ ],
+      "id" : "player-god",
+      "inventory" : [ "nomad/scanner", "nomad/medkit", "nomad/deploy-explosive-mine", "nomad/deploy-explosive-timed", "nomad/weapon-blade" ],
+      "faction" : "nomad",
+      "description" : "It's you.",
+      "stats" : {
+        "launcher" : {
+          "range" : 0,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          },
+          "missiles" : [ ]
+        },
+        "stances" : [ "Stances.Aim", "Stances.Evasive" ],
+        "explosive" : {
+          "attack" : 0,
+          "damage" : 0,
+          "radius" : 0,
+          "blast" : 0,
+          "conditions" : [ ]
+        },
+        "speed" : 1000,
+        "ranged" : {
+          "attack" : 1000,
+          "damage" : 1000,
+          "range" : 0,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          },
+          "conditions" : [ ]
+        },
+        "energy" : {
+          "max" : 100,
+          "regen" : 5
+        },
+        "materials" : {
+          "max" : 500,
+          "regen" : 0
+        },
+        "defence" : 1000,
+        "skill" : {
+          "hacking" : 3000
+        },
+        "melee" : {
+          "attack" : 1000,
+          "damage" : 1000,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          },
+          "conditions" : [ ]
+        },
+        "resistance" : 0,
+        "health" : {
+          "max" : 1000,
+          "regen" : 0
+        },
+        "sight" : {
+          "range" : 10,
+          "sensors" : 30
+        },
+        "armor" : 1000
       }
     } ], [ "skyfarer/clone", {
       "display" : "r",
@@ -8801,7 +8947,7 @@
             "data" : {
               "description" : null,
               "resources" : null,
-              "goal" : "gain-ship-materials"
+              "goal" : "generic/gain-ship-materials"
             }
           } ]
         }
@@ -11850,7 +11996,7 @@
         "value" : "overrun"
       },
       "requirements" : {
-        "goals" : [ [ "gain-ship-materials" ] ]
+        "goals" : [ [ "generic/gain-ship-materials" ] ]
       }
     } ],
     "id" : "scippe/dice/entrance"
@@ -30227,7 +30373,7 @@
   } ] ],
   "worlds" : [ [ "main", {
     "start" : "scippe/dice/1",
-    "characters" : [ "player" ],
+    "characters" : [ "player-god" ],
     "conduits" : [ {
       "source" : "iridan/labs",
       "target" : "iridan/nexus",

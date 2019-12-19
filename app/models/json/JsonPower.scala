@@ -23,6 +23,7 @@ object JsonPower {
   lazy private implicit val compositeCreatureFormat = Json.format[CompositeCreaturePower]
   lazy private implicit val compositeItemFormat = Json.format[CompositeItemPower]
   lazy private implicit val createEntityFormat = Json.format[CreateEntityPower]
+  lazy private implicit val deathFormat = Json.format[DeathPower]
   lazy private implicit val explodeFormat = Json.format[ExplodePower]
   lazy private implicit val factionDispositionFormat = Json.format[FactionDispositionPower]
   lazy private implicit val factionStrategyFormat = Json.format[FactionStrategyPower]
@@ -46,6 +47,7 @@ object JsonPower {
       case "CapturePower" => data.as[CapturePower]
       case "CompositeCreaturePower" => data.as[CompositeCreaturePower]
       case "CreateEntityPower" => data.as[CreateEntityPower]
+      case "DeathPower" => data.as[DeathPower]
       case "ExplodePower" => data.as[ExplodePower]
       case "FactionDispositionPower" => data.as[FactionDispositionPower]
       case "FactionStrategyPower" => data.as[FactionStrategyPower]
@@ -62,6 +64,7 @@ object JsonPower {
       case power: CapturePower => captureFormat.writes(power)
       case power: CompositeCreaturePower => compositeCreatureFormat.writes(power)
       case power: CreateEntityPower => createEntityFormat.writes(power)
+      case power: DeathPower => deathFormat.writes(power)
       case power: ExplodePower => explodeFormat.writes(power)
       case power: FactionDispositionPower => factionDispositionFormat.writes(power)
       case power: FactionStrategyPower => factionStrategyFormat.writes(power)

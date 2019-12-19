@@ -156,6 +156,7 @@ object Sources {
       typeOf[CompositeCreaturePower],
       typeOf[CapturePower],
       typeOf[CreateEntityPower],
+      typeOf[DeathPower],
       typeOf[FactionDispositionPower],
       typeOf[FactionStrategyPower],
       typeOf[MaybeCreaturePower],
