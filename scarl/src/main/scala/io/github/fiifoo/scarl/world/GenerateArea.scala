@@ -1,19 +1,24 @@
 package io.github.fiifoo.scarl.world
 
 import io.github.fiifoo.scarl.area.AreaId
-import io.github.fiifoo.scarl.area.template.{ApplyTemplate, CalculateTemplate}
+import io.github.fiifoo.scarl.area.template.{ApplyTemplate, CalculateFailedException, CalculateTemplate}
 import io.github.fiifoo.scarl.core._
 import io.github.fiifoo.scarl.core.ai.{Brain, Strategy}
 import io.github.fiifoo.scarl.core.creature.FactionId
 import io.github.fiifoo.scarl.core.entity.{GlobalActor, GlobalActorId, IdSeq}
 import io.github.fiifoo.scarl.core.math.Rng
+import io.github.fiifoo.scarl.core.math.Rng.WeightedChoices
 import io.github.fiifoo.scarl.core.mutation.{IdSeqMutation, NewEntityMutation}
+import io.github.fiifoo.scarl.world.Site.AreaSource
+
+import scala.util.Random
 
 object GenerateArea {
 
   def apply(site: SiteId, rng: Rng, idSeq: IdSeq = IdSeq(1))(world: WorldState): WorldState = {
+    val (random, _) = rng()
     val assets = world.assets
-    val (variant, areaId) = selectArea(world, assets.sites(site))
+    val (variant, areaId) = selectArea(world, assets.sites(site), random)
     val area = assets.areas(areaId)
 
     var state = State(
@@ -27,7 +32,6 @@ object GenerateArea {
       rng = rng
     )
 
-    val (random, _) = state.rng()
     val template = assets.templates(area.template)
     val templateResult = CalculateTemplate(assets, area, world.usedUniqueTemplates, random)(template)
 
@@ -39,19 +43,48 @@ object GenerateArea {
 
     world.copy(
       states = world.states + (site -> state),
+      usedAreas = world.usedAreas + areaId,
       usedUniqueTemplates = world.usedUniqueTemplates ++ templateResult.collectUsedUniqueTemplates(assets),
       variants = world.variants + (assets.sites(site).region -> variant)
     )
   }
 
-  private def selectArea(world: WorldState, site: Site): (Option[RegionVariantKey], AreaId) = {
+  private def selectArea(world: WorldState, site: Site, random: Random): (Option[RegionVariantKey], AreaId) = {
+    val (variant, source) = selectAreaSource(world, site)
+
+    val area: AreaId = source.priority flatMap (area => {
+      if (world.usedAreas.contains(area)) {
+        None
+      } else {
+        Some(area)
+      }
+    }) getOrElse {
+      val choices = source.choices filter (choice => {
+        val area = choice.value
+
+        !world.assets.areas(area).unique || !world.usedAreas.contains(area)
+      })
+
+      if (choices.isEmpty) {
+        source.priority getOrElse {
+          throw new CalculateFailedException // ...
+        }
+      } else {
+        WeightedChoices(choices)(random)
+      }
+    }
+
+    (variant, area)
+  }
+
+  private def selectAreaSource(world: WorldState, site: Site): (Option[RegionVariantKey], AreaSource) = {
     val variant = world.variants.getOrElse(
       site.region,
       selectVariant(world, world.assets.regions(site.region))
     )
-    val area = variant flatMap site.variants.get getOrElse site.area
+    val source = variant flatMap site.variants.get getOrElse site.area
 
-    (variant, area)
+    (variant, source)
   }
 
   private def selectVariant(world: WorldState, region: Region): Option[RegionVariantKey] = {
