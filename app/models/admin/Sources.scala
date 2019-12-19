@@ -108,7 +108,7 @@ object Sources {
     )),
 
     SubModelSource(typeOf[ContentSelection.DoorSelection], List(
-      typeOf[ContentSelection.ThemeDoor],
+      typeOf[ContentSelection.CatalogueDoor],
       typeOf[ContentSelection.FixedDoor],
       typeOf[ContentSelection.ThemeDoor],
     )),

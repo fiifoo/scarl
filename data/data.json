@@ -643,6 +643,13 @@
         "weight" : 100
       } ] ] ],
       "id" : "scipoi/scippe-civilians"
+    } ], [ "siux/default", {
+      "subs" : [ "generic/default" ],
+      "content" : [ [ "ItemKind.SecureDoorCategory", [ {
+        "value" : "generic/door-secure-closed",
+        "weight" : 100
+      } ] ] ],
+      "id" : "siux/default"
     } ] ],
     "templates" : [ [ "iridan/default", {
       "subs" : [ ],
@@ -703,6 +710,9 @@
       }, {
         "value" : "exodus/room/invertebrate",
         "weight" : 100
+      }, {
+        "value" : "siux/house/diplomat",
+        "weight" : 10000
       } ] ], [ "Template.RoomCategory", [ {
         "value" : "generic/room",
         "weight" : 100
@@ -1107,6 +1117,28 @@
         "weight" : 100
       } ] ] ],
       "id" : "generic/constructed-surface"
+    } ], [ "siux/default", {
+      "subs" : [ ],
+      "content" : [ [ "WallKind.DefaultCategory", [ {
+        "value" : "siux/wall",
+        "weight" : 100
+      } ] ], [ "WallKind.ConstructedCategory", [ {
+        "value" : "siux/wall",
+        "weight" : 100
+      } ] ], [ "WallKind.NaturalCategory", [ {
+        "value" : "siux/wall",
+        "weight" : 100
+      } ] ], [ "WallKind.SecureCategory", [ {
+        "value" : "siux/wall",
+        "weight" : 100
+      } ] ], [ "WallKind.AreaBorderCategory", [ {
+        "value" : "generic/wall-indestructible",
+        "weight" : 100
+      } ] ], [ "WallKind.TransparentCategory", [ {
+        "value" : "generic/window",
+        "weight" : 100
+      } ] ] ],
+      "id" : "siux/default"
     } ] ],
     "widgets" : [ [ "iridan/default", {
       "subs" : [ ],
@@ -2058,7 +2090,7 @@
       "color" : "#ffc107",
       "traits" : {
         "events" : null,
-        "flying" : true,
+        "flying" : false,
         "immobile" : false,
         "missile" : null,
         "solitary" : false,
@@ -10469,7 +10501,15 @@
       "impassable" : true,
       "id" : "generic/chasm"
     } ] ],
-    "walls" : [ [ "generic/wall-cave-indestructible", {
+    "walls" : [ [ "siux/wall", {
+      "name" : "Wall of exotic material",
+      "display" : "#",
+      "color" : "#673ab7",
+      "description" : "Wall grown by Siux technology.",
+      "hardness" : 200,
+      "id" : "siux/wall",
+      "transparent" : false
+    } ], [ "generic/wall-cave-indestructible", {
       "name" : "Cave wall",
       "display" : "#",
       "color" : "#607d8b",
@@ -22633,6 +22673,275 @@
         }
       }
     }
+  } ], [ "siux/room/diplomat", {
+    "type" : "FixedTemplate",
+    "data" : {
+      "shape" : {
+        "type" : "Rectangle",
+        "data" : {
+          "width" : 5,
+          "height" : 5,
+          "variance" : 0
+        }
+      },
+      "theme" : "siux/default",
+      "owner" : "siux",
+      "terrain" : null,
+      "content" : {
+        "conduitLocations" : [ ],
+        "items" : [ ],
+        "restrictedLocations" : [ ],
+        "walls" : [ [ {
+          "x" : 4,
+          "y" : 3
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "theme" : null,
+            "category" : [ ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 4,
+          "y" : 2
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "theme" : null,
+            "category" : [ ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 0,
+          "y" : 1
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "theme" : null,
+            "category" : [ ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 4,
+          "y" : 4
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "theme" : null,
+            "category" : [ ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 3,
+          "y" : 0
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "theme" : null,
+            "category" : [ ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 0,
+          "y" : 0
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "theme" : null,
+            "category" : [ ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 0,
+          "y" : 3
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "theme" : null,
+            "category" : [ ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 0,
+          "y" : 4
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "theme" : null,
+            "category" : [ ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 4,
+          "y" : 0
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "theme" : null,
+            "category" : [ ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 1,
+          "y" : 4
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "theme" : null,
+            "category" : [ ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 3,
+          "y" : 4
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "theme" : null,
+            "category" : [ ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 2,
+          "y" : 0
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "theme" : null,
+            "category" : [ ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 1,
+          "y" : 0
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "theme" : null,
+            "category" : [ ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 2,
+          "y" : 4
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "theme" : null,
+            "category" : [ ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 4,
+          "y" : 1
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "theme" : null,
+            "category" : [ ],
+            "tags" : [ ]
+          }
+        } ] ],
+        "machinery" : [ ],
+        "widgets" : [ [ {
+          "x" : 2,
+          "y" : 1
+        }, {
+          "type" : "ContentSelection.ThemeWidget",
+          "data" : {
+            "theme" : null,
+            "category" : [ "WidgetKind.TrapCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 2,
+          "y" : 2
+        }, {
+          "type" : "ContentSelection.ThemeWidget",
+          "data" : {
+            "theme" : null,
+            "category" : [ "WidgetKind.TrapCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 2,
+          "y" : 3
+        }, {
+          "type" : "ContentSelection.ThemeWidget",
+          "data" : {
+            "theme" : null,
+            "category" : [ "WidgetKind.TrapCategory" ],
+            "tags" : [ ]
+          }
+        } ] ],
+        "creatures" : [ [ {
+          "x" : 3,
+          "y" : 2
+        }, {
+          "type" : "ContentSelection.FixedCreature",
+          "data" : {
+            "kind" : "siux/diplomat",
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 3,
+          "y" : 1
+        }, {
+          "type" : "ContentSelection.ThemeCreature",
+          "data" : {
+            "theme" : null,
+            "category" : [ "CreatureKind.TurretCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 1,
+          "y" : 1
+        }, {
+          "type" : "ContentSelection.ThemeCreature",
+          "data" : {
+            "theme" : null,
+            "category" : [ "CreatureKind.TurretCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 1,
+          "y" : 3
+        }, {
+          "type" : "ContentSelection.ThemeCreature",
+          "data" : {
+            "theme" : null,
+            "category" : [ "CreatureKind.TurretCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 3,
+          "y" : 3
+        }, {
+          "type" : "ContentSelection.ThemeCreature",
+          "data" : {
+            "theme" : null,
+            "category" : [ "CreatureKind.TurretCategory" ],
+            "tags" : [ ]
+          }
+        } ] ],
+        "gatewayLocations" : [ ],
+        "terrains" : [ ]
+      },
+      "templates" : [ ],
+      "id" : "siux/room/diplomat",
+      "features" : [ ],
+      "entrances" : [ [ {
+        "x" : 0,
+        "y" : 2
+      }, {
+        "type" : "ContentSelection.ThemeDoor",
+        "data" : {
+          "theme" : null,
+          "category" : [ "ItemKind.SecureDoorCategory" ],
+          "tags" : [ ]
+        }
+      } ] ]
+    }
   } ], [ "iridan/area/core-approach", {
     "type" : "RandomizedTemplate",
     "data" : {
@@ -24616,6 +24925,100 @@
       "entrances" : {
         "min" : 0,
         "max" : 0,
+        "door" : null
+      }
+    }
+  } ], [ "siux/house/diplomat", {
+    "type" : "RandomizedTemplate",
+    "data" : {
+      "conduitLocations" : {
+        "min" : 0,
+        "max" : 0
+      },
+      "shape" : {
+        "type" : "Rectangle",
+        "data" : {
+          "width" : 21,
+          "height" : 19,
+          "variance" : 0
+        }
+      },
+      "fill" : {
+        "type" : "ContentSelection.ThemeWall",
+        "data" : {
+          "theme" : null,
+          "category" : [ ],
+          "tags" : [ ]
+        }
+      },
+      "theme" : "siux/default",
+      "border" : {
+        "type" : "ContentSelection.ThemeWall",
+        "data" : {
+          "category" : [ ],
+          "tags" : [ ]
+        }
+      },
+      "owner" : "siux",
+      "terrain" : {
+        "type" : "ContentSelection.ThemeTerrain",
+        "data" : {
+          "category" : [ ],
+          "tags" : [ ]
+        }
+      },
+      "templates" : [ {
+        "selection" : {
+          "type" : "ContentSelection.ThemeTemplate",
+          "data" : {
+            "category" : [ "Template.TrapCategory" ],
+            "tags" : [ ]
+          }
+        },
+        "distribution" : {
+          "type" : "Distribution.Uniform",
+          "data" : {
+            "min" : 2,
+            "max" : 2
+          }
+        },
+        "required" : 2
+      }, {
+        "selection" : {
+          "type" : "ContentSelection.FixedTemplate",
+          "data" : {
+            "template" : "siux/room/diplomat"
+          }
+        },
+        "distribution" : {
+          "type" : "Distribution.Uniform",
+          "data" : {
+            "min" : 1,
+            "max" : 1
+          }
+        },
+        "required" : 1
+      } ],
+      "id" : "siux/house/diplomat",
+      "features" : [ {
+        "type" : "BurrowFeature",
+        "data" : {
+          "min" : 40,
+          "max" : 60,
+          "noise" : 30
+        }
+      }, {
+        "type" : "RandomizedContentFeature",
+        "data" : {
+          "creatures" : [ ],
+          "items" : [ ],
+          "widgets" : [ ],
+          "catalogues" : [ "generic/room-portal-high", "generic/room" ]
+        }
+      } ],
+      "entrances" : {
+        "min" : 1,
+        "max" : 1,
         "door" : null
       }
     }
@@ -29774,13 +30177,13 @@
     "templates" : "iridan/default",
     "id" : "iridan/natural-surface",
     "terrains" : "generic/natural-surface"
-  } ], [ "siux/constructed-underground", {
-    "items" : "generic/default",
-    "walls" : "generic/constructed-underground",
+  } ], [ "siux/default", {
+    "items" : "siux/default",
+    "walls" : "siux/default",
     "widgets" : "siux/default",
     "creatures" : "siux/default",
     "templates" : "siux/default",
-    "id" : "siux/constructed-underground",
+    "id" : "siux/default",
     "terrains" : "generic/constructed-underground"
   } ], [ "scippe/civilians/constructed-surface", {
     "items" : "scippe/civilians/default",
