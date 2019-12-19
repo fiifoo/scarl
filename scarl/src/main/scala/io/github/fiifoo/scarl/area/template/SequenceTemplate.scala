@@ -1,11 +1,10 @@
 package io.github.fiifoo.scarl.area.template
 
-import io.github.fiifoo.scarl.area.Area
 import io.github.fiifoo.scarl.area.feature.Feature
 import io.github.fiifoo.scarl.area.shape.Shape
 import io.github.fiifoo.scarl.area.template.ContentSelection._
 import io.github.fiifoo.scarl.area.template.RandomizedContentSource.{ConduitLocations, Entrances, Routing}
-import io.github.fiifoo.scarl.area.template.Template.Result
+import io.github.fiifoo.scarl.area.template.Template.{Context, Result}
 import io.github.fiifoo.scarl.area.theme.ThemeId
 import io.github.fiifoo.scarl.core.creature.FactionId
 import io.github.fiifoo.scarl.core.geometry.{Location, Rotation}
@@ -26,19 +25,19 @@ case class SequenceTemplate(id: TemplateId,
                             features: List[Feature] = List(),
                            ) extends Template with RandomizedContentSource {
 
-  def apply(assets: WorldAssets, area: Area, random: Random): Result = {
-    val (subResults, shapeResult) = this.calculateSequence(assets, area, random)
+  def apply(assets: WorldAssets, context: Context, random: Random): Result = {
+    val (subResults, shapeResult) = this.calculateSequence(assets, context, random)
 
-    CalculateRandomizedContent(this, shapeResult, subResults)(assets, area, this.theme, random)
+    CalculateRandomizedContent(this, shapeResult, subResults)(assets, context(this), random)
   }
 
   private def calculateSequence(assets: WorldAssets,
-                                area: Area,
+                                context: Context,
                                 random: Random
                                ): (Map[Location, Result], Shape.Result) = {
     val templates = this.templates map (selection => {
-      selection.apply(assets, this.theme getOrElse area.theme, random) map (template => {
-        val result = template.apply(assets.templates)(assets, area, random)
+      selection.apply(assets, context(this), random) map (template => {
+        val result = template.apply(assets.templates)(assets, context(this), random)
         val rotation = Rotation(random, result.shape.outerWidth, result.shape.outerHeight).reverse
 
         result.rotate(rotation)

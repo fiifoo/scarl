@@ -16,7 +16,7 @@ object CalculateTemplate {
            )(template: Template): Result = {
 
     val result = try {
-      Some(template(assets, area, random))
+      Some(template(assets, Template.Context(area), random))
     } catch {
       case _: CalculateFailedException => None
     }

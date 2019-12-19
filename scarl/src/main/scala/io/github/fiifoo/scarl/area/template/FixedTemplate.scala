@@ -1,10 +1,9 @@
 package io.github.fiifoo.scarl.area.template
 
-import io.github.fiifoo.scarl.area.Area
 import io.github.fiifoo.scarl.area.feature.Feature
 import io.github.fiifoo.scarl.area.shape.Shape
 import io.github.fiifoo.scarl.area.template.ContentSelection.{DoorSelection, TerrainSelection}
-import io.github.fiifoo.scarl.area.template.Template.Result
+import io.github.fiifoo.scarl.area.template.Template.{Context, Result}
 import io.github.fiifoo.scarl.area.theme.ThemeId
 import io.github.fiifoo.scarl.core.creature.FactionId
 import io.github.fiifoo.scarl.core.geometry.Location
@@ -23,9 +22,9 @@ case class FixedTemplate(id: TemplateId,
                          content: FixedContent = FixedContent(),
                         ) extends Template {
 
-  def apply(assets: WorldAssets, area: Area, random: Random): Result = {
+  def apply(assets: WorldAssets, context: Context, random: Random): Result = {
     val shapeResult = shape(random)
-    val subResults = templates transform ((_, template) => template(assets.templates)(assets, area, random))
+    val subResults = templates transform ((_, template) => template(assets.templates)(assets, context(this), random))
     val subEntrances = (subResults map (x => {
       val (location, subResult) = x
 
@@ -35,7 +34,7 @@ case class FixedTemplate(id: TemplateId,
     val contained = CalculateUtils.templateContainedLocations(shapeResult, subResults)
     val contentResult = CalculateContent(
       assets = assets,
-      theme = this.theme getOrElse area.theme,
+      context = context(this),
       shape = shapeResult,
       target = content,
       locations = contained,
@@ -47,7 +46,7 @@ case class FixedTemplate(id: TemplateId,
     )
 
     Result(
-      owner = this.owner orElse area.owner,
+      owner = context(this).owner,
       shape = shapeResult,
       templates = subResults,
       entrances = entrances.keys.toSet,

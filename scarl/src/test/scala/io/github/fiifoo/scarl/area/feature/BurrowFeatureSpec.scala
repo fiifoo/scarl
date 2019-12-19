@@ -1,6 +1,7 @@
 package io.github.fiifoo.scarl.area.feature
 
 import io.github.fiifoo.scarl.area.Utils.TemplateMock
+import io.github.fiifoo.scarl.area.template.Template
 import io.github.fiifoo.scarl.area.theme.ThemeId
 import io.github.fiifoo.scarl.world.WorldAssets
 import org.scalatest._
@@ -38,7 +39,7 @@ class BurrowFeatureSpec extends FlatSpec with Matchers {
   private def burrow(template: TemplateMock, min: Int, max: Int, noise: Int): TemplateMock = {
     val result = BurrowFeature(min, max, noise)(
       assets,
-      theme,
+      Template.Context(ThemeId("")),
       template.shape,
       template.content,
       template.locations,

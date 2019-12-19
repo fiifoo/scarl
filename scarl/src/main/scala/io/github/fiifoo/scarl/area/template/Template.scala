@@ -3,7 +3,7 @@ package io.github.fiifoo.scarl.area.template
 import io.github.fiifoo.scarl.area.Area
 import io.github.fiifoo.scarl.area.shape.Shape
 import io.github.fiifoo.scarl.area.template.FixedContent.MachinerySource
-import io.github.fiifoo.scarl.area.template.Template.Result
+import io.github.fiifoo.scarl.area.template.Template.{Context, Result}
 import io.github.fiifoo.scarl.area.theme.ThemeId
 import io.github.fiifoo.scarl.core.Tag
 import io.github.fiifoo.scarl.core.creature.FactionId
@@ -19,7 +19,7 @@ trait Template {
   val owner: Option[FactionId]
 
   def apply(assets: WorldAssets,
-            area: Area,
+            context: Context,
             random: Random,
            ): Result
 }
@@ -44,6 +44,23 @@ object Template {
     SpaceCategory,
     TrapCategory,
   )
+
+  object Context {
+    def apply(area: Area): Context = {
+      Context(area.theme, area.owner)
+    }
+  }
+
+  case class Context(theme: ThemeId,
+                     owner: Option[FactionId] = None,
+                    ) {
+    def apply(template: Template): Context = {
+      this.copy(
+        theme = template.theme getOrElse this.theme,
+        owner = template.owner orElse this.owner,
+      )
+    }
+  }
 
   case class Result(shape: Shape.Result,
                     owner: Option[FactionId] = None,

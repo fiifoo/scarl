@@ -3,7 +3,7 @@ package io.github.fiifoo.scarl.area.feature
 import io.github.fiifoo.scarl.area.feature.BurrowFeature.{Burrow, CalculateResistance}
 import io.github.fiifoo.scarl.area.shape.Shape
 import io.github.fiifoo.scarl.area.template.FixedContent
-import io.github.fiifoo.scarl.area.theme.ThemeId
+import io.github.fiifoo.scarl.area.template.Template.Context
 import io.github.fiifoo.scarl.core.geometry.Location
 import io.github.fiifoo.scarl.core.math.Rng
 import io.github.fiifoo.scarl.world.WorldAssets
@@ -16,7 +16,7 @@ import scala.util.Random
 case class BurrowFeature(min: Int, max: Int, noise: Int) extends Feature {
 
   def apply(assets: WorldAssets,
-            theme: ThemeId,
+            context: Context,
             shape: Shape.Result,
             content: FixedContent,
             locations: Set[Location],

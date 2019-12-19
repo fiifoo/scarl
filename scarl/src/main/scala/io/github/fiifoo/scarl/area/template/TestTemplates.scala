@@ -33,7 +33,7 @@ object TestTemplates {
   private def testTemplate[K](assets: WorldAssets, area: Area, random: Random)(k: K, template: Template): Int = {
     val passed = (0 until iterations).count(_ => {
       try {
-        template(assets, area, random)
+        template(assets, Template.Context(area), random)
 
         true
       } catch {
