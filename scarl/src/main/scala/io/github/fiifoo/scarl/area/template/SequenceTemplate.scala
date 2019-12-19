@@ -37,7 +37,7 @@ case class SequenceTemplate(id: TemplateId,
                                ): (Map[Location, Result], Shape.Result) = {
     val templates = this.templates map (selection => {
       selection.apply(assets, context(this), random) map (template => {
-        val result = template.apply(assets.templates)(assets, context(this), random)
+        val result = CalculateTemplate(assets, context(this), random)(template(assets.templates))
         val rotation = Rotation(random, result.shape.outerWidth, result.shape.outerHeight).reverse
 
         result.rotate(rotation)
