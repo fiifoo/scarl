@@ -561,6 +561,16 @@
         "weight" : 100
       } ] ] ],
       "id" : "scipoi/scippe-civilians"
+    } ], [ "siux/default", {
+      "subs" : [ ],
+      "content" : [ [ "CreatureKind.DefaultCategory", [ {
+        "value" : "siux/drone",
+        "weight" : 100
+      } ] ], [ "CreatureKind.TurretCategory", [ {
+        "value" : "siux/turret",
+        "weight" : 100
+      } ] ] ],
+      "id" : "siux/default"
     } ] ],
     "items" : [ [ "generic/equipment-default", {
       "subs" : [ ],
@@ -711,6 +721,31 @@
       }, {
         "value" : "generic/room/equipment-storage",
         "weight" : 25
+      } ] ] ]
+    } ], [ "siux/default", {
+      "subs" : [ ],
+      "id" : "siux/default",
+      "content" : [ [ "Template.RoomCategory", [ {
+        "value" : "generic/room",
+        "weight" : 100
+      } ] ], [ "Template.SpaceCategory", [ {
+        "value" : "generic/space",
+        "weight" : 100
+      } ] ], [ "Template.TrapCategory", [ {
+        "value" : "generic/trap/corridor-turret-immobilize",
+        "weight" : 100
+      }, {
+        "value" : "generic/trap-room-ambush",
+        "weight" : 100
+      } ] ], [ "Template.StorageCategory", [ {
+        "value" : "generic/room/misc-storage",
+        "weight" : 100
+      }, {
+        "value" : "generic/room/equipment-storage",
+        "weight" : 25
+      } ] ], [ "Template.ChallengeCategory", [ {
+        "value" : "generic/room",
+        "weight" : 100
       } ] ] ]
     } ] ],
     "templateSources" : [ [ "generic/area-rooms", {
@@ -1110,6 +1145,19 @@
         "weight" : 100
       } ] ], [ "WidgetKind.PortalCategory", [ {
         "value" : "scipoi/portal",
+        "weight" : 100
+      } ] ] ]
+    } ], [ "siux/default", {
+      "subs" : [ ],
+      "id" : "siux/default",
+      "content" : [ [ "WidgetKind.TrapCategory", [ {
+        "value" : "generic/trap-laser",
+        "weight" : 100
+      }, {
+        "value" : "generic/trap-plasma",
+        "weight" : 100
+      } ] ], [ "WidgetKind.PortalCategory", [ {
+        "value" : "siux/portal",
         "weight" : 100
       } ] ] ]
     } ] ]
@@ -1796,7 +1844,7 @@
         },
         "defence" : 0,
         "skill" : {
-          "hacking" : 30
+          "hacking" : 300
         },
         "melee" : {
           "attack" : 0,
@@ -2002,6 +2050,92 @@
         "sight" : {
           "range" : 7,
           "sensors" : 10
+        },
+        "armor" : 30
+      }
+    } ], [ "siux/drone", {
+      "display" : "d",
+      "color" : "#ffc107",
+      "traits" : {
+        "events" : null,
+        "flying" : true,
+        "immobile" : false,
+        "missile" : null,
+        "solitary" : false,
+        "leader" : false
+      },
+      "equipments" : [ ],
+      "recipes" : [ ],
+      "character" : null,
+      "name" : "Siux drone",
+      "responses" : [ ],
+      "behavior" : {
+        "type" : "RoamTactic",
+        "data" : { }
+      },
+      "usable" : null,
+      "greetings" : [ ],
+      "id" : "siux/drone",
+      "inventory" : [ ],
+      "faction" : "siux",
+      "description" : "Effective combat drone.",
+      "stats" : {
+        "launcher" : {
+          "range" : 0,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          },
+          "missiles" : [ ]
+        },
+        "stances" : [ ],
+        "explosive" : {
+          "attack" : 0,
+          "damage" : 0,
+          "radius" : 0,
+          "blast" : 0,
+          "conditions" : [ ]
+        },
+        "speed" : 150,
+        "ranged" : {
+          "attack" : 30,
+          "damage" : 40,
+          "range" : 7,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          },
+          "conditions" : [ ]
+        },
+        "energy" : {
+          "max" : 0,
+          "regen" : 0
+        },
+        "materials" : {
+          "max" : 0,
+          "regen" : 0
+        },
+        "defence" : 50,
+        "skill" : {
+          "hacking" : 0
+        },
+        "melee" : {
+          "attack" : 0,
+          "damage" : 0,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          },
+          "conditions" : [ ]
+        },
+        "resistance" : 50,
+        "health" : {
+          "max" : 50,
+          "regen" : 0
+        },
+        "sight" : {
+          "range" : 7,
+          "sensors" : 30
         },
         "armor" : 30
       }
@@ -6031,6 +6165,38 @@
       "description" : "Fires rounds of piercing bullets with effective targeting system.",
       "armor" : null,
       "key" : null
+    } ], [ "siux/portal-empty", {
+      "display" : "O",
+      "color" : "darkgrey",
+      "rangedWeapon" : null,
+      "shield" : null,
+      "hidden" : false,
+      "locked" : null,
+      "name" : "Siux drone storage (empty)",
+      "concealment" : 0,
+      "door" : null,
+      "usable" : null,
+      "pickable" : false,
+      "id" : "siux/portal-empty",
+      "weapon" : null,
+      "description" : "Storage space for a number of combat drones.",
+      "armor" : null
+    } ], [ "siux/portal", {
+      "display" : "O",
+      "color" : "#ffc107",
+      "rangedWeapon" : null,
+      "shield" : null,
+      "hidden" : false,
+      "locked" : null,
+      "name" : "Siux drone storage",
+      "concealment" : 0,
+      "door" : null,
+      "usable" : null,
+      "pickable" : false,
+      "id" : "siux/portal",
+      "weapon" : null,
+      "description" : "Storage space for a number of combat drones.",
+      "armor" : null
     } ], [ "old/healing-chamber", {
       "display" : "H",
       "color" : "white",
@@ -6481,6 +6647,61 @@
       "description" : "Somewhat cumbersome high quality deflector.",
       "armor" : null,
       "key" : null
+    } ], [ "generic/trap-immobilizing-trigger", {
+      "display" : "^",
+      "color" : "#607d8b",
+      "rangedWeapon" : null,
+      "shield" : null,
+      "hidden" : true,
+      "locked" : {
+        "key" : null,
+        "security" : 30
+      },
+      "name" : "Immobilizing trap",
+      "concealment" : 150,
+      "trap" : {
+        "type" : "CompositeItemPower",
+        "data" : {
+          "description" : null,
+          "resources" : null,
+          "powers" : [ {
+            "type" : "TrapAttackPower",
+            "data" : {
+              "description" : null,
+              "resources" : null,
+              "attack" : 100,
+              "damage" : 0,
+              "conditions" : [ {
+                "type" : "Conditions.Immobilized",
+                "data" : {
+                  "strength" : 30
+                }
+              } ],
+              "hitDescription" : "Threads spring from floor to grapple {target}.",
+              "deflectDescription" : "Threads spring from floor to grapple {target}.",
+              "missDescription" : "Threads spring from floor to grapple {target} but miss."
+            }
+          }, {
+            "type" : "ActivateMachineryPower",
+            "data" : {
+              "description" : null,
+              "resources" : null
+            }
+          } ]
+        }
+      },
+      "door" : null,
+      "usable" : {
+        "type" : "RemoveItemPower",
+        "data" : {
+          "removeDescription" : "Trap is disabled."
+        }
+      },
+      "pickable" : false,
+      "id" : "generic/trap-immobilizing-trigger",
+      "weapon" : null,
+      "description" : "Trap hidden in floor.",
+      "armor" : null
     } ], [ "generic/conduit-cargo-lift-up", {
       "display" : ">",
       "color" : "white",
@@ -9678,47 +9899,6 @@
         "slot" : "Equipment.BodyArmor"
       },
       "key" : null
-    } ], [ "generic/trap-immobilizing", {
-      "display" : "^",
-      "color" : "#607d8b",
-      "rangedWeapon" : null,
-      "shield" : null,
-      "hidden" : true,
-      "locked" : {
-        "key" : null,
-        "security" : 30
-      },
-      "name" : "Immobilizing trap",
-      "concealment" : 150,
-      "trap" : {
-        "type" : "TrapAttackPower",
-        "data" : {
-          "attack" : 100,
-          "damage" : 0,
-          "hitDescription" : "Threads spring from floor to grapple {target}.",
-          "deflectDescription" : "Threads spring from floor to grapple {target}.",
-          "missDescription" : "Threads spring from floor to grapple {target} but miss.",
-          "conditions" : [ {
-            "type" : "Conditions.Immobilized",
-            "data" : {
-              "strength" : 30
-            }
-          } ],
-          "description" : null
-        }
-      },
-      "door" : null,
-      "usable" : {
-        "type" : "RemoveItemPower",
-        "data" : {
-          "removeDescription" : "Trap is disabled."
-        }
-      },
-      "pickable" : false,
-      "id" : "generic/trap-immobilizing",
-      "weapon" : null,
-      "description" : "Trap hidden in floor.",
-      "armor" : null
     } ], [ "scippe/weapon-shard-blast", {
       "launcher" : null,
       "display" : "(",
@@ -10394,7 +10574,26 @@
       "description" : "Wall designed to withstand attacks.",
       "transparent" : false
     } ] ],
-    "widgets" : [ [ "generic/trap-laser", {
+    "widgets" : [ [ "siux/portal", {
+      "type" : "SummonCreatureWidget",
+      "data" : {
+        "item" : "siux/portal",
+        "summon" : "siux/default",
+        "interval" : 500,
+        "id" : "siux/portal",
+        "summonDescription" : "{target} appears from storage.",
+        "summonCategory" : "CreatureKind.DefaultCategory",
+        "charge" : {
+          "charges" : 3,
+          "transformTo" : {
+            "type" : "ItemKind",
+            "data" : null,
+            "value" : "siux/portal-empty"
+          },
+          "transformDescription" : null
+        }
+      }
+    } ], [ "generic/trap-laser", {
       "type" : "TriggeredTrapWidget",
       "data" : {
         "item" : "generic/trap-laser",
@@ -10413,6 +10612,15 @@
         "transformTo" : "old/healing-chamber-widget-inactive",
         "transformDescription" : "Healing chamber deactivates.",
         "id" : "old/healing-chamber-widget-active"
+      }
+    } ], [ "generic/trap-immobilizing-trigger", {
+      "type" : "TriggeredTrapWidget",
+      "data" : {
+        "item" : "generic/trap-immobilizing-trigger",
+        "smart" : true,
+        "discover" : "Discover.Triggerer",
+        "triggerDescription" : "Click.",
+        "id" : "generic/trap-immobilizing-trigger"
       }
     } ], [ "skyfarer/explosive-mine", {
       "type" : "TriggeredTrapWidget",
@@ -26304,6 +26512,250 @@
         }
       }
     }
+  } ], [ "generic/trap/corridor-turret-immobilize", {
+    "type" : "FixedTemplate",
+    "data" : {
+      "shape" : {
+        "type" : "Rectangle",
+        "data" : {
+          "width" : 3,
+          "height" : 7,
+          "variance" : 0
+        }
+      },
+      "templates" : [ ],
+      "entrances" : [ [ {
+        "x" : 0,
+        "y" : 3
+      }, {
+        "type" : "ContentSelection.FixedDoor",
+        "data" : {
+          "kind" : "generic/door-hidden",
+          "tags" : [ ]
+        }
+      } ], [ {
+        "x" : 2,
+        "y" : 3
+      }, {
+        "type" : "ContentSelection.FixedDoor",
+        "data" : {
+          "kind" : "generic/door-hidden",
+          "tags" : [ ]
+        }
+      } ] ],
+      "features" : [ ],
+      "content" : {
+        "conduitLocations" : [ ],
+        "items" : [ ],
+        "restrictedLocations" : [ {
+          "x" : 1,
+          "y" : 3
+        } ],
+        "walls" : [ [ {
+          "x" : 0,
+          "y" : 1
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.ConstructedCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 0,
+          "y" : 0
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.ConstructedCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 0,
+          "y" : 2
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.ConstructedCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 2,
+          "y" : 1
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.ConstructedCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 2,
+          "y" : 2
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.ConstructedCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 2,
+          "y" : 0
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.ConstructedCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 1,
+          "y" : 0
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.ConstructedCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 1,
+          "y" : 2
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.ConstructedCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 0,
+          "y" : 6
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.ConstructedCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 1,
+          "y" : 6
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.ConstructedCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 0,
+          "y" : 4
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.ConstructedCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 2,
+          "y" : 6
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.ConstructedCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 0,
+          "y" : 5
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.ConstructedCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 2,
+          "y" : 5
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.ConstructedCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 2,
+          "y" : 4
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.ConstructedCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 1,
+          "y" : 4
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.ConstructedCategory" ],
+            "tags" : [ ]
+          }
+        } ] ],
+        "machinery" : [ {
+          "mechanism" : {
+            "type" : "RemoveWallMechanism",
+            "data" : { }
+          },
+          "disposable" : true,
+          "description" : "Walls open around you!",
+          "controls" : [ {
+            "x" : 1,
+            "y" : 3
+          } ],
+          "targets" : [ {
+            "x" : 1,
+            "y" : 2
+          }, {
+            "x" : 1,
+            "y" : 4
+          } ]
+        } ],
+        "widgets" : [ [ {
+          "x" : 1,
+          "y" : 3
+        }, {
+          "type" : "ContentSelection.FixedWidget",
+          "data" : {
+            "kind" : "generic/trap-immobilizing-trigger",
+            "tags" : [ ]
+          }
+        } ] ],
+        "creatures" : [ [ {
+          "x" : 1,
+          "y" : 5
+        }, {
+          "type" : "ContentSelection.ThemeCreature",
+          "data" : {
+            "tags" : [ ],
+            "category" : [ "CreatureKind.TurretCategory" ]
+          }
+        } ], [ {
+          "x" : 1,
+          "y" : 1
+        }, {
+          "type" : "ContentSelection.ThemeCreature",
+          "data" : {
+            "tags" : [ ],
+            "category" : [ "CreatureKind.TurretCategory" ]
+          }
+        } ] ],
+        "gatewayLocations" : [ ],
+        "terrains" : [ ]
+      },
+      "id" : "generic/trap/corridor-turret-immobilize",
+      "terrain" : {
+        "type" : "ContentSelection.ThemeTerrain",
+        "data" : {
+          "category" : [ "TerrainKind.ConstructedCategory" ],
+          "tags" : [ ]
+        }
+      }
+    }
   } ], [ "scippe/dice/room/lift", {
     "type" : "FixedTemplate",
     "data" : {
@@ -29290,13 +29742,21 @@
       }
     }
   } ] ],
-  "themes" : [ [ "iridan/natural-surface", {
-    "items" : "iridan/default",
+  "themes" : [ [ "scipoi/scippe-civilians/constructed-underground", {
+    "items" : "scipoi/scippe-civilians",
+    "walls" : "generic/constructed-underground",
+    "widgets" : "scipoi/scippe-civilians",
+    "creatures" : "scipoi/scippe-civilians",
+    "templates" : "scipoi/scippe-civilians",
+    "id" : "scipoi/scippe-civilians/constructed-underground",
+    "terrains" : "generic/constructed-underground"
+  } ], [ "scipoi/scippe-civilians/natural-surface", {
+    "items" : "scipoi/scippe-civilians",
     "walls" : "generic/natural-surface",
-    "widgets" : "iridan/default",
-    "creatures" : "iridan/default",
-    "templates" : "iridan/default",
-    "id" : "iridan/natural-surface",
+    "widgets" : "scipoi/scippe-civilians",
+    "creatures" : "scipoi/scippe-civilians",
+    "templates" : "scipoi/scippe-civilians",
+    "id" : "scipoi/scippe-civilians/natural-surface",
     "terrains" : "generic/natural-surface"
   } ], [ "iridan/constructed-underground", {
     "items" : "iridan/default",
@@ -29306,22 +29766,22 @@
     "templates" : "iridan/default",
     "id" : "iridan/constructed-underground",
     "terrains" : "generic/constructed-underground"
-  } ], [ "iridan/natural-underground", {
+  } ], [ "iridan/natural-surface", {
     "items" : "iridan/default",
-    "walls" : "generic/natural-underground",
+    "walls" : "generic/natural-surface",
     "widgets" : "iridan/default",
     "creatures" : "iridan/default",
     "templates" : "iridan/default",
-    "id" : "iridan/natural-underground",
-    "terrains" : "generic/natural-underground"
-  } ], [ "scipoi/scippe-civilians/natural-underground", {
-    "items" : "scipoi/scippe-civilians",
-    "walls" : "generic/natural-underground",
-    "widgets" : "scipoi/scippe-civilians",
-    "creatures" : "scipoi/scippe-civilians",
-    "templates" : "scipoi/scippe-civilians",
-    "id" : "scipoi/scippe-civilians/natural-underground",
-    "terrains" : "generic/natural-underground"
+    "id" : "iridan/natural-surface",
+    "terrains" : "generic/natural-surface"
+  } ], [ "siux/constructed-underground", {
+    "items" : "generic/default",
+    "walls" : "generic/constructed-underground",
+    "widgets" : "siux/default",
+    "creatures" : "siux/default",
+    "templates" : "siux/default",
+    "id" : "siux/constructed-underground",
+    "terrains" : "generic/constructed-underground"
   } ], [ "scippe/civilians/constructed-surface", {
     "items" : "scippe/civilians/default",
     "walls" : "generic/constructed-surface",
@@ -29330,14 +29790,6 @@
     "templates" : "scippe/civilians/default",
     "id" : "scippe/civilians/constructed-surface",
     "terrains" : "generic/constructed-surface"
-  } ], [ "scipoi/scippe-civilians/natural-surface", {
-    "items" : "scipoi/scippe-civilians",
-    "walls" : "generic/natural-surface",
-    "widgets" : "scipoi/scippe-civilians",
-    "creatures" : "scipoi/scippe-civilians",
-    "templates" : "scipoi/scippe-civilians",
-    "id" : "scipoi/scippe-civilians/natural-surface",
-    "terrains" : "generic/natural-surface"
   } ], [ "scipoi/scippe-civilians/constructed-surface", {
     "items" : "scipoi/scippe-civilians",
     "walls" : "generic/constructed-surface",
@@ -29346,14 +29798,22 @@
     "templates" : "scipoi/scippe-civilians",
     "id" : "scipoi/scippe-civilians/constructed-surface",
     "terrains" : "generic/constructed-surface"
-  } ], [ "scipoi/scippe-civilians/constructed-underground", {
+  } ], [ "scipoi/scippe-civilians/natural-underground", {
     "items" : "scipoi/scippe-civilians",
-    "walls" : "generic/constructed-underground",
+    "walls" : "generic/natural-underground",
     "widgets" : "scipoi/scippe-civilians",
     "creatures" : "scipoi/scippe-civilians",
     "templates" : "scipoi/scippe-civilians",
-    "id" : "scipoi/scippe-civilians/constructed-underground",
-    "terrains" : "generic/constructed-underground"
+    "id" : "scipoi/scippe-civilians/natural-underground",
+    "terrains" : "generic/natural-underground"
+  } ], [ "iridan/natural-underground", {
+    "items" : "iridan/default",
+    "walls" : "generic/natural-underground",
+    "widgets" : "iridan/default",
+    "creatures" : "iridan/default",
+    "templates" : "iridan/default",
+    "id" : "iridan/natural-underground",
+    "terrains" : "generic/natural-underground"
   } ] ],
   "transports" : [ [ "nomad/spaceship", {
     "category" : "TransportCategory.Spaceship",
@@ -29363,7 +29823,7 @@
     "name" : "Nomad spaceship"
   } ] ],
   "worlds" : [ [ "main", {
-    "start" : "iridan/start",
+    "start" : "scippe/dice/1",
     "characters" : [ "player" ],
     "conduits" : [ {
       "source" : "iridan/labs",
