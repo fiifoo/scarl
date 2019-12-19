@@ -24,7 +24,7 @@ case class FixedTemplate(id: TemplateId,
 
   def apply(assets: WorldAssets, context: Context, random: Random): Result = {
     val shapeResult = shape(random)
-    val subResults = templates transform ((_, template) => template(assets.templates)(assets, context(this), random))
+    val subResults = templates transform ((_, template) => CalculateTemplate(assets, context(this), random)(template(assets.templates)))
     val subEntrances = (subResults map (x => {
       val (location, subResult) = x
 

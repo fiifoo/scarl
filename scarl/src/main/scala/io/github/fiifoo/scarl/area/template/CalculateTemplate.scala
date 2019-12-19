@@ -1,30 +1,43 @@
 package io.github.fiifoo.scarl.area.template
 
 import io.github.fiifoo.scarl.area.Area
-import io.github.fiifoo.scarl.area.template.Template.Result
+import io.github.fiifoo.scarl.area.template.Template.{Context, Result}
 import io.github.fiifoo.scarl.world.WorldAssets
 
-import scala.annotation.tailrec
 import scala.util.Random
 
 object CalculateTemplate {
+  val DEFAULT_ATTEMPT_LIMIT = 10
 
-  @tailrec
   def apply(assets: WorldAssets,
             area: Area,
             random: Random,
            )(template: Template): Result = {
+    this.apply(assets, Context(area), random, None)(template)
+  }
 
-    val result = try {
-      Some(template(assets, Template.Context(area), random))
-    } catch {
-      case _: CalculateFailedException => None
+  def apply(assets: WorldAssets,
+            context: Context,
+            random: Random,
+            attemptLimit: Option[Int] = Some(DEFAULT_ATTEMPT_LIMIT)
+           )(template: Template): Result = {
+
+    var i = 0
+    var result: Option[Result] = None
+
+    while (result.isEmpty && attemptLimit.forall(_ > i)) {
+      try {
+        result = Some(template(assets, context, random))
+      } catch {
+        case _: CalculateFailedException =>
+      }
+      i = i + 1
     }
 
     if (result.isDefined) {
       result.get
     } else {
-      CalculateTemplate(assets, area, random)(template)
+      throw new CalculateFailedException
     }
   }
 }
