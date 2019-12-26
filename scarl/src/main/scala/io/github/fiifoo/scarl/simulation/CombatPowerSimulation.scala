@@ -174,7 +174,7 @@ case class CombatPowerSimulation(matches: Int = 25,
       themes = Map(theme.id -> theme)
     )
 
-    val templateResult = CalculateTemplate(assets, area, random)(template)
+    val templateResult = CalculateTemplate(assets, area, Set[TemplateId](), random)(template)
 
     val instance = State(
       assets = assets.instance(),

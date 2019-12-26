@@ -15,6 +15,7 @@ import scala.util.Random
 
 trait Template {
   val id: TemplateId
+  val unique: Boolean
   val theme: Option[ThemeId]
   val owner: Option[FactionId]
 
@@ -46,30 +47,48 @@ object Template {
   )
 
   object Context {
-    def apply(area: Area): Context = {
-      Context(area.theme, area.owner)
+    def apply(area: Area, usedUniqueTemplates: Set[TemplateId]): Context = {
+      Context(area.theme, area.owner, usedUniqueTemplates)
     }
   }
 
   case class Context(theme: ThemeId,
                      owner: Option[FactionId] = None,
+                     usedUniqueTemplates: Set[TemplateId] = Set()
                     ) {
     def apply(template: Template): Context = {
       this.copy(
         theme = template.theme getOrElse this.theme,
         owner = template.owner orElse this.owner,
+        usedUniqueTemplates = if (template.unique) this.usedUniqueTemplates + template.id else this.usedUniqueTemplates
+      )
+    }
+
+    def apply(assets: WorldAssets, result: Template.Result): Context = {
+      this.copy(
+        usedUniqueTemplates = this.usedUniqueTemplates ++ result.collectUsedUniqueTemplates(assets)
       )
     }
   }
 
-  case class Result(shape: Shape.Result,
+  case class Result(source: TemplateId,
+                    shape: Shape.Result,
                     owner: Option[FactionId] = None,
                     templates: Map[Location, Result] = Map(),
                     entrances: Set[Location] = Set(),
                     content: ResultContent = ResultContent()
                    ) {
+    def collectUsedUniqueTemplates(assets: WorldAssets): Set[TemplateId] = {
+      val subs = this.templates.values
+        .flatMap(_.collectUsedUniqueTemplates(assets))
+        .toSet
+
+      if (assets.templates(this.source).unique) subs + this.source
+      else subs
+    }
 
     def rotate(rotation: Rotation): Result = Result(
+      source = this.source,
       owner = this.owner,
       shape = this.shape.rotate(rotation),
       templates = this.rotateTemplates(rotation),

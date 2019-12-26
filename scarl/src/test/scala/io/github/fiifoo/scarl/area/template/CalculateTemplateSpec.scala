@@ -73,6 +73,6 @@ class CalculateTemplateSpec extends FlatSpec with Matchers {
       theme.id
     )
 
-    t1(assets, Template.Context(area), new Random(1))
+    t1(assets, Template.Context(area, Set[TemplateId]()), new Random(1))
   }
 }
