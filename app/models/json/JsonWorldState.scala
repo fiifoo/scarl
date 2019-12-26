@@ -19,6 +19,7 @@ object JsonWorldState {
   lazy private implicit val siteIdFormat = JsonSite.siteIdFormat
   lazy private implicit val solarSystemFormat = JsonSolarSystem.solarSystemFormat
   lazy private implicit val stateFormat = JsonState.stateFormat
+  lazy private implicit val templateIdFormat = JsonTemplate.templateIdFormat
   lazy private implicit val transportIdFormat = JsonTransport.transportIdFormat
   lazy private implicit val variantKeyFormat = JsonRegionVariant.variantKeyFormat
 

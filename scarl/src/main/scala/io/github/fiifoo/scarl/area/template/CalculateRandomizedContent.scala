@@ -50,6 +50,7 @@ object CalculateRandomizedContent {
     )
 
     Result(
+      source = source.id,
       owner = context.owner,
       shape = shapeResult,
       templates = subResults,

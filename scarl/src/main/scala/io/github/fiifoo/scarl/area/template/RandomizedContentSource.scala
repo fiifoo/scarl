@@ -23,6 +23,7 @@ object RandomizedContentSource {
 }
 
 trait RandomizedContentSource {
+  val id: TemplateId
   val owner: Option[FactionId]
   val border: Option[WallSelection]
   val fill: Option[WallSelection]

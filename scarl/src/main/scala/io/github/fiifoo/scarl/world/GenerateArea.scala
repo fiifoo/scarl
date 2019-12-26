@@ -29,7 +29,7 @@ object GenerateArea {
 
     val (random, _) = state.rng()
     val template = assets.templates(area.template)
-    val templateResult = CalculateTemplate(assets, area, random)(template)
+    val templateResult = CalculateTemplate(assets, area, world.usedUniqueTemplates, random)(template)
 
     val in = (world.conduits.values filter (_.target == site)).toList
     val out = (world.conduits.values filter (_.source == site)).toList
@@ -39,6 +39,7 @@ object GenerateArea {
 
     world.copy(
       states = world.states + (site -> state),
+      usedUniqueTemplates = world.usedUniqueTemplates ++ templateResult.collectUsedUniqueTemplates(assets),
       variants = world.variants + (assets.sites(site).region -> variant)
     )
   }

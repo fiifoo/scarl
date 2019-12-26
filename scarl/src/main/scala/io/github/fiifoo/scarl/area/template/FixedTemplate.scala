@@ -13,6 +13,7 @@ import scala.util.Random
 
 case class FixedTemplate(id: TemplateId,
                          shape: Shape,
+                         unique: Boolean = false,
                          theme: Option[ThemeId] = None,
                          owner: Option[FactionId] = None,
                          terrain: Option[TerrainSelection] = None,
@@ -24,7 +25,8 @@ case class FixedTemplate(id: TemplateId,
 
   def apply(assets: WorldAssets, context: Context, random: Random): Result = {
     val shapeResult = shape(random)
-    val subResults = templates transform ((_, template) => CalculateTemplate(assets, context(this), random)(template(assets.templates)))
+    val subResults = this.calculateSubResults(assets, context, random)
+
     val subEntrances = (subResults map (x => {
       val (location, subResult) = x
 
@@ -46,11 +48,28 @@ case class FixedTemplate(id: TemplateId,
     )
 
     Result(
+      source = this.id,
       owner = context(this).owner,
       shape = shapeResult,
       templates = subResults,
       entrances = entrances.keys.toSet,
       content = contentResult
     )
+  }
+
+  private def calculateSubResults(assets: WorldAssets, context: Context, random: Random): Map[Location, Result] = {
+    val initial: (Map[Location, Result], Context) = (Map(), context(this))
+
+    val (results, _) = (this.templates foldLeft initial) ((carry, item) => {
+      val (results, context) = carry
+      val (location, template) = item
+
+      val result = CalculateTemplate(assets, context, random)(template(assets.templates))
+      // should rotate?
+
+      (results + (location -> result), context(assets, result))
+    })
+
+    results
   }
 }

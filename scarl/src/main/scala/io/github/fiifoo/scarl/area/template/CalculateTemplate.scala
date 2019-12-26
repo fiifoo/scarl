@@ -11,9 +11,12 @@ object CalculateTemplate {
 
   def apply(assets: WorldAssets,
             area: Area,
+            usedUniqueTemplates: Set[TemplateId],
             random: Random,
            )(template: Template): Result = {
-    this.apply(assets, Context(area), random, None)(template)
+    val context = Context(area, usedUniqueTemplates = usedUniqueTemplates)
+
+    this.apply(assets, context, random, None)(template)
   }
 
   def apply(assets: WorldAssets,

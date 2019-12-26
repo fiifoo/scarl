@@ -105,6 +105,13 @@ case object ContentSelection {
     def apply(assets: WorldAssets, context: Context, random: Random): Option[TemplateId] = {
       val choices = assets.catalogues.templates(this.catalogue)
         .apply(assets.catalogues.templates)
+        .transform((_, choices) => {
+          choices filter (choice => {
+            val template = assets.templates(choice.value)
+
+            !template.unique || !context.usedUniqueTemplates.contains(template.id)
+          })
+        })
       val categories =
         if (this.category.isEmpty) Template.categories
         else this.category

@@ -16,6 +16,7 @@ import scala.util.Random
 
 case class RandomizedTemplate(id: TemplateId,
                               shape: Shape,
+                              unique: Boolean = false,
                               theme: Option[ThemeId] = None,
                               owner: Option[FactionId] = None,
                               border: Option[WallSelection] = None,
@@ -41,33 +42,39 @@ case class RandomizedTemplate(id: TemplateId,
                                     shape: Shape.Result,
                                     random: Random
                                    ): Map[Location, Result] = {
-    def calculate(source: TemplateSource): Iterable[(Result, Boolean)] = {
-      val result = source.selection.apply(assets, context(this), random) map (sub => {
-        val range = Rng.nextRange(random, source.distribution)
-
-        range map (i => {
-          val required = i < source.required
-          val result = CalculateTemplate(assets, context(this), random)(sub(assets.templates))
-          val rotation = Rotation(random, result.shape.outerWidth, result.shape.outerHeight).reverse
-
-          (result.rotate(rotation), required)
-        })
-      })
-
-      if (result.isEmpty) {
-        throw new CalculateFailedException
-      }
-
-      result.get
-    }
-
-    val templates = this.templates ::: this.templateCatalogue
+    val sources = this.templates ::: this.templateCatalogue
       .flatMap(assets.catalogues.templateSources.get)
       .map(_.apply(assets.catalogues.templateSources))
       .getOrElse(Nil)
 
+    val selections = sources flatMap (source => {
+      val distribution = source.distribution
+      val range = Rng.nextRange(random, distribution)
+
+      range map (i => (source.selection, i < source.required))
+    })
+
+    val initial: (List[(Result, Boolean)], Context) = (Nil, context(this))
+
+    val (results, _) = (selections foldLeft initial) ((carry, item) => {
+      val (results, context) = carry
+      val (selection, required) = item
+
+      val result = selection(assets, context, random) map (template => {
+        val result = CalculateTemplate(assets, context, random)(template(assets.templates))
+        val rotation = Rotation(random, result.shape.outerWidth, result.shape.outerHeight).reverse
+
+        result.rotate(rotation)
+      }) match {
+        case Some(x) => x
+        case None => throw new CalculateFailedException
+      }
+
+      ((result, required) :: results, context(assets, result))
+    })
+
     CalculateTemplateLocations(
-      templates flatMap calculate,
+      results,
       shape,
       random
     )

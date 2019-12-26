@@ -13,6 +13,7 @@ import io.github.fiifoo.scarl.world.WorldAssets
 import scala.util.Random
 
 case class SequenceTemplate(id: TemplateId,
+                            unique: Boolean = false,
                             theme: Option[ThemeId] = None,
                             owner: Option[FactionId] = None,
                             border: Option[WallSelection] = None,
@@ -35,9 +36,13 @@ case class SequenceTemplate(id: TemplateId,
                                 context: Context,
                                 random: Random
                                ): (Map[Location, Result], Shape.Result) = {
-    val templates = this.templates map (selection => {
-      selection.apply(assets, context(this), random) map (template => {
-        val result = CalculateTemplate(assets, context(this), random)(template(assets.templates))
+    val initial: (List[Result], Context) = (Nil, context(this))
+
+    val (results, _) = (this.templates foldLeft initial) ((carry, selection) => {
+      val (results, context) = carry
+
+      val result = selection(assets, context, random) map (template => {
+        val result = CalculateTemplate(assets, context, random)(template(assets.templates))
         val rotation = Rotation(random, result.shape.outerWidth, result.shape.outerHeight).reverse
 
         result.rotate(rotation)
@@ -45,8 +50,10 @@ case class SequenceTemplate(id: TemplateId,
         case Some(x) => x
         case None => throw new CalculateFailedException
       }
+
+      (result :: results, context(assets, result))
     })
 
-    CalculateTemplateSequence(templates)
+    CalculateTemplateSequence(results)
   }
 }
