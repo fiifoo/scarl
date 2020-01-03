@@ -5,63 +5,72 @@
     "id" : "iridan/nexus",
     "owner" : "iridan",
     "dispositions" : [ ],
-    "strategies" : [ ]
+    "strategies" : [ ],
+    "unique" : false
   } ], [ "iridan/start", {
     "template" : "iridan/area/start",
     "theme" : "iridan/constructed-underground",
     "id" : "iridan/start",
     "owner" : "nomad",
     "dispositions" : [ ],
-    "strategies" : [ ]
+    "strategies" : [ ],
+    "unique" : false
   } ], [ "iridan/labs", {
     "template" : "iridan/area/labs",
     "theme" : "iridan/constructed-underground",
     "id" : "iridan/labs",
     "owner" : "iridan",
     "dispositions" : [ ],
-    "strategies" : [ ]
+    "strategies" : [ ],
+    "unique" : false
   } ], [ "iridan/mine-approach", {
     "template" : "generic/area/tunnels",
     "theme" : "iridan/natural-underground",
     "id" : "iridan/mine-approach",
     "owner" : "iridan",
     "dispositions" : [ ],
-    "strategies" : [ ]
+    "strategies" : [ ],
+    "unique" : false
   } ], [ "nomad/spaceship-hub", {
     "template" : "nomad/spaceship/hub",
     "theme" : "iridan/constructed-underground",
     "owner" : "nomad",
     "id" : "nomad/spaceship-hub",
     "dispositions" : [ ],
-    "strategies" : [ ]
+    "strategies" : [ ],
+    "unique" : false
   } ], [ "scipoi/unfinished-mine/mine", {
     "template" : "generic/area/mine-lift",
     "theme" : "scipoi/scippe-civilians/natural-underground",
     "id" : "scipoi/unfinished-mine/mine",
     "owner" : "scipoi",
     "dispositions" : [ ],
-    "strategies" : [ ]
+    "strategies" : [ ],
+    "unique" : false
   } ], [ "scippe/dice/1", {
     "template" : "scippe/dice/area/1",
     "theme" : "scipoi/scippe-civilians/constructed-underground",
     "owner" : "scippe/civilians",
     "id" : "scippe/dice/1",
     "dispositions" : [ ],
-    "strategies" : [ ]
+    "strategies" : [ ],
+    "unique" : false
   } ], [ "iridan/surface", {
     "template" : "iridan/area/surface-assault",
     "theme" : "iridan/natural-surface",
     "id" : "iridan/surface",
     "owner" : "iridan",
     "dispositions" : [ ],
-    "strategies" : [ ]
+    "strategies" : [ ],
+    "unique" : false
   } ], [ "iridan/coms", {
     "template" : "iridan/area/coms",
     "theme" : "iridan/natural-underground",
     "id" : "iridan/coms",
     "owner" : "iridan",
     "dispositions" : [ ],
-    "strategies" : [ ]
+    "strategies" : [ ],
+    "unique" : false
   } ], [ "iridan/mine", {
     "template" : "iridan/area/mine",
     "theme" : "iridan/natural-underground",
@@ -71,56 +80,64 @@
     "strategies" : [ [ "skyfarer", {
       "type" : "AttackStrategy",
       "data" : { }
-    } ] ]
+    } ] ],
+    "unique" : false
   } ], [ "scippe/dice/surface-overrun", {
     "template" : "scippe/dice/area/surface/overrun",
     "theme" : "scipoi/scippe-civilians/constructed-surface",
     "owner" : "scippe/civilians",
     "id" : "scippe/dice/surface-overrun",
     "dispositions" : [ ],
-    "strategies" : [ ]
+    "strategies" : [ ],
+    "unique" : false
   } ], [ "placeholder", {
     "template" : "placeholder",
     "theme" : "iridan/constructed-underground",
     "owner" : "nomad",
     "id" : "placeholder",
     "dispositions" : [ ],
-    "strategies" : [ ]
+    "strategies" : [ ],
+    "unique" : false
   } ], [ "scipoi/unfinished-mine/mine-final", {
     "template" : "scipoi/unfinished-mine/area/mine-final",
     "theme" : "scipoi/scippe-civilians/natural-underground",
     "id" : "scipoi/unfinished-mine/mine-final",
     "owner" : "scipoi",
     "dispositions" : [ ],
-    "strategies" : [ ]
+    "strategies" : [ ],
+    "unique" : false
   } ], [ "scipoi/unfinished-mine/surface", {
     "template" : "generic/area/surface-mine-lift-shuttle",
     "theme" : "scipoi/scippe-civilians/natural-surface",
     "id" : "scipoi/unfinished-mine/surface",
     "owner" : "scipoi",
     "dispositions" : [ ],
-    "strategies" : [ ]
+    "strategies" : [ ],
+    "unique" : false
   } ], [ "iridan/core-approach", {
     "template" : "iridan/area/core-approach",
     "theme" : "iridan/constructed-underground",
     "id" : "iridan/core-approach",
     "owner" : "iridan",
     "dispositions" : [ ],
-    "strategies" : [ ]
+    "strategies" : [ ],
+    "unique" : false
   } ], [ "nomad/shuttle", {
     "template" : "nomad/shuttle/interior",
     "theme" : "iridan/constructed-underground",
     "owner" : "nomad",
     "id" : "nomad/shuttle",
     "dispositions" : [ ],
-    "strategies" : [ ]
+    "strategies" : [ ],
+    "unique" : false
   } ], [ "scippe/dice/surface-default", {
     "template" : "scippe/dice/area/surface/default",
     "theme" : "scippe/civilians/constructed-surface",
     "owner" : "scippe/civilians",
     "id" : "scippe/dice/surface-default",
     "dispositions" : [ ],
-    "strategies" : [ ]
+    "strategies" : [ ],
+    "unique" : false
   } ], [ "iridan/core", {
     "template" : "iridan/area/core",
     "theme" : "iridan/natural-underground",
@@ -130,7 +147,8 @@
     "strategies" : [ [ "skyfarer", {
       "type" : "AttackStrategy",
       "data" : { }
-    } ] ]
+    } ] ],
+    "unique" : false
   } ] ],
   "catalogues" : {
     "contentSources" : [ [ "generic/room", {
@@ -12012,37 +12030,55 @@
   } ] ],
   "sites" : [ [ "scipoi/unfinished-mine/shuttle", {
     "id" : "scipoi/unfinished-mine/shuttle",
-    "area" : "nomad/shuttle",
+    "area" : {
+      "priority" : "nomad/shuttle",
+      "choices" : [ ]
+    },
     "region" : "scipoi/unfinished-mine",
     "variants" : [ ],
     "name" : "Shuttle landing near mine entrance"
   } ], [ "iridan/nexus", {
     "id" : "iridan/nexus",
-    "area" : "iridan/nexus",
+    "area" : {
+      "priority" : "iridan/nexus",
+      "choices" : [ ]
+    },
     "region" : "iridan/underground",
     "variants" : [ ],
     "name" : "Iridan central cavern"
   } ], [ "iridan/start", {
     "id" : "iridan/start",
-    "area" : "iridan/start",
+    "area" : {
+      "priority" : "iridan/start",
+      "choices" : [ ]
+    },
     "region" : "iridan/underground",
     "variants" : [ ],
     "name" : "Scippe orbit"
   } ], [ "iridan/labs-surface", {
     "id" : "iridan/labs-surface",
-    "area" : "iridan/surface",
+    "area" : {
+      "priority" : "iridan/surface",
+      "choices" : [ ]
+    },
     "region" : "iridan/underground",
     "variants" : [ ],
     "name" : "Iridan tech laboratories surface"
   } ], [ "iridan/labs", {
     "id" : "iridan/labs",
-    "area" : "iridan/labs",
+    "area" : {
+      "priority" : "iridan/labs",
+      "choices" : [ ]
+    },
     "region" : "iridan/underground",
     "variants" : [ ],
     "name" : "Iridan tech laboratories"
   } ], [ "iridan/mine-approach", {
     "id" : "iridan/mine-approach",
-    "area" : "iridan/mine-approach",
+    "area" : {
+      "priority" : "iridan/mine-approach",
+      "choices" : [ ]
+    },
     "region" : "iridan/underground",
     "variants" : [ ],
     "name" : "Iridan mine approach"
@@ -12050,14 +12086,23 @@
     "name" : "DiCe entrance",
     "description" : null,
     "region" : "scippe/dice/entrance",
-    "area" : "scippe/dice/surface-default",
+    "area" : {
+      "priority" : "scippe/dice/surface-default",
+      "choices" : [ ]
+    },
     "variants" : [ [ {
       "value" : "overrun"
-    }, "scippe/dice/surface-overrun" ] ],
+    }, {
+      "priority" : "scippe/dice/surface-overrun",
+      "choices" : [ ]
+    } ] ],
     "id" : "scippe/dice/surface"
   } ], [ "nomad/spaceship-hub", {
     "region" : "nomad/spaceship",
-    "area" : "nomad/spaceship-hub",
+    "area" : {
+      "priority" : "nomad/spaceship-hub",
+      "choices" : [ ]
+    },
     "variants" : [ ],
     "id" : "nomad/spaceship-hub",
     "name" : "Nomad spaceship hub"
@@ -12065,54 +12110,81 @@
     "name" : "DiCe 1",
     "description" : null,
     "region" : "scippe/dice",
-    "area" : "scippe/dice/1",
+    "area" : {
+      "priority" : "scippe/dice/1",
+      "choices" : [ ]
+    },
     "variants" : [ ],
     "id" : "scippe/dice/1"
   } ], [ "scipoi/unfinished-mine/mine-1", {
     "id" : "scipoi/unfinished-mine/mine-1",
-    "area" : "scipoi/unfinished-mine/mine",
+    "area" : {
+      "priority" : "scipoi/unfinished-mine/mine",
+      "choices" : [ ]
+    },
     "region" : "scipoi/unfinished-mine",
     "variants" : [ ],
     "name" : "Mine construction site upper level"
   } ], [ "iridan/coms-surface", {
     "id" : "iridan/coms-surface",
-    "area" : "iridan/surface",
+    "area" : {
+      "priority" : "iridan/surface",
+      "choices" : [ ]
+    },
     "region" : "iridan/underground",
     "variants" : [ ],
     "name" : "Iridan communications relay surface"
   } ], [ "iridan/coms", {
     "id" : "iridan/coms",
-    "area" : "iridan/coms",
+    "area" : {
+      "priority" : "iridan/coms",
+      "choices" : [ ]
+    },
     "region" : "iridan/underground",
     "variants" : [ ],
     "name" : "Iridan communications relay"
   } ], [ "iridan/mine", {
     "id" : "iridan/mine",
-    "area" : "iridan/mine",
+    "area" : {
+      "priority" : "iridan/mine",
+      "choices" : [ ]
+    },
     "region" : "iridan/underground",
     "variants" : [ ],
     "name" : "Iridan mine"
   } ], [ "scipoi/unfinished-mine/mine-final", {
     "id" : "scipoi/unfinished-mine/mine-final",
-    "area" : "scipoi/unfinished-mine/mine-final",
+    "area" : {
+      "priority" : "scipoi/unfinished-mine/mine-final",
+      "choices" : [ ]
+    },
     "region" : "scipoi/unfinished-mine",
     "variants" : [ ],
     "name" : "Mine construction site lower level"
   } ], [ "scippe/dice/shuttle", {
     "id" : "scippe/dice/shuttle",
-    "area" : "nomad/shuttle",
+    "area" : {
+      "priority" : "nomad/shuttle",
+      "choices" : [ ]
+    },
     "region" : "scippe/dice/entrance",
     "variants" : [ ],
     "name" : "Shuttle near DiCe entrance"
   } ], [ "scipoi/unfinished-mine/surface", {
     "id" : "scipoi/unfinished-mine/surface",
-    "area" : "scipoi/unfinished-mine/surface",
+    "area" : {
+      "priority" : "scipoi/unfinished-mine/surface",
+      "choices" : [ ]
+    },
     "region" : "scipoi/unfinished-mine",
     "variants" : [ ],
     "name" : "Mine entrance"
   } ], [ "test/some-placeholder", {
     "region" : "test/some",
-    "area" : "placeholder",
+    "area" : {
+      "priority" : "placeholder",
+      "choices" : [ ]
+    },
     "variants" : [ ],
     "id" : "test/some-placeholder",
     "name" : "Placeholder site"
@@ -12120,24 +12192,36 @@
     "name" : "DiCe negotiations",
     "description" : null,
     "region" : "scippe/dice/entrance",
-    "area" : "placeholder",
+    "area" : {
+      "priority" : "placeholder",
+      "choices" : [ ]
+    },
     "variants" : [ ],
     "id" : "scippe/dice/negotiations"
   } ], [ "iridan/core-approach", {
     "id" : "iridan/core-approach",
-    "area" : "iridan/core-approach",
+    "area" : {
+      "priority" : "iridan/core-approach",
+      "choices" : [ ]
+    },
     "region" : "iridan/underground",
     "variants" : [ ],
     "name" : "Iridan AI core approach"
   } ], [ "test/other-placeholder", {
     "region" : "test/other",
-    "area" : "placeholder",
+    "area" : {
+      "priority" : "placeholder",
+      "choices" : [ ]
+    },
     "variants" : [ ],
     "id" : "test/other-placeholder",
     "name" : "Placeholder site"
   } ], [ "iridan/core", {
     "id" : "iridan/core",
-    "area" : "iridan/core",
+    "area" : {
+      "priority" : "iridan/core",
+      "choices" : [ ]
+    },
     "region" : "iridan/underground",
     "variants" : [ ],
     "name" : "Iridan AI core"

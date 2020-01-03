@@ -9,6 +9,7 @@ import io.github.fiifoo.scarl.core.creature.FactionId
 case class Area(id: AreaId,
                 template: TemplateId,
                 theme: ThemeId,
+                unique: Boolean = false,
                 owner: Option[FactionId] = None,
                 dispositions: Map[FactionId, Map[FactionId, Disposition]] = Map(),
                 strategies: Map[FactionId, Strategy] = Map(),
