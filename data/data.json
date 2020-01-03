@@ -12224,6 +12224,7 @@
         }
       },
       "templateCatalogue" : null,
+      "unique" : false,
       "terrain" : {
         "type" : "ContentSelection.ThemeTerrain",
         "data" : {
@@ -12314,6 +12315,7 @@
         }
       },
       "templateCatalogue" : "generic/area-tunnels",
+      "unique" : false,
       "terrain" : null,
       "templates" : [ ],
       "id" : "generic/area/tunnels",
@@ -12364,6 +12366,7 @@
           "tags" : [ ]
         }
       },
+      "unique" : false,
       "terrain" : null,
       "templates" : [ {
         "type" : "ContentSelection.FixedTemplate",
@@ -12505,7 +12508,8 @@
         "gatewayLocations" : [ ],
         "terrains" : [ ]
       },
-      "id" : "old/healing-chamber"
+      "id" : "old/healing-chamber",
+      "unique" : false
     }
   } ], [ "iridan/area/core", {
     "type" : "RandomizedTemplate",
@@ -12537,6 +12541,7 @@
         }
       },
       "templateCatalogue" : "generic/area-cave",
+      "unique" : false,
       "terrain" : null,
       "templates" : [ {
         "selection" : {
@@ -17294,7 +17299,8 @@
           }
         } ] ]
       },
-      "id" : "scippe/dice/hall/chasm"
+      "id" : "scippe/dice/hall/chasm",
+      "unique" : false
     }
   } ], [ "scippe/dice/room/gate-security/default", {
     "type" : "FixedTemplate",
@@ -17549,7 +17555,8 @@
         "gatewayLocations" : [ ],
         "terrains" : [ ]
       },
-      "id" : "scippe/dice/room/gate-security/default"
+      "id" : "scippe/dice/room/gate-security/default",
+      "unique" : false
     }
   } ], [ "nomad/shuttle/interior", {
     "type" : "FixedTemplate",
@@ -18120,7 +18127,8 @@
         } ],
         "terrains" : [ ]
       },
-      "id" : "nomad/shuttle/interior"
+      "id" : "nomad/shuttle/interior",
+      "unique" : false
     }
   } ], [ "scipoi/unfinished-mine/area/mine-final", {
     "type" : "RandomizedTemplate",
@@ -18152,6 +18160,7 @@
         }
       },
       "templateCatalogue" : null,
+      "unique" : false,
       "terrain" : null,
       "templates" : [ {
         "selection" : {
@@ -19079,7 +19088,8 @@
           }
         } ] ]
       },
-      "id" : "iridan/conduit/assault-pod"
+      "id" : "iridan/conduit/assault-pod",
+      "unique" : false
     }
   } ], [ "scipoi/unfinished-mine/cave/mine-final", {
     "type" : "RandomizedTemplate",
@@ -19112,6 +19122,7 @@
         }
       },
       "templateCatalogue" : null,
+      "unique" : false,
       "terrain" : null,
       "templates" : [ {
         "selection" : {
@@ -19225,7 +19236,8 @@
         "gatewayLocations" : [ ],
         "terrains" : [ ]
       },
-      "id" : "generic/conduit"
+      "id" : "generic/conduit",
+      "unique" : false
     }
   } ], [ "generic/room/portal-high", {
     "type" : "RandomizedTemplate",
@@ -19250,6 +19262,7 @@
           "tags" : [ ]
         }
       },
+      "unique" : false,
       "terrain" : {
         "type" : "ContentSelection.ThemeTerrain",
         "data" : {
@@ -19299,6 +19312,7 @@
           "tags" : [ ]
         }
       },
+      "unique" : false,
       "terrain" : null,
       "templates" : [ {
         "type" : "ContentSelection.FixedTemplate",
@@ -19342,6 +19356,7 @@
           "tags" : [ ]
         }
       },
+      "unique" : false,
       "terrain" : {
         "type" : "ContentSelection.ThemeTerrain",
         "data" : {
@@ -19856,7 +19871,8 @@
         } ],
         "terrains" : [ ]
       },
-      "id" : "nomad/spaceship/hub"
+      "id" : "nomad/spaceship/hub",
+      "unique" : false
     }
   } ], [ "skyfarer/hall/control-freak", {
     "type" : "RandomizedTemplate",
@@ -19884,6 +19900,7 @@
         }
       },
       "templateCatalogue" : null,
+      "unique" : false,
       "terrain" : null,
       "templates" : [ ],
       "id" : "skyfarer/hall/control-freak",
@@ -19938,6 +19955,7 @@
         }
       },
       "templateCatalogue" : "generic/area-rooms",
+      "unique" : false,
       "terrain" : null,
       "templates" : [ {
         "selection" : {
@@ -20013,6 +20031,7 @@
         }
       },
       "templateCatalogue" : null,
+      "unique" : false,
       "terrain" : null,
       "templates" : [ ],
       "id" : "exodus/room/carapace",
@@ -20063,6 +20082,7 @@
         }
       },
       "templateCatalogue" : null,
+      "unique" : false,
       "terrain" : null,
       "templates" : [ {
         "selection" : {
@@ -20521,7 +20541,8 @@
           "category" : [ "TerrainKind.ConstructedCategory" ],
           "tags" : [ ]
         }
-      }
+      },
+      "unique" : false
     }
   } ], [ "iridan/room/iridan-hunters", {
     "type" : "FixedTemplate",
@@ -20713,7 +20734,8 @@
         "gatewayLocations" : [ ],
         "terrains" : [ ]
       },
-      "id" : "iridan/room/iridan-hunters"
+      "id" : "iridan/room/iridan-hunters",
+      "unique" : false
     }
   } ], [ "generic/trap/corridor-ambush", {
     "type" : "FixedTemplate",
@@ -21208,7 +21230,8 @@
           "category" : [ "TerrainKind.ConstructedCategory" ],
           "tags" : [ ]
         }
-      }
+      },
+      "unique" : false
     }
   } ], [ "generic/area/rooms", {
     "type" : "RandomizedTemplate",
@@ -21240,6 +21263,7 @@
         }
       },
       "templateCatalogue" : "generic/area-rooms",
+      "unique" : false,
       "terrain" : null,
       "templates" : [ ],
       "id" : "generic/area/rooms",
@@ -21275,6 +21299,7 @@
       },
       "fill" : null,
       "border" : null,
+      "unique" : false,
       "terrain" : null,
       "templates" : [ ],
       "id" : "generic/space",
@@ -21322,6 +21347,7 @@
           "tags" : [ ]
         }
       },
+      "unique" : false,
       "terrain" : {
         "type" : "ContentSelection.ThemeTerrain",
         "data" : {
@@ -21403,6 +21429,7 @@
           "tags" : [ ]
         }
       },
+      "unique" : false,
       "terrain" : {
         "type" : "ContentSelection.ThemeTerrain",
         "data" : {
@@ -22817,7 +22844,8 @@
           "category" : [ "TerrainKind.ConstructedCategory" ],
           "tags" : [ ]
         }
-      }
+      },
+      "unique" : false
     }
   } ], [ "siux/room/diplomat", {
     "type" : "FixedTemplate",
@@ -22831,6 +22859,7 @@
         }
       },
       "theme" : "siux/default",
+      "unique" : false,
       "owner" : "siux",
       "terrain" : null,
       "content" : {
@@ -23118,6 +23147,7 @@
         }
       },
       "templateCatalogue" : "generic/area-rooms",
+      "unique" : false,
       "terrain" : null,
       "templates" : [ {
         "selection" : {
@@ -23468,7 +23498,8 @@
         } ],
         "terrains" : [ ]
       },
-      "id" : "placeholder"
+      "id" : "placeholder",
+      "unique" : false
     }
   } ], [ "generic/room", {
     "type" : "RandomizedTemplate",
@@ -23493,6 +23524,7 @@
           "tags" : [ ]
         }
       },
+      "unique" : false,
       "terrain" : {
         "type" : "ContentSelection.ThemeTerrain",
         "data" : {
@@ -23534,6 +23566,7 @@
       },
       "fill" : null,
       "border" : null,
+      "unique" : false,
       "terrain" : null,
       "templates" : [ ],
       "id" : "generic/space/portal-low",
@@ -23588,6 +23621,7 @@
         }
       },
       "templateCatalogue" : "generic/area-rooms-challenges",
+      "unique" : false,
       "terrain" : null,
       "templates" : [ {
         "selection" : {
@@ -24496,7 +24530,8 @@
           }
         } ] ]
       },
-      "id" : "nomad/shuttle/exterior"
+      "id" : "nomad/shuttle/exterior",
+      "unique" : false
     }
   } ], [ "generic/space/chasm", {
     "type" : "FixedTemplate",
@@ -24740,7 +24775,8 @@
           }
         } ] ]
       },
-      "id" : "generic/space/chasm"
+      "id" : "generic/space/chasm",
+      "unique" : false
     }
   } ], [ "nomad/shuttle/valley", {
     "type" : "RandomizedTemplate",
@@ -24773,6 +24809,7 @@
         }
       },
       "templateCatalogue" : null,
+      "unique" : false,
       "terrain" : null,
       "templates" : [ {
         "selection" : {
@@ -24844,6 +24881,7 @@
         }
       },
       "templateCatalogue" : null,
+      "unique" : false,
       "terrain" : {
         "type" : "ContentSelection.ThemeTerrain",
         "data" : {
@@ -24949,6 +24987,7 @@
         }
       },
       "templateCatalogue" : "generic/area-rooms",
+      "unique" : false,
       "terrain" : null,
       "templates" : [ {
         "selection" : {
@@ -25049,6 +25088,7 @@
         }
       },
       "templateCatalogue" : "generic/area-cave",
+      "unique" : false,
       "terrain" : null,
       "templates" : [ ],
       "id" : "generic/area/cave",
@@ -25105,6 +25145,7 @@
           "tags" : [ ]
         }
       },
+      "unique" : true,
       "owner" : "siux",
       "terrain" : {
         "type" : "ContentSelection.ThemeTerrain",
@@ -25198,6 +25239,7 @@
         }
       },
       "templateCatalogue" : "generic/area-tunnels",
+      "unique" : false,
       "terrain" : null,
       "templates" : [ {
         "selection" : {
@@ -26384,7 +26426,8 @@
           "category" : [ "TerrainKind.ConstructedCategory" ],
           "tags" : [ ]
         }
-      }
+      },
+      "unique" : false
     }
   } ], [ "scippe/dice/area/surface/overrun", {
     "type" : "SequenceTemplate",
@@ -26411,6 +26454,7 @@
           "tags" : [ ]
         }
       },
+      "unique" : false,
       "terrain" : null,
       "templates" : [ {
         "type" : "ContentSelection.FixedTemplate",
@@ -26757,7 +26801,8 @@
         "gatewayLocations" : [ ],
         "terrains" : [ ]
       },
-      "id" : "scipoi/unfinished-mine/room/mine-final"
+      "id" : "scipoi/unfinished-mine/room/mine-final",
+      "unique" : false
     }
   } ], [ "generic/room/cargo-lift", {
     "type" : "FixedTemplate",
@@ -26920,7 +26965,8 @@
         "gatewayLocations" : [ ],
         "terrains" : [ ]
       },
-      "id" : "generic/room/cargo-lift"
+      "id" : "generic/room/cargo-lift",
+      "unique" : false
     }
   } ], [ "iridan/area/surface-assault", {
     "type" : "RandomizedTemplate",
@@ -26952,6 +26998,7 @@
         }
       },
       "templateCatalogue" : "generic/area-cave",
+      "unique" : false,
       "terrain" : null,
       "templates" : [ {
         "selection" : {
@@ -27015,6 +27062,7 @@
           "tags" : [ ]
         }
       },
+      "unique" : false,
       "terrain" : {
         "type" : "ContentSelection.ThemeTerrain",
         "data" : {
@@ -27303,7 +27351,8 @@
           "category" : [ "TerrainKind.ConstructedCategory" ],
           "tags" : [ ]
         }
-      }
+      },
+      "unique" : false
     }
   } ], [ "scippe/dice/room/lift", {
     "type" : "FixedTemplate",
@@ -27317,6 +27366,7 @@
         }
       },
       "theme" : null,
+      "unique" : false,
       "owner" : null,
       "terrain" : {
         "type" : "ContentSelection.FixedTerrain",
@@ -27487,6 +27537,7 @@
       },
       "fill" : null,
       "border" : null,
+      "unique" : false,
       "terrain" : null,
       "templates" : [ ],
       "id" : "idiran/space/coms-equipment",
@@ -27572,6 +27623,7 @@
         }
       },
       "templateCatalogue" : null,
+      "unique" : false,
       "terrain" : {
         "type" : "ContentSelection.ThemeTerrain",
         "data" : {
@@ -27643,7 +27695,8 @@
         "gatewayLocations" : [ ],
         "terrains" : [ ]
       },
-      "id" : "generic/spot"
+      "id" : "generic/spot",
+      "unique" : false
     }
   } ], [ "iridan/space/skyfarer-assault", {
     "type" : "FixedTemplate",
@@ -27817,7 +27870,8 @@
         "gatewayLocations" : [ ],
         "terrains" : [ ]
       },
-      "id" : "iridan/space/skyfarer-assault"
+      "id" : "iridan/space/skyfarer-assault",
+      "unique" : false
     }
   } ], [ "generic/vault", {
     "type" : "FixedTemplate",
@@ -28321,7 +28375,8 @@
           "category" : [ "TerrainKind.ConstructedCategory" ],
           "tags" : [ ]
         }
-      }
+      },
+      "unique" : false
     }
   } ], [ "generic/area/mine-lift", {
     "type" : "RandomizedTemplate",
@@ -28353,6 +28408,7 @@
         }
       },
       "templateCatalogue" : null,
+      "unique" : false,
       "terrain" : null,
       "templates" : [ {
         "selection" : {
@@ -28696,7 +28752,8 @@
         "gatewayLocations" : [ ],
         "terrains" : [ ]
       },
-      "id" : "scippe/dice/room/gate-security/overrun"
+      "id" : "scippe/dice/room/gate-security/overrun",
+      "unique" : false
     }
   } ], [ "scippe/dice/hall/gate", {
     "type" : "FixedTemplate",
@@ -29485,7 +29542,8 @@
           }
         } ] ]
       },
-      "id" : "scippe/dice/hall/gate"
+      "id" : "scippe/dice/hall/gate",
+      "unique" : false
     }
   } ], [ "iridan/area/start", {
     "type" : "FixedTemplate",
@@ -30037,7 +30095,8 @@
         "terrains" : [ ]
       },
       "id" : "iridan/area/start",
-      "entrances" : [ ]
+      "entrances" : [ ],
+      "unique" : false
     }
   } ], [ "exodus/room/invertebrate", {
     "type" : "RandomizedTemplate",
@@ -30065,6 +30124,7 @@
         }
       },
       "templateCatalogue" : null,
+      "unique" : false,
       "terrain" : null,
       "templates" : [ ],
       "id" : "exodus/room/invertebrate",
@@ -30112,6 +30172,7 @@
           "tags" : [ ]
         }
       },
+      "unique" : false,
       "terrain" : {
         "type" : "ContentSelection.ThemeTerrain",
         "data" : {
@@ -30213,6 +30274,7 @@
         }
       },
       "templateCatalogue" : null,
+      "unique" : false,
       "terrain" : {
         "type" : "ContentSelection.ThemeTerrain",
         "data" : {

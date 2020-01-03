@@ -18,9 +18,11 @@ object Simulations {
 
   private def simulateCombatPower(data: Data): CombatPower = {
     val main = Simulate.combatPower(getCombatants(data))
-    val equipment = Simulate.equipmentCombatPower(data.kinds.items.values, getCombatants(data))
+    //val equipment = Simulate.equipmentCombatPower(data.kinds.items.values, getCombatants(data))
 
-    main.copy(equipment = equipment)
+    //main.copy(equipment = equipment)
+
+    main
   }
 
   private def getCombatants(data: Data): Iterable[CreatureKind] = {

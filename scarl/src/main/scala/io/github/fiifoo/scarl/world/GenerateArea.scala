@@ -8,6 +8,7 @@ import io.github.fiifoo.scarl.core.creature.FactionId
 import io.github.fiifoo.scarl.core.entity.{GlobalActor, GlobalActorId, IdSeq}
 import io.github.fiifoo.scarl.core.math.Rng
 import io.github.fiifoo.scarl.core.mutation.{IdSeqMutation, NewEntityMutation}
+import io.github.fiifoo.scarl.world.Site.AreaSource
 
 object GenerateArea {
 
@@ -39,19 +40,29 @@ object GenerateArea {
 
     world.copy(
       states = world.states + (site -> state),
+      usedAreas = world.usedAreas + areaId,
       usedUniqueTemplates = world.usedUniqueTemplates ++ templateResult.collectUsedUniqueTemplates(assets),
       variants = world.variants + (assets.sites(site).region -> variant)
     )
   }
 
   private def selectArea(world: WorldState, site: Site): (Option[RegionVariantKey], AreaId) = {
+    val (variant, source) = selectAreaSource(world, site)
+
+    val area = source.priority.get
+    // todo
+
+    (variant, area)
+  }
+
+  private def selectAreaSource(world: WorldState, site: Site): (Option[RegionVariantKey], AreaSource) = {
     val variant = world.variants.getOrElse(
       site.region,
       selectVariant(world, world.assets.regions(site.region))
     )
-    val area = variant flatMap site.variants.get getOrElse site.area
+    val source = variant flatMap site.variants.get getOrElse site.area
 
-    (variant, area)
+    (variant, source)
   }
 
   private def selectVariant(world: WorldState, region: Region): Option[RegionVariantKey] = {
