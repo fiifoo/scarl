@@ -47,6 +47,14 @@
     "dispositions" : [ ],
     "strategies" : [ ],
     "unique" : false
+  } ], [ "skyfarer/swarm", {
+    "template" : "generic/area/rooms-excavated-portals",
+    "theme" : "skyfarer/swarm",
+    "owner" : "skyfarer",
+    "id" : "skyfarer/swarm",
+    "dispositions" : [ ],
+    "strategies" : [ ],
+    "unique" : false
   } ], [ "scippe/dice/1", {
     "template" : "scippe/dice/area/1",
     "theme" : "scipoi/scippe-civilians/constructed-underground",
@@ -589,10 +597,71 @@
         "weight" : 100
       } ] ] ],
       "id" : "siux/default"
-    } ] ],
-    "items" : [ [ "generic/equipment-default", {
+    } ], [ "skyfarer/swarm", {
       "subs" : [ ],
-      "id" : "generic/equipment-default",
+      "content" : [ [ "CreatureKind.DefaultCategory", [ {
+        "value" : "skyfarer/blacksmith",
+        "weight" : 10
+      }, {
+        "value" : "skyfarer/swarm",
+        "weight" : 100
+      }, {
+        "value" : "skyfarer/drone",
+        "weight" : 20
+      } ] ], [ "CreatureKind.TurretCategory", [ {
+        "value" : "skyfarer/drone",
+        "weight" : 100
+      } ] ] ],
+      "id" : "skyfarer/swarm"
+    } ] ],
+    "items" : [ [ "generic/default", {
+      "subs" : [ "generic/no-secure-door" ],
+      "content" : [ [ "ItemKind.SecureDoorCategory", [ {
+        "value" : "generic/door-secure-closed",
+        "weight" : 100
+      } ] ] ],
+      "id" : "generic/default"
+    } ], [ "siux/default", {
+      "subs" : [ "generic/default" ],
+      "content" : [ ],
+      "id" : "siux/default"
+    } ], [ "iridan/default", {
+      "subs" : [ "generic/no-secure-door" ],
+      "content" : [ [ "ItemKind.SecureDoorCategory", [ {
+        "value" : "iridan/door-secure-closed",
+        "weight" : 100
+      } ] ] ],
+      "id" : "iridan/default"
+    } ], [ "scippe/civilians/default", {
+      "subs" : [ "generic/default" ],
+      "content" : [ ],
+      "id" : "scippe/civilians/default"
+    } ], [ "scipoi/scippe-civilians", {
+      "subs" : [ "generic/default" ],
+      "content" : [ ],
+      "id" : "scipoi/scippe-civilians"
+    } ], [ "generic/no-secure-door", {
+      "subs" : [ "generic/equipment/default" ],
+      "id" : "generic/no-secure-door",
+      "content" : [ [ "ItemKind.UtilityCategory", [ {
+        "value" : "skyfarer/drone",
+        "weight" : 200
+      }, {
+        "value" : "generic/fence-energy-open",
+        "weight" : 100
+      }, {
+        "value" : "skyfarer/explosive-timed-antimatter",
+        "weight" : 150
+      }, {
+        "value" : "skyfarer/explosive-mine",
+        "weight" : 100
+      } ] ], [ "ItemKind.DefaultDoorCategory", [ {
+        "value" : "generic/door-closed",
+        "weight" : 100
+      } ] ] ]
+    } ], [ "generic/equipment/default", {
+      "subs" : [ ],
+      "id" : "generic/equipment/default",
       "content" : [ [ "Equipment.BodyArmorCategory", [ {
         "value" : "skyfarer/armor-body-heavy",
         "weight" : 100
@@ -621,53 +690,10 @@
         "value" : "skyfarer/weapon-whip-plasma",
         "weight" : 100
       } ] ] ]
-    } ], [ "generic/default", {
-      "subs" : [ "generic/equipment-default" ],
-      "id" : "generic/default",
-      "content" : [ [ "ItemKind.UtilityCategory", [ {
-        "value" : "skyfarer/drone",
-        "weight" : 200
-      }, {
-        "value" : "generic/fence-energy-open",
-        "weight" : 100
-      }, {
-        "value" : "skyfarer/explosive-timed-antimatter",
-        "weight" : 150
-      }, {
-        "value" : "skyfarer/explosive-mine",
-        "weight" : 100
-      } ] ], [ "ItemKind.DefaultDoorCategory", [ {
-        "value" : "generic/door-closed",
-        "weight" : 100
-      } ] ] ]
-    } ], [ "iridan/default", {
+    } ], [ "skyfarer/swarm", {
       "subs" : [ "generic/default" ],
-      "content" : [ [ "ItemKind.SecureDoorCategory", [ {
-        "value" : "iridan/door-secure-closed",
-        "weight" : 100
-      } ] ] ],
-      "id" : "iridan/default"
-    } ], [ "scippe/civilians/default", {
-      "subs" : [ "generic/default" ],
-      "content" : [ [ "ItemKind.SecureDoorCategory", [ {
-        "value" : "generic/door-secure-closed",
-        "weight" : 100
-      } ] ] ],
-      "id" : "scippe/civilians/default"
-    } ], [ "scipoi/scippe-civilians", {
-      "subs" : [ "generic/default" ],
-      "content" : [ [ "ItemKind.SecureDoorCategory", [ {
-        "value" : "generic/door-secure-closed",
-        "weight" : 100
-      } ] ] ],
-      "id" : "scipoi/scippe-civilians"
-    } ], [ "siux/default", {
-      "subs" : [ "generic/default" ],
-      "content" : [ [ "ItemKind.SecureDoorCategory", [ {
-        "value" : "generic/door-secure-closed",
-        "weight" : 100
-      } ] ] ],
-      "id" : "siux/default"
+      "content" : [ ],
+      "id" : "skyfarer/swarm"
     } ] ],
     "templates" : [ [ "iridan/default", {
       "subs" : [ ],
@@ -774,6 +800,31 @@
       } ] ], [ "Template.ChallengeCategory", [ {
         "value" : "generic/room",
         "weight" : 100
+      } ] ] ]
+    } ], [ "skyfarer/swarm", {
+      "subs" : [ ],
+      "id" : "skyfarer/swarm",
+      "content" : [ [ "Template.ChallengeCategory", [ {
+        "value" : "skyfarer/hall/control-freak",
+        "weight" : 100
+      } ] ], [ "Template.RoomCategory", [ {
+        "value" : "generic/room",
+        "weight" : 100
+      } ] ], [ "Template.SpaceCategory", [ {
+        "value" : "generic/space",
+        "weight" : 100
+      } ] ], [ "Template.TrapCategory", [ {
+        "value" : "generic/trap/corridor-ambush",
+        "weight" : 100
+      }, {
+        "value" : "generic/trap-room-ambush",
+        "weight" : 100
+      } ] ], [ "Template.StorageCategory", [ {
+        "value" : "generic/room/misc-storage",
+        "weight" : 100
+      }, {
+        "value" : "generic/room/equipment-storage",
+        "weight" : 25
       } ] ] ]
     } ] ],
     "templateSources" : [ [ "generic/area-rooms", {
@@ -1208,6 +1259,19 @@
         "weight" : 100
       } ] ], [ "WidgetKind.PortalCategory", [ {
         "value" : "siux/portal",
+        "weight" : 100
+      } ] ] ]
+    } ], [ "skyfarer/swarm", {
+      "subs" : [ ],
+      "id" : "skyfarer/swarm",
+      "content" : [ [ "WidgetKind.TrapCategory", [ {
+        "value" : "generic/trap-laser",
+        "weight" : 100
+      }, {
+        "value" : "generic/trap-plasma",
+        "weight" : 100
+      } ] ], [ "WidgetKind.PortalCategory", [ {
+        "value" : "skyfarer/swarm/portal",
         "weight" : 100
       } ] ] ]
     } ] ]
@@ -2164,7 +2228,7 @@
       "color" : "#ffc107",
       "traits" : {
         "events" : null,
-        "flying" : false,
+        "flying" : true,
         "immobile" : false,
         "missile" : null,
         "solitary" : false,
@@ -3760,6 +3824,106 @@
         },
         "armor" : 30
       }
+    } ], [ "skyfarer/swarm", {
+      "display" : "s",
+      "color" : "#9c27b0",
+      "traits" : {
+        "events" : {
+          "death" : null,
+          "hit" : null
+        },
+        "flying" : false,
+        "immobile" : false,
+        "missile" : null,
+        "solitary" : false,
+        "leader" : false
+      },
+      "equipments" : [ ],
+      "recipes" : [ ],
+      "character" : null,
+      "locked" : {
+        "key" : null,
+        "security" : 20,
+        "sub" : null
+      },
+      "name" : "Skyfarer swarm",
+      "responses" : [ ],
+      "behavior" : {
+        "type" : "RoamTactic",
+        "data" : { }
+      },
+      "usable" : {
+        "type" : "CapturePower",
+        "data" : {
+          "description" : null,
+          "resources" : null
+        }
+      },
+      "greetings" : [ ],
+      "id" : "skyfarer/swarm",
+      "inventory" : [ ],
+      "faction" : "skyfarer",
+      "description" : "Low cost machine usually built on site from improvised materials.",
+      "stats" : {
+        "launcher" : {
+          "range" : 0,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          },
+          "missiles" : [ ]
+        },
+        "stances" : [ ],
+        "explosive" : {
+          "attack" : 0,
+          "damage" : 0,
+          "radius" : 0,
+          "blast" : 0,
+          "conditions" : [ ]
+        },
+        "speed" : 100,
+        "ranged" : {
+          "attack" : 0,
+          "damage" : 0,
+          "range" : 0,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          },
+          "conditions" : [ ]
+        },
+        "energy" : {
+          "max" : 0,
+          "regen" : 0
+        },
+        "materials" : {
+          "max" : 0,
+          "regen" : 0
+        },
+        "defence" : 40,
+        "skill" : {
+          "hacking" : 0
+        },
+        "melee" : {
+          "attack" : 30,
+          "damage" : 35,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          },
+          "conditions" : [ ]
+        },
+        "resistance" : 20,
+        "health" : {
+          "max" : 20,
+          "regen" : 0
+        },
+        "sight" : {
+          "range" : 7,
+          "sensors" : 10
+        },
+        "armor" : 20
+      }
     } ], [ "skyfarer/biojack-stun", {
       "display" : "b",
       "color" : "#9c27b0",
@@ -3869,7 +4033,7 @@
       }
     } ], [ "skyfarer/drone", {
       "display" : "d",
-      "color" : "yellow",
+      "color" : "#9c27b0",
       "traits" : {
         "events" : null,
         "flying" : true,
@@ -3881,10 +4045,15 @@
       "equipments" : [ ],
       "recipes" : [ ],
       "character" : null,
+      "locked" : {
+        "key" : null,
+        "security" : 50,
+        "sub" : null
+      },
       "name" : "Skyfarer drone",
       "responses" : [ ],
       "behavior" : {
-        "type" : "FollowOwnerTactic",
+        "type" : "RoamTactic",
         "data" : { }
       },
       "usable" : {
@@ -4467,6 +4636,93 @@
         "sight" : {
           "range" : 10,
           "sensors" : 30
+        },
+        "armor" : 40
+      }
+    } ], [ "skyfarer/blacksmith", {
+      "display" : "B",
+      "color" : "#9c27b0",
+      "traits" : {
+        "events" : null,
+        "flying" : false,
+        "immobile" : false,
+        "missile" : null,
+        "solitary" : false,
+        "leader" : true
+      },
+      "equipments" : [ ],
+      "recipes" : [ ],
+      "character" : null,
+      "locked" : null,
+      "name" : "Skyfarer blacksmith",
+      "responses" : [ ],
+      "behavior" : {
+        "type" : "RoamTactic",
+        "data" : { }
+      },
+      "usable" : null,
+      "greetings" : [ ],
+      "id" : "skyfarer/blacksmith",
+      "inventory" : [ ],
+      "faction" : "skyfarer",
+      "description" : "Master of manufacturing.",
+      "stats" : {
+        "launcher" : {
+          "range" : 0,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          },
+          "missiles" : [ ]
+        },
+        "stances" : [ ],
+        "explosive" : {
+          "attack" : 0,
+          "damage" : 0,
+          "radius" : 0,
+          "blast" : 0,
+          "conditions" : [ ]
+        },
+        "speed" : 100,
+        "ranged" : {
+          "attack" : 30,
+          "damage" : 40,
+          "range" : 5,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          },
+          "conditions" : [ ]
+        },
+        "energy" : {
+          "max" : 0,
+          "regen" : 0
+        },
+        "materials" : {
+          "max" : 0,
+          "regen" : 0
+        },
+        "defence" : 30,
+        "skill" : {
+          "hacking" : 0
+        },
+        "melee" : {
+          "attack" : 0,
+          "damage" : 0,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          },
+          "conditions" : [ ]
+        },
+        "resistance" : 20,
+        "health" : {
+          "max" : 30,
+          "regen" : 0
+        },
+        "sight" : {
+          "range" : 7,
+          "sensors" : 10
         },
         "armor" : 40
       }
@@ -5844,6 +6100,102 @@
           "sensors" : 10
         },
         "armor" : 20
+      }
+    } ], [ "skyfarer/drone-captured", {
+      "display" : "d",
+      "color" : "yellow",
+      "traits" : {
+        "events" : null,
+        "flying" : true,
+        "immobile" : false,
+        "missile" : null,
+        "solitary" : false,
+        "leader" : false
+      },
+      "equipments" : [ ],
+      "recipes" : [ ],
+      "character" : null,
+      "name" : "Skyfarer drone",
+      "responses" : [ ],
+      "behavior" : {
+        "type" : "FollowOwnerTactic",
+        "data" : { }
+      },
+      "usable" : {
+        "type" : "TransformPower",
+        "data" : {
+          "transformTo" : {
+            "type" : "ItemKind",
+            "data" : null,
+            "value" : "skyfarer/drone"
+          },
+          "transformDescription" : "Drone shuts down."
+        }
+      },
+      "greetings" : [ ],
+      "id" : "skyfarer/drone-captured",
+      "inventory" : [ ],
+      "faction" : "skyfarer",
+      "description" : "Effective combat drone.",
+      "stats" : {
+        "launcher" : {
+          "range" : 0,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          },
+          "missiles" : [ ]
+        },
+        "stances" : [ ],
+        "explosive" : {
+          "attack" : 0,
+          "damage" : 0,
+          "radius" : 0,
+          "blast" : 0,
+          "conditions" : [ ]
+        },
+        "speed" : 150,
+        "ranged" : {
+          "attack" : 30,
+          "damage" : 40,
+          "range" : 7,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          },
+          "conditions" : [ ]
+        },
+        "energy" : {
+          "max" : 0,
+          "regen" : 0
+        },
+        "materials" : {
+          "max" : 0,
+          "regen" : 0
+        },
+        "defence" : 50,
+        "skill" : {
+          "hacking" : 0
+        },
+        "melee" : {
+          "attack" : 30,
+          "damage" : 40,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          },
+          "conditions" : [ ]
+        },
+        "resistance" : 50,
+        "health" : {
+          "max" : 50,
+          "regen" : 1
+        },
+        "sight" : {
+          "range" : 7,
+          "sensors" : 30
+        },
+        "armor" : 30
       }
     } ] ],
     "items" : [ [ "iridan/weapon-boser", {
@@ -7993,7 +8345,7 @@
           "transformTo" : {
             "type" : "CreatureKind",
             "data" : null,
-            "value" : "skyfarer/drone"
+            "value" : "skyfarer/drone-captured"
           },
           "transformDescription" : "Drone starts humming."
         }
@@ -8241,6 +8593,38 @@
       "id" : "iridan/conduit-stairs-up-coms",
       "weapon" : null,
       "description" : "Constructed passageway.",
+      "armor" : null
+    } ], [ "skyfarer/swarm/portal", {
+      "display" : "O",
+      "color" : "#9c27b0",
+      "rangedWeapon" : null,
+      "shield" : null,
+      "hidden" : false,
+      "locked" : null,
+      "name" : "Skyfarer excavation",
+      "concealment" : 0,
+      "door" : null,
+      "usable" : null,
+      "pickable" : false,
+      "id" : "skyfarer/swarm/portal",
+      "weapon" : null,
+      "description" : "Excavation with limited construction capability.",
+      "armor" : null
+    } ], [ "skyfarer/swarm/portal-empty", {
+      "display" : "O",
+      "color" : "#607d8b",
+      "rangedWeapon" : null,
+      "shield" : null,
+      "hidden" : false,
+      "locked" : null,
+      "name" : "Skyfarer excavation (empty)",
+      "concealment" : 0,
+      "door" : null,
+      "usable" : null,
+      "pickable" : false,
+      "id" : "skyfarer/swarm/portal-empty",
+      "weapon" : null,
+      "description" : "Excavation with limited construction capability.",
       "armor" : null
     } ], [ "nomad/armor-leg-assault", {
       "launcher" : null,
@@ -10923,6 +11307,25 @@
         "timer" : 1000,
         "id" : "nomad/explosive-timed"
       }
+    } ], [ "skyfarer/swarm/portal", {
+      "type" : "SummonCreatureWidget",
+      "data" : {
+        "item" : "skyfarer/swarm/portal",
+        "summon" : "skyfarer/swarm",
+        "interval" : 500,
+        "id" : "skyfarer/swarm/portal",
+        "summonDescription" : "{target} appears from excavation.",
+        "summonCategory" : "CreatureKind.DefaultCategory",
+        "charge" : {
+          "charges" : 10,
+          "transformTo" : {
+            "type" : "ItemKind",
+            "data" : null,
+            "value" : "skyfarer/swarm/portal-empty"
+          },
+          "transformDescription" : null
+        }
+      }
     } ], [ "generic/pressure-plate-hidden", {
       "type" : "TriggeredTrapWidget",
       "data" : {
@@ -12116,6 +12519,29 @@
     },
     "variants" : [ ],
     "id" : "scippe/dice/1"
+  } ], [ "scippe/dice/2", {
+    "name" : "DiCe 2",
+    "description" : null,
+    "region" : "scippe/dice",
+    "area" : {
+      "priority" : null,
+      "choices" : [ {
+        "value" : "skyfarer/swarm",
+        "weight" : 100
+      } ]
+    },
+    "variants" : [ ],
+    "id" : "scippe/dice/2"
+  } ], [ "scippe/dice/3", {
+    "name" : "DiCe 3",
+    "description" : null,
+    "region" : "scippe/dice",
+    "area" : {
+      "priority" : "placeholder",
+      "choices" : [ ]
+    },
+    "variants" : [ ],
+    "id" : "scippe/dice/3"
   } ], [ "scipoi/unfinished-mine/mine-1", {
     "id" : "scipoi/unfinished-mine/mine-1",
     "area" : {
@@ -23201,6 +23627,62 @@
         }
       } ] ]
     }
+  } ], [ "generic/area/rooms-excavated-portals", {
+    "type" : "RandomizedTemplate",
+    "data" : {
+      "conduitLocations" : {
+        "min" : 0,
+        "max" : 0
+      },
+      "shape" : {
+        "type" : "Rectangle",
+        "data" : {
+          "width" : 70,
+          "height" : 40,
+          "variance" : 0
+        }
+      },
+      "fill" : {
+        "type" : "ContentSelection.ThemeWall",
+        "data" : {
+          "category" : [ ],
+          "tags" : [ ]
+        }
+      },
+      "border" : {
+        "type" : "ContentSelection.ThemeWall",
+        "data" : {
+          "category" : [ "WallKind.AreaBorderCategory" ],
+          "tags" : [ ]
+        }
+      },
+      "templateCatalogue" : "generic/area-rooms",
+      "unique" : false,
+      "terrain" : null,
+      "templates" : [ ],
+      "id" : "generic/area/rooms-excavated-portals",
+      "features" : [ {
+        "type" : "BurrowFeature",
+        "data" : {
+          "min" : 10,
+          "max" : 15,
+          "noise" : 50
+        }
+      }, {
+        "type" : "RandomizedContentFeature",
+        "data" : {
+          "creatures" : [ ],
+          "items" : [ ],
+          "widgets" : [ ],
+          "catalogues" : [ "generic/room-portal-high", "generic/room-portal-high" ]
+        }
+      } ],
+      "entrances" : {
+        "min" : 0,
+        "max" : 0,
+        "door" : null
+      }
+    }
   } ], [ "iridan/area/core-approach", {
     "type" : "RandomizedTemplate",
     "data" : {
@@ -26578,6 +27060,62 @@
             "tags" : [ ]
           }
         }
+      }
+    }
+  } ], [ "generic/area/rooms-excavated", {
+    "type" : "RandomizedTemplate",
+    "data" : {
+      "conduitLocations" : {
+        "min" : 0,
+        "max" : 0
+      },
+      "shape" : {
+        "type" : "Rectangle",
+        "data" : {
+          "width" : 70,
+          "height" : 40,
+          "variance" : 0
+        }
+      },
+      "fill" : {
+        "type" : "ContentSelection.ThemeWall",
+        "data" : {
+          "category" : [ ],
+          "tags" : [ ]
+        }
+      },
+      "border" : {
+        "type" : "ContentSelection.ThemeWall",
+        "data" : {
+          "category" : [ "WallKind.AreaBorderCategory" ],
+          "tags" : [ ]
+        }
+      },
+      "templateCatalogue" : "generic/area-rooms",
+      "unique" : false,
+      "terrain" : null,
+      "templates" : [ ],
+      "id" : "generic/area/rooms-excavated",
+      "features" : [ {
+        "type" : "BurrowFeature",
+        "data" : {
+          "min" : 10,
+          "max" : 15,
+          "noise" : 50
+        }
+      }, {
+        "type" : "RandomizedContentFeature",
+        "data" : {
+          "creatures" : [ ],
+          "items" : [ ],
+          "widgets" : [ ],
+          "catalogues" : [ "generic/room" ]
+        }
+      } ],
+      "entrances" : {
+        "min" : 0,
+        "max" : 0,
+        "door" : null
       }
     }
   } ], [ "scipoi/unfinished-mine/room/mine-final", {
@@ -30477,6 +31015,14 @@
     "templates" : "siux/default",
     "id" : "siux/default",
     "terrains" : "generic/constructed-underground"
+  } ], [ "skyfarer/swarm", {
+    "items" : "skyfarer/swarm",
+    "walls" : "generic/constructed-underground",
+    "widgets" : "skyfarer/swarm",
+    "creatures" : "skyfarer/swarm",
+    "templates" : "skyfarer/swarm",
+    "id" : "skyfarer/swarm",
+    "terrains" : "generic/constructed-underground"
   } ], [ "scippe/civilians/constructed-surface", {
     "items" : "scippe/civilians/default",
     "walls" : "generic/constructed-surface",
@@ -30518,7 +31064,7 @@
     "name" : "Nomad spaceship"
   } ] ],
   "worlds" : [ [ "main", {
-    "start" : "scippe/dice/1",
+    "start" : "scippe/dice/2",
     "characters" : [ "player-god" ],
     "conduits" : [ {
       "source" : "iridan/labs",
@@ -30610,6 +31156,18 @@
       "sourceItem" : "generic/conduit-lift-down",
       "targetItem" : "generic/conduit-lift-up",
       "tag" : "lift"
+    }, {
+      "source" : "scippe/dice/1",
+      "target" : "scippe/dice/2",
+      "sourceItem" : "generic/conduit-stairs-down",
+      "targetItem" : "generic/conduit-stairs-up",
+      "tag" : null
+    }, {
+      "source" : "scippe/dice/2",
+      "target" : "scippe/dice/3",
+      "sourceItem" : "generic/conduit-stairs-down",
+      "targetItem" : "generic/conduit-stairs-up",
+      "tag" : null
     } ],
     "id" : "main",
     "transports" : [ [ "nomad/spaceship", "iridan/underground" ] ],
