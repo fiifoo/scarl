@@ -5,63 +5,91 @@
     "id" : "iridan/nexus",
     "owner" : "iridan",
     "dispositions" : [ ],
-    "strategies" : [ ]
+    "strategies" : [ ],
+    "unique" : false
   } ], [ "iridan/start", {
     "template" : "iridan/area/start",
     "theme" : "iridan/constructed-underground",
     "id" : "iridan/start",
     "owner" : "nomad",
     "dispositions" : [ ],
-    "strategies" : [ ]
+    "strategies" : [ ],
+    "unique" : false
   } ], [ "iridan/labs", {
     "template" : "iridan/area/labs",
     "theme" : "iridan/constructed-underground",
     "id" : "iridan/labs",
     "owner" : "iridan",
     "dispositions" : [ ],
-    "strategies" : [ ]
+    "strategies" : [ ],
+    "unique" : false
   } ], [ "iridan/mine-approach", {
     "template" : "generic/area/tunnels",
     "theme" : "iridan/natural-underground",
     "id" : "iridan/mine-approach",
     "owner" : "iridan",
     "dispositions" : [ ],
-    "strategies" : [ ]
+    "strategies" : [ ],
+    "unique" : false
   } ], [ "nomad/spaceship-hub", {
     "template" : "nomad/spaceship/hub",
     "theme" : "iridan/constructed-underground",
     "owner" : "nomad",
     "id" : "nomad/spaceship-hub",
     "dispositions" : [ ],
-    "strategies" : [ ]
+    "strategies" : [ ],
+    "unique" : false
   } ], [ "scipoi/unfinished-mine/mine", {
     "template" : "generic/area/mine-lift",
     "theme" : "scipoi/scippe-civilians/natural-underground",
     "id" : "scipoi/unfinished-mine/mine",
     "owner" : "scipoi",
     "dispositions" : [ ],
-    "strategies" : [ ]
+    "strategies" : [ ],
+    "unique" : false
+  } ], [ "skyfarer/swarm", {
+    "template" : "generic/area/rooms-excavated-portals",
+    "theme" : "skyfarer/swarm",
+    "owner" : "skyfarer",
+    "id" : "skyfarer/swarm",
+    "dispositions" : [ ],
+    "strategies" : [ ],
+    "unique" : false
+  } ], [ "scippe/dice/scipoi-portal-chasm", {
+    "template" : "scippe/dice/area/scipoi-portal-chasm",
+    "theme" : "scippe/civilians/dice",
+    "owner" : "scippe/civilians",
+    "id" : "scippe/dice/scipoi-portal-chasm",
+    "dispositions" : [ ],
+    "strategies" : [ [ "scipoi", {
+      "type" : "AttackStrategy",
+      "data" : { }
+    } ] ],
+    "unique" : false
   } ], [ "scippe/dice/1", {
     "template" : "scippe/dice/area/1",
-    "theme" : "scipoi/scippe-civilians/constructed-underground",
+    "theme" : "scipoi/scippe-civilians/dice",
     "owner" : "scippe/civilians",
     "id" : "scippe/dice/1",
     "dispositions" : [ ],
-    "strategies" : [ ]
+    "strategies" : [ ],
+    "unique" : false
   } ], [ "iridan/surface", {
     "template" : "iridan/area/surface-assault",
     "theme" : "iridan/natural-surface",
     "id" : "iridan/surface",
     "owner" : "iridan",
     "dispositions" : [ ],
-    "strategies" : [ ]
+    "strategies" : [ ],
+    "unique" : false
   } ], [ "iridan/coms", {
     "template" : "iridan/area/coms",
     "theme" : "iridan/natural-underground",
     "id" : "iridan/coms",
     "owner" : "iridan",
     "dispositions" : [ ],
-    "strategies" : [ ]
+    "strategies" : [ ],
+    "unique" : false
   } ], [ "iridan/mine", {
     "template" : "iridan/area/mine",
     "theme" : "iridan/natural-underground",
@@ -71,56 +99,64 @@
     "strategies" : [ [ "skyfarer", {
       "type" : "AttackStrategy",
       "data" : { }
-    } ] ]
+    } ] ],
+    "unique" : false
   } ], [ "scippe/dice/surface-overrun", {
     "template" : "scippe/dice/area/surface/overrun",
     "theme" : "scipoi/scippe-civilians/constructed-surface",
     "owner" : "scippe/civilians",
     "id" : "scippe/dice/surface-overrun",
     "dispositions" : [ ],
-    "strategies" : [ ]
+    "strategies" : [ ],
+    "unique" : false
   } ], [ "placeholder", {
     "template" : "placeholder",
     "theme" : "iridan/constructed-underground",
     "owner" : "nomad",
     "id" : "placeholder",
     "dispositions" : [ ],
-    "strategies" : [ ]
+    "strategies" : [ ],
+    "unique" : false
   } ], [ "scipoi/unfinished-mine/mine-final", {
     "template" : "scipoi/unfinished-mine/area/mine-final",
     "theme" : "scipoi/scippe-civilians/natural-underground",
     "id" : "scipoi/unfinished-mine/mine-final",
     "owner" : "scipoi",
     "dispositions" : [ ],
-    "strategies" : [ ]
+    "strategies" : [ ],
+    "unique" : false
   } ], [ "scipoi/unfinished-mine/surface", {
     "template" : "generic/area/surface-mine-lift-shuttle",
     "theme" : "scipoi/scippe-civilians/natural-surface",
     "id" : "scipoi/unfinished-mine/surface",
     "owner" : "scipoi",
     "dispositions" : [ ],
-    "strategies" : [ ]
+    "strategies" : [ ],
+    "unique" : false
   } ], [ "iridan/core-approach", {
     "template" : "iridan/area/core-approach",
     "theme" : "iridan/constructed-underground",
     "id" : "iridan/core-approach",
     "owner" : "iridan",
     "dispositions" : [ ],
-    "strategies" : [ ]
+    "strategies" : [ ],
+    "unique" : false
   } ], [ "nomad/shuttle", {
     "template" : "nomad/shuttle/interior",
     "theme" : "iridan/constructed-underground",
     "owner" : "nomad",
     "id" : "nomad/shuttle",
     "dispositions" : [ ],
-    "strategies" : [ ]
+    "strategies" : [ ],
+    "unique" : false
   } ], [ "scippe/dice/surface-default", {
     "template" : "scippe/dice/area/surface/default",
     "theme" : "scippe/civilians/constructed-surface",
     "owner" : "scippe/civilians",
     "id" : "scippe/dice/surface-default",
     "dispositions" : [ ],
-    "strategies" : [ ]
+    "strategies" : [ ],
+    "unique" : false
   } ], [ "iridan/core", {
     "template" : "iridan/area/core",
     "theme" : "iridan/natural-underground",
@@ -130,7 +166,8 @@
     "strategies" : [ [ "skyfarer", {
       "type" : "AttackStrategy",
       "data" : { }
-    } ] ]
+    } ] ],
+    "unique" : false
   } ] ],
   "catalogues" : {
     "contentSources" : [ [ "generic/room", {
@@ -561,10 +598,81 @@
         "weight" : 100
       } ] ] ],
       "id" : "scipoi/scippe-civilians"
-    } ] ],
-    "items" : [ [ "generic/equipment-default", {
+    } ], [ "siux/default", {
       "subs" : [ ],
-      "id" : "generic/equipment-default",
+      "content" : [ [ "CreatureKind.DefaultCategory", [ {
+        "value" : "siux/drone",
+        "weight" : 100
+      } ] ], [ "CreatureKind.TurretCategory", [ {
+        "value" : "siux/turret",
+        "weight" : 100
+      } ] ] ],
+      "id" : "siux/default"
+    } ], [ "skyfarer/swarm", {
+      "subs" : [ ],
+      "content" : [ [ "CreatureKind.DefaultCategory", [ {
+        "value" : "skyfarer/blacksmith",
+        "weight" : 10
+      }, {
+        "value" : "skyfarer/swarm",
+        "weight" : 100
+      }, {
+        "value" : "skyfarer/drone",
+        "weight" : 20
+      } ] ], [ "CreatureKind.TurretCategory", [ {
+        "value" : "skyfarer/drone",
+        "weight" : 100
+      } ] ] ],
+      "id" : "skyfarer/swarm"
+    } ] ],
+    "items" : [ [ "generic/default", {
+      "subs" : [ "generic/no-secure-door" ],
+      "content" : [ [ "ItemKind.SecureDoorCategory", [ {
+        "value" : "generic/door-secure-closed",
+        "weight" : 100
+      } ] ] ],
+      "id" : "generic/default"
+    } ], [ "siux/default", {
+      "subs" : [ "generic/default" ],
+      "content" : [ ],
+      "id" : "siux/default"
+    } ], [ "iridan/default", {
+      "subs" : [ "generic/no-secure-door" ],
+      "content" : [ [ "ItemKind.SecureDoorCategory", [ {
+        "value" : "iridan/door-secure-closed",
+        "weight" : 100
+      } ] ] ],
+      "id" : "iridan/default"
+    } ], [ "scippe/civilians/default", {
+      "subs" : [ "generic/default" ],
+      "content" : [ ],
+      "id" : "scippe/civilians/default"
+    } ], [ "scipoi/scippe-civilians", {
+      "subs" : [ "generic/default" ],
+      "content" : [ ],
+      "id" : "scipoi/scippe-civilians"
+    } ], [ "generic/no-secure-door", {
+      "subs" : [ "generic/equipment/default" ],
+      "id" : "generic/no-secure-door",
+      "content" : [ [ "ItemKind.UtilityCategory", [ {
+        "value" : "skyfarer/drone",
+        "weight" : 200
+      }, {
+        "value" : "generic/fence-energy-open",
+        "weight" : 100
+      }, {
+        "value" : "skyfarer/explosive-timed-antimatter",
+        "weight" : 150
+      }, {
+        "value" : "skyfarer/explosive-mine",
+        "weight" : 100
+      } ] ], [ "ItemKind.DefaultDoorCategory", [ {
+        "value" : "generic/door-closed",
+        "weight" : 100
+      } ] ] ]
+    } ], [ "generic/equipment/default", {
+      "subs" : [ ],
+      "id" : "generic/equipment/default",
       "content" : [ [ "Equipment.BodyArmorCategory", [ {
         "value" : "skyfarer/armor-body-heavy",
         "weight" : 100
@@ -593,46 +701,10 @@
         "value" : "skyfarer/weapon-whip-plasma",
         "weight" : 100
       } ] ] ]
-    } ], [ "generic/default", {
-      "subs" : [ "generic/equipment-default" ],
-      "id" : "generic/default",
-      "content" : [ [ "ItemKind.UtilityCategory", [ {
-        "value" : "skyfarer/drone",
-        "weight" : 200
-      }, {
-        "value" : "generic/fence-energy-open",
-        "weight" : 100
-      }, {
-        "value" : "skyfarer/explosive-timed-antimatter",
-        "weight" : 150
-      }, {
-        "value" : "skyfarer/explosive-mine",
-        "weight" : 100
-      } ] ], [ "ItemKind.DefaultDoorCategory", [ {
-        "value" : "generic/door-closed",
-        "weight" : 100
-      } ] ] ]
-    } ], [ "iridan/default", {
+    } ], [ "skyfarer/swarm", {
       "subs" : [ "generic/default" ],
-      "content" : [ [ "ItemKind.SecureDoorCategory", [ {
-        "value" : "iridan/door-secure-closed",
-        "weight" : 100
-      } ] ] ],
-      "id" : "iridan/default"
-    } ], [ "scippe/civilians/default", {
-      "subs" : [ "generic/default" ],
-      "content" : [ [ "ItemKind.SecureDoorCategory", [ {
-        "value" : "generic/door-secure-closed",
-        "weight" : 100
-      } ] ] ],
-      "id" : "scippe/civilians/default"
-    } ], [ "scipoi/scippe-civilians", {
-      "subs" : [ "generic/default" ],
-      "content" : [ [ "ItemKind.SecureDoorCategory", [ {
-        "value" : "generic/door-secure-closed",
-        "weight" : 100
-      } ] ] ],
-      "id" : "scipoi/scippe-civilians"
+      "content" : [ ],
+      "id" : "skyfarer/swarm"
     } ] ],
     "templates" : [ [ "iridan/default", {
       "subs" : [ ],
@@ -678,9 +750,9 @@
         "value" : "generic/room/equipment-storage",
         "weight" : 25
       } ] ] ]
-    } ], [ "scipoi/scippe-civilians", {
+    } ], [ "scipoi/scippe-civilians/dice", {
       "subs" : [ ],
-      "id" : "scipoi/scippe-civilians",
+      "id" : "scipoi/scippe-civilians/dice",
       "content" : [ [ "Template.ChallengeCategory", [ {
         "value" : "skyfarer/hall/control-freak",
         "weight" : 100
@@ -692,6 +764,59 @@
         "weight" : 100
       }, {
         "value" : "exodus/room/invertebrate",
+        "weight" : 100
+      }, {
+        "value" : "siux/house/diplomat",
+        "weight" : 100
+      } ] ], [ "Template.RoomCategory", [ {
+        "value" : "generic/room",
+        "weight" : 100
+      } ] ], [ "Template.SpaceCategory", [ {
+        "value" : "generic/space",
+        "weight" : 100
+      } ] ], [ "Template.TrapCategory", [ {
+        "value" : "generic/trap/corridor-ambush",
+        "weight" : 100
+      }, {
+        "value" : "generic/trap-room-ambush",
+        "weight" : 100
+      } ] ], [ "Template.StorageCategory", [ {
+        "value" : "generic/room/misc-storage",
+        "weight" : 100
+      }, {
+        "value" : "generic/room/equipment-storage",
+        "weight" : 25
+      } ] ] ]
+    } ], [ "siux/default", {
+      "subs" : [ ],
+      "id" : "siux/default",
+      "content" : [ [ "Template.RoomCategory", [ {
+        "value" : "generic/room",
+        "weight" : 100
+      } ] ], [ "Template.SpaceCategory", [ {
+        "value" : "generic/space",
+        "weight" : 100
+      } ] ], [ "Template.TrapCategory", [ {
+        "value" : "generic/trap/corridor-turret-immobilize",
+        "weight" : 100
+      }, {
+        "value" : "generic/trap-room-ambush",
+        "weight" : 100
+      } ] ], [ "Template.StorageCategory", [ {
+        "value" : "generic/room/misc-storage",
+        "weight" : 100
+      }, {
+        "value" : "generic/room/equipment-storage",
+        "weight" : 25
+      } ] ], [ "Template.ChallengeCategory", [ {
+        "value" : "generic/room",
+        "weight" : 100
+      } ] ] ]
+    } ], [ "skyfarer/swarm", {
+      "subs" : [ ],
+      "id" : "skyfarer/swarm",
+      "content" : [ [ "Template.ChallengeCategory", [ {
+        "value" : "skyfarer/hall/control-freak",
         "weight" : 100
       } ] ], [ "Template.RoomCategory", [ {
         "value" : "generic/room",
@@ -1072,6 +1197,28 @@
         "weight" : 100
       } ] ] ],
       "id" : "generic/constructed-surface"
+    } ], [ "siux/default", {
+      "subs" : [ ],
+      "content" : [ [ "WallKind.DefaultCategory", [ {
+        "value" : "siux/wall",
+        "weight" : 100
+      } ] ], [ "WallKind.ConstructedCategory", [ {
+        "value" : "siux/wall",
+        "weight" : 100
+      } ] ], [ "WallKind.NaturalCategory", [ {
+        "value" : "siux/wall",
+        "weight" : 100
+      } ] ], [ "WallKind.SecureCategory", [ {
+        "value" : "siux/wall",
+        "weight" : 100
+      } ] ], [ "WallKind.AreaBorderCategory", [ {
+        "value" : "generic/wall-indestructible",
+        "weight" : 100
+      } ] ], [ "WallKind.TransparentCategory", [ {
+        "value" : "generic/window",
+        "weight" : 100
+      } ] ] ],
+      "id" : "siux/default"
     } ] ],
     "widgets" : [ [ "iridan/default", {
       "subs" : [ ],
@@ -1109,12 +1256,72 @@
         "value" : "generic/trap-plasma",
         "weight" : 100
       } ] ], [ "WidgetKind.PortalCategory", [ {
-        "value" : "scipoi/portal",
+        "value" : "scipoi/portal-hollow",
+        "weight" : 100
+      } ] ] ]
+    } ], [ "siux/default", {
+      "subs" : [ ],
+      "id" : "siux/default",
+      "content" : [ [ "WidgetKind.TrapCategory", [ {
+        "value" : "generic/trap-laser",
+        "weight" : 100
+      }, {
+        "value" : "generic/trap-plasma",
+        "weight" : 100
+      } ] ], [ "WidgetKind.PortalCategory", [ {
+        "value" : "siux/portal",
+        "weight" : 100
+      } ] ] ]
+    } ], [ "skyfarer/swarm", {
+      "subs" : [ ],
+      "id" : "skyfarer/swarm",
+      "content" : [ [ "WidgetKind.TrapCategory", [ {
+        "value" : "generic/trap-laser",
+        "weight" : 100
+      }, {
+        "value" : "generic/trap-plasma",
+        "weight" : 100
+      } ] ], [ "WidgetKind.PortalCategory", [ {
+        "value" : "skyfarer/swarm/portal",
         "weight" : 100
       } ] ] ]
     } ] ]
   },
-  "communications" : [ [ "iridan/unfinished-mine/prospector/greet", {
+  "communications" : [ [ "siux/diplomat/main", {
+    "message" : "Interfacing... A Nomad, I have erred.\n\nSituation here became chaotic and I had to defend myself blindly. Please accept my apology and spare me. My defences will no longer bother you, if any remain.",
+    "repeatable" : false,
+    "creaturePower" : {
+      "type" : "CompositeCreaturePower",
+      "data" : {
+        "description" : null,
+        "resources" : null,
+        "powers" : [ {
+          "type" : "FactionDispositionPower",
+          "data" : {
+            "description" : null,
+            "resources" : null,
+            "disposition" : "Faction.Neutral"
+          }
+        }, {
+          "type" : "AchieveGoalPower",
+          "data" : {
+            "description" : null,
+            "resources" : null,
+            "goal" : "siux/truce"
+          }
+        } ]
+      }
+    },
+    "itemPower" : null,
+    "choices" : [ {
+      "communication" : "generic/farewell-repeatable",
+      "description" : "Accept apology"
+    }, {
+      "communication" : "generic/death-pain",
+      "description" : "Kill diplomat"
+    } ],
+    "id" : "siux/diplomat/main"
+  } ], [ "iridan/unfinished-mine/prospector/greet", {
     "message" : "Please do not attack.",
     "repeatable" : true,
     "creaturePower" : null,
@@ -1171,6 +1378,19 @@
     "itemPower" : null,
     "choices" : [ ],
     "id" : "iridan/unfinished-mine/prospector/bye"
+  } ], [ "generic/death-pain", {
+    "message" : "Cries in pain",
+    "repeatable" : false,
+    "creaturePower" : {
+      "type" : "DeathPower",
+      "data" : {
+        "description" : null,
+        "resources" : null
+      }
+    },
+    "itemPower" : null,
+    "choices" : [ ],
+    "id" : "generic/death-pain"
   } ], [ "scippe/dice/gate-security/door/overrun", {
     "message" : "Finally! ... \n\nBTG? No. Who the hell are you? Never mind. Just come in since you made it this far and we are fucked anyway.",
     "repeatable" : false,
@@ -1212,6 +1432,13 @@
     "id" : "scippe/liason-greet",
     "creaturePower" : null,
     "choices" : [ ]
+  } ], [ "generic/farewell-repeatable", {
+    "message" : "Farewell.",
+    "repeatable" : true,
+    "creaturePower" : null,
+    "itemPower" : null,
+    "choices" : [ ],
+    "id" : "generic/farewell-repeatable"
   } ], [ "scippe/dice/gate-officer/main", {
     "message" : "Orbital and surface solar collectors are gone and so is our main power network. Everything still operational runs on emergency power.\n\nLift down to main DiCe levels is operational and I can give you security access. I expect things down there to be quite chaotic. Because of Scipoi of course but also not all visitors there are, well, very diplomatic and might have seized the opportunity.\n\nGate to DiCe Negotiations was hit by orbital debris and I lack both resources and machinery to repair it.",
     "repeatable" : true,
@@ -1325,8 +1552,10 @@
     "dispositions" : [ [ "exodus", "Faction.Hostile" ], [ "iridan", "Faction.Hostile" ], [ "iridan/command", "Faction.Hostile" ], [ "iridan/hunters", "Faction.Hostile" ], [ "nomad", "Faction.Hostile" ], [ "scipoi", "Faction.Hostile" ], [ "skyfarer", "Faction.Hostile" ] ],
     "id" : "siux"
   } ] ],
-  "goals" : [ [ "gain-ship-materials", {
-    "id" : "gain-ship-materials"
+  "goals" : [ [ "generic/gain-ship-materials", {
+    "id" : "generic/gain-ship-materials"
+  } ], [ "siux/truce", {
+    "id" : "siux/truce"
   } ] ],
   "keys" : [ [ "iridan/access-codes", {
     "name" : "Iridan access codes",
@@ -2002,6 +2231,92 @@
         "sight" : {
           "range" : 7,
           "sensors" : 10
+        },
+        "armor" : 30
+      }
+    } ], [ "siux/drone", {
+      "display" : "d",
+      "color" : "#ffc107",
+      "traits" : {
+        "events" : null,
+        "flying" : true,
+        "immobile" : false,
+        "missile" : null,
+        "solitary" : false,
+        "leader" : false
+      },
+      "equipments" : [ ],
+      "recipes" : [ ],
+      "character" : null,
+      "name" : "Siux drone",
+      "responses" : [ ],
+      "behavior" : {
+        "type" : "RoamTactic",
+        "data" : { }
+      },
+      "usable" : null,
+      "greetings" : [ ],
+      "id" : "siux/drone",
+      "inventory" : [ ],
+      "faction" : "siux",
+      "description" : "Effective combat drone.",
+      "stats" : {
+        "launcher" : {
+          "range" : 0,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          },
+          "missiles" : [ ]
+        },
+        "stances" : [ ],
+        "explosive" : {
+          "attack" : 0,
+          "damage" : 0,
+          "radius" : 0,
+          "blast" : 0,
+          "conditions" : [ ]
+        },
+        "speed" : 150,
+        "ranged" : {
+          "attack" : 30,
+          "damage" : 40,
+          "range" : 7,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          },
+          "conditions" : [ ]
+        },
+        "energy" : {
+          "max" : 0,
+          "regen" : 0
+        },
+        "materials" : {
+          "max" : 0,
+          "regen" : 0
+        },
+        "defence" : 50,
+        "skill" : {
+          "hacking" : 0
+        },
+        "melee" : {
+          "attack" : 0,
+          "damage" : 0,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          },
+          "conditions" : [ ]
+        },
+        "resistance" : 50,
+        "health" : {
+          "max" : 50,
+          "regen" : 0
+        },
+        "sight" : {
+          "range" : 7,
+          "sensors" : 30
         },
         "armor" : 30
       }
@@ -2902,7 +3217,7 @@
       "character" : null,
       "locked" : null,
       "name" : "Siux diplomat",
-      "responses" : [ ],
+      "responses" : [ [ "nomad", [ "siux/diplomat/main", "generic/farewell-repeatable" ] ] ],
       "behavior" : {
         "type" : "GreetTactic",
         "data" : { }
@@ -3520,6 +3835,106 @@
         },
         "armor" : 30
       }
+    } ], [ "skyfarer/swarm", {
+      "display" : "s",
+      "color" : "#9c27b0",
+      "traits" : {
+        "events" : {
+          "death" : null,
+          "hit" : null
+        },
+        "flying" : false,
+        "immobile" : false,
+        "missile" : null,
+        "solitary" : false,
+        "leader" : false
+      },
+      "equipments" : [ ],
+      "recipes" : [ ],
+      "character" : null,
+      "locked" : {
+        "key" : null,
+        "security" : 20,
+        "sub" : null
+      },
+      "name" : "Skyfarer swarm",
+      "responses" : [ ],
+      "behavior" : {
+        "type" : "RoamTactic",
+        "data" : { }
+      },
+      "usable" : {
+        "type" : "CapturePower",
+        "data" : {
+          "description" : null,
+          "resources" : null
+        }
+      },
+      "greetings" : [ ],
+      "id" : "skyfarer/swarm",
+      "inventory" : [ ],
+      "faction" : "skyfarer",
+      "description" : "Low cost machine usually built on site from improvised materials.",
+      "stats" : {
+        "launcher" : {
+          "range" : 0,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          },
+          "missiles" : [ ]
+        },
+        "stances" : [ ],
+        "explosive" : {
+          "attack" : 0,
+          "damage" : 0,
+          "radius" : 0,
+          "blast" : 0,
+          "conditions" : [ ]
+        },
+        "speed" : 100,
+        "ranged" : {
+          "attack" : 0,
+          "damage" : 0,
+          "range" : 0,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          },
+          "conditions" : [ ]
+        },
+        "energy" : {
+          "max" : 0,
+          "regen" : 0
+        },
+        "materials" : {
+          "max" : 0,
+          "regen" : 0
+        },
+        "defence" : 40,
+        "skill" : {
+          "hacking" : 0
+        },
+        "melee" : {
+          "attack" : 30,
+          "damage" : 35,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          },
+          "conditions" : [ ]
+        },
+        "resistance" : 20,
+        "health" : {
+          "max" : 20,
+          "regen" : 0
+        },
+        "sight" : {
+          "range" : 7,
+          "sensors" : 10
+        },
+        "armor" : 20
+      }
     } ], [ "skyfarer/biojack-stun", {
       "display" : "b",
       "color" : "#9c27b0",
@@ -3629,7 +4044,7 @@
       }
     } ], [ "skyfarer/drone", {
       "display" : "d",
-      "color" : "yellow",
+      "color" : "#9c27b0",
       "traits" : {
         "events" : null,
         "flying" : true,
@@ -3641,10 +4056,15 @@
       "equipments" : [ ],
       "recipes" : [ ],
       "character" : null,
+      "locked" : {
+        "key" : null,
+        "security" : 50,
+        "sub" : null
+      },
       "name" : "Skyfarer drone",
       "responses" : [ ],
       "behavior" : {
-        "type" : "FollowOwnerTactic",
+        "type" : "RoamTactic",
         "data" : { }
       },
       "usable" : {
@@ -4229,6 +4649,183 @@
           "sensors" : 30
         },
         "armor" : 40
+      }
+    } ], [ "skyfarer/blacksmith", {
+      "display" : "B",
+      "color" : "#9c27b0",
+      "traits" : {
+        "events" : null,
+        "flying" : false,
+        "immobile" : false,
+        "missile" : null,
+        "solitary" : false,
+        "leader" : true
+      },
+      "equipments" : [ ],
+      "recipes" : [ ],
+      "character" : null,
+      "locked" : null,
+      "name" : "Skyfarer blacksmith",
+      "responses" : [ ],
+      "behavior" : {
+        "type" : "RoamTactic",
+        "data" : { }
+      },
+      "usable" : null,
+      "greetings" : [ ],
+      "id" : "skyfarer/blacksmith",
+      "inventory" : [ ],
+      "faction" : "skyfarer",
+      "description" : "Master of manufacturing.",
+      "stats" : {
+        "launcher" : {
+          "range" : 0,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          },
+          "missiles" : [ ]
+        },
+        "stances" : [ ],
+        "explosive" : {
+          "attack" : 0,
+          "damage" : 0,
+          "radius" : 0,
+          "blast" : 0,
+          "conditions" : [ ]
+        },
+        "speed" : 100,
+        "ranged" : {
+          "attack" : 30,
+          "damage" : 40,
+          "range" : 5,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          },
+          "conditions" : [ ]
+        },
+        "energy" : {
+          "max" : 0,
+          "regen" : 0
+        },
+        "materials" : {
+          "max" : 0,
+          "regen" : 0
+        },
+        "defence" : 30,
+        "skill" : {
+          "hacking" : 0
+        },
+        "melee" : {
+          "attack" : 0,
+          "damage" : 0,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          },
+          "conditions" : [ ]
+        },
+        "resistance" : 20,
+        "health" : {
+          "max" : 30,
+          "regen" : 0
+        },
+        "sight" : {
+          "range" : 7,
+          "sensors" : 10
+        },
+        "armor" : 40
+      }
+    } ], [ "player-god", {
+      "display" : "@",
+      "color" : "yellow",
+      "traits" : {
+        "events" : null,
+        "flying" : false,
+        "immobile" : false,
+        "missile" : null,
+        "solitary" : true,
+        "leader" : false
+      },
+      "equipments" : [ [ "Equipment.LauncherSlot", "nomad/launcher-missile" ], [ "Equipment.MainHand", "nomad/weapon-blade" ], [ "Equipment.RangedSlot", "nomad/weapon-laser-light" ], [ "Equipment.OffHand", "nomad/deflector" ], [ "Equipment.BodyArmor", "nomad/armor-body-envoy" ], [ "Equipment.FootArmor", "nomad/armor-leg-envoy" ], [ "Equipment.HandArmor", "nomad/armor-hand-envoy" ], [ "Equipment.HeadArmor", "nomad/armor-head-envoy" ] ],
+      "recipes" : [ "iridan/deflector-merged", "iridan/weapon-boser-merged", "nomad/armor-body-assault", "nomad/armor-body-infiltration", "nomad/armor-hand-assault", "nomad/armor-hand-infiltration", "nomad/armor-head-assault", "nomad/armor-head-infiltration", "nomad/armor-leg-assault", "nomad/armor-leg-infiltration", "nomad/launcher-missile-smart", "nomad/weapon-laser-heavy", "nomad/weapon-spear", "scippe/weapon-shard-blast-merged", "skyfarer/armor-body-heavy-merged", "skyfarer/armor-hand-melee-merged", "skyfarer/armor-head-ranged-merged", "skyfarer/armor-leg-heavy-merged", "skyfarer/weapon-smart-gun-merged", "skyfarer/weapon-whip-plasma-merged" ],
+      "character" : {
+        "progression" : "player",
+        "experience" : 0,
+        "level" : 0
+      },
+      "name" : "Player",
+      "responses" : [ ],
+      "behavior" : {
+        "type" : "RoamTactic",
+        "data" : { }
+      },
+      "usable" : null,
+      "greetings" : [ ],
+      "id" : "player-god",
+      "inventory" : [ "nomad/scanner", "nomad/medkit", "nomad/deploy-explosive-mine", "nomad/deploy-explosive-timed", "nomad/weapon-blade" ],
+      "faction" : "nomad",
+      "description" : "It's you.",
+      "stats" : {
+        "launcher" : {
+          "range" : 0,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          },
+          "missiles" : [ ]
+        },
+        "stances" : [ "Stances.Aim", "Stances.Evasive" ],
+        "explosive" : {
+          "attack" : 0,
+          "damage" : 0,
+          "radius" : 0,
+          "blast" : 0,
+          "conditions" : [ ]
+        },
+        "speed" : 100,
+        "ranged" : {
+          "attack" : 1000,
+          "damage" : 1000,
+          "range" : 0,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          },
+          "conditions" : [ ]
+        },
+        "energy" : {
+          "max" : 100,
+          "regen" : 5
+        },
+        "materials" : {
+          "max" : 500,
+          "regen" : 0
+        },
+        "defence" : 1000,
+        "skill" : {
+          "hacking" : 3000
+        },
+        "melee" : {
+          "attack" : 1000,
+          "damage" : 1000,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          },
+          "conditions" : [ ]
+        },
+        "resistance" : 0,
+        "health" : {
+          "max" : 1000,
+          "regen" : 0
+        },
+        "sight" : {
+          "range" : 10,
+          "sensors" : 30
+        },
+        "armor" : 1000
       }
     } ], [ "skyfarer/clone", {
       "display" : "r",
@@ -5515,6 +6112,102 @@
         },
         "armor" : 20
       }
+    } ], [ "skyfarer/drone-captured", {
+      "display" : "d",
+      "color" : "yellow",
+      "traits" : {
+        "events" : null,
+        "flying" : true,
+        "immobile" : false,
+        "missile" : null,
+        "solitary" : false,
+        "leader" : false
+      },
+      "equipments" : [ ],
+      "recipes" : [ ],
+      "character" : null,
+      "name" : "Skyfarer drone",
+      "responses" : [ ],
+      "behavior" : {
+        "type" : "FollowOwnerTactic",
+        "data" : { }
+      },
+      "usable" : {
+        "type" : "TransformPower",
+        "data" : {
+          "transformTo" : {
+            "type" : "ItemKind",
+            "data" : null,
+            "value" : "skyfarer/drone"
+          },
+          "transformDescription" : "Drone shuts down."
+        }
+      },
+      "greetings" : [ ],
+      "id" : "skyfarer/drone-captured",
+      "inventory" : [ ],
+      "faction" : "skyfarer",
+      "description" : "Effective combat drone.",
+      "stats" : {
+        "launcher" : {
+          "range" : 0,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          },
+          "missiles" : [ ]
+        },
+        "stances" : [ ],
+        "explosive" : {
+          "attack" : 0,
+          "damage" : 0,
+          "radius" : 0,
+          "blast" : 0,
+          "conditions" : [ ]
+        },
+        "speed" : 150,
+        "ranged" : {
+          "attack" : 30,
+          "damage" : 40,
+          "range" : 7,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          },
+          "conditions" : [ ]
+        },
+        "energy" : {
+          "max" : 0,
+          "regen" : 0
+        },
+        "materials" : {
+          "max" : 0,
+          "regen" : 0
+        },
+        "defence" : 50,
+        "skill" : {
+          "hacking" : 0
+        },
+        "melee" : {
+          "attack" : 30,
+          "damage" : 40,
+          "consumption" : {
+            "energy" : 0,
+            "materials" : 0
+          },
+          "conditions" : [ ]
+        },
+        "resistance" : 50,
+        "health" : {
+          "max" : 50,
+          "regen" : 1
+        },
+        "sight" : {
+          "range" : 7,
+          "sensors" : 30
+        },
+        "armor" : 30
+      }
     } ] ],
     "items" : [ [ "iridan/weapon-boser", {
       "launcher" : null,
@@ -6031,6 +6724,38 @@
       "description" : "Fires rounds of piercing bullets with effective targeting system.",
       "armor" : null,
       "key" : null
+    } ], [ "siux/portal-empty", {
+      "display" : "O",
+      "color" : "darkgrey",
+      "rangedWeapon" : null,
+      "shield" : null,
+      "hidden" : false,
+      "locked" : null,
+      "name" : "Siux drone storage (empty)",
+      "concealment" : 0,
+      "door" : null,
+      "usable" : null,
+      "pickable" : false,
+      "id" : "siux/portal-empty",
+      "weapon" : null,
+      "description" : "Storage space for a number of combat drones.",
+      "armor" : null
+    } ], [ "siux/portal", {
+      "display" : "O",
+      "color" : "#ffc107",
+      "rangedWeapon" : null,
+      "shield" : null,
+      "hidden" : false,
+      "locked" : null,
+      "name" : "Siux drone storage",
+      "concealment" : 0,
+      "door" : null,
+      "usable" : null,
+      "pickable" : false,
+      "id" : "siux/portal",
+      "weapon" : null,
+      "description" : "Storage space for a number of combat drones.",
+      "armor" : null
     } ], [ "old/healing-chamber", {
       "display" : "H",
       "color" : "white",
@@ -6481,6 +7206,61 @@
       "description" : "Somewhat cumbersome high quality deflector.",
       "armor" : null,
       "key" : null
+    } ], [ "generic/trap-immobilizing-trigger", {
+      "display" : "^",
+      "color" : "#607d8b",
+      "rangedWeapon" : null,
+      "shield" : null,
+      "hidden" : true,
+      "locked" : {
+        "key" : null,
+        "security" : 30
+      },
+      "name" : "Immobilizing trap",
+      "concealment" : 150,
+      "trap" : {
+        "type" : "CompositeItemPower",
+        "data" : {
+          "description" : null,
+          "resources" : null,
+          "powers" : [ {
+            "type" : "TrapAttackPower",
+            "data" : {
+              "description" : null,
+              "resources" : null,
+              "attack" : 100,
+              "damage" : 0,
+              "conditions" : [ {
+                "type" : "Conditions.Immobilized",
+                "data" : {
+                  "strength" : 30
+                }
+              } ],
+              "hitDescription" : "Threads spring from floor to grapple {target}.",
+              "deflectDescription" : "Threads spring from floor to grapple {target}.",
+              "missDescription" : "Threads spring from floor to grapple {target} but miss."
+            }
+          }, {
+            "type" : "ActivateMachineryPower",
+            "data" : {
+              "description" : null,
+              "resources" : null
+            }
+          } ]
+        }
+      },
+      "door" : null,
+      "usable" : {
+        "type" : "RemoveItemPower",
+        "data" : {
+          "removeDescription" : "Trap is disabled."
+        }
+      },
+      "pickable" : false,
+      "id" : "generic/trap-immobilizing-trigger",
+      "weapon" : null,
+      "description" : "Trap hidden in floor.",
+      "armor" : null
     } ], [ "generic/conduit-cargo-lift-up", {
       "display" : ">",
       "color" : "white",
@@ -7152,22 +7932,6 @@
         "slot" : "Equipment.HandArmor"
       },
       "key" : null
-    } ], [ "scipoi/portal", {
-      "display" : "O",
-      "color" : "red",
-      "rangedWeapon" : null,
-      "shield" : null,
-      "hidden" : false,
-      "locked" : null,
-      "name" : "Scipoi hollow",
-      "concealment" : 0,
-      "door" : null,
-      "usable" : null,
-      "pickable" : false,
-      "id" : "scipoi/portal",
-      "weapon" : null,
-      "description" : "Small hollowed space.",
-      "armor" : null
     } ], [ "iridan/portal", {
       "display" : "O",
       "color" : "red",
@@ -7277,22 +8041,6 @@
         "slot" : "Equipment.FootArmor"
       },
       "key" : null
-    } ], [ "scipoi/portal-empty", {
-      "display" : "O",
-      "color" : "#607d8b",
-      "rangedWeapon" : null,
-      "shield" : null,
-      "hidden" : false,
-      "locked" : null,
-      "name" : "Scipoi hollow (empty)",
-      "concealment" : 0,
-      "door" : null,
-      "usable" : null,
-      "pickable" : false,
-      "id" : "scipoi/portal-empty",
-      "weapon" : null,
-      "description" : "Small hollowed space.",
-      "armor" : null
     } ], [ "generic/decoration/controls-spacecraft", {
       "launcher" : null,
       "display" : "Ω",
@@ -7576,7 +8324,7 @@
           "transformTo" : {
             "type" : "CreatureKind",
             "data" : null,
-            "value" : "skyfarer/drone"
+            "value" : "skyfarer/drone-captured"
           },
           "transformDescription" : "Drone starts humming."
         }
@@ -7824,6 +8572,38 @@
       "id" : "iridan/conduit-stairs-up-coms",
       "weapon" : null,
       "description" : "Constructed passageway.",
+      "armor" : null
+    } ], [ "skyfarer/swarm/portal", {
+      "display" : "O",
+      "color" : "#9c27b0",
+      "rangedWeapon" : null,
+      "shield" : null,
+      "hidden" : false,
+      "locked" : null,
+      "name" : "Skyfarer excavation",
+      "concealment" : 0,
+      "door" : null,
+      "usable" : null,
+      "pickable" : false,
+      "id" : "skyfarer/swarm/portal",
+      "weapon" : null,
+      "description" : "Excavation with limited construction capability.",
+      "armor" : null
+    } ], [ "skyfarer/swarm/portal-empty", {
+      "display" : "O",
+      "color" : "#607d8b",
+      "rangedWeapon" : null,
+      "shield" : null,
+      "hidden" : false,
+      "locked" : null,
+      "name" : "Skyfarer excavation (empty)",
+      "concealment" : 0,
+      "door" : null,
+      "usable" : null,
+      "pickable" : false,
+      "id" : "skyfarer/swarm/portal-empty",
+      "weapon" : null,
+      "description" : "Excavation with limited construction capability.",
       "armor" : null
     } ], [ "nomad/armor-leg-assault", {
       "launcher" : null,
@@ -8463,6 +9243,38 @@
       "description" : "Weird technology forcing plasma to concentrate as a whip.",
       "armor" : null,
       "key" : null
+    } ], [ "scipoi/portal-hollow-empty", {
+      "display" : "O",
+      "color" : "#607d8b",
+      "rangedWeapon" : null,
+      "shield" : null,
+      "hidden" : false,
+      "locked" : null,
+      "name" : "Scipoi hollow (empty)",
+      "concealment" : 0,
+      "door" : null,
+      "usable" : null,
+      "pickable" : false,
+      "id" : "scipoi/portal-hollow-empty",
+      "weapon" : null,
+      "description" : "Small hollowed space.",
+      "armor" : null
+    } ], [ "scipoi/portal-hollow", {
+      "display" : "O",
+      "color" : "#673ab7",
+      "rangedWeapon" : null,
+      "shield" : null,
+      "hidden" : false,
+      "locked" : null,
+      "name" : "Scipoi hollow",
+      "concealment" : 0,
+      "door" : null,
+      "usable" : null,
+      "pickable" : false,
+      "id" : "scipoi/portal-hollow",
+      "weapon" : null,
+      "description" : "Small hollowed space.",
+      "armor" : null
     } ], [ "generic/door-closed", {
       "display" : "+",
       "color" : "brown",
@@ -8548,7 +9360,7 @@
             "data" : {
               "description" : null,
               "resources" : null,
-              "goal" : "gain-ship-materials"
+              "goal" : "generic/gain-ship-materials"
             }
           } ]
         }
@@ -8559,6 +9371,34 @@
       "description" : "Large source of rare materials that could be used for ship resources.",
       "armor" : null,
       "key" : null
+    } ], [ "scipoi/portal-chasm", {
+      "display" : "O",
+      "color" : "#673ab7",
+      "rangedWeapon" : null,
+      "shield" : null,
+      "hidden" : false,
+      "locked" : null,
+      "name" : "Scipoi chasm",
+      "concealment" : 0,
+      "door" : null,
+      "usable" : {
+        "type" : "RemoveItemPower",
+        "data" : {
+          "description" : "You drop an explosive to a narrow in the chasm.",
+          "resources" : {
+            "health" : 0,
+            "energy" : 0,
+            "materials" : -15,
+            "components" : 0
+          },
+          "removeDescription" : "Chasm becomes obstructed by the explosion."
+        }
+      },
+      "pickable" : false,
+      "id" : "scipoi/portal-chasm",
+      "weapon" : null,
+      "description" : "Could be collapsed by an explosion.",
+      "armor" : null
     } ], [ "iridan/deflector", {
       "launcher" : null,
       "display" : "[",
@@ -9678,47 +10518,6 @@
         "slot" : "Equipment.BodyArmor"
       },
       "key" : null
-    } ], [ "generic/trap-immobilizing", {
-      "display" : "^",
-      "color" : "#607d8b",
-      "rangedWeapon" : null,
-      "shield" : null,
-      "hidden" : true,
-      "locked" : {
-        "key" : null,
-        "security" : 30
-      },
-      "name" : "Immobilizing trap",
-      "concealment" : 150,
-      "trap" : {
-        "type" : "TrapAttackPower",
-        "data" : {
-          "attack" : 100,
-          "damage" : 0,
-          "hitDescription" : "Threads spring from floor to grapple {target}.",
-          "deflectDescription" : "Threads spring from floor to grapple {target}.",
-          "missDescription" : "Threads spring from floor to grapple {target} but miss.",
-          "conditions" : [ {
-            "type" : "Conditions.Immobilized",
-            "data" : {
-              "strength" : 30
-            }
-          } ],
-          "description" : null
-        }
-      },
-      "door" : null,
-      "usable" : {
-        "type" : "RemoveItemPower",
-        "data" : {
-          "removeDescription" : "Trap is disabled."
-        }
-      },
-      "pickable" : false,
-      "id" : "generic/trap-immobilizing",
-      "weapon" : null,
-      "description" : "Trap hidden in floor.",
-      "armor" : null
     } ], [ "scippe/weapon-shard-blast", {
       "launcher" : null,
       "display" : "(",
@@ -10289,7 +11088,15 @@
       "impassable" : true,
       "id" : "generic/chasm"
     } ] ],
-    "walls" : [ [ "generic/wall-cave-indestructible", {
+    "walls" : [ [ "siux/wall", {
+      "name" : "Wall of exotic material",
+      "display" : "#",
+      "color" : "#673ab7",
+      "description" : "Wall grown by Siux technology.",
+      "hardness" : 200,
+      "id" : "siux/wall",
+      "transparent" : false
+    } ], [ "generic/wall-cave-indestructible", {
       "name" : "Cave wall",
       "display" : "#",
       "color" : "#607d8b",
@@ -10394,7 +11201,26 @@
       "description" : "Wall designed to withstand attacks.",
       "transparent" : false
     } ] ],
-    "widgets" : [ [ "generic/trap-laser", {
+    "widgets" : [ [ "siux/portal", {
+      "type" : "SummonCreatureWidget",
+      "data" : {
+        "item" : "siux/portal",
+        "summon" : "siux/default",
+        "interval" : 500,
+        "id" : "siux/portal",
+        "summonDescription" : "{target} appears from storage.",
+        "summonCategory" : "CreatureKind.DefaultCategory",
+        "charge" : {
+          "charges" : 3,
+          "transformTo" : {
+            "type" : "ItemKind",
+            "data" : null,
+            "value" : "siux/portal-empty"
+          },
+          "transformDescription" : null
+        }
+      }
+    } ], [ "generic/trap-laser", {
       "type" : "TriggeredTrapWidget",
       "data" : {
         "item" : "generic/trap-laser",
@@ -10414,6 +11240,15 @@
         "transformDescription" : "Healing chamber deactivates.",
         "id" : "old/healing-chamber-widget-active"
       }
+    } ], [ "generic/trap-immobilizing-trigger", {
+      "type" : "TriggeredTrapWidget",
+      "data" : {
+        "item" : "generic/trap-immobilizing-trigger",
+        "smart" : true,
+        "discover" : "Discover.Triggerer",
+        "triggerDescription" : "Click.",
+        "id" : "generic/trap-immobilizing-trigger"
+      }
     } ], [ "skyfarer/explosive-mine", {
       "type" : "TriggeredTrapWidget",
       "data" : {
@@ -10422,25 +11257,6 @@
         "triggerDescription" : "Click.",
         "id" : "skyfarer/explosive-mine",
         "smart" : true
-      }
-    } ], [ "scipoi/portal", {
-      "type" : "SummonCreatureWidget",
-      "data" : {
-        "item" : "scipoi/portal",
-        "summon" : "scipoi/scippe-civilians",
-        "interval" : 500,
-        "id" : "scipoi/portal",
-        "summonDescription" : "{target} appears from hollow.",
-        "summonCategory" : "CreatureKind.DefaultCategory",
-        "charge" : {
-          "charges" : 3,
-          "transformTo" : {
-            "type" : "ItemKind",
-            "data" : null,
-            "value" : "scipoi/portal-empty"
-          },
-          "transformDescription" : null
-        }
       }
     } ], [ "iridan/portal", {
       "type" : "SummonCreatureWidget",
@@ -10511,6 +11327,25 @@
         "timer" : 1000,
         "id" : "nomad/explosive-timed"
       }
+    } ], [ "skyfarer/swarm/portal", {
+      "type" : "SummonCreatureWidget",
+      "data" : {
+        "item" : "skyfarer/swarm/portal",
+        "summon" : "skyfarer/swarm",
+        "interval" : 500,
+        "id" : "skyfarer/swarm/portal",
+        "summonDescription" : "{target} appears from excavation.",
+        "summonCategory" : "CreatureKind.DefaultCategory",
+        "charge" : {
+          "charges" : 10,
+          "transformTo" : {
+            "type" : "ItemKind",
+            "data" : null,
+            "value" : "skyfarer/swarm/portal-empty"
+          },
+          "transformDescription" : null
+        }
+      }
     } ], [ "generic/pressure-plate-hidden", {
       "type" : "TriggeredTrapWidget",
       "data" : {
@@ -10519,6 +11354,36 @@
         "discover" : "Discover.Nobody",
         "triggerDescription" : "Click.",
         "id" : "generic/pressure-plate-hidden"
+      }
+    } ], [ "scipoi/portal-hollow", {
+      "type" : "SummonCreatureWidget",
+      "data" : {
+        "item" : "scipoi/portal-hollow",
+        "summon" : "scipoi/scippe-civilians",
+        "interval" : 500,
+        "id" : "scipoi/portal-hollow",
+        "summonDescription" : "{target} appears from hollow.",
+        "summonCategory" : "CreatureKind.DefaultCategory",
+        "charge" : {
+          "charges" : 3,
+          "transformTo" : {
+            "type" : "ItemKind",
+            "data" : null,
+            "value" : "scipoi/portal-hollow-empty"
+          },
+          "transformDescription" : null
+        }
+      }
+    } ], [ "scipoi/portal-chasm", {
+      "type" : "SummonCreatureWidget",
+      "data" : {
+        "item" : "scipoi/portal-chasm",
+        "summon" : "scipoi/scippe-civilians",
+        "interval" : 1000,
+        "id" : "scipoi/portal-chasm",
+        "summonDescription" : "{target} crawls up from chasm.",
+        "summonCategory" : "CreatureKind.DefaultCategory",
+        "charge" : null
       }
     } ], [ "nomad/explosive-mine", {
       "type" : "TriggeredTrapWidget",
@@ -11602,7 +12467,7 @@
         "value" : "overrun"
       },
       "requirements" : {
-        "goals" : [ [ "gain-ship-materials" ] ]
+        "goals" : [ [ "generic/gain-ship-materials" ] ]
       }
     } ],
     "id" : "scippe/dice/entrance"
@@ -11618,37 +12483,55 @@
   } ] ],
   "sites" : [ [ "scipoi/unfinished-mine/shuttle", {
     "id" : "scipoi/unfinished-mine/shuttle",
-    "area" : "nomad/shuttle",
+    "area" : {
+      "priority" : "nomad/shuttle",
+      "choices" : [ ]
+    },
     "region" : "scipoi/unfinished-mine",
     "variants" : [ ],
     "name" : "Shuttle landing near mine entrance"
   } ], [ "iridan/nexus", {
     "id" : "iridan/nexus",
-    "area" : "iridan/nexus",
+    "area" : {
+      "priority" : "iridan/nexus",
+      "choices" : [ ]
+    },
     "region" : "iridan/underground",
     "variants" : [ ],
     "name" : "Iridan central cavern"
   } ], [ "iridan/start", {
     "id" : "iridan/start",
-    "area" : "iridan/start",
+    "area" : {
+      "priority" : "iridan/start",
+      "choices" : [ ]
+    },
     "region" : "iridan/underground",
     "variants" : [ ],
     "name" : "Scippe orbit"
   } ], [ "iridan/labs-surface", {
     "id" : "iridan/labs-surface",
-    "area" : "iridan/surface",
+    "area" : {
+      "priority" : "iridan/surface",
+      "choices" : [ ]
+    },
     "region" : "iridan/underground",
     "variants" : [ ],
     "name" : "Iridan tech laboratories surface"
   } ], [ "iridan/labs", {
     "id" : "iridan/labs",
-    "area" : "iridan/labs",
+    "area" : {
+      "priority" : "iridan/labs",
+      "choices" : [ ]
+    },
     "region" : "iridan/underground",
     "variants" : [ ],
     "name" : "Iridan tech laboratories"
   } ], [ "iridan/mine-approach", {
     "id" : "iridan/mine-approach",
-    "area" : "iridan/mine-approach",
+    "area" : {
+      "priority" : "iridan/mine-approach",
+      "choices" : [ ]
+    },
     "region" : "iridan/underground",
     "variants" : [ ],
     "name" : "Iridan mine approach"
@@ -11656,14 +12539,23 @@
     "name" : "DiCe entrance",
     "description" : null,
     "region" : "scippe/dice/entrance",
-    "area" : "scippe/dice/surface-default",
+    "area" : {
+      "priority" : "scippe/dice/surface-default",
+      "choices" : [ ]
+    },
     "variants" : [ [ {
       "value" : "overrun"
-    }, "scippe/dice/surface-overrun" ] ],
+    }, {
+      "priority" : "scippe/dice/surface-overrun",
+      "choices" : [ ]
+    } ] ],
     "id" : "scippe/dice/surface"
   } ], [ "nomad/spaceship-hub", {
     "region" : "nomad/spaceship",
-    "area" : "nomad/spaceship-hub",
+    "area" : {
+      "priority" : "nomad/spaceship-hub",
+      "choices" : [ ]
+    },
     "variants" : [ ],
     "id" : "nomad/spaceship-hub",
     "name" : "Nomad spaceship hub"
@@ -11671,54 +12563,107 @@
     "name" : "DiCe 1",
     "description" : null,
     "region" : "scippe/dice",
-    "area" : "scippe/dice/1",
+    "area" : {
+      "priority" : "scippe/dice/1",
+      "choices" : [ ]
+    },
     "variants" : [ ],
     "id" : "scippe/dice/1"
+  } ], [ "scippe/dice/2", {
+    "name" : "DiCe 2",
+    "description" : null,
+    "region" : "scippe/dice",
+    "area" : {
+      "priority" : null,
+      "choices" : [ {
+        "value" : "skyfarer/swarm",
+        "weight" : 100
+      }, {
+        "value" : "scippe/dice/scipoi-portal-chasm",
+        "weight" : 100
+      } ]
+    },
+    "variants" : [ ],
+    "id" : "scippe/dice/2"
+  } ], [ "scippe/dice/3", {
+    "name" : "DiCe 3",
+    "description" : null,
+    "region" : "scippe/dice",
+    "area" : {
+      "priority" : "placeholder",
+      "choices" : [ ]
+    },
+    "variants" : [ ],
+    "id" : "scippe/dice/3"
   } ], [ "scipoi/unfinished-mine/mine-1", {
     "id" : "scipoi/unfinished-mine/mine-1",
-    "area" : "scipoi/unfinished-mine/mine",
+    "area" : {
+      "priority" : "scipoi/unfinished-mine/mine",
+      "choices" : [ ]
+    },
     "region" : "scipoi/unfinished-mine",
     "variants" : [ ],
     "name" : "Mine construction site upper level"
   } ], [ "iridan/coms-surface", {
     "id" : "iridan/coms-surface",
-    "area" : "iridan/surface",
+    "area" : {
+      "priority" : "iridan/surface",
+      "choices" : [ ]
+    },
     "region" : "iridan/underground",
     "variants" : [ ],
     "name" : "Iridan communications relay surface"
   } ], [ "iridan/coms", {
     "id" : "iridan/coms",
-    "area" : "iridan/coms",
+    "area" : {
+      "priority" : "iridan/coms",
+      "choices" : [ ]
+    },
     "region" : "iridan/underground",
     "variants" : [ ],
     "name" : "Iridan communications relay"
   } ], [ "iridan/mine", {
     "id" : "iridan/mine",
-    "area" : "iridan/mine",
+    "area" : {
+      "priority" : "iridan/mine",
+      "choices" : [ ]
+    },
     "region" : "iridan/underground",
     "variants" : [ ],
     "name" : "Iridan mine"
   } ], [ "scipoi/unfinished-mine/mine-final", {
     "id" : "scipoi/unfinished-mine/mine-final",
-    "area" : "scipoi/unfinished-mine/mine-final",
+    "area" : {
+      "priority" : "scipoi/unfinished-mine/mine-final",
+      "choices" : [ ]
+    },
     "region" : "scipoi/unfinished-mine",
     "variants" : [ ],
     "name" : "Mine construction site lower level"
   } ], [ "scippe/dice/shuttle", {
     "id" : "scippe/dice/shuttle",
-    "area" : "nomad/shuttle",
+    "area" : {
+      "priority" : "nomad/shuttle",
+      "choices" : [ ]
+    },
     "region" : "scippe/dice/entrance",
     "variants" : [ ],
     "name" : "Shuttle near DiCe entrance"
   } ], [ "scipoi/unfinished-mine/surface", {
     "id" : "scipoi/unfinished-mine/surface",
-    "area" : "scipoi/unfinished-mine/surface",
+    "area" : {
+      "priority" : "scipoi/unfinished-mine/surface",
+      "choices" : [ ]
+    },
     "region" : "scipoi/unfinished-mine",
     "variants" : [ ],
     "name" : "Mine entrance"
   } ], [ "test/some-placeholder", {
     "region" : "test/some",
-    "area" : "placeholder",
+    "area" : {
+      "priority" : "placeholder",
+      "choices" : [ ]
+    },
     "variants" : [ ],
     "id" : "test/some-placeholder",
     "name" : "Placeholder site"
@@ -11726,24 +12671,36 @@
     "name" : "DiCe negotiations",
     "description" : null,
     "region" : "scippe/dice/entrance",
-    "area" : "placeholder",
+    "area" : {
+      "priority" : "placeholder",
+      "choices" : [ ]
+    },
     "variants" : [ ],
     "id" : "scippe/dice/negotiations"
   } ], [ "iridan/core-approach", {
     "id" : "iridan/core-approach",
-    "area" : "iridan/core-approach",
+    "area" : {
+      "priority" : "iridan/core-approach",
+      "choices" : [ ]
+    },
     "region" : "iridan/underground",
     "variants" : [ ],
     "name" : "Iridan AI core approach"
   } ], [ "test/other-placeholder", {
     "region" : "test/other",
-    "area" : "placeholder",
+    "area" : {
+      "priority" : "placeholder",
+      "choices" : [ ]
+    },
     "variants" : [ ],
     "id" : "test/other-placeholder",
     "name" : "Placeholder site"
   } ], [ "iridan/core", {
     "id" : "iridan/core",
-    "area" : "iridan/core",
+    "area" : {
+      "priority" : "iridan/core",
+      "choices" : [ ]
+    },
     "region" : "iridan/underground",
     "variants" : [ ],
     "name" : "Iridan AI core"
@@ -11830,6 +12787,7 @@
         }
       },
       "templateCatalogue" : null,
+      "unique" : false,
       "terrain" : {
         "type" : "ContentSelection.ThemeTerrain",
         "data" : {
@@ -11920,6 +12878,7 @@
         }
       },
       "templateCatalogue" : "generic/area-tunnels",
+      "unique" : false,
       "terrain" : null,
       "templates" : [ ],
       "id" : "generic/area/tunnels",
@@ -11970,6 +12929,7 @@
           "tags" : [ ]
         }
       },
+      "unique" : false,
       "terrain" : null,
       "templates" : [ {
         "type" : "ContentSelection.FixedTemplate",
@@ -12111,7 +13071,8 @@
         "gatewayLocations" : [ ],
         "terrains" : [ ]
       },
-      "id" : "old/healing-chamber"
+      "id" : "old/healing-chamber",
+      "unique" : false
     }
   } ], [ "iridan/area/core", {
     "type" : "RandomizedTemplate",
@@ -12143,6 +13104,7 @@
         }
       },
       "templateCatalogue" : "generic/area-cave",
+      "unique" : false,
       "terrain" : null,
       "templates" : [ {
         "selection" : {
@@ -16900,7 +17862,8 @@
           }
         } ] ]
       },
-      "id" : "scippe/dice/hall/chasm"
+      "id" : "scippe/dice/hall/chasm",
+      "unique" : false
     }
   } ], [ "scippe/dice/room/gate-security/default", {
     "type" : "FixedTemplate",
@@ -17155,7 +18118,8 @@
         "gatewayLocations" : [ ],
         "terrains" : [ ]
       },
-      "id" : "scippe/dice/room/gate-security/default"
+      "id" : "scippe/dice/room/gate-security/default",
+      "unique" : false
     }
   } ], [ "nomad/shuttle/interior", {
     "type" : "FixedTemplate",
@@ -17726,7 +18690,8 @@
         } ],
         "terrains" : [ ]
       },
-      "id" : "nomad/shuttle/interior"
+      "id" : "nomad/shuttle/interior",
+      "unique" : false
     }
   } ], [ "scipoi/unfinished-mine/area/mine-final", {
     "type" : "RandomizedTemplate",
@@ -17758,6 +18723,7 @@
         }
       },
       "templateCatalogue" : null,
+      "unique" : false,
       "terrain" : null,
       "templates" : [ {
         "selection" : {
@@ -18685,7 +19651,8 @@
           }
         } ] ]
       },
-      "id" : "iridan/conduit/assault-pod"
+      "id" : "iridan/conduit/assault-pod",
+      "unique" : false
     }
   } ], [ "scipoi/unfinished-mine/cave/mine-final", {
     "type" : "RandomizedTemplate",
@@ -18718,6 +19685,7 @@
         }
       },
       "templateCatalogue" : null,
+      "unique" : false,
       "terrain" : null,
       "templates" : [ {
         "selection" : {
@@ -18831,7 +19799,8 @@
         "gatewayLocations" : [ ],
         "terrains" : [ ]
       },
-      "id" : "generic/conduit"
+      "id" : "generic/conduit",
+      "unique" : false
     }
   } ], [ "generic/room/portal-high", {
     "type" : "RandomizedTemplate",
@@ -18856,6 +19825,7 @@
           "tags" : [ ]
         }
       },
+      "unique" : false,
       "terrain" : {
         "type" : "ContentSelection.ThemeTerrain",
         "data" : {
@@ -18905,6 +19875,7 @@
           "tags" : [ ]
         }
       },
+      "unique" : false,
       "terrain" : null,
       "templates" : [ {
         "type" : "ContentSelection.FixedTemplate",
@@ -18948,6 +19919,7 @@
           "tags" : [ ]
         }
       },
+      "unique" : false,
       "terrain" : {
         "type" : "ContentSelection.ThemeTerrain",
         "data" : {
@@ -19462,7 +20434,8 @@
         } ],
         "terrains" : [ ]
       },
-      "id" : "nomad/spaceship/hub"
+      "id" : "nomad/spaceship/hub",
+      "unique" : false
     }
   } ], [ "skyfarer/hall/control-freak", {
     "type" : "RandomizedTemplate",
@@ -19490,6 +20463,7 @@
         }
       },
       "templateCatalogue" : null,
+      "unique" : false,
       "terrain" : null,
       "templates" : [ ],
       "id" : "skyfarer/hall/control-freak",
@@ -19544,6 +20518,7 @@
         }
       },
       "templateCatalogue" : "generic/area-rooms",
+      "unique" : false,
       "terrain" : null,
       "templates" : [ {
         "selection" : {
@@ -19619,6 +20594,7 @@
         }
       },
       "templateCatalogue" : null,
+      "unique" : false,
       "terrain" : null,
       "templates" : [ ],
       "id" : "exodus/room/carapace",
@@ -19669,6 +20645,7 @@
         }
       },
       "templateCatalogue" : null,
+      "unique" : false,
       "terrain" : null,
       "templates" : [ {
         "selection" : {
@@ -20127,7 +21104,8 @@
           "category" : [ "TerrainKind.ConstructedCategory" ],
           "tags" : [ ]
         }
-      }
+      },
+      "unique" : false
     }
   } ], [ "iridan/room/iridan-hunters", {
     "type" : "FixedTemplate",
@@ -20319,7 +21297,74 @@
         "gatewayLocations" : [ ],
         "terrains" : [ ]
       },
-      "id" : "iridan/room/iridan-hunters"
+      "id" : "iridan/room/iridan-hunters",
+      "unique" : false
+    }
+  } ], [ "scipoi/hall/portal-chasm", {
+    "type" : "RandomizedTemplate",
+    "data" : {
+      "conduitLocations" : {
+        "min" : 0,
+        "max" : 0,
+        "tag" : null
+      },
+      "shape" : {
+        "type" : "Rectangle",
+        "data" : {
+          "width" : 14,
+          "height" : 10,
+          "variance" : 0
+        }
+      },
+      "fill" : null,
+      "routing" : null,
+      "border" : {
+        "type" : "ContentSelection.ThemeWall",
+        "data" : {
+          "category" : [ ],
+          "tags" : [ ]
+        }
+      },
+      "templateCatalogue" : null,
+      "unique" : false,
+      "terrain" : null,
+      "templates" : [ {
+        "selection" : {
+          "type" : "ContentSelection.FixedTemplate",
+          "data" : {
+            "template" : "scipoi/space/portal-chasm"
+          }
+        },
+        "distribution" : {
+          "type" : "Distribution.Uniform",
+          "data" : {
+            "min" : 1,
+            "max" : 1
+          }
+        },
+        "required" : 1
+      } ],
+      "id" : "scipoi/hall/portal-chasm",
+      "features" : [ {
+        "type" : "RandomizedContentFeature",
+        "data" : {
+          "catalogues" : [ "scipoi/party/builder" ],
+          "creatures" : [ ],
+          "items" : [ ],
+          "widgets" : [ ]
+        }
+      } ],
+      "entrances" : {
+        "min" : 1,
+        "max" : 2,
+        "door" : {
+          "type" : "ContentSelection.ThemeDoor",
+          "data" : {
+            "category" : [ ],
+            "tags" : [ ]
+          }
+        }
+      }
     }
   } ], [ "generic/trap/corridor-ambush", {
     "type" : "FixedTemplate",
@@ -20814,7 +21859,8 @@
           "category" : [ "TerrainKind.ConstructedCategory" ],
           "tags" : [ ]
         }
-      }
+      },
+      "unique" : false
     }
   } ], [ "generic/area/rooms", {
     "type" : "RandomizedTemplate",
@@ -20846,6 +21892,7 @@
         }
       },
       "templateCatalogue" : "generic/area-rooms",
+      "unique" : false,
       "terrain" : null,
       "templates" : [ ],
       "id" : "generic/area/rooms",
@@ -20881,6 +21928,7 @@
       },
       "fill" : null,
       "border" : null,
+      "unique" : false,
       "terrain" : null,
       "templates" : [ ],
       "id" : "generic/space",
@@ -20928,6 +21976,7 @@
           "tags" : [ ]
         }
       },
+      "unique" : false,
       "terrain" : {
         "type" : "ContentSelection.ThemeTerrain",
         "data" : {
@@ -21009,6 +22058,7 @@
           "tags" : [ ]
         }
       },
+      "unique" : false,
       "terrain" : {
         "type" : "ContentSelection.ThemeTerrain",
         "data" : {
@@ -22423,6 +23473,333 @@
           "category" : [ "TerrainKind.ConstructedCategory" ],
           "tags" : [ ]
         }
+      },
+      "unique" : false
+    }
+  } ], [ "siux/room/diplomat", {
+    "type" : "FixedTemplate",
+    "data" : {
+      "shape" : {
+        "type" : "Rectangle",
+        "data" : {
+          "width" : 5,
+          "height" : 5,
+          "variance" : 0
+        }
+      },
+      "theme" : "siux/default",
+      "unique" : false,
+      "owner" : "siux",
+      "terrain" : null,
+      "content" : {
+        "conduitLocations" : [ ],
+        "items" : [ ],
+        "restrictedLocations" : [ ],
+        "walls" : [ [ {
+          "x" : 4,
+          "y" : 3
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "theme" : null,
+            "category" : [ ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 4,
+          "y" : 2
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "theme" : null,
+            "category" : [ ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 0,
+          "y" : 1
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "theme" : null,
+            "category" : [ ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 4,
+          "y" : 4
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "theme" : null,
+            "category" : [ ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 3,
+          "y" : 0
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "theme" : null,
+            "category" : [ ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 0,
+          "y" : 0
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "theme" : null,
+            "category" : [ ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 0,
+          "y" : 3
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "theme" : null,
+            "category" : [ ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 0,
+          "y" : 4
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "theme" : null,
+            "category" : [ ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 4,
+          "y" : 0
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "theme" : null,
+            "category" : [ ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 1,
+          "y" : 4
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "theme" : null,
+            "category" : [ ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 3,
+          "y" : 4
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "theme" : null,
+            "category" : [ ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 2,
+          "y" : 0
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "theme" : null,
+            "category" : [ ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 1,
+          "y" : 0
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "theme" : null,
+            "category" : [ ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 2,
+          "y" : 4
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "theme" : null,
+            "category" : [ ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 4,
+          "y" : 1
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "theme" : null,
+            "category" : [ ],
+            "tags" : [ ]
+          }
+        } ] ],
+        "machinery" : [ ],
+        "widgets" : [ [ {
+          "x" : 2,
+          "y" : 1
+        }, {
+          "type" : "ContentSelection.ThemeWidget",
+          "data" : {
+            "theme" : null,
+            "category" : [ "WidgetKind.TrapCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 2,
+          "y" : 2
+        }, {
+          "type" : "ContentSelection.ThemeWidget",
+          "data" : {
+            "theme" : null,
+            "category" : [ "WidgetKind.TrapCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 2,
+          "y" : 3
+        }, {
+          "type" : "ContentSelection.ThemeWidget",
+          "data" : {
+            "theme" : null,
+            "category" : [ "WidgetKind.TrapCategory" ],
+            "tags" : [ ]
+          }
+        } ] ],
+        "creatures" : [ [ {
+          "x" : 3,
+          "y" : 2
+        }, {
+          "type" : "ContentSelection.FixedCreature",
+          "data" : {
+            "kind" : "siux/diplomat",
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 3,
+          "y" : 1
+        }, {
+          "type" : "ContentSelection.ThemeCreature",
+          "data" : {
+            "theme" : null,
+            "category" : [ "CreatureKind.TurretCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 1,
+          "y" : 1
+        }, {
+          "type" : "ContentSelection.ThemeCreature",
+          "data" : {
+            "theme" : null,
+            "category" : [ "CreatureKind.TurretCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 1,
+          "y" : 3
+        }, {
+          "type" : "ContentSelection.ThemeCreature",
+          "data" : {
+            "theme" : null,
+            "category" : [ "CreatureKind.TurretCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 3,
+          "y" : 3
+        }, {
+          "type" : "ContentSelection.ThemeCreature",
+          "data" : {
+            "theme" : null,
+            "category" : [ "CreatureKind.TurretCategory" ],
+            "tags" : [ ]
+          }
+        } ] ],
+        "gatewayLocations" : [ ],
+        "terrains" : [ ]
+      },
+      "templates" : [ ],
+      "id" : "siux/room/diplomat",
+      "features" : [ ],
+      "entrances" : [ [ {
+        "x" : 0,
+        "y" : 2
+      }, {
+        "type" : "ContentSelection.ThemeDoor",
+        "data" : {
+          "theme" : null,
+          "category" : [ "ItemKind.SecureDoorCategory" ],
+          "tags" : [ ]
+        }
+      } ] ]
+    }
+  } ], [ "generic/area/rooms-excavated-portals", {
+    "type" : "RandomizedTemplate",
+    "data" : {
+      "conduitLocations" : {
+        "min" : 0,
+        "max" : 0
+      },
+      "shape" : {
+        "type" : "Rectangle",
+        "data" : {
+          "width" : 70,
+          "height" : 40,
+          "variance" : 0
+        }
+      },
+      "fill" : {
+        "type" : "ContentSelection.ThemeWall",
+        "data" : {
+          "category" : [ ],
+          "tags" : [ ]
+        }
+      },
+      "border" : {
+        "type" : "ContentSelection.ThemeWall",
+        "data" : {
+          "category" : [ "WallKind.AreaBorderCategory" ],
+          "tags" : [ ]
+        }
+      },
+      "templateCatalogue" : "generic/area-rooms",
+      "unique" : false,
+      "terrain" : null,
+      "templates" : [ ],
+      "id" : "generic/area/rooms-excavated-portals",
+      "features" : [ {
+        "type" : "BurrowFeature",
+        "data" : {
+          "min" : 10,
+          "max" : 15,
+          "noise" : 50
+        }
+      }, {
+        "type" : "RandomizedContentFeature",
+        "data" : {
+          "creatures" : [ ],
+          "items" : [ ],
+          "widgets" : [ ],
+          "catalogues" : [ "generic/room-portal-high", "generic/room-portal-high" ]
+        }
+      } ],
+      "entrances" : {
+        "min" : 0,
+        "max" : 0,
+        "door" : null
       }
     }
   } ], [ "iridan/area/core-approach", {
@@ -22455,6 +23832,7 @@
         }
       },
       "templateCatalogue" : "generic/area-rooms",
+      "unique" : false,
       "terrain" : null,
       "templates" : [ {
         "selection" : {
@@ -22805,7 +24183,8 @@
         } ],
         "terrains" : [ ]
       },
-      "id" : "placeholder"
+      "id" : "placeholder",
+      "unique" : false
     }
   } ], [ "generic/room", {
     "type" : "RandomizedTemplate",
@@ -22830,6 +24209,7 @@
           "tags" : [ ]
         }
       },
+      "unique" : false,
       "terrain" : {
         "type" : "ContentSelection.ThemeTerrain",
         "data" : {
@@ -22871,6 +24251,7 @@
       },
       "fill" : null,
       "border" : null,
+      "unique" : false,
       "terrain" : null,
       "templates" : [ ],
       "id" : "generic/space/portal-low",
@@ -22925,6 +24306,7 @@
         }
       },
       "templateCatalogue" : "generic/area-rooms-challenges",
+      "unique" : false,
       "terrain" : null,
       "templates" : [ {
         "selection" : {
@@ -23833,7 +25215,72 @@
           }
         } ] ]
       },
-      "id" : "nomad/shuttle/exterior"
+      "id" : "nomad/shuttle/exterior",
+      "unique" : false
+    }
+  } ], [ "scippe/dice/area/scipoi-portal-chasm", {
+    "type" : "RandomizedTemplate",
+    "data" : {
+      "conduitLocations" : {
+        "min" : 0,
+        "max" : 0
+      },
+      "shape" : {
+        "type" : "Rectangle",
+        "data" : {
+          "width" : 70,
+          "height" : 40,
+          "variance" : 0
+        }
+      },
+      "fill" : {
+        "type" : "ContentSelection.ThemeWall",
+        "data" : {
+          "category" : [ ],
+          "tags" : [ ]
+        }
+      },
+      "border" : {
+        "type" : "ContentSelection.ThemeWall",
+        "data" : {
+          "category" : [ "WallKind.AreaBorderCategory" ],
+          "tags" : [ ]
+        }
+      },
+      "templateCatalogue" : "generic/area-rooms-challenges",
+      "unique" : false,
+      "terrain" : null,
+      "templates" : [ {
+        "selection" : {
+          "type" : "ContentSelection.FixedTemplate",
+          "data" : {
+            "template" : "scipoi/hall/portal-chasm"
+          }
+        },
+        "distribution" : {
+          "type" : "Distribution.Uniform",
+          "data" : {
+            "min" : 1,
+            "max" : 1
+          }
+        },
+        "required" : 1
+      } ],
+      "id" : "scippe/dice/area/scipoi-portal-chasm",
+      "features" : [ {
+        "type" : "RandomizedContentFeature",
+        "data" : {
+          "creatures" : [ ],
+          "items" : [ ],
+          "widgets" : [ ],
+          "catalogues" : [ "generic/room" ]
+        }
+      } ],
+      "entrances" : {
+        "min" : 0,
+        "max" : 0,
+        "door" : null
+      }
     }
   } ], [ "generic/space/chasm", {
     "type" : "FixedTemplate",
@@ -24077,7 +25524,8 @@
           }
         } ] ]
       },
-      "id" : "generic/space/chasm"
+      "id" : "generic/space/chasm",
+      "unique" : false
     }
   } ], [ "nomad/shuttle/valley", {
     "type" : "RandomizedTemplate",
@@ -24110,6 +25558,7 @@
         }
       },
       "templateCatalogue" : null,
+      "unique" : false,
       "terrain" : null,
       "templates" : [ {
         "selection" : {
@@ -24181,6 +25630,7 @@
         }
       },
       "templateCatalogue" : null,
+      "unique" : false,
       "terrain" : {
         "type" : "ContentSelection.ThemeTerrain",
         "data" : {
@@ -24286,6 +25736,7 @@
         }
       },
       "templateCatalogue" : "generic/area-rooms",
+      "unique" : false,
       "terrain" : null,
       "templates" : [ {
         "selection" : {
@@ -24386,6 +25837,7 @@
         }
       },
       "templateCatalogue" : "generic/area-cave",
+      "unique" : false,
       "terrain" : null,
       "templates" : [ ],
       "id" : "generic/area/cave",
@@ -24408,6 +25860,101 @@
       "entrances" : {
         "min" : 0,
         "max" : 0,
+        "door" : null
+      }
+    }
+  } ], [ "siux/house/diplomat", {
+    "type" : "RandomizedTemplate",
+    "data" : {
+      "conduitLocations" : {
+        "min" : 0,
+        "max" : 0
+      },
+      "shape" : {
+        "type" : "Rectangle",
+        "data" : {
+          "width" : 21,
+          "height" : 19,
+          "variance" : 0
+        }
+      },
+      "fill" : {
+        "type" : "ContentSelection.ThemeWall",
+        "data" : {
+          "theme" : null,
+          "category" : [ ],
+          "tags" : [ ]
+        }
+      },
+      "theme" : "siux/default",
+      "border" : {
+        "type" : "ContentSelection.ThemeWall",
+        "data" : {
+          "category" : [ ],
+          "tags" : [ ]
+        }
+      },
+      "unique" : true,
+      "owner" : "siux",
+      "terrain" : {
+        "type" : "ContentSelection.ThemeTerrain",
+        "data" : {
+          "category" : [ ],
+          "tags" : [ ]
+        }
+      },
+      "templates" : [ {
+        "selection" : {
+          "type" : "ContentSelection.ThemeTemplate",
+          "data" : {
+            "category" : [ "Template.TrapCategory" ],
+            "tags" : [ ]
+          }
+        },
+        "distribution" : {
+          "type" : "Distribution.Uniform",
+          "data" : {
+            "min" : 2,
+            "max" : 2
+          }
+        },
+        "required" : 2
+      }, {
+        "selection" : {
+          "type" : "ContentSelection.FixedTemplate",
+          "data" : {
+            "template" : "siux/room/diplomat"
+          }
+        },
+        "distribution" : {
+          "type" : "Distribution.Uniform",
+          "data" : {
+            "min" : 1,
+            "max" : 1
+          }
+        },
+        "required" : 1
+      } ],
+      "id" : "siux/house/diplomat",
+      "features" : [ {
+        "type" : "BurrowFeature",
+        "data" : {
+          "min" : 40,
+          "max" : 60,
+          "noise" : 30
+        }
+      }, {
+        "type" : "RandomizedContentFeature",
+        "data" : {
+          "creatures" : [ ],
+          "items" : [ ],
+          "widgets" : [ ],
+          "catalogues" : [ "generic/room-portal-high", "generic/room" ]
+        }
+      } ],
+      "entrances" : {
+        "min" : 1,
+        "max" : 1,
         "door" : null
       }
     }
@@ -24441,6 +25988,7 @@
         }
       },
       "templateCatalogue" : "generic/area-tunnels",
+      "unique" : false,
       "terrain" : null,
       "templates" : [ {
         "selection" : {
@@ -25627,7 +27175,8 @@
           "category" : [ "TerrainKind.ConstructedCategory" ],
           "tags" : [ ]
         }
-      }
+      },
+      "unique" : false
     }
   } ], [ "scippe/dice/area/surface/overrun", {
     "type" : "SequenceTemplate",
@@ -25654,6 +27203,7 @@
           "tags" : [ ]
         }
       },
+      "unique" : false,
       "terrain" : null,
       "templates" : [ {
         "type" : "ContentSelection.FixedTemplate",
@@ -25693,6 +27243,62 @@
             "tags" : [ ]
           }
         }
+      }
+    }
+  } ], [ "generic/area/rooms-excavated", {
+    "type" : "RandomizedTemplate",
+    "data" : {
+      "conduitLocations" : {
+        "min" : 0,
+        "max" : 0
+      },
+      "shape" : {
+        "type" : "Rectangle",
+        "data" : {
+          "width" : 70,
+          "height" : 40,
+          "variance" : 0
+        }
+      },
+      "fill" : {
+        "type" : "ContentSelection.ThemeWall",
+        "data" : {
+          "category" : [ ],
+          "tags" : [ ]
+        }
+      },
+      "border" : {
+        "type" : "ContentSelection.ThemeWall",
+        "data" : {
+          "category" : [ "WallKind.AreaBorderCategory" ],
+          "tags" : [ ]
+        }
+      },
+      "templateCatalogue" : "generic/area-rooms",
+      "unique" : false,
+      "terrain" : null,
+      "templates" : [ ],
+      "id" : "generic/area/rooms-excavated",
+      "features" : [ {
+        "type" : "BurrowFeature",
+        "data" : {
+          "min" : 10,
+          "max" : 15,
+          "noise" : 50
+        }
+      }, {
+        "type" : "RandomizedContentFeature",
+        "data" : {
+          "creatures" : [ ],
+          "items" : [ ],
+          "widgets" : [ ],
+          "catalogues" : [ "generic/room" ]
+        }
+      } ],
+      "entrances" : {
+        "min" : 0,
+        "max" : 0,
+        "door" : null
       }
     }
   } ], [ "scipoi/unfinished-mine/room/mine-final", {
@@ -26000,7 +27606,8 @@
         "gatewayLocations" : [ ],
         "terrains" : [ ]
       },
-      "id" : "scipoi/unfinished-mine/room/mine-final"
+      "id" : "scipoi/unfinished-mine/room/mine-final",
+      "unique" : false
     }
   } ], [ "generic/room/cargo-lift", {
     "type" : "FixedTemplate",
@@ -26163,7 +27770,8 @@
         "gatewayLocations" : [ ],
         "terrains" : [ ]
       },
-      "id" : "generic/room/cargo-lift"
+      "id" : "generic/room/cargo-lift",
+      "unique" : false
     }
   } ], [ "iridan/area/surface-assault", {
     "type" : "RandomizedTemplate",
@@ -26195,6 +27803,7 @@
         }
       },
       "templateCatalogue" : "generic/area-cave",
+      "unique" : false,
       "terrain" : null,
       "templates" : [ {
         "selection" : {
@@ -26258,6 +27867,7 @@
           "tags" : [ ]
         }
       },
+      "unique" : false,
       "terrain" : {
         "type" : "ContentSelection.ThemeTerrain",
         "data" : {
@@ -26304,6 +27914,251 @@
         }
       }
     }
+  } ], [ "generic/trap/corridor-turret-immobilize", {
+    "type" : "FixedTemplate",
+    "data" : {
+      "shape" : {
+        "type" : "Rectangle",
+        "data" : {
+          "width" : 3,
+          "height" : 7,
+          "variance" : 0
+        }
+      },
+      "templates" : [ ],
+      "entrances" : [ [ {
+        "x" : 0,
+        "y" : 3
+      }, {
+        "type" : "ContentSelection.FixedDoor",
+        "data" : {
+          "kind" : "generic/door-hidden",
+          "tags" : [ ]
+        }
+      } ], [ {
+        "x" : 2,
+        "y" : 3
+      }, {
+        "type" : "ContentSelection.FixedDoor",
+        "data" : {
+          "kind" : "generic/door-hidden",
+          "tags" : [ ]
+        }
+      } ] ],
+      "features" : [ ],
+      "content" : {
+        "conduitLocations" : [ ],
+        "items" : [ ],
+        "restrictedLocations" : [ {
+          "x" : 1,
+          "y" : 3
+        } ],
+        "walls" : [ [ {
+          "x" : 0,
+          "y" : 1
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.ConstructedCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 0,
+          "y" : 0
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.ConstructedCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 0,
+          "y" : 2
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.ConstructedCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 2,
+          "y" : 1
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.ConstructedCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 2,
+          "y" : 2
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.ConstructedCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 2,
+          "y" : 0
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.ConstructedCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 1,
+          "y" : 0
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.ConstructedCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 1,
+          "y" : 2
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.ConstructedCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 0,
+          "y" : 6
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.ConstructedCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 1,
+          "y" : 6
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.ConstructedCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 0,
+          "y" : 4
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.ConstructedCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 2,
+          "y" : 6
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.ConstructedCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 0,
+          "y" : 5
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.ConstructedCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 2,
+          "y" : 5
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.ConstructedCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 2,
+          "y" : 4
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.ConstructedCategory" ],
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 1,
+          "y" : 4
+        }, {
+          "type" : "ContentSelection.ThemeWall",
+          "data" : {
+            "category" : [ "WallKind.ConstructedCategory" ],
+            "tags" : [ ]
+          }
+        } ] ],
+        "machinery" : [ {
+          "mechanism" : {
+            "type" : "RemoveWallMechanism",
+            "data" : { }
+          },
+          "disposable" : true,
+          "description" : "Walls open around you!",
+          "controls" : [ {
+            "x" : 1,
+            "y" : 3
+          } ],
+          "targets" : [ {
+            "x" : 1,
+            "y" : 2
+          }, {
+            "x" : 1,
+            "y" : 4
+          } ]
+        } ],
+        "widgets" : [ [ {
+          "x" : 1,
+          "y" : 3
+        }, {
+          "type" : "ContentSelection.FixedWidget",
+          "data" : {
+            "kind" : "generic/trap-immobilizing-trigger",
+            "tags" : [ ]
+          }
+        } ] ],
+        "creatures" : [ [ {
+          "x" : 1,
+          "y" : 5
+        }, {
+          "type" : "ContentSelection.ThemeCreature",
+          "data" : {
+            "tags" : [ ],
+            "category" : [ "CreatureKind.TurretCategory" ]
+          }
+        } ], [ {
+          "x" : 1,
+          "y" : 1
+        }, {
+          "type" : "ContentSelection.ThemeCreature",
+          "data" : {
+            "tags" : [ ],
+            "category" : [ "CreatureKind.TurretCategory" ]
+          }
+        } ] ],
+        "gatewayLocations" : [ ],
+        "terrains" : [ ]
+      },
+      "id" : "generic/trap/corridor-turret-immobilize",
+      "terrain" : {
+        "type" : "ContentSelection.ThemeTerrain",
+        "data" : {
+          "category" : [ "TerrainKind.ConstructedCategory" ],
+          "tags" : [ ]
+        }
+      },
+      "unique" : false
+    }
   } ], [ "scippe/dice/room/lift", {
     "type" : "FixedTemplate",
     "data" : {
@@ -26316,6 +28171,7 @@
         }
       },
       "theme" : null,
+      "unique" : false,
       "owner" : null,
       "terrain" : {
         "type" : "ContentSelection.FixedTerrain",
@@ -26486,6 +28342,7 @@
       },
       "fill" : null,
       "border" : null,
+      "unique" : false,
       "terrain" : null,
       "templates" : [ ],
       "id" : "idiran/space/coms-equipment",
@@ -26571,6 +28428,7 @@
         }
       },
       "templateCatalogue" : null,
+      "unique" : false,
       "terrain" : {
         "type" : "ContentSelection.ThemeTerrain",
         "data" : {
@@ -26642,7 +28500,8 @@
         "gatewayLocations" : [ ],
         "terrains" : [ ]
       },
-      "id" : "generic/spot"
+      "id" : "generic/spot",
+      "unique" : false
     }
   } ], [ "iridan/space/skyfarer-assault", {
     "type" : "FixedTemplate",
@@ -26816,7 +28675,8 @@
         "gatewayLocations" : [ ],
         "terrains" : [ ]
       },
-      "id" : "iridan/space/skyfarer-assault"
+      "id" : "iridan/space/skyfarer-assault",
+      "unique" : false
     }
   } ], [ "generic/vault", {
     "type" : "FixedTemplate",
@@ -27320,7 +29180,8 @@
           "category" : [ "TerrainKind.ConstructedCategory" ],
           "tags" : [ ]
         }
-      }
+      },
+      "unique" : false
     }
   } ], [ "generic/area/mine-lift", {
     "type" : "RandomizedTemplate",
@@ -27352,6 +29213,7 @@
         }
       },
       "templateCatalogue" : null,
+      "unique" : false,
       "terrain" : null,
       "templates" : [ {
         "selection" : {
@@ -27695,7 +29557,262 @@
         "gatewayLocations" : [ ],
         "terrains" : [ ]
       },
-      "id" : "scippe/dice/room/gate-security/overrun"
+      "id" : "scippe/dice/room/gate-security/overrun",
+      "unique" : false
+    }
+  } ], [ "scipoi/space/portal-chasm", {
+    "type" : "FixedTemplate",
+    "data" : {
+      "shape" : {
+        "type" : "Rectangle",
+        "data" : {
+          "width" : 6,
+          "height" : 6,
+          "variance" : 0
+        }
+      },
+      "terrain" : null,
+      "templates" : [ ],
+      "entrances" : [ ],
+      "features" : [ ],
+      "content" : {
+        "conduitLocations" : [ ],
+        "items" : [ ],
+        "restrictedLocations" : [ ],
+        "walls" : [ ],
+        "machinery" : [ ],
+        "widgets" : [ [ {
+          "x" : 1,
+          "y" : 4
+        }, {
+          "type" : "ContentSelection.FixedWidget",
+          "data" : {
+            "kind" : "scipoi/portal-chasm",
+            "tags" : [ ]
+          }
+        } ] ],
+        "creatures" : [ ],
+        "gatewayLocations" : [ ],
+        "terrains" : [ [ {
+          "x" : 1,
+          "y" : 3
+        }, {
+          "type" : "ContentSelection.FixedTerrain",
+          "data" : {
+            "kind" : "generic/chasm",
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 4,
+          "y" : 3
+        }, {
+          "type" : "ContentSelection.FixedTerrain",
+          "data" : {
+            "kind" : "generic/chasm",
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 5,
+          "y" : 2
+        }, {
+          "type" : "ContentSelection.FixedTerrain",
+          "data" : {
+            "kind" : "generic/chasm",
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 4,
+          "y" : 2
+        }, {
+          "type" : "ContentSelection.FixedTerrain",
+          "data" : {
+            "kind" : "generic/chasm",
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 2,
+          "y" : 1
+        }, {
+          "type" : "ContentSelection.FixedTerrain",
+          "data" : {
+            "kind" : "generic/chasm",
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 4,
+          "y" : 4
+        }, {
+          "type" : "ContentSelection.FixedTerrain",
+          "data" : {
+            "kind" : "generic/chasm",
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 3,
+          "y" : 0
+        }, {
+          "type" : "ContentSelection.FixedTerrain",
+          "data" : {
+            "kind" : "generic/chasm",
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 1,
+          "y" : 1
+        }, {
+          "type" : "ContentSelection.FixedTerrain",
+          "data" : {
+            "kind" : "generic/chasm",
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 0,
+          "y" : 2
+        }, {
+          "type" : "ContentSelection.FixedTerrain",
+          "data" : {
+            "kind" : "generic/chasm",
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 0,
+          "y" : 3
+        }, {
+          "type" : "ContentSelection.FixedTerrain",
+          "data" : {
+            "kind" : "generic/chasm",
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 2,
+          "y" : 2
+        }, {
+          "type" : "ContentSelection.FixedTerrain",
+          "data" : {
+            "kind" : "generic/chasm",
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 3,
+          "y" : 3
+        }, {
+          "type" : "ContentSelection.FixedTerrain",
+          "data" : {
+            "kind" : "generic/chasm",
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 5,
+          "y" : 3
+        }, {
+          "type" : "ContentSelection.FixedTerrain",
+          "data" : {
+            "kind" : "generic/chasm",
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 3,
+          "y" : 5
+        }, {
+          "type" : "ContentSelection.FixedTerrain",
+          "data" : {
+            "kind" : "generic/chasm",
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 3,
+          "y" : 2
+        }, {
+          "type" : "ContentSelection.FixedTerrain",
+          "data" : {
+            "kind" : "generic/chasm",
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 3,
+          "y" : 4
+        }, {
+          "type" : "ContentSelection.FixedTerrain",
+          "data" : {
+            "kind" : "generic/chasm",
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 2,
+          "y" : 5
+        }, {
+          "type" : "ContentSelection.FixedTerrain",
+          "data" : {
+            "kind" : "generic/chasm",
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 2,
+          "y" : 0
+        }, {
+          "type" : "ContentSelection.FixedTerrain",
+          "data" : {
+            "kind" : "generic/chasm",
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 2,
+          "y" : 4
+        }, {
+          "type" : "ContentSelection.FixedTerrain",
+          "data" : {
+            "kind" : "generic/chasm",
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 2,
+          "y" : 3
+        }, {
+          "type" : "ContentSelection.FixedTerrain",
+          "data" : {
+            "kind" : "generic/chasm",
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 4,
+          "y" : 1
+        }, {
+          "type" : "ContentSelection.FixedTerrain",
+          "data" : {
+            "kind" : "generic/chasm",
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 3,
+          "y" : 1
+        }, {
+          "type" : "ContentSelection.FixedTerrain",
+          "data" : {
+            "kind" : "generic/chasm",
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 1,
+          "y" : 2
+        }, {
+          "type" : "ContentSelection.FixedTerrain",
+          "data" : {
+            "kind" : "generic/chasm",
+            "tags" : [ ]
+          }
+        } ], [ {
+          "x" : 1,
+          "y" : 4
+        }, {
+          "type" : "ContentSelection.FixedTerrain",
+          "data" : {
+            "kind" : "generic/chasm",
+            "tags" : [ ]
+          }
+        } ] ]
+      },
+      "id" : "scipoi/space/portal-chasm",
+      "unique" : false
     }
   } ], [ "scippe/dice/hall/gate", {
     "type" : "FixedTemplate",
@@ -28484,7 +30601,8 @@
           }
         } ] ]
       },
-      "id" : "scippe/dice/hall/gate"
+      "id" : "scippe/dice/hall/gate",
+      "unique" : false
     }
   } ], [ "iridan/area/start", {
     "type" : "FixedTemplate",
@@ -29036,7 +31154,8 @@
         "terrains" : [ ]
       },
       "id" : "iridan/area/start",
-      "entrances" : [ ]
+      "entrances" : [ ],
+      "unique" : false
     }
   } ], [ "exodus/room/invertebrate", {
     "type" : "RandomizedTemplate",
@@ -29064,6 +31183,7 @@
         }
       },
       "templateCatalogue" : null,
+      "unique" : false,
       "terrain" : null,
       "templates" : [ ],
       "id" : "exodus/room/invertebrate",
@@ -29111,6 +31231,7 @@
           "tags" : [ ]
         }
       },
+      "unique" : false,
       "terrain" : {
         "type" : "ContentSelection.ThemeTerrain",
         "data" : {
@@ -29212,6 +31333,7 @@
         }
       },
       "templateCatalogue" : null,
+      "unique" : false,
       "terrain" : {
         "type" : "ContentSelection.ThemeTerrain",
         "data" : {
@@ -29290,14 +31412,38 @@
       }
     }
   } ] ],
-  "themes" : [ [ "iridan/natural-surface", {
-    "items" : "iridan/default",
+  "themes" : [ [ "scipoi/scippe-civilians/constructed-underground", {
+    "items" : "scipoi/scippe-civilians",
+    "walls" : "generic/constructed-underground",
+    "widgets" : "scipoi/scippe-civilians",
+    "creatures" : "scipoi/scippe-civilians",
+    "templates" : "scippe/civilians/default",
+    "id" : "scipoi/scippe-civilians/constructed-underground",
+    "terrains" : "generic/constructed-underground"
+  } ], [ "scipoi/scippe-civilians/natural-surface", {
+    "items" : "scipoi/scippe-civilians",
     "walls" : "generic/natural-surface",
-    "widgets" : "iridan/default",
-    "creatures" : "iridan/default",
-    "templates" : "iridan/default",
-    "id" : "iridan/natural-surface",
+    "widgets" : "scipoi/scippe-civilians",
+    "creatures" : "scipoi/scippe-civilians",
+    "templates" : "scippe/civilians/default",
+    "id" : "scipoi/scippe-civilians/natural-surface",
     "terrains" : "generic/natural-surface"
+  } ], [ "scipoi/scippe-civilians/dice", {
+    "items" : "scipoi/scippe-civilians",
+    "walls" : "generic/constructed-underground",
+    "widgets" : "scipoi/scippe-civilians",
+    "creatures" : "scipoi/scippe-civilians",
+    "templates" : "scipoi/scippe-civilians/dice",
+    "id" : "scipoi/scippe-civilians/dice",
+    "terrains" : "generic/constructed-underground"
+  } ], [ "scippe/civilians/dice", {
+    "items" : "scippe/civilians/default",
+    "walls" : "generic/constructed-underground",
+    "widgets" : "scippe/civilians/default",
+    "creatures" : "scippe/civilians/default",
+    "templates" : "scipoi/scippe-civilians/dice",
+    "id" : "scippe/civilians/dice",
+    "terrains" : "generic/constructed-underground"
   } ], [ "iridan/constructed-underground", {
     "items" : "iridan/default",
     "walls" : "generic/constructed-underground",
@@ -29306,22 +31452,30 @@
     "templates" : "iridan/default",
     "id" : "iridan/constructed-underground",
     "terrains" : "generic/constructed-underground"
-  } ], [ "iridan/natural-underground", {
+  } ], [ "iridan/natural-surface", {
     "items" : "iridan/default",
-    "walls" : "generic/natural-underground",
+    "walls" : "generic/natural-surface",
     "widgets" : "iridan/default",
     "creatures" : "iridan/default",
     "templates" : "iridan/default",
-    "id" : "iridan/natural-underground",
-    "terrains" : "generic/natural-underground"
-  } ], [ "scipoi/scippe-civilians/natural-underground", {
-    "items" : "scipoi/scippe-civilians",
-    "walls" : "generic/natural-underground",
-    "widgets" : "scipoi/scippe-civilians",
-    "creatures" : "scipoi/scippe-civilians",
-    "templates" : "scipoi/scippe-civilians",
-    "id" : "scipoi/scippe-civilians/natural-underground",
-    "terrains" : "generic/natural-underground"
+    "id" : "iridan/natural-surface",
+    "terrains" : "generic/natural-surface"
+  } ], [ "siux/default", {
+    "items" : "siux/default",
+    "walls" : "siux/default",
+    "widgets" : "siux/default",
+    "creatures" : "siux/default",
+    "templates" : "siux/default",
+    "id" : "siux/default",
+    "terrains" : "generic/constructed-underground"
+  } ], [ "skyfarer/swarm", {
+    "items" : "skyfarer/swarm",
+    "walls" : "generic/constructed-underground",
+    "widgets" : "skyfarer/swarm",
+    "creatures" : "skyfarer/swarm",
+    "templates" : "skyfarer/swarm",
+    "id" : "skyfarer/swarm",
+    "terrains" : "generic/constructed-underground"
   } ], [ "scippe/civilians/constructed-surface", {
     "items" : "scippe/civilians/default",
     "walls" : "generic/constructed-surface",
@@ -29330,30 +31484,30 @@
     "templates" : "scippe/civilians/default",
     "id" : "scippe/civilians/constructed-surface",
     "terrains" : "generic/constructed-surface"
-  } ], [ "scipoi/scippe-civilians/natural-surface", {
-    "items" : "scipoi/scippe-civilians",
-    "walls" : "generic/natural-surface",
-    "widgets" : "scipoi/scippe-civilians",
-    "creatures" : "scipoi/scippe-civilians",
-    "templates" : "scipoi/scippe-civilians",
-    "id" : "scipoi/scippe-civilians/natural-surface",
-    "terrains" : "generic/natural-surface"
   } ], [ "scipoi/scippe-civilians/constructed-surface", {
     "items" : "scipoi/scippe-civilians",
     "walls" : "generic/constructed-surface",
     "widgets" : "scipoi/scippe-civilians",
     "creatures" : "scipoi/scippe-civilians",
-    "templates" : "scipoi/scippe-civilians",
+    "templates" : "scippe/civilians/default",
     "id" : "scipoi/scippe-civilians/constructed-surface",
     "terrains" : "generic/constructed-surface"
-  } ], [ "scipoi/scippe-civilians/constructed-underground", {
+  } ], [ "scipoi/scippe-civilians/natural-underground", {
     "items" : "scipoi/scippe-civilians",
-    "walls" : "generic/constructed-underground",
+    "walls" : "generic/natural-underground",
     "widgets" : "scipoi/scippe-civilians",
     "creatures" : "scipoi/scippe-civilians",
-    "templates" : "scipoi/scippe-civilians",
-    "id" : "scipoi/scippe-civilians/constructed-underground",
-    "terrains" : "generic/constructed-underground"
+    "templates" : "scippe/civilians/default",
+    "id" : "scipoi/scippe-civilians/natural-underground",
+    "terrains" : "generic/natural-underground"
+  } ], [ "iridan/natural-underground", {
+    "items" : "iridan/default",
+    "walls" : "generic/natural-underground",
+    "widgets" : "iridan/default",
+    "creatures" : "iridan/default",
+    "templates" : "iridan/default",
+    "id" : "iridan/natural-underground",
+    "terrains" : "generic/natural-underground"
   } ] ],
   "transports" : [ [ "nomad/spaceship", {
     "category" : "TransportCategory.Spaceship",
@@ -29455,6 +31609,18 @@
       "sourceItem" : "generic/conduit-lift-down",
       "targetItem" : "generic/conduit-lift-up",
       "tag" : "lift"
+    }, {
+      "source" : "scippe/dice/1",
+      "target" : "scippe/dice/2",
+      "sourceItem" : "generic/conduit-stairs-down",
+      "targetItem" : "generic/conduit-stairs-up",
+      "tag" : null
+    }, {
+      "source" : "scippe/dice/2",
+      "target" : "scippe/dice/3",
+      "sourceItem" : "generic/conduit-stairs-down",
+      "targetItem" : "generic/conduit-stairs-up",
+      "tag" : null
     } ],
     "id" : "main",
     "transports" : [ [ "nomad/spaceship", "iridan/underground" ] ],

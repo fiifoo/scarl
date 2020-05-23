@@ -108,7 +108,7 @@ object Sources {
     )),
 
     SubModelSource(typeOf[ContentSelection.DoorSelection], List(
-      typeOf[ContentSelection.ThemeDoor],
+      typeOf[ContentSelection.CatalogueDoor],
       typeOf[ContentSelection.FixedDoor],
       typeOf[ContentSelection.ThemeDoor],
     )),
@@ -156,6 +156,7 @@ object Sources {
       typeOf[CompositeCreaturePower],
       typeOf[CapturePower],
       typeOf[CreateEntityPower],
+      typeOf[DeathPower],
       typeOf[FactionDispositionPower],
       typeOf[FactionStrategyPower],
       typeOf[MaybeCreaturePower],
